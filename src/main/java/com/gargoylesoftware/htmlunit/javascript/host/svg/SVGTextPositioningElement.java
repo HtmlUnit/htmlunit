@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-public class SVGTextPositioningElement extends SVGElement {
+public class SVGTextPositioningElement extends SVGTextContentElement {
 
     /**
      * Creates an instance.

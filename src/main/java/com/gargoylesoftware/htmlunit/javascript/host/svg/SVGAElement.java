@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgAnchor;
  */
 @JsxClass(domClass = SvgAnchor.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGAElement extends SVGElement {
+public class SVGAElement extends SVGGraphicsElement {
 
     /**
      * Creates an instance.

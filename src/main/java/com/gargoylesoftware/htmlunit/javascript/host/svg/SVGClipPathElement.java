@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgClipPath;
  */
 @JsxClass(domClass = SvgClipPath.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGClipPathElement extends SVGElement {
+public class SVGClipPathElement extends SVGGraphicsElement {
 
     /**
      * Creates an instance.

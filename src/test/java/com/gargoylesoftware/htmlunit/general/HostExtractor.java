@@ -39,6 +39,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public final class HostExtractor {
 
+    /**
+     * Tests known prefixes.
+     */
+    public static final List<String> PREFIXES_ = Arrays.asList("HTML", "DOM", "SVG", "CSS", "JSON",
+            "URL", "URI", "TCP", "RTC", "IDB");
+
     private HostExtractor() {
     }
 
@@ -100,8 +106,6 @@ public final class HostExtractor {
         unusedNames.remove("null");
 
         if (!unusedNames.isEmpty()) {
-            final List<String> prefixes = Arrays.asList("HTML", "DOM", "SVG", "CSS", "JSON",
-                    "URL", "URI", "TCP", "RTC", "IDB");
             for (final String name : unusedNames) {
                 if (name.contains(" ")) {
                     continue;
@@ -113,7 +117,7 @@ public final class HostExtractor {
                 System.out.println("    @Test");
                 System.out.println("    @Alerts(\"exception\")");
                 String methodName = name;
-                for (final String prefix : prefixes) {
+                for (final String prefix : PREFIXES_) {
                     if (methodName.startsWith(prefix)) {
                         methodName = prefix.toLowerCase() + methodName.substring(prefix.length());
                         break;

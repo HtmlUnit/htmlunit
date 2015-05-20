@@ -1903,4 +1903,24 @@ public class HostParentOfHTest extends HostParentOf {
         test("Headers", "Headers");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _HTMLElement_HTMLTemplateElement() throws Exception {
+        test("HTMLElement", "HTMLTemplateElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _HTMLTemplateElement_HTMLTemplateElement() throws Exception {
+        test("HTMLTemplateElement", "HTMLTemplateElement");
+    }
+
 }

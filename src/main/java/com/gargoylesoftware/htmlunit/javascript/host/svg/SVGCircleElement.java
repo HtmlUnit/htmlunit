@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgCircle;
  */
 @JsxClass(domClass = SvgCircle.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGCircleElement extends SVGElement {
+public class SVGCircleElement extends SVGGraphicsElement {
 
     /**
      * Creates an instance.

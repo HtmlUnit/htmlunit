@@ -8393,4 +8393,1062 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
         test("webkitSpeechRecognition");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void syncRegistration() throws Exception {
+        test("SyncRegistration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mIDIConnectionEvent() throws Exception {
+        test("MIDIConnectionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vRDevice() throws Exception {
+        test("VRDevice");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sIMD_int16x8() throws Exception {
+        test("SIMD.int16x8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mIDIInput() throws Exception {
+        test("MIDIInput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sIMD() throws Exception {
+        test("SIMD");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mIDIInputMap() throws Exception {
+        test("MIDIInputMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sIMD_int8x16() throws Exception {
+        test("SIMD.int8x16");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void syncEvent() throws Exception {
+        test("SyncEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sIMD_float32x4() throws Exception {
+        test("SIMD.float32x4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void periodicSyncManager() throws Exception {
+        test("PeriodicSyncManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void syncManager() throws Exception {
+        test("SyncManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void periodicSyncEvent() throws Exception {
+        test("PeriodicSyncEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domPointReadOnly() throws Exception {
+        test("DOMPointReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vRFieldOfView() throws Exception {
+        test("VRFieldOfView");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void permissionStatus() throws Exception {
+        test("PermissionStatus");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domPoint() throws Exception {
+        test("DOMPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void beforeInstallPromptEvent() throws Exception {
+        test("BeforeInstallPromptEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void positionSensorVRDevice() throws Exception {
+        test("PositionSensorVRDevice");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void hMDVRDevice() throws Exception {
+        test("HMDVRDevice");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domRectReadOnly() throws Exception {
+        test("DOMRectReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mIDIAccess() throws Exception {
+        test("MIDIAccess");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domApplication() throws Exception {
+        test("DOMApplication");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sIMD_float64x2() throws Exception {
+        test("SIMD.float64x2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void periodicSyncRegistration() throws Exception {
+        test("PeriodicSyncRegistration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void permissions() throws Exception {
+        test("Permissions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vRPositionState() throws Exception {
+        test("VRPositionState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vRFieldOfViewReadOnly() throws Exception {
+        test("VRFieldOfViewReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vREyeParameters() throws Exception {
+        test("VREyeParameters");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sIMD_int32x4() throws Exception {
+        test("SIMD.int32x4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AutocompleteErrorEvent() { [native code] }")
+    public void autocompleteErrorEvent() throws Exception {
+        test("AutocompleteErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSUnknownRule() { [native code] }")
+    public void cssUnknownRule() throws Exception {
+        test("CSSUnknownRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMSettableTokenList() { [native code] }",
+            FF = "function DOMSettableTokenList() {\n    [native code]\n}",
+            IE11 = "[object DOMSettableTokenList]")
+    public void domSettableTokenList() throws Exception {
+        test("DOMSettableTokenList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DataTransferItem() { [native code] }")
+    public void dataTransferItem() throws Exception {
+        test("DataTransferItem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DataTransferItemList() { [native code] }")
+    public void dataTransferItemList() throws Exception {
+        test("DataTransferItemList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLTemplateElement() { [native code] }",
+            FF = "function HTMLTemplateElement() {\n    [native code]\n}")
+    public void htmlTemplateElement() throws Exception {
+        test("HTMLTemplateElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaError() { [native code] }",
+            FF = "function MediaError() {\n    [native code]\n}",
+            IE11 = "[object MediaError]")
+    public void mediaError() throws Exception {
+        test("MediaError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeyError() { [native code] }")
+    public void mediaKeyError() throws Exception {
+        test("MediaKeyError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeyEvent() { [native code] }")
+    public void mediaKeyEvent() throws Exception {
+        test("MediaKeyEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function OverflowEvent() { [native code] }")
+    public void overflowEvent() throws Exception {
+        test("OverflowEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceEntry() { [native code] }",
+            FF = "function PerformanceEntry() {\n    [native code]\n}",
+            IE11 = "[object PerformanceEntry]")
+    public void performanceEntry() throws Exception {
+        test("PerformanceEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceMark() { [native code] }",
+            FF = "function PerformanceMark() {\n    [native code]\n}",
+            IE11 = "[object PerformanceMark]")
+    public void performanceMark() throws Exception {
+        test("PerformanceMark");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceMeasure() { [native code] }",
+            FF = "function PerformanceMeasure() {\n    [native code]\n}",
+            IE11 = "[object PerformanceMeasure]")
+    public void performanceMeasure() throws Exception {
+        test("PerformanceMeasure");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceResourceTiming() { [native code] }",
+            FF = "function PerformanceResourceTiming() {\n    [native code]\n}",
+            IE11 = "[object PerformanceResourceTiming]")
+    public void performanceResourceTiming() throws Exception {
+        test("PerformanceResourceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGComponentTransferFunctionElement() { [native code] }",
+            FF = "function SVGComponentTransferFunctionElement() {\n    [native code]\n}",
+            IE11 = "[object SVGComponentTransferFunctionElement]")
+    public void svgComponentTransferFunctionElement() throws Exception {
+        test("SVGComponentTransferFunctionElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGFEDropShadowElement() { [native code] }",
+            FF = "function SVGFEDropShadowElement() {\n    [native code]\n}")
+    public void svgFEDropShadowElement() throws Exception {
+        test("SVGFEDropShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGGraphicsElement() { [native code] }",
+            FF = "function SVGGraphicsElement() {\n    [native code]\n}")
+    public void svgGraphicsElement() throws Exception {
+        test("SVGGraphicsElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSeg() { [native code] }",
+            FF = "function SVGPathSeg() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSeg]")
+    public void svgPathSeg() throws Exception {
+        test("SVGPathSeg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegArcAbs() { [native code] }",
+            FF = "function SVGPathSegArcAbs() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegArcAbs]")
+    public void svgPathSegArcAbs() throws Exception {
+        test("SVGPathSegArcAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegArcRel() { [native code] }",
+            FF = "function SVGPathSegArcRel() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegArcRel]")
+    public void svgPathSegArcRel() throws Exception {
+        test("SVGPathSegArcRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegClosePath() { [native code] }",
+            FF = "function SVGPathSegClosePath() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegClosePath]")
+    public void svgPathSegClosePath() throws Exception {
+        test("SVGPathSegClosePath");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegCurvetoCubicAbs() { [native code] }",
+            FF = "function SVGPathSegCurvetoCubicAbs() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegCurvetoCubicAbs]")
+    public void svgPathSegCurvetoCubicAbs() throws Exception {
+        test("SVGPathSegCurvetoCubicAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegCurvetoCubicRel() { [native code] }",
+            FF = "function SVGPathSegCurvetoCubicRel() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegCurvetoCubicRel]")
+    public void svgPathSegCurvetoCubicRel() throws Exception {
+        test("SVGPathSegCurvetoCubicRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegCurvetoCubicSmoothAbs() { [native code] }",
+            FF = "function SVGPathSegCurvetoCubicSmoothAbs() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegCurvetoCubicSmoothAbs]")
+    public void svgPathSegCurvetoCubicSmoothAbs() throws Exception {
+        test("SVGPathSegCurvetoCubicSmoothAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegCurvetoCubicSmoothRel() { [native code] }",
+            FF = "function SVGPathSegCurvetoCubicSmoothRel() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegCurvetoCubicSmoothRel]")
+    public void svgPathSegCurvetoCubicSmoothRel() throws Exception {
+        test("SVGPathSegCurvetoCubicSmoothRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegCurvetoQuadraticAbs() { [native code] }",
+            FF = "function SVGPathSegCurvetoQuadraticAbs() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegCurvetoQuadraticAbs]")
+    public void svgPathSegCurvetoQuadraticAbs() throws Exception {
+        test("SVGPathSegCurvetoQuadraticAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegCurvetoQuadraticRel() { [native code] }",
+            FF = "function SVGPathSegCurvetoQuadraticRel() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegCurvetoQuadraticRel]")
+    public void svgPathSegCurvetoQuadraticRel() throws Exception {
+        test("SVGPathSegCurvetoQuadraticRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegCurvetoQuadraticSmoothAbs() { [native code] }",
+            FF = "function SVGPathSegCurvetoQuadraticSmoothAbs() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegCurvetoQuadraticSmoothAbs]")
+    public void svgPathSegCurvetoQuadraticSmoothAbs() throws Exception {
+        test("SVGPathSegCurvetoQuadraticSmoothAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegCurvetoQuadraticSmoothRel() { [native code] }",
+            FF = "function SVGPathSegCurvetoQuadraticSmoothRel() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegCurvetoQuadraticSmoothRel]")
+    public void svgPathSegCurvetoQuadraticSmoothRel() throws Exception {
+        test("SVGPathSegCurvetoQuadraticSmoothRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegLinetoAbs() { [native code] }",
+            FF = "function SVGPathSegLinetoAbs() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegLinetoAbs]")
+    public void svgPathSegLinetoAbs() throws Exception {
+        test("SVGPathSegLinetoAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegLinetoHorizontalAbs() { [native code] }",
+            FF = "function SVGPathSegLinetoHorizontalAbs() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegLinetoHorizontalAbs]")
+    public void svgPathSegLinetoHorizontalAbs() throws Exception {
+        test("SVGPathSegLinetoHorizontalAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegLinetoHorizontalRel() { [native code] }",
+            FF = "function SVGPathSegLinetoHorizontalRel() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegLinetoHorizontalRel]")
+    public void svgPathSegLinetoHorizontalRel() throws Exception {
+        test("SVGPathSegLinetoHorizontalRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegLinetoRel() { [native code] }",
+            FF = "function SVGPathSegLinetoRel() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegLinetoRel]")
+    public void svgPathSegLinetoRel() throws Exception {
+        test("SVGPathSegLinetoRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegLinetoVerticalAbs() { [native code] }",
+            FF = "function SVGPathSegLinetoVerticalAbs() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegLinetoVerticalAbs]")
+    public void svgPathSegLinetoVerticalAbs() throws Exception {
+        test("SVGPathSegLinetoVerticalAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegLinetoVerticalRel() { [native code] }",
+            FF = "function SVGPathSegLinetoVerticalRel() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegLinetoVerticalRel]")
+    public void svgPathSegLinetoVerticalRel() throws Exception {
+        test("SVGPathSegLinetoVerticalRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegList() { [native code] }",
+            FF = "function SVGPathSegList() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegList]")
+    public void svgPathSegList() throws Exception {
+        test("SVGPathSegList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegMovetoAbs() { [native code] }",
+            FF = "function SVGPathSegMovetoAbs() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegMovetoAbs]")
+    public void svgPathSegMovetoAbs() throws Exception {
+        test("SVGPathSegMovetoAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPathSegMovetoRel() { [native code] }",
+            FF = "function SVGPathSegMovetoRel() {\n    [native code]\n}",
+            IE11 = "[object SVGPathSegMovetoRel]")
+    public void svgPathSegMovetoRel() throws Exception {
+        test("SVGPathSegMovetoRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPointList() { [native code] }",
+            FF = "function SVGPointList() {\n    [native code]\n}",
+            IE11 = "[object SVGPointList]")
+    public void svgPointList() throws Exception {
+        test("SVGPointList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGRenderingIntent() { [native code] }")
+    public void svgRenderingIntent() throws Exception {
+        test("SVGRenderingIntent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGTextContentElement() { [native code] }",
+            FF = "function SVGTextContentElement() {\n    [native code]\n}",
+            IE11 = "[object SVGTextContentElement]")
+    public void svgTextContentElement() throws Exception {
+        test("SVGTextContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGUnitTypes() { [native code] }",
+            FF = "function SVGUnitTypes() {\n    [native code]\n}",
+            IE11 = "[object SVGUnitTypes]")
+    public void svgUnitTypes() throws Exception {
+        test("SVGUnitTypes");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGViewSpec() { [native code] }")
+    public void svgViewSpec() throws Exception {
+        test("SVGViewSpec");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGZoomEvent() { [native code] }",
+            FF = "function SVGZoomEvent() {\n    [native code]\n}",
+            IE11 = "[object SVGZoomEvent]")
+    public void svgZoomEvent() throws Exception {
+        test("SVGZoomEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SecurityPolicyViolationEvent() { [native code] }")
+    public void securityPolicyViolationEvent() throws Exception {
+        test("SecurityPolicyViolationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SpeechSynthesisEvent() { [native code] }")
+    public void speechSynthesisEvent() throws Exception {
+        test("SpeechSynthesisEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextEvent() { [native code] }",
+            IE11 = "[object TextEvent]")
+    public void textEvent() throws Exception {
+        test("TextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextTrack() { [native code] }",
+            FF = "function TextTrack() {\n    [native code]\n}",
+            IE11 = "[object TextTrack]")
+    public void textTrack() throws Exception {
+        test("TextTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextTrackCue() { [native code] }",
+            IE11 = "\nfunction TextTrackCue() {\n    [native code]\n}\n")
+    public void textTrackCue() throws Exception {
+        test("TextTrackCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextTrackCueList() { [native code] }",
+            FF = "function TextTrackCueList() {\n    [native code]\n}",
+            IE11 = "[object TextTrackCueList]")
+    public void textTrackCueList() throws Exception {
+        test("TextTrackCueList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextTrackList() { [native code] }",
+            FF = "function TextTrackList() {\n    [native code]\n}",
+            IE11 = "[object TextTrackList]")
+    public void textTrackList() throws Exception {
+        test("TextTrackList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TrackEvent() { [native code] }",
+            FF = "function TrackEvent() {\n    [native code]\n}",
+            IE11 = "[object TrackEvent]")
+    public void trackEvent() throws Exception {
+        test("TrackEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function VTTCue() { [native code] }",
+            FF = "function VTTCue() {\n    [native code]\n}")
+    public void vTTCue() throws Exception {
+        test("VTTCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLActiveInfo() { [native code] }",
+            FF = "function WebGLActiveInfo() {\n    [native code]\n}",
+            IE11 = "[object WebGLActiveInfo]")
+    public void webGLActiveInfo() throws Exception {
+        test("WebGLActiveInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLBuffer() { [native code] }",
+            FF = "function WebGLBuffer() {\n    [native code]\n}",
+            IE11 = "[object WebGLBuffer]")
+    public void webGLBuffer() throws Exception {
+        test("WebGLBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLContextEvent() { [native code] }",
+            IE11 = "\nfunction WebGLContextEvent() {\n    [native code]\n}\n")
+    public void webGLContextEvent() throws Exception {
+        test("WebGLContextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLFramebuffer() { [native code] }",
+            FF = "function WebGLFramebuffer() {\n    [native code]\n}",
+            IE11 = "[object WebGLFramebuffer]")
+    public void webGLFramebuffer() throws Exception {
+        test("WebGLFramebuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLProgram() { [native code] }",
+            FF = "function WebGLProgram() {\n    [native code]\n}",
+            IE11 = "[object WebGLProgram]")
+    public void webGLProgram() throws Exception {
+        test("WebGLProgram");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLRenderbuffer() { [native code] }",
+            FF = "function WebGLRenderbuffer() {\n    [native code]\n}",
+            IE11 = "[object WebGLRenderbuffer]")
+    public void webGLRenderbuffer() throws Exception {
+        test("WebGLRenderbuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLShader() { [native code] }",
+            FF = "function WebGLShader() {\n    [native code]\n}",
+            IE11 = "[object WebGLShader]")
+    public void webGLShader() throws Exception {
+        test("WebGLShader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLShaderPrecisionFormat() { [native code] }",
+            FF = "function WebGLShaderPrecisionFormat() {\n    [native code]\n}",
+            IE11 = "[object WebGLShaderPrecisionFormat]")
+    public void webGLShaderPrecisionFormat() throws Exception {
+        test("WebGLShaderPrecisionFormat");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLTexture() { [native code] }",
+            FF = "function WebGLTexture() {\n    [native code]\n}",
+            IE11 = "[object WebGLTexture]")
+    public void webGLTexture() throws Exception {
+        test("WebGLTexture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLUniformLocation() { [native code] }",
+            FF = "function WebGLUniformLocation() {\n    [native code]\n}",
+            IE11 = "[object WebGLUniformLocation]")
+    public void webGLUniformLocation() throws Exception {
+        test("WebGLUniformLocation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebKitAnimationEvent() { [native code] }")
+    public void webKitAnimationEvent() throws Exception {
+        test("WebKitAnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebKitCSSMatrix() { [native code] }")
+    public void webKitCSSMatrix() throws Exception {
+        test("WebKitCSSMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TransitionEvent() { [native code] }")
+    public void webKitTransitionEvent() throws Exception {
+        test("WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function XMLHttpRequestProgressEvent() { [native code] }")
+    public void xMLHttpRequestProgressEvent() throws Exception {
+        test("XMLHttpRequestProgressEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function XMLHttpRequestUpload() { [native code] }",
+            FF = "function XMLHttpRequestUpload() {\n    [native code]\n}")
+    public void xMLHttpRequestUpload() throws Exception {
+        test("XMLHttpRequestUpload");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function XPathExpression() { [native code] }",
+            FF = "function XPathExpression() {\n    [native code]\n}")
+    public void xPathExpression() throws Exception {
+        test("XPathExpression");
+    }
 }

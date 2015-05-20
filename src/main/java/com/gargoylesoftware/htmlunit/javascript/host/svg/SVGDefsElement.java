@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgDefs;
  */
 @JsxClass(domClass = SvgDefs.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGDefsElement extends SVGElement {
+public class SVGDefsElement extends SVGGraphicsElement {
 
     /**
      * Creates an instance.

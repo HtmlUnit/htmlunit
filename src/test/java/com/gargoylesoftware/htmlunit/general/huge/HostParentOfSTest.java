@@ -1875,4 +1875,844 @@ public class HostParentOfSTest extends HostParentOf {
         test("StyleMedia", "StyleMedia");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGGElement() throws Exception {
+        test("SVGGraphicsElement", "SVGGElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGGraphicsElement() throws Exception {
+        test("SVGGraphicsElement", "SVGGraphicsElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGImageElement() throws Exception {
+        test("SVGGraphicsElement", "SVGImageElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGLineElement() throws Exception {
+        test("SVGGraphicsElement", "SVGLineElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGPathElement() throws Exception {
+        test("SVGGraphicsElement", "SVGPathElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGPolygonElement() throws Exception {
+        test("SVGGraphicsElement", "SVGPolygonElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGPolylineElement() throws Exception {
+        test("SVGGraphicsElement", "SVGPolylineElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGRectElement() throws Exception {
+        test("SVGGraphicsElement", "SVGRectElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGSVGElement() throws Exception {
+        test("SVGGraphicsElement", "SVGSVGElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGSwitchElement() throws Exception {
+        test("SVGGraphicsElement", "SVGSwitchElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGTSpanElement() throws Exception {
+        test("SVGGraphicsElement", "SVGTSpanElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGTextContentElement() throws Exception {
+        test("SVGGraphicsElement", "SVGTextContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGTextElement() throws Exception {
+        test("SVGGraphicsElement", "SVGTextElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGTextPathElement() throws Exception {
+        test("SVGGraphicsElement", "SVGTextPathElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGTextPositioningElement() throws Exception {
+        test("SVGGraphicsElement", "SVGTextPositioningElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGUseElement() throws Exception {
+        test("SVGGraphicsElement", "SVGUseElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegArcAbs_SVGPathSegArcAbs() throws Exception {
+        test("SVGPathSegArcAbs", "SVGPathSegArcAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegArcRel_SVGPathSegArcRel() throws Exception {
+        test("SVGPathSegArcRel", "SVGPathSegArcRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegClosePath_SVGPathSegClosePath() throws Exception {
+        test("SVGPathSegClosePath", "SVGPathSegClosePath");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegCurvetoCubicAbs_SVGPathSegCurvetoCubicAbs() throws Exception {
+        test("SVGPathSegCurvetoCubicAbs", "SVGPathSegCurvetoCubicAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegCurvetoCubicRel_SVGPathSegCurvetoCubicRel() throws Exception {
+        test("SVGPathSegCurvetoCubicRel", "SVGPathSegCurvetoCubicRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegCurvetoCubicSmoothAbs_SVGPathSegCurvetoCubicSmoothAbs() throws Exception {
+        test("SVGPathSegCurvetoCubicSmoothAbs", "SVGPathSegCurvetoCubicSmoothAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegCurvetoCubicSmoothRel_SVGPathSegCurvetoCubicSmoothRel() throws Exception {
+        test("SVGPathSegCurvetoCubicSmoothRel", "SVGPathSegCurvetoCubicSmoothRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegCurvetoQuadraticAbs_SVGPathSegCurvetoQuadraticAbs() throws Exception {
+        test("SVGPathSegCurvetoQuadraticAbs", "SVGPathSegCurvetoQuadraticAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegCurvetoQuadraticRel_SVGPathSegCurvetoQuadraticRel() throws Exception {
+        test("SVGPathSegCurvetoQuadraticRel", "SVGPathSegCurvetoQuadraticRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegCurvetoQuadraticSmoothAbs_SVGPathSegCurvetoQuadraticSmoothAbs() throws Exception {
+        test("SVGPathSegCurvetoQuadraticSmoothAbs", "SVGPathSegCurvetoQuadraticSmoothAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegCurvetoQuadraticSmoothRel_SVGPathSegCurvetoQuadraticSmoothRel() throws Exception {
+        test("SVGPathSegCurvetoQuadraticSmoothRel", "SVGPathSegCurvetoQuadraticSmoothRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegLinetoAbs_SVGPathSegLinetoAbs() throws Exception {
+        test("SVGPathSegLinetoAbs", "SVGPathSegLinetoAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegLinetoHorizontalAbs_SVGPathSegLinetoHorizontalAbs() throws Exception {
+        test("SVGPathSegLinetoHorizontalAbs", "SVGPathSegLinetoHorizontalAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegLinetoHorizontalRel_SVGPathSegLinetoHorizontalRel() throws Exception {
+        test("SVGPathSegLinetoHorizontalRel", "SVGPathSegLinetoHorizontalRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegLinetoRel_SVGPathSegLinetoRel() throws Exception {
+        test("SVGPathSegLinetoRel", "SVGPathSegLinetoRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegLinetoVerticalAbs_SVGPathSegLinetoVerticalAbs() throws Exception {
+        test("SVGPathSegLinetoVerticalAbs", "SVGPathSegLinetoVerticalAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegLinetoVerticalRel_SVGPathSegLinetoVerticalRel() throws Exception {
+        test("SVGPathSegLinetoVerticalRel", "SVGPathSegLinetoVerticalRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegList_SVGPathSegList() throws Exception {
+        test("SVGPathSegList", "SVGPathSegList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegMovetoAbs_SVGPathSegMovetoAbs() throws Exception {
+        test("SVGPathSegMovetoAbs", "SVGPathSegMovetoAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSegMovetoRel_SVGPathSegMovetoRel() throws Exception {
+        test("SVGPathSegMovetoRel", "SVGPathSegMovetoRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSeg() throws Exception {
+        test("SVGPathSeg", "SVGPathSeg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegArcAbs() throws Exception {
+        test("SVGPathSeg", "SVGPathSegArcAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegArcRel() throws Exception {
+        test("SVGPathSeg", "SVGPathSegArcRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegClosePath() throws Exception {
+        test("SVGPathSeg", "SVGPathSegClosePath");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegCurvetoCubicAbs() throws Exception {
+        test("SVGPathSeg", "SVGPathSegCurvetoCubicAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegCurvetoCubicRel() throws Exception {
+        test("SVGPathSeg", "SVGPathSegCurvetoCubicRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegCurvetoCubicSmoothAbs() throws Exception {
+        test("SVGPathSeg", "SVGPathSegCurvetoCubicSmoothAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegCurvetoCubicSmoothRel() throws Exception {
+        test("SVGPathSeg", "SVGPathSegCurvetoCubicSmoothRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegCurvetoQuadraticAbs() throws Exception {
+        test("SVGPathSeg", "SVGPathSegCurvetoQuadraticAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegCurvetoQuadraticRel() throws Exception {
+        test("SVGPathSeg", "SVGPathSegCurvetoQuadraticRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegCurvetoQuadraticSmoothAbs() throws Exception {
+        test("SVGPathSeg", "SVGPathSegCurvetoQuadraticSmoothAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegCurvetoQuadraticSmoothRel() throws Exception {
+        test("SVGPathSeg", "SVGPathSegCurvetoQuadraticSmoothRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegLinetoAbs() throws Exception {
+        test("SVGPathSeg", "SVGPathSegLinetoAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegLinetoHorizontalAbs() throws Exception {
+        test("SVGPathSeg", "SVGPathSegLinetoHorizontalAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegLinetoHorizontalRel() throws Exception {
+        test("SVGPathSeg", "SVGPathSegLinetoHorizontalRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegLinetoRel() throws Exception {
+        test("SVGPathSeg", "SVGPathSegLinetoRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegLinetoVerticalAbs() throws Exception {
+        test("SVGPathSeg", "SVGPathSegLinetoVerticalAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegLinetoVerticalRel() throws Exception {
+        test("SVGPathSeg", "SVGPathSegLinetoVerticalRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegMovetoAbs() throws Exception {
+        test("SVGPathSeg", "SVGPathSegMovetoAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPathSeg_SVGPathSegMovetoRel() throws Exception {
+        test("SVGPathSeg", "SVGPathSegMovetoRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGPointList_SVGPointList() throws Exception {
+        test("SVGPointList", "SVGPointList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGRenderingIntent_SVGRenderingIntent() throws Exception {
+        test("SVGRenderingIntent", "SVGRenderingIntent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGTextContentElement_SVGTSpanElement() throws Exception {
+        test("SVGTextContentElement", "SVGTSpanElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGTextContentElement_SVGTextContentElement() throws Exception {
+        test("SVGTextContentElement", "SVGTextContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGTextContentElement_SVGTextElement() throws Exception {
+        test("SVGTextContentElement", "SVGTextElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGTextContentElement_SVGTextPathElement() throws Exception {
+        test("SVGTextContentElement", "SVGTextPathElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGTextContentElement_SVGTextPositioningElement() throws Exception {
+        test("SVGTextContentElement", "SVGTextPositioningElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGUnitTypes_SVGUnitTypes() throws Exception {
+        test("SVGUnitTypes", "SVGUnitTypes");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGViewSpec_SVGViewSpec() throws Exception {
+        test("SVGViewSpec", "SVGViewSpec");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGZoomEvent_SVGZoomEvent() throws Exception {
+        test("SVGZoomEvent", "SVGZoomEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SecurityPolicyViolationEvent_SecurityPolicyViolationEvent() throws Exception {
+        test("SecurityPolicyViolationEvent", "SecurityPolicyViolationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SpeechSynthesisEvent_SpeechSynthesisEvent() throws Exception {
+        test("SpeechSynthesisEvent", "SpeechSynthesisEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGComponentTransferFunctionElement_SVGComponentTransferFunctionElement() throws Exception {
+        test("SVGComponentTransferFunctionElement", "SVGComponentTransferFunctionElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGComponentTransferFunctionElement_SVGFEFuncAElement() throws Exception {
+        test("SVGComponentTransferFunctionElement", "SVGFEFuncAElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGComponentTransferFunctionElement_SVGFEFuncBElement() throws Exception {
+        test("SVGComponentTransferFunctionElement", "SVGFEFuncBElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGComponentTransferFunctionElement_SVGFEFuncGElement() throws Exception {
+        test("SVGComponentTransferFunctionElement", "SVGFEFuncGElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGComponentTransferFunctionElement_SVGFEFuncRElement() throws Exception {
+        test("SVGComponentTransferFunctionElement", "SVGFEFuncRElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGElement_SVGComponentTransferFunctionElement() throws Exception {
+        test("SVGElement", "SVGComponentTransferFunctionElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGElement_SVGFEDropShadowElement() throws Exception {
+        test("SVGElement", "SVGFEDropShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGElement_SVGGraphicsElement() throws Exception {
+        test("SVGElement", "SVGGraphicsElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGElement_SVGTextContentElement() throws Exception {
+        test("SVGElement", "SVGTextContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGFEDropShadowElement_SVGFEDropShadowElement() throws Exception {
+        test("SVGFEDropShadowElement", "SVGFEDropShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGAElement() throws Exception {
+        test("SVGGraphicsElement", "SVGAElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGCircleElement() throws Exception {
+        test("SVGGraphicsElement", "SVGCircleElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGClipPathElement() throws Exception {
+        test("SVGGraphicsElement", "SVGClipPathElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGDefsElement() throws Exception {
+        test("SVGGraphicsElement", "SVGDefsElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGEllipseElement() throws Exception {
+        test("SVGGraphicsElement", "SVGEllipseElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGGraphicsElement_SVGForeignObjectElement() throws Exception {
+        test("SVGGraphicsElement", "SVGForeignObjectElement");
+    }
+
 }

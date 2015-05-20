@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgText;
  */
 @JsxClass(domClass = SvgText.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGTextElement extends SVGElement {
+public class SVGTextElement extends SVGTextContentElement {
 
     /**
      * Creates an instance.

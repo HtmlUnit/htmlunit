@@ -5813,4 +5813,357 @@ public class HostParentOfATest extends HostParentOf {
         test("EventTarget", "webkitSpeechRecognition");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AutocompleteErrorEvent_AutocompleteErrorEvent() throws Exception {
+        test("AutocompleteErrorEvent", "AutocompleteErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CSSRule_CSSUnknownRule() throws Exception {
+        test("CSSRule", "CSSUnknownRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CSSUnknownRule_CSSUnknownRule() throws Exception {
+        test("CSSUnknownRule", "CSSUnknownRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _DOMSettableTokenList_DOMSettableTokenList() throws Exception {
+        test("DOMSettableTokenList", "DOMSettableTokenList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _DOMTokenList_DOMSettableTokenList() throws Exception {
+        test("DOMTokenList", "DOMSettableTokenList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _DataTransferItemList_DataTransferItemList() throws Exception {
+        test("DataTransferItemList", "DataTransferItemList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _DataTransferItem_DataTransferItem() throws Exception {
+        test("DataTransferItem", "DataTransferItem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Element_HTMLTemplateElement() throws Exception {
+        test("Element", "HTMLTemplateElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Element_SVGComponentTransferFunctionElement() throws Exception {
+        test("Element", "SVGComponentTransferFunctionElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Element_SVGFEDropShadowElement() throws Exception {
+        test("Element", "SVGFEDropShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Element_SVGGraphicsElement() throws Exception {
+        test("Element", "SVGGraphicsElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Element_SVGTextContentElement() throws Exception {
+        test("Element", "SVGTextContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_HTMLTemplateElement() throws Exception {
+        test("EventTarget", "HTMLTemplateElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_SVGComponentTransferFunctionElement() throws Exception {
+        test("EventTarget", "SVGComponentTransferFunctionElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_SVGFEDropShadowElement() throws Exception {
+        test("EventTarget", "SVGFEDropShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_SVGGraphicsElement() throws Exception {
+        test("EventTarget", "SVGGraphicsElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_SVGTextContentElement() throws Exception {
+        test("EventTarget", "SVGTextContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_TextTrack() throws Exception {
+        test("EventTarget", "TextTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_TextTrackCue() throws Exception {
+        test("EventTarget", "TextTrackCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_TextTrackList() throws Exception {
+        test("EventTarget", "TextTrackList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_VTTCue() throws Exception {
+        test("EventTarget", "VTTCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF38 = "true")
+    public void _EventTarget_XMLHttpRequestEventTarget() throws Exception {
+        test("EventTarget", "XMLHttpRequestEventTarget");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_XMLHttpRequestUpload() throws Exception {
+        test("EventTarget", "XMLHttpRequestUpload");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_AutocompleteErrorEvent() throws Exception {
+        test("Event", "AutocompleteErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_MediaKeyEvent() throws Exception {
+        test("Event", "MediaKeyEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_OverflowEvent() throws Exception {
+        test("Event", "OverflowEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Event_SVGZoomEvent() throws Exception {
+        test("Event", "SVGZoomEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_SecurityPolicyViolationEvent() throws Exception {
+        test("Event", "SecurityPolicyViolationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_SpeechSynthesisEvent() throws Exception {
+        test("Event", "SpeechSynthesisEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            IE11 = "true")
+    public void _Event_TextEvent() throws Exception {
+        test("Event", "TextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Event_TrackEvent() throws Exception {
+        test("Event", "TrackEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            IE11 = "true")
+    public void _Event_WebGLContextEvent() throws Exception {
+        test("Event", "WebGLContextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_WebKitAnimationEvent() throws Exception {
+        test("Event", "WebKitAnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_WebKitTransitionEvent() throws Exception {
+        test("Event", "WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_XMLHttpRequestProgressEvent() throws Exception {
+        test("Event", "XMLHttpRequestProgressEvent");
+    }
+
 }

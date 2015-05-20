@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgLine;
  */
 @JsxClass(domClass = SvgLine.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGLineElement extends SVGElement {
+public class SVGLineElement extends SVGGraphicsElement {
 
     /**
      * Creates an instance.

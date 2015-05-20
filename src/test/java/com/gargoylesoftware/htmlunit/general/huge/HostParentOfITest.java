@@ -2820,4 +2820,174 @@ public class HostParentOfITest extends HostParentOf {
         test("MediaDevices", "MediaDevices");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _MediaError_MediaError() throws Exception {
+        test("MediaError", "MediaError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaKeyError_MediaKeyError() throws Exception {
+        test("MediaKeyError", "MediaKeyError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaKeyEvent_MediaKeyEvent() throws Exception {
+        test("MediaKeyEvent", "MediaKeyEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_HTMLTemplateElement() throws Exception {
+        test("Node", "HTMLTemplateElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Node_SVGComponentTransferFunctionElement() throws Exception {
+        test("Node", "SVGComponentTransferFunctionElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_SVGFEDropShadowElement() throws Exception {
+        test("Node", "SVGFEDropShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_SVGGraphicsElement() throws Exception {
+        test("Node", "SVGGraphicsElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Node_SVGTextContentElement() throws Exception {
+        test("Node", "SVGTextContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _OverflowEvent_OverflowEvent() throws Exception {
+        test("OverflowEvent", "OverflowEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _PerformanceEntry_PerformanceEntry() throws Exception {
+        test("PerformanceEntry", "PerformanceEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _PerformanceEntry_PerformanceMark() throws Exception {
+        test("PerformanceEntry", "PerformanceMark");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _PerformanceEntry_PerformanceMeasure() throws Exception {
+        test("PerformanceEntry", "PerformanceMeasure");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _PerformanceEntry_PerformanceResourceTiming() throws Exception {
+        test("PerformanceEntry", "PerformanceResourceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _PerformanceMark_PerformanceMark() throws Exception {
+        test("PerformanceMark", "PerformanceMark");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _PerformanceMeasure_PerformanceMeasure() throws Exception {
+        test("PerformanceMeasure", "PerformanceMeasure");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _PerformanceResourceTiming_PerformanceResourceTiming() throws Exception {
+        test("PerformanceResourceTiming", "PerformanceResourceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ProgressEvent_XMLHttpRequestProgressEvent() throws Exception {
+        test("ProgressEvent", "XMLHttpRequestProgressEvent");
+    }
+
 }

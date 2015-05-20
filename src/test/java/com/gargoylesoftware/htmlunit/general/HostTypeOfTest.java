@@ -6140,6 +6140,15 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("undefined")
+    public void speechSynthesis() throws Exception {
+        test("SpeechSynthesis");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
     public void speechSynthesisUtterance() throws Exception {
@@ -6164,6 +6173,789 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function")
     public void webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void autocompleteErrorEvent() throws Exception {
+        test("AutocompleteErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void cssUnknownRule() throws Exception {
+        test("CSSUnknownRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void dataTransferItem() throws Exception {
+        test("DataTransferItem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void dataTransferItemList() throws Exception {
+        test("DataTransferItemList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void domSettableTokenList() throws Exception {
+        test("DOMSettableTokenList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void htmlTemplateElement() throws Exception {
+        test("HTMLTemplateElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void mediaError() throws Exception {
+        test("MediaError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void mediaKeyError() throws Exception {
+        test("MediaKeyError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void mediaKeyEvent() throws Exception {
+        test("MediaKeyEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void overflowEvent() throws Exception {
+        test("OverflowEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void performanceEntry() throws Exception {
+        test("PerformanceEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void performanceMark() throws Exception {
+        test("PerformanceMark");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void performanceMeasure() throws Exception {
+        test("PerformanceMeasure");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void performanceResourceTiming() throws Exception {
+        test("PerformanceResourceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgComponentTransferFunctionElement() throws Exception {
+        test("SVGComponentTransferFunctionElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void svgFEDropShadowElement() throws Exception {
+        test("SVGFEDropShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void svgGraphicsElement() throws Exception {
+        test("SVGGraphicsElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSeg() throws Exception {
+        test("SVGPathSeg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegArcAbs() throws Exception {
+        test("SVGPathSegArcAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegArcRel() throws Exception {
+        test("SVGPathSegArcRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegClosePath() throws Exception {
+        test("SVGPathSegClosePath");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegCurvetoCubicAbs() throws Exception {
+        test("SVGPathSegCurvetoCubicAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegCurvetoCubicRel() throws Exception {
+        test("SVGPathSegCurvetoCubicRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegCurvetoCubicSmoothAbs() throws Exception {
+        test("SVGPathSegCurvetoCubicSmoothAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegCurvetoCubicSmoothRel() throws Exception {
+        test("SVGPathSegCurvetoCubicSmoothRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegCurvetoQuadraticAbs() throws Exception {
+        test("SVGPathSegCurvetoQuadraticAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegCurvetoQuadraticRel() throws Exception {
+        test("SVGPathSegCurvetoQuadraticRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegCurvetoQuadraticSmoothAbs() throws Exception {
+        test("SVGPathSegCurvetoQuadraticSmoothAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegCurvetoQuadraticSmoothRel() throws Exception {
+        test("SVGPathSegCurvetoQuadraticSmoothRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegLinetoAbs() throws Exception {
+        test("SVGPathSegLinetoAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegLinetoHorizontalAbs() throws Exception {
+        test("SVGPathSegLinetoHorizontalAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegLinetoHorizontalRel() throws Exception {
+        test("SVGPathSegLinetoHorizontalRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegLinetoRel() throws Exception {
+        test("SVGPathSegLinetoRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegLinetoVerticalAbs() throws Exception {
+        test("SVGPathSegLinetoVerticalAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegLinetoVerticalRel() throws Exception {
+        test("SVGPathSegLinetoVerticalRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegList() throws Exception {
+        test("SVGPathSegList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegMovetoAbs() throws Exception {
+        test("SVGPathSegMovetoAbs");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPathSegMovetoRel() throws Exception {
+        test("SVGPathSegMovetoRel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgPointList() throws Exception {
+        test("SVGPointList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void svgRenderingIntent() throws Exception {
+        test("SVGRenderingIntent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgTextContentElement() throws Exception {
+        test("SVGTextContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgUnitTypes() throws Exception {
+        test("SVGUnitTypes");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void svgViewSpec() throws Exception {
+        test("SVGViewSpec");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void svgZoomEvent() throws Exception {
+        test("SVGZoomEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void securityPolicyViolationEvent() throws Exception {
+        test("SecurityPolicyViolationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void speechSynthesisEvent() throws Exception {
+        test("SpeechSynthesisEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            IE11 = "object")
+    public void textEvent() throws Exception {
+        test("TextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void textTrack() throws Exception {
+        test("TextTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            IE11 = "function")
+    public void textTrackCue() throws Exception {
+        test("TextTrackCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void textTrackCueList() throws Exception {
+        test("TextTrackCueList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void textTrackList() throws Exception {
+        test("TextTrackList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void trackEvent() throws Exception {
+        test("TrackEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void vTTCue() throws Exception {
+        test("VTTCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void webGLActiveInfo() throws Exception {
+        test("WebGLActiveInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void webGLBuffer() throws Exception {
+        test("WebGLBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            IE11 = "function")
+    public void webGLContextEvent() throws Exception {
+        test("WebGLContextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void webGLFramebuffer() throws Exception {
+        test("WebGLFramebuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void webGLProgram() throws Exception {
+        test("WebGLProgram");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void webGLRenderbuffer() throws Exception {
+        test("WebGLRenderbuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void webGLShader() throws Exception {
+        test("WebGLShader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void webGLShaderPrecisionFormat() throws Exception {
+        test("WebGLShaderPrecisionFormat");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void webGLTexture() throws Exception {
+        test("WebGLTexture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function",
+            IE11 = "object")
+    public void webGLUniformLocation() throws Exception {
+        test("WebGLUniformLocation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void webKitAnimationEvent() throws Exception {
+        test("WebKitAnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void webKitCSSMatrix() throws Exception {
+        test("WebKitCSSMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void webKitTransitionEvent() throws Exception {
+        test("WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void xMLHttpRequestProgressEvent() throws Exception {
+        test("XMLHttpRequestProgressEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void xMLHttpRequestUpload() throws Exception {
+        test("XMLHttpRequestUpload");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void xPathExpression() throws Exception {
+        test("XPathExpression");
     }
 
 }

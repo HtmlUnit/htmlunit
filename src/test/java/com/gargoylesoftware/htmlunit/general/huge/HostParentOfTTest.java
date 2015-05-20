@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.util.Collection;
 
 import org.junit.Test;
@@ -22,6 +24,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.google.common.base.Predicate;
 
 /**
@@ -558,6 +561,302 @@ public class HostParentOfTTest extends HostParentOf {
             CHROME = "true")
     public void _webkitSpeechRecognition_webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition", "webkitSpeechRecognition");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            IE11 = "true")
+    public void _TextEvent_TextEvent() throws Exception {
+        test("TextEvent", "TextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _TextTrackCueList_TextTrackCueList() throws Exception {
+        test("TextTrackCueList", "TextTrackCueList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            IE11 = "true")
+    public void _TextTrackCue_TextTrackCue() throws Exception {
+        test("TextTrackCue", "TextTrackCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _TextTrackCue_VTTCue() throws Exception {
+        test("TextTrackCue", "VTTCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _TextTrackList_TextTrackList() throws Exception {
+        test("TextTrackList", "TextTrackList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _TextTrack_TextTrack() throws Exception {
+        test("TextTrack", "TextTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _TrackEvent_TrackEvent() throws Exception {
+        test("TrackEvent", "TrackEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _TransitionEvent_WebKitTransitionEvent() throws Exception {
+        test("TransitionEvent", "WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _UIEvent_SVGZoomEvent() throws Exception {
+        test("UIEvent", "SVGZoomEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            IE11 = "true")
+    public void _UIEvent_TextEvent() throws Exception {
+        test("UIEvent", "TextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _VTTCue_VTTCue() throws Exception {
+        test("VTTCue", "VTTCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLActiveInfo_WebGLActiveInfo() throws Exception {
+        test("WebGLActiveInfo", "WebGLActiveInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLBuffer_WebGLBuffer() throws Exception {
+        test("WebGLBuffer", "WebGLBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            IE11 = "true")
+    public void _WebGLContextEvent_WebGLContextEvent() throws Exception {
+        test("WebGLContextEvent", "WebGLContextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLFramebuffer_WebGLFramebuffer() throws Exception {
+        test("WebGLFramebuffer", "WebGLFramebuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLProgram_WebGLProgram() throws Exception {
+        test("WebGLProgram", "WebGLProgram");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLRenderbuffer_WebGLRenderbuffer() throws Exception {
+        test("WebGLRenderbuffer", "WebGLRenderbuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLShaderPrecisionFormat_WebGLShaderPrecisionFormat() throws Exception {
+        test("WebGLShaderPrecisionFormat", "WebGLShaderPrecisionFormat");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLShader_WebGLShader() throws Exception {
+        test("WebGLShader", "WebGLShader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLTexture_WebGLTexture() throws Exception {
+        test("WebGLTexture", "WebGLTexture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLUniformLocation_WebGLUniformLocation() throws Exception {
+        test("WebGLUniformLocation", "WebGLUniformLocation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitAnimationEvent_WebKitAnimationEvent() throws Exception {
+        test("WebKitAnimationEvent", "WebKitAnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitCSSMatrix_WebKitCSSMatrix() throws Exception {
+        test("WebKitCSSMatrix", "WebKitCSSMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _WebKitTransitionEvent_TransitionEvent() throws Exception {
+        test("WebKitTransitionEvent", "TransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitTransitionEvent_WebKitTransitionEvent() throws Exception {
+        test("WebKitTransitionEvent", "WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XMLHttpRequestEventTarget_XMLHttpRequestUpload() throws Exception {
+        test("XMLHttpRequestEventTarget", "XMLHttpRequestUpload");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _XMLHttpRequestProgressEvent_XMLHttpRequestProgressEvent() throws Exception {
+        test("XMLHttpRequestProgressEvent", "XMLHttpRequestProgressEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XMLHttpRequestUpload_XMLHttpRequestUpload() throws Exception {
+        test("XMLHttpRequestUpload", "XMLHttpRequestUpload");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XPathExpression_XPathExpression() throws Exception {
+        test("XPathExpression", "XPathExpression");
     }
 
 }

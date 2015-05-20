@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for AnalyserNode.
+ * A JavaScript object for {@code AnalyserNode}.
  *
  * @version $Revision$
  * @author Ahmed Ashour

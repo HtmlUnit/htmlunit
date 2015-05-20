@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgTextPath;
  */
 @JsxClass(domClass = SvgTextPath.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGTextPathElement extends SVGElement {
+public class SVGTextPathElement extends SVGTextContentElement {
 
     /**
      * Creates an instance.

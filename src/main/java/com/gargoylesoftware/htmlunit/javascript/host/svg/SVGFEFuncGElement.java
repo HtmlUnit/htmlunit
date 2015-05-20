@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeFuncG;
  */
 @JsxClass(domClass = SvgFeFuncG.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGFEFuncGElement extends SVGElement {
+public class SVGFEFuncGElement extends SVGComponentTransferFunctionElement {
 
     /**
      * Creates an instance.

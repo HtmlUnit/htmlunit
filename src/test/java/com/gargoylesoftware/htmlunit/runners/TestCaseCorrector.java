@@ -30,6 +30,7 @@ import org.junit.runners.model.FrameworkMethod;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CodeStyleTest;
+import com.gargoylesoftware.htmlunit.general.HostExtractor;
 
 /**
  * This is meant to automatically correct the test case to put either the real browser expectations,
@@ -253,7 +254,13 @@ final class TestCaseCorrector {
             final String defaultExpectations) {
         String parent = methodName;
         final String child = parent.substring(parent.lastIndexOf('_') + 1);
-        parent = parent.substring(1, parent.indexOf('_', 1));
+        final int index = parent.indexOf('_', 1);
+        if (index != -1) {
+            parent = parent.substring(1, index);
+        }
+        else {
+            parent = parent.substring(1);
+        }
 
         if (!lines.get(i).isEmpty()) {
             i++;
@@ -265,8 +272,24 @@ final class TestCaseCorrector {
         lines.add(i++, "    @Test");
         lines.add(i++, "    @Alerts(DEFAULT = \"" + defaultExpectations + "\",");
         lines.add(i++, "            " + browserString + " = " + getActualString(comparisonFailure) + ")");
-        lines.add(i++, "    public void _" + parent + "_" + child + "() throws Exception {");
-        lines.add(i++, "        test(\"" + parent + "\", \"" + child + "\");");
+        if (index != -1) {
+            lines.add(i++, "    public void _" + parent + "_" + child + "() throws Exception {");
+            lines.add(i++, "        test(\"" + parent + "\", \"" + child + "\");");
+        }
+        else {
+            String method = parent;
+            for (final String prefix : HostExtractor.PREFIXES_) {
+                if (method.startsWith(prefix)) {
+                    method = prefix.toLowerCase() + method.substring(prefix.length());
+                    break;
+                }
+            }
+            if (Character.isUpperCase(method.charAt(0))) {
+                method = Character.toLowerCase(method.charAt(0)) + method.substring(1);
+            }
+            lines.add(i++, "    public void " + method + "() throws Exception {");
+            lines.add(i++, "        test(\"" + parent + "\");");
+        }
         lines.add(i++, "    }");
         lines.add(i++, "}");
         while (lines.size() > i) {

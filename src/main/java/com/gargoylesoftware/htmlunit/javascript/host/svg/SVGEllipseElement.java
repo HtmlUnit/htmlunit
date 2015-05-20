@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgEllipse;
  */
 @JsxClass(domClass = SvgEllipse.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGEllipseElement extends SVGElement {
+public class SVGEllipseElement extends SVGGraphicsElement {
 
     /**
      * Creates an instance.

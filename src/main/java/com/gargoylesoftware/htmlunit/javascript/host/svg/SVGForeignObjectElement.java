@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgForeignObject;
  */
 @JsxClass(domClass = SvgForeignObject.class,
     browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGForeignObjectElement extends SVGElement {
+public class SVGForeignObjectElement extends SVGGraphicsElement {
 
     /**
      * Creates an instance.
