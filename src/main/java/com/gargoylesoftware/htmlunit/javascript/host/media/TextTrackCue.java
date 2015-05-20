@@ -34,7 +34,7 @@ public class TextTrackCue extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor
     public TextTrackCue() {
     }
 

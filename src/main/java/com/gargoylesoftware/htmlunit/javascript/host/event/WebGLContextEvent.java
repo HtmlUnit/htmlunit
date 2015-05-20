@@ -34,7 +34,7 @@ public class WebGLContextEvent extends Event {
     /**
      * Default constructor.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor
     public WebGLContextEvent() {
     }
 }

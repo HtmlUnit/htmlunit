@@ -9416,6 +9416,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function TransitionEvent() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void webKitTransitionEvent() throws Exception {
         test("WebKitTransitionEvent");
     }
