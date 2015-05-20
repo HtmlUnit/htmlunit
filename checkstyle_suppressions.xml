@@ -18,6 +18,7 @@
     <suppress checks="FileLength" files="HostClassNameStandardsTest.java"/>
     <suppress checks="FileLength" files="HostParentOfATest.java"/>
     <suppress checks="FileLength" files="HostParentOfITest.java"/>
+    <suppress checks="FileLength" files="HostParentOfSTest.java"/>
     <suppress checks="FileLength" files="HostTypeOfTest.java"/>
     <suppress checks="FileLength" files="HTMLDocument.java"/>
     <suppress checks="FileLength" files="HTMLElement.java"/>
