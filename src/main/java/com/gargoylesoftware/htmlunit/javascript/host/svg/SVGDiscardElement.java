@@ -15,28 +15,24 @@
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgEllipse;
 
 /**
- * A JavaScript object for SVGEllipseElement.
+ * A JavaScript object for {@code SVGDiscardElement}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgEllipse.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGEllipseElement extends SVGGeometryElement {
+@JsxClass(browsers = @WebBrowser(CHROME))
+public class SVGDiscardElement extends SVGElement {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public SVGEllipseElement() {
+    @JsxConstructor
+    public SVGDiscardElement() {
     }
 }

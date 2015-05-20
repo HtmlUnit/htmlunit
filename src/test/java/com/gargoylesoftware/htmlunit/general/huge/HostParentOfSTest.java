@@ -2715,4 +2715,134 @@ public class HostParentOfSTest extends HostParentOf {
         test("SVGGraphicsElement", "SVGForeignObjectElement");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGDiscardElement_SVGDiscardElement() throws Exception {
+        test("SVGDiscardElement", "SVGDiscardElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGElement_SVGDiscardElement() throws Exception {
+        test("SVGElement", "SVGDiscardElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGElement_SVGGeometryElement() throws Exception {
+        test("SVGElement", "SVGGeometryElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGGeometryElement_SVGCircleElement() throws Exception {
+        test("SVGGeometryElement", "SVGCircleElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGGeometryElement_SVGEllipseElement() throws Exception {
+        test("SVGGeometryElement", "SVGEllipseElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGGeometryElement_SVGGeometryElement() throws Exception {
+        test("SVGGeometryElement", "SVGGeometryElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGGeometryElement_SVGLineElement() throws Exception {
+        test("SVGGeometryElement", "SVGLineElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGGeometryElement_SVGPathElement() throws Exception {
+        test("SVGGeometryElement", "SVGPathElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGGeometryElement_SVGPolygonElement() throws Exception {
+        test("SVGGeometryElement", "SVGPolygonElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGGeometryElement_SVGPolylineElement() throws Exception {
+        test("SVGGeometryElement", "SVGPolylineElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGGeometryElement_SVGRectElement() throws Exception {
+        test("SVGGeometryElement", "SVGRectElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SVGGraphicsElement_SVGGeometryElement() throws Exception {
+        test("SVGGraphicsElement", "SVGGeometryElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ScreenOrientation_ScreenOrientation() throws Exception {
+        test("ScreenOrientation", "ScreenOrientation");
+    }
+
 }

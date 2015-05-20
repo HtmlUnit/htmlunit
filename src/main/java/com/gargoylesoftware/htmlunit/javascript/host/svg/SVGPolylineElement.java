@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgPolyline;
  */
 @JsxClass(domClass = SvgPolyline.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGPolylineElement extends SVGGraphicsElement {
+public class SVGPolylineElement extends SVGGeometryElement {
 
     /**
      * Creates an instance.

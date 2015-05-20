@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgRect;
  */
 @JsxClass(domClass = SvgRect.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGRectElement extends SVGGraphicsElement {
+public class SVGRectElement extends SVGGeometryElement {
 
     /**
      * Creates an instance.

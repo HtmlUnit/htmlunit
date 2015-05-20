@@ -2265,6 +2265,19 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         speechSynthesis.setPrototype(getPrototype(speechSynthesis.getClass()));
         return speechSynthesis;
     }
+
+    /**
+     * Returns the {@code offscreenBuffering} property.
+     * @return the {@code offscreenBuffering} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public Object getOffscreenBuffering() {
+        if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)) {
+            return "auto";
+        }
+        return true;
+    }
+
 }
 
 class HTMLCollectionFrames extends HTMLCollection {

@@ -9452,4 +9452,291 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     public void xPathExpression() throws Exception {
         test("XPathExpression");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ApplicationCacheErrorEvent() { [native code] }")
+    public void applicationCacheErrorEvent() throws Exception {
+        test("ApplicationCacheErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSViewportRule() { [native code] }")
+    public void cssViewportRule() throws Exception {
+        test("CSSViewportRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function FontFace() { [native code] }")
+    public void fontFace() throws Exception {
+        test("FontFace");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ImageBitmap() { [native code] }")
+    public void imageBitmap() throws Exception {
+        test("ImageBitmap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function InputMethodContext() { [native code] }")
+    public void inputMethodContext() throws Exception {
+        test("InputMethodContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaEncryptedEvent() { [native code] }")
+    public void mediaEncryptedEvent() throws Exception {
+        test("MediaEncryptedEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaQueryListEvent() { [native code] }")
+    public void mediaQueryListEvent() throws Exception {
+        test("MediaQueryListEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGDiscardElement() { [native code] }")
+    public void svgDiscardElement() throws Exception {
+        test("SVGDiscardElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGGeometryElement() { [native code] }")
+    public void svgGeometryElement() throws Exception {
+        test("SVGGeometryElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ScreenOrientation() { [native code] }")
+    public void screenOrientation() throws Exception {
+        test("ScreenOrientation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MutationObserver() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webKitMutationObserver() throws Exception {
+        test("WebKitMutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioContext() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitAudioContext() throws Exception {
+        test("webkitAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBCursor() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitIDBCursor() throws Exception {
+        test("webkitIDBCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBDatabase() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitIDBDatabase() throws Exception {
+        test("webkitIDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBFactory() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitIDBFactory() throws Exception {
+        test("webkitIDBFactory");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBIndex() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitIDBIndex() throws Exception {
+        test("webkitIDBIndex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBKeyRange() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitIDBKeyRange() throws Exception {
+        test("webkitIDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBObjectStore() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitIDBObjectStore() throws Exception {
+        test("webkitIDBObjectStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBRequest() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitIDBRequest() throws Exception {
+        test("webkitIDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBTransaction() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitIDBTransaction() throws Exception {
+        test("webkitIDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStream() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitMediaStream() throws Exception {
+        test("webkitMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function OfflineAudioContext() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitOfflineAudioContext() throws Exception {
+        test("webkitOfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SpeechGrammar() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitSpeechGrammar() throws Exception {
+        test("webkitSpeechGrammar");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SpeechGrammarList() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitSpeechGrammarList() throws Exception {
+        test("webkitSpeechGrammarList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SpeechRecognitionError() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitSpeechRecognitionError() throws Exception {
+        test("webkitSpeechRecognitionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SpeechRecognitionEvent() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitSpeechRecognitionEvent() throws Exception {
+        test("webkitSpeechRecognitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function URL() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void webkitURL() throws Exception {
+        test("webkitURL");
+    }
 }

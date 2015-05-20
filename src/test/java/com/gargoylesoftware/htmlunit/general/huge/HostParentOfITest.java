@@ -2990,4 +2990,64 @@ public class HostParentOfITest extends HostParentOf {
         test("ProgressEvent", "XMLHttpRequestProgressEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ImageBitmap_ImageBitmap() throws Exception {
+        test("ImageBitmap", "ImageBitmap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _InputMethodContext_InputMethodContext() throws Exception {
+        test("InputMethodContext", "InputMethodContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaEncryptedEvent_MediaEncryptedEvent() throws Exception {
+        test("MediaEncryptedEvent", "MediaEncryptedEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaQueryListEvent_MediaQueryListEvent() throws Exception {
+        test("MediaQueryListEvent", "MediaQueryListEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Node_SVGDiscardElement() throws Exception {
+        test("Node", "SVGDiscardElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Node_SVGGeometryElement() throws Exception {
+        test("Node", "SVGGeometryElement");
+    }
+
 }

@@ -12,31 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.svg;
+package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgEllipse;
 
 /**
- * A JavaScript object for SVGEllipseElement.
+ * A JavaScript object for {@code CSSViewportRule}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgEllipse.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGEllipseElement extends SVGGeometryElement {
+@JsxClass(browsers = @WebBrowser(CHROME))
+public class CSSViewportRule extends CSSRule {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public SVGEllipseElement() {
+    @JsxConstructor
+    public CSSViewportRule() {
     }
 }

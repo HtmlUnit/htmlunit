@@ -6166,4 +6166,134 @@ public class HostParentOfATest extends HostParentOf {
         test("Event", "XMLHttpRequestProgressEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ApplicationCacheErrorEvent_ApplicationCacheErrorEvent() throws Exception {
+        test("ApplicationCacheErrorEvent", "ApplicationCacheErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CSSRule_CSSViewportRule() throws Exception {
+        test("CSSRule", "CSSViewportRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CSSViewportRule_CSSViewportRule() throws Exception {
+        test("CSSViewportRule", "CSSViewportRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Element_SVGDiscardElement() throws Exception {
+        test("Element", "SVGDiscardElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Element_SVGGeometryElement() throws Exception {
+        test("Element", "SVGGeometryElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_InputMethodContext() throws Exception {
+        test("EventTarget", "InputMethodContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_SVGDiscardElement() throws Exception {
+        test("EventTarget", "SVGDiscardElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_SVGGeometryElement() throws Exception {
+        test("EventTarget", "SVGGeometryElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_ScreenOrientation() throws Exception {
+        test("EventTarget", "ScreenOrientation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_ApplicationCacheErrorEvent() throws Exception {
+        test("Event", "ApplicationCacheErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_MediaEncryptedEvent() throws Exception {
+        test("Event", "MediaEncryptedEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_MediaQueryListEvent() throws Exception {
+        test("Event", "MediaQueryListEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _FontFace_FontFace() throws Exception {
+        test("FontFace", "FontFace");
+    }
+
 }

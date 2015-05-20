@@ -1629,4 +1629,23 @@ public class Window3Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "true",
+            IE = "auto")
+    public void offscreenBuffering() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "      alert(window.offscreenBuffering);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

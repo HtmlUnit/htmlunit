@@ -19,24 +19,27 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgEllipse;
 
 /**
- * A JavaScript object for SVGEllipseElement.
+ * A JavaScript object for {@code SVGGeometryElement}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgEllipse.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGEllipseElement extends SVGGeometryElement {
+@JsxClasses({
+    @JsxClass(browsers = @WebBrowser(CHROME)),
+    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
+        browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    })
+public class SVGGeometryElement extends SVGGraphicsElement {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public SVGEllipseElement() {
+    @JsxConstructor
+    public SVGGeometryElement() {
     }
 }

@@ -12,31 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.svg;
+package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgEllipse;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * A JavaScript object for SVGEllipseElement.
+ * A JavaScript object for {@code ApplicationCacheErrorEvent}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgEllipse.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGEllipseElement extends SVGGeometryElement {
+@JsxClass(browsers = @WebBrowser(CHROME))
+public class ApplicationCacheErrorEvent extends Event {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public SVGEllipseElement() {
+    @JsxConstructor
+    public ApplicationCacheErrorEvent() {
     }
 }

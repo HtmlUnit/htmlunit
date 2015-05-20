@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgPolygon;
  */
 @JsxClass(domClass = SvgPolygon.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGPolygonElement extends SVGGraphicsElement {
+public class SVGPolygonElement extends SVGGeometryElement {
 
     /**
      * Creates an instance.

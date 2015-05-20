@@ -34,9 +34,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.DeviceStorage;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.External;
+import com.gargoylesoftware.htmlunit.javascript.host.FontFace;
 import com.gargoylesoftware.htmlunit.javascript.host.Gamepad;
 import com.gargoylesoftware.htmlunit.javascript.host.GamepadButton;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
+import com.gargoylesoftware.htmlunit.javascript.host.ImageBitmap;
+import com.gargoylesoftware.htmlunit.javascript.host.InputMethodContext;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageChannel;
@@ -57,6 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Proxy;
 import com.gargoylesoftware.htmlunit.javascript.host.PushManager;
 import com.gargoylesoftware.htmlunit.javascript.host.PushSubscription;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
+import com.gargoylesoftware.htmlunit.javascript.host.ScreenOrientation;
 import com.gargoylesoftware.htmlunit.javascript.host.Set;
 import com.gargoylesoftware.htmlunit.javascript.host.SharedWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.SimpleArray;
@@ -128,6 +132,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSSupportsRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSUnknownRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSViewportRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CaretPosition;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
@@ -175,6 +180,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathEvaluator;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
+import com.gargoylesoftware.htmlunit.javascript.host.event.ApplicationCacheErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.AutocompleteErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ClipboardEvent;
@@ -194,7 +200,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.FocusEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.GamepadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.InputEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MediaEncryptedEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaKeyEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MediaQueryListEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseScrollEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
@@ -353,7 +361,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, AnimationEvent.class, ApplicationCache.class,
-        ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
+        ApplicationCacheErrorEvent.class, ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
         Attr.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AutocompleteErrorEvent.class, BarProp.class,
@@ -369,7 +377,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CSSGroupingRule.class, CSSImportRule.class, CSSKeyframeRule.class, CSSKeyframesRule.class,
         CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class, CSSPrimitiveValue.class, CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSSupportsRule.class,
-        CSSUnknownRule.class, CSSValue.class, CustomEvent.class, DataTransfer.class, DataTransferItem.class,
+        CSSUnknownRule.class, CSSValue.class, CSSViewportRule.class, CustomEvent.class, DataTransfer.class,
+        DataTransferItem.class,
         DataTransferItemList.class, DataView.class, DelayNode.class, DeviceLightEvent.class, DeviceMotionEvent.class,
         DeviceOrientationEvent.class, DeviceProximityEvent.class, DeviceStorage.class, DeviceStorageChangeEvent.class,
         Document.class, DocumentFragment.class, DocumentType.class, DOMCursor.class, DOMError.class, DOMException.class,
@@ -378,7 +387,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DragEvent.class, DynamicsCompressorNode.class,
         Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,
         EventTarget.class, External.class, File.class, FileError.class, FileHandle.class, FileList.class,
-        FileReader.class, FileRequest.class, Float32Array.class, Float64Array.class, FocusEvent.class,
+        FileReader.class, FileRequest.class, Float32Array.class, Float64Array.class, FocusEvent.class, FontFace.class,
         FormChild.class, FormData.class, FormField.class, GainNode.class, Gamepad.class, GamepadButton.class,
         GamepadEvent.class, Geolocation.class, HashChangeEvent.class, Headers.class, History.class,
         HTMLAllCollection.class,
@@ -412,13 +421,14 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLVideoElement.class,
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
         IDBKeyRange.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class, IDBTransaction.class,
-        IDBVersionChangeEvent.class, Image.class, ImageData.class, InputEvent.class,
-        Int16Array.class, Int32Array.class, Int8Array.class,
+        IDBVersionChangeEvent.class, Image.class, ImageBitmap.class, ImageData.class, InputEvent.class,
+        InputMethodContext.class, Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class, LocalMediaStream.class,
         Location.class, LockedFile.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
-        MediaDevices.class, MediaElementAudioSourceNode.class, MediaError.class, MediaKeyError.class,
-        MediaKeyEvent.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
-        MediaKeyStatusMap.class, MediaKeySystemAccess.class, MediaList.class, MediaQueryList.class, MediaRecorder.class,
+        MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
+        MediaKeyError.class, MediaKeyEvent.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
+        MediaKeyStatusMap.class, MediaKeySystemAccess.class, MediaList.class, MediaQueryList.class,
+        MediaQueryListEvent.class, MediaRecorder.class,
         MediaSource.class, MediaStream.class, MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
         MediaStreamEvent.class, MediaStreamTrack.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
@@ -441,8 +451,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Promise.class, Proxy.class, PushManager.class, PushSubscription.class, RadioNodeList.class, Range.class,
         Request.class, Response.class, RowContainer.class,
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
-        Screen.class, ScriptProcessorNode.class, SecurityPolicyViolationEvent.class, Selection.class,
-        ServiceWorker.class, ServiceWorkerContainer.class,
+        Screen.class, ScreenOrientation.class, ScriptProcessorNode.class, SecurityPolicyViolationEvent.class,
+        Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
         SpeechSynthesis.class, SpeechSynthesisEvent.class, SpeechSynthesisUtterance.class,
         StaticNodeList.class, StereoPannerNode.class, Storage.class, StorageEvent.class, StyleMedia.class,
@@ -455,7 +465,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGAnimationElement.class,
         SVGCircleElement.class,
         SVGClipPathElement.class, SVGComponentTransferFunctionElement.class, SVGCursorElement.class,
-        SVGDefsElement.class, SVGDescElement.class, SVGDocument.class, SVGElement.class,
+        SVGDefsElement.class, SVGDescElement.class, SVGDiscardElement.class, SVGDocument.class, SVGElement.class,
         SVGEllipseElement.class, SVGFEBlendElement.class, SVGFEColorMatrixElement.class,
         SVGFEComponentTransferElement.class, SVGFECompositeElement.class, SVGFEConvolveMatrixElement.class,
         SVGFEDiffuseLightingElement.class, SVGFEDisplacementMapElement.class, SVGFEDistantLightElement.class,
@@ -465,7 +475,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGFEMergeNodeElement.class, SVGFEMorphologyElement.class, SVGFEOffsetElement.class,
         SVGFEPointLightElement.class, SVGFESpecularLightingElement.class, SVGFESpotLightElement.class,
         SVGFETileElement.class, SVGFETurbulenceElement.class, SVGFilterElement.class, SVGForeignObjectElement.class,
-        SVGGElement.class, SVGGradientElement.class, SVGGraphicsElement.class,
+        SVGGElement.class, SVGGeometryElement.class, SVGGradientElement.class, SVGGraphicsElement.class,
         SVGImageElement.class, SVGLength.class, SVGLengthList.class, SVGLinearGradientElement.class,
         SVGLineElement.class, SVGMarkerElement.class, SVGMaskElement.class, SVGMatrix.class,
         SVGMetadataElement.class, SVGMPathElement.class, SVGNumber.class, SVGNumberList.class,
