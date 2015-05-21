@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -8422,8 +8423,74 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIMessageEvent() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void midiMessageEvent() throws Exception {
+        test("MIDIMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIOutput() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void midiOutput() throws Exception {
+        test("MIDIOutput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIOutputMap() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void midiOutputMap() throws Exception {
+        test("MIDIOutputMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIPort() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void midiPort() throws Exception {
+        test("MIDIPort");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ReadableByteStream() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void readableByteStream() throws Exception {
+        test("ReadableByteStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ReadableStream() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void readableStream() throws Exception {
+        test("ReadableStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("exception")
-    public void vRDevice() throws Exception {
+    public void vrDevice() throws Exception {
         test("VRDevice");
     }
 
@@ -8432,7 +8499,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void sIMD_int16x8() throws Exception {
+    public void simd_int16x8() throws Exception {
         test("SIMD.int16x8");
     }
 
@@ -8452,7 +8519,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void sIMD() throws Exception {
+    public void simd() throws Exception {
         test("SIMD");
     }
 
@@ -8472,7 +8539,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void sIMD_int8x16() throws Exception {
+    public void simd_int8x16() throws Exception {
         test("SIMD.int8x16");
     }
 
@@ -8490,7 +8557,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void sIMD_float32x4() throws Exception {
+    public void simd_float32x4() throws Exception {
         test("SIMD.float32x4");
     }
 
@@ -8525,7 +8592,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function DOMPointReadOnly() {\n    [native code]\n}")
+    @NotYetImplemented(FF38)
     public void domPointReadOnly() throws Exception {
         test("DOMPointReadOnly");
     }
@@ -8535,7 +8604,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void vRFieldOfView() throws Exception {
+    public void vrFieldOfView() throws Exception {
         test("VRFieldOfView");
     }
 
@@ -8554,7 +8623,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function DOMPoint() {\n    [native code]\n}")
+    @NotYetImplemented(FF38)
     public void domPoint() throws Exception {
         test("DOMPoint");
     }
@@ -8590,7 +8661,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function DOMRectReadOnly() {\n    [native code]\n}")
+    @NotYetImplemented(FF38)
     public void domRectReadOnly() throws Exception {
         test("DOMRectReadOnly");
     }
@@ -8620,7 +8693,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void sIMD_float64x2() throws Exception {
+    public void simd_float64x2() throws Exception {
         test("SIMD.float64x2");
     }
 
@@ -8649,7 +8722,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void vRPositionState() throws Exception {
+    public void vrPositionState() throws Exception {
         test("VRPositionState");
     }
 
@@ -8658,7 +8731,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void vRFieldOfViewReadOnly() throws Exception {
+    public void vrFieldOfViewReadOnly() throws Exception {
         test("VRFieldOfViewReadOnly");
     }
 
@@ -8667,7 +8740,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void vREyeParameters() throws Exception {
+    public void vrEyeParameters() throws Exception {
         test("VREyeParameters");
     }
 
@@ -8676,7 +8749,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void sIMD_int32x4() throws Exception {
+    public void simd_int32x4() throws Exception {
         test("SIMD.int32x4");
     }
 
@@ -9756,4 +9829,5 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     public void webkitURL() throws Exception {
         test("webkitURL");
     }
+
 }

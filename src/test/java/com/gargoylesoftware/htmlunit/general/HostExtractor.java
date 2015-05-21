@@ -43,7 +43,7 @@ public final class HostExtractor {
      * Tests known prefixes.
      */
     public static final List<String> PREFIXES_ = Arrays.asList("HTML", "DOM", "SVG", "CSS", "JSON",
-            "URL", "URI", "TCP", "RTC", "IDB", "MIDI");
+            "URL", "URI", "TCP", "RTC", "IDB", "MIDI", "VR", "SIMD");
 
     private HostExtractor() {
     }
