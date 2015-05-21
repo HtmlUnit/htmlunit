@@ -211,7 +211,9 @@ public class HTMLOptionElement extends FormChild {
         if (domNode instanceof HtmlOption) {
             ((HtmlOption) domNode).setLabelAttribute(label);
         }
-        ((HtmlOptionGroup) domNode).setLabelAttribute(label);
+        else {
+            ((HtmlOptionGroup) domNode).setLabelAttribute(label);
+        }
     }
 
     /**

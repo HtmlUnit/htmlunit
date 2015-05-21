@@ -1040,4 +1040,32 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "text2", "label2" })
+    public void setLabel() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var s = document.getElementById('testSelect');\n"
+            + "  var lastIndex = s.length;\n"
+            + "  s.length += 1;\n"
+            + "  s[lastIndex].value = 'value2';\n"
+            + "  s[lastIndex].text  = 'text2';\n"
+            + "  s[lastIndex].label = 'label2';\n"
+            + "  alert(s[1].text);\n"
+            + "  alert(s[1].label);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <select id='testSelect'>\n"
+            + "    <option value='value1' label='label1'>text1</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
