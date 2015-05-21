@@ -181,7 +181,7 @@ public class Selection extends SimpleScriptable {
      * Adds a range to the selection.
      * @param range the range to add
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void addRange(final com.gargoylesoftware.htmlunit.javascript.host.dom.Range range) {
         getRanges().add(range.toW3C());
     }
