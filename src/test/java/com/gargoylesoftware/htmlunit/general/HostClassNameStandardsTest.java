@@ -4549,6 +4549,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function AnimationEvent() { [native code] }",
             FF31 = "function AnimationEvent() {\n    [native code]\n}",
             FF38 = "function AnimationEvent() {\n    [native code]\n}",
             IE11 = "[object AnimationEvent]")
@@ -5904,7 +5905,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Cache() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void cache() throws Exception {
         test("Cache");
     }
@@ -7496,7 +7499,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CacheStorage() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void cacheStorage() throws Exception {
         test("CacheStorage");
     }
@@ -8406,8 +8411,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    public void mIDIConnectionEvent() throws Exception {
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIConnectionEvent() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void midiConnectionEvent() throws Exception {
         test("MIDIConnectionEvent");
     }
 
@@ -8433,8 +8440,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    public void mIDIInput() throws Exception {
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIInput() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void midiInput() throws Exception {
         test("MIDIInput");
     }
 
@@ -8451,8 +8460,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    public void mIDIInputMap() throws Exception {
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIInputMap() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void midiInputMap() throws Exception {
         test("MIDIInputMap");
     }
 
@@ -8532,7 +8543,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PermissionStatus() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void permissionStatus() throws Exception {
         test("PermissionStatus");
     }
@@ -8586,8 +8599,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    public void mIDIAccess() throws Exception {
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIAccess() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void midiAccess() throws Exception {
         test("MIDIAccess");
     }
 
@@ -8622,7 +8637,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Permissions() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void permissions() throws Exception {
         test("Permissions");
     }
@@ -8762,8 +8779,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function OverflowEvent() { [native code] }")
+    @Alerts("exception")
     public void overflowEvent() throws Exception {
         test("OverflowEvent");
     }
@@ -9395,7 +9411,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function WebKitAnimationEvent() { [native code] }")
+            CHROME = "function AnimationEvent() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void webKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent");
     }

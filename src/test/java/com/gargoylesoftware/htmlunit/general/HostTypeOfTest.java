@@ -4149,9 +4149,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = "function",
-            FF38 = "function",
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined",
             IE11 = "object")
     public void animationEvent() throws Exception {
         test("AnimationEvent");
@@ -6274,16 +6273,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void overflowEvent() throws Exception {
-        test("OverflowEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
             CHROME = "function",
             FF = "function",
             IE11 = "object")
@@ -6904,6 +6893,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
+    @NotYetImplemented(CHROME)
     public void webKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent");
     }

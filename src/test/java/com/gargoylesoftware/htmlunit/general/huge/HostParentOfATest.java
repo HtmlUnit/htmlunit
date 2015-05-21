@@ -4805,9 +4805,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true",
-            IE11 = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _AnimationEvent_AnimationEvent() throws Exception {
         test("AnimationEvent", "AnimationEvent");
     }
@@ -4937,9 +4936,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true",
-            IE11 = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _Event_AnimationEvent() throws Exception {
         test("Event", "AnimationEvent");
     }
@@ -6068,16 +6066,6 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Event_OverflowEvent() throws Exception {
-        test("Event", "OverflowEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _Event_SVGZoomEvent() throws Exception {
@@ -6142,6 +6130,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(CHROME)
     public void _Event_WebKitAnimationEvent() throws Exception {
         test("Event", "WebKitAnimationEvent");
     }

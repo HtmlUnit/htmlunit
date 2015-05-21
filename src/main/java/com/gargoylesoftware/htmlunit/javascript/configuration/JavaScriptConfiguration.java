@@ -206,7 +206,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MediaQueryListEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseScrollEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.OverflowEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PageTransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
@@ -222,7 +221,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.TransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UserProximityEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.WebKitAnimationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WebKitTransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.XMLHttpRequestProgressEvent;
@@ -441,8 +439,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeIterator.class, NodeList.class, Notification.class,
         OfflineAudioCompletionEvent.class,
-        OfflineAudioContext.class, Option.class, OscillatorNode.class, OverflowEvent.class, PageTransitionEvent.class,
-        PannerNode.class,
+        OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
         Path2D.class, Performance.class, PerformanceEntry.class, PerformanceMark.class,
         PerformanceMeasure.class, PerformanceNavigation.class, PerformanceResourceTiming.class, PerformanceTiming.class,
         PeriodicWave.class, Plugin.class, PluginArray.class, PointerEvent.class, PopStateEvent.class, Popup.class,
@@ -505,9 +502,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WeakMap.class,
         WeakSet.class, WebGLActiveInfo.class, WebGLBuffer.class, WebGLContextEvent.class, WebGLFramebuffer.class,
         WebGLProgram.class, WebGLRenderbuffer.class, WebGLRenderingContext.class, WebGLShader.class,
-        WebGLShaderPrecisionFormat.class, WebGLTexture.class, WebGLUniformLocation.class, WebKitAnimationEvent.class,
-        WebKitCSSMatrix.class, webkitRTCPeerConnection.class, webkitSpeechRecognition.class,
-        WebKitTransitionEvent.class,
+        WebGLShaderPrecisionFormat.class, WebGLTexture.class, WebGLUniformLocation.class, WebKitCSSMatrix.class,
+        webkitRTCPeerConnection.class, webkitSpeechRecognition.class, WebKitTransitionEvent.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XDomainRequest.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestProgressEvent.class,
         XMLHttpRequestUpload.class, XMLSerializer.class,

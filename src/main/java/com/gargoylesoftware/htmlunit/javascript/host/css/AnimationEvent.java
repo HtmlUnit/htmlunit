@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -28,13 +29,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class AnimationEvent extends Event {
 
     /**
      * Default constructor.
      */
-    @JsxConstructor(@WebBrowser(FF))
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public AnimationEvent() {
     }
 }

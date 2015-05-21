@@ -784,6 +784,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(CHROME)
     public void _WebKitAnimationEvent_WebKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent", "WebKitAnimationEvent");
     }

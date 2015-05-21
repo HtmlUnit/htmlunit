@@ -4188,6 +4188,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function AnimationEvent() { [native code] }",
             FF31 = "function AnimationEvent() {\n    [native code]\n}",
             FF38 = "function AnimationEvent() {\n    [native code]\n}",
             IE11 = "[object AnimationEvent]")
@@ -6422,8 +6423,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function OverflowEvent() { [native code] }")
+    @Alerts("exception")
     public void overflowEvent() throws Exception {
         test("OverflowEvent");
     }
@@ -7055,7 +7055,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function WebKitAnimationEvent() { [native code] }")
+            CHROME = "function AnimationEvent() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void webKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent");
     }

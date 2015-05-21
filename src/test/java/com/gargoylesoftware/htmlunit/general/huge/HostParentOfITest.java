@@ -2904,16 +2904,6 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _OverflowEvent_OverflowEvent() throws Exception {
-        test("OverflowEvent", "OverflowEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _PerformanceEntry_PerformanceEntry() throws Exception {
