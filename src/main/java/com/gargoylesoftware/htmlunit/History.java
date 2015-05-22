@@ -178,6 +178,14 @@ public class History implements Serializable {
      */
     private void goToUrlAtCurrentIndex() throws IOException {
         final WebRequest request = webRequests_.get(index_);
+
+        String url = request.getUrl().toExternalForm();
+        final int index = url.indexOf('#');
+        if (index != -1) {
+            url = url.substring(0,  index);
+            request.setUrl(new URL(url));
+        }
+
         final Boolean old = ignoreNewPages_.get();
         try {
             ignoreNewPages_.set(Boolean.TRUE);

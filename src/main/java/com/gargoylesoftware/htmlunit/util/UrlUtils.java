@@ -484,7 +484,7 @@ public final class UrlUtils {
             len += 1 + ref.length();
         }
 
-        final StringBuffer s = new StringBuffer(len);
+        final StringBuilder s = new StringBuilder(len);
         s.append(protocol);
         s.append(":");
         if (authority != null && authority.length() > 0) {
@@ -505,8 +505,7 @@ public final class UrlUtils {
             s.append(ref);
         }
 
-        final URL url = new URL(s.toString());
-        return url;
+        return new URL(s.toString());
     }
 
     /**

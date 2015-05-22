@@ -801,7 +801,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         if (scriptTagCount > 0 || tagState != ParsingStatus.OUTSIDE) {
             if (LOG.isDebugEnabled()) {
-                final StringBuffer message = new StringBuffer();
+                final StringBuilder message = new StringBuilder();
                 message.append("canAlreadyBeParsed() retruns false for content: '");
                 message.append(StringUtils.abbreviateMiddle(content, ".", 100));
                 message.append("' (scriptTagCount: " + scriptTagCount);

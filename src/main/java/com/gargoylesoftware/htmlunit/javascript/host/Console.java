@@ -185,7 +185,7 @@ public class Console extends SimpleScriptable {
             final ScriptableObject obj = (ScriptableObject) o;
             final Object[] ids = obj.getIds();
             if (ids != null && ids.length > 0) {
-                final StringBuffer sb = new StringBuffer();
+                final StringBuilder sb = new StringBuilder();
                 for (Object id : ids) {
                     final Object value = obj.get(id);
                     if (value instanceof Delegator) {
@@ -262,7 +262,7 @@ public class Console extends SimpleScriptable {
      */
     private static class ConsoleFormatter implements Formatter {
 
-        private static void appendNativeArray(final NativeArray a, final StringBuffer sb, final int level) {
+        private static void appendNativeArray(final NativeArray a, final StringBuilder sb, final int level) {
             sb.append("[");
             if (level < 3) {
                 for (int i = 0; i < a.size(); i++) {
@@ -278,7 +278,7 @@ public class Console extends SimpleScriptable {
             sb.append("]");
         }
 
-        private static void appendNativeObject(final NativeObject obj, final StringBuffer sb, final int level) {
+        private static void appendNativeObject(final NativeObject obj, final StringBuilder sb, final int level) {
             if (level == 0) {
                 // For whatever reason, when a native object is printed at the
                 // root level Firefox puts brackets outside it. This is not the
@@ -317,13 +317,13 @@ public class Console extends SimpleScriptable {
          * @param val
          *            the object to be printed
          * @param sb
-         *            the StringBuffer used as destination
+         *            the StringBuilder used as destination
          * @param level
          *            the recursion level. If zero, it mean the object is
          *            printed at the console root level. Otherwise, the object
          *            is printed as part of an array or a native object.
          */
-        private static void appendValue(final Object val, final StringBuffer sb, final int level) {
+        private static void appendValue(final Object val, final StringBuilder sb, final int level) {
             if (val instanceof NativeFunction) {
                 sb.append("(");
                 // Remove unnecessary new lines and spaces from the function
@@ -462,7 +462,7 @@ public class Console extends SimpleScriptable {
 
         @Override
         public String printObject(final Object o) {
-            final StringBuffer sb = new StringBuffer();
+            final StringBuilder sb = new StringBuilder();
             appendValue(o, sb, 0);
             return sb.toString();
         }
@@ -470,7 +470,7 @@ public class Console extends SimpleScriptable {
         @Override
         public String parameterAsString(final Object o) {
             if (o instanceof NativeArray) {
-                final StringBuffer sb = new StringBuffer();
+                final StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < ((NativeArray) o).size(); i++) {
                     if (i > 0) {
                         sb.append(",");
