@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.17" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1685">
+                JavaScript: Element lookup by CSS class name does not always work.
+            </action>
             <action type="fix" dev="asashour">
                 History: support POST requests.
             </action>

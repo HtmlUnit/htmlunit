@@ -513,7 +513,7 @@ public class CSSStyleSheet extends StyleSheet {
                     v3 = UNESCAPE_SELECTOR.matcher(v3).replaceAll("$1");
                 }
                 final String a3 = element.getAttribute("class");
-                return selects(v3, a3, ' ');
+                return selectsWhitespaceSeparated(v3, a3);
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
                 return selects(browserVersion, cc1.getFirstCondition(), element)
@@ -610,6 +610,36 @@ public class CSSStyleSheet extends StyleSheet {
             return false;
         }
         return attribute.equals(condition);
+    }
+
+    private static boolean selectsWhitespaceSeparated(final String condition, final String attribute) {
+        final int conditionLength = condition.length();
+        if (conditionLength < 1) {
+            return false;
+        }
+
+        final int attribLength = attribute.length();
+        if (attribLength < conditionLength) {
+            return false;
+        }
+
+        int pos = attribute.indexOf(condition);
+        while (pos != -1) {
+            if (pos > 0 && !Character.isWhitespace(attribute.charAt(pos - 1))) {
+                pos = attribute.indexOf(condition, pos + 1);
+                continue;
+            }
+
+            final int lastPos = pos + condition.length();
+            if (lastPos < attribLength && !Character.isWhitespace(attribute.charAt(lastPos))) {
+                pos = attribute.indexOf(condition, pos + 1);
+                continue;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,

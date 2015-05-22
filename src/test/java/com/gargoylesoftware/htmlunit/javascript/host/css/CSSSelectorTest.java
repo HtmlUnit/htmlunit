@@ -1403,6 +1403,37 @@ public class CSSSelectorTest extends WebDriverTestCase {
     }
 
     /**
+     * See issue #1685.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "6", "3" })
+    public void differentWhitespaceClassName() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "</head><body>\n"
+            + "  <input id='first' class='foo'>\n"
+            + "  <input id='first' class='\tfoo\n'>\n"
+            + "  <input id='first' class='foo bar'>\n"
+            + "  <input id='second' class='foo\tbar'>\n"
+            + "  <input id='third' class='foo\r\nbar'>\n"
+
+            + "  <input id='third' class='foobar foo'>\n"
+
+            + "  <input id='third' class='foobar'>\n"
+            + "  <input id='third' class='abcfoobar'>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  alert(document.querySelectorAll('.foo').length);\n"
+            + "  alert(document.querySelectorAll('.bar').length);\n"
+            + "} catch(e) {alert('exception')}\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
