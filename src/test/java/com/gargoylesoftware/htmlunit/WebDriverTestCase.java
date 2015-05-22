@@ -75,13 +75,13 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * "test.properties" in the HtmlUnit root directory.
  * Sample:
  * <pre>
-   browsers=hu,ff31,ie11
+   browsers=hu,ff38,ie11
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
    ff38.bin=/usr/bin/firefox                            [Unix-like]
    chrome.bin=/path/to/chromedriver                     [Unix-like]
    autofix=true
  * </pre>
- * The file should contain four properties: "browsers", "ie.bin", "ff238bin", and "chrome.bin".
+ * The file should contain four properties: "browsers", "ie.bin", "ff38.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
  *   "hu-ie8", "hu-ff31",

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.17" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                History: support POST requests.
+            </action>
             <action type="fix" dev="asashour" issue="1687">
                 JavaScript: fix setting HTMLOptionElement.label.
             </action>
