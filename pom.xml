@@ -711,6 +711,9 @@
         <contributor>
             <name>David Ostrovsky</name>
         </contributor>
+        <contributor>
+            <name>Matthias Brandt</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -31,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot
+ * @author Matthias Brandt
  */
 @RunWith(BrowserRunner.class)
 public class PostponedActionTest extends WebDriverTestCase {
@@ -100,5 +102,43 @@ public class PostponedActionTest extends WebDriverTestCase {
         conn.setResponse(URL_SECOND, secondContent);
 
         loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * Test case for bug #1686.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "setting timeout", "before", "after", "iframe.html", "simpleAlert"})
+    @NotYetImplemented
+    public void loadingJavaScriptWithTimeout() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>First Page</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert('before');\n"
+                + "    var iframe = document.createElement('iframe');\n"
+                + "    iframe.src = 'iframe.html';\n"
+                + "    document.body.appendChild(iframe);\n"
+                + "    alert('after');\n"
+                + "}\n"
+                + "  function timeout() {\n"
+                + "    alert('setting timeout');\n"
+                + "    window.setTimeout(function(){test()}, 1000);\n"
+                + "    window.setTimeout(function(){alert('simpleAlert')}, 1100);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='timeout()'>\n"
+                + "</body>\n"
+                + "</html>";
+        final String secondContent
+                = "<script>alert('iframe.html')</script>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(new URL(getDefaultUrl(), "iframe.html"), secondContent);
+
+        loadPageWithAlerts2(html);
     }
 }
