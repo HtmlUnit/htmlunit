@@ -169,7 +169,10 @@ public class History implements Serializable {
         while (webRequests_.size() > index_) {
             webRequests_.remove(index_);
         }
-        webRequests_.add(page.getWebResponse().getWebRequest());
+        final WebRequest request = page.getWebResponse().getWebRequest();
+        final WebRequest newRequest = new WebRequest(request.getUrl(), request.getHttpMethod());
+        newRequest.setRequestParameters(request.getRequestParameters());
+        webRequests_.add(newRequest);
     }
 
     /**
@@ -178,13 +181,6 @@ public class History implements Serializable {
      */
     private void goToUrlAtCurrentIndex() throws IOException {
         final WebRequest request = webRequests_.get(index_);
-
-        String url = request.getUrl().toExternalForm();
-        final int index = url.indexOf('#');
-        if (index != -1) {
-            url = url.substring(0,  index);
-            request.setUrl(new URL(url));
-        }
 
         final Boolean old = ignoreNewPages_.get();
         try {
