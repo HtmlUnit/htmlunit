@@ -438,4 +438,34 @@ public class HTMLImageElement extends HTMLElement {
     public void setDataSrc(final String dataSrc) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
+
+    /**
+     * Returns the value of the {@code naturalWidth} property.
+     * @return the value of the {@code naturalWidth} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public int getNaturalWidth() {
+        final HtmlImage img = (HtmlImage) getDomNodeOrDie();
+        try {
+            return img.getWidth();
+        }
+        catch (final IOException e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Returns the value of the {@code naturalHeight} property.
+     * @return the value of the {@code naturalHeight} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public int getNaturalHeight() {
+        final HtmlImage img = (HtmlImage) getDomNodeOrDie();
+        try {
+            return img.getHeight();
+        }
+        catch (final IOException e) {
+            return 0;
+        }
+    }
 }
