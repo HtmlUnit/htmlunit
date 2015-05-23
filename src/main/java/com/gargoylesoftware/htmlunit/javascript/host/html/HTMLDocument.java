@@ -139,6 +139,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
@@ -248,6 +249,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         dom3EventMap.put("MessageEvent", MessageEvent.class);
         dom3EventMap.put("MutationEvent", MutationEvent.class);
         dom3EventMap.put("UIEvent", UIEvent.class);
+        dom3EventMap.put("CustomEvent", CustomEvent.class);
         SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
 
         final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<>();

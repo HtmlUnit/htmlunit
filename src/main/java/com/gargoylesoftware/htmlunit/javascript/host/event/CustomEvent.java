@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
@@ -32,10 +34,40 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class CustomEvent extends Event {
 
+    /** The data passed when initializing the event. */
+    private Object detail_;
+
     /**
      * Default constructor.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public CustomEvent() {
+    }
+
+    /**
+     * Implementation of the DOM Level 2 Event method for initializing the mouse event.
+     *
+     * @param type the event type
+     * @param bubbles can the event bubble
+     * @param cancelable can the event be canceled
+     * @param detail the detail to set for the event
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    public void initCustomEvent(
+            final String type,
+            final boolean bubbles,
+            final boolean cancelable,
+            final Object detail) {
+        initEvent(type, bubbles, cancelable);
+        detail_ = detail;
+    }
+
+    /**
+     * Returns any data passed when initializing the event.
+     * @return any data passed when initializing the event
+     */
+    @JsxGetter
+    public Object getDetail() {
+        return detail_;
     }
 }
