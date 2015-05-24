@@ -1732,6 +1732,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_STYLE_SET_ATTRIBUTE_SUPPORTS_FLAGS,
 
+    /** Indicates if style.setProperty ignores case when determining the priority. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE,
+
     /** IE supports accessing unsupported style elements via getter
      * like val = elem.style.htmlunit;.
      */

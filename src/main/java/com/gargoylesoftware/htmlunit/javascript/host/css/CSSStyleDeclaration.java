@@ -27,6 +27,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPACITY_AC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_REMOVE_ATTRIBUTE_SUPPORTS_FLAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_ATTRIBUTE_SUPPORTS_FLAGS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -562,7 +563,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the attribute name (camel-cased)
      * @param newValue the attribute value
      */
-    protected void setStyleAttribute(final String name, String newValue) {
+    protected void setStyleAttribute(final String name, final String newValue) {
+        setStyleAttribute(name, newValue, "");
+    }
+
+    /**
+     * Sets the specified style attribute.
+     * @param name the attribute name (camel-cased)
+     * @param newValue the attribute value
+     * @param important important value
+     */
+    protected void setStyleAttribute(final String name, String newValue, final String important) {
         if ("null".equals(newValue)) {
             if (getBrowserVersion().hasFeature(CSS_SET_NULL_THROWS)) {
                 //Context.throwAsScriptRuntimeEx(new Exception("Invalid argument."));
@@ -570,11 +581,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             newValue = "";
         }
         if (styleDeclaration_ != null) {
-            styleDeclaration_.setProperty(name, newValue, null);
+            styleDeclaration_.setProperty(name, newValue, important);
             return;
         }
 
-        replaceStyleAttribute(name, newValue);
+        replaceStyleAttribute(name, newValue, important);
     }
 
     /**
@@ -583,8 +594,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * string, this method actually removes the named style attribute.
      * @param name the attribute name (delimiter-separated, not camel-cased)
      * @param value the attribute value
+     * @param priority  the new priority of the property; <code>"important"</code>or the empty string if none.
      */
-    private void replaceStyleAttribute(final String name, final String value) {
+    private void replaceStyleAttribute(final String name, final String value, final String priority) {
         if (StringUtils.isBlank(value)) {
             removeStyleAttribute(name);
         }
@@ -598,7 +610,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             else {
                 index = getCurrentElementIndex();
             }
-            final StyleElement element = new StyleElement(name, value, index);
+            final StyleElement element = new StyleElement(name, value, priority,
+                    SelectorSpecificity.FROM_STYLE_ATTRIBUTE, index);
             styleMap.put(name, element);
             writeToElement(styleMap);
         }
@@ -674,6 +687,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             buffer.append(e.getName());
             buffer.append(": ");
             buffer.append(e.getValue());
+
+            final String prio = e.getPriority();
+            if (StringUtils.isNotBlank(prio)) {
+                buffer.append(" !");
+                buffer.append(prio);
+            }
             buffer.append(";");
         }
         jsElement_.getDomNodeOrDie().setAttribute("style", buffer.toString());
@@ -4109,11 +4128,23 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      *
      * @param name the name of the attribute
      * @param value the value to assign to the attribute
-     * @param important my be null
+     * @param important may be null
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void setProperty(final String name, final String value, final String important) {
-        setStyleAttribute(name, value);
+        if (StringUtils.isEmpty(important) || "null".equals(important)) {
+            setStyleAttribute(name, value, "");
+        }
+        if (getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
+            if (PRIORITY_IMPORTANT.equalsIgnoreCase(important)) {
+                setStyleAttribute(name, value, PRIORITY_IMPORTANT);
+            }
+        }
+        else {
+            if (PRIORITY_IMPORTANT.equals(important)) {
+                setStyleAttribute(name, value, PRIORITY_IMPORTANT);
+            }
+        }
     }
 
     /**

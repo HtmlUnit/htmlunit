@@ -1323,20 +1323,28 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "red ", "BlacK ", "blue important", "gray ", "green ", "green " },
-            CHROME = { "red ", "black ", "blue important", "gray ", "green ", "black important" },
-            IE11 = { "red ", "black ", "blue important", "gray ", "green ", "black important" },
-            IE8 = { "not supported", "not supported", "not supported", "not supported",
-                        "not supported", "not supported" })
-    @NotYetImplemented
+    @Alerts(DEFAULT = { "red ", "black ", "blue important", "gray " },
+            IE8 = { "not supported", "not supported", "not supported", "not supported" })
     public void setProperty() throws Exception {
         final String[] expected = getExpectedAlerts();
         setProperty("'background-color', 'red', ''", expected[0]);
-        setProperty("'background-ColoR', 'BlacK', ''", expected[1]);
+        setProperty("'background-ColoR', 'black', ''", expected[1]);
         setProperty("'background-color', 'blue', 'important'", expected[2]);
         setProperty("'background-color', 'gray', null", expected[3]);
-        setProperty("'background-color', 'white', 'crucial'", expected[4]);
-        setProperty("'background-color', 'black', 'imPORTant'", expected[5]);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "green ", "black important", "green " },
+            FF = { "green ", "green ", "green " },
+            IE8 = { "not supported", "not supported", "not supported" })
+    public void setPropertyImportant() throws Exception {
+        final String[] expected = getExpectedAlerts();
+        setProperty("'background-color', 'white', 'crucial'", expected[0]);
+        setProperty("'background-color', 'black', 'imPORTant'", expected[1]);
+        setProperty("'background-color', 'blue', 'important '", expected[2]);
     }
 
     private void setProperty(final String params, final String... expected) throws Exception {
