@@ -1320,6 +1320,88 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "red ", "BlacK ", "blue important", "gray ", "green ", "green " },
+            CHROME = { "red ", "black ", "blue important", "gray ", "green ", "black important" },
+            IE11 = { "red ", "black ", "blue important", "gray ", "green ", "black important" },
+            IE8 = { "not supported", "not supported", "not supported", "not supported",
+                        "not supported", "not supported" })
+    @NotYetImplemented
+    public void setProperty() throws Exception {
+        final String[] expected = getExpectedAlerts();
+        setProperty("'background-color', 'red', ''", expected[0]);
+        setProperty("'background-ColoR', 'BlacK', ''", expected[1]);
+        setProperty("'background-color', 'blue', 'important'", expected[2]);
+        setProperty("'background-color', 'gray', null", expected[3]);
+        setProperty("'background-color', 'white', 'crucial'", expected[4]);
+        setProperty("'background-color', 'black', 'imPORTant'", expected[5]);
+    }
+
+    private void setProperty(final String params, final String... expected) throws Exception {
+        final String html =
+              "<html><body onload='test()'>\n"
+            + "<a id='a' href='#' style='background-color:green'>go</a>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var node = document.getElementById('a');\n"
+            + "    if (node.style.setProperty) {\n"
+            + "      try {\n"
+            + "        node.style.setProperty(" + params + ");\n"
+            + "        alert(node.style.backgroundColor + ' ' + node.style.getPropertyPriority('background-color'));\n"
+            + "      } catch(e) { alert(e); }\n"
+            + "    } else {\n"
+            + "      alert('not supported');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        setExpectedAlerts(expected);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "important", "", "important" },
+            IE8 = "not supported")
+    public void getPropertyPriority() throws Exception {
+        final String html =
+                "<html><body onload='test()'>\n"
+              + "<a id='a1' href='#' style='color:green'>go</a>\n"
+              + "<a id='a2' href='#' style='color:blue !important'>go</a>\n"
+
+              + "<a id='a3' href='#' style='background-color:green'>go</a>\n"
+              + "<a id='a4' href='#' style='background-color:blue !important'>go</a>\n"
+
+              + "<script>\n"
+              + "  function test() {\n"
+              + "    var node = document.getElementById('a1');\n"
+              + "    if (node.style.getPropertyPriority) {\n"
+              + "      alert(node.style.getPropertyPriority('color'));\n"
+
+              + "      node = document.getElementById('a2');\n"
+              + "      alert(node.style.getPropertyPriority('color'));\n"
+
+              + "      node = document.getElementById('a3');\n"
+              + "      alert(node.style.getPropertyPriority('background-color'));\n"
+
+              + "      node = document.getElementById('a4');\n"
+              + "      alert(node.style.getPropertyPriority('background-color'));\n"
+              + "    } else {\n"
+              + "      alert('not supported');\n"
+              + "    }\n"
+              + "  }\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

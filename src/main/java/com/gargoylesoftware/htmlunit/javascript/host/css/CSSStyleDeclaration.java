@@ -426,6 +426,23 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
+     * Returns the priority of the named style attribute, or an empty string if it is not found.
+     *
+     * @param name the name of the style attribute whose value is to be retrieved
+     * @return the named style attribute value, or an empty string if it is not found
+     */
+    protected String getStylePriority(final String name) {
+        if (styleDeclaration_ != null) {
+            return styleDeclaration_.getPropertyPriority(name);
+        }
+        final StyleElement element = getStyleElement(name);
+        if (element != null && element.getValue() != null) {
+            return element.getPriority();
+        }
+        return "";
+    }
+
+    /**
      * Determines the StyleElement for the given name.
      *
      * @param name the name of the requested StyleElement
@@ -4075,6 +4092,28 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         return new CSSPrimitiveValue(jsElement_, (org.w3c.dom.css.CSSPrimitiveValue) cssValue);
+    }
+
+    /**
+     * Gets the value of the specified property of the style.
+     * @param name the style property name
+     * @return empty string if nothing found
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    public String getPropertyPriority(final String name) {
+        return getStylePriority(name);
+    }
+
+    /**
+     * Sets the value of the specified property.
+     *
+     * @param name the name of the attribute
+     * @param value the value to assign to the attribute
+     * @param important my be null
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    public void setProperty(final String name, final String value, final String important) {
+        setStyleAttribute(name, value);
     }
 
     /**
