@@ -18,10 +18,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -30,6 +32,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -43,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
 
 /**
- * A JavaScript object for a CanvasRenderingContext2D.
+ * A JavaScript object for {@code CanvasRenderingContext2D}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -53,6 +57,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class CanvasRenderingContext2D extends SimpleScriptable {
+
+    private static final Log LOG = LogFactory.getLog(CanvasRenderingContext2D.class);
 
     private final HTMLCanvasElement canvas_;
     private final BufferedImage image_;
@@ -92,8 +98,32 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param fillStyle the "fillStyle" property
      */
     @JsxSetter
-    public void setFillStyle(final Object fillStyle) {
-        //empty
+    public void setFillStyle(String fillStyle) {
+        fillStyle = fillStyle.replaceAll("\\s", "");
+        Color color = null;
+        if (fillStyle.startsWith("rgb(")) {
+            final String[] colors = fillStyle.substring(4, fillStyle.length() - 1).split(",");
+            color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]));
+        }
+        else if (fillStyle.startsWith("rgba(")) {
+            final String[] colors = fillStyle.substring(5, fillStyle.length() - 1).split(",");
+            color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]),
+                (int) (Float.parseFloat(colors[3]) * 255));
+        }
+        else if (fillStyle.startsWith("#")) {
+            color = Color.decode(fillStyle);
+        }
+        else {
+            try {
+                final Field f = Color.class.getField(fillStyle);
+                color = (Color) f.get(null);
+            }
+            catch (final Exception e) {
+                LOG.info("Can not find color '" + fillStyle + '\'');
+                color = Color.black;
+            }
+        }
+        graphics2D_.setColor(color);
     }
 
     /**
@@ -387,8 +417,8 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param h the height
      */
     @JsxFunction
-    public void fillRect(final double x, final double y, final double w, final double h) {
-        //empty
+    public void fillRect(final int x, final int y, final int w, final int h) {
+        graphics2D_.fillRect(x, y, w, h);
     }
 
     /**
@@ -400,11 +430,19 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Dummy placeholder.
+     * Returns the {@code ImageData} object.
+     * @param sx x
+     * @param sy y
+     * @param sw width
+     * @param sh height
+     * @return the {@code ImageData} object
      */
     @JsxFunction
-    public void getImageData() {
-        //empty
+    public ImageData getImageData(final int sx, final int sy, final int sw, final int sh) {
+        final ImageData imageData = new ImageData(image_, sx, sy, sw, sh);
+        imageData.setParentScope(getParentScope());
+        imageData.setPrototype(getPrototype(imageData.getClass()));
+        return imageData;
     }
 
     /**

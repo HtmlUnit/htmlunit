@@ -9,6 +9,9 @@
     <body>
         <release version="2.17" date="???" description="Bugfixes">
             <action type="add" dev="asashour">
+                JavaScript: implement CanvasRenderingContext2D.getImageData().
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: support image.naturalWidth and .naturalHeight.
             </action>
             <action type="add" dev="asashour">

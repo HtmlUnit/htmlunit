@@ -34,8 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
 public class ArrayBuffer extends SimpleScriptable {
 
     private byte[] bytes_;
@@ -81,7 +80,12 @@ public class ArrayBuffer extends SimpleScriptable {
         return bytes_[index];
     }
 
-    void setBytes(final int index, final byte[] array) {
+    /**
+     * Sets the bytes.
+     * @param index the starting index
+     * @param array the array
+     */
+    public void setBytes(final int index, final byte[] array) {
         for (int i = array.length - 1; i >= 0; i--) {
             bytes_[index + i] = array[i];
         }
