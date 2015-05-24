@@ -21,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -64,7 +66,10 @@ public class Int16Array extends ArrayBufferViewBase {
      * {@inheritDoc}
      */
     @Override
-    protected Number fromArray(final byte[] array, final int offset) {
+    protected Object fromArray(final byte[] array, final int offset) {
+        if (offset >= array.length) {
+            return Scriptable.NOT_FOUND;
+        }
         final ByteBuffer buff = ByteBuffer.wrap(array);
         buff.order(ByteOrder.LITTLE_ENDIAN);
         return buff.getShort(offset);

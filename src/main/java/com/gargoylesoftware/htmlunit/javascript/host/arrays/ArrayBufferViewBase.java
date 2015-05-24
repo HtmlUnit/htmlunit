@@ -130,9 +130,13 @@ public class ArrayBufferViewBase extends ArrayBufferView {
      * {@inheritDoc}
      */
     @Override
-    public Number get(final int index, final Scriptable start) {
+    public Object get(final int index, final Scriptable start) {
         final int offset = index * getBytesPerElement() + getByteOffset();
-        return fromArray(getBuffer().getBytes(), offset);
+        final ArrayBuffer buffer = getBuffer();
+        if (buffer == null) {
+            return Scriptable.NOT_FOUND;
+        }
+        return fromArray(buffer.getBytes(), offset);
     }
 
     /**
@@ -158,7 +162,7 @@ public class ArrayBufferViewBase extends ArrayBufferView {
      * @param offset the offset
      * @return the byte array
      */
-    protected Number fromArray(final byte[] array, final int offset) {
+    protected Object fromArray(final byte[] array, final int offset) {
         return null;
     }
 

@@ -127,4 +127,30 @@ public class Int16ArrayTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE8 = "exception")
+    public void outOfRange() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var array = new Int16Array(2);\n"
+            + "    array[0] = 11;\n"
+            + "    array[1] = 12;\n"
+            + "    array[2] = 13;\n"
+            + "    alert(array[2]);\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

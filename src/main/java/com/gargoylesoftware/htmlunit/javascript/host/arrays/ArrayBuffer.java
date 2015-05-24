@@ -86,7 +86,11 @@ public class ArrayBuffer extends SimpleScriptable {
      * @param array the array
      */
     public void setBytes(final int index, final byte[] array) {
-        for (int i = array.length - 1; i >= 0; i--) {
+        int i = array.length - 1;
+        if (index + i >= bytes_.length) {
+            i = bytes_.length - index - 1;
+        }
+        for (; i >= 0; i--) {
             bytes_[index + i] = array[i];
         }
     }

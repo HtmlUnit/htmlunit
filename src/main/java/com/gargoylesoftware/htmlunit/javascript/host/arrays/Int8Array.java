@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -58,7 +59,10 @@ public class Int8Array extends ArrayBufferViewBase {
      * {@inheritDoc}
      */
     @Override
-    protected Number fromArray(final byte[] array, final int offset) {
+    protected Object fromArray(final byte[] array, final int offset) {
+        if (offset >= array.length) {
+            return Scriptable.NOT_FOUND;
+        }
         return array[offset];
     }
 
