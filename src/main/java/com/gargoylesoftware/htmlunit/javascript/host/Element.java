@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_CLASS_LIST_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -496,7 +497,10 @@ public class Element extends EventNode {
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public DOMTokenList getClassList() {
-        return null;
+        if (getBrowserVersion().hasFeature(JS_ELEMENT_CLASS_LIST_NULL)) {
+            return null;
+        }
+        return new DOMTokenList(this, "class");
     }
 
     /**

@@ -4464,7 +4464,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF24, FF31 })
     public void blob() throws Exception {
         test("Blob");
     }
@@ -4888,7 +4888,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF31 = "function",
             FF38 = "function",
             IE11 = "object")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF24, FF31 })
     public void file() throws Exception {
         test("File");
     }

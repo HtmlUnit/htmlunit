@@ -1022,7 +1022,6 @@ public class ElementTest extends WebDriverTestCase {
             FF38 = { "", "a b c" },
             IE = { "undefined", "undefined" },
             IE11 = { "undefined", "a b c" })
-    @NotYetImplemented(CHROME)
     public void classList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

@@ -1145,6 +1145,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_ECMA5_FUNCTIONS,
 
+    /** Element.classList returns null. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
+    JS_ELEMENT_CLASS_LIST_NULL,
+
     /** Javascript calculation of element clientHeight/Width does not
      * include the padding.
      */
