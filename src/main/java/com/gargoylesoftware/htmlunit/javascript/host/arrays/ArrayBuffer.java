@@ -90,7 +90,7 @@ public class ArrayBuffer extends SimpleScriptable {
         if (index + i >= bytes_.length) {
             i = bytes_.length - index - 1;
         }
-        for (; i >= 0; i--) {
+        for ( ; i >= 0; i--) {
             bytes_[index + i] = array[i];
         }
     }

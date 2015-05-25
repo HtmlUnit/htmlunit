@@ -56,7 +56,7 @@
                 <dl>
                     <dt>Latest build</dt>
                     <dd>
-                        <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_QuickBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">Build server (Log in as 'guest')</a> 
+                        <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">Build server (Log in as 'guest')</a> 
                     </dd>
                     
                     <dt>Latest release <date>Apr 20, 2015</date></dt>
