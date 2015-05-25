@@ -90,19 +90,19 @@ public class HtmlUnknownElement extends HtmlElement {
                 }
                 return DisplayStyle.RUBY;
             case HtmlRp.TAG_NAME:
-                if (wasCreatedByJavascript() && getParentNode() == null) {
-                    return DisplayStyle.BLOCK;
-                }
                 if (hasFeature(CSS_RP_DISPLAY_NONE)) {
                     return DisplayStyle.NONE;
                 }
-                break;
-            case HtmlRt.TAG_NAME:
-                if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
-                    return DisplayStyle.RUBY_TEXT;
-                }
                 if (wasCreatedByJavascript() && getParentNode() == null) {
                     return DisplayStyle.BLOCK;
+                }
+                break;
+            case HtmlRt.TAG_NAME:
+                if (wasCreatedByJavascript() && getParentNode() == null) {
+                    return DisplayStyle.BLOCK;
+                }
+                if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
+                    return DisplayStyle.RUBY_TEXT;
                 }
                 break;
 

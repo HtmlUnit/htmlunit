@@ -2514,7 +2514,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(FF31 = "dateTime",
             FF38 = "dateTime")
-    @NotYetImplemented(FF31)
+    @NotYetImplemented({ FF31, FF38 })
     public void time() throws Exception {
         test("time");
     }
@@ -2539,7 +2539,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31 })
+    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
     public void track() throws Exception {
         test("track");
     }
@@ -2620,7 +2620,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "preload,readyState,seekable,seeking,src,textTracks,videoHeight,videoWidth,volume,"
                 + "width",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31 })
+    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
     public void video() throws Exception {
         test("video");
     }
