@@ -298,4 +298,42 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
         final WebElement textArea = driver.findElement(By.id("textArea1"));
         Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void asTextAndVisibility() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea id='textArea1' style='visibility:hidden'> foo \n bar "
+            + "</textarea>\n"
+            + "</form></body></html>";
+        final WebDriver driver = loadPage2(html);
+        final WebElement textArea = driver.findElement(By.id("textArea1"));
+        Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = " foo \n bar <p>html snippet</p>",
+            FF24 = "foo bar <p>html snippet</p>",
+            FF31 = "foo bar <p>html snippet</p>")
+    public void parentAsText() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea name='textArea1'> foo \n bar "
+            + "<p>html snippet</p>\n"
+            + "</textarea>\n"
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textArea = driver.findElement(By.id("form1"));
+        Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
+    }
 }

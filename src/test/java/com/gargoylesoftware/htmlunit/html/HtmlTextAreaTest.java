@@ -22,7 +22,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -77,7 +76,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormSubmission_NewValue() throws Exception {
+    public void formSubmission_NewValue() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -100,7 +99,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetText() throws Exception {
+    public void getText() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -146,7 +145,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testPreventDefault() throws Exception {
+    public void preventDefault() throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function handler(e) {\n"
@@ -228,46 +227,6 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = " foo \n bar <p>html snippet</p>",
-            FF = "foo bar <p>html snippet</p>")
-    public void asText() throws Exception {
-        final String content
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "<textarea name='textArea1'> foo \n bar "
-            + "<p>html snippet</p>\n"
-            + "</textarea>\n"
-            + "</form></body></html>";
-        final HtmlPage page = loadPage(content);
-        final HtmlForm form = page.getHtmlElementById("form1");
-        final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
-        assertNotNull(textArea);
-        Assert.assertEquals(getExpectedAlerts()[0].replace("\n", LINE_SEPARATOR), textArea.asText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = " foo \n bar <p>html snippet</p>",
-            FF = "foo bar <p>html snippet</p>")
-    public void testParentAsText() throws Exception {
-        final String content
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "<textarea name='textArea1'> foo \n bar "
-            + "<p>html snippet</p>\n"
-            + "</textarea>\n"
-            + "</form></body></html>";
-        final HtmlPage page = loadPage(content);
-        final HtmlForm form = page.getHtmlElementById("form1");
-        Assert.assertEquals(getExpectedAlerts()[0].replace("\n", LINE_SEPARATOR), form.asText());
-    }
-
-    /**
      * Style=visibility:hidden should not affect getText().
      * @throws Exception if the test fails
      */
@@ -284,6 +243,5 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
         assertEquals(" foo \n bar ", textArea.getText());
-        assertEquals("", textArea.asText());
     }
 }
