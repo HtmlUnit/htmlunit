@@ -240,7 +240,7 @@ public class Location extends SimpleScriptable {
             webWindow.getWebClient().download(webWindow, "", request, false, "JS set location");
         }
         catch (final MalformedURLException e) {
-            LOG.error("setLocation('" + newLocation + "') Got MalformedURLException", e);
+            LOG.error("setHref('" + newLocation + "') got MalformedURLException", e);
             throw e;
         }
     }
