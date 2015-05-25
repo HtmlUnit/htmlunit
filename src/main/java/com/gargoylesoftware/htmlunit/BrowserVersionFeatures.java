@@ -466,7 +466,7 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_OBJECT_DETECTION,
 
     /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlCommand} have no end tag. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
     HTMLCOMMAND_END_TAG_FORBIDDEN,
 
     /**
