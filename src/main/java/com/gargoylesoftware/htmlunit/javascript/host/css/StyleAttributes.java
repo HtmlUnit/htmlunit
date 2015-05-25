@@ -501,12 +501,10 @@ final class StyleAttributes {
                 "-ms-content-zoom-snap-points", ie11up("snapInterval(0%, 100%)")),
 
         /** The style property -ms-content-zoom-snap-type. */
-        MS_CONTENT_ZOOM_SNAP_TYPE("msContentZoomSnapType",
-                "-ms-content-zoom-snap-type", ie11up("none")),
+        MS_CONTENT_ZOOM_SNAP_TYPE("msContentZoomSnapType", "-ms-content-zoom-snap-type", ie11up("none")),
 
         /** The style property -ms-content-zooming. */
-        MS_CONTENT_ZOOMING("msContentZooming",
-                "-ms-content-zooming", ie11up("none")),
+        MS_CONTENT_ZOOMING("msContentZooming", "-ms-content-zooming", ie11up("none")),
 
         /** The style property -ms-flex. */
         MS_FLEX("msFlex", "-ms-flex", ie11up("0 1 auto")),
@@ -551,8 +549,7 @@ final class StyleAttributes {
         MS_FLOW_INTO("msFlowInto", "-ms-flow-into", ie11up("none")),
 
         /** The style property -ms-font-feature-settings. */
-        MS_FONT_FEATURE_SETTINGS("msFontFeatureSettings",
-                "-ms-font-feature-settings", ie11up("normal")),
+        MS_FONT_FEATURE_SETTINGS("msFontFeatureSettings", "-ms-font-feature-settings", ie11up("normal")),
 
         /** The style property -ms-grid-column. */
         MS_GRID_COLUMN("msGridColumn", "-ms-grid-column", ie11up("1")),
@@ -606,8 +603,7 @@ final class StyleAttributes {
         MS_PERSPECTIVE("msPerspective", "-ms-perspective", ie11up("none")),
 
         /** The style property -ms-perspective-origin. */
-        MS_PERSPECTIVE_ORIGIN("msPerspectiveOrigin",
-                "-ms-perspective-origin", ie11up("620px 163.2px")),
+        MS_PERSPECTIVE_ORIGIN("msPerspectiveOrigin", "-ms-perspective-origin", ie11up("620px 163.2px")),
 
         /** The style property -ms-scroll-chaining. */
         MS_SCROLL_CHAINING("msScrollChaining", "-ms-scroll-chaining", ie11up("chained")),
@@ -661,19 +657,16 @@ final class StyleAttributes {
         MS_TRANSFORM("msTransform", "-ms-transform", ie11up("none")),
 
         /** The style property -ms-transform-origin. */
-        MS_TRANSFORM_ORIGIN("msTransformOrigin", "-ms-transform-origin",
-                ie11up("620px 163.2px")),
+        MS_TRANSFORM_ORIGIN("msTransformOrigin", "-ms-transform-origin", ie11up("620px 163.2px")),
 
         /** The style property -ms-transform-style. */
-        MS_TRANSFORM_STYLE("msTransformStyle", "-ms-transform-style",
-                ie11up("flat")),
+        MS_TRANSFORM_STYLE("msTransformStyle", "-ms-transform-style", ie11up("flat")),
 
         /** The style property -ms-transition. */
         MS_TRANSITION("msTransition", "-ms-transition", ie11up("")),
 
         /** The style property -ms-transition-delay. */
-        MS_TRANSITION_DELAY("msTransitionDelay", "-ms-transition-delay",
-                ie11up("0s")),
+        MS_TRANSITION_DELAY("msTransitionDelay", "-ms-transition-delay", ie11up("0s")),
 
         /** The style property -ms-transition-duration. */
         MS_TRANSITION_DURATION("msTransitionDuration",
@@ -704,19 +697,19 @@ final class StyleAttributes {
         ALIGN_CONTENT("alignContent", "align-content", ie11up("stretch"), ff31up("stretch")),
 
         /** The style property {@code align-content}. */
-        ALIGN_MINUS_CONTENT("align-content", "align-content", ff31up("stretch")),
+        ALIGN_CONTENT_("align-content", "align-content", ff31up("stretch")),
 
         /** The style property {@code align-items}. */
         ALIGN_ITEMS("alignItems", "align-items", ff24up("stretch"), ie11up("stretch")),
 
         /** The style property {@code align-items}. */
-        ALIGN_MINUS_ITEMS("align-items", "align-items", ff38up("stretch")),
+        ALIGN_ITEMS_("align-items", "align-items", ff38up("stretch")),
 
         /** The style property alignment-self. */
         ALIGN_SELF("alignSelf", "align-self", ff24up("stretch"), ie11up("auto")),
 
         /** The style property {@code align-self}. */
-        ALIGN_MINUS_SELF("align-self", "align-self", ff38up("stretch")),
+        ALIGN_SELF_("align-self", "align-self", ff38up("stretch")),
 
         /** The style property alignment-baseline. */
         ALIGNMENT_BASELINE("alignmentBaseline", "alignment-baseline", ie11up("auto")),
@@ -731,43 +724,43 @@ final class StyleAttributes {
         ANIMATION_DELAY("animationDelay", "animation-delay", ff("0s"), ie11up("0s")),
 
         /** The style property {@code animation-delay}. */
-        ANIMATION_MINUS_DELAY("animation-delay", "animation-delay", ff38up("0s")),
+        ANIMATION_DELAY_("animation-delay", "animation-delay", ff38up("0s")),
 
         /** The style property animation-direction. */
         ANIMATION_DIRECTION("animationDirection", "animation-direction", ff("normal"), ie11up("normal")),
 
         /** The style property {@code animation-direction}. */
-        ANIMATION_MINUS_DIRECTION("animation-direction", "animation-direction", ff38up("normal")),
+        ANIMATION_DIRECTION_("animation-direction", "animation-direction", ff38up("normal")),
 
         /** The style property animation-duration. */
         ANIMATION_DURATION("animationDuration", "animation-duration", ff("0s"), ie11up("0s")),
 
         /** The style property {@code animation-duration}. */
-        ANIMATION_MINUS_DURATION("animation-duration", "animation-duration", ff38up("0s")),
+        ANIMATION_DURATION_("animation-duration", "animation-duration", ff38up("0s")),
 
         /** The style property animation-fill-mode. */
         ANIMATION_FILL_MODE("animationFillMode", "animation-fill-mode", ff("none"), ie11up("none")),
 
         /** The style property {@code animation-fill-mode}. */
-        ANIMATION_MINUS_FILL_MODE("animation-fill-mode", "animation-fill-mode", ff38up("none")),
+        ANIMATION_FILL_MODE_("animation-fill-mode", "animation-fill-mode", ff38up("none")),
 
         /** The style property animation-iteration-count. */
         ANIMATION_ITERATION_COUNT("animationIterationCount", "animation-iteration-count", ff("1"), ie11up("1")),
 
         /** The style property {@code animation-iteration-count}. */
-        ANIMATION_MINUS_ITERATION_COUNT("animation-iteration-count", "animation-iteration-count", ff38up("1")),
+        ANIMATION_ITERATION_COUNT_("animation-iteration-count", "animation-iteration-count", ff38up("1")),
 
         /** The style property animation-name. */
         ANIMATION_NAME("animationName", "animation-name", ff("none"), ie11up("none")),
 
         /** The style property animation-name. */
-        ANIMATION_MINUS_NAME("animation-name", "animation-name", ff38up("none")),
+        ANIMATION_NAME_("animation-name", "animation-name", ff38up("none")),
 
         /** The style property animation-play-state. */
         ANIMATION_PLAY_STATE("animationPlayState", "animation-play-state", ff("running"), ie11up("running")),
 
         /** The style property {@code animation-play-state}. */
-        ANIMATION_MINUS_PLAY_STATE("animation-play-state", "animation-play-state", ff38up("running")),
+        ANIMATION_PLAY_STATE_("animation-play-state", "animation-play-state", ff38up("running")),
 
         /** The style property animation-timing-function. */
         ANIMATION_TIMING_FUNCTION("animationTimingFunction",
@@ -776,7 +769,7 @@ final class StyleAttributes {
                 ie11up("cubic-bezier(0.25, 0.1, 0.25, 1)")),
 
         /** The style property {@code animation-timing-function}. */
-        ANIMATION_MINUS_TIMING_FUNCTION("animation-timing-function", "animation-timing-function",
+        ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function",
                 ff38up("cubic-bezier(0.25, 0.1, 0.25, 1)")),
 
         /** The style property azimuth. */
@@ -786,37 +779,37 @@ final class StyleAttributes {
         BACKFACE_VISIBILITY("backfaceVisibility", "backface-visibility", ff("visible"), ie11up("visible")),
 
         /** The style property {@code backface-visibility}. */
-        BACKFACE_MINUS_VISIBILITY("backface-visibility", "backface-visibility", ff38up("visible")),
+        BACKFACE_VISIBILITY_("backface-visibility", "backface-visibility", ff38up("visible")),
 
         /** The style property {@code background-attachment}. */
-        BACKGROUND_MINUS_ATTACHMENT("background-attachment", "background-attachment", ff38up("scroll")),
+        BACKGROUND_ATTACHMENT_("background-attachment", "background-attachment", ff38up("scroll")),
 
         /** The style property background-blend-mode. */
         BACKGROUND_BLEND_MODE("backgroundBlendMode", "background-blend-mode", ff31up("normal")),
 
         /** The style property {@code background-blend-mode}. */
-        BACKGROUND_MINUS_BLEND_MODE("background-blend-mode", "background-blend-mode", ff38up("normal")),
+        BACKGROUND_BLEND_MODE_("background-blend-mode", "background-blend-mode", ff38up("normal")),
 
         /** The style property background-clip. */
         BACKGROUND_CLIP("backgroundClip", "background-clip", ff("border-box"), ie11up("border-box")),
 
         /** The style property {@code background-clip}. */
-        BACKGROUND_MINUS_CLIP("background-clip", "background-clip", ff38up("border-box")),
+        BACKGROUND_CLIP_("background-clip", "background-clip", ff38up("border-box")),
 
         /** The style property {@code background-color}. */
-        BACKGROUND_MINUS_COLOR("background-color", "background-color", ff38up("transparent")),
+        BACKGROUND_COLOR_("background-color", "background-color", ff38up("transparent")),
 
         /** The style property {@code background-image}. */
-        BACKGROUND_MINUS_IMAGE("background-image", "background-image", ff38up("none")),
+        BACKGROUND_IMAGE_("background-image", "background-image", ff38up("none")),
 
         /** The style property background-origin. */
         BACKGROUND_ORIGIN("backgroundOrigin", "background-origin", ff("padding-box"), ie11up("padding-box")),
 
         /** The style property {@code background-origin}. */
-        BACKGROUND_MINUS_ORIGIN("background-origin", "background-origin", ff38up("padding-box")),
+        BACKGROUND_ORIGIN_("background-origin", "background-origin", ff38up("padding-box")),
 
         /** The style property {@code background-position}. */
-        BACKGROUND_MINUS_POSITION("background-position", "background-position", ff38up("0% 0%")),
+        BACKGROUND_POSITION_("background-position", "background-position", ff38up("0% 0%")),
 
         /** The style property background-position-x. */
         BACKGROUND_POSITION_X("backgroundPositionX", "background-position-x",
@@ -826,13 +819,13 @@ final class StyleAttributes {
         BACKGROUND_POSITION_Y("backgroundPositionY", "background-position-y", ie11up("undefined")),
 
         /** The style property {@code background-repeat}. */
-        BACKGROUND_MINUS_REPEAT("background-repeat", "background-repeat", ff38up("repeat")),
+        BACKGROUND_REPEAT_("background-repeat", "background-repeat", ff38up("repeat")),
 
         /** The style property background-size. */
         BACKGROUND_SIZE("backgroundSize", "background-size", ff("auto auto"), ie11up("auto")),
 
         /** The style property {@code background-size}. */
-        BACKGROUND_MINUS_SIZE("background-size", "background-size", ff38up("auto auto")),
+        BACKGROUND_SIZE_("background-size", "background-size", ff38up("auto auto")),
 
         /** The style property baseline-shift. */
         BASELINE_SHIFT("baselineShift", "baseline-shift", ie11up("baseline")),
@@ -841,151 +834,151 @@ final class StyleAttributes {
         BEHAVIOR("behavior", "behavior"),
 
         /** The style property {@code border-bottom}. */
-        BORDER_MINUS_BOTTOM("border-bottom", "border-bottom", ff38up("")),
+        BORDER_BOTTOM_("border-bottom", "border-bottom", ff38up("")),
 
         /** The style property {@code border-bottom-color}. */
-        BORDER_MINUS_BOTTOM_COLOR("border-bottom-color", "border-bottom-color", ff38up("rgb(0, 0, 0)")),
+        BORDER_BOTTOM_COLOR_("border-bottom-color", "border-bottom-color", ff38up("rgb(0, 0, 0)")),
 
         /** The style property border-bottom-left-radius. */
         ORDER_BOTTOM_LEFT_RADIUS("borderBottomLeftRadius", "border-bottom-left-radius", ff("0px"), ie11up("0px")),
 
         /** The style property {@code border-bottom-left-radius}. */
-        BORDER_MINUS_BOTTOM_LEFT_RADIUS("border-bottom-left-radius", "border-bottom-left-radius", ff38up("0px")),
+        BORDER_BOTTOM_LEFT_RADIUS_("border-bottom-left-radius", "border-bottom-left-radius", ff38up("0px")),
 
         /** The style property border-bottom-right-radius. */
         BORDER_BOTTOM_RIGHT_RADIUS("borderBottomRightRadius", "border-bottom-right-radius", ff("0px"), ie11up("0px")),
 
         /** The style property {@code border-bottom-right-radius}. */
-        BORDER_MINUS_BOTTOM_RIGHT_RADIUS("border-bottom-right-radius", "border-bottom-right-radius", ff38up("0px")),
+        BORDER_BOTTOM_RIGHT_RADIUS_("border-bottom-right-radius", "border-bottom-right-radius", ff38up("0px")),
 
         /** The style property {@code border-bottom-style}. */
-        BORDER_MINUS_BOTTOM_STYLE("border-bottom-style", "border-bottom-style", ff38up("none")),
+        BORDER_BOTTOM_STYLE_("border-bottom-style", "border-bottom-style", ff38up("none")),
 
         /** The style property {@code border-bottom-width}. */
-        BORDER_MINUS_BOTTOM_WIDTH("border-bottom-width", "border-bottom-width", ff38up("0px")),
+        BORDER_BOTTOM_WIDTH_("border-bottom-width", "border-bottom-width", ff38up("0px")),
 
         /** The style property {@code border-collapse}. */
-        BORDER_MINUS_COLLAPSE("border-collapse", "border-collapse", ff38up("separate")),
+        BORDER_COLLAPSE_("border-collapse", "border-collapse", ff38up("separate")),
 
         /** The style property {@code border-color}. */
-        BORDER_MINUS_COLOR("border-color", "border-color", ff38up("")),
+        BORDER_COLOR_("border-color", "border-color", ff38up("")),
 
         /** The style property border-image. */
         BORDER_IMAGE("borderImage", "border-image", ff(""), ie11up("")),
 
         /** The style property {@code border-image}. */
-        BORDER_MINUS_IMAGE("border-image", "border-image", ff38up("")),
+        BORDER_IMAGE_("border-image", "border-image", ff38up("")),
 
         /** The style property border-image-outset. */
         BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ff("0 0 0 0"), ie11up("0")),
 
         /** The style property {@code border-image-outset}. */
-        BORDER_MINUS_IMAGE_OUTSET("border-image-outset", "border-image-outset", ff38up("0 0 0 0")),
+        BORDER_IMAGE_OUTSET_("border-image-outset", "border-image-outset", ff38up("0 0 0 0")),
 
         /** The style property border-image-repeat. */
         BORDER_IMAGE_REPEAT("borderImageRepeat", "border-image-repeat", ff("stretch stretch"), ie11up("stretch")),
 
         /** The style property {@code border-image-repeat}. */
-        BORDER_MINUS_IMAGE_REPEAT("border-image-repeat", "border-image-repeat", ff38up("stretch stretch")),
+        BORDER_IMAGE_REPEAT_("border-image-repeat", "border-image-repeat", ff38up("stretch stretch")),
 
         /** The style property border-image-slice. */
         BORDER_IMAGE_SLICE("borderImageSlice", "border-image-slice", ff("100% 100% 100% 100%"), ie11up("100%")),
 
         /** The style property {@code border-image-slice}. */
-        BORDER_MINUS_IMAGE_SLICE("border-image-slice", "border-image-slice", ff38up("100% 100% 100% 100%")),
+        BORDER_IMAGE_SLICE_("border-image-slice", "border-image-slice", ff38up("100% 100% 100% 100%")),
 
         /** The style property border-image-source. */
         BORDER_IMAGE_SOURCE("borderImageSource", "border-image-source", ff("none"), ie11up("none")),
 
         /** The style property {@code border-image-source}. */
-        BORDER_MINUS_IMAGE_SOURCE("border-image-source", "border-image-source", ff38up("none")),
+        BORDER_IMAGE_SOURCE_("border-image-source", "border-image-source", ff38up("none")),
 
         /** The style property border-image-width. */
         BORDER_IMAGE_WIDTH("borderImageWidth", "border-image-width", ff("1 1 1 1"), ie11up("1")),
 
         /** The style property {@code border-image-width}. */
-        BORDER_MINUS_IMAGE_WIDTH("border-image-width", "border-image-width", ff38up("1 1 1 1")),
+        BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ff38up("1 1 1 1")),
 
         /** The style property {@code border-left}. */
-        BORDER_MINUS_LEFT("border-left", "border-left", ff38up("")),
+        BORDER_LEFT_("border-left", "border-left", ff38up("")),
 
         /** The style property {@code border-left-color}. */
-        BORDER_MINUS_LEFT_COLOR("border-left-color", "border-left-color", ff38up("rgb(0, 0, 0)")),
+        BORDER_LEFT_COLOR_("border-left-color", "border-left-color", ff38up("rgb(0, 0, 0)")),
 
         /** The style property {@code border-left-style}. */
-        BORDER_MINUS_LEFT_STYLE("border-left-style", "border-left-style", ff38up("none")),
+        BORDER_LEFT_STYLE_("border-left-style", "border-left-style", ff38up("none")),
 
         /** The style property {@code border-left-width}. */
-        BORDER_MINUS_LEFT_WIDTH("border-left-width", "border-left-width", ff38up("0px")),
+        BORDER_LEFT_WIDTH_("border-left-width", "border-left-width", ff38up("0px")),
 
         /** The style property border-radius. */
         BORDER_RADIUS("borderRadius", "border-radius", ff(""), ie11up("")),
 
         /** The style property {@code border-radius}. */
-        BORDER_MINUS_RADIUS("border-radius", "border-radius", ff38up("")),
+        BORDER_RADIUS_("border-radius", "border-radius", ff38up("")),
 
         /** The style property {@code border-right}. */
-        BORDER_MINUS_RIGHT("border-right", "border-right", ff38up("")),
+        BORDER_RIGHT_("border-right", "border-right", ff38up("")),
 
         /** The style property {@code border-right-color}. */
-        BORDER_MINUS_RIGHT_COLOR("border-right-color", "border-right-color", ff38up("rgb(0, 0, 0)")),
+        BORDER_RIGHT_COLOR_("border-right-color", "border-right-color", ff38up("rgb(0, 0, 0)")),
 
         /** The style property {@code border-right-style}. */
-        BORDER_MINUS_RIGHT_STYLE("border-right-style", "border-right-style", ff38up("none")),
+        BORDER_RIGHT_STYLE_("border-right-style", "border-right-style", ff38up("none")),
 
         /** The style property {@code border-right-width}. */
-        BORDER_MINUS_RIGHT_WIDTH("border-right-width", "border-right-width", ff38up("0px")),
+        BORDER_RIGHT_WIDTH_("border-right-width", "border-right-width", ff38up("0px")),
 
         /** The style property {@code border-spacing}. */
-        BORDER_MINUS_SPACING("border-spacing", "border-spacing", ff38up("0px 0px")),
+        BORDER_SPACING_("border-spacing", "border-spacing", ff38up("0px 0px")),
 
         /** The style property {@code border-style}. */
-        BORDER_MINUS_STYLE("border-style", "border-style", ff38up("")),
+        BORDER_STYLE_("border-style", "border-style", ff38up("")),
 
         /** The style property {@code border-top}. */
-        BORDER_MINUS_TOP("border-top", "border-top", ff38up("")),
+        BORDER_TOP_("border-top", "border-top", ff38up("")),
 
         /** The style property {@code border-top-color}. */
-        BORDER_MINUS_TOP_COLOR("border-top-color", "border-top-color", ff38up("rgb(0, 0, 0)")),
+        BORDER_TOP_COLOR_("border-top-color", "border-top-color", ff38up("rgb(0, 0, 0)")),
 
         /** The style property border-top-left-radius. */
         BORDER_TOP_LEFT_RADIUS("borderTopLeftRadius", "border-top-left-radius", ff("0px"), ie11up("0px")),
 
         /** The style property {@code border-top-left-radius}. */
-        BORDER_MINUS_TOP_LEFT_RADIUS("border-top-left-radius", "border-top-left-radius", ff38up("0px")),
+        BORDER_TOP_LEFT_RADIUS_("border-top-left-radius", "border-top-left-radius", ff38up("0px")),
 
         /** The style property border-top-right-radius. */
         BORDER_TOP_RIGHT_RADIUS("borderTopRightRadius", "border-top-right-radius", ff("0px"), ie11up("0px")),
 
         /** The style property {@code border-top-right-radius}. */
-        BORDER_MINUS_TOP_RIGHT_RADIUS("border-top-right-radius", "border-top-right-radius", ff38up("0px")),
+        BORDER_TOP_RIGHT_RADIUS_("border-top-right-radius", "border-top-right-radius", ff38up("0px")),
 
         /** The style property {@code border-top-style}. */
-        BORDER_MINUS_TOP_STYLE("border-top-style", "border-top-style", ff38up("none")),
+        BORDER_TOP_STYLE_("border-top-style", "border-top-style", ff38up("none")),
 
         /** The style property {@code border-top-width}. */
-        BORDER_MINUS_TOP_WIDTH("border-top-width", "border-top-width", ff38up("0px")),
+        BORDER_TOP_WIDTH_("border-top-width", "border-top-width", ff38up("0px")),
 
         /** The style property {@code border-width}. */
-        BORDER_MINUS_WIDTH("border-width", "border-width", ff38up("")),
+        BORDER_WIDTH_("border-width", "border-width", ff38up("")),
 
         /** The style property box-decoration-break. */
         BOX_DECORATION_BREAK("boxDecorationBreak", "box-decoration-break", ff38up("slice")),
 
         /** The style property {@code box-decoration-break}. */
-        BOX_MINUS_DECORATION_BREAK("box-decoration-break", "box-decoration-break", ff38up("slice")),
+        BOX_DECORATION_BREAK_("box-decoration-break", "box-decoration-break", ff38up("slice")),
 
         /** The style property box-shadow. */
         BOX_SHADOW("boxShadow", "box-shadow", ff("none"), ie11up("none")),
 
         /** The style property {@code box-shadow}. */
-        BOX_MINUS_SHADOW("box-shadow", "box-shadow", ff38up("none")),
+        BOX_SHADOW_("box-shadow", "box-shadow", ff38up("none")),
 
         /** The style property box-sizing. */
         BOX_SIZING("boxSizing", "box-sizing", ff31up("content-box"), ie11up("content-box")),
 
         /** The style property {@code box-sizing}. */
-        BOX_MINUS_SIZING("box-sizing", "box-sizing", ff38up("content-box")),
+        BOX_SIZING_("box-sizing", "box-sizing", ff38up("content-box")),
 
         /** The style property break-after. */
         BREAK_AFTER("breakAfter", "break-after", ie11up("auto")),
@@ -997,20 +990,19 @@ final class StyleAttributes {
         BREAK_INSIDE("breakInside", "break-inside", ie11up("auto")),
 
         /** The style property {@code caption-side}. */
-        CAPTION_MINUS_SIDE("caption-side", "caption-side", ff38up("top")),
+        CAPTION_SIDE_("caption-side", "caption-side", ff38up("top")),
 
         /** The style property clip-path. */
         CLIP_PATH("clipPath", "clip-path", ff("none"), ie11up("none")),
 
         /** The style property {@code clip-path}. */
-        CLIP_MINUS_PATH("clip-path", "clip-path", ff38up("none")),
+        CLIP_PATH_("clip-path", "clip-path", ff38up("none")),
 
         /** The style property clip-rule. */
         CLIP_RULE("clipRule", "clip-rule", ff("nonzero"), ie11up("nonzero")),
 
         /** The style property color-interpolation. */
-        COLOR_INTERPOLATION("colorInterpolation", "color-interpolation",
-                ff("srgb")),
+        COLOR_INTERPOLATION("colorInterpolation", "color-interpolation", ff("srgb")),
 
         /** The style property color-interpolation-filters. */
         COLOR_INTERPOLATION_FILTERS("colorInterpolationFilters",
