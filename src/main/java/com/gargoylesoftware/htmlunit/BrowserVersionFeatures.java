@@ -293,7 +293,8 @@ public enum BrowserVersionFeatures {
     EVENT_ONHASHCHANGE_BUBBLES_AND_CANCELABLE_FALSE,
 
     /** <code>Event.cancelable</code> is false in 'onload' event handler. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
+        @WebBrowser(value = IE, minVersion = 11) })
     EVENT_ONLOAD_CANCELABLE_FALSE,
 
     /** Triggers "onload" event if external javascript successfully loaded. */
