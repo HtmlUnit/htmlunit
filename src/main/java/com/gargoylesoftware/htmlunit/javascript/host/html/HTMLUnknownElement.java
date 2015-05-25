@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOMMAND_E
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_UNKNOWN_LOCAL_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_GENERIC_ELEMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_HYPHEN_ELEMENT_CLASS_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_RUBY_ELEMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -25,6 +26,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlRp;
+import com.gargoylesoftware.htmlunit.html.HtmlRt;
+import com.gargoylesoftware.htmlunit.html.HtmlRuby;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -79,9 +83,21 @@ public class HTMLUnknownElement extends HTMLElement {
                 return "HTMLGenericElement";
             }
             final HtmlElement element = getDomNodeOrNull();
-            if (element != null && element.getNodeName().indexOf('-') != -1
+            if (element != null) {
+                final String name = element.getNodeName();
+                if (getBrowserVersion().hasFeature(JS_HTML_RUBY_ELEMENT_CLASS_NAME)
+                        && (HtmlRp.TAG_NAME.equals(name)
+                                || HtmlRt.TAG_NAME.equals(name)
+                                || HtmlRuby.TAG_NAME.equals(name)
+                                || "rb".equals(name)
+                                || "rtc".equals(name))) {
+                    return "HTMLElement";
+                }
+
+                if (name.indexOf('-') != -1
                     && getBrowserVersion().hasFeature(JS_HTML_HYPHEN_ELEMENT_CLASS_NAME)) {
-                return "HTMLElement";
+                    return "HTMLElement";
+                }
             }
         }
         return super.getClassName();
