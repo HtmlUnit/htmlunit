@@ -1001,12 +1001,21 @@ final class StyleAttributes {
         /** The style property clip-rule. */
         CLIP_RULE("clipRule", "clip-rule", ff("nonzero"), ie11up("nonzero")),
 
+        /** The style property {@code clip-rule}. */
+        CLIP_RULE_("clip-rule", "clip-rule", ff38up("nonzero")),
+
         /** The style property color-interpolation. */
         COLOR_INTERPOLATION("colorInterpolation", "color-interpolation", ff("srgb")),
+
+        /** The style property {@code color-interpolation}. */
+        COLOR_INTERPOLATION_("color-interpolation", "color-interpolation", ff38up("srgb")),
 
         /** The style property color-interpolation-filters. */
         COLOR_INTERPOLATION_FILTERS("colorInterpolationFilters",
                 "color-interpolation-filters", ff("linearrgb"), ie11up("")),
+
+        /** The style property {@code color-interpolation-filters}. */
+        COLOR_INTERPOLATION_FILTERS_("color-interpolation-filters", "color-interpolation-filters", ff38up("linearrgb")),
 
         /** The style property column-count. */
         COLUMN_COUNT("columnCount", "column-count", ie11up("auto")),
@@ -1041,6 +1050,12 @@ final class StyleAttributes {
         /** The style property content. */
         CONTENT("content", "content", ie11up("normal")),
 
+        /** The style property {@code counter-increment}. */
+        COUNTER_INCREMENT_("counter-increment", "counter-increment", ff38up("none")),
+
+        /** The style property {@code counter-reset}. */
+        COUNTER_RESET_("counter-reset", "counter-reset", ff38up("none")),
+
         /** The style property cue. */
         CUE("cue", "cue"),
 
@@ -1051,11 +1066,16 @@ final class StyleAttributes {
         CUE_BEFORE("cueBefore", "cue-before"),
 
         /** The style property dominant-baseline. */
-        DOMINANT_BASELINE("dominantBaseline", "dominant-baseline",
-                ff("auto"), ie11up("auto")),
+        DOMINANT_BASELINE("dominantBaseline", "dominant-baseline", ff("auto"), ie11up("auto")),
+
+        /** The style property {@code dominant-baseline}. */
+        DOMINANT_BASELINE_("dominant-baseline", "dominant-baseline", ff38up("auto")),
 
         /** The style property empty-cells. */
         EMPTY_CELLS("emptyCells", "empty-cells", ie11up("show")),
+
+        /** The style property {@code empty-cells}. */
+        EMPTY_CELLS_("empty-cells", "empty-cells", ff38up("show")),
 
         /** The style property enable-background. */
         ENABLE_BACKGROUND("enableBackground", "enable-background", ie11up("accumulate")),
@@ -1069,8 +1089,14 @@ final class StyleAttributes {
         /** The style property fill-opacity. */
         FILL_OPACITY("fillOpacity", "fill-opacity", ff("1"), ie11up("1")),
 
+        /** The style property {@code fill-opacity}. */
+        FILL_OPACITY_("fill-opacity", "fill-opacity", ff38up("1")),
+
         /** The style property fill-rule. */
         FILL_RULE("fillRule", "fill-rule", ff("nonzero"), ie11up("nonzero")),
+
+        /** The style property {@code fill-rule}. */
+        FILL_RULE_("fill-rule", "fill-rule", ff38up("nonzero")),
 
         /** The style property filter. */
         FILTER("filter", "filter", ff("none"), ieBelow11(""), ie11up("none")),
@@ -1081,20 +1107,38 @@ final class StyleAttributes {
         /** The style property flex-basis. */
         FLEX_BASIS("flexBasis", "flex-basis", ff24up("auto"), ie11up("auto")),
 
+        /** The style property {@code flex-basis}. */
+        FLEX_BASIS_("flex-basis", "flex-basis", ff38up("auto")),
+
         /** The style property flex-direction. */
         FLEX_DIRECTION("flexDirection", "flex-direction", ff24up("row"), ie11up("row")),
+
+        /** The style property {@code flex-direction}. */
+        FLEX_DIRECTION_("flex-direction", "flex-direction", ff38up("row")),
 
         /** The style property flex-flow. */
         FLEX_FLOW("flexFlow", "flex-flow", ff31up(""), ie11up("row nowrap")),
 
+        /** The style property {@code flex-flow}. */
+        FLEX_FLOW_("flex-flow", "flex-flow", ff38up("")),
+
         /** The style property flex-grow. */
         FLEX_GROW("flexGrow", "flex-grow", ff24up("0"), ie11up("0")),
+
+        /** The style property {@code flex-grow}. */
+        FLEX_GROW_("flex-grow", "flex-grow", ff38up("0")),
 
         /** The style property flex-shrink. */
         FLEX_SHRINK("flexShrink", "flex-shrink", ff24up("1"), ie11up("1")),
 
+        /** The style property {@code flex-shrink}. */
+        FLEX_SHRINK_("flex-shrink", "flex-shrink", ff38up("1")),
+
         /** The style property flex-wrap. */
         FLEX_WRAP("flexWrap", "flex-wrap", ff31up("nowrap"), ie11up("nowrap")),
+
+        /** The style property {@code flex-wrap}. */
+        FLEX_WRAP_("flex-wrap", "flex-wrap", ff38up("nowrap")),
 
         /** The style property float. */
         FLOAT("float", "float", ff38up("none")),
@@ -1102,38 +1146,95 @@ final class StyleAttributes {
         /** The style property flood-color. */
         FLOOD_COLOR("floodColor", "flood-color", ff("rgb(0, 0, 0)"), ie11up("")),
 
+        /** The style property {@code flood-color}. */
+        FLOOD_COLOR_("flood-color", "flood-color", ff38up("rgb(0, 0, 0)")),
+
         /** The style property flood-opacity. */
         FLOOD_OPACITY("floodOpacity", "flood-opacity", ff("1"), ie11up("1")),
+
+        /** The style property {@code flood-opacity}. */
+        FLOOD_OPACITY_("flood-opacity", "flood-opacity", ff38up("1")),
+
+        /** The style property {@code font-family}. */
+        FONT_FAMILY_("font-family", "font-family", ff38up("serif")),
 
         /** The style property font-feature-settings. */
         FONT_FEATURE_SETTINGS("fontFeatureSettings", "font-feature-settings", ie11up("normal"), ff38up("normal")),
 
+        /** The style property {@code font-feature-settings}. */
+        FONT_FEATURE_SETTINGS_("font-feature-settings", "font-feature-settings", ff38up("normal")),
+
         /** The style property font-kerning. */
         FONT_KERNING("fontKerning", "font-kerning", ff38up("auto")),
+
+        /** The style property {@code font-kerning}. */
+        FONT_KERNING_("font-kerning", "font-kerning", ff38up("auto")),
 
         /** The style property font-language-override. */
         FONT_LANGUAGE_OVERRIDE("fontLanguageOverride", "font-language-override", ff38up("normal")),
 
+        /** The style property {@code font-language-override}. */
+        FONT_LANGUAGE_OVERRIDE_("font-language-override", "font-language-override", ff38up("normal")),
+
+        /** The style property {@code font-size}. */
+        FONT_SIZE_("font-size", "font-size", ff38up("16px")),
+
+        /** The style property {@code font-size-adjust}. */
+        FONT_SIZE_ADJUST_("font-size-adjust", "font-size-adjust", ff38up("none")),
+
+        /** The style property {@code font-stretch}. */
+        FONT_STRETCH_("font-stretch", "font-stretch", ff38up("normal")),
+
+        /** The style property {@code font-style}. */
+        FONT_STYLE_("font-style", "font-style", ff38up("normal")),
+
         /** The style property font-synthesis. */
         FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff38up("weight style")),
+
+        /** The style property {@code font-synthesis}. */
+        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff38up("weight style")),
+
+        /** The style property {@code font-variant}. */
+        FONT_VARIANT_("font-variant", "font-variant", ff38up("normal")),
 
         /** The style property font-variant-alternates. */
         FONT_VARIANT_ALTERNATES("fontVariantAlternates", "font-variant-alternates", ff38up("normal")),
 
+        /** The style property {@code font-variant-alternates}. */
+        FONT_VARIANT_ALTERNATES_("font-variant-alternates", "font-variant-alternates", ff38up("normal")),
+
         /** The style property font-variant-caps. */
         FONT_VARIANT_CAPS("fontVariantCaps", "font-variant-caps", ff38up("normal")),
+
+        /** The style property {@code font-variant-caps}. */
+        FONT_VARIANT_CAPS_("font-variant-caps", "font-variant-caps", ff38up("normal")),
 
         /** The style property font-variant-east-asian. */
         FONT_VARIANT_EAST_ASIAN("fontVariantEastAsian", "font-variant-east-asian", ff38up("normal")),
 
+        /** The style property {@code font-variant-east-asian}. */
+        FONT_VARIANT_EAST_ASIAN_("font-variant-east-asian", "font-variant-east-asian", ff38up("normal")),
+
         /** The style property font-variant-ligatures. */
         FONT_VARIANT_LIGATURES("fontVariantLigatures", "font-variant-ligatures", ff38up("normal")),
+
+        /** The style property {@code font-variant-ligatures}. */
+        FONT_VARIANT_LIGATURES_("font-variant-ligatures", "font-variant-ligatures", ff38up("normal")),
 
         /** The style property font-variant-numeric. */
         FONT_VARIANT_NUMERIC("fontVariantNumeric", "font-variant-numeric", ff38up("normal")),
 
+        /** The style property {@code font-variant-numeric}. */
+        FONT_VARIANT_NUMERIC_("font-variant-numeric", "font-variant-numeric", ff38up("normal")),
+
         /** The style property font-variant-position. */
         FONT_VARIANT_POSITION("fontVariantPosition", "font-variant-position", ff38up("normal")),
+
+        /** The style property {@code font-variant-position}. */
+        FONT_VARIANT_POSITION_("font-variant-position", "font-variant-position", ff38up("normal")),
+
+        /** The style property {@code font-weight}. */
+        FONT_WEIGHT_("font-weight", "font-weight", ff38up("400")),
 
         /** The style property glyph-orientation-horizontal. */
         GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal", ie11up("0deg")),
@@ -1150,11 +1251,17 @@ final class StyleAttributes {
         /** The style property ime-mode. */
         IME_MODE("imeMode", "ime-mode", ie11up("undefined")),
 
-        /** The style property isolation. */
-        FONT_VARIANT_ISOLATION("isolation", "isolation", ff38up("auto")),
+        /** The style property {@code ime-mode}. */
+        IME_MODE_("ime-mode", "ime-mode", ff38up("auto")),
 
-        /** The style property ime-mode. */
+        /** The style property {@code isolation}. */
+        ISOLATION("isolation", "isolation", ff38up("auto")),
+
+        /** The style property {@code justify-content}. */
         JUSTIFY_CONTENT("justifyContent", "justify-content", ff24up("flex-start"), ie11up("flex-start")),
+
+        /** The style property {@code justify-content}. */
+        JUSTIFY_CONTENT_("justify-content", "justify-content", ff38up("flex-start")),
 
         /** The style property kerning. */
         KERNING("kerning", "kerning", ie11up("auto")),
@@ -1177,16 +1284,47 @@ final class StyleAttributes {
         /** The style property layout-grid-type. */
         LAYOUT_GRID_TYPE("layoutGridType", "layout-grid-type", ie11up("undefined")),
 
+        /** The style property {@code letter-spacing}. */
+        LETTER_SPACING_("letter-spacing", "letter-spacing", ff38up("normal")),
+
         /** The style property lighting-color. */
-        LIGHTING_COLOR("lightingColor", "lighting-color",
-                ff("rgb(255, 255, 255)"), ie11up("")),
+        LIGHTING_COLOR("lightingColor", "lighting-color", ff("rgb(255, 255, 255)"), ie11up("")),
+
+        /** The style property {@code lighting-color}. */
+        LIGHTING_COLOR_("lighting-color", "lighting-color", ff38up("rgb(255, 255, 255)")),
 
         /** The style property line-break. */
         LINE_BREAK("lineBreak", "line-break", ie11up("undefined")),
 
         /** The style property line-height. */
-        LINE_HEIGHT("lineHeight", "line-height",
-                ff("20px"), ieBelow11("20px"), ie11up("normal")),
+        LINE_HEIGHT("lineHeight", "line-height", ff("20px"), ieBelow11("20px"), ie11up("normal")),
+
+        /** The style property {@code line-height}. */
+        LINE_HEIGHT_("line-height", "line-height", ff38up("20px")),
+
+        /** The style property {@code list-style}. */
+        LIST_STYLE_("list-style", "list-style", ff38up("")),
+
+        /** The style property {@code list-style-image}. */
+        LIST_STYLE_IMAGE_("list-style-image", "list-style-image", ff38up("none")),
+
+        /** The style property {@code list-style-position}. */
+        LIST_STYLE_POSITION_("list-style-position", "list-style-position", ff38up("outside")),
+
+        /** The style property {@code list-style-type}. */
+        LIST_STYLE_TYPE_("list-style-type", "list-style-type", ff38up("disc")),
+
+        /** The style property {@code margin-bottom}. */
+        MARGIN_BOTTOM_("margin-bottom", "margin-bottom", ff38up("0px")),
+
+        /** The style property {@code margin-left}. */
+        MARGIN_LEFT_("margin-left", "margin-left", ff38up("0px")),
+
+        /** The style property {@code margin-right}. */
+        MARGIN_RIGHT_("margin-right", "margin-right", ff38up("0px")),
+
+        /** The style property {@code margin-top}. */
+        MARGIN_TOP_("margin-top", "margin-top", ff38up("0px")),
 
         /** The style property marker. */
         MARKER("marker", "marker", ff(""), ie11up("none")),
@@ -1194,11 +1332,23 @@ final class StyleAttributes {
         /** The style property marker-end. */
         MARKER_END("markerEnd", "marker-end", ff("none"), ie11up("none")),
 
+        /** The style property {@code marker-end}. */
+        MARKER_END_("marker-end", "marker-end", ff38up("none")),
+
         /** The style property marker-mid. */
         MARKER_MID("markerMid", "marker-mid", ff("none"), ie11up("none")),
 
+        /** The style property {@code marker-mid}. */
+        MARKER_MID_("marker-mid", "marker-mid", ff38up("none")),
+
+        /** The style property {@code marker-offset}. */
+        MARKER_OFFSET_("marker-offset", "marker-offset", ff38up("auto")),
+
         /** The style property marker-start. */
         MARKER_START("markerStart", "marker-start", ff("none"), ie11up("none")),
+
+        /** The style property {@code marker-start}. */
+        MARKER_START_("marker-start", "marker-start", ff38up("none")),
 
         /** The style property mask. */
         MASK("mask", "mask", ff("none"), ie11up("none")),
@@ -1206,14 +1356,38 @@ final class StyleAttributes {
         /** The style property mask-type. */
         MASK_TYPE("maskType", "mask-type", ff38up("luminance")),
 
+        /** The style property {@code mask-type}. */
+        MASK_TYPE_("mask-type", "mask-type", ff38up("luminance")),
+
+        /** The style property {@code max-height}. */
+        MAX_HEIGHT_("max-height", "max-height", ff38up("none")),
+
+        /** The style property {@code max-width}. */
+        MAX_WIDTH_("max-width", "max-width", ff38up("none")),
+
+        /** The style property {@code min-height}. */
+        MIN_HEIGHT_("min-height", "min-height", ff38up("0px")),
+
+        /** The style property {@code min-width}. */
+        MIN_WIDTH_("min-width", "min-width", ff38up("0px")),
+
         /** The style property mix-blend-mode. */
         MIX_BLEND_MODE("mixBlendMode", "mix-blend-mode", ff38up("normal")),
+
+        /** The style property {@code mix-blend-mode}. */
+        MIX_BLEND_MODE_("mix-blend-mode", "mix-blend-mode", ff38up("normal")),
 
         /** The style property object-fit. */
         OBJECT_FIT("objectFit", "object-fit", ff38up("normal")),
 
+        /** The style property {@code object-fit}. */
+        OBJECT_FIT_("object-fit", "object-fit", ff38up("fill")),
+
         /** The style property object-position. */
         OBJECT_POSITION("objectPosition", "object-position", ff38up("50% 50%")),
+
+        /** The style property {@code object-position}. */
+        OBJECT_POSITION_("object-position", "object-position", ff38up("50% 50%")),
 
         /** The style property order. */
         ORDER("order", "order", ff24up("0"), ie11up("0")),
@@ -1224,8 +1398,50 @@ final class StyleAttributes {
         /** The style property outline-color. */
         OUTLINE_COLOR("outlineColor", "outline-color", ie11up("transparent")),
 
+        /** The style property {@code outline-color}. */
+        OUTLINE_COLOR_("outline-color", "outline-color", ff38up("rgb(0, 0, 0)")),
+
+        /** The style property {@code outline-offset}. */
+        OUTLINE_OFFSET_("outline-offset", "outline-offset", ff38up("0px")),
+
+        /** The style property {@code outline-style}. */
+        OUTLINE_STYLE_("outline-style", "outline-style", ff38up("none")),
+
+        /** The style property {@code outline-width}. */
+        OUTLINE_WIDTH_("outline-width", "outline-width", ff38up("0px")),
+
+        /** The style property {@code overflow-x}. */
+        OVERFLOW_X_("overflow-x", "overflow-x", ff38up("visible")),
+
+        /** The style property {@code overflow-y}. */
+        OVERFLOW_Y_("overflow-y", "overflow-y", ff38up("visible")),
+
+        /** The style property {@code padding-bottom}. */
+        PADDING_BOTTOM_("padding-bottom", "padding-bottom", ff38up("0px")),
+
+        /** The style property {@code padding-left}. */
+        PADDING_LEFT_("padding-left", "padding-left", ff38up("0px")),
+
+        /** The style property {@code padding-right}. */
+        PADDING_RIGHT_("padding-right", "padding-right", ff38up("0px")),
+
+        /** The style property {@code padding-top}. */
+        PADDING_TOP_("padding-top", "padding-top", ff38up("0px")),
+
+        /** The style property {@code page-break-after}. */
+        PAGE_BREAK_AFTER_("page-break-after", "page-break-after", ff38up("auto")),
+
+        /** The style property {@code page-break-before}. */
+        PAGE_BREAK_BEFORE_("page-break-before", "page-break-before", ff38up("auto")),
+
         /** The style property page-break-inside. */
         PAGE_BREAK_INSIDE("pageBreakInside", "page-break-inside", ff24up("auto"), ie11up("auto")),
+
+        /** The style property {@code page-break-inside}. */
+        PAGE_BREAK_INSIDE_("page-break-inside", "page-break-inside", ff38up("auto")),
+
+        /** The style property {@code paint-order}. */
+        PAINT_ORDER_("paint-order", "paint-order", ff38up("normal")),
 
         /** The style property pause. */
         PAUSE("pause", "pause"),
@@ -1251,6 +1467,9 @@ final class StyleAttributes {
         /** The style property perspective-origin. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
                 ff("621px 172.5px"), ie11up("620px 163.2px")),
+
+        /** The style property {@code perspective-origin}. */
+        PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ff38up("621px 172.5px")),
 
         /** The style property pointer-events. */
         POINTER_EVENTS("pointerEvents", "pointer-events", ie11up("visiblePainted")),
