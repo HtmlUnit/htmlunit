@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_DONT_ENUM_ITEM;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_ENUM_ITEM_LENGTH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -109,8 +110,14 @@ public class CSSRuleList extends SimpleScriptable {
                 idList.add(Integer.toString(i));
             }
 
-            idList.add("length");
-            idList.add("item");
+            if (getBrowserVersion().hasFeature(JS_CSSRULELIST_ENUM_ITEM_LENGTH)) {
+                idList.add("item");
+                idList.add("length");
+            }
+            else {
+                idList.add("length");
+                idList.add("item");
+            }
         }
         return idList.toArray();
     }

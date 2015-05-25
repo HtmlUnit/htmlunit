@@ -844,6 +844,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_CSSRULELIST_DONT_ENUM_ITEM,
 
+    /** item is enumerated before length property of CSSRuleList. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
+    JS_CSSRULELIST_ENUM_ITEM_LENGTH,
+
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
     JS_DATE_LOCALE_DATE_SHORT,
