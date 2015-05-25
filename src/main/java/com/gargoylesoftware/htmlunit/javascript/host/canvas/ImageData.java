@@ -79,6 +79,7 @@ public class ImageData extends SimpleScriptable {
      * Returns the {@code width} property.
      * @return the {@code width} property
      */
+    @JsxGetter
     public int getWidth() {
         return width_;
     }
@@ -87,6 +88,7 @@ public class ImageData extends SimpleScriptable {
      * Returns the {@code height} property.
      * @return the {@code height} property
      */
+    @JsxGetter
     public int getHeight() {
         return height_;
     }
