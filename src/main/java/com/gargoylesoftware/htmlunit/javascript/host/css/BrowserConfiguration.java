@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
- *
+ * @author Ahmed Ashour
  */
 class BrowserConfiguration {
     private String browserFamily_;

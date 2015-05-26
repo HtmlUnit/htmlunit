@@ -16,6 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -30,12 +34,18 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 public class StyleAttributesTest {
 
     /**
+     * Before the tests.
+     */
+    @BeforeClass
+    public static void before() {
+        StyleAttributes.getDefinitions(BrowserVersion.CHROME);
+    }
+
+    /**
      * Test of alphabetical order.
      */
     @Test
     public void lexicographicOrder() {
-        StyleAttributes.getDefinitions(BrowserVersion.CHROME);
-
         String lastName = null;
         for (final Definition definition : StyleAttributes.Definition.values()) {
             final String name = definition.name();
@@ -44,6 +54,42 @@ public class StyleAttributesTest {
                     + name + "' should be before '" + lastName + "'");
             }
             lastName = name;
+        }
+    }
+
+    /**
+     * Test the uniqueness of the property names.
+     */
+    @Test
+    public void unique() {
+        final List<String> nameList = new ArrayList<>();
+        for (final Definition definition : StyleAttributes.Definition.values()) {
+            final String propertyName = definition.getPropertyName();
+            if (nameList.contains(propertyName)) {
+                fail("StyleAttributes.Definition: the property name '"
+                    + propertyName + "' is defined more than once");
+            }
+            nameList.add(propertyName);
+        }
+    }
+
+    /**
+     * Test the naming convention.
+     */
+    @Test
+    public void name() {
+        for (final Definition definition : StyleAttributes.Definition.values()) {
+            final String propertyName = definition.getPropertyName();
+            if (propertyName.indexOf('-') == -1) {
+                if (definition.name().endsWith("_")) {
+                    fail("StyleAttributes.Definition: '" + definition.name() + "' must not end with underscore");
+                }
+            }
+            else {
+                if (!definition.name().endsWith("_")) {
+                    fail("StyleAttributes.Definition: '" + definition.name() + "' must end with underscore");
+                }
+            }
         }
     }
 
