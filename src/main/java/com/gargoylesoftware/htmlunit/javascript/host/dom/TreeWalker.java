@@ -125,7 +125,7 @@ public class TreeWalker extends SimpleScriptable {
      *
      * @return the value of the expandEntityReferences flag
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter(@WebBrowser(IE))
     public boolean getExpandEntityReferences() {
         return expandEntityReferences_;
     }
