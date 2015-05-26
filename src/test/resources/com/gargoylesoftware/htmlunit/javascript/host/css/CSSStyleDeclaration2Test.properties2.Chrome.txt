@@ -3,6 +3,15 @@ alignItems
 alignSelf
 alignmentBaseline
 all
+animation
+animationDelay
+animationDirection
+animationDuration
+animationFillMode
+animationIterationCount
+animationName
+animationPlayState
+animationTimingFunction
 backfaceVisibility
 background
 backgroundAttachment
@@ -70,6 +79,8 @@ counterIncrement
 counterReset
 cssText
 cursor
+cx
+cy
 direction
 display
 dominantBaseline
@@ -102,6 +113,7 @@ glyphOrientationHorizontal
 glyphOrientationVertical
 height
 imageRendering
+isolation
 justifyContent
 left
 letterSpacing
@@ -128,6 +140,7 @@ maxZoom
 minHeight
 minWidth
 minZoom
+mixBlendMode
 objectFit
 objectPosition
 opacity
@@ -158,8 +171,11 @@ perspectiveOrigin
 pointerEvents
 position
 quotes
+r
 resize
 right
+rx
+ry
 shapeImageThreshold
 shapeMargin
 shapeOutside
@@ -353,5 +369,7 @@ wordBreak
 wordSpacing
 wordWrap
 writingMode
+x
+y
 zIndex
 zoom
