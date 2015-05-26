@@ -1699,7 +1699,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "cssFloat" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getCssFloat() {
         return getStyleAttribute(FLOAT);
     }
@@ -1708,7 +1708,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "cssFloat" style attribute.
      * @param value the new attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void setCssFloat(final String value) {
         setStyleAttribute(FLOAT, value);
     }
@@ -1969,7 +1969,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "imeMode" style attribute.
      * @return the style attribute
      */
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getImeMode() {
         return getStyleAttribute(IME_MODE);
     }
@@ -1978,7 +1978,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "imeMode" style attribute.
      * @param imeMode the new attribute
      */
-    @JsxSetter
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void setImeMode(final String imeMode) {
         setStyleAttribute(IME_MODE, imeMode);
     }

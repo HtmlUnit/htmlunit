@@ -70,7 +70,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(CHROME)
     public void stringProperties() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -84,7 +83,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  for (var i in e.style) {\n"
             + "    var s1 = e.style[i];\n"
             + "    var s2 = window.getComputedStyle(e, null)[i];\n"
-            + "    if ('height' == i || 'width' == i) {\n"
+            + "    if ('height' == i || 'width' == i || 'cssText' == i) {\n"
             + "      s2 = 'skipped';\n"
             + "    }\n"
             + "    if(typeof s1 == 'string')\n"

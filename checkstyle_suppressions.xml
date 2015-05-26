@@ -27,6 +27,7 @@
     <suppress checks="FileLength" files="HtmlPageTest.java"/>
     <suppress checks="FileLength" files="PageReloadTest.java"/>
     <suppress checks="FileLength" files="HTMLSelectElementTest.java"/>
+    <suppress checks="FileLength" files="StyleAttributes.java"/>
     <suppress checks="FileLength" files="WebClient.java"/>
     <suppress checks="FileLength" files="WebClientTest.java"/>
     <suppress checks="FileLength" files="Window.java"/>
