@@ -2478,6 +2478,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return;
         }
 
+        final Scriptable prototype = getPrototype();
+        if (prototype != null && !"constructor".equals(name)) {
+            if (prototype.get(name, start) != Scriptable.NOT_FOUND) {
+                prototype.put(name, start, value);
+                return;
+            }
+        }
+
         if (getDomNodeOrNull() != null) { // check if prototype or not
             final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
             if (style != null) {
