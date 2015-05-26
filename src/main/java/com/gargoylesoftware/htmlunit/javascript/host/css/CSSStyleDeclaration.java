@@ -2430,6 +2430,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return super.get(name, start);
         }
 
+        final Scriptable prototype = getPrototype();
+        if (prototype != null) {
+            final Object value = prototype.get(name, start);
+            if (value != Scriptable.NOT_FOUND) {
+                return value;
+            }
+        }
+
         final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
         if (style != null) {
             return getStyleAttributeValue(style);
