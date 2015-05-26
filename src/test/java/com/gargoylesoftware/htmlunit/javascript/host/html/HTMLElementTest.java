@@ -3044,9 +3044,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE11 = "false",
-            CHROME = "false")
-    @NotYetImplemented(CHROME)
+            IE11 = "false")
     public void contains_invalid_argument() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -3379,9 +3377,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception call", "exception set" },
-            CHROME = { "undefined", "true" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "exception call", "exception set" })
     public void prototype_innerHTML() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
