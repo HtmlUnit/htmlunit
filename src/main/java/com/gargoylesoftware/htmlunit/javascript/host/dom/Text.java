@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- * A JavaScript object for Text.
+ * A JavaScript object for {@code Text}.
  *
  * @version $Revision$
  * @author David K. Taylor

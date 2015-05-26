@@ -6285,4 +6285,44 @@ public class HostParentOfATest extends HostParentOf {
         test("FontFace", "FontFace");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _DOMPointReadOnly_DOMPoint() throws Exception {
+        test("DOMPointReadOnly", "DOMPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _DOMPointReadOnly_DOMPointReadOnly() throws Exception {
+        test("DOMPointReadOnly", "DOMPointReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _DOMPoint_DOMPoint() throws Exception {
+        test("DOMPoint", "DOMPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _DOMRectReadOnly_DOMRectReadOnly() throws Exception {
+        test("DOMRectReadOnly", "DOMRectReadOnly");
+    }
+
 }

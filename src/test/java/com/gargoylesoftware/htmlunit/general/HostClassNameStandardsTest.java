@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -8594,7 +8593,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF38 = "function DOMPointReadOnly() {\n    [native code]\n}")
-    @NotYetImplemented(FF38)
     public void domPointReadOnly() throws Exception {
         test("DOMPointReadOnly");
     }
@@ -8625,7 +8623,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF38 = "function DOMPoint() {\n    [native code]\n}")
-    @NotYetImplemented(FF38)
     public void domPoint() throws Exception {
         test("DOMPoint");
     }
@@ -8663,7 +8660,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF38 = "function DOMRectReadOnly() {\n    [native code]\n}")
-    @NotYetImplemented(FF38)
     public void domRectReadOnly() throws Exception {
         test("DOMRectReadOnly");
     }

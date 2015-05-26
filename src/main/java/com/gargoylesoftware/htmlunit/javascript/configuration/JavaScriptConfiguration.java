@@ -152,6 +152,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMMatrix;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMMatrixReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMParser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMPoint;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMPointReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMRectReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMSettableTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringList;
@@ -380,7 +383,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DataTransferItemList.class, DataView.class, DelayNode.class, DeviceLightEvent.class, DeviceMotionEvent.class,
         DeviceOrientationEvent.class, DeviceProximityEvent.class, DeviceStorage.class, DeviceStorageChangeEvent.class,
         Document.class, DocumentFragment.class, DocumentType.class, DOMCursor.class, DOMError.class, DOMException.class,
-        DOMImplementation.class, DOMMatrix.class, DOMMatrixReadOnly.class, DOMParser.class, DOMRequest.class,
+        DOMImplementation.class, DOMMatrix.class, DOMMatrixReadOnly.class, DOMParser.class, DOMPoint.class,
+        DOMPointReadOnly.class, DOMRectReadOnly.class, DOMRequest.class,
         DOMSettableTokenList.class, DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
         DragEvent.class, DynamicsCompressorNode.class,
         Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,

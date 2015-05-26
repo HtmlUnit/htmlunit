@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for XPathResult.
+ * A JavaScript object for {@code XPathResult}.
  *
  * @version $Revision$
  * @author Ahmed Ashour

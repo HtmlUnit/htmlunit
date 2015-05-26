@@ -197,13 +197,16 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     }
 
     private static void addClasses(final File directory, final String packageName, final List<String> list) {
-        for (final File file: directory.listFiles()) {
-            final String name = file.getName();
-            if (name.endsWith(".class")) {
-                list.add(packageName + '.' + name.substring(0, name.length() - 6));
-            }
-            else if (file.isDirectory() && !".svn".equals(file.getName())) {
-                addClasses(file, packageName + '.' + file.getName(), list);
+        final File[] files = directory.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                final String name = file.getName();
+                if (name.endsWith(".class")) {
+                    list.add(packageName + '.' + name.substring(0, name.length() - 6));
+                }
+                else if (file.isDirectory() && !".svn".equals(file.getName())) {
+                    addClasses(file, packageName + '.' + file.getName(), list);
+                }
             }
         }
     }

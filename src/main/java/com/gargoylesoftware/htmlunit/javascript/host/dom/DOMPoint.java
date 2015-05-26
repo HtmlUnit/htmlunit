@@ -14,25 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code ShadowRoot}.
+ * A JavaScript object for {@code DOMPoint}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(CHROME))
-public class ShadowRoot extends DocumentFragment {
+@JsxClass(browsers = @WebBrowser(value = FF, minVersion = 38))
+public class DOMPoint extends DOMPointReadOnly {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public ShadowRoot() {
+    public DOMPoint() {
     }
 }

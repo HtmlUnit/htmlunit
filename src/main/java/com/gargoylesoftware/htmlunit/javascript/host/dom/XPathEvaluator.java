@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolver;
 
 /**
- * A JavaScript object for XPathEvaluator.
+ * A JavaScript object for {@code XPathEvaluator}.
  *
  * @version $Revision$
  * @author Marc Guillemot

@@ -7401,4 +7401,34 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("webkitURL");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function DOMPoint() {\n    [native code]\n}")
+    public void domPoint() throws Exception {
+        test("DOMPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function DOMPointReadOnly() {\n    [native code]\n}")
+    public void domPointReadOnly() throws Exception {
+        test("DOMPointReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function DOMRectReadOnly() {\n    [native code]\n}")
+    public void domRectReadOnly() throws Exception {
+        test("DOMRectReadOnly");
+    }
+
 }

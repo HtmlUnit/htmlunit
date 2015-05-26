@@ -7235,4 +7235,34 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("webkitURL");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF38 = "function")
+    public void domPoint() throws Exception {
+        test("DOMPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF38 = "function")
+    public void domPointReadOnly() throws Exception {
+        test("DOMPointReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF38 = "function")
+    public void domRectReadOnly() throws Exception {
+        test("DOMRectReadOnly");
+    }
+
 }
