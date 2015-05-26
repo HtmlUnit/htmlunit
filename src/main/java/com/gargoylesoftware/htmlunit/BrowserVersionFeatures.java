@@ -1961,7 +1961,7 @@ public enum BrowserVersionFeatures {
     JS_XMLHTTPREQUEST_OBJECT,
 
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
-    @BrowserFeature(@WebBrowser(CHROME))
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
 
     /** Indicates that XML code embedded in an HTML page is handled by MSXML ActiveX. */
