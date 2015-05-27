@@ -409,6 +409,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 38) })
     HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
 
+    /** HtmlAllCollection.item(int) is not supported. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
+    HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES,
+
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,

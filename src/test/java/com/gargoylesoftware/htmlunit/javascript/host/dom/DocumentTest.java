@@ -1012,16 +1012,21 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "HTML", "HEAD", "TITLE", "SCRIPT", "BODY" },
-            FF38 = { "error", "error", "error", "error", "error" })
+            FF38 = { "all == null", "all == null", "all == null", "all == null", "all == null" })
     public void all_WithParentheses() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var length = document.all.length;\n"
-            + "    for(i=0; i< length; i++ ) {\n"
+            + "    for(i=0; i < length; i++ ) {\n"
             + "      try {\n"
-            + "        alert(document.all(i).tagName);\n"
-            + "      } catch(e) { alert('error'); }\n"
+            + "        var all = document.all(i);\n"
+            + "        if (all == null) {\n"
+            + "          alert('all == null');\n"
+            + "        } else {\n"
+            + "          alert(all.tagName);\n"
+            + "        };\n"
+            + "      } catch(e) { alert(e); }\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
