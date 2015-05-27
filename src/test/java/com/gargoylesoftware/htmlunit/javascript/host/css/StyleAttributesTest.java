@@ -19,10 +19,8 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 
 /**
@@ -32,14 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
  * @author Ahmed Ashour
  */
 public class StyleAttributesTest {
-
-    /**
-     * Before the tests.
-     */
-    @BeforeClass
-    public static void before() {
-        StyleAttributes.getDefinitions(BrowserVersion.CHROME);
-    }
 
     /**
      * Test of alphabetical order.

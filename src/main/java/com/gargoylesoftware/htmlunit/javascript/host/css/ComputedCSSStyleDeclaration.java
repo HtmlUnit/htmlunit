@@ -26,7 +26,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -299,6 +298,20 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return existent;
     }
 
+    private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition) {
+        if (str == null || str.isEmpty()) {
+            return definition.getDefaultComputedValue(getBrowserVersion());
+        }
+        return str;
+    }
+
+    private String defaultIfEmpty(final String str, final String defaultStr) {
+        if (str == null || str.isEmpty()) {
+            return defaultStr;
+        }
+        return str;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -311,8 +324,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getBackground() {
+        return defaultIfEmpty(super.getBackground(), Definition.BACKGROUND);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getBackgroundAttachment() {
-        return defaultIfEmpty(super.getBackgroundAttachment(), "scroll");
+        return defaultIfEmpty(super.getBackgroundAttachment(), Definition.BACKGROUND_ATTACHMENT);
     }
 
     /**
@@ -550,7 +571,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getCssFloat() {
-        return defaultIfEmpty(super.getCssFloat(), "none");
+        return defaultIfEmpty(super.getCssFloat(), Definition.FLOAT);
     }
 
     /**

@@ -42,11 +42,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 final class StyleAttributes {
     private static final Map<String, Definition> styles_ = new HashMap<>();
 
-    static {
-        // force loading of Definition to fill the styles_ map
-        Definition.values();
-    }
-
     private StyleAttributes() {
         // nothing
     }
@@ -689,7 +684,7 @@ final class StyleAttributes {
         FLEX_WRAP_("flex-wrap", "flex-wrap", ff38up("nowrap")),
 
         /** The style property float. */
-        FLOAT("float", "float", ff38up("none"), chrome("none")),
+        FLOAT("float", "float", ff("none"), chrome("none"), ie11up("none")),
 
         /** The style property flood-color. */
         FLOOD_COLOR("floodColor", "flood-color", ff("rgb(0, 0, 0)"), ie11up(""), chrome("rgb(0, 0, 0)")),
@@ -2622,8 +2617,12 @@ final class StyleAttributes {
 
         public String getDefaultComputedValue(
                 final BrowserVersion browserVersion) {
-            return BrowserConfiguration.getMatchingConfiguration(
-                    browserVersion, browserConfigurations_).getDefaultValue();
+            final BrowserConfiguration config
+                = BrowserConfiguration.getMatchingConfiguration(browserVersion, browserConfigurations_);
+            if (config == null) {
+                return "";
+            }
+            return config.getDefaultValue();
         }
     }
 }
