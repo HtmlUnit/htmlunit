@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.general.ElementPropertiesTest;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class NotYetImplementedTest {
 
@@ -46,11 +47,14 @@ public class NotYetImplementedTest {
 
     private void process(final File dir) throws IOException {
         for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !".svn".equals(file.getName())) {
+            if (file.isDirectory()
+                    && !"huge".equals(file.getName())
+                    && !".svn".equals(file.getName())) {
                 process(file);
             }
             else {
-                if (file.getName().endsWith(".java") && !"SimpleWebTestCase.java".equals(file.getName())
+                if (file.getName().endsWith(".java")
+                        && !"SimpleWebTestCase.java".equals(file.getName())
                         && !"NotYetImplementedTest.java".equals(file.getName())
                         && !"CodeStyleTest.java".equals(file.getName())) {
                     final List<String> lines = FileUtils.readLines(file);
@@ -166,6 +170,7 @@ public class NotYetImplementedTest {
         int countIE11 = 0;
         int countFF24 = 0;
         int countFF31 = 0;
+        int countFF38 = 0;
         int countChrome = 0;
         for (final String entry : entries_) {
             final String[] values = entry.split(";");
@@ -222,11 +227,16 @@ public class NotYetImplementedTest {
             if (browser.contains("FF31")) {
                 countFF31++;
             }
+            if (browser.contains("FF38")) {
+                countFF38++;
+            }
             if (!browser.contains("FF24")
                     && !browser.contains("FF31")
+                    && !browser.contains("FF38")
                     && browser.contains("FF")) {
                 countFF24++;
                 countFF31++;
+                countFF38++;
             }
             if (browser.contains("CHROME")) {
                 countChrome++;
@@ -236,6 +246,7 @@ public class NotYetImplementedTest {
                 countIE11++;
                 countFF24++;
                 countFF31++;
+                countFF38++;
                 countChrome++;
             }
         }
@@ -266,6 +277,11 @@ public class NotYetImplementedTest {
         overview.append("  <tr>\n");
         overview.append("    <td class='numeric'>").append(Integer.toString(countFF31)).append("</td>\n");
         overview.append("    <td>for FF31</td>\n");
+        overview.append("  </tr>\n");
+
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countFF38)).append("</td>\n");
+        overview.append("    <td>for FF38</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
