@@ -26,6 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.BarProp;
 import com.gargoylesoftware.htmlunit.javascript.host.BatteryManager;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.BroadcastChannel;
+import com.gargoylesoftware.htmlunit.javascript.host.Cache;
+import com.gargoylesoftware.htmlunit.javascript.host.CacheStorage;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
 import com.gargoylesoftware.htmlunit.javascript.host.ClipboardData;
@@ -52,6 +54,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Namespace;
 import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Navigator;
 import com.gargoylesoftware.htmlunit.javascript.host.Notification;
+import com.gargoylesoftware.htmlunit.javascript.host.PermissionStatus;
+import com.gargoylesoftware.htmlunit.javascript.host.Permissions;
 import com.gargoylesoftware.htmlunit.javascript.host.Plugin;
 import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Popup;
@@ -59,6 +63,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 import com.gargoylesoftware.htmlunit.javascript.host.Proxy;
 import com.gargoylesoftware.htmlunit.javascript.host.PushManager;
 import com.gargoylesoftware.htmlunit.javascript.host.PushSubscription;
+import com.gargoylesoftware.htmlunit.javascript.host.ReadableByteStream;
+import com.gargoylesoftware.htmlunit.javascript.host.ReadableStream;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.ScreenOrientation;
 import com.gargoylesoftware.htmlunit.javascript.host.Set;
@@ -203,6 +209,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.FocusEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.GamepadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.InputEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MIDIConnectionEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MIDIMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaEncryptedEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaKeyEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaQueryListEvent;
@@ -304,6 +312,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.TextTrackList;
 import com.gargoylesoftware.htmlunit.javascript.host.media.TimeRanges;
 import com.gargoylesoftware.htmlunit.javascript.host.media.VTTCue;
 import com.gargoylesoftware.htmlunit.javascript.host.media.WaveShaperNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIAccess;
+import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIInput;
+import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIInputMap;
+import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIOutput;
+import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIOutputMap;
+import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIPort;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCDataChannelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCIceCandidate;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCPeerConnectionIceEvent;
@@ -367,11 +381,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AutocompleteErrorEvent.class, BarProp.class,
         BatteryManager.class, BeforeUnloadEvent.class, BiquadFilterNode.class,
-        Blob.class, BlobEvent.class, BoxObject.class, BroadcastChannel.class,
-        CanvasGradient.class,
-        CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class, CDATASection.class,
-        ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class, ClientRectList.class,
-        ClipboardData.class, ClipboardEvent.class,
+        Blob.class, BlobEvent.class, BoxObject.class, BroadcastChannel.class, Cache.class, CacheStorage.class,
+        CanvasGradient.class, CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class,
+        CDATASection.class, ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class,
+        ClientRectList.class, ClipboardData.class, ClipboardEvent.class,
         CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class, Console.class,
         ConvolverNode.class, Coordinates.class, Crypto.class, CryptoKey.class, CSS.class, CSS2Properties.class,
         CSSCharsetRule.class, CSSConditionRule.class, CSSCounterStyleRule.class, CSSFontFaceRule.class,
@@ -433,8 +446,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MediaQueryListEvent.class, MediaRecorder.class,
         MediaSource.class, MediaStream.class, MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
         MediaStreamEvent.class, MediaStreamTrack.class, MessageChannel.class,
-        MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
-        MouseScrollEvent.class, MouseWheelEvent.class,
+        MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
+        MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
+        MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class, MouseWheelEvent.class,
         MozContactChangeEvent.class, MozMmsEvent.class, MozMmsMessage.class,
         MozMobileMessageManager.class, MozMobileMessageThread.class, mozRTCIceCandidate.class,
         mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class,
@@ -446,11 +460,11 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
         Path2D.class, Performance.class, PerformanceEntry.class, PerformanceMark.class,
         PerformanceMeasure.class, PerformanceNavigation.class, PerformanceResourceTiming.class, PerformanceTiming.class,
-        PeriodicWave.class, Plugin.class, PluginArray.class, PointerEvent.class, PopStateEvent.class, Popup.class,
-        Position.class, PositionError.class,
+        PeriodicWave.class, Permissions.class, PermissionStatus.class, Plugin.class, PluginArray.class,
+        PointerEvent.class, PopStateEvent.class, Popup.class, Position.class, PositionError.class,
         ProcessingInstruction.class, ProgressEvent.class,
         Promise.class, Proxy.class, PushManager.class, PushSubscription.class, RadioNodeList.class, Range.class,
-        Request.class, Response.class, RowContainer.class,
+        ReadableByteStream.class, ReadableStream.class, Request.class, Response.class, RowContainer.class,
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScreenOrientation.class, ScriptProcessorNode.class, SecurityPolicyViolationEvent.class,
         Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,

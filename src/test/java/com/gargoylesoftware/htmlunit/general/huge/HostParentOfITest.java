@@ -3040,4 +3040,144 @@ public class HostParentOfITest extends HostParentOf {
         test("Node", "SVGGeometryElement");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIAccess_MIDIAccess() throws Exception {
+        test("MIDIAccess", "MIDIAccess");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIConnectionEvent_MIDIConnectionEvent() throws Exception {
+        test("MIDIConnectionEvent", "MIDIConnectionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIInputMap_MIDIInputMap() throws Exception {
+        test("MIDIInputMap", "MIDIInputMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIInput_MIDIInput() throws Exception {
+        test("MIDIInput", "MIDIInput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIMessageEvent_MIDIMessageEvent() throws Exception {
+        test("MIDIMessageEvent", "MIDIMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIOutputMap_MIDIOutputMap() throws Exception {
+        test("MIDIOutputMap", "MIDIOutputMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIOutput_MIDIOutput() throws Exception {
+        test("MIDIOutput", "MIDIOutput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIPort_MIDIInput() throws Exception {
+        test("MIDIPort", "MIDIInput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIPort_MIDIOutput() throws Exception {
+        test("MIDIPort", "MIDIOutput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIPort_MIDIPort() throws Exception {
+        test("MIDIPort", "MIDIPort");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PermissionStatus_PermissionStatus() throws Exception {
+        test("PermissionStatus", "PermissionStatus");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Permissions_Permissions() throws Exception {
+        test("Permissions", "Permissions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ReadableByteStream_ReadableByteStream() throws Exception {
+        test("ReadableByteStream", "ReadableByteStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ReadableStream_ReadableStream() throws Exception {
+        test("ReadableStream", "ReadableStream");
+    }
+
 }

@@ -184,7 +184,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "" },
             IE8 = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void colon() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

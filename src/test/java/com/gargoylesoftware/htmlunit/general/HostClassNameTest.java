@@ -7431,4 +7431,144 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("DOMRectReadOnly");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Cache() { [native code] }")
+    public void cache() throws Exception {
+        test("Cache");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CacheStorage() { [native code] }")
+    public void cacheStorage() throws Exception {
+        test("CacheStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIAccess() { [native code] }")
+    public void midiAccess() throws Exception {
+        test("MIDIAccess");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIConnectionEvent() { [native code] }")
+    public void midiConnectionEvent() throws Exception {
+        test("MIDIConnectionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIInput() { [native code] }")
+    public void midiInput() throws Exception {
+        test("MIDIInput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIInputMap() { [native code] }")
+    public void midiInputMap() throws Exception {
+        test("MIDIInputMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIMessageEvent() { [native code] }")
+    public void midiMessageEvent() throws Exception {
+        test("MIDIMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIOutput() { [native code] }")
+    public void midiOutput() throws Exception {
+        test("MIDIOutput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIOutputMap() { [native code] }")
+    public void midiOutputMap() throws Exception {
+        test("MIDIOutputMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MIDIPort() { [native code] }")
+    public void midiPort() throws Exception {
+        test("MIDIPort");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Permissions() { [native code] }")
+    public void permissions() throws Exception {
+        test("Permissions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PermissionStatus() { [native code] }")
+    public void permissionStatus() throws Exception {
+        test("PermissionStatus");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ReadableByteStream() { [native code] }")
+    public void readableByteStream() throws Exception {
+        test("ReadableByteStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ReadableStream() { [native code] }")
+    public void readableStream() throws Exception {
+        test("ReadableStream");
+    }
+
 }

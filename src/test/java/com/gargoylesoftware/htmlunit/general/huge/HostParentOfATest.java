@@ -6325,4 +6325,94 @@ public class HostParentOfATest extends HostParentOf {
         test("DOMRectReadOnly", "DOMRectReadOnly");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CacheStorage_CacheStorage() throws Exception {
+        test("CacheStorage", "CacheStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Cache_Cache() throws Exception {
+        test("Cache", "Cache");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_MIDIAccess() throws Exception {
+        test("EventTarget", "MIDIAccess");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_MIDIInput() throws Exception {
+        test("EventTarget", "MIDIInput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_MIDIOutput() throws Exception {
+        test("EventTarget", "MIDIOutput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_MIDIPort() throws Exception {
+        test("EventTarget", "MIDIPort");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_PermissionStatus() throws Exception {
+        test("EventTarget", "PermissionStatus");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_MIDIConnectionEvent() throws Exception {
+        test("Event", "MIDIConnectionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_MIDIMessageEvent() throws Exception {
+        test("Event", "MIDIMessageEvent");
+    }
+
 }

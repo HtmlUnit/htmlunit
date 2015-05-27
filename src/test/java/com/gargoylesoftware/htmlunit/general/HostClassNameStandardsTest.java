@@ -5907,7 +5907,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Cache() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void cache() throws Exception {
         test("Cache");
     }
@@ -7501,7 +7500,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function CacheStorage() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void cacheStorage() throws Exception {
         test("CacheStorage");
     }
@@ -8413,7 +8411,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIConnectionEvent() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void midiConnectionEvent() throws Exception {
         test("MIDIConnectionEvent");
     }
@@ -8424,7 +8421,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIMessageEvent() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void midiMessageEvent() throws Exception {
         test("MIDIMessageEvent");
     }
@@ -8435,7 +8431,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIOutput() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void midiOutput() throws Exception {
         test("MIDIOutput");
     }
@@ -8446,7 +8441,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIOutputMap() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void midiOutputMap() throws Exception {
         test("MIDIOutputMap");
     }
@@ -8457,7 +8451,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIPort() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void midiPort() throws Exception {
         test("MIDIPort");
     }
@@ -8468,7 +8461,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ReadableByteStream() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void readableByteStream() throws Exception {
         test("ReadableByteStream");
     }
@@ -8479,7 +8471,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ReadableStream() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void readableStream() throws Exception {
         test("ReadableStream");
     }
@@ -8508,7 +8499,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIInput() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void midiInput() throws Exception {
         test("MIDIInput");
     }
@@ -8528,7 +8518,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIInputMap() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void midiInputMap() throws Exception {
         test("MIDIInputMap");
     }
@@ -8612,7 +8601,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PermissionStatus() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void permissionStatus() throws Exception {
         test("PermissionStatus");
     }
@@ -8670,7 +8658,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIAccess() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void midiAccess() throws Exception {
         test("MIDIAccess");
     }
@@ -8708,7 +8695,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Permissions() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void permissions() throws Exception {
         test("Permissions");
     }
