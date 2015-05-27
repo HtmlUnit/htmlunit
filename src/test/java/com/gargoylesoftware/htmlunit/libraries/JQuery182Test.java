@@ -4159,7 +4159,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void css__Do_not_append_px_to__fill_opacity___9548() throws Exception {
         runTest("css: Do not append px to 'fill-opacity' #9548");
     }
@@ -6163,7 +6162,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__Do_not_append_px_to__fill_opacity___9548() throws Exception {
         runTest("effects: Do not append px to 'fill-opacity' #9548");
     }

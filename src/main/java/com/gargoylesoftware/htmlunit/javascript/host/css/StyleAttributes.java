@@ -184,7 +184,8 @@ final class StyleAttributes {
                 chrome("rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box")),
 
         /** The style property {@code backgroundAttachment}. */
-        BACKGROUND_ATTACHMENT("backgroundAttachment", "background-attachment", chrome("scroll")),
+        BACKGROUND_ATTACHMENT("backgroundAttachment", "background-attachment", chrome("scroll"),
+                ff("scroll"), ie11up("scroll")),
 
         /** The style property {@code background-attachment}. */
         BACKGROUND_ATTACHMENT_("background-attachment", "background-attachment", ff38up("scroll")),

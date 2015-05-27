@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.ArrayList;
@@ -81,7 +80,7 @@ public class MooTools121Test extends WebDriverTestCase {
                     "should return true if the string constains the string and separator otherwise false",
                     "should return the function bound to an object with multiple arguments" })
     @Test
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE)
     public void mooTools() throws Exception {
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + "/Specs/index.html");
