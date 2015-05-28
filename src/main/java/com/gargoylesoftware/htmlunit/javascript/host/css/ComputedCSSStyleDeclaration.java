@@ -323,7 +323,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getAccelerator() {
-        return defaultIfEmpty(getStyleAttribute("accelerator"), "undefined");
+        return defaultIfEmpty(getStyleAttribute("accelerator"), Definition.ACCELERATOR);
     }
 
     /**
@@ -362,7 +362,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundImage() {
-        return defaultIfEmpty(super.getBackgroundImage(), "none");
+        return defaultIfEmpty(super.getBackgroundImage(), Definition.BACKGROUND_IMAGE);
     }
 
     /**
@@ -395,7 +395,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundRepeat() {
-        return defaultIfEmpty(super.getBackgroundRepeat(), "repeat");
+        return defaultIfEmpty(super.getBackgroundRepeat(), Definition.BACKGROUND_REPEAT);
     }
 
     /**
@@ -427,7 +427,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomColor() {
-        return defaultIfEmpty(super.getBorderBottomColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER_BOTTOM_COLOR);
     }
 
     /**
@@ -435,7 +435,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomStyle() {
-        return defaultIfEmpty(super.getBorderBottomStyle(), "none");
+        return defaultIfEmpty(super.getBorderBottomStyle(), Definition.BORDER_BOTTOM_STYLE);
     }
 
     /**
@@ -443,7 +443,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), "0px"));
+        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), Definition.BORDER_BOTTOM_WIDTH));
     }
 
     /**
@@ -451,7 +451,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderCollapse() {
-        return defaultIfEmpty(super.getBorderCollapse(), "separate");
+        return defaultIfEmpty(super.getBorderCollapse(), Definition.BORDER_COLLAPSE);
     }
 
     /**
@@ -467,7 +467,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftColor() {
-        return defaultIfEmpty(super.getBorderLeftColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.getBorderLeftColor(), Definition.BORDER_LEFT_COLOR);
     }
 
     /**
@@ -475,7 +475,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftStyle() {
-        return defaultIfEmpty(super.getBorderLeftStyle(), "none");
+        return defaultIfEmpty(super.getBorderLeftStyle(), Definition.BORDER_LEFT_STYLE);
     }
 
     /**

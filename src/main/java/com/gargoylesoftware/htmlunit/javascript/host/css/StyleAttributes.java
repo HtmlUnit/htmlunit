@@ -88,6 +88,10 @@ final class StyleAttributes {
      * TODO: move all (?) style attribute definitions here.
      */
     public static enum Definition {
+
+        /** The style property {@code accelerator}. */
+        ACCELERATOR("accelerator", "accelerator", ie11up("undefined")),
+
         /** The style property alignment-content. */
         ALIGN_CONTENT("alignContent", "align-content", ie11up("stretch"), ff31up("stretch"), chrome("start")),
 
@@ -212,7 +216,7 @@ final class StyleAttributes {
         BACKGROUND_COLOR_("background-color", "background-color", ff38up("transparent")),
 
         /** The style property {@code backgroundImage}. */
-        BACKGROUND_IMAGE("backgroundImage", "background-image", chrome("none")),
+        BACKGROUND_IMAGE("backgroundImage", "background-image", chrome("none"), ff("none"), ie("none")),
 
         /** The style property {@code background-image}. */
         BACKGROUND_IMAGE_("background-image", "background-image", ff38up("none")),
@@ -238,7 +242,7 @@ final class StyleAttributes {
         BACKGROUND_POSITION_Y("backgroundPositionY", "background-position-y", ie11up("undefined"), chrome("0%")),
 
         /** The style property {@code backgroundRepeat}. */
-        BACKGROUND_REPEAT("backgroundRepeat", "background-repeat", chrome("repeat")),
+        BACKGROUND_REPEAT("backgroundRepeat", "background-repeat", chrome("repeat"), ff("repeat"), ie("repeat")),
 
         /** The style property {@code background-repeat}. */
         BACKGROUND_REPEAT_("background-repeat", "background-repeat", ff38up("repeat")),
@@ -271,7 +275,8 @@ final class StyleAttributes {
         BORDER_BOTTOM_("border-bottom", "border-bottom", ff38up("")),
 
         /** The style property {@code borderBottomColor}. */
-        BORDER_BOTTOM_COLOR("borderBottomColor", "border-bottom-color", chrome("rgb(0, 0, 0)")),
+        BORDER_BOTTOM_COLOR("borderBottomColor", "border-bottom-color", chrome("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)"),
+                ie("rgb(0, 0, 0)")),
 
         /** The style property {@code border-bottom-color}. */
         BORDER_BOTTOM_COLOR_("border-bottom-color", "border-bottom-color", ff38up("rgb(0, 0, 0)")),
@@ -291,19 +296,19 @@ final class StyleAttributes {
         BORDER_BOTTOM_RIGHT_RADIUS_("border-bottom-right-radius", "border-bottom-right-radius", ff38up("0px")),
 
         /** The style property {@code borderBottomStyle}. */
-        BORDER_BOTTOM_STYLE("borderBottomStyle", "border-bottom-style", chrome("none")),
+        BORDER_BOTTOM_STYLE("borderBottomStyle", "border-bottom-style", chrome("none"), ff("none"), ie("none")),
 
         /** The style property {@code border-bottom-style}. */
         BORDER_BOTTOM_STYLE_("border-bottom-style", "border-bottom-style", ff38up("none")),
 
         /** The style property {@code borderBottomWidth}. */
-        BORDER_BOTTOM_WIDTH("borderBottomWidth", "border-bottom-width", chrome("0px")),
+        BORDER_BOTTOM_WIDTH("borderBottomWidth", "border-bottom-width", chrome("0px"), ff("0px"), ie("0px")),
 
         /** The style property {@code border-bottom-width}. */
         BORDER_BOTTOM_WIDTH_("border-bottom-width", "border-bottom-width", ff38up("0px")),
 
         /** The style property {@code borderCollapse}. */
-        BORDER_COLLAPSE("borderCollapse", "border-collapse", chrome("separate")),
+        BORDER_COLLAPSE("borderCollapse", "border-collapse", chrome("separate"), ff("separate"), ie("separate")),
 
         /** The style property {@code border-collapse}. */
         BORDER_COLLAPSE_("border-collapse", "border-collapse", ff38up("separate")),
@@ -359,13 +364,14 @@ final class StyleAttributes {
         BORDER_LEFT_("border-left", "border-left", ff38up("")),
 
         /** The style property {@code borderLeftColor}. */
-        BORDER_LEFT_COLOR("borderLeftColor", "border-left-color", chrome("rgb(0, 0, 0)")),
+        BORDER_LEFT_COLOR("borderLeftColor", "border-left-color", chrome("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)"),
+                ie("rgb(0, 0, 0)")),
 
         /** The style property {@code border-left-color}. */
         BORDER_LEFT_COLOR_("border-left-color", "border-left-color", ff38up("rgb(0, 0, 0)")),
 
         /** The style property {@code borderLeftStyle}. */
-        BORDER_LEFT_STYLE("borderLeftStyle", "border-left-style", chrome("none")),
+        BORDER_LEFT_STYLE("borderLeftStyle", "border-left-style", chrome("none"), ff("none"), ie("none")),
 
         /** The style property {@code border-left-style}. */
         BORDER_LEFT_STYLE_("border-left-style", "border-left-style", ff38up("none")),

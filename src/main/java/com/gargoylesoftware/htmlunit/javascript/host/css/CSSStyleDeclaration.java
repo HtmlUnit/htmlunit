@@ -110,7 +110,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     /** CSS important property constant. */
     protected static final String PRIORITY_IMPORTANT = "important";
 
-    private static final String ACCELERATOR = "accelerator";
     private static final String BACKGROUND = "background";
     private static final String BACKGROUND_ATTACHMENT = "background-attachment";
     private static final String BACKGROUND_COLOR = "background-color";
@@ -759,7 +758,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
     public String getAccelerator() {
-        return defaultIfEmpty(getStyleAttribute(ACCELERATOR), "false");
+        return defaultIfEmpty(getStyleAttribute(Definition.ACCELERATOR.getAttributeName()), "false");
     }
 
     /**
@@ -768,7 +767,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
     public void setAccelerator(final String accelerator) {
-        setStyleAttributePixel(ACCELERATOR, accelerator);
+        setStyleAttributePixel(Definition.ACCELERATOR.getAttributeName(), accelerator);
     }
 
     /**
@@ -887,7 +886,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                         return "url(" + ((HtmlElement) jsElement_.getDomNodeOrDie()).getHtmlPageOrNull()
                             .getFullyQualifiedUrl(value) + ")";
                     }
-                    catch(final Exception e) {
+                    catch (final Exception e) {
                         // ignore
                     }
                 }
@@ -932,10 +931,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                 }
                 if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_INTEGER) && !isComputed) {
                     final String[] values = value.split(" ");
-                    if (values[0].equals("center")) {
+                    if ("center".equals(values[0])) {
                         values[0] = "";
                     }
-                    if (values[1].equals("center")) {
+                    if ("center".equals(values[1])) {
                         values[1] = "";
                     }
                     value = (values[0] + ' ' + values[1]).trim();
@@ -954,19 +953,23 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                         case "right":
                             values[0] = "100%";
                             break;
+
+                        default:
                     }
                     switch (values[1]) {
-                    case "top":
-                        values[1] = "0%";
-                        break;
+                        case "top":
+                            values[1] = "0%";
+                            break;
 
-                    case "center":
-                        values[1] = "50%";
-                        break;
+                        case "center":
+                            values[1] = "50%";
+                            break;
 
-                    case "bottom":
-                        values[1] = "100%";
-                        break;
+                        case "bottom":
+                            values[1] = "100%";
+                            break;
+
+                        default:
                     }
                     value = values[0] + ' ' + values[1];
                 }

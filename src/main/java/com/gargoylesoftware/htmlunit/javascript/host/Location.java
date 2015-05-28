@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
  * A JavaScript object for a Location.
