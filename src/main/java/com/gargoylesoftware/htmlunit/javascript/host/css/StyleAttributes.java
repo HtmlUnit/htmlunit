@@ -225,7 +225,7 @@ final class StyleAttributes {
         BACKGROUND_ORIGIN_("background-origin", "background-origin", ff38up("padding-box")),
 
         /** The style property {@code backgroundPosition}. */
-        BACKGROUND_POSITION("backgroundPosition", "background-position", chrome("0% 0%")),
+        BACKGROUND_POSITION("backgroundPosition", "background-position", chrome("0% 0%"), ff("0% 0%"), ie11up("0% 0%")),
 
         /** The style property {@code background-position}. */
         BACKGROUND_POSITION_("background-position", "background-position", ff38up("0% 0%")),

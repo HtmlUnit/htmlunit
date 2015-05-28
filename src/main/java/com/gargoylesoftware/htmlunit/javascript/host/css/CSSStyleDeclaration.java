@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_IMAGE_URL_QUOTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PIXEL_VALUES_INT_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
@@ -68,6 +69,7 @@ import org.w3c.css.sac.InputSource;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -799,6 +801,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             if (StringUtils.isNotBlank(bg)) {
                 value = findAttachment(bg);
                 if (value == null) {
+                    if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)
+                            && getClass() == CSSStyleDeclaration.class) {
+                        return "initial";
+                    }
                     return "scroll"; // default if shorthand is used
                 }
                 return value;
@@ -832,6 +838,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             }
             value = findColor(bg);
             if (value == null) {
+                if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
+                    if (getClass() == CSSStyleDeclaration.class) {
+                        return "initial";
+                    }
+                    else {
+                        return "rgba(0, 0, 0, 0)";
+                    }
+                }
                 return "transparent"; // default if shorthand is used
             }
             return value;
@@ -862,8 +876,20 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             final String bg = getStyleAttribute(BACKGROUND);
             if (StringUtils.isNotBlank(bg)) {
                 value = findImageUrl(bg);
+                final boolean backgroundInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)
+                        && getClass() == CSSStyleDeclaration.class;
                 if (value == null) {
-                    return "none"; // default if shorthand is used
+                    return backgroundInitial ? "initial" : "none";
+                }
+                if (backgroundInitial) {
+                    try {
+                        value = value.substring(5, value.length() - 2);
+                        return "url(" + ((HtmlElement) jsElement_.getDomNodeOrDie()).getHtmlPageOrNull()
+                            .getFullyQualifiedUrl(value) + ")";
+                    }
+                    catch(final Exception e) {
+                        // ignore
+                    }
                 }
                 return value;
             }
@@ -899,8 +925,50 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             }
             if (StringUtils.isNotBlank(bg)) {
                 value = findPosition(bg);
+                final boolean isInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL);
+                final boolean isComputed = getClass() != CSSStyleDeclaration.class;
                 if (value == null) {
-                    return "0% 0%"; // default if shorthand is used
+                    return isInitial ? "" : "0% 0%";
+                }
+                if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_INTEGER) && !isComputed) {
+                    final String[] values = value.split(" ");
+                    if (values[0].equals("center")) {
+                        values[0] = "";
+                    }
+                    if (values[1].equals("center")) {
+                        values[1] = "";
+                    }
+                    value = (values[0] + ' ' + values[1]).trim();
+                }
+                else if (isInitial || isComputed) {
+                    final String[] values = value.split(" ");
+                    switch (values[0]) {
+                        case "left":
+                            values[0] = "0%";
+                            break;
+
+                        case "center":
+                            values[0] = "50%";
+                            break;
+
+                        case "right":
+                            values[0] = "100%";
+                            break;
+                    }
+                    switch (values[1]) {
+                    case "top":
+                        values[1] = "0%";
+                        break;
+
+                    case "center":
+                        values[1] = "50%";
+                        break;
+
+                    case "bottom":
+                        values[1] = "100%";
+                        break;
+                    }
+                    value = values[0] + ' ' + values[1];
                 }
                 return value;
             }
@@ -967,6 +1035,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             if (StringUtils.isNotBlank(bg)) {
                 value = findRepeat(bg);
                 if (value == null) {
+                    if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)
+                            && getClass() == CSSStyleDeclaration.class) {
+                        return "initial";
+                    }
                     return "repeat"; // default if shorthand is used
                 }
                 return value;
@@ -1133,7 +1205,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderBottomWidth(final String borderBottomWidth) {
-        setStyleAttributePixel(BORDER_BOTTOM_WIDTH, borderBottomWidth);
+        if (!borderBottomWidth.endsWith("%")) {
+            setStyleAttributePixel(BORDER_BOTTOM_WIDTH, borderBottomWidth);
+        }
     }
 
     /**
@@ -1290,7 +1364,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderLeftWidth(final String borderLeftWidth) {
-        setStyleAttributePixel(BORDER_LEFT_WIDTH, borderLeftWidth);
+        if (!borderLeftWidth.endsWith("%")) {
+            setStyleAttributePixel(BORDER_LEFT_WIDTH, borderLeftWidth);
+        }
     }
 
     /**
@@ -1382,7 +1458,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderRightWidth(final String borderRightWidth) {
-        setStyleAttributePixel(BORDER_RIGHT_WIDTH, borderRightWidth);
+        if (!borderRightWidth.endsWith("%")) {
+            setStyleAttributePixel(BORDER_RIGHT_WIDTH, borderRightWidth);
+        }
     }
 
     /**
@@ -1510,7 +1588,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderTopWidth(final String borderTopWidth) {
-        setStyleAttributePixel(BORDER_TOP_WIDTH, borderTopWidth);
+        if (!borderTopWidth.endsWith("%")) {
+            setStyleAttributePixel(BORDER_TOP_WIDTH, borderTopWidth);
+        }
     }
 
     /**
@@ -2131,7 +2211,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setLetterSpacing(final String letterSpacing) {
-        setStyleAttributePixel(LETTER_SPACING, letterSpacing);
+        if (!letterSpacing.endsWith("%")) {
+            setStyleAttributePixel(LETTER_SPACING, letterSpacing);
+        }
     }
 
     /**
@@ -3937,7 +4019,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "outlineWidth" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter
     public String getOutlineWidth() {
         return getStyleAttribute(OUTLINE_WIDTH);
     }
@@ -3946,9 +4028,16 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "outlineWidth" style attribute.
      * @param outlineWidth the new attribute
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxSetter
     public void setOutlineWidth(final String outlineWidth) {
-        setStyleAttributePixel(OUTLINE_WIDTH, outlineWidth);
+        if (getBrowserVersion().hasFeature(CSS_SUPPORTS_BEHAVIOR_PROPERTY)) {
+            if (!outlineWidth.endsWith("%")) {
+                setStyleAttributePixel(OUTLINE_WIDTH, outlineWidth);
+            }
+        }
+        else if (outlineWidth.endsWith("px") || outlineWidth.endsWith("em") || outlineWidth.endsWith("mm")) {
+            setStyleAttributePixel(OUTLINE_WIDTH, outlineWidth);
+        }
     }
 
     /**
@@ -5136,7 +5225,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setWordSpacing(final String wordSpacing) {
-        setStyleAttributePixel(WORD_SPACING, wordSpacing);
+        if (!wordSpacing.endsWith("%")) {
+            setStyleAttributePixel(WORD_SPACING, wordSpacing);
+        }
     }
 
     /**
@@ -5549,9 +5640,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Searches for any url notation in the specified text.
+     * Searches for any URL notation in the specified text.
      * @param text the string to search in
-     * @return the string of the url if found, null otherwise
+     * @return the string of the URL if found, null otherwise
      */
     private String findImageUrl(final String text) {
         final Matcher m = URL_PATTERN.matcher(text);

@@ -67,6 +67,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CAN_INHERIT_CSS_PROPERTY_VALUES,
 
+    /** Background image is 'initial'. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    CSS_BACKGROUND_INITIAL,
+
     /** Indicates that the default value for height of elements is 18 instead of 20. */
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     CSS_DEFAULT_ELEMENT_HEIGHT_18,

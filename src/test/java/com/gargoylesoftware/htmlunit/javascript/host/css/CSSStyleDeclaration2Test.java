@@ -121,7 +121,6 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "borderBottomWidth 42% - 42em", "borderLeftWidth 42% - 42em",
                 "borderRightWidth 42% - 42em", "borderTopWidth 42% - 42em" })
-    @NotYetImplemented
     public void width_like_properties_border() throws Exception {
         width_like_properties("borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderTopWidth");
     }
@@ -187,7 +186,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                         "success",
                         "success",
                         "wordSpacing 42% - 42em" })
-    @NotYetImplemented
+    @NotYetImplemented(FF31)
     public void width_like_properties_font() throws Exception {
         width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                         "verticalAlign", "wordSpacing");

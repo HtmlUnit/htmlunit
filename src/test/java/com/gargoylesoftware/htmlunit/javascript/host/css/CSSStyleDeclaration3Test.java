@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -54,7 +52,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "red", "none", "repeat", "0% 0%", "scroll" },
             CHROME = { "red", "initial", "initial", "" , "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundColorRed() throws Exception {
         background("red");
     }
@@ -66,7 +63,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "rgb(20, 40, 60)", "none", "repeat", "0% 0%", "scroll" },
             CHROME = { "rgb(20, 40, 60)", "initial", "initial", "", "initial" },
             IE8 = { "rgb(20,40,60)", "none", "repeat", "0% 0%", "scroll" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void backgroundColorRgb() throws Exception {
         background("rgb(20, 40, 60)");
     }
@@ -78,7 +75,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
             CHROME = { "initial", "url(http://localhost:12345/myImage.png)", "initial", "", "initial" },
             IE8 = { "transparent", "url(myImage.png)", "repeat", "0% 0%", "scroll" })
-    @NotYetImplemented(CHROME)
     public void backgroundImage() throws Exception {
         background("url(myImage.png)");
     }
@@ -89,7 +85,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat-x", "0% 0%", "scroll" },
             CHROME = { "initial", "initial", "repeat-x", "", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundRepeat() throws Exception {
         background("repeat-x");
     }
@@ -100,7 +95,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "20px 100%", "scroll" },
             CHROME = { "initial", "initial", "initial", "20px 100%", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundPosition() throws Exception {
         background("20px 100%");
     }
@@ -111,7 +105,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "right bottom", "scroll" },
             CHROME = { "initial", "initial", "initial", "100% 100%", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundPosition2() throws Exception {
         background("bottom right");
     }
@@ -122,7 +115,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "10em bottom", "scroll" },
             CHROME = { "initial", "initial", "initial", "10em 100%", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundPosition3() throws Exception {
         background("10em bottom");
     }
@@ -134,7 +126,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "10em center", "scroll" },
             CHROME = { "initial", "initial", "initial", "10em 50%", "initial" },
             IE11 = { "transparent", "none", "repeat", "10em", "scroll" })
-    @NotYetImplemented({ IE11, CHROME })
     public void backgroundPosition4() throws Exception {
         background("10em center");
     }
@@ -145,7 +136,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "0% 0%", "fixed" },
             CHROME = { "initial", "initial", "initial", "", "fixed" })
-    @NotYetImplemented(CHROME)
     public void backgroundAttachment() throws Exception {
         background("fixed");
     }
@@ -157,7 +147,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" },
             CHROME = { "rgb(255, 204, 221)", "initial", "initial", "", "initial" },
             IE8 = { "#ffccdd", "none", "repeat", "0% 0%", "scroll" })
-    @NotYetImplemented(CHROME)
     public void backgroundColorHex() throws Exception {
         background("#ffccdd");
     }
@@ -169,7 +158,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "red", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
             CHROME = { "red", "url(http://localhost:12345/myImage.png)", "initial", "", "initial" },
             IE8 = { "red", "url(myImage.png)", "repeat", "0% 0%", "scroll" })
-    @NotYetImplemented(CHROME)
     public void backgroundMixed() throws Exception {
         background("red url(\"myImage.png\")");
     }
@@ -181,7 +169,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll" },
             CHROME = { "rgb(255, 255, 255)", "initial", "no-repeat", "20px 100px", "initial" },
             IE8 = { "#fff", "none", "no-repeat", "20px 100px", "scroll" })
-    @NotYetImplemented(CHROME)
     public void backgroundMixed2() throws Exception {
         background("#fff no-repeat 20px 100px");
     }
@@ -257,7 +244,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "none", "repeat-x", "0% 0%", "scroll" },
             CHROME = { "rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll" },
             IE8 = { "transparent", "none", "repeat-x", "undefined", "scroll" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void backgroundCssRepeat() throws Exception {
         backgroundCss("repeat-x");
     }
@@ -269,7 +256,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "20px 100%", "scroll" },
             CHROME = { "rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll" },
             IE8 = { "transparent", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void backgroundCssPosition() throws Exception {
         backgroundCss("20px 100%");
     }
@@ -281,7 +268,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "100% 100%", "scroll" },
             CHROME = { "rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll" },
             IE8 = { "transparent", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void backgroundCssPosition2() throws Exception {
         backgroundCss("bottom right");
     }
@@ -293,7 +280,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "0% 100%", "scroll" },
             CHROME = { "rgba(0, 0, 0, 0)", "none", "repeat", "0% 100%", "scroll" },
             IE8 = { "transparent", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void backgroundCssPosition3() throws Exception {
         backgroundCss("left bottom");
     }
@@ -306,7 +293,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             CHROME = { "rgba(0, 0, 0, 0)", "none", "repeat", "50% 0%", "scroll" },
             IE8 = { "transparent", "none", "repeat", "undefined", "scroll" },
             IE11 = { "transparent", "none", "repeat", "top", "scroll" })
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE)
     public void backgroundCssPosition4() throws Exception {
         backgroundCss("top center");
     }
@@ -318,7 +305,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "0% 0%", "fixed" },
             CHROME = { "rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed" },
             IE8 = { "transparent", "none", "repeat", "undefined", "fixed" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void backgroundCssAttachment() throws Exception {
         backgroundCss("fixed");
     }

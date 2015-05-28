@@ -371,17 +371,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundPosition() {
-        String bg = super.getBackgroundPosition();
-        if (StringUtils.isNotBlank(bg)) {
-            bg = StringUtils.replace(bg, "left", "0%");
-            bg = StringUtils.replace(bg, "right", "100%");
-            bg = StringUtils.replace(bg, "center", "50%");
-
-            bg = StringUtils.replace(bg, "top", "0%");
-            bg = StringUtils.replace(bg, "bottom", "100%");
-        }
-
-        return defaultIfEmpty(bg, "0% 0%");
+        return defaultIfEmpty(super.getBackgroundPosition(), Definition.BACKGROUND_POSITION);
     }
 
     /**
