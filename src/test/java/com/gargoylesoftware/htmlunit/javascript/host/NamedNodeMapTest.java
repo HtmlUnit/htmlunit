@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
@@ -34,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NamedNodeMapTest extends WebDriverTestCase {
@@ -165,26 +167,53 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
-            IE8 = { "[object]", "[object]", "[object]" })
-    public void unspecifiedAttributes() throws Exception {
-        final String html =
-              "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
+    @Alerts(DEFAULT = { "myAttr", "myAttr" },
+            FF38 = { "myAttr", "not found" })
+    public void setNamedItem() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    alert(document.body.attributes.language);\n"
-            + "    alert(document.body.attributes.id);\n"
-            + "    alert(document.body.attributes.dir);\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    var node = doc.createAttribute('myAttr');\n"
+            + "    doc.documentElement.attributes.setNamedItem(node);\n"
+            + "    alert(doc.documentElement.attributes.getNamedItem('myAttr').nodeName);\n"
+
+            + "    node = document.createAttribute('myAttr');\n"
+            + "    document.body.attributes.setNamedItem(node);\n"
+            + "    var item = document.body.attributes.getNamedItem('myAttr');"
+            + "    if (item) {\n"
+            + "      alert(item.nodeName);\n"
+            + "    } else {\n"
+            + "      alert('not found');\n"
+            + "    }\n"
             + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml = "<test></test>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({ "true", "[object Attr]", "true", "[object Attr]" })
+    public void has() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html ng-app><body>\n"
+            + "<script>\n"
+            + "var attributes = document.documentElement.attributes;\n"
+            + "alert(0 in attributes);\n"
+            + "alert(attributes[0]);\n"
+            + "alert('0' in attributes);\n"
+            + "alert(attributes['0']);\n"
             + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "</body>\n"
-            + "</html>";
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
@@ -205,6 +234,31 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "  el.attributes.removeNamedItem('id');\n"
             + "  alert(el.id);\n"
             + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
+            IE8 = { "[object]", "[object]", "[object]" })
+    public void unspecifiedAttributes() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.body.attributes.language);\n"
+            + "    alert(document.body.attributes.id);\n"
+            + "    alert(document.body.attributes.dir);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 
