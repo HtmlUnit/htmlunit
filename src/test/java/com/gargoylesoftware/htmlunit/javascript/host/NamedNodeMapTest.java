@@ -137,6 +137,47 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     }
 
     /**
+     * Looks like FF38 has a strange bug when using attrib names with uppercase letters.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" },
+            FF38 = { "myAttr", "myattr2", "not found", "myattr2", "myattr2" })
+    public void getNamedItem_HTML_Case() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('tester');\n"
+
+            + "    var node = document.createAttribute('myAttr');\n"
+            + "    elem.attributes.setNamedItem(node);\n"
+
+            + "    var node = document.createAttribute('myattr2');\n"
+            + "    elem.attributes.setNamedItem(node);\n"
+
+            + "    for(var i = 0; i < elem.attributes.length; i++) {\n"
+            + "      var name = elem.attributes[i].name;\n"
+            + "      if (name.indexOf('my') === 0) { alert(name); }\n"
+            + "    }\n"
+
+            + "    var item = elem.attributes.getNamedItem('myAttr');\n"
+            + "    if (item) {\n"
+            + "      alert(item.nodeName);\n"
+            + "    } else {\n"
+            + "      alert('not found');\n"
+            + "    }\n"
+
+            + "    alert(elem.attributes.getNamedItem('myattr2').name);\n"
+            + "    alert(elem.attributes.getNamedItem('MYaTTr2').name);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='tester'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -170,27 +211,43 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myAttr", "myAttr" },
-            FF38 = { "myAttr", "not found" })
-    public void setNamedItem() throws Exception {
+    @Alerts("myattr")
+    public void setNamedItem_HTML() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    var node = doc.createAttribute('myAttr');\n"
-            + "    doc.documentElement.attributes.setNamedItem(node);\n"
-            + "    alert(doc.documentElement.attributes.getNamedItem('myAttr').nodeName);\n"
-
-            + "    node = document.createAttribute('myAttr');\n"
-            + "    document.body.attributes.setNamedItem(node);\n"
-            + "    var item = document.body.attributes.getNamedItem('myAttr');"
+            + "    var node = document.createAttribute('myattr');\n"
+            + "    var elem = document.getElementById('tester');\n"
+            + "    elem.attributes.setNamedItem(node);\n"
+            + "    var item = elem.attributes.getNamedItem('myAttr');"
             + "    if (item) {\n"
             + "      alert(item.nodeName);\n"
             + "    } else {\n"
             + "      alert('not found');\n"
             + "    }\n"
             + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='tester'></div\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("myAttr")
+    public void setNamedItem_XML() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    var node = doc.createAttribute('myAttr');\n"
+            + "    doc.documentElement.attributes.setNamedItem(node);\n"
+            + "    alert(doc.documentElement.attributes.getNamedItem('myAttr').nodeName);\n"
+            + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
+            + "  <div id='tester'></div\n"
             + "</body></html>";
 
         final String xml = "<test></test>";
