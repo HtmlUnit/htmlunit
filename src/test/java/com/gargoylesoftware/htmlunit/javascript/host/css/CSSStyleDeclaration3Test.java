@@ -211,7 +211,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "0% 0%", "scroll" },
             CHROME = { "rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "scroll" },
             IE8 = { "transparent", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void backgroundCssEmpty() throws Exception {
         backgroundCss("");
     }
