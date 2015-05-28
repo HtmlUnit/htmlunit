@@ -841,9 +841,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                     if (getClass() == CSSStyleDeclaration.class) {
                         return "initial";
                     }
-                    else {
-                        return "rgba(0, 0, 0, 0)";
-                    }
+                    return "rgba(0, 0, 0, 0)";
                 }
                 return "transparent"; // default if shorthand is used
             }
