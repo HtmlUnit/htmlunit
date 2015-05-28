@@ -70,7 +70,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ CHROME, FF, IE11 })
     public void stringProperties() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -983,7 +982,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "rgb(255, 0, 0)", "rgb(255, 255, 255)" },
             CHROME = { "rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)" },
             IE8 = { "transparent", "red", "white" })
-    @NotYetImplemented(CHROME)
     public void backgroundColor() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0'>div 0</div>\n"

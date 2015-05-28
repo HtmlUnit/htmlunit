@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfigura
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff38up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow31;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow38;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie11up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie8up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ieBelow11;
@@ -204,7 +205,8 @@ final class StyleAttributes {
         BACKGROUND_CLIP_("background-clip", "background-clip", ff38up("border-box")),
 
         /** The style property {@code backgroundColor}. */
-        BACKGROUND_COLOR("backgroundColor", "background-color", chrome("rgba(0, 0, 0, 0)")),
+        BACKGROUND_COLOR("backgroundColor", "background-color", chrome("rgba(0, 0, 0, 0)"), ff("transparent"),
+                ie("transparent")),
 
         /** The style property {@code background-color}. */
         BACKGROUND_COLOR_("background-color", "background-color", ff38up("transparent")),
@@ -567,7 +569,7 @@ final class StyleAttributes {
         COLUMNS("columns", "columns", ie11up("")),
 
         /** The style property content. */
-        CONTENT("content", "content", ie11up("normal"), chrome("")),
+        CONTENT("content", "content", ie11up("normal"), chrome(""), ff("none")),
 
         /** The style property {@code counterIncrement}. */
         COUNTER_INCREMENT("counterIncrement", "counter-increment", chrome("none")),
@@ -581,12 +583,12 @@ final class StyleAttributes {
         /** The style property {@code counter-reset}. */
         COUNTER_RESET_("counter-reset", "counter-reset", ff38up("none")),
 
+        /** The style property {@code cssFloat}. */
+        CSS_FLOAT("cssFloat", "css-float", chrome("none"), ff("none"), ie11up("none")),
+
         //TODO: seems to be a combination of all other properties.
         /** The style property {@code cssText}. */
         CSS_TEXT("cssText", "css-text", chrome("")),
-
-        /** The style property {@code cssFloat}. */
-        CSS_FLOAT("cssFloat", "css-float", chrome("none"), ff("none"), ie11up("none")),
 
         /** The style property cue. */
         CUE("cue", "cue"),
@@ -622,7 +624,8 @@ final class StyleAttributes {
         ELEVATION("elevation", "elevation"),
 
         /** The style property empty-cells. */
-        EMPTY_CELLS("emptyCells", "empty-cells", ie11up("show"), ff38up("show"), chrome("show")),
+        EMPTY_CELLS("emptyCells", "empty-cells", ie11up("show"), ffBelow38("-moz-show-background"), ff38up("show"),
+                chrome("show")),
 
         /** The style property {@code empty-cells}. */
         EMPTY_CELLS_("empty-cells", "empty-cells", ff38up("show")),
@@ -706,7 +709,7 @@ final class StyleAttributes {
         FONT("font", "font", chrome("normal normal normal normal 16px/normal 'Times New Roman'")),
 
         /** The style property {@code fontFamily}. */
-        FONT_FAMILY("fontFamily", "font-family", chrome("'Times New Roman'")),
+        FONT_FAMILY("fontFamily", "font-family", chrome("'Times New Roman'"), ie11up("Times New Roman"), ff("serif")),
 
         /** The style property {@code font-family}. */
         FONT_FAMILY_("font-family", "font-family", ff38up("serif")),
@@ -799,7 +802,7 @@ final class StyleAttributes {
         FONT_VARIANT_POSITION_("font-variant-position", "font-variant-position", ff38up("normal")),
 
         /** The style property {@code fontWeight}. */
-        FONT_WEIGHT("fontWeight", "font-weight", chrome("normal")),
+        FONT_WEIGHT("fontWeight", "font-weight", chrome("normal"), ff("400"), ie("400")),
 
         /** The style property {@code font-weight}. */
         FONT_WEIGHT_("font-weight", "font-weight", ff38up("400")),
@@ -828,7 +831,7 @@ final class StyleAttributes {
         IMAGE_RENDERING_("image-rendering", "image-rendering", ff38up("auto")),
 
         /** The style property ime-mode. */
-        IME_MODE("imeMode", "ime-mode", ie11up("undefined")),
+        IME_MODE("imeMode", "ime-mode", ie11up("undefined"), ff("auto")),
 
         /** The style property {@code ime-mode}. */
         IME_MODE_("ime-mode", "ime-mode", ff38up("auto")),
@@ -914,7 +917,7 @@ final class StyleAttributes {
         LIST_STYLE_TYPE_("list-style-type", "list-style-type", ff38up("disc")),
 
         /** The style property {@code margin}. */
-        MARGIN("margin", "margin", chrome("0px")),
+        MARGIN("margin", "margin", chrome("0px"), ff("")),
 
         /** The style property {@code marginBottom}. */
         MARGIN_BOTTOM("marginBottom", "margin-bottom", chrome("0px")),
@@ -1623,7 +1626,8 @@ final class StyleAttributes {
         OUTLINE("outline", "outline", chrome("rgb(0, 0, 0) none 0px")),
 
         /** The style property outline-color. */
-        OUTLINE_COLOR("outlineColor", "outline-color", ie11up("transparent"), chrome("rgb(0, 0, 0)")),
+        OUTLINE_COLOR("outlineColor", "outline-color", ie11up("transparent"), chrome("rgb(0, 0, 0)"),
+                ff("rgb(0, 0, 0)")),
 
         /** The style property {@code outline-color}. */
         OUTLINE_COLOR_("outline-color", "outline-color", ff38up("rgb(0, 0, 0)")),
@@ -1744,7 +1748,7 @@ final class StyleAttributes {
         PITCH_RANGE("pitchRange", "pitch-range"),
 
         /** The style property pointer-events. */
-        POINTER_EVENTS("pointerEvents", "pointer-events", ie11up("visiblePainted"), chrome("auto")),
+        POINTER_EVENTS("pointerEvents", "pointer-events", ie11up("visiblePainted"), chrome("auto"), ff("auto")),
 
         /** The style property {@code pointer-events}. */
         POINTER_EVENTS_("pointer-events", "pointer-events", ff38up("auto")),
@@ -1927,7 +1931,7 @@ final class StyleAttributes {
         TABLE_LAYOUT_("table-layout", "table-layout", ff38up("auto")),
 
         /** The style property text-align. */
-        TEXT_ALIGN("textAlign", "text-align", ie11up("left"), chrome("start")),
+        TEXT_ALIGN("textAlign", "text-align", ie11up("left"), chrome("start"), ff("start")),
 
         /** The style property {@code text-align}. */
         TEXT_ALIGN_("text-align", "text-align", ff38up("start")),
@@ -1999,7 +2003,7 @@ final class StyleAttributes {
         TEXT_RENDERING_("text-rendering", "text-rendering", ff38up("auto")),
 
         /** The style property {@code textShadow}. */
-        TEXT_SHADOW("textShadow", "text-shadow", chrome("none")),
+        TEXT_SHADOW("textShadow", "text-shadow", chrome("none"), ff("none"), ie11up("none")),
 
         /** The style property {@code text-shadow}. */
         TEXT_SHADOW_("text-shadow", "text-shadow", ff38up("none")),
@@ -2559,13 +2563,13 @@ final class StyleAttributes {
         WORD_BREAK_("word-break", "word-break", ff38up("normal")),
 
         /** The style property {@code wordSpacing}. */
-        WORD_SPACING("wordSpacing", "word-spacing", chrome("0px")),
+        WORD_SPACING("wordSpacing", "word-spacing", chrome("0px"), ff("0px"), ie("0px")),
 
         /** The style property {@code word-spacing}. */
         WORD_SPACING_("word-spacing", "word-spacing", ff38up("0px")),
 
         /** The style property word-wrap. */
-        WORD_WRAP("wordWrap", "word-wrap", ie11up(""), chrome("normal")),
+        WORD_WRAP("wordWrap", "word-wrap", ie11up(""), chrome("normal"), ff("normal")),
 
         /** The style property {@code word-wrap}. */
         WORD_WRAP_("word-wrap", "word-wrap", ff38up("normal")),
@@ -2590,10 +2594,10 @@ final class StyleAttributes {
         private final BrowserConfiguration[] browserConfigurations_;
 
         private Definition(final String propertyName,
-                final String styleAttributeName,
+                final String attributeName,
                 final BrowserConfiguration... browserConfigurations) {
-            attributeName_ = styleAttributeName;
             propertyName_ = propertyName;
+            attributeName_ = attributeName;
             browserConfigurations_ = browserConfigurations;
             styles_.put(propertyName_, this);
         }

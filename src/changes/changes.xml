@@ -9,6 +9,9 @@
     <body>
         <release version="2.17" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
+                CSS: fix default attribute values.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: Typed Arrays to tolerate out of range.
             </action>
             <action type="add" dev="rbri">

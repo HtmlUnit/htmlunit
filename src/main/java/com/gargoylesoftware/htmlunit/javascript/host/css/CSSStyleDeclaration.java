@@ -187,8 +187,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String MAX_WIDTH = "max-width";
     private static final String MIN_HEIGHT = "min-height";
     private static final String MIN_WIDTH = "min-width";
-    private static final String MS_BLOCK_PROGRESSION = "ms-block-progression";
-    private static final String MS_INTERPOLATION_MODE = "ms-interpolation-mode";
     private static final String OPACITY = "opacity";
     private static final String ORPHANS = "orphans";
     private static final String OUTLINE = "outline";
@@ -2537,7 +2535,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter(@WebBrowser(IE))
     public String getMsBlockProgression() {
-        return getStyleAttribute(MS_BLOCK_PROGRESSION);
+        return getStyleAttribute(Definition.MS_BLOCK_PROGRESSION.getAttributeName());
     }
 
     /**
@@ -2546,7 +2544,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter(@WebBrowser(IE))
     public void setMsBlockProgression(final String msBlockProgression) {
-        setStyleAttribute(MS_BLOCK_PROGRESSION, msBlockProgression);
+        setStyleAttribute(Definition.MS_BLOCK_PROGRESSION.getAttributeName(), msBlockProgression);
     }
 
     /**
@@ -2555,7 +2553,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter(@WebBrowser(IE))
     public String getMsInterpolationMode() {
-        return getStyleAttribute(MS_INTERPOLATION_MODE);
+        return getStyleAttribute(Definition.MS_INTERPOLATION_MODE.getAttributeName());
     }
 
     /**
@@ -2564,7 +2562,1231 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter(@WebBrowser(IE))
     public void setMsInterpolationMode(final String msInterpolationMode) {
-        setStyleAttribute(MS_INTERPOLATION_MODE, msInterpolationMode);
+        setStyleAttribute(Definition.MS_INTERPOLATION_MODE.getAttributeName(), msInterpolationMode);
+    }
+
+    /**
+     * Returns the {@code msContentZoomChaining} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsContentZoomChaining() {
+        return getStyleAttribute(Definition.MS_CONTENT_ZOOM_CHAINING.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msContentZoomChaining} style attribute.
+     * @param msContentZoomChaining the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsContentZoomChaining(final String msContentZoomChaining) {
+        setStyleAttribute(Definition.MS_CONTENT_ZOOM_CHAINING.getAttributeName(), msContentZoomChaining);
+    }
+
+    /**
+     * Returns the {@code msContentZoomLimit} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsContentZoomLimit() {
+        return getStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msContentZoomLimit} style attribute.
+     * @param msContentZoomLimit the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsContentZoomLimit(final String msContentZoomLimit) {
+        setStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT.getAttributeName(), msContentZoomLimit);
+    }
+
+    /**
+     * Returns the {@code msContentZoomLimitMax} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsContentZoomLimitMax() {
+        return getStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT_MAX.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msContentZoomLimitMax} style attribute.
+     * @param msContentZoomLimitMax the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsContentZoomLimitMax(final String msContentZoomLimitMax) {
+        setStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT_MAX.getAttributeName(), msContentZoomLimitMax);
+    }
+
+    /**
+     * Returns the {@code msContentZoomLimitMin} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsContentZoomLimitMin() {
+        return getStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT_MIN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msContentZoomLimitMin} style attribute.
+     * @param msContentZoomLimitMin the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsContentZoomLimitMin(final String msContentZoomLimitMin) {
+        setStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT_MIN.getAttributeName(), msContentZoomLimitMin);
+    }
+
+    /**
+     * Returns the {@code msContentZoomSnap} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsContentZoomSnap() {
+        return getStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msContentZoomSnap} style attribute.
+     * @param msContentZoomSnap the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsContentZoomSnap(final String msContentZoomSnap) {
+        setStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP.getAttributeName(), msContentZoomSnap);
+    }
+
+    /**
+     * Returns the {@code msContentZoomSnapPoints} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsContentZoomSnapPoints() {
+        return getStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP_POINTS.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msContentZoomSnapPoints} style attribute.
+     * @param msContentZoomSnapPoints the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsContentZoomSnapPoints(final String msContentZoomSnapPoints) {
+        setStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP_POINTS.getAttributeName(), msContentZoomSnapPoints);
+    }
+
+    /**
+     * Returns the {@code msContentZoomSnapType} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsContentZoomSnapType() {
+        return getStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP_TYPE.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msContentZoomSnapType} style attribute.
+     * @param msContentZoomSnapType the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsContentZoomSnapType(final String msContentZoomSnapType) {
+        setStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP_TYPE.getAttributeName(), msContentZoomSnapType);
+    }
+
+    /**
+     * Returns the {@code msContentZooming} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsContentZooming() {
+        return getStyleAttribute(Definition.MS_CONTENT_ZOOMING.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msContentZooming} style attribute.
+     * @param msContentZooming the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsContentZooming(final String msContentZooming) {
+        setStyleAttribute(Definition.MS_CONTENT_ZOOMING.getAttributeName(), msContentZooming);
+    }
+
+    /**
+     * Returns the {@code msFlex} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlex() {
+        return getStyleAttribute(Definition.MS_FLEX.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlex} style attribute.
+     * @param msFlex the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlex(final String msFlex) {
+        setStyleAttribute(Definition.MS_FLEX.getAttributeName(), msFlex);
+    }
+
+    /**
+     * Returns the {@code msFlexAlign} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexAlign() {
+        return getStyleAttribute(Definition.MS_FLEX_ALIGN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexAlign} style attribute.
+     * @param msFlexAlign the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexAlign(final String msFlexAlign) {
+        setStyleAttribute(Definition.MS_FLEX_ALIGN.getAttributeName(), msFlexAlign);
+    }
+
+    /**
+     * Returns the {@code msFlexDirection} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexDirection() {
+        return getStyleAttribute(Definition.MS_FLEX_DIRECTION.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexDirection} style attribute.
+     * @param msFlexDirection the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexDirection(final String msFlexDirection) {
+        setStyleAttribute(Definition.MS_FLEX_DIRECTION.getAttributeName(), msFlexDirection);
+    }
+
+    /**
+     * Returns the {@code msFlexFlow} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexFlow() {
+        return getStyleAttribute(Definition.MS_FLEX_FLOW.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexFlow} style attribute.
+     * @param msFlexFlow the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexFlow(final String msFlexFlow) {
+        setStyleAttribute(Definition.MS_FLEX_FLOW.getAttributeName(), msFlexFlow);
+    }
+
+    /**
+     * Returns the {@code msFlexItemAlign} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexItemAlign() {
+        return getStyleAttribute(Definition.MS_FLEX_ITEM_ALIGN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexItemAlign} style attribute.
+     * @param msFlexItemAlign the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexItemAlign(final String msFlexItemAlign) {
+        setStyleAttribute(Definition.MS_FLEX_ITEM_ALIGN.getAttributeName(), msFlexItemAlign);
+    }
+
+    /**
+     * Returns the {@code msFlexLinePack} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexLinePack() {
+        return getStyleAttribute(Definition.MS_FLEX_LINE_PACK.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexLinePack} style attribute.
+     * @param msFlexLinePack the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexLinePack(final String msFlexLinePack) {
+        setStyleAttribute(Definition.MS_FLEX_LINE_PACK.getAttributeName(), msFlexLinePack);
+    }
+
+    /**
+     * Returns the {@code msFlexNegative} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexNegative() {
+        return getStyleAttribute(Definition.MS_FLEX_NEGATIVE.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexNegative} style attribute.
+     * @param msFlexNegative the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexNegative(final String msFlexNegative) {
+        setStyleAttribute(Definition.MS_FLEX_NEGATIVE.getAttributeName(), msFlexNegative);
+    }
+
+    /**
+     * Returns the {@code msFlexOrder} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexOrder() {
+        return getStyleAttribute(Definition.MS_FLEX_ORDER.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexOrder} style attribute.
+     * @param msFlexOrder the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexOrder(final String msFlexOrder) {
+        setStyleAttribute(Definition.MS_FLEX_ORDER.getAttributeName(), msFlexOrder);
+    }
+
+    /**
+     * Returns the {@code msFlexPack} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexPack() {
+        return getStyleAttribute(Definition.MS_FLEX_PACK.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexPack} style attribute.
+     * @param msFlexPack the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexPack(final String msFlexPack) {
+        setStyleAttribute(Definition.MS_FLEX_PACK.getAttributeName(), msFlexPack);
+    }
+
+    /**
+     * Returns the {@code msFlexPositive} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexPositive() {
+        return getStyleAttribute(Definition.MS_FLEX_POSITIVE.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexPositive} style attribute.
+     * @param msFlexPositive the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexPositive(final String msFlexPositive) {
+        setStyleAttribute(Definition.MS_FLEX_POSITIVE.getAttributeName(), msFlexPositive);
+    }
+
+    /**
+     * Returns the {@code msFlexPreferredSize} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexPreferredSize() {
+        return getStyleAttribute(Definition.MS_FLEX_PREFERRED_SIZE.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexPreferredSize} style attribute.
+     * @param msFlexPreferredSize the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexPreferredSize(final String msFlexPreferredSize) {
+        setStyleAttribute(Definition.MS_FLEX_PREFERRED_SIZE.getAttributeName(), msFlexPreferredSize);
+    }
+
+    /**
+     * Returns the {@code msFlexWrap} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlexWrap() {
+        return getStyleAttribute(Definition.MS_FLEX_WRAP.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlexWrap} style attribute.
+     * @param msFlexWrap the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlexWrap(final String msFlexWrap) {
+        setStyleAttribute(Definition.MS_FLEX_WRAP.getAttributeName(), msFlexWrap);
+    }
+
+    /**
+     * Returns the {@code msFlowFrom} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlowFrom() {
+        return getStyleAttribute(Definition.MS_FLOW_FROM.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlowFrom} style attribute.
+     * @param msFlowFrom the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlowFrom(final String msFlowFrom) {
+        setStyleAttribute(Definition.MS_FLOW_FROM.getAttributeName(), msFlowFrom);
+    }
+
+    /**
+     * Returns the {@code msFlowInto} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFlowInto() {
+        return getStyleAttribute(Definition.MS_FLOW_INTO.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFlowInto} style attribute.
+     * @param msFlowInto the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFlowInto(final String msFlowInto) {
+        setStyleAttribute(Definition.MS_FLOW_INTO.getAttributeName(), msFlowInto);
+    }
+
+    /**
+     * Returns the {@code msFontFeatureSettings} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsFontFeatureSettings() {
+        return getStyleAttribute(Definition.MS_FONT_FEATURE_SETTINGS.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msFontFeatureSettings} style attribute.
+     * @param msFontFeatureSettings the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsFontFeatureSettings(final String msFontFeatureSettings) {
+        setStyleAttribute(Definition.MS_FONT_FEATURE_SETTINGS.getAttributeName(), msFontFeatureSettings);
+    }
+
+    /**
+     * Returns the {@code msGridColumn} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsGridColumn() {
+        return getStyleAttribute(Definition.MS_GRID_COLUMN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msGridColumn} style attribute.
+     * @param msGridColumn the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsGridColumn(final String msGridColumn) {
+        setStyleAttribute(Definition.MS_GRID_COLUMN.getAttributeName(), msGridColumn);
+    }
+
+    /**
+     * Returns the {@code msGridColumnAlign} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsGridColumnAlign() {
+        return getStyleAttribute(Definition.MS_GRID_COLUMN_ALIGN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msGridColumnAlign} style attribute.
+     * @param msGridColumnAlign the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsGridColumnAlign(final String msGridColumnAlign) {
+        setStyleAttribute(Definition.MS_GRID_COLUMN_ALIGN.getAttributeName(), msGridColumnAlign);
+    }
+
+    /**
+     * Returns the {@code msGridColumnSpan} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsGridColumnSpan() {
+        return getStyleAttribute(Definition.MS_GRID_COLUMN_SPAN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msGridColumnSpan} style attribute.
+     * @param msGridColumnSpan the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsGridColumnSpan(final String msGridColumnSpan) {
+        setStyleAttribute(Definition.MS_GRID_COLUMN_SPAN.getAttributeName(), msGridColumnSpan);
+    }
+
+    /**
+     * Returns the {@code msGridColumns} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsGridColumns() {
+        return getStyleAttribute(Definition.MS_GRID_COLUMNS.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msGridColumns} style attribute.
+     * @param msGridColumns the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsGridColumns(final String msGridColumns) {
+        setStyleAttribute(Definition.MS_GRID_COLUMNS.getAttributeName(), msGridColumns);
+    }
+
+    /**
+     * Returns the {@code msGridRow} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsGridRow() {
+        return getStyleAttribute(Definition.MS_GRID_ROW.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msGridRow} style attribute.
+     * @param msGridRow the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsGridRow(final String msGridRow) {
+        setStyleAttribute(Definition.MS_GRID_ROW.getAttributeName(), msGridRow);
+    }
+
+    /**
+     * Returns the {@code msGridRowAlign} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsGridRowAlign() {
+        return getStyleAttribute(Definition.MS_GRID_ROW_ALIGN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msGridRowAlign} style attribute.
+     * @param msGridRowAlign the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsGridRowAlign(final String msGridRowAlign) {
+        setStyleAttribute(Definition.MS_GRID_ROW_ALIGN.getAttributeName(), msGridRowAlign);
+    }
+
+    /**
+     * Returns the {@code msGridRowSpan} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsGridRowSpan() {
+        return getStyleAttribute(Definition.MS_GRID_ROW_SPAN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msGridRowSpan} style attribute.
+     * @param msGridRowSpan the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsGridRowSpan(final String msGridRowSpan) {
+        setStyleAttribute(Definition.MS_GRID_ROW_SPAN.getAttributeName(), msGridRowSpan);
+    }
+
+    /**
+     * Returns the {@code msGridRows} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsGridRows() {
+        return getStyleAttribute(Definition.MS_GRID_ROWS.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msGridRows} style attribute.
+     * @param msGridRows the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsGridRows(final String msGridRows) {
+        setStyleAttribute(Definition.MS_GRID_ROWS.getAttributeName(), msGridRows);
+    }
+
+    /**
+     * Returns the {@code msHighContrastAdjust} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsHighContrastAdjust() {
+        return getStyleAttribute(Definition.MS_HIGH_CONTRAST_ADJUST.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msHighContrastAdjust} style attribute.
+     * @param msHighContrastAdjust the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsHighContrastAdjust(final String msHighContrastAdjust) {
+        setStyleAttribute(Definition.MS_HIGH_CONTRAST_ADJUST.getAttributeName(), msHighContrastAdjust);
+    }
+
+    /**
+     * Returns the {@code msHyphenateLimitChars} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsHyphenateLimitChars() {
+        return getStyleAttribute(Definition.MS_HYPHENATE_LIMIT_CHARS.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msHyphenateLimitChars} style attribute.
+     * @param msHyphenateLimitChars the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsHyphenateLimitChars(final String msHyphenateLimitChars) {
+        setStyleAttribute(Definition.MS_HYPHENATE_LIMIT_CHARS.getAttributeName(), msHyphenateLimitChars);
+    }
+
+    /**
+     * Returns the {@code msHyphenateLimitLines} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsHyphenateLimitLines() {
+        return getStyleAttribute(Definition.MS_HYPHENATE_LIMIT_LINES.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msHyphenateLimitLines} style attribute.
+     * @param msHyphenateLimitLines the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsHyphenateLimitLines(final String msHyphenateLimitLines) {
+        setStyleAttribute(Definition.MS_HYPHENATE_LIMIT_LINES.getAttributeName(), msHyphenateLimitLines);
+    }
+
+    /**
+     * Returns the {@code msHyphenateLimitZone} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsHyphenateLimitZone() {
+        return getStyleAttribute(Definition.MS_HYPHENATE_LIMIT_ZONE.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msHyphenateLimitZone} style attribute.
+     * @param msHyphenateLimitZone the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsHyphenateLimitZone(final String msHyphenateLimitZone) {
+        setStyleAttribute(Definition.MS_HYPHENATE_LIMIT_ZONE.getAttributeName(), msHyphenateLimitZone);
+    }
+
+    /**
+     * Returns the {@code msHyphens} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsHyphens() {
+        return getStyleAttribute(Definition.MS_HYPHENS.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msHyphens} style attribute.
+     * @param msHyphens the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsHyphens(final String msHyphens) {
+        setStyleAttribute(Definition.MS_HYPHENS.getAttributeName(), msHyphens);
+    }
+
+    /**
+     * Returns the {@code msImeAlign} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsImeAlign() {
+        return getStyleAttribute(Definition.MS_IME_ALIGN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msImeAlign} style attribute.
+     * @param msImeAlign the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsImeAlign(final String msImeAlign) {
+        setStyleAttribute(Definition.MS_IME_ALIGN.getAttributeName(), msImeAlign);
+    }
+
+    /**
+     * Returns the {@code msOverflowStyle} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsOverflowStyle() {
+        return getStyleAttribute(Definition.MS_OVERFLOW_STYLE.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msOverflowStyle} style attribute.
+     * @param msOverflowStyle the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsOverflowStyle(final String msOverflowStyle) {
+        setStyleAttribute(Definition.MS_OVERFLOW_STYLE.getAttributeName(), msOverflowStyle);
+    }
+
+    /**
+     * Returns the {@code msPerspective} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsPerspective() {
+        return getStyleAttribute(Definition.MS_PERSPECTIVE.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msPerspective} style attribute.
+     * @param msPerspective the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsPerspective(final String msPerspective) {
+        setStyleAttribute(Definition.MS_PERSPECTIVE.getAttributeName(), msPerspective);
+    }
+
+    /**
+     * Returns the {@code msPerspectiveOrigin} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsPerspectiveOrigin() {
+        return getStyleAttribute(Definition.MS_PERSPECTIVE_ORIGIN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msPerspectiveOrigin} style attribute.
+     * @param msPerspectiveOrigin the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsPerspectiveOrigin(final String msPerspectiveOrigin) {
+        setStyleAttribute(Definition.MS_PERSPECTIVE_ORIGIN.getAttributeName(), msPerspectiveOrigin);
+    }
+
+    /**
+     * Returns the {@code msScrollChaining} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollChaining() {
+        return getStyleAttribute(Definition.MS_SCROLL_CHAINING.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollChaining} style attribute.
+     * @param msScrollChaining the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollChaining(final String msScrollChaining) {
+        setStyleAttribute(Definition.MS_SCROLL_CHAINING.getAttributeName(), msScrollChaining);
+    }
+
+    /**
+     * Returns the {@code msScrollLimit} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollLimit() {
+        return getStyleAttribute(Definition.MS_SCROLL_LIMIT.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollLimit} style attribute.
+     * @param msScrollLimit the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollLimit(final String msScrollLimit) {
+        setStyleAttribute(Definition.MS_SCROLL_LIMIT.getAttributeName(), msScrollLimit);
+    }
+
+    /**
+     * Returns the {@code msScrollLimitXMax} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollLimitXMax() {
+        return getStyleAttribute(Definition.MS_SCROLL_LIMIT_X_MAX.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollLimitXMax} style attribute.
+     * @param msScrollLimitXMax the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollLimitXMax(final String msScrollLimitXMax) {
+        setStyleAttribute(Definition.MS_SCROLL_LIMIT_X_MAX.getAttributeName(), msScrollLimitXMax);
+    }
+
+    /**
+     * Returns the {@code msScrollLimitXMin} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollLimitXMin() {
+        return getStyleAttribute(Definition.MS_SCROLL_LIMIT_X_MIN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollLimitXMin} style attribute.
+     * @param msScrollLimitXMin the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollLimitXMin(final String msScrollLimitXMin) {
+        setStyleAttribute(Definition.MS_SCROLL_LIMIT_X_MIN.getAttributeName(), msScrollLimitXMin);
+    }
+
+    /**
+     * Returns the {@code msScrollLimitYMax} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollLimitYMax() {
+        return getStyleAttribute(Definition.MS_SCROLL_LIMIT_Y_MAX.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollLimitYMax} style attribute.
+     * @param msScrollLimitYMax the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollLimitYMax(final String msScrollLimitYMax) {
+        setStyleAttribute(Definition.MS_SCROLL_LIMIT_Y_MAX.getAttributeName(), msScrollLimitYMax);
+    }
+
+    /**
+     * Returns the {@code msScrollLimitYMin} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollLimitYMin() {
+        return getStyleAttribute(Definition.MS_SCROLL_LIMIT_Y_MIN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollLimitYMin} style attribute.
+     * @param msScrollLimitYMin the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollLimitYMin(final String msScrollLimitYMin) {
+        setStyleAttribute(Definition.MS_SCROLL_LIMIT_Y_MIN.getAttributeName(), msScrollLimitYMin);
+    }
+
+    /**
+     * Returns the {@code msScrollRails} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollRails() {
+        return getStyleAttribute(Definition.MS_SCROLL_RAILS.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollRails} style attribute.
+     * @param msScrollRails the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollRails(final String msScrollRails) {
+        setStyleAttribute(Definition.MS_SCROLL_RAILS.getAttributeName(), msScrollRails);
+    }
+
+    /**
+     * Returns the {@code msScrollSnapPointsX} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollSnapPointsX() {
+        return getStyleAttribute(Definition.MS_SCROLL_SNAP_POINTS_X.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollSnapPointsX} style attribute.
+     * @param msScrollSnapPointsX the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollSnapPointsX(final String msScrollSnapPointsX) {
+        setStyleAttribute(Definition.MS_SCROLL_SNAP_POINTS_X.getAttributeName(), msScrollSnapPointsX);
+    }
+
+    /**
+     * Returns the {@code msScrollSnapPointsY} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollSnapPointsY() {
+        return getStyleAttribute(Definition.MS_SCROLL_SNAP_POINTS_Y.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollSnapPointsY} style attribute.
+     * @param msScrollSnapPointsY the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollSnapPointsY(final String msScrollSnapPointsY) {
+        setStyleAttribute(Definition.MS_SCROLL_SNAP_POINTS_Y.getAttributeName(), msScrollSnapPointsY);
+    }
+
+    /**
+     * Returns the {@code msScrollSnapType} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollSnapType() {
+        return getStyleAttribute(Definition.MS_SCROLL_SNAP_TYPE.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollSnapType} style attribute.
+     * @param msScrollSnapType the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollSnapType(final String msScrollSnapType) {
+        setStyleAttribute(Definition.MS_SCROLL_SNAP_TYPE.getAttributeName(), msScrollSnapType);
+    }
+
+    /**
+     * Returns the {@code msScrollSnapX} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollSnapX() {
+        return getStyleAttribute(Definition.MS_SCROLL_SNAP_X.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollSnapX} style attribute.
+     * @param msScrollSnapX the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollSnapX(final String msScrollSnapX) {
+        setStyleAttribute(Definition.MS_SCROLL_SNAP_X.getAttributeName(), msScrollSnapX);
+    }
+
+    /**
+     * Returns the {@code msScrollSnapY} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollSnapY() {
+        return getStyleAttribute(Definition.MS_SCROLL_SNAP_Y.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollSnapY} style attribute.
+     * @param msScrollSnapY the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollSnapY(final String msScrollSnapY) {
+        setStyleAttribute(Definition.MS_SCROLL_SNAP_Y.getAttributeName(), msScrollSnapY);
+    }
+
+    /**
+     * Returns the {@code msScrollTranslation} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsScrollTranslation() {
+        return getStyleAttribute(Definition.MS_SCROLL_TRANSLATION.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msScrollTranslation} style attribute.
+     * @param msScrollTranslation the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsScrollTranslation(final String msScrollTranslation) {
+        setStyleAttribute(Definition.MS_SCROLL_TRANSLATION.getAttributeName(), msScrollTranslation);
+    }
+
+    /**
+     * Returns the {@code msTextCombineHorizontal} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTextCombineHorizontal() {
+        return getStyleAttribute(Definition.MS_TEXT_COMBINE_HORIZONTAL.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTextCombineHorizontal} style attribute.
+     * @param msTextCombineHorizontal the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTextCombineHorizontal(final String msTextCombineHorizontal) {
+        setStyleAttribute(Definition.MS_TEXT_COMBINE_HORIZONTAL.getAttributeName(), msTextCombineHorizontal);
+    }
+
+    /**
+     * Returns the {@code msTouchAction} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTouchAction() {
+        return getStyleAttribute(Definition.MS_TOUCH_ACTION.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTouchAction} style attribute.
+     * @param msTouchAction the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTouchAction(final String msTouchAction) {
+        setStyleAttribute(Definition.MS_TOUCH_ACTION.getAttributeName(), msTouchAction);
+    }
+
+    /**
+     * Returns the {@code msTouchSelect} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTouchSelect() {
+        return getStyleAttribute(Definition.MS_TOUCH_SELECT.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTouchSelect} style attribute.
+     * @param msTouchSelect the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTouchSelect(final String msTouchSelect) {
+        setStyleAttribute(Definition.MS_TOUCH_SELECT.getAttributeName(), msTouchSelect);
+    }
+
+    /**
+     * Returns the {@code msTransform} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTransform() {
+        return getStyleAttribute(Definition.MS_TRANSFORM.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTransform} style attribute.
+     * @param msTransform the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTransform(final String msTransform) {
+        setStyleAttribute(Definition.MS_TRANSFORM.getAttributeName(), msTransform);
+    }
+
+    /**
+     * Returns the {@code msTransformOrigin} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTransformOrigin() {
+        return getStyleAttribute(Definition.MS_TRANSFORM_ORIGIN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTransformOrigin} style attribute.
+     * @param msTransformOrigin the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTransformOrigin(final String msTransformOrigin) {
+        setStyleAttribute(Definition.MS_TRANSFORM_ORIGIN.getAttributeName(), msTransformOrigin);
+    }
+
+    /**
+     * Returns the {@code msTransformStyle} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTransformStyle() {
+        return getStyleAttribute(Definition.MS_TRANSFORM_STYLE.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTransformStyle} style attribute.
+     * @param msTransformStyle the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTransformStyle(final String msTransformStyle) {
+        setStyleAttribute(Definition.MS_TRANSFORM_STYLE.getAttributeName(), msTransformStyle);
+    }
+
+    /**
+     * Returns the {@code msTransition} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTransition() {
+        return getStyleAttribute(Definition.MS_TRANSITION.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTransition} style attribute.
+     * @param msTransition the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTransition(final String msTransition) {
+        setStyleAttribute(Definition.MS_TRANSITION.getAttributeName(), msTransition);
+    }
+
+    /**
+     * Returns the {@code msTransitionDelay} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTransitionDelay() {
+        return getStyleAttribute(Definition.MS_TRANSITION_DELAY.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTransitionDelay} style attribute.
+     * @param msTransitionDelay the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTransitionDelay(final String msTransitionDelay) {
+        setStyleAttribute(Definition.MS_TRANSITION_DELAY.getAttributeName(), msTransitionDelay);
+    }
+
+    /**
+     * Returns the {@code msTransitionDuration} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTransitionDuration() {
+        return getStyleAttribute(Definition.MS_TRANSITION_DURATION.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTransitionDuration} style attribute.
+     * @param msTransitionDuration the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTransitionDuration(final String msTransitionDuration) {
+        setStyleAttribute(Definition.MS_TRANSITION_DURATION.getAttributeName(), msTransitionDuration);
+    }
+
+    /**
+     * Returns the {@code msTransitionProperty} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTransitionProperty() {
+        return getStyleAttribute(Definition.MS_TRANSITION_PROPERTY.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTransitionProperty} style attribute.
+     * @param msTransitionProperty the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTransitionProperty(final String msTransitionProperty) {
+        setStyleAttribute(Definition.MS_TRANSITION_PROPERTY.getAttributeName(), msTransitionProperty);
+    }
+
+    /**
+     * Returns the {@code msTransitionTimingFunction} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsTransitionTimingFunction() {
+        return getStyleAttribute(Definition.MS_TRANSITION_TIMING_FUNCTION.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msTransitionTimingFunction} style attribute.
+     * @param msTransitionTimingFunction the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsTransitionTimingFunction(final String msTransitionTimingFunction) {
+        setStyleAttribute(Definition.MS_TRANSITION_TIMING_FUNCTION.getAttributeName(), msTransitionTimingFunction);
+    }
+
+    /**
+     * Returns the {@code msUserSelect} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsUserSelect() {
+        return getStyleAttribute(Definition.MS_USER_SELECT.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msUserSelect} style attribute.
+     * @param msUserSelect the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsUserSelect(final String msUserSelect) {
+        setStyleAttribute(Definition.MS_USER_SELECT.getAttributeName(), msUserSelect);
+    }
+
+    /**
+     * Returns the {@code msWrapFlow} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsWrapFlow() {
+        return getStyleAttribute(Definition.MS_WRAP_FLOW.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msWrapFlow} style attribute.
+     * @param msWrapFlow the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsWrapFlow(final String msWrapFlow) {
+        setStyleAttribute(Definition.MS_WRAP_FLOW.getAttributeName(), msWrapFlow);
+    }
+
+    /**
+     * Returns the {@code msWrapMargin} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsWrapMargin() {
+        return getStyleAttribute(Definition.MS_WRAP_MARGIN.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msWrapMargin} style attribute.
+     * @param msWrapMargin the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsWrapMargin(final String msWrapMargin) {
+        setStyleAttribute(Definition.MS_WRAP_MARGIN.getAttributeName(), msWrapMargin);
+    }
+
+    /**
+     * Returns the {@code msWrapThrough} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getMsWrapThrough() {
+        return getStyleAttribute(Definition.MS_WRAP_THROUGH.getAttributeName());
+    }
+
+    /**
+     * Sets the {@code msWrapThrough} style attribute.
+     * @param msWrapThrough the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setMsWrapThrough(final String msWrapThrough) {
+        setStyleAttribute(Definition.MS_WRAP_THROUGH.getAttributeName(), msWrapThrough);
     }
 
     /**

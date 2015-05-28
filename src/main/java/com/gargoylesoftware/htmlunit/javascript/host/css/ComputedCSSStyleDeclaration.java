@@ -19,9 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_E
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_19;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_FAMILY_DEFAULT_TIMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_TEXT_SHADOW_DEFAULT_NONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
@@ -299,8 +297,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition) {
+        return defaultIfEmpty(str, definition, false);
+    }
+
+    private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition,
+            final boolean isPixel) {
         if (str == null || str.isEmpty()) {
             return definition.getDefaultComputedValue(getBrowserVersion());
+        }
+        if (isPixel) {
+            return pixelString(str);
         }
         return str;
     }
@@ -343,7 +349,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getBackgroundColor() {
         String value = super.getBackgroundColor();
         if (StringUtils.isEmpty(value)) {
-            value = "transparent";
+            value = Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
         }
         else if (getBrowserVersion().hasFeature(JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB)) {
             value = toRGBColor(value);
@@ -382,8 +388,48 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getBackgroundPositionX() {
+        return defaultIfEmpty(super.getBackgroundPositionX(), Definition.BACKGROUND_POSITION_X);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBackgroundPositionY() {
+        return defaultIfEmpty(super.getBackgroundPositionY(), Definition.BACKGROUND_POSITION_Y);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getBackgroundRepeat() {
         return defaultIfEmpty(super.getBackgroundRepeat(), "repeat");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorder() {
+        return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderBottom() {
+        return defaultIfEmpty(super.getBorderBottom(), Definition.BORDER_BOTTOM);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderColor() {
+        return defaultIfEmpty(super.getBorderColor(), Definition.BORDER_COLOR);
     }
 
     /**
@@ -422,6 +468,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getBorderLeft() {
+        return defaultIfEmpty(super.getBorderLeft(), Definition.BORDER_LEFT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getBorderLeftColor() {
         return defaultIfEmpty(super.getBorderLeftColor(), "rgb(0, 0, 0)");
     }
@@ -440,6 +494,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getBorderLeftWidth() {
         return pixelString(defaultIfEmpty(super.getBorderLeftWidth(), "0px"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderRight() {
+        return defaultIfEmpty(super.getBorderRight(), Definition.BORDER_RIGHT);
     }
 
     /**
@@ -478,6 +540,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getBorderStyle() {
+        return defaultIfEmpty(super.getBorderStyle(), Definition.BORDER_STYLE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderTop() {
+        return defaultIfEmpty(super.getBorderTop(), Definition.BORDER_TOP);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getBorderTopColor() {
         return defaultIfEmpty(super.getBorderTopColor(), "rgb(0, 0, 0)");
     }
@@ -502,8 +580,24 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getBorderWidth() {
+        return defaultIfEmpty(super.getBorderWidth(), Definition.BORDER_WIDTH);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getBottom() {
         return defaultIfEmpty(super.getBottom(), "auto");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBoxSizing() {
+        return defaultIfEmpty(super.getBoxSizing(), Definition.BOX_SIZING);
     }
 
     /**
@@ -535,7 +629,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getContent() {
-        return defaultIfEmpty(super.getContent(), "none");
+        return defaultIfEmpty(super.getContent(), Definition.CONTENT);
     }
 
     /**
@@ -613,7 +707,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getEmptyCells() {
-        return defaultIfEmpty(super.getEmptyCells(), "-moz-show-background");
+        return defaultIfEmpty(super.getEmptyCells(), Definition.EMPTY_CELLS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getFont() {
+        return defaultIfEmpty(super.getFont(), Definition.FONT);
     }
 
     /**
@@ -621,11 +723,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFontFamily() {
-        String defaultFontFamily = "serif";
-        if (getBrowserVersion().hasFeature(CSS_FONT_FAMILY_DEFAULT_TIMES)) {
-            defaultFontFamily = "Times New Roman";
-        }
-        return defaultIfEmpty(super.getFontFamily(), defaultFontFamily);
+        return defaultIfEmpty(super.getFontFamily(), Definition.FONT_FAMILY);
     }
 
     /**
@@ -688,7 +786,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFontWeight() {
-        return defaultIfEmpty(super.getFontWeight(), "400");
+        return defaultIfEmpty(super.getFontWeight(), Definition.FONT_WEIGHT);
     }
 
     /**
@@ -720,6 +818,54 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getLayoutFlow() {
+        return defaultIfEmpty(super.getLayoutFlow(), Definition.LAYOUT_FLOW);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLayoutGrid() {
+        return defaultIfEmpty(super.getLayoutGrid(), Definition.LAYOUT_GRID);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLayoutGridChar() {
+        return defaultIfEmpty(super.getLayoutGridChar(), Definition.LAYOUT_GRID_CHAR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLayoutGridLine() {
+        return defaultIfEmpty(super.getLayoutGridLine(), Definition.LAYOUT_GRID_LINE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLayoutGridMode() {
+        return defaultIfEmpty(super.getLayoutGridMode(), Definition.LAYOUT_GRID_MODE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLayoutGridType() {
+        return defaultIfEmpty(super.getLayoutGridType(), Definition.LAYOUT_GRID_TYPE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getLeft() {
         return defaultIfEmpty(super.getLeft(), "auto");
     }
@@ -730,6 +876,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getLetterSpacing() {
         return defaultIfEmpty(super.getLetterSpacing(), "normal");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLineBreak() {
+        return defaultIfEmpty(super.getLineBreak(), Definition.LINE_BREAK);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getListStyle() {
+        return defaultIfEmpty(super.getListStyle(), Definition.LIST_STYLE);
     }
 
     /**
@@ -754,6 +916,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getListStyleType() {
         return defaultIfEmpty(super.getListStyleType(), "disc");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMargin() {
+        return defaultIfEmpty(super.getMargin(), Definition.MARGIN, true);
     }
 
     /**
@@ -828,15 +998,564 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return defaultIfEmpty(super.getMinWidth(), "0px");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected String getStyleAttributeValue(final Definition style) {
-        // don't use defaultIfEmpty for performance
-        // (no need to calculate the default if not empty)
-        final String value = super.getStyleAttributeValue(style);
-        if (StringUtils.isEmpty(value)) {
-            return style.getDefaultComputedValue(getBrowserVersion());
-        }
-        return value;
+    public String getMsBlockProgression() {
+        return defaultIfEmpty(super.getMsBlockProgression(), Definition.MS_BLOCK_PROGRESSION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsContentZoomChaining() {
+        return defaultIfEmpty(super.getMsContentZoomChaining(), Definition.MS_CONTENT_ZOOM_CHAINING);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsContentZoomLimit() {
+        return defaultIfEmpty(super.getMsContentZoomLimit(), Definition.MS_CONTENT_ZOOM_LIMIT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsContentZoomLimitMax() {
+        return defaultIfEmpty(super.getMsContentZoomLimitMax(), Definition.MS_CONTENT_ZOOM_LIMIT_MAX);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsContentZoomLimitMin() {
+        return defaultIfEmpty(super.getMsContentZoomLimitMin(), Definition.MS_CONTENT_ZOOM_LIMIT_MIN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsContentZoomSnap() {
+        return defaultIfEmpty(super.getMsContentZoomSnap(), Definition.MS_CONTENT_ZOOM_SNAP);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsContentZoomSnapPoints() {
+        return defaultIfEmpty(super.getMsContentZoomSnapPoints(), Definition.MS_CONTENT_ZOOM_SNAP_POINTS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsContentZoomSnapType() {
+        return defaultIfEmpty(super.getMsContentZoomSnapType(), Definition.MS_CONTENT_ZOOM_SNAP_TYPE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsContentZooming() {
+        return defaultIfEmpty(super.getMsContentZooming(), Definition.MS_CONTENT_ZOOMING);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlex() {
+        return defaultIfEmpty(super.getMsFlex(), Definition.MS_FLEX);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexAlign() {
+        return defaultIfEmpty(super.getMsFlexAlign(), Definition.MS_FLEX_ALIGN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexDirection() {
+        return defaultIfEmpty(super.getMsFlexDirection(), Definition.MS_FLEX_DIRECTION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexFlow() {
+        return defaultIfEmpty(super.getMsFlexFlow(), Definition.MS_FLEX_FLOW);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexItemAlign() {
+        return defaultIfEmpty(super.getMsFlexItemAlign(), Definition.MS_FLEX_ITEM_ALIGN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexLinePack() {
+        return defaultIfEmpty(super.getMsFlexLinePack(), Definition.MS_FLEX_LINE_PACK);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexNegative() {
+        return defaultIfEmpty(super.getMsFlexNegative(), Definition.MS_FLEX_NEGATIVE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexOrder() {
+        return defaultIfEmpty(super.getMsFlexOrder(), Definition.MS_FLEX_ORDER);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexPack() {
+        return defaultIfEmpty(super.getMsFlexPack(), Definition.MS_FLEX_PACK);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexPositive() {
+        return defaultIfEmpty(super.getMsFlexPositive(), Definition.MS_FLEX_POSITIVE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexPreferredSize() {
+        return defaultIfEmpty(super.getMsFlexPreferredSize(), Definition.MS_FLEX_PREFERRED_SIZE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlexWrap() {
+        return defaultIfEmpty(super.getMsFlexWrap(), Definition.MS_FLEX_WRAP);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlowFrom() {
+        return defaultIfEmpty(super.getMsFlowFrom(), Definition.MS_FLOW_FROM);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFlowInto() {
+        return defaultIfEmpty(super.getMsFlowInto(), Definition.MS_FLOW_INTO);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsFontFeatureSettings() {
+        return defaultIfEmpty(super.getMsFontFeatureSettings(), Definition.MS_FONT_FEATURE_SETTINGS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsGridColumn() {
+        return defaultIfEmpty(super.getMsGridColumn(), Definition.MS_GRID_COLUMN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsGridColumnAlign() {
+        return defaultIfEmpty(super.getMsGridColumnAlign(), Definition.MS_GRID_COLUMN_ALIGN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsGridColumnSpan() {
+        return defaultIfEmpty(super.getMsGridColumnSpan(), Definition.MS_GRID_COLUMN_SPAN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsGridColumns() {
+        return defaultIfEmpty(super.getMsGridColumns(), Definition.MS_GRID_COLUMNS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsGridRow() {
+        return defaultIfEmpty(super.getMsGridRow(), Definition.MS_GRID_ROW);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsGridRowAlign() {
+        return defaultIfEmpty(super.getMsGridRowAlign(), Definition.MS_GRID_ROW_ALIGN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsGridRowSpan() {
+        return defaultIfEmpty(super.getMsGridRowSpan(), Definition.MS_GRID_ROW_SPAN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsGridRows() {
+        return defaultIfEmpty(super.getMsGridRows(), Definition.MS_GRID_ROWS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsHighContrastAdjust() {
+        return defaultIfEmpty(super.getMsHighContrastAdjust(), Definition.MS_HIGH_CONTRAST_ADJUST);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsHyphenateLimitChars() {
+        return defaultIfEmpty(super.getMsHyphenateLimitChars(), Definition.MS_HYPHENATE_LIMIT_CHARS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsHyphenateLimitLines() {
+        return defaultIfEmpty(super.getMsHyphenateLimitLines(), Definition.MS_HYPHENATE_LIMIT_LINES);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsHyphenateLimitZone() {
+        return defaultIfEmpty(super.getMsHyphenateLimitZone(), Definition.MS_HYPHENATE_LIMIT_ZONE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsHyphens() {
+        return defaultIfEmpty(super.getMsHyphens(), Definition.MS_HYPHENS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsImeAlign() {
+        return defaultIfEmpty(super.getMsImeAlign(), Definition.MS_IME_ALIGN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsInterpolationMode() {
+        return defaultIfEmpty(super.getMsInterpolationMode(), Definition.MS_INTERPOLATION_MODE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsOverflowStyle() {
+        return defaultIfEmpty(super.getMsOverflowStyle(), Definition.MS_OVERFLOW_STYLE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsPerspective() {
+        return defaultIfEmpty(super.getMsPerspective(), Definition.MS_PERSPECTIVE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsPerspectiveOrigin() {
+        return defaultIfEmpty(super.getMsPerspectiveOrigin(), Definition.MS_PERSPECTIVE_ORIGIN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollChaining() {
+        return defaultIfEmpty(super.getMsScrollChaining(), Definition.MS_SCROLL_CHAINING);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollLimit() {
+        return defaultIfEmpty(super.getMsScrollLimit(), Definition.MS_SCROLL_LIMIT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollLimitXMax() {
+        return defaultIfEmpty(super.getMsScrollLimitXMax(), Definition.MS_SCROLL_LIMIT_X_MAX);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollLimitXMin() {
+        return defaultIfEmpty(super.getMsScrollLimitXMin(), Definition.MS_SCROLL_LIMIT_X_MIN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollLimitYMax() {
+        return defaultIfEmpty(super.getMsScrollLimitYMax(), Definition.MS_SCROLL_LIMIT_Y_MAX);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollLimitYMin() {
+        return defaultIfEmpty(super.getMsScrollLimitYMin(), Definition.MS_SCROLL_LIMIT_Y_MIN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollRails() {
+        return defaultIfEmpty(super.getMsScrollRails(), Definition.MS_SCROLL_RAILS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollSnapPointsX() {
+        return defaultIfEmpty(super.getMsScrollSnapPointsX(), Definition.MS_SCROLL_SNAP_POINTS_X);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollSnapPointsY() {
+        return defaultIfEmpty(super.getMsScrollSnapPointsY(), Definition.MS_SCROLL_SNAP_POINTS_Y);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollSnapType() {
+        return defaultIfEmpty(super.getMsScrollSnapType(), Definition.MS_SCROLL_SNAP_TYPE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollSnapX() {
+        return defaultIfEmpty(super.getMsScrollSnapX(), Definition.MS_SCROLL_SNAP_X);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollSnapY() {
+        return defaultIfEmpty(super.getMsScrollSnapY(), Definition.MS_SCROLL_SNAP_Y);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsScrollTranslation() {
+        return defaultIfEmpty(super.getMsScrollTranslation(), Definition.MS_SCROLL_TRANSLATION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTextCombineHorizontal() {
+        return defaultIfEmpty(super.getMsTextCombineHorizontal(), Definition.MS_TEXT_COMBINE_HORIZONTAL);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTouchAction() {
+        return defaultIfEmpty(super.getMsTouchAction(), Definition.MS_TOUCH_ACTION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTouchSelect() {
+        return defaultIfEmpty(super.getMsTouchSelect(), Definition.MS_TOUCH_SELECT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTransform() {
+        return defaultIfEmpty(super.getMsTransform(), Definition.MS_TRANSFORM);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTransformOrigin() {
+        return defaultIfEmpty(super.getMsTransformOrigin(), Definition.MS_TRANSFORM_ORIGIN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTransformStyle() {
+        return defaultIfEmpty(super.getMsTransformStyle(), Definition.MS_TRANSFORM_STYLE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTransition() {
+        return defaultIfEmpty(super.getMsTransition(), Definition.MS_TRANSITION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTransitionDelay() {
+        return defaultIfEmpty(super.getMsTransitionDelay(), Definition.MS_TRANSITION_DELAY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTransitionDuration() {
+        return defaultIfEmpty(super.getMsTransitionDuration(), Definition.MS_TRANSITION_DURATION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTransitionProperty() {
+        return defaultIfEmpty(super.getMsTransitionProperty(), Definition.MS_TRANSITION_PROPERTY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsTransitionTimingFunction() {
+        return defaultIfEmpty(super.getMsTransitionTimingFunction(), Definition.MS_TRANSITION_TIMING_FUNCTION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsUserSelect() {
+        return defaultIfEmpty(super.getMsUserSelect(), Definition.MS_USER_SELECT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsWrapFlow() {
+        return defaultIfEmpty(super.getMsWrapFlow(), Definition.MS_WRAP_FLOW);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsWrapMargin() {
+        return defaultIfEmpty(super.getMsWrapMargin(), Definition.MS_WRAP_MARGIN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMsWrapThrough() {
+        return defaultIfEmpty(super.getMsWrapThrough(), Definition.MS_WRAP_THROUGH);
     }
 
     /**
@@ -851,8 +1570,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getOrphans() {
+        return defaultIfEmpty(super.getOrphans(), Definition.ORPHANS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getOutlineColor() {
-        return defaultIfEmpty(super.getOutlineColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.getOutlineColor(), Definition.OUTLINE_COLOR);
     }
 
     /**
@@ -923,6 +1650,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getPageBreakInside() {
+        return defaultIfEmpty(super.getPageBreakInside(), Definition.PAGE_BREAK_INSIDE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPadding() {
+        return defaultIfEmpty(super.getPadding(), Definition.PADDING, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getPaddingBottom() {
         return pixelString(defaultIfEmpty(super.getPaddingBottom(), "0px"));
     }
@@ -956,7 +1699,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPointerEvents() {
-        return defaultIfEmpty(super.getPointerEvents(), "auto");
+        return defaultIfEmpty(super.getPointerEvents(), Definition.POINTER_EVENTS);
     }
 
     /**
@@ -979,6 +1722,78 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getScrollbar3dLightColor() {
+        return defaultIfEmpty(super.getScrollbar3dLightColor(), Definition.SCROLLBAR_3DLIGHT_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getScrollbarArrowColor() {
+        return defaultIfEmpty(super.getScrollbarArrowColor(), Definition.SCROLLBAR_ARROW_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getScrollbarBaseColor() {
+        return defaultIfEmpty(super.getScrollbarBaseColor(), Definition.SCROLLBAR_BASE_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getScrollbarDarkShadowColor() {
+        return defaultIfEmpty(super.getScrollbarDarkShadowColor(), Definition.SCROLLBAR_DARKSHADOW_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getScrollbarFaceColor() {
+        return defaultIfEmpty(super.getScrollbarFaceColor(), Definition.SCROLLBAR_FACE_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getScrollbarHighlightColor() {
+        return defaultIfEmpty(super.getScrollbarHighlightColor(), Definition.SCROLLBAR_HIGHLIGHT_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getScrollbarShadowColor() {
+        return defaultIfEmpty(super.getScrollbarShadowColor(), Definition.SCROLLBAR_SHADOW_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getScrollbarTrackColor() {
+        return defaultIfEmpty(super.getScrollbarTrackColor(), Definition.SCROLLBAR_TRACK_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getStyleFloat() {
+        return defaultIfEmpty(super.getStyleFloat(), Definition.STYLE_FLOAT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getTableLayout() {
         return defaultIfEmpty(super.getTableLayout(), "auto");
     }
@@ -988,7 +1803,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getTextAlign() {
-        return defaultIfEmpty(super.getTextAlign(), "start");
+        return defaultIfEmpty(super.getTextAlign(), Definition.TEXT_ALIGN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextAlignLast() {
+        return defaultIfEmpty(super.getTextAlignLast(), Definition.TEXT_ALIGN_LAST);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextAutospace() {
+        return defaultIfEmpty(super.getTextAutospace(), Definition.TEXT_AUTOSPACE);
     }
 
     /**
@@ -1011,12 +1842,48 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getTextJustify() {
+        return defaultIfEmpty(super.getTextJustify(), Definition.TEXT_JUSTIFY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextJustifyTrim() {
+        return defaultIfEmpty(super.getTextJustifyTrim(), Definition.TEXT_JUSTIFY_TRIM);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextKashida() {
+        return defaultIfEmpty(super.getTextKashida(), Definition.TEXT_KASHIDA);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextKashidaSpace() {
+        return defaultIfEmpty(super.getTextKashidaSpace(), Definition.TEXT_KASHIDA_SPACE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextOverflow() {
+        return defaultIfEmpty(super.getTextOverflow(), Definition.TEXT_OVERFLOW);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getTextShadow() {
-        String shadow = "";
-        if (getBrowserVersion().hasFeature(CSS_TEXT_SHADOW_DEFAULT_NONE)) {
-            shadow = "none";
-        }
-        return defaultIfEmpty(super.getTextShadow(), shadow);
+        return defaultIfEmpty(super.getTextShadow(), Definition.TEXT_SHADOW);
     }
 
     /**
@@ -1025,6 +1892,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getTextTransform() {
         return defaultIfEmpty(super.getTextTransform(), "none");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextUnderlinePosition() {
+        return defaultIfEmpty(super.getTextUnderlinePosition(), Definition.TEXT_UNDERLINE_POSITION);
     }
 
     /**
@@ -1057,6 +1932,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getWhiteSpace() {
         return defaultIfEmpty(super.getWhiteSpace(), "normal");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getWidows() {
+        return defaultIfEmpty(super.getWidows(), Definition.WIDOWS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getWritingMode() {
+        return defaultIfEmpty(super.getWritingMode(), Definition.WRITING_MODE);
     }
 
     /**
@@ -1724,6 +2615,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getRubyOverhang() {
+        return defaultIfEmpty(super.getRubyOverhang(), Definition.RUBY_OVERHANG);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getRubyPosition() {
+        return defaultIfEmpty(super.getRubyPosition(), Definition.RUBY_POSITION);
+    }
+
+    /**
      * Gets the left margin of the element.
      * @return the value in pixels
      */
@@ -1856,7 +2763,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWordSpacing() {
-        return defaultIfEmpty(super.getWordSpacing(), "0px");
+        return defaultIfEmpty(super.getWordSpacing(), Definition.WORD_SPACING);
     }
 
     /**
@@ -1864,7 +2771,21 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWordWrap() {
-        return defaultIfEmpty(super.getWordWrap(), "normal");
+        return defaultIfEmpty(super.getWordWrap(), Definition.WORD_WRAP);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String getStyleAttributeValue(final Definition style) {
+        // don't use defaultIfEmpty for performance
+        // (no need to calculate the default if not empty)
+        final String value = super.getStyleAttributeValue(style);
+        if (StringUtils.isEmpty(value)) {
+            return style.getDefaultComputedValue(getBrowserVersion());
+        }
+        return value;
     }
 
     /**
@@ -1877,6 +2798,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return "auto";
         }
         return response;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getZoom() {
+        return defaultIfEmpty(super.getZoom(), Definition.ZOOM);
     }
 
     /**

@@ -100,10 +100,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_FONTFACERULE_CSSTEXT_CRLF,
 
-    /** Default is 'Times New Roman'. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
-    CSS_FONT_FAMILY_DEFAULT_TIMES,
-
     /** Default is 'normal'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     CSS_FONT_STRECH_DEFAULT_NORMAL,
@@ -182,10 +178,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
-
-    /** Default is 'none'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-    CSS_TEXT_SHADOW_DEFAULT_NONE,
 
     /** zIndex is of type Integer. Other values are ignored (''). */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
