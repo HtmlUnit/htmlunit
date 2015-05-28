@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -318,6 +319,37 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "media=\"screen\"" })
+    @NotYetImplemented(IE8)
+    public void changedAttribute() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+
+            + "<style id='myStyle'>my { }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('myStyle');\n"
+            + "  style.media = 'screen';\n"
+
+            + "  var attributes = style.attributes;\n"
+            + "  for (var i = 0; i < attributes.length; i++) {\n"
+            + "    if (attributes[i].name === 'media') {\n"
+            + "      alert(attributes[i].name + '=\"' + attributes[i].value + '\"');\n"
+            + "    }\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
