@@ -78,7 +78,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
                     "onsubmit=null", "method=get", "onreset=null",
                     "name=f", "action=", "target=", "baz=blah", "foo=bar" },
             IE11 = { "name=f", "id=f", "baz=blah", "foo=bar" })
-    public void testAttributes() throws Exception {
+    public void attributes() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
@@ -105,7 +105,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "name", "f", "name", "f", "name", "f", "name", "f", "null" },
             IE8 = { "name", "f", "name", "f", "name", "f", "exception", "null" })
-    public void testGetNamedItem_HTML() throws Exception {
+    public void getNamedItem_HTML() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
@@ -183,7 +183,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "name", "y", "name", "y", "null", "undefined", "null" },
             IE8 = { "name", "y", "exception", "null", "undefined", "null" })
-    public void testGetNamedItem_XML() throws Exception {
+    public void getNamedItem_XML() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'second.xml'") + ";\n"
