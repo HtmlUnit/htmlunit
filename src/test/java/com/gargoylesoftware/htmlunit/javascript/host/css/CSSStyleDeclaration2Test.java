@@ -266,7 +266,6 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void properties() throws Exception {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties", ".txt");
 
@@ -303,7 +302,6 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void properties2() throws Exception {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
 

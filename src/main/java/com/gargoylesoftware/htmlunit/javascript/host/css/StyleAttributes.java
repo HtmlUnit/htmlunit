@@ -585,6 +585,9 @@ final class StyleAttributes {
         /** The style property {@code cssText}. */
         CSS_TEXT("cssText", "css-text", chrome("")),
 
+        /** The style property {@code cssFloat}. */
+        CSS_FLOAT("cssFloat", "css-float", chrome("none"), ff("none"), ie11up("none")),
+
         /** The style property cue. */
         CUE("cue", "cue"),
 
@@ -678,16 +681,16 @@ final class StyleAttributes {
         /** The style property {@code flex-shrink}. */
         FLEX_SHRINK_("flex-shrink", "flex-shrink", ff38up("1")),
 
-        /** The style property flex-wrap. */
+        /** The style property {@code flexWrap}. */
         FLEX_WRAP("flexWrap", "flex-wrap", ff31up("nowrap"), ie11up("nowrap"), chrome("nowrap")),
 
         /** The style property {@code flex-wrap}. */
         FLEX_WRAP_("flex-wrap", "flex-wrap", ff38up("nowrap")),
 
-        /** The style property float. */
-        FLOAT("float", "float", ff("none"), chrome("none"), ie11up("none")),
+        /** The style property {@code float}. */
+        FLOAT("float", "float", ff38up("none"), chrome("none")),
 
-        /** The style property flood-color. */
+        /** The style property {@code floodColor}. */
         FLOOD_COLOR("floodColor", "flood-color", ff("rgb(0, 0, 0)"), ie11up(""), chrome("rgb(0, 0, 0)")),
 
         /** The style property {@code flood-color}. */

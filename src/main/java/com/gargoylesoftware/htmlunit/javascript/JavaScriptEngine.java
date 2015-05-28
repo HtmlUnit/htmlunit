@@ -567,7 +567,13 @@ public class JavaScriptEngine {
             final String propertyName = propertyEntry.getKey();
             final Method readMethod = propertyEntry.getValue().getReadMethod();
             final Method writeMethod = propertyEntry.getValue().getWriteMethod();
-            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
+            int flag = ScriptableObject.EMPTY;
+
+            // https://code.google.com/p/chromium/issues/detail?id=492999
+            if (browserVersion.isChrome() && "cssFloat".equals(propertyName)) {
+                flag = ScriptableObject.DONTENUM;
+            }
+            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, flag);
         }
 
         int attributes;

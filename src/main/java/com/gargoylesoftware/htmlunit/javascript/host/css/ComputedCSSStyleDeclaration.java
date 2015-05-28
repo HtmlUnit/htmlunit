@@ -571,7 +571,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getCssFloat() {
-        return defaultIfEmpty(super.getCssFloat(), Definition.FLOAT);
+        return defaultIfEmpty(super.getCssFloat(), Definition.CSS_FLOAT);
     }
 
     /**
@@ -713,7 +713,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getImeMode() {
-        return defaultIfEmpty(super.getImeMode(), "auto");
+        return defaultIfEmpty(super.getImeMode(), Definition.IME_MODE);
     }
 
     /**

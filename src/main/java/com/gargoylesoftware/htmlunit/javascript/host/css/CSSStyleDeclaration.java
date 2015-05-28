@@ -105,7 +105,7 @@ import com.steadystate.css.parser.SACParserCSS3;
         @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
     })
 public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
-    /** Css important property constant. */
+    /** CSS important property constant. */
     protected static final String PRIORITY_IMPORTANT = "important";
 
     private static final String ACCELERATOR = "accelerator";
@@ -1969,7 +1969,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "imeMode" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public String getImeMode() {
         return getStyleAttribute(IME_MODE);
     }
@@ -2517,7 +2517,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     public Object[] getIds() {
         final List<Object> ids = new ArrayList<>();
         for (final Definition styleAttribute : StyleAttributes.getDefinitions(getBrowserVersion())) {
-            ids.add(styleAttribute.getPropertyName());
+            // https://code.google.com/p/chromium/issues/detail?id=492999
+            if (!"cssFloat".equals(styleAttribute.getPropertyName())) {
+                ids.add(styleAttribute.getPropertyName());
+            }
         }
         final Object[] normalIds = super.getIds();
         for (final Object o : normalIds) {
