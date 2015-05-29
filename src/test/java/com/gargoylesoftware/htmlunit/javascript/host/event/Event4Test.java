@@ -17,8 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Event;
-
 /**
  * Tests for {@link Event}.
  *
