@@ -45,11 +45,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  * @deprecated as of 2.17, please use {@link com.gargoylesoftware.htmlunit.javascript.host.event.Event}
  */
+@Deprecated
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
         @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
     })
-@Deprecated
 public class Event extends com.gargoylesoftware.htmlunit.javascript.host.event.Event {
 
     /**

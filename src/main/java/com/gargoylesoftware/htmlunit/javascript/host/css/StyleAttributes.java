@@ -88,7 +88,6 @@ final class StyleAttributes {
      * TODO: move all (?) style attribute definitions here.
      */
     public static enum Definition {
-
         /** The style property {@code accelerator}. */
         ACCELERATOR("accelerator", "accelerator", ie11up("undefined")),
 

@@ -327,7 +327,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "media=\"screen\"" })
+    @Alerts("media=\"screen\"")
     @NotYetImplemented(IE8)
     public void changedAttribute() throws Exception {
         final String html
