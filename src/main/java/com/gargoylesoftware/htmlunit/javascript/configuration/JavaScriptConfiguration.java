@@ -45,7 +45,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.InputMethodContext;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageChannel;
-import com.gargoylesoftware.htmlunit.javascript.host.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MessagePort;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeType;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeTypeArray;
@@ -115,7 +114,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLUniformLocation
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.CryptoKey;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.SubtleCrypto;
-import com.gargoylesoftware.htmlunit.javascript.host.css.AnimationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
@@ -189,9 +187,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathEvaluator;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
+import com.gargoylesoftware.htmlunit.javascript.host.event.AnimationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ApplicationCacheErrorEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.AudioProcessingEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.AutocompleteErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.BlobEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ClipboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CompositionEvent;
@@ -208,19 +209,31 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.FocusEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.GamepadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.IDBVersionChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.InputEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MIDIConnectionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MIDIMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaEncryptedEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaKeyEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MediaKeyMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaQueryListEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MediaStreamEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseScrollEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MozContactChangeEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MozMmsEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MozSettingsEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MozSmsEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.OfflineAudioCompletionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PageTransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.RTCDataChannelEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.RTCPeerConnectionIceEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.SVGZoomEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.SpeechSynthesisEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.StorageEvent;
@@ -239,7 +252,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.fetch.Headers;
 import com.gargoylesoftware.htmlunit.javascript.host.fetch.Request;
 import com.gargoylesoftware.htmlunit.javascript.host.fetch.Response;
 import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
-import com.gargoylesoftware.htmlunit.javascript.host.file.BlobEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.DataTransferItem;
 import com.gargoylesoftware.htmlunit.javascript.host.file.DataTransferItemList;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
@@ -264,7 +276,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBObjectStore;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBOpenDBRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBTransaction;
-import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBVersionChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AnalyserNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBufferSourceNode;
@@ -273,7 +284,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.AudioDestinationNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioListener;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioParam;
-import com.gargoylesoftware.htmlunit.javascript.host.media.AudioProcessingEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.BiquadFilterNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.ChannelMergerNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.ChannelSplitterNode;
@@ -286,7 +296,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.MediaDevices;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaElementAudioSourceNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaError;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeyError;
-import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeyMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeySession;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeyStatusMap;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeySystemAccess;
@@ -296,9 +305,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.MediaSource;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamAudioDestinationNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamAudioSourceNode;
-import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamTrack;
-import com.gargoylesoftware.htmlunit.javascript.host.media.OfflineAudioCompletionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.OfflineAudioContext;
 import com.gargoylesoftware.htmlunit.javascript.host.media.OscillatorNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.PannerNode;
@@ -318,21 +325,15 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIInputMap;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIOutput;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIOutputMap;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIPort;
-import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCDataChannelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCIceCandidate;
-import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCPeerConnectionIceEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCIceCandidate;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.webkitRTCPeerConnection;
-import com.gargoylesoftware.htmlunit.javascript.host.moz.MozContactChangeEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMmsEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMmsMessage;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMobileMessageManager;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMobileMessageThread;
-import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSettingsEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsMessage;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsSegmentInfo;
@@ -400,9 +401,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DOMPointReadOnly.class, DOMRectReadOnly.class, DOMRequest.class,
         DOMSettableTokenList.class, DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
         DragEvent.class, DynamicsCompressorNode.class,
-        Element.class, Enumerator.class, ErrorEvent.class,
-        com.gargoylesoftware.htmlunit.javascript.host.event.Event.class,
-        Event.class, EventNode.class, EventSource.class,
+        Element.class, Enumerator.class, ErrorEvent.class, Event.class,
+        com.gargoylesoftware.htmlunit.javascript.host.event.Event.class, EventNode.class, EventSource.class,
         EventTarget.class, External.class, File.class, FileError.class, FileHandle.class, FileList.class,
         FileReader.class, FileRequest.class, Float32Array.class, Float64Array.class, FocusEvent.class, FontFace.class,
         FormChild.class, FormData.class, FormField.class, GainNode.class, Gamepad.class, GamepadButton.class,
@@ -439,8 +439,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
         IDBKeyRange.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class, IDBTransaction.class,
         IDBVersionChangeEvent.class, Image.class, ImageBitmap.class, ImageData.class, InputEvent.class,
-        InputMethodContext.class, Int16Array.class, Int32Array.class, Int8Array.class,
-        KeyboardEvent.class, LocalMediaStream.class,
+        InputMethodContext.class, Int16Array.class, Int32Array.class, Int8Array.class, KeyboardEvent.class,
+        com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.class, LocalMediaStream.class,
         Location.class, LockedFile.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
         MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
         MediaKeyError.class, MediaKeyEvent.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
@@ -450,8 +450,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MediaStreamEvent.class, MediaStreamTrack.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
-        MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class, MouseWheelEvent.class,
-        MozContactChangeEvent.class, MozMmsEvent.class, MozMmsMessage.class,
+        MimeType.class, MimeTypeArray.class, MouseEvent.class,
+        com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent.class, MouseScrollEvent.class,
+        MouseWheelEvent.class, MozContactChangeEvent.class, MozMmsEvent.class, MozMmsMessage.class,
         MozMobileMessageManager.class, MozMobileMessageThread.class, mozRTCIceCandidate.class,
         mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class,
         MozSmsEvent.class, MozSmsFilter.class, MozSmsMessage.class, MozSmsSegmentInfo.class,

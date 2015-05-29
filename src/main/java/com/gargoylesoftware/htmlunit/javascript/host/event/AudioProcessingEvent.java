@@ -12,30 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.idb;
+package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * A JavaScript object for {@code IDBVersionChangeEvent}.
+ * A JavaScript object for {@code AudioProcessingEvent}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-public class IDBVersionChangeEvent extends Event {
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
+public class AudioProcessingEvent extends Event {
 
     /**
-     * Creates a new instance.
+     * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public IDBVersionChangeEvent() {
+    @JsxConstructor
+    public AudioProcessingEvent() {
     }
 }

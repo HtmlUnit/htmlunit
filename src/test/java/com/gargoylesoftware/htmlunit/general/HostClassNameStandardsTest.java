@@ -1997,7 +1997,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessageEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent}.
      *
      * @throws Exception if an error occurs
      */

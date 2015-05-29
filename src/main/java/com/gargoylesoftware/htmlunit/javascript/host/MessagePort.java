@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 
 /**
  * A JavaScript object for MessagePort.

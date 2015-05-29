@@ -30,7 +30,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
  * An abstract container for all the JavaScript configuration information.
@@ -77,11 +76,9 @@ public abstract class AbstractJavaScriptConfiguration {
         final Map<String, ClassConfiguration> classMap = new HashMap<>(getClasses().length);
 
         for (final Class<? extends SimpleScriptable> klass : getClasses()) {
-            if (klass != Event.class) {
-                final ClassConfiguration config = getClassConfiguration(klass, browser);
-                if (config != null) {
-                    classMap.put(config.getClassName(), config);
-                }
+            final ClassConfiguration config = getClassConfiguration(klass, browser);
+            if (config != null) {
+                classMap.put(config.getClassName(), config);
             }
         }
         return Collections.unmodifiableMap(classMap);

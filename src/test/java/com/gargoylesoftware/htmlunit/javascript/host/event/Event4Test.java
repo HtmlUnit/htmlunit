@@ -12,29 +12,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.moz;
+package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import org.junit.Assert;
+import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * A JavaScript object for {@code MozSmsEvent}.
+ * Tests for {@link Event}.
  *
  * @version $Revision$
+ * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Ahmed Ashour
+ * @author Daniel Gredler
+ * @author Marc Guillemot
+ * @author Ronald Brill
+ * @author Frank Danek
  */
-@JsxClass(browsers = @WebBrowser(value = FF, maxVersion = 31))
-public class MozSmsEvent extends Event {
+public class Event4Test {
 
     /**
-     * Creates an instance.
+     * @throws Exception if an error occurs
      */
-    @JsxConstructor
-    public MozSmsEvent() {
+    @Test
+    public void testSetEventPhaseToInvalidValue() throws Exception {
+        boolean thrown = false;
+        try {
+            new Event().setEventPhase((short) 777);
+        }
+        catch (final IllegalArgumentException e) {
+            thrown = true;
+        }
+        Assert.assertTrue(thrown);
     }
-
 }

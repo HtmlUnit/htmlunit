@@ -12,36 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * Tests for {@link Event}.
+ * A JavaScript object for {@code MozSettingsEvent}.
  *
  * @version $Revision$
- * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Ahmed Ashour
- * @author Daniel Gredler
- * @author Marc Guillemot
- * @author Ronald Brill
- * @author Frank Danek
  */
-public class Event4Test {
+@JsxClass(browsers = @WebBrowser(FF))
+public class MozSettingsEvent extends Event {
 
     /**
-     * @throws Exception if an error occurs
+     * Creates an instance.
      */
-    @Test
-    public void testSetEventPhaseToInvalidValue() throws Exception {
-        boolean thrown = false;
-        try {
-            new Event().setEventPhase((short) 777);
-        }
-        catch (final IllegalArgumentException e) {
-            thrown = true;
-        }
-        Assert.assertTrue(thrown);
+    @JsxConstructor
+    public MozSettingsEvent() {
     }
+
 }

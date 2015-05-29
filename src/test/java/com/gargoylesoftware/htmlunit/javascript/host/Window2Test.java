@@ -842,7 +842,7 @@ public class Window2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
-     * @see com.gargoylesoftware.htmlunit.javascript.host.EventTest#firedEvent_equals_original_event()
+     * @see com.gargoylesoftware.htmlunit.javascript.host.event.EventTest#firedEvent_equals_original_event()
      */
     @Test
     @Alerts(DEFAULT = { "true", "I was here" },

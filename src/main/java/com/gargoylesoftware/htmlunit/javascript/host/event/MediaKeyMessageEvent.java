@@ -12,29 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.moz;
+package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * A JavaScript object for {@code MozSettingsEvent}.
+ * A JavaScript object for {@code MediaKeyMessageEvent}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(FF))
-public class MozSettingsEvent extends Event {
+@JsxClass(browsers = @WebBrowser(CHROME))
+public class MediaKeyMessageEvent extends Event {
 
     /**
-     * Creates an instance.
+     * Creates a new instance.
      */
     @JsxConstructor
-    public MozSettingsEvent() {
+    public MediaKeyMessageEvent() {
     }
-
 }

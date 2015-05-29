@@ -133,6 +133,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
