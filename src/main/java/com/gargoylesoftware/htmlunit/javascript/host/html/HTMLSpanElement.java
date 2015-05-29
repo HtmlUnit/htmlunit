@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBaseFont;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
-import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -117,9 +116,6 @@ public class HTMLSpanElement extends HTMLElement {
      * {@inheritDoc}
      */
     protected boolean isLowerCaseInOuterHtml() {
-        if (getDomNodeOrDie() instanceof HtmlMultiColumn) {
-            return true;
-        }
         return super.isLowerCaseInOuterHtml();
     }
 
