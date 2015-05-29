@@ -1631,4 +1631,15 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
         loadPageWithAlerts2(test("picture"));
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTemplate}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "none",
+            IE = "inline")
+    public void template() throws Exception {
+        loadPageWithAlerts2(test("template"));
+    }
 }

@@ -2731,4 +2731,17 @@ public class ElementPropertiesTest extends WebDriverTestCase {
         test("picture");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTemplate}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "content",
+            IE = "")
+    @NotYetImplemented({ CHROME, FF })
+    public void template() throws Exception {
+        test("template");
+    }
+
 }

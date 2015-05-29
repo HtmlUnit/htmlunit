@@ -1817,4 +1817,17 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     public void picture() throws Exception {
         loadPageWithAlerts2(test("picture"));
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTemplate}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented(IE8)
+    public void template() throws Exception {
+        loadPageWithAlerts2(test("template"));
+    }
 }

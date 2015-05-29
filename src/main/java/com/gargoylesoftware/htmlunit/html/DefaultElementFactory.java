@@ -94,10 +94,9 @@ class DefaultElementFactory implements ElementFactory {
             HtmlTable.TAG_NAME, HtmlTableColumn.TAG_NAME, HtmlTableColumnGroup.TAG_NAME,
             HtmlTableBody.TAG_NAME, HtmlTableDataCell.TAG_NAME, HtmlTableHeaderCell.TAG_NAME,
             HtmlTableRow.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlTableFooter.TAG_NAME,
-            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlTime.TAG_NAME, HtmlTitle.TAG_NAME, HtmlTrack.TAG_NAME,
-            HtmlUnderlined.TAG_NAME, HtmlUnorderedList.TAG_NAME,
-            HtmlVariable.TAG_NAME, HtmlVideo.TAG_NAME,
-            HtmlWordBreak.TAG_NAME, HtmlExample.TAG_NAME
+            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlTemplate.TAG_NAME, HtmlTime.TAG_NAME,
+            HtmlTitle.TAG_NAME, HtmlTrack.TAG_NAME, HtmlUnderlined.TAG_NAME, HtmlUnorderedList.TAG_NAME,
+            HtmlVariable.TAG_NAME, HtmlVideo.TAG_NAME, HtmlWordBreak.TAG_NAME, HtmlExample.TAG_NAME
     );
 
     /**
@@ -732,6 +731,10 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlTeletype.TAG_NAME:
                 element = new HtmlTeletype(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlTemplate.TAG_NAME:
+                element = new HtmlTemplate(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlTextArea.TAG_NAME:

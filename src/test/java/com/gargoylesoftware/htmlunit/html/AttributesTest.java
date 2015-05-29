@@ -114,7 +114,7 @@ public class AttributesTest extends TestCase {
             "HtmlTable", "HtmlTableColumn", "HtmlTableColumnGroup",
             "HtmlTableBody", "HtmlTableDataCell", "HtmlTableHeaderCell",
             "HtmlTableRow", "HtmlTextArea", "HtmlTableFooter",
-            "HtmlTableHeader", "HtmlTeletype", "HtmlTrack",
+            "HtmlTableHeader", "HtmlTeletype", "HtmlTemplate", "HtmlTrack",
             "HtmlTime", "HtmlTitle",
             "HtmlUnderlined", "HtmlUnorderedList",
             "HtmlVariable", "HtmlVideo",

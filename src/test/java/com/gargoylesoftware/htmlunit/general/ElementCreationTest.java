@@ -2132,4 +2132,16 @@ public class ElementCreationTest extends WebDriverTestCase {
         test("picture");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPicture}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLTemplateElement]",
+            IE11 = "[object HTMLUnknownElement]",
+            IE8 = "[object HTMLGenericElement]")
+    public void template() throws Exception {
+        test("template");
+    }
 }

@@ -145542,4 +145542,2078 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     public void _picture_isindex() throws Exception {
         test("picture", "isindex");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _area_template() throws Exception {
+        test("area", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _base_template() throws Exception {
+        test("base", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _basefont_template() throws Exception {
+        test("basefont", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _bgsound_template() throws Exception {
+        test("bgsound", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _body_template() throws Exception {
+        test("body", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _br_template() throws Exception {
+        test("br", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _caption_template() throws Exception {
+        test("caption", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _col_template() throws Exception {
+        test("col", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _colgroup_template() throws Exception {
+        test("colgroup", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            IE11 = "0")
+    @NotYetImplemented({ CHROME, IE11 })
+    public void _command_template() throws Exception {
+        test("command", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _embed_template() throws Exception {
+        test("embed", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _frame_template() throws Exception {
+        test("frame", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented({ CHROME, IE8, IE11, FF31 })
+    public void _frameset_template() throws Exception {
+        test("frameset", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _head_template() throws Exception {
+        test("head", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _hr_template() throws Exception {
+        test("hr", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _html_template() throws Exception {
+        test("html", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented({ CHROME, IE11, FF31, IE8 })
+    public void _image_template() throws Exception {
+        test("image", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _img_template() throws Exception {
+        test("img", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_template() throws Exception {
+        test("input", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "2",
+            IE11 = "0")
+    @NotYetImplemented({ IE8, FF31 })
+    public void _keygen_template() throws Exception {
+        test("keygen", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _link_template() throws Exception {
+        test("link", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _meta_template() throws Exception {
+        test("meta", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _param_template() throws Exception {
+        test("param", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented({ CHROME, IE11, FF31, IE8 })
+    public void _source_template() throws Exception {
+        test("source", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tbody_template() throws Exception {
+        test("tbody", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _td_template() throws Exception {
+        test("td", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_a() throws Exception {
+        test("template", "a");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_abbr() throws Exception {
+        test("template", "abbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_acronym() throws Exception {
+        test("template", "acronym");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_address() throws Exception {
+        test("template", "address");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_applet() throws Exception {
+        test("template", "applet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _template_area() throws Exception {
+        test("template", "area");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_article() throws Exception {
+        test("template", "article");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_aside() throws Exception {
+        test("template", "aside");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_audio() throws Exception {
+        test("template", "audio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_b() throws Exception {
+        test("template", "b");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_base() throws Exception {
+        test("template", "base");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_basefont() throws Exception {
+        test("template", "basefont");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_bdi() throws Exception {
+        test("template", "bdi");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_bdo() throws Exception {
+        test("template", "bdo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_bgsound() throws Exception {
+        test("template", "bgsound");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_big() throws Exception {
+        test("template", "big");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_blink() throws Exception {
+        test("template", "blink");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_blockquote() throws Exception {
+        test("template", "blockquote");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_body() throws Exception {
+        test("template", "body");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_br() throws Exception {
+        test("template", "br");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_button() throws Exception {
+        test("template", "button");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_canvas() throws Exception {
+        test("template", "canvas");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_caption() throws Exception {
+        test("template", "caption");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_center() throws Exception {
+        test("template", "center");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_cite() throws Exception {
+        test("template", "cite");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_code() throws Exception {
+        test("template", "code");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_col() throws Exception {
+        test("template", "col");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_colgroup() throws Exception {
+        test("template", "colgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _template_command() throws Exception {
+        test("template", "command");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_content() throws Exception {
+        test("template", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_data() throws Exception {
+        test("template", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_datalist() throws Exception {
+        test("template", "datalist");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_dd() throws Exception {
+        test("template", "dd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_del() throws Exception {
+        test("template", "del");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_details() throws Exception {
+        test("template", "details");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_dfn() throws Exception {
+        test("template", "dfn");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_dialog() throws Exception {
+        test("template", "dialog");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_dir() throws Exception {
+        test("template", "dir");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_div() throws Exception {
+        test("template", "div");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_dl() throws Exception {
+        test("template", "dl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_dt() throws Exception {
+        test("template", "dt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_em() throws Exception {
+        test("template", "em");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_embed() throws Exception {
+        test("template", "embed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_fieldset() throws Exception {
+        test("template", "fieldset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_figcaption() throws Exception {
+        test("template", "figcaption");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_figure() throws Exception {
+        test("template", "figure");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_font() throws Exception {
+        test("template", "font");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_footer() throws Exception {
+        test("template", "footer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_form() throws Exception {
+        test("template", "form");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_frame() throws Exception {
+        test("template", "frame");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_frameset() throws Exception {
+        test("template", "frameset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_h1() throws Exception {
+        test("template", "h1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_h2() throws Exception {
+        test("template", "h2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_h3() throws Exception {
+        test("template", "h3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_h4() throws Exception {
+        test("template", "h4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_h5() throws Exception {
+        test("template", "h5");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_h6() throws Exception {
+        test("template", "h6");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_head() throws Exception {
+        test("template", "head");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_header() throws Exception {
+        test("template", "header");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_hr() throws Exception {
+        test("template", "hr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_html() throws Exception {
+        test("template", "html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_i() throws Exception {
+        test("template", "i");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_iframe() throws Exception {
+        test("template", "iframe");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _template_image() throws Exception {
+        test("template", "image");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_img() throws Exception {
+        test("template", "img");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ IE8, FF31, CHROME })
+    public void _template_input() throws Exception {
+        test("template", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_ins() throws Exception {
+        test("template", "ins");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _template_isindex() throws Exception {
+        test("template", "isindex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_kbd() throws Exception {
+        test("template", "kbd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_keygen() throws Exception {
+        test("template", "keygen");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_label() throws Exception {
+        test("template", "label");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_layer() throws Exception {
+        test("template", "layer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_legend() throws Exception {
+        test("template", "legend");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_li() throws Exception {
+        test("template", "li");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_link() throws Exception {
+        test("template", "link");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_listing() throws Exception {
+        test("template", "listing");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_main() throws Exception {
+        test("template", "main");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_map() throws Exception {
+        test("template", "map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_mark() throws Exception {
+        test("template", "mark");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_marquee() throws Exception {
+        test("template", "marquee");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_menu() throws Exception {
+        test("template", "menu");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_menuitem() throws Exception {
+        test("template", "menuitem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_meta() throws Exception {
+        test("template", "meta");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_meter() throws Exception {
+        test("template", "meter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_multicol() throws Exception {
+        test("template", "multicol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_nav() throws Exception {
+        test("template", "nav");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31, IE11 })
+    public void _template_nextid() throws Exception {
+        test("template", "nextid");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_nobr() throws Exception {
+        test("template", "nobr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_noembed() throws Exception {
+        test("template", "noembed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_noframes() throws Exception {
+        test("template", "noframes");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_nolayer() throws Exception {
+        test("template", "nolayer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_noscript() throws Exception {
+        test("template", "noscript");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_object() throws Exception {
+        test("template", "object");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_ol() throws Exception {
+        test("template", "ol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_optgroup() throws Exception {
+        test("template", "optgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_option() throws Exception {
+        test("template", "option");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_output() throws Exception {
+        test("template", "output");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_p() throws Exception {
+        test("template", "p");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _template_param() throws Exception {
+        test("template", "param");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_picture() throws Exception {
+        test("template", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_plaintext() throws Exception {
+        test("template", "plaintext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_pre() throws Exception {
+        test("template", "pre");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_progress() throws Exception {
+        test("template", "progress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_q() throws Exception {
+        test("template", "q");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_rp() throws Exception {
+        test("template", "rp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_rt() throws Exception {
+        test("template", "rt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_ruby() throws Exception {
+        test("template", "ruby");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_s() throws Exception {
+        test("template", "s");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_samp() throws Exception {
+        test("template", "samp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _template_script() throws Exception {
+        test("template", "script");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_section() throws Exception {
+        test("template", "section");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_select() throws Exception {
+        test("template", "select");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_small() throws Exception {
+        test("template", "small");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _template_source() throws Exception {
+        test("template", "source");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_span() throws Exception {
+        test("template", "span");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_strike() throws Exception {
+        test("template", "strike");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_strong() throws Exception {
+        test("template", "strong");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_style() throws Exception {
+        test("template", "style");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_sub() throws Exception {
+        test("template", "sub");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_summary() throws Exception {
+        test("template", "summary");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_sup() throws Exception {
+        test("template", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_table() throws Exception {
+        test("template", "table");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_tbody() throws Exception {
+        test("template", "tbody");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_td() throws Exception {
+        test("template", "td");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_template() throws Exception {
+        test("template", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_textarea() throws Exception {
+        test("template", "textarea");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_tfoot() throws Exception {
+        test("template", "tfoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_th() throws Exception {
+        test("template", "th");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_thead() throws Exception {
+        test("template", "thead");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_time() throws Exception {
+        test("template", "time");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ IE8, IE11 })
+    public void _template_title() throws Exception {
+        test("template", "title");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, IE8, FF31 })
+    public void _template_tr() throws Exception {
+        test("template", "tr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _template_track() throws Exception {
+        test("template", "track");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_tt() throws Exception {
+        test("template", "tt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_u() throws Exception {
+        test("template", "u");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_ul() throws Exception {
+        test("template", "ul");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_var() throws Exception {
+        test("template", "var");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_video() throws Exception {
+        test("template", "video");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, CHROME })
+    public void _template_wbr() throws Exception {
+        test("template", "wbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF = "0")
+    @NotYetImplemented({ CHROME, FF31 })
+    public void _template_xmp() throws Exception {
+        test("template", "xmp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tfoot_template() throws Exception {
+        test("tfoot", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _th_template() throws Exception {
+        test("th", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _thead_template() throws Exception {
+        test("thead", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tr_template() throws Exception {
+        test("tr", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented({ CHROME, IE11, FF31, IE8 })
+    public void _track_template() throws Exception {
+        test("track", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _wbr_template() throws Exception {
+        test("wbr", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF = "0",
+            IE11 = "0")
+    @NotYetImplemented({ IE11, FF31 })
+    public void _isindex_template() throws Exception {
+        test("isindex", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE11 = "0")
+    @NotYetImplemented({ IE8, FF31, CHROME })
+    public void _table_template() throws Exception {
+        test("table", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
+    public void _nextid_template() throws Exception {
+        test("nextid", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
+    public void _optgroup_template() throws Exception {
+        test("optgroup", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
+    public void _option_template() throws Exception {
+        test("option", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
+    public void _script_template() throws Exception {
+        test("script", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _noscript_template() throws Exception {
+        test("noscript", "template");
+    }
 }
