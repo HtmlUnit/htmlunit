@@ -27,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -264,7 +265,7 @@ public class StorageTest extends WebDriverTestCase {
             CHROME = { "function", "null", "string", "null", "0" },
             FF38 = { "function", "null", "function", "value", "1" },
             IE8 = { "undefined", "null", "string", "value", "1" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, Browser.FF38 })
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

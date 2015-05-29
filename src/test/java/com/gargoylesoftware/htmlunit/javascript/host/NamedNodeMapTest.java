@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -139,12 +140,14 @@ public class NamedNodeMapTest extends WebDriverTestCase {
 
     /**
      * Looks like FF38 has a strange bug when using attrib names with uppercase letters.
+     * see https://bugzilla.mozilla.org/show_bug.cgi?id=1169384
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = { "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" },
             FF38 = { "myAttr", "myattr2", "not found", "myattr2", "myattr2" })
+    @NotYetImplemented(FF38)
     public void getNamedItem_HTML_Case() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
