@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -964,7 +962,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline",
             FF = "block")
-    @NotYetImplemented(FF)
     public void multicol() throws Exception {
         loadPageWithAlerts2(test("multicol"));
     }

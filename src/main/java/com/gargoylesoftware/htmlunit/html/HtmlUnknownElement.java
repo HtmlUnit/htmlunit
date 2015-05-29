@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RP_DISPLAY_NONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RUBY_DISPLAY_INLINE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.MULTICOL_BLOCK;
 
 import java.util.Map;
 
@@ -105,6 +106,10 @@ public class HtmlUnknownElement extends HtmlElement {
                     return DisplayStyle.RUBY_TEXT;
                 }
                 break;
+            case HtmlMultiColumn.TAG_NAME:
+                if (hasFeature(MULTICOL_BLOCK)) {
+                    return DisplayStyle.BLOCK;
+                }
 
             default:
         }

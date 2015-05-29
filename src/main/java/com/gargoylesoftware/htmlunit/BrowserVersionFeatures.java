@@ -2016,6 +2016,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     META_X_UA_COMPATIBLE,
 
+    /**
+     * The default display style of multicol is 'block'.
+     */
+    @BrowserFeature(@WebBrowser(FF))
+    MULTICOL_BLOCK,
+
     /** If true, then silently ignore element.appendChild(element). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     NODE_APPEND_CHILD_SELF_IGNORE,
