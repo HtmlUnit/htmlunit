@@ -282,24 +282,6 @@ public class JavaScriptEngine {
             }
         }
 
-        // once all prototypes have been build, it's possible to configure the chains
-        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
-        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
-            final String name = entry.getKey();
-            final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
-            Scriptable prototype = entry.getValue();
-            if (prototype.getPrototype() != null) {
-                prototype = prototype.getPrototype(); // "double prototype" hack for FF
-            }
-            if (!StringUtils.isEmpty(config.getExtendedClassName())) {
-                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
-                prototype.setPrototype(parentPrototype);
-            }
-            else {
-                prototype.setPrototype(objectPrototype);
-            }
-        }
-
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Member jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
@@ -383,6 +365,24 @@ public class JavaScriptEngine {
             }
         }
         window.setPrototype(prototypesPerJSName.get(Window.class.getSimpleName()));
+
+        // once all prototypes have been build, it's possible to configure the chains
+        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
+        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
+            final String name = entry.getKey();
+            final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
+            Scriptable prototype = entry.getValue();
+            if (prototype.getPrototype() != null) {
+                prototype = prototype.getPrototype(); // "double prototype" hack for FF
+            }
+            if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
+                prototype.setPrototype(parentPrototype);
+            }
+            else {
+                prototype.setPrototype(objectPrototype);
+            }
+        }
 
         // IE11 ActiveXObject simulation
         // see http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx
