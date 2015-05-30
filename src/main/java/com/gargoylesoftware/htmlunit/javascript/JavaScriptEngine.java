@@ -844,7 +844,6 @@ public class JavaScriptEngine {
                 return response;
             }
             catch (final Exception e) {
-                e.printStackTrace();
                 handleJavaScriptException(new ScriptException(htmlPage_, e, getSourceCode(cx)), true);
                 return null;
             }
