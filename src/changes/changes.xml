@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.17" date="???" description="Bugfixes">
+        <release version="2.17" date="???" description="FF38, Bugfixes">
+            <action type="add" dev="rbri">
+                Firefox 38 ESR support added.
+            </action>
             <action type="fix" dev="rbri">
                 Button tag submits a form if type is unknown.
             </action>
