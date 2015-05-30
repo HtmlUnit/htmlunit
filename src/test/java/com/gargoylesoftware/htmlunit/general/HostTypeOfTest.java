@@ -6286,7 +6286,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            FF = "function",
+            FF38 = "function",
             IE11 = "object")
     public void performanceMark() throws Exception {
         test("PerformanceMark");
@@ -6298,7 +6298,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            FF = "function",
+            FF38 = "function",
             IE11 = "object")
     public void performanceMeasure() throws Exception {
         test("PerformanceMeasure");
@@ -6943,7 +6943,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
+            FF31 = "[object]",
             IE = "undefined")
+    @NotYetImplemented(FF31)
     public void xPathExpression() throws Exception {
         test("XPathExpression");
     }
@@ -7240,6 +7242,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void domPoint() throws Exception {
         test("DOMPoint");
@@ -7250,6 +7253,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void domPointReadOnly() throws Exception {
         test("DOMPointReadOnly");
@@ -7260,6 +7264,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void domRectReadOnly() throws Exception {
         test("DOMRectReadOnly");

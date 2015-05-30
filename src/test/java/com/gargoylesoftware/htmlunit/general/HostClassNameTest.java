@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -6446,7 +6447,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PerformanceMark() { [native code] }",
-            FF = "function PerformanceMark() {\n    [native code]\n}",
+            FF38 = "function PerformanceMark() {\n    [native code]\n}",
             IE11 = "[object PerformanceMark]")
     public void performanceMark() throws Exception {
         test("PerformanceMark");
@@ -6458,7 +6459,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PerformanceMeasure() { [native code] }",
-            FF = "function PerformanceMeasure() {\n    [native code]\n}",
+            FF38 = "function PerformanceMeasure() {\n    [native code]\n}",
             IE11 = "[object PerformanceMeasure]")
     public void performanceMeasure() throws Exception {
         test("PerformanceMeasure");
@@ -7109,7 +7110,9 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function XPathExpression() { [native code] }",
-            FF = "function XPathExpression() {\n    [native code]\n}")
+            FF31 = "[object XPathExpression]",
+            FF38 = "function XPathExpression() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
     public void xPathExpression() throws Exception {
         test("XPathExpression");
     }
@@ -7406,6 +7409,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF31 = "function DOMPoint() {\n    [native code]\n}",
             FF38 = "function DOMPoint() {\n    [native code]\n}")
     public void domPoint() throws Exception {
         test("DOMPoint");
@@ -7416,6 +7420,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF31 = "function DOMPointReadOnly() {\n    [native code]\n}",
             FF38 = "function DOMPointReadOnly() {\n    [native code]\n}")
     public void domPointReadOnly() throws Exception {
         test("DOMPointReadOnly");
@@ -7426,6 +7431,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF31 = "function DOMRectReadOnly() {\n    [native code]\n}",
             FF38 = "function DOMRectReadOnly() {\n    [native code]\n}")
     public void domRectReadOnly() throws Exception {
         test("DOMRectReadOnly");

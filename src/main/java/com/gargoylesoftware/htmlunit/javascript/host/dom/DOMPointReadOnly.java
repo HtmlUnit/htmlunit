@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(value = FF, minVersion = 38))
+@JsxClass(browsers = @WebBrowser(value = FF, minVersion = 31))
 public class DOMPointReadOnly extends SimpleScriptable {
 
     /**

@@ -1390,7 +1390,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpageshow,onpopstate,onstorage,onunload,"
                 + "rows",
             FF31 = "cols,onafterprint,onbeforeprint,onbeforeunload,onhashchange,onmessage,onoffline,ononline,"
-                + "onpagehide,onpageshow,onpopstate,onunload,"
+                + "onpagehide,onpageshow,onpopstate,onresize,onunload,"
                 + "rows",
             FF38 = "cols,onafterprint,onbeforeprint,onbeforeunload,onhashchange,onlanguagechange,onmessage,"
                 + "onoffline,ononline,"
