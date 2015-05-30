@@ -147,7 +147,9 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * Firefox 31 ESR.
      * @since 2.16
+     * @deprecated as of 2.17
      */
+    @Deprecated
     public static final BrowserVersion FIREFOX_31 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:31.0) Gecko/20100101 Firefox/31.0",

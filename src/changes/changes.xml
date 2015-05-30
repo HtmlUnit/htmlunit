@@ -11,6 +11,9 @@
             <action type="add" dev="rbri">
                 Firefox 38 ESR support added.
             </action>
+            <action type="update" dev="rbri">
+                BrowserVersion: deprecate FIREFOX_31.
+            </action>
             <action type="fix" dev="rbri">
                 Button tag submits a form if type is unknown.
             </action>

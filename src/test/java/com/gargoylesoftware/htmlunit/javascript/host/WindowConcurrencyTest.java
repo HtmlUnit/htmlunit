@@ -489,7 +489,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "setInterval(forceStyleComputationInParent, 10);\n"
             + "</script></head></body></html>";
 
-        try (final WebClient client = new WebClient(BrowserVersion.FIREFOX_31)) {
+        try (final WebClient client = new WebClient(BrowserVersion.FIREFOX_38)) {
             final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setResponse(URL_FIRST, html);
             webConnection.setDefaultResponse(html2);

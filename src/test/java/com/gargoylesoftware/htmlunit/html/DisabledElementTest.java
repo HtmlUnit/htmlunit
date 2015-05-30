@@ -122,7 +122,7 @@ public class DisabledElementTest extends SimpleWebTestCase {
 
         final String htmlContent = MessageFormat.format(htmlContent_, new Object[]{disabledAttribute});
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_31, htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_38, htmlContent, collectedAlerts);
 
         final DisabledElement element = (DisabledElement) page.getHtmlElementById("element1");
         assertEquals(expectedIsDisabled, element.isDisabled());
