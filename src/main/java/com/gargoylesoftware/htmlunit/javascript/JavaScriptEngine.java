@@ -230,7 +230,7 @@ public class JavaScriptEngine {
         }
 
         if (!browserVersion.hasFeature(JS_Iterator)) {
-            deleteProperties(window, "Iterator", "StopIteration");
+            deleteProperties(window, "Iterator", "StopIteration", "InternalError");
         }
 
         if (browserVersion.hasFeature(JS_INTL)) {
