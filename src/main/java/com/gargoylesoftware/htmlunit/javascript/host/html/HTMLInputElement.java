@@ -39,8 +39,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 
 /**
@@ -272,8 +272,8 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Gets the min length.
-     * @return the min length
+     * Gets the {@code minLength}.
+     * @return the {@code minLength}
      */
     @JsxGetter(@WebBrowser(CHROME))
     public int getMinLength() {
@@ -282,12 +282,48 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Sets the value of "minLength" attribute.
+     * Sets the value of {@code minLength} attribute.
      * @param length the new value
      */
     @JsxSetter(@WebBrowser(CHROME))
     public void setMinLength(final int length) {
         getDomNodeOrDie().setMinLength(length);
+    }
+
+    /**
+     * Gets the {@code min} property.
+     * @return the {@code min} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public String getMin() {
+        return getDomNodeOrDie().getAttribute("min");
+    }
+
+    /**
+     * Sets the {@code min} property.
+     * @param min the {@code min} property
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public void setMin(final String min) {
+        getDomNodeOrDie().setAttribute("min", min);
+    }
+
+    /**
+     * Gets the {@code max} property.
+     * @return the {@code max} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public String getMax() {
+        return getDomNodeOrDie().getAttribute("max");
+    }
+
+    /**
+     * Sets the {@code max} property.
+     * @param max the {@code max} property
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public void setMax(final String max) {
+        getDomNodeOrDie().setAttribute("max", max);
     }
 
     /**

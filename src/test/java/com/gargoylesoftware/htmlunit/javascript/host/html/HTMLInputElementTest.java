@@ -1137,4 +1137,71 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         driver.findElement(By.id("mySubmit")).click();
         assertEquals(URL_FIRST + "?myName=ab", driver.getCurrentUrl());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "30", "undefined", "30", "30",
+                "40", "50", "string", "string" },
+            CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" },
+            IE8 = { "30", "undefined", "30", "30", "undefined", "40", "string", "string" })
+    @NotYetImplemented(IE8)
+    public void min() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var input = document.getElementById('text1');\n"
+            + "    alert(input.min);\n"
+            + "    alert(input.Min);\n"
+            + "    alert(input.getAttribute('min'));\n"
+            + "    alert(input.getAttribute('Min'));\n"
+            + "    input.setAttribute('MiN', 40);\n"
+            + "    alert(input.min);\n"
+            + "    input.min = 50;\n"
+            + "    alert(input.getAttribute('min'));\n"
+            + "    alert(typeof input.getAttribute('min'));\n"
+            + "    alert(typeof input.min);\n"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='myForm' action='foo'>\n"
+            + "<input type='text' id='text1' min='30'/>\n"
+            + "</form></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "30", "undefined", "30", "30",
+                "40", "50", "string", "string" },
+            CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" },
+            IE8 = { "30", "undefined", "30", "30", "undefined", "40", "string", "string" })
+    @NotYetImplemented(IE8)
+    public void max() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var input = document.getElementById('text1');\n"
+            + "    alert(input.max);\n"
+            + "    alert(input.Max);\n"
+            + "    alert(input.getAttribute('max'));\n"
+            + "    alert(input.getAttribute('Max'));\n"
+            + "    input.setAttribute('MaX', 40);\n"
+            + "    alert(input.max);\n"
+            + "    input.max = 50;\n"
+            + "    alert(input.getAttribute('max'));\n"
+            + "    alert(typeof input.getAttribute('max'));\n"
+            + "    alert(typeof input.max);\n"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='myForm' action='foo'>\n"
+            + "<input type='text' id='text1' max='30'/>\n"
+            + "</form></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
