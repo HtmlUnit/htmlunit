@@ -6853,6 +6853,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function SVGNumber() { [native code] }",
             FF = "function SVGNumber() {\n    [native code]\n}",
+            FF31 = "[object SVGNumber]",
             IE11 = "[object SVGNumber]")
     public void svgNumber() throws Exception {
         test("SVGNumber");
