@@ -209,7 +209,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         FIREFOX_31.setBrowserLanguage("en-US");
         FIREFOX_31.setVendor("");
-        FIREFOX_31.buildId_ = "20140717132905";
+        FIREFOX_31.buildId_ = "20150504194141";
         FIREFOX_31.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
         FIREFOX_31.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
