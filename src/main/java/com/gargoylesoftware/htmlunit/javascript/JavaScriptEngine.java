@@ -230,7 +230,7 @@ public class JavaScriptEngine {
         }
 
         if (!browserVersion.hasFeature(JS_Iterator)) {
-            deleteProperties(window, "Iterator", "StopIteration", "InternalError");
+            deleteProperties(window, "Iterator", "StopIteration");
         }
 
         if (browserVersion.hasFeature(JS_INTL)) {
@@ -844,6 +844,7 @@ public class JavaScriptEngine {
                 return response;
             }
             catch (final Exception e) {
+                e.printStackTrace();
                 handleJavaScriptException(new ScriptException(htmlPage_, e, getSourceCode(cx)), true);
                 return null;
             }
