@@ -59,6 +59,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     BUTTON_EMPTY_TYPE_BUTTON,
 
+    /** If the "type" attribute of HtmlButton is not known clicking the button will not submit. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    BUTTON_UNKNOWN_TYPE_DOES_NOT_SUBMIT,
+
     /** Is canvas supported? */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CANVAS,

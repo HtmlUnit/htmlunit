@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_UNKNOWN_TYPE_DOES_NOT_SUBMIT;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -88,12 +89,24 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
+            if ("button".equals(type)) {
+                return false;
+            }
+
             if ("submit".equals(type)) {
                 form.submit(this);
+                return false;
             }
-            else if ("reset".equals(type)) {
+
+            if ("reset".equals(type)) {
                 form.reset();
+                return false;
             }
+            if (hasFeature(BUTTON_UNKNOWN_TYPE_DOES_NOT_SUBMIT)) {
+                return false;
+            }
+
+            form.submit(this);
             return false;
         }
         super.doClickStateUpdate();
