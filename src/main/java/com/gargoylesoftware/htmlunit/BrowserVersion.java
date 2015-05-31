@@ -83,7 +83,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 public class BrowserVersion implements Serializable, Cloneable {
-    
+
     private String applicationCodeName_ = "Mozilla";
     private String applicationMinorVersion_ = "0";
     private String applicationName_;
