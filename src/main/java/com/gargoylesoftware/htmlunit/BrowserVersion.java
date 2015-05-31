@@ -83,7 +83,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 public class BrowserVersion implements Serializable, Cloneable {
-
+    
     private String applicationCodeName_ = "Mozilla";
     private String applicationMinorVersion_ = "0";
     private String applicationName_;
@@ -397,7 +397,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
-     * version of Firefox like {@link #FIREFOX_24} or {@link #FIREFOX_31}.
+     * version of Firefox.
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {

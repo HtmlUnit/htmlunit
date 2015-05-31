@@ -4816,7 +4816,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CSSConditionRule_CSSConditionRule() throws Exception {
         test("CSSConditionRule", "CSSConditionRule");
     }
@@ -4826,7 +4826,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CSSConditionRule_CSSMediaRule() throws Exception {
         test("CSSConditionRule", "CSSMediaRule");
     }
@@ -4836,7 +4836,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CSSConditionRule_CSSSupportsRule() throws Exception {
         test("CSSConditionRule", "CSSSupportsRule");
     }
@@ -4846,7 +4846,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CSSGroupingRule_CSSConditionRule() throws Exception {
         test("CSSGroupingRule", "CSSConditionRule");
     }
@@ -4856,7 +4856,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CSSGroupingRule_CSSGroupingRule() throws Exception {
         test("CSSGroupingRule", "CSSGroupingRule");
     }
@@ -4866,7 +4866,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CSSGroupingRule_CSSMediaRule() throws Exception {
         test("CSSGroupingRule", "CSSMediaRule");
     }
@@ -4876,7 +4876,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CSSGroupingRule_CSSSupportsRule() throws Exception {
         test("CSSGroupingRule", "CSSSupportsRule");
     }
@@ -4886,7 +4886,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CSSRule_CSSConditionRule() throws Exception {
         test("CSSRule", "CSSConditionRule");
     }
@@ -4896,7 +4896,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CSSRule_CSSGroupingRule() throws Exception {
         test("CSSRule", "CSSGroupingRule");
     }
@@ -4906,7 +4906,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _DeviceLightEvent_DeviceLightEvent() throws Exception {
         test("DeviceLightEvent", "DeviceLightEvent");
     }
@@ -4926,7 +4926,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true",
+            FF = "true",
             IE11 = "true")
     public void _DragEvent_DragEvent() throws Exception {
         test("DragEvent", "DragEvent");
@@ -4947,7 +4947,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_DeviceLightEvent() throws Exception {
         test("Event", "DeviceLightEvent");
     }
@@ -4967,7 +4967,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true",
+            FF = "true",
             IE11 = "true")
     public void _Event_DragEvent() throws Exception {
         test("Event", "DragEvent");
@@ -4978,7 +4978,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_MouseScrollEvent() throws Exception {
         test("Event", "MouseScrollEvent");
     }
@@ -4988,7 +4988,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_TimeEvent() throws Exception {
         test("Event", "TimeEvent");
     }
@@ -4998,7 +4998,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_UserProximityEvent() throws Exception {
         test("Event", "UserProximityEvent");
     }
@@ -5058,7 +5058,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_DeviceProximityEvent() throws Exception {
         test("Event", "DeviceProximityEvent");
     }
@@ -5068,7 +5068,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _DeviceProximityEvent_DeviceProximityEvent() throws Exception {
         test("DeviceProximityEvent", "DeviceProximityEvent");
     }
@@ -5078,7 +5078,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_InputEvent() throws Exception {
         test("Event", "InputEvent");
     }
@@ -5088,7 +5088,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF38 = "true")
     public void _Element_HTMLPictureElement() throws Exception {
         test("Element", "HTMLPictureElement");
     }
@@ -5098,7 +5099,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF38 = "true")
     public void _EventTarget_HTMLPictureElement() throws Exception {
         test("EventTarget", "HTMLPictureElement");
     }
@@ -5178,7 +5180,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _EventTarget_MediaRecorder() throws Exception {
         test("EventTarget", "MediaRecorder");
     }
@@ -5207,7 +5209,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _EventTarget_mozRTCPeerConnection() throws Exception {
         test("EventTarget", "mozRTCPeerConnection");
     }
@@ -5217,7 +5219,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_RTCDataChannelEvent() throws Exception {
         test("Event", "RTCDataChannelEvent");
     }
@@ -5227,7 +5229,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_RTCPeerConnectionIceEvent() throws Exception {
         test("Event", "RTCPeerConnectionIceEvent");
     }
@@ -5257,7 +5259,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF38 = "true")
     public void _CryptoKey_CryptoKey() throws Exception {
         test("CryptoKey", "CryptoKey");
     }
@@ -5406,7 +5409,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _BlobEvent_BlobEvent() throws Exception {
         test("BlobEvent", "BlobEvent");
     }
@@ -5416,7 +5419,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _CaretPosition_CaretPosition() throws Exception {
         test("CaretPosition", "CaretPosition");
     }
@@ -5426,7 +5429,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _DOMRequest_DOMCursor() throws Exception {
         test("DOMRequest", "DOMCursor");
     }
@@ -5436,7 +5439,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _DOMRequest_DOMRequest() throws Exception {
         test("DOMRequest", "DOMRequest");
     }
@@ -5466,7 +5469,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _EventTarget_DOMCursor() throws Exception {
         test("EventTarget", "DOMCursor");
     }
@@ -5476,7 +5479,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _EventTarget_DOMRequest() throws Exception {
         test("EventTarget", "DOMRequest");
     }
@@ -5526,7 +5529,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_BlobEvent() throws Exception {
         test("Event", "BlobEvent");
     }
@@ -5566,7 +5569,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_MozContactChangeEvent() throws Exception {
         test("Event", "MozContactChangeEvent");
     }
@@ -5586,7 +5589,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _Event_MozSettingsEvent() throws Exception {
         test("Event", "MozSettingsEvent");
     }
