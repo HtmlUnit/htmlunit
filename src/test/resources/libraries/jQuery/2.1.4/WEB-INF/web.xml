@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+    <!-- the following 8 lines extend the servlet spec 2.2 "url-pattern" to handle PHP PATH_INFO: *.php/something?what=that. Remove them, if you don't need this feature. -->
+    <filter>
+        <filter-name>PhpCGIFilter</filter-name>
+        <filter-class>php.java.servlet.PhpCGIFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PhpCGIFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- the following adds the JSR223 listener. Remove it if you don't want to use the JSR223 API -->
+    <listener>
+        <listener-class>php.java.servlet.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- the back end for external (console, Apache/IIS-) PHP scripts; remove it if you don't need this -->
+    <servlet>
+        <servlet-name>PhpJavaServlet</servlet-name>
+        <servlet-class>php.java.servlet.PhpJavaServlet</servlet-class>
+    </servlet>
+
+    <!-- runs PHP scripts in this web app; remove it if you don't need this -->
+    <servlet>
+        <servlet-name>PhpCGIServlet</servlet-name>
+        <servlet-class>php.java.servlet.fastcgi.FastCGIServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>PhpJavaServlet</servlet-name>
+        <url-pattern>*.phpjavabridge</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PhpCGIServlet</servlet-name>
+        <url-pattern>*.php</url-pattern>
+    </servlet-mapping>
+
+</web-app>
