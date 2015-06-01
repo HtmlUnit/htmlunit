@@ -203,7 +203,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF31 = "false")
     public void _NamedNodeMap_NamedNodeMap() throws Exception {
         test("NamedNodeMap", "NamedNodeMap");
     }
@@ -2708,7 +2708,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF31 = "true")
     public void _MozSmsSegmentInfo_MozSmsSegmentInfo() throws Exception {
         test("MozSmsSegmentInfo", "MozSmsSegmentInfo");
     }
@@ -2918,7 +2918,8 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false")
+            IE8 = "false",
+            FF31 = "false")
     public void _PerformanceEntry_PerformanceMark() throws Exception {
         test("PerformanceEntry", "PerformanceMark");
     }
@@ -2928,7 +2929,8 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false")
+            IE8 = "false",
+            FF31 = "false")
     public void _PerformanceEntry_PerformanceMeasure() throws Exception {
         test("PerformanceEntry", "PerformanceMeasure");
     }
@@ -2948,7 +2950,8 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false")
+            IE8 = "false",
+            FF31 = "false")
     public void _PerformanceMark_PerformanceMark() throws Exception {
         test("PerformanceMark", "PerformanceMark");
     }
@@ -2958,7 +2961,8 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false")
+            IE8 = "false",
+            FF31 = "false")
     public void _PerformanceMeasure_PerformanceMeasure() throws Exception {
         test("PerformanceMeasure", "PerformanceMeasure");
     }
