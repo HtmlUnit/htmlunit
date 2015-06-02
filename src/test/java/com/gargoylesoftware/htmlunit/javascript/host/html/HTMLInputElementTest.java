@@ -1111,7 +1111,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "true" },
             IE8 = { "checkValidity not supported", "checkValidity not supported" })
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void checkValidity() throws Exception {
         final String html
             = "<html><head><script>\n"
