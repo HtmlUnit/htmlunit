@@ -197,7 +197,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF31 = "true")
     public void _XPathNSResolver_XPathNSResolver() throws Exception {
         test("XPathNSResolver", "XPathNSResolver");
     }
@@ -397,7 +397,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _TimeEvent_TimeEvent() throws Exception {
         test("TimeEvent", "TimeEvent");
     }
@@ -407,7 +407,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true",
+            FF = "true",
             IE11 = "true")
     public void _UIEvent_DragEvent() throws Exception {
         test("UIEvent", "DragEvent");
@@ -418,7 +418,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _UIEvent_MouseScrollEvent() throws Exception {
         test("UIEvent", "MouseScrollEvent");
     }
@@ -428,7 +428,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
+            FF = "true")
     public void _UserProximityEvent_UserProximityEvent() throws Exception {
         test("UserProximityEvent", "UserProximityEvent");
     }
@@ -497,8 +497,9 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF31 = "false",
+            IE = "false")
     public void _WeakSet_WeakSet() throws Exception {
         test("WeakSet", "WeakSet");
     }
@@ -546,9 +547,9 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE11 = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false",
+            FF31 = "false")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");
     }
