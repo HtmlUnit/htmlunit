@@ -84,7 +84,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 + "search, email, tel, url",
             IE11 = "button, button, checkbox, file, hidden, select-one, select-multiple, password, reset, reset, "
                 + "submit, submit, text, textarea, text, text, text, text, text, text, text, number, range, "
-                + "search, email, tel, url"
+                + "search, email, tel, url",
+            IE8 = "button, button, checkbox, file, hidden, select-one, select-multiple, password, reset, reset, "
+                + "submit, submit, text, textarea, text, text, text, text, text, text, text, text, text, "
+                + "text, text, text, text"
             )
     @NotYetImplemented
     public void textProperties() throws Exception {
@@ -489,22 +492,31 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"radio", "hidden", "image" })
+    @Alerts(DEFAULT = {"radio", "hidden", "image" },
+            IE8 = {"radio", "error", "radio", "error", "radio"})
+    @NotYetImplemented(IE8)
     public void changeType() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var input = document.myForm.myRadio;\n"
             + "    alert(input.type);\n"
-            + "    input.type = 'hidden';\n"
+
+            + "    try {;\n"
+            + "      input.type = 'hidden';\n"
+            + "    } catch(e) { alert('error');}\n"
             + "    alert(input.type);\n"
-            + "    input.setAttribute('type', 'image');\n"
+
+            + "    try {;\n"
+            + "      input.setAttribute('type', 'image');\n"
+            + "    } catch(e) { alert('error');}\n"
             + "    alert(input.type);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
-            + "<form name='myForm' action='foo'>\n"
-            + "<input type='radio' name='myRadio'/>\n"
-            + "</form></body></html>";
+            + "  <form name='myForm' action='foo'>\n"
+            + "    <input type='radio' name='myRadio'/>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
 
@@ -780,13 +792,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"text text", "password password", "hidden hidden",
-            "checkbox checkbox", "radio radio", "file file", "checkbox checkbox" },
+                    "checkbox checkbox", "radio radio", "file file", "checkbox checkbox" },
             CHROME = {"text TeXt", "password PassWord", "hidden Hidden",
                     "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
             FF = {"text TeXt", "password PassWord", "hidden Hidden",
-            "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
+                    "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
             IE11 = {"text TeXt", "password PassWord", "hidden Hidden",
-            "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
+                    "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void typeCase() throws Exception {
         final String html
@@ -845,8 +857,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
-            IE = { "left", "right", "bottom", "middle", "top", "", "" },
-            IE11 = { "", "", "", "", "", "", "" })
+            IE = { "", "", "", "", "", "", "" })
     @NotYetImplemented({ IE8, IE11 })
     public void getAlign() throws Exception {
         final String html
@@ -875,8 +886,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
-            IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" },
-            IE11 = { "", "error", "", "error", "", "", "", "", "", "" })
+            IE = { "", "error", "", "error", "", "", "", "", "", "" })
     @NotYetImplemented({ IE8, IE11 })
     public void setAlign() throws Exception {
         final String html
@@ -1099,13 +1109,19 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false, true")
+    @Alerts(DEFAULT = { "false", "true" },
+            IE8 = { "checkValidity not supported", "checkValidity not supported" })
     @NotYetImplemented
     public void checkValidity() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function checkStatus() {\n"
-            + "    alert(document.getElementById('myInput').checkValidity());\n"
+            + "    var elem = document.getElementById('myInput');\n"
+            + "    if (elem.checkValidity) {;\n"
+            + "      alert(elem.checkValidity());\n"
+            + "    } else {\n"
+            + "      alert('checkValidity not supported');\n"
+            + "    }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body>\n"
@@ -1178,7 +1194,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "30", "undefined", "30", "30",
                 "40", "50", "string", "string" },
             CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" },
-            IE8 = { "30", "undefined", "30", "30", "undefined", "40", "string", "string" })
+            IE8 = { "30", "undefined", "30", "30", "30", "50", "number", "number" })
     @NotYetImplemented(IE8)
     public void min() throws Exception {
         final String html
@@ -1211,7 +1227,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "30", "undefined", "30", "30",
                 "40", "50", "string", "string" },
             CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" },
-            IE8 = { "30", "undefined", "30", "30", "undefined", "40", "string", "string" })
+            IE8 = { "30", "undefined", "30", "30", "30", "50", "number", "number" })
     @NotYetImplemented(IE8)
     public void max() throws Exception {
         final String html
