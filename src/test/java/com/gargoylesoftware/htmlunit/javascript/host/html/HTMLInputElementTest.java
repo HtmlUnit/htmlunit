@@ -1087,7 +1087,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @Alerts(DEFAULT = "§§URL§§",
+            IE8 = "§§URL§§?myName=")
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void submitRequired() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -1104,7 +1106,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("mySubmit")).click();
-        assertFalse(driver.getCurrentUrl().contains("myName"));
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
         assertTrue(getCollectedAlerts(driver).isEmpty());
     }
 
