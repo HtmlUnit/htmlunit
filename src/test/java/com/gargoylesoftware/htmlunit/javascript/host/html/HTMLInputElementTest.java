@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -791,15 +792,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"text text", "password password", "hidden hidden",
-                    "checkbox checkbox", "radio radio", "file file", "checkbox checkbox" },
-            CHROME = {"text TeXt", "password PassWord", "hidden Hidden",
+    @Alerts(DEFAULT = {"text TeXt", "password PassWord", "hidden Hidden",
                     "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
-            FF = {"text TeXt", "password PassWord", "hidden Hidden",
-                    "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
+            IE8 = {"text text", "password password", "hidden hidden",
+                    "checkbox checkbox", "radio radio", "file file", "error" },
             IE11 = {"text TeXt", "password PassWord", "hidden Hidden",
                     "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE, CHROME })
     public void typeCase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -816,18 +815,22 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  alert(r.type + ' ' + r.getAttribute('type'));\n"
             + "  var f = document.getElementById('aFile');\n"
             + "  alert(f.type + ' ' + f.getAttribute('type'));\n"
-            + "  f.type = 'CHECKBOX';\n"
-            + "  alert(f.type + ' ' + f.getAttribute('type'));\n"
+
+            + "  try {"
+            + "    f.type = 'CHECKBOX';\n"
+            + "    alert(f.type + ' ' + f.getAttribute('type'));\n"
+            + "  } catch(e) { alert('error');}\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<form action='foo'>\n"
-            + "<input Type='TeXt' id='aText' value='some test'>\n"
-            + "<input tYpe='PassWord' id='aPassword' value='some test'>\n"
-            + "<input tyPe='Hidden' id='aHidden' value='some test'>\n"
-            + "<input typE='CheckBox' id='aCb'>\n"
-            + "<input TYPE='rAdiO' id='aRadio'>\n"
-            + "<input type='FILE' id='aFile'>\n"
-            + "</form>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form action='foo'>\n"
+            + "    <input Type='TeXt' id='aText' value='some test'>\n"
+            + "    <input tYpe='PassWord' id='aPassword' value='some test'>\n"
+            + "    <input tyPe='Hidden' id='aHidden' value='some test'>\n"
+            + "    <input typE='CheckBox' id='aCb'>\n"
+            + "    <input TYPE='rAdiO' id='aRadio'>\n"
+            + "    <input type='FILE' id='aFile'>\n"
+            + "  </form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
