@@ -97,6 +97,7 @@ public class WebSocket extends EventTarget {
             client.start();
             incomingSession_ = client.connect(new WebSocketImpl(), new URI(url)).get();
             containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
+            readyState_ = OPEN;
         }
         catch (final Exception e) {
             LOG.error(e);
@@ -202,13 +203,8 @@ public class WebSocket extends EventTarget {
     }
 
     /**
-     * Returns The current state of the connection. The possible values are:
-     * <ul>
-     *   <li>0 = CONNECTING</li>
-     *   <li>1 = OPEN</li>
-     *   <li>2 = CLOSING</li>
-     *   <li>3 = CLOSED</li>
-     * </ul>
+     * Returns The current state of the connection. The possible values are: {@link #CONNECTING}, {@link #OPEN},
+     * {@link #CLOSING} or {@link #CLOSED}.
      * @return the current state of the connection
      */
     @JsxGetter
@@ -224,11 +220,14 @@ public class WebSocket extends EventTarget {
      */
     @JsxFunction
     public void close(final Object code, final Object reason) {
-        if (incomingSession_ != null) {
-            incomingSession_.close();
-        }
-        if (outgoingSession_ != null) {
-            outgoingSession_.close();
+        if (readyState_ != CLOSED) {
+            if (incomingSession_ != null) {
+                incomingSession_.close();
+            }
+            if (outgoingSession_ != null) {
+                outgoingSession_.close();
+            }
+            readyState_ = CLOSED;
         }
     }
 
