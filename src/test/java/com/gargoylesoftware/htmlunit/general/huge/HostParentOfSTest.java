@@ -1828,9 +1828,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE11 = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SubtleCrypto_SubtleCrypto() throws Exception {
         test("SubtleCrypto", "SubtleCrypto");
     }
@@ -1840,7 +1839,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF38 = "true")
     public void _Symbol_Symbol() throws Exception {
         test("Symbol", "Symbol");
     }

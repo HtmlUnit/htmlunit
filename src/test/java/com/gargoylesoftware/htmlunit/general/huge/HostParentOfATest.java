@@ -6293,7 +6293,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _DOMPointReadOnly_DOMPoint() throws Exception {
         test("DOMPointReadOnly", "DOMPoint");
     }
@@ -6303,7 +6303,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _DOMPointReadOnly_DOMPointReadOnly() throws Exception {
         test("DOMPointReadOnly", "DOMPointReadOnly");
     }
@@ -6313,7 +6313,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _DOMPoint_DOMPoint() throws Exception {
         test("DOMPoint", "DOMPoint");
     }
@@ -6323,7 +6323,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _DOMRectReadOnly_DOMRectReadOnly() throws Exception {
         test("DOMRectReadOnly", "DOMRectReadOnly");
     }
