@@ -76,10 +76,17 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({
-            "button", "button", "checkbox", "file", "hidden", "select-one",
-            "select-multiple", "password", "reset", "reset", "submit",
-            "submit", "text", "textarea" })
+    @Alerts(CHROME = "button, button, checkbox, file, hidden, select-one, select-multiple, password, reset, reset, "
+                + "submit, submit, text, textarea, color, date, text, datetime-local, time, week, month, number, "
+                + "range, search, email, tel, url",
+            FF = "button, button, checkbox, file, hidden, select-one, select-multiple, password, reset, reset, "
+                + "submit, submit, text, textarea, color, text, text, text, text, text, text, number, range, "
+                + "search, email, tel, url",
+            IE11 = "button, button, checkbox, file, hidden, select-one, select-multiple, password, reset, reset, "
+                + "submit, submit, text, textarea, text, text, text, text, text, text, text, number, range, "
+                + "search, email, tel, url"
+            )
+    @NotYetImplemented
     public void textProperties() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -98,6 +105,19 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "    alert(document.form1.submit2.type);\n"
             + "    alert(document.form1.textInput1.type);\n"
             + "    alert(document.form1.textarea1.type);\n"
+            + "    alert(document.form1.color1.type);\n"
+            + "    alert(document.form1.date1.type);\n"
+            + "    alert(document.form1.datetime1.type);\n"
+            + "    alert(document.form1.datetimeLocal1.type);\n"
+            + "    alert(document.form1.time1.type);\n"
+            + "    alert(document.form1.week1.type);\n"
+            + "    alert(document.form1.month1.type);\n"
+            + "    alert(document.form1.number1.type);\n"
+            + "    alert(document.form1.range1.type);\n"
+            + "    alert(document.form1.search1.type);\n"
+            + "    alert(document.form1.email1.type);\n"
+            + "    alert(document.form1.tel1.type);\n"
+            + "    alert(document.form1.url1.type);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -121,6 +141,19 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "    <button type='submit' name='submit2'></button>\n"
             + "    <input type='text' name='textInput1' />\n"
             + "    <textarea name='textarea1'>foo</textarea>\n"
+            + "    <input type='color' name='color1' />\n"
+            + "    <input type='date' name='date1' />\n"
+            + "    <input type='datetime' name='datetime1' />\n"
+            + "    <input type='datetime-local' name='datetimeLocal1' />\n"
+            + "    <input type='time' name='time1' />\n"
+            + "    <input type='week' name='week1' />\n"
+            + "    <input type='month' name='month1' />\n"
+            + "    <input type='number' name='number1' />\n"
+            + "    <input type='range' name='range1' />\n"
+            + "    <input type='search' name='search1' />\n"
+            + "    <input type='email' name='email1' />\n"
+            + "    <input type='tel' name='tel1' />\n"
+            + "    <input type='url' name='url1' />\n"
             + "</form>\n"
             + "</body></html>";
 
