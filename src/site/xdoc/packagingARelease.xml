@@ -126,9 +126,9 @@ mvn scm:tag
                     mvn -up -Dmaven.test.skip=true clean site package
                     <source>
 mvn javadoc:jar
-mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.16.jar
-mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.16-sources.jar -Dclassifier=sources
-mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.16-javadoc.jar -Dclassifier=javadoc
+mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.17.jar
+mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.17-sources.jar -Dclassifier=sources
+mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.17-javadoc.jar -Dclassifier=javadoc
 </source>
 					and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories">Sonatype OSS staging repository</a> to close and release the artifacts.
                     </li>

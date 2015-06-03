@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.17" date="???" description="FF38, Bugfixes">
+        <release version="2.17" date="Jun 3, 2015" description="FF38, Bugfixes">
+            <action type="update" dev="asashour">
+                CSS: cssparser updated to 0.9.16.
+            </action>
+            <action type="update" dev="asashour">
+                Update htmlunit-core-js to Rhino head of 03.06.2015 + custom patches.
+            </action>
             <action type="fix" dev="asashour" issue="1689">
                 JavaScript: fix WebSocket.readyState.
             </action>
@@ -76,9 +82,6 @@
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: execute onload handlers for dynamically created iframe as well when src is set to about:blank.
-            </action>
-            <action type="update" dev="asashour">
-                Update htmlunit-core-js to Rhino head of 07.05.2015 + custom patches.
             </action>
             <action type="add" dev="asashour" issue="1680">
                 JavaScript: implement MessageChannel.
