@@ -627,9 +627,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "true", "true", "89", "true", "true", "16" },
-            FF24 = { "true", "true", "115", "true", "true", "14" },
-            FF31 = { "true", "true", "94", "true", "true", "14" },
-            FF38 = { "true", "true", "94", "true", "true", "14" },
+            FF = { "true", "true", "94", "true", "true", "14" },
             IE8 = { "false", "false", "NaN", "false", "false", "NaN" },
             IE11 = { "true", "true", "63", "true", "true", "16" })
     public void heightsAndWidths() throws Exception {
@@ -654,7 +652,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "679", "1256", "662", "1239" },
-            FF24 = { "653", "1258", "636", "1241" },
             FF31 = { "674", "1258", "657", "1241" },
             FF38 = { "674", "1258", "657", "1241" },
             IE11 = { "705", "1256", "688", "1239" },
@@ -691,9 +688,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" },
-            FF38 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238" },
-            FF31 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238" },
-            FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1196" })
+            FF = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238" })
     @NotYetImplemented(FF)
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -968,7 +963,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "function", "5" },
-            FF24 = { "null", "function", "3" },
             IE8 = { "null", "function", "3" })
     public void onError() throws Exception {
         final String html
@@ -1189,9 +1183,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF24 = { "type: message", "bubbles: false", "cancelable: true", "data: hello",
-                "origin: ", "source: [object Window]", "lastEventId: " },
-            FF31 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
+    @Alerts(FF31 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: " },
             FF38 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: " },

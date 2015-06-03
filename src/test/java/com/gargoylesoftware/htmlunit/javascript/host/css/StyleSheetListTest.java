@@ -103,7 +103,6 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "undefined", "undefined", "undefined" },
-            FF24 = { "0", "undefined", "undefined", "exception for -2" },
             IE8 = { "0", "exception for 0", "exception for 46", "exception for -2" },
             IE11 = { "0", "undefined", "undefined", "undefined" })
     public void arrayIndexOutOfBoundAccess() throws Exception {

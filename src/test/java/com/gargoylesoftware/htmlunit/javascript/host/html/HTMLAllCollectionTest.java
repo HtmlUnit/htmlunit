@@ -498,7 +498,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Alerts(IE = { "[object HTMLAllCollection]", "[object HTMLAllCollection]" },
             IE8 = { "[object]", "exception" },
             CHROME = { "[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }" },
-            FF24 = { "[object HTML document.all class]", "exception" },
             FF31 = { "[object HTML document.all class]", "exception" },
             FF38 = { "[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}" })
     public void type() throws Exception {

@@ -194,8 +194,7 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "testConstructor",
-            FF24 = { "testConstructor", "test_regex" })
+    @Alerts("testConstructor")
     public void module() throws Exception {
         doTest("module.html", Arrays.asList(getExpectedAlerts()));
     }

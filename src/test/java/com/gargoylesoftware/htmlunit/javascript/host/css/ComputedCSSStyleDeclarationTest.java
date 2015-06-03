@@ -1033,7 +1033,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1240px", "auto" },
-            FF24 = { "1248px", "auto" },
             FF31 = { "1248px", "auto" },
             FF38 = { "1242px", "auto" },
             IE8 = { "auto", "auto" })

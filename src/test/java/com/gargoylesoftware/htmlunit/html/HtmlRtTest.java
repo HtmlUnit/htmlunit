@@ -35,7 +35,6 @@ public class HtmlRtTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = ", inline, block",
-            FF24 = "block, inline, inline",
             FF31 = "block, inline, inline",
             FF38 = "block, ruby-text, ruby-text",
             IE8 = "null, inline, inline",
@@ -71,7 +70,6 @@ public class HtmlRtTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = ", inline, block",
-            FF24 = "block, inline, inline",
             FF31 = "block, inline, inline",
             FF38 = "block, ruby-text, ruby-text",
             IE8 = "null, ruby-text, ruby-text",

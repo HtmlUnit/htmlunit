@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -55,7 +54,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { },
             FF38 = "SELECT;",
             IE = "SELECT;")
-    @NotYetImplemented({ FF24, FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME })
     public void clickSelect() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -792,10 +791,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLOptionsCollection]", "0", "exception", "0" },
-            FF24 = { "[object HTMLOptionsCollection]", "0", "1" },
             IE11 = { "[object HTMLSelectElement]", "0", "1" },
             IE8 = { "[object]", "0", "exception", "0" })
-    @NotYetImplemented({ FF24, IE11 })
+    @NotYetImplemented(IE11)
     public void without_new() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

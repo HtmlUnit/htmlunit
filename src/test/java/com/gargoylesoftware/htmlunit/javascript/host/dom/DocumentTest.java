@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -1685,7 +1684,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "object", "[object Event]", "false" },
-            FF24 = { "true", "object", "[object Event]", "true" },
             IE8 = "exception")
     public void createEvent_FF_Event() throws Exception {
         createEvent_FF("Event");
@@ -1696,7 +1694,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "object", "[object Event]", "false" },
-            FF24 = { "true", "object", "[object Event]", "true" },
             IE8 = "exception")
     public void createEvent_FF_Events() throws Exception {
         createEvent_FF("Events");
@@ -1707,7 +1704,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "object", "[object Event]", "false" },
-            FF24 = { "true", "object", "[object Event]", "true" },
             IE8 = "exception")
     public void createEvent_FF_HTMLEvents() throws Exception {
         createEvent_FF("HTMLEvents");
@@ -1888,7 +1884,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "0", "0" },
             FF = { "0", "1", "1" },
             IE8 = { "undefined", "undefined", "undefined" })
-    @BuggyWebDriver({ FF24, FF31 })
+    @BuggyWebDriver(FF31)
     @NotYetImplemented(CHROME)
     public void designMode_createsSelectionRange() throws Exception {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";

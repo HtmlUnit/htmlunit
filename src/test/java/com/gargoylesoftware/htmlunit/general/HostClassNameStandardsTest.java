@@ -164,8 +164,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF24 = "[object BoxObject]")
+    @Alerts("exception")
     public void boxObject() throws Exception {
         test("BoxObject");
     }
@@ -379,9 +378,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object ClientRect]",
             CHROME = "function ClientRect() { [native code] }",
-            FF24 = "function ClientRect() {\n    [native code]\n}",
-            FF31 = "exception",
-            FF38 = "exception",
+            FF = "exception",
             IE8 = "exception")
     public void clientRect() throws Exception {
         test("ClientRect");
@@ -924,7 +921,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLAllCollection]",
             CHROME = "function HTMLAllCollection() { [native code] }",
-            FF24 = "exception",
             FF31 = "exception",
             FF38 = "function HTMLAllCollection() {\n    [native code]\n}",
             IE8 = "exception")
@@ -2071,7 +2067,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object NamedNodeMap]",
             CHROME = "function NamedNodeMap() { [native code] }",
-            FF24 = "exception",
             FF31 = "exception",
             FF38 = "function NamedNodeMap() {\n    [native code]\n}")
     public void namedNodeMap() throws Exception {
@@ -3472,7 +3467,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF24 = "[object XPathNSResolver]",
             FF31 = "[object XPathNSResolver]")
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
@@ -3586,7 +3580,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE11 = "[object ClientRectList]",
-            FF24 = "function ClientRectList() {\n    [native code]\n}",
             CHROME = "function ClientRectList() { [native code] }")
     public void clientRectList() throws Exception {
         test("ClientRectList");

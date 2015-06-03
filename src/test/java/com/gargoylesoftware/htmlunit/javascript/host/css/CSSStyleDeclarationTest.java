@@ -79,7 +79,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = { "black", "pink", "color: pink; background: blue; foo: bar;" },
-            FF24 = { "black", "pink", "color: pink; background: none repeat scroll 0% 0% blue;" },
             FF31 = { "black", "pink", "color: pink; background: none repeat scroll 0% 0% blue;" },
             FF38 = { "black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
             CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203); background: blue;" },
@@ -238,7 +237,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "blue",
-            FF24 = "none repeat scroll 0% 0% blue",
             FF31 = "none repeat scroll 0% 0% blue",
             FF38 = "blue none repeat scroll 0% 0%",
             IE8 = "exception")

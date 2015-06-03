@@ -38,7 +38,6 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLElement]" },
-            FF24 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" },
             IE8 = { "[object]", "[object]" , "[object]" },
             IE11 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" })
     public void simpleScriptable() throws Exception {
@@ -70,7 +69,6 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLElement]" },
-        FF24 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" },
         IE8 = { "[object HTMLGenericElement]", "[object HTMLGenericElement]" , "[object HTMLGenericElement]" },
         IE11 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" })
     public void simpleScriptable_strict() throws Exception {

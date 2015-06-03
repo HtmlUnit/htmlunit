@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -156,8 +155,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF24 = "object")
+    @Alerts("undefined")
     public void boxObject() throws Exception {
         test("BoxObject");
     }
@@ -375,9 +373,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
-            FF24 = "function",
-            FF31 = "undefined",
-            FF38 = "undefined",
+            FF = "undefined",
             IE8 = "undefined")
     public void clientRect() throws Exception {
         test("ClientRect");
@@ -930,9 +926,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
-            FF24 = "undefined",
-            FF31 = "undefined",
-            FF38 = "function",
+            FF = "undefined",
             IE8 = "undefined")
     public void htmlAllCollection() throws Exception {
         test("HTMLAllCollection");
@@ -2116,9 +2110,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
-            FF24 = "undefined",
-            FF31 = "undefined",
-            FF38 = "function",
+            FF = "undefined",
             IE8 = "undefined")
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
@@ -3522,7 +3514,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF24 = "object",
             FF31 = "object")
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
@@ -3585,7 +3576,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
-    @NotYetImplemented(FF24)
     public void domRect() throws Exception {
         test("DOMRect");
     }
@@ -4464,7 +4454,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
-    @NotYetImplemented({ FF24, FF31 })
+    @NotYetImplemented(FF31)
     public void blob() throws Exception {
         test("Blob");
     }
@@ -4888,7 +4878,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF31 = "function",
             FF38 = "function",
             IE11 = "object")
-    @NotYetImplemented({ FF24, FF31 })
+    @NotYetImplemented(FF31)
     public void file() throws Exception {
         test("File");
     }

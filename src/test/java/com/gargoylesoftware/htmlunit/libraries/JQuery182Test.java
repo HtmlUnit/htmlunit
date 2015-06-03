@@ -1189,7 +1189,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
-        FF24 = "0, 2, 2",
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
@@ -1706,7 +1705,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 4, 4",
-        FF24 = "0, 4, 4",
         FF31 = "0, 4, 4",
         FF38 = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
@@ -3322,7 +3320,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
-        FF24 = "0, 2, 2",
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
@@ -3617,7 +3614,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 5, 5",
-        FF24 = "0, 5, 5",
         FF31 = "0, 5, 5",
         FF38 = "0, 5, 5",
         IE11 = "1, 4, 5",
@@ -3984,7 +3980,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 7, 7",
-        FF24 = "0, 7, 7",
         FF31 = "0, 7, 7",
         FF38 = "0, 7, 7",
         IE11 = "0, 7, 7",
@@ -4102,7 +4097,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2, 2, 4",
-        FF24 = "0, 4, 4",
         FF31 = "0, 4, 4",
         FF38 = "0, 4, 4",
         IE11 = "0, 4, 4",
@@ -6283,7 +6277,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
-        FF24 = "0, 1, 1",
         FF31 = "0, 1, 1",
         FF38 = "0, 1, 1",
         IE11 = "0, 1, 1",

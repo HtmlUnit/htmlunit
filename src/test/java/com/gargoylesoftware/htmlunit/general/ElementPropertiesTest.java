@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
@@ -870,7 +869,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "seekable,seeking,src,textTracks,"
                 + "volume",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
+    @NotYetImplemented({ CHROME, IE11, FF31, FF38 })
     public void audio() throws Exception {
         test("audio");
     }
@@ -1281,7 +1280,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             IE11 = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate",
             IE8 = "align,form")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
+    @NotYetImplemented({ CHROME, IE11, FF })
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -2110,7 +2109,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF38 = "max,position,value",
             IE11 = "form,max,position,value",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
+    @NotYetImplemented({ CHROME, IE11, FF })
     public void progress() throws Exception {
         test("progress");
     }
@@ -2247,7 +2246,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF31 = "media,src,type",
             IE11 = "media,src,type",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
+    @NotYetImplemented({ CHROME, IE11, FF })
     public void source() throws Exception {
         test("source");
     }
@@ -2539,7 +2538,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
+    @NotYetImplemented({ CHROME, IE11, FF })
     public void track() throws Exception {
         test("track");
     }
@@ -2620,7 +2619,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "preload,readyState,seekable,seeking,src,textTracks,videoHeight,videoWidth,volume,"
                 + "width",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
+    @NotYetImplemented({ CHROME, IE11, FF })
     public void video() throws Exception {
         test("video");
     }

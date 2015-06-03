@@ -111,7 +111,6 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "", "false", "false" },
-            FF24 = { "[object Event]", "", "true", "true" },
             IE8 = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -513,7 +512,6 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "load", "false", "false" },
-            FF24 = { "[object Event]", "load", "false", "true" },
             FF31 = { "[object Event]", "load", "false", "true" },
             IE8 = { "[object]", "load", "undefined", "undefined" })
     public void onload() throws Exception {
@@ -664,12 +662,6 @@ public class EventTest extends WebDriverTestCase {
                         "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
                         "e-25", "e-26", "e-27", "e-28", "e-29", "e-30", "e-31", "e-32",
                          "e-33" },
-            FF24 = { "400000", "1", "20000000", "2000", "8000", "40",
-                     "2", "80", "800", "800000", "1000", "8000000",
-                     "10000000", "100", "400", "200", "80000", "1000000", "8",
-                     "1", "20", "10", "8", "4", "2",
-                     "2000000", "10000", "4000000", "40000", "4000", "4", "20000", "100000",
-                     "200000" },
             FF31 = { "e-0", "1", "e-2", "e-3", "e-4", "e-5",
                      "2", "e-7", "e-8", "e-9", "e-10", "e-11",
                      "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
@@ -718,8 +710,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF24 = "40000000")
+    @Alerts("exception")
     public void text() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"

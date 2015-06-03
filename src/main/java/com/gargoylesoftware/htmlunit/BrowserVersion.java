@@ -134,17 +134,6 @@ public class BrowserVersion implements Serializable, Cloneable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /**
-     * Firefox 24 ESR.
-     * @since 2.14
-     * @deprecated as of 2.16
-     */
-    @Deprecated
-    public static final BrowserVersion FIREFOX_24 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20100101 Firefox/24.0",
-        (float) 24.0, "FF24", null);
-
-    /**
      * Firefox 31 ESR.
      * @since 2.16
      * @deprecated as of 2.17
@@ -193,19 +182,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER_8.initDefaultFeatures();
         INTERNET_EXPLORER_11.initDefaultFeatures();
 
-        FIREFOX_24.initDefaultFeatures();
         FIREFOX_31.initDefaultFeatures();
         FIREFOX_38.initDefaultFeatures();
-
-        FIREFOX_24.setBrowserLanguage("en-US");
-        FIREFOX_24.setVendor("");
-        FIREFOX_24.buildId_ = "20140923194127";
-        FIREFOX_24.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
-        FIREFOX_24.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_24.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_24.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
-        FIREFOX_24.setCssAcceptHeader("text/css,*/*;q=0.1");
 
         FIREFOX_31.setBrowserLanguage("en-US");
         FIREFOX_31.setVendor("");
@@ -243,7 +221,6 @@ public class BrowserVersion implements Serializable, Cloneable {
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
-        FIREFOX_24.getPlugins().add(flash);
         FIREFOX_31.getPlugins().add(flash);
         FIREFOX_38.getPlugins().add(flash);
 

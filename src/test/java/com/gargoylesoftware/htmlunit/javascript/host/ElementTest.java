@@ -1017,7 +1017,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "", "a b c" },
-            FF24 = { "null", "a b c" },
             FF31 = { "null", "a b c" },
             FF38 = { "", "a b c" },
             IE = { "undefined", "undefined" },

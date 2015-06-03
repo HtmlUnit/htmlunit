@@ -53,8 +53,6 @@ public class ConsoleTest {
          */
         @Test
         @Alerts(DEFAULT = { "false", "object", "true" },
-                FF24 = { "false", "object", "true" },
-                CHROME = { "false", "object", "true" },
                 IE8 = { "true", "undefined", "false" })
         public void prototype() throws Exception {
             final String html
