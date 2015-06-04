@@ -161,7 +161,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
         "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
 
-    /** Internet Explorer 11. Work In Progress!!! */
+    /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER_11 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
         "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE11", null);
