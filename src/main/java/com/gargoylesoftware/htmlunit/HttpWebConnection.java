@@ -689,18 +689,6 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Reads the content of the stream and saves it in memory or on the file system.
      * @param is the stream to read
-     * @return a wrapper around the downloaded content
-     * @throws IOException in case of read issues
-     * @deprecated as of 2.16, use {@link #downloadContent(InputStream, int)}
-     */
-    @Deprecated
-    public static DownloadedContent downloadContent(final InputStream is) throws IOException {
-        return downloadContent(is, 500 * 1024);
-    }
-
-    /**
-     * Reads the content of the stream and saves it in memory or on the file system.
-     * @param is the stream to read
      * @param maxInMemory the maximumBytes to store in memory, after which save to a local file
      * @return a wrapper around the downloaded content
      * @throws IOException in case of read issues
