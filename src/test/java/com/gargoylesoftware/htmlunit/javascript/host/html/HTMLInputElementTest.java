@@ -1089,6 +1089,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "§§URL§§" },
             IE8 = { "2", "§§URL§§?myName=" })
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void submitRequired() throws Exception {
         final String html
             = "<html><head><script>\n"
