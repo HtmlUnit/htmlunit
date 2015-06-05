@@ -875,7 +875,7 @@ public class HttpWebConnection implements WebConnection {
             final int maxConnPerRoute = (Integer) FieldUtils.readDeclaredField(builder, "maxConnPerRoute", true);
             HostnameVerifier hostnameVerifier = (HostnameVerifier)
                         FieldUtils.readDeclaredField(builder, "hostnameVerifier", true);
-            final SSLContext sslcontext = (SSLContext) FieldUtils.readDeclaredField(builder, "sslcontext", true);
+            final SSLContext sslcontext = (SSLContext) FieldUtils.readDeclaredField(builder, "sslContext", true);
 
             if (sslSocketFactory == null) {
                 final String[] supportedProtocols = systemProperties
