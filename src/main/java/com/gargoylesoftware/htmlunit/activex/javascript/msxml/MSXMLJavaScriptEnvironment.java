@@ -173,7 +173,6 @@ public class MSXMLJavaScriptEnvironment {
     }
 
     private static class FallbackCaller extends ScriptableObject {
-        private static final long serialVersionUID = 1402030469837200894L;
 
         @Override
         public Object get(final String name, final Scriptable start) {

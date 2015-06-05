@@ -1452,7 +1452,6 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * Servlet bouncing requests.
      */
     public static class BounceServlet extends HttpServlet {
-        private static final long serialVersionUID = -2408889391981343295L;
 
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)

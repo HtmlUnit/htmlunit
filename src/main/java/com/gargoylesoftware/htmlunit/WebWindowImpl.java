@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * @author Ronald Brill
  */
 public abstract class WebWindowImpl implements WebWindow {
-    private static final long serialVersionUID = 1272747208915903553L;
 
     private static final Log LOG = LogFactory.getLog(WebWindowImpl.class);
 

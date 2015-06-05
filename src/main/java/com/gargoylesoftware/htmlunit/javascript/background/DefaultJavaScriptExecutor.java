@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Ronald Brill
  */
 public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
-    private static final long serialVersionUID = 5677978210585334168L;
 
     // TODO: is there utility in not having these as transient?
     private final transient WeakReference<WebClient> webClient_;

@@ -72,7 +72,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**

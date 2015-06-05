@@ -44,7 +44,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @see MemoryLeakTest
  */
 class JavaScriptJobManagerImpl implements JavaScriptJobManager {
-    private static final long serialVersionUID = -4681836475956316533L;
 
     private static final String LINE_SEPARARATOR = System.getProperty("line.separator");
 

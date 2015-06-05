@@ -980,7 +980,6 @@ public class JavaScriptEngine {
     }
 
     private static class FallbackCaller extends ScriptableObject {
-        private static final long serialVersionUID = 5142592186670858001L;
 
         @Override
         public Object get(final String name, final Scriptable start) {
