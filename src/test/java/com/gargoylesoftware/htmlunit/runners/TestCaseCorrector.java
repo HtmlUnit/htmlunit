@@ -194,7 +194,7 @@ final class TestCaseCorrector {
             }
             else {
                 final List<String> allBrowsers =
-                        new ArrayList<>(Arrays.asList("CHROME", "IE8", "IE11", "FF24", "FF31"));
+                        new ArrayList<>(Arrays.asList("CHROME", "IE8", "IE11", "FF31", "FF38"));
                 for (final Iterator<String> it = allBrowsers.iterator(); it.hasNext();) {
                     if (it.next().equals(browserString)) {
                         it.remove();

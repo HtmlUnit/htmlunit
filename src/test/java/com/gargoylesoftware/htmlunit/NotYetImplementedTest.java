@@ -168,7 +168,6 @@ public class NotYetImplementedTest {
         int count = 0;
         int countIE8 = 0;
         int countIE11 = 0;
-        int countFF24 = 0;
         int countFF31 = 0;
         int countFF38 = 0;
         int countChrome = 0;
@@ -221,20 +220,15 @@ public class NotYetImplementedTest {
                 countIE11++;
             }
 
-            if (browser.contains("FF24")) {
-                countFF24++;
-            }
             if (browser.contains("FF31")) {
                 countFF31++;
             }
             if (browser.contains("FF38")) {
                 countFF38++;
             }
-            if (!browser.contains("FF24")
-                    && !browser.contains("FF31")
+            if (!browser.contains("FF31")
                     && !browser.contains("FF38")
                     && browser.contains("FF")) {
-                countFF24++;
                 countFF31++;
                 countFF38++;
             }
@@ -244,7 +238,6 @@ public class NotYetImplementedTest {
             if (browser.contains("All")) {
                 countIE8++;
                 countIE11++;
-                countFF24++;
                 countFF31++;
                 countFF38++;
                 countChrome++;
@@ -267,11 +260,6 @@ public class NotYetImplementedTest {
         overview.append("  <tr>\n");
         overview.append("    <td class='numeric'>").append(Integer.toString(countIE11)).append("</td>\n");
         overview.append("    <td>for IE11</td>\n");
-        overview.append("  </tr>\n");
-
-        overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countFF24)).append("</td>\n");
-        overview.append("    <td>for FF24</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");

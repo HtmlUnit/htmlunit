@@ -796,7 +796,7 @@ public class CodeStyleTest {
                 break;
 
             case "FF":
-                if (previousList.contains("FF24") || previousList.contains("FF31")) {
+                if (previousList.contains("FF31") || previousList.contains("FF38")) {
                     addFailure("FF must be before specifc FF version in "
                             + relativePath + ", line: " + (lineIndex + 1));
                 }
