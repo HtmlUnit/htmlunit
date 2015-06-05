@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Upgrade Apache HttpComponents to 4.5.
+            </action>
             <action type="remove" dev="asashour">
                 HtmlElement: mark .fireEvent() as internal API.
             </action>
