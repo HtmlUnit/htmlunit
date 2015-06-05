@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.ClipboardData;
 import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.gargoylesoftware.htmlunit.javascript.host.DeviceStorage;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.External;
 import com.gargoylesoftware.htmlunit.javascript.host.FontFace;
 import com.gargoylesoftware.htmlunit.javascript.host.Gamepad;
@@ -42,13 +41,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.GamepadButton;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
 import com.gargoylesoftware.htmlunit.javascript.host.ImageBitmap;
 import com.gargoylesoftware.htmlunit.javascript.host.InputMethodContext;
-import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageChannel;
 import com.gargoylesoftware.htmlunit.javascript.host.MessagePort;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeType;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeTypeArray;
-import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Namespace;
 import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Navigator;
@@ -204,6 +201,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceProximityEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceStorageChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ErrorEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventSource;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.FocusEvent;
@@ -211,6 +209,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.GamepadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.IDBVersionChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.InputEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MIDIConnectionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MIDIMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaEncryptedEvent;
@@ -219,6 +218,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MediaKeyMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaQueryListEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaStreamEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseScrollEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MozContactChangeEvent;
@@ -401,8 +401,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DOMPointReadOnly.class, DOMRectReadOnly.class, DOMRequest.class,
         DOMSettableTokenList.class, DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
         DragEvent.class, DynamicsCompressorNode.class,
-        Element.class, Enumerator.class, ErrorEvent.class, Event.class,
-        com.gargoylesoftware.htmlunit.javascript.host.event.Event.class, EventNode.class, EventSource.class,
+        Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,
         EventTarget.class, External.class, File.class, FileError.class, FileHandle.class, FileList.class,
         FileReader.class, FileRequest.class, Float32Array.class, Float64Array.class, FocusEvent.class, FontFace.class,
         FormChild.class, FormData.class, FormField.class, GainNode.class, Gamepad.class, GamepadButton.class,
@@ -440,7 +439,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IDBKeyRange.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class, IDBTransaction.class,
         IDBVersionChangeEvent.class, Image.class, ImageBitmap.class, ImageData.class, InputEvent.class,
         InputMethodContext.class, Int16Array.class, Int32Array.class, Int8Array.class, KeyboardEvent.class,
-        com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.class, LocalMediaStream.class,
+        LocalMediaStream.class,
         Location.class, LockedFile.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
         MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
         MediaKeyError.class, MediaKeyEvent.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
@@ -450,8 +449,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MediaStreamEvent.class, MediaStreamTrack.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
-        MimeType.class, MimeTypeArray.class, MouseEvent.class,
-        com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent.class, MouseScrollEvent.class,
+        MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
         MouseWheelEvent.class, MozContactChangeEvent.class, MozMmsEvent.class, MozMmsMessage.class,
         MozMobileMessageManager.class, MozMobileMessageThread.class, mozRTCIceCandidate.class,
         mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class,

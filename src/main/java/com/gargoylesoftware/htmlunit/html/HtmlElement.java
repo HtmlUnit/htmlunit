@@ -59,9 +59,9 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
+import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -891,6 +891,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Shortcut for {@link #fireEvent(Event)}.
      * @param eventType the event type (like "load", "click")
      * @return the execution result, or <code>null</code> if nothing is executed
@@ -900,6 +902,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Fires the event on the element. Nothing is done if JavaScript is disabled.
      * @param event the event to fire
      * @return the execution result, or <tt>null</tt> if nothing is executed
