@@ -163,10 +163,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
@@ -179,6 +177,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
 /**
  * The JavaScript object "HTMLElement" which is the base class for all HTML
@@ -306,7 +305,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private static int UniqueID_Counter_ = 1;
 
     private final Set<String> behaviors_ = new HashSet<>();
-    private BoxObject boxObject_; // lazy init
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_;
     private int scrollTop_;
@@ -1547,19 +1545,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public int getBufferDepth() {
         return getWindow().getScreen().getBufferDepth();
-    }
-
-    /**
-     * Returns the BoxObject for this element.
-     * @return the BoxObject for this element
-     */
-    public BoxObject getBoxObject() {
-        if (boxObject_ == null) {
-            boxObject_ = new BoxObject(this);
-            boxObject_.setParentScope(getWindow());
-            boxObject_.setPrototype(getPrototype(boxObject_.getClass()));
-        }
-        return boxObject_;
     }
 
     /**

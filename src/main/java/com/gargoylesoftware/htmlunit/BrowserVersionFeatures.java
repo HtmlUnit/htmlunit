@@ -121,7 +121,7 @@ public enum BrowserVersionFeatures {
     CSS_IMAGE_URL_QUOTED,
 
     /** The default value of the display property for the 'input' tags is 'inline-block'. */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     CSS_INPUT_DISPLAY_INLINE_BLOCK,
 
     /** The default value of the display property for the 'keygen' tag is always 'inline'. */
@@ -1727,7 +1727,7 @@ public enum BrowserVersionFeatures {
     JS_STORAGE_PRESERVED_INCLUDED,
 
     /** When addressing an item in a stylesheet list using a negative index an exception is thrown. */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX,
 
     /**
@@ -1943,10 +1943,6 @@ public enum BrowserVersionFeatures {
     /** Window.postMessage is sent when the targetOrigin port is different than the current port. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT,
-
-    /** Window.postMessage created cancelable event. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 24))
-    JS_WINDOW_POST_MESSAGE_CANCELABLE,
 
     /** Window.postMessage is synchronous. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

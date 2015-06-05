@@ -716,7 +716,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, works with ff24, fails with FF38
+    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, fails with FF38
     @Alerts(DEFAULT = { "0", "exception" },
             FF = { "1", "[object HTMLBodyElement]" },
             IE8 = "exception")
@@ -732,7 +732,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, works with ff24, fails with FF38
+    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, fails with FF38
     @Alerts(DEFAULT = { "0", "exception" },
             FF = { "1", "[object Text]" },
             IE8 = "exception")

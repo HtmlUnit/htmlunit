@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_CANCELABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -106,8 +105,7 @@ public class MessagePort extends EventTarget {
             final URL currentURL = getWindow().getWebWindow().getEnclosedPage().getUrl();
             final MessageEvent event = new MessageEvent();
             final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
-            final boolean cancelable = getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_CANCELABLE);
-            event.initMessageEvent(Event.TYPE_MESSAGE, false, cancelable, message, origin, "", getWindow(), transfer);
+            event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", getWindow(), transfer);
             event.setParentScope(port1_);
             event.setPrototype(getPrototype(event.getClass()));
 

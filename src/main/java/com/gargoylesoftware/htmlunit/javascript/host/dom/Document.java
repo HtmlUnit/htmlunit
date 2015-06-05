@@ -65,7 +65,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolver;
@@ -309,16 +308,6 @@ public class Document extends EventNode {
     @JsxFunction
     public Attr createAttribute(final String attributeName) {
         return (Attr) getPage().createAttribute(attributeName).getScriptObject();
-    }
-
-    /**
-     * Returns the {@link BoxObject} for the specific element.
-     *
-     * @param element target for BoxObject
-     * @return the BoxObject
-     */
-    public BoxObject getBoxObjectFor(final HTMLElement element) {
-        return element.getBoxObject();
     }
 
     /**
