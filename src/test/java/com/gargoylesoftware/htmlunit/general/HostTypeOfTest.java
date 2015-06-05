@@ -924,10 +924,10 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            CHROME = "function",
-            FF = "undefined",
-            IE8 = "undefined")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined",
+            IE11 = "object",
+            FF31 = "undefined")
     public void htmlAllCollection() throws Exception {
         test("HTMLAllCollection");
     }
@@ -2108,10 +2108,10 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            CHROME = "function",
-            FF = "undefined",
-            IE8 = "undefined")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined",
+            IE11 = "object",
+            FF31 = "undefined")
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
     }
