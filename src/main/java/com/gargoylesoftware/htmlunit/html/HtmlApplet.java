@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.APPLET_INLINE
 import java.applet.Applet;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -286,6 +287,7 @@ public class HtmlApplet extends HtmlElement {
                     archiveUrls_.add(archiveUrl);
                 }
             }
+            archiveUrls_ = Collections.unmodifiableList(archiveUrls_);
 
             // no archive attribute, single class
             if (null == archives || archives.length == 0) {
