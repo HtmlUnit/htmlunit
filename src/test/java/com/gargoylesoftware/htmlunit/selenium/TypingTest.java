@@ -55,6 +55,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -87,6 +88,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -117,6 +119,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -134,6 +137,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -151,6 +155,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -170,6 +175,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -184,6 +190,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -199,6 +206,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -218,6 +226,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -231,6 +240,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -247,6 +257,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -264,6 +275,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -284,6 +296,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -312,6 +325,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -320,6 +334,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
@@ -334,6 +349,7 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * A test.
      */
     @Test
     @NotYetImplemented
