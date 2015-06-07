@@ -2160,7 +2160,9 @@ public class HtmlPage extends SgmlPage {
 
         // if deep, clone the kids too, and re initialize parts of the clone
         if (deep) {
-            result.attributeListeners_ = null;
+            synchronized (lock_) {
+                result.attributeListeners_ = null;
+            }
             result.selectionRanges_ = new ArrayList<>(3);
             result.afterLoadActions_ = new ArrayList<>();
             result.frameElements_ = new TreeSet<>(documentPositionComparator);
