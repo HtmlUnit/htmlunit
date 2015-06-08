@@ -22,7 +22,7 @@
     <fileSets>
         <fileSet>
             <directory>${basedir}/src</directory>
-            <outputDirectory>/src</outputDirectory>
+            <outputDirectory>src</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>

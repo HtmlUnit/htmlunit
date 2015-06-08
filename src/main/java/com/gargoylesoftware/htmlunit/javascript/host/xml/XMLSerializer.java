@@ -153,7 +153,7 @@ public class XMLSerializer extends SimpleScriptable {
         }
         if (root instanceof CDATASection
             && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT)) {
-            final DomCDataSection domCData = root.getDomNodeOrDie();
+            final DomCDataSection domCData = (DomCDataSection) root.getDomNodeOrDie();
             final String data = domCData.getData();
             if (org.apache.commons.lang3.StringUtils.isNotBlank(data)) {
                 return StringUtils.escapeXmlChars(data);

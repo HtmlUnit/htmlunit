@@ -308,7 +308,7 @@ public class DOMImplementation extends SimpleScriptable {
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(document.getClass()));
         if (qualifiedName != null && !qualifiedName.isEmpty()) {
-            final XmlPage page = document.getDomNodeOrDie();
+            final XmlPage page = (XmlPage) document.getDomNodeOrDie();
             page.appendChild(page.createXmlElementNS("".equals(namespaceURI) ? null : namespaceURI, qualifiedName));
         }
         return document;

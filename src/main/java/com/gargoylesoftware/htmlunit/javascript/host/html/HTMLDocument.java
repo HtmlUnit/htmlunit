@@ -328,15 +328,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public <N extends DomNode> N getDomNodeOrDie() throws IllegalStateException {
+    public DomNode getDomNodeOrDie() throws IllegalStateException {
         try {
-            return (N) super.getDomNodeOrDie();
+            return super.getDomNodeOrDie();
         }
         catch (final IllegalStateException e) {
             final DomNode node = getDomNodeOrNullFromRealDocument();
             if (node != null) {
-                return (N) node;
+                return node;
             }
             throw Context.reportRuntimeError("No node attached to this object");
         }
@@ -346,8 +345,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     @Override
-    public <N extends DomNode> N getDomNodeOrNull() {
-        N node = super.getDomNodeOrNull();
+    public DomNode getDomNodeOrNull() {
+        DomNode node = super.getDomNodeOrNull();
         if (node == null) {
             node = getDomNodeOrNullFromRealDocument();
         }
@@ -364,8 +363,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      *
      * @return the real document's DOM node, or <tt>null</tt> if we're not emulating IE
      */
-    private <N extends DomNode> N getDomNodeOrNullFromRealDocument() {
-        N node = null;
+    private DomNode getDomNodeOrNullFromRealDocument() {
+        DomNode node = null;
         // don't use getWindow().getBrowserVersion() here because this is called
         // from getBrowserVersion() and results in endless loop
         if (getWindow().getWebWindow().getWebClient().getBrowserVersion()
@@ -657,7 +656,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             LOG.debug("write: " + content);
         }
 
-        final HtmlPage page = getDomNodeOrDie();
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
         if (!page.isBeingParsed()) {
             writeInCurrentDocument_ = false;
         }
@@ -688,7 +687,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private void scheduleImplicitClose() {
         if (!closePostponedAction_) {
             closePostponedAction_ = true;
-            final HtmlPage page = getDomNodeOrDie();
+            final HtmlPage page = (HtmlPage) getDomNodeOrDie();
             final WebWindow enclosingWindow = page.getEnclosingWindow();
             page.getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(page) {
                 @Override

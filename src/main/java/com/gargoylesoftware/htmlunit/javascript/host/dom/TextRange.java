@@ -147,7 +147,7 @@ public class TextRange extends SimpleScriptable {
             if (null == range_.getStartContainer() || null == range_.getEndContainer()) {
                 try {
                     final Window window = (Window) getParentScope();
-                    final HtmlPage page = window.getDomNodeOrDie();
+                    final HtmlPage page = (HtmlPage) window.getDomNodeOrDie();
                     return (Node) getScriptableFor(page.getBody());
                 }
                 catch (final Exception e) {

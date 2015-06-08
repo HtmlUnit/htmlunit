@@ -186,9 +186,8 @@ public class Attr extends Node {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     public DomAttr getDomNodeOrDie() throws IllegalStateException {
-        return super.getDomNodeOrDie();
+        return (DomAttr) super.getDomNodeOrDie();
     }
 
     /**

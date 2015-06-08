@@ -736,7 +736,7 @@ public class Node extends EventTarget {
      */
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getBaseName() {
-        final DomElement domElem = getDomNodeOrDie();
+        final DomElement domElem = (DomElement) getDomNodeOrDie();
         final boolean isXmlPage = domElem.getOwnerDocument() instanceof XmlPage;
         if (isXmlPage) {
             return domElem.getLocalName();

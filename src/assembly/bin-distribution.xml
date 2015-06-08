@@ -13,7 +13,7 @@
     <fileSets>
         <fileSet>
             <directory>${basedir}/target/site/apidocs</directory>
-            <outputDirectory>/apidocs</outputDirectory>
+            <outputDirectory>apidocs</outputDirectory>
         </fileSet>
     </fileSets>
     <dependencySets>

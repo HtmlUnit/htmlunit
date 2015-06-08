@@ -1430,7 +1430,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         //call click event first
-        final Page clickPage = click(shiftKey, ctrlKey, altKey);
+        final P clickPage = click(shiftKey, ctrlKey, altKey);
         if (clickPage != getPage()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("dblClick() is ignored, as click() loaded a different page.");

@@ -208,8 +208,7 @@ public class XMLDOMAttribute extends XMLDOMNode {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     public DomAttr getDomNodeOrDie() throws IllegalStateException {
-        return super.getDomNodeOrDie();
+        return (DomAttr) super.getDomNodeOrDie();
     }
 }

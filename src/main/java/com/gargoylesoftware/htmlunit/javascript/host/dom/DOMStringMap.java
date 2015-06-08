@@ -60,7 +60,7 @@ public final class DOMStringMap extends SimpleScriptable {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        final HtmlElement e = getDomNodeOrNull();
+        final HtmlElement e = (HtmlElement) getDomNodeOrNull();
         if (e != null) {
             final String value = e.getAttribute("data-" + decamelize(name));
             if (value != DomElement.ATTRIBUTE_NOT_DEFINED) {
@@ -78,7 +78,7 @@ public final class DOMStringMap extends SimpleScriptable {
             super.put(name, start, value);
         }
         else {
-            final HtmlElement e = getDomNodeOrNull();
+            final HtmlElement e = (HtmlElement) getDomNodeOrNull();
             if (e != null) {
                 e.setAttribute("data-" + decamelize(name), Context.toString(value));
             }
