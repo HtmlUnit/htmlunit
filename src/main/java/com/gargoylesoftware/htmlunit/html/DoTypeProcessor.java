@@ -53,33 +53,39 @@ abstract class DoTypeProcessor implements Serializable {
 
         final StringBuilder newValue = new StringBuilder(currentValue);
         int cursorPosition = selectionStart;
-        
+
         if (keyCode >= '\uE000' && keyCode <= '\uF8FF') {
             // nothing, this is private use area
             // see http://www.unicode.org/charts/PDF/UE000.pdf
         }
-        else switch (keyCode) {
-            case KeyboardEvent.DOM_VK_BACK_SPACE:
-                if (selectionStart > 0) {
-                    newValue.deleteCharAt(selectionStart - 1);
-                    cursorPosition = selectionStart - 1;
-                }
-                break;
+        else {
+            switch (keyCode) {
+                case KeyboardEvent.DOM_VK_SPACE:
+                    doType(currentValue, selectionStart, selectionEnd, ' ', shiftKey, ctrlKey, altKey);
+                    return;
 
-            case KeyboardEvent.DOM_VK_LEFT:
-                if (selectionStart > 0) {
-                    cursorPosition = selectionStart - 1;
-                }
-                break;
+                case KeyboardEvent.DOM_VK_BACK_SPACE:
+                    if (selectionStart > 0) {
+                        newValue.deleteCharAt(selectionStart - 1);
+                        cursorPosition = selectionStart - 1;
+                    }
+                    break;
 
-            case KeyboardEvent.DOM_VK_RIGHT:
-                if (selectionStart > 0) {
-                    cursorPosition = selectionStart + 1;
-                }
-                break;
+                case KeyboardEvent.DOM_VK_LEFT:
+                    if (selectionStart > 0) {
+                        cursorPosition = selectionStart - 1;
+                    }
+                    break;
 
-            default:
-                break;
+                case KeyboardEvent.DOM_VK_RIGHT:
+                    if (selectionStart > 0) {
+                        cursorPosition = selectionStart + 1;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         typeDone(newValue.toString(), cursorPosition);

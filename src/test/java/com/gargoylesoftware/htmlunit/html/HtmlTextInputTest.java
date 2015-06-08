@@ -300,6 +300,8 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
         assertEquals("tet", t.getValueAttribute());
         t.type('s');
         assertEquals("test", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_SPACE);
+        assertEquals("tes t", t.getValueAttribute());
     }
 
 }
