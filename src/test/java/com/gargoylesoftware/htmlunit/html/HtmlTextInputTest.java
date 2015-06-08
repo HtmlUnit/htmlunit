@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 
 /**
  * Tests for {@link HtmlTextInput}.
@@ -281,6 +282,24 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlPage page2 = clone(page);
         assertNotNull(page2);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeLeftArrow() throws Exception {
+        final String html = "<html><head></head><body><input id='t'/></body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextInput t = page.getHtmlElementById("t");
+        t.type('t');
+        t.type('e');
+        t.type('t');
+        assertEquals("tet", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        assertEquals("tet", t.getValueAttribute());
+        t.type('s');
+        assertEquals("test", t.getValueAttribute());
     }
 
 }

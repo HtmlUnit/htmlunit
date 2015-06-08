@@ -639,20 +639,25 @@ public abstract class HtmlElement extends DomElement {
 
         final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey);
 
-        @SuppressWarnings("unused")
         final ScriptResult keyDownResult = fireEvent(keyDown);
 
         final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+        final Event keyPress;
+        final ScriptResult keyPressResult;
         if (browserVersion.hasFeature(KEYBOARD_EVENT_SPECIAL_KEYPRESS)) {
-            final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode, shiftKey, ctrlKey, altKey);
+            keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode, shiftKey, ctrlKey, altKey);
 
-            @SuppressWarnings("unused")
-            final ScriptResult keyPressResult = fireEvent(keyPress);
+            keyPressResult = fireEvent(keyPress);
+        }
+        else {
+            keyPress = null;
+            keyPressResult = null;
         }
 
-        //if (!keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
-        //    doType(keyCode, shiftKey, ctrlKey, altKey);
-        //}
+        if (!keyDown.isAborted(keyDownResult)
+                && (keyPress == null || !keyPress.isAborted(keyPressResult))) {
+            doType(keyCode, shiftKey, ctrlKey, altKey);
+        }
 
         if (browserVersion.hasFeature(EVENT_INPUT)
             && (this instanceof HtmlTextInput
@@ -688,6 +693,20 @@ public abstract class HtmlElement extends DomElement {
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
      */
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        // Empty.
+    }
+
+    /**
+     * Performs the effective type action, called after the keyPress event and before the keyUp event.
+     *
+     * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
+     *
+     * @param keyCode the key code wish to simulate typing
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
+     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     */
+    protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         // Empty.
     }
 

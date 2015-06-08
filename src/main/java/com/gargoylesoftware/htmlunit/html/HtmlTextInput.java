@@ -77,6 +77,15 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
+    protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        doTypeProcessor_.doType(getValueAttribute(), getSelectionStart(), getSelectionEnd(),
+            keyCode, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected boolean isSubmittableByEnter() {
         return true;
     }
