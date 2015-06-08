@@ -58,6 +58,7 @@ public class MutationObserver extends SimpleScriptable implements CharacterDataC
 
     /**
      * Creates an instance.
+     * @param function the function to observe
      */
     @JsxConstructor
     public MutationObserver(final Function function) {
