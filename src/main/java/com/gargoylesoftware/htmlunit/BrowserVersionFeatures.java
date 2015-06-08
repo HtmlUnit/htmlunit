@@ -854,7 +854,7 @@ public enum BrowserVersionFeatures {
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
 
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DATE_LOCALE_DATE_SHORT,
 
     /** <code>Date.toLocaleDateString()</code> returns a short form (dd.MM.yyyy) with some weird special chars. */
