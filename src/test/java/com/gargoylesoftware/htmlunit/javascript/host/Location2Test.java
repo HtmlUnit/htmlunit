@@ -743,6 +743,9 @@ public class Location2Test extends WebDriverTestCase {
 
         // click an anchor with href and target
         driver.findElement(By.id("link")).click();
+        // because real browsers are doing the open async, we have to be a bit patient
+        Thread.sleep(DEFAULT_WAIT_TIME);
+
         assertEquals(2, conn.getRequestCount());
         Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
