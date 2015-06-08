@@ -6933,7 +6933,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF31 = "[object]",
+            FF31 = "object",
             IE = "undefined")
     @NotYetImplemented(FF31)
     public void xPathExpression() throws Exception {
