@@ -144,7 +144,6 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     /**
      * Returns the DOM node that corresponds to this JavaScript object or throw
      * an exception if one cannot be found.
-     * @param <N> the node type
      * @return the DOM node
      * @exception IllegalStateException If the DOM node could not be found.
      */
@@ -159,7 +158,6 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     /**
      * Returns the DOM node that corresponds to this JavaScript object
      * or null if a node hasn't been set.
-     * @param <N> the node type
      * @return the DOM node or null
      */
     public DomNode getDomNodeOrNull() {
