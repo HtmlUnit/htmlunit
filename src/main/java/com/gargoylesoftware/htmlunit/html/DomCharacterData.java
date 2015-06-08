@@ -42,7 +42,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
      */
     public DomCharacterData(final SgmlPage page, final String data) {
         super(page);
-        data_ = data;
+        setData(data);
     }
 
     /**
@@ -58,7 +58,9 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
      * @param data the new data character string
      */
     public void setData(final String data) {
+        final String oldData = data_;
         data_ = data;
+        fireCharacterDataChanged(this, oldData);
     }
 
     /**
@@ -67,7 +69,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
      */
     @Override
     public void setNodeValue(final String newValue) {
-        data_ = newValue;
+        setData(newValue);
     }
 
     /**
@@ -75,7 +77,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
      */
     @Override
     public void setTextContent(final String textContent) {
-        data_ = textContent;
+        setData(textContent);
     }
 
     /**
@@ -110,11 +112,11 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
         if (count >= 0) {
             final int fromLeft = offset + count;
             if (fromLeft < data_.length()) {
-                data_ = data + data_.substring(fromLeft, data_.length());
+                setData(data + data_.substring(fromLeft, data_.length()));
                 return;
             }
         }
-        data_ = data;
+        setData(data);
     }
 
     /**
@@ -123,7 +125,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
      * @param arg the string to insert
      */
     public void insertData(final int offset, final String arg) {
-        data_ = new StringBuilder(data_).insert(offset, arg).toString();
+        setData(new StringBuilder(data_).insert(offset, arg).toString());
     }
 
     /**

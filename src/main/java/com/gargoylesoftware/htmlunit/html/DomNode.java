@@ -173,7 +173,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private boolean directlyAttachedToPage_;
 
     private Collection<DomChangeListener> domListeners_;
-    private final Object domListeners_lock_ = new Serializable() { };
+    private final Object listeners_lock_ = new Serializable() { };
+
+    /** The listeners which are to be notified of characterData change. */
+    private Collection<CharacterDataChangeListener> characterDataListeners_;
 
     /**
      * Creates a new instance.
@@ -1620,7 +1623,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void addDomChangeListener(final DomChangeListener listener) {
         WebAssert.notNull("listener", listener);
-        synchronized (domListeners_lock_) {
+        synchronized (listeners_lock_) {
             if (domListeners_ == null) {
                 domListeners_ = new LinkedHashSet<>();
             }
@@ -1637,7 +1640,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void removeDomChangeListener(final DomChangeListener listener) {
         WebAssert.notNull("listener", listener);
-        synchronized (domListeners_lock_) {
+        synchronized (listeners_lock_) {
             if (domListeners_ != null) {
                 domListeners_.remove(listener);
             }
@@ -1667,6 +1670,60 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Adds a {@link CharacterDataChangeListener} to the listener list. The listener is registered for
+     * all descendants of this node.
+     *
+     * @param listener the character data change listener to be added
+     * @see #removeCharacterDataChangeListener(DomChangeListener)
+     */
+    public void addCharacterDataChangeListener(final CharacterDataChangeListener listener) {
+        WebAssert.notNull("listener", listener);
+        synchronized (listeners_lock_) {
+            if (characterDataListeners_ == null) {
+                characterDataListeners_ = new LinkedHashSet<>();
+            }
+            characterDataListeners_.add(listener);
+        }
+    }
+
+    /**
+     * Removes a {@link CharacterDataChangeListener} from the listener list. The listener is deregistered for
+     * all descendants of this node.
+     *
+     * @param listener the Character Data change listener to be removed
+     * @see #addCharacterDataChangeListener(DomChangeListener)
+     */
+    public void removeCharacterDataChangeListener(final CharacterDataChangeListener listener) {
+        WebAssert.notNull("listener", listener);
+        synchronized (listeners_lock_) {
+            if (characterDataListeners_ != null) {
+                characterDataListeners_.remove(listener);
+            }
+        }
+    }
+
+    /**
+     * Support for reporting Character Data changes.
+     *
+     * Note that this method recursively calls this node's parent's {@link #fireCharacterDataChanged}.
+     *
+     * @param charcterData the character data that was changed
+     * @param oldValue the old value
+     */
+    protected void fireCharacterDataChanged(final DomCharacterData charcterData, final String oldValue) {
+        final List<CharacterDataChangeListener> listeners = safeGetCharacterDataListeners();
+        if (listeners != null) {
+            final CharacterDataChangeEvent event = new CharacterDataChangeEvent(charcterData, oldValue);
+            for (final CharacterDataChangeListener listener : listeners) {
+                listener.characterDataChanged(event);
+            }
+        }
+        if (parent_ != null) {
+            parent_.fireCharacterDataChanged(charcterData, oldValue);
+        }
+    }
+
+    /**
      * Support for reporting DOM changes. This method can be called when a node has been deleted and it
      * will send the appropriate {@link DomChangeEvent} to any registered {@link DomChangeListener}s.
      *
@@ -1689,9 +1746,18 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     private List<DomChangeListener> safeGetDomListeners() {
-        synchronized (domListeners_lock_) {
+        synchronized (listeners_lock_) {
             if (domListeners_ != null) {
                 return new ArrayList<>(domListeners_);
+            }
+            return null;
+        }
+    }
+
+    private List<CharacterDataChangeListener> safeGetCharacterDataListeners() {
+        synchronized (listeners_lock_) {
+            if (characterDataListeners_ != null) {
+                return new ArrayList<>(characterDataListeners_);
             }
             return null;
         }
