@@ -9,7 +9,7 @@
     <body>
         <release version="2.18" date="???" description="Bugfixes">
             <action type="add" dev="asashour">
-                JavaScript: implement TextRange.compareEndPoints().
+                JavaScript: implement TextRange.compareEndPoints() and .move().
             </action>
             <action type="fix" dev="asashour">
                 HtmlTextInput: handle typing arrow keys.

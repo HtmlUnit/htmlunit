@@ -206,6 +206,18 @@ public class TextRange extends SimpleScriptable {
     }
 
     /**
+     * Collapses the given text range and moves the empty range by the given number of units.
+     * @param unit specifies the units to move
+     * @param count the number of units to move
+     * @return the number of units moved
+     */
+    @JsxFunction
+    public int move(final String unit, final Object count) {
+        collapse(true);
+        return moveStart(unit, count);
+    }
+
+    /**
      * Changes the end position of the range.
      * @param unit specifies the units to move
      * @param count the number of units to move
