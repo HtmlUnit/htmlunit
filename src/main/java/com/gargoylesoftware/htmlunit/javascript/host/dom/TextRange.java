@@ -46,9 +46,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author David Gileadi
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+    @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+})
 public class TextRange extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(TextRange.class);
@@ -95,11 +95,11 @@ public class TextRange extends SimpleScriptable {
     @JsxSetter
     public void setText(final String text) {
         if (range_.getStartContainer() == range_.getEndContainer()
-            && range_.getStartContainer() instanceof SelectableTextInput) {
+                && range_.getStartContainer() instanceof SelectableTextInput) {
             final SelectableTextInput input = (SelectableTextInput) range_.getStartContainer();
             final String oldValue = input.getText();
             input.setText(oldValue.substring(0, input.getSelectionStart()) + text
-                + oldValue.substring(input.getSelectionEnd()));
+                    + oldValue.substring(input.getSelectionEnd()));
         }
     }
 
@@ -197,7 +197,7 @@ public class TextRange extends SimpleScriptable {
             c = (int) Context.toNumber(count);
         }
         if (range_.getStartContainer() == range_.getEndContainer()
-            && range_.getStartContainer() instanceof SelectableTextInput) {
+                && range_.getStartContainer() instanceof SelectableTextInput) {
             final SelectableTextInput input = (SelectableTextInput) range_.getStartContainer();
             c = constrainMoveBy(c, range_.getStartOffset(), input.getText().length());
             range_.setStart(input, range_.getStartOffset() + c);
@@ -222,7 +222,7 @@ public class TextRange extends SimpleScriptable {
             c = (int) Context.toNumber(count);
         }
         if (range_.getStartContainer() == range_.getEndContainer()
-            && range_.getStartContainer() instanceof SelectableTextInput) {
+                && range_.getStartContainer() instanceof SelectableTextInput) {
             final SelectableTextInput input = (SelectableTextInput) range_.getStartContainer();
             c = constrainMoveBy(c, range_.getEndOffset(), input.getText().length());
             range_.setEnd(input, range_.getEndOffset() + c);
@@ -258,15 +258,15 @@ public class TextRange extends SimpleScriptable {
         }
         final short startComparison = start.compareDocumentPosition(otherStart);
         final boolean startNodeBefore = startComparison == 0
-            || (startComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0
-            || (startComparison & Node.DOCUMENT_POSITION_PRECEDING) != 0;
+                || (startComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0
+                || (startComparison & Node.DOCUMENT_POSITION_PRECEDING) != 0;
         if (startNodeBefore && (start != otherStart || range_.getStartOffset() <= otherRange.getStartOffset())) {
             final org.w3c.dom.Node end = range_.getEndContainer();
             final org.w3c.dom.Node otherEnd = otherRange.getEndContainer();
             final short endComparison = end.compareDocumentPosition(otherEnd);
             final boolean endNodeAfter = endComparison == 0
-                || (endComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0
-                || (endComparison & Node.DOCUMENT_POSITION_FOLLOWING) != 0;
+                    || (endComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0
+                    || (endComparison & Node.DOCUMENT_POSITION_FOLLOWING) != 0;
             if (endNodeAfter && (end != otherEnd || range_.getEndOffset() >= otherRange.getEndOffset())) {
                 return true;
             }
@@ -344,4 +344,37 @@ public class TextRange extends SimpleScriptable {
         return false;
     }
 
+    /**
+     * Compares an end point of a TextRange object with an end point of another range.
+     * @param how how to compare
+     * @param sourceRange the other range
+     * @return the result
+     */
+    @JsxFunction
+    public int compareEndPoints(final String how, final TextRange sourceRange) {
+        final org.w3c.dom.Node start;
+        final org.w3c.dom.Node otherStart;
+        switch (how) {
+            case "StartToEnd":
+                start = range_.getStartContainer();
+                otherStart = sourceRange.range_.getEndContainer();
+                break;
+
+            case "StartToStart":
+                start = range_.getStartContainer();
+                otherStart = sourceRange.range_.getStartContainer();
+                break;
+
+            case "EndToStart":
+                start = range_.getEndContainer();
+                otherStart = sourceRange.range_.getStartContainer();
+                break;
+
+            default:
+                start = range_.getEndContainer();
+                otherStart = sourceRange.range_.getEndContainer();
+                break;
+        }
+        return start.compareDocumentPosition(otherStart);
+    }
 }
