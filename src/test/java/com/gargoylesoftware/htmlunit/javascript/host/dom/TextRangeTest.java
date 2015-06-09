@@ -383,4 +383,31 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            IE8 = "0")
+    public void compareEndPoints() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (document.selection) {\n"
+            + "          var r1 = document.selection.createRange();\n"
+            + "          var r2 = document.selection.createRange();\n"
+            + "          alert(r1.compareEndPoints('StartToStart', r2));\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

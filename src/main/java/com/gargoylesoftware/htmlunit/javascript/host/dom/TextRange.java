@@ -375,6 +375,9 @@ public class TextRange extends SimpleScriptable {
                 otherStart = sourceRange.range_.getEndContainer();
                 break;
         }
+        if (start == null || otherStart == null) {
+            return 0;
+        }
         return start.compareDocumentPosition(otherStart);
     }
 }
