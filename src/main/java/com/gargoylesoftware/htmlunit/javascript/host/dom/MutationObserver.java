@@ -23,10 +23,14 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
 
 import com.gargoylesoftware.htmlunit.html.CharacterDataChangeEvent;
 import com.gargoylesoftware.htmlunit.html.CharacterDataChangeListener;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -40,11 +44,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-public class MutationObserver extends SimpleScriptable implements CharacterDataChangeListener {
+public class MutationObserver extends SimpleScriptable implements HtmlAttributeChangeListener,
+        CharacterDataChangeListener {
 
     private Function function_;
     private Node node_;
     private boolean attaributes_;
+    private boolean attributeOldValue_;
+    private NativeArray attributeFilter_;
     private boolean childList_;
     private boolean characterData_;
     private boolean characterDataOldValue_;
@@ -74,10 +81,16 @@ public class MutationObserver extends SimpleScriptable implements CharacterDataC
     public void observe(final Node node, final NativeObject options) {
         node_ = node;
         attaributes_ = Boolean.TRUE.equals(options.get("attributes"));
+        attributeOldValue_ = Boolean.TRUE.equals(options.get("attributeOldValue"));
         childList_ = Boolean.TRUE.equals(options.get("childList"));
         characterData_ = Boolean.TRUE.equals(options.get("characterData"));
         characterDataOldValue_ = Boolean.TRUE.equals(options.get("characterDataOldValue"));
         subtree_ = Boolean.TRUE.equals(options.get("subtree"));
+        attributeFilter_ = (NativeArray) options.get("attributeFilter");
+
+        if (attaributes_) {
+            ((HtmlElement) node_.getDomNodeOrDie()).addHtmlAttributeChangeListener(this);
+        }
         if (characterData_) {
             node.getDomNodeOrDie().addCharacterDataChangeListener(this);
         }
@@ -88,6 +101,9 @@ public class MutationObserver extends SimpleScriptable implements CharacterDataC
      */
     @JsxFunction
     public void disconnect() {
+        if (attaributes_) {
+            ((HtmlElement) node_.getDomNodeOrDie()).removeHtmlAttributeChangeListener(this);
+        }
         if (characterData_) {
             node_.getDomNodeOrDie().removeCharacterDataChangeListener(this);
         }
@@ -98,16 +114,63 @@ public class MutationObserver extends SimpleScriptable implements CharacterDataC
      */
     @Override
     public void characterDataChanged(final CharacterDataChangeEvent event) {
-        final MutationRecord mutationRecord = new MutationRecord();
-        final Scriptable scope = getParentScope();
-        mutationRecord.setParentScope(scope);
-        mutationRecord.setPrototype(getPrototype(mutationRecord.getClass()));
+        final ScriptableObject target = event.getCharacterData().getScriptObject();
+        if (subtree_ || target == node_) {
+            final MutationRecord mutationRecord = new MutationRecord();
+            final Scriptable scope = getParentScope();
+            mutationRecord.setParentScope(scope);
+            mutationRecord.setPrototype(getPrototype(mutationRecord.getClass()));
 
-        mutationRecord.setTarget(event.getCharacterData().getScriptObject());
-        mutationRecord.setOldValue(event.getOldValue());
+            mutationRecord.setType("characterData");
+            mutationRecord.setTarget(target);
+            if (characterDataOldValue_) {
+                mutationRecord.setOldValue(event.getOldValue());
+            }
 
-        final NativeArray array = new NativeArray(new Object[] {mutationRecord});
-        ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
-        function_.call(Context.getCurrentContext(), scope, this, new Object[] {array});
+            final NativeArray array = new NativeArray(new Object[] {mutationRecord});
+            ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
+            function_.call(Context.getCurrentContext(), scope, this, new Object[] {array});
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void attributeAdded(final HtmlAttributeChangeEvent event) {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void attributeRemoved(final HtmlAttributeChangeEvent event) {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+        final HtmlElement target = event.getHtmlElement();
+        if (subtree_ || target == node_.getDomNodeOrDie()) {
+            final String attributeName = event.getName();
+            if (attributeFilter_ == null || attributeFilter_.contains(attributeName)) {
+                final MutationRecord mutationRecord = new MutationRecord();
+                final Scriptable scope = getParentScope();
+                mutationRecord.setParentScope(scope);
+                mutationRecord.setPrototype(getPrototype(mutationRecord.getClass()));
+
+                mutationRecord.setType("attributes");
+                mutationRecord.setTarget(target.getScriptObject());
+                if (attributeOldValue_) {
+                    mutationRecord.setOldValue(event.getValue());
+                }
+
+                final NativeArray array = new NativeArray(new Object[] {mutationRecord});
+                ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
+                function_.call(Context.getCurrentContext(), scope, this, new Object[] {array});
+            }
+        }
     }
 }
