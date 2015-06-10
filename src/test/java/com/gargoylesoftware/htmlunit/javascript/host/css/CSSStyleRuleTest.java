@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -117,9 +117,9 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = "false",
-            IE11 = "")
-    @NotYetImplemented({ IE8, CHROME })
+    @Alerts(DEFAULT = "undefined",
+            IE = "false")
+    @NotYetImplemented(IE)
     public void readOnly() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -136,9 +136,37 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[1];\n"
-                + "    if (!r.type) {\n"
-                + "      alert(r.readOnly);\n"
-                + "    }\n"
+                + "    alert(r.readOnly);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "undefined")
+    public void type() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  BODY { background-color: white; color: black; }\n"
+                + "  H1 { font: 8pt Arial bold; }\n"
+                + "  P  { font: 10pt Arial; text-indent: 0.5in; }\n"
+                + "  A  { text-decoration: none; color: blue; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test(){\n"
+                + "    var rules;\n"
+                + "    if (document.styleSheets[0].cssRules)\n"
+                + "      rules = document.styleSheets[0].cssRules;\n"
+                + "    else\n"
+                + "      rules = document.styleSheets[0].rules;\n"
+                + "    var r = rules[1];\n"
+                + "    alert(r.type);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -184,7 +212,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "" },
             IE8 = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void colon() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

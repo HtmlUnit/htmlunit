@@ -123,7 +123,7 @@ public class CSSRule extends SimpleScriptable {
      * Returns the type of the rule.
      * @return the type of the rule.
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public short getType() {
         return rule_.getType();
     }
