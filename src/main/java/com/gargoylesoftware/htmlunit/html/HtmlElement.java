@@ -693,7 +693,28 @@ public abstract class HtmlElement extends DomElement {
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
      */
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        // Empty.
+        final HTMLElement scriptElement = (HTMLElement) getScriptObject();
+        if (scriptElement.getIsContentEditable()) {
+            final DomNodeList<DomNode> children = getChildNodes();
+            if (!children.isEmpty()) {
+                final DomNode node = children.get(children.size() - 1);
+                if (node instanceof DomText) {
+                    ((DomText) node).setData(((DomText) node).getData() + c);
+                    return;
+                }
+                if (node instanceof HtmlElement) {
+                    try {
+                        ((HtmlElement) node).type(c, shiftKey, ctrlKey, altKey);
+                        return;
+                    }
+                    catch (final IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            final DomText domText = new DomText(getPage(), String.valueOf(c));
+            appendChild(domText);
+        }
     }
 
     /**
