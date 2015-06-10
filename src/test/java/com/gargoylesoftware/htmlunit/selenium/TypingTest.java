@@ -45,7 +45,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testShouldBeAbleToUseArrowKeys() throws Exception {
+    public void shouldBeAbleToUseArrowKeys() throws Exception {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement keyReporter = driver.findElement(By.id("keyReporter"));
@@ -59,7 +59,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testShouldReportKeyCodeOfArrowKeys() {
+    public void shouldReportKeyCodeOfArrowKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
@@ -92,7 +92,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testShouldReportKeyCodeOfArrowKeysUpDownEvents() {
+    public void shouldReportKeyCodeOfArrowKeysUpDownEvents() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
@@ -122,7 +122,7 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    public void testNumericShiftKeys() {
+    public void numericShiftKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
@@ -140,7 +140,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testUppercaseAlphaKeys() {
+    public void uppercaseAlphaKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
@@ -228,7 +228,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testSpecialSpaceKeys() {
+    public void specialSpaceKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement element = driver.findElement(By.id("keyReporter"));
@@ -242,7 +242,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testNumberpadKeys() {
+    public void numberpadKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement element = driver.findElement(By.id("keyReporter"));
@@ -259,7 +259,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testShiftSelectionDeletes() {
+    public void shiftSelectionDeletes() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement element = driver.findElement(By.id("keyReporter"));
@@ -277,7 +277,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testChordControlHomeShiftEndDelete() {
+    public void chordControlHomeShiftEndDelete() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
@@ -298,7 +298,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testChordReveseShiftHomeSelectionDeletes() {
+    public void chordReveseShiftHomeSelectionDeletes() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
@@ -327,7 +327,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testChordControlCutAndPaste() {
+    public void chordControlCutAndPaste() {
         Assert.fail();
     }
 
@@ -351,7 +351,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testNonPrintableCharactersShouldWorkWithContentEditableOrDesignModeSet() {
+    public void nonPrintableCharactersShouldWorkWithContentEditableOrDesignModeSet() {
         final WebDriver driver = getWebDriver("/rich_text.html");
 
         driver.switchTo().frame("editFrame");

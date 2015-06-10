@@ -37,7 +37,7 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "20%,*", "*,*" })
-    public void testCols() throws Exception {
+    public void cols() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
             + "<script>\n"

@@ -67,7 +67,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "object")
     @NotYetImplemented(IE8)
-    public void testToStringFunction() throws Exception {
+    public void toStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(typeof document.links.toString);\n"
@@ -185,7 +185,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "false" },
             IE = {"true", "true" })
-    public void testTags() throws Exception {
+    public void tags() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.all.tags != undefined);\n"

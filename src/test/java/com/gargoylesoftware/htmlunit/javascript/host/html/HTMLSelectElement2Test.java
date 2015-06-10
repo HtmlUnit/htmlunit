@@ -51,7 +51,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNoOnchangeFromJS() throws Exception {
+    public void noOnchangeFromJS() throws Exception {
         final String html = "<html><head><title>Test infinite loop on js onchange</title></head>\n"
             + "<body><form name='myForm'>\n"
             + "<select name='a' onchange='this.form.b.selectedIndex=0'>\n"
@@ -150,7 +150,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSelectedIndexReset() throws Exception {
+    public void selectedIndexReset() throws Exception {
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<body onload='document.forms[0].testSelect.selectedIndex = -1; "

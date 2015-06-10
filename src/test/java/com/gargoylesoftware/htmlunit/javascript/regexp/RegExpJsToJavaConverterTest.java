@@ -364,7 +364,7 @@ public class RegExpJsToJavaConverterTest {
      * Verifies that curly braces can be used non escaped in JS regexp.
      */
     @Test
-    public void testEscapeCurlyBraces() {
+    public void escapeCurlyBraces() {
         final RegExpJsToJavaConverter regExpJsToJavaConverter = new RegExpJsToJavaConverter();
 
         Assert.assertEquals("\\{", regExpJsToJavaConverter.convert("{"));
