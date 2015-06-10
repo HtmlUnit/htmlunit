@@ -18,6 +18,9 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -152,5 +155,25 @@ public class HtmlElement2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    //TODO: fails because of HTMLElement.getContentEditable doesn't detect DomElement.ATTRIBUTE_VALUE_EMPTY
+    // this could be a general attribute issue
+    public void contentEditable() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body contentEditable><p>initial</p></body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement body = driver.findElement(By.xpath("//body"));
+        body.clear();
+        body.sendKeys("something");
+        assertEquals("something", body.getText());
     }
 }
