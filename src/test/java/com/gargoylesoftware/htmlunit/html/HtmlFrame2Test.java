@@ -284,7 +284,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("loaded")
-    public void testLineBreaksInUrl() throws Exception {
+    public void lineBreaksInUrl() throws Exception {
         final String html
             = "<html><head>\n"
             + "</head>\n"
@@ -309,7 +309,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("loaded")
-    public void testLineBreaksInUrlIFrame() throws Exception {
+    public void lineBreaksInUrlIFrame() throws Exception {
         final String html
             = "<html><head>\n"
             + "</head>\n"

@@ -178,7 +178,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    public void testScriptUnderIFrame() throws Exception {
+    public void scriptUnderIFrame() throws Exception {
         final String firstContent
             = "<html><body>\n"
             + "<iframe src='" + URL_SECOND + "'>\n"

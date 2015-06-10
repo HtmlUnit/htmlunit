@@ -112,7 +112,7 @@ public class HtmlAttrTest extends SimpleWebTestCase {
      * Tests {@link DomAttr#setValue(String)}.
      */
     @Test
-    public void testSetValue() {
+    public void setValue() {
         htmlAttr_.setValue("foo");
         assertEquals("foo", htmlAttr_.getValue());
     }
@@ -131,7 +131,7 @@ public class HtmlAttrTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNodeType() throws Exception {
+    public void nodeType() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var attr = document.createAttribute('myAttrib');\n"

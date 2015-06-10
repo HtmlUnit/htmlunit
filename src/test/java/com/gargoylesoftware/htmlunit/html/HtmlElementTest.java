@@ -478,7 +478,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * Tests constants.
      */
     @Test
-    public void testConstants() {
+    public void constants() {
         assertEquals("", DomElement.ATTRIBUTE_NOT_DEFINED);
         assertEquals("", DomElement.ATTRIBUTE_VALUE_EMPTY);
         assertTrue("Not the same object",

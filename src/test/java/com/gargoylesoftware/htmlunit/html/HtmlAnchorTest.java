@@ -57,7 +57,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_onClickHandler() throws Exception {
+    public void click_onClickHandler() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -92,7 +92,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_onClickHandler_returnFalse() throws Exception {
+    public void click_onClickHandler_returnFalse() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -126,7 +126,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_onClickHandler_javascriptDisabled() throws Exception {
+    public void click_onClickHandler_javascriptDisabled() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -164,7 +164,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrl() throws Exception {
+    public void click_javascriptUrl() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -188,7 +188,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrlMixedCase() throws Exception {
+    public void click_javascriptUrlMixedCase() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='JAVAscrIpt:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
@@ -210,7 +210,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrlLeadingWhitespace() throws Exception {
+    public void click_javascriptUrlLeadingWhitespace() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='  javascript:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
@@ -232,7 +232,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
+    public void click_javascriptUrl_javascriptDisabled() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -264,7 +264,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrl_InvalidReturn_RegressionTest() throws Exception {
+    public void click_javascriptUrl_InvalidReturn_RegressionTest() throws Exception {
         final String htmlContent
             = "<html><head><SCRIPT lang=\"JavaScript\">\n"
             + "function doSubmit(formName) {\n"
@@ -286,7 +286,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrl_targetPageWithIframe() throws Exception {
+    public void click_javascriptUrl_targetPageWithIframe() throws Exception {
         final String firstContent
             = " <html>\n"
             + "<head><title>Page A</title></head>\n"
@@ -321,7 +321,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrl_encoded() throws Exception {
+    public void click_javascriptUrl_encoded() throws Exception {
         final String htmlContent
             = "<html><body><script>function hello() { alert('hello') }</script>\n"
             + "<a href='javascript:%20hello%28%29' id='a1'>a1</a>\n"
@@ -344,7 +344,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testOpenLinkInNewWindow() throws Exception {
+    public void openLinkInNewWindow() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "</body></html>";
@@ -369,7 +369,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testClick_refererHeader() throws Exception {
+    public void click_refererHeader() throws Exception {
         final String firstContent
             = "<html><head><title>Page A</title></head>\n"
             + "<body><a href='" + URL_SECOND + "' id='link'>link</a></body>\n"
@@ -430,7 +430,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testCorrectLinkTargetWhenOnclickOpensWindow() throws Exception {
+    public void correctLinkTargetWhenOnclickOpensWindow() throws Exception {
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<a href='page2.html' id='clickme' onclick=\"window.open('popup.html', 'newWindow');\">X</a>\n"
             + "</body></html>";
@@ -462,7 +462,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testPreventDefault1() throws Exception {
+    public void preventDefault1() throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function handler(e) {\n"
@@ -489,7 +489,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testPreventDefault2() throws Exception {
+    public void preventDefault2() throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function handler(e) {\n"
@@ -513,7 +513,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testPreventDefault3() throws Exception {
+    public void preventDefault3() throws Exception {
         final String html =
               "<html><body>\n"
             + "<a href='" + URL_SECOND + "' id='a1' onclick='return false'>Test</a>\n"
@@ -530,7 +530,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testHashAnchor() throws Exception {
+    public void hashAnchor() throws Exception {
         final String html = "<html><body>"
                 + "<a id='a' href='#a'>a</a>"
                 + "<a id='a_target' href='#target' target='_blank'>target</a>"
@@ -550,7 +550,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testTargetWithRelativeUrl() throws Exception {
+    public void targetWithRelativeUrl() throws Exception {
         final WebClient client = getWebClient();
 
         final URL url = getClass().getResource("HtmlAnchorTest_targetWithRelativeUrl_a.html");

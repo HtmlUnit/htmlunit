@@ -135,7 +135,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "onfocus", "onblur" })
-    public void testButton_onblur_onfocus() throws Exception {
+    public void button_onblur_onfocus() throws Exception {
         testTagWithClick("<button name='foo' value='bar' type='button'>button</button>");
     }
 
@@ -146,7 +146,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "onfocus", "onblur" })
-    public void testLabelContainsInput_onblur_onfocus() throws Exception {
+    public void labelContainsInput_onblur_onfocus() throws Exception {
         final String body = "<form><label " + COMMON_ID + ">"
                 + "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>\n";
         testWithClick(body);
@@ -159,7 +159,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "onfocus", "onblur" })
-    public void testLabelReferencesInput_onblur_onfocus() throws Exception {
+    public void labelReferencesInput_onblur_onfocus() throws Exception {
         final String body = "<form><label " + COMMON_ID + " for=\"fooId\">Foo</label>\n"
                 + "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>\n";
         testWithClick(body);
@@ -172,7 +172,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "onfocus", "onblur" })
-    public void testSelect_onblur_onfocus() throws Exception {
+    public void select_onblur_onfocus() throws Exception {
         testTagWithClick("<select><option>1</option></select>");
     }
 
@@ -183,7 +183,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "onfocus", "onblur" })
-    public void testTextarea_onblur_onfocus() throws Exception {
+    public void textarea_onblur_onfocus() throws Exception {
         testTagWithClick("<textarea>Text</textarea>");
     }
 
@@ -300,7 +300,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "true" })
-    public void testOnAllElements() throws Exception {
+    public void onAllElements() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<title>focus/blur on all elements</title>\n"

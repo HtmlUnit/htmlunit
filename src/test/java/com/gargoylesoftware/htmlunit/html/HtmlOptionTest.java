@@ -38,7 +38,7 @@ public class HtmlOptionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSelect() throws Exception {
+    public void select() throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -134,7 +134,7 @@ public class HtmlOptionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick() throws Exception {
+    public void click() throws Exception {
         final String htmlContent
             = "<html><body>\n"
             + "  <form id='form1'>\n"

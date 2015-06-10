@@ -484,7 +484,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "true" })
-    public void testNonZeroWidthHeight() throws Exception {
+    public void nonZeroWidthHeight() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
                 + "  function test() {\n"

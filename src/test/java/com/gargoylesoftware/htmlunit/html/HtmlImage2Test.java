@@ -185,7 +185,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "§§URL§§abcd/img.gif" })
-    public void testLineBreaksInUrl() throws Exception {
+    public void lineBreaksInUrl() throws Exception {
         final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img");
         final byte[] directBytes = IOUtils.toByteArray(is);
         is.close();

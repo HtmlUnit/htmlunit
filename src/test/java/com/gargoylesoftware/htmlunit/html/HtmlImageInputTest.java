@@ -46,7 +46,7 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented(CHROME)
-    public void testClick_WithPosition() throws Exception {
+    public void click_WithPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -78,7 +78,7 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNoNameClick_WithPosition() throws Exception {
+    public void noNameClick_WithPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"

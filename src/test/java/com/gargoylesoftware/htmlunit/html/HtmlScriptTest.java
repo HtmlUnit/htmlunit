@@ -56,7 +56,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testBadExternalScriptReference() throws Exception {
+    public void badExternalScriptReference() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script src='inexistent.js'></script>\n"
                 + "</head><body></body></html>";
@@ -164,7 +164,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts("loaded")
-    public void testScriptCloneDoesNotReloadScript() throws Exception {
+    public void scriptCloneDoesNotReloadScript() throws Exception {
         final String html = "<html><body><script src='" + URL_SECOND + "'></script></body></html>";
         final String js = "alert('loaded')";
 
@@ -193,7 +193,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts("ok")
-    public void testWhitespaceInSrc() throws Exception {
+    public void whitespaceInSrc() throws Exception {
         final String html = "<html><head><script src=' " + URL_SECOND + " '></script></head><body>abc</body></html>";
         final String js = "alert('ok')";
 
@@ -216,7 +216,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testEmptySrc() throws Exception {
+    public void emptySrc() throws Exception {
         final String html1 = "<html><head><script src=''></script></head><body>abc</body></html>";
         final String html2 = "<html><head><script src='  '></script></head><body>abc</body></html>";
 
@@ -344,7 +344,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts({ "First script executes", "Second page loading" })
-    public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
+    public void changingLocationSkipsFurtherScriptsOnPage() throws Exception {
         final String html
             = "<html><head></head>\n"
             + "<body onload='alert(\"body onload executing but should be skipped\")'>\n"

@@ -165,7 +165,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("a")
-    public void testScriptIsNotRunWhenCloned() throws Exception {
+    public void scriptIsNotRunWhenCloned() throws Exception {
         final String html = "<html><body onload='document.body.cloneNode(true)'>\n"
             + "<script>alert('a')</script></body></html>";
 
@@ -178,7 +178,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "deferred", "normal", "onload" },
             IE8 = { "normal", "deferred", "onload" })
-    public void testDefer() throws Exception {
+    public void defer() throws Exception {
         final String html = "<html><head>\n"
             + "<script defer>alert('deferred')</script>\n"
             + "<script>alert('normal')</script>\n"
@@ -374,7 +374,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInvalidJQuerySrcAttribute() throws Exception {
+    public void invalidJQuerySrcAttribute() throws Exception {
         loadPage2("<html><body><script src='//:'></script></body></html>");
     }
 
@@ -383,7 +383,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "loaded", "§§URL§§abcd" })
-    public void testLineBreaksInUrl() throws Exception {
+    public void lineBreaksInUrl() throws Exception {
         final String html
             = "<html><head>\n"
             + "  <script id='myScript' src='" + URL_SECOND + "a\rb\nc\r\nd'></script>\n"

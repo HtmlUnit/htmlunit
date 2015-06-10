@@ -572,7 +572,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testEmbeddedMetaTag_Regression() throws Exception {
+    public void embeddedMetaTag_Regression() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
             + "<table><tr><td>\n"
@@ -1164,7 +1164,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetCookieMetaTag() throws Exception {
+    public void setCookieMetaTag() throws Exception {
         final String content = "<html><head><title>first</title>\n"
             + "<meta http-equiv='set-cookie' content='webm=none; path=/;'>\n"
             + "</head><body>\n"
@@ -1217,7 +1217,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented(IE) // in fact IE seems to perform other requests
-    public void testNoSlashURL() throws Exception {
+    public void noSlashURL() throws Exception {
         testNoSlashURL("http:/second");
         testNoSlashURL("http:second");
     }
@@ -1281,7 +1281,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSerialization() throws Exception {
+    public void serialization() throws Exception {
         // The document.all and form.elements calls are important because they trigger the creation
         // of HTMLCollections, which have caused serialization problems in the past (see bug 1951047).
 
@@ -1333,7 +1333,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClonedPageHasOwnIdMap() throws Exception {
+    public void clonedPageHasOwnIdMap() throws Exception {
         final String content = "<html><head><title>foo</title>"
             + "<body>"
             + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>"
@@ -1368,7 +1368,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClonedPageHasOwnDocumentElement() throws Exception {
+    public void clonedPageHasOwnDocumentElement() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<body>\n"
             + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>\n"
@@ -1547,7 +1547,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCaseInsensitiveRegexReplacement() throws Exception {
+    public void caseInsensitiveRegexReplacement() throws Exception {
         final String html = "<html><body><script>\n"
             + "var r = /^([#.]?)([a-z0-9\\*_-]*)/i;\n"
             + "var s = '#userAgent';\n"
@@ -1581,7 +1581,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testTitle_EmptyXmlTagExpanded() throws Exception {
+    public void title_EmptyXmlTagExpanded() throws Exception {
         final String content = "<html><head><title/></head>\n"
             + "<body>Hello World!</body></html>";
         final HtmlPage page = loadPage(content);
@@ -1721,7 +1721,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testSrcJavaScript() throws Exception {
+    public void srcJavaScript() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<script id='ie_ready' src='javascript:void(0)'></script>\n"

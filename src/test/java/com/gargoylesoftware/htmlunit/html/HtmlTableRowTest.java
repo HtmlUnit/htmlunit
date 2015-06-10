@@ -76,7 +76,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure that cloneNode leaves the original node unchanged.
      */
     @Test
-    public void testClonePreservesOriginal() {
+    public void clonePreservesOriginal() {
         assertSame(tbody_, row_.getParentNode());
         assertSame(row_, cell_.getParentNode());
         assertSame(cell_, row_.getCell(0));
@@ -89,7 +89,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClonesAreDistinct() throws Exception {
+    public void clonesAreDistinct() throws Exception {
         assertNotSame(row_, rowClone_);
         assertNotSame(cell_, cellClone_);
     }
@@ -98,7 +98,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure that the clones have the same page as the originals.
      */
     @Test
-    public void testCloneHasSamePage() {
+    public void cloneHasSamePage() {
         assertSame(cell_.getPage(), cellClone_.getPage());
         assertSame(row_.getPage(), rowClone_.getPage());
     }
@@ -108,7 +108,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClonedRowHasNullParent() throws Exception {
+    public void clonedRowHasNullParent() throws Exception {
         assertNull(rowClone_.getParentNode());
     }
 
@@ -117,7 +117,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClonedRowHasDifferentChildren() throws Exception {
+    public void clonedRowHasDifferentChildren() throws Exception {
         assertEquals(row_.getCells().size(), rowClone_.getCells().size());
         assertNotSame(row_.getFirstChild(), rowClone_.getFirstChild());
     }
@@ -126,7 +126,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure that the cloned cell's children are not those of the original.
      */
     @Test
-    public void testClonedCellHasDifferentChildren() {
+    public void clonedCellHasDifferentChildren() {
         assertNotSame(cell_.getParentNode(), cellClone_.getParentNode());
         assertNotNull(cell_.getFirstChild());
         assertNotSame(cell_.getFirstChild(), cellClone_.getFirstChild());
@@ -137,7 +137,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClonedCellHasClonedRowAsParent() throws Exception {
+    public void clonedCellHasClonedRowAsParent() throws Exception {
         assertSame(rowClone_, cellClone_.getParentNode());
     }
 
@@ -145,7 +145,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure the cloned cell's attribute value is the same as the original.
      */
     @Test
-    public void testCloneAttributesCopiedFromOriginal() {
+    public void cloneAttributesCopiedFromOriginal() {
         assertEquals("20", cell_.getAttribute("width"));
         assertEquals("20", cellClone_.getAttribute("width"));
     }
@@ -155,7 +155,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * attribute unchanged.
      */
     @Test
-    public void testCloneAttributeIsIndependentOfOriginal() {
+    public void cloneAttributeIsIndependentOfOriginal() {
         cellClone_.setAttribute("a", "one");
         assertFalse("one".equals(cell_.getAttribute("a")));
     }
@@ -165,7 +165,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * attribute unchanged.
      */
     @Test
-    public void testOriginalAttributeIsIndependentOfClone() {
+    public void originalAttributeIsIndependentOfClone() {
         cell_.setAttribute("a", "one");
         assertFalse("one".equals(cellClone_.getAttribute("a")));
     }
@@ -175,7 +175,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * unchanged.
      */
     @Test
-    public void testCloneValueIsIndependentOfOriginal() {
+    public void cloneValueIsIndependentOfOriginal() {
         cellClone_.setNodeValue("one");
         assertFalse("one".equals(cell_.getNodeValue()));
     }
@@ -184,7 +184,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure that changing the clone's id leaves the original's unchanged.
      */
     @Test
-    public void testCloneIdIsIndependentOfOriginal() {
+    public void cloneIdIsIndependentOfOriginal() {
         cellClone_.setNodeValue("one");
         assertFalse("one".equals(cell_.getNodeValue()));
     }
@@ -196,7 +196,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * refers to the same DOM node we think it should.
      */
     @Test
-    public void testScriptCanGetOriginalCell() {
+    public void scriptCanGetOriginalCell() {
         final String cmd = "document.getElementById('cell')";
         final Object object = page_.executeJavaScript(cmd).getJavaScriptResult();
 
@@ -209,7 +209,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * same one the DOM node thinks it's wrapped by.
      */
     @Test
-    public void testCellScriptObjectIsReturnedByScript() {
+    public void cellScriptObjectIsReturnedByScript() {
         final String cmd = "document.getElementById('cell')";
         final HTMLElement jselement = (HTMLElement) page_.executeJavaScript(cmd).getJavaScriptResult();
 
@@ -221,7 +221,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * ScriptableObject that we think it should.
      */
     @Test
-    public void testScriptCanSetJsPropertyOnCell() {
+    public void scriptCanSetJsPropertyOnCell() {
         final String cmd = "document.getElementById('cell').a='original';document.getElementById('cell')";
         final Object object = page_.executeJavaScript(cmd).getJavaScriptResult();
 
@@ -236,7 +236,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented({ FF, CHROME })
-    public void testCloneScriptCanSetDisabledOnCell() {
+    public void cloneScriptCanSetDisabledOnCell() {
         final String cmd = "document.getElementById('cell').disabled='true'";
         page_.executeJavaScript(cmd);
         assertEquals("disabled", cell_.getAttribute("disabled"));
@@ -246,7 +246,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure that a script can set an attribute on the DOM node.
      */
     @Test
-    public void testCloneScriptCanSetAttributeOnCell() {
+    public void cloneScriptCanSetAttributeOnCell() {
         final String cmd = "document.getElementById('cell').setAttribute('a','original')";
         page_.executeJavaScript(cmd);
         assertEquals("original", cell_.getAttribute("a"));
@@ -259,7 +259,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * that same attribute on the clone.
      */
     @Test
-    public void testCloneScriptSetAttributeIndependentOfOriginal() {
+    public void cloneScriptSetAttributeIndependentOfOriginal() {
         final String cmd = "document.getElementById('cell').setAttribute('a','original')";
         page_.executeJavaScript(cmd);
 
@@ -273,7 +273,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented({ FF, CHROME })
-    public void testCloneScriptSetDisabledIndependentOfOriginal() {
+    public void cloneScriptSetDisabledIndependentOfOriginal() {
         final String cmd = "document.getElementById('cell').disabled = 'true'";
         page_.executeJavaScript(cmd);
 
@@ -287,7 +287,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * the clone.
      */
     @Test
-    public void testCloneHasDifferentScriptableObject() {
+    public void cloneHasDifferentScriptableObject() {
         final String cmd = "document.getElementById('cell')"; // force it to have a
         // scriptable object
         page_.executeJavaScript(cmd);
@@ -300,7 +300,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * the cloned child.
      */
     @Test
-    public void testScriptDomOperations() {
+    public void scriptDomOperations() {
         final String cmd = "document.getElementById('foo').value = 'Input!';document.getElementById('foo')";
         page_.executeJavaScript(cmd);
 

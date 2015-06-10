@@ -433,7 +433,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick() throws Exception {
+    public void click() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -463,7 +463,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClickAnchorName() throws Exception {
+    public void clickAnchorName() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='#clickedAnchor' id='a1'>link to foo1</a>\n"

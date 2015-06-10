@@ -47,7 +47,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementHasAttributesWith() throws Exception {
+    public void elementHasAttributesWith() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -60,7 +60,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementHasAttributesNone() throws Exception {
+    public void elementHasAttributesNone() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -74,7 +74,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNonElementHasAttributes() throws Exception {
+    public void nonElementHasAttributes() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -88,7 +88,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNonElementGetPrefix() throws Exception {
+    public void nonElementGetPrefix() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -102,7 +102,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNonElementGetNamespaceURI() throws Exception {
+    public void nonElementGetNamespaceURI() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -116,7 +116,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNonElementGetLocalName() throws Exception {
+    public void nonElementGetLocalName() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -130,7 +130,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNonElementSetPrefix() throws Exception {
+    public void nonElementSetPrefix() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 

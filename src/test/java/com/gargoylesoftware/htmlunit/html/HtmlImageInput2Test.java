@@ -55,7 +55,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
             IE8 = "§§URL§§?button.x=15&button.y=16",
             IE11 = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({ CHROME, IE })
-    public void testClick_NoPosition() throws Exception {
+    public void click_NoPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -79,7 +79,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
             IE8 = "§§URL§§?button.x=15&button.y=16",
             IE11 = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({ CHROME, IE })
-    public void testClick_NoPosition_NoValue() throws Exception {
+    public void click_NoPosition_NoValue() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -292,7 +292,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    public void testClickFiresOnMouseDown() throws Exception {
+    public void clickFiresOnMouseDown() throws Exception {
         final String html = "<html><body><input type='image' src='x.png' id='i' onmousedown='alert(1)'></body></html>";
 
         final WebDriver webDriver = loadPage2(html);
@@ -307,7 +307,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    public void testClickFiresOnMouseUp() throws Exception {
+    public void clickFiresOnMouseUp() throws Exception {
         final String html = "<html><body><input type='image' src='x.png' id='i' onmouseup='alert(1)'></body></html>";
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("i")).click();
@@ -337,7 +337,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§abcd/img.gif")
-    public void testLineBreaksInUrl() throws Exception {
+    public void lineBreaksInUrl() throws Exception {
         final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img");
         final byte[] directBytes = IOUtils.toByteArray(is);
         is.close();

@@ -67,7 +67,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick() throws Exception {
+    public void click() throws Exception {
         final WebClient client = createWebClient("");
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -82,7 +82,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_onclickReturnsFalse() throws Exception {
+    public void click_onclickReturnsFalse() throws Exception {
         final WebClient client = createWebClient("alert('foo');return false;");
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -99,7 +99,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_onclickReturnsTrue() throws Exception {
+    public void click_onclickReturnsTrue() throws Exception {
         final WebClient client = createWebClient("alert('foo');return true;");
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -116,7 +116,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrl() throws Exception {
+    public void click_javascriptUrl() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
@@ -138,7 +138,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrlMixedCas() throws Exception {
+    public void click_javascriptUrlMixedCas() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javasCRIpT:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
@@ -160,7 +160,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrlLeadingWhitespace() throws Exception {
+    public void click_javascriptUrlLeadingWhitespace() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='     javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
@@ -182,7 +182,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
+    public void click_javascriptUrl_javascriptDisabled() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
@@ -213,7 +213,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testThisInJavascriptHref() throws Exception {
+    public void thisInJavascriptHref() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>\n"

@@ -42,7 +42,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetSrcAttribute() throws Exception {
+    public void setSrcAttribute() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='" + URL_SECOND + "'>\n"
@@ -74,7 +74,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetSrcAttributeWithWhiteSpaces() throws Exception {
+    public void setSrcAttributeWithWhiteSpaces() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='\n" + URL_SECOND + "\n'>\n"
@@ -168,7 +168,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetSrcAttribute_ViaJavaScript() throws Exception {
+    public void setSrcAttribute_ViaJavaScript() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='" + URL_SECOND + "'></iframe>\n"

@@ -41,7 +41,7 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts(IE = "Submit Query",
             FF = "")
-    public void testDefaultValue() throws Exception {
+    public void defaultValue() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
@@ -66,7 +66,7 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts("")
-    public void testEmptyValue() throws Exception {
+    public void emptyValue() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"

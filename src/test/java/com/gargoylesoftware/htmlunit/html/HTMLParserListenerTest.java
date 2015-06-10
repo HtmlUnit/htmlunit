@@ -116,7 +116,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSimple() throws Exception {
+    public void simple() throws Exception {
         testSimple(5, 7);
     }
 
@@ -127,7 +127,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSimple_withWrongLineCol() throws Exception {
+    public void simple_withWrongLineCol() throws Exception {
         testSimple(5, 7);
     }
 

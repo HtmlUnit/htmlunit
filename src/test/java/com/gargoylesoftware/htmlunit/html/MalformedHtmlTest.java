@@ -43,7 +43,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "in test", "BODY" })
-    public void testBodyAttributeWhenOpeningBodyGenerated() throws Exception {
+    public void bodyAttributeWhenOpeningBodyGenerated() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function test(){\n"
             + "    alert('in test');\n"
@@ -62,7 +62,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "3", "text3", "text3", "null" })
-    public void testLostFormChildren() throws Exception {
+    public void lostFormChildren() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function test(){\n"
             + "    alert(document.forms[0].childNodes.length);\n"
@@ -91,7 +91,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Test document")
-    public void testTitleAfterInsertedBody() throws Exception {
+    public void titleAfterInsertedBody() throws Exception {
         final String content = "<html><head>\n"
             + "<noscript><link href='other.css' rel='stylesheet' type='text/css'></noscript>\n"
             + "<title>Test document</title>\n"
@@ -107,7 +107,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Test document")
-    public void testTitleTwice() throws Exception {
+    public void titleTwice() throws Exception {
         final String content = "<html><head>\n"
             + "<title>Test document</title>\n"
             + "<title>2nd title</title>\n"
@@ -163,7 +163,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("12345")
-    public void testWrongHtml_TagBeforeHtml() throws Exception {
+    public void  wrongHtml_TagBeforeHtml() throws Exception {
         final String html = "<div>\n"
             + "<html>\n"
             + "<head><title>foo</title>\n"

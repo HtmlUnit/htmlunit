@@ -57,7 +57,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSelect() throws Exception {
+    public void select() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1'>Option1</option>\n"
@@ -90,7 +90,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSelect_MultipleSelectNoneSelected() throws Exception {
+    public void select_MultipleSelectNoneSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
             + "<option value='option1'>Option1</option>\n"
@@ -122,7 +122,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSelect_ChangeSelectedOption_SingleSelect() throws Exception {
+    public void select_ChangeSelectedOption_SingleSelect() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
@@ -155,7 +155,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSelect_ChangeSelectedOption_MultipleSelect() throws Exception {
+    public void select_ChangeSelectedOption_MultipleSelect() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple='multiple'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
@@ -190,7 +190,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSelect_MultipleSelectMultipleSelected() throws Exception {
+    public void select_MultipleSelectMultipleSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
@@ -218,7 +218,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSelect_SingleSelectMultipleSelected() throws Exception {
+    public void select_SingleSelectMultipleSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
@@ -245,7 +245,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSelect_SingleSelectNoneSelected() throws Exception {
+    public void select_SingleSelectNoneSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1'>Option1</option>\n"
@@ -270,7 +270,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSelect_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
+    public void select_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
             + "<select name='select1' size='2' id='mySelect'>\n"
@@ -292,7 +292,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSetSelected_IllegalValue() throws Exception {
+    public void setSelected_IllegalValue() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
@@ -315,7 +315,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetOptions() throws Exception {
+    public void getOptions() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
@@ -344,7 +344,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSelect_OptionMultiple_NoValueOnAttribute() throws Exception {
+    public void select_OptionMultiple_NoValueOnAttribute() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' id='select1' multiple>\n"
             + "<option value='option1'>Option1</option>\n"
@@ -363,7 +363,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetOptionByValue() throws Exception {
+    public void  getOptionByValue() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body><form id='form1'>\n"
             + "<select name='select1'>\n"
             + "    <option value='option1'>s1o1</option>\n"
@@ -390,7 +390,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSelect_SetSelected_OnChangeHandler() throws Exception {
+    public void select_SetSelected_OnChangeHandler() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' onChange='alert(\"changing\")'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
@@ -417,7 +417,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetSelectionOnOptionWithNoName() throws Exception {
+    public void setSelectionOnOptionWithNoName() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' multiple size='5'>\n"
             + "<option value='1'>111</option>\n"
@@ -445,7 +445,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
     /** @throws Exception if the test fails */
     @Test
-    public void testRemoveOptionsFromSelect() throws Exception {
+    public void removeOptionsFromSelect() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' id='theSelect'>"
             + "<option value='a'>111</option>"
@@ -494,7 +494,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
     /** @throws Exception if the test fails */
     @Test
-    public void testEditOptions() throws Exception {
+    public void editOptions() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' id='theSelect'>\n"
             + "<option value='a'>111</option>\n"
@@ -575,7 +575,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSetSelectedAttributeReturnedPage() throws Exception {
+    public void setSelectedAttributeReturnedPage() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -604,7 +604,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnChangeResultPage() throws Exception {
+    public void onChangeResultPage() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -689,7 +689,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetOptionByText() throws Exception {
+    public void getOptionByText() throws Exception {
         final String html = "<html><head><title>foo</title></head><body><form id='form1'>\n"
             + "<select name='select1'>\n"
             + "    <option value='option1'>s1o1</option>\n"
