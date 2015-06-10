@@ -115,7 +115,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0" })
-    public void testFrameTag1192854() throws Exception {
+    public void frameTag1192854() throws Exception {
         final String html
             = "<html>\n"
             + "<script>\n"

@@ -48,7 +48,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,," },
             IE8 = {"0px,0px,0px,0px,0px", ",,,,", "15px 10px,10px,10px,15px,15px", ",,,," })
     @NotYetImplemented(CHROME)
-    public void testDefaultPaddingAndMargins() throws Exception {
+    public void defaultPaddingAndMargins() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"

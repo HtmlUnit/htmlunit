@@ -37,7 +37,7 @@ public class CSSRuleListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object CSSStyleRule]",
             IE8 = "[object]")
-    public void testRuleList() throws Exception {
+    public void ruleList() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
                 + "  BODY { font-size: 1234px; }\n"
@@ -63,7 +63,7 @@ public class CSSRuleListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("undefined")
-    public void testWrongRuleListAccess() throws Exception {
+    public void wrongRuleListAccess() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
                 + "  BODY { font-size: 1234px; }\n"

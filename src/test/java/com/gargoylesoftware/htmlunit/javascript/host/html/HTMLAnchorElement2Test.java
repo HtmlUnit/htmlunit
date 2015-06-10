@@ -392,7 +392,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "9", "9", "true", "false" })
-    public void testHrefTrimmed() throws Exception {
+    public void hrefTrimmed() throws Exception {
         final String html = "<html><head><title>AnchorTest</title>\n"
             + "<script>\n"
             + "  function test() {\n"

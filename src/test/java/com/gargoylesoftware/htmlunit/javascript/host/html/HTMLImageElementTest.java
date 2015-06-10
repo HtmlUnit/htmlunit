@@ -405,7 +405,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" },
             IE = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" },
             IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" })
-    public void testWidthHeightWithoutSource() throws Exception {
+    public void widthHeightWithoutSource() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function showInfo(imageId) {\n"
@@ -434,7 +434,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" })
-    public void testWidthHeightWithSource() throws Exception {
+    public void widthHeightWithSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
         final String html = "<html><head>\n"
@@ -478,7 +478,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" },
             IE8 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
     @NotYetImplemented(IE8)
-    public void testWidthHeightEmptySource() throws Exception {
+    public void widthHeightEmptySource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
         final String html = "<html><head>\n"
@@ -522,7 +522,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" },
             IE8 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
     @NotYetImplemented(IE8)
-    public void testWidthHeightBlankSource() throws Exception {
+    public void widthHeightBlankSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
         final String html = "<html><head>\n"
@@ -566,7 +566,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             IE8 = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
             IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" })
     @NotYetImplemented(CHROME)
-    public void testWidthHeightInvalidSource() throws Exception {
+    public void widthHeightInvalidSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
         final String html = "<html><head>\n"

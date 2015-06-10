@@ -38,7 +38,7 @@ public class HTMLPreElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "number", "100", "77", "number", "123" },
             IE = { "", "string", "100", "77", "string", "123" })
     @NotYetImplemented
-    public void testWidth() throws Exception {
+    public void width() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"

@@ -90,7 +90,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRightPageAfterOnchange() throws Exception {
+    public void rightPageAfterOnchange() throws Exception {
         final String html
             = "<html><body>\n"
             + "<iframe src='fooIFrame.html'></iframe>\n"
@@ -121,7 +121,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnChangeCallsFormSubmit() throws Exception {
+    public void onChangeCallsFormSubmit() throws Exception {
         final String html
             = "<html><head>\n"
             + "</head>\n"

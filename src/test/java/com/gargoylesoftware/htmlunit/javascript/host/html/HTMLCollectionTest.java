@@ -46,7 +46,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void testImplicitToStringConversion() throws Exception {
+    public void implicitToStringConversion() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(document.links != 'foo')\n"
@@ -112,7 +112,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             IE = { "string length", "string myForm" },
             IE11 = { "string item", "string length", "string myForm", "string namedItem" })
     @NotYetImplemented({  FF31, IE11, CHROME })
-    public void testFor_in() throws Exception {
+    public void for_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var arr = new Array();\n"
@@ -150,7 +150,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
                 "string length", "string namedItem", "string second_submit", "string val1",
                 "string val2" })
     @NotYetImplemented({ FF31, IE11, CHROME })
-    public void testFor_in2() throws Exception {
+    public void for_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var form = document.getElementById('myForm');\n"
@@ -207,7 +207,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "null", "null", "undefined", "exception" },
             IE = { "null", "null", "undefined", "null" },
             IE11 = { "null", "null", "undefined", "undefined" })
-    public void testOutOfBoundAccess() throws Exception {
+    public void outOfBoundAccess() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var col = document.getElementsByTagName('a');\n"
@@ -229,7 +229,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "undefined", "undefined", "undefined" })
-    public void testInexistentProperties() throws Exception {
+    public void inexistentProperties() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var x = document.documentElement.childNodes;\n"

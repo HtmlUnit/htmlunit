@@ -102,7 +102,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRemoveFrameWindow() throws Exception {
+    public void removeFrameWindow() throws Exception {
         final String index = "<html><head></head><body>"
                 + "<div id='content'>"
                 + "  <iframe name='content' src='second/'></iframe>"

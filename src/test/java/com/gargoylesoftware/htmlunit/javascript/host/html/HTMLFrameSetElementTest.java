@@ -61,7 +61,7 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "20%,*", "*,*" })
-    public void testRows() throws Exception {
+    public void rows() throws Exception {
         final String framesetContent =
             "<html><head><title>First</title></head>\n"
             + "<frameset id='fs' rows='20%,*'>\n"
