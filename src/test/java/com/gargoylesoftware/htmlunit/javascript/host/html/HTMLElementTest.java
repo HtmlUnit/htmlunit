@@ -4377,4 +4377,28 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("inherit, false, string, boolean")
+    public void contentEditable() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('myDiv');\n"
+            + "    alert(div.contentEditable);\n"
+            + "    alert(div.isContentEditable);\n"
+            + "    alert(typeof div.contentEditable);\n"
+            + "    alert(typeof div.isContentEditable);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

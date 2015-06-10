@@ -2066,7 +2066,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     public HtmlElement getDomNodeOrNull() {
         return (HtmlElement) super.getDomNodeOrNull();
     }
@@ -3037,5 +3036,52 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
     public boolean releaseCapture() {
         return true;
+    }
+
+    /**
+     * Returns the {@code contentEditable} property.
+     * @return the {@code contentEditable} property
+     */
+    @JsxGetter
+    public String getContentEditable() {
+        final String attribute = getDomNodeOrDie().getAttribute("contentEditable");
+        if (attribute == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            return "inherit";
+        }
+        if (attribute == DomElement.ATTRIBUTE_VALUE_EMPTY) {
+            return "true";
+        }
+        return attribute;
+    }
+
+    /**
+     * Sets the {@code contentEditable} property.
+     * @param contentEditable the {@code contentEditable} property to set
+     */
+    @JsxSetter
+    public void setContentEditable(final String contentEditable) {
+        getDomNodeOrDie().setAttribute("contentEditable", contentEditable);
+    }
+
+    /**
+     * Returns the {@code isContentEditable} property.
+     * @return the {@code isContentEditable} property
+     */
+    @JsxGetter
+    public boolean getIsContentEditable() {
+        final String attribute = getContentEditable();
+        if ("true".equals(attribute)) {
+            return true;
+        }
+        else if ("inherit".equals(attribute)) {
+            final DomNode parent = getDomNodeOrDie().getParentNode();
+            if (parent != null) {
+                final Scriptable parentScriptable = parent.getScriptObject();
+                if (parentScriptable instanceof HTMLElement) {
+                    return ((HTMLElement) parentScriptable).getIsContentEditable();
+                }
+            }
+        }
+        return false;
     }
 }

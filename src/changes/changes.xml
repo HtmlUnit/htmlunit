@@ -9,6 +9,9 @@
     <body>
         <release version="2.18" date="???" description="Bugfixes">
             <action type="add" dev="asashour">
+                JavaScript: implement HTMLElement.contentEditable and isContentEditable.
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: implement TextRange.compareEndPoints() and .move().
             </action>
             <action type="fix" dev="asashour">
