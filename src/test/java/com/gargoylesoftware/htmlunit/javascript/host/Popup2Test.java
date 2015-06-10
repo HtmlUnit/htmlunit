@@ -38,7 +38,7 @@ public class Popup2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE8 = "done")
-    public void testPopup() throws Exception {
+    public void popup() throws Exception {
         final String html = "<html><head><title>First</title><body>\n"
             + "<script>\n"
             + "  try {\n"
@@ -62,7 +62,7 @@ public class Popup2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE8 = "done")
-    public void testPopupBodyStyle() throws Exception {
+    public void popupBodyStyle() throws Exception {
         final String html = "<html><head><title>First</title><body>\n"
             + "<script language='javascript'>\n"
             + "  try {\n"

@@ -33,7 +33,7 @@ public final class ImmediateRefreshHandlerTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRefreshSamePageAfterPost() throws Exception {
+    public void refreshSamePageAfterPost() throws Exception {
         final WebClient client = getWebClient();
         client.setRefreshHandler(new ImmediateRefreshHandler());
 

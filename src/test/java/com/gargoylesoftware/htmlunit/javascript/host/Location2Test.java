@@ -523,7 +523,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§")
-    public void tesToString() throws Exception {
+    public void testToString() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"

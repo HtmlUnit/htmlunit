@@ -39,7 +39,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "default", "default", "default" })
-    public void testReadOnlyPrototype() throws Exception {
+    public void readOnlyPrototype() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
             + "  var proto = Object.create(Object.prototype, {\n"

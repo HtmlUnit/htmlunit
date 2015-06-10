@@ -231,7 +231,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection301_MovedPermanently_GetMethod() throws Exception {
+    public void redirection301_MovedPermanently_GetMethod() throws Exception {
         final int statusCode = 301;
         final HttpMethod initialRequestMethod = HttpMethod.GET;
         final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
@@ -289,7 +289,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection301_MovedPermanently_PostMethod() throws Exception {
+    public void redirection301_MovedPermanently_PostMethod() throws Exception {
         doTestRedirection(301, HttpMethod.POST, HttpMethod.GET);
     }
 
@@ -297,7 +297,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRedirection301_MovedPermanently_PostMethod2() throws Exception {
+    public void redirection301_MovedPermanently_PostMethod2() throws Exception {
         doTestRedirectionSameUrlAfterPost(301);
     }
 
@@ -312,7 +312,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection302_MovedTemporarily_PostMethod() throws Exception {
+    public void redirection302_MovedTemporarily_PostMethod() throws Exception {
         doTestRedirection(302, HttpMethod.POST, HttpMethod.GET);
     }
 
@@ -320,7 +320,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRedirection302_MovedTemporarily_PostMethod2() throws Exception {
+    public void redirection302_MovedTemporarily_PostMethod2() throws Exception {
         doTestRedirectionSameUrlAfterPost(302);
     }
 
@@ -329,7 +329,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection302_MovedTemporarily_GetMethod() throws Exception {
+    public void redirection302_MovedTemporarily_GetMethod() throws Exception {
         final int statusCode = 302;
         final HttpMethod initialRequestMethod = HttpMethod.GET;
         final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
@@ -342,7 +342,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection302_MovedTemporarily_CommaInParameters() throws Exception {
+    public void redirection302_MovedTemporarily_CommaInParameters() throws Exception {
         doTestRedirection(302, HttpMethod.GET, HttpMethod.GET, URL_SECOND + "/foo.html?foo1=abc&foo2=1,2,3,4");
     }
 
@@ -351,7 +351,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection303_SeeOther_GetMethod() throws Exception {
+    public void redirection303_SeeOther_GetMethod() throws Exception {
         final int statusCode = 303;
         final HttpMethod initialRequestMethod = HttpMethod.GET;
         final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
@@ -364,7 +364,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection303_SeeOther_PostMethod() throws Exception {
+    public void redirection303_SeeOther_PostMethod() throws Exception {
         doTestRedirection(303, HttpMethod.POST, HttpMethod.GET);
     }
 
@@ -372,7 +372,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection303_SeeOther_PostMethod2() throws Exception {
+    public void redirection303_SeeOther_PostMethod2() throws Exception {
         doTestRedirectionSameUrlAfterPost(303);
     }
 
@@ -381,7 +381,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection307_TemporaryRedirect_GetMethod() throws Exception {
+    public void redirection307_TemporaryRedirect_GetMethod() throws Exception {
         final int statusCode = 307;
         final HttpMethod initialRequestMethod = HttpMethod.GET;
         final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
@@ -394,7 +394,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirection307_TemporaryRedirect_PostMethod() throws Exception {
+    public void redirection307_TemporaryRedirect_PostMethod() throws Exception {
         final int statusCode = 307;
         final HttpMethod initialRequestMethod = HttpMethod.POST;
         final HttpMethod expectedRedirectedRequestMethod = null;
@@ -448,7 +448,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRedirectionSameURL() throws Exception {
+    public void redirectionSameURL() throws Exception {
         final HtmlPage page1 = getPageWithRedirectionsSameURL(1);
         assertEquals("Second", page1.getTitleText());
 
@@ -502,12 +502,12 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testRedirection_AdditionalHeadersMaintained() throws Exception {
-        testRedirection_AdditionalHeadersMaintained(301);
-        testRedirection_AdditionalHeadersMaintained(302);
+    public void redirection_AdditionalHeadersMaintained() throws Exception {
+        redirection_AdditionalHeadersMaintained(301);
+        redirection_AdditionalHeadersMaintained(302);
     }
 
-    private void testRedirection_AdditionalHeadersMaintained(final int statusCode) throws Exception {
+    private void redirection_AdditionalHeadersMaintained(final int statusCode) throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
@@ -808,7 +808,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRedirectViaJavaScriptDuringInitialPageLoad() throws Exception {
+    public void redirectViaJavaScriptDuringInitialPageLoad() throws Exception {
         final String firstContent = "<html><head><title>First</title><script>\n"
                 + "location.href='" + URL_SECOND + "'\n"
                 + "</script></head><body></body></html>";

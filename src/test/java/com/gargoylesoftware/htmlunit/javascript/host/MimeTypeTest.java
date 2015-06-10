@@ -38,7 +38,7 @@ public class MimeTypeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFlashMimeType() throws Exception {
+    public void flashMimeType() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var mimeTypeFlash = navigator.mimeTypes['application/x-shockwave-flash'];\n"
@@ -65,7 +65,7 @@ public class MimeTypeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRemoveFlashMimeType() throws Exception {
+    public void removeFlashMimeType() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var mimeTypeFlash = navigator.mimeTypes['application/x-shockwave-flash'];\n"
