@@ -48,145 +48,49 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
     })
 public class KeyboardEvent extends UIEvent {
 
-    /** Constant for DOM_VK_MULTIPLY. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_MULTIPLY = 106;
+    /** Constant for {@code DOM_KEY_LOCATION_STANDARD}. */
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public static final int DOM_KEY_LOCATION_STANDARD = 0;
 
-    /** Constant for DOM_VK_ADD. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_ADD = 107;
+    /** Constant for {@code DOM_KEY_LOCATION_LEFT}. */
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public static final int DOM_KEY_LOCATION_LEFT = 1;
 
-    /** Constant for DOM_VK_SEPARATOR. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_SEPARATOR = 108;
+    /** Constant for {@code DOM_KEY_LOCATION_RIGHT}. */
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public static final int DOM_KEY_LOCATION_RIGHT = 2;
 
-    /** Constant for DOM_VK_SUBTRACT. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_SUBTRACT = 109;
+    /** Constant for {@code DOM_KEY_LOCATION_NUMPAD}. */
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public static final int DOM_KEY_LOCATION_NUMPAD = 3;
 
-    /** Constant for DOM_VK_DECIMAL. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_DECIMAL = 110;
+    /** Constant for {@code DOM_KEY_LOCATION_MOBILE}. */
+    @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
+    public static final int DOM_KEY_LOCATION_MOBILE = 4;
 
-    /** Constant for DOM_VK_DIVIDE. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_DIVIDE = 111;
+    /** Constant for {@code DOM_KEY_LOCATION_JOYSTICK}. */
+    @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
+    public static final int DOM_KEY_LOCATION_JOYSTICK = 5;
 
-    /** Constant for DOM_VK_F1. */
+    /** Constant for DOM_VK_CANCEL. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F1 = 112;
+    public static final int DOM_VK_CANCEL = 3;
 
-    /** Constant for DOM_VK_F2. */
+    /** Constant for DOM_VK_HELP. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F2 = 113;
+    public static final int DOM_VK_HELP = 6;
 
-    /** Constant for DOM_VK_F3. */
+    /** Constant for DOM_VK_TAB. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F3 = 114;
-
-    /** Constant for DOM_VK_F4. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F4 = 115;
-
-    /** Constant for DOM_VK_F5. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F5 = 116;
-
-    /** Constant for DOM_VK_F6. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F6 = 117;
-
-    /** Constant for DOM_VK_F7. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F7 = 118;
-
-    /** Constant for DOM_VK_F8. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F8 = 119;
+    public static final int DOM_VK_TAB = 9;
 
     /** Constant for DOM_VK_CLEAR. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_CLEAR = 12;
 
-    /** Constant for DOM_VK_F9. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F9 = 120;
-
-    /** Constant for DOM_VK_F10. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F10 = 121;
-
-    /** Constant for DOM_VK_F11. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F11 = 122;
-
-    /** Constant for DOM_VK_F12. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F12 = 123;
-
-    /** Constant for DOM_VK_F13. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F13 = 124;
-
-    /** Constant for DOM_VK_F14. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F14 = 125;
-
-    /** Constant for DOM_VK_F15. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F15 = 126;
-
-    /** Constant for DOM_VK_F16. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F16 = 127;
-
-    /** Constant for DOM_VK_F17. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F17 = 128;
-
-    /** Constant for DOM_VK_F18. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F18 = 129;
-
     /** Constant for DOM_VK_RETURN. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_RETURN = 13;
-
-    /** Constant for DOM_VK_F19. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F19 = 130;
-
-    /** Constant for DOM_VK_F20. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F20 = 131;
-
-    /** Constant for DOM_VK_F21. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F21 = 132;
-
-    /** Constant for DOM_VK_F22. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F22 = 133;
-
-    /** Constant for DOM_VK_F23. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F23 = 134;
-
-    /** Constant for DOM_VK_F24. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_F24 = 135;
-
-    /** Constant for DOM_VK_ENTER. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_ENTER = 14;
-
-    /** Constant for DOM_VK_NUM_LOCK. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_NUM_LOCK = 144;
-
-    /** Constant for DOM_VK_SCROLL_LOCK. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_SCROLL_LOCK = 145;
 
     /** Constant for DOM_VK_SHIFT. */
     @JsxConstant(@WebBrowser(FF))
@@ -200,57 +104,61 @@ public class KeyboardEvent extends UIEvent {
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_ALT = 18;
 
-    /** Constant for DOM_VK_COMMA. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_COMMA = 188;
-
     /** Constant for DOM_VK_PAUSE. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_PAUSE = 19;
-
-    /** Constant for DOM_VK_PERIOD. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_PERIOD = 190;
-
-    /** Constant for DOM_VK_SLASH. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_SLASH = 191;
-
-    /** Constant for DOM_VK_BACK_QUOTE. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_BACK_QUOTE = 192;
 
     /** Constant for DOM_VK_CAPS_LOCK. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_CAPS_LOCK = 20;
 
-    /** Constant for DOM_VK_OPEN_BRACKET. */
+    /** Constant for {@code DOM_VK_HANGUL}. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_OPEN_BRACKET = 219;
+    public static final int DOM_VK_HANGUL = 21;
 
-    /** Constant for DOM_VK_BACK_SLASH. */
+    /** Constant for {@code DOM_VK_KANA}. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_BACK_SLASH = 220;
+    public static final int DOM_VK_KANA = 21;
 
-    /** Constant for DOM_VK_CLOSE_BRACKET. */
+    /** Constant for {@code DOM_VK_EISU}. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_CLOSE_BRACKET = 221;
+    public static final int DOM_VK_EISU = 22;
 
-    /** Constant for DOM_VK_QUOTE. */
+    /** Constant for {@code DOM_VK_FINAL}. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_QUOTE = 222;
+    public static final int DOM_VK_FINAL = 24;
 
-    /** Constant for DOM_VK_META. */
+    /** Constant for {@code DOM_VK_JUNJA}. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_META = 224;
+    public static final int DOM_VK_JUNJA = 23;
+
+    /** Constant for {@code DOM_VK_HANJA}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_HANJA = 25;
+
+    /** Constant for {@code DOM_VK_KANJI}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_KANJI = 25;
 
     /** Constant for DOM_VK_ESCAPE. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_ESCAPE = 27;
 
-    /** Constant for DOM_VK_CANCEL. */
+    /** Constant for {@code DOM_VK_CONVERT}. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_CANCEL = 3;
+    public static final int DOM_VK_CONVERT = 28;
+
+    /** Constant for {@code DOM_VK_NONCONVERT}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_NONCONVERT = 29;
+
+    /** Constant for {@code DOM_VK_ACCEPT}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_ACCEPT = 30;
+
+    /** Constant for {@code DOM_VK_MODECHANGE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_MODECHANGE = 31;
 
     /** Constant for DOM_VK_SPACE. */
     @JsxConstant(@WebBrowser(FF))
@@ -284,9 +192,21 @@ public class KeyboardEvent extends UIEvent {
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_RIGHT = 39;
 
+    /** Constant for {@code DOM_VK_SELECT}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_SELECT = 41;
+
     /** Constant for DOM_VK_DOWN. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_DOWN = 40;
+
+    /** Constant for {@code DOM_VK_PRINT}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_PRINT = 42;
+
+    /** Constant for {@code DOM_VK_EXECUTE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_EXECUTE = 43;
 
     /** Constant for DOM_VK_PRINTSCREEN. */
     @JsxConstant(@WebBrowser(FF))
@@ -340,17 +260,33 @@ public class KeyboardEvent extends UIEvent {
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_9 = 57;
 
+    /** Constant for {@code DOM_VK_COLON}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_COLON = 58;
+
     /** Constant for DOM_VK_SEMICOLON. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_SEMICOLON = 59;
 
-    /** Constant for DOM_VK_HELP. */
+    /** Constant for {@code DOM_VK_LESS_THAN}. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_HELP = 6;
+    public static final int DOM_VK_LESS_THAN = 60;
 
-    /** Constant for DOM_VK_EQUALS. */
+    /** Constant for {@code DOM_VK_EQUALS}. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_EQUALS = 61;
+
+    /** Constant for {@code DOM_VK_GREATER_THAN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_GREATER_THAN = 62;
+
+    /** Constant for {@code DOM_VK_QUESTION_MARK}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_QUESTION_MARK = 63;
+
+    /** Constant for {@code DOM_VK_AT}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_AT = 64;
 
     /** Constant for DOM_VK_A. */
     @JsxConstant(@WebBrowser(FF))
@@ -456,17 +392,21 @@ public class KeyboardEvent extends UIEvent {
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_Y = 89;
 
-    /** Constant for DOM_VK_TAB. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int DOM_VK_TAB = 9;
-
     /** Constant for DOM_VK_Z. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_Z = 90;
 
+    /** Constant for {@code DOM_VK_WIN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN = 91;
+
     /** Constant for DOM_VK_CONTEXT_MENU. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_CONTEXT_MENU = 93;
+
+    /** Constant for {@code DOM_VK_SLEEP}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_SLEEP = 95;
 
     /** Constant for DOM_VK_NUMPAD0. */
     @JsxConstant(@WebBrowser(FF))
@@ -507,6 +447,370 @@ public class KeyboardEvent extends UIEvent {
     /** Constant for DOM_VK_NUMPAD9. */
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_NUMPAD9 = 105;
+
+    /** Constant for DOM_VK_MULTIPLY. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_MULTIPLY = 106;
+
+    /** Constant for DOM_VK_ADD. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_ADD = 107;
+
+    /** Constant for DOM_VK_SEPARATOR. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_SEPARATOR = 108;
+
+    /** Constant for DOM_VK_SUBTRACT. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_SUBTRACT = 109;
+
+    /** Constant for DOM_VK_DECIMAL. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_DECIMAL = 110;
+
+    /** Constant for DOM_VK_DIVIDE. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_DIVIDE = 111;
+
+    /** Constant for DOM_VK_F1. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F1 = 112;
+
+    /** Constant for DOM_VK_F2. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F2 = 113;
+
+    /** Constant for DOM_VK_F3. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F3 = 114;
+
+    /** Constant for DOM_VK_F4. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F4 = 115;
+
+    /** Constant for DOM_VK_F5. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F5 = 116;
+
+    /** Constant for DOM_VK_F6. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F6 = 117;
+
+    /** Constant for DOM_VK_F7. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F7 = 118;
+
+    /** Constant for DOM_VK_F8. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F8 = 119;
+
+    /** Constant for DOM_VK_F9. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F9 = 120;
+
+    /** Constant for DOM_VK_F10. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F10 = 121;
+
+    /** Constant for DOM_VK_F11. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F11 = 122;
+
+    /** Constant for DOM_VK_F12. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F12 = 123;
+
+    /** Constant for DOM_VK_F13. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F13 = 124;
+
+    /** Constant for DOM_VK_F14. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F14 = 125;
+
+    /** Constant for DOM_VK_F15. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F15 = 126;
+
+    /** Constant for DOM_VK_F16. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F16 = 127;
+
+    /** Constant for DOM_VK_F17. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F17 = 128;
+
+    /** Constant for DOM_VK_F18. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F18 = 129;
+
+    /** Constant for DOM_VK_F19. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F19 = 130;
+
+    /** Constant for DOM_VK_F20. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F20 = 131;
+
+    /** Constant for DOM_VK_F21. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F21 = 132;
+
+    /** Constant for DOM_VK_F22. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F22 = 133;
+
+    /** Constant for DOM_VK_F23. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F23 = 134;
+
+    /** Constant for DOM_VK_F24. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_F24 = 135;
+
+    /** Constant for DOM_VK_NUM_LOCK. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_NUM_LOCK = 144;
+
+    /** Constant for DOM_VK_SCROLL_LOCK. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_SCROLL_LOCK = 145;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_FJ_JISHO}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_FJ_JISHO = 146;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_FJ_MASSHOU}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_FJ_MASSHOU = 147;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_FJ_TOUROKU}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_FJ_TOUROKU = 148;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_FJ_LOYA}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_FJ_LOYA = 149;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_FJ_ROYA}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_FJ_ROYA = 150;
+
+    /** Constant for {@code DOM_VK_CIRCUMFLEX}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_CIRCUMFLEX = 160;
+
+    /** Constant for {@code DOM_VK_EXCLAMATION}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_EXCLAMATION = 161;
+
+    /** Constant for {@code DOM_VK_DOUBLE_QUOTE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_DOUBLE_QUOTE = 162;
+
+    /** Constant for {@code DOM_VK_HASH}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_HASH = 163;
+
+    /** Constant for {@code DOM_VK_DOLLAR}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_DOLLAR = 164;
+
+    /** Constant for {@code DOM_VK_PERCENT}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_PERCENT = 165;
+
+    /** Constant for {@code DOM_VK_AMPERSAND}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_AMPERSAND = 166;
+
+    /** Constant for {@code DOM_VK_UNDERSCORE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_UNDERSCORE = 167;
+
+    /** Constant for {@code DOM_VK_OPEN_PAREN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_OPEN_PAREN = 168;
+
+    /** Constant for {@code DOM_VK_CLOSE_PAREN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_CLOSE_PAREN = 169;
+
+    /** Constant for {@code DOM_VK_ASTERISK}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_ASTERISK = 170;
+
+    /** Constant for {@code DOM_VK_PLUS}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_PLUS = 171;
+
+    /** Constant for {@code DOM_VK_PIPE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_PIPE = 172;
+
+    /** Constant for {@code DOM_VK_HYPHEN_MINUS}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_HYPHEN_MINUS = 173;
+
+    /** Constant for {@code DOM_VK_OPEN_CURLY_BRACKET}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_OPEN_CURLY_BRACKET = 174;
+
+    /** Constant for {@code DOM_VK_CLOSE_CURLY_BRACKET}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_CLOSE_CURLY_BRACKET = 175;
+
+    /** Constant for {@code DOM_VK_TILDE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_TILDE = 176;
+
+    /** Constant for {@code DOM_VK_VOLUME_MUTE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_VOLUME_MUTE = 181;
+
+    /** Constant for {@code DOM_VK_VOLUME_DOWN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_VOLUME_DOWN = 182;
+
+    /** Constant for {@code DOM_VK_VOLUME_UP}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_VOLUME_UP = 183;
+
+    /** Constant for DOM_VK_COMMA. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_COMMA = 188;
+
+    /** Constant for DOM_VK_PERIOD. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_PERIOD = 190;
+
+    /** Constant for DOM_VK_SLASH. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_SLASH = 191;
+
+    /** Constant for DOM_VK_BACK_QUOTE. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_BACK_QUOTE = 192;
+
+    /** Constant for DOM_VK_OPEN_BRACKET. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_OPEN_BRACKET = 219;
+
+    /** Constant for DOM_VK_BACK_SLASH. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_BACK_SLASH = 220;
+
+    /** Constant for DOM_VK_CLOSE_BRACKET. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_CLOSE_BRACKET = 221;
+
+    /** Constant for DOM_VK_QUOTE. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_QUOTE = 222;
+
+    /** Constant for DOM_VK_META. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_META = 224;
+
+    /** Constant for {@code DOM_VK_ALTGR}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_ALTGR = 225;
+
+    /** Constant for {@code DOM_VK_WIN_ICO_HELP}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_ICO_HELP = 227;
+
+    /** Constant for {@code DOM_VK_WIN_ICO_00}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_ICO_00 = 228;
+
+    /** Constant for {@code DOM_VK_WIN_ICO_CLEAR}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_ICO_CLEAR = 230;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_RESET}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_RESET = 233;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_JUMP}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_JUMP = 234;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_PA1}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_PA1 = 235;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_PA2}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_PA2 = 236;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_PA3}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_PA3 = 237;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_WSCTRL}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_WSCTRL = 238;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_CUSEL}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_CUSEL = 239;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_ATTN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_ATTN = 240;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_FINISH}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_FINISH = 241;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_COPY}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_COPY = 242;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_AUTO}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_AUTO = 243;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_ENLW}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_ENLW = 244;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_BACKTAB}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_BACKTAB = 245;
+
+    /** Constant for {@code DOM_VK_ATTN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_ATTN = 246;
+
+    /** Constant for {@code DOM_VK_CRSEL}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_CRSEL = 247;
+
+    /** Constant for {@code DOM_VK_EXSEL}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_EXSEL = 248;
+
+    /** Constant for {@code DOM_VK_EREOF}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_EREOF = 249;
+
+    /** Constant for {@code DOM_VK_PLAY}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_PLAY = 250;
+
+    /** Constant for {@code DOM_VK_ZOOM}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_ZOOM = 251;
+
+    /** Constant for {@code DOM_VK_PA1}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_PA1 = 253;
+
+    /** Constant for {@code DOM_VK_WIN_OEM_CLEAR}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int DOM_VK_WIN_OEM_CLEAR = 254;
 
     /**
      * For {@link #KEYDOWN} and {@link #KEYUP}, this map stores {@link #setKeyCode(Object)} associated with
@@ -721,25 +1025,25 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * @return whether SHIFT has been pressed during this event or not
+     * {@inheritDoc}
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter
     public boolean getShiftKey() {
         return super.getShiftKey();
     }
 
     /**
-     * @return whether CTRL has been pressed during this event or not
+     * {@inheritDoc}
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter
     public boolean getCtrlKey() {
         return super.getCtrlKey();
     }
 
     /**
-     * @return whether ALT has been pressed during this event or not
+     * {@inheritDoc}
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter
     public boolean getAltKey() {
         return super.getAltKey();
     }

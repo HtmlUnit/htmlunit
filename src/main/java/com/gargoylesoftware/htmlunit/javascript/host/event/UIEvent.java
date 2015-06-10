@@ -160,30 +160,4 @@ public class UIEvent extends Event {
         metaKey_ = metaKey;
     }
 
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter(@WebBrowser(FF))
-    public boolean getAltKey() {
-        return super.getAltKey();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter(@WebBrowser(FF))
-    public boolean getCtrlKey() {
-        return super.getCtrlKey();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter(@WebBrowser(FF))
-    public boolean getShiftKey() {
-        return super.getShiftKey();
-    }
 }
