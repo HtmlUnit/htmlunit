@@ -831,22 +831,27 @@ public class KeyboardEvent extends UIEvent {
         keyCodeMap.put('*', DOM_VK_8);
         keyCodeMap.put('(', DOM_VK_9);
         keyCodeMap.put(')', DOM_VK_0);
-//        keyCodeMap.put('_', DOM_VK_1);
-//        keyCodeMap.put('+', DOM_VK_1);
-//        keyCodeMap.put('{', DOM_VK_1);
-//        keyCodeMap.put('}', DOM_VK_1);
-//        keyCodeMap.put(':', DOM_VK_1);
-//        keyCodeMap.put('"', DOM_VK_1);
-//        keyCodeMap.put('<', DOM_VK_1);
-//        keyCodeMap.put('>', DOM_VK_1);
-//        keyCodeMap.put('?', DOM_VK_1);
-        keyCodeMap.put('|', DOM_VK_BACK_SLASH);
-//        keyCodeMap.put('&', DOM_VK_1);
-//      keyCodeMap.put('_', DOM_VK_1);
-
-        keyCodeMap.put('.', DOM_VK_PERIOD);
+        //Chrome/IE11 189
+        keyCodeMap.put('-', DOM_VK_HYPHEN_MINUS);
+        keyCodeMap.put('_', DOM_VK_HYPHEN_MINUS);
+        //Chrome/IE11 187
+        keyCodeMap.put('+', DOM_VK_EQUALS);
+        keyCodeMap.put('[', DOM_VK_OPEN_BRACKET);
+        keyCodeMap.put('{', DOM_VK_OPEN_BRACKET);
+        keyCodeMap.put(']', DOM_VK_CLOSE_BRACKET);
+        keyCodeMap.put('}', DOM_VK_CLOSE_BRACKET);
+        //Chrome/IE11 186
+        keyCodeMap.put(':', DOM_VK_SEMICOLON);
+        keyCodeMap.put('\'', DOM_VK_QUOTE);
+        keyCodeMap.put('"', DOM_VK_QUOTE);
         keyCodeMap.put(',', DOM_VK_COMMA);
+        keyCodeMap.put('<', DOM_VK_COMMA);
+        keyCodeMap.put('.', DOM_VK_PERIOD);
+        keyCodeMap.put('>', DOM_VK_PERIOD);
         keyCodeMap.put('/', DOM_VK_SLASH);
+        keyCodeMap.put('?', DOM_VK_SLASH);
+        keyCodeMap.put('\\', DOM_VK_BACK_SLASH);
+        keyCodeMap.put('|', DOM_VK_BACK_SLASH);
     }
 
     /**
