@@ -183,7 +183,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("clickId")
-    public void testThisDefined() throws Exception {
+    public void thisDefined() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -201,7 +201,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("foo")
-    public void testSetPropOnThisDefined() throws Exception {
+    public void setPropOnThisDefined() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -220,7 +220,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("defined")
-    public void testEventArgDefinedByWrapper() throws Exception {
+    public void eventArgDefinedByWrapper() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId' onclick=\"alert(event ? 'defined' : 'undefined')\"/>\n"
@@ -235,7 +235,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "defined",
             IE8 = "undefined")
-    public void testEventArgDefined() throws Exception {
+    public void eventArgDefined() throws Exception {
         final String content
             = "<html><head></head>\n"
             + "<body>\n"
@@ -254,7 +254,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "pass",
             IE8 = "no event param")
-    public void testEventTargetSameAsThis() throws Exception {
+    public void eventTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head>\n"
             + "<body>\n"
@@ -277,7 +277,7 @@ public class EventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object HTMLInputElement]", "true" },
             FF = { "undefined", "false" },
             IE8 = { "[object]", "true" })
-    public void testEventSrcElementSameAsThis() throws Exception {
+    public void eventSrcElementSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -300,7 +300,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "pass",
             IE8 = "no event param")
-    public void testEventCurrentTargetSameAsThis() throws Exception {
+    public void eventCurrentTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head>\n"
             + "<body>\n"
@@ -323,7 +323,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Window]", "[object HTMLDivElement]" },
             IE8 = { "no addEventListener", "no event param" })
-    public void testCurrentTarget_sameListenerForEltAndWindow() throws Exception {
+    public void currentTarget_sameListenerForEltAndWindow() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<div id='clickId'>click me</div>\n"
@@ -375,7 +375,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" },
             IE8 = { "124a", "1a2a4ab1ab2ab4abc" })
-    public void testTyping_input() throws Exception {
+    public void typing_input() throws Exception {
         testTyping("<input type='text'", "");
         testTyping("<input type='password'", "");
         testTyping("<textarea", "</textarea>");
@@ -387,7 +387,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" },
             IE8 = { "124a", "1a2a4ab1ab2ab4abc" })
-    public void testTyping_textara() throws Exception {
+    public void typing_textara() throws Exception {
         testTyping("<textarea", "</textarea>");
     }
 
@@ -477,7 +477,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "2" })
-    public void testCommentInEventHandlerDeclaration() throws Exception {
+    public void commentInEventHandlerDeclaration() throws Exception {
         final String html
             = "<html><head></head>\n"
             + "<body onload='alert(1);\n"
@@ -494,7 +494,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    public void testNullEventHandler() throws Exception {
+    public void nullEventHandler() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
@@ -532,7 +532,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Event]", "number" },
             IE8 = { "[object]", "undefined" })
-    public void testTimeStamp() throws Exception {
+    public void timeStamp() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"

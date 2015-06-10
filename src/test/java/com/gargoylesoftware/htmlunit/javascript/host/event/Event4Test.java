@@ -34,7 +34,7 @@ public class Event4Test {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testSetEventPhaseToInvalidValue() throws Exception {
+    public void setEventPhaseToInvalidValue() throws Exception {
         boolean thrown = false;
         try {
             new Event().setEventPhase((short) 777);

@@ -89,7 +89,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "4px", "4px", "4px", "4px" })
-    public void testStyleSheet() throws Exception {
+    public void styleSheet() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
                 + "  BODY { margin: 4px; }\n"
@@ -120,7 +120,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Alerts(IE = "false",
             IE11 = "")
     @NotYetImplemented({ IE8, CHROME })
-    public void testReadOnly() throws Exception {
+    public void readOnly() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"

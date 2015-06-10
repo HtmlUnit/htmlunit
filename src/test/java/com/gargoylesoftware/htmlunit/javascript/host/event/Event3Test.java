@@ -53,7 +53,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testEventOnKeyDown_Shift_Ctrl_Alt() throws Exception {
+    public void eventOnKeyDown_Shift_Ctrl_Alt() throws Exception {
         testEventOnKeyDown_Shift_Ctrl_Alt(false, false, false, new String[] {"false,false,false"});
         testEventOnKeyDown_Shift_Ctrl_Alt(true,  false, false, new String[] {"true,false,false"});
         testEventOnKeyDown_Shift_Ctrl_Alt(false, true,  false, new String[] {"false,true,false"});
@@ -87,7 +87,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testEventOnClick_Shift_Ctrl_Alt() throws Exception {
+    public void eventOnClick_Shift_Ctrl_Alt() throws Exception {
         testEventOnClick_Shift_Ctrl_Alt(false, false, false, new String[] {"false,false,false"});
         testEventOnClick_Shift_Ctrl_Alt(true,  false, false, new String[] {"true,false,false"});
         testEventOnClick_Shift_Ctrl_Alt(false, true,  false, new String[] {"false,true,false"});
@@ -125,7 +125,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testEventOnBlur() throws Exception {
+    public void eventOnBlur() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<form action='foo'>\n"
@@ -181,7 +181,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testEventBubblingReturns_1() throws Exception {
+    public void eventBubblingReturns_1() throws Exception {
         testEventBubblingReturns("", "", "", true);
         testEventBubblingReturns("return false;", "             ", "             ", false);
         testEventBubblingReturns("             ", "return false;", "             ", false);
@@ -203,7 +203,7 @@ public class Event3Test extends SimpleWebTestCase {
     @Alerts(DEFAULT = "false",
             IE8 = "true") // here not alerts! ;-)
     @NotYetImplemented(IE11)
-    public void testEventBubblingReturns_2() throws Exception {
+    public void eventBubblingReturns_2() throws Exception {
         final boolean changesPage = Boolean.parseBoolean(getExpectedAlerts()[0]);
         testEventBubblingReturns("return true; ", "return false;", "return true; ", changesPage);
         testEventBubblingReturns("return true; ", "return true; ", "return false;", changesPage);

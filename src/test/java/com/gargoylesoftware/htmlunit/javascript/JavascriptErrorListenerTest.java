@@ -49,7 +49,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNullJavaScriptErrorListener() throws Exception {
+    public void nullJavaScriptErrorListener() throws Exception {
         final WebClient webClient = getWebClient();
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.setJavaScriptErrorListener(null);

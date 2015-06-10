@@ -78,7 +78,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetVariousAttributes() throws Exception {
+    public void getVariousAttributes() throws Exception {
         String[] expectedAlerts = {
             "",               // hash
             "first",          // host
@@ -139,7 +139,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetHostname() throws Exception {
+    public void setHostname() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
@@ -161,7 +161,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetHostWithoutPort() throws Exception {
+    public void setHostWithoutPort() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
@@ -183,7 +183,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetHostWithPort() throws Exception {
+    public void setHostWithPort() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
@@ -205,7 +205,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetPathname() throws Exception {
+    public void setPathname() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
@@ -227,7 +227,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetPort() throws Exception {
+    public void setPort() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
@@ -249,7 +249,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetProtocol() throws Exception {
+    public void setProtocol() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
@@ -275,7 +275,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetHash() throws Exception {
+    public void setHash() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
 
@@ -308,7 +308,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplaceWithFrame() throws Exception {
+    public void replaceWithFrame() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
@@ -349,7 +349,7 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReload() throws Exception {
+    public void reload() throws Exception {
         final String content =
               "<html>\n"
             + "  <head><title>test</title></head>\n"
@@ -371,7 +371,7 @@ public class LocationTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts("c")
-    public void testLocationWithTarget() throws Exception {
+    public void locationWithTarget() throws Exception {
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));

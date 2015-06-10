@@ -313,7 +313,7 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "pass", "fail:66", "fail:undefined" },
             CHROME = { "pass", "fail:66", "fail:0" },
             IE8 = { "pass", "fail:66", "fail:0" })
-    public void testEventOnKeyDown() throws Exception {
+    public void eventOnKeyDown() throws Exception {
         final String html
             = "<html><head></head>\n"
             + "<body>\n"
@@ -491,7 +491,7 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "false", "false", "SPAN" },
             FF = { "false", "true", "SPAN" },
             IE8 = { "true", "false", "SPAN" })
-    public void testEventTransmission() throws Exception {
+    public void eventTransmission() throws Exception {
         final String html =
             "<html>\n"
             + "<body>\n"
@@ -521,7 +521,7 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "capturing", "at target", "bubbling" },
             IE8 = "unknown")
     @NotYetImplemented(CHROME)
-    public void testEventPhase() throws Exception {
+    public void eventPhase() throws Exception {
         final String html =
               "<html>\n"
             + "<head><script>\n"

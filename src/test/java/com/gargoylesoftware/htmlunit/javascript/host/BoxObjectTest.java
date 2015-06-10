@@ -37,7 +37,7 @@ public class BoxObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void testElementAttributes() throws Exception {
+    public void elementAttributes() throws Exception {
         final String html =
               "<html>\n"
             + "  <body onload='test()'>\n"
@@ -71,7 +71,7 @@ public class BoxObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void testPositionAndSizeAttributes() throws Exception {
+    public void positionAndSizeAttributes() throws Exception {
         final String html =
               "<html>\n"
             + "  <body onload='test()'>\n"

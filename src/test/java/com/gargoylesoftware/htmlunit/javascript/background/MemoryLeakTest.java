@@ -49,7 +49,7 @@ public class MemoryLeakTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testLeaks() throws Exception {
+    public void leaks() throws Exception {
         // windowLeaks();
     }
 

@@ -142,7 +142,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("DIV")
-    public void testNodeNameIsUppercase() throws Exception {
+    public void nodeNameIsUppercase() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
@@ -188,7 +188,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "nb nodes: 2", "8", "1" })
-    public void testChildNodes_Comments() throws Exception {
+    public void childNodes_Comments() throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "</head>\n"
             + "<body><!-- comment --><script>\n"
@@ -238,7 +238,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "document: 9", "document.body: 1", "body child 1: 3", "body child 2: 8" })
-    public void testNodeType() throws Exception {
+    public void nodeType() throws Exception {
         final String html = "<html><head><title>test</title>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
@@ -397,7 +397,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "3", "3", "3", "3", "3", "3", "3" },
             IE8 = { "undefined", "not supported" })
-    public void testNodePrototype() throws Exception {
+    public void nodePrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
@@ -490,7 +490,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "in click",
             IE8 = { "in click", "in click", "in click" })
-    public void testCloneNode_copiesListenerOnlyForIE() throws Exception {
+    public void cloneNode_copiesListenerOnlyForIE() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -976,7 +976,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("id=bar")
-    public void testCloneAttributesAvailable() throws Exception {
+    public void cloneAttributesAvailable() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
