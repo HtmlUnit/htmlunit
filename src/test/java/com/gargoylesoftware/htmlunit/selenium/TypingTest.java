@@ -122,7 +122,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void testNumericShiftKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -158,7 +157,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void testAllPrintableKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 

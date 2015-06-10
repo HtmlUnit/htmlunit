@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: trigger SHIFT keydown/keyup events when "upper" characters are typed. 
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: implement HTMLElement.contentEditable and isContentEditable.
             </action>

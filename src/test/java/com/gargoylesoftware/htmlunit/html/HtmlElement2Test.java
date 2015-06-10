@@ -24,6 +24,8 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -176,4 +178,35 @@ public class HtmlElement2Test extends WebDriverTestCase {
         body.sendKeys("something");
         assertEquals("something", body.getText());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "down: 16,0 down: 49,0 press: 33,33 up: 49,0 up: 16,0"
+                + " down: 16,0 down: 220,0 press: 124,124 up: 220,0 up: 16,0",
+            FF = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
+                + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0")
+    //https://github.com/SeleniumHQ/selenium/issues/639
+    @BuggyWebDriver(Browser.FF)
+    public void shiftKeys() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function appendMessage(message) {\n"
+            + "    document.getElementById('result').innerHTML += message + ' ';\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body >\n"
+            + "  <input id='input1' onkeyup=\"appendMessage('up: ' + event.keyCode + ',' + event.charCode)\" "
+            + "onkeypress=\"appendMessage('press: ' + event.keyCode + ',' + event.charCode)\" "
+            + "onkeydown=\"appendMessage('down: ' + event.keyCode + ',' + event.charCode)\"><br>\n"
+            + "<p id='result'></p>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("input1"));
+        final WebElement result = driver.findElement(By.id("result"));
+        input.sendKeys("!|");
+        assertEquals(getExpectedAlerts()[0], result.getText());
+    }
+
 }

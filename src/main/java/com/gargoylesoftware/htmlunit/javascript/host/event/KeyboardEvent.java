@@ -19,6 +19,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -505,6 +508,52 @@ public class KeyboardEvent extends UIEvent {
     @JsxConstant(@WebBrowser(FF))
     public static final int DOM_VK_NUMPAD9 = 105;
 
+    /**
+     * For {@link #KEYDOWN} and {@link #KEYUP}, this map stores {@link #setKeyCode(Object)} associated with
+     * the character (if they are not the same).
+     * You can verify this <a href="http://www.asquare.net/javascript/tests/KeyCode.html">here</a>
+     */
+    private static final Map<Character, Integer> keyCodeMap = new HashMap<>();
+    static {
+        keyCodeMap.put('`', DOM_VK_BACK_QUOTE);
+        keyCodeMap.put('~', DOM_VK_BACK_QUOTE);
+        keyCodeMap.put('!', DOM_VK_1);
+        keyCodeMap.put('@', DOM_VK_2);
+        keyCodeMap.put('#', DOM_VK_3);
+        keyCodeMap.put('$', DOM_VK_4);
+        keyCodeMap.put('%', DOM_VK_5);
+        keyCodeMap.put('^', DOM_VK_6);
+        keyCodeMap.put('&', DOM_VK_7);
+        keyCodeMap.put('*', DOM_VK_8);
+        keyCodeMap.put('(', DOM_VK_9);
+        keyCodeMap.put(')', DOM_VK_0);
+//        keyCodeMap.put('_', DOM_VK_1);
+//        keyCodeMap.put('+', DOM_VK_1);
+//        keyCodeMap.put('{', DOM_VK_1);
+//        keyCodeMap.put('}', DOM_VK_1);
+//        keyCodeMap.put(':', DOM_VK_1);
+//        keyCodeMap.put('"', DOM_VK_1);
+//        keyCodeMap.put('<', DOM_VK_1);
+//        keyCodeMap.put('>', DOM_VK_1);
+//        keyCodeMap.put('?', DOM_VK_1);
+        keyCodeMap.put('|', DOM_VK_BACK_SLASH);
+//        keyCodeMap.put('&', DOM_VK_1);
+//      keyCodeMap.put('_', DOM_VK_1);
+
+        keyCodeMap.put('.', DOM_VK_PERIOD);
+        keyCodeMap.put(',', DOM_VK_COMMA);
+        keyCodeMap.put('/', DOM_VK_SLASH);
+    }
+
+    /**
+     * Returns whether the specified character can be written only when {@code SHIFT} key is pressed.
+     * @param ch the character
+     * @return whether the specified character can be written only when {@code SHIFT} key is pressed
+     */
+    public static boolean isShiftNeeded(final char ch) {
+        return "~!@#$%^&*()_+{}:\"<>?|".indexOf(ch) != -1;
+    }
+
     private int charCode_;
     private int which_;
 
@@ -650,24 +699,16 @@ public class KeyboardEvent extends UIEvent {
      * @param c the character
      * @return the corresponding keycode
      */
-    private static int charToKeyCode(final int c) {
+    private static int charToKeyCode(final char c) {
         if (c >= 'a' && c <= 'z') {
             return 'A' + c - 'a';
         }
 
-        switch (c) {
-            case '.':
-                return DOM_VK_PERIOD;
-
-            case ',':
-                return DOM_VK_COMMA;
-
-            case '/':
-                return DOM_VK_SLASH;
-
-            default:
-                return c;
+        final Integer i = keyCodeMap.get(c);
+        if (i != null) {
+            return i;
         }
+        return c;
     }
 
     /**

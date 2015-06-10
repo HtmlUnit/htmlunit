@@ -557,6 +557,19 @@ public abstract class HtmlElement extends DomElement {
         if (page.getFocusedElement() != this) {
             focus();
         }
+        final boolean isShiftNeeded = KeyboardEvent.isShiftNeeded(c);
+
+        final Event shiftDown;
+        final ScriptResult shiftDownResult;
+        if (isShiftNeeded) {
+            shiftDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, KeyboardEvent.DOM_VK_SHIFT,
+                true, ctrlKey, altKey);
+            shiftDownResult = fireEvent(shiftDown);
+        }
+        else {
+            shiftDown = null;
+            shiftDownResult = null;
+        }
 
         final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyDownResult = fireEvent(keyDown);
@@ -564,7 +577,8 @@ public abstract class HtmlElement extends DomElement {
         final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyPressResult = fireEvent(keyPress);
 
-        if (!keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
+        if ((shiftDownResult == null || !shiftDown.isAborted(shiftDownResult))
+                && !keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
             doType(c, shiftKey, ctrlKey, altKey);
         }
 
@@ -580,6 +594,12 @@ public abstract class HtmlElement extends DomElement {
 
         final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey);
         fireEvent(keyUp);
+
+        if (isShiftNeeded) {
+            final Event shiftUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, KeyboardEvent.DOM_VK_SHIFT,
+                false, ctrlKey, altKey);
+            fireEvent(shiftUp);
+        }
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
