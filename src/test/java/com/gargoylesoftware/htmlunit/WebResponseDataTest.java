@@ -55,7 +55,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGZippedContent() throws Exception {
+    public void gZippedContent() throws Exception {
         final InputStream stream = getClass().getClassLoader().getResourceAsStream(GZIPPED_FILE);
         final byte[] zippedContent = IOUtils.toByteArray(stream);
 
@@ -72,7 +72,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testEmptyGZippedContent() throws Exception {
+    public void emptyGZippedContent() throws Exception {
         testEmptyGZippedContent(HttpStatus.SC_OK, 0, null);
     }
 
@@ -116,7 +116,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testBrokenGZippedContent() throws Exception {
+    public void brokenGZippedContent() throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
@@ -135,7 +135,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNullBody() throws Exception {
+    public void nullBody() throws Exception {
         final DownloadedContent downloadedContent = new DownloadedContent.InMemory(new byte[] {});
         final List<NameValuePair> headers = new ArrayList<>();
         final WebResponseData data = new WebResponseData(downloadedContent, 304, "NOT_MODIFIED", headers);

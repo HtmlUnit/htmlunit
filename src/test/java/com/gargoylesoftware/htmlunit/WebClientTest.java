@@ -86,7 +86,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testCredentialProvider_NoCredentials() throws Exception {
+    public void credentialProvider_NoCredentials() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
                 + "No access</body></html>";
         final WebClient client = getWebClient();
@@ -613,7 +613,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * Test passing in a null page creator.
      */
     @Test
-    public void testSetPageCreator_null() {
+    public void setPageCreator_null() {
         final WebClient webClient = getWebClient();
         try {
             webClient.setPageCreator(null);
@@ -629,7 +629,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testSetPageCreator() throws Exception {
+    public void setPageCreator() throws Exception {
         final String page1Content = "<html><head><title>foo</title>\n"
                 + "</head><body>\n"
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
@@ -682,7 +682,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testLoadPage_PostWithParameters() throws Exception {
+    public void loadPage_PostWithParameters() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
                 + "</body></html>";
         final WebClient client = getWebClient();
@@ -703,7 +703,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testLoadPage_SlashesInQueryString() throws Exception {
+    public void loadPage_SlashesInQueryString() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head>\n"
                 + "<body><a href='foo.html?id=UYIUYTY//YTYUY..F'>to page 2</a>\n"
                 + "</body></html>";
@@ -726,7 +726,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testLoadFilePage() throws Exception {
+    public void loadFilePage() throws Exception {
         // Create a real file to read.
         // It could be useful to have existing files to test in a special location in filesystem.
         // It will be really needed when we have to test binary files using the file protocol.
@@ -776,7 +776,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testLoadFilePageXml() throws Exception {
+    public void loadFilePageXml() throws Exception {
         final String xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\n"
                 + "<dataset>\n"
                 + "<table name=\"USER\">\n"
@@ -918,7 +918,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testTabNext() throws Exception {
+    public void tabNext() throws Exception {
         final WebClient webClient = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -938,7 +938,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testTabPrevious() throws Exception {
+    public void tabPrevious() throws Exception {
         final WebClient webClient = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1026,7 +1026,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLoadWebResponseInto() throws Exception {
+    public void loadWebResponseInto() throws Exception {
         final WebClient webClient = getWebClient();
         final WebResponse webResponse = new StringWebResponse(
                 "<html><head><title>first</title></head><body></body></html>", getDefaultUrl());
@@ -1208,7 +1208,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testExpandUrl() throws Exception {
+    public void expandUrl() throws Exception {
         final String prefix = URL_FIRST.toExternalForm();
         assertEquals(prefix + "#second", WebClient.expandUrl(URL_FIRST, "#second"));
         assertEquals(prefix + "?a=1&b=2", WebClient.expandUrl(new URL(prefix + "?a=1&b=2"), ""));
@@ -1221,7 +1221,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testExpandUrlWithFile() throws Exception {
+    public void expandUrlWithFile() throws Exception {
         final String urlString = "http://host/page.html";
         final URL url = new URL(urlString);
         assertEquals(urlString + "#second", WebClient.expandUrl(url, "#second"));
@@ -1264,7 +1264,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testExpandUrlHandlesColonsInRelativeUrl() throws Exception {
+    public void expandUrlHandlesColonsInRelativeUrl() throws Exception {
         final URL newUrl = WebClient.expandUrl(new URL("http://host/foo"), "/bar/blah:de:blah");
         assertEquals("http://host/bar/blah:de:blah", newUrl);
     }
@@ -1435,7 +1435,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testContentTypeCaseInsensitive() throws Exception {
+    public void contentTypeCaseInsensitive() throws Exception {
         final String content = "<html><head>\n"
                 + "<script type='Text/Javascript' src='foo.js'></script>\n"
                 + "</head></html>";
@@ -1472,7 +1472,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testLoadFilePageWithExternalJS() throws Exception {
+    public void loadFilePageWithExternalJS() throws Exception {
         final File currentDirectory = new File((new File("")).getAbsolutePath());
 
         final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
@@ -1519,7 +1519,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testUrlEncoding() throws Exception {
+    public void urlEncoding() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_38, "<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
@@ -1532,7 +1532,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testUrlEncoding2() throws Exception {
+    public void urlEncoding2() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
         final HtmlPage page = loadPage(INTERNET_EXPLORER_11, "<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
@@ -1555,7 +1555,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testCssEnablementControlsCssLoading() throws Exception {
+    public void cssEnablementControlsCssLoading() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
@@ -1875,7 +1875,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testCssErrorHandler() throws Exception {
+    public void cssErrorHandler() throws Exception {
         final WebClient client = getWebClient();
         assertTrue(client.getCssErrorHandler() instanceof DefaultCssErrorHandler);
 
@@ -1966,7 +1966,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testCurrentWindow() throws Exception {
+    public void currentWindow() throws Exception {
         final WebClient client = getWebClient();
 
         final MockWebConnection conn = new MockWebConnection();
@@ -1993,7 +1993,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testCurrentWindow2() throws Exception {
+    public void currentWindow2() throws Exception {
         final String html = "<html><head><script>\n"
                 + "function createFrame() {\n"
                 + "  var f = document.createElement('iframe');\n"
@@ -2087,7 +2087,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testUrlWithDirectoryUp() throws Exception {
+    public void urlWithDirectoryUp() throws Exception {
         final URL url = new URL("http://htmlunit.sf.net/foo.html");
         final URL urlWithDirectoryUp = new URL("http://htmlunit.sf.net/bla/../foo.html");
 

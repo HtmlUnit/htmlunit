@@ -50,7 +50,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
      * @throws IOException if the test fails
      */
     @Test
-    public void testScriptPreProcessor() throws IOException {
+    public void scriptPreProcessor() throws IOException {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final String alertText = "content";
@@ -112,7 +112,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testScriptPreProcessor_UnimplementedJavascript() throws Exception {
+    public void scriptPreProcessor_UnimplementedJavascript() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         final String content = "<html><head><title>foo</title></head><body>\n"
@@ -146,7 +146,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testScriptPreProcessor_Eval() throws Exception {
+    public void scriptPreProcessor_Eval() throws Exception {
         final String html = "<html><body><script>eval('aX'+'ert(\"abc\")');</script></body></html>";
 
         final WebClient client = getWebClient();

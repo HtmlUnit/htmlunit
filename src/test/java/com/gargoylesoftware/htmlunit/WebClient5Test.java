@@ -53,7 +53,7 @@ public class WebClient5Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testTests() throws Exception {
+    public void tests() throws Exception {
         testTests(new File("src/test/java"));
     }
 
@@ -121,7 +121,7 @@ public class WebClient5Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetPageWithStringArg() throws Exception {
+    public void getPageWithStringArg() throws Exception {
         final URL[] calledUrls = {null};
         try (final WebClient wc = new WebClient() {
             @Override

@@ -34,7 +34,7 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNotification() throws Exception {
+    public void notification() throws Exception {
         final String html = "<html><head>\n"
                 + "  <script src='script.js'></script>\n"
                 + "</head>\n"

@@ -199,7 +199,7 @@ public class WebClient4Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testUseProxy() throws Exception {
+    public void useProxy() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", UseProxyHeaderServlet.class);
         startWebServer("./", null, servlets);
@@ -233,7 +233,7 @@ public class WebClient4Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testNoContent() throws Exception {
+    public void noContent() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test1", NoContentServlet1.class);
         servlets.put("/test2", NoContentServlet2.class);
@@ -282,7 +282,7 @@ public class WebClient4Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testNotModified() throws Exception {
+    public void notModified() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NotModifiedServlet.class);
         startWebServer("./", null, servlets);
@@ -321,7 +321,7 @@ public class WebClient4Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testTimeout() throws Exception {
+    public void timeout() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/*", DelayDeliverServlet.class);
         startWebServer("./", null, servlets);

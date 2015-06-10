@@ -41,7 +41,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
      * @throws Exception if the test fails
      */
     @Test
-    public void testConstructorWithWebResponse() throws Exception {
+    public void constructorWithWebResponse() throws Exception {
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData webResponseData = new WebResponseData(
                 ArrayUtils.EMPTY_BYTE_ARRAY, HttpStatus.SC_NOT_FOUND, "not found",
