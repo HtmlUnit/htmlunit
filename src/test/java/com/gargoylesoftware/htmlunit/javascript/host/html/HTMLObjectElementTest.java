@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -24,8 +22,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 
@@ -35,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLObjectElementTest extends SimpleWebTestCase {
@@ -61,20 +58,11 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final Map<String, String> activeXObjectMap = new HashMap<>();
-        activeXObjectMap.put(clsid,
-                "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
+        activeXObjectMap.put(clsid, "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
         client.setActiveXObjectMap(activeXObjectMap);
 
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(getDefaultUrl(), html);
-        client.setWebConnection(webConnection);
-
-        client.getPage(getDefaultUrl());
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }
