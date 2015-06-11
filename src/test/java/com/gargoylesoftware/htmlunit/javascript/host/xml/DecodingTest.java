@@ -39,10 +39,8 @@ public class DecodingTest {
         System.out.println("--------------");
         final String string = "'\u9ec4'";
         final Charset charset = Charset.forName("GBK");
-        System.out.println(charset.getClass().getName());
-        System.out.println(charset.getClass().getProtectionDomain().getCodeSource());
         final InputStream is = new ByteArrayInputStream(string.getBytes("UTF-8"));
-        final sun.nio.cs.StreamDecoder decoder = sun.nio.cs.StreamDecoder.forInputStreamReader(is, this, charset);
+        final StreamDecoder decoder = StreamDecoder.forInputStreamReader(is, this, charset);
         int i;
         while((i = decoder.read()) != -1) {
             System.out.println(i);
@@ -50,7 +48,7 @@ public class DecodingTest {
         System.out.println("--------------");
         final Properties systemProperties = System.getProperties();
         for (final Object key : systemProperties.keySet()) {
-            System.out.println("" + key + '=' + systemProperties.getProperty((String) key));
+            //System.out.println("" + key + '=' + systemProperties.getProperty((String) key));
         }
     }
 }
