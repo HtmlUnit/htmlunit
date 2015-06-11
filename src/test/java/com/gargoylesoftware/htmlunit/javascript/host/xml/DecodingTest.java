@@ -21,7 +21,6 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CodingErrorAction;
-import java.util.Properties;
 
 import org.junit.Test;
 
@@ -38,90 +37,11 @@ public class DecodingTest {
      *
      * @throws Exception if the test fails
      */
-    //@Test
-    public void test() throws Exception {
-        System.out.println("--------------");
-        final String string = "'\u9ec4'";
-        final Charset charset = Charset.forName("GBK");
-        final InputStream is = new ByteArrayInputStream(string.getBytes("UTF-8"));
-        final StreamDecoder decoder = StreamDecoder.forInputStreamReader(is, this, charset);
-        int i;
-        while((i = decoder.read()) != -1) {
-            System.out.println("test result: " + i);
-        }
-        System.out.println("--------------");
-        final Properties systemProperties = System.getProperties();
-        for (final Object key : systemProperties.keySet()) {
-            //System.out.println("" + key + '=' + systemProperties.getProperty((String) key));
-        }
-    }
-
-    /**
-     * Helper method Bug #1623.
-     *
-     * @throws Exception if the test fails
-     */
-    //@Test
-    public void test2() throws Exception {
-        System.out.println("--------------");
-        final String string = "'\u9ec4'";
-        final Charset charset = Charset.forName("GBK");
-        CharsetDecoder decoder = charset.newDecoder();
-        System.out.println(decoder.getClass().getName());
-        byte[] bytes = string.getBytes("UTF-8");
-        System.out.println("-------Original-------");
-        for (byte b: bytes) {
-            System.out.println("Byte " + (int) b);
-        }
-        
-        for (int i = 1; i <= bytes.length; i++) {
-            for (int offset = 0; offset < bytes.length; offset++) {
-                process(decoder, bytes, offset, i);
-            }
-        }
-        bytes = increase(bytes, 6);
-
-        System.out.println("-------Extended-------");
-        for (byte b: bytes) {
-            System.out.println("Byte " + (int) b);
-        }
-        
-        for (int i = 1; i <= bytes.length; i++) {
-            for (int offset = 0; offset < bytes.length; offset++) {
-                process(decoder, bytes, offset, i);
-            }
-        }
-    }
-
-    private void process(CharsetDecoder decoder, byte[] bytes, int offset, int length) {
-        try {
-          CharBuffer buff = decoder.decode(ByteBuffer.wrap(bytes, offset, length));
-          System.out.println("----------" + bytes.length + ", offset " + offset + ", length " + length);
-          for (char ch : buff.array()) {
-              System.out.println("Char " + (int) ch);
-          }
-        }
-        catch(Exception e) {
-            //System.out.println("Exception");
-        }
-        
-    }
-    private byte[] increase(byte[] bytes, int size) {
-        byte[] newBytes = new byte[size];
-        System.arraycopy(bytes, 0, newBytes, 0, Math.min(bytes.length, size));
-        return newBytes;
-    }
-
-    /**
-     * Helper method Bug #1623.
-     *
-     * @throws Exception if the test fails
-     */
     @Test
-    public void test3() throws Exception {
-        System.out.println("-----------test3()------------");
+    public void test() throws Exception {
         final String string = "'\u9ec4'";
-        final Charset charset = Charset.forName("GBK");
+        final GBK charset = new GBK();
+        System.out.println(charset.getClass().getName());
         CharsetDecoder decoder = charset.newDecoder().onMalformedInput(CodingErrorAction.REPLACE)
                 .onUnmappableCharacter(CodingErrorAction.REPLACE);
         byte[] bytes = string.getBytes("UTF-8");
