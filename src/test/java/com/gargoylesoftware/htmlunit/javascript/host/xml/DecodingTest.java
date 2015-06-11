@@ -110,4 +110,31 @@ public class DecodingTest {
         System.arraycopy(bytes, 0, newBytes, 0, Math.min(bytes.length, size));
         return newBytes;
     }
+
+    /**
+     * Helper method Bug #1623.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void test3() throws Exception {
+        System.out.println("-----------test3()------------");
+        final String string = "'\u9ec4'";
+        final Charset charset = Charset.forName("GBK");
+        CharsetDecoder decoder = charset.newDecoder();
+        byte[] bytes = string.getBytes("UTF-8");
+        ByteBuffer bb = ByteBuffer.wrap(bytes, 0, 5);
+        CharBuffer cb = CharBuffer.wrap(new char[4]);
+        System.out.println(bb.position() + " " + bb.limit());
+        System.out.println(cb.position() + " " + cb.limit());
+        decoder.decode(bb, cb, false);
+        System.out.println(bb.position() + " " + bb.limit());
+        System.out.println(cb.position() + " " + cb.limit());
+        decoder.decode(bb, cb, false);
+        System.out.println(bb.position() + " " + bb.limit());
+        System.out.println(cb.position() + " " + cb.limit());
+        decoder.decode(bb, cb, false);
+        System.out.println(bb.position() + " " + bb.limit());
+        System.out.println(cb.position() + " " + cb.limit());
+    }
 }
