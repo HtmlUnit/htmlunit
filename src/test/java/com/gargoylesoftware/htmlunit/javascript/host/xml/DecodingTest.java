@@ -74,25 +74,34 @@ public class DecodingTest {
         }
         
         for (int i = 1; i <= bytes.length; i++) {
-            process(decoder, bytes, i);
+            for (int offset = 0; offset < bytes.length; offset++) {
+                process(decoder, bytes, offset, i);
+            }
         }
         bytes = increase(bytes, 6);
 
+        System.out.println("-------Extended-------");
+        for (byte b: bytes) {
+            System.out.println("Byte " + (int) b);
+        }
+        
         for (int i = 1; i <= bytes.length; i++) {
-            process(decoder, bytes, i);
+            for (int offset = 0; offset < bytes.length; offset++) {
+                process(decoder, bytes, offset, i);
+            }
         }
     }
 
-    private void process(CharsetDecoder decoder, byte[] bytes, int length) {
-        System.out.println("----------" + bytes.length + ", length " + length);
+    private void process(CharsetDecoder decoder, byte[] bytes, int offset, int length) {
         try {
-          CharBuffer buff = decoder.decode(ByteBuffer.wrap(bytes, 0, length));
+          CharBuffer buff = decoder.decode(ByteBuffer.wrap(bytes, offset, length));
+          System.out.println("----------" + bytes.length + ", offset " + offset + ", length " + length);
           for (char ch : buff.array()) {
               System.out.println("Char " + (int) ch);
           }
         }
         catch(Exception e) {
-            e.printStackTrace();
+            //System.out.println("Exception");
         }
         
     }
