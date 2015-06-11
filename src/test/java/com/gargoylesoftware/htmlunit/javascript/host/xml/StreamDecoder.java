@@ -335,7 +335,7 @@ public class StreamDecoder extends Reader
                 if ((cb.position() > 0) && !inReady())
                     break;          // Block at most once
                 int n = readBytes();
-                System.out.println("implRead: n " + readBytes());
+                System.out.println("implRead: n " + n);
                 if (n < 0) {
                     eof = true;
                     if ((cb.position() == 0) && (!bb.hasRemaining()))

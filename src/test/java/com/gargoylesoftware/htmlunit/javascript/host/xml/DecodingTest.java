@@ -16,7 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
 import java.util.Properties;
 
 import org.junit.Test;
@@ -34,7 +37,7 @@ public class DecodingTest {
      *
      * @throws Exception if the test fails
      */
-    @Test
+    //@Test
     public void test() throws Exception {
         System.out.println("--------------");
         final String string = "'\u9ec4'";
@@ -43,12 +46,59 @@ public class DecodingTest {
         final StreamDecoder decoder = StreamDecoder.forInputStreamReader(is, this, charset);
         int i;
         while((i = decoder.read()) != -1) {
-            System.out.println(i);
+            System.out.println("test result: " + i);
         }
         System.out.println("--------------");
         final Properties systemProperties = System.getProperties();
         for (final Object key : systemProperties.keySet()) {
             //System.out.println("" + key + '=' + systemProperties.getProperty((String) key));
         }
+    }
+
+    /**
+     * Helper method Bug #1623.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void test2() throws Exception {
+        System.out.println("--------------");
+        final String string = "'\u9ec4'";
+        final Charset charset = Charset.forName("GBK");
+        CharsetDecoder decoder = charset.newDecoder();
+        System.out.println(decoder.getClass().getName());
+        byte[] bytes = string.getBytes("UTF-8");
+        System.out.println("-------Original-------");
+        for (byte b: bytes) {
+            System.out.println("Byte " + (int) b);
+        }
+        
+        for (int i = 1; i <= bytes.length; i++) {
+            process(decoder, bytes, i);
+        }
+        bytes = increase(bytes, 6);
+
+        for (int i = 1; i <= bytes.length; i++) {
+            process(decoder, bytes, i);
+        }
+    }
+
+    private void process(CharsetDecoder decoder, byte[] bytes, int length) {
+        System.out.println("----------" + bytes.length + ", length " + length);
+        try {
+          CharBuffer buff = decoder.decode(ByteBuffer.wrap(bytes, 0, length));
+          for (char ch : buff.array()) {
+              System.out.println("Char " + (int) ch);
+          }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    private byte[] increase(byte[] bytes, int size) {
+        byte[] newBytes = new byte[size];
+        System.arraycopy(bytes, 0, newBytes, 0, Math.min(bytes.length, size));
+        return newBytes;
     }
 }
