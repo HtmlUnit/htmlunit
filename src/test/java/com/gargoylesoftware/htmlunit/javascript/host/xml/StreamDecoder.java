@@ -258,6 +258,7 @@ public class StreamDecoder extends Reader
     private int readBytes() throws IOException {
         bb.compact();
         try {
+            System.out.println("readBytes(): ch " + ch);
             if (ch != null) {
                 // Read from the channel
                 int n = ch.read(bb);
@@ -266,11 +267,16 @@ public class StreamDecoder extends Reader
             } else {
                 // Read from the input stream, and then update the buffer
                 int lim = bb.limit();
+                System.out.println("readBytes(): lim " + lim);
                 int pos = bb.position();
+                System.out.println("readBytes(): post " + pos);
                 assert (pos <= lim);
                 int rem = (pos <= lim ? lim - pos : 0);
+                System.out.println("readBytes(): rem " + rem);
                 assert rem > 0;
+                System.out.println("readBytes(): bb.arrayOffset() " + bb.arrayOffset());
                 int n = in.read(bb.array(), bb.arrayOffset() + pos, rem);
+                System.out.println("readBytes(): n " + n);
                 if (n < 0)
                     return n;
                 if (n == 0)
@@ -285,6 +291,7 @@ public class StreamDecoder extends Reader
         }
 
         int rem = bb.remaining();
+        System.out.println("readBytes(): rem final: " + rem);
         assert (rem != 0) : rem;
         return rem;
     }
@@ -295,7 +302,7 @@ public class StreamDecoder extends Reader
         System.out.println("implRead: off " + off);
         System.out.println("implRead: end " + end);
         for (char ch : cbuf) {
-            System.out.println("implRead: " + cbuf[ch]);
+            System.out.println("implRead: " + (int) cbuf[ch]);
         }
 
         // In order to handle surrogate pairs, this method requires that
