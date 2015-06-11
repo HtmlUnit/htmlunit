@@ -73,7 +73,7 @@ public class HtmlTable extends HtmlElement {
      */
     public final HtmlTableCell getCellAt(final int rowIndex, final int columnIndex) {
         final RowIterator rowIterator = getRowIterator();
-        final HashSet<Point> occupied = new HashSet<Point>();
+        final HashSet<Point> occupied = new HashSet<>();
         int row = 0;
         for (final HtmlTableRow htmlTableRow : rowIterator) {
             final HtmlTableRow.CellIterator cellIterator = htmlTableRow.getCellIterator();

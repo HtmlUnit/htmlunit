@@ -115,7 +115,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
                 final JsxClass[] jsxClassValues = jsxClasses.value();
 
-                final Set<Class<?>> domClasses = new HashSet<Class<?>>();
+                final Set<Class<?>> domClasses = new HashSet<>();
 
                 boolean isJsObject = false;
                 boolean isDefinedInStandardsMode = false;
@@ -150,7 +150,7 @@ public abstract class AbstractJavaScriptConfiguration {
             final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
             if (jsxClass != null && isSupported(jsxClass.browsers(), expectedBrowserName, browserVersionNumeric)) {
 
-                final Set<Class<?>> domClasses = new HashSet<Class<?>>();
+                final Set<Class<?>> domClasses = new HashSet<>();
                 final Class<?> domClass = jsxClass.domClass();
                 if (domClass != null && domClass != Object.class) {
                     domClasses.add(domClass);

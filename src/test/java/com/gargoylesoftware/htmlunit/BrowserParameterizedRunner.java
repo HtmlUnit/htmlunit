@@ -225,7 +225,7 @@ public class BrowserParameterizedRunner extends Suite {
             final Iterable<Object> allParameters, final String namePattern)
         throws Exception {
         int i = 0;
-        final List<TestWithParameters> children = new ArrayList<TestWithParameters>();
+        final List<TestWithParameters> children = new ArrayList<>();
         for (final Object parametersOfSingleTest : allParameters) {
             children.add(createTestWithNotNormalizedParameters(namePattern,
                     i++, parametersOfSingleTest));

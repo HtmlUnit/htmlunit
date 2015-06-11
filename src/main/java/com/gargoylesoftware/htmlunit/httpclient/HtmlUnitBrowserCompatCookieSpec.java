@@ -242,7 +242,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 }
             }
         }
-        final List<Header> headers = new ArrayList<Header>(1);
+        final List<Header> headers = new ArrayList<>(1);
         headers.add(new BufferedHeader(buffer));
         return headers;
     }

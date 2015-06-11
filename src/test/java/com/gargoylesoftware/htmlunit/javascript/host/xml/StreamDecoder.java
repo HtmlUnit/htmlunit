@@ -53,9 +53,9 @@ public class StreamDecoder extends Reader
     // Factories for java.io.InputStreamReader
 
     public static StreamDecoder forInputStreamReader(InputStream in,
-                                                     Object lock,
-                                                     String charsetName)
-        throws UnsupportedEncodingException
+            Object lock,
+            String charsetName)
+                    throws UnsupportedEncodingException
     {
         String csn = charsetName;
         if (csn == null)
@@ -68,15 +68,15 @@ public class StreamDecoder extends Reader
     }
 
     public static StreamDecoder forInputStreamReader(InputStream in,
-                                                     Object lock,
-                                                     Charset cs)
+            Object lock,
+            Charset cs)
     {
         return new StreamDecoder(in, lock, cs);
     }
 
     public static StreamDecoder forInputStreamReader(InputStream in,
-                                                     Object lock,
-                                                     CharsetDecoder dec)
+            Object lock,
+            CharsetDecoder dec)
     {
         return new StreamDecoder(in, lock, dec);
     }
@@ -85,8 +85,8 @@ public class StreamDecoder extends Reader
     // Factory for java.nio.channels.Channels.newReader
 
     public static StreamDecoder forDecoder(ReadableByteChannel ch,
-                                           CharsetDecoder dec,
-                                           int minBufferCap)
+            CharsetDecoder dec,
+            int minBufferCap)
     {
         return new StreamDecoder(ch, dec, minBufferCap);
     }
@@ -111,7 +111,6 @@ public class StreamDecoder extends Reader
     private int read0() throws IOException {
         synchronized (lock) {
 
-            System.out.println("read0() " + haveLeftoverChar);
             // Return the leftover char, if there is one
             if (haveLeftoverChar) {
                 haveLeftoverChar = false;
@@ -121,7 +120,6 @@ public class StreamDecoder extends Reader
             // Convert more bytes
             char cb[] = new char[2];
             int n = read(cb, 0, 2);
-            System.out.println("n " + n);
             switch (n) {
             case -1:
                 return -1;
@@ -133,7 +131,7 @@ public class StreamDecoder extends Reader
                 return cb[0];
             default:
                 assert false : n;
-                return -1;
+            return -1;
             }
         }
     }
@@ -144,16 +142,14 @@ public class StreamDecoder extends Reader
         synchronized (lock) {
             ensureOpen();
             if ((off < 0) || (off > cbuf.length) || (len < 0) ||
-                ((off + len) > cbuf.length) || ((off + len) < 0)) {
+                    ((off + len) > cbuf.length) || ((off + len) < 0)) {
                 throw new IndexOutOfBoundsException();
             }
-            System.out.println("read(): len " + len);
             if (len == 0)
                 return 0;
 
             int n = 0;
 
-            System.out.println("read(): haveLeftoverChar " + haveLeftoverChar);
             if (haveLeftoverChar) {
                 // Copy the leftover char into the buffer
                 cbuf[off] = leftoverChar;
@@ -161,12 +157,10 @@ public class StreamDecoder extends Reader
                 haveLeftoverChar = false;
                 n = 1;
                 if ((len == 0) || !implReady())
-                    System.out.println("read(): returning " + n);
                     // Return now if this is all we can produce w/o blocking
                     return n;
             }
 
-            System.out.println("read(): len " + len);
             if (len == 1) {
                 // Treat single-character array reads just like read()
                 int c = read0();
@@ -230,9 +224,9 @@ public class StreamDecoder extends Reader
 
     StreamDecoder(InputStream in, Object lock, Charset cs) {
         this(in, lock,
-         cs.newDecoder()
-         .onMalformedInput(CodingErrorAction.REPLACE)
-         .onUnmappableCharacter(CodingErrorAction.REPLACE));
+                cs.newDecoder()
+                .onMalformedInput(CodingErrorAction.REPLACE)
+                .onUnmappableCharacter(CodingErrorAction.REPLACE));
     }
 
     StreamDecoder(InputStream in, Object lock, CharsetDecoder dec) {
@@ -241,9 +235,9 @@ public class StreamDecoder extends Reader
         this.decoder = dec;
 
         if (ch == null) {
-        this.in = in;
-        this.ch = null;
-        bb = ByteBuffer.allocate(DEFAULT_BYTE_BUFFER_SIZE);
+            this.in = in;
+            this.ch = null;
+            bb = ByteBuffer.allocate(DEFAULT_BYTE_BUFFER_SIZE);
         }
         bb.flip();                      // So that bb is initially empty
     }
@@ -254,48 +248,55 @@ public class StreamDecoder extends Reader
         this.decoder = dec;
         this.cs = dec.charset();
         this.bb = ByteBuffer.allocate(mbc < 0
-                                  ? DEFAULT_BYTE_BUFFER_SIZE
-                                  : (mbc < MIN_BYTE_BUFFER_SIZE
-                                     ? MIN_BYTE_BUFFER_SIZE
-                                     : mbc));
+                ? DEFAULT_BYTE_BUFFER_SIZE
+                        : (mbc < MIN_BYTE_BUFFER_SIZE
+                                ? MIN_BYTE_BUFFER_SIZE
+                                        : mbc));
         bb.flip();
     }
 
     private int readBytes() throws IOException {
         bb.compact();
         try {
-        if (ch != null) {
-            // Read from the channel
-            int n = ch.read(bb);
-            if (n < 0)
-                return n;
-        } else {
-            // Read from the input stream, and then update the buffer
-            int lim = bb.limit();
-            int pos = bb.position();
-            assert (pos <= lim);
-            int rem = (pos <= lim ? lim - pos : 0);
-            assert rem > 0;
-            int n = in.read(bb.array(), bb.arrayOffset() + pos, rem);
-            if (n < 0)
-                return n;
-            if (n == 0)
-                throw new IOException("Underlying input stream returned zero bytes");
-            assert (n <= rem) : "n = " + n + ", rem = " + rem;
-            bb.position(pos + n);
-        }
+            if (ch != null) {
+                // Read from the channel
+                int n = ch.read(bb);
+                if (n < 0)
+                    return n;
+            } else {
+                // Read from the input stream, and then update the buffer
+                int lim = bb.limit();
+                int pos = bb.position();
+                assert (pos <= lim);
+                int rem = (pos <= lim ? lim - pos : 0);
+                assert rem > 0;
+                int n = in.read(bb.array(), bb.arrayOffset() + pos, rem);
+                if (n < 0)
+                    return n;
+                if (n == 0)
+                    throw new IOException("Underlying input stream returned zero bytes");
+                assert (n <= rem) : "n = " + n + ", rem = " + rem;
+                bb.position(pos + n);
+            }
         } finally {
-        // Flip even when an IOException is thrown,
-        // otherwise the stream will stutter
-        bb.flip();
+            // Flip even when an IOException is thrown,
+            // otherwise the stream will stutter
+            bb.flip();
         }
 
         int rem = bb.remaining();
-            assert (rem != 0) : rem;
-            return rem;
+        assert (rem != 0) : rem;
+        return rem;
     }
 
     int implRead(char[] cbuf, int off, int end) throws IOException {
+
+        System.out.println("---------implRead-------------");
+        System.out.println("implRead: off " + off);
+        System.out.println("implRead: end " + end);
+        for (char ch : cbuf) {
+            System.out.println("implRead: " + cbuf[ch]);
+        }
 
         // In order to handle surrogate pairs, this method requires that
         // the invoker attempt to read at least two characters.  Saving the
@@ -304,41 +305,51 @@ public class StreamDecoder extends Reader
         assert (end - off > 1);
 
         CharBuffer cb = CharBuffer.wrap(cbuf, off, end - off);
-        if (cb.position() != 0)
-        // Ensure that cb[0] == cbuf[off]
-        cb = cb.slice();
+        if (cb.position() != 0) {
+            // Ensure that cb[0] == cbuf[off]
+            System.out.println("implRead: slicing");
+            cb = cb.slice();
+        }
 
         boolean eof = false;
         for (;;) {
-        CoderResult cr = decoder.decode(bb, cb, eof);
-        if (cr.isUnderflow()) {
-            if (eof)
-                break;
-            if (!cb.hasRemaining())
-                break;
-            if ((cb.position() > 0) && !inReady())
-                break;          // Block at most once
-            int n = readBytes();
-            if (n < 0) {
-                eof = true;
-                if ((cb.position() == 0) && (!bb.hasRemaining()))
+            System.out.println("implRead: for;;");
+            CoderResult cr = decoder.decode(bb, cb, eof);
+            System.out.println("implRead: cr.isUnderflow " + cr.isUnderflow());
+            if (cr.isUnderflow()) {
+                System.out.println("implRead: eof " + eof);
+                if (eof)
                     break;
-                decoder.reset();
+                System.out.println("implRead: cb.hasRemaining " + cb.hasRemaining());
+                if (!cb.hasRemaining())
+                    break;
+                System.out.println("implRead: cb.position " + cb.position());
+                System.out.println("implRead: inReady " + inReady());
+                if ((cb.position() > 0) && !inReady())
+                    break;          // Block at most once
+                int n = readBytes();
+                System.out.println("implRead: n " + readBytes());
+                if (n < 0) {
+                    eof = true;
+                    if ((cb.position() == 0) && (!bb.hasRemaining()))
+                        break;
+                    decoder.reset();
+                }
+                continue;
             }
-            continue;
-        }
-        if (cr.isOverflow()) {
-            assert cb.position() > 0;
-            break;
-        }
-        cr.throwException();
+            if (cr.isOverflow()) {
+                assert cb.position() > 0;
+                break;
+            }
+            cr.throwException();
         }
 
         if (eof) {
-        // ## Need to flush decoder
-        decoder.reset();
+            // ## Need to flush decoder
+            decoder.reset();
         }
 
+        System.out.println("cb.position " + cb.position());
         if (cb.position() == 0) {
             if (eof)
                 return -1;
@@ -353,22 +364,22 @@ public class StreamDecoder extends Reader
 
     private boolean inReady() {
         try {
-        return (((in != null) && (in.available() > 0))
-                || (ch instanceof FileChannel)); // ## RBC.available()?
+            return (((in != null) && (in.available() > 0))
+                    || (ch instanceof FileChannel)); // ## RBC.available()?
         } catch (IOException x) {
-        return false;
+            return false;
         }
     }
 
     boolean implReady() {
-            return bb.hasRemaining() || inReady();
+        return bb.hasRemaining() || inReady();
     }
 
     void implClose() throws IOException {
         if (ch != null)
-        ch.close();
+            ch.close();
         else
-        in.close();
+            in.close();
     }
 
 }
