@@ -320,11 +320,17 @@ public class StreamDecoder extends Reader
 
         boolean eof = false;
         for (;;) {
-            System.out.println("implRead: bb1 " + bb.position() + " " + bb.limit());
-            System.out.println("implRead: cb1 " + cb.position() + " " + cb.limit());
+            System.out.println("implRead: bb1 " + bb.position() + " " + bb.limit() + " " + bb.arrayOffset());
+            for (int i = bb.position(); i < bb.limit(); i++) {
+                System.out.println("" + (int) bb.array()[i]);
+            }
+            System.out.println("implRead: cb1 " + cb.position() + " " + cb.limit() + " " + cb.arrayOffset());
+            for (int i = cb.position(); i < cb.limit(); i++) {
+                System.out.println("" + (int) cb.array()[i]);
+            }
             CoderResult cr = decoder.decode(bb, cb, eof);
-            System.out.println("implRead: bb2 " + bb.position() + " " + bb.limit());
-            System.out.println("implRead: cb2 " + cb.position() + " " + cb.limit());
+            System.out.println("implRead: bb2 " + bb.position() + " " + bb.limit() + " " + bb.arrayOffset());
+            System.out.println("implRead: cb2 " + cb.position() + " " + cb.limit() + " " + cb.arrayOffset());
             if (cr.isUnderflow()) {
                 if (eof)
                     break;
