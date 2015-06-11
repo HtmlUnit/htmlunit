@@ -37,7 +37,7 @@ public class DecodingTest {
      *
      * @throws Exception if the test fails
      */
-    //@Test
+    @Test
     public void test() throws Exception {
         System.out.println("--------------");
         final String string = "'\u9ec4'";
@@ -60,7 +60,7 @@ public class DecodingTest {
      *
      * @throws Exception if the test fails
      */
-    @Test
+    //@Test
     public void test2() throws Exception {
         System.out.println("--------------");
         final String string = "'\u9ec4'";

@@ -320,8 +320,9 @@ public class StreamDecoder extends Reader
 
         boolean eof = false;
         for (;;) {
-            System.out.println("implRead: for;;");
+            System.out.println("implRead: cb1 " + cb.position() + " " + cb.limit());
             CoderResult cr = decoder.decode(bb, cb, eof);
+            System.out.println("implRead: cb2 " + cb.position() + " " + cb.limit());
             System.out.println("implRead: cr.isUnderflow " + cr.isUnderflow());
             if (cr.isUnderflow()) {
                 System.out.println("implRead: eof " + eof);
