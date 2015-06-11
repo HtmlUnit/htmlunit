@@ -111,4 +111,13 @@ public class CSSStyleRule extends CSSRule {
     public CSSStyleDeclaration getStyle() {
         return new CSSStyleDeclaration(getParentScope(), ((org.w3c.dom.css.CSSStyleRule) getRule()).getStyle());
     }
+
+    /**
+     * Returns the readonly property.
+     * @return the readonly value.
+     */
+    @JsxGetter({ @WebBrowser(IE) })
+    public boolean getReadOnly() {
+        return false;
+    }
 }

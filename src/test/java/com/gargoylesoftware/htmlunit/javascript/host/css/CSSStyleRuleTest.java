@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -119,7 +118,6 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "false")
-    @NotYetImplemented(IE)
     public void readOnly() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
