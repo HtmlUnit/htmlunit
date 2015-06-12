@@ -19,9 +19,11 @@ package com.gargoylesoftware.htmlunit.javascript;
  *
  * @version $Revision$
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Ronald Brill
  */
 public class MockActiveXObject {
 
+    private String message_ = "Javascript called this method!";
     /**
      * Test property.
      */
@@ -32,6 +34,14 @@ public class MockActiveXObject {
      * @return the test message
      */
     public String GetMessage() {
-        return "Javascript called this method!";
+        return message_;
+    }
+
+    /**
+     * Change the message text.
+     * @param newMessage the new text
+     */
+    public void setMessage(final String newMessage) {
+        message_ = newMessage;
     }
 }
