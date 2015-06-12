@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -92,12 +93,19 @@ public class DecodingTest {
         char[] b2cSB = (char[]) getField(charset, "b2cSB");
         Constructor con1 = getConstructor(Class.forName("sun.nio.cs.ext.DoubleByte$Decoder"),
                 Charset.class, char[][].class, char[].class, int.class, int.class);
+        String className= sun.nio.cs.ext.DoubleByte.Decoder.class.getName();
+        String location = className.replace(".", "/") + ".class";
+        System.out.println(location);
+        System.out.println(ClassLoader.getSystemClassLoader().getResource(location));
+        InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(location);
+        printHexStream(in, 16);
+        
         Constructor con2 = getConstructor(Class.forName("com.gargoylesoftware.htmlunit.javascript.host.xml.DoubleByte$Decoder"),
                 Charset.class, char[][].class, char[].class, int.class, int.class);
-        System.out.println("------------");
-        test2(con1, charset, b2c, b2cSB);
-        System.out.println("------------");
-        test2(con2, charset, b2c, b2cSB);
+        //System.out.println("------------");
+//        test2(con1, charset, b2c, b2cSB);
+//        System.out.println("------------");
+//        test2(con2, charset, b2c, b2cSB);
     }
 
     @SuppressWarnings("rawtypes")
@@ -212,4 +220,14 @@ public class DecodingTest {
 //        System.out.println(getField(decoder2, "maxCharsPerByte"));
 //        assertEquals(getField(decoder1, "maxCharsPerByte"), getField(decoder2, "maxCharsPerByte"));
 //    }
-}
+
+    public static void printHexStream(final InputStream inputStream, final int numberOfColumns) throws IOException {
+        long streamPtr=0;
+        while (inputStream.available() > 0) { 
+            final long col = streamPtr++ % numberOfColumns;
+            System.out.printf("%02X", inputStream.read());
+            if (col == (numberOfColumns-1)) {
+                System.out.printf("\n");
+            }
+        }
+    }}
