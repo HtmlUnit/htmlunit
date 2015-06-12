@@ -83,40 +83,40 @@ public class DOMException extends SimpleScriptable {
     /** If a node is used in a different document than the one that created it (that doesn't support it). */
     @JsxConstant
     public static final short WRONG_DOCUMENT_ERR = org.w3c.dom.DOMException.WRONG_DOCUMENT_ERR;
-    /** If a call to a method would make the {@code Node} invalid with respect to "partial validity". */ 
+    /** If a call to a method would make the {@code Node} invalid with respect to "partial validity". */
     @JsxConstant
     public static final short VALIDATION_ERR = org.w3c.dom.DOMException.VALIDATION_ERR;
-    /** If the type of an object is incompatible with the expected type of the parameter. */ 
+    /** If the type of an object is incompatible with the expected type of the parameter. */
     @JsxConstant
     public static final short TYPE_MISMATCH_ERR = org.w3c.dom.DOMException.TYPE_MISMATCH_ERR;
-    /** Security error. */ 
+    /** Security error. */
     @JsxConstant
     public static final short SECURITY_ERR = 18;
-    /** Network error. */ 
+    /** Network error. */
     @JsxConstant
     public static final short NETWORK_ERR = 19;
-    /** Abort error. */ 
+    /** Abort error. */
     @JsxConstant
     public static final short ABORT_ERR = 20;
-    /** URL mismatch error. */ 
+    /** URL mismatch error. */
     @JsxConstant
     public static final short URL_MISMATCH_ERR = 21;
-    /** Quota exceeded error. */ 
+    /** Quota exceeded error. */
     @JsxConstant
     public static final short QUOTA_EXCEEDED_ERR = 22;
-    /** Timeout error. */ 
+    /** Timeout error. */
     @JsxConstant
     public static final short TIMEOUT_ERR = 23;
-    /** Invalid node type error. */ 
+    /** Invalid node type error. */
     @JsxConstant
     public static final short INVALID_NODE_TYPE_ERR = 24;
-    /** Data clone error. */ 
+    /** Data clone error. */
     @JsxConstant
     public static final short DATA_CLONE_ERR = 25;
-    /** Parse error. */ 
+    /** Parse error. */
     @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
     public static final short PARSE_ERR = 81;
-    /** Serialize error. */ 
+    /** Serialize error. */
     @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
     public static final short SERIALIZE_ERR = 82;
 
