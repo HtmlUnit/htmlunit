@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static org.junit.Assert.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -123,12 +125,11 @@ public class DecodingTest {
 //        System.out.println("12 - " + cb.position() + " " + cb.limit());
 //    }
 
-    @Test
-    public void test3() throws Exception {
-        log(new GBK());
-        System.out.println("JDK GBK");
-        log(Charset.forName("GBK"));
-    }
+//    public void test3() throws Exception {
+//        log(new GBK());
+//        System.out.println("JDK GBK");
+//        log(Charset.forName("GBK"));
+//    }
 
     private void log(Charset charset) throws Exception {
         charset.newDecoder();
@@ -148,5 +149,42 @@ public class DecodingTest {
         for (int i = 0; i < b2cSB.length; i++) {
             System.out.println("y-" + i + " " + (int) b2cSB[i]);
         }
+    }
+
+    protected Object getField(final Object obj, final String name) {
+        for (Class<?> c = obj.getClass(); c != null; c = c.getSuperclass()) {
+            try {
+                final Field field = c.getDeclaredField(name);
+                field.setAccessible(true);
+                return field.get(obj);
+            } catch (final Exception e) {
+                ;
+            }
+        }
+        return null;
+    }
+
+    @Test
+    public void test4() {
+        Charset charset1 = new GBK();
+        CharsetDecoder decoder1 = charset1.newDecoder();
+        
+        Charset charset2 = Charset.forName("GBK");
+        CharsetDecoder decoder2 = charset2.newDecoder();
+
+        System.out.println(getField(decoder2, "b2Min"));
+        assertEquals(getField(decoder1, "b2Min"), getField(decoder2, "b2Min"));
+        System.out.println(getField(decoder2, "b2Max"));
+        assertEquals(getField(decoder1, "b2Max"), getField(decoder2, "b2Max"));
+        assertArrayEquals((char[]) getField(decoder1, "b2cSB"), (char[]) getField(decoder2, "b2cSB"));
+        assertArrayEquals((char[][]) getField(decoder1, "b2c"), (char[][]) getField(decoder2, "b2c"));
+        System.out.println(getField(decoder2, "replacement").toString().length());
+        System.out.println(getField(decoder2, "replacement").toString().codePointAt(0));
+        assertEquals(getField(decoder1, "replacement"), getField(decoder2, "replacement"));
+        System.out.println(getField(decoder2, "averageCharsPerByte"));
+        assertEquals(getField(decoder1, "averageCharsPerByte"), getField(decoder2, "averageCharsPerByte"));
+        System.out.println(getField(decoder2, "maxCharsPerByte"));
+        assertEquals(getField(decoder1, "maxCharsPerByte"), getField(decoder2, "maxCharsPerByte"));
+        
     }
 }
