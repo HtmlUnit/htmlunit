@@ -227,14 +227,13 @@ public class Event3Test extends SimpleWebTestCase {
 
         final String html2 = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, html1);
         webConnection.setResponse(URL_SECOND, html2);
-        client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getHtmlElementById("a");

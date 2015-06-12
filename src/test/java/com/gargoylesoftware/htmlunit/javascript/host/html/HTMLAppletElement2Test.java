@@ -46,7 +46,7 @@ public class HTMLAppletElement2Test extends SimpleWebTestCase {
     public void callAppletMethodFromJS() throws Exception {
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {

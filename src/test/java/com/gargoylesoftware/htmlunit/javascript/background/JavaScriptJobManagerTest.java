@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -158,16 +157,13 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
             + "</script>\n"
             + "</body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
-        final WebClient client = getWebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
 
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(firstContent);
         final HtmlInlineFrame iframe = page.getHtmlElementById("iframe1");
         final JavaScriptJobManager mgr = iframe.getEnclosedWindow().getJobManager();
         Assert.assertEquals("inner frame should show child thread", 1, mgr.getJobCount());
