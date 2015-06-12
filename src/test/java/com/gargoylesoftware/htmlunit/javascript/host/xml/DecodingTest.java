@@ -90,10 +90,22 @@ public class DecodingTest {
         charset1.newDecoder();
         Charset charset2 = new GBK();
         charset2.newDecoder();
-        char[][] b2c = (char[][]) getField(charset1, "b2c");
-        char[] b2cSB = (char[]) getField(charset2, "b2cSB");
-        test2(charset1, b2c, b2cSB);
-        test2(charset2, b2c, b2cSB);
+        char[][] b2c1 = (char[][]) getField(charset1, "b2c");
+        char[] b2cSB1 = (char[]) getField(charset1, "b2cSB");
+        char[][] b2c2 = (char[][]) getField(charset2, "b2c");
+        char[] b2cSB2 = (char[]) getField(charset2, "b2cSB");
+        System.out.println("------------1 1");
+        test2(charset1, b2c1, b2cSB1);
+        test2(charset2, b2c1, b2cSB1);
+        System.out.println("------------1 2");
+        test2(charset1, b2c1, b2cSB2);
+        test2(charset2, b2c1, b2cSB2);
+        System.out.println("------------2 1");
+        test2(charset1, b2c2, b2cSB1);
+        test2(charset2, b2c2, b2cSB1);
+        System.out.println("------------2 2");
+        test2(charset1, b2c2, b2cSB2);
+        test2(charset2, b2c2, b2cSB2);
     }
 
     @SuppressWarnings("rawtypes")
