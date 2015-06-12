@@ -24,6 +24,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 public class MockActiveXObject {
 
     private String message_ = "Javascript called this method!";
+
     /**
      * Test property.
      */
