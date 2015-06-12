@@ -85,42 +85,45 @@ public class CodeStyleTest {
      */
     @Test
     public void codeStyle() throws IOException {
-//        final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-//        final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
-//        svnWCClient_ = new SVNWCClient(authManager, options);
-//        process(new File("src/main"));
-//        process(new File("src/test"));
-//        licenseYear();
-//        versionYear();
+        final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
+        final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
+        svnWCClient_ = new SVNWCClient(authManager, options);
+        process(new File("src/main"));
+        process(new File("src/test"));
+        licenseYear();
+        versionYear();
     }
 
     private void process(final File dir) throws IOException {
-        for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !".svn".equals(file.getName())) {
-                process(file);
-            }
-            else {
-                final String relativePath = file.getAbsolutePath().substring(
-                        new File(".").getAbsolutePath().length() - 1);
-                svnProperties(file, relativePath);
-                if (file.getName().endsWith(".java")) {
-                    final List<String> lines = FileUtils.readLines(file);
-                    openingCurlyBracket(lines, relativePath);
-                    year(lines, relativePath);
-                    javaDocFirstLine(lines, relativePath);
-                    methodFirstLine(lines, relativePath);
-                    methodLastLine(lines, relativePath);
-                    lineBetweenMethods(lines, relativePath);
-                    runWith(lines, relativePath);
-                    vs85aspx(lines, relativePath);
-                    deprecated(lines, relativePath);
-                    staticJSMethod(lines, relativePath);
-                    singleAlert(lines, relativePath);
-                    staticLoggers(lines, relativePath);
-                    loggingEnabled(lines, relativePath);
-                    browserVersion_isIE(lines, relativePath);
-                    versionBeforeAuthor(lines, relativePath);
-                    alerts(lines, relativePath);
+        final File[] files = dir.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                    process(file);
+                }
+                else {
+                    final String relativePath = file.getAbsolutePath().substring(
+                            new File(".").getAbsolutePath().length() - 1);
+                    svnProperties(file, relativePath);
+                    if (file.getName().endsWith(".java")) {
+                        final List<String> lines = FileUtils.readLines(file);
+                        openingCurlyBracket(lines, relativePath);
+                        year(lines, relativePath);
+                        javaDocFirstLine(lines, relativePath);
+                        methodFirstLine(lines, relativePath);
+                        methodLastLine(lines, relativePath);
+                        lineBetweenMethods(lines, relativePath);
+                        runWith(lines, relativePath);
+                        vs85aspx(lines, relativePath);
+                        deprecated(lines, relativePath);
+                        staticJSMethod(lines, relativePath);
+                        singleAlert(lines, relativePath);
+                        staticLoggers(lines, relativePath);
+                        loggingEnabled(lines, relativePath);
+                        browserVersion_isIE(lines, relativePath);
+                        versionBeforeAuthor(lines, relativePath);
+                        alerts(lines, relativePath);
+                    }
                 }
             }
         }
@@ -294,20 +297,23 @@ public class CodeStyleTest {
     }
 
     private void processXML(final File dir, final boolean recursive) throws Exception {
-        for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !".svn".equals(file.getName())) {
-                if (recursive) {
-                    processXML(file, true);
+        final File[] files = dir.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                    if (recursive) {
+                        processXML(file, true);
+                    }
                 }
-            }
-            else {
-                if (file.getName().endsWith(".xml")) {
-                    final List<String> lines = FileUtils.readLines(file);
-                    final String relativePath = file.getAbsolutePath().substring(
-                        new File(".").getAbsolutePath().length() - 1);
-                    mixedIndentation(lines, relativePath);
-                    trailingWhitespace(lines, relativePath);
-                    badIndentationLevels(lines, relativePath);
+                else {
+                    if (file.getName().endsWith(".xml")) {
+                        final List<String> lines = FileUtils.readLines(file);
+                        final String relativePath = file.getAbsolutePath().substring(
+                                new File(".").getAbsolutePath().length() - 1);
+                        mixedIndentation(lines, relativePath);
+                        trailingWhitespace(lines, relativePath);
+                        badIndentationLevels(lines, relativePath);
+                    }
                 }
             }
         }
