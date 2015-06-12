@@ -14,10 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static org.junit.Assert.*;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -80,50 +79,66 @@ public class DecodingTest {
 //        System.out.println("12 - " + cb.position() + " " + cb.limit());
 //    }
 //
-//    /**
-//     * Helper method Bug #1623.
-//     *
-//     * @throws Exception if the test fails
-//     */
-//    @Test
-//    public void test2() throws Exception {
-//        System.out.println("test2()");
-//        final String string = "'\u9ec4'";
-//        final Charset charset = Charset.forName("GBK");
-//        System.out.println(charset.getClass().getName());
-//        CharsetDecoder decoder = charset.newDecoder().onMalformedInput(CodingErrorAction.REPLACE)
-//                .onUnmappableCharacter(CodingErrorAction.REPLACE);
-//        byte[] bytes = string.getBytes("UTF-8");
-//        final InputStream in = new ByteArrayInputStream(bytes);
-//        ByteBuffer bb = ByteBuffer.allocate(8192);
-//        bb.flip();
-//
-//        CharBuffer cb = CharBuffer.wrap(new char[2]);
-//        System.out.println("01 - " + bb.position() + " " + bb.limit());
-//        System.out.println("02 - " + cb.position() + " " + cb.limit());
-//        decoder.decode(bb, cb, false);
-//        System.out.println("03 - " + bb.position() + " " + bb.limit());
-//        System.out.println("04 - " + cb.position() + " " + cb.limit());
-//
-//        bb.compact();
-//        
-//        in.read(bb.array(), 0, 8192);
-//        bb.position(5);
-//        bb.flip();
-//
-//        System.out.println("05 - " + bb.position() + " " + bb.limit());
-//        System.out.println("06 - " + cb.position() + " " + cb.limit());
-//        decoder.decode(bb, cb, false);
-//        System.out.println("07 - " + bb.position() + " " + bb.limit());
-//        System.out.println("08 - " + cb.position() + " " + cb.limit());
-//
-//        cb = CharBuffer.wrap(new char[2]);
-//        System.out.println("09 - " + bb.position() + " " + bb.limit());
-//        System.out.println("10 - " + cb.position() + " " + cb.limit());
-//        decoder.decode(bb, cb, false);
-//        System.out.println("11 - " + bb.position() + " " + bb.limit());
-//        System.out.println("12 - " + cb.position() + " " + cb.limit());
-//    }
+    /**
+     * Helper method Bug #1623.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void test2() throws Exception {
+        Charset charset1 = Charset.forName("GBK");
+        charset1.newDecoder();
+        Charset charset2 = new GBK();
+        charset2.newDecoder();
+        char[][] b2c = (char[][]) getField(charset1, "b2c");
+        char[] b2cSB = (char[]) getField(charset2, "b2cSB");
+        test2(charset1, b2c, b2cSB);
+        test2(charset2, b2c, b2cSB);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private void test2(Charset charset, char[][] b2c, char[] b2cSB) throws Exception {
+        final String string = "'\u9ec4'";
+        System.out.println(charset.getClass().getName());
+        charset.newDecoder();
+        Constructor con = getConstructor(Class.forName("sun.nio.cs.ext.DoubleByte$Decoder"),
+                Charset.class, char[][].class, char[].class, int.class, int.class);
+        
+        CharsetDecoder decoder = (CharsetDecoder) con.newInstance(charset, b2c, b2cSB, 0x40, 0xfe);
+
+        decoder.onMalformedInput(CodingErrorAction.REPLACE)
+            .onUnmappableCharacter(CodingErrorAction.REPLACE);
+        byte[] bytes = string.getBytes("UTF-8");
+        final InputStream in = new ByteArrayInputStream(bytes);
+        ByteBuffer bb = ByteBuffer.allocate(8192);
+        bb.flip();
+
+        CharBuffer cb = CharBuffer.wrap(new char[2]);
+        System.out.println("01 - " + bb.position() + " " + bb.limit());
+        System.out.println("02 - " + cb.position() + " " + cb.limit());
+        decoder.decode(bb, cb, false);
+        System.out.println("03 - " + bb.position() + " " + bb.limit());
+        System.out.println("04 - " + cb.position() + " " + cb.limit());
+
+        bb.compact();
+        
+        in.read(bb.array(), 0, 8192);
+        bb.position(5);
+        bb.flip();
+
+        System.out.println("05 - " + bb.position() + " " + bb.limit());
+        System.out.println("06 - " + cb.position() + " " + cb.limit());
+        decoder.decode(bb, cb, false);
+        System.out.println("07 - " + bb.position() + " " + bb.limit());
+        System.out.println("08 - " + cb.position() + " " + cb.limit());
+
+        cb = CharBuffer.wrap(new char[2]);
+        System.out.println("09 - " + bb.position() + " " + bb.limit());
+        System.out.println("10 - " + cb.position() + " " + cb.limit());
+        decoder.decode(bb, cb, false);
+        System.out.println("11 - " + bb.position() + " " + bb.limit());
+        System.out.println("12 - " + cb.position() + " " + cb.limit());
+    }
 
 //    public void test3() throws Exception {
 //        log(new GBK());
@@ -164,27 +179,35 @@ public class DecodingTest {
         return null;
     }
 
-    @Test
-    public void test4() {
-        Charset charset1 = new GBK();
-        CharsetDecoder decoder1 = charset1.newDecoder();
-        
-        Charset charset2 = Charset.forName("GBK");
-        CharsetDecoder decoder2 = charset2.newDecoder();
-
-        System.out.println(getField(decoder2, "b2Min"));
-        assertEquals(getField(decoder1, "b2Min"), getField(decoder2, "b2Min"));
-        System.out.println(getField(decoder2, "b2Max"));
-        assertEquals(getField(decoder1, "b2Max"), getField(decoder2, "b2Max"));
-        assertArrayEquals((char[]) getField(decoder1, "b2cSB"), (char[]) getField(decoder2, "b2cSB"));
-        assertArrayEquals((char[][]) getField(decoder1, "b2c"), (char[][]) getField(decoder2, "b2c"));
-        System.out.println(getField(decoder2, "replacement").toString().length());
-        System.out.println(getField(decoder2, "replacement").toString().codePointAt(0));
-        assertEquals(getField(decoder1, "replacement"), getField(decoder2, "replacement"));
-        System.out.println(getField(decoder2, "averageCharsPerByte"));
-        assertEquals(getField(decoder1, "averageCharsPerByte"), getField(decoder2, "averageCharsPerByte"));
-        System.out.println(getField(decoder2, "maxCharsPerByte"));
-        assertEquals(getField(decoder1, "maxCharsPerByte"), getField(decoder2, "maxCharsPerByte"));
-        
+    protected Constructor getConstructor(final Class c, final Class<?>... parameterTypes) {
+        try {
+            Constructor con = c.getDeclaredConstructor(parameterTypes);
+            con.setAccessible(true);
+            return con;
+        }catch(Exception e) {
+            return null;
+        }
     }
+//    @Test
+//    public void test4() {
+//        Charset charset1 = new GBK();
+//        CharsetDecoder decoder1 = charset1.newDecoder();
+//        
+//        Charset charset2 = Charset.forName("GBK");
+//        CharsetDecoder decoder2 = charset2.newDecoder();
+//
+//        System.out.println(getField(decoder2, "b2Min"));
+//        assertEquals(getField(decoder1, "b2Min"), getField(decoder2, "b2Min"));
+//        System.out.println(getField(decoder2, "b2Max"));
+//        assertEquals(getField(decoder1, "b2Max"), getField(decoder2, "b2Max"));
+//        assertArrayEquals((char[]) getField(decoder1, "b2cSB"), (char[]) getField(decoder2, "b2cSB"));
+//        assertArrayEquals((char[][]) getField(decoder1, "b2c"), (char[][]) getField(decoder2, "b2c"));
+//        System.out.println(getField(decoder2, "replacement").toString().length());
+//        System.out.println(getField(decoder2, "replacement").toString().codePointAt(0));
+//        assertEquals(getField(decoder1, "replacement"), getField(decoder2, "replacement"));
+//        System.out.println(getField(decoder2, "averageCharsPerByte"));
+//        assertEquals(getField(decoder1, "averageCharsPerByte"), getField(decoder2, "averageCharsPerByte"));
+//        System.out.println(getField(decoder2, "maxCharsPerByte"));
+//        assertEquals(getField(decoder1, "maxCharsPerByte"), getField(decoder2, "maxCharsPerByte"));
+//    }
 }
