@@ -94,27 +94,23 @@ public class DecodingTest {
         char[] b2cSB1 = (char[]) getField(charset1, "b2cSB");
         char[][] b2c2 = (char[][]) getField(charset2, "b2c");
         char[] b2cSB2 = (char[]) getField(charset2, "b2cSB");
+        Constructor con1 = getConstructor(Class.forName("sun.nio.cs.ext.DoubleByte$Decoder"),
+                Charset.class, char[][].class, char[].class, int.class, int.class);
+        Constructor con2 = getConstructor(Class.forName("com.gargoylesoftware.htmlunit.javascript.host.xml.DoubleByte$Decoder"),
+                Charset.class, char[][].class, char[].class, int.class, int.class);
         System.out.println("------------1 1");
-        test2(charset1, b2c1, b2cSB1);
-        test2(charset2, b2c1, b2cSB1);
+        test2(con1, charset1, b2c1, b2cSB1);
+        test2(con1, charset2, b2c1, b2cSB1);
         System.out.println("------------1 2");
-        test2(charset1, b2c1, b2cSB2);
-        test2(charset2, b2c1, b2cSB2);
-        System.out.println("------------2 1");
-        test2(charset1, b2c2, b2cSB1);
-        test2(charset2, b2c2, b2cSB1);
-        System.out.println("------------2 2");
-        test2(charset1, b2c2, b2cSB2);
-        test2(charset2, b2c2, b2cSB2);
+        test2(con2, charset1, b2c1, b2cSB1);
+        test2(con2, charset2, b2c1, b2cSB1);
     }
 
     @SuppressWarnings("rawtypes")
-    private void test2(Charset charset, char[][] b2c, char[] b2cSB) throws Exception {
+    private void test2(Constructor con, Charset charset, char[][] b2c, char[] b2cSB) throws Exception {
         final String string = "'\u9ec4'";
         System.out.println(charset.getClass().getName());
         charset.newDecoder();
-        Constructor con = getConstructor(Class.forName("sun.nio.cs.ext.DoubleByte$Decoder"),
-                Charset.class, char[][].class, char[].class, int.class, int.class);
         
         CharsetDecoder decoder = (CharsetDecoder) con.newInstance(charset, b2c, b2cSB, 0x40, 0xfe);
 
