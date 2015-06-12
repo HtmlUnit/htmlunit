@@ -193,15 +193,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setDefaultResponse(secondHtml);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
@@ -226,15 +224,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
@@ -307,12 +303,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final WebClient client = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setDefaultResponse(secondHtml);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
@@ -332,17 +326,15 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         client.getOptions().setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setDefaultResponse(secondHtml);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
@@ -367,15 +359,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
@@ -399,15 +389,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
@@ -431,15 +419,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
@@ -462,16 +448,14 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         client.getOptions().setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
@@ -549,15 +533,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setDefaultResponse(secondHtml);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link1");
@@ -895,12 +877,11 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<form id='form1' target='window2' action='" + URL_SECOND + "' method='post'>\n"
             + "    <input type='submit' name='button' value='push me'/>\n"
             + "</form></body></html>";
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponseAsGenericHtml(URL_SECOND, "second");
-        client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final WebWindow firstWindow = client.getCurrentWindow();
@@ -994,11 +975,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<input type='submit' name='dispatch' value='Save' id='submitButton'>\n"
             + "<input type='hidden' name='dispatch' value='TAB'>\n"
             + "</form></body></html>";
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(html);
-        client.setWebConnection(webConnection);
 
         final WebRequest request = new WebRequest(getDefaultUrl(), HttpMethod.POST);
 
@@ -1027,13 +1007,11 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
@@ -1168,10 +1146,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<input type='text' name='nonAscii' value='Flo\u00DFfahrt'/>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        client.setWebConnection(webConnection);
+        final WebClient client = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
 
         String contentType = "text/html";
         if (headerCharset != null) {
@@ -1232,12 +1208,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final String[] expectedAlerts = {"number", "false"};
         final List<String> collectedAlerts = new ArrayList<>();
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
+
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, firstHtml);
         conn.setResponse(URL_SECOND, secondHtml);
-        client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlForm form = page.getForms().get(0);
@@ -1261,12 +1237,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String secondHtml = "<html><head><title>second</title></head></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
+
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, firstHtml);
         conn.setDefaultResponse(secondHtml);
-        client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlForm form = page.getForms().get(0);

@@ -49,14 +49,12 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
@@ -81,14 +79,12 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
@@ -128,13 +124,11 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head>\n"
             + "<body><iframe id='iframe2_1' src='" + URL_FIRST + "'></iframe></body></html>";
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
@@ -176,14 +170,12 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "</script></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
-
-        client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
@@ -202,12 +194,11 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         final String html1 = "<html><body><iframe src='" + URL_SECOND + "'></iframe></body></html>";
         final String html2 = "<html><body>abc</body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, html1);
         conn.setResponse(URL_SECOND, html2);
-        client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals(2, conn.getRequestCount());
@@ -228,12 +219,11 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "</body></html>";
         final String html2 = "<html><body>iframe content</body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, html1);
         conn.setResponse(URL_SECOND, html2);
-        client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlElement iFrame = page.getHtmlElementById("f");
@@ -264,13 +254,12 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         final String html2 = "<html><body>iframe content</body></html>";
         final String html3 = "<html><head></head><body>Third content</body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, html1);
         conn.setResponse(URL_SECOND, html2);
         conn.setResponse(URL_THIRD, html3);
-        client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
@@ -310,13 +299,12 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         final String html2 = "<html><body>iframe content</body></html>";
         final String html3 = "<html><head></head><body>Third content</body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, html1);
         conn.setResponse(URL_SECOND, html2);
         conn.setResponse(URL_THIRD, html3);
-        client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
@@ -359,9 +347,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "<body>\n"
             + "</html>";
 
-        final WebClient webClient = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
-        webClient.setWebConnection(conn);
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
 
         conn.setDefaultResponse(html);
         final HtmlPage page = webClient.getPage(URL_FIRST);
@@ -392,9 +379,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "<body>\n"
             + "</html>";
 
-        final WebClient webClient = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
-        webClient.setWebConnection(conn);
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
 
         conn.setResponse(URL_FIRST, html, "text/html; charset=UTF-8", "UTF-8");
         final HtmlPage page = webClient.getPage(URL_FIRST);
@@ -425,8 +411,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "<body>\n"
             + "</html>";
 
-        final WebClient webClient = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         webClient.setWebConnection(conn);
 
         conn.setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");

@@ -66,8 +66,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void onLoadHandler() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -80,7 +80,6 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final String[] expectedAlerts = {"FRAME"};
 
         webConnection.setResponse(URL_FIRST, html);
-        webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
@@ -124,8 +123,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void deregisterNonHtmlFrame() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
 
         final String html
             = "<html><head><title>first</title></head>\n"
@@ -134,7 +133,6 @@ public class HtmlFrameTest extends SimpleWebTestCase {
             + "</frameset></html>";
         webConnection.setDefaultResponse("foo", 200, "OK", "text/plain");
         webConnection.setResponse(URL_FIRST, html);
-        webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
@@ -164,15 +162,13 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdHtml  = "<html><head><title>Third</title></head><body></body></html>";
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(failingHtml, 404, "Not Found", "text/html");
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, thirdHtml);
-
-        webClient.setWebConnection(webConnection);
 
         try {
             webClient.getPage(URL_FIRST);
@@ -207,10 +203,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
 
         final String frame3 = "<html><head><title>page 3</title></head><body></body></html>";
 
-        final WebClient webClient = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
-        webClient.setWebConnection(conn);
-
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<html><head><title>default</title></head><body></body></html>");
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);

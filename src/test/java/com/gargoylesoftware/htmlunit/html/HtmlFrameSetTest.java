@@ -62,14 +62,12 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
-
-        webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
@@ -97,13 +95,11 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "</html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-
-        webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
@@ -154,15 +150,13 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         final URL firstURL = new URL(baseUrl + "/subdir2/first.html");
         final URL secondURL = new URL(baseUrl + "/second.html");
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(framesURL, framesContent);
         webConnection.setResponse(menuURL, menuContent);
         webConnection.setResponse(firstURL, firstContent);
         webConnection.setResponse(secondURL, secondContent);
-
-        webClient.setWebConnection(webConnection);
 
         final HtmlPage framesPage = webClient.getPage(framesURL);
         assertEquals("Frames", framesPage.getTitleText());
@@ -207,9 +201,9 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "</head>\n"
             + "<body onload='init()'></body></html>";
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
 
         final List<String> collectedAlerts = new ArrayList<>();
         final String[] expectedAlerts = {"Success"};
@@ -217,8 +211,6 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
 
         webConnection.setResponse(URL_FIRST, framesContent);
         webConnection.setResponse(URL_SECOND, menuContent);
-
-        webClient.setWebConnection(webConnection);
 
         final HtmlPage framesPage = webClient.getPage(URL_FIRST);
         assertEquals("Main", framesPage.getTitleText());
@@ -242,13 +234,11 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "</html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-
-        webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
@@ -275,14 +265,12 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             = "<html><body><script>alert(2);</script></body></html>";
         final String thirdContent
             = "alert('3');\n";
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
-
-        client.setWebConnection(webConnection);
 
         final String[] expectedAlerts = {"2"};
         final ArrayList<String> collectedAlerts = new ArrayList<>();
@@ -342,16 +330,15 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "  This is the right frame, version 2.\n"
             + "</body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(framesetURL, framesetHtml);
         webConnection.setResponse(leftURL, leftHtml);
         webConnection.setResponse(rightURL, rightHtml);
         webConnection.setResponse(right2URL, right2Html);
-        client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(framesetURL);
         final HtmlPage leftPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
@@ -384,12 +371,11 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "<body>hello</body>\n"
             + "</html>";
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        webClient.setWebConnection(conn);
 
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, mainHtml);
         conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
         conn.setResponse(new URL(URL_FIRST, "2.html"), html2);
@@ -419,14 +405,12 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
-
-        webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
@@ -457,14 +441,12 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
 
-        final WebClient webClient = getWebClient();
+        final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
-
-        webClient.setWebConnection(webConnection);
 
         HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
