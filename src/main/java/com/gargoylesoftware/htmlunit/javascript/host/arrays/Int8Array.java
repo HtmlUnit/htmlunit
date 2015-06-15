@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class Int8Array extends ArrayBufferViewBase {
 
     /** The size, in bytes, of each array element. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public static final int BYTES_PER_ELEMENT = 1;
 
     /**
