@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -31,6 +32,16 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class SVGUnitTypes extends SimpleScriptable {
+
+    /** The constant {@code SVG_UNIT_TYPE_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_UNIT_TYPE_UNKNOWN = 0;
+    /** The constant {@code SVG_UNIT_TYPE_USERSPACEONUSE}. */
+    @JsxConstant
+    public static final int SVG_UNIT_TYPE_USERSPACEONUSE = 1;
+    /** The constant {@code SVG_UNIT_TYPE_OBJECTBOUNDINGBOX}. */
+    @JsxConstant
+    public static final int SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 
     /**
      * Creates an instance.

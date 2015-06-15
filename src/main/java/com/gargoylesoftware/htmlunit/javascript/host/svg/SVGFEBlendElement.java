@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeBlend;
@@ -32,6 +33,25 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeBlend;
 @JsxClass(domClass = SvgFeBlend.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEBlendElement extends SVGElement {
+
+    /** The constant {@code SVG_FEBLEND_MODE_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_FEBLEND_MODE_UNKNOWN = 0;
+    /** The constant {@code SVG_FEBLEND_MODE_NORMAL}. */
+    @JsxConstant
+    public static final int SVG_FEBLEND_MODE_NORMAL = 1;
+    /** The constant {@code SVG_FEBLEND_MODE_MULTIPLY}. */
+    @JsxConstant
+    public static final int SVG_FEBLEND_MODE_MULTIPLY = 2;
+    /** The constant {@code SVG_FEBLEND_MODE_SCREEN}. */
+    @JsxConstant
+    public static final int SVG_FEBLEND_MODE_SCREEN = 3;
+    /** The constant {@code SVG_FEBLEND_MODE_DARKEN}. */
+    @JsxConstant
+    public static final int SVG_FEBLEND_MODE_DARKEN = 4;
+    /** The constant {@code SVG_FEBLEND_MODE_LIGHTEN}. */
+    @JsxConstant
+    public static final int SVG_FEBLEND_MODE_LIGHTEN = 5;
 
     /**
      * Creates an instance.

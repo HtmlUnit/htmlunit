@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -30,6 +31,16 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class SVGTextContentElement extends SVGGraphicsElement {
+
+    /** The constant {@code LENGTHADJUST_UNKNOWN}. */
+    @JsxConstant
+    public static final int LENGTHADJUST_UNKNOWN = 0;
+    /** The constant {@code LENGTHADJUST_SPACING}. */
+    @JsxConstant
+    public static final int LENGTHADJUST_SPACING = 1;
+    /** The constant {@code LENGTHADJUST_SPACINGANDGLYPHS}. */
+    @JsxConstant
+    public static final int LENGTHADJUST_SPACINGANDGLYPHS = 2;
 
     /**
      * Creates an instance.

@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -29,6 +30,25 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
 public class SVGRenderingIntent extends SimpleScriptable {
+
+    /** The constant {@code RENDERING_INTENT_UNKNOWN}. */
+    @JsxConstant
+    public static final int RENDERING_INTENT_UNKNOWN = 0;
+    /** The constant {@code RENDERING_INTENT_AUTO}. */
+    @JsxConstant
+    public static final int RENDERING_INTENT_AUTO = 1;
+    /** The constant {@code RENDERING_INTENT_PERCEPTUAL}. */
+    @JsxConstant
+    public static final int RENDERING_INTENT_PERCEPTUAL = 2;
+    /** The constant {@code RENDERING_INTENT_RELATIVE_COLORIMETRIC}. */
+    @JsxConstant
+    public static final int RENDERING_INTENT_RELATIVE_COLORIMETRIC = 3;
+    /** The constant {@code RENDERING_INTENT_SATURATION}. */
+    @JsxConstant
+    public static final int RENDERING_INTENT_SATURATION = 4;
+    /** The constant {@code RENDERING_INTENT_ABSOLUTE_COLORIMETRIC}. */
+    @JsxConstant
+    public static final int RENDERING_INTENT_ABSOLUTE_COLORIMETRIC = 5;
 
     /**
      * Creates a new instance.

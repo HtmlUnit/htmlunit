@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgLinearGradient;
@@ -32,6 +33,19 @@ import com.gargoylesoftware.htmlunit.svg.SvgLinearGradient;
 @JsxClass(domClass = SvgLinearGradient.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGLinearGradientElement extends SVGGradientElement {
+
+    /** The constant {@code SVG_SPREADMETHOD_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_SPREADMETHOD_UNKNOWN = 0;
+    /** The constant {@code SVG_SPREADMETHOD_PAD}. */
+    @JsxConstant
+    public static final int SVG_SPREADMETHOD_PAD = 1;
+    /** The constant {@code SVG_SPREADMETHOD_REFLECT}. */
+    @JsxConstant
+    public static final int SVG_SPREADMETHOD_REFLECT = 2;
+    /** The constant {@code SVG_SPREADMETHOD_REPEAT}. */
+    @JsxConstant
+    public static final int SVG_SPREADMETHOD_REPEAT = 3;
 
     /**
      * Creates an instance.

@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgMarker;
@@ -32,6 +33,25 @@ import com.gargoylesoftware.htmlunit.svg.SvgMarker;
 @JsxClass(domClass = SvgMarker.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGMarkerElement extends SVGElement {
+
+    /** The constant {@code SVG_MARKER_ORIENT_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_MARKER_ORIENT_UNKNOWN = 0;
+    /** The constant {@code SVG_MARKERUNITS_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_MARKERUNITS_UNKNOWN = 0;
+    /** The constant {@code SVG_MARKER_ORIENT_AUTO}. */
+    @JsxConstant
+    public static final int SVG_MARKER_ORIENT_AUTO = 1;
+    /** The constant {@code SVG_MARKERUNITS_USERSPACEONUSE}. */
+    @JsxConstant
+    public static final int SVG_MARKERUNITS_USERSPACEONUSE = 1;
+    /** The constant {@code SVG_MARKER_ORIENT_ANGLE}. */
+    @JsxConstant
+    public static final int SVG_MARKER_ORIENT_ANGLE = 2;
+    /** The constant {@code SVG_MARKERUNITS_STROKEWIDTH}. */
+    @JsxConstant
+    public static final int SVG_MARKERUNITS_STROKEWIDTH = 2;
 
     /**
      * Creates an instance.

@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgTextPath;
@@ -32,6 +33,25 @@ import com.gargoylesoftware.htmlunit.svg.SvgTextPath;
 @JsxClass(domClass = SvgTextPath.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGTextPathElement extends SVGTextContentElement {
+
+    /** The constant {@code TEXTPATH_METHODTYPE_UNKNOWN}. */
+    @JsxConstant
+    public static final int TEXTPATH_METHODTYPE_UNKNOWN = 0;
+    /** The constant {@code TEXTPATH_SPACINGTYPE_UNKNOWN}. */
+    @JsxConstant
+    public static final int TEXTPATH_SPACINGTYPE_UNKNOWN = 0;
+    /** The constant {@code TEXTPATH_METHODTYPE_ALIGN}. */
+    @JsxConstant
+    public static final int TEXTPATH_METHODTYPE_ALIGN = 1;
+    /** The constant {@code TEXTPATH_SPACINGTYPE_AUTO}. */
+    @JsxConstant
+    public static final int TEXTPATH_SPACINGTYPE_AUTO = 1;
+    /** The constant {@code TEXTPATH_METHODTYPE_STRETCH}. */
+    @JsxConstant
+    public static final int TEXTPATH_METHODTYPE_STRETCH = 2;
+    /** The constant {@code TEXTPATH_SPACINGTYPE_EXACT}. */
+    @JsxConstant
+    public static final int TEXTPATH_SPACINGTYPE_EXACT = 2;
 
     /**
      * Creates an instance.

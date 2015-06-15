@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -31,6 +32,49 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class SVGPreserveAspectRatio extends SimpleScriptable {
+
+    /** The constant {@code SVG_MEETORSLICE_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_MEETORSLICE_UNKNOWN = 0;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_UNKNOWN = 0;
+    /** The constant {@code SVG_MEETORSLICE_MEET}. */
+    @JsxConstant
+    public static final int SVG_MEETORSLICE_MEET = 1;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_NONE}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_NONE = 1;
+    /** The constant {@code SVG_MEETORSLICE_SLICE}. */
+    @JsxConstant
+    public static final int SVG_MEETORSLICE_SLICE = 2;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_XMINYMIN}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_XMINYMIN = 2;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_XMIDYMIN}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_XMIDYMIN = 3;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_XMAXYMIN}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_XMAXYMIN = 4;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_XMINYMID}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_XMINYMID = 5;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_XMIDYMID}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_XMIDYMID = 6;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_XMAXYMID}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_XMAXYMID = 7;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_XMINYMAX}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_XMINYMAX = 8;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_XMIDYMAX}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_XMIDYMAX = 9;
+    /** The constant {@code SVG_PRESERVEASPECTRATIO_XMAXYMAX}. */
+    @JsxConstant
+    public static final int SVG_PRESERVEASPECTRATIO_XMAXYMAX = 10;
 
     /**
      * Creates an instance.

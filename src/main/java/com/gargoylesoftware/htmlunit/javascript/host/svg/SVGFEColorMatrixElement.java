@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeColorMatrix;
@@ -32,6 +33,22 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeColorMatrix;
 @JsxClass(domClass = SvgFeColorMatrix.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEColorMatrixElement extends SVGElement {
+
+    /** The constant {@code SVG_FECOLORMATRIX_TYPE_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_FECOLORMATRIX_TYPE_UNKNOWN = 0;
+    /** The constant {@code SVG_FECOLORMATRIX_TYPE_MATRIX}. */
+    @JsxConstant
+    public static final int SVG_FECOLORMATRIX_TYPE_MATRIX = 1;
+    /** The constant {@code SVG_FECOLORMATRIX_TYPE_SATURATE}. */
+    @JsxConstant
+    public static final int SVG_FECOLORMATRIX_TYPE_SATURATE = 2;
+    /** The constant {@code SVG_FECOLORMATRIX_TYPE_HUEROTATE}. */
+    @JsxConstant
+    public static final int SVG_FECOLORMATRIX_TYPE_HUEROTATE = 3;
+    /** The constant {@code SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA}. */
+    @JsxConstant
+    public static final int SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA = 4;
 
     /**
      * Creates an instance.

@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -31,6 +32,67 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class SVGPathSeg extends SimpleScriptable {
+
+    /** The constant {@code PATHSEG_UNKNOWN}. */
+    @JsxConstant
+    public static final int PATHSEG_UNKNOWN = 0;
+    /** The constant {@code PATHSEG_CLOSEPATH}. */
+    @JsxConstant
+    public static final int PATHSEG_CLOSEPATH = 1;
+    /** The constant {@code PATHSEG_MOVETO_ABS}. */
+    @JsxConstant
+    public static final int PATHSEG_MOVETO_ABS = 2;
+    /** The constant {@code PATHSEG_MOVETO_REL}. */
+    @JsxConstant
+    public static final int PATHSEG_MOVETO_REL = 3;
+    /** The constant {@code PATHSEG_LINETO_ABS}. */
+    @JsxConstant
+    public static final int PATHSEG_LINETO_ABS = 4;
+    /** The constant {@code PATHSEG_LINETO_REL}. */
+    @JsxConstant
+    public static final int PATHSEG_LINETO_REL = 5;
+    /** The constant {@code PATHSEG_CURVETO_CUBIC_ABS}. */
+    @JsxConstant
+    public static final int PATHSEG_CURVETO_CUBIC_ABS = 6;
+    /** The constant {@code PATHSEG_CURVETO_CUBIC_REL}. */
+    @JsxConstant
+    public static final int PATHSEG_CURVETO_CUBIC_REL = 7;
+    /** The constant {@code PATHSEG_CURVETO_QUADRATIC_ABS}. */
+    @JsxConstant
+    public static final int PATHSEG_CURVETO_QUADRATIC_ABS = 8;
+    /** The constant {@code PATHSEG_CURVETO_QUADRATIC_REL}. */
+    @JsxConstant
+    public static final int PATHSEG_CURVETO_QUADRATIC_REL = 9;
+    /** The constant {@code PATHSEG_ARC_ABS}. */
+    @JsxConstant
+    public static final int PATHSEG_ARC_ABS = 10;
+    /** The constant {@code PATHSEG_ARC_REL}. */
+    @JsxConstant
+    public static final int PATHSEG_ARC_REL = 11;
+    /** The constant {@code PATHSEG_LINETO_HORIZONTAL_ABS}. */
+    @JsxConstant
+    public static final int PATHSEG_LINETO_HORIZONTAL_ABS = 12;
+    /** The constant {@code PATHSEG_LINETO_HORIZONTAL_REL}. */
+    @JsxConstant
+    public static final int PATHSEG_LINETO_HORIZONTAL_REL = 13;
+    /** The constant {@code PATHSEG_LINETO_VERTICAL_ABS}. */
+    @JsxConstant
+    public static final int PATHSEG_LINETO_VERTICAL_ABS = 14;
+    /** The constant {@code PATHSEG_LINETO_VERTICAL_REL}. */
+    @JsxConstant
+    public static final int PATHSEG_LINETO_VERTICAL_REL = 15;
+    /** The constant {@code PATHSEG_CURVETO_CUBIC_SMOOTH_ABS}. */
+    @JsxConstant
+    public static final int PATHSEG_CURVETO_CUBIC_SMOOTH_ABS = 16;
+    /** The constant {@code PATHSEG_CURVETO_CUBIC_SMOOTH_REL}. */
+    @JsxConstant
+    public static final int PATHSEG_CURVETO_CUBIC_SMOOTH_REL = 17;
+    /** The constant {@code PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS}. */
+    @JsxConstant
+    public static final int PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS = 18;
+    /** The constant {@code PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL}. */
+    @JsxConstant
+    public static final int PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL = 19;
 
     /**
      * Creates an instance.

@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeDisplacementMap;
@@ -32,6 +33,22 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeDisplacementMap;
 @JsxClass(domClass = SvgFeDisplacementMap.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEDisplacementMapElement extends SVGElement {
+
+    /** The constant {@code SVG_CHANNEL_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_CHANNEL_UNKNOWN = 0;
+    /** The constant {@code SVG_CHANNEL_R}. */
+    @JsxConstant
+    public static final int SVG_CHANNEL_R = 1;
+    /** The constant {@code SVG_CHANNEL_G}. */
+    @JsxConstant
+    public static final int SVG_CHANNEL_G = 2;
+    /** The constant {@code SVG_CHANNEL_B}. */
+    @JsxConstant
+    public static final int SVG_CHANNEL_B = 3;
+    /** The constant {@code SVG_CHANNEL_A}. */
+    @JsxConstant
+    public static final int SVG_CHANNEL_A = 4;
 
     /**
      * Creates an instance.

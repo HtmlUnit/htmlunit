@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeMorphology;
@@ -32,6 +33,16 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeMorphology;
 @JsxClass(domClass = SvgFeMorphology.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEMorphologyElement extends SVGElement {
+
+    /** The constant {@code SVG_MORPHOLOGY_OPERATOR_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_MORPHOLOGY_OPERATOR_UNKNOWN = 0;
+    /** The constant {@code SVG_MORPHOLOGY_OPERATOR_ERODE}. */
+    @JsxConstant
+    public static final int SVG_MORPHOLOGY_OPERATOR_ERODE = 1;
+    /** The constant {@code SVG_MORPHOLOGY_OPERATOR_DILATE}. */
+    @JsxConstant
+    public static final int SVG_MORPHOLOGY_OPERATOR_DILATE = 2;
 
     /**
      * Creates an instance.

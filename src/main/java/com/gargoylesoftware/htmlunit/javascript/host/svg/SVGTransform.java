@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -31,6 +32,28 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class SVGTransform extends SimpleScriptable {
+
+    /** The constant {@code SVG_TRANSFORM_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_TRANSFORM_UNKNOWN = 0;
+    /** The constant {@code SVG_TRANSFORM_MATRIX}. */
+    @JsxConstant
+    public static final int SVG_TRANSFORM_MATRIX = 1;
+    /** The constant {@code SVG_TRANSFORM_TRANSLATE}. */
+    @JsxConstant
+    public static final int SVG_TRANSFORM_TRANSLATE = 2;
+    /** The constant {@code SVG_TRANSFORM_SCALE}. */
+    @JsxConstant
+    public static final int SVG_TRANSFORM_SCALE = 3;
+    /** The constant {@code SVG_TRANSFORM_ROTATE}. */
+    @JsxConstant
+    public static final int SVG_TRANSFORM_ROTATE = 4;
+    /** The constant {@code SVG_TRANSFORM_SKEWX}. */
+    @JsxConstant
+    public static final int SVG_TRANSFORM_SKEWX = 5;
+    /** The constant {@code SVG_TRANSFORM_SKEWY}. */
+    @JsxConstant
+    public static final int SVG_TRANSFORM_SKEWY = 6;
 
     /**
      * Creates an instance.

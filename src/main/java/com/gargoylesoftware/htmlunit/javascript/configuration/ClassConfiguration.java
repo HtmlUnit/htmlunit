@@ -97,8 +97,8 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Add the a static property to the configuration.
-     * @param name name of the property
+     * Add the static property to the configuration.
+     * @param name name of the static property
      * @param getter the static getter method
      * @param setter the static setter method
      */

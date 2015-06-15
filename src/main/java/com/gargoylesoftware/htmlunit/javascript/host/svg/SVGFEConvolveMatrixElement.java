@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeConvolveMatrix;
@@ -32,6 +33,19 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeConvolveMatrix;
 @JsxClass(domClass = SvgFeConvolveMatrix.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEConvolveMatrixElement extends SVGElement {
+
+    /** The constant {@code SVG_EDGEMODE_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_EDGEMODE_UNKNOWN = 0;
+    /** The constant {@code SVG_EDGEMODE_DUPLICATE}. */
+    @JsxConstant
+    public static final int SVG_EDGEMODE_DUPLICATE = 1;
+    /** The constant {@code SVG_EDGEMODE_WRAP}. */
+    @JsxConstant
+    public static final int SVG_EDGEMODE_WRAP = 2;
+    /** The constant {@code SVG_EDGEMODE_NONE}. */
+    @JsxConstant
+    public static final int SVG_EDGEMODE_NONE = 3;
 
     /**
      * Creates an instance.

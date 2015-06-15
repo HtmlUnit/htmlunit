@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -31,6 +32,40 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class SVGLength extends SimpleScriptable {
+
+    /** The constant {@code SVG_LENGTHTYPE_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_UNKNOWN = 0;
+    /** The constant {@code SVG_LENGTHTYPE_NUMBER}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_NUMBER = 1;
+    /** The constant {@code SVG_LENGTHTYPE_PERCENTAGE}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_PERCENTAGE = 2;
+    /** The constant {@code SVG_LENGTHTYPE_EMS}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_EMS = 3;
+    /** The constant {@code SVG_LENGTHTYPE_EXS}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_EXS = 4;
+    /** The constant {@code SVG_LENGTHTYPE_PX}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_PX = 5;
+    /** The constant {@code SVG_LENGTHTYPE_CM}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_CM = 6;
+    /** The constant {@code SVG_LENGTHTYPE_MM}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_MM = 7;
+    /** The constant {@code SVG_LENGTHTYPE_IN}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_IN = 8;
+    /** The constant {@code SVG_LENGTHTYPE_PT}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_PT = 9;
+    /** The constant {@code SVG_LENGTHTYPE_PC}. */
+    @JsxConstant
+    public static final int SVG_LENGTHTYPE_PC = 10;
 
     /**
      * Creates an instance.

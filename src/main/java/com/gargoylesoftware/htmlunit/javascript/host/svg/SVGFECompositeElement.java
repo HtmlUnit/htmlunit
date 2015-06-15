@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeComposite;
@@ -32,6 +33,28 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeComposite;
 @JsxClass(domClass = SvgFeComposite.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFECompositeElement extends SVGElement {
+
+    /** The constant {@code SVG_FECOMPOSITE_OPERATOR_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_FECOMPOSITE_OPERATOR_UNKNOWN = 0;
+    /** The constant {@code SVG_FECOMPOSITE_OPERATOR_OVER}. */
+    @JsxConstant
+    public static final int SVG_FECOMPOSITE_OPERATOR_OVER = 1;
+    /** The constant {@code SVG_FECOMPOSITE_OPERATOR_IN}. */
+    @JsxConstant
+    public static final int SVG_FECOMPOSITE_OPERATOR_IN = 2;
+    /** The constant {@code SVG_FECOMPOSITE_OPERATOR_OUT}. */
+    @JsxConstant
+    public static final int SVG_FECOMPOSITE_OPERATOR_OUT = 3;
+    /** The constant {@code SVG_FECOMPOSITE_OPERATOR_ATOP}. */
+    @JsxConstant
+    public static final int SVG_FECOMPOSITE_OPERATOR_ATOP = 4;
+    /** The constant {@code SVG_FECOMPOSITE_OPERATOR_XOR}. */
+    @JsxConstant
+    public static final int SVG_FECOMPOSITE_OPERATOR_XOR = 5;
+    /** The constant {@code SVG_FECOMPOSITE_OPERATOR_ARITHMETIC}. */
+    @JsxConstant
+    public static final int SVG_FECOMPOSITE_OPERATOR_ARITHMETIC = 6;
 
     /**
      * Creates an instance.

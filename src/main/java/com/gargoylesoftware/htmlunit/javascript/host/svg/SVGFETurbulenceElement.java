@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeTurbulence;
@@ -32,6 +33,25 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeTurbulence;
 @JsxClass(domClass = SvgFeTurbulence.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFETurbulenceElement extends SVGElement {
+
+    /** The constant {@code SVG_STITCHTYPE_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_STITCHTYPE_UNKNOWN = 0;
+    /** The constant {@code SVG_TURBULENCE_TYPE_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_TURBULENCE_TYPE_UNKNOWN = 0;
+    /** The constant {@code SVG_STITCHTYPE_STITCH}. */
+    @JsxConstant
+    public static final int SVG_STITCHTYPE_STITCH = 1;
+    /** The constant {@code SVG_TURBULENCE_TYPE_FRACTALNOISE}. */
+    @JsxConstant
+    public static final int SVG_TURBULENCE_TYPE_FRACTALNOISE = 1;
+    /** The constant {@code SVG_STITCHTYPE_NOSTITCH}. */
+    @JsxConstant
+    public static final int SVG_STITCHTYPE_NOSTITCH = 2;
+    /** The constant {@code SVG_TURBULENCE_TYPE_TURBULENCE}. */
+    @JsxConstant
+    public static final int SVG_TURBULENCE_TYPE_TURBULENCE = 2;
 
     /**
      * Creates an instance.

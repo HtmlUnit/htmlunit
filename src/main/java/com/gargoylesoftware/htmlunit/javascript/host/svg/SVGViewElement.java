@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgView;
@@ -32,6 +33,16 @@ import com.gargoylesoftware.htmlunit.svg.SvgView;
 @JsxClass(domClass = SvgView.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGViewElement extends SVGElement {
+
+    /** The constant {@code SVG_ZOOMANDPAN_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_ZOOMANDPAN_UNKNOWN = 0;
+    /** The constant {@code SVG_ZOOMANDPAN_DISABLE}. */
+    @JsxConstant
+    public static final int SVG_ZOOMANDPAN_DISABLE = 1;
+    /** The constant {@code SVG_ZOOMANDPAN_MAGNIFY}. */
+    @JsxConstant
+    public static final int SVG_ZOOMANDPAN_MAGNIFY = 2;
 
     /**
      * Creates an instance.
