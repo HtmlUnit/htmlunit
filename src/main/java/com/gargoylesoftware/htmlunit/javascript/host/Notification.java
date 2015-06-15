@@ -14,13 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NOTIFICATION_GRANTED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
@@ -32,15 +35,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
 public class Notification extends EventTarget {
-
-    /**
-     * In fact not a constant... but as a constant in a first step.
-     */
-    @JsxConstant(@WebBrowser(FF))
-    public static final String permission = "default";
 
     /**
      * JavaScript constructor.
@@ -49,6 +47,19 @@ public class Notification extends EventTarget {
     @JsxConstructor
     public void jsConstructor(final String title) {
         // Empty.
+    }
+
+    /**
+     * Returns the {@code permission} static property.
+     * @return the {@code permission} static property
+     */
+    @JsxStaticGetter
+    public static String getPermission(final Scriptable thisObj) {
+        final SimpleScriptable scripatble = (SimpleScriptable) thisObj.getParentScope();
+        if (scripatble.getBrowserVersion().hasFeature(JS_NOTIFICATION_GRANTED)) {
+            return "granted";
+        }
+        return "default";
     }
 
     /**

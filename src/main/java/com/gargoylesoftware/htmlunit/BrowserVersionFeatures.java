@@ -1495,6 +1495,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_NON_ECMA_GET_YEAR,
 
+    /** If 'granted'. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_NOTIFICATION_GRANTED,
+
     /** "[object]" in quirks mode. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_OBJECT_IN_QUIRKS_MODE,

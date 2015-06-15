@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public final class ClassConfiguration {
     private Map<String, PropertyInfo> propertyMap_ = new HashMap<>();
     private Map<String, Method> functionMap_ = new HashMap<>();
+    private Map<String, PropertyInfo> staticPropertyMap_ = new HashMap<>();
     private Map<String, Method> staticFunctionMap_ = new HashMap<>();
     private List<String> constants_ = new ArrayList<>();
     private String extendedClassName_;
@@ -96,6 +97,17 @@ public final class ClassConfiguration {
     }
 
     /**
+     * Add the a static property to the configuration.
+     * @param name name of the property
+     * @param getter the static getter method
+     * @param setter the static setter method
+     */
+    public void addStaticProperty(final String name, final Method getter, final Method setter) {
+        final PropertyInfo info = new PropertyInfo(getter, setter);
+        staticPropertyMap_.put(name, info);
+    }
+
+    /**
      * Add the constant to the configuration.
      * @param name - Name of the configuration
      */
@@ -109,6 +121,14 @@ public final class ClassConfiguration {
      */
     public Set<Entry<String, PropertyInfo>> getPropertyEntries() {
         return propertyMap_.entrySet();
+    }
+
+    /**
+     * Returns the set of entries for the defined static properties.
+     * @return a set
+     */
+    public Set<Entry<String, PropertyInfo>> getStaticPropertyEntries() {
+        return staticPropertyMap_.entrySet();
     }
 
     /**

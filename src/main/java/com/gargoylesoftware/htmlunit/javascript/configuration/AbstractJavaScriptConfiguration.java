@@ -227,6 +227,15 @@ public abstract class AbstractJavaScriptConfiguration {
                         classConfiguration.addFunction(method);
                     }
                 }
+                else if (annotation instanceof JsxStaticGetter) {
+                    final JsxStaticGetter jsxStaticGetter = (JsxStaticGetter) annotation;
+                    if (isSupported(jsxStaticGetter.value(), expectedBrowserName, browserVersionNumeric)) {
+                        final int prefix = method.getName().startsWith("is") ? 2 : 3;
+                        String property = method.getName().substring(prefix);
+                        property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
+                        classConfiguration.addStaticProperty(property, method, null);
+                    }
+                }
                 else if (annotation instanceof JsxStaticFunction) {
                     if (isSupported(((JsxStaticFunction) annotation).value(),
                             expectedBrowserName, browserVersionNumeric)) {

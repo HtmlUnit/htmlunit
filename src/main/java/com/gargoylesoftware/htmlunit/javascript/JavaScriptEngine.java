@@ -338,6 +338,16 @@ public class JavaScriptEngine {
                                 functionObject);
                         functionObject.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
                     }
+
+                    for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry
+                            : config.getStaticPropertyEntries()) {
+                        final String propertyName = propertyEntry.getKey();
+                        final Method readMethod = propertyEntry.getValue().getReadMethod();
+                        final Method writeMethod = propertyEntry.getValue().getWriteMethod();
+                        final int flag = ScriptableObject.EMPTY;
+
+                        functionObject.defineProperty(propertyName, null, readMethod, writeMethod, flag);
+                    }
                 }
                 else {
                     if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
