@@ -51,6 +51,7 @@ public class Notification extends EventTarget {
 
     /**
      * Returns the {@code permission} static property.
+     * @param thisObj the scriptable
      * @return the {@code permission} static property
      */
     @JsxStaticGetter
