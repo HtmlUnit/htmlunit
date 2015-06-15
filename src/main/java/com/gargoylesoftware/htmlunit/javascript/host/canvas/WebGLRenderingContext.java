@@ -117,7 +117,7 @@ public class WebGLRenderingContext extends SimpleScriptable {
     /** The constant {@code FUNC_REVERSE_SUBTRACT}. */
     @JsxConstant
     public static final int FUNC_REVERSE_SUBTRACT = 0x800B;
-    
+
     /** The constant {@code BLEND_EQUATION}. */
     @JsxConstant
     public static final int BLEND_EQUATION = 0x8009;
