@@ -39,7 +39,7 @@ public class Notification extends EventTarget {
     /**
      * In fact not a constant... but as a constant in a first step.
      */
-    @JsxConstant
+    @JsxConstant(@WebBrowser(FF))
     public static final String permission = "default";
 
     /**

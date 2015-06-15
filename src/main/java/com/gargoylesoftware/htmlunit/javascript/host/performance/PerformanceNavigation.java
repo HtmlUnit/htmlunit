@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -31,6 +32,18 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class PerformanceNavigation extends SimpleScriptable {
+
+    /** Navigate. */
+    @JsxConstant
+    public static final int TYPE_NAVIGATE = 0;
+
+    /** Reload. */
+    @JsxConstant
+    public static final int TYPE_RELOAD = 1;
+
+    /** Reserved. */
+    @JsxConstant
+    public static final int TYPE_RESERVED = 255;
 
     /**
      * Creates an instance.

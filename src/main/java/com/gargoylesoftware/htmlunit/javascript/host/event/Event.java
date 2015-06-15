@@ -216,10 +216,6 @@ public class Event extends SimpleScriptable {
 
     /** Constant. */
     @JsxConstant(@WebBrowser(CHROME))
-    public static final int MOVE = 0x2000000;
-
-    /** Constant. */
-    @JsxConstant(@WebBrowser(CHROME))
     public static final int SELECT = 0x4000;
 
     /** Constant. */

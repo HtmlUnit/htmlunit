@@ -73,6 +73,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -106,15 +107,20 @@ public class XMLHttpRequest extends EventTarget {
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
 
     /** The object has been created, but not initialized (the open() method has not been called). */
-    public static final int STATE_UNSENT = 0;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final int UNSENT = 0;
     /** The object has been created, but the send() method has not been called. */
-    public static final int STATE_OPENED = 1;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final int OPENED = 1;
     /** The send() method has been called, but the status and headers are not yet available. */
-    public static final int STATE_HEADERS_RECEIVED = 2;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final int HEADERS_RECEIVED = 2;
     /** Some data has been received. */
-    public static final int STATE_LOADING = 3;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final int LOADING = 3;
     /** All the data has been received; the complete data is available in responseBody and responseText. */
-    public static final int STATE_DONE = 4;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final int DONE = 4;
 
     private static final String HEADER_ORIGIN = "Origin";
     private static final char REQUEST_HEADERS_SEPARATOR = ',';
@@ -162,7 +168,7 @@ public class XMLHttpRequest extends EventTarget {
      */
     public XMLHttpRequest(final boolean caseSensitiveProperties) {
         caseSensitiveProperties_ = caseSensitiveProperties;
-        state_ = STATE_UNSENT;
+        state_ = UNSENT;
     }
 
     /**
@@ -181,7 +187,7 @@ public class XMLHttpRequest extends EventTarget {
     @JsxSetter
     public void setOnreadystatechange(final Function stateChangeHandler) {
         stateChangeHandler_ = stateChangeHandler;
-        if (state_ == STATE_OPENED) {
+        if (state_ == OPENED) {
             setState(state_, null);
         }
     }
@@ -199,7 +205,7 @@ public class XMLHttpRequest extends EventTarget {
         // Firefox doesn't trigger onreadystatechange handler for sync requests except for completed for FF10
         final boolean noTriggerForSync = browser.hasFeature(
                 XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED);
-        final boolean triggerForSyncCompleted = (state == STATE_DONE)
+        final boolean triggerForSyncCompleted = (state == DONE)
             && browser.hasFeature(XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED);
         if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || triggerForSyncCompleted)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
@@ -227,7 +233,7 @@ public class XMLHttpRequest extends EventTarget {
 
         // Firefox has a separate onload handler, too.
         final boolean triggerOnload = browser.hasFeature(XHR_TRIGGER_ONLOAD_ON_COMPLETED);
-        if (triggerOnload && loadHandler_ != null && state == STATE_DONE) {
+        if (triggerOnload && loadHandler_ != null && state == DONE) {
             final Scriptable scope = loadHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
             jsEngine.callFunction(containingPage_, loadHandler_, scope, this, ArrayUtils.EMPTY_OBJECT_ARRAY);
@@ -316,7 +322,7 @@ public class XMLHttpRequest extends EventTarget {
      */
     @JsxGetter
     public String getResponseText() {
-        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+        if (state_ == UNSENT || state_ == OPENED) {
             return "";
         }
         if (webResponse_ != null) {
@@ -378,7 +384,7 @@ public class XMLHttpRequest extends EventTarget {
      */
     @JsxGetter
     public int getStatus() {
-        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+        if (state_ == UNSENT || state_ == OPENED) {
             if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
                 throw Context.reportRuntimeError("status not set");
             }
@@ -399,7 +405,7 @@ public class XMLHttpRequest extends EventTarget {
      */
     @JsxGetter
     public String getStatusText() {
-        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+        if (state_ == UNSENT || state_ == OPENED) {
             if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
                 throw Context.reportRuntimeError("statusText not set");
             }
@@ -428,7 +434,7 @@ public class XMLHttpRequest extends EventTarget {
      */
     @JsxFunction
     public String getAllResponseHeaders() {
-        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+        if (state_ == UNSENT || state_ == OPENED) {
             return null;
         }
         if (webResponse_ != null) {
@@ -451,7 +457,7 @@ public class XMLHttpRequest extends EventTarget {
      */
     @JsxFunction
     public String getResponseHeader(final String headerName) {
-        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+        if (state_ == UNSENT || state_ == OPENED) {
             return null;
         }
         if (webResponse_ != null) {
@@ -546,7 +552,7 @@ public class XMLHttpRequest extends EventTarget {
         // Async stays a boolean.
         async_ = async;
         // Change the state!
-        setState(STATE_OPENED, null);
+        setState(OPENED, null);
     }
 
     private boolean isAllowCrossDomainsFor(final URL originUrl, final URL newUrl) {
@@ -601,7 +607,7 @@ public class XMLHttpRequest extends EventTarget {
             if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
                 // quite strange but IE and FF seem both to fire state loading twice
                 // in async mode (at least with HTML of the unit tests)
-                setState(STATE_OPENED, Context.getCurrentContext());
+                setState(OPENED, Context.getCurrentContext());
             }
 
             // Create and start a thread in which to execute the request.
@@ -692,9 +698,9 @@ public class XMLHttpRequest extends EventTarget {
                 // do the preflight request
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
                 if (!isPreflightAuthorized(preflightResponse)) {
-                    setState(STATE_HEADERS_RECEIVED, context);
-                    setState(STATE_LOADING, context);
-                    setState(STATE_DONE, context);
+                    setState(HEADERS_RECEIVED, context);
+                    setState(LOADING, context);
+                    setState(DONE, context);
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }
@@ -757,9 +763,9 @@ public class XMLHttpRequest extends EventTarget {
                 }
             }
             if (allowOriginResponse) {
-                setState(STATE_HEADERS_RECEIVED, context);
-                setState(STATE_LOADING, context);
-                setState(STATE_DONE, context);
+                setState(HEADERS_RECEIVED, context);
+                setState(LOADING, context);
+                setState(DONE, context);
             }
             else {
                 if (LOG.isDebugEnabled()) {
@@ -773,8 +779,8 @@ public class XMLHttpRequest extends EventTarget {
                 LOG.debug("IOException: returning a network error response.", e);
             }
             webResponse_ = new NetworkErrorWebResponse(webRequest_);
-            setState(STATE_HEADERS_RECEIVED, context);
-            setState(STATE_DONE, context);
+            setState(HEADERS_RECEIVED, context);
+            setState(DONE, context);
             if (async_) {
                 processError(context);
             }
@@ -909,7 +915,7 @@ public class XMLHttpRequest extends EventTarget {
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setWithCredentials(final boolean withCredentials) {
-        if (!async_ && state_ != STATE_UNSENT) {
+        if (!async_ && state_ != UNSENT) {
             if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION)) {
                 throw Context.reportRuntimeError("Property 'withCredentials' not writable in sync mode.");
             }

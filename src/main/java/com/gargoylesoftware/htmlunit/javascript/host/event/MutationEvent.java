@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -38,6 +39,18 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
             browsers = @WebBrowser(value = IE, maxVersion = 8))
     })
 public class MutationEvent extends Event {
+
+    /** Modification. */
+    @JsxConstant
+    public static final int MODIFICATION = 1;
+
+    /** Addition. */
+    @JsxConstant
+    public static final int ADDITION = 2;
+
+    /** Removal. */
+    @JsxConstant
+    public static final int REMOVAL = 3;
 
     /**
      * Creates an instance.

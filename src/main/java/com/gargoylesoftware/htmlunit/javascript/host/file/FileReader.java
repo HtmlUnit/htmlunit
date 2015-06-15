@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -31,6 +32,18 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class FileReader extends EventTarget {
+
+    /** No data has been loaded yet. */
+    @JsxConstant
+    public static final short EMPTY = 0;
+
+    /** Data is currently being loaded. */
+    @JsxConstant
+    public static final short LOADING = 1;
+
+    /** The entire read request has been completed. */
+    @JsxConstant
+    public static final short DONE = 2;
 
     /**
      * Creates an instance.

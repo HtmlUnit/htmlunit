@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -29,6 +30,30 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
 public class MediaKeyError extends SimpleScriptable {
+
+    /** Unknown Error. */
+    @JsxConstant
+    public static final int MEDIA_KEYERR_UNKNOWN = 1;
+
+    /** Client Error. */
+    @JsxConstant
+    public static final int MEDIA_KEYERR_CLIENT = 2;
+
+    /** Service Error. */
+    @JsxConstant
+    public static final int MEDIA_KEYERR_SERVICE = 3;
+
+    /** Output Error. */
+    @JsxConstant
+    public static final int MEDIA_KEYERR_OUTPUT = 4;
+
+    /** Hardware Change Error. */
+    @JsxConstant
+    public static final int MEDIA_KEYERR_HARDWARECHANGE = 5;
+
+    /** Domain Error. */
+    @JsxConstant
+    public static final int MEDIA_KEYERR_DOMAIN = 6;
 
     /**
      * Creates an instance.

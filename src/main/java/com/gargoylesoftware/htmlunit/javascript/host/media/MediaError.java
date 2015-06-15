@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -31,6 +32,22 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class MediaError extends SimpleScriptable {
+
+    /** Aborted Error. */
+    @JsxConstant
+    public static final int MEDIA_ERR_ABORTED = 1;
+
+    /** Network Error. */
+    @JsxConstant
+    public static final int MEDIA_ERR_NETWORK = 2;
+
+    /** Decode Error. */
+    @JsxConstant
+    public static final int MEDIA_ERR_DECODE = 3;
+
+    /** Source Not Supported Error. */
+    @JsxConstant
+    public static final int MEDIA_ERR_SRC_NOT_SUPPORTED = 4;
 
     /**
      * Creates an instance.

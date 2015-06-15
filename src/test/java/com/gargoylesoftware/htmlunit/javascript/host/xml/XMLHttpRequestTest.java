@@ -63,9 +63,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     private static final String XHR_INSTANTIATION = "(window.XMLHttpRequest ? "
         + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
-    private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNSENT);
-    private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_OPENED);
-    private static final String COMPLETED = String.valueOf(XMLHttpRequest.STATE_DONE);
+    private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.UNSENT);
+    private static final String LOADING = String.valueOf(XMLHttpRequest.OPENED);
+    private static final String COMPLETED = String.valueOf(XMLHttpRequest.DONE);
 
     /**
      * Tests synchronous use of XMLHttpRequest.

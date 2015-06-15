@@ -22,6 +22,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -51,19 +52,25 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
-    public static final short STATUS_UNCACHED = 0;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short UNCACHED = 0;
     /** The application cache is not in the process of being updated. */
-    public static final short STATUS_IDLE = 1;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short IDLE = 1;
     /** The application cache manifest is being fetched and checked for updates. */
-    public static final short STATUS_CHECKING = 2;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short CHECKING = 2;
     /** Resources are being downloaded to be added to the cache. */
-    public static final short STATUS_DOWNLOADING = 3;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short DOWNLOADING = 3;
     /** There is a new version of the application cache available. */
-    public static final short STATUS_UPDATEREADY = 4;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short UPDATEREADY = 4;
     /** The application cache group is now obsolete. */
-    public static final short STATUS_OBSOLETE = 5;
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short OBSOLETE = 5;
 
-    private short status_ = STATUS_UNCACHED;
+    private short status_ = UNCACHED;
 
     /**
      * The constructor.

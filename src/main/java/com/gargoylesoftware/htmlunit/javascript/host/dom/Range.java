@@ -71,6 +71,22 @@ public class Range extends SimpleScriptable {
     @JsxConstant
     public static final short END_TO_START = 3;
 
+    /** Node before. */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short NODE_BEFORE = 0;
+
+    /** Node after. */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short NODE_AFTER = 1;
+
+    /** Node before and after. */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short NODE_BEFORE_AND_AFTER = 2;
+
+    /** Node inside. */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short NODE_INSIDE = 3;
+
     private Node startContainer_, endContainer_;
     private int startOffset_, endOffset_;
 

@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -38,37 +39,104 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a <code>CSSUnknownRule</code>.
      */
+    @JsxConstant
     public static final short UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
 
     /**
      * The rule is a <code>CSSStyleRule</code>.
      */
+    @JsxConstant
     public static final short STYLE_RULE                = org.w3c.dom.css.CSSRule.STYLE_RULE;
 
     /**
      * The rule is a <code>CSSCharsetRule</code>.
      */
+    @JsxConstant
     public static final short CHARSET_RULE              = org.w3c.dom.css.CSSRule.CHARSET_RULE;
 
     /**
      * The rule is a <code>CSSImportRule</code>.
      */
+    @JsxConstant
     public static final short IMPORT_RULE               = org.w3c.dom.css.CSSRule.IMPORT_RULE;
 
     /**
      * The rule is a <code>CSSMediaRule</code>.
      */
+    @JsxConstant
     public static final short MEDIA_RULE                = org.w3c.dom.css.CSSRule.MEDIA_RULE;
 
     /**
      * The rule is a <code>CSSFontFaceRule</code>.
      */
+    @JsxConstant
     public static final short FONT_FACE_RULE            = org.w3c.dom.css.CSSRule.FONT_FACE_RULE;
 
     /**
      * The rule is a <code>CSSPageRule</code>.
      */
+    @JsxConstant
     public static final short PAGE_RULE                 = org.w3c.dom.css.CSSRule.PAGE_RULE;
+
+    /**
+     * The rule is a {@code CSSKeyframesRule}.
+     */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short KEYFRAMES_RULE            = 7;
+
+    /**
+     * The rule is a {@code CSSKeyframesRule}.
+     */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short WEBKIT_KEYFRAMES_RULE     = 7;
+
+    /**
+     * The rule is a {@code CSSKeyframeRule}.
+     */
+    @JsxConstant(@WebBrowser(FF))
+    public static final short MOZ_KEYFRAMES_RULE        = 7;
+
+    /**
+     * The rule is a {@code CSSKeyframeRule}.
+     */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short KEYFRAME_RULE             = 8;
+
+    /**
+     * The rule is a {@code CSSKeyframeRule}.
+     */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short WEBKIT_KEYFRAME_RULE      = 8;
+
+    /**
+     * The rule is a {@code CSSKeyframeRule}.
+     */
+    @JsxConstant(@WebBrowser(FF))
+    public static final short MOZ_KEYFRAME_RULE         = 8;
+
+    /**
+     * The rule is a {@code CSSNamespaceRule}.
+     */
+    @JsxConstant(@WebBrowser(FF))
+    public static final short NAMESPACE_RULE           = 10;
+
+    /**
+     * The rule is a {@code CSSCounterStyleRule}.
+     */
+    @JsxConstant(@WebBrowser(FF))
+    public static final short COUNTER_STYLE_RULE        = 11;
+
+    /**
+     * The rule is a {@code CSSSupportsRule}.
+     */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short SUPPORTS_RULE             = 12;
+
+    /**
+     * The rule is a {@code CSSCounterStyleRule}.
+     */
+    @JsxConstant(@WebBrowser(FF))
+    public static final short FONT_FEATURE_VALUES_RULE  = 14;
 
     private final CSSStyleSheet stylesheet_;
 

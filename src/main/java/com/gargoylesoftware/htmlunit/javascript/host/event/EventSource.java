@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -29,6 +30,18 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
 public class EventSource extends EventTarget {
+
+    /** The connection is being established. */
+    @JsxConstant
+    public static final short CONNECTING = 0;
+
+    /** The connection is open and dispatching events. */
+    @JsxConstant
+    public static final short OPEN = 1;
+
+    /** The connection is not being established, has been closed or there was a fatal error. */
+    @JsxConstant
+    public static final short CLOSED = 2;
 
     /**
      * Default constructor.

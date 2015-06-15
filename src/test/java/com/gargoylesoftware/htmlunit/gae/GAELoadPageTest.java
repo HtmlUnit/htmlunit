@@ -113,12 +113,12 @@ public class GAELoadPageTest {
             client.getPage(FIRST_URL);
 
             final int executedJobs = client.getJavaScriptEngine().pumpEventLoop(1000);
-            final String[] alerts = {String.valueOf(XMLHttpRequest.STATE_UNSENT),
-                String.valueOf(XMLHttpRequest.STATE_OPENED),
-                String.valueOf(XMLHttpRequest.STATE_OPENED),
-                String.valueOf(XMLHttpRequest.STATE_HEADERS_RECEIVED),
-                String.valueOf(XMLHttpRequest.STATE_LOADING),
-                String.valueOf(XMLHttpRequest.STATE_DONE), xml};
+            final String[] alerts = {String.valueOf(XMLHttpRequest.UNSENT),
+                String.valueOf(XMLHttpRequest.OPENED),
+                String.valueOf(XMLHttpRequest.OPENED),
+                String.valueOf(XMLHttpRequest.HEADERS_RECEIVED),
+                String.valueOf(XMLHttpRequest.LOADING),
+                String.valueOf(XMLHttpRequest.DONE), xml};
             assertEquals(Arrays.asList(alerts).toString(), collectedAlerts.toString());
             assertEquals(1, executedJobs);
         }
