@@ -39,7 +39,7 @@ public class Uint32ArrayTest extends WebDriverTestCase {
             IE8 = "exception")
     public void arrayConstruction() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function test() {\n"
             + "  try {\n"
             + "    var array = new Uint32Array([-45.3]);\n"
@@ -47,6 +47,28 @@ public class Uint32ArrayTest extends WebDriverTestCase {
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      alert(array2[i]);\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "4",
+            IE8 = "exception")
+    public void constant() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    alert(Uint32Array.BYTES_PER_ELEMENT);\n"
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
             + "  }\n"
