@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -30,6 +31,16 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class WheelEvent extends MouseEvent {
+
+    /** Constant for {@code DOM_DELTA_PIXEL}. */
+    @JsxConstant
+    public static final int DOM_DELTA_PIXEL = 0;
+    /** Constant for {@code DOM_DELTA_LINE}. */
+    @JsxConstant
+    public static final int DOM_DELTA_LINE = 1;
+    /** Constant for {@code DOM_DELTA_PAGe}. */
+    @JsxConstant
+    public static final int DOM_DELTA_PAGE = 2;
 
     /**
      * Default constructor.

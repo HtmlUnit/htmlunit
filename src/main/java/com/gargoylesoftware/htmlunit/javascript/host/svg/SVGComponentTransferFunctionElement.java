@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -30,6 +31,25 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class SVGComponentTransferFunctionElement extends SVGElement {
+
+    /** Constant for {@code SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN}. */
+    @JsxConstant
+    public static final int SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN = 0;
+    /** Constant for {@code SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY}. */
+    @JsxConstant
+    public static final int SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY = 1;
+    /** Constant for {@code SVG_FECOMPONENTTRANSFER_TYPE_TABLE}. */
+    @JsxConstant
+    public static final int SVG_FECOMPONENTTRANSFER_TYPE_TABLE = 2;
+    /** Constant for {@code SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE}. */
+    @JsxConstant
+    public static final int SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE = 3;
+    /** Constant for {@code SVG_FECOMPONENTTRANSFER_TYPE_LINEAR}. */
+    @JsxConstant
+    public static final int SVG_FECOMPONENTTRANSFER_TYPE_LINEAR = 4;
+    /** Constant for {@code SVG_FECOMPONENTTRANSFER_TYPE_GAMMA}. */
+    @JsxConstant
+    public static final int SVG_FECOMPONENTTRANSFER_TYPE_GAMMA = 5;
 
     /**
      * Creates an instance.

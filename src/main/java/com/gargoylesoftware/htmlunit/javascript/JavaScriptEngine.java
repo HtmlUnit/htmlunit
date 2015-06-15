@@ -598,7 +598,12 @@ public class JavaScriptEngine {
         for (final String constant : config.getConstants()) {
             try {
                 final Object value = linkedClass.getField(constant).get(null);
-                scriptable.defineProperty(constant, value, ScriptableObject.READONLY | ScriptableObject.PERMANENT);
+                int flag = ScriptableObject.READONLY | ScriptableObject.PERMANENT;
+                // https://code.google.com/p/chromium/issues/detail?id=500633
+                if (config.getClassName().endsWith("Array")) {
+                    flag |= ScriptableObject.DONTENUM;
+                }
+                scriptable.defineProperty(constant, value, flag);
             }
             catch (final Exception e) {
                 throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "

@@ -99,6 +99,9 @@ public class HostConstantsTest extends WebDriverTestCase {
     }
 
     private String getExpectedString() throws Exception {
+        if (host_.endsWith("Array")) {
+            return "";
+        }
         final JavaScriptConfiguration javaScriptConfig = JavaScriptConfiguration.getInstance(getBrowserVersion());
         final Map<String, Object> constants = new TreeMap<>();
         ClassConfiguration classConfig = javaScriptConfig.getClassConfiguration(host_);

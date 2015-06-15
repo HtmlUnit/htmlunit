@@ -41,6 +41,10 @@ public class PerformanceNavigation extends SimpleScriptable {
     @JsxConstant
     public static final int TYPE_RELOAD = 1;
 
+    /** Back forward. */
+    @JsxConstant
+    public static final int TYPE_BACK_FORWARD = 2;
+
     /** Reserved. */
     @JsxConstant
     public static final int TYPE_RESERVED = 255;
