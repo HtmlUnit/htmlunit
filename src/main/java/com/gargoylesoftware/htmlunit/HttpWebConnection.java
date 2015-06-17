@@ -83,7 +83,6 @@ import org.apache.http.config.SocketConfig;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecProvider;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -97,7 +96,7 @@ import org.apache.http.protocol.RequestContent;
 import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.ssl.SSLContexts;
 
-import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
+import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
@@ -144,12 +143,7 @@ public class HttpWebConnection implements WebConnection {
      */
     public HttpWebConnection(final WebClient webClient) {
         webClient_ = webClient;
-        htmlUnitCookieSpecProvider_ = new CookieSpecProvider() {
-            @Override
-            public CookieSpec create(final HttpContext context) {
-                return new HtmlUnitBrowserCompatCookieSpec(webClient.getBrowserVersion());
-            }
-        };
+        htmlUnitCookieSpecProvider_ = new HtmlUnitCookieSpecProvider(webClient.getBrowserVersion());
         httpContext_ = new HttpClientContext();
         usedOptions_ = new WebClientOptions();
     }
@@ -519,12 +513,12 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Creates the <tt>HttpClient</tt> that will be used by this WebClient.
+     * Creates the <tt>HttpClientBuilder</tt> that will be used by this WebClient.
      * Extensions may override this method in order to create a customized
-     * <tt>HttpClient</tt> instance (e.g. with a custom
+     * <tt>HttpClientBuilder</tt> instance (e.g. with a custom
      * {@link org.apache.http.conn.ClientConnectionManager} to perform
      * some tracking; see feature request 1438216).
-     * @return the <tt>HttpClient</tt> that will be used by this WebConnection
+     * @return the <tt>HttpClientBuilder</tt> that will be used by this WebConnection
      */
     protected HttpClientBuilder createHttpClient() {
         final HttpClientBuilder builder = HttpClientBuilder.create();
