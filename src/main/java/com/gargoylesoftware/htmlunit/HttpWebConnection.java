@@ -163,7 +163,7 @@ public class HttpWebConnection implements WebConnection {
         HttpUriRequest httpMethod = null;
         try {
             try {
-                httpMethod = makeHttpMethod(request);
+                httpMethod = makeHttpMethod(request, builder);
             }
             catch (final URISyntaxException e) {
                 throw new IOException("Unable to create URI from URL: " + url.toExternalForm()
@@ -246,12 +246,13 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Creates an <tt>HttpMethod</tt> instance according to the specified parameters.
      * @param webRequest the request
+     * @param httpClientBuilder the httpClientBuilder that will be configured
      * @return the <tt>HttpMethod</tt> instance constructed according to the specified parameters
      * @throws IOException
      * @throws URISyntaxException
      */
     @SuppressWarnings("deprecation")
-    private HttpUriRequest makeHttpMethod(final WebRequest webRequest)
+    private HttpUriRequest makeHttpMethod(final WebRequest webRequest, final HttpClientBuilder httpClientBuilder)
         throws IOException, URISyntaxException {
 
         final String charset = webRequest.getCharset();
@@ -325,9 +326,7 @@ public class HttpWebConnection implements WebConnection {
             }
         }
 
-        final HttpClientBuilder httpClient = getHttpClientBuilder();
-
-        configureHttpProcessor(httpClient, webRequest);
+        configureHttpProcessorBuilder(httpClientBuilder, webRequest);
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
@@ -353,7 +352,7 @@ public class HttpWebConnection implements WebConnection {
             credentialsProvider.setCredentials(authScope, requestCredentials);
             httpContext_.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
         }
-        httpClient.setDefaultCredentialsProvider(credentialsProvider);
+        httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
         httpContext_.removeAttribute(HttpClientContext.CREDS_PROVIDER);
 
         return httpMethod;
@@ -513,12 +512,12 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Creates the <tt>HttpClient</tt> that will be used by this WebClient.
+     * Creates the <tt>HttpClientBuilder</tt> that will be used by this WebClient.
      * Extensions may override this method in order to create a customized
-     * <tt>HttpClient</tt> instance (e.g. with a custom
+     * <tt>HttpClientBuilder</tt> instance (e.g. with a custom
      * {@link org.apache.http.conn.ClientConnectionManager} to perform
      * some tracking; see feature request 1438216).
-     * @return the <tt>HttpClient</tt> that will be used by this WebConnection
+     * @return the <tt>HttpClientBuilder</tt> that will be used by this WebConnection
      */
     protected HttpClientBuilder createHttpClient() {
         final HttpClientBuilder builder = HttpClientBuilder.create();
@@ -602,7 +601,7 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_.setProxyConfig(options.getProxyConfig());
     }
 
-    private void configureHttpProcessor(final HttpClientBuilder builder, final WebRequest webRequest)
+    private void configureHttpProcessorBuilder(final HttpClientBuilder builder, final WebRequest webRequest)
         throws IOException {
         final HttpProcessorBuilder b = HttpProcessorBuilder.create();
         for (final HttpRequestInterceptor i : getHttpRequestInterceptors(webRequest)) {

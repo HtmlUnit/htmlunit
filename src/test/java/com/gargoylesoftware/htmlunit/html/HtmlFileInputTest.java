@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
@@ -159,11 +160,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         assertNotNull(pair.getData());
         assertTrue(pair.getData().length > 10);
 
-        final Method makeHttpMethod = HttpWebConnection.class.getDeclaredMethod("makeHttpMethod", WebRequest.class);
-        makeHttpMethod.setAccessible(true);
-        final HttpPost httpPost = (HttpPost) makeHttpMethod
-            .invoke(new HttpWebConnection(client), webConnection.getLastWebRequest());
-        final HttpEntity httpEntity = httpPost.getEntity();
+        final HttpEntity httpEntity = post(client, webConnection);
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         httpEntity.writeTo(out);
@@ -207,11 +204,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         assertNotNull(pair.getData());
         assertTrue(pair.getData().length > 10);
 
-        final Method makeHttpMethod = HttpWebConnection.class.getDeclaredMethod("makeHttpMethod", WebRequest.class);
-        makeHttpMethod.setAccessible(true);
-        final HttpPost httpPost = (HttpPost) makeHttpMethod
-            .invoke(new HttpWebConnection(client), webConnection.getLastWebRequest());
-        final HttpEntity httpEntity = httpPost.getEntity();
+        final HttpEntity httpEntity = post(client, webConnection);
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         httpEntity.writeTo(out);
@@ -261,11 +254,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         assertNull(pair.getData());
 
-        final Method makeHttpMethod = HttpWebConnection.class.getDeclaredMethod("makeHttpMethod", WebRequest.class);
-        makeHttpMethod.setAccessible(true);
-        final HttpPost httpPost = (HttpPost) makeHttpMethod
-            .invoke(new HttpWebConnection(client), webConnection.getLastWebRequest());
-        final HttpEntity httpEntity = httpPost.getEntity();
+        final HttpEntity httpEntity = post(client, webConnection);
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         httpEntity.writeTo(out);
@@ -273,6 +262,28 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         assertTrue(out.toString()
                 .contains("Content-Disposition: form-data; name=\"image\"; filename=\"\""));
+    }
+
+    /**
+     * Helper that does some nasty magic.
+     */
+    private HttpEntity post(final WebClient client,
+            final MockWebConnection webConnection)
+            throws NoSuchMethodException, IllegalAccessException,
+            InvocationTargetException {
+        final Method makeHttpMethod = HttpWebConnection.class.getDeclaredMethod("makeHttpMethod",
+                WebRequest.class, HttpClientBuilder.class);
+        makeHttpMethod.setAccessible(true);
+
+        final HttpWebConnection con = new HttpWebConnection(client);
+
+        final Method getHttpClientBuilderMethod = HttpWebConnection.class.getDeclaredMethod("getHttpClientBuilder");
+        getHttpClientBuilderMethod.setAccessible(true);
+        final HttpClientBuilder builder = (HttpClientBuilder) getHttpClientBuilderMethod.invoke(con);
+
+        final HttpPost httpPost = (HttpPost) makeHttpMethod.invoke(con, webConnection.getLastWebRequest(), builder);
+        final HttpEntity httpEntity = httpPost.getEntity();
+        return httpEntity;
     }
 
     /**
