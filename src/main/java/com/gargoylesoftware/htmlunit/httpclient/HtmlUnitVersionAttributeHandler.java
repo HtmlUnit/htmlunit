@@ -29,10 +29,6 @@ import org.apache.http.impl.cookie.AbstractCookieAttributeHandler;
 final class HtmlUnitVersionAttributeHandler extends AbstractCookieAttributeHandler
                 implements CommonCookieAttributeHandler {
 
-    public HtmlUnitVersionAttributeHandler() {
-        super();
-    }
-
     /**
      * Parse cookie version attribute.
      */
