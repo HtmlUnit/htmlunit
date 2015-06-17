@@ -53,7 +53,6 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
-import org.apache.http.ProtocolException;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.client.CredentialsProvider;
@@ -90,7 +89,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.InputStreamBody;
-import org.apache.http.impl.client.DefaultRedirectStrategy;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
@@ -101,6 +99,7 @@ import org.apache.http.ssl.SSLContexts;
 
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
+import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
 import com.gargoylesoftware.htmlunit.httpclient.SocksConnectionSocketFactory;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
@@ -529,14 +528,7 @@ public class HttpWebConnection implements WebConnection {
      */
     protected HttpClientBuilder createHttpClient() {
         final HttpClientBuilder builder = HttpClientBuilder.create();
-        builder.setRedirectStrategy(new DefaultRedirectStrategy() {
-            @Override
-            public boolean isRedirected(final HttpRequest request, final HttpResponse response,
-                    final HttpContext context) throws ProtocolException {
-                return super.isRedirected(request, response, context)
-                        && response.getFirstHeader("location") != null;
-            }
-        });
+        builder.setRedirectStrategy(new HtmlUnitRedirectStrategie());
         configureTimeout(builder, getTimeout());
         configureHttpsScheme(builder);
         builder.setMaxConnPerRoute(6);
