@@ -388,9 +388,9 @@
     <mailingLists>
         <mailingList>
             <name>HtmlUnit Users</name>
-            <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</subscribe>
-            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</unsubscribe>
-            <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</archive>
+            <subscribe>https://lists.sourceforge.net/lists/listinfo/htmlunit-user</subscribe>
+            <unsubscribe>https://lists.sourceforge.net/lists/listinfo/htmlunit-user</unsubscribe>
+            <archive>https://sourceforge.net/p/htmlunit/mailman/htmlunit-user/</archive>
             <post>htmlunit-user@lists.sourceforge.net</post>
             <otherArchives>
                 <otherArchive>http://htmlunit.10904.n7.nabble.com/HtmlUnit-General-f20847.html</otherArchive>
@@ -400,9 +400,9 @@
         </mailingList>
         <mailingList>
             <name>HtmlUnit Developers</name>
-            <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
-            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</unsubscribe>
-            <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</archive>
+            <subscribe>https://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
+            <unsubscribe>https://lists.sourceforge.net/lists/listinfo/htmlunit-develop</unsubscribe>
+            <archive>https://sourceforge.net/p/htmlunit/mailman/htmlunit-develop/</archive>
             <post>htmlunit-develop@lists.sourceforge.net</post>
             <otherArchives>
                 <otherArchive>http://htmlunit.10904.n7.nabble.com/HtmlUnit-Dev-f3.html</otherArchive>
