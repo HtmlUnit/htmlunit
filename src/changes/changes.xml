@@ -9,6 +9,9 @@
     <body>
         <release version="2.18" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Fix an IllegalStateException when parsing ajax response containing an object tag.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: Limited support for CSSStyleRule.readonly added (property is available in IE only).
             </action>
             <action type="fix" dev="asashour">

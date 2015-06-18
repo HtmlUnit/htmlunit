@@ -16,8 +16,12 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * Wrapper for the HTML element "object".
@@ -32,6 +36,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
  */
 public class HtmlObject extends HtmlElement {
 
+    private static final Log LOG = LogFactory.getLog(HtmlObject.class);
+
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "object";
 
@@ -45,12 +51,6 @@ public class HtmlObject extends HtmlElement {
     HtmlObject(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        if (attributes != null) {
-            final DomAttr classid = attributes.get("classid");
-            if (classid != null) {
-                ((HTMLObjectElement) getScriptObject()).setClassid(classid.getValue());
-            }
-        }
     }
 
     /**
@@ -255,6 +255,26 @@ public class HtmlObject extends HtmlElement {
      */
     public final String getVspaceAttribute() {
         return getAttribute("vspace");
+    }
+
+    /**
+     * Initialize the ActiveX(Mock).
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onAllChildrenAddedToPage(final boolean postponed) {
+        if (getOwnerDocument() instanceof XmlPage) {
+            return;
+        }
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Object node added: " + asXml());
+        }
+
+        final String clsId = getClassIdAttribute();
+        if (ATTRIBUTE_NOT_DEFINED != clsId) {
+            ((HTMLObjectElement) getScriptObject()).setClassid(clsId);
+        }
     }
 
     /**

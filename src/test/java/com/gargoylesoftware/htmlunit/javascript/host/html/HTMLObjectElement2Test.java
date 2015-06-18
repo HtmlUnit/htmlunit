@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Unit tests for {@link HTMLObjectElement}.
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLObjectElement2Test extends WebDriverTestCase {
@@ -51,6 +53,35 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
             + "  alert(document.getElementById('o2').form);\n"
             + "</script>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * There was an error that this code throws an illegal state ex.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            IE8 = "[object Object]")
+    public void responseXML_htmlObject() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('GET', 'foo.xml', false);\n"
+            + "    xhr.send('');\n"
+            + "    try {\n"
+            + "      alert(xhr.responseXML);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+                    + "<object classid='CLSID:test'/>\n"
+                    + "</html>";
+
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
         loadPageWithAlerts2(html);
     }
 }
