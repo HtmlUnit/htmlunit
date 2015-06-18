@@ -18,7 +18,7 @@ import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecProvider;
 import org.apache.http.protocol.HttpContext;
 
-import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 /**
  * Customized CookieSpecProvider for HtmlUnit.
@@ -28,18 +28,18 @@ import com.gargoylesoftware.htmlunit.WebClient;
  */
 public final class HtmlUnitCookieSpecProvider implements CookieSpecProvider {
 
-    private final WebClient webClient_;
+    private final BrowserVersion browserVersion_;
 
     /**
      * Constructor.
-     * @param webClient the webClient
+     * @param browserVersion the browserVersion
      */
-    public HtmlUnitCookieSpecProvider(final WebClient webClient) {
-        webClient_ = webClient;
+    public HtmlUnitCookieSpecProvider(final BrowserVersion browserVersion) {
+        browserVersion_ = browserVersion;
     }
 
     @Override
     public CookieSpec create(final HttpContext context) {
-        return new HtmlUnitBrowserCompatCookieSpec(webClient_.getBrowserVersion());
+        return new HtmlUnitBrowserCompatCookieSpec(browserVersion_);
     }
 }

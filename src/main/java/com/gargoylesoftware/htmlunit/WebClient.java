@@ -136,7 +136,7 @@ public class WebClient implements Serializable, AutoCloseable {
     /** Like the Firefox default value for network.http.redirection-limit. */
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
 
-    private transient WebConnection webConnection_ = createWebConnection();
+    private transient WebConnection webConnection_;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
     private transient JavaScriptEngine scriptEngine_;
@@ -233,6 +233,7 @@ public class WebClient implements Serializable, AutoCloseable {
         browserVersion_ = browserVersion;
         getOptions().setProxyConfig(proxyConfig);
 
+        webConnection_ = createWebConnection(); // this has to be done after the browser version was set
         scriptEngine_ = new JavaScriptEngine(this);
         // The window must be constructed AFTER the script engine.
         addWebWindowListener(new CurrentWindowTracker(this));
@@ -1926,6 +1927,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+
         webConnection_ = createWebConnection();
         scriptEngine_ = new JavaScriptEngine(this);
         jobManagers_ = Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());

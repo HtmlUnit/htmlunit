@@ -143,7 +143,7 @@ public class HttpWebConnection implements WebConnection {
      */
     public HttpWebConnection(final WebClient webClient) {
         webClient_ = webClient;
-        htmlUnitCookieSpecProvider_ = new HtmlUnitCookieSpecProvider(webClient);
+        htmlUnitCookieSpecProvider_ = new HtmlUnitCookieSpecProvider(webClient.getBrowserVersion());
         httpContext_ = new HttpClientContext();
         usedOptions_ = new WebClientOptions();
     }
