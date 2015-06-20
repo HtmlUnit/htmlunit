@@ -229,7 +229,6 @@ public class XMLDOMCharacterData extends XMLDOMNode {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     public DomCharacterData getDomNodeOrDie() {
         return (DomCharacterData) super.getDomNodeOrDie();
     }

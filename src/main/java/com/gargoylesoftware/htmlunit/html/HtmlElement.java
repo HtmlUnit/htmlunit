@@ -1495,7 +1495,7 @@ public abstract class HtmlElement extends DomElement {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("dblClick() is ignored, as click() loaded a different page.");
             }
-            return (P) clickPage;
+            return clickPage;
         }
 
         final Event event;
@@ -1509,7 +1509,7 @@ public abstract class HtmlElement extends DomElement {
         }
         final ScriptResult scriptResult = fireEvent(event);
         if (scriptResult == null) {
-            return (P) clickPage;
+            return clickPage;
         }
         return (P) scriptResult.getNewPage();
     }

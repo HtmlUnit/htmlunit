@@ -135,7 +135,6 @@ public final class XMLDOMProcessingInstruction extends XMLDOMNode {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     public DomProcessingInstruction getDomNodeOrDie() {
         return (DomProcessingInstruction) super.getDomNodeOrDie();
     }

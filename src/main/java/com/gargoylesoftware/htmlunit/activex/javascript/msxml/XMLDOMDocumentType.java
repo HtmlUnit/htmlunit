@@ -166,7 +166,6 @@ public class XMLDOMDocumentType extends XMLDOMNode {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     public DomDocumentType getDomNodeOrDie() {
         return (DomDocumentType) super.getDomNodeOrDie();
     }

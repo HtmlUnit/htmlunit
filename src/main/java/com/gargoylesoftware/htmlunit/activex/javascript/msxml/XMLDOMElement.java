@@ -394,7 +394,6 @@ public class XMLDOMElement extends XMLDOMNode {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     public DomElement getDomNodeOrDie() {
         return (DomElement) super.getDomNodeOrDie();
     }
