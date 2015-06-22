@@ -347,6 +347,24 @@ public class RegExpJsToJavaConverterTest {
         in = "(a)(?:b) \\1 \\2";
         out = regExpJsToJavaConverter.convert(in);
         Assert.assertEquals("(a)(?:b) \\1 \\02", out);
+
+        in = "(a\\1) \\2";
+        out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals("(a) \\02", out);
+
+        in = "(a)(b\\1\\2) \\3";
+        out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals("(a)(b\\1) \\03", out);
+
+        in = "(a)(b\\1\\2)(c\\1\\2\\3) \\3 \\7";
+        out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals("(a)(b\\1)(c\\1\\2) \\3 \\07", out);
+
+        in = "^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])";
+        out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals(
+                "^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])",
+                out);
     }
 
     /**

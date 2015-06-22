@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -356,6 +357,89 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "    alert(':toto'.match(re));\n"
             + "    alert('foo'.match(re));\n"
             + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Sample from ExtJS.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[floating=true],floating,=,,true")
+    @NotYetImplemented
+    public void extJs() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  var re = /^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])/;\n"
+            + "  function test() {\n"
+            + "    alert('[floating=true]'.match(re));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Browsers ignore back references pointing to not finished groups.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "axxxxa,a", "xxxx,", "xxxx,", "xxxx," })
+    @NotYetImplemented
+    public void backReferenceToOptionalGroup() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + " var re = /(a)?x+\\1/;\n"
+            + " alert('axxxxa'.match(re));\n"
+            + " alert('axxxx'.match(re));\n"
+            + " alert('xxxxa'.match(re));\n"
+            + " alert('xxxx'.match(re));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Browsers ignore back references pointing to not finished groups.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "abcx\u0004,b,x", "null", "null", "null" })
+    public void backReferenceToNotDefinedGroupsAreHandledAsOctal() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + " var re = /(?:a)(b)c(x)\\4/;\n"
+            + " alert('abcx\\04'.match(re));\n"
+            + " alert('abcx'.match(re));\n"
+            + " alert('abb'.match(re));\n"
+            + " alert('abbxx'.match(re));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Browsers ignore back references pointing to not finished groups.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "abcx,b,x", "abcx,b,x", "null", "null" })
+    public void ignoreBackReferenceNotFinishedGroups() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + " var re = /(?:a)(b)c(x\\2)/;\n"
+            + " alert('abcx'.match(re));\n"
+            + " alert('abcx\\02'.match(re));\n"
+            + " alert('abb'.match(re));\n"
+            + " alert('abbxx'.match(re));\n"
+            + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 

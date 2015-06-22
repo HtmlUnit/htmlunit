@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * Translates JavaScript RegExp to Java RegExp.<br>
  * // [...\b...] -> [...\cH...]
@@ -102,10 +106,21 @@ public class RegExpJsToJavaConverter {
         }
     }
 
+    private static final class Subexpresion {
+        private boolean count_;
+        private boolean closed_;
+
+        private Subexpresion(final boolean count) {
+            count_ = count;
+            closed_ = false;
+        }
+    }
+
     private Tape tape_;
     private boolean insideCharClass_;
     private boolean insideRepetition_;
-    private int noOfSubexpressions_;
+    private Stack<Subexpresion> parsingSubexpressions_;
+    private List<Subexpresion> subexpressions_;
 
     /**
      * Initiate the FSM.
@@ -125,7 +140,9 @@ public class RegExpJsToJavaConverter {
         tape_ = new Tape(input);
         insideCharClass_ = false;
         insideRepetition_ = false;
-        noOfSubexpressions_ = 0;
+
+        parsingSubexpressions_ = new Stack<Subexpresion>();
+        subexpressions_ = new LinkedList<Subexpresion>();
 
         int current = tape_.read();
         while (current > -1) {
@@ -146,6 +163,9 @@ public class RegExpJsToJavaConverter {
             }
             else if ('(' == current) {
                 processSubExpressionStart();
+            }
+            else if (')' == current) {
+                processSubExpressionEnd();
             }
 
             // process next
@@ -238,7 +258,10 @@ public class RegExpJsToJavaConverter {
         }
 
         if ('?' != next) {
-            noOfSubexpressions_++;
+            final Subexpresion sub = new Subexpresion(true);
+            parsingSubexpressions_.push(sub);
+            subexpressions_.add(sub);
+
             tape_.move(-1);
             return;
         }
@@ -248,9 +271,25 @@ public class RegExpJsToJavaConverter {
             return;
         }
         if (':' != next) {
-            noOfSubexpressions_++;
+            final Subexpresion sub = new Subexpresion(true);
+            parsingSubexpressions_.push(sub);
+            subexpressions_.add(sub);
+
             tape_.move(-1);
             return;
+        }
+
+        final Subexpresion sub = new Subexpresion(false);
+        parsingSubexpressions_.push(sub);
+    }
+
+    private void processSubExpressionEnd() {
+        if (parsingSubexpressions_.isEmpty()) {
+            return;
+        }
+        final Subexpresion sub = parsingSubexpressions_.pop();
+        if (sub.count_) {
+            sub.closed_ = true;
         }
     }
 
@@ -326,19 +365,24 @@ public class RegExpJsToJavaConverter {
         }
 
         final int value = Integer.parseInt(tmpNo.toString());
-        if (value > noOfSubexpressions_) {
+        if (value > subexpressions_.size()) {
             // we have a octal here
             tape_.insert("0", tmpInsertPos);
             return false;
         }
 
-        if (insideCharClass_) {
+        // ignore invalid back references (inside char classes
+        // of if the referenced group is not (yet) available
+        if (insideCharClass_
+                || (0 < value && value <= subexpressions_.size() && !subexpressions_.get(value - 1).closed_)
+                || value > subexpressions_.size()) {
             // drop back reference
             for (int i = tmpInsertPos; i <= 0; i++) {
                 tape_.move(-1);
                 tape_.replace("");
             }
         }
+
         return true;
     }
 }
