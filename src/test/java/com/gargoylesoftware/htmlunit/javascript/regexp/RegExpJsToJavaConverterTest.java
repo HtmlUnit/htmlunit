@@ -133,6 +133,11 @@ public class RegExpJsToJavaConverterTest {
         in = "\\912abc";
         out = regExpJsToJavaConverter.convert(in);
         Assert.assertEquals("\\0912abc", out);
+
+        in = "(a) (b) \\02";
+        out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals("(a) (b) \\02", out);
+
     }
 
     /**

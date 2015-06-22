@@ -320,6 +320,11 @@ public class RegExpJsToJavaConverter {
             }
         }
 
+        if (tmpNo.charAt(0) == '0') {
+            // we have a octal here
+            return false;
+        }
+
         final int value = Integer.parseInt(tmpNo.toString());
         if (value > noOfSubexpressions_) {
             // we have a octal here

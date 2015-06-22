@@ -9,6 +9,9 @@
     <body>
         <release version="2.18" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Regex: minor improvements for the octal detection when converting a js regex into java regex.
+            </action>
+            <action type="fix" dev="rbri">
                 Fix an IllegalStateException when parsing ajax response containing an object tag.
             </action>
             <action type="fix" dev="rbri">
