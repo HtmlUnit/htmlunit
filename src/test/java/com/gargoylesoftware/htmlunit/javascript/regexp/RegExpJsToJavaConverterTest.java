@@ -137,7 +137,6 @@ public class RegExpJsToJavaConverterTest {
         in = "(a) (b) \\02";
         out = regExpJsToJavaConverter.convert(in);
         Assert.assertEquals("(a) (b) \\02", out);
-
     }
 
     /**

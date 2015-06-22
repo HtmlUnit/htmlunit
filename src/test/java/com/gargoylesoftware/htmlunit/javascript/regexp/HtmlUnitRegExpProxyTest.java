@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
