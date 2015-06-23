@@ -327,7 +327,7 @@ public final class XmlUtil {
      */
     public static String lookupNamespaceURI(final DomElement element, final String prefix) {
         String uri = DomElement.ATTRIBUTE_NOT_DEFINED;
-        if (prefix.length() == 0) {
+        if (prefix.isEmpty()) {
             uri = element.getAttribute("xmlns");
         }
         else {
