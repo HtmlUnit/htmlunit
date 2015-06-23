@@ -27,7 +27,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Unit tests for {@link CookieManager}.
- * These test are require a special setup in you etc/hosts
+ *
+ * These test require a special setup in etc/hosts
  * 127.0.0.1       host1.htmlunit.org
  * 127.0.0.1       host2.htmlunit.org
  *
