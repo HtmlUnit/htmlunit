@@ -85,6 +85,7 @@ public class ActiveXObjectImpl extends SimpleScriptable {
         }
         catch (final Exception e) {
             return new Function() {
+                @Override
                 public Object call(final Context arg0, final Scriptable arg1, final Scriptable arg2,
                     final Object[] arg3) {
                     try {
@@ -96,70 +97,87 @@ public class ActiveXObjectImpl extends SimpleScriptable {
                     }
                 }
 
+                @Override
                 public Scriptable construct(final Context arg0, final Scriptable arg1, final Object[] arg2) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public void delete(final String arg0) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public void delete(final int arg0) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public Object get(final String arg0, final Scriptable arg1) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public Object get(final int arg0, final Scriptable arg1) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public String getClassName() {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public Object getDefaultValue(final Class<?> arg0) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public Object[] getIds() {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public Scriptable getParentScope() {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public Scriptable getPrototype() {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public boolean has(final String arg0, final Scriptable arg1) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public boolean has(final int arg0, final Scriptable arg1) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public boolean hasInstance(final Scriptable arg0) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public void put(final String arg0, final Scriptable arg1, final Object arg2) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public void put(final int arg0, final Scriptable arg1, final Object arg2) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public void setParentScope(final Scriptable arg0) {
                     throw new UnsupportedOperationException();
                 }
 
+                @Override
                 public void setPrototype(final Scriptable arg0) {
                     throw new UnsupportedOperationException();
                 }

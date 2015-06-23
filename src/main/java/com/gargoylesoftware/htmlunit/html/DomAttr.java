@@ -77,6 +77,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getName() {
         return getQualifiedName();
     }
@@ -84,6 +85,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getValue() {
         return value_;
     }
@@ -99,6 +101,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setValue(final String value) {
         value_ = value;
         specified_ = true;
@@ -107,6 +110,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomElement getOwnerElement() {
         return (DomElement) getParentNode();
     }
@@ -114,6 +118,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean getSpecified() {
         return specified_;
     }
@@ -122,6 +127,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public TypeInfo getSchemaTypeInfo() {
         throw new UnsupportedOperationException("DomAttr.getSchemaTypeInfo is not yet implemented.");
     }
@@ -129,6 +135,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isId() {
         return "id".equals(getNodeName());
     }

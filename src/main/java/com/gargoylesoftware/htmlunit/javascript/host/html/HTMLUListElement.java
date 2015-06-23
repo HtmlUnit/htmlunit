@@ -57,6 +57,7 @@ public class HTMLUListElement extends HTMLListElement {
      * Returns the value of the <tt>type</tt> attribute.
      * @return the value of the <tt>type</tt> attribute
      */
+    @Override
     @JsxGetter
     public String getType() {
         return super.getType();
@@ -66,6 +67,7 @@ public class HTMLUListElement extends HTMLListElement {
      * Sets the value of the <tt>type</tt> attribute.
      * @param type the value of the <tt>type</tt> attribute
      */
+    @Override
     @JsxSetter
     public void setType(final String type) {
         super.setType(type);

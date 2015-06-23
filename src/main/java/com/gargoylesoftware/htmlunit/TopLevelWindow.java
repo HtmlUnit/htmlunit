@@ -53,6 +53,7 @@ public class TopLevelWindow extends WebWindowImpl {
      * {@inheritDoc}
      * Since this is a top level window, return this window.
      */
+    @Override
     public WebWindow getParentWindow() {
         return this;
     }
@@ -61,6 +62,7 @@ public class TopLevelWindow extends WebWindowImpl {
      * {@inheritDoc}
      * Since this is a top level window, return this window.
      */
+    @Override
     public WebWindow getTopWindow() {
         return this;
     }

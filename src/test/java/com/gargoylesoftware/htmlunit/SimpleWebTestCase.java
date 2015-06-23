@@ -257,6 +257,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     /**
      * Cleanup after a test.
      */
+    @Override
     @After
     public void releaseResources() {
         super.releaseResources();

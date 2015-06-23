@@ -47,6 +47,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Applet getApplet(final String name) {
         return null;
     }
@@ -54,6 +55,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Enumeration<Applet> getApplets() {
         return EMPTY_ENUMERATION;
     }
@@ -61,6 +63,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public AudioClip getAudioClip(final URL url) {
         throw new RuntimeException("Not yet implemented!");
     }
@@ -68,6 +71,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Image getImage(final URL url) {
         throw new RuntimeException("Not yet implemented!");
     }
@@ -75,6 +79,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public InputStream getStream(final String key) {
         throw new RuntimeException("Not yet implemented!");
     }
@@ -82,6 +87,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Iterator<String> getStreamKeys() {
         throw new RuntimeException("Not yet implemented!");
     }
@@ -89,6 +95,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setStream(final String key, final InputStream stream) throws IOException {
         throw new RuntimeException("Not yet implemented!");
     }
@@ -96,6 +103,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void showDocument(final URL url) {
         throw new RuntimeException("Not yet implemented!");
     }
@@ -103,6 +111,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void showDocument(final URL url, final String target) {
         throw new RuntimeException("Not yet implemented!");
     }
@@ -110,6 +119,7 @@ public class AppletContextImpl implements AppletContext {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void showStatus(final String status) {
         // perhaps should we move status handling to WebWindow
         // on the other side this allows "orphaned" pages to be usable

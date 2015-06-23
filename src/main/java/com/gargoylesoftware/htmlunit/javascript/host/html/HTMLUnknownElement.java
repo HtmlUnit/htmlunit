@@ -106,6 +106,7 @@ public class HTMLUnknownElement extends HTMLElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isLowerCaseInOuterHtml() {
         return true;
     }

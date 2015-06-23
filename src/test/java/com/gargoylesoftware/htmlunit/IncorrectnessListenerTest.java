@@ -46,6 +46,7 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
 
         final List<String> collectedIncorrectness = new ArrayList<>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
+            @Override
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }

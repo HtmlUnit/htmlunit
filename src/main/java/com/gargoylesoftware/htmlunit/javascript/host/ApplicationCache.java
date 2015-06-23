@@ -212,6 +212,7 @@ public class ApplicationCache extends EventTarget {
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      */
+    @Override
     @JsxFunction
     public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
@@ -239,6 +240,7 @@ public class ApplicationCache extends EventTarget {
      * @return <tt>false</tt> if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
+    @Override
     @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);

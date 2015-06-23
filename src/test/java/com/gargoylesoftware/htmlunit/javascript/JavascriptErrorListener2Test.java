@@ -48,19 +48,23 @@ public class JavascriptErrorListener2Test extends SimpleWebTestCase {
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
 
+            @Override
             public void loadScriptError(final HtmlPage htmlPage, final URL scriptUrl, final Exception exception) {
                 // nothing
             }
 
+            @Override
             public void malformedScriptURL(final HtmlPage htmlPage, final String url,
                     final MalformedURLException malformedURLException) {
                 // nothing
             }
 
+            @Override
             public void scriptException(final HtmlPage htmlPage, final ScriptException scriptException) {
                 scriptExceptions.append(scriptException.getCause() + "\n");
             }
 
+            @Override
             public void timeoutError(final HtmlPage htmlPage, final long allowedTime, final long executionTime) {
                 // nothing
             }

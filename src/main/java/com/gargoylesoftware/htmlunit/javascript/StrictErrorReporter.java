@@ -43,6 +43,7 @@ public class StrictErrorReporter implements ErrorReporter, Serializable {
      * @param lineSource the source code that failed
      * @param lineOffset the line offset
      */
+    @Override
     public void warning(
             final String message, final String sourceName, final int line,
             final String lineSource, final int lineOffset) {
@@ -58,6 +59,7 @@ public class StrictErrorReporter implements ErrorReporter, Serializable {
      * @param lineSource the source code that failed
      * @param lineOffset the line offset
      */
+    @Override
     public void error(final String message, final String sourceName, final int line,
             final String lineSource, final int lineOffset) {
         LOG.error(format("error", message, sourceName, line, lineSource, lineOffset));
@@ -74,6 +76,7 @@ public class StrictErrorReporter implements ErrorReporter, Serializable {
      * @param lineOffset the line offset
      * @return an evaluator exception
      */
+    @Override
     public EvaluatorException runtimeError(
             final String message, final String sourceName, final int line,
             final String lineSource, final int lineOffset) {

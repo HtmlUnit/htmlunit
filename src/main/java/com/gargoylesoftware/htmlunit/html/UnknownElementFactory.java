@@ -43,6 +43,7 @@ public final class UnknownElementFactory implements ElementFactory {
     /**
      * {@inheritDoc}
      */
+    @Override
     public HtmlElement createElement(final SgmlPage page, final String tagName, final Attributes attributes) {
         String namespace = null;
         if (page != null && page.isHtmlPage() && tagName.indexOf(':') != -1) {
@@ -59,6 +60,7 @@ public final class UnknownElementFactory implements ElementFactory {
     /**
      * {@inheritDoc}
      */
+    @Override
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
         return createElementNS(page, namespaceURI, qualifiedName, attributes, false);
@@ -67,6 +69,7 @@ public final class UnknownElementFactory implements ElementFactory {
     /**
      * {@inheritDoc}
      */
+    @Override
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes, final boolean checkBrowserCompatibility) {
         final Map<String, DomAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);

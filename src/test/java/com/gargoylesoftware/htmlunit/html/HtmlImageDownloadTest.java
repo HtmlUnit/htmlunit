@@ -147,6 +147,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     /**
      * {@inheritDoc}
      */
+    @Override
     @After
     public void tearDown() throws Exception {
         Thread.sleep(100);

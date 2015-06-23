@@ -355,9 +355,11 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final DomChangeListener listener = new DomChangeListener() {
+            @Override
             public void nodeAdded(final DomChangeEvent event) {
                 // Empty.
             }
+            @Override
             public void nodeDeleted(final DomChangeEvent event) {
                 // Empty.
             }

@@ -64,6 +64,7 @@ public class WebConnectionWrapper implements WebConnection {
      * {@inheritDoc}
      * The default behavior of this method is to return getResponse() on the wrapped connection object.
      */
+    @Override
     public WebResponse getResponse(final WebRequest request) throws IOException {
         return wrappedWebConnection_.getResponse(request);
     }

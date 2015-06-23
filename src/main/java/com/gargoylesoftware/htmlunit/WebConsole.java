@@ -262,6 +262,7 @@ public class WebConsole {
      */
     private static class DefaultFormatter implements Formatter {
 
+        @Override
         public String printObject(final Object o) {
             return parameterAsString(o);
         }

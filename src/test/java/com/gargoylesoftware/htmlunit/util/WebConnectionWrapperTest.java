@@ -48,6 +48,7 @@ public class WebConnectionWrapperTest extends SimpleWebTestCase {
         final WebRequest wrs = new WebRequest(URL_FIRST);
 
         final WebConnection realConnection = new WebConnection() {
+            @Override
             public WebResponse getResponse(final WebRequest request) {
                 assertSame(wrs, request);
                 return response;

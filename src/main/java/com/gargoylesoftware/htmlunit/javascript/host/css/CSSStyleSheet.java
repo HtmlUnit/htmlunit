@@ -787,14 +787,17 @@ public class CSSStyleSheet extends StyleSheet {
             final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
             final AtomicBoolean errorOccured = new AtomicBoolean(false);
             final ErrorHandler errorHandler = new ErrorHandler() {
+                @Override
                 public void warning(final CSSParseException exception) throws CSSException {
                     // ignore
                 }
 
+                @Override
                 public void fatalError(final CSSParseException exception) throws CSSException {
                     errorOccured.set(true);
                 }
 
+                @Override
                 public void error(final CSSParseException exception) throws CSSException {
                     errorOccured.set(true);
                 }
@@ -880,13 +883,8 @@ public class CSSStyleSheet extends StyleSheet {
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null, null);
         }
-        catch (final Exception e) {
-            LOG.error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
-            ss = new CSSStyleSheetImpl();
-        }
-        catch (final Error e) {
-            // SACParser sometimes throws Error: "Missing return statement in function"
-            LOG.error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
+        catch (final Throwable t) {
+            LOG.error("Error parsing CSS from '" + toString(source) + "': " + t.getMessage(), t);
             ss = new CSSStyleSheetImpl();
         }
         return ss;
@@ -911,13 +909,8 @@ public class CSSStyleSheet extends StyleSheet {
                 selectors = new SelectorListImpl();
             }
         }
-        catch (final Exception e) {
-            LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
-            selectors = new SelectorListImpl();
-        }
-        catch (final Error e) {
-            // SACParser sometimes throws Error: "Missing return statement in function"
-            LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
+        catch (final Throwable t) {
+            LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + t.getMessage(), t);
             selectors = new SelectorListImpl();
         }
         return selectors;

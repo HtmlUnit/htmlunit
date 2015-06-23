@@ -100,6 +100,7 @@ public class UIEvent extends Event {
     /**
      * @return indicates if event propagation is stopped
      */
+    @Override
     @JsxGetter
     public boolean getCancelBubble() {
         return super.getCancelBubble();
@@ -108,6 +109,7 @@ public class UIEvent extends Event {
     /**
      * @param newValue indicates if event propagation is stopped
      */
+    @Override
     @JsxSetter
     public void setCancelBubble(final boolean newValue) {
         super.setCancelBubble(newValue);

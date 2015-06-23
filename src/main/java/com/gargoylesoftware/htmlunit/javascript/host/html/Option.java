@@ -33,6 +33,7 @@ public class Option extends HTMLOptionElement {
      *
      * {@inheritDoc}
      */
+    @Override
     @JsxConstructor
     public void jsConstructor(final String newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {

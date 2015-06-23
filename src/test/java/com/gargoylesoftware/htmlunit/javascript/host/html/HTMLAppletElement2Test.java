@@ -49,6 +49,7 @@ public class HTMLAppletElement2Test extends SimpleWebTestCase {
         final WebClient webClient = getWebClientWithMockWebConnection();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }

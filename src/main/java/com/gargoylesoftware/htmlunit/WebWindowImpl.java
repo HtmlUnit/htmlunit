@@ -104,6 +104,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebClient getWebClient() {
         return webClient_;
     }
@@ -111,6 +112,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Page getEnclosedPage() {
         return enclosedPage_;
     }
@@ -118,6 +120,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setEnclosedPage(final Page page) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("setEnclosedPage: " + page);
@@ -143,6 +146,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setScriptObject(final Object scriptObject) {
         scriptObject_ = scriptObject;
     }
@@ -150,6 +154,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object getScriptObject() {
         return scriptObject_;
     }
@@ -157,6 +162,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public JavaScriptJobManager getJobManager() {
         return jobManager_;
     }
@@ -227,6 +233,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getName() {
         return name_;
     }
@@ -234,6 +241,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setName(final String name) {
         name_ = name;
     }
@@ -242,6 +250,7 @@ public abstract class WebWindowImpl implements WebWindow {
      * Returns this window's navigation history.
      * @return this window's navigation history
      */
+    @Override
     public History getHistory() {
         return history_;
     }

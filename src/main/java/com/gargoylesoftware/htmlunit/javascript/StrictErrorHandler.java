@@ -31,6 +31,7 @@ public class StrictErrorHandler implements ErrorHandler {
      * @param rethrow an exception which will be rethrown
      * @throws SAXParseException always
      */
+    @Override
     public void warning(final SAXParseException rethrow) throws SAXParseException {
         throw rethrow;
     }
@@ -41,6 +42,7 @@ public class StrictErrorHandler implements ErrorHandler {
      * @param rethrow an exception which will be rethrown
      * @throws SAXParseException always
      */
+    @Override
     public void error(final SAXParseException rethrow) throws SAXParseException {
         throw rethrow;
     }
@@ -51,6 +53,7 @@ public class StrictErrorHandler implements ErrorHandler {
      * @param rethrow an exception which will be rethrown
      * @throws SAXParseException always
      */
+    @Override
     public void fatalError(final SAXParseException rethrow) throws SAXParseException {
         throw rethrow;
     }

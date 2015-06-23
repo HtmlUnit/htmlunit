@@ -64,6 +64,7 @@ public class DomDocumentType extends DomNode implements DocumentType {
     /**
      * {@inheritDoc}
      */
+    @Override
     public NamedNodeMap getEntities() {
         return null;
     }
@@ -71,6 +72,7 @@ public class DomDocumentType extends DomNode implements DocumentType {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getInternalSubset() {
         return "";
     }
@@ -78,6 +80,7 @@ public class DomDocumentType extends DomNode implements DocumentType {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getName() {
         return name_;
     }
@@ -85,6 +88,7 @@ public class DomDocumentType extends DomNode implements DocumentType {
     /**
      * {@inheritDoc}
      */
+    @Override
     public NamedNodeMap getNotations() {
         return null;
     }
@@ -92,6 +96,7 @@ public class DomDocumentType extends DomNode implements DocumentType {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getPublicId() {
         return publicId_;
     }
@@ -99,6 +104,7 @@ public class DomDocumentType extends DomNode implements DocumentType {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getSystemId() {
         return systemId_;
     }

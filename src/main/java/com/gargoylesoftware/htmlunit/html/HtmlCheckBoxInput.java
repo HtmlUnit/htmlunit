@@ -271,6 +271,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
         return isChecked();
     }
 
+    @Override
     void handleFocusLostValueChanged() {
         final boolean fireOnChange = hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
         if (fireOnChange) {

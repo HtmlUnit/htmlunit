@@ -64,6 +64,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
      * Sets the job ID.
      * @param id the job ID
      */
+    @Override
     public void setId(final Integer id) {
         id_ = id;
     }
@@ -72,6 +73,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
      * Returns the job ID.
      * @return the job ID
      */
+    @Override
     public Integer getId() {
         return id_;
     }
@@ -88,6 +90,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
      * Returns the amount of time to wait between executions of this job (may be <tt>null</tt>).
      * @return the amount of time to wait between executions of this job (may be <tt>null</tt>)
      */
+    @Override
     public Integer getPeriod() {
         return period_;
     }
@@ -96,6 +99,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
      * Returns <tt>true</tt> if this job executes periodically.
      * @return <tt>true</tt> if this job executes periodically
      */
+    @Override
     public boolean isPeriodic() {
         return period_ != null;
     }
@@ -104,6 +108,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
      * Returns <tt>true</tt> if has to be executed asap.
      * @return <tt>true</tt> if has to be executed asap
      */
+    @Override
     public boolean isExecuteAsap() {
         return executeAsap_;
     }
@@ -115,6 +120,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
     }
 
     /** {@inheritDoc} */
+    @Override
     public int compareTo(final JavaScriptJob other) {
         final boolean xhr1 = executeAsap_;
         final boolean xhr2 = other.isExecuteAsap();
@@ -138,6 +144,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
      * Returns the target execution time of the job.
      * @return the target execution time in ms
      */
+    @Override
     public long getTargetExecutionTime() {
         return targetExecutionTime_;
     }
@@ -146,6 +153,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
      * Sets the target execution time of the job.
      * @param targetExecutionTime the new target execution time.
      */
+    @Override
     public void setTargetExecutionTime(final long targetExecutionTime) {
         targetExecutionTime_ = targetExecutionTime;
     }

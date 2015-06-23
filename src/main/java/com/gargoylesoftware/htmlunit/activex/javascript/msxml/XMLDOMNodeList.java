@@ -123,6 +123,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     /**
      * {@inheritDoc}
      */
+    @Override
     @JsxGetter
     public final int getLength() {
         return getElements().size();
@@ -182,6 +183,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     /**
      * {@inheritDoc}
      */
+    @Override
     public final Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
         return null;
     }
@@ -189,6 +191,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (args.length == 0) {
             throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
@@ -495,6 +498,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         /**
          * {@inheritDoc}
          */
+        @Override
         public void nodeAdded(final DomChangeEvent event) {
             clearCache();
         }
@@ -502,6 +506,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         /**
          * {@inheritDoc}
          */
+        @Override
         public void nodeDeleted(final DomChangeEvent event) {
             clearCache();
         }
@@ -509,6 +514,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         /**
          * {@inheritDoc}
          */
+        @Override
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
             handleChangeOnCache(event);
         }
@@ -516,6 +522,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         /**
          * {@inheritDoc}
          */
+        @Override
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
             handleChangeOnCache(event);
         }
@@ -523,6 +530,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         /**
          * {@inheritDoc}
          */
+        @Override
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             final XMLDOMNodeList nodes = nodeList_.get();
             if (null == nodes) {
@@ -569,6 +577,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node item(final int index) {
         return getElements().get(index);
     }

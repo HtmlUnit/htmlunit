@@ -48,6 +48,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isBasicAuthentication() {
         return true;
     }
@@ -149,12 +150,14 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         /**
          * {@inheritDoc}
          */
+        @Override
         public void close() {
         }
 
         /**
          * {@inheritDoc}
          */
+        @Override
         public boolean requiresLayout() {
             return false;
         }

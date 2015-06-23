@@ -78,6 +78,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object call(final Context context, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         final Object javaResp;
         if (thisObj instanceof ScriptableWrapper) {
@@ -135,6 +136,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Scriptable construct(final Context context, final Scriptable scope, final Object[] args) {
         throw Context.reportRuntimeError("Function " + method_.getName() + " can't be used as a constructor");
     }

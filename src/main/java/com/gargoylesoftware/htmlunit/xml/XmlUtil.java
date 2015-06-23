@@ -81,18 +81,21 @@ public final class XmlUtil {
         /**
          * Does nothing as we're not interested in this.
          */
+        @Override
         public void error(final SAXParseException exception) {
             // Does nothing as we're not interested in this.
         }
         /**
          * Does nothing as we're not interested in this.
          */
+        @Override
         public void fatalError(final SAXParseException exception) {
             // Does nothing as we're not interested in this.
         }
         /**
          * Does nothing as we're not interested in this.
          */
+        @Override
         public void warning(final SAXParseException exception) {
             // Does nothing as we're not interested in this.
         }
@@ -136,6 +139,7 @@ public final class XmlUtil {
         final DocumentBuilder builder = factory.newDocumentBuilder();
         builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
         builder.setEntityResolver(new EntityResolver() {
+            @Override
             public InputSource resolveEntity(final String publicId, final String systemId)
                 throws SAXException, IOException {
                 return new InputSource(new StringReader(""));

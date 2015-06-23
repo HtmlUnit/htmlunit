@@ -88,6 +88,7 @@ abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E> im
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getLength() {
         return getNodes().size();
     }
@@ -95,6 +96,7 @@ abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E> im
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node item(final int index) {
         return getNodes().get(index);
     }
@@ -124,6 +126,7 @@ abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E> im
         /**
          * {@inheritDoc}
          */
+        @Override
         public void nodeAdded(final DomChangeEvent event) {
             clearCache();
         }
@@ -131,6 +134,7 @@ abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E> im
         /**
          * {@inheritDoc}
          */
+        @Override
         public void nodeDeleted(final DomChangeEvent event) {
             clearCache();
         }
@@ -138,6 +142,7 @@ abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E> im
         /**
          * {@inheritDoc}
          */
+        @Override
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
             clearCache();
         }
@@ -145,6 +150,7 @@ abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E> im
         /**
          * {@inheritDoc}
          */
+        @Override
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
             clearCache();
         }
@@ -152,6 +158,7 @@ abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E> im
         /**
          * {@inheritDoc}
          */
+        @Override
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             clearCache();
         }

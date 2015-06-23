@@ -55,6 +55,7 @@ public final class WebClientUtils {
         main.getDebugFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         final SourceProvider sourceProvider = new SourceProvider() {
+            @Override
             public String getSource(final DebuggableScript script) {
                 String sourceName = script.getSourceName();
                 if (sourceName.endsWith("(eval)") || sourceName.endsWith("(Function)")) {

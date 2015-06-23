@@ -102,6 +102,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      *
      * @return the text
      */
+    @Override
     public final String getText() {
         return readValue();
     }
@@ -128,6 +129,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      *
      * @param newValue the new value
      */
+    @Override
     public final void setText(final String newValue) {
         setTextInternal(newValue);
 
@@ -156,6 +158,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public NameValuePair[] getSubmitKeyValuePairs() {
         String text = getText();
         text = text.replace("\r\n", "\n").replace("\n", "\r\n");
@@ -167,6 +170,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      * @see SubmittableElement#reset()
      */
+    @Override
     public void reset() {
         initDefaultValue();
         setText(defaultValue_);
@@ -176,6 +180,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
+    @Override
     public void setDefaultValue(String defaultValue) {
         initDefaultValue();
         if (defaultValue == null) {
@@ -194,6 +199,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      * @see SubmittableElement#getDefaultValue()
      */
+    @Override
     public String getDefaultValue() {
         initDefaultValue();
         return defaultValue_;
@@ -206,6 +212,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
+    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
@@ -217,6 +224,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @see HtmlRadioButtonInput#isDefaultChecked()
      * @see HtmlCheckBoxInput#isDefaultChecked()
      */
+    @Override
     public boolean isDefaultChecked() {
         return false;
     }
@@ -257,6 +265,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public final boolean isDisabled() {
         return hasAttribute("disabled");
     }
@@ -264,6 +273,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public final String getDisabledAttribute() {
         return getAttribute("disabled");
     }
@@ -348,6 +358,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public void select() {
         selectionDelegate_.select();
     }
@@ -355,6 +366,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getSelectedText() {
         return selectionDelegate_.getSelectedText();
     }
@@ -362,6 +374,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getSelectionStart() {
         return selectionDelegate_.getSelectionStart();
     }
@@ -369,6 +382,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setSelectionStart(final int selectionStart) {
         selectionDelegate_.setSelectionStart(selectionStart);
     }
@@ -376,6 +390,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getSelectionEnd() {
         return selectionDelegate_.getSelectionEnd();
     }
@@ -383,6 +398,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setSelectionEnd(final int selectionEnd) {
         selectionDelegate_.setSelectionEnd(selectionEnd);
     }
@@ -480,6 +496,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getOriginalName() {
         return originalName_;
     }
@@ -487,6 +504,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * {@inheritDoc}
      */
+    @Override
     public Collection<String> getNewNames() {
         return newNames_;
     }

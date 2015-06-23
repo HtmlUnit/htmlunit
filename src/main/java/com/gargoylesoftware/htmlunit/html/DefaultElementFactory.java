@@ -105,6 +105,7 @@ class DefaultElementFactory implements ElementFactory {
      * @param attributes initial attributes, possibly <code>null</code>
      * @return the newly created element
      */
+    @Override
     public HtmlElement createElement(final SgmlPage page, final String tagName, final Attributes attributes) {
         return createElementNS(page, null, tagName, attributes);
     }
@@ -116,6 +117,7 @@ class DefaultElementFactory implements ElementFactory {
      * @param attributes initial attributes, possibly <code>null</code>
      * @return the newly created element
      */
+    @Override
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
         return createElementNS(page, namespaceURI, qualifiedName, attributes, false);
@@ -129,6 +131,7 @@ class DefaultElementFactory implements ElementFactory {
      * @param checkBrowserCompatibility if true and the page doesn't support this element, return null
      * @return the newly created element
      */
+    @Override
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes, final boolean checkBrowserCompatibility) {
         final Map<String, DomAttr> attributeMap = setAttributes(page, attributes);

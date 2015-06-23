@@ -36,6 +36,7 @@ class StaticDomNodeList extends AbstractList<DomNode> implements DomNodeList<Dom
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getLength() {
         return elements_.size();
     }
@@ -51,6 +52,7 @@ class StaticDomNodeList extends AbstractList<DomNode> implements DomNodeList<Dom
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node item(final int index) {
         return get(index);
     }

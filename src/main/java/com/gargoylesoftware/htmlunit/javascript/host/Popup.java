@@ -139,6 +139,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getEnclosedPage()
      */
+    @Override
     public Page getEnclosedPage() {
         return enclosedPage_;
     }
@@ -146,6 +147,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getName()
      */
+    @Override
     public String getName() {
         throw new RuntimeException("Not supported");
     }
@@ -153,6 +155,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getParentWindow()
      */
+    @Override
     public WebWindow getParentWindow() {
         throw new RuntimeException("Not supported");
     }
@@ -160,6 +163,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getScriptObject()
      */
+    @Override
     public Object getScriptObject() {
         return scriptObject_;
     }
@@ -167,6 +171,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getJobManager()
      */
+    @Override
     public JavaScriptJobManager getJobManager() {
         throw new RuntimeException("Not supported");
     }
@@ -174,6 +179,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getTopWindow()
      */
+    @Override
     public WebWindow getTopWindow() {
         throw new RuntimeException("Not supported");
     }
@@ -181,6 +187,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getWebClient()
      */
+    @Override
     public WebClient getWebClient() {
         return webClient_;
     }
@@ -188,6 +195,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#getHistory()
      */
+    @Override
     public History getHistory() {
         throw new RuntimeException("Not supported");
     }
@@ -195,6 +203,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#setEnclosedPage(com.gargoylesoftware.htmlunit.Page)
      */
+    @Override
     public void setEnclosedPage(final Page page) {
         enclosedPage_ = page;
         webClient_.initialize(page);
@@ -203,6 +212,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#setName(java.lang.String)
      */
+    @Override
     public void setName(final String name) {
         throw new RuntimeException("Not supported");
     }
@@ -210,6 +220,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * @see com.gargoylesoftware.htmlunit.WebWindow#setScriptObject(java.lang.Object)
      */
+    @Override
     public void setScriptObject(final Object scriptObject) {
         scriptObject_ = scriptObject;
     }
@@ -217,6 +228,7 @@ class PopupPseudoWebWindow implements WebWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isClosed() {
         return false;
     }

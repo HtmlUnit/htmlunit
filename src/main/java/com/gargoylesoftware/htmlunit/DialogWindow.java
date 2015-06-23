@@ -49,6 +49,7 @@ public class DialogWindow extends WebWindowImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebWindow getParentWindow() {
         return this;
     }
@@ -56,6 +57,7 @@ public class DialogWindow extends WebWindowImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebWindow getTopWindow() {
         return this;
     }

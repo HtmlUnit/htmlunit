@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScript
 public final class MSXMLConfiguration extends AbstractJavaScriptConfiguration {
 
     @SuppressWarnings("unchecked")
-    static final Class<MSXMLScriptable>[] CLASSES_ = new Class[] {
+    private static final Class<MSXMLScriptable>[] CLASSES_ = new Class[] {
         XMLDOMAttribute.class, XMLDOMCDATASection.class, XMLDOMCharacterData.class, XMLDOMComment.class,
         XMLDOMDocument.class, XMLDOMDocumentFragment.class, XMLDOMDocumentType.class, XMLDOMElement.class,
         XMLDOMImplementation.class, XMLDOMNamedNodeMap.class, XMLDOMNode.class, XMLDOMNodeList.class,

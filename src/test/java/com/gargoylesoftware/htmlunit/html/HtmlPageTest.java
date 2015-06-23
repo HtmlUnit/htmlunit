@@ -425,6 +425,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedIncorrectness = new ArrayList<>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
+            @Override
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }
@@ -458,6 +459,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedIncorrectness = new ArrayList<>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
+            @Override
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }
@@ -1684,6 +1686,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final List<String> collectedConfirms = new ArrayList<>();
 
         webClient.setOnbeforeunloadHandler(new OnbeforeunloadHandler() {
+            @Override
             public boolean handleEvent(final Page page, final String message) {
                 collectedConfirms.add(message);
                 return handlerOk;

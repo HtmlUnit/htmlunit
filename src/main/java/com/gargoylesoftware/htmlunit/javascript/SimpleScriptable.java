@@ -298,6 +298,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      */
     protected Transformer getTransformerScriptableFor() {
         return new Transformer() {
+            @Override
             public Object transform(final Object obj) {
                 return getScriptableFor(obj);
             }

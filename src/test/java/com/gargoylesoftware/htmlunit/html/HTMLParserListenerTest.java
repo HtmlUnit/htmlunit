@@ -141,11 +141,13 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
         final List<MessageInfo> messages = new ArrayList<>();
         final HTMLParserListener collecter = new HTMLParserListener() {
 
+            @Override
             public void error(final String message, final URL url, final String html,
                     final int line, final int column, final String key) {
                 messages.add(new MessageInfo(true, message, url, html, line, column, key));
             }
 
+            @Override
             public void warning(final String message, final URL url, final String html,
                     final int line, final int column, final String key) {
                 messages.add(new MessageInfo(false, message, url, html, line, column, key));
@@ -195,11 +197,13 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
         final List<MessageInfo> messages = new ArrayList<>();
         final HTMLParserListener collecter = new HTMLParserListener() {
 
+            @Override
             public void error(final String message, final URL url, final String html,
                     final int line, final int column, final String key) {
                 messages.add(new MessageInfo(true, message, url, html, line, column, key));
             }
 
+            @Override
             public void warning(final String message, final URL url, final String html,
                     final int line, final int column, final String key) {
                 messages.add(new MessageInfo(false, message, url, html, line, column, key));

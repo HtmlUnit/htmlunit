@@ -103,6 +103,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * {@inheritDoc}
      */
+    @Override
     public NameValuePair[] getSubmitKeyValuePairs() {
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
     }
@@ -154,6 +155,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * {@inheritDoc}
      */
+    @Override
     public final String getDisabledAttribute() {
         return getAttribute("disabled");
     }
@@ -161,6 +163,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * {@inheritDoc}
      */
+    @Override
     public final boolean isDisabled() {
         return hasAttribute("disabled");
     }
@@ -355,6 +358,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * {@inheritDoc}
      * @see SubmittableElement#reset()
      */
+    @Override
     public void reset() {
         setValueAttribute(defaultValue_);
     }
@@ -365,6 +369,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @see SubmittableElement#setDefaultValue(String)
      * @see HtmlFileInput#setDefaultValue(String)
      */
+    @Override
     public void setDefaultValue(final String defaultValue) {
         final boolean modifyValue = hasFeature(HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE);
         setDefaultValue(defaultValue, modifyValue);
@@ -386,6 +391,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * {@inheritDoc}
      * @see SubmittableElement#getDefaultValue()
      */
+    @Override
     public String getDefaultValue() {
         return defaultValue_;
     }
@@ -397,6 +403,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
+    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
@@ -408,6 +415,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @see HtmlRadioButtonInput#isDefaultChecked()
      * @see HtmlCheckBoxInput#isDefaultChecked()
      */
+    @Override
     public boolean isDefaultChecked() {
         return false;
     }
@@ -479,6 +487,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean propagateClickStateUpdateToParent() {
         return !hasFeature(HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR);
     }
@@ -531,6 +540,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getOriginalName() {
         return originalName_;
     }
@@ -538,6 +548,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * {@inheritDoc}
      */
+    @Override
     public Collection<String> getNewNames() {
         return newNames_;
     }

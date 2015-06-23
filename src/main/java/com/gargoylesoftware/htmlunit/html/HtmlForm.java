@@ -439,6 +439,7 @@ public class HtmlForm extends HtmlElement {
             }
         };
         return new Iterable<HtmlElement>() {
+            @Override
             public Iterator<HtmlElement> iterator() {
                 return iter;
             }

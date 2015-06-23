@@ -44,6 +44,7 @@ public class BinaryPage implements Page {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void initialize() {
         // nothing to do here
     }
@@ -51,6 +52,7 @@ public class BinaryPage implements Page {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void cleanUp() {
         webResponse_.cleanUp();
     }
@@ -68,6 +70,7 @@ public class BinaryPage implements Page {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebResponse getWebResponse() {
         return webResponse_;
     }
@@ -75,6 +78,7 @@ public class BinaryPage implements Page {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;
     }
@@ -83,6 +87,7 @@ public class BinaryPage implements Page {
      * Returns the URL of this page.
      * @return the URL of this page
      */
+    @Override
     public URL getUrl() {
         return getWebResponse().getWebRequest().getUrl();
     }

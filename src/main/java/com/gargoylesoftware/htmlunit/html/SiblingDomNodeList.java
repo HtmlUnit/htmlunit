@@ -37,6 +37,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getLength() {
         int length = 0;
         for (DomNode node = parent_.getFirstChild(); node != null; node = node.getNextSibling()) {
@@ -56,6 +57,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node item(final int index) {
         return get(index);
     }
@@ -107,6 +109,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
         /**
          * {@inheritDoc}
          */
+        @Override
         public boolean hasNext() {
             return next_ != null;
         }
@@ -114,6 +117,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
         /**
          * {@inheritDoc}
          */
+        @Override
         public DomNode next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
@@ -127,10 +131,12 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
         /**
          * {@inheritDoc}
          */
+        @Override
         public boolean hasPrevious() {
             return prev_ != null;
         }
 
+        @Override
         public DomNode previous() {
             if (!hasPrevious()) {
                 throw new NoSuchElementException();
@@ -141,22 +147,27 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
             return next_;
         }
 
+        @Override
         public int nextIndex() {
             return nextIndex_;
         }
 
+        @Override
         public int previousIndex() {
             return nextIndex_ - 1;
         }
 
+        @Override
         public void add(final DomNode e) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public void set(final DomNode e) {
             throw new UnsupportedOperationException();
         }

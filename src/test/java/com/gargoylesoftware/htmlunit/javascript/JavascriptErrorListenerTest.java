@@ -212,19 +212,23 @@ class CollectingJavaScriptErrorListener implements JavaScriptErrorListener {
     private final StringBuilder loadScriptErrors_ = new StringBuilder();
     private final StringBuilder malformedScriptURLErrors_ = new StringBuilder();
 
+    @Override
     public void loadScriptError(final HtmlPage htmlPage, final URL scriptUrl, final Exception exception) {
         loadScriptErrors_.append(scriptUrl + ", " + exception);
     }
 
+    @Override
     public void malformedScriptURL(final HtmlPage htmlPage, final String url,
             final MalformedURLException malformedURLException) {
         malformedScriptURLErrors_.append(url + ", " + malformedURLException);
     }
 
+    @Override
     public void scriptException(final HtmlPage htmlPage, final ScriptException scriptException) {
         scriptExceptions_.append(scriptException.toString());
     }
 
+    @Override
     public void timeoutError(final HtmlPage htmlPage, final long allowedTime, final long executionTime) {
         timeoutErrors_.append("Timeout allowed: " + allowedTime);
     }

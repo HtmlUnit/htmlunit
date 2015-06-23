@@ -117,6 +117,7 @@ public class SocksProxyTest extends WebServerTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Override
     @After
     public void tearDown() throws Exception {
         if (localServer_ != null) {

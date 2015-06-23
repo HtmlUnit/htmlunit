@@ -49,14 +49,17 @@ public interface DownloadedContent extends Serializable {
             }
         }
 
+        @Override
         public InputStream getInputStream() {
             return new ByteArrayInputStream(bytes_);
         }
 
+        @Override
         public void cleanUp() {
             // nothing to do
         }
 
+        @Override
         public boolean isEmpty() {
             return bytes_.length == 0;
         }
@@ -78,16 +81,19 @@ public interface DownloadedContent extends Serializable {
             temporary_ = temporary;
         }
 
+        @Override
         public InputStream getInputStream() throws FileNotFoundException {
             return new FileInputStream(file_);
         }
 
+        @Override
         public void cleanUp() {
             if (temporary_) {
                 FileUtils.deleteQuietly(file_);
             }
         }
 
+        @Override
         public boolean isEmpty() {
             return false;
         }

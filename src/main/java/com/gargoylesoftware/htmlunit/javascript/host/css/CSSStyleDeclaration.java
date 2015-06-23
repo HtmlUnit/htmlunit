@@ -386,6 +386,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the name of the requested property
      * @return the object value, {@link #NOT_FOUND} if nothing is found
      */
+    @Override
     public Object getWithFallback(final String name) {
         // TODO
         if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)) {
@@ -6041,6 +6042,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         /**
          * {@inheritDoc}
          */
+        @Override
         public int compareTo(final StyleElement e) {
             if (e != null) {
                 final long styleIndex = e.index_;

@@ -87,6 +87,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
      *
      * {@inheritDoc}
      */
+    @Override
     public Object getWithFallback(final String name) {
         final Object response = getNamedItem(name);
         if (response != null) {

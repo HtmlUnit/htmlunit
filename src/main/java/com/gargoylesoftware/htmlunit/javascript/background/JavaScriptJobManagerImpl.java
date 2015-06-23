@@ -79,11 +79,13 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
+    @Override
     public synchronized int getJobCount() {
         return scheduledJobsQ_.size() + (currentlyRunningJob_ != null ? 1 : 0);
     }
 
     /** {@inheritDoc} */
+    @Override
     public synchronized int getJobCount(final JavaScriptJobFilter filter) {
         if (filter == null) {
             return scheduledJobsQ_.size() + (currentlyRunningJob_ != null ? 1 : 0);
@@ -102,6 +104,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
+    @Override
     public int addJob(final JavaScriptJob job, final Page page) {
         final WebWindow w = getWindow();
         if (w == null) {
@@ -139,6 +142,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
+    @Override
     public synchronized void removeJob(final int id) {
         for (final JavaScriptJob job : scheduledJobsQ_) {
             final int jobId = job.getId().intValue();
@@ -152,6 +156,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
+    @Override
     public synchronized void stopJob(final int id) {
         for (final JavaScriptJob job : scheduledJobsQ_) {
             final int jobId = job.getId().intValue();
@@ -166,6 +171,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
+    @Override
     public synchronized void removeAllJobs() {
         if (currentlyRunningJob_ != null) {
             cancelledJobs_.add(currentlyRunningJob_.getId());
@@ -178,6 +184,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
+    @Override
     public int waitForJobs(final long timeoutMillis) {
         final boolean debug = LOG.isDebugEnabled();
         if (debug) {
@@ -209,11 +216,13 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
+    @Override
     public int waitForJobsStartingBefore(final long delayMillis) {
         return waitForJobsStartingBefore(delayMillis, null);
     }
 
     /** {@inheritDoc} */
+    @Override
     public int waitForJobsStartingBefore(final long delayMillis, final JavaScriptJobFilter filter) {
         final boolean debug = LOG.isDebugEnabled();
 
@@ -262,6 +271,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
+    @Override
     public synchronized void shutdown() {
         scheduledJobsQ_.clear();
         notify();
@@ -302,6 +312,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      */
+    @Override
     public synchronized String jobStatusDump(final JavaScriptJobFilter filter) {
         final StringBuilder status = new StringBuilder();
         status.append("------ JavaScript job status -----");
@@ -344,6 +355,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /**
      * {@inheritDoc}
      */
+    @Override
     public JavaScriptJob getEarliestJob() {
         return scheduledJobsQ_.peek();
     }
@@ -351,6 +363,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /**
      * {@inheritDoc}
      */
+    @Override
     public synchronized JavaScriptJob getEarliestJob(final JavaScriptJobFilter filter) {
         if (filter == null) {
             return scheduledJobsQ_.peek();
@@ -367,6 +380,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean runSingleJob(final JavaScriptJob givenJob) {
         assert givenJob != null;
         final JavaScriptJob job = getEarliestJob();

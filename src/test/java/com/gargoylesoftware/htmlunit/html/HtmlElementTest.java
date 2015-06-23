@@ -487,17 +487,20 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
         private final List<String> collectedValues_ = new ArrayList<>();
+        @Override
         @Test
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
             collectedValues_.add("attributeAdded: " + event.getHtmlElement().getTagName() + ','
                     + event.getName() + ',' + event.getValue());
         }
+        @Override
         @Test
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
             collectedValues_.add("attributeRemoved: " + event.getHtmlElement().getTagName() + ','
                     + event.getName() + ',' + event.getValue());
         }
 
+        @Override
         @Test
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             collectedValues_.add("attributeReplaced: " + event.getHtmlElement().getTagName() + ','

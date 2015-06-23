@@ -378,6 +378,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public org.w3c.dom.Node importNode(final org.w3c.dom.Node importedNode, final boolean deep) {
         throw new UnsupportedOperationException("HtmlPage.importNode is not yet implemented.");
     }
@@ -386,6 +387,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public String getInputEncoding() {
         throw new UnsupportedOperationException("HtmlPage.getInputEncoding is not yet implemented.");
     }
@@ -394,6 +396,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public String getXmlEncoding() {
         throw new UnsupportedOperationException("HtmlPage.getXmlEncoding is not yet implemented.");
     }
@@ -402,6 +405,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public boolean getXmlStandalone() {
         throw new UnsupportedOperationException("HtmlPage.getXmlStandalone is not yet implemented.");
     }
@@ -410,6 +414,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public void setXmlStandalone(final boolean xmlStandalone) throws DOMException {
         throw new UnsupportedOperationException("HtmlPage.setXmlStandalone is not yet implemented.");
     }
@@ -418,6 +423,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public String getXmlVersion() {
         throw new UnsupportedOperationException("HtmlPage.getXmlVersion is not yet implemented.");
     }
@@ -426,6 +432,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public void setXmlVersion(final String xmlVersion) throws DOMException {
         throw new UnsupportedOperationException("HtmlPage.setXmlVersion is not yet implemented.");
     }
@@ -434,6 +441,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public boolean getStrictErrorChecking() {
         throw new UnsupportedOperationException("HtmlPage.getStrictErrorChecking is not yet implemented.");
     }
@@ -442,6 +450,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public void setStrictErrorChecking(final boolean strictErrorChecking) {
         throw new UnsupportedOperationException("HtmlPage.setStrictErrorChecking is not yet implemented.");
     }
@@ -450,6 +459,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public String getDocumentURI() {
         throw new UnsupportedOperationException("HtmlPage.getDocumentURI is not yet implemented.");
     }
@@ -458,6 +468,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public void setDocumentURI(final String documentURI) {
         throw new UnsupportedOperationException("HtmlPage.setDocumentURI is not yet implemented.");
     }
@@ -466,6 +477,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public org.w3c.dom.Node adoptNode(final org.w3c.dom.Node source) throws DOMException {
         throw new UnsupportedOperationException("HtmlPage.adoptNode is not yet implemented.");
     }
@@ -474,6 +486,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public DOMConfiguration getDomConfig() {
         throw new UnsupportedOperationException("HtmlPage.getDomConfig is not yet implemented.");
     }
@@ -482,6 +495,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public org.w3c.dom.Node renameNode(final org.w3c.dom.Node newNode, final String namespaceURI,
         final String qualifiedName) throws DOMException {
         throw new UnsupportedOperationException("HtmlPage.renameNode is not yet implemented.");
@@ -502,6 +516,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public DOMImplementation getImplementation() {
         throw new UnsupportedOperationException("HtmlPage.getImplementation is not yet implemented.");
     }
@@ -531,6 +546,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public Attr createAttributeNS(final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("HtmlPage.createAttributeNS is not yet implemented.");
     }
@@ -538,6 +554,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Comment createComment(final String data) {
         return new DomComment(this, data);
     }
@@ -545,6 +562,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Text createTextNode(final String data) {
         return new DomText(this, data);
     }
@@ -552,6 +570,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public CDATASection createCDATASection(final String data) {
         return new DomCDataSection(this, data);
     }
@@ -559,6 +578,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DocumentFragment createDocumentFragment() {
         return new DomDocumentFragment(this);
     }
@@ -567,6 +587,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public EntityReference createEntityReference(final String id) {
         throw new UnsupportedOperationException("HtmlPage.createEntityReference is not yet implemented.");
     }
@@ -575,6 +596,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public ProcessingInstruction createProcessingInstruction(final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("HtmlPage.createProcessingInstruction is not yet implemented.");
     }
@@ -582,6 +604,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
         return new AbstractDomNodeList<DomElement>(this) {
             @Override
@@ -601,6 +624,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public DomNodeList<DomElement> getElementsByTagNameNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("HtmlPage.getElementsByTagNameNS is not yet implemented.");
     }
@@ -608,6 +632,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomElement getElementById(final String elementId) {
         try {
             return getElementById(elementId, true);
@@ -838,6 +863,7 @@ public class HtmlPage extends SgmlPage {
 
     private Comparator<HtmlElement> createTabOrderComparator() {
         return new Comparator<HtmlElement>() {
+            @Override
             public int compare(final HtmlElement element1, final HtmlElement element2) {
                 final Short i1 = element1.getTabIndex();
                 final Short i2 = element2.getTabIndex();

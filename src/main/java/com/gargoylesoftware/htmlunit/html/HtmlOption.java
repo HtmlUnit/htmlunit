@@ -172,6 +172,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return <tt>true</tt> if the disabled attribute is set for this element (always <tt>false</tt>
      *         when emulating IE)
      */
+    @Override
     public final boolean isDisabled() {
         if (hasFeature(HTMLOPTION_PREVENT_DISABLED)) {
             return false;
@@ -182,6 +183,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     public final String getDisabledAttribute() {
         return getAttribute("disabled");
     }

@@ -115,6 +115,7 @@ public class HTMLSpanElement extends HTMLElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isLowerCaseInOuterHtml() {
         return super.isLowerCaseInOuterHtml();
     }
@@ -124,6 +125,7 @@ public class HTMLSpanElement extends HTMLElement {
      * @see <a href="http://www.w3.org/TR/html4/index/elements.html">HTML 4 specs</a>
      * @return whether the end tag is forbidden or not
      */
+    @Override
     protected boolean isEndTagForbidden() {
         return endTagForbidden_;
     }

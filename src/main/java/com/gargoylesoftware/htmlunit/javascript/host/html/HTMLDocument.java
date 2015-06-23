@@ -1423,6 +1423,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Looks at attributes with the specified name.
      * {@inheritDoc}
      */
+    @Override
     public Object getWithFallback(final String name) {
         if (getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_NAME)
             || getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME)) {
@@ -2051,6 +2052,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return <tt>false</tt> if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
+    @Override
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);

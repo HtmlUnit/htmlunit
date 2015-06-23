@@ -166,6 +166,7 @@ public class JavaScriptEngine {
         WebAssert.notNull("webWindow", webWindow);
 
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 try {
                     init(webWindow, cx);
@@ -823,6 +824,7 @@ public class JavaScriptEngine {
             htmlPage_ = htmlPage;
         }
 
+        @Override
         public final Object run(final Context cx) {
             final Boolean javaScriptAlreadyRunning = javaScriptRunning_.get();
             javaScriptRunning_.set(Boolean.TRUE);

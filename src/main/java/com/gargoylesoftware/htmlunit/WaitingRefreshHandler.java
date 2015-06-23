@@ -65,6 +65,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
      *        greater than <tt>maxwait</tt> then <tt>maxwait</tt> will be used instead
      * @throws IOException if the refresh fails
      */
+    @Override
     public void handleRefresh(final Page page, final URL url, final int requestedWait) throws IOException {
         int seconds = requestedWait;
         if (seconds > maxwait_ && maxwait_ > 0) {

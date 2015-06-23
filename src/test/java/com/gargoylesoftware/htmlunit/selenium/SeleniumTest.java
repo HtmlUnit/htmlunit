@@ -33,6 +33,7 @@ public class SeleniumTest extends WebDriverTestCase {
     /**
      * Starts the web server.
      */
+    @Override
     @Before
     public void before() {
         try {

@@ -112,6 +112,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * Returns the tag name of this element.
      * @return the tag name of this element
      */
+    @Override
     public final String getTagName() {
         return getNodeName();
     }
@@ -131,6 +132,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return true if an attribute with the given name is specified on this element or has a
      * default value, false otherwise.
      */
+    @Override
     public boolean hasAttribute(final String attributeName) {
         return attributes_.containsKey(attributeName);
     }
@@ -219,6 +221,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @param attributeName the name of the attribute
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
+    @Override
     public String getAttribute(final String attributeName) {
         final DomAttr attr = attributes_.get(attributeName);
         if (attr != null) {
@@ -231,6 +234,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * Removes an attribute specified by name from this element.
      * @param attributeName the attribute attributeName
      */
+    @Override
     public void removeAttribute(final String attributeName) {
         attributes_.remove(attributeName);
     }
@@ -240,6 +244,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @param namespaceURI the URI that identifies an XML namespace
      * @param localName the name within the namespace
      */
+    @Override
     public final void removeAttributeNS(final String namespaceURI, final String localName) {
         final String qualifiedName = getQualifiedName(namespaceURI, localName);
         if (qualifiedName != null) {
@@ -251,6 +256,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public final Attr removeAttributeNode(final Attr attribute) {
         throw new UnsupportedOperationException("DomElement.removeAttributeNode is not yet implemented.");
     }
@@ -263,6 +269,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return true if an attribute with the given name is specified on this element or has a
      * default value, false otherwise.
      */
+    @Override
     public final boolean hasAttributeNS(final String namespaceURI, final String localName) {
         final String qualifiedName = getQualifiedName(namespaceURI, localName);
         if (qualifiedName != null) {
@@ -293,6 +300,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @param attributeName the name of the attribute
      * @param attributeValue the value of the attribute
      */
+    @Override
     public final void setAttribute(final String attributeName, final String attributeValue) {
         setAttributeNS(null, attributeName, attributeValue);
     }
@@ -304,6 +312,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @param qualifiedName the qualified name (prefix:local) of the attribute
      * @param attributeValue the value of the attribute
      */
+    @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
         final String value = attributeValue;
@@ -334,6 +343,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @param localName the name within the namespace
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
+    @Override
     public final String getAttributeNS(final String namespaceURI, final String localName) {
         final String qualifiedName = getQualifiedName(namespaceURI, localName);
         if (qualifiedName != null) {
@@ -345,6 +355,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr getAttributeNode(final String name) {
         return attributes_.get(name);
     }
@@ -352,6 +363,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr getAttributeNodeNS(final String namespaceURI, final String localName) {
         final String qualifiedName = getQualifiedName(namespaceURI, localName);
         if (qualifiedName != null) {
@@ -363,6 +375,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNodeList<HtmlElement> getElementsByTagName(final String tagName) {
         return new AbstractDomNodeList<HtmlElement>(this) {
             @Override
@@ -382,6 +395,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public DomNodeList<HtmlElement> getElementsByTagNameNS(final String namespace, final String localName) {
         throw new UnsupportedOperationException("DomElement.getElementsByTagNameNS is not yet implemented.");
     }
@@ -390,6 +404,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public TypeInfo getSchemaTypeInfo() {
         throw new UnsupportedOperationException("DomElement.getSchemaTypeInfo is not yet implemented.");
     }
@@ -398,6 +413,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public void setIdAttribute(final String name, final boolean isId) {
         throw new UnsupportedOperationException("DomElement.setIdAttribute is not yet implemented.");
     }
@@ -406,6 +422,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId) {
         throw new UnsupportedOperationException("DomElement.setIdAttributeNS is not yet implemented.");
     }
@@ -413,6 +430,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     /**
      * {@inheritDoc}
      */
+    @Override
     public Attr setAttributeNode(final Attr attribute) {
         attributes_.setNamedItem(attribute);
         return null;
@@ -422,6 +440,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public Attr setAttributeNodeNS(final Attr attribute) {
         throw new UnsupportedOperationException("DomElement.setAttributeNodeNS is not yet implemented.");
     }
@@ -430,6 +449,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public final void setIdAttributeNode(final Attr idAttr, final boolean isId) {
         throw new UnsupportedOperationException("DomElement.setIdAttributeNode is not yet implemented.");
     }
@@ -564,16 +584,19 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         }
 
         /** @return is there a next one ? */
+        @Override
         public boolean hasNext() {
             return nextElement_ != null;
         }
 
         /** @return the next one */
+        @Override
         public DomElement next() {
             return nextElement();
         }
 
         /** Removes the current one. */
+        @Override
         public void remove() {
             if (nextElement_ == null) {
                 throw new IllegalStateException();
@@ -639,6 +662,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getLength() {
         return size();
     }
@@ -646,6 +670,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr getNamedItem(final String name) {
         return get(name);
     }
@@ -660,6 +685,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node getNamedItemNS(final String namespaceURI, final String localName) {
         if (domNode_ == null) {
             return null;
@@ -670,6 +696,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node item(final int index) {
         if (index < 0 || index >= attrPositions_.size()) {
             return null;
@@ -680,6 +707,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node removeNamedItem(final String name) throws DOMException {
         return remove(name);
     }
@@ -687,6 +715,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node removeNamedItemNS(final String namespaceURI, final String localName) {
         if (domNode_ == null) {
             return null;
@@ -697,6 +726,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr setNamedItem(final Node node) {
         return put(node.getLocalName(), (DomAttr) node);
     }
@@ -704,6 +734,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node setNamedItemNS(final Node node) throws DOMException {
         return put(node.getNodeName(), (DomAttr) node);
     }
@@ -711,6 +742,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr put(final String key, final DomAttr value) {
         final String name = fixName(key);
         final DomAttr previous = map_.put(name, value);
@@ -723,6 +755,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr remove(final Object key) {
         if (key instanceof String) {
             final String name = fixName((String) key);
@@ -735,6 +768,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public void clear() {
         attrPositions_.clear();
         map_.clear();
@@ -743,6 +777,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public void putAll(final Map<? extends String, ? extends DomAttr> t) {
         // add one after the other to save the positions
         for (final Map.Entry<? extends String, ? extends DomAttr> entry : t.entrySet()) {
@@ -753,6 +788,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean containsKey(final Object key) {
         if (key instanceof String) {
             final String name = fixName((String) key);
@@ -764,6 +800,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr get(final Object key) {
         if (key instanceof String) {
             final String name = fixName((String) key);
@@ -775,6 +812,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean containsValue(final Object value) {
         return map_.containsValue(value);
     }
@@ -782,6 +820,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public Set<java.util.Map.Entry<String, DomAttr>> entrySet() {
         return map_.entrySet();
     }
@@ -789,6 +828,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isEmpty() {
         return map_.isEmpty();
     }
@@ -796,6 +836,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public Set<String> keySet() {
         return map_.keySet();
     }
@@ -803,6 +844,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public int size() {
         return map_.size();
     }
@@ -810,6 +852,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     /**
      * {@inheritDoc}
      */
+    @Override
     public Collection<DomAttr> values() {
         return map_.values();
     }

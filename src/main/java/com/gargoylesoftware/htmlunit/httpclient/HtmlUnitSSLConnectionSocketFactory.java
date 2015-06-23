@@ -154,6 +154,7 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
      * @return the created/connected socket
      * @throws IOException in case of problems
      */
+    @Override
     public Socket connectSocket(
             final int connectTimeout,
             final Socket socket,
@@ -252,6 +253,7 @@ class InsecureTrustManager2 implements X509TrustManager {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void checkClientTrusted(final X509Certificate[] chain, final String authType) throws CertificateException {
         // Everyone is trusted!
         acceptedIssuers_.addAll(Arrays.asList(chain));
@@ -260,6 +262,7 @@ class InsecureTrustManager2 implements X509TrustManager {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void checkServerTrusted(final X509Certificate[] chain, final String authType) throws CertificateException {
         // Everyone is trusted!
         acceptedIssuers_.addAll(Arrays.asList(chain));
@@ -268,6 +271,7 @@ class InsecureTrustManager2 implements X509TrustManager {
     /**
      * {@inheritDoc}
      */
+    @Override
     public X509Certificate[] getAcceptedIssuers() {
         // it seems to be OK for Java <= 6 to return an empty array but not for Java 7 (at least 1.7.0_04-b20):
         // requesting an URL with a valid certificate (working without WebClient.setUseInsecureSSL(true)) throws a

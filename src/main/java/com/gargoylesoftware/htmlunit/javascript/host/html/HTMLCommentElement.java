@@ -53,6 +53,7 @@ public class HTMLCommentElement extends Comment {
      * Returns the element ID.
      * @return the ID of this element
      */
+    @Override
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getId() {
         return "";
@@ -62,6 +63,7 @@ public class HTMLCommentElement extends Comment {
      * Returns the class defined for this element.
      * @return the class name
      */
+    @Override
     @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 8), propertyName = "className")
     public Object getClassName_js() {
         return "";
@@ -71,6 +73,7 @@ public class HTMLCommentElement extends Comment {
      * Returns the tag name of this element.
      * @return the tag name
      */
+    @Override
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getTagName() {
         return "!";
@@ -80,6 +83,7 @@ public class HTMLCommentElement extends Comment {
      * Returns the text of this element.
      * @return the text
      */
+    @Override
     @JsxGetter(@WebBrowser(IE))
     public String getText() {
         return "<!--" + getData() + "-->";
@@ -89,6 +93,7 @@ public class HTMLCommentElement extends Comment {
      * Returns the document of this element.
      * @return the document
      */
+    @Override
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getDocument() {
         return getWindow().getDocument_js();
@@ -99,6 +104,7 @@ public class HTMLCommentElement extends Comment {
      * @param attributeName the name of the attribute to retrieve
      * @return the attribute node for the specified attribute
      */
+    @Override
     @JsxFunction(@WebBrowser(IE))
     public Object getAttributeNode(final String attributeName) {
         return null;
@@ -112,6 +118,7 @@ public class HTMLCommentElement extends Comment {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
+    @Override
     @JsxFunction(@WebBrowser(IE))
     public Object getAttribute(final String attributeName, final Integer flags) {
         return null;
@@ -121,6 +128,7 @@ public class HTMLCommentElement extends Comment {
      * Gets the innerText attribute.
      * @return the innerText
      */
+    @Override
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getInnerText() {
         return "";
@@ -130,6 +138,7 @@ public class HTMLCommentElement extends Comment {
      * Currently does nothing.
      * @param value the new value for the contents of this node
      */
+    @Override
     @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
     public void setInnerText(final String value) {
         // nothing

@@ -614,6 +614,7 @@ public class XMLHttpRequest extends EventTarget {
             final Scriptable startingScope = getWindow();
             final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
             final ContextAction action = new ContextAction() {
+                @Override
                 public Object run(final Context cx) {
                     // KEY_STARTING_SCOPE maintains a stack of scopes
                     @SuppressWarnings("unchecked")

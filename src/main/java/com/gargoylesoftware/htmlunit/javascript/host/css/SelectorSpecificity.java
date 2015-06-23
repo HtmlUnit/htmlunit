@@ -146,6 +146,7 @@ class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializab
     /**
      * {@inheritDoc}
      */
+    @Override
     public int compareTo(final SelectorSpecificity other) {
         if (fieldA_ != other.fieldA_) {
             return fieldA_ - other.fieldA_;

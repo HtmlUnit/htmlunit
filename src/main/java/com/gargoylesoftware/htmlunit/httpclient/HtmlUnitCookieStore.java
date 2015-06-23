@@ -49,6 +49,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public synchronized void addCookie(final Cookie cookie) {
         manager_.addCookie(new com.gargoylesoftware.htmlunit.util.Cookie((ClientCookie) cookie));
     }
@@ -56,6 +57,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public synchronized List<Cookie> getCookies() {
         if (manager_.isCookiesEnabled()) {
             return Arrays.asList(com.gargoylesoftware.htmlunit.util.Cookie.toHttpClient(manager_.getCookies()));
@@ -66,6 +68,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public synchronized boolean clearExpired(final Date date) {
         return manager_.clearExpired(date);
     }
@@ -73,6 +76,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public synchronized void clear() {
         manager_.clearCookies();
     }

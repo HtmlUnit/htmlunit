@@ -40,6 +40,7 @@ public class ImmediateRefreshHandler implements RefreshHandler, Serializable {
      * @param seconds the number of seconds to wait before reloading the page (ignored!)
      * @throws IOException if the refresh fails
      */
+    @Override
     public void handleRefresh(final Page page, final URL url, final int seconds) throws IOException {
         final WebWindow window = page.getEnclosingWindow();
         if (window == null) {

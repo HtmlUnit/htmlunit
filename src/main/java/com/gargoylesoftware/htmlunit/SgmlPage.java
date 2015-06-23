@@ -58,6 +58,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void cleanUp() {
         webResponse_.cleanUp();
     }
@@ -65,6 +66,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebResponse getWebResponse() {
         return webResponse_;
     }
@@ -72,6 +74,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void initialize() throws IOException {
         // nothing to do here
     }
@@ -99,6 +102,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      *
      * @return the enclosing frame or null if this page isn't inside a frame
      */
+    @Override
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;
     }
@@ -133,6 +137,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * Returns the document type.
      * @return the document type
      */
+    @Override
     public final DocumentType getDoctype() {
         return documentType_;
     }
@@ -158,6 +163,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * @param tagName the tag name which determines the type of element to be created
      * @return an element, the type of which depends on the specified tag name
      */
+    @Override
     public abstract Element createElement(final String tagName);
 
     /**
@@ -166,6 +172,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @return the new element
      */
+    @Override
     public abstract Element createElementNS(final String namespaceURI, final String qualifiedName);
 
     /**
@@ -178,6 +185,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * Returns the document element.
      * @return the document element
      */
+    @Override
     public DomElement getDocumentElement() {
         DomNode childNode = getFirstChild();
         while (childNode != null && !(childNode instanceof DomElement)) {
@@ -224,6 +232,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * {@inheritDoc}
      * The current implementation just {@link DomNode#normalize()}s the document element.
      */
+    @Override
     public void normalizeDocument() {
         getDocumentElement().normalize();
     }
@@ -239,6 +248,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomAttr createAttribute(final String name) {
         return new DomAttr(getPage(), null, name, "", false);
     }
@@ -247,6 +257,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * Returns the URL of this page.
      * @return the URL of this page
      */
+    @Override
     public URL getUrl() {
         return getWebResponse().getWebRequest().getUrl();
     }

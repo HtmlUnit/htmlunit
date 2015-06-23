@@ -101,6 +101,7 @@ class NSAPrintStreamWrapper extends PrintStream {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int hashCode() {
         return wrapped_.hashCode();
     }
@@ -108,6 +109,7 @@ class NSAPrintStreamWrapper extends PrintStream {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean equals(final Object obj) {
         return wrapped_.equals(obj);
     }
@@ -115,6 +117,7 @@ class NSAPrintStreamWrapper extends PrintStream {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String toString() {
         return wrapped_.toString();
     }
@@ -122,6 +125,7 @@ class NSAPrintStreamWrapper extends PrintStream {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void flush() {
         super.flush();
         wrapped_.flush();
@@ -130,6 +134,7 @@ class NSAPrintStreamWrapper extends PrintStream {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void close() {
         super.close();
         wrapped_.close();
@@ -138,6 +143,7 @@ class NSAPrintStreamWrapper extends PrintStream {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean checkError() {
         super.checkError();
         return wrapped_.checkError();
@@ -146,6 +152,7 @@ class NSAPrintStreamWrapper extends PrintStream {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void write(final int b) {
         super.write(b);
         wrapped_.write(b);
@@ -154,6 +161,7 @@ class NSAPrintStreamWrapper extends PrintStream {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void write(final byte[] buf, final int off, final int len) {
         super.write(buf, off, len);
         wrapped_.write(buf, off, len);

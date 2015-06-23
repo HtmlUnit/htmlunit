@@ -51,6 +51,7 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomText splitText(final int offset) {
         if (offset < 0 || offset > getLength()) {
             throw new IllegalArgumentException("offset: " + offset + " data.length: " + getLength());
@@ -82,6 +83,7 @@ public class DomText extends DomCharacterData implements Text {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public boolean isElementContentWhitespace() {
         throw new UnsupportedOperationException("DomText.isElementContentWhitespace is not yet implemented.");
     }
@@ -89,6 +91,7 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getWholeText() {
         // I couldn't find a way to have a nearby EntityReference node (either sibling or parent)
         // if this is found, have a look at xerces TextImpl.
@@ -99,6 +102,7 @@ public class DomText extends DomCharacterData implements Text {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public Text replaceWholeText(final String content) throws DOMException {
         throw new UnsupportedOperationException("DomText.replaceWholeText is not yet implemented.");
     }

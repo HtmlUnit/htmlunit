@@ -135,6 +135,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (args.length != 1) {
             return NOT_FOUND;
@@ -143,6 +144,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
         return null;
     }

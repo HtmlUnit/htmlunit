@@ -113,6 +113,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomDocumentFragment cloneContents() throws DOMException {
         // Clone the common ancestor.
         final DomNode ancestor = (DomNode) getCommonAncestorContainer();
@@ -190,6 +191,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Range cloneRange() throws DOMException {
         return new SimpleRange(startContainer_, startOffset_, endContainer_, endOffset_);
     }
@@ -197,6 +199,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void collapse(final boolean toStart) throws DOMException {
         if (toStart) {
             endContainer_ = startContainer_;
@@ -211,6 +214,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public short compareBoundaryPoints(final short how, final Range sourceRange) throws DOMException {
         throw new RuntimeException("Not implemented!");
     }
@@ -218,6 +222,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void deleteContents() throws DOMException {
         final DomNode ancestor = (DomNode) getCommonAncestorContainer();
         if (ancestor != null) {
@@ -275,6 +280,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void detach() throws DOMException {
         throw new RuntimeException("Not implemented!");
     }
@@ -282,6 +288,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomDocumentFragment extractContents() throws DOMException {
         final DomDocumentFragment fragment = cloneContents();
 
@@ -295,6 +302,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean getCollapsed() throws DOMException {
         return startContainer_ == endContainer_ && startOffset_ == endOffset_;
     }
@@ -302,6 +310,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node getCommonAncestorContainer() throws DOMException {
         if (startContainer_ != null && endContainer_ != null) {
             for (Node p1 = startContainer_; p1 != null; p1 = p1.getParentNode()) {
@@ -318,6 +327,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node getEndContainer() throws DOMException {
         return endContainer_;
     }
@@ -325,6 +335,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getEndOffset() throws DOMException {
         return endOffset_;
     }
@@ -332,6 +343,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node getStartContainer() throws DOMException {
         return startContainer_;
     }
@@ -339,6 +351,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getStartOffset() throws DOMException {
         return startOffset_;
     }
@@ -346,6 +359,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void insertNode(final Node newNode) throws DOMException, RangeException {
         if (isOffsetChars(startContainer_)) {
             final Node split = startContainer_.cloneNode(false);
@@ -383,6 +397,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void selectNode(final Node node) throws RangeException, DOMException {
         startContainer_ = node;
         startOffset_ = 0;
@@ -393,6 +408,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void selectNodeContents(final Node node) throws RangeException, DOMException {
         startContainer_ = node.getFirstChild();
         startOffset_ = 0;
@@ -403,6 +419,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setEnd(final Node refNode, final int offset) throws RangeException, DOMException {
         endContainer_ = refNode;
         endOffset_ = offset;
@@ -411,6 +428,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setEndAfter(final Node refNode) throws RangeException, DOMException {
         throw new RuntimeException("Not implemented!");
     }
@@ -418,6 +436,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setEndBefore(final Node refNode) throws RangeException, DOMException {
         throw new RuntimeException("Not implemented!");
     }
@@ -425,6 +444,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setStart(final Node refNode, final int offset) throws RangeException, DOMException {
         startContainer_ = refNode;
         startOffset_ = offset;
@@ -433,6 +453,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setStartAfter(final Node refNode) throws RangeException, DOMException {
         throw new RuntimeException("Not implemented!");
     }
@@ -440,6 +461,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setStartBefore(final Node refNode) throws RangeException, DOMException {
         throw new RuntimeException("Not implemented!");
     }
@@ -447,6 +469,7 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void surroundContents(final Node newParent) throws DOMException, RangeException {
         newParent.appendChild(extractContents());
         insertNode(newParent);

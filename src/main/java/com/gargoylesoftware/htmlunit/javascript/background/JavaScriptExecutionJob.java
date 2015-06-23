@@ -57,6 +57,7 @@ abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void run() {
         final WebWindow w = window_.get();
         if (w == null) {

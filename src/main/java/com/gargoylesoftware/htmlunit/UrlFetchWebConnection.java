@@ -70,6 +70,7 @@ public class UrlFetchWebConnection implements WebConnection {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebResponse getResponse(final WebRequest webRequest) throws IOException {
         final long startTime = System.currentTimeMillis();
         final URL url = webRequest.getUrl();

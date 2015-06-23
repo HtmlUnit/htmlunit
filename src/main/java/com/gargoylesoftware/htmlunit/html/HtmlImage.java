@@ -555,7 +555,7 @@ public class HtmlImage extends HtmlElement {
          * {@inheritDoc}
          */
         @Override
-        protected void finalize() {
+        protected void finalize() throws Throwable {
             if (imageReader_ != null) {
                 try {
                     final ImageInputStream stream = (ImageInputStream) imageReader_.getInput();
@@ -571,6 +571,7 @@ public class HtmlImage extends HtmlElement {
                     imageReader_.dispose();
                 }
             }
+            super.finalize();
         }
     }
 

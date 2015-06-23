@@ -119,6 +119,7 @@ public class MessagePort extends EventTarget {
                 @Override
                 public void execute() throws Exception {
                     final ContextAction action = new ContextAction() {
+                        @Override
                         public Object run(final Context cx) {
                             return port1_.dispatchEvent(event);
                         }

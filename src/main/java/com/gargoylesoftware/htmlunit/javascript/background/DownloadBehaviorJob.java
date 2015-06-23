@@ -62,6 +62,7 @@ final class DownloadBehaviorJob extends BasicJavaScriptJob {
     /**
      * Performs the download and calls the callback method.
      */
+    @Override
     public void run() {
         final Scriptable scope = callback_.getParentScope();
         final WebRequest request = new WebRequest(url_);
@@ -73,6 +74,7 @@ final class DownloadBehaviorJob extends BasicJavaScriptJob {
             }
             final Object[] args = new Object[] {content};
             final ContextAction action = new ContextAction() {
+                @Override
                 public Object run(final Context cx) {
                     callback_.call(cx, scope, scope, args);
                     return null;

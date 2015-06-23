@@ -46,6 +46,7 @@ public class UnexpectedPage implements Page {
     /**
      * Initialize this page.
      */
+    @Override
     public void initialize() {
         // nothing to do here
     }
@@ -53,6 +54,7 @@ public class UnexpectedPage implements Page {
     /**
      * Cleans up this page.
      */
+    @Override
     public void cleanUp() {
         webResponse_.cleanUp();
     }
@@ -72,6 +74,7 @@ public class UnexpectedPage implements Page {
      *
      * @return the web response that was originally used to create this page
      */
+    @Override
     public WebResponse getWebResponse() {
         return webResponse_;
     }
@@ -81,6 +84,7 @@ public class UnexpectedPage implements Page {
      *
      * @return the enclosing frame or null if this page isn't inside a frame
      */
+    @Override
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;
     }
@@ -89,6 +93,7 @@ public class UnexpectedPage implements Page {
      * Returns the URL of this page.
      * @return the URL of this page
      */
+    @Override
     public URL getUrl() {
         return getWebResponse().getWebRequest().getUrl();
     }

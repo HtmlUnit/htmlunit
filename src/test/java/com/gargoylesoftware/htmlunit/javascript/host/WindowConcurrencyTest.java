@@ -80,6 +80,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
     /**
      * Sets up the tests.
      */
+    @Override
     @Before
     public void before() {
         client_ = new WebClient();
@@ -564,17 +565,21 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
         final List<ScriptException> scriptExceptions = new ArrayList<ScriptException>();
         client_.setJavaScriptErrorListener(new JavaScriptErrorListener() {
 
+            @Override
             public void loadScriptError(final HtmlPage htmlPage, final URL scriptUrl, final Exception exception) {
             }
 
+            @Override
             public void malformedScriptURL(final HtmlPage htmlPage, final String url,
                     final MalformedURLException malformedURLException) {
             }
 
+            @Override
             public void scriptException(final HtmlPage htmlPage, final ScriptException scriptException) {
                 scriptExceptions.add(scriptException);
             }
 
+            @Override
             public void timeoutError(final HtmlPage htmlPage, final long allowedTime, final long executionTime) {
             }
         });

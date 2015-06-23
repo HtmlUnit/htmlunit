@@ -123,6 +123,7 @@ public class HTMLInputElement extends FormField {
     /**
      * {@inheritDoc}
      */
+    @Override
     public HtmlInput getDomNodeOrDie() {
         return (HtmlInput) super.getDomNodeOrDie();
     }

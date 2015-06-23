@@ -31,6 +31,7 @@ public class Image extends HTMLImageElement {
     /**
      * JavaScript constructor.
      */
+    @Override
     @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();

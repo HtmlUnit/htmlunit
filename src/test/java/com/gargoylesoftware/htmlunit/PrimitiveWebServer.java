@@ -56,6 +56,7 @@ public class PrimitiveWebServer {
         server_ = new ServerSocket(port_);
         new Thread(new Runnable() {
 
+            @Override
             public void run() {
                 try {
                     while (true) {

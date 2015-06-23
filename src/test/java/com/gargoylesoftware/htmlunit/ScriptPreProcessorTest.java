@@ -71,12 +71,14 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
 
         // Test null return from pre processor
         client.setScriptPreProcessor(new ScriptPreProcessor() {
+            @Override
             public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
                     final int lineNumber, final HtmlElement htmlElement) {
                 return null;
             }
         });
         client.setAlertHandler(new AlertHandler() {
+            @Override
             public void handleAlert(final Page page, final String message) {
                 fail("The pre processor did not remove the JavaScript");
             }
@@ -86,6 +88,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
 
         // Test modify script in pre processor
         client.setScriptPreProcessor(new ScriptPreProcessor() {
+            @Override
             public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
                     final int lineNumber, final HtmlElement htmlElement) {
                 final int start = sourceCode.indexOf(alertText);
@@ -95,6 +98,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
             }
         });
         client.setAlertHandler(new AlertHandler() {
+            @Override
             public void handleAlert(final Page page, final String message) {
                 if (!message.equals(newAlertText)) {
                     fail("The pre processor did not modify the JavaScript");
@@ -125,6 +129,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
         client.setWebConnection(webConnection);
 
         client.setScriptPreProcessor(new ScriptPreProcessor() {
+            @Override
             public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
                     final int lineNumber, final HtmlElement htmlElement) {
                 if (sourceCode.indexOf("unimplementedFunction") > -1) {
@@ -155,6 +160,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
         client.setWebConnection(conn);
 
         client.setScriptPreProcessor(new ScriptPreProcessor() {
+            @Override
             public String preProcess(final HtmlPage p, final String src, final String srcName,
                     final int lineNumber, final HtmlElement htmlElement) {
                 return src.replaceAll("aXert", "alert");

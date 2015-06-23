@@ -82,6 +82,7 @@ public class JavaScriptJobManagerMinimalTest {
     public void addJob_periodicJob() throws Exception {
         final MutableInt count = new MutableInt(0);
         final JavaScriptJob job = new BasicJavaScriptJob(5, Integer.valueOf(100)) {
+            @Override
             public void run() {
                 count.increment();
             }
@@ -103,6 +104,7 @@ public class JavaScriptJobManagerMinimalTest {
     public void addJob_periodicJob2() throws Exception {
         final MutableInt count = new MutableInt(0);
         final JavaScriptJob job = new BasicJavaScriptJob(5, Integer.valueOf(200)) {
+            @Override
             public void run() {
                 if (count.intValue() == 0) {
                     try {
@@ -132,6 +134,7 @@ public class JavaScriptJobManagerMinimalTest {
     public void addJob_singleExecution() throws Exception {
         final MutableInt count = new MutableInt(0);
         final JavaScriptJob job = new BasicJavaScriptJob(5, null) {
+            @Override
             public void run() {
                 count.increment();
             }
@@ -150,6 +153,7 @@ public class JavaScriptJobManagerMinimalTest {
         final MutableInt id = new MutableInt();
         final MutableInt count = new MutableInt(0);
         final JavaScriptJob job = new BasicJavaScriptJob(50, Integer.valueOf(50)) {
+            @Override
             public void run() {
                 count.increment();
                 if (count.intValue() >= 5) {
@@ -169,6 +173,7 @@ public class JavaScriptJobManagerMinimalTest {
     public void addJob_multipleExecution_removeAllJobs() throws Exception {
         final MutableInt count = new MutableInt(0);
         final JavaScriptJob job = new BasicJavaScriptJob(50, Integer.valueOf(50)) {
+            @Override
             public void run() {
                 count.increment();
                 if (count.intValue() >= 5) {
@@ -188,6 +193,7 @@ public class JavaScriptJobManagerMinimalTest {
     public void getJobCount() throws Exception {
         final MutableInt count = new MutableInt();
         final JavaScriptJob job = new BasicJavaScriptJob(50, null) {
+            @Override
             public void run() {
                 count.setValue(manager_.getJobCount());
             }
@@ -202,6 +208,7 @@ public class JavaScriptJobManagerMinimalTest {
     private void waitForCurrentLongJob(final WaitingMode waitingMode, final int expectedFinalJobCount) {
         final JavaScriptJob job = new BasicJavaScriptJob(50, null) {
             // Long job
+            @Override
             public void run() {
                 try {
                     Thread.sleep(500);
@@ -245,11 +252,13 @@ public class JavaScriptJobManagerMinimalTest {
 
     private void waitForSimpleJobs(final WaitingMode waitingMode, final int expectedFinalJobCount) {
         final JavaScriptJob job1 = new BasicJavaScriptJob(50, null) {
+            @Override
             public void run() {
             // Empty.
             }
         };
         final JavaScriptJob job2 = new BasicJavaScriptJob(1000, null) {
+            @Override
             public void run() {
             // Empty.
             }
@@ -291,6 +300,7 @@ public class JavaScriptJobManagerMinimalTest {
         final long start = System.currentTimeMillis();
         final JavaScriptJob job1 = new BasicJavaScriptJob(50, null) {
             // This job takes 30ms to complete.
+            @Override
             public void run() {
                 try {
                     Thread.sleep(30);
@@ -301,6 +311,7 @@ public class JavaScriptJobManagerMinimalTest {
             }
         };
         final JavaScriptJob job2 = new BasicJavaScriptJob(60, null) {
+            @Override
             public void run() {
             // Empty.
             }

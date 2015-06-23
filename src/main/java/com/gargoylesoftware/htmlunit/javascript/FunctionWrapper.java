@@ -39,6 +39,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         return wrapped_.call(cx, scope, thisObj, args);
     }
@@ -46,6 +47,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getClassName() {
         return wrapped_.getClassName();
     }
@@ -53,6 +55,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
         return wrapped_.construct(cx, scope, args);
     }
@@ -60,6 +63,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object get(final String name, final Scriptable start) {
         return wrapped_.get(name, start);
     }
@@ -67,6 +71,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object get(final int index, final Scriptable start) {
         return wrapped_.get(index, start);
     }
@@ -74,6 +79,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean has(final String name, final Scriptable start) {
         return wrapped_.has(name, start);
     }
@@ -81,6 +87,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean has(final int index, final Scriptable start) {
         return wrapped_.has(index, start);
     }
@@ -88,6 +95,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void put(final String name, final Scriptable start, final Object value) {
         wrapped_.put(name, wrapped_, value);
     }
@@ -95,6 +103,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void put(final int index, final Scriptable start, final Object value) {
         wrapped_.put(index, wrapped_, value);
     }
@@ -102,6 +111,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void delete(final String name) {
         wrapped_.delete(name);
     }
@@ -109,6 +119,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void delete(final int index) {
         wrapped_.delete(index);
     }
@@ -116,6 +127,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Scriptable getPrototype() {
         return wrapped_.getPrototype();
     }
@@ -123,6 +135,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setPrototype(final Scriptable prototype) {
         wrapped_.setPrototype(prototype);
     }
@@ -130,6 +143,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Scriptable getParentScope() {
         return wrapped_.getParentScope();
     }
@@ -137,6 +151,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setParentScope(final Scriptable parent) {
         wrapped_.setParentScope(parent);
     }
@@ -144,6 +159,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object[] getIds() {
         return wrapped_.getIds();
     }
@@ -151,6 +167,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object getDefaultValue(final Class<?> hint) {
         return wrapped_.getDefaultValue(hint);
     }
@@ -158,6 +175,7 @@ public class FunctionWrapper implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean hasInstance(final Scriptable instance) {
         return wrapped_.hasInstance(instance);
     }

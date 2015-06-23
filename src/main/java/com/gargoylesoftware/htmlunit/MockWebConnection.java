@@ -154,6 +154,7 @@ public class MockWebConnection implements WebConnection {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebResponse getResponse(final WebRequest request) throws IOException {
         final RawResponseData rawResponse = getRawResponse(request);
         return new WebResponse(rawResponse.asWebResponseData(), request, 0);

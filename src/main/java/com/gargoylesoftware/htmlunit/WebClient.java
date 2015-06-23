@@ -1684,6 +1684,7 @@ public class WebClient implements Serializable, AutoCloseable {
         /**
          * {@inheritDoc}
          */
+        @Override
         public void webWindowClosed(final WebWindowEvent event) {
             final WebWindow window = event.getWebWindow();
             if (window instanceof TopLevelWindow) {
@@ -1709,6 +1710,7 @@ public class WebClient implements Serializable, AutoCloseable {
         /**
          * {@inheritDoc}
          */
+        @Override
         public void webWindowContentChanged(final WebWindowEvent event) {
             final WebWindow window = event.getWebWindow();
             boolean use = false;
@@ -1743,6 +1745,7 @@ public class WebClient implements Serializable, AutoCloseable {
         /**
          * {@inheritDoc}
          */
+        @Override
         public void webWindowOpened(final WebWindowEvent event) {
             final WebWindow window = event.getWebWindow();
             if (window instanceof TopLevelWindow) {

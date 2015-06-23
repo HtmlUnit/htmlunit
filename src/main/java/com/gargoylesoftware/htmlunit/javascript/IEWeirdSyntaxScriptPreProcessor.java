@@ -46,6 +46,7 @@ public class IEWeirdSyntaxScriptPreProcessor implements ScriptPreProcessor {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String preProcess(final HtmlPage htmlPage, String sourceCode,
             final String sourceName, final int lineNumber, final HtmlElement htmlElement) {
 

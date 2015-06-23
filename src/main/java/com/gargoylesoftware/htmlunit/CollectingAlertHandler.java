@@ -52,6 +52,7 @@ public class CollectingAlertHandler implements AlertHandler, Serializable {
      * @param page the page that triggered the alert
      * @param message the message in the alert
      */
+    @Override
     public void handleAlert(final Page page, final String message) {
         collectedAlerts_.add(message);
     }

@@ -69,14 +69,23 @@ public class Cache implements Serializable {
         /**
          * {@inheritDoc}
          */
+        @Override
         public int compareTo(final Entry other) {
             if (lastAccess_ < other.lastAccess_) {
                 return -1;
             }
             if (lastAccess_ == other.lastAccess_) {
-                return -0;
+                return 0;
             }
             return 1;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean equals(final Object obj) {
+            return obj instanceof Entry && lastAccess_ == ((Entry) obj).lastAccess_;
         }
 
         /**

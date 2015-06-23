@@ -496,11 +496,13 @@ public final class HTMLParser {
         }
 
         /** {@inheritDoc ContentHandler#setDocumentLocator} */
+        @Override
         public void setDocumentLocator(final Locator locator) {
             locator_ = locator;
         }
 
         /** {@inheritDoc ContentHandler#startDocument()} */
+        @Override
         public void startDocument() throws SAXException {
         }
 
@@ -514,6 +516,7 @@ public final class HTMLParser {
         }
 
         /** {@inheritDoc ContentHandler#startElement(String,String,String,Attributes)} */
+        @Override
         public void startElement(
                 String namespaceURI, final String localName,
                 final String qName, final Attributes atts)
@@ -752,6 +755,7 @@ public final class HTMLParser {
         }
 
         /** {@inheritDoc ContentHandler@endElement(String,String,String)} */
+        @Override
         public void endElement(final String namespaceURI, final String localName, final String qName)
             throws SAXException {
 
@@ -794,6 +798,7 @@ public final class HTMLParser {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
             if ((characters_ == null || characters_.length() == 0)
                     && page_.hasFeature(HTMLPARSER_REMOVE_EMPTY_CONTENT)
@@ -856,6 +861,7 @@ public final class HTMLParser {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void ignorableWhitespace(final char[] ch, final int start, final int length) throws SAXException {
             if (characters_ == null) {
                 characters_ = new StringBuilder();
@@ -895,6 +901,7 @@ public final class HTMLParser {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void endDocument() throws SAXException {
             handleCharacters();
             final DomNode currentPage = page_;
@@ -902,24 +909,29 @@ public final class HTMLParser {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void endPrefixMapping(final String prefix) throws SAXException {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void processingInstruction(final String target, final String data) throws SAXException {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void skippedEntity(final String name) throws SAXException {
         }
 
         // LexicalHandler methods
 
         /** {@inheritDoc} */
+        @Override
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
             final String data = new String(ch, start, length);
@@ -931,22 +943,27 @@ public final class HTMLParser {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void endCDATA() {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void endDTD() {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void endEntity(final String name) {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void startCDATA() {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void startDTD(final String name, final String publicId, final String systemId) {
             final DomDocumentType type = new DomDocumentType(page_, name, publicId, systemId);
             page_.setDocumentType(type);
@@ -963,12 +980,14 @@ public final class HTMLParser {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void startEntity(final String name) {
         }
 
         /**
          * {@inheritDoc}
          */
+        @Override
         public void ignoredEndElement(final QName element, final Augmentations augs) {
             // if real </form> is reached, don't accept fields anymore as lost children
             if ("form".equals(element.localpart)) {
@@ -983,6 +1002,7 @@ public final class HTMLParser {
         /**
          * {@inheritDoc}
          */
+        @Override
         public void ignoredStartElement(final QName elem, final XMLAttributes attrs, final Augmentations augs) {
             // when multiple body elements are encountered, the attributes of the discarded
             // elements are used when not previously defined

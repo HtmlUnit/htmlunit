@@ -72,6 +72,7 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     public NameValuePair[] getSubmitKeyValuePairs() {
         return new NameValuePair[]{new NameValuePair(getPromptAttribute(), getValue())};
     }
@@ -80,6 +81,7 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
      * {@inheritDoc}
      * @see SubmittableElement#reset()
      */
+    @Override
     public void reset() {
         value_ = "";
     }
@@ -88,6 +90,7 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
+    @Override
     public void setDefaultValue(final String defaultValue) {
         // The reset() method does nothing, so this method doesn't have to, either.
     }
@@ -96,6 +99,7 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
+    @Override
     public String getDefaultValue() {
         // The reset() method does nothing, so this method doesn't have to, either.
         return "";
@@ -108,6 +112,7 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
+    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
@@ -119,6 +124,7 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
      * @see HtmlRadioButtonInput#isDefaultChecked()
      * @see HtmlCheckBoxInput#isDefaultChecked()
      */
+    @Override
     public boolean isDefaultChecked() {
         return false;
     }

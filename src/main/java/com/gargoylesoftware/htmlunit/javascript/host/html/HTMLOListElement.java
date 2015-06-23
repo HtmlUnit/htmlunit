@@ -53,6 +53,7 @@ public class HTMLOListElement extends HTMLListElement {
      *
      * @return the value of the <tt>type</tt> attribute
      */
+    @Override
     @JsxGetter
     public String getType() {
         return super.getType();
@@ -63,6 +64,7 @@ public class HTMLOListElement extends HTMLListElement {
      *
      * @param type the value of the <tt>type</tt> attribute
      */
+    @Override
     @JsxSetter
     public void setType(final String type) {
         super.setType(type);

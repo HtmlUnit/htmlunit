@@ -168,6 +168,7 @@ public class HtmlTableRow extends HtmlElement {
         }
 
         /** @return whether there is another cell available */
+        @Override
         public boolean hasNext() {
             return nextCell_ != null;
         }
@@ -176,6 +177,7 @@ public class HtmlTableRow extends HtmlElement {
          * @return the next cell
          * @throws NoSuchElementException if no cell is available
          */
+        @Override
         public HtmlTableCell next() throws NoSuchElementException {
             return nextCell();
         }
@@ -184,6 +186,7 @@ public class HtmlTableRow extends HtmlElement {
          * Removes the cell under the cursor from the current row.
          * @throws IllegalStateException if there is no current row
          */
+        @Override
         public void remove() throws IllegalStateException {
             if (nextCell_ == null) {
                 throw new IllegalStateException();
@@ -238,6 +241,7 @@ public class HtmlTableRow extends HtmlElement {
          *
          * @return an HtmlTableCell Iterator.
          */
+        @Override
         public Iterator<HtmlTableCell> iterator() {
             return this;
         }

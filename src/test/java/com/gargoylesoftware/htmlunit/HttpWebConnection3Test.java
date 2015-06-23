@@ -135,6 +135,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      */
     public static ExpectedCondition<Boolean> currentUrlContains(final String url) {
         return new ExpectedCondition<Boolean>() {
+            @Override
             public Boolean apply(final WebDriver driver) {
                 final String currentUrl = driver.getCurrentUrl();
                 return currentUrl != null && currentUrl.contains(url);

@@ -78,6 +78,7 @@ public class HTMLAllCollection extends HTMLCollection {
      * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
+    @Override
     @JsxFunction
     public Object item(final Object index) {
         Double numb;
@@ -189,6 +190,7 @@ public class HTMLAllCollection extends HTMLCollection {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES)) {
             if (args.length == 0) {

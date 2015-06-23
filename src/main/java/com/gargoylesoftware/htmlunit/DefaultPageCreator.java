@@ -146,6 +146,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @exception IOException if an IO problem occurs
      * @return the new page object
      */
+    @Override
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final String contentType = determineContentType(webResponse.getContentType().toLowerCase(Locale.ENGLISH),
             webResponse.getContentAsStream());

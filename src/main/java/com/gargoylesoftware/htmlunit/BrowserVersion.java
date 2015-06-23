@@ -330,7 +330,7 @@ public class BrowserVersion implements Serializable, Cloneable {
             }
             catch (final NoSuchFieldException e) {
                 // should never happen
-                throw new IllegalStateException();
+                throw new IllegalStateException(e);
             }
         }
     }

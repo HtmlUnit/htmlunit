@@ -265,6 +265,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Document getOwnerDocument() {
         return getPage();
     }
@@ -284,6 +285,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNode getLastChild() {
         if (firstChild_ != null) {
             // last child is stored as the previous sibling of first child
@@ -295,6 +297,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNode getParentNode() {
         return parent_;
     }
@@ -322,6 +325,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNode getPreviousSibling() {
         if (parent_ == null || this == parent_.firstChild_) {
             // previous sibling of first child points to last child
@@ -333,6 +337,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNode getNextSibling() {
         return nextSibling_;
     }
@@ -340,6 +345,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNode getFirstChild() {
         return firstChild_;
     }
@@ -389,17 +395,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns this node's node type.
      * @return this node's node type
      */
+    @Override
     public abstract short getNodeType();
 
     /**
      * Returns this node's node name.
      * @return this node's node name
      */
+    @Override
     public abstract String getNodeName();
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNamespaceURI() {
         return null;
     }
@@ -407,6 +416,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getLocalName() {
         return null;
     }
@@ -414,6 +424,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getPrefix() {
         return null;
     }
@@ -421,6 +432,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setPrefix(final String prefix) {
         // Empty.
     }
@@ -428,6 +440,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean hasChildNodes() {
         return firstChild_ != null;
     }
@@ -435,6 +448,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNodeList<DomNode> getChildNodes() {
         return new SiblingDomNodeList(this);
     }
@@ -443,6 +457,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public boolean isSupported(final String namespace, final String featureName) {
         throw new UnsupportedOperationException("DomNode.isSupported is not yet implemented.");
     }
@@ -450,6 +465,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void normalize() {
         for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child instanceof DomText) {
@@ -486,6 +502,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public String getBaseURI() {
         throw new UnsupportedOperationException("DomNode.getBaseURI is not yet implemented.");
     }
@@ -493,6 +510,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public short compareDocumentPosition(final Node other) {
         if (other == this) {
             return 0; // strange, no constant available?
@@ -560,6 +578,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getTextContent() {
         switch (getNodeType()) {
             case ELEMENT_NODE:
@@ -590,6 +609,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setTextContent(final String textContent) {
         removeAllChildren();
         if (textContent != null) {
@@ -600,6 +620,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isSameNode(final Node other) {
         return other == this;
     }
@@ -608,6 +629,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public String lookupPrefix(final String namespaceURI) {
         throw new UnsupportedOperationException("DomNode.lookupPrefix is not yet implemented.");
     }
@@ -616,6 +638,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public boolean isDefaultNamespace(final String namespaceURI) {
         throw new UnsupportedOperationException("DomNode.isDefaultNamespace is not yet implemented.");
     }
@@ -624,6 +647,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public String lookupNamespaceURI(final String prefix) {
         throw new UnsupportedOperationException("DomNode.lookupNamespaceURI is not yet implemented.");
     }
@@ -632,6 +656,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public boolean isEqualNode(final Node arg) {
         throw new UnsupportedOperationException("DomNode.isEqualNode is not yet implemented.");
     }
@@ -640,6 +665,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public Object getFeature(final String feature, final String version) {
         throw new UnsupportedOperationException("DomNode.getFeature is not yet implemented.");
     }
@@ -648,6 +674,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public Object getUserData(final String key) {
         throw new UnsupportedOperationException("DomNode.getUserData is not yet implemented.");
     }
@@ -656,6 +683,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
         throw new UnsupportedOperationException("DomNode.setUserData is not yet implemented.");
     }
@@ -663,6 +691,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean hasAttributes() {
         return false;
     }
@@ -670,6 +699,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public NamedNodeMap getAttributes() {
         return NamedAttrNodeMapImpl.EMPTY_MAP;
     }
@@ -827,6 +857,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNodeValue() {
         return null;
     }
@@ -834,6 +865,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setNodeValue(final String value) {
         // Default behavior is to do nothing, overridden in some subclasses
     }
@@ -841,6 +873,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNode cloneNode(final boolean deep) {
         final DomNode newnode;
         try {
@@ -904,6 +937,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNode appendChild(final Node node) {
         if (node == this) {
             if (!hasFeature(NODE_APPEND_CHILD_SELF_IGNORE)) {
@@ -961,6 +995,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node insertBefore(final Node newChild, final Node refChild) {
         if (newChild instanceof DomDocumentFragment) {
             final DomDocumentFragment fragment = (DomDocumentFragment) newChild;
@@ -1082,6 +1117,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node removeChild(final Node child) {
         if (child.getParentNode() != this) {
             throw new DOMException(DOMException.NOT_FOUND_ERR, "Node is not a child of this node.");
@@ -1163,6 +1199,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Node replaceChild(final Node newChild, final Node oldChild) {
         if (oldChild.getParentNode() != this) {
             throw new DOMException(DOMException.NOT_FOUND_ERR, "Node is not a child of this node.");
@@ -1279,6 +1316,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public final Iterable<DomNode> getChildren() {
         return new Iterable<DomNode>() {
+            @Override
             public Iterator<DomNode> iterator() {
                 return new ChildIterator();
             }
@@ -1294,11 +1332,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         private DomNode currentNode_ = null;
 
         /** {@inheritDoc} */
+        @Override
         public boolean hasNext() {
             return nextNode_ != null;
         }
 
         /** {@inheritDoc} */
+        @Override
         public DomNode next() {
             if (nextNode_ != null) {
                 currentNode_ = nextNode_;
@@ -1309,6 +1349,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         /** {@inheritDoc} */
+        @Override
         public void remove() {
             if (currentNode_ == null) {
                 throw new IllegalStateException();
@@ -1325,6 +1366,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public final Iterable<DomNode> getDescendants() {
         return new Iterable<DomNode>() {
+            @Override
             public Iterator<DomNode> iterator() {
                 return new DescendantElementsIterator<DomNode>(DomNode.class);
             }
@@ -1340,6 +1382,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public final Iterable<HtmlElement> getHtmlElementDescendants() {
         return new Iterable<HtmlElement>() {
+            @Override
             public Iterator<HtmlElement> iterator() {
                 return new DescendantElementsIterator<HtmlElement>(HtmlElement.class);
             }
@@ -1366,16 +1409,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         /** {@inheritDoc} */
+        @Override
         public boolean hasNext() {
             return nextNode_ != null;
         }
 
         /** {@inheritDoc} */
+        @Override
         public T next() {
             return nextNode();
         }
 
         /** {@inheritDoc} */
+        @Override
         public void remove() {
             if (currentNode_ == null) {
                 throw new IllegalStateException("Unable to remove current node, because there is no current node.");
@@ -1775,14 +1821,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             final WebClient webClient = getPage().getWebClient();
             final AtomicBoolean errorOccured = new AtomicBoolean(false);
             final ErrorHandler errorHandler = new ErrorHandler() {
+                @Override
                 public void warning(final CSSParseException exception) throws CSSException {
                     // ignore
                 }
 
+                @Override
                 public void fatalError(final CSSParseException exception) throws CSSException {
                     errorOccured.set(true);
                 }
 
+                @Override
                 public void error(final CSSParseException exception) throws CSSException {
                     errorOccured.set(true);
                 }

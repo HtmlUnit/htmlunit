@@ -61,6 +61,7 @@ public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends 
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object getWithFallback(final String name) {
         final SimpleScriptable delegee = getDelegee();
         if (delegee instanceof ScriptableWithFallbackGetter) {

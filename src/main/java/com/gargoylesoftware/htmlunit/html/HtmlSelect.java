@@ -369,6 +369,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
+    @Override
     public NameValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
 
@@ -394,6 +395,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * Returns the value of this element to what it was at the time the page was loaded.
      */
+    @Override
     public void reset() {
         for (final HtmlOption option : getOptions()) {
             option.reset();
@@ -405,6 +407,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
+    @Override
     public void setDefaultValue(final String defaultValue) {
         setSelectedAttribute(defaultValue, true);
     }
@@ -413,6 +416,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
+    @Override
     public String getDefaultValue() {
         final List<HtmlOption> options = getSelectedOptions();
         if (options.size() > 0) {
@@ -429,6 +433,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
+    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
@@ -441,6 +446,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @see HtmlRadioButtonInput#isDefaultChecked()
      * @see HtmlCheckBoxInput#isDefaultChecked()
      */
+    @Override
     public boolean isDefaultChecked() {
         return false;
     }
@@ -564,6 +570,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
+    @Override
     public final String getDisabledAttribute() {
         return getAttribute("disabled");
     }
@@ -571,6 +578,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
+    @Override
     public final boolean isDisabled() {
         return hasAttribute("disabled");
     }
@@ -632,6 +640,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getOriginalName() {
         return originalName_;
     }
@@ -639,6 +648,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
+    @Override
     public Collection<String> getNewNames() {
         return newNames_;
     }

@@ -130,6 +130,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
 
         final ContextFactory factory = new ContextFactory();
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 cx.setOptimizationLevel(-1);
                 final Script script = cx.compileString(scriptSource, scriptName, 0, null);

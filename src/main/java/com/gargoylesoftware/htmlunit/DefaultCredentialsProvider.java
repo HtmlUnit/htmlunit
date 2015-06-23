@@ -93,6 +93,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /**
      * {@inheritDoc}
      */
+    @Override
     public synchronized void setCredentials(final AuthScope authscope, final Credentials credentials) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
@@ -149,6 +150,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /**
      * {@inheritDoc}
      */
+    @Override
     public synchronized Credentials getCredentials(final AuthScope authscope) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
@@ -167,6 +169,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /**
      * {@inheritDoc}
      */
+    @Override
     public synchronized void clear() {
         credentialsMap_.clear();
     }
@@ -218,6 +221,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             password_ = password;
         }
 
+        @Override
         public Credentials getInstance() {
             return new UsernamePasswordCredentials(username_, password_);
         }
@@ -245,6 +249,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             domain_ = domain;
         }
 
+        @Override
         public Credentials getInstance() {
             return new NTCredentials(username_, password_, workstation_, domain_);
         }

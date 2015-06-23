@@ -29,11 +29,13 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
 public class DebuggerAdapter implements Debugger {
 
     /** {@inheritDoc} */
+    @Override
     public void handleCompilationDone(final Context cx, final DebuggableScript functionOrScript, final String source) {
         // Empty.
     }
 
     /** {@inheritDoc} */
+    @Override
     public DebugFrame getFrame(final Context cx, final DebuggableScript fnOrScript) {
         return new DebugFrameAdapter();
     }

@@ -84,6 +84,7 @@ public class BeforeUnloadEvent extends Event {
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
+    @Override
     @JsxGetter
     public Object getReturnValue() {
         return super.getReturnValue();
@@ -93,6 +94,7 @@ public class BeforeUnloadEvent extends Event {
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
      */
+    @Override
     @JsxSetter
     public void setReturnValue(final Object returnValue) {
         super.setReturnValue(returnValue);

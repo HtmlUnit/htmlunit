@@ -54,6 +54,7 @@ public class AppletStubImpl implements AppletStub {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void appletResize(final int width, final int height) {
         // does nothing
     }
@@ -61,6 +62,7 @@ public class AppletStubImpl implements AppletStub {
     /**
      * {@inheritDoc}
      */
+    @Override
     public AppletContext getAppletContext() {
         return appletContextImpl_;
     }
@@ -68,6 +70,7 @@ public class AppletStubImpl implements AppletStub {
     /**
      * {@inheritDoc}
      */
+    @Override
     public URL getCodeBase() {
         return codebase_;
     }
@@ -75,6 +78,7 @@ public class AppletStubImpl implements AppletStub {
     /**
      * {@inheritDoc}
      */
+    @Override
     public URL getDocumentBase() {
         return documentbase_;
     }
@@ -82,6 +86,7 @@ public class AppletStubImpl implements AppletStub {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getParameter(final String name) {
         return parameters_.get(name);
     }
@@ -89,6 +94,7 @@ public class AppletStubImpl implements AppletStub {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isActive() {
         throw new RuntimeException(
                 "Not yet implemented! (com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl.isActive())");

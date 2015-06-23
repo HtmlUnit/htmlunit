@@ -1302,6 +1302,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_A_FUNCTION)) {
             throw Context.reportRuntimeError("Window is not a function.");
@@ -1321,6 +1322,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * {@inheritDoc}
      */
+    @Override
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
         if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_A_FUNCTION)) {
             throw Context.reportRuntimeError("Window is not a function.");
@@ -1331,6 +1333,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object getWithFallback(final String name) {
         Object result = NOT_FOUND;
 
@@ -1870,6 +1873,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         /**
          * {@inheritDoc}
          */
+        @Override
         public void nodeAdded(final DomChangeEvent event) {
             nodeChanged(event.getChangedNode(), null);
         }
@@ -1877,6 +1881,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         /**
          * {@inheritDoc}
          */
+        @Override
         public void nodeDeleted(final DomChangeEvent event) {
             nodeChanged(event.getChangedNode(), null);
         }
@@ -1884,6 +1889,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         /**
          * {@inheritDoc}
          */
+        @Override
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
             nodeChanged(event.getHtmlElement(), event.getName());
         }
@@ -1891,6 +1897,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         /**
          * {@inheritDoc}
          */
+        @Override
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
             nodeChanged(event.getHtmlElement(), event.getName());
         }
@@ -1898,6 +1905,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         /**
          * {@inheritDoc}
          */
+        @Override
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             nodeChanged(event.getHtmlElement(), event.getName());
         }
@@ -2043,6 +2051,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param event the event
      * @return the result
      */
+    @Override
     public ScriptResult executeEvent(final Event event) {
         return executeEvent(event, this);
     }
@@ -2106,6 +2115,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return <tt>false</tt> if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
+    @Override
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
@@ -2182,6 +2192,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             @Override
             public void execute() throws Exception {
                 final ContextAction action = new ContextAction() {
+                    @Override
                     public Object run(final Context cx) {
                         return dispatchEvent(event);
                     }

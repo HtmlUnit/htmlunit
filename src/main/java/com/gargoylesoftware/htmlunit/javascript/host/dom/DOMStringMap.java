@@ -73,6 +73,7 @@ public final class DOMStringMap extends SimpleScriptable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void put(final String name, final Scriptable start, final Object value) {
         if (!(ScriptableObject.getTopLevelScope(this) instanceof Window) || getWindow().getWebWindow() == null) {
             super.put(name, start, value);

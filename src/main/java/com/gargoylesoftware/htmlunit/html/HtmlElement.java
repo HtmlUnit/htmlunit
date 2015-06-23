@@ -983,6 +983,7 @@ public abstract class HtmlElement extends DomElement {
         }
         final HTMLElement jsElt = (HTMLElement) getScriptObject();
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 return jsElt.fireEvent(event);
             }

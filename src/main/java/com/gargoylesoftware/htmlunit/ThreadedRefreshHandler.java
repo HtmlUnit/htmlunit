@@ -44,6 +44,7 @@ public class ThreadedRefreshHandler implements RefreshHandler {
      * @param url the URL where the new page will be loaded
      * @param seconds the number of seconds to wait before reloading the page
      */
+    @Override
     public void handleRefresh(final Page page, final URL url, final int seconds) {
         final Thread thread = new Thread("ThreadedRefreshHandler Thread") {
             @Override

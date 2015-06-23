@@ -637,6 +637,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     * Looks at attributes with the given name.
     * {@inheritDoc}
     */
+    @Override
     public Object getWithFallback(final String name) {
         if (getBrowserVersion().hasFeature(HTMLELEMENT_ATTRIBUTE_AS_JS_PROPERTY) && !"class".equals(name)) {
             final HtmlElement htmlElement = getDomNodeOrNull();
@@ -2073,6 +2074,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Remove focus from this element.
      */
+    @Override
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
     public void blur() {
         super.blur();
@@ -2913,6 +2915,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
+    @Override
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");

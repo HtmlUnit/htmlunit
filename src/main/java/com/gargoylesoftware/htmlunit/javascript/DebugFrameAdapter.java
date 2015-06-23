@@ -28,26 +28,31 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame;
 public class DebugFrameAdapter implements DebugFrame {
 
     /** {@inheritDoc} */
+    @Override
     public void onDebuggerStatement(final Context cx) {
         // Empty.
     }
 
     /** {@inheritDoc} */
+    @Override
     public void onEnter(final Context cx, final Scriptable activation, final Scriptable thisObj, final Object[] args) {
         // Empty.
     }
 
     /** {@inheritDoc} */
+    @Override
     public void onExceptionThrown(final Context cx, final Throwable ex) {
         // Empty.
     }
 
     /** {@inheritDoc} */
+    @Override
     public void onExit(final Context cx, final boolean byThrow, final Object resultOrException) {
         // Empty.
     }
 
     /** {@inheritDoc} */
+    @Override
     public void onLineChange(final Context cx, final int lineNumber) {
         // Empty.
     }

@@ -52,6 +52,7 @@ public class CollectingAttachmentHandler implements AttachmentHandler {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void handleAttachment(final Page page) {
         collectedAttachments_.add(new Attachment(page));
     }

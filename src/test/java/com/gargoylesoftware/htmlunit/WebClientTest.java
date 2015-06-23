@@ -669,6 +669,7 @@ public class WebClientTest extends SimpleWebTestCase {
          * @return the new page
          * @throws IOException if an IO problem occurs
          */
+        @Override
         public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
             final Page page = new TextPage(webResponse, webWindow);
             webWindow.setEnclosedPage(page);
@@ -1882,12 +1883,15 @@ public class WebClientTest extends SimpleWebTestCase {
         final MutableInt errors = new MutableInt();
         final StringBuilder errorUri = new StringBuilder();
         final ErrorHandler handler = new ErrorHandler() {
+            @Override
             public void warning(final CSSParseException exception) throws CSSException {
                 errors.increment();
             }
+            @Override
             public void fatalError(final CSSParseException exception) throws CSSException {
                 errors.increment();
             }
+            @Override
             public void error(final CSSParseException exception) throws CSSException {
                 errors.increment();
                 errorUri.append(exception.getURI());

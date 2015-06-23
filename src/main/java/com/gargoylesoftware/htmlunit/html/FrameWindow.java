@@ -64,6 +64,7 @@ public class FrameWindow extends WebWindowImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebWindow getParentWindow() {
         return frame_.getPage().getEnclosingWindow();
     }
@@ -71,6 +72,7 @@ public class FrameWindow extends WebWindowImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebWindow getTopWindow() {
         return getParentWindow().getTopWindow();
     }

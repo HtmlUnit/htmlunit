@@ -64,6 +64,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     /**
      * {@inheritDoc}
      */
+    @Override
     public String preProcess(final HtmlPage htmlPage, final String sourceCode,
             final String sourceName, final int lineNumber, final HtmlElement htmlElement) {
 

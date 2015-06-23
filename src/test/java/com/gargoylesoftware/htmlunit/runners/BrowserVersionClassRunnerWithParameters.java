@@ -108,6 +108,7 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
         }
 
         final Comparator<FrameworkMethod> comparator = new Comparator<FrameworkMethod>() {
+            @Override
             public int compare(final FrameworkMethod fm1, final FrameworkMethod fm2) {
                 return fm1.getName().compareTo(fm2.getName());
             }

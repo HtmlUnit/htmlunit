@@ -259,6 +259,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      *
      * @return the value of the attribute "disabled" or an empty string if that attribute isn't defined
      */
+    @Override
     public final String getDisabledAttribute() {
         return getAttribute("disabled");
     }
@@ -324,6 +325,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getOriginalName() {
         return originalName_;
     }
@@ -331,6 +333,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
+    @Override
     public Collection<String> getNewNames() {
         return newNames_;
     }

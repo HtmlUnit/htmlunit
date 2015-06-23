@@ -31,6 +31,7 @@ public class SilentCssErrorHandler implements ErrorHandler, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void error(final CSSParseException exception) {
         // Ignore.
     }
@@ -38,6 +39,7 @@ public class SilentCssErrorHandler implements ErrorHandler, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void fatalError(final CSSParseException exception) {
         // Ignore.
     }
@@ -45,6 +47,7 @@ public class SilentCssErrorHandler implements ErrorHandler, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void warning(final CSSParseException exception) {
         // Ignore.
     }

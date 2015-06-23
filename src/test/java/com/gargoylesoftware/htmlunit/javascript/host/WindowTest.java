@@ -558,6 +558,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         webClient.setConfirmHandler(new ConfirmHandler() {
+            @Override
             public boolean handleConfirm(final Page page, final String message) {
                 collectedConfirms.add(message);
                 return true;
@@ -605,6 +606,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         webClient.setPromptHandler(new PromptHandler() {
+            @Override
             public String handlePrompt(final Page page, final String message) {
                 collectedPrompts.add(message);
                 return "Flintstone";
@@ -774,6 +776,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final List<String> collectedStatus = new ArrayList<>();
         webClient.setStatusHandler(new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -1247,6 +1250,7 @@ public class WindowTest extends SimpleWebTestCase {
         getMockWebConnection().setDefaultResponse("");
 
         final OnbeforeunloadHandler handler = new OnbeforeunloadHandler() {
+            @Override
             public boolean handleEvent(final Page page, final String returnValue) {
                 final String[] expectedRequests = {""};
                 assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));

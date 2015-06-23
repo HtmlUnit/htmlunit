@@ -58,6 +58,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object getWithFallback(final String name) {
         final Object response = namedItem(name);
         if (response != null) {

@@ -33,6 +33,7 @@ public class WebWindowAdapter implements WebWindowListener {
      *
      * @param event the event
      */
+    @Override
     public void webWindowOpened(final WebWindowEvent event) {
     }
 
@@ -41,6 +42,7 @@ public class WebWindowAdapter implements WebWindowListener {
      *
      * @param event the event
      */
+    @Override
     public void webWindowContentChanged(final WebWindowEvent event) {
     }
 
@@ -49,6 +51,7 @@ public class WebWindowAdapter implements WebWindowListener {
      *
      * @param event the event
      */
+    @Override
     public void webWindowClosed(final WebWindowEvent event) {
     }
 }

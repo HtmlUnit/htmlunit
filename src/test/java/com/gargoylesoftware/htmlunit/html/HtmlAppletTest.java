@@ -96,6 +96,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -130,6 +131,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -164,6 +166,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -198,6 +201,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -232,6 +236,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -268,6 +273,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -304,6 +310,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -336,6 +343,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -361,6 +369,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }
@@ -394,6 +403,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
+            @Override
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
             }

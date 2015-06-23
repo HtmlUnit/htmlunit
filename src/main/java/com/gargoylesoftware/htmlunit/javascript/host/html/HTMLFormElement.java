@@ -256,6 +256,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the <tt>onsubmit</tt> event handler for this element.
      * @return the <tt>onsubmit</tt> event handler for this element
      */
+    @Override
     @JsxGetter(@WebBrowser(IE))
     public Object getOnsubmit() {
         return getEventHandlerProp("onsubmit");
@@ -265,6 +266,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the <tt>onsubmit</tt> event handler for this element.
      * @param onsubmit the <tt>onsubmit</tt> event handler for this element
      */
+    @Override
     @JsxSetter(@WebBrowser(IE))
     public void setOnsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);
@@ -497,6 +499,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTION)) {
             throw Context.reportRuntimeError("Not a function.");
@@ -516,6 +519,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
         if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTION)) {
             throw Context.reportRuntimeError("Not a function.");

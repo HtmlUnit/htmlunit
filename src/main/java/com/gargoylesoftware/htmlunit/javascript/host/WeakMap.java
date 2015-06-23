@@ -89,6 +89,7 @@ public class WeakMap extends SimpleScriptable {
      * @param key the key
      * @return the value
      */
+    @Override
     @JsxFunction
     public Object get(final Object key) {
         Object o = map_.get(key);

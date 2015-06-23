@@ -151,6 +151,7 @@ public class HttpWebConnection implements WebConnection {
     /**
      * {@inheritDoc}
      */
+    @Override
     public WebResponse getResponse(final WebRequest request) throws IOException {
         final URL url = request.getUrl();
         final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder());

@@ -446,10 +446,12 @@ public class DomNodeTest extends SimpleWebTestCase {
 
     static class DomChangeListenerTestImpl implements DomChangeListener {
         private final List<String> collectedValues_ = new ArrayList<>();
+        @Override
         public void nodeAdded(final DomChangeEvent event) {
             collectedValues_.add("nodeAdded: " + event.getParentNode().getNodeName() + ','
                     + event.getChangedNode().getNodeName());
         }
+        @Override
         public void nodeDeleted(final DomChangeEvent event) {
             collectedValues_.add("nodeDeleted: " + event.getParentNode().getNodeName() + ','
                     + event.getChangedNode().getNodeName());

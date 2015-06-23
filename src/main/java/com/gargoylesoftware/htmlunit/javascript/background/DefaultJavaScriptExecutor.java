@@ -133,11 +133,13 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      * @param timeoutMillis the timeout in milliseconds
      * @return the number of jobs executed
      */
+    @Override
     public int pumpEventLoop(final long timeoutMillis) {
         return 0;
     }
 
     /** Runs the eventLoop. */
+    @Override
     public void run() {
         final boolean trace = LOG.isTraceEnabled();
         // this has to be a multiple of 10ms
@@ -193,6 +195,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      * Register a window with the eventLoop.
      * @param newWindow the new web window
      */
+    @Override
     public synchronized void addWindow(final WebWindow newWindow) {
         final JavaScriptJobManager jobManager = newWindow.getJobManager();
         if (jobManager != null && !contains(jobManager)) {
@@ -211,6 +214,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     }
 
     /** Notes that this thread has been shutdown. */
+    @Override
     public void shutdown() {
         shutdown_ = true;
         killThread();

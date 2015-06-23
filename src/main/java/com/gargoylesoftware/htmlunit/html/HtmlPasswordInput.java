@@ -74,6 +74,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void select() {
         selectionDelegate_.select();
     }
@@ -81,6 +82,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getSelectedText() {
         return selectionDelegate_.getSelectedText();
     }
@@ -88,6 +90,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getText() {
         return getValueAttribute();
     }
@@ -95,6 +98,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setText(final String text) {
         setValueAttribute(text);
     }
@@ -102,6 +106,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getSelectionStart() {
         return selectionDelegate_.getSelectionStart();
     }
@@ -109,6 +114,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setSelectionStart(final int selectionStart) {
         selectionDelegate_.setSelectionStart(selectionStart);
     }
@@ -116,6 +122,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getSelectionEnd() {
         return selectionDelegate_.getSelectionEnd();
     }
@@ -123,6 +130,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setSelectionEnd(final int selectionEnd) {
         selectionDelegate_.setSelectionEnd(selectionEnd);
     }
@@ -166,6 +174,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setDefaultValue(final String defaultValue) {
         boolean modifyValue = hasFeature(HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE);
         modifyValue = modifyValue && getValueAttribute().equals(getDefaultValue());

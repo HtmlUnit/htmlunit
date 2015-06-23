@@ -1032,6 +1032,7 @@ public class KeyboardEvent extends UIEvent {
     /**
      * {@inheritDoc}
      */
+    @Override
     @JsxGetter
     public boolean getShiftKey() {
         return super.getShiftKey();
@@ -1040,6 +1041,7 @@ public class KeyboardEvent extends UIEvent {
     /**
      * {@inheritDoc}
      */
+    @Override
     @JsxGetter
     public boolean getCtrlKey() {
         return super.getCtrlKey();
@@ -1048,6 +1050,7 @@ public class KeyboardEvent extends UIEvent {
     /**
      * {@inheritDoc}
      */
+    @Override
     @JsxGetter
     public boolean getAltKey() {
         return super.getAltKey();

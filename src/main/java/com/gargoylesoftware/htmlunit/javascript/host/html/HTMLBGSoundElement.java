@@ -55,6 +55,7 @@ public class HTMLBGSoundElement extends HTMLElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isEndTagForbidden() {
         return true;
     }

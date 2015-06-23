@@ -59,6 +59,7 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
      * Performs post-test deconstruction.
      * @throws Exception if an error occurs
      */
+    @Override
     @After
     public void tearDown() throws Exception {
         if (proxyWebServer_ != null) {

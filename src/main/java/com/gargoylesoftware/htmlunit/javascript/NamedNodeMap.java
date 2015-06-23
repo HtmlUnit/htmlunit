@@ -101,6 +101,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      *
      * {@inheritDoc}
      */
+    @Override
     public Object getWithFallback(final String name) {
         final Object response = getNamedItem(name);
         if (response != null) {
