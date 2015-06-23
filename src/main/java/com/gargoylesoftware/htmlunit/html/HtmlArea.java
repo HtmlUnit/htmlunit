@@ -70,7 +70,7 @@ public class HtmlArea extends HtmlElement {
         final WebClient webClient = enclosingPage.getWebClient();
 
         final String href = getHrefAttribute().trim();
-        if (href.length() > 0) {
+        if (!href.isEmpty()) {
             final HtmlPage page = (HtmlPage) getPage();
             if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 page.executeJavaScriptIfPossible(

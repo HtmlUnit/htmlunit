@@ -166,7 +166,7 @@ public class ScriptException extends RuntimeException {
             getCause().printStackTrace(printWriter);
         }
 
-        if (scriptSourceCode_ != null && scriptSourceCode_.length() > 0) {
+        if (scriptSourceCode_ != null && !scriptSourceCode_.isEmpty()) {
             printWriter.println("== CALLING JAVASCRIPT ==");
             printWriter.println(scriptSourceCode_);
         }

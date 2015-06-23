@@ -144,7 +144,7 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
         File expectationsFile = null;
         // version specific to this browser (or browser group)?
         String browserSuffix = "." + browserVersion.getNickname();
-        while (browserSuffix.length() > 0) {
+        while (!browserSuffix.isEmpty()) {
             final File file = new File(baseName + browserSuffix + ".txt");
             if (file.exists()) {
                 expectationsFile = file;

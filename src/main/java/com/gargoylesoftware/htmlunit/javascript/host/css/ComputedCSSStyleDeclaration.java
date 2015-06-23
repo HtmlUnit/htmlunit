@@ -2155,7 +2155,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         final int contentHeight = getContentHeight();
         final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN);
-        final boolean explicitHeightSpecified = super.getHeight().length() > 0;
+        final boolean explicitHeightSpecified = !super.getHeight().isEmpty();
 
         int height;
         if (contentHeight > 0
@@ -2201,7 +2201,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return windowHeight;
         }
 
-        final boolean explicitHeightSpecified = super.getHeight().length() > 0;
+        final boolean explicitHeightSpecified = !super.getHeight().isEmpty();
 
         final int defaultHeight;
         if (node instanceof HtmlDivision && node.getTextContent().trim().isEmpty()) {

@@ -130,7 +130,7 @@ public class UrlFetchWebConnection implements WebConnection {
                 if (headerKey != null) { // map contains entry like (null: "HTTP/1.1 200 OK")
                     final StringBuilder sb = new StringBuilder();
                     for (final String headerValue : headerEntry.getValue()) {
-                        if (sb.length() > 0) {
+                        if (sb.length() != 0) {
                             sb.append(", ");
                         }
                         sb.append(headerValue);

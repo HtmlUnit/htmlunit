@@ -187,7 +187,7 @@ public class HtmlForm extends HtmlElement {
                 url = htmlPage.getFullyQualifiedUrl(actionUrl);
             }
 
-            if (queryFromFields.length() > 0) {
+            if (!queryFromFields.isEmpty()) {
                 url = UrlUtils.getUrlWithNewQuery(url, queryFromFields);
             }
 
@@ -229,7 +229,7 @@ public class HtmlForm extends HtmlElement {
      */
     private String getSubmitCharset() {
         String charset = getAcceptCharsetAttribute();
-        if (charset.length() > 0) {
+        if (!charset.isEmpty()) {
             charset = charset.trim();
             return SUBMIT_CHARSET_PATTERN.matcher(charset).replaceAll("").toUpperCase(Locale.ENGLISH);
         }

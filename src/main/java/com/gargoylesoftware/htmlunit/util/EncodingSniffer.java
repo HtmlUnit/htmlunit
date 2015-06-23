@@ -781,7 +781,7 @@ public final class EncodingSniffer {
             if (i >= bytes.length) {
                 return new Attribute(name.toString(), value.toString(), i);
             }
-            if (bytes[i] == '=' && name.length() > 0) {
+            if (bytes[i] == '=' && name.length() != 0) {
                 i++;
                 break;
             }

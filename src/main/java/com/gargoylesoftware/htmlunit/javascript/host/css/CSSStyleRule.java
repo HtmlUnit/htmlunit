@@ -74,8 +74,7 @@ public class CSSStyleRule extends CSSRule {
         while (m.find()) {
             String fixedName = m.group();
             // this should be handled with the right regex but...
-            if ((fixedName.length() > 0)
-                    && (('.' == fixedName.charAt(0)) || ('#' == fixedName.charAt(0)))) {
+            if (!fixedName.isEmpty() && ('.' == fixedName.charAt(0)) || ('#' == fixedName.charAt(0))) {
                 // nothing
             }
             else if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_UPPERCASE)) {

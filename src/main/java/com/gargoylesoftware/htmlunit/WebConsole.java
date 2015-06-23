@@ -239,7 +239,7 @@ public class WebConsole {
         }
 
         for (final Object o : args) {
-            if (sb.length() > 0) {
+            if (sb.length() != 0) {
                 sb.append(' ');
             }
             sb.append(formatter.printObject(o));

@@ -185,7 +185,7 @@ public final class MozillaTestGenerator {
                     i = p1 - 1;
                     p1 = p0;
                 }
-                if (buffer.length() > 0) {
+                if (buffer.length() != 0) {
                     buffer.append(',');
                 }
                 buffer.append(line.substring(p0, p1));

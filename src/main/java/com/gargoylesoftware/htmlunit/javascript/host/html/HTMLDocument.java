@@ -692,7 +692,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             page.getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(page) {
                 @Override
                 public void execute() throws Exception {
-                    if (writeBuffer_.length() > 0) {
+                    if (writeBuffer_.length() != 0) {
                         close();
                     }
                     closePostponedAction_ = false;

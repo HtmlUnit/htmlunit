@@ -867,7 +867,7 @@ public final class HTMLParser {
          * Picks up the character data accumulated so far and add it to the current element as a text node.
          */
         private void handleCharacters() {
-            if (characters_ != null && characters_.length() > 0) {
+            if (characters_ != null && characters_.length() != 0) {
                 if (currentNode_ instanceof HtmlHtml) {
                     // In HTML, the <html> node only has two possible children:
                     // the <head> and the <body>; any text is ignored.

@@ -182,7 +182,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
     private String getFunctionName(final Scriptable thisObj) {
         if (functionOrScript_.isFunction()) {
             final String name = functionOrScript_.getFunctionName();
-            if (name != null && name.length() > 0) {
+            if (name != null && !name.isEmpty()) {
                 // A named function -- we can just return the name.
                 return name;
             }

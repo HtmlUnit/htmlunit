@@ -436,7 +436,7 @@ public final class UrlUtils {
         if (port != -1) {
             s.append(":").append(port);
         }
-        if (path != null && path.length() > 0) {
+        if (path != null && !path.isEmpty()) {
             if (!('/' == path.charAt(0))) {
                 s.append("/");
             }
@@ -446,7 +446,7 @@ public final class UrlUtils {
             s.append("?").append(query);
         }
         if (ref != null) {
-            if (!((ref.length() > 0) && ('#' == ref.charAt(0)))) {
+            if (ref.isEmpty() || ref.charAt(0) != '#') {
                 s.append("#");
             }
             s.append(ref);
@@ -471,7 +471,7 @@ public final class UrlUtils {
 
         // pre-compute length of StringBuffer
         int len = protocol.length() + 1;
-        if (authority != null && authority.length() > 0) {
+        if (authority != null && !authority.isEmpty()) {
             len += 2 + authority.length();
         }
         if (path != null) {
@@ -487,7 +487,7 @@ public final class UrlUtils {
         final StringBuilder s = new StringBuilder(len);
         s.append(protocol);
         s.append(":");
-        if (authority != null && authority.length() > 0) {
+        if (authority != null && !authority.isEmpty()) {
             s.append("//");
             s.append(authority);
         }
@@ -499,7 +499,7 @@ public final class UrlUtils {
             s.append(query);
         }
         if (ref != null) {
-            if (!((ref.length() > 0) && ('#' == ref.charAt(0)))) {
+            if (ref.isEmpty() || ref.charAt(0) != '#') {
                 s.append("#");
             }
             s.append(ref);
@@ -770,7 +770,7 @@ public final class UrlUtils {
         url.location_ = baseUrl.location_;
         // Step 4: If the embedded URL path is preceded by a slash "/", the
         //         path is not relative and we skip to Step 7.
-        if ((url.path_ != null) && ((url.path_.length() > 0) && ('/' == url.path_.charAt(0)))) {
+        if (url.path_ != null && !url.path_.isEmpty() && url.path_.charAt(0) == '/') {
             url.path_ = removeLeadingSlashPoints(url.path_);
             return url;
         }

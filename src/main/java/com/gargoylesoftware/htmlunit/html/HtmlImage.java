@@ -172,7 +172,7 @@ public class HtmlImage extends HtmlElement {
             return;
         }
 
-        if (hasEventHandlers("onload") && getSrcAttribute().length() > 0) {
+        if (hasEventHandlers("onload") && !getSrcAttribute().isEmpty()) {
             onloadInvoked_ = true;
             // An onload handler and source are defined; we need to download the image and then call the onload handler.
             boolean ok;

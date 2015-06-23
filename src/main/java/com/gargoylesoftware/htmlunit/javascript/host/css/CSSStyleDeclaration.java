@@ -680,7 +680,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         final StringBuilder buffer = new StringBuilder();
         final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
         for (final StyleElement e : sortedValues) {
-            if (buffer.length() > 0) {
+            if (buffer.length() != 0) {
                 buffer.append(" ");
             }
             buffer.append(e.getName());
@@ -5568,7 +5568,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
         else {
             // Case-sensitive.
-            if (getStyleAttribute(name).length() > 0) {
+            if (!getStyleAttribute(name).isEmpty()) {
                 setStyleAttribute(name, value);
             }
         }
@@ -5605,7 +5605,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
         // Case-sensitive.
         final String s = getStyleAttribute(name);
-        if (s.length() > 0) {
+        if (!s.isEmpty()) {
             removeStyleAttribute(name);
             return true;
         }

@@ -69,7 +69,7 @@ public class ErrorOutputChecker implements TestRule {
             // remove webdriver message
             output = WEB_DRIVER_CHROME_MSG.matcher(output).replaceAll("");
             output = WEB_DRIVER_IE_MSG.matcher(output).replaceAll("");
-            if (output.length() > 0) {
+            if (!output.isEmpty()) {
                 throw new RuntimeException("Test has produced output to System.err: " + output);
             }
         }

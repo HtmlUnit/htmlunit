@@ -330,7 +330,7 @@ public class Location extends SimpleScriptable {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
         if (hash != null) {
-            if (hash.length() > 0 && ('#' == hash.charAt(0))) {
+            if (!hash.isEmpty() && ('#' == hash.charAt(0))) {
                 hash = hash.substring(1);
             }
         }

@@ -114,7 +114,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
             }
         }
         // if content starts with new line, it is ignored (=> for the parser?)
-        if (buffer.length() > 0 && buffer.charAt(0) == '\n') {
+        if (buffer.length() != 0 && buffer.charAt(0) == '\n') {
             buffer.deleteCharAt(0);
         }
         return buffer.toString();

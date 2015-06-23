@@ -2396,7 +2396,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *        is set for the simulated browser
      */
     protected void setWidthOrHeight(final String attributeName, String value, final boolean allowNegativeValues) {
-        if (!getBrowserVersion().hasFeature(JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES) && value.length() > 0) {
+        if (!getBrowserVersion().hasFeature(JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES) && !value.isEmpty()) {
             if (value.endsWith("px")) {
                 value = value.substring(0, value.length() - 2);
             }

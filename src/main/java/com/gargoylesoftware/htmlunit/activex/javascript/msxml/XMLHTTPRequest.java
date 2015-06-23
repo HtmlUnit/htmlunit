@@ -503,7 +503,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             if (HttpMethod.POST == webRequest_.getHttpMethod()
                     || HttpMethod.PUT == webRequest_.getHttpMethod()) {
                 final String body = Context.toString(content);
-                if (body.length() > 0) {
+                if (!body.isEmpty()) {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("Setting request body to: " + body);
                     }

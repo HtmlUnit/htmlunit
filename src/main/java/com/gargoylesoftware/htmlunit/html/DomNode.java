@@ -1510,7 +1510,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 if (ScriptableObject.hasProperty(scriptable, "getProperty")) {
                     final Object selectionNS =
                             ScriptableObject.callMethod(scriptable, "getProperty", new Object[]{"SelectionNamespaces"});
-                    if (selectionNS != null && selectionNS.toString().length() > 0) {
+                    if (selectionNS != null && !selectionNS.toString().isEmpty()) {
                         final Map<String, String> namespaces = parseSelectionNamespaces(selectionNS.toString());
                         if (namespaces != null) {
                             prefixResolver = new PrefixResolver() {

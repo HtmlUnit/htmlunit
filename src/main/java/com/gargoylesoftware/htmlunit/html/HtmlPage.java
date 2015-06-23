@@ -767,7 +767,7 @@ public class HtmlPage extends SgmlPage {
         if (base_ == null) {
             resolvedTarget = elementTarget;
         }
-        else if (elementTarget != null && elementTarget.length() > 0) {
+        else if (elementTarget != null && !elementTarget.isEmpty()) {
             resolvedTarget = elementTarget;
         }
         else {

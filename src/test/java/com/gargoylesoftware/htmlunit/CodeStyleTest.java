@@ -337,7 +337,7 @@ public class CodeStyleTest {
     private void trailingWhitespace(final List<String> lines, final String relativePath) {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
-            if (line.length() > 0) {
+            if (!line.isEmpty()) {
                 final char last = line.charAt(line.length() - 1);
                 if (Character.isWhitespace(last)) {
                     addFailure("Trailing whitespace in " + relativePath + ", line: " + (i + 1));
