@@ -89,6 +89,14 @@ public class Cache implements Serializable {
         }
 
         /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int hashCode() {
+            return ((Long) lastAccess_).hashCode();
+        }
+
+        /**
          * Updates the last access date.
          */
         public void touch() {
