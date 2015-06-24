@@ -86,10 +86,6 @@ public abstract class WebTestCase {
     public static final int SOCKS_PROXY_PORT = Integer.parseInt(
             System.getProperty("htmlunit.test.socksproxy.port", "55555"));
 
-    /** Skips the SOCKS proxy tests. */
-    public static final boolean SOCKS_PROXY_SKIP = Boolean.valueOf(
-            System.getProperty("htmlunit.test.socksproxy.skip", "false"));
-
     /** Succeeds the SOCKS proxy tests (for windows) . */
     public static final boolean GEOLOCATION_IGNORE = Boolean.valueOf(
             System.getProperty("htmlunit.test.geolocation.ignore", "false"));

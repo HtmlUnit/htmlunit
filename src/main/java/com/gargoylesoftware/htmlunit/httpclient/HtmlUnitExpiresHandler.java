@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
 
     // simplified patterns from BrowserCompatSpec, with yy patterns before similar yyyy patterns
-    static final String[] DEFAULT_DATE_PATTERNS = new String[] {
+    private static final String[] DEFAULT_DATE_PATTERNS = new String[] {
         "EEE dd MMM yy HH mm ss zzz",
         "EEE dd MMM yyyy HH mm ss zzz",
         "EEE MMM d HH mm ss yyyy",
@@ -52,7 +52,7 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
         "EEE dd MM yy HH mm ss z ",
         "EEE dd MM yyyy HH mm ss z ",
     };
-    static final String[] EXTENDED_DATE_PATTERNS = new String[] {
+    private static final String[] EXTENDED_DATE_PATTERNS = new String[] {
         "EEE dd MMM yy HH mm ss zzz",
         "EEE dd MMM yyyy HH mm ss zzz",
         "EEE MMM d HH mm ss yyyy",

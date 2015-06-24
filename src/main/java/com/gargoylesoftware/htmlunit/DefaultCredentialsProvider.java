@@ -19,6 +19,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
@@ -40,7 +41,7 @@ import org.apache.http.client.CredentialsProvider;
  */
 public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
 
-    private final HashMap<AuthScopeProxy, CredentialsFactory> credentialsMap_ = new HashMap<>();
+    private final Map<AuthScopeProxy, CredentialsFactory> credentialsMap_ = new HashMap<>();
 
     /**
      * Adds credentials for the specified username/password for any host/port/realm combination.
@@ -122,7 +123,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param authscope the {@link AuthScope authentication scope}
      * @return the credentials
      */
-    private static Credentials matchCredentials(final HashMap<AuthScopeProxy, CredentialsFactory> map,
+    private static Credentials matchCredentials(final Map<AuthScopeProxy, CredentialsFactory> map,
             final AuthScope authscope) {
         final CredentialsFactory factory = map.get(new AuthScopeProxy(authscope));
         Credentials creds = null;

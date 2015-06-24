@@ -199,19 +199,19 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             return "true";
         }
         else if ("@_jscript_version".equals(variable)) {
-            if (browserVersion.getBrowserVersionNumeric() <= 6) {
+            if (Float.compare(browserVersion.getBrowserVersionNumeric(), 6) <= 0) {
                 return "5.6";
             }
-            else if (browserVersion.getBrowserVersionNumeric() == 7) {
+            if (Float.compare(browserVersion.getBrowserVersionNumeric(), 7) == 0) {
                 return "5.7";
             }
             return "5.8";
         }
         else if ("@_jscript_build".equals(variable)) {
-            if (browserVersion.getBrowserVersionNumeric() <= 6) {
+            if (Float.compare(browserVersion.getBrowserVersionNumeric(), 6) <= 0) {
                 return "6626";
             }
-            if (browserVersion.getBrowserVersionNumeric() == 7) {
+            if (Float.compare(browserVersion.getBrowserVersionNumeric(), 7) == 0) {
                 return "5730";
             }
             return "18702";

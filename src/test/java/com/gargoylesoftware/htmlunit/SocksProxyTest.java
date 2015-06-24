@@ -14,8 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assume.assumeTrue;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,11 +34,12 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Tests for SOCKS proxy support.
- * This test expects a SOCKS proxy to be available on port
+ * This test {@link org.junit.Assume assumes} a SOCKS proxy to be available on port
  * {@link WebTestCase#SOCKS_PROXY_PORT} of {@link WebTestCase#SOCKS_PROXY_HOST}.
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class SocksProxyTest extends WebServerTestCase {
@@ -47,9 +51,8 @@ public class SocksProxyTest extends WebServerTestCase {
      */
     @Test
     public void http() throws Exception {
-        if (!SOCKS_PROXY_SKIP) {
-            doHttpTest(getWebClientWithSocksProxy());
-        }
+        assumeSocksProxyInUse();
+        doHttpTest(getWebClientWithSocksProxy());
     }
 
     /**
@@ -75,9 +78,8 @@ public class SocksProxyTest extends WebServerTestCase {
      */
     @Test
     public void https() throws Exception {
-        if (!SOCKS_PROXY_SKIP) {
-            doHttpsTest(getWebClientWithSocksProxy());
-        }
+        assumeSocksProxyInUse();
+        doHttpsTest(getWebClientWithSocksProxy());
     }
 
     /**
@@ -99,6 +101,15 @@ public class SocksProxyTest extends WebServerTestCase {
         final String url = "https://" + localServer_.getHostName() + ":" + localServer_.getPort();
         final HtmlPage page = webClient.getPage(url);
         assertEquals("hello", page.getTitleText());
+    }
+
+    private void assumeSocksProxyInUse() {
+        try {
+            new Socket(SOCKS_PROXY_HOST, SOCKS_PROXY_PORT).close();
+        }
+        catch (final IOException e) {
+            assumeTrue("Socks proxy is not available", false);
+        }
     }
 
     private WebClient getWebClientWithWrongSocksProxy() {

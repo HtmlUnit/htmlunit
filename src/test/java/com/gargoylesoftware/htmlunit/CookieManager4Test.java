@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assume.assumeTrue;
+
+import java.net.Inet4Address;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -29,20 +33,40 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * Unit tests for {@link CookieManager}.
  *
  * These tests require a special setup in etc/hosts
+ * <pre>
  * 127.0.0.1       host1.htmlunit.org
  * 127.0.0.1       host2.htmlunit.org
+ * 127.0.0.1       htmlunit.org
+ * </pre>
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-@Ignore("Requires a special configuration; see class comment for more")
 public class CookieManager4Test extends WebDriverTestCase {
 
     private static final String DOMAIN = "htmlunit.org";
-    private static final String HOST1 = "http://host1." + DOMAIN + ":" + PORT;
-    private static final String HOST2 = "http://host2." + DOMAIN + ":" + PORT;
-    private static final String HOST3 = "http://" + DOMAIN + ":" + PORT;
+    private static final String URL_HOST1 = "http://host1." + DOMAIN + ":" + PORT;
+    private static final String URL_HOST2 = "http://host2." + DOMAIN + ":" + PORT;
+    private static final String URL_HOST3 = "http://" + DOMAIN + ":" + PORT;
+
+    /**
+     * {@link org.junit.Assume Assumes} that the host configurations are present.
+     *
+     * @throws Exception if the test fails
+     */
+    @Before
+    public void checkSettings() throws Exception {
+        try {
+            Inet4Address.getByName(new URL(URL_HOST1).getHost());
+            Inet4Address.getByName(new URL(URL_HOST2).getHost());
+            Inet4Address.getByName(new URL(URL_HOST3).getHost());
+        }
+        catch (final UnknownHostException e) {
+            assumeTrue("Host configurations are not present", false);
+        }
+    }
 
     /**
      * @throws Exception if the test fails
@@ -57,7 +81,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 "text/html", responseHeader);
 
-        final URL firstUrl = new URL(HOST1 + "/");
+        final URL firstUrl = new URL(URL_HOST1 + "/");
 
         loadPageWithAlerts2(firstUrl);
     }
@@ -80,13 +104,13 @@ public class CookieManager4Test extends WebDriverTestCase {
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
             + "<script>\n"
-            + "  location.replace('" + HOST3 + "/');\n"
+            + "  location.replace('" + URL_HOST3 + "/');\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
-        final URL firstUrl = new URL(HOST1 + "/");
+        final URL firstUrl = new URL(URL_HOST1 + "/");
         getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
@@ -110,13 +134,13 @@ public class CookieManager4Test extends WebDriverTestCase {
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
             + "<script>\n"
-            + "  location.replace('" + HOST3 + "/test.html');\n"
+            + "  location.replace('" + URL_HOST3 + "/test.html');\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
-        final URL firstUrl = new URL(HOST3 + "/");
+        final URL firstUrl = new URL(URL_HOST3 + "/");
         getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
@@ -136,13 +160,13 @@ public class CookieManager4Test extends WebDriverTestCase {
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
             + "<script>\n"
-            + "  location.replace('" + HOST2 + "/');\n"
+            + "  location.replace('" + URL_HOST2 + "/');\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
-        final URL firstUrl = new URL(HOST1 + "/");
+        final URL firstUrl = new URL(URL_HOST1 + "/");
         getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
@@ -161,13 +185,13 @@ public class CookieManager4Test extends WebDriverTestCase {
             + "<p>Cookie Domain Test</p>\n"
             + "<script>\n"
             + "  document.cookie='cross-domain=1; Domain=.htmlunit.org; Path=/';\n"
-            + "  location.replace('" + HOST2 + "/');\n"
+            + "  location.replace('" + URL_HOST2 + "/');\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
-        final URL firstUrl = new URL(HOST1 + "/");
+        final URL firstUrl = new URL(URL_HOST1 + "/");
         getMockWebConnection().setResponse(firstUrl, html);
 
         loadPageWithAlerts2(firstUrl);
@@ -186,13 +210,13 @@ public class CookieManager4Test extends WebDriverTestCase {
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
             + "<script>\n"
-            + "  location.replace('" + HOST2 + "/');\n"
+            + "  location.replace('" + URL_HOST2 + "/');\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
-        final URL firstUrl = new URL(HOST1 + "/");
+        final URL firstUrl = new URL(URL_HOST1 + "/");
         getMockWebConnection().setResponse(firstUrl, html);
 
         loadPageWithAlerts2(firstUrl);
