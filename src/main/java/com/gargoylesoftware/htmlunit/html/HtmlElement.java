@@ -623,12 +623,81 @@ public abstract class HtmlElement extends DomElement {
      *
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
-     * @param keyCode the key code wish to simulate typing
+     * @param keyCodes the key codes to simulate typing
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
      */
-    public Page type(final int keyCode) throws IOException {
-        return type(keyCode, false, false, false);
+    public Page type(final int... keyCodes) throws IOException {
+        if (keyCodes.length == 1) {
+            return type(keyCodes[0], false, false, false);
+        }
+
+        Page page = null;
+
+        boolean shiftPressed = false;
+        boolean ctrlPressed = false;
+        boolean altPressed = false;
+
+        List<Integer> specialKeys = null;
+        for (final int key : keyCodes) {
+            switch (key) {
+                case KeyboardEvent.DOM_VK_SHIFT:
+                    shiftPressed = true;
+                    break;
+
+                case KeyboardEvent.DOM_VK_CONTROL:
+                    ctrlPressed = true;
+                    break;
+
+                case KeyboardEvent.DOM_VK_ALT:
+                    altPressed = true;
+                    break;
+
+                default:
+            }
+
+            boolean keyPress = true;
+            boolean keyUp = true;
+            switch (key) {
+                case KeyboardEvent.DOM_VK_SHIFT:
+                case KeyboardEvent.DOM_VK_CONTROL:
+                case KeyboardEvent.DOM_VK_ALT:
+                    if (specialKeys == null) {
+                        specialKeys = new ArrayList<>(keyCodes.length);
+                    }
+                    specialKeys.add(key);
+                    keyPress = false;
+                    keyUp = false;
+                    break;
+
+                default:
+            }
+            page = type(key, shiftPressed, ctrlPressed, altPressed, true, keyPress, keyUp);
+        }
+
+        if (specialKeys != null) {
+            for (int i = specialKeys.size() - 1; i >= 0; i--) {
+                final int key = specialKeys.get(i);
+                switch (key) {
+                    case KeyboardEvent.DOM_VK_SHIFT:
+                        shiftPressed = false;
+                        break;
+
+                    case KeyboardEvent.DOM_VK_CONTROL:
+                        ctrlPressed = false;
+                        break;
+
+                    case KeyboardEvent.DOM_VK_ALT:
+                        altPressed = false;
+                        break;
+
+                    default:
+                }
+                page = type(key, shiftPressed, ctrlPressed, altPressed, false, false, true);
+            }
+        }
+
+        return page;
     }
 
     /**
@@ -648,6 +717,12 @@ public abstract class HtmlElement extends DomElement {
      */
     public Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
+        return type(keyCode, shiftKey, ctrlKey, altKey, true, true, true);
+    }
+
+    private Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+        final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp)
+        throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
@@ -657,14 +732,22 @@ public abstract class HtmlElement extends DomElement {
             focus();
         }
 
-        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey);
-
-        final ScriptResult keyDownResult = fireEvent(keyDown);
+        final Event keyDown;
+        final ScriptResult keyDownResult;
+        if (fireKeyDown) {
+            keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey);
+            keyDownResult = fireEvent(keyDown);
+        }
+        else {
+            keyDown = null;
+            keyDownResult = null;
+        }
 
         final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+
         final Event keyPress;
         final ScriptResult keyPressResult;
-        if (browserVersion.hasFeature(KEYBOARD_EVENT_SPECIAL_KEYPRESS)) {
+        if (fireKeyPress && browserVersion.hasFeature(KEYBOARD_EVENT_SPECIAL_KEYPRESS)) {
             keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode, shiftKey, ctrlKey, altKey);
 
             keyPressResult = fireEvent(keyPress);
@@ -674,7 +757,7 @@ public abstract class HtmlElement extends DomElement {
             keyPressResult = null;
         }
 
-        if (!keyDown.isAborted(keyDownResult)
+        if (keyDown != null && !keyDown.isAborted(keyDownResult)
                 && (keyPress == null || !keyPress.isAborted(keyPressResult))) {
             doType(keyCode, shiftKey, ctrlKey, altKey);
         }
@@ -687,8 +770,10 @@ public abstract class HtmlElement extends DomElement {
             fireEvent(input);
         }
 
-        final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, keyCode, shiftKey, ctrlKey, altKey);
-        fireEvent(keyUp);
+        if (fireKeyUp) {
+            final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, keyCode, shiftKey, ctrlKey, altKey);
+            fireEvent(keyUp);
+        }
 
 //        final HtmlForm form = getEnclosingForm();
 //        if (form != null && keyCode == '\n' && isSubmittableByEnter()) {

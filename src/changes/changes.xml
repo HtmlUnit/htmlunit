@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                HtmlElement: type(int) is now varargs, to support special key combinations.
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek">
                 Mocked ActiveX objects have to be able to deal with unknown/unsupported properties.
             </action>
