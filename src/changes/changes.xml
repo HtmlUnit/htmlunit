@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                Mocked ActiveX objects have to be able to deal with unknown/unsupported properties.
+            </action>
             <action type="fix" dev="rbri">
                 Regex: back references to enclosing groups are ignored by js regex (e.g. /(a)(b\2)/).
             </action>

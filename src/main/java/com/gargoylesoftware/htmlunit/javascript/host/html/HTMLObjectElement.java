@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.NativeJavaObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
 
@@ -45,6 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectImpl;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlObject.class,
@@ -162,6 +164,17 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
+        // for java mocks do a bit more, we have handle unkonwn properties
+        // ourself
+        if (wrappedActiveX_ instanceof NativeJavaObject) {
+            final NativeJavaObject obj = (NativeJavaObject) wrappedActiveX_;
+            final Object result = obj.get(name, start);
+            if (Scriptable.NOT_FOUND != result) {
+                return result;
+            }
+            return super.get(name, start);
+        }
+
         if (wrappedActiveX_ != null) {
             return wrappedActiveX_.get(name, start);
         }
@@ -173,12 +186,12 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
      */
     @Override
     public void put(final String name, final Scriptable start, final Object value) {
-        if (wrappedActiveX_ != null) {
+        if (wrappedActiveX_ != null && wrappedActiveX_.has(name, start)) {
             wrappedActiveX_.put(name, start, value);
+            return;
         }
-        else {
-            super.put(name, start, value);
-        }
+
+        super.put(name, start, value);
     }
 
     /**

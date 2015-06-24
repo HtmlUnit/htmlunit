@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.MockActiveXObject;
 
 /**
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.MockActiveXObject;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLObjectElementTest extends SimpleWebTestCase {
@@ -50,8 +52,8 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
             IE = { "ActiveX is working!", "Javascript called this method!" })
     public void classid() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
-        final String html = "<html><head>\n"
-            + "<object id='id1' classid='" + clsid + "'></object>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var obj = document.all.id1;"
@@ -61,7 +63,9 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
             + "    }\n"
             + "  }\n"
             + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <object id='id1' classid='" + clsid + "'></object>\n"
             + "</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
@@ -81,17 +85,19 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
     @Alerts(IE = { "Javascript called this method!", "ActiveX is still alive" })
     public void activeXInteraction() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
-        final String html = "<html><head>\n"
-            + "<object id='id1' classid='" + clsid + "'></object>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var obj = document.all.id1;"
+            + "    var obj = document.all.id1;\n"
             + "    if (obj.GetMessage) {\n"
             + "      alert(obj.GetMessage());\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
-            + "</head><body>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <object id='id1' classid='" + clsid + "'></object>\n"
             + "  <button id='myButton' onClick='test()'>Click Me</button>\n"
             + "</body></html>";
 
@@ -116,5 +122,67 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
         }
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "undefined", "string", "test" })
+    public void activeXUnknownProperty() throws Exception {
+        final String clsid = "clsid:TESTING-CLASS-ID";
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var obj = document.all.id1;\n"
+            + "    alert(typeof obj.unknown);\n"
+            + "    obj.unknown = 'test';\n"
+            + "    alert(typeof obj.unknown);\n"
+            + "    alert(obj.unknown);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test();'>\n"
+            + "  <object id='id1' classid='" + clsid + "'></object>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        final Map<String, String> activeXObjectMap = new HashMap<>();
+        activeXObjectMap.put(clsid, "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
+        client.setActiveXObjectMap(activeXObjectMap);
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "undefined", "function", "test" })
+    public void activeXUnknownMethod() throws Exception {
+        final String clsid = "clsid:TESTING-CLASS-ID";
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var obj = document.all.id1;\n"
+            + "    alert(typeof obj.unknown);\n"
+            + "    obj.unknown = function() { return 'test'; };\n"
+            + "    alert(typeof obj.unknown);\n"
+            + "    alert(obj.unknown());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test();'>\n"
+            + "  <object id='id1' classid='" + clsid + "'></object>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        final Map<String, String> activeXObjectMap = new HashMap<>();
+        activeXObjectMap.put(clsid, "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
+        client.setActiveXObjectMap(activeXObjectMap);
+
+        loadPageWithAlerts(html);
     }
 }
