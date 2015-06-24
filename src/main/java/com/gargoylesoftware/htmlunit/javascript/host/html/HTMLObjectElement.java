@@ -164,7 +164,7 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        // for java mocks do a bit more, we have handle unkonwn properties
+        // for java mocks do a bit more, we have handle unknown properties
         // ourself
         if (wrappedActiveX_ instanceof NativeJavaObject) {
             final NativeJavaObject obj = (NativeJavaObject) wrappedActiveX_;
@@ -186,7 +186,19 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
      */
     @Override
     public void put(final String name, final Scriptable start, final Object value) {
-        if (wrappedActiveX_ != null && wrappedActiveX_.has(name, start)) {
+        // for java mocks do a bit more, we have handle unknown properties
+        // ourself
+        if (wrappedActiveX_ instanceof NativeJavaObject) {
+            if (wrappedActiveX_.has(name, start)) {
+                wrappedActiveX_.put(name, start, value);
+            }
+            else {
+                super.put(name, start, value);
+            }
+            return;
+        }
+
+        if (wrappedActiveX_ != null) {
             wrappedActiveX_.put(name, start, value);
             return;
         }
