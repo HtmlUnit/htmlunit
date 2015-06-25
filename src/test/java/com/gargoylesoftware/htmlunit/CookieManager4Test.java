@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assume.assumeTrue;
 
-import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -63,10 +63,10 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Before
     public void checkSettings() throws Exception {
         try {
-            Inet4Address.getByName(new URL(URL_HOST1).getHost());
-            Inet4Address.getByName(new URL(URL_HOST2).getHost());
-            Inet4Address.getByName(new URL(URL_HOST3).getHost());
-            Inet4Address.getByName(new URL(URL_HOST4).getHost());
+            InetAddress.getByName(new URL(URL_HOST1).getHost());
+            InetAddress.getByName(new URL(URL_HOST2).getHost());
+            InetAddress.getByName(new URL(URL_HOST3).getHost());
+            InetAddress.getByName(new URL(URL_HOST4).getHost());
         }
         catch (final UnknownHostException e) {
             assumeTrue("Host configurations are not present", false);
@@ -249,7 +249,7 @@ public class CookieManager4Test extends WebDriverTestCase {
     }
 
     private void testCookies(final URL url, final String cookie1, final String cookie2) throws Exception {
-        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", cookie1));
         responseHeader.add(new NameValuePair("Set-Cookie", cookie2));
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "OK", "text/html",

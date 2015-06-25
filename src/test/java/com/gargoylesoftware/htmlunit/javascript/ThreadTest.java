@@ -18,15 +18,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Multi-threaded JavaScript engine test.
@@ -141,7 +141,7 @@ public class ThreadTest extends TestCase {
                 connection.setDefaultResponse(html);
                 webClient.setWebConnection(connection);
 
-                final HtmlPage page = webClient.getPage(SimpleWebTestCase.URL_FIRST);
+                final HtmlPage page = webClient.getPage(WebTestCase.URL_FIRST);
 
                 assertEquals("foo", page.getTitleText());
                 assertEquals("focus not changed to textfield1",

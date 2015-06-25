@@ -14,12 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import javax.swing.JFrame;
-
-import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.Main;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.ScopeProvider;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.SourceProvider;
+import java.awt.Frame;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,6 +22,11 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
+
+import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
+import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.Main;
+import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.ScopeProvider;
+import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.SourceProvider;
 
 /**
  * Utility class containing miscellaneous {@link WebClient}-related methods.
@@ -52,7 +52,7 @@ public final class WebClientUtils {
         final ScopeProvider sp = null;
         final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final Main main = Main.mainEmbedded(cf, sp, "HtmlUnit JavaScript Debugger");
-        main.getDebugFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
+        main.getDebugFrame().setExtendedState(Frame.MAXIMIZED_BOTH);
 
         final SourceProvider sourceProvider = new SourceProvider() {
             @Override
