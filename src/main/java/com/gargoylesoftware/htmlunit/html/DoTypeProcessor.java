@@ -16,19 +16,31 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.Serializable;
 
+import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 
+/**
+ * The process for {@link HtmlElement#doType(char, boolean, boolean, boolean)}.
+ *
+ * @version $Revision$
+ * @author Marc Guillemot
+ * @author Ronald Brill
+ * @author Ahmed Ashour
+ */
 abstract class DoTypeProcessor implements Serializable {
 
-    void doType(final String currentValue, final int selectionStart, final int selectionEnd,
+    void doType(final String currentValue, final SelectionDelegate selectionDelegate,
             final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
 
+        int selectionStart = selectionDelegate.getSelectionStart();
+        int selectionEnd = selectionDelegate.getSelectionEnd();
+
         final StringBuilder newValue = new StringBuilder(currentValue);
-        int cursorPosition = selectionStart;
         if (c == '\b') {
             if (selectionStart > 0) {
                 newValue.deleteCharAt(selectionStart - 1);
-                cursorPosition = selectionStart - 1;
+                selectionStart--;
+                selectionEnd--;
             }
         }
         else if (c >= '\uE000' && c <= '\uF8FF') {
@@ -42,17 +54,25 @@ abstract class DoTypeProcessor implements Serializable {
             else {
                 newValue.append(c);
             }
-            cursorPosition++;
+            selectionStart++;
         }
 
-        typeDone(newValue.toString(), cursorPosition);
+        if (!shiftKey) {
+        	selectionEnd = selectionStart;
+        }
+
+        typeDone(newValue.toString());
+
+        selectionDelegate.setSelectionStart(selectionStart);
+        selectionDelegate.setSelectionEnd(selectionEnd);
     }
 
-    void doType(final String currentValue, final int selectionStart, final int selectionEnd,
+    void doType(final String currentValue, final SelectionDelegate selectionDelegate,
             final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
 
         final StringBuilder newValue = new StringBuilder(currentValue);
-        int cursorPosition = selectionStart;
+        int selectionStart = selectionDelegate.getSelectionStart();
+        int selectionEnd = selectionDelegate.getSelectionEnd();
 
         if (keyCode >= '\uE000' && keyCode <= '\uF8FF') {
             // nothing, this is private use area
@@ -61,26 +81,39 @@ abstract class DoTypeProcessor implements Serializable {
         else {
             switch (keyCode) {
                 case KeyboardEvent.DOM_VK_SPACE:
-                    doType(currentValue, selectionStart, selectionEnd, ' ', shiftKey, ctrlKey, altKey);
+                    doType(currentValue, selectionDelegate, ' ', shiftKey, ctrlKey, altKey);
                     return;
 
                 case KeyboardEvent.DOM_VK_BACK_SPACE:
                     if (selectionStart > 0) {
                         newValue.deleteCharAt(selectionStart - 1);
-                        cursorPosition = selectionStart - 1;
+                        selectionStart--;
                     }
                     break;
 
                 case KeyboardEvent.DOM_VK_LEFT:
                     if (selectionStart > 0) {
-                        cursorPosition = selectionStart - 1;
+                        selectionStart--;
                     }
                     break;
 
                 case KeyboardEvent.DOM_VK_RIGHT:
                     if (selectionStart > 0) {
-                        cursorPosition = selectionStart + 1;
+                        selectionStart++;
                     }
+                    break;
+
+                case KeyboardEvent.DOM_VK_HOME:
+                    selectionStart = 0;
+                    break;
+
+                case KeyboardEvent.DOM_VK_END:
+                	selectionStart = newValue.length();
+                    break;
+
+                case KeyboardEvent.DOM_VK_DELETE:
+                	newValue.delete(selectionStart, selectionEnd);
+                	selectionEnd = selectionStart;
                     break;
 
                 default:
@@ -88,7 +121,14 @@ abstract class DoTypeProcessor implements Serializable {
             }
         }
 
-        typeDone(newValue.toString(), cursorPosition);
+        if (!shiftKey) {
+        	selectionEnd = selectionStart;
+        }
+
+        typeDone(newValue.toString());
+
+        selectionDelegate.setSelectionStart(selectionStart);
+        selectionDelegate.setSelectionEnd(selectionEnd);
     }
 
     /**
@@ -100,6 +140,6 @@ abstract class DoTypeProcessor implements Serializable {
         return c == ' ' || !Character.isWhitespace(c);
     }
 
-    abstract void typeDone(final String newValue, final int newCursorPosition);
+    abstract void typeDone(final String newValue);
 
 }

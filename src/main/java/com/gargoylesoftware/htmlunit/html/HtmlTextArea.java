@@ -62,10 +62,8 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
         @Override
-        void typeDone(final String newValue, final int newCursorPosition) {
+        void typeDone(final String newValue) {
             setTextInternal(newValue);
-            setSelectionStart(newCursorPosition);
-            setSelectionEnd(newCursorPosition);
         }
         @Override
         protected boolean acceptChar(final char c) {
@@ -424,8 +422,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        doTypeProcessor_.doType(getText(), getSelectionStart(), getSelectionEnd(),
-            c, shiftKey, ctrlKey, altKey);
+        doTypeProcessor_.doType(getText(), selectionDelegate_, c, shiftKey, ctrlKey, altKey);
     }
 
     /**

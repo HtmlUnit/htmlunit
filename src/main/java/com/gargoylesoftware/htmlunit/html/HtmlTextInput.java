@@ -42,13 +42,11 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
         @Override
-        void typeDone(final String newValue, final int newCursorPosition) {
+        void typeDone(final String newValue) {
             if (newValue.length() > getMaxLength()) {
                 return;
             }
             setAttribute("value", newValue);
-            setSelectionStart(newCursorPosition);
-            setSelectionEnd(newCursorPosition);
         }
     };
 
@@ -69,8 +67,7 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
      */
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        doTypeProcessor_.doType(getValueAttribute(), getSelectionStart(), getSelectionEnd(),
-            c, shiftKey, ctrlKey, altKey);
+        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, shiftKey, ctrlKey, altKey);
     }
 
     /**
@@ -78,8 +75,7 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
      */
     @Override
     protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        doTypeProcessor_.doType(getValueAttribute(), getSelectionStart(), getSelectionEnd(),
-            keyCode, shiftKey, ctrlKey, altKey);
+        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, shiftKey, ctrlKey, altKey);
     }
 
     /**
