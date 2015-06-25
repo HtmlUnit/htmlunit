@@ -26,8 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -44,6 +42,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * A JavaScript object for Geolocation.

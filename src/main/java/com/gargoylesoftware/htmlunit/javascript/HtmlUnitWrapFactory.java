@@ -16,12 +16,12 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.io.Serializable;
 
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.NodeList;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
-
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.NodeList;
 
 /**
  * Called by Rhino to Wrap Object as {@link Scriptable}.

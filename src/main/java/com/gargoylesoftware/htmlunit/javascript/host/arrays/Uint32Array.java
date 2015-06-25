@@ -21,12 +21,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Represents an array of unsigned 32-bit integers.

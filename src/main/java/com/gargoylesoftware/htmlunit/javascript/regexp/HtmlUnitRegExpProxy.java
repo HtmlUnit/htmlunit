@@ -23,6 +23,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.RegExpProxy;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -30,12 +36,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.NativeRegExp;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImpl;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 /**
  * Begins customization of JavaScript RegExp base on JDK regular expression support.

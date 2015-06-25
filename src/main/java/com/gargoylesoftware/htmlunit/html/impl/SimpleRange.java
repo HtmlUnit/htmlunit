@@ -17,8 +17,6 @@ package com.gargoylesoftware.htmlunit.html.impl;
 import java.io.Serializable;
 import java.util.Iterator;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.w3c.dom.DOMException;
@@ -33,6 +31,8 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomText;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * Simple implementation of {@link Range}.

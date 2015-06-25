@@ -21,8 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.io.StringReader;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 import org.w3c.css.sac.InputSource;
 
 import com.gargoylesoftware.htmlunit.Cache;
@@ -34,6 +32,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object "HTMLStyleElement".

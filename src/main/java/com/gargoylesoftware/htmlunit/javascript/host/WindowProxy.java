@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableProxy;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Proxy for a {@link Window} script object.

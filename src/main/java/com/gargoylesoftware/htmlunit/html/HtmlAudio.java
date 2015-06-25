@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.AUDIO_INLINE;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;

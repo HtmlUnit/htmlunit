@@ -21,12 +21,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The ArrayBufferView type describes a particular view on the contents of an {@link ArrayBuffer}'s data.

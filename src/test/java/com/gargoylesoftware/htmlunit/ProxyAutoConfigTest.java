@@ -17,9 +17,9 @@ package com.gargoylesoftware.htmlunit;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 import org.junit.Test;
+
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * Tests for the {@link ProxyAutoConfig}.

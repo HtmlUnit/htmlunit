@@ -23,9 +23,6 @@ import java.util.Map;
 
 import javax.servlet.Servlet;
 
-import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
@@ -45,6 +42,9 @@ import org.xml.sax.InputSource;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A WebTestCase which starts a local server, and doens't use WebDriver.

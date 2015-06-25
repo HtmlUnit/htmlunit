@@ -22,12 +22,12 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.StringTokenizer;
 
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
 import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
-
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * An exception that will be thrown if an error occurs during the processing of

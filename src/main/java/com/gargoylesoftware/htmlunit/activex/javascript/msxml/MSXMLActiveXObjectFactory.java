@@ -16,14 +16,14 @@ package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import java.util.Locale;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebWindow;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * ActiveXObjectFactory for the MSXML ActiveX library.
