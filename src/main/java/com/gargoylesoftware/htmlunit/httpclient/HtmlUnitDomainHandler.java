@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.impl.cookie.BasicDomainHandler;
@@ -23,19 +26,27 @@ import org.apache.http.impl.cookie.BasicDomainHandler;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 final class HtmlUnitDomainHandler extends BasicDomainHandler {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean match(final Cookie cookie, final CookieOrigin origin) {
         final String domain = cookie.getDomain();
         if (domain == null) {
             return false;
         }
-        if (!"localhost".equalsIgnoreCase(domain)
-                && !HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN.equalsIgnoreCase(domain)
-                && domain.lastIndexOf('.') < 1) {
-            return false;
+        if (domain.indexOf('.') == -1
+                && !HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN.equalsIgnoreCase(domain)) {
+            try {
+                InetAddress.getByName(domain);
+            }
+            catch (final UnknownHostException e) {
+                return false;
+            }
         }
 
         return super.match(cookie, origin);

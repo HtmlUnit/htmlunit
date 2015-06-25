@@ -714,6 +714,9 @@
         <contributor>
             <name>Matthias Brandt</name>
         </contributor>
+        <contributor>
+            <name>Jacob Childress</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
