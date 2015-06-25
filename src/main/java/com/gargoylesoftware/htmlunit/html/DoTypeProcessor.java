@@ -58,7 +58,7 @@ abstract class DoTypeProcessor implements Serializable {
         }
 
         if (!shiftKey) {
-        	selectionEnd = selectionStart;
+            selectionEnd = selectionStart;
         }
 
         typeDone(newValue.toString());
@@ -98,7 +98,10 @@ abstract class DoTypeProcessor implements Serializable {
                     break;
 
                 case KeyboardEvent.DOM_VK_RIGHT:
-                    if (selectionStart > 0) {
+                    if (shiftKey) {
+                        selectionEnd++;
+                    }
+                    else if (selectionStart > 0) {
                         selectionStart++;
                     }
                     break;
@@ -108,12 +111,17 @@ abstract class DoTypeProcessor implements Serializable {
                     break;
 
                 case KeyboardEvent.DOM_VK_END:
-                	selectionStart = newValue.length();
+                    if (shiftKey) {
+                        selectionEnd = newValue.length();
+                    }
+                    else {
+                        selectionStart = newValue.length();
+                    }
                     break;
 
                 case KeyboardEvent.DOM_VK_DELETE:
-                	newValue.delete(selectionStart, selectionEnd);
-                	selectionEnd = selectionStart;
+                    newValue.delete(selectionStart, selectionEnd);
+                    selectionEnd = selectionStart;
                     break;
 
                 default:
@@ -122,7 +130,7 @@ abstract class DoTypeProcessor implements Serializable {
         }
 
         if (!shiftKey) {
-        	selectionEnd = selectionStart;
+            selectionEnd = selectionStart;
         }
 
         typeDone(newValue.toString());
