@@ -77,9 +77,7 @@ abstract class DoTypeProcessor implements Serializable {
             selectionStart++;
         }
 
-        if (!shiftKey) {
-            selectionEnd = selectionStart;
-        }
+        selectionEnd = selectionStart;
 
         typeDone(newValue.toString());
 
