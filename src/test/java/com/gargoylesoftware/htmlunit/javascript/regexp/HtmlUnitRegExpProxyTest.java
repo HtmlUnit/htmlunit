@@ -368,12 +368,20 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[floating=true],floating,=,,true")
+    @Alerts({   "[floating=true],floating,=,,true",
+                "[floating=\"true\"],floating,=,\",true",
+                "[floating=\"true'],floating,=,,\"true'",
+                "[floating=\"true],floating,=,,\"true",
+                "[floating=true\"],floating,=,,true\"" })
     public void extJs() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var re = /^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])/;\n"
             + "  function test() {\n"
             + "    alert('[floating=true]'.match(re));\n"
+            + "    alert('[floating=\"true\"]'.match(re));\n"
+            + "    alert('[floating=\"true\\']'.match(re));\n"
+            + "    alert('[floating=\"true]'.match(re));\n"
+            + "    alert('[floating=true\"]'.match(re));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
