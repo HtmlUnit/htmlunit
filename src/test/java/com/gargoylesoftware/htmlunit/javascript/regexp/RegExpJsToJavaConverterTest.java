@@ -362,7 +362,8 @@ public class RegExpJsToJavaConverterTest {
         in = "^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])";
         out = regExpJsToJavaConverter.convert(in);
         Assert.assertEquals(
-                "^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])",
+                "^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*"
+                + "((?:['\\\"])?)((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])",
                 out);
     }
 
@@ -380,6 +381,26 @@ public class RegExpJsToJavaConverterTest {
         in = "ab(?";
         out = regExpJsToJavaConverter.convert(in);
         Assert.assertEquals("ab(?", out);
+    }
+
+    /**
+     * Test subExpression start end.
+     */
+    @Test
+    public void subExpressionOptional() {
+        final RegExpJsToJavaConverter regExpJsToJavaConverter = new RegExpJsToJavaConverter();
+
+        String in = "a(xy)? b \\1";
+        String out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals("a((?:xy)?) b \\1", out);
+
+        in = "a(xy) b \\1";
+        out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals("a(xy) b \\1", out);
+
+        in = "a(xy)? (u)? b \\1 \\2";
+        out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals("a((?:xy)?) ((?:u)?) b \\1 \\2", out);
     }
 
     /**

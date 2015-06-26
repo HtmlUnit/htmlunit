@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Regex: back references to optional groups are corrected (e.g. /(a)?xyz\1/).
+            </action>
             <action type="update" dev="asashour">
                 HtmlElement: Deprecated type() with shift, control and alt parameters.
             </action>

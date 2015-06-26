@@ -88,6 +88,16 @@ public class RegExpJsToJavaConverter {
         }
 
         /**
+         * Inserts a string at the given pos.
+         * @param token the string to insert
+         * @param pos the move position offset
+         */
+        public void insertAt(final String token, final int pos) {
+            tape_.insert(pos, token);
+            currentPos_ += token.length();
+        }
+
+        /**
          * Replaces the current char with the given string.
          * @param token the string to insert
          */
@@ -107,12 +117,18 @@ public class RegExpJsToJavaConverter {
     }
 
     private static final class Subexpresion {
-        private boolean count_;
         private boolean closed_;
+        private boolean optional_;
+        private boolean enhanced_;
+        private int start_;
+        private int end_;
 
-        private Subexpresion(final boolean count) {
-            count_ = count;
+        private Subexpresion() {
             closed_ = false;
+            optional_ = false;
+            enhanced_ = false;
+            start_ = -1;
+            end_ = -1;
         }
     }
 
@@ -258,7 +274,8 @@ public class RegExpJsToJavaConverter {
         }
 
         if ('?' != next) {
-            final Subexpresion sub = new Subexpresion(true);
+            final Subexpresion sub = new Subexpresion();
+            sub.start_ = tape_.currentPos_;
             parsingSubexpressions_.push(sub);
             subexpressions_.add(sub);
 
@@ -271,7 +288,8 @@ public class RegExpJsToJavaConverter {
             return;
         }
         if (':' != next) {
-            final Subexpresion sub = new Subexpresion(true);
+            final Subexpresion sub = new Subexpresion();
+            sub.start_ = tape_.currentPos_;
             parsingSubexpressions_.push(sub);
             subexpressions_.add(sub);
 
@@ -279,7 +297,8 @@ public class RegExpJsToJavaConverter {
             return;
         }
 
-        final Subexpresion sub = new Subexpresion(false);
+        final Subexpresion sub = new Subexpresion();
+        sub.start_ = tape_.currentPos_;
         parsingSubexpressions_.push(sub);
     }
 
@@ -288,9 +307,12 @@ public class RegExpJsToJavaConverter {
             return;
         }
         final Subexpresion sub = parsingSubexpressions_.pop();
-        if (sub.count_) {
-            sub.closed_ = true;
-        }
+        sub.closed_ = true;
+        sub.end_ = tape_.currentPos_;
+
+        final int next = tape_.read();
+        sub.optional_ = '?' == next;
+        tape_.move(-1);
     }
 
     private void processEscapeSequence() {
@@ -383,6 +405,32 @@ public class RegExpJsToJavaConverter {
             }
         }
 
+        // ok it is a backreference
+        final Subexpresion back = subexpressions_.get(value - 1);
+        if (back.optional_ &&  !back.enhanced_) {
+            // change subexpression to make it java compatible
+            int insertPos = back.start_ - 1;
+            tape_.insertAt("(?:", insertPos);
+            for (Subexpresion subexp : subexpressions_) {
+                if (subexp.start_ > insertPos) {
+                    subexp.start_ = subexp.start_ + 3;
+                }
+                if (subexp.end_ > insertPos) {
+                    subexp.end_ = subexp.end_ + 3;
+                }
+            }
+
+            insertPos = back.end_ + 1;
+            tape_.insertAt(")", insertPos);
+            for (Subexpresion subexp : subexpressions_) {
+                if (subexp.start_ > insertPos) {
+                    subexp.start_ = subexp.start_ + 1;
+                }
+                if (subexp.end_ > insertPos) {
+                    subexp.end_ = subexp.end_ + 1;
+                }
+            }
+        }
         return true;
     }
 }

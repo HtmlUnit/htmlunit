@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -370,7 +369,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[floating=true],floating,=,,true")
-    @NotYetImplemented
     public void extJs() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var re = /^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])/;\n"
@@ -389,7 +387,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "axxxxa,a", "xxxx,", "xxxx,", "xxxx," })
-    @NotYetImplemented
     public void backReferenceToOptionalGroup() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
