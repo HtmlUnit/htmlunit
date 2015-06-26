@@ -382,7 +382,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     /**
-     * Browsers ignore back references pointing to not finished groups.
+     * Javascript has a different idea about back references to optional groups.
      * @throws Exception if the test fails
      */
     @Test
