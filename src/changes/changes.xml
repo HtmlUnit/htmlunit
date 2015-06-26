@@ -8,11 +8,14 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                HtmlElement: Deprecated type() with shift, control and alt parameters. 
+            </action>
             <action type="fix" dev="asashour" issue="1697">
                 Properly handle cookies for unqualified hostname.
             </action>
-            <action type="update" dev="asashour">
-                HtmlElement: type(int) is now varargs, to support special key combinations.
+            <action type="add" dev="asashour">
+                HtmlElement: add type(Keyboard).
             </action>
             <action type="fix" dev="rbri" due-to="Frank Danek">
                 Mocked ActiveX objects have to be able to deal with unknown/unsupported properties.

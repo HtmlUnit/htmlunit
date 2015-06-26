@@ -509,7 +509,9 @@ public abstract class HtmlElement extends DomElement {
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
      * @exception IOException If an IO error occurs
+     * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
      */
+    @Deprecated
     public void type(final String text, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
         for (final char ch : text.toCharArray()) {
@@ -543,7 +545,10 @@ public abstract class HtmlElement extends DomElement {
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
+     * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
      */
+    @Deprecated
+    // would be private
     public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
@@ -623,15 +628,25 @@ public abstract class HtmlElement extends DomElement {
      *
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
-     * @param keyCodes the key codes to simulate typing
+     * @param keyCode the key code to simulate typing
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
      */
-    public Page type(final int... keyCodes) throws IOException {
-        if (keyCodes.length == 1) {
-            return type(keyCodes[0], false, false, false);
-        }
+    public Page type(final int keyCode) throws IOException {
+        return type(keyCode, false, false, false, true, true, true);
+    }
 
+    /**
+     * Simulates typing the specified {@link Keyboard} while this element has focus, returning the page contained
+     * by this element's window after typing. Note that it may or may not be the same as the original page,
+     * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>XXXXXXXXXXX</tt>
+     * submits the enclosed form.
+     *
+     * @param keyboard the keyboard
+     * @return the page that occupies this window after typing
+     * @exception IOException if an IO error occurs
+     */
+    public Page type(final Keyboard keyboard) throws IOException {
         Page page = null;
 
         boolean shiftPressed = false;
@@ -639,40 +654,47 @@ public abstract class HtmlElement extends DomElement {
         boolean altPressed = false;
 
         List<Integer> specialKeys = null;
-        for (final int key : keyCodes) {
-            switch (key) {
-                case KeyboardEvent.DOM_VK_SHIFT:
-                    shiftPressed = true;
-                    break;
-
-                case KeyboardEvent.DOM_VK_CONTROL:
-                    ctrlPressed = true;
-                    break;
-
-                case KeyboardEvent.DOM_VK_ALT:
-                    altPressed = true;
-                    break;
-
-                default:
+        final List<Object[]> keys = keyboard.getKeys();
+        for (final Object[] entry : keys) {
+            if (entry.length == 1) {
+                type((char) entry[0], shiftPressed, ctrlPressed, altPressed);
             }
+            else {
+                final int key = (int) entry[0];
+                final boolean pressed = (boolean) entry[1];
+                switch (key) {
+                    case KeyboardEvent.DOM_VK_SHIFT:
+                        shiftPressed = pressed;
+                        break;
 
-            boolean keyPress = true;
-            boolean keyUp = true;
-            switch (key) {
-                case KeyboardEvent.DOM_VK_SHIFT:
-                case KeyboardEvent.DOM_VK_CONTROL:
-                case KeyboardEvent.DOM_VK_ALT:
-                    if (specialKeys == null) {
-                        specialKeys = new ArrayList<>(keyCodes.length);
-                    }
-                    specialKeys.add(key);
-                    keyPress = false;
-                    keyUp = false;
-                    break;
+                    case KeyboardEvent.DOM_VK_CONTROL:
+                        ctrlPressed = pressed;
+                        break;
 
-                default:
+                    case KeyboardEvent.DOM_VK_ALT:
+                        altPressed = pressed;
+                        break;
+
+                    default:
+                }
+                boolean keyPress = true;
+                boolean keyUp = true;
+                switch (key) {
+                    case KeyboardEvent.DOM_VK_SHIFT:
+                    case KeyboardEvent.DOM_VK_CONTROL:
+                    case KeyboardEvent.DOM_VK_ALT:
+                        if (specialKeys == null) {
+                            specialKeys = new ArrayList<>(keys.size());
+                        }
+                        specialKeys.add(key);
+                        keyPress = false;
+                        keyUp = false;
+                        break;
+
+                    default:
+                }
+                page = type(key, shiftPressed, ctrlPressed, altPressed, true, keyPress, keyUp);
             }
-            page = type(key, shiftPressed, ctrlPressed, altPressed, true, keyPress, keyUp);
         }
 
         if (specialKeys != null) {
@@ -714,7 +736,9 @@ public abstract class HtmlElement extends DomElement {
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
+     * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
      */
+    @Deprecated
     public Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
         return type(keyCode, shiftKey, ctrlKey, altKey, true, true, true);

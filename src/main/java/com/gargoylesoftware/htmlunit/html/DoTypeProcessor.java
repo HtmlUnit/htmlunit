@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
@@ -28,6 +30,24 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
  * @author Ahmed Ashour
  */
 abstract class DoTypeProcessor implements Serializable {
+
+    private static Map<Integer, Character> SPECIAL_KEYS_MAP_ = new HashMap<>();
+
+    static {
+        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_ADD, '+');
+        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_DECIMAL, '.');
+        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_DIVIDE, '/');
+        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_EQUALS, '=');
+        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_MULTIPLY, '*');
+        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_SEMICOLON, ';');
+        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_SEPARATOR, ',');
+        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_SPACE, ' ');
+        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_SUBTRACT, '-');
+
+        for (int i = KeyboardEvent.DOM_VK_NUMPAD0; i <= KeyboardEvent.DOM_VK_NUMPAD9; i++) {
+            SPECIAL_KEYS_MAP_.put(i, (char) ('0' + (i - KeyboardEvent.DOM_VK_NUMPAD0)));
+        }
+    }
 
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
             final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
@@ -74,59 +94,54 @@ abstract class DoTypeProcessor implements Serializable {
         int selectionStart = selectionDelegate.getSelectionStart();
         int selectionEnd = selectionDelegate.getSelectionEnd();
 
-        if (keyCode >= '\uE000' && keyCode <= '\uF8FF') {
-            // nothing, this is private use area
-            // see http://www.unicode.org/charts/PDF/UE000.pdf
+        final Character ch = SPECIAL_KEYS_MAP_.get(keyCode);
+        if (ch != null) {
+            doType(currentValue, selectionDelegate, ch, shiftKey, ctrlKey, altKey);
+            return;
         }
-        else {
-            switch (keyCode) {
-                case KeyboardEvent.DOM_VK_SPACE:
-                    doType(currentValue, selectionDelegate, ' ', shiftKey, ctrlKey, altKey);
-                    return;
+        switch (keyCode) {
+            case KeyboardEvent.DOM_VK_BACK_SPACE:
+                if (selectionStart > 0) {
+                    newValue.deleteCharAt(selectionStart - 1);
+                    selectionStart--;
+                }
+                break;
 
-                case KeyboardEvent.DOM_VK_BACK_SPACE:
-                    if (selectionStart > 0) {
-                        newValue.deleteCharAt(selectionStart - 1);
-                        selectionStart--;
-                    }
-                    break;
+            case KeyboardEvent.DOM_VK_LEFT:
+                if (selectionStart > 0) {
+                    selectionStart--;
+                }
+                break;
 
-                case KeyboardEvent.DOM_VK_LEFT:
-                    if (selectionStart > 0) {
-                        selectionStart--;
-                    }
-                    break;
+            case KeyboardEvent.DOM_VK_RIGHT:
+                if (shiftKey) {
+                    selectionEnd++;
+                }
+                else if (selectionStart > 0) {
+                    selectionStart++;
+                }
+                break;
 
-                case KeyboardEvent.DOM_VK_RIGHT:
-                    if (shiftKey) {
-                        selectionEnd++;
-                    }
-                    else if (selectionStart > 0) {
-                        selectionStart++;
-                    }
-                    break;
+            case KeyboardEvent.DOM_VK_HOME:
+                selectionStart = 0;
+                break;
 
-                case KeyboardEvent.DOM_VK_HOME:
-                    selectionStart = 0;
-                    break;
+            case KeyboardEvent.DOM_VK_END:
+                if (shiftKey) {
+                    selectionEnd = newValue.length();
+                }
+                else {
+                    selectionStart = newValue.length();
+                }
+                break;
 
-                case KeyboardEvent.DOM_VK_END:
-                    if (shiftKey) {
-                        selectionEnd = newValue.length();
-                    }
-                    else {
-                        selectionStart = newValue.length();
-                    }
-                    break;
+            case KeyboardEvent.DOM_VK_DELETE:
+                newValue.delete(selectionStart, selectionEnd);
+                selectionEnd = selectionStart;
+                break;
 
-                case KeyboardEvent.DOM_VK_DELETE:
-                    newValue.delete(selectionStart, selectionEnd);
-                    selectionEnd = selectionStart;
-                    break;
-
-                default:
-                    break;
-            }
+            default:
+                break;
         }
 
         if (!shiftKey) {
