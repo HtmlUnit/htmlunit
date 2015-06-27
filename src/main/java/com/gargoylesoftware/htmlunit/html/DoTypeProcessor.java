@@ -33,7 +33,10 @@ class DoTypeProcessor implements Serializable {
 
     private static Map<Integer, Character> SPECIAL_KEYS_MAP_ = new HashMap<>();
 
-    private HtmlElement htmlElement_;
+    /**
+     * Either {@link HtmlElement} or {@link DomText}.
+     */
+    private DomNode domNode_;
 
     static {
         SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_ADD, '+');
@@ -51,8 +54,8 @@ class DoTypeProcessor implements Serializable {
         }
     }
 
-    DoTypeProcessor(final HtmlElement htmlElement) {
-        htmlElement_ = htmlElement;
+    DoTypeProcessor(final DomNode domNode) {
+        domNode_ = domNode;
     }
 
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
@@ -69,7 +72,7 @@ class DoTypeProcessor implements Serializable {
                 selectionEnd--;
             }
         }
-        else if (htmlElement_.acceptChar(c)) {
+        else if (acceptChar(c)) {
             if (selectionStart != currentValue.length()) {
                 newValue.replace(selectionStart, selectionEnd, Character.toString(c));
             }
@@ -81,10 +84,26 @@ class DoTypeProcessor implements Serializable {
 
         selectionEnd = selectionStart;
 
-        htmlElement_.typeDone(newValue.toString());
+        typeDone(newValue.toString());
 
         selectionDelegate.setSelectionStart(selectionStart);
         selectionDelegate.setSelectionEnd(selectionEnd);
+    }
+
+    private void typeDone(final String newValue) {
+        if (domNode_ instanceof DomText) {
+            ((DomText) domNode_).setData(newValue);
+        }
+        else {
+            ((HtmlElement) domNode_).typeDone(newValue);
+        }
+    }
+
+    private boolean acceptChar(final char ch) {
+        if (domNode_ instanceof DomText) {
+            return ((DomText) domNode_).acceptChar(ch);
+        }
+        return ((HtmlElement) domNode_).acceptChar(ch);
     }
 
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
@@ -151,7 +170,7 @@ class DoTypeProcessor implements Serializable {
             selectionEnd = selectionStart;
         }
 
-        htmlElement_.typeDone(newValue.toString());
+        typeDone(newValue.toString());
 
         selectionDelegate.setSelectionStart(selectionStart);
         selectionDelegate.setSelectionEnd(selectionEnd);

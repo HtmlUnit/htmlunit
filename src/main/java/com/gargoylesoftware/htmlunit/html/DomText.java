@@ -20,6 +20,8 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Text;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
+import com.gargoylesoftware.htmlunit.html.impl.SimpleSelectionDelegate;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -34,6 +36,9 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Philip Graf
  */
 public class DomText extends DomCharacterData implements Text {
+
+    private SelectionDelegate selectionDelegate_;
+    private DoTypeProcessor doTypeProcessor_;
 
     /** The symbolic node name. */
     public static final String NODE_NAME = "#text";
@@ -158,6 +163,49 @@ public class DomText extends DomCharacterData implements Text {
     @Override
     protected boolean isTrimmedText() {
         return false;
+    }
+
+    /**
+     * Performs the effective type action, called after the keyPress event and before the keyUp event.
+     * @param c the character you with to simulate typing
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
+     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     */
+    protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        initDoTypeProcessor();
+        doTypeProcessor_.doType(getData(), selectionDelegate_, c, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * Performs the effective type action, called after the keyPress event and before the keyUp event.
+     *
+     * @param keyCode the key code wish to simulate typing
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
+     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     */
+    protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        initDoTypeProcessor();
+        doTypeProcessor_.doType(getData(), selectionDelegate_, keyCode, shiftKey, ctrlKey, altKey);
+    }
+
+    private void initDoTypeProcessor() {
+        if (selectionDelegate_ == null) {
+            selectionDelegate_ = new SimpleSelectionDelegate();
+            doTypeProcessor_ = new DoTypeProcessor(this);
+        }
+    }
+
+    /**
+     * Indicates if the provided character can by "typed" in the element.
+     * @param c the character
+     * @return {@code true} if it is accepted
+     */
+    protected boolean acceptChar(final char c) {
+        // This range is this is private use area
+        // see http://www.unicode.org/charts/PDF/UE000.pdf
+        return (c < '\uE000' || c > '\uF8FF') && (c == ' ' || !Character.isWhitespace(c));
     }
 
 }

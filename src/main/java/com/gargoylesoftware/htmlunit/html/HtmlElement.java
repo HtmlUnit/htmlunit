@@ -51,8 +51,6 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
-import com.gargoylesoftware.htmlunit.html.impl.SimpleSelectionDelegate;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
@@ -150,9 +148,6 @@ public abstract class HtmlElement extends DomElement {
      * @see #getTabIndex()
      */
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
-
-    private SelectionDelegate selectionDelegate_;
-    private DoTypeProcessor doTypeProcessor_;
 
     /** The listeners which are to be notified of attribute changes. */
     private final Collection<HtmlAttributeChangeListener> attributeListeners_;
@@ -829,7 +824,7 @@ public abstract class HtmlElement extends DomElement {
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
-            doTypeProcessor_.doType(((DomText) domNode).getData(), selectionDelegate_, c, shiftKey, ctrlKey, altKey);
+            ((DomText) domNode).doType(c, shiftKey, ctrlKey, altKey);
         }
         else if (domNode instanceof HtmlElement) {
             try {
@@ -854,8 +849,7 @@ public abstract class HtmlElement extends DomElement {
     protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
-            doTypeProcessor_.doType(((DomText) domNode).getData(), selectionDelegate_, keyCode,
-                    shiftKey, ctrlKey, altKey);
+            ((DomText) domNode).doType(keyCode, shiftKey, ctrlKey, altKey);
         }
         else if (domNode instanceof HtmlElement) {
             try {
@@ -891,15 +885,6 @@ public abstract class HtmlElement extends DomElement {
                 appendChild(domText);
                 node = domText;
             }
-
-            if (!(node instanceof HtmlElement)) {
-                if (selectionDelegate_ == null) {
-                    selectionDelegate_ = new SimpleSelectionDelegate();
-                }
-                if (doTypeProcessor_ == null) {
-                    doTypeProcessor_ = new DoTypeProcessor(this);
-                }
-            }
         }
         return node;
     }
@@ -909,10 +894,7 @@ public abstract class HtmlElement extends DomElement {
      * @param newValue the new value
      */
     protected void typeDone(final String newValue) {
-        final DomNode domNode = getDoTypeNode();
-        if (domNode instanceof DomText) {
-            ((DomText) domNode).setData(newValue);
-        }
+        // nothing
     }
 
     /**
