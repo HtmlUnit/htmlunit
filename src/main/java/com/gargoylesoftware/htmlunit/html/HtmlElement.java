@@ -51,6 +51,8 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
+import com.gargoylesoftware.htmlunit.html.impl.SimpleSelectionDelegate;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
@@ -148,6 +150,9 @@ public abstract class HtmlElement extends DomElement {
      * @see #getTabIndex()
      */
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
+
+    private SelectionDelegate selectionDelegate_;
+    private DoTypeProcessor doTypeProcessor_;
 
     /** The listeners which are to be notified of attribute changes. */
     private final Collection<HtmlAttributeChangeListener> attributeListeners_;
@@ -822,45 +827,18 @@ public abstract class HtmlElement extends DomElement {
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
      */
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        final HTMLElement scriptElement = (HTMLElement) getScriptObject();
-        if (scriptElement.getIsContentEditable()) {
-            final DomNodeList<DomNode> children = getChildNodes();
-            if (!children.isEmpty()) {
-                final DomNode node = children.get(children.size() - 1);
-                if (node instanceof DomText) {
-                    ((DomText) node).setData(((DomText) node).getData() + c);
-                    return;
-                }
-                if (node instanceof HtmlElement) {
-                    try {
-                        ((HtmlElement) node).type(c, shiftKey, ctrlKey, altKey);
-                        return;
-                    }
-                    catch (final IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-            final DomText domText = new DomText(getPage(), String.valueOf(c));
-            appendChild(domText);
+        final DomNode domNode = getDoTypeNode();
+        if (domNode instanceof DomText) {
+            doTypeProcessor_.doType(((DomText) domNode).getData(), selectionDelegate_, c, shiftKey, ctrlKey, altKey);
         }
-    }
-
-    /**
-     * Called from {@link DoTypeProcessor}.
-     * @param newValue the new value
-     */
-    protected void typeDone(final String newValue) {
-        // nothing
-    }
-
-    /**
-     * Indicates if the provided character can by "typed" in the element.
-     * @param c the character
-     * @return {@code true} if it is accepted
-     */
-    protected boolean acceptChar(final char c) {
-        return c == ' ' || !Character.isWhitespace(c);
+        else if (domNode instanceof HtmlElement) {
+            try {
+                ((HtmlElement) domNode).type(c, shiftKey, ctrlKey, altKey);
+            }
+            catch (final IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     /**
@@ -874,7 +852,78 @@ public abstract class HtmlElement extends DomElement {
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
      */
     protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        // Empty.
+        final DomNode domNode = getDoTypeNode();
+        if (domNode instanceof DomText) {
+            doTypeProcessor_.doType(((DomText) domNode).getData(), selectionDelegate_, keyCode,
+                    shiftKey, ctrlKey, altKey);
+        }
+        else if (domNode instanceof HtmlElement) {
+            try {
+                ((HtmlElement) domNode).type(keyCode, shiftKey, ctrlKey, altKey);
+            }
+            catch (final IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * Returns the node to type into.
+     * @return the node
+     */
+    private DomNode getDoTypeNode() {
+        DomNode node = null;
+        final HTMLElement scriptElement = (HTMLElement) getScriptObject();
+        if (scriptElement.getIsContentEditable()) {
+            final DomNodeList<DomNode> children = getChildNodes();
+            if (!children.isEmpty()) {
+                final DomNode lastChild = children.get(children.size() - 1);
+                if (lastChild instanceof DomText) {
+                    node = lastChild;
+                }
+                else if (lastChild instanceof HtmlElement) {
+                    node = lastChild;
+                }
+            }
+
+            if (node == null) {
+                final DomText domText = new DomText(getPage(), "");
+                appendChild(domText);
+                node = domText;
+            }
+
+            if (!(node instanceof HtmlElement)) {
+                if (selectionDelegate_ == null) {
+                    selectionDelegate_ = new SimpleSelectionDelegate();
+                }
+                if (doTypeProcessor_ == null) {
+                    doTypeProcessor_ = new DoTypeProcessor(this);
+                }
+            }
+        }
+        return node;
+    }
+
+    /**
+     * Called from {@link DoTypeProcessor}.
+     * @param newValue the new value
+     */
+    protected void typeDone(final String newValue) {
+        final DomNode domNode = getDoTypeNode();
+        if (domNode instanceof DomText) {
+            ((DomText) domNode).setData(newValue);
+        }
+    }
+
+    /**
+     * Indicates if the provided character can by "typed" in the element.
+     * @param c the character
+     * @return {@code true} if it is accepted
+     */
+    protected boolean acceptChar(final char c) {
+        // This range is this is private use area
+        // see http://www.unicode.org/charts/PDF/UE000.pdf
+        return (c < '\uE000' || c > '\uF8FF') && (c == ' ' || !Character.isWhitespace(c));
     }
 
     /**

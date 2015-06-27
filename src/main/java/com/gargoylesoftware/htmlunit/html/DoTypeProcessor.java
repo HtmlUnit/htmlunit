@@ -136,6 +136,9 @@ class DoTypeProcessor implements Serializable {
                 break;
 
             case KeyboardEvent.DOM_VK_DELETE:
+                if (selectionEnd == selectionStart) {
+                    selectionEnd++;
+                }
                 newValue.delete(selectionStart, selectionEnd);
                 selectionEnd = selectionStart;
                 break;

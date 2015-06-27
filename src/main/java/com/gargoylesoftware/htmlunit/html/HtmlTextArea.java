@@ -28,7 +28,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
-import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -58,7 +58,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     private String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
 
-    private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
+    private final SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 

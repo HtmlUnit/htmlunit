@@ -21,7 +21,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
-import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
 
 /**
  * Wrapper for the HTML element "input" with type="text".
@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
  */
 public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
 
-    private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
+    private final SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 

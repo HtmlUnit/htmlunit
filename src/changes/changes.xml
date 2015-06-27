@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes">
-            <action type="add" dev="asashour">
+            <action type="update" dev="asashour">
+                Rename SelectionDelegate to SelectableTextSelectionDelegate, and add SimpleSelectionDelegate.
+            </action>
+            <action type="add" dev="asashour">SelectableTextSelectionDelegate
                 JavaScript: initial implementation of performance.navigation.
             </action>
             <action type="fix" dev="rbri">

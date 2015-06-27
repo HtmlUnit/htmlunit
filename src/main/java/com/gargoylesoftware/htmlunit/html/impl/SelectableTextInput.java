@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.Page;
 /**
  * Internal interface which defines an input element which contains selectable text. This interface just keeps
  * the various implementations in sync as to selection functionality, and provides a definition of the functionality
- * required by the {@link SelectionDelegate} so that it can do its job. This interface is not public because it is
+ * required by the {@link SelectableTextSelectionDelegate} so that it can do its job. This interface is not public because it is
  * an internal contract.
  *
  * @version $Revision$
