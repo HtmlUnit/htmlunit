@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.html.impl;
 import java.io.Serializable;
 
 /**
- * A selection delegate.
+ * Contains selection-related functionality used by elements.
  *
  * @version $Revision$
  * @author Ahmed Ashour

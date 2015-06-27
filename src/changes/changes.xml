@@ -11,7 +11,7 @@
             <action type="update" dev="asashour">
                 Rename SelectionDelegate to SelectableTextSelectionDelegate, and add SimpleSelectionDelegate.
             </action>
-            <action type="add" dev="asashour">SelectableTextSelectionDelegate
+            <action type="add" dev="asashour">
                 JavaScript: initial implementation of performance.navigation.
             </action>
             <action type="fix" dev="rbri">
