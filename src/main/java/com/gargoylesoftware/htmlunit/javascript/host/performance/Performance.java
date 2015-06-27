@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
@@ -39,4 +40,15 @@ public class Performance extends EventTarget {
     public Performance() {
     }
 
+    /**
+     * Returns the {@code navigation} property.
+     * @return the {@code navigation} property
+     */
+    @JsxGetter
+    public PerformanceNavigation getNavigation() {
+        final PerformanceNavigation navigation = new PerformanceNavigation();
+        navigation.setParentScope(getParentScope());
+        navigation.setPrototype(getPrototype(navigation.getClass()));
+        return navigation;
+    }
 }

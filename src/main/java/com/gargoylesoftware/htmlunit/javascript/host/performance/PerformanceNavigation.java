@@ -22,6 +22,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -54,6 +56,33 @@ public class PerformanceNavigation extends SimpleScriptable {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public PerformanceNavigation() {
+    }
+
+    /**
+     * Returns the {@code type} property.
+     * @return the {@code type} property
+     */
+    @JsxGetter
+    public int getType() {
+        return TYPE_NAVIGATE;
+    }
+
+    /**
+     * Returns the {@code redirectCount} property.
+     * @return the {@code redirectCount} property
+     */
+    @JsxGetter
+    public int getRedirectCount() {
+        return 0;
+    }
+
+    /**
+     * The {@code toJSON} function.
+     * @return the {@code toJSON} object
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public Object toJSON() {
+        throw new UnsupportedOperationException();
     }
 
 }

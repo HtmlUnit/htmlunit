@@ -2225,7 +2225,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Performance getPerformance() {
         final Performance performance = new Performance();
-        performance.setParentScope(getParentScope());
+        performance.setParentScope(this);
         performance.setPrototype(getPrototype(performance.getClass()));
         return performance;
     }
