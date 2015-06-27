@@ -64,10 +64,11 @@
                         </manifest>
                         <manifestEntries>
                             <Url>${project.url}</Url>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
+
                             <!-- Following entries should be passed by CruiseControl on the CI server -->
                             <SVN-Revision>${svnrevision}</SVN-Revision>
                             <Build-Number>${label}</Build-Number>
-                            <Build-Time>${maven.build.timestamp}</Build-Time>
                         </manifestEntries>
                     </archive>
                 </configuration>
