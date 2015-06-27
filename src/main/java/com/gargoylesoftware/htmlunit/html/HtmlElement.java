@@ -847,6 +847,23 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * Called from {@link DoTypeProcessor}.
+     * @param newValue the new value
+     */
+    protected void typeDone(final String newValue) {
+        // nothing
+    }
+
+    /**
+     * Indicates if the provided character can by "typed" in the element.
+     * @param c the character
+     * @return {@code true} if it is accepted
+     */
+    protected boolean acceptChar(final char c) {
+        return c == ' ' || !Character.isWhitespace(c);
+    }
+
+    /**
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      *
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.

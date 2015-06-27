@@ -39,15 +39,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
 
     private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
 
-    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
-        @Override
-        void typeDone(final String newValue) {
-            if (newValue.length() > getMaxLength()) {
-                return;
-            }
-            setAttribute("value", newValue);
-        }
-    };
+    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
      * Creates an instance.
@@ -139,6 +131,16 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void typeDone(final String newValue) {
+        if (newValue.length() <= getMaxLength()) {
+            setAttribute("value", newValue);
+        }
     }
 
     /**

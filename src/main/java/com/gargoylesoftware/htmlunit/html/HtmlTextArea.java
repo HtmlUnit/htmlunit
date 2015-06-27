@@ -60,16 +60,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
 
-    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
-        @Override
-        void typeDone(final String newValue) {
-            setTextInternal(newValue);
-        }
-        @Override
-        protected boolean acceptChar(final char c) {
-            return super.acceptChar(c) || c == '\n' || c == '\r';
-        }
-    };
+    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
      * Creates an instance.
@@ -423,6 +414,22 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     @Override
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         doTypeProcessor_.doType(getText(), selectionDelegate_, c, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void typeDone(final String newValue) {
+        setTextInternal(newValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean acceptChar(final char c) {
+        return super.acceptChar(c) || c == '\n' || c == '\r';
     }
 
     /**

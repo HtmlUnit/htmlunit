@@ -29,9 +29,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-abstract class DoTypeProcessor implements Serializable {
+class DoTypeProcessor implements Serializable {
 
     private static Map<Integer, Character> SPECIAL_KEYS_MAP_ = new HashMap<>();
+
+    private HtmlElement htmlElement_;
 
     static {
         SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_ADD, '+');
@@ -49,6 +51,10 @@ abstract class DoTypeProcessor implements Serializable {
         }
     }
 
+    DoTypeProcessor(final HtmlElement htmlElement) {
+        htmlElement_ = htmlElement;
+    }
+
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
             final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
 
@@ -63,11 +69,7 @@ abstract class DoTypeProcessor implements Serializable {
                 selectionEnd--;
             }
         }
-        else if (c >= '\uE000' && c <= '\uF8FF') {
-            // nothing, this is private use area
-            // see http://www.unicode.org/charts/PDF/UE000.pdf
-        }
-        else if (acceptChar(c)) {
+        else if (htmlElement_.acceptChar(c)) {
             if (selectionStart != currentValue.length()) {
                 newValue.replace(selectionStart, selectionEnd, Character.toString(c));
             }
@@ -79,7 +81,7 @@ abstract class DoTypeProcessor implements Serializable {
 
         selectionEnd = selectionStart;
 
-        typeDone(newValue.toString());
+        htmlElement_.typeDone(newValue.toString());
 
         selectionDelegate.setSelectionStart(selectionStart);
         selectionDelegate.setSelectionEnd(selectionEnd);
@@ -146,21 +148,10 @@ abstract class DoTypeProcessor implements Serializable {
             selectionEnd = selectionStart;
         }
 
-        typeDone(newValue.toString());
+        htmlElement_.typeDone(newValue.toString());
 
         selectionDelegate.setSelectionStart(selectionStart);
         selectionDelegate.setSelectionEnd(selectionEnd);
     }
-
-    /**
-     * Indicates if the provided character can by "typed" in the text.
-     * @param c the character
-     * @return <code>true</code> if it is accepted
-     */
-    protected boolean acceptChar(final char c) {
-        return c == ' ' || !Character.isWhitespace(c);
-    }
-
-    abstract void typeDone(final String newValue);
 
 }
