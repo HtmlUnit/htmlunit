@@ -138,7 +138,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
             try {
                 result = (String) contents.getTransferData(DataFlavor.stringFlavor);
             }
-            catch (UnsupportedFlavorException | IOException ex) {
+            catch (final UnsupportedFlavorException | IOException ex) {
             }
         }
         return result;
