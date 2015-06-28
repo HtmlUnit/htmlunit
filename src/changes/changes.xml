@@ -9,6 +9,9 @@
     <body>
         <release version="2.18" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
+                Typing: support clipboard copy, cut and paste.
+            </action>
+            <action type="fix" dev="asashour">
                 ImageData: reuse data property, to preserve setting the values.
             </action>
             <action type="update" dev="asashour">

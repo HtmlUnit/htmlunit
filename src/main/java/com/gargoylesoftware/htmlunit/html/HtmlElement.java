@@ -26,6 +26,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -677,23 +678,43 @@ public abstract class HtmlElement extends DomElement {
 
                     default:
                 }
-                boolean keyPress = true;
-                boolean keyUp = true;
-                switch (key) {
-                    case KeyboardEvent.DOM_VK_SHIFT:
-                    case KeyboardEvent.DOM_VK_CONTROL:
-                    case KeyboardEvent.DOM_VK_ALT:
-                        if (specialKeys == null) {
-                            specialKeys = new ArrayList<>(keys.size());
-                        }
-                        specialKeys.add(key);
-                        keyPress = false;
-                        keyUp = false;
-                        break;
+                if (pressed) {
+                    boolean keyPress = true;
+                    boolean keyUp = true;
+                    switch (key) {
+                        case KeyboardEvent.DOM_VK_SHIFT:
+                        case KeyboardEvent.DOM_VK_CONTROL:
+                        case KeyboardEvent.DOM_VK_ALT:
+                            if (specialKeys == null) {
+                                specialKeys = new ArrayList<>(keys.size());
+                            }
+                            specialKeys.add(key);
+                            keyPress = false;
+                            keyUp = false;
+                            break;
 
-                    default:
+                        default:
+                    }
+                    page = type(key, shiftPressed, ctrlPressed, altPressed, true, keyPress, keyUp);
                 }
-                page = type(key, shiftPressed, ctrlPressed, altPressed, true, keyPress, keyUp);
+                else {
+                    switch (key) {
+                        case KeyboardEvent.DOM_VK_SHIFT:
+                        case KeyboardEvent.DOM_VK_CONTROL:
+                        case KeyboardEvent.DOM_VK_ALT:
+                            if (specialKeys != null) {
+                                for (final Iterator<Integer> it = specialKeys.iterator(); it.hasNext();) {
+                                    if (it.next() == key) {
+                                        it.remove();
+                                    }
+                                }
+                            }
+                            break;
+
+                        default:
+                    }
+                    page = type(key, shiftPressed, ctrlPressed, altPressed, false, false, true);
+                }
             }
         }
 

@@ -14,6 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-class DoTypeProcessor implements Serializable {
+class DoTypeProcessor implements Serializable, ClipboardOwner {
 
     private static Map<Integer, Character> SPECIAL_KEYS_MAP_ = new HashMap<>();
 
@@ -73,21 +81,73 @@ class DoTypeProcessor implements Serializable {
             }
         }
         else if (acceptChar(c)) {
-            if (selectionStart != currentValue.length()) {
-                newValue.replace(selectionStart, selectionEnd, Character.toString(c));
+            if (ctrlKey && (c == 'C' || c == 'c')) {
+                final String content = newValue.substring(selectionStart, selectionEnd);
+                setClipboardContent(content);
+            }
+            else if (ctrlKey && (c == 'V' || c == 'v')) {
+                final String content = getClipboardContent();
+                add(newValue, content, selectionStart, selectionEnd);
+                selectionStart += content.length();
+                selectionEnd = selectionStart;
+            }
+            else if (ctrlKey && (c == 'X' || c == 'x')) {
+                final String content = newValue.substring(selectionStart, selectionEnd);
+                setClipboardContent(content);
+                newValue.delete(selectionStart, selectionEnd);
+                selectionEnd = selectionStart;
             }
             else {
-                newValue.append(c);
+                add(newValue, c, selectionStart, selectionEnd);
+                selectionStart++;
+                selectionEnd = selectionStart;
             }
-            selectionStart++;
         }
-
-        selectionEnd = selectionStart;
 
         typeDone(newValue.toString());
 
         selectionDelegate.setSelectionStart(selectionStart);
         selectionDelegate.setSelectionEnd(selectionEnd);
+    }
+
+    private void add(final StringBuilder newValue, final char c, final int selectionStart,
+            final int selectionEnd) {
+        if (selectionStart != newValue.length()) {
+            newValue.replace(selectionStart, selectionEnd, Character.toString(c));
+        }
+        else {
+            newValue.append(c);
+        }
+    }
+
+    private void add(final StringBuilder newValue, final String string, final int selectionStart,
+            final int selectionEnd) {
+        if (selectionStart != newValue.length()) {
+            newValue.replace(selectionStart, selectionEnd, string);
+        }
+        else {
+            newValue.append(string);
+        }
+    }
+
+    private String getClipboardContent() {
+        String result = "";
+        final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        final Transferable contents = clipboard.getContents(null);
+        if (contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+            try {
+                result = (String) contents.getTransferData(DataFlavor.stringFlavor);
+            }
+            catch (UnsupportedFlavorException | IOException ex) {
+            }
+        }
+        return result;
+    }
+
+    private void setClipboardContent(final String string) {
+        final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        final StringSelection stringSelection = new StringSelection(string);
+        clipboard.setContents(stringSelection, this);
     }
 
     private void typeDone(final String newValue) {
@@ -163,7 +223,7 @@ class DoTypeProcessor implements Serializable {
                 break;
 
             default:
-                break;
+                return;
         }
 
         if (!shiftKey) {
@@ -174,6 +234,13 @@ class DoTypeProcessor implements Serializable {
 
         selectionDelegate.setSelectionStart(selectionStart);
         selectionDelegate.setSelectionEnd(selectionEnd);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void lostOwnership(final Clipboard clipboard, final Transferable contents) {
     }
 
 }
