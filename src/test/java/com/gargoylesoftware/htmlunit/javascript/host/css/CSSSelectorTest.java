@@ -1271,7 +1271,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "id2" },
-            CHROME = { "0", "exception" },
+            CHROME = { "0" },
             IE8 = "exception")
     @NotYetImplemented(CHROME)
     public void target() throws Exception {
@@ -1283,7 +1283,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    try {\n"
             + "      found = document.querySelectorAll(':target');\n"
             + "      alert(found.length);\n"
-            + "      alert(found[0].id);\n"
+            + "      if (found.length > 0) { alert(found[0].id); }\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"
