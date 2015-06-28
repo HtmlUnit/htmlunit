@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                ImageData: reuse data property, to preserve setting the values.
+            </action>
             <action type="update" dev="asashour">
                 Rename SelectionDelegate to SelectableTextSelectionDelegate, and add SimpleSelectionDelegate.
             </action>

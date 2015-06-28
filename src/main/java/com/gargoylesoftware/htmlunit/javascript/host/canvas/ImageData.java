@@ -43,6 +43,7 @@ public class ImageData extends SimpleScriptable {
     private final int sy_;
     private final int width_;
     private final int height_;
+    private Uint8ClampedArray data_;
 
     /**
      * Default constructor.
@@ -100,18 +101,20 @@ public class ImageData extends SimpleScriptable {
      */
     @JsxGetter
     public Uint8ClampedArray getData() {
-        final byte[] bytes = getBytes();
-        final ArrayBuffer arrayBuffer = new ArrayBuffer();
-        arrayBuffer.constructor(bytes.length);
-        arrayBuffer.setBytes(0, bytes);
+        if (data_ == null) {
+            final byte[] bytes = getBytes();
+            final ArrayBuffer arrayBuffer = new ArrayBuffer();
+            arrayBuffer.constructor(bytes.length);
+            arrayBuffer.setBytes(0, bytes);
 
-        final Uint8ClampedArray clampedArray = new Uint8ClampedArray();
-        clampedArray.setParentScope(getParentScope());
-        clampedArray.setPrototype(getPrototype(clampedArray.getClass()));
+            data_ = new Uint8ClampedArray();
+            data_.setParentScope(getParentScope());
+            data_.setPrototype(getPrototype(data_.getClass()));
 
-        clampedArray.constructor(arrayBuffer, 0, bytes.length);
+            data_.constructor(arrayBuffer, 0, bytes.length);
+        }
 
-        return clampedArray;
+        return data_;
     }
 
 }
