@@ -746,7 +746,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             final Writer writer = resp.getWriter();
             writer.write(req.getMethod());
             writer.write('|');
-            writer.write(IOUtils.toString(req.getReader())); 
+            writer.write(IOUtils.toString(req.getReader()));
             writer.close();
         }
     }
