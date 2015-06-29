@@ -754,22 +754,22 @@ public class HttpWebConnection implements WebConnection {
         if (headerNames != null) {
             for (final String header : headerNames) {
                 if ("Host".equals(header)) {
-                    list.add(new StaticHttpRequestInterceptor(header, host.toString()) { });
+                    list.add(new StaticHttpRequestInterceptor(header, host.toString()));
                 }
                 else if ("User-Agent".equals(header)) {
-                    list.add(new StaticHttpRequestInterceptor(header, userAgent) { });
+                    list.add(new StaticHttpRequestInterceptor(header, userAgent));
                 }
                 else if ("Accept".equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
+                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)));
                 }
                 else if ("Accept-Language".equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
+                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)));
                 }
                 else if ("Accept-Encoding".equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
+                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)));
                 }
                 else if ("Referer".equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
+                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)));
                 }
                 else if ("Connection".equals(header)) {
                     list.add(new RequestClientConnControl());
@@ -778,12 +778,12 @@ public class HttpWebConnection implements WebConnection {
                     list.add(new RequestAddCookies());
                 }
                 else if ("DNT".equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
-                    list.add(new StaticHttpRequestInterceptor(header, "1") { });
+                    list.add(new StaticHttpRequestInterceptor(header, "1"));
                 }
             }
         }
         else {
-            list.add(new StaticHttpRequestInterceptor("User-Agent", userAgent) { });
+            list.add(new StaticHttpRequestInterceptor("User-Agent", userAgent));
             list.add(new RequestAddCookies());
             list.add(new RequestClientConnControl());
         }
@@ -791,7 +791,7 @@ public class HttpWebConnection implements WebConnection {
         // not all browser versions have DNT by default as part of getHeaderNamesOrdered()
         // so we add it again, in case
         if (webClient_.getOptions().isDoNotTrackEnabled()) {
-            list.add(new StaticHttpRequestInterceptor("DNT", "1") { });
+            list.add(new StaticHttpRequestInterceptor("DNT", "1"));
         }
 
         synchronized (requestHeaders) {
@@ -801,13 +801,13 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /** We must have a separate class per header, because of org.apache.http.protocol.ChainBuilder. */
-    private abstract static class StaticHttpRequestInterceptor implements HttpRequestInterceptor {
+    private static final class StaticHttpRequestInterceptor implements HttpRequestInterceptor {
         private String name_;
         private String value_;
 
         StaticHttpRequestInterceptor(final String name, final String value) {
-            this.name_ = name;
-            this.value_ = value;
+            name_ = name;
+            value_ = value;
         }
 
         @Override
@@ -817,11 +817,11 @@ public class HttpWebConnection implements WebConnection {
         }
     }
 
-    private static class MultiHttpRequestInterceptor implements HttpRequestInterceptor {
+    private static final class MultiHttpRequestInterceptor implements HttpRequestInterceptor {
         private final Map<String, String> map_;
 
         MultiHttpRequestInterceptor(final Map<String, String> map) {
-            this.map_ = map;
+            map_ = map;
         }
 
         @Override
