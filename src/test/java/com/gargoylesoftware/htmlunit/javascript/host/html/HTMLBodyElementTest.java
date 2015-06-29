@@ -328,4 +328,35 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "keydown (target)", "keydown (body)" })
+    public void eventHandler() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var target = document.getElementById('target');\n"
+            + "        target.onkeydown = function() {\n"
+            + "          alert('keydown (target)');\n"
+            + "        };\n"
+            + "        document.body.onkeydown = function() {\n"
+            + "          alert('keydown (body)');\n"
+            + "        };\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <input id='target' type='checkbox'>\n"
+            + "  </body>\n"
+            + "</html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("target")).sendKeys("a");
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
 }

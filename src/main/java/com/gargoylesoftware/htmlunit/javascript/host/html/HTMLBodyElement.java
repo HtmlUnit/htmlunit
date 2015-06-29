@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -70,6 +71,15 @@ public class HTMLBodyElement extends HTMLElement {
         if (attributeName.toLowerCase(Locale.ENGLISH).startsWith("on")) {
             createEventHandler(attributeName, value);
         }
+    }
+
+    /**
+     * Forwards the events to window.
+     *
+     * {@inheritDoc}
+     */
+    public EventListenersContainer getEventListenersContainer() {
+        return getWindow().getEventListenersContainer();
     }
 
     /**

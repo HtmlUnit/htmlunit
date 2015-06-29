@@ -9,6 +9,9 @@
     <body>
         <release version="2.18" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: properly handle event handlers as a property of document body.
+            </action>
+            <action type="fix" dev="asashour">
                 Typing: support clipboard copy, cut and paste.
             </action>
             <action type="fix" dev="asashour">
