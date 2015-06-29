@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -37,10 +40,13 @@ import org.xml.sax.SAXException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.AbstractDomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCDataSection;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 
 /**
@@ -311,12 +317,37 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
+     * Returns an {@link Iterable} that will recursively iterate over all of this node's {@link DomElement} descendants.
+     *
+     * @return an {@link Iterable} that will recursively iterate over all of this node's {@link DomElement} descendants
+     */
+    public final Iterable<DomElement> getXmlElementDescendants() {
+        return new Iterable<DomElement>() {
+            @Override
+            public Iterator<DomElement> iterator() {
+                return new DescendantElementsIterator<DomElement>(DomElement.class);
+            }
+        };
+    }
+
+    /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
-    public NodeList getElementsByTagName(final String tagname) {
-        throw new UnsupportedOperationException("XmlPage.getElementsByTagName is not yet implemented.");
+    public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
+        return new AbstractDomNodeList<DomElement>(this) {
+            @Override
+            protected List<DomElement> provideElements() {
+                final List<DomElement> res = new LinkedList<>();
+
+                for (final DomNode elem : getXmlElementDescendants()) {
+                    if (elem.getLocalName().equals(tagName)) {
+                        res.add((DomElement) elem);
+                    }
+                }
+                return res;
+            }
+        };
     }
 
     /**

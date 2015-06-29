@@ -25,12 +25,15 @@ import org.w3c.dom.Node;
 /**
  * A generic DomNodeList implementation of {@link org.w3c.dom.NodeList}.
  *
+ * @param <E> The element type
+ *
  * @version $Revision$
  * @author Daniel Gredler
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill
  */
-abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E> implements DomNodeList<E>, Serializable {
+public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E>
+    implements DomNodeList<E>, Serializable {
 
     /** This node list's root node. */
     private DomNode node_;
@@ -55,10 +58,18 @@ abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E> im
         }
     }
 
+    /**
+     * Returns the DOM node.
+     * @return the DOM node
+     */
     protected DomNode getDomNode() {
         return node_;
     }
 
+    /**
+     * Returns the elements.
+     * @return the elements
+     */
     protected abstract List<E> provideElements();
 
     /**

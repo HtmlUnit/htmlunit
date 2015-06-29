@@ -380,7 +380,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         return new AbstractDomNodeList<HtmlElement>(this) {
             @Override
             protected List<HtmlElement> provideElements() {
-                final List<HtmlElement> res = new LinkedList<HtmlElement>();
+                final List<HtmlElement> res = new LinkedList<>();
                 for (HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
                     if (elem.getLocalName().equals(tagName)) {
                         res.add(elem);

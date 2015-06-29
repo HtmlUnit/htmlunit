@@ -609,7 +609,7 @@ public class HtmlPage extends SgmlPage {
         return new AbstractDomNodeList<DomElement>(this) {
             @Override
             protected List<DomElement> provideElements() {
-                final List<DomElement> res = new LinkedList<DomElement>();
+                final List<DomElement> res = new LinkedList<>();
                 for (HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
                     if (elem.getLocalName().equals(tagName)) {
                         res.add(elem);
