@@ -293,12 +293,13 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Sets the body content to be submitted if this is a <tt>POST</tt> or <tt>PUT</tt> request.
+     * Sets the body content to be submitted if this is a {@code POST}, {@code PUT} or {@code PATCH} request.
      * Ignored for all other request types.
      * Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
-     * @param requestBody the body content to be submitted if this is a <tt>POST</tt> request
+     * @param requestBody the body content to be submitted if this is a {@code POST}, {@code PUT}
+     * or {@code PATCH} request
      * @throws RuntimeException if the request parameters have already been set
-     *                          or this is not a <tt>POST</tt> or <tt>PUT </tt> request
+     *                          or this is not a {@code POST}, {@code PUT} or {@code PATCH} request.
      */
     public void setRequestBody(final String requestBody) throws RuntimeException {
         if (requestParameters_ != null && !requestParameters_.isEmpty()) {
@@ -306,8 +307,8 @@ public class WebRequest implements Serializable {
                        + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
         }
-        if (httpMethod_ != HttpMethod.POST && httpMethod_ != HttpMethod.PUT) {
-            final String msg = "The request body may only be set for POST or PUT requests!";
+        if (httpMethod_ != HttpMethod.POST && httpMethod_ != HttpMethod.PUT && httpMethod_ != HttpMethod.PATCH) {
+            final String msg = "The request body may only be set for POST, PUT or PATCH requests!";
             throw new RuntimeException(msg);
         }
         requestBody_ = requestBody;

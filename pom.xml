@@ -721,6 +721,9 @@
         <contributor>
             <name>Jacob Childress</name>
         </contributor>
+        <contributor>
+            <name>Joerg Werner</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

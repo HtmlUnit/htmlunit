@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.18" date="???" description="Bugfixes">
+        <release version="2.18" date="???" description="Bugfixes, .type(Keyboard), PATCH method for HTTP">
+            <action type="add" dev="asashour" issue="222" system="features" due-to="Joerg Werner">
+                Support PATCH Method for HTTP.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: properly handle event handlers as a property of document body.
             </action>

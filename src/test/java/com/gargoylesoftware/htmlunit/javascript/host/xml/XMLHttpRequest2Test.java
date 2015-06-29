@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -717,12 +718,13 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("PATCH|some body data")
     public void patch() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var xhr = " + XHRInstantiation_ + ";\n"
             + "  xhr.open('PATCH', '/test2', false);\n"
-            + "  xhr.send('');\n"
+            + "  xhr.send('some body data');\n"
             + "  alert(xhr.responseText);\n"
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
@@ -739,10 +741,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public static class PatchServlet2 extends HttpServlet {
 
         @Override
-        protected void doPost(final HttpServletRequest req, final HttpServletResponse resp)
+        protected void service(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
             final Writer writer = resp.getWriter();
             writer.write(req.getMethod());
+            writer.write('|');
+            writer.write(IOUtils.toString(req.getReader())); 
             writer.close();
         }
     }

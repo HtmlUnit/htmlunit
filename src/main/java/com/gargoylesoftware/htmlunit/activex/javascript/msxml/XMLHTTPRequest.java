@@ -502,7 +502,8 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                 webRequest_.setHttpMethod(HttpMethod.POST);
             }
             if (HttpMethod.POST == webRequest_.getHttpMethod()
-                    || HttpMethod.PUT == webRequest_.getHttpMethod()) {
+                    || HttpMethod.PUT == webRequest_.getHttpMethod()
+                    || HttpMethod.PATCH == webRequest_.getHttpMethod()) {
                 final String body = Context.toString(content);
                 if (!body.isEmpty()) {
                     if (LOG.isDebugEnabled()) {

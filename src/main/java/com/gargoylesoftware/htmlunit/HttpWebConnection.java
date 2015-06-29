@@ -61,6 +61,7 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.client.methods.HttpOptions;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -283,7 +284,7 @@ public class HttpWebConnection implements WebConnection {
                 httpMethod.setURI(uri);
             }
         }
-        else { // POST as well as PUT
+        else { // POST as well as PUT and PATCH
             final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 
             if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED && method instanceof HttpPost) {
@@ -319,7 +320,7 @@ public class HttpWebConnection implements WebConnection {
                 }
                 method.setEntity(builder.build());
             }
-            else { // for instance a PUT request
+            else { // for instance a PUT or PATCH request
                 final String body = webRequest.getRequestBody();
                 if (body != null) {
                     method.setEntity(new StringEntity(body, charset));
@@ -470,6 +471,10 @@ public class HttpWebConnection implements WebConnection {
 
             case TRACE:
                 method = new HttpTrace(uri);
+                break;
+
+            case PATCH:
+                method = new HttpPatch(uri);
                 break;
 
             default:

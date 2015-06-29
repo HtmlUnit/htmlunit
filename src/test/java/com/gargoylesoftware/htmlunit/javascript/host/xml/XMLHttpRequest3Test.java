@@ -256,6 +256,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         testMethod(HttpMethod.PUT);
         testMethod(HttpMethod.OPTIONS);
         testMethod(HttpMethod.TRACE);
+        testMethod(HttpMethod.PATCH);
     }
 
     /**

@@ -651,7 +651,8 @@ public class XMLHttpRequest extends EventTarget {
     private void prepareRequest(final Object content) {
         if (content != null
             && (HttpMethod.POST == webRequest_.getHttpMethod()
-                    || HttpMethod.PUT == webRequest_.getHttpMethod())
+                    || HttpMethod.PUT == webRequest_.getHttpMethod()
+                    || HttpMethod.PATCH == webRequest_.getHttpMethod())
             && !Context.getUndefinedValue().equals(content)) {
             final String body = Context.toString(content);
             if (!body.isEmpty()) {

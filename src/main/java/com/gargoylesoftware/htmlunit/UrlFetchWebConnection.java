@@ -101,7 +101,7 @@ public class UrlFetchWebConnection implements WebConnection {
 
             final HttpMethod httpMethod = webRequest.getHttpMethod();
             connection.setRequestMethod(httpMethod.name());
-            if (HttpMethod.POST == httpMethod || HttpMethod.PUT == httpMethod) {
+            if (HttpMethod.POST == httpMethod || HttpMethod.PUT == httpMethod || HttpMethod.PATCH == httpMethod) {
                 connection.setDoOutput(true);
                 final String charset = webRequest.getCharset();
                 connection.addRequestProperty("Content-Type", FormEncodingType.URL_ENCODED.getName());
