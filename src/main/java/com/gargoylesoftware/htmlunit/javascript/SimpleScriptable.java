@@ -132,7 +132,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Sets the class name.
      * @param className the class name.

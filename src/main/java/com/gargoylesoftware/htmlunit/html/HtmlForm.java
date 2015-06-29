@@ -89,7 +89,7 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * <p>Submits this form to the server. If <tt>submitElement</tt> is <tt>null</tt>, then
      * the submission is treated as if it was triggered by JavaScript, and the <tt>onsubmit</tt>
@@ -140,7 +140,7 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Gets the request for a submission of this form with the specified SubmittableElement.
      * @param submitElement the element that caused the submit to occur

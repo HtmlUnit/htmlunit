@@ -47,7 +47,7 @@ public final class StringUtils {
     }
 
     /**
-     * Escapes the characters '<', '>' and '&' into their XML entity equivalents. Note that
+     * Escapes the characters '&lt;', '&gt;' and '&amp;' into their XML entity equivalents. Note that
      * sometimes we have to use this method instead of
      * {@link org.apache.commons.lang3.StringEscapeUtils#escapeXml(String)} or
      * {@link org.apache.commons.lang3.StringEscapeUtils#escapeHtml4(String)} because those methods
@@ -63,7 +63,7 @@ public final class StringUtils {
 
     /**
      * Escape the string to be used as attribute value.
-     * Only <, & and " have to be escaped (see http://www.w3.org/TR/REC-xml/#d0e888).
+     * Only {@code <}, {@code &} and {@code "} have to be escaped (see http://www.w3.org/TR/REC-xml/#d0e888).
      * @param attValue the attribute value
      * @return the escaped value
      */

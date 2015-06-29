@@ -135,7 +135,7 @@ public class HtmlImageInput extends HtmlInput {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same

@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.util;
 import java.io.File;
 
 /**
- * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  *
  * A holder for a key/value pair that represents a file to upload.
  *

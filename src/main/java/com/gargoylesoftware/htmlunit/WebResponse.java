@@ -165,7 +165,8 @@ public class WebResponse implements Serializable {
      * This method always returns a valid charset. This method first checks the "Content-Type"
      * header; if not found, it checks the request charset; as a last resort, this method
      * returns {@link TextUtil#DEFAULT_CHARSET}.
-     * If no charset is defined for an xml respose, then UTF-8 is used ({@link "http://www.w3.org/TR/xml/#charencoding"}
+     * If no charset is defined for an xml respose, then UTF-8 is used
+     * @see <a href="http://www.w3.org/TR/xml/#charencoding">Character Encoding</a>
      * @return the content charset for this response
      */
     public String getContentCharset() {

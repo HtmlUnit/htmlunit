@@ -310,7 +310,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      */
     @Override
     public synchronized String jobStatusDump(final JavaScriptJobFilter filter) {

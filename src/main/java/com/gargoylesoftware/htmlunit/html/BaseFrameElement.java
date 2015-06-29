@@ -104,7 +104,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Called after the node for the &lt;frame&gt; or &lt;iframe&gt; has been added to the containing page.
      * The node needs to be added first to allow JavaScript in the frame to see the frame in the parent.
@@ -432,7 +432,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Marks this frame as created by javascript. This is needed to handle
      * some special IE behavior.
@@ -442,7 +442,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Unmarks this frame as created by javascript. This is needed to handle
      * some special IE behavior.
@@ -452,7 +452,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Returns true if this frame was created by javascript. This is needed to handle
      * some special IE behavior.

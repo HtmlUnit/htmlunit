@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
- * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  *
  * Google App Engine specific subclass to facilitate execution of JS jobs.
  *

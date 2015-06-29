@@ -88,7 +88,7 @@ public interface WebWindow extends Serializable {
     History getHistory();
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Sets the JavaScript object that corresponds to this element. This is not guaranteed
      * to be set even if there is a JavaScript object for this HTML element.
@@ -98,7 +98,7 @@ public interface WebWindow extends Serializable {
     void setScriptObject(final Object scriptObject);
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Returns the JavaScript object that corresponds to this element.
      *
@@ -107,7 +107,7 @@ public interface WebWindow extends Serializable {
     Object getScriptObject();
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Returns the job manager for this window.
      *

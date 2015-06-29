@@ -145,7 +145,7 @@ public class BrowserRunner extends Suite {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      */
     public static final String EMPTY_DEFAULT = "~InTerNal_To_BrowSeRRunNer#@$";
 

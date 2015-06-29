@@ -70,7 +70,7 @@ public class StyleSheetList extends SimpleScriptable {
     private HTMLCollection nodes_;
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Verifies if the provided node is a link node pointing to a stylesheet.
      *

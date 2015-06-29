@@ -194,6 +194,9 @@ public class History implements Serializable {
 
     /**
      * Re-initializes transient fields when an object of this type is deserialized.
+     * @param in the object input stream
+     * @throws IOException if an error occurs
+     * @throws ClassNotFoundException if an error occurs
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();

@@ -967,7 +967,7 @@ public class JavaScriptEngine {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * Indicates that no postponed action should be executed.
      */
     public void holdPosponedActions() {
@@ -975,7 +975,7 @@ public class JavaScriptEngine {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * Process postponed actions, if any.
      */
     public void processPostponedActions() {

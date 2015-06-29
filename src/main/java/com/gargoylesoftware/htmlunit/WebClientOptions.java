@@ -205,7 +205,7 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Enables/disables Applet support. By default, this property is disabled.<br/>
+     * Enables/disables Applet support. By default, this property is disabled.<br>
      * <p>
      * Note: as of HtmlUnit-2.4, Applet support is experimental and minimal
      * </p>

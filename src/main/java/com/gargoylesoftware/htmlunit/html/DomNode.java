@@ -271,7 +271,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Sets the JavaScript object that corresponds to this node. This is not guaranteed to be set even if
      * there is a JavaScript object for this DOM node.
@@ -900,7 +900,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.
      *
@@ -1144,7 +1144,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Detach this node from all relationships with other nodes.
      * This is the first step of an move.
@@ -1720,7 +1720,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * all descendants of this node.
      *
      * @param listener the character data change listener to be added
-     * @see #removeCharacterDataChangeListener(DomChangeListener)
+     * @see #removeCharacterDataChangeListener(CharacterDataChangeListener)
      */
     public void addCharacterDataChangeListener(final CharacterDataChangeListener listener) {
         WebAssert.notNull("listener", listener);
@@ -1737,7 +1737,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * all descendants of this node.
      *
      * @param listener the Character Data change listener to be removed
-     * @see #addCharacterDataChangeListener(DomChangeListener)
+     * @see #addCharacterDataChangeListener(CharacterDataChangeListener)
      */
     public void removeCharacterDataChangeListener(final CharacterDataChangeListener listener) {
         WebAssert.notNull("listener", listener);
@@ -1886,7 +1886,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Indicates if this node is currently directly attached to the page.
      * @return <code>true</code> if the page is one ancestor of the node.
@@ -1896,20 +1896,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Lifecycle method to support special processing for js method importNode.
      * @param doc the import target document
      * @see com.gargoylesoftware.htmlunit.javascript.host.dom.Document#importNode(
      * com.gargoylesoftware.htmlunit.javascript.host.dom.Node, boolean)
-     * @see HtmlScript#processImportNode(Document)
+     * @see HtmlScript#processImportNode(com.gargoylesoftware.htmlunit.javascript.host.dom.Document)
      */
     public void processImportNode(final com.gargoylesoftware.htmlunit.javascript.host.dom.Document doc) {
         // empty default impl
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Helper for a common call sequence.
      * @param feature the feature to check

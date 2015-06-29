@@ -35,10 +35,10 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * type isn't found. There are also protected <tt>createXXXXPage()</tt> methods for creating the {@link Page} types
  * which HtmlUnit already knows about for your custom content types.
  *
- * <p />
+ * <p>
  * The following table shows the type of {@link Page} created depending on the content type:<br>
  * <br>
- *  <table border="1" width="50%">
+ *  <table border="1" width="50%" summary="Page Types">
  *    <tr>
  *      <th>Content type</th>
  *      <th>Type of page</th>
@@ -48,15 +48,15 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *      <td>{@link HtmlPage}</td>
  *    </tr>
  *    <tr>
- *      <td>text/xml<br/>
- *      application/xml<br/>
- *      text/vnd.wap.wml<br/>
+ *      <td>text/xml<br>
+ *      application/xml<br>
+ *      text/vnd.wap.wml<br>
  *      *+xml
  *      </td>
  *      <td>{@link XmlPage}, or an {@link XHtmlPage} if an XHTML namespace is used</td>
  *    </tr>
  *    <tr>
- *      <td>text/javascript<br/>
+ *      <td>text/javascript<br>
  *      application/x-javascript
  *      </td>
  *      <td>{@link JavaScriptPage}</td>

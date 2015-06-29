@@ -113,9 +113,9 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * <p>
  * HtmlPage instances should not be instantiated directly. They will be returned by {@link WebClient#getPage(String)}
  * when the content type of the server's response is <code>text/html</code> (or one of its variations).<br>
- * <br/>
- * <b>Example:</b><br/>
- * <br/>
+ * <br>
+ * <b>Example:</b><br>
+ * <br>
  * <code>
  * final HtmlPage page = webClient.{@link WebClient#getPage(String) getPage}("http://mywebsite/some/page.html");
  * </code>
@@ -977,7 +977,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * <p>
      * Execute the specified JavaScript if a JavaScript engine was successfully
      * instantiated. If this JavaScript causes the current page to be reloaded
@@ -1010,7 +1010,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Execute a Function in the given context.
      *
@@ -1049,7 +1049,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @param srcAttribute the source attribute from the script tag
      * @param charset the charset attribute from the script tag
@@ -1390,7 +1390,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @return true if the OnbeforeunloadHandler has accepted to change the page
      */
@@ -1832,7 +1832,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @param node the node that has just been added to the document
      */
@@ -1857,7 +1857,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @param node the node that has just been removed from the tree
      */
@@ -2392,7 +2392,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * <p>
      * Parses the given string as would it belong to the content being parsed
      * at the current parsing position
@@ -2499,7 +2499,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * {@inheritDoc}
      */
     @Override

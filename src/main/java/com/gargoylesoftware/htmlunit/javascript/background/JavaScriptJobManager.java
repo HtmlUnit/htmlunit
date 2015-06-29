@@ -145,7 +145,7 @@ public interface JavaScriptJobManager extends Serializable {
     boolean runSingleJob(final JavaScriptJob job);
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Utility method to report the current job status.
      * Might help some tools.

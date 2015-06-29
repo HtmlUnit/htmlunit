@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 
 /**
- * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  *
  * Provides facility method to work with XML responses.
  *

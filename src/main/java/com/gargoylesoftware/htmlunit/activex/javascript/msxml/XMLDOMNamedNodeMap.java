@@ -107,7 +107,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Gets the specified attribute but does not handle the synthetic class attribute for IE.
      * @see #getNamedItem(String)

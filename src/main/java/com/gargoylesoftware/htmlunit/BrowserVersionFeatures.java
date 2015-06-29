@@ -902,7 +902,7 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_CREATE_ELEMENT_COMMENT,
 
     /** Javascript function document.createElement can process html code.
-     * e.g. document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")
+     * e.g. {@code document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")}
      * @see "http://msdn.microsoft.com/en-us/library/ms536389%28v=VS.85%29.aspx"
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
@@ -1491,7 +1491,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
 
-    /** If <tt>true</tt>, Date.prototype.getYear subtracts 1900 only if 1900 <= date < 2000. */
+    /** If <tt>true</tt>, Date.prototype.getYear subtracts 1900 only if 1900 &lt;= date &lt; 2000. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_NON_ECMA_GET_YEAR,
 

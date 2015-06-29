@@ -901,7 +901,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Called from the HTMLParser if a 'X-UA-Compatible' meta tag found.
      * @param documentMode the mode forced by the meta tag

@@ -78,6 +78,10 @@
                         Update maven to latest version, and delete ~/.m2/repository folder.
                     </li>
                     <li>
+                        In pom.xml: temporarily remove "-Xdoclint:none" javadoc configuration and try to fix
+                        javadoc errors other than "script" in BrowserVersion.
+                    </li>
+                    <li>
                         Update the version number in pom.xml
                     </li>
                     <li>

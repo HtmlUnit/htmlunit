@@ -243,7 +243,7 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Gets the HTML page in which the script error occurred.<br/>
+     * Gets the HTML page in which the script error occurred.<br>
      * Caution: this page may be only partially parsed if the exception occurred in a script
      * executed at parsing time.
      * @return the page

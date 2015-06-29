@@ -328,6 +328,7 @@
                         <link>http://commons.apache.org/codec/apidocs/</link>
                         <link>http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
                     </links>
+                    <additionalparam>-Xdoclint:none</additionalparam>
                 </configuration>
             </plugin>
             <plugin>

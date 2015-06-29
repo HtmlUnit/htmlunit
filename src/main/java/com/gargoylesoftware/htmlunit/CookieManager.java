@@ -132,7 +132,7 @@ public class CookieManager implements Serializable {
     /**
      * Gets the port of the URL.
      * This functionality is implemented here as protected method to allow subclass to change it
-     * as workaround to <a href="http://code.google.com/p/googleappengine/issues/detail?id=4784>
+     * as workaround to <a href="http://code.google.com/p/googleappengine/issues/detail?id=4784">
      * Google App Engine bug 4784</a>.
      * @param url the URL
      * @return the port use to connect the server

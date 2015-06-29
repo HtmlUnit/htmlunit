@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Listener for messages from the HTML parser. <br/>
+ * Listener for messages from the HTML parser. <br>
  * The classification of problems as warnings or errors is the one of the HTML parser
  * used by HtmlUnit. The line and column may indicates the position of the problem detected
  * by the parser. This is only an indication and in some cases the position where
@@ -34,7 +34,7 @@ public interface HTMLParserListener {
 
     /**
      * Simple implementation of {@link HTMLParserListener} logging the received warnings
-     * and errors in the "com.gargoylesoftware.htmlunit.html.HTMLParserListener" log.<br/>
+     * and errors in the "com.gargoylesoftware.htmlunit.html.HTMLParserListener" log.<br>
      * Errors are logged at the error level and warnings at the warning level.
      */
     HTMLParserListener LOG_REPORTER = new SimpleHTMLParserListener();

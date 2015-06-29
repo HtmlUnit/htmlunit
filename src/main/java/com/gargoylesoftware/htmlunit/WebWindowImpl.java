@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptF
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
- * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  *
  * Base class for common WebWindow functionality. While public, this class is not
  * exposed in any other places of the API. Internally we can cast to this class

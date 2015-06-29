@@ -2057,7 +2057,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Executes the event on this window only. Internal helper to share the impl with Node.java.
      *

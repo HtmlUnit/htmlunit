@@ -153,9 +153,9 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE RESOURCE - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE RESOURCE - USE AT YOUR OWN RISK.</span><br>
      * If the linked content is not already downloaded it triggers a download. Then it stores the response
-     * for later use.<br/>
+     * for later use.<br>
      *
      * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
      * @return <code>null</code> if no download should be performed and when this wasn't already done; the response

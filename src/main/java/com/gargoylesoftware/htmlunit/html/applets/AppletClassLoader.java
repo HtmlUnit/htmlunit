@@ -23,7 +23,7 @@ import org.apache.commons.io.IOUtils;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
- * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  * Class loader for loading applets.
  *
  * @version $Revision$

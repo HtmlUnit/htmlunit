@@ -1050,7 +1050,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * Returns <tt>true</tt> if this element has any JavaScript functions that need to be executed when the
      * specified event occurs.
      * @param eventName the name of the event, such as "onclick" or "onblur", etc
@@ -1062,7 +1062,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * Registers a JavaScript function as an event handler.
      * @param eventName the name of the event, such as "onclick" or "onblur", etc
      * @param eventHandler a Rhino JavaScript function
@@ -1073,7 +1073,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * Register a snippet of JavaScript code as an event handler. The JavaScript code will
      * be wrapped inside a unique function declaration which provides one argument named
      * "event"
@@ -1090,7 +1090,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * Removes the specified event handler.
      * @param eventName Name of the event such as "onclick" or "onblur", etc
      */
@@ -1129,7 +1129,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Shortcut for {@link #fireEvent(Event)}.
      * @param eventType the event type (like "load", "click")
@@ -1140,7 +1140,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Fires the event on the element. Nothing is done if JavaScript is disabled.
      * @param event the event to fire
@@ -1525,7 +1525,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
@@ -1915,7 +1915,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Returns the default display style.
      *

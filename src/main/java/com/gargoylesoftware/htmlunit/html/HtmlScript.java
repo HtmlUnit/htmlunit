@@ -59,7 +59,7 @@ import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
  * is added to the DOM tree. When the script code is nested, it gets executed when the text node
  * containing the script is added to the HtmlScript.<br>
  * The ScriptFilter feature of NekoHtml can't be used because it doesn't allow immediate access to the DOM
- * (i.e. <code>document.write("&lt;span id='mySpan'/>"); document.getElementById("mySpan").tagName;</code>
+ * (i.e. <code>document.write("&lt;span id='mySpan'/&gt;"); document.getElementById("mySpan").tagName;</code>
  * can't work with a filter).
  *
  * @version $Revision$
@@ -368,7 +368,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Executes this script node if necessary and/or possible.
      */
@@ -581,7 +581,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Resets the executed flag.
      * @see HtmlScript#processImportNode(Document)

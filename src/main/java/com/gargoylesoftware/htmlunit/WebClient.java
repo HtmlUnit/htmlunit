@@ -97,8 +97,8 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * <b>Example:</b><br>
  * <br>
  * <code>
- * final WebClient webClient = new WebClient();<br/>
- * final {@link HtmlPage} startPage = webClient.getPage("http://htmlunit.sf.net");<br/>
+ * final WebClient webClient = new WebClient();<br>
+ * final {@link HtmlPage} startPage = webClient.getPage("http://htmlunit.sf.net");<br>
  * assertEquals("HtmlUnit - Welcome to HtmlUnit", startPage.{@link HtmlPage#getTitleText() getTitleText}());
  * </code>
  * <p>
@@ -358,7 +358,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * <p>Open a new web window and populate it with a page loaded by
      * {@link #getPage(WebWindow,WebRequest)}</p>
@@ -834,7 +834,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Open the window with the specified name. The name may be a special
      * target name of _self, _parent, _top, or _blank. An empty or null
@@ -994,7 +994,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Initializes a new web window for JavaScript.
      * @param webWindow the new WebWindow
@@ -1005,7 +1005,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Initializes a new page for JavaScript.
      * @param newPage the new page
@@ -1016,7 +1016,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Initializes a new empty window for JavaScript.
      *
@@ -1029,7 +1029,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Adds a new window to the list of available windows.
      *
@@ -1043,7 +1043,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Removes a window from the list of available windows.
      *
@@ -1141,7 +1141,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Tries to guess the content type of the file.<br/>
+     * Tries to guess the content type of the file.<br>
      * This utility could be located in an helper class but we can compare this functionality
      * for instance with the "Helper Applications" settings of Mozilla and therefore see it as a
      * property of the "browser".
@@ -1405,7 +1405,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Returns true if the list of WebWindows contains the provided one.
      * This method is there to improve the performance of some internal checks because
@@ -1927,6 +1927,9 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * When we deserialize, re-initializie transient fields.
+     * @param in the object input stream
+     * @throws IOException if an error occurs
+     * @throws ClassNotFoundException if an error occurs
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
@@ -1994,7 +1997,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private final List<LoadJob> loadQueue_ = new ArrayList<>();
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Perform the downloads and stores it for loading later into a window.
      * In the future downloads should be performed in parallel in separated threads.
@@ -2065,7 +2068,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Loads downloaded responses into the corresponding windows.
      * TODO: refactor it before next release.

@@ -20,14 +20,14 @@ import java.util.Collection;
  * Interface for form fields where the original field name still matters even once it
  * has been changed.
  * <p>
- * Example:<br/>
- * With<br/>
- * <code>&lt;input name="foo"/&gt;</code><br/>
- * following script will work<br/>
+ * Example:<br>
+ * With<br>
+ * <code>&lt;input name="foo"/&gt;</code><br>
+ * following script will work<br>
  * <code>
- * theForm.foo.name = 'newName';<br/>
+ * theForm.foo.name = 'newName';<br>
  * theForm.foo.value = 'some value';
- * </code><br/>
+ * </code><br>
  * Depending on the simulated browser the form field is reachable only through its original name
  * or through all the names it has had.
  * @version $Revision$

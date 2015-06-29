@@ -87,7 +87,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Sets the selected state of this option. This will possibly also change the
      * selected properties of sibling option elements.
