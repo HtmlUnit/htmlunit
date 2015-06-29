@@ -109,7 +109,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlFigure;
 import com.gargoylesoftware.htmlunit.html.HtmlFigureCaption;
 import com.gargoylesoftware.htmlunit.html.HtmlFooter;
-import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlHeader;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
@@ -537,11 +536,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // TODO: check that it is an "allowed" event for the browser, and take care to the case
         final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
         setEventHandler(eventName, eventHandler);
-        // forward onload, onclick, ondblclick, ... to window
-        if (htmlElt instanceof HtmlBody || htmlElt instanceof HtmlFrameSet) {
-            getWindow().getEventListenersContainer()
-                .setEventHandlerProp(eventName.substring(2), eventHandler);
-        }
     }
 
     /**

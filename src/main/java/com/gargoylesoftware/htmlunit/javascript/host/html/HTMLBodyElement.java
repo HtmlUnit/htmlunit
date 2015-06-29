@@ -77,6 +77,8 @@ public class HTMLBodyElement extends HTMLElement {
      * Forwards the events to window.
      *
      * {@inheritDoc}
+     *
+     * @see HTMLFrameSetElement#getEventListenersContainer()
      */
     public EventListenersContainer getEventListenersContainer() {
         return getWindow().getEventListenersContainer();

@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -50,6 +51,17 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public HTMLFrameSetElement() {
+    }
+
+    /**
+     * Forwards the events to window.
+     *
+     * {@inheritDoc}
+     *
+     * @see HTMLBodyElement#getEventListenersContainer()
+     */
+    public EventListenersContainer getEventListenersContainer() {
+        return getWindow().getEventListenersContainer();
     }
 
     /**
