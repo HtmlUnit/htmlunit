@@ -602,7 +602,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
 
     private boolean isPreflight() {
         final HttpMethod method = webRequest_.getHttpMethod();
-        if (method != HttpMethod.GET && method != HttpMethod.PUT && method != HttpMethod.HEAD) {
+        if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST) {
             return true;
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
