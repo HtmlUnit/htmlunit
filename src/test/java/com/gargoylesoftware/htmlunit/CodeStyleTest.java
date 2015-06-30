@@ -180,7 +180,7 @@ public class CodeStyleTest {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             if (StringUtils.isBlank(lines.get(index + 1))
-                && line.length() > 4
+                && line.length() > 4 && lines.get(index - 1).startsWith("    ")
                 && Character.isWhitespace(line.charAt(0)) && line.endsWith("{")
                 && !line.contains(" class ") && !line.contains(" interface ") && !line.contains(" @interface ")
                 && (!Character.isWhitespace(line.charAt(4))
