@@ -110,6 +110,108 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({ "4", "200", "null" })
+    @NotYetImplemented
+    public void simpleHead() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
+                + "    xhr.open('HEAD', url, false);\n"
+                + "    xhr.send();\n"
+                + "    alert(xhr.readyState);\n"
+                + "    alert(xhr.status);\n"
+                + "    alert(xhr.responseXML);"
+                + "  } catch(e) { alert(e) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/simple2", SimpleServerServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/simple1"));
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = { "4", "200", "§§URL§§" },
+            IE = { "4", "200", "No Origin!" })
+    public void simplePost() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
+                + "    xhr.open('POST', url, false);\n"
+                + "    xhr.send('');\n"
+                + "    alert(xhr.readyState);\n"
+                + "    alert(xhr.status);\n"
+                + "    alert(xhr.responseXML.firstChild.firstChild.nodeValue);"
+                + "  } catch(e) { alert(e) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/simple2", SimpleServerServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/simple1"));
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = { "4", "200", "§§URL§§" },
+            IE = { "4", "200", "No Origin!" })
+    public void simplePut() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
+                + "    xhr.open('POST', url, false);\n"
+                + "    xhr.send('');\n"
+                + "    alert(xhr.readyState);\n"
+                + "    alert(xhr.status);\n"
+                + "    alert(xhr.responseXML.firstChild.firstChild.nodeValue);"
+                + "  } catch(e) { alert(e) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/simple2", SimpleServerServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/simple1"));
+    }
+
+    /**
      * Simple CORS scenario Servlet.
      */
     public static class SimpleServerServlet extends HttpServlet {
@@ -129,6 +231,22 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 origin = "No Origin!";
             }
             response.getWriter().write("<origin>" + origin + "</origin>");
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            doGet(request, response);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPut(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            doGet(request, response);
         }
     }
 
@@ -184,7 +302,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
-            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type" },
+            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother" },
             IE = { "4", "200", "null", "null", "null", "null" })
     @NotYetImplemented(CHROME)
     public void preflight() throws Exception {
@@ -196,9 +314,10 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
-            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type" },
+            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother" },
             IE = { "4", "200", "null", "null", "null", "null" })
     @NotYetImplemented(CHROME)
+    //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflight_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain;charset=utf-8");
     }
@@ -210,7 +329,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
-            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type" },
+            CHROME = { "4", "200", "§§URL§§", "null", "null", "null" },
             IE = { "4", "200", "null", "null", "null", "null" })
     @NotYetImplemented(CHROME)
     public void preflight_incorrect_methods() throws Exception {
@@ -309,9 +428,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "4", "0" },
-            CHROME = { "exception", "4", "200" },
-            IE = { "4", "200" })
+    @Alerts(DEFAULT = { "4", "200" },
+            FF = { "exception", "4", "0" })
     @NotYetImplemented(CHROME)
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
