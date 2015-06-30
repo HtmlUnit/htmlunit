@@ -32,6 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code Set}.
@@ -56,7 +57,7 @@ public class Set extends SimpleScriptable {
      */
     @JsxConstructor
     public Set(final Object iterable) {
-        if (iterable != null) {
+        if (iterable != Undefined.instance) {
             final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
             if (window.getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
                 if (iterable instanceof NativeArray) {

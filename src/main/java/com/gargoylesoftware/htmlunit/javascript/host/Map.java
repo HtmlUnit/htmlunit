@@ -57,7 +57,7 @@ public class Map extends SimpleScriptable {
      */
     @JsxConstructor
     public Map(final Object iterable) {
-        if (iterable != null) {
+        if (iterable != Undefined.instance) {
             final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
             if (window.getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
                 if (iterable instanceof NativeArray) {

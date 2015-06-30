@@ -57,7 +57,7 @@ public class WeakMap extends SimpleScriptable {
      */
     @JsxConstructor
     public WeakMap(final Object iterable) {
-        if (iterable != null) {
+        if (iterable != Undefined.instance) {
             final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
             if (window.getBrowserVersion().hasFeature(JS_WEAKMAP_CONSTRUCTOR_ARGUMENT)) {
                 if (iterable instanceof NativeArray) {

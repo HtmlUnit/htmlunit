@@ -30,6 +30,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code WeakSet}.
@@ -54,7 +55,7 @@ public class WeakSet extends SimpleScriptable {
      */
     @JsxConstructor
     public WeakSet(final Object iterable) {
-        if (iterable != null) {
+        if (iterable != Undefined.instance) {
             if (iterable instanceof NativeArray) {
                 final NativeArray array = (NativeArray) iterable;
                 for (int i = 0; i < array.getLength(); i++) {
