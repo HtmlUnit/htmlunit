@@ -201,7 +201,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "      xhr.onreadystatechange = onReadyStateChange;\n"
             + "      alertStatus('2: ');\n"
 
-            + "      xhr.open('GET',  '/foo.xml', true);\n"
+            + "      xhr.open('GET', '/foo.xml', true);\n"
             + "      alertStatus('3: ');\n"
 
             + "      xhr.send();\n"
@@ -253,7 +253,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "try {\n"
             + "  alert('#1');\n"
             + "  xhr.onreadystatechange = onReadyStateChange;\n"
-            + "  xhr.open('GET',  '/foo.xml');\n"
+            + "  xhr.open('GET', '/foo.xml');\n"
             + "  alert('#2');\n"
             + "  xhr.send();\n"
             + "  alert('#3');\n"

@@ -254,8 +254,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String screenCss = "#d { font-size: 42px; }";
         final String printCss  = "#d { font-size: 13px; }";
 
-        getMockWebConnection().setResponse(URL_SECOND,  screenCss, "text/css");
-        getMockWebConnection().setResponse(URL_THIRD, printCss,  "text/css");
+        getMockWebConnection().setResponse(URL_SECOND, screenCss, "text/css");
+        getMockWebConnection().setResponse(URL_THIRD, printCss, "text/css");
 
         loadPageWithAlerts2(html);
     }

@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
         browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlUnorderedList.class,
         isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-    @JsxClass(domClass = HtmlMenu.class,  isJSObject = false,
+    @JsxClass(domClass = HtmlMenu.class, isJSObject = false,
         browsers = { @WebBrowser(value = IE, maxVersion = 8) }) })
 public class HTMLUListElement extends HTMLListElement {
 

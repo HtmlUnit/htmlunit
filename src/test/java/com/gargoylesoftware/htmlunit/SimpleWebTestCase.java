@@ -251,7 +251,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      */
     @Before
     public void before() {
-        Assert.assertEquals(0,  getJavaScriptThreads().size());
+        Assert.assertEquals(0, getJavaScriptThreads().size());
     }
 
     /**
@@ -268,7 +268,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         webClient_ = null;
 
         final List<Thread> jsThreads = getJavaScriptThreads();
-        Assert.assertEquals(0,  jsThreads.size());
+        Assert.assertEquals(0, jsThreads.size());
 
         // collect stack traces
         // caution: the threads may terminate after the threads have been returned by getJavaScriptThreads()

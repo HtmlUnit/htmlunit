@@ -268,7 +268,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</body></html>";
 
         webConnection.setResponse(URL_FIRST, htmlContent);
-        webConnection.setResponse(new URL(URL_FIRST, "foo.js"),  "alert('got here');", "text/javascript");
+        webConnection.setResponse(new URL(URL_FIRST, "foo.js"), "alert('got here');", "text/javascript");
         webConnection.setResponse(new URL(URL_FIRST, "foo2.js"), "alert('got here 2');", "text/javascript");
         client.setWebConnection(webConnection);
 

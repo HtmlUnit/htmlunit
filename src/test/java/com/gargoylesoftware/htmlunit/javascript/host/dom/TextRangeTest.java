@@ -316,7 +316,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "    range2.moveStart('character', 6);\n"
             + "    alert(range2.text);\n"
             + "    var r3 = range1.duplicate();\n"
-            + "    r3.setEndPoint('EndToEnd',  range2);\n"
+            + "    r3.setEndPoint('EndToEnd', range2);\n"
             + "    alert(r3.text);\n"
             + "  } catch(e) { alert('exception'); }\n"
             + "</script>\n"

@@ -212,7 +212,7 @@ public final class JQueryExtractor {
             }
             System.out.println(")");
 
-            final String methodName = test.getName().replaceAll("\\W",  "_");
+            final String methodName = test.getName().replaceAll("\\W", "_");
             try {
                 final Method method = JQuery182Test.class.getMethod(methodName);
                 final NotYetImplemented notYetImplemented = method.getAnnotation(NotYetImplemented.class);
@@ -249,8 +249,8 @@ public final class JQueryExtractor {
                 // ignore
             }
 
-            System.out.println("    public void " + test.getName().replaceAll("\\W",  "_") + "() throws Exception {");
-            System.out.println("        runTest(\"" + test.getName().replace("\"",  "\\\"") + "\");");
+            System.out.println("    public void " + test.getName().replaceAll("\\W", "_") + "() throws Exception {");
+            System.out.println("        runTest(\"" + test.getName().replace("\"", "\\\"") + "\");");
             System.out.println("    }");
             System.out.println();
         }

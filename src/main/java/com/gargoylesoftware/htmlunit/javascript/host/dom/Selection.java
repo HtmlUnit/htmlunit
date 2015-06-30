@@ -198,7 +198,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Removes all ranges from the selection.
      */
-    @JsxFunction({ @WebBrowser(FF),  @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void removeAllRanges() {
         getRanges().clear();
     }

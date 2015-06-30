@@ -971,7 +971,7 @@ public class Window3Test extends WebDriverTestCase {
             + "      window.execScript('alert(\"JavaScript\")', 'JavaScript');\n"
             + "      window.execScript('alert(\"JScript\")',    'JScript');\n"
             + "      try {\n"
-            + "        window.execScript('alert(\"VBScript\")',   'VBScript');\n"
+            + "        window.execScript('alert(\"VBScript\")', 'VBScript');\n"
             + "      } catch (e) { alert('exception1'); }\n"
             + "      try {\n"
             + "        window.execScript('alert(\"BadLanguage\")', 'BadLanguage');\n"
