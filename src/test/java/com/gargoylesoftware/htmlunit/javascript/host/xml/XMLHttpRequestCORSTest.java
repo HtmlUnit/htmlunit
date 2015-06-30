@@ -181,7 +181,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "4", "200", "§§URL§§" },
+    @Alerts(DEFAULT = "exception",
             IE = { "4", "200", "No Origin!" })
     public void simplePut() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
@@ -192,12 +192,12 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
-                + "    xhr.open('POST', url, false);\n"
+                + "    xhr.open('PUT', url, false);\n"
                 + "    xhr.send('');\n"
                 + "    alert(xhr.readyState);\n"
                 + "    alert(xhr.status);\n"
                 + "    alert(xhr.responseXML.firstChild.firstChild.nodeValue);"
-                + "  } catch(e) { alert(e) }\n"
+                + "  } catch(e) { alert('exception') }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
