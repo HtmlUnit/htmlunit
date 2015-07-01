@@ -2317,7 +2317,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public void doScroll(final String scrollAction) {
-        if (((HtmlPage) getDomNodeOrDie().getPage()).isBeingParsed()) {
+        final DomNode domNode = getDomNodeOrNull();
+        if (domNode == null || ((HtmlPage) domNode.getPage()).isBeingParsed()) {
             throw Context.reportRuntimeError("The data necessary to complete this operation is not yet available.");
         }
         // Ignore because we aren't displaying anything!
