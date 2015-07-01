@@ -130,7 +130,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  var fragment = document.createDocumentFragment();\n"
-            + "  fragment.textContent = 'a';\n"
+            + "  fragment.textContent = '';\n"
             + "  alert(fragment.childNodes.length);\n"
             + "}\n"
             + "</script></head>\n"
