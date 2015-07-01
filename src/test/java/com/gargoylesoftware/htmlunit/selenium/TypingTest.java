@@ -371,6 +371,7 @@ public class TypingTest extends SeleniumTest {
             "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing" },
             CHROME = { "keydown (target) keyup (target) keyup (body)",
             "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing keyup (body)" })
+    @NotYetImplemented
     public void canSafelyTypeOnElementThatIsRemovedFromTheDomOnKeyPress() {
         final WebDriver driver = getWebDriver("/key_tests/remove_on_keypress.html");
 
