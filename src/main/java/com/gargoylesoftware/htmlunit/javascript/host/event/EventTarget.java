@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_WINDOW_EXECUTE_IF_DITACHED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -125,14 +126,21 @@ public class EventTarget extends SimpleScriptable {
 
             // capturing phase
             event.setEventPhase(Event.CAPTURING_PHASE);
-            result = windowsListeners.executeCapturingListeners(event, args);
-            if (event.isPropagationStopped()) {
-                return result;
+            final boolean windowEventIfDetached = getBrowserVersion().hasFeature(JS_EVENT_WINDOW_EXECUTE_IF_DITACHED);
+            final boolean isAttached = getDomNodeOrNull().getPage().isAncestorOf(getDomNodeOrNull());
+
+            if (isAttached || windowEventIfDetached) {
+                result = windowsListeners.executeCapturingListeners(event, args);
+                if (event.isPropagationStopped()) {
+                    return result;
+                }
             }
             final List<EventTarget> eventTargetList = new ArrayList<>();
             EventTarget eventTarget = this;
             while (eventTarget != null) {
-                eventTargetList.add(eventTarget);
+                if (isAttached) {
+                    eventTargetList.add(eventTarget);
+                }
                 final DomNode domNode = eventTarget.getDomNodeOrNull();
                 eventTarget = null;
                 if (domNode != null && domNode.getParentNode() != null) {
@@ -144,7 +152,7 @@ public class EventTarget extends SimpleScriptable {
             for (int i = eventTargetList.size() - 1; i >= 0; i--) {
                 final EventTarget jsNode = eventTargetList.get(i);
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
-                if (elc != null) {
+                if (elc != null && isAttached) {
                     final ScriptResult r = elc.executeCapturingListeners(event, args);
                     result = ScriptResult.combine(r, result, ie);
                     if (event.isPropagationStopped()) {
@@ -168,7 +176,7 @@ public class EventTarget extends SimpleScriptable {
             while (eventTarget != null) {
                 final EventTarget jsNode = eventTarget;
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
-                if (elc != null && !(jsNode instanceof Window)) {
+                if (elc != null && !(jsNode instanceof Window) && isAttached) {
                     final ScriptResult r = elc.executeBubblingListeners(event, args, propHandlerArgs);
                     result = ScriptResult.combine(r, result, ie);
                     if (event.isPropagationStopped()) {
@@ -183,8 +191,10 @@ public class EventTarget extends SimpleScriptable {
                 event.setEventPhase(Event.BUBBLING_PHASE);
             }
 
-            final ScriptResult r = windowsListeners.executeBubblingListeners(event, args, propHandlerArgs);
-            result = ScriptResult.combine(r, result, ie);
+            if (isAttached || windowEventIfDetached) {
+                final ScriptResult r = windowsListeners.executeBubblingListeners(event, args, propHandlerArgs);
+                result = ScriptResult.combine(r, result, ie);
+            }
         }
         finally {
             event.endFire();

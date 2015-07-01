@@ -1216,6 +1216,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_EVENT_NO_PARAMETER,
 
+    /** Executes the window event listeners if the node is detached from the document. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_EVENT_WINDOW_EXECUTE_IF_DITACHED,
+
     /** Indicates that the action property of a form is the fully qualified URL. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_FORM_ACTION_EXPANDURL,

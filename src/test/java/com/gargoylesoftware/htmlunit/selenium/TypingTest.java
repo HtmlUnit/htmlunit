@@ -27,6 +27,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -362,4 +363,35 @@ public class TypingTest extends SeleniumTest {
         assertEquals("Fishee!", element.getText());
     }
 
+    /**
+     * A test.
+     */
+    @Test
+    @Alerts(DEFAULT = { "keydown (target) keyup (target) keyup (body)",
+            "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing" },
+            CHROME = { "keydown (target) keyup (target) keyup (body)",
+            "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing keyup (body)" })
+    public void canSafelyTypeOnElementThatIsRemovedFromTheDomOnKeyPress() {
+        final WebDriver driver = getWebDriver("/key_tests/remove_on_keypress.html");
+
+        final WebElement input = driver.findElement(By.id("target"));
+        final WebElement log = driver.findElement(By.id("log"));
+
+        assertEquals("", log.getAttribute("value"));
+
+        input.sendKeys("b");
+        assertEquals(getExpectedAlerts()[0], getValueText(log).replace('\n', ' '));
+
+        input.sendKeys("a");
+
+        // Some drivers (IE, Firefox) do not always generate the final keyup event since the element
+        // is removed from the DOM in response to the keypress (note, this is a product of how events
+        // are generated and does not match actual user behavior).
+        assertEquals(getExpectedAlerts()[1], getValueText(log).replace('\n', ' '));
+    }
+
+    private static String getValueText(final WebElement el) {
+        // Standardize on \n and strip any trailing whitespace.
+        return el.getAttribute("value").replace("\r\n", "\n").trim();
+    }
 }
