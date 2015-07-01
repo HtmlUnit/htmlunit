@@ -754,22 +754,22 @@ public class HttpWebConnection implements WebConnection {
         if (headerNames != null) {
             for (final String header : headerNames) {
                 if ("Host".equals(header)) {
-                    list.add(new StaticHttpRequestInterceptor(header, host.toString()) { });
+                    list.add(new HostHeaderHttpRequestInterceptor(host.toString()));
                 }
                 else if ("User-Agent".equals(header)) {
-                    list.add(new StaticHttpRequestInterceptor(header, userAgent) { });
+                    list.add(new UserAgentHeaderHttpRequestInterceptor(userAgent));
                 }
                 else if ("Accept".equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
+                    list.add(new AcceptHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
                 else if ("Accept-Language".equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
+                    list.add(new AcceptLanguageHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
                 else if ("Accept-Encoding".equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
+                    list.add(new AcceptEncodingHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
                 else if ("Referer".equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
+                    list.add(new RefererHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
                 else if ("Connection".equals(header)) {
                     list.add(new RequestClientConnControl());
@@ -778,12 +778,12 @@ public class HttpWebConnection implements WebConnection {
                     list.add(new RequestAddCookies());
                 }
                 else if ("DNT".equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
-                    list.add(new StaticHttpRequestInterceptor(header, "1") { });
+                    list.add(new DntHeaderHttpRequestInterceptor("1"));
                 }
             }
         }
         else {
-            list.add(new StaticHttpRequestInterceptor("User-Agent", userAgent) { });
+            list.add(new UserAgentHeaderHttpRequestInterceptor(userAgent));
             list.add(new RequestAddCookies());
             list.add(new RequestClientConnControl());
         }
@@ -791,7 +791,7 @@ public class HttpWebConnection implements WebConnection {
         // not all browser versions have DNT by default as part of getHeaderNamesOrdered()
         // so we add it again, in case
         if (webClient_.getOptions().isDoNotTrackEnabled()) {
-            list.add(new StaticHttpRequestInterceptor("DNT", "1") { });
+            list.add(new DntHeaderHttpRequestInterceptor("1"));
         }
 
         synchronized (requestHeaders) {
@@ -801,19 +801,94 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /** We must have a separate class per header, because of org.apache.http.protocol.ChainBuilder. */
-    private abstract static class StaticHttpRequestInterceptor implements HttpRequestInterceptor {
-        private String name_;
+    private static final class HostHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
         private String value_;
 
-        StaticHttpRequestInterceptor(final String name, final String value) {
-            this.name_ = name;
-            this.value_ = value;
+        HostHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context)
-            throws HttpException, IOException {
-            request.setHeader(name_, value_);
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader("Host", value_);
+        }
+    }
+
+    private static final class UserAgentHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
+        private String value_;
+
+        UserAgentHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader("User-Agent", value_);
+        }
+    }
+
+    private static final class AcceptHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
+        private String value_;
+
+        AcceptHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader("Accept", value_);
+        }
+    }
+
+    private static final class AcceptLanguageHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
+        private String value_;
+
+        AcceptLanguageHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader("Accept-Language", value_);
+        }
+    }
+
+    private static final class AcceptEncodingHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
+        private String value_;
+
+        AcceptEncodingHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader("Accept-Encoding", value_);
+        }
+    }
+
+    private static final class RefererHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
+        private String value_;
+
+        RefererHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader("Referer", value_);
+        }
+    }
+
+    private static final class DntHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
+        private String value_;
+
+        DntHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader("DNT", value_);
         }
     }
 
@@ -821,7 +896,7 @@ public class HttpWebConnection implements WebConnection {
         private final Map<String, String> map_;
 
         MultiHttpRequestInterceptor(final Map<String, String> map) {
-            this.map_ = map;
+            map_ = map;
         }
 
         @Override
