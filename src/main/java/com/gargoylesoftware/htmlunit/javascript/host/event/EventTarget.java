@@ -127,7 +127,8 @@ public class EventTarget extends SimpleScriptable {
             // capturing phase
             event.setEventPhase(Event.CAPTURING_PHASE);
             final boolean windowEventIfDetached = getBrowserVersion().hasFeature(JS_EVENT_WINDOW_EXECUTE_IF_DITACHED);
-            final boolean isAttached = getDomNodeOrNull().getPage().isAncestorOf(getDomNodeOrNull());
+            final boolean isAttached = getDomNodeOrNull() != null
+                    && getDomNodeOrNull().getPage().isAncestorOf(getDomNodeOrNull());
 
             if (isAttached || windowEventIfDetached) {
                 result = windowsListeners.executeCapturingListeners(event, args);
