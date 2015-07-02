@@ -97,6 +97,23 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "foo.js", "§§URL§§foo.js" })
+    public void srcPropertyShouldBeAFullUrl() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script src='foo.js'></script>\n"
+                + "</body></html>";
+
+        final String js = "var script = document.getElementsByTagName('script')[0];\n"
+                + "alert(script.getAttribute('src'));\n"
+                + "alert(script.src);";
+        getMockWebConnection().setDefaultResponse(js , "text/javascript");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038.
      * @throws Exception if the test fails
      */

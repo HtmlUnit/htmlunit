@@ -21,9 +21,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -66,7 +70,17 @@ public class HTMLScriptElement extends HTMLElement {
     @JsxGetter
     public String getSrc() {
         final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
-        return tmpScript.getSrcAttribute();
+
+        String src = tmpScript.getSrcAttribute();
+        try {
+            final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
+            src = expandedSrc.toString();
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
+
+        return src;
     }
 
     /**
