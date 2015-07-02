@@ -311,6 +311,10 @@ public class WebClient implements Serializable, AutoCloseable {
                 // We're just navigating to an anchor within the current page.
                 page.getWebResponse().getWebRequest().setUrl(current);
                 webWindow.getHistory().addPage(page);
+                final Window window = (Window) webWindow.getScriptObject();
+                if (window != null) { // js enabled
+                    window.getLocation().setHash(current.getRef());
+                }
                 return (P) page;
             }
 

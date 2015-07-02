@@ -636,6 +636,24 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("onhashchange #/foo")
+    public void getNextPageWithOnlyHashChangeShouldTriggerHashChangeEvent() throws Exception {
+        final String html =
+            "<html><body><script>\n"
+            + " window.onhashchange = function(event) {\n"
+            + "    alert('onhashchange ' + window.location.hash);\n"
+            + " }\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.navigate().to(driver.getCurrentUrl() + "#/foo");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "supported", "onhashchange §§URL§§#1  §§URL§§" },
             IE = { "supported", "onhashchange undefined  undefined" },
             IE8 = { "supported", "onhashchange -" })
