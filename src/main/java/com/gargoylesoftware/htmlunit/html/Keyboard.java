@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
+
 /**
  * Keeps track of the typed keys.
  *
@@ -31,7 +33,7 @@ public class Keyboard {
      * Types the specified character.
      * @param ch the character
      */
-    public void type(final char ch) {
+    public void type(char ch) {
         keys_.add(new Object[] {ch});
     }
 
@@ -44,6 +46,9 @@ public class Keyboard {
      * @param keyCode the key code
      */
     public void press(final int keyCode) {
+        if (keyCode >= KeyboardEvent.DOM_VK_A && keyCode <= KeyboardEvent.DOM_VK_Z) {
+            throw new IllegalArgumentException("For key code " + keyCode + ", use type(char) instead");
+        }
         keys_.add(new Object[] {keyCode, true});
     }
 

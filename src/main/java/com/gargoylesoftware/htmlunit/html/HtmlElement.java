@@ -563,7 +563,7 @@ public abstract class HtmlElement extends DomElement {
         if (page.getFocusedElement() != this) {
             focus();
         }
-        final boolean isShiftNeeded = KeyboardEvent.isShiftNeeded(c);
+        final boolean isShiftNeeded = KeyboardEvent.isShiftNeeded(c, shiftKey);
 
         final Event shiftDown;
         final ScriptResult shiftDownResult;

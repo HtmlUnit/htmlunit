@@ -857,10 +857,12 @@ public class KeyboardEvent extends UIEvent {
     /**
      * Returns whether the specified character can be written only when {@code SHIFT} key is pressed.
      * @param ch the character
+     * @param shiftKey is shift key pressed
      * @return whether the specified character can be written only when {@code SHIFT} key is pressed
      */
-    public static boolean isShiftNeeded(final char ch) {
-        return "~!@#$%^&*()_+{}:\"<>?|".indexOf(ch) != -1;
+    public static boolean isShiftNeeded(final char ch, final boolean shiftKey) {
+        return "~!@#$%^&*()_+{}:\"<>?|".indexOf(ch) != -1
+                || (!shiftKey && ch >= 'A' && ch <='Z');
     }
 
     private int charCode_;
