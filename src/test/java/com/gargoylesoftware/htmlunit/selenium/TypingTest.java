@@ -140,7 +140,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void uppercaseAlphaKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 

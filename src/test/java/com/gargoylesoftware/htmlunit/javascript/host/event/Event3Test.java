@@ -54,15 +54,15 @@ public class Event3Test extends SimpleWebTestCase {
      */
     @Test
     public void eventOnKeyDown_Shift_Ctrl_Alt() throws Exception {
-        testEventOnKeyDown_Shift_Ctrl_Alt(false, false, false, new String[] {"false,false,false"});
-        testEventOnKeyDown_Shift_Ctrl_Alt(true,  false, false, new String[] {"true,false,false"});
-        testEventOnKeyDown_Shift_Ctrl_Alt(false, true,  false, new String[] {"false,true,false"});
-        testEventOnKeyDown_Shift_Ctrl_Alt(false, false, true,  new String[] {"false,false,true"});
-        testEventOnKeyDown_Shift_Ctrl_Alt(true,  true,  true,  new String[] {"true,true,true"});
+        testEventOnKeyDown_Shift_Ctrl_Alt(false, false, false, "true,false,false", "false,false,false");
+        testEventOnKeyDown_Shift_Ctrl_Alt(true,  false, false, "true,false,false");
+        testEventOnKeyDown_Shift_Ctrl_Alt(false, true,  false, "true,true,false", "false,true,false");
+        testEventOnKeyDown_Shift_Ctrl_Alt(false, false, true, "true,false,true", "false,false,true");
+        testEventOnKeyDown_Shift_Ctrl_Alt(true,  true,  true, "true,true,true");
     }
 
     private void testEventOnKeyDown_Shift_Ctrl_Alt(final boolean shiftKey,
-            final boolean ctrlKey, final boolean altKey, final String[] expectedAlerts) throws Exception {
+            final boolean ctrlKey, final boolean altKey, final String... expectedAlerts) throws Exception {
         final String content
             = "<html>\n"
             + "<head></head>\n"
