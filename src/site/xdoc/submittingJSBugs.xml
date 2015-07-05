@@ -12,140 +12,119 @@
             <p>
 				HtmlUnit has a good support for JavaScript which gets continuously improved,
 				and test cases for complex libraries (Dojo, jQuery, Prototype,
-				Google Web Toolkit, Yahoo User Interface and Sarissa) are already included.<br/>
+				Google Web Toolkit, Yahoo User Interface and Sarissa) are already included.
 				However, not all test cases succeed, and you would probably face an issue in real-life example.
             </p>
             <p>
 				Before reporting an issue with JavaScript, it is very preferred if you 
-				isolate the root cause, but just saying 'jQuery' or a given web site is not working, doesn't help much.<br/>
+				isolate the root cause of a single JavaScript property or method,
+				but just saying 'jQuery' or a given web site is not working, doesn't help much.<br/>
 				To find the offending line, you can put <code>alert()</code> at various places,
 				compare the result of HtmlUnit to a real browser (Chrome, Firefox or Internet Explorer),
 				and you will mostly be able to provide a tiny failing test case which contains
-				few lines of JavaScript with or without HTML (independent of the whole JavaScript library),
-				please have a look at <a href="http://sourceforge.net/p/htmlunit/code/HEAD/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/html/">some sample test cases</a>.<br/>
+				few lines of JavaScript (independent of the whole JavaScript library),
+				please have a look at <a href="https://sourceforge.net/p/htmlunit/code/HEAD/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/javascript/ArgumentsTest.java">some sample test cases</a>.<br/>
 				Once the cause is identified, it is very likely to be fixed in a timely manner.<br/>
             </p>
             <p>
-				If you need any help in tracing, please don't hesitate to ask the team.
+				If you need help in tracing, please don't hesitate to ask the team.
             </p>
         </section>
 
-        <section name="Example">
+        <section name="Suggested steps">
             <p>
-                The below are sample steps demonstrating putting 'alerts()' for a bug reported with HtmlUnit 2.7 and Dojo 1.4.
-                Dojo is a complex JavaScript library, and you will mostly find it easier to debug simpler web applications.
-
-                Please also note the exact bug may have already been fixed and you may get different result.
+                The first step is to have a way to compare HtmlUnit behavior against real browser, and this can be done
+                by installing a proxy that modifies the incoming content (so debugging statements can be put).
+                There are many proxy servers that can be used, one suggested option is <a href="http://www.charlesproxy.com/">Charles</a>.
             </p>
             <p>
-                The user complained that an error occurs: 
+                Ensure you can correctly modify the content, and that the real browser does not cache the response.
+            <source><![CDATA[
+function someFunction() {
+    alert('I am called!!');
+    anotherFunction();
+}]]></source>
+            </p>
+            <p>
+                Ensure you are using HtmlUnit with the same simulated <a href="http://htmlunit.sourceforge.net/apidocs/com/gargoylesoftware/htmlunit/WebClient.html#WebClient(com.gargoylesoftware.htmlunit.BrowserVersion)">
+                BrowserVersion</a> as the real browser.
+            </p>
+            <p>
+                You can encounter an error similar to: 
             </p>
             <source><![CDATA[
 net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call method "getAttribute" of undefined
 (http://download.dojotoolkit.org/release-1.4.0/dojo-release-1.4.0/dojo/dojo.js#16(eval)#16)]]></source>
             <p>
-                which means that in some_variable.getAttribute(), HtmlUnit evaluated it to 'undefined'
-                during execution of that line.<br/><br/>
-                The first thing to do it to be able to change the JavaScript/HTML source, which can be done by locally
-                deploying the Dojo examples in this case, or to modify the incoming JavaScript code as mentioned 
-                <a href="http://htmlunit.sourceforge.net/faq.html#HowToModifyRequestOrResponse">here</a>.<br/><br/>
-                By looking into dojo.js line #16, it is compressed very long line, so we need to beautify it,
-                again we can get the uncompressed version, modify the WebResponse, or using a beautifier 
-                <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/proxy/">proxy</a>.<br/><br/>
-                To make it simpler for now, the uncompressed dojo-release-1.4.2-src.zip was locally deployed and the following test was run again:
+                which means that in <code>some_variable.getAttribute()</code>, <code>some_variable</code>
+                was evaluated to '<code>undefined</code>' during execution of that line.<br/>
             </p>
+            <p>
+                Once that line is found, you can start navigating the hierarchy of the caller functions to see
+                where exactly the discrepancy is.
+            </p>
+            <p>
+                To quickly modify the content, you can save the file locally and tell the proxy to replace the content
+                of a specific URL with that file. This is call <code>MAP LOCAL</code> in Charles.<br/>
+                You can also beautify the JavaScript, look for online tools.
+            </p>
+        </section>
+        <section name="JavaScript hints">
+            <p>
+                To know a variable value, you can simply use <code>alert</code>, and check the value in HtmlUnit
+                and compare it with real browser.
             <source><![CDATA[
-@Test
-public void dojoTest() throws Exception {
-    final List<String> collectedAlerts = new ArrayList<String>();
-    try (final WebClient webClient = new WebClient()) {
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        webClient.getPage("http://localhost/dojo/dijit/tests/form/test_Button.html");
+function myfunction(a, b) {
+    var c = a + b;
+    alert(c);
+    return c;
+}]]></source>
+			</p>
+            <p>
+                To know what is the called function, you can use:
+            <source><![CDATA[
+function myfunction(a, b) {
+    var c = a + b;
+    alert(arguments.callee.caller);
+    return c;
+}]]></source> which will print the content of the caller function.
+			</p>
+            <p>
+                To know what function will be called, you can use:
+            <source><![CDATA[
+function myfunction(a, b) {
+    var c = a + b;
+    alert(anotherFunction);
+    return anotherFunction(c + 'something');
+}]]></source>
+			</p>
+            <p>
+                If a function is called too many times, you can put conditional <code>alert</code>
+            <source><![CDATA[
+function myfunction(a, b) {
+    var c = a + b;
+    if (a == 'properties') {
+        alert(c);
     }
-    finally {
-        for (final String alert : collectedAlerts) {
-            System.out.println("ALERT: " + alert);
-        }
-    }
-}
-]]></source>
-            <p>
-                giving the error 
-            </p>
-            <source><![CDATA[TypeError: Cannot call method "getAttribute" of undefined (http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval)#299)
-...
-at net.sourceforge.htmlunit.corejs.javascript.Interpreter.interpretLoop(Interpreter.java:1515)
-at script(http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval):299)
-at script(http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval):191)
-at script(http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval):238)
-at script(http://localhost/dojo/dojo/_base/_loader/bootstrap.js#468(eval):131)
-            ]]></source>
-            <p>
-                By looking into bootstrap.js line #468, you would see
-            </p>
+    return anotherFunction(c + 'something');
+}]]></source> or use a global variable:
             <source><![CDATA[
-dojo["eval"] = function(scriptFragment){
-    return d.global.eval ? d.global.eval(scriptFragment) : eval(scriptFragment); // line #468
-}
-]]></source>
-            <p>
-                We then add "alert(scriptFragment);" just before that line, and re-run the test, and since the alerted strings
-                are too large, we print them to outside files
-            </p>
-            <source><![CDATA[
-    private int counter = 1;
-    public void dojoTest() throws Exception {
+var debug = false;
 
-        ...
+function main() {
+  debug = true; // to debug only during the next method execution
+  myFunction(a, b);
+  debug = false; // to stop debugging
+}
 
-        for (String alert : collectedAlerts) {
-            System.out.println("ALERT: " + alert);
-            FileUtils.writeStringToFile(new File("path_to_dir\\testOutput_" + counter++ + ".txt"), alert);
-        }
+function myfunction(a, b) {
+    var c = a + b;
+    if (debug) {
+        alert(anotherFunction);
     }
-]]></source>
-            <p>
-                then search for any line #299 with 'getAttribute()', you would see the below line for the file for dijit/_base/manager.js
-            </p>
-            <source><![CDATA[dijit.byNode = function(node){
-	return dijit.registry.byId(node.getAttribute("widgetId")); // line #299
-};]]></source>
-            <p>
-                By putting 'alert(node)' just before that line, you will get 'undefined' alert.<br/><br/>
-                Going back to the stack trace, we know that something.byNode() was called on #191, searching in the files again,
-                you will see the below for the file for dijit/form/Button.js'
-            </p>
-            <source><![CDATA[if(!this.dropDown){
-    var dropDownNode = dojo.query("[widgetId]", this.dropDownContainer)[0];
-    this.dropDown = dijit.byNode(dropDownNode); // line #191
-    delete this.dropDownContainer;
-}]]></source>
-            <p>
-                That means that dropDownNode was evaluated to 'undefined', which was passed to dijit.byNode().
-                To further debug the issue of dojo.query() and since it is called many times, we change the calling code to: 
-            </p>
-            <source><![CDATA[if(!this.dropDown){
-    window.top.debugMe = true;  // ADDED FOR DEBUGGING
-    var dropDownNode = dojo.query("[widgetId]", this.dropDownContainer)[0];
-    window.top.debugMe = false;  // ADDED FOR DEBUGGING
-    this.dropDown = dijit.byNode(dropDownNode); // line #191
-    delete this.dropDownContainer;
-}]]></source>
-            <p>
-                And add the below alerts in dojo/_base/query.js
-            </p>
-            <source><![CDATA[d.query = function(query, root){
-    ...
-    var r = getQueryFunc(query)(root);
-    if (window.top.debugMe)        // ADDED FOR DEBUGGING
-       alert(getQueryFunc(query))  // ADDED FOR DEBUGGING
-    ...
-}]]></source>
-            <p>
-                you will find getQueryFunc() returns different value in HtmlUnit than with real browser.<br/><br/>
-                
-                You could follow that technique to debug further and reach a single line where HtmlUnit incorrectly behaves, and provide minimal test case.
-            </p>
+    return anotherFunction(c + 'something');
+}}]]></source>
+			</p>
         </section>
     </body>
 </document>
