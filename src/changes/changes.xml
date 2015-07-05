@@ -11,9 +11,6 @@
             <action type="fix" dev="mguillem">
                 JavaScript: WebClient.getPage should trigger hashchange event when called for with the same URL but different hash than the current page.
             </action>
-            <action type="fix" dev="mguillem">
-                JavaScript: HTMLScriptElement.src should return complete URL.
-            </action>
             <action type="fix" dev="asashour">
                 DomNode: .setTextContent() should add child only if the text is not empty.
             </action>

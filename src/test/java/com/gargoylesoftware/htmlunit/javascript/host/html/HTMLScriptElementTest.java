@@ -101,6 +101,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "foo.js", "§§URL§§foo.js" })
+    @NotYetImplemented
     public void srcPropertyShouldBeAFullUrl() throws Exception {
         final String html = "<html><body>\n"
                 + "<script src='foo.js'></script>\n"
