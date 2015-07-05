@@ -68,6 +68,11 @@ net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call met
                 of a specific URL with that file. This is call <code>MAP LOCAL</code> in Charles.<br/>
                 You can also beautify the JavaScript, look for online tools.
             </p>
+            <p>
+                Use the latest released version at least, if not the
+                <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&buildId=lastSuccessful&tab=artifacts">
+                latest snapshot</a>.
+            </p>
         </section>
         <section name="JavaScript hints">
             <p>
