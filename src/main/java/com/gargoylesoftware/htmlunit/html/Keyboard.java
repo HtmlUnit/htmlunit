@@ -33,7 +33,7 @@ public class Keyboard {
      * Types the specified character.
      * @param ch the character
      */
-    public void type(char ch) {
+    public void type(final char ch) {
         keys_.add(new Object[] {ch});
     }
 

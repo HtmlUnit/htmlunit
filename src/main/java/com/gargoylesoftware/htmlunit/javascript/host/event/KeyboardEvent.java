@@ -862,7 +862,7 @@ public class KeyboardEvent extends UIEvent {
      */
     public static boolean isShiftNeeded(final char ch, final boolean shiftKey) {
         return "~!@#$%^&*()_+{}:\"<>?|".indexOf(ch) != -1
-                || (!shiftKey && ch >= 'A' && ch <='Z');
+                || (!shiftKey && ch >= 'A' && ch <= 'Z');
     }
 
     private int charCode_;
