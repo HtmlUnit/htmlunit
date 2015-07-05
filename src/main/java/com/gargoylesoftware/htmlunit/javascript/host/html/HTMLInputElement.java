@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
 
 /**
  * The JavaScript object for form input elements (html tag &lt;input ...&gt;).
@@ -537,4 +538,17 @@ public class HTMLInputElement extends FormField {
     public void setAutocomplete(final String autocomplete) {
         getDomNodeOrDie().setAutocomplete(autocomplete);
     }
+
+    /**
+     * Returns the {@code files} property.
+     * @return the {@code files} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public FileList getFiles() {
+        final FileList list = new FileList(getValue().split("\u00A7"));
+        list.setParentScope(getParentScope());
+        list.setPrototype(getPrototype(list.getClass()));
+        return list;
+    }
+
 }

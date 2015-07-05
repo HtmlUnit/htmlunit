@@ -18,8 +18,15 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -31,6 +38,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class File extends Blob {
 
+    private java.io.File file_;
+
     /**
      * Creates an instance.
      */
@@ -38,4 +47,82 @@ public class File extends Blob {
     public File() {
     }
 
+    File(final String pathname) {
+        file_ = new java.io.File(pathname);
+    }
+
+    /**
+     * Returns the {@code name} property.
+     * @return the {@code name} property
+     */
+    @JsxGetter
+    public String getName() {
+        return file_.getName();
+    }
+
+    /**
+     * Returns the {@code lastModifiedDate} property.
+     * @return the {@code lastModifiedDate} property
+     */
+    @JsxGetter
+    public String getLastModifiedDate() {
+        final Date date = new Date(getLastModified());
+        return new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss").format(date)
+            + " GMT" + new SimpleDateFormat("Z (zzzz)").format(date);
+    }
+
+    /**
+     * Returns the {@code lastModified} property.
+     * @return the {@code lastModified} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public long getLastModified() {
+        return file_.lastModified();
+    }
+
+    /**
+     * Returns the {@code webkitRelativePath} property.
+     * @return the {@code webkitRelativePath} property
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public String getWebkitRelativePath() {
+        return "";
+    }
+
+    /**
+     * Returns the {@code size} property.
+     * @return the {@code size} property
+     */
+    @JsxGetter
+    public long getSize() {
+        return file_.length();
+    }
+
+    /**
+     * Returns the {@code type} property.
+     * @return the {@code type} property
+     */
+    @JsxGetter
+    public String getType() {
+        try {
+            return Files.probeContentType(file_.toPath());
+        }
+        catch (final IOException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Slices the file.
+     */
+    @JsxFunction
+    public void slice() {
+    }
+
+    /**
+     * Closes the file.
+     */
+    @JsxFunction(@WebBrowser(value = IE, minVersion = 11))
+    public void msClose() {
+    }
 }

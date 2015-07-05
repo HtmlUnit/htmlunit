@@ -17,10 +17,13 @@ package com.gargoylesoftware.htmlunit.javascript.host.file;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -32,6 +35,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class FileList extends SimpleScriptable {
 
+    private File[] files_;
+
     /**
      * Creates an instance.
      */
@@ -39,4 +44,55 @@ public class FileList extends SimpleScriptable {
     public FileList() {
     }
 
+    /**
+     * Creates a new instance.
+     * @param pathnames the path names
+     */
+    public FileList(final String[] pathnames) {
+        files_ = new File[pathnames.length];
+        for (int i = 0; i < pathnames.length; i++) {
+            files_[i] = new File(pathnames[i]);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setParentScope(final Scriptable m) {
+        super.setParentScope(m);
+        if (files_ != null) {
+            for (final File file : files_) {
+                file.setParentScope(m);
+                file.setPrototype(getPrototype(file.getClass()));
+            }
+        }
+    }
+
+    /**
+     * Returns the {@code length} property.
+     * @return the {@code length} property
+     */
+    @JsxGetter
+    public int getLength() {
+        return files_.length;
+    }
+
+    /**
+     * Returns a {@code File} object representing the file at the specified index in the file list.
+     * @param index The zero-based index of the file to retrieve from the list
+     * @return The {@code File} representing the requested file
+     */
+    @JsxFunction
+    public File item(final int index) {
+        return files_[index];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final int index, final Scriptable start) {
+        return item(index);
+    }
 }
