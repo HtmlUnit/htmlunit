@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -886,7 +887,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         newnode.parent_ = null;
         if (hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)) {
-            newnode.parent_ = new HtmlPage(WebClient.URL_ABOUT_BLANK, null, null);
+            final WebWindow window = getPage().getWebClient().openWindow(WebClient.URL_ABOUT_BLANK, "");
+            newnode.parent_ = (HtmlPage) window.getEnclosedPage();
         }
         newnode.nextSibling_ = null;
         newnode.previousSibling_ = null;
@@ -894,7 +896,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newnode.scriptObject_ = null;
         newnode.directlyAttachedToPage_ = false;
 
-        // if deep, clone the kids too.
+        // if deep, clone the children too.
         if (deep) {
             for (DomNode child = firstChild_; child != null; child = child.nextSibling_) {
                 newnode.appendChild(child.cloneNode(true));
@@ -1897,6 +1899,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns the first element within the document that matches the specified group of selectors.
      * @param selectors one or more CSS selectors separated by commas
+     * @param <N> the node type
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
     @SuppressWarnings("unchecked")

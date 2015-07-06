@@ -9,6 +9,9 @@
     <body>
         <release version="2.18" date="???" description="Bugfixes, .type(Keyboard), SVG events, PATCH method for HTTP">
             <action type="fix" dev="asashour">
+                JavaScript: do not trigger events if the element is detached from page.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: Node.cloneNode() should return a node with a parent (IE8). 
             </action>
             <action type="add" dev="asashour">

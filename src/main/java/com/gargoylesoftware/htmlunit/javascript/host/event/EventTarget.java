@@ -29,6 +29,7 @@ import java.util.Locale;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -127,9 +129,15 @@ public class EventTarget extends SimpleScriptable {
             // capturing phase
             event.setEventPhase(Event.CAPTURING_PHASE);
             final boolean windowEventIfDetached = getBrowserVersion().hasFeature(JS_EVENT_WINDOW_EXECUTE_IF_DITACHED);
-            final boolean isAttached = getDomNodeOrNull() != null
-                    && getDomNodeOrNull().getPage().isAncestorOf(getDomNodeOrNull());
 
+            boolean isAttached = false;
+            for (DomNode node = getDomNodeOrNull(); node != null; node = node.getParentNode()) {
+                if (node instanceof Page) {
+                    isAttached = true;
+                    break;
+                }
+            }
+            
             if (isAttached || windowEventIfDetached) {
                 result = windowsListeners.executeCapturingListeners(event, args);
                 if (event.isPropagationStopped()) {
@@ -177,7 +185,7 @@ public class EventTarget extends SimpleScriptable {
             while (eventTarget != null) {
                 final EventTarget jsNode = eventTarget;
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
-                if (elc != null && !(jsNode instanceof Window)) {
+                if (elc != null && !(jsNode instanceof Window) && (isAttached || !(jsNode instanceof HTMLElement))) {
                     final ScriptResult r = elc.executeBubblingListeners(event, args, propHandlerArgs);
                     result = ScriptResult.combine(r, result, ie);
                     if (event.isPropagationStopped()) {
