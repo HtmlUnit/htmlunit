@@ -53,7 +53,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void test_hasChildNodes_true() throws Exception {
+    public void hasChildNodes_true() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
@@ -72,7 +72,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    public void test_hasChildNodes_false() throws Exception {
+    public void hasChildNodes_false() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
@@ -92,7 +92,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "true" })
-    public void testRemoveChild() throws Exception {
+    public void removeChild() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -115,7 +115,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "true", "true" })
-    public void testReplaceChild_Normal() throws Exception {
+    public void replaceChild_Normal() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -161,7 +161,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "SPAN", "2", "#text", "H1", "H2" })
-    public void test_getChildNodes() throws Exception {
+    public void getChildNodes() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function doTest() {\n"
@@ -208,7 +208,7 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts({ "length: 5",
         "tempNode.name: undefined", "tempNode.name: input1", "tempNode.name: undefined",
         "tempNode.name: input2", "tempNode.name: undefined" })
-    public void test_getChildNodesProperties() throws Exception {
+    public void getChildNodesProperties() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
             + "function doTest() {\n"
@@ -263,7 +263,7 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE8 = { "in foo2", "in foo1" })
     @NotYetImplemented(IE8)
-    public void testAttachEvent() throws Exception {
+    public void attachEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<title>First</title>\n"
             + "<script>\n"
@@ -321,7 +321,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "null" },
             IE8 = { "null", "#document-fragment" })
-    public void testAppendChild_parentNode() throws Exception {
+    public void appendChild_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
@@ -370,7 +370,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    public void testAppendChild_of_DocumentFragment() throws Exception {
+    public void appendChild_of_DocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var fragment = document.createDocumentFragment();\n"
@@ -430,7 +430,7 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
             "<div>one</div><div>two</div><div id=\"myDiv3\"></div>" },
             IE8 = { "exception thrown" })
-    public void testReplaceChild() throws Exception {
+    public void replaceChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
@@ -460,7 +460,7 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
             "<div id=\"myDiv3\"></div>" },
             IE8 = { "exception thrown" })
-    public void testReplaceChild_EmptyDocumentFragment() throws Exception {
+    public void replaceChild_EmptyDocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var element = document.getElementById('myDiv2');\n"
@@ -529,7 +529,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "1", "2", "4", "8", "16", "32" },
             IE8 = { "undefined", "not supported" })
-    public void testDocumentPositionConstants() throws Exception {
+    public void documentPositionConstants() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
@@ -664,7 +664,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts({ "3", "H2" })
     public void insertBefore_nullRef() throws Exception {
-        test_insertBefore("aNode.insertBefore(nodeToInsert, null);");
+        insertBefore("aNode.insertBefore(nodeToInsert, null);");
     }
 
     /**
@@ -698,13 +698,13 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = { "3", "H2" })
     public void insertBefore_noSecondArg() throws Exception {
-        test_insertBefore("aNode.insertBefore(nodeToInsert);");
+        insertBefore("aNode.insertBefore(nodeToInsert);");
     }
 
     /**
      * @throws Exception if the test fails
      */
-    void test_insertBefore(final String insertJSLine) throws Exception {
+    private void insertBefore(final String insertJSLine) throws Exception {
         final String html = "<html><head><title>test_insertBefore</title>\n"
             + "<script>\n"
             + "function doTest() {\n"
@@ -1016,6 +1016,36 @@ public class NodeTest extends WebDriverTestCase {
             + "      foo.textContent = 'Hello';\n"
             + "      if (foo.firstChild) {\n"
             + "        alert(foo.firstChild.wholeText);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <span id='foo'></span>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = { "[object HTMLDocument]", "about:blank" })
+    @NotYetImplemented(IE8)
+    public void cloneParent() throws Exception {
+        final String html =
+              "<!DOCTYPE><html>\n"
+            + "  <head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var foo = document.getElementById('foo');\n"
+            + "      var clone = foo.cloneNode(true);\n"
+            + "      alert(clone.parentNode);\n"
+            + "      if (clone.parentNode) {\n"
+            + "        alert(clone.parentNode.URL);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
