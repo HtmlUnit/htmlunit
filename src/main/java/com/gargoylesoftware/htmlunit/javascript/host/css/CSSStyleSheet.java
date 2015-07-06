@@ -439,7 +439,7 @@ public class CSSStyleSheet extends StyleSheet {
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
-                return name == null || name.equalsIgnoreCase(element.getTagName());
+                return name == null || name.equalsIgnoreCase(element.getLocalName());
             case Selector.SAC_ROOT_NODE_SELECTOR:
                 return HtmlHtml.TAG_NAME.equalsIgnoreCase(element.getTagName());
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:

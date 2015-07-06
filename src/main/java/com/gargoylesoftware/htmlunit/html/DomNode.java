@@ -36,6 +36,9 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import org.apache.xml.utils.PrefixResolver;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
@@ -66,9 +69,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the
@@ -1379,12 +1379,30 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@link DomComment} elements, etc.), please use {@link #getDescendants()}.
      * @return an {@link Iterable} that will recursively iterate over all of this node's {@link HtmlElement}
      *         descendants
+     * @see #getDomElementDescendants()
      */
     public final Iterable<HtmlElement> getHtmlElementDescendants() {
         return new Iterable<HtmlElement>() {
             @Override
             public Iterator<HtmlElement> iterator() {
                 return new DescendantElementsIterator<HtmlElement>(HtmlElement.class);
+            }
+        };
+    }
+
+    /**
+     * Returns an {@link Iterable} that will recursively iterate over all of this node's {@link DomElement}
+     * descendants. If you want to iterate over all descendants (including {@link DomText} elements,
+     * {@link DomComment} elements, etc.), please use {@link #getDescendants()}.
+     * @return an {@link Iterable} that will recursively iterate over all of this node's {@link DomElement}
+     *         descendants
+     * @see #getHtmlElementDescendants()
+     */
+    public final Iterable<DomElement> getDomElementDescendants() {
+        return new Iterable<DomElement>() {
+            @Override
+            public Iterator<DomElement> iterator() {
+                return new DescendantElementsIterator<DomElement>(DomElement.class);
             }
         };
     }
@@ -1844,7 +1862,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 throw new CSSException("Invalid selectors: " + selectors);
             }
 
-            if (null != selectorList) {
+            if (selectorList != null) {
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
                 int documentMode = 9;
                 if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
@@ -1855,7 +1873,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
                 CSSStyleSheet.validateSelectors(selectorList, documentMode, this);
 
-                for (final HtmlElement child : getHtmlElementDescendants()) {
+                for (final DomElement child : getDomElementDescendants()) {
                     for (int i = 0; i < selectorList.getLength(); i++) {
                         final Selector selector = selectorList.item(i);
                         if (CSSStyleSheet.selects(browserVersion, selector, child)) {
