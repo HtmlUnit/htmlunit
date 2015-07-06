@@ -2132,8 +2132,8 @@ public class HtmlPage extends SgmlPage {
      * @return the element with focus or null
      * @see #setFocusedElement(HtmlElement)
      */
-    public DomElement getFocusedElement() {
-        return elementWithFocus_;
+    public HtmlElement getFocusedElement() {
+        return (HtmlElement) elementWithFocus_;
     }
 
     /**

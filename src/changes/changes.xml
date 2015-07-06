@@ -7,9 +7,9 @@
     </properties>
 
     <body>
-        <release version="2.18" date="???" description="Bugfixes, .type(Keyboard), PATCH method for HTTP">
+        <release version="2.18" date="???" description="Bugfixes, .type(Keyboard), SVG events, PATCH method for HTTP">
             <action type="add" dev="asashour">
-                DomElement: now has event related methods (e.g. .click(), .focus()) to support SVG interaction.
+                DomElement: now handle events (e.g. .click(), .focus()) to support SVG interaction.
             </action>
             <action type="fix" dev="asashour">
                 SVG: fix SVG element creation.

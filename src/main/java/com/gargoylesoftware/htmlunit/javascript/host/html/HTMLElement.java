@@ -170,7 +170,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
@@ -504,19 +503,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-        setParentScope(getWindow().getDocument());
-
-        /**
-         * Convert JavaScript snippets defined in the attribute map to executable event handlers.
-         * Should be called only on construction.
-         */
-        final HtmlElement htmlElt = (HtmlElement) domNode;
-        for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
-            final String eventName = attr.getName();
-            if (eventName.toLowerCase(Locale.ENGLISH).startsWith("on")) {
-                createEventHandler(eventName, attr.getValue());
-            }
-        }
 
         if ("wbr".equalsIgnoreCase(domNode.getLocalName())) {
             endTagForbidden_ = true;
@@ -524,18 +510,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else if ("basefont".equalsIgnoreCase(domNode.getLocalName())) {
             endTagForbidden_ = true;
         }
-    }
-
-    /**
-     * Create the event handler function from the attribute value.
-     * @param eventName the event name (ex: "onclick")
-     * @param attrValue the attribute value
-     */
-    protected void createEventHandler(final String eventName, final String attrValue) {
-        final HtmlElement htmlElt = getDomNodeOrDie();
-        // TODO: check that it is an "allowed" event for the browser, and take care to the case
-        final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
-        setEventHandler(eventName, eventHandler);
     }
 
     /**

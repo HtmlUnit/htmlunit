@@ -46,8 +46,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
@@ -80,11 +82,40 @@ public class Element extends EventNode {
         // Empty.
     }
 
+    /**
+     * Sets the DOM node that corresponds to this JavaScript object.
+     * @param domNode the DOM node
+     */
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-
         style_ = new CSSStyleDeclaration(this);
+
+        setParentScope(getWindow().getDocument());
+
+        /**
+         * Convert JavaScript snippets defined in the attribute map to executable event handlers.
+         * Should be called only on construction.
+         */
+        final DomElement htmlElt = (DomElement) domNode;
+        for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
+            final String eventName = attr.getName();
+            if (eventName.toLowerCase(Locale.ENGLISH).startsWith("on")) {
+                createEventHandler(eventName, attr.getValue());
+            }
+        }
+    }
+
+    /**
+     * Create the event handler function from the attribute value.
+     * @param eventName the event name (ex: "onclick")
+     * @param attrValue the attribute value
+     */
+    protected void createEventHandler(final String eventName, final String attrValue) {
+        final DomElement htmlElt = getDomNodeOrDie();
+        // TODO: check that it is an "allowed" event for the browser, and take care to the case
+        final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
+        setEventHandler(eventName, eventHandler);
     }
 
     /**
