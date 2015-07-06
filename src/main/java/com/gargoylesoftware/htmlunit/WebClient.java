@@ -65,10 +65,10 @@ import com.gargoylesoftware.htmlunit.attachment.Attachment;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
@@ -727,7 +727,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (currentWindow_ != null && !currentWindow_.isClosed()) {
             final Page enclosedPage = currentWindow_.getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-                final HtmlElement focusedElement = ((HtmlPage) enclosedPage).getFocusedElement();
+                final DomElement focusedElement = ((HtmlPage) enclosedPage).getFocusedElement();
                 if (focusedElement != null) {
                     focusedElement.fireEvent(Event.TYPE_BLUR);
                 }

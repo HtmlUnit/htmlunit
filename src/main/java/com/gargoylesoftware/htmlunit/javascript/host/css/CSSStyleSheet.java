@@ -664,7 +664,7 @@ public class CSSStyleSheet extends StyleSheet {
         if ("focus".equals(value)) {
             final HtmlPage htmlPage = element.getHtmlPageOrNull();
             if (htmlPage != null) {
-                final HtmlElement focus = htmlPage.getFocusedElement();
+                final DomElement focus = htmlPage.getFocusedElement();
                 return element == focus;
             }
         }

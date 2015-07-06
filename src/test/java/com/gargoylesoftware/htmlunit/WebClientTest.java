@@ -48,6 +48,7 @@ import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -840,7 +841,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        HtmlElement focus = page.getFocusedElement();
+        DomElement focus = page.getFocusedElement();
         Assert.assertTrue("original", (focus == null)
                 || (focus == page.getDocumentElement())
                 || (focus == page.getBody()));
@@ -871,12 +872,12 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{null});
         final HtmlElement element = page.getHtmlElementById("submit0");
 
-        final HtmlElement focus = page.getFocusedElement();
+        final DomElement focus = page.getFocusedElement();
         Assert.assertTrue("original", (focus == null)
                 || (focus == page.getDocumentElement())
                 || (focus == page.getBody()));
 
-        final HtmlElement accessKey = page.pressAccessKey('x');
+        final DomElement accessKey = page.pressAccessKey('x');
         Assert.assertEquals("accesskey", focus, accessKey);
 
         Assert.assertEquals("next", element, page.tabToNextElement());

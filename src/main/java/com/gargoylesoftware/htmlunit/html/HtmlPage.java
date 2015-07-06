@@ -153,7 +153,7 @@ public class HtmlPage extends SgmlPage {
     private Map<String, SortedSet<DomElement>> nameMap_ = new Hashtable<String, SortedSet<DomElement>>();
 
     private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<>(documentPositionComparator);
-    private HtmlElement elementWithFocus_;
+    private DomElement elementWithFocus_;
     private int parserCount_;
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
@@ -1593,7 +1593,7 @@ public class HtmlPage extends SgmlPage {
      * @throws IOException if an IO error occurs during the processing of this access key (this
      *         would only happen if the access key triggered a button which in turn caused a page load)
      */
-    public HtmlElement pressAccessKey(final char accessKey) throws IOException {
+    public DomElement pressAccessKey(final char accessKey) throws IOException {
         final HtmlElement element = getHtmlElementByAccessKey(accessKey);
         if (element != null) {
             element.focus();
@@ -1646,7 +1646,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         final HtmlElement elementToGiveFocus;
-        final HtmlElement elementWithFocus = getFocusedElement();
+        final DomElement elementWithFocus = getFocusedElement();
         if (elementWithFocus == null) {
             elementToGiveFocus = elements.get(0);
         }
@@ -1684,7 +1684,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         final HtmlElement elementToGiveFocus;
-        final HtmlElement elementWithFocus = getFocusedElement();
+        final DomElement elementWithFocus = getFocusedElement();
         if (elementWithFocus == null) {
             elementToGiveFocus = elements.get(elements.size() - 1);
         }
@@ -2065,7 +2065,7 @@ public class HtmlPage extends SgmlPage {
      * @see #pressAccessKey(char)
      * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
      */
-    public boolean setFocusedElement(final HtmlElement newElement) {
+    public boolean setFocusedElement(final DomElement newElement) {
         return setFocusedElement(newElement, false);
     }
 
@@ -2082,7 +2082,7 @@ public class HtmlPage extends SgmlPage {
      * @see #pressAccessKey(char)
      * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
      */
-    public boolean setFocusedElement(final HtmlElement newElement, final boolean windowActivated) {
+    public boolean setFocusedElement(final DomElement newElement, final boolean windowActivated) {
         if (elementWithFocus_ == newElement && !windowActivated) {
             // nothing to do
             return true;
@@ -2091,7 +2091,7 @@ public class HtmlPage extends SgmlPage {
             throw new IllegalArgumentException("Can't move focus to an element from a different page.");
         }
 
-        final HtmlElement oldFocusedElement = elementWithFocus_;
+        final DomElement oldFocusedElement = elementWithFocus_;
         elementWithFocus_ = null;
 
         if (!windowActivated) {
@@ -2132,7 +2132,7 @@ public class HtmlPage extends SgmlPage {
      * @return the element with focus or null
      * @see #setFocusedElement(HtmlElement)
      */
-    public HtmlElement getFocusedElement() {
+    public DomElement getFocusedElement() {
         return elementWithFocus_;
     }
 
