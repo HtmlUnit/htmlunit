@@ -61,7 +61,10 @@ public class SvgElementFactory implements ElementFactory {
             final Attributes attributes, final boolean checkBrowserCompatibility) {
 
         final Map<String, DomAttr> attributeMap = toMap(page, attributes);
-        final String tagName = qualifiedName;
+        String tagName = qualifiedName;
+        if (tagName.indexOf(':') != -1) {
+            tagName = tagName.substring(tagName.indexOf(':') + 1);
+        }
         DomElement element = null;
         if (tagName.equalsIgnoreCase(SvgAltGlyph.TAG_NAME)) {
             element = new SvgAltGlyph(namespaceURI, qualifiedName, page, attributeMap);
