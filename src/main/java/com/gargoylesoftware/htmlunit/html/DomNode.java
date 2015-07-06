@@ -1895,10 +1895,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param selectors one or more CSS selectors separated by commas
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
-    public DomNode querySelector(final String selectors) {
+    @SuppressWarnings("unchecked")
+    public <N extends DomNode> N querySelector(final String selectors) {
         final DomNodeList<DomNode> list = querySelectorAll(selectors);
         if (!list.isEmpty()) {
-            return list.get(0);
+            return (N) list.get(0);
         }
         return null;
     }

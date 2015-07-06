@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -625,6 +626,24 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             nextElement_ = (DomElement) next;
         }
     }
+
+    /**
+     * Returns a string representation of this element.
+     * @return a string representation of this element
+     */
+    @Override
+    public String toString() {
+        final StringWriter writer = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(writer);
+
+        printWriter.print(getClass().getSimpleName());
+        printWriter.print("[<");
+        printOpeningTagContentAsXml(printWriter);
+        printWriter.print(">]");
+        printWriter.flush();
+        return writer.toString();
+    }
+
 }
 
 /**
