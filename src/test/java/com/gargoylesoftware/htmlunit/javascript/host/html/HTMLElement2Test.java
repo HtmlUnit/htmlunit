@@ -1294,4 +1294,33 @@ public class HTMLElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         assertEquals(getExpectedAlerts()[0], driver.findElement(By.tagName("body")).getText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    @NotYetImplemented
+    public void getBoundingClientRect_WithGreaterZero() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var input = document.getElementById('myInput');\n"
+            + "      alert(input.getBoundingClientRect().width > 0);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>"
+            + "<body onload='test()'>\n"
+            + "<style>.full { width:100%; }</style>\n"
+            + "<div class='foo bar'>\n"
+            + "    <form action='javascript:void(0)' method='post'>\n"
+            + "        <div class='full'>\n"
+            + "            <input class='full' type='text' id='myInput'>\n"
+            + "        </div>\n"
+            + "    </form>\n"
+            + "</div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
