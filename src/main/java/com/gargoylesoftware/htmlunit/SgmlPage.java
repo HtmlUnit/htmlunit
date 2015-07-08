@@ -163,9 +163,11 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      */
     protected void setDocumentType(final DocumentType type) {
         documentType_ = type;
-        final ScriptableObject sobj = getScriptObject();
-        if (sobj instanceof HTMLDocument) {
-            ((HTMLDocument) sobj).forceDocumentMode(-1);
+        if (isHtmlPage() || this != getPage()) {
+            final ScriptableObject sobj = getScriptObject();
+            if (sobj instanceof HTMLDocument) {
+                ((HTMLDocument) sobj).forceDocumentMode(-1);
+            }
         }
     }
 
