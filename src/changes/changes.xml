@@ -15,7 +15,7 @@
                 JavaScript: do not trigger events if the element is detached from page.
             </action>
             <action type="fix" dev="asashour">
-                JavaScript: Node.cloneNode() should return a node with a parent (IE8). 
+                JavaScript: Node.cloneNode() should return a node with a parent (IE8).
             </action>
             <action type="add" dev="asashour">
                 DomElement: now handle events (e.g. .click(), .focus()) to support SVG interaction.

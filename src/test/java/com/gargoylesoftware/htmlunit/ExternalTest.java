@@ -180,8 +180,7 @@ public class ExternalTest {
     }
 
     private static WebClient getWebClient() {
-        final WebClient webClient = new WebClient();
-        return webClient;
+        return new WebClient();
     }
 
     /**

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DISPLAYED_COLLAPSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.NODE_APPEND_CHILD_SELF_IGNORE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
@@ -885,11 +884,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         newnode.parent_ = null;
-        if (hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS) && !(newnode instanceof Document)
-                && !(newnode instanceof DomDocumentFragment)) {
-            newnode.parent_ = (DomNode) getPage().createDocumentFragment();
-            newnode.parent_.appendChild(newnode);
-        }
         newnode.nextSibling_ = null;
         newnode.previousSibling_ = null;
         newnode.firstChild_ = null;

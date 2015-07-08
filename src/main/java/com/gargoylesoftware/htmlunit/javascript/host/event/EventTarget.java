@@ -28,9 +28,10 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Document;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -132,7 +133,7 @@ public class EventTarget extends SimpleScriptable {
 
             boolean isAttached = false;
             for (DomNode node = getDomNodeOrNull(); node != null; node = node.getParentNode()) {
-                if (node instanceof Page) {
+                if (node instanceof Document || node instanceof DomDocumentFragment) {
                     isAttached = true;
                     break;
                 }
