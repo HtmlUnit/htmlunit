@@ -43,7 +43,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.AbstractDomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCDataSection;
-import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
@@ -235,15 +234,6 @@ public class XmlPage extends SgmlPage {
     @Override
     public Comment createComment(final String data) {
         throw new UnsupportedOperationException("XmlPage.createComment is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    @Override
-    public DomDocumentFragment createDocumentFragment() {
-        throw new UnsupportedOperationException("XmlPage.createDocumentFragment is not yet implemented.");
     }
 
     /**
