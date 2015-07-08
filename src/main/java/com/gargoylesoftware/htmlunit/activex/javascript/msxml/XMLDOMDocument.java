@@ -362,7 +362,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @JsxFunction
     public Object createDocumentFragment() {
-        final DomDocumentFragment domDocumentFragment = getPage().createDomDocumentFragment();
+        final DomDocumentFragment domDocumentFragment = getPage().createDocumentFragment();
         return getScriptableFor(domDocumentFragment);
     }
 

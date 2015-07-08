@@ -29,7 +29,7 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentFragment;
+import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.AbstractDomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCDataSection;
-import com.gargoylesoftware.htmlunit.html.DomDocumentType;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
@@ -242,7 +242,7 @@ public class XmlPage extends SgmlPage {
      * Not yet implemented.
      */
     @Override
-    public DocumentFragment createDocumentFragment() {
+    public DomDocumentFragment createDocumentFragment() {
         throw new UnsupportedOperationException("XmlPage.createDocumentFragment is not yet implemented.");
     }
 
@@ -480,7 +480,7 @@ public class XmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
-    protected void setDocumentType(final DomDocumentType type) {
+    protected void setDocumentType(final DocumentType type) {
         super.setDocumentType(type);
     }
 }

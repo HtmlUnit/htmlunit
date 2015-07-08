@@ -145,7 +145,7 @@ public class XSLProcessor extends MSXMLScriptable {
         final SgmlPage page = input.getDomNodeOrDie().getPage();
 
         if (output_ == null || !(output_ instanceof XMLDOMNode)) {
-            final DomDocumentFragment fragment = page.createDomDocumentFragment();
+            final DomDocumentFragment fragment = page.createDocumentFragment();
             final XMLDOMDocumentFragment node = new XMLDOMDocumentFragment();
             node.setParentScope(getParentScope());
             node.setPrototype(getPrototype(node.getClass()));

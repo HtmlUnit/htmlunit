@@ -157,7 +157,7 @@ public class XSLTProcessor extends SimpleScriptable {
     public DocumentFragment transformToFragment(final Node source, final Object output) {
         final SgmlPage page = (SgmlPage) ((Document) output).getDomNodeOrDie();
 
-        final DomDocumentFragment fragment = page.createDomDocumentFragment();
+        final DomDocumentFragment fragment = page.createDocumentFragment();
         final DocumentFragment rv = new DocumentFragment();
         rv.setPrototype(getPrototype(rv.getClass()));
         rv.setParentScope(getParentScope());

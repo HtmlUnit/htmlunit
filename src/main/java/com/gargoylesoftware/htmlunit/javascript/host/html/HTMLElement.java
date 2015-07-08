@@ -1066,7 +1066,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // if the parentNode has null parentNode in IE,
             // create a DocumentFragment to be the parentNode's parentNode.
             if (domNode.getParentNode() == null && createFragment) {
-                final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
+                final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDocumentFragment();
                 fragment.appendChild(domNode);
             }
         }
@@ -1098,7 +1098,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // if the parentNode has null parentNode in IE,
         // create a DocumentFragment to be the parentNode's parentNode.
         if (domNode.getParentNode() == null && createFragment) {
-            final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
+            final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDocumentFragment();
             fragment.appendChild(domNode);
         }
     }

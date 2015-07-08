@@ -369,7 +369,7 @@ public class XMLDOMNode extends MSXMLScriptable {
             // create a DocumentFragment to be the parentNode's parentNode.
             if (!(parentNode instanceof SgmlPage)
                     && !(this instanceof XMLDOMDocumentFragment) && parentNode.getParentNode() == null) {
-                final DomDocumentFragment fragment = parentNode.getPage().createDomDocumentFragment();
+                final DomDocumentFragment fragment = parentNode.getPage().createDocumentFragment();
                 fragment.appendChild(parentNode);
             }
         }
@@ -477,7 +477,7 @@ public class XMLDOMNode extends MSXMLScriptable {
 
             // if parentNode is null in IE, create a DocumentFragment to be the parentNode
             if (domNode.getParentNode() == null) {
-                final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
+                final DomDocumentFragment fragment = domNode.getPage().createDocumentFragment();
                 fragment.appendChild(domNode);
             }
         }

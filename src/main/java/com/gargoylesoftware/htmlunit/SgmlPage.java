@@ -23,9 +23,11 @@ import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
-import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A basic class to be implemented by {@link com.gargoylesoftware.htmlunit.html.HtmlPage} and
@@ -37,7 +39,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  */
 public abstract class SgmlPage extends DomNode implements Page, Document {
 
-    private DomDocumentType documentType_;
+    private DocumentType documentType_;
     private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
@@ -128,9 +130,22 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     /**
      * Creates an empty {@link DomDocumentFragment} object.
      * @return a newly created {@link DomDocumentFragment}
+     * @deprecated as of 2.18, please use {@link #createDocumentFragment()} instead
      */
+    @Deprecated
     public DomDocumentFragment createDomDocumentFragment() {
-        return new DomDocumentFragment(this);
+        return createDocumentFragment();
+    }
+
+    /**
+     * Creates an empty {@link DomDocumentFragment} object.
+     * @return a newly created {@link DomDocumentFragment}
+     */
+    public DomDocumentFragment createDocumentFragment() {
+        final WebWindow window = getPage().getWebClient().openWindow(WebClient.URL_ABOUT_BLANK, "");
+        final SgmlPage page = (SgmlPage) window.getEnclosedPage();
+        page.setDocumentType(getPage().getDoctype());
+        return new DomDocumentFragment(page);
     }
 
     /**
@@ -146,8 +161,12 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * Sets the document type.
      * @param type the document type
      */
-    protected void setDocumentType(final DomDocumentType type) {
+    protected void setDocumentType(final DocumentType type) {
         documentType_ = type;
+        final ScriptableObject sobj = getScriptObject();
+        if (sobj instanceof HTMLDocument) {
+            ((HTMLDocument) sobj).forceDocumentMode(-1);
+        }
     }
 
     /**

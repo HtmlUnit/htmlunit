@@ -862,9 +862,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the "compatMode" attribute.
-     * Note that it is deprecated in Internet Explorer 8 in favor of the documentMode.
-     * @return the "compatMode" attribute
+     * Returns the {@code compatMode} attribute.
+     * Note that it is deprecated in Internet Explorer 8 in favor of the {@code documentMode}.
+     * @return the {@code compatMode} attribute
      */
     @JsxGetter
     public String getCompatMode() {
@@ -874,8 +874,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the "documentMode" attribute.
-     * @return the "documentMode" attribute
+     * Returns the {@code documentMode} attribute.
+     * @return the {@code documentMode} attribute
      */
     @JsxGetter(@WebBrowser(IE))
     public int getDocumentMode() {
@@ -935,7 +935,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 }
             }
             else if (docType.getPublicId() == null) {
-                return false;
+                if (docType.getName() != null) {
+                    return false;
+                }
+                return !browserVersion.hasFeature(DOCTYPE_4_0_TRANSITIONAL_STANDARDS);
             }
         }
         return true;

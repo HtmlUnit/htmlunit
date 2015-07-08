@@ -290,7 +290,7 @@ public class Document extends EventNode {
      */
     @JsxFunction
     public Object createDocumentFragment() {
-        final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDomDocumentFragment();
+        final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDocumentFragment();
         final DocumentFragment node = new DocumentFragment();
         node.setParentScope(getParentScope());
         node.setPrototype(getPrototype(node.getClass()));

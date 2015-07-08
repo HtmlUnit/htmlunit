@@ -8,8 +8,17 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes, .type(Keyboard), SVG events, PATCH method for HTTP">
+            <action type="fix" dev="asashour">
+                Fix detection of standards mode for DocType with empty name (IE8).
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: DocumentFragment: add .URL property and fix its default value (IE8).
+            </action>
             <action type="update" dev="asashour">
-                HtmlPage: deprecated getFocusedElement() as its return type will change to DomElement.
+                SgmlPage: deprecate createDomDocumentFragment().
+            </action>
+            <action type="update" dev="asashour">
+                HtmlPage: deprecate getFocusedElement() as its return type will change to DomElement.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: do not trigger events if the element is detached from page.

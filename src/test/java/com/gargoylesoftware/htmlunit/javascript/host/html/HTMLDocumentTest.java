@@ -158,6 +158,16 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "BackCompat",
+            IE8 = "CSS1Compat")
+    public void compatMode_doctype() throws Exception {
+        compatMode("<!DOCTYPE>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("CSS1Compat")
     public void compatMode_html() throws Exception {
         compatMode("<!DOCTYPE html>");

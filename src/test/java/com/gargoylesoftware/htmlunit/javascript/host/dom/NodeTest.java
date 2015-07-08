@@ -1034,7 +1034,6 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             IE8 = { "[object HTMLDocument]", "about:blank", "11" })
-    @NotYetImplemented(IE8)
     public void cloneParent() throws Exception {
         final String html =
               "<!DOCTYPE><html>\n"

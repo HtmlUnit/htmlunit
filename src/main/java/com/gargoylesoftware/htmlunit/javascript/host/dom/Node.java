@@ -242,7 +242,7 @@ public class Node extends EventTarget {
                     && !(this instanceof DocumentFragment) && parentNode.getParentNode() == null
                     && getBrowserVersion().hasFeature(
                             JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
-                final DomDocumentFragment fragment = parentNode.getPage().createDomDocumentFragment();
+                final DomDocumentFragment fragment = parentNode.getPage().createDocumentFragment();
                 fragment.appendChild(parentNode);
             }
 
@@ -392,7 +392,7 @@ public class Node extends EventTarget {
             // if parentNode is null, create a DocumentFragment to be the parentNode
             if (domNode.getParentNode() == null && getBrowserVersion()
                     .hasFeature(JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
-                final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
+                final DomDocumentFragment fragment = domNode.getPage().createDocumentFragment();
                 fragment.appendChild(domNode);
             }
         }
@@ -492,7 +492,7 @@ public class Node extends EventTarget {
                 // need to copy the event listener when they exist
                 copyEventListenersWhenNeeded(domNode, clonedNode);
 
-                final org.w3c.dom.DocumentFragment documentFragment = domNode.getPage().createDocumentFragment();
+                final DomDocumentFragment documentFragment = domNode.getPage().createDocumentFragment();
                 documentFragment.appendChild(clonedNode);
                 
             }

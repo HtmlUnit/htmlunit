@@ -55,7 +55,6 @@ import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
@@ -573,14 +572,6 @@ public class HtmlPage extends SgmlPage {
     @Override
     public CDATASection createCDATASection(final String data) {
         return new DomCDataSection(this, data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DocumentFragment createDocumentFragment() {
-        return new DomDocumentFragment(this);
     }
 
     /**
@@ -2483,7 +2474,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
-    protected void setDocumentType(final DomDocumentType type) {
+    protected void setDocumentType(final DocumentType type) {
         super.setDocumentType(type);
 
         if (hasFeature(JS_WINDOW_IN_STANDARDS_MODE) && !isQuirksMode()) {
@@ -2504,8 +2495,8 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns whether the current page mode is in quirks mode or in standards mode.
-     * @return true for quirks mode, false for standards mode
+     * Returns whether the current page mode is in {@code quirks mode} or in {@code standards mode}.
+     * @return true for {@code quirks mode}, false for {@code standards mode}
      */
     public boolean isQuirksMode() {
         return "BackCompat".equals(((HTMLDocument) getScriptObject()).getCompatMode());
@@ -2520,6 +2511,9 @@ public class HtmlPage extends SgmlPage {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isHtmlPage() {
         return true;

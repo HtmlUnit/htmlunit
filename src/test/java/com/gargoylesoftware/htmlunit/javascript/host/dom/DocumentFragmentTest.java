@@ -126,12 +126,33 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void children() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  var fragment = document.createDocumentFragment();\n"
             + "  fragment.textContent = '';\n"
             + "  alert(fragment.childNodes.length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object DocumentFragment]", "undefined" },
+            IE8 = { "[object HTMLDocument]", "about:blank" })
+    public void url() throws Exception {
+        final String html = "<!DOCTYPE><html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var fragment = document.createDocumentFragment();\n"
+            + "  alert(fragment);\n"
+            + "  alert(fragment.URL);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
