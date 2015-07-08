@@ -75,10 +75,6 @@
                 Now do this for each release:
                 <ol>
                     <li>
-                        For 2.18: HtmlPage.getFocusedElement should return DomElement, WebDriver binary relies
-                        on HtmlElement, but in Git it would depend on DomElement.
-                    </li>
-                    <li>
                         Update maven to latest version, and delete ~/.m2/repository folder.
                     </li>
                     <li>

@@ -57,7 +57,6 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -886,9 +885,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         newnode.parent_ = null;
-        if (hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)) {
-            final WebWindow window = getPage().getWebClient().openWindow(WebClient.URL_ABOUT_BLANK, "");
-            newnode.parent_ = (HtmlPage) window.getEnclosedPage();
+        if (hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS) && !(newnode instanceof Document)
+                && !(newnode instanceof DomDocumentFragment)) {
+            newnode.parent_ = (DomNode) getPage().createDocumentFragment();
+            newnode.parent_.appendChild(newnode);
         }
         newnode.nextSibling_ = null;
         newnode.previousSibling_ = null;

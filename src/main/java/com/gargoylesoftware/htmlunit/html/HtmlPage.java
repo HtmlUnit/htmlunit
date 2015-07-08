@@ -2130,10 +2130,23 @@ public class HtmlPage extends SgmlPage {
     /**
      * Returns the element with the focus or null if no element has the focus.
      * @return the element with focus or null
-     * @see #setFocusedElement(HtmlElement)
+     * @see #setFocusedElement(DomElement)
+     * @deprecated as of 2.18, the return type will be {@code DomNode} in the next release
      */
+    @Deprecated
     public HtmlElement getFocusedElement() {
         return (HtmlElement) elementWithFocus_;
+    }
+
+    /**
+     * Returns the element with the focus or null if no element has the focus.
+     * @return the element with focus or null
+     * @see #setFocusedElement(DomElement)
+     * @deprecated as of 2.18, please use {@link #getFocusedElement()}
+     */
+    @Deprecated
+    public DomElement getDomFocusedElement() {
+        return elementWithFocus_;
     }
 
     /**

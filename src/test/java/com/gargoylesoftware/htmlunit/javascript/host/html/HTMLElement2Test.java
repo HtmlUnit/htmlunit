@@ -1310,7 +1310,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "      alert(input.getBoundingClientRect().width > 0);\n"
             + "    }\n"
             + "  </script>\n"
-            + "</head>"
+            + "</head>\n"
             + "<body onload='test()'>\n"
             + "<style>.full { width:100%; }</style>\n"
             + "<div class='foo bar'>\n"
