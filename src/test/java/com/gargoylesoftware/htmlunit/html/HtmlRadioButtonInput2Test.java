@@ -377,63 +377,61 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "    function test() {\n"
             + "      var existing = document.getElementById('rad1');\n";
         if (fromHtml) {
-            html = html
+            html += ""
                 + "      var builder = document.createElement('div');\n"
                 + "      builder.innerHTML = '<input type=\"radio\" id=\"rad2\" name=\"radar\"";
             if (checked) {
-                html = html + " checked";
+                html += " checked";
             }
-            html = html + ">';\n"
+            html += ">';\n"
                 + "      var input = builder.firstChild;\n";
         }
         else {
-            html = html
+            html += ""
                 + "      var input = document.createElement('input');\n"
                 + "      input.type = 'radio';\n"
                 + "      input.id = 'rad2';\n"
                 + "      input.name = 'radar';\n";
             if (checked) {
-                html = html + "      input.checked = true;\n";
+                html += "      input.checked = true;\n";
             }
         }
 
         if (cloneNode && !useFragment) {
-            html = html
-                    + "      input=input.cloneNode(true);\n";
+            html += "      input = input.cloneNode(true);\n";
             cloneNode = false;
         }
-        html = html
+        html += ""
             + "      alert(input.checked);\n"
 
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n";
+            + "      var parent = document.getElementById('myDiv');\n"
+            + "      var after = document.getElementById('divAfter');\n";
         if (useFragment) {
-            html = html
-                    + "      var appendix=document.createDocumentFragment();\n"
+            html += ""
+                    + "      var appendix = document.createDocumentFragment();\n"
                     + "      appendix.appendChild(input);\n"
                     + "      alert(input.checked + '-' + existing.checked);\n";
         }
         else {
-            html = html
-                    + "      var appendix=input;\n";
+            html += "      var appendix = input;\n";
         }
         if (appendChild) {
             if (cloneNode) {
-                html = html + "      parent.appendChild(appendix.cloneNode(true));\n";
+                html += "      parent.appendChild(appendix.cloneNode(true));\n";
             }
             else {
-                html = html + "      parent.appendChild(appendix);\n";
+                html += "      parent.appendChild(appendix);\n";
             }
         }
         else {
             if (cloneNode) {
-                html = html + "      parent.insertBefore(appendix.cloneNode(true), after);\n";
+                html += "      parent.insertBefore(appendix.cloneNode(true), after);\n";
             }
             else {
-                html = html + "      parent.insertBefore(appendix, after);\n";
+                html += "      parent.insertBefore(appendix, after);\n";
             }
         }
-        html = html
+        html += ""
             + "      input = document.getElementById('rad2');\n"
             + "      alert(input.checked + '-' + existing.checked);\n"
             + "      parent.removeChild(input);\n"

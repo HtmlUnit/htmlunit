@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.AbstractDomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCDataSection;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
@@ -178,6 +179,13 @@ public class XmlPage extends SgmlPage {
             return node_.getOwnerDocument();
         }
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public DomDocumentFragment createDocumentFragment() {
+        return new DomDocumentFragment(this);
     }
 
     /**
