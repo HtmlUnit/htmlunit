@@ -44,6 +44,12 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -90,12 +96,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -2077,9 +2077,6 @@ public class HtmlPage extends SgmlPage {
         if (elementWithFocus_ == newElement && !windowActivated) {
             // nothing to do
             return true;
-        }
-        if (newElement != null && newElement.getPage() != this) {
-            throw new IllegalArgumentException("Can't move focus to an element from a different page.");
         }
 
         final DomElement oldFocusedElement = elementWithFocus_;
