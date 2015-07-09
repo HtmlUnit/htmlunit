@@ -332,8 +332,6 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "true-false", "true-false", "true-false", "true-false", "true-false" })
-    @NotYetImplemented(IE8)
-    // Fails on IE8, because Node.cloneNode needs to add the HtmlRadioButtonInput to DomDocumentFragment
     public void checked_appendChild_fromHtml_cloneNode() throws Exception {
         performTest(true, true, true, false, true);
     }
@@ -354,8 +352,6 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
             IE = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" })
-    @NotYetImplemented(IE8)
-    // Fails on IE8, because Node.cloneNode needs to add the HtmlRadioButtonInput to DomDocumentFragment
     public void checked_insertBefore_fromHtml_cloneNode() throws Exception {
         performTest(true, false, true, false, true);
     }

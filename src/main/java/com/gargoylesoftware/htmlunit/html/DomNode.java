@@ -896,6 +896,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 newnode.appendChild(child.cloneNode(true));
             }
         }
+
+        if (!(this instanceof Document) && !(this instanceof DomDocumentFragment)) {
+            final DomNode documentFragment = getPage().createDocumentFragment();
+            documentFragment.basicAppend(newnode);
+        }
         return newnode;
     }
 
