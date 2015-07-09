@@ -441,7 +441,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             + "    var root = doc.documentElement;\n"
             + "    var fragment = doc.createDocumentFragment();\n"
             + "    try {\n"
-            + test
+            + "      " + test + "\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "  function debug(e) {\n"
