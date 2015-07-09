@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -191,8 +192,9 @@ public class ExternalTest {
             HtmlPage page = webClient.getPage("https://ci.canoo.com/teamcity/viewLog.html"
                     + "?buildTypeId=HtmlUnit_FastBuild&buildId=lastSuccessful");
             page = page.getAnchorByText("Log in as guest").click();
-            System.out.println(page.asXml());
+            webClient.waitForBackgroundJavaScript(1000);
             final HtmlTable table = page.getFirstByXPath("//table[@class='statusTable']");
+            assumeTrue(page.asXml(), table != null);
             final HtmlTableCell cell = table.getRow(1).getCell(3);
             final String string = cell.asText().substring("Subversion on ".length());
             final Calendar buildCalendar = Calendar.getInstance();
