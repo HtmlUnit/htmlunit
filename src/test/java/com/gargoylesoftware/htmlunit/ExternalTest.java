@@ -191,8 +191,8 @@ public class ExternalTest {
             HtmlPage page = webClient.getPage("https://ci.canoo.com/teamcity/viewLog.html"
                     + "?buildTypeId=HtmlUnit_FastBuild&buildId=lastSuccessful");
             page = page.getAnchorByText("Log in as guest").click();
+            System.out.println(page.asXml());
             final HtmlTable table = page.getFirstByXPath("//table[@class='statusTable']");
-            System.out.println(table.asXml());
             final HtmlTableCell cell = table.getRow(1).getCell(3);
             final String string = cell.asText().substring("Subversion on ".length());
             final Calendar buildCalendar = Calendar.getInstance();

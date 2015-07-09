@@ -488,13 +488,12 @@ public class Node extends EventTarget {
 
         final Node jsClonedNode = getJavaScriptNode(clonedNode);
         if (getBrowserVersion().hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)) {
-            if (!(domNode instanceof Document) && !(domNode instanceof DomDocumentFragment)) {
-                // need to copy the event listener when they exist
-                copyEventListenersWhenNeeded(domNode, clonedNode);
+            // need to copy the event listener when they exist
+            copyEventListenersWhenNeeded(domNode, clonedNode);
 
+            if (!(domNode instanceof Document) && !(domNode instanceof DomDocumentFragment)) {
                 final DomDocumentFragment documentFragment = domNode.getPage().createDocumentFragment();
                 documentFragment.appendChild(clonedNode);
-                
             }
         }
         

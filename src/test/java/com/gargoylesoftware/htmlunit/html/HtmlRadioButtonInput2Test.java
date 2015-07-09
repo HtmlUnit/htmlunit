@@ -366,6 +366,13 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         performTest(false, false, true, false, true);
     }
 
+    /**
+     * @param checked whether the created {@code input} is checked or not
+     * @param appendChild use {@code .appendChild} or {@code .insertBefore}
+     * @param fromHtml create the {@code input} by {@code .innerHTML} or by {@code document.createElement()}
+     * @param useFragment is {@code appendix} is a new {@code DocumentFragment} or the {@code input}
+     * @param cloneNode use {@code .cloneNode()}
+     */
     private void performTest(final boolean checked,
             final boolean appendChild,
             final boolean fromHtml,
