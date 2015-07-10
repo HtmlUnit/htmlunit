@@ -138,7 +138,7 @@ public class EventTarget extends SimpleScriptable {
                     break;
                 }
             }
-            
+
             if (isAttached || windowEventIfDetached) {
                 result = windowsListeners.executeCapturingListeners(event, args);
                 if (event.isPropagationStopped()) {

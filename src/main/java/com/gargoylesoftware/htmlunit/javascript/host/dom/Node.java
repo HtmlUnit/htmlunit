@@ -490,7 +490,7 @@ public class Node extends EventTarget {
             // need to copy the event listener when they exist
             copyEventListenersWhenNeeded(domNode, clonedNode);
         }
-        
+
         return jsClonedNode;
     }
 
