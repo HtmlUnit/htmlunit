@@ -654,12 +654,17 @@ public class XMLHttpRequest extends EventTarget {
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
                     || HttpMethod.PATCH == webRequest_.getHttpMethod())
             && !Context.getUndefinedValue().equals(content)) {
-            final String body = Context.toString(content);
-            if (!body.isEmpty()) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Setting request body to: " + body);
+            if (content instanceof FormData) {
+                ((FormData) content).fillRequest(webRequest_);
+            }
+            else {
+                final String body = Context.toString(content);
+                if (!body.isEmpty()) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Setting request body to: " + body);
+                    }
+                    webRequest_.setRequestBody(body);
                 }
-                webRequest_.setRequestBody(body);
             }
         }
     }

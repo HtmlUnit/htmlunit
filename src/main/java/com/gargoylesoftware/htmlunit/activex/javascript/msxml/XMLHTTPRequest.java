@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -504,12 +505,17 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             if (HttpMethod.POST == webRequest_.getHttpMethod()
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
                     || HttpMethod.PATCH == webRequest_.getHttpMethod()) {
-                final String body = Context.toString(content);
-                if (!body.isEmpty()) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Setting request body to: " + body);
+                if (content instanceof FormData) {
+                    ((FormData) content).fillRequest(webRequest_);
+                }
+                else {
+                    final String body = Context.toString(content);
+                    if (!body.isEmpty()) {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug("Setting request body to: " + body);
+                        }
+                        webRequest_.setRequestBody(body);
                     }
-                    webRequest_.setRequestBody(body);
                 }
             }
         }

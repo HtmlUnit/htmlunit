@@ -598,6 +598,42 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Same as {@link #loadPage2(String)} with additional servlet configuration.
+     * @param html the HTML to use for the default response
+     * @param servlets the additional servlets to configure with their mapping
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final String html,
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+        return loadPage2(html, getDefaultUrl(), servlets);
+    }
+
+    /**
+     * Same as {@link #loadPage2(String, URL)}, but with additional servlet configuration.
+     * @param html the HTML to use for the default page
+     * @param url the URL to use to load the page
+     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
+     * @param servlets the additional servlets to configure with their mapping
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final String html, final URL url,
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+
+        servlets.put("/*", MockWebConnectionServlet.class);
+        getMockWebConnection().setResponse(url, html);
+        MockWebConnectionServlet.MockConnection_ = getMockWebConnection();
+
+        startWebServer("./", null, servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toExternalForm());
+
+        return driver;
+    }
+
+    /**
      * Defines the provided HTML as the response for {@link #getDefaultUrl()}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
      * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
@@ -709,16 +745,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
         expandExpectedAlertsVariables(getDefaultUrl());
         final String[] expectedAlerts = getExpectedAlerts();
 
-        servlets.put("/*", MockWebConnectionServlet.class);
-        getMockWebConnection().setResponse(url, html);
-        MockWebConnectionServlet.MockConnection_ = getMockWebConnection();
-
-        startWebServer("./", null, servlets);
-
-        final WebDriver driver = getWebDriver();
-        driver.get(url.toExternalForm());
-
+        final WebDriver driver = loadPage2(html, url, servlets);
         verifyAlerts(maxWaitTime, driver, expectedAlerts);
+
         return driver;
     }
 

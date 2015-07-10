@@ -16,9 +16,9 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
@@ -156,10 +156,10 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
-            final InputStream in = request.getInputStream();
-            int i;
-            while ((i = in.read()) != -1) {
-                writer.write(i);
+            final BufferedReader reader = request.getReader();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
             }
             writer.close();
         }
