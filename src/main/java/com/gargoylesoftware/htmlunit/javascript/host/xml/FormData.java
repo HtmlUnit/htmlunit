@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class FormData extends SimpleScriptable {
 
-    final List<NameValuePair> requestParameters = new ArrayList<>();
+    final List<NameValuePair> requestParameters_ = new ArrayList<>();
 
     /**
      * Default constructor.
@@ -57,7 +57,7 @@ public class FormData extends SimpleScriptable {
      */
     @JsxFunction
     public void append(final String name, final Object value, final Object filename) {
-        requestParameters.add(new NameValuePair(name, value.toString()));
+        requestParameters_.add(new NameValuePair(name, value.toString()));
     }
 
     /**
@@ -66,6 +66,6 @@ public class FormData extends SimpleScriptable {
      */
     public void fillRequest(final WebRequest webRequest) {
         webRequest.setEncodingType(FormEncodingType.MULTIPART);
-        webRequest.setRequestParameters(requestParameters);
+        webRequest.setRequestParameters(requestParameters_);
     }
 }
