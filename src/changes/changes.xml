@@ -9,6 +9,9 @@
     <body>
         <release version="2.18" date="???" description="Bugfixes, .type(Keyboard), SVG events, PATCH method for HTTP">
             <action type="add" dev="asashour">
+                JavaScript: primitive implementation of XMLHttpRequestUpload.
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: implement FormData.
             </action>
             <action type="fix" dev="asashour">
