@@ -100,8 +100,14 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      */
     @Test
     public void cloneHasSamePage() {
-        assertSame(cell_.getPage(), cellClone_.getPage());
-        assertSame(row_.getPage(), rowClone_.getPage());
+        if (getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() == 8) {
+            assertNotSame(cell_.getPage(), cellClone_.getPage());
+            assertNotSame(row_.getPage(), rowClone_.getPage());
+        }
+        else {
+            assertSame(cell_.getPage(), cellClone_.getPage());
+            assertSame(row_.getPage(), rowClone_.getPage());
+        }
     }
 
     /**
@@ -110,7 +116,12 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      */
     @Test
     public void clonedRowHasNullParent() throws Exception {
-        assertNull(rowClone_.getParentNode());
+        if (getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() == 8) {
+            assertNotNull(rowClone_.getParentNode());
+        }
+        else {
+            assertNull(rowClone_.getParentNode());
+        }
     }
 
     /**

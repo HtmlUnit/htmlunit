@@ -15,13 +15,13 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -114,7 +114,10 @@ public class GWT250Test extends WebServerTestCase {
     @Test
     public void mail() throws Exception {
         final HtmlPage page = loadGWTPage("Mail", null, "//div[@class='MGJ']");
-        Assert.assertSame(page.getEnclosingWindow(), page.getWebClient().getCurrentWindow());
+        if (!getBrowserVersion().isIE() || getBrowserVersion().getBrowserVersionNumeric() != 8) {
+            // cloneNode makes a DocumentFragment parent
+            assertSame(page.getEnclosingWindow(), page.getWebClient().getCurrentWindow());
+        }
         final HtmlDivision cell = page.getFirstByXPath("//div[@class='MGJ']");
         assertElementValue(cell, "Welcome back, foo@example.com");
 
@@ -133,7 +136,7 @@ public class GWT250Test extends WebServerTestCase {
         // click on email from Hollie Voss
         final HtmlElement elt = page.getFirstByXPath("//td[text() = 'Hollie Voss']");
         final HtmlPage page2 = elt.click();
-        Assert.assertSame(page, page2);
+        assertSame(page, page2);
         verifyStartMailBody(page, ">> Componentes e decodificadores; confira aqui;",
                 "http://br.geocities.com/listajohn/index.htm",
                 "THE GOVERNING AWARD");

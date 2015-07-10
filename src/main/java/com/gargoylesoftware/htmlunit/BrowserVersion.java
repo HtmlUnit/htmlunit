@@ -84,30 +84,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 public class BrowserVersion implements Serializable, Cloneable {
 
-    private String applicationCodeName_ = "Mozilla";
-    private String applicationMinorVersion_ = "0";
-    private String applicationName_;
-    private String applicationVersion_;
-    private String buildId_;
-    private String vendor_;
-    private String browserLanguage_ = LANGUAGE_ENGLISH_US;
-    private String cpuClass_ = CPU_CLASS_X86;
-    private boolean onLine_ = true;
-    private String platform_ = PLATFORM_WIN32;
-    private String systemLanguage_ = LANGUAGE_ENGLISH_US;
-    private String userAgent_;
-    private String userLanguage_ = LANGUAGE_ENGLISH_US;
-    private float browserVersionNumeric_;
-    private final Set<PluginConfiguration> plugins_ = new HashSet<>();
-    private final Set<BrowserVersionFeatures> features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
-    private final String nickname_;
-    private String htmlAcceptHeader_;
-    private String imgAcceptHeader_;
-    private String cssAcceptHeader_;
-    private String scriptAcceptHeader_;
-    private String xmlHttpRequestAcceptHeader_;
-    private String[] headerNamesOrdered_;
-
     /**
      * Application name for the Internet Explorer series of browsers.
      */
@@ -238,6 +214,30 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.setScriptAcceptHeader("*/*");
         // there are other issues with Chrome; a different productSub, etc.
     }
+
+    private String applicationCodeName_ = "Mozilla";
+    private String applicationMinorVersion_ = "0";
+    private String applicationName_;
+    private String applicationVersion_;
+    private String buildId_;
+    private String vendor_;
+    private String browserLanguage_ = LANGUAGE_ENGLISH_US;
+    private String cpuClass_ = CPU_CLASS_X86;
+    private boolean onLine_ = true;
+    private String platform_ = PLATFORM_WIN32;
+    private String systemLanguage_ = LANGUAGE_ENGLISH_US;
+    private String userAgent_;
+    private String userLanguage_ = LANGUAGE_ENGLISH_US;
+    private float browserVersionNumeric_;
+    private final Set<PluginConfiguration> plugins_ = new HashSet<>();
+    private final Set<BrowserVersionFeatures> features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
+    private final String nickname_;
+    private String htmlAcceptHeader_;
+    private String imgAcceptHeader_;
+    private String cssAcceptHeader_;
+    private String scriptAcceptHeader_;
+    private String xmlHttpRequestAcceptHeader_;
+    private String[] headerNamesOrdered_;
 
     /**
      * Instantiates one.
