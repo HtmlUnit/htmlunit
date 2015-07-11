@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class FormData extends SimpleScriptable {
 
-    final List<NameValuePair> requestParameters_ = new ArrayList<>();
+    private final List<NameValuePair> requestParameters_ = new ArrayList<>();
 
     /**
      * Default constructor.
