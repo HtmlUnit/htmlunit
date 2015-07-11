@@ -872,7 +872,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         // Default behavior is to do nothing, overridden in some subclasses
     }
 
-    static int counter = 1;
     /**
      * {@inheritDoc}
      */
