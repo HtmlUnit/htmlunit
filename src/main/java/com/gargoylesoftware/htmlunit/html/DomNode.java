@@ -38,6 +38,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.xml.utils.PrefixResolver;
@@ -871,6 +872,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         // Default behavior is to do nothing, overridden in some subclasses
     }
 
+    static int counter = 1;
     /**
      * {@inheritDoc}
      */
@@ -900,8 +902,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         if (hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)
                 && !(this instanceof Document) && !(this instanceof DomDocumentFragment)) {
+            final Scriptable prototype = newnode.getScriptObject().getPrototype();
             final DomNode documentFragment = getPage().createDocumentFragment();
             documentFragment.basicAppend(newnode);
+            newnode.getScriptObject().setPrototype(prototype);
         }
         return newnode;
     }
