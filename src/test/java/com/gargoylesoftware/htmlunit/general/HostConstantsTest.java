@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
 /**
  * Tests all {@code constant}s defined in host classes.
  *
- * This is meant to be run against real real browsers.
+ * This is meant to be run against real browsers.
  *
  * @version $Revision$
  * @author Ahmed Ashour
