@@ -114,10 +114,7 @@ public class GWT250Test extends WebServerTestCase {
     @Test
     public void mail() throws Exception {
         final HtmlPage page = loadGWTPage("Mail", null, "//div[@class='MGJ']");
-        if (!getBrowserVersion().isIE() || getBrowserVersion().getBrowserVersionNumeric() != 8) {
-            // cloneNode makes a DocumentFragment parent
-            assertSame(page.getEnclosingWindow(), page.getWebClient().getCurrentWindow());
-        }
+        assertSame(page.getEnclosingWindow(), page.getWebClient().getCurrentWindow());
         final HtmlDivision cell = page.getFirstByXPath("//div[@class='MGJ']");
         assertElementValue(cell, "Welcome back, foo@example.com");
 

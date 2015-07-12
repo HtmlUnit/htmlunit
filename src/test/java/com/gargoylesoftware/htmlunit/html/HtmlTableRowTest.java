@@ -100,14 +100,8 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      */
     @Test
     public void cloneHasSamePage() {
-        if (getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() == 8) {
-            assertNotSame(cell_.getPage(), cellClone_.getPage());
-            assertNotSame(row_.getPage(), rowClone_.getPage());
-        }
-        else {
-            assertSame(cell_.getPage(), cellClone_.getPage());
-            assertSame(row_.getPage(), rowClone_.getPage());
-        }
+        assertSame(cell_.getPage(), cellClone_.getPage());
+        assertSame(row_.getPage(), rowClone_.getPage());
     }
 
     /**
