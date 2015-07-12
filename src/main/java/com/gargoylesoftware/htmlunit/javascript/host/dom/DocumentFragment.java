@@ -25,6 +25,7 @@ import java.util.List;
 import org.w3c.css.sac.CSSException;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -185,7 +186,7 @@ public class DocumentFragment extends Node {
      */
     @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 8), propertyName = "URL")
     public String getURL() {
-        return getDomNodeOrDie().getPage().getUrl().toExternalForm();
+        return WebClient.ABOUT_BLANK;
     }
 
     /**

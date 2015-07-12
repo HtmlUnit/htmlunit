@@ -25,9 +25,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A basic class to be implemented by {@link com.gargoylesoftware.htmlunit.html.HtmlPage} and
@@ -142,10 +139,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * @return a newly created {@link DomDocumentFragment}
      */
     public DomDocumentFragment createDocumentFragment() {
-        final WebWindow window = getPage().getWebClient().openWindow(WebClient.URL_ABOUT_BLANK, "");
-        final SgmlPage page = (SgmlPage) window.getEnclosedPage();
-        page.setDocumentType(getPage().getDoctype());
-        return new DomDocumentFragment(page);
+        return new DomDocumentFragment(this);
     }
 
     /**
@@ -163,12 +157,6 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      */
     protected void setDocumentType(final DocumentType type) {
         documentType_ = type;
-        if (isHtmlPage() || this != getPage()) {
-            final ScriptableObject sobj = getScriptObject();
-            if (sobj instanceof HTMLDocument) {
-                ((HTMLDocument) sobj).forceDocumentMode(-1);
-            }
-        }
     }
 
     /**
