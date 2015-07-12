@@ -1339,12 +1339,10 @@ public class HtmlPage extends SgmlPage {
         // If this page was loaded in a frame, execute the version of the event specified on the frame tag.
         if (window instanceof FrameWindow) {
             if (Event.TYPE_LOAD.equals(eventType)) {
-                // FF always triggers this event for frame windows
                 if (!hasFeature(EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT)) {
                     final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
-                    // IE triggers this event only in some cases
+                    // IE8 triggers this event only in some cases
                     if (frame.wasCreatedByJavascript()) {
-                        frame.unmarkAsCreatedByJavascript();
                         return true;
                     }
                 }
