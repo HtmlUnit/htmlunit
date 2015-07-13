@@ -265,7 +265,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     CHROME_SERVICE_ = builder
                         .usingAnyFreePort()
                         .build();
-                    
+
                     CHROME_SERVICE_.start();
                 }
                 return new ChromeDriver(CHROME_SERVICE_);
