@@ -89,10 +89,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
  *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
- *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a></li>
+ *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
  *   <li>ff38.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
- *   <li>chrome.bin: is the location of the ChromeDriver binary (see
- *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a></li>
+ *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
+ *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
  *   <li>autofix (optional): if {@code true}, try to automatically fix the real browser expectations,
  *   or add/remove {@code @NotYetImplemented} annotations, use with caution!</li>
  * </ul>
@@ -258,13 +258,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             if (BrowserVersion.CHROME == getBrowserVersion()) {
                 if (CHROME_SERVICE_ == null) {
-                    if (CHROME_BIN_ == null) {
-                        throw new IllegalStateException("\"chrome.bin\" property is not specified!");
+                    final ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
+                    if (CHROME_BIN_ != null) {
+                        builder.usingDriverExecutable(new File(CHROME_BIN_));
                     }
-                    CHROME_SERVICE_ = new ChromeDriverService.Builder()
-                        .usingDriverExecutable(new File(CHROME_BIN_))
+                    CHROME_SERVICE_ = builder
                         .usingAnyFreePort()
                         .build();
+                    
                     CHROME_SERVICE_.start();
                 }
                 return new ChromeDriver(CHROME_SERVICE_);
