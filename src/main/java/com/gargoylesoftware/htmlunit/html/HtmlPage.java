@@ -601,7 +601,7 @@ public class HtmlPage extends SgmlPage {
             @Override
             protected List<DomElement> provideElements() {
                 final List<DomElement> res = new LinkedList<>();
-                for (HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
+                for (final DomElement elem : getDomElementDescendants()) {
                     if (elem.getLocalName().equals(tagName)) {
                         res.add(elem);
                     }
