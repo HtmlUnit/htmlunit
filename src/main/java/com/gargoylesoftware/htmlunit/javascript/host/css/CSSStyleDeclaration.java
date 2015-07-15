@@ -43,8 +43,8 @@ import java.io.StringReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -265,10 +265,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();
 
-    // use plain old hashtable because this is synchronized and does not introduce one more
-    // indirection layer (hope this is a bit faster)
-    // we only need the get/set api so there is no difference at all
-    private static final Hashtable<String, String> CamelizeCache_ = new Hashtable<>();
+    private static final Map<String, String> CamelizeCache_
+            = Collections.synchronizedMap(new HashMap<String, String>());
 
     /** The different types of shorthand values. */
     private enum Shorthand {

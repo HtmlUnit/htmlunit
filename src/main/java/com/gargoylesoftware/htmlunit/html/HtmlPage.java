@@ -34,7 +34,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -144,9 +143,10 @@ public class HtmlPage extends SgmlPage {
     private HtmlUnitDOMBuilder builder_;
     private String originalCharset_;
 
-    // use Hashtable instead of HashMap to avoid corruption during concurrent access
-    private Map<String, SortedSet<DomElement>> idMap_ = new Hashtable<String, SortedSet<DomElement>>();
-    private Map<String, SortedSet<DomElement>> nameMap_ = new Hashtable<String, SortedSet<DomElement>>();
+    private Map<String, SortedSet<DomElement>> idMap_
+            = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
+    private Map<String, SortedSet<DomElement>> nameMap_
+            = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
 
     private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<>(documentPositionComparator);
     private DomElement elementWithFocus_;
@@ -2120,8 +2120,8 @@ public class HtmlPage extends SgmlPage {
         final HtmlPage result = (HtmlPage) super.clone();
 
         result.elementWithFocus_ = null;
-        result.idMap_ = new Hashtable<String, SortedSet<DomElement>>();
-        result.nameMap_ = new Hashtable<String, SortedSet<DomElement>>();
+        result.idMap_.clear();
+        result.nameMap_.clear();
 
         return result;
     }
