@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
-            <action type="add" dev="asashour">
+            <action type="update" dev="asashour">
                 XmlPage: deprecate .getContent(), .createXmlElement(), .createXmlElementNS()
                 and .getXmlElementDescendants().
             </action>
