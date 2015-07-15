@@ -27,13 +27,14 @@ import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.ProcessingInstruction;
 
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomCDataSection;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -283,7 +284,7 @@ public class XMLDocument extends Document {
      */
     @JsxFunction
     public Object createProcessingInstruction(final String target, final String data) {
-        final DomNode node = ((XmlPage) getPage()).createProcessingInstruction(target, data);
+        final ProcessingInstruction node = getPage().createProcessingInstruction(target, data);
         return getScriptableFor(node);
     }
 
@@ -294,7 +295,7 @@ public class XMLDocument extends Document {
      */
     @JsxFunction
     public Object createCDATASection(final String data) {
-        final DomCDataSection node = ((XmlPage) getPage()).createCDATASection(data);
+        final CDATASection node = getPage().createCDATASection(data);
         return getScriptableFor(node);
     }
 }

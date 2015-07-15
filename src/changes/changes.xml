@@ -7,7 +7,14 @@
     </properties>
 
     <body>
-        <release version="2.18" date="???" description="Bugfixes, .type(Keyboard), SVG events, PATCH method for HTTP">
+        <release version="2.18" date="???" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
+            <action type="add" dev="asashour">
+                XmlPage: deprecate .getContent(), .createXmlElement(), .createXmlElementNS()
+                and .getXmlElementDescendants().
+            </action>
+            <action type="add" dev="asashour">
+                Add SvgPage.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: primitive implementation of XMLHttpRequestUpload.
             </action>

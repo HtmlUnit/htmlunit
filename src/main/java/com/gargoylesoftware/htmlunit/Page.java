@@ -63,7 +63,7 @@ public interface Page extends Serializable {
     URL getUrl();
 
     /**
-     * Returns true if this page is a HtmlPage.
+     * Returns true if this page is an HtmlPage.
      * @return true or false
      */
     boolean isHtmlPage();

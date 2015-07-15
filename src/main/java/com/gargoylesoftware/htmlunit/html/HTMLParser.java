@@ -103,9 +103,13 @@ public final class HTMLParser {
 
     /** SVG namespace. */
     public static final String SVG_NAMESPACE = "http://www.w3.org/2000/svg";
-    private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<>();
 
-    private static final ElementFactory SVG_FACTORY = new SvgElementFactory();
+    /**
+     * The SVG factory.
+     */
+    public static final ElementFactory SVG_FACTORY = new SvgElementFactory();
+
+    private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<>();
 
     static {
         ELEMENT_FACTORIES.put(HtmlInput.TAG_NAME, InputElementFactory.instance);

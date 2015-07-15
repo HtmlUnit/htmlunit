@@ -24,6 +24,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.CDATASection;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -33,7 +34,6 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomCDataSection;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -341,7 +341,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @JsxFunction
     public Object createCDATASection(final String data) {
-        final DomCDataSection domCDATASection = ((XmlPage) getPage()).createCDATASection(data);
+        final CDATASection domCDATASection = getPage().createCDATASection(data);
         return getScriptableFor(domCDATASection);
     }
 

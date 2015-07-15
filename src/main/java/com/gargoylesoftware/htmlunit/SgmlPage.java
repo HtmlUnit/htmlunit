@@ -16,15 +16,25 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 
+import com.gargoylesoftware.htmlunit.html.AbstractDomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomCDataSection;
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomNodeList;
+import com.gargoylesoftware.htmlunit.html.DomText;
 
 /**
  * A basic class to be implemented by {@link com.gargoylesoftware.htmlunit.html.HtmlPage} and
@@ -275,4 +285,48 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     public boolean isHtmlPage() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
+        return new AbstractDomNodeList<DomElement>(this) {
+            @Override
+            protected List<DomElement> provideElements() {
+                final List<DomElement> res = new LinkedList<>();
+                for (final DomElement elem : getDomElementDescendants()) {
+                    if (elem.getLocalName().equals(tagName)) {
+                        res.add(elem);
+                    }
+                }
+                return res;
+            }
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CDATASection createCDATASection(final String data) {
+        return new DomCDataSection(this, data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Text createTextNode(final String data) {
+        return new DomText(this, data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Comment createComment(final String data) {
+        return new DomComment(this, data);
+    }
+
 }

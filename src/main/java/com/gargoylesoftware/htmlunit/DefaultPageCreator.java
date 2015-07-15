@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -27,6 +29,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
+import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -160,12 +163,12 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return createJavaScriptPage(webResponse, webWindow);
 
             case XML:
-                final XmlPage xml = createXmlPage(webResponse, webWindow);
-                final DomElement doc = xml.getDocumentElement();
+                final SgmlPage sgmlPage = createXmlPage(webResponse, webWindow);
+                final DomElement doc = sgmlPage.getDocumentElement();
                 if (doc != null && HTMLParser.XHTML_NAMESPACE.equals(doc.getNamespaceURI())) {
                     return createXHtmlPage(webResponse, webWindow);
                 }
-                return xml;
+                return sgmlPage;
 
             case TEXT:
                 return createTextPage(webResponse, webWindow);
@@ -321,16 +324,30 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     }
 
     /**
-     * Creates an XmlPage for this WebResponse.
+     * Creates an SgmlPage for this WebResponse.
      *
      * @param webResponse the page's source
      * @param webWindow the WebWindow to place the TextPage in
      * @return the newly created TextPage
      * @throws IOException if the page could not be created
      */
-    protected XmlPage createXmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final XmlPage newPage = new XmlPage(webResponse, webWindow);
-        webWindow.setEnclosedPage(newPage);
-        return newPage;
+    protected SgmlPage createXmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
+        SgmlPage page = new XmlPage(webResponse, webWindow);
+        if (isSvg(page)) {
+            page = new SvgPage(webResponse, page.getDocumentElement(), webWindow);
+        }
+        webWindow.setEnclosedPage(page);
+        return page;
+    }
+
+    /**
+     * Returns whether the specified {@code page} is {@link SvgPage} or not.
+     * @param page the page
+     * @return whether the specified {@code page} is {@link SvgPage} or not
+     */
+    protected boolean isSvg(final SgmlPage page) {
+        final DomElement documentElement = page.getDocumentElement();
+        return documentElement != null && page.hasFeature(SVG) && "svg".equals(documentElement.getTagName())
+                && HTMLParser.SVG_NAMESPACE.equals(documentElement.getNamespaceURI());
     }
 }

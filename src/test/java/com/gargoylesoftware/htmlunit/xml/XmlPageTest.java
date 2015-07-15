@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpStatus;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.Node;
@@ -62,7 +63,7 @@ public class XmlPageTest extends WebServerTestCase {
             + "</Description>\n"
             + "</RDF>";
 
-        final XmlPage xmlPage = testXmlDocument(content, "text/xml");
+        final XmlPage xmlPage = testDocument(content, "text/xml");
         final Node node = xmlPage.getXmlDocument().getFirstChild().getFirstChild().getFirstChild();
         assertEquals("em:name", node.getNodeName());
         assertEquals("name", node.getLocalName());
@@ -82,7 +83,7 @@ public class XmlPageTest extends WebServerTestCase {
              + "    <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
-        final XmlPage xmlPage = testXmlDocument(content, "text/xml");
+        final XmlPage xmlPage = testDocument(content, "text/xml");
         assertEquals("foo", xmlPage.getXmlDocument().getFirstChild().getNodeName());
     }
 
@@ -110,8 +111,8 @@ public class XmlPageTest extends WebServerTestCase {
         assertTrue(XmlPage.class.isInstance(page));
 
         final XmlPage xmlPage = (XmlPage) page;
-        assertEquals(content, xmlPage.getContent());
-        Assert.assertNotNull(xmlPage.getXmlDocument());
+        assertEquals(content, xmlPage.getWebResponse().getContentAsString());
+        assertNotNull(xmlPage.getXmlDocument());
 
         assertEquals("foo", xmlPage.getXmlDocument().getFirstChild().getNodeName());
     }
@@ -123,7 +124,7 @@ public class XmlPageTest extends WebServerTestCase {
      * @return the page returned by the WebClient
      * @throws Exception if a problem occurs
      */
-    private XmlPage testXmlDocument(final String content, final String mimeType) throws Exception {
+    private XmlPage testDocument(final String content, final String mimeType) throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(content, 200, "OK", mimeType);
@@ -135,8 +136,8 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals(mimeType, page.getWebResponse().getContentType());
         assertTrue(XmlPage.class.isInstance(page));
         final XmlPage xmlPage = (XmlPage) page;
-        Assert.assertEquals(content, xmlPage.getContent());
-        Assert.assertNotNull(xmlPage.getXmlDocument());
+        assertEquals(content, xmlPage.getWebResponse().getContentAsString());
+        assertNotNull(xmlPage.getXmlDocument());
         return xmlPage;
     }
 
@@ -168,7 +169,7 @@ public class XmlPageTest extends WebServerTestCase {
 
         assertTrue(Page.class.isInstance(page));
         final XmlPage xmlPage = (XmlPage) page;
-        assertEquals(content, xmlPage.getContent());
+        assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNull(xmlPage.getXmlDocument());
     }
 
@@ -194,7 +195,7 @@ public class XmlPageTest extends WebServerTestCase {
 
         assertTrue(Page.class.isInstance(page));
         final XmlPage xmlPage = (XmlPage) page;
-        assertEquals(content, xmlPage.getContent());
+        assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNull(xmlPage.getXmlDocument());
     }
 
@@ -220,7 +221,7 @@ public class XmlPageTest extends WebServerTestCase {
 
         assertTrue(Page.class.isInstance(page));
         final XmlPage xmlPage = (XmlPage) page;
-        assertEquals(content, xmlPage.getContent());
+        assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNull(xmlPage.getXmlDocument());
     }
 
@@ -241,7 +242,7 @@ public class XmlPageTest extends WebServerTestCase {
             + "  </form>\n"
             + "</vxml>";
 
-        final XmlPage xmlPage = testXmlDocument(content, "application/voicexml+xml");
+        final XmlPage xmlPage = testDocument(content, "application/voicexml+xml");
         assertEquals("vxml", xmlPage.getXmlDocument().getFirstChild().getNodeName());
     }
 
@@ -256,7 +257,7 @@ public class XmlPageTest extends WebServerTestCase {
              + "    <foofoo name='first'>something</foofoo>\n"
              + "    <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
-        final XmlPage xmlPage = testXmlDocument(html, "text/xml");
+        final XmlPage xmlPage = testDocument(html, "text/xml");
         assertEquals(1, xmlPage.getByXPath("//foofoo[@name='first']").size());
     }
 

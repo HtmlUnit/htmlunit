@@ -16,16 +16,12 @@ package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
-import org.w3c.dom.Comment;
 import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -34,19 +30,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.AbstractDomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomCDataSection;
-import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 
 /**
@@ -165,7 +155,9 @@ public class XmlPage extends SgmlPage {
     /**
      * Returns the content of the page.
      * @return the content of the page
+     * @deprecated as of 2.18, please use {@link #getWebResponse()}.getContentAsString()
      */
+    @Deprecated
     public String getContent() {
         return getWebResponse().getContentAsString();
     }
@@ -182,20 +174,15 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public DomDocumentFragment createDocumentFragment() {
-        return new DomDocumentFragment(this);
-    }
-
-    /**
      * Creates a new XML element with the given tag name.
      *
      * @param tagName the tag name
      * @return the new XML element
+     * @deprecated as of 2.18, please use {@link #createElement(String)} instead
      */
+    @Deprecated
     public DomElement createXmlElement(final String tagName) {
-        return createXmlElementNS(null, tagName);
+        return createElement(tagName);
     }
 
     /**
@@ -204,9 +191,11 @@ public class XmlPage extends SgmlPage {
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @return the new XML element
+     * @deprecated as of 2.18, please use {@link #createElementNS(String, String)} instead
      */
+    @Deprecated
     public DomElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
-        return new DomElement(namespaceURI, qualifiedName, this, new HashMap<String, DomAttr>());
+        return createElementNS(namespaceURI, qualifiedName);
     }
 
     /**
@@ -231,34 +220,16 @@ public class XmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
-    public DomCDataSection createCDATASection(final String data) {
-        return new DomCDataSection(this, data);
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    @Override
-    public Comment createComment(final String data) {
-        throw new UnsupportedOperationException("XmlPage.createComment is not yet implemented.");
+    public DomElement createElement(final String tagName) {
+        return createElementNS(null, tagName);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Element createElement(final String tagName) {
-        return createXmlElement(tagName);
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    @Override
-    public Element createElementNS(final String namespaceURI, final String qualifiedName) {
-        throw new UnsupportedOperationException("XmlPage.createElementNS is not yet implemented.");
+    public DomElement createElementNS(final String namespaceURI, final String qualifiedName) {
+        return new DomElement(namespaceURI, qualifiedName, this, new HashMap<String, DomAttr>());
     }
 
     /**
@@ -276,15 +247,6 @@ public class XmlPage extends SgmlPage {
     @Override
     public DomProcessingInstruction createProcessingInstruction(final String target, final String data) {
         return new DomProcessingInstruction(this, target, data);
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    @Override
-    public Text createTextNode(final String data) {
-        throw new UnsupportedOperationException("XmlPage.createTextNode is not yet implemented.");
     }
 
     /**
@@ -318,34 +280,11 @@ public class XmlPage extends SgmlPage {
      * Returns an {@link Iterable} that will recursively iterate over all of this node's {@link DomElement} descendants.
      *
      * @return an {@link Iterable} that will recursively iterate over all of this node's {@link DomElement} descendants
+     * @deprecated as of 2.18, please use {@link #getDomElementDescendants()} instead
      */
+    @Deprecated
     public final Iterable<DomElement> getXmlElementDescendants() {
-        return new Iterable<DomElement>() {
-            @Override
-            public Iterator<DomElement> iterator() {
-                return new DescendantElementsIterator<DomElement>(DomElement.class);
-            }
-        };
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
-        return new AbstractDomNodeList<DomElement>(this) {
-            @Override
-            protected List<DomElement> provideElements() {
-                final List<DomElement> res = new LinkedList<>();
-
-                for (final DomNode elem : getXmlElementDescendants()) {
-                    if (elem.getLocalName().equals(tagName)) {
-                        res.add((DomElement) elem);
-                    }
-                }
-                return res;
-            }
-        };
+        return getDomElementDescendants();
     }
 
     /**

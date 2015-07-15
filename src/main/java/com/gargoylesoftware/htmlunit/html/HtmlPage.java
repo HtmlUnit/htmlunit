@@ -37,25 +37,17 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 import org.w3c.dom.Attr;
-import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMException;
@@ -65,7 +57,6 @@ import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.ProcessingInstruction;
-import org.w3c.dom.Text;
 import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.Cache;
@@ -96,6 +87,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -552,30 +549,6 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     */
-    @Override
-    public Comment createComment(final String data) {
-        return new DomComment(this, data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Text createTextNode(final String data) {
-        return new DomText(this, data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public CDATASection createCDATASection(final String data) {
-        return new DomCDataSection(this, data);
-    }
-
-    /**
-     * {@inheritDoc}
      * Not yet implemented.
      */
     @Override
@@ -590,25 +563,6 @@ public class HtmlPage extends SgmlPage {
     @Override
     public ProcessingInstruction createProcessingInstruction(final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("HtmlPage.createProcessingInstruction is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
-        return new AbstractDomNodeList<DomElement>(this) {
-            @Override
-            protected List<DomElement> provideElements() {
-                final List<DomElement> res = new LinkedList<>();
-                for (final DomElement elem : getDomElementDescendants()) {
-                    if (elem.getLocalName().equals(tagName)) {
-                        res.add(elem);
-                    }
-                }
-                return res;
-            }
-        };
     }
 
     /**
