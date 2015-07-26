@@ -92,7 +92,7 @@ public class Popup extends SimpleScriptable {
 
     /**
      * Indicates if the popup is opened.
-     * @return <code>true</code> if opened
+     * @return {@code true} if opened
      */
     @JsxGetter
     public boolean getIsOpen() {
