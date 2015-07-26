@@ -130,7 +130,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @see #getNamedItem(String)
      *
      * @param name attribute name
-     * @return the attribute node, <code>null</code> if the attribute is not defined
+     * @return the attribute node, {@code null} if the attribute is not defined
      */
     public Object getNamedItemWithoutSytheticClassAttr(final String name) {
         if (attributes_ != null) {
@@ -149,7 +149,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     /**
      * Gets the specified attribute.
      * @param name attribute name
-     * @return the attribute node, <code>null</code> if the attribute is not defined
+     * @return the attribute node, {@code null} if the attribute is not defined
      */
     @JsxFunction
     public Object getNamedItem(final String name) {
