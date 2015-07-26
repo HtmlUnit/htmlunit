@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -27,6 +28,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -43,6 +45,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
+
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object for form input elements (html tag &lt;input ...&gt;).
@@ -544,11 +548,17 @@ public class HTMLInputElement extends FormField {
      * @return the {@code files} property
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-    public FileList getFiles() {
-        final FileList list = new FileList(getValue().split("\u00A7"));
-        list.setParentScope(getParentScope());
-        list.setPrototype(getPrototype(list.getClass()));
-        return list;
+    public Object getFiles() {
+        if (getDomNodeOrDie() instanceof HtmlFileInput) {
+            final FileList list = new FileList(getValue().split("\u00A7"));
+            list.setParentScope(getParentScope());
+            list.setPrototype(getPrototype(list.getClass()));
+            return list;
+        }
+        if (getBrowserVersion().hasFeature(HTMLINPUT_FILES_UNDEFINED)) {
+            return Undefined.instance;
+        }
+        return null;
     }
 
 }

@@ -579,6 +579,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
 
+    /** HTMLInputElement: {@code files} to be {@code undefined}. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    HTMLINPUT_FILES_UNDEFINED,
+
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE,
