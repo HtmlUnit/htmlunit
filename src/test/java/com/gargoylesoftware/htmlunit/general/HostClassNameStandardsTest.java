@@ -8448,7 +8448,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function BeforeInstallPromptEvent() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void beforeInstallPromptEvent() throws Exception {
         test("BeforeInstallPromptEvent");
     }
