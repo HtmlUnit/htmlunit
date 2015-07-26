@@ -74,7 +74,7 @@ public class EventTarget extends SimpleScriptable {
      * Allows the registration of event listeners on the event target.
      * @param type the event type to listen for (like "click")
      * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture
+     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      * @see #attachEvent(String, Function)
      */
@@ -284,7 +284,7 @@ public class EventTarget extends SimpleScriptable {
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "click")
      * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
      * documentation</a>
      */
@@ -296,7 +296,7 @@ public class EventTarget extends SimpleScriptable {
     /**
      * Defines an event handler (or maybe any other object).
      * @param eventName the event name (e.g. "onclick")
-     * @param value the property (<code>null</code> to reset it)
+     * @param value the property ({@code null} to reset it)
      */
     protected void setEventHandlerProp(final String eventName, final Object value) {
         getEventListenersContainer().setEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2), value);
@@ -305,7 +305,7 @@ public class EventTarget extends SimpleScriptable {
     /**
      * Defines an event handler.
      * @param eventName the event name (e.g. "onclick")
-     * @param eventHandler the handler (<code>null</code> to reset it)
+     * @param eventHandler the handler ({@code null} to reset it)
      */
     public void setEventHandler(final String eventName, final Function eventHandler) {
         setEventHandlerProp(eventName, eventHandler);

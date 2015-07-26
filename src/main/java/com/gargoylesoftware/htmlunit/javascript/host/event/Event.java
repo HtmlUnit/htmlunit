@@ -718,7 +718,7 @@ public class Event extends SimpleScriptable {
      * Indicates if the current event can be applied to the provided node.
      * TODO: investigate systematically ALL nodes and ALL events!
      * @param node the node to test
-     * @return <code>false</code> if the event can't be applied
+     * @return {@code false} if the event can't be applied
      */
     public boolean applies(final DomNode node) {
         if (TYPE_BLUR.equals(getType()) || TYPE_FOCUS.equals(getType())) {
