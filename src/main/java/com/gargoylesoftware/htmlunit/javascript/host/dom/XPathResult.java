@@ -194,7 +194,7 @@ public class XPathResult extends SimpleScriptable {
     }
 
     /**
-     * Iterates and returns the next node from the node set or <code>null</code> if there are no more nodes.
+     * Iterates and returns the next node from the node set or {@code null} if there are no more nodes.
      * @return the next node
      */
     @JsxFunction

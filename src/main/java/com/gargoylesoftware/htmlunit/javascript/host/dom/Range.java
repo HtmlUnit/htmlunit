@@ -221,7 +221,7 @@ public class Range extends SimpleScriptable {
 
     /**
      * Indicates if the range is collapsed.
-     * @return <code>true</code> if the range is collapsed
+     * @return {@code true} if the range is collapsed
      */
     @JsxGetter
     public boolean getCollapsed() {
@@ -292,7 +292,7 @@ public class Range extends SimpleScriptable {
 
     /**
      * Collapse a Range onto one of its boundaries.
-     * @param toStart if <code>true</code>, collapses the Range onto its start; else collapses it onto its end
+     * @param toStart if {@code true}, collapses the Range onto its start; else collapses it onto its end
      */
     @JsxFunction
     public void collapse(final boolean toStart) {

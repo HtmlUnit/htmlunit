@@ -257,7 +257,7 @@ public class TextRange extends SimpleScriptable {
     /**
      * Indicates if a range is contained in current one.
      * @param other the other range
-     * @return <code>true</code> if <code>other</code> is contained within current range
+     * @return {@code true} if <code>other</code> is contained within current range
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536371.aspx">MSDN doc</a>
      */
     @JsxFunction
@@ -350,7 +350,7 @@ public class TextRange extends SimpleScriptable {
      * Moves to a bookmark.
      * The current implementation does nothing
      * @param bookmark the bookmark
-     * @return <code>false</code>
+     * @return {@code false}
      */
     @JsxFunction
     public boolean moveToBookmark(final String bookmark) {

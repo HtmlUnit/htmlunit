@@ -401,7 +401,7 @@ public class Node extends EventTarget {
     /**
      * Indicates if the node can be inserted.
      * @param childObject the node
-     * @return <code>false</code> if it is not allowed here
+     * @return {@code false} if it is not allowed here
      */
     private boolean isNodeInsertable(final Node childObject) {
         return !(childObject instanceof HTMLHtmlElement);
@@ -664,7 +664,7 @@ public class Node extends EventTarget {
      * Allows the registration of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
      * @param listener the event listener
-     * @return <code>true</code> if the listener has been added
+     * @return {@code true} if the listener has been added
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
      * @see #addEventListener(String, Scriptable, boolean)
      */

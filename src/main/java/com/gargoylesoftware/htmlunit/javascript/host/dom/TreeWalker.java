@@ -60,16 +60,16 @@ public class TreeWalker extends SimpleScriptable {
      * Creates an instance.
      *
      * @param root The root node of the TreeWalker. Must not be
-     *          <code>null</code>.
+     *          {@code null}.
      * @param whatToShow Flag specifying which types of nodes appear in the
      *          logical view of the TreeWalker. See {@link NodeFilter} for the
      *          set of possible Show_ values.
      * @param filter The {@link NodeFilter} to be used with this TreeWalker,
-     *          or <code>null</code> to indicate no filter.
+     *          or {@code null} to indicate no filter.
      * @param expandEntityReferences If false, the contents of
      *          EntityReference nodes are not present in the logical view.
      * @throws DOMException on attempt to create a TreeWalker with a root that
-     *          is <code>null</code>.
+     *          is {@code null}.
      */
     public TreeWalker(final Node root,
                       final long whatToShow,
@@ -147,7 +147,7 @@ public class TreeWalker extends SimpleScriptable {
      * @param currentNode The node to be used as the current position of the
      *          TreeWalker.
      * @throws DOMException on attempt to set currentNode to
-     *          <code>null</code>.
+     *          {@code null}.
      */
     @JsxSetter
     public void setCurrentNode(final Node currentNode) throws DOMException {
@@ -255,7 +255,7 @@ public class TreeWalker extends SimpleScriptable {
      * TreeWalker's root node, or if it fails to find a visible ancestor node,
      * this method retains the current position and returns null.
      *
-     * @return The new parent node, or <code>null</code> if the current node
+     * @return The new parent node, or {@code null} if the current node
      *          has no parent in the TreeWalker's logical view.
      */
     @JsxFunction
@@ -348,9 +348,9 @@ public class TreeWalker extends SimpleScriptable {
     /**
      * Moves the TreeWalker to the first visible child of the current node,
      * and returns the new node. If the current node has no visible children,
-     * returns <code>null</code>, and retains the current node.
+     * returns {@code null}, and retains the current node.
      *
-     * @return The new node, or <code>null</code> if the current node has no
+     * @return The new node, or {@code null} if the current node has no
      *          visible children in the TreeWalker's logical view.
      */
     @JsxFunction
@@ -367,9 +367,9 @@ public class TreeWalker extends SimpleScriptable {
     /**
      * Moves the TreeWalker to the last visible child of the current node,
      * and returns the new node. If the current node has no visible children,
-     * returns <code>null</code>, and retains the current node.
+     * returns {@code null}, and retains the current node.
      *
-     * @return The new node, or <code>null</code> if the current node has no
+     * @return The new node, or {@code null} if the current node has no
      *          visible children in the TreeWalker's logical view.
      */
     @JsxFunction
@@ -386,9 +386,9 @@ public class TreeWalker extends SimpleScriptable {
     /**
       * Moves the TreeWalker to the previous sibling of the current node, and
       * returns the new node. If the current node has no visible previous
-      * sibling, returns <code>null</code>, and retains the current node.
+      * sibling, returns {@code null}, and retains the current node.
       *
-      * @return The new node, or <code>null</code> if the current node has no
+      * @return The new node, or {@code null} if the current node has no
       *          previous sibling in the TreeWalker's logical view.
       */
     @JsxFunction
@@ -409,9 +409,9 @@ public class TreeWalker extends SimpleScriptable {
      /**
       * Moves the TreeWalker to the next sibling of the current node, and
       * returns the new node. If the current node has no visible next sibling,
-      * returns <code>null</code>, and retains the current node.
+      * returns {@code null}, and retains the current node.
       *
-      * @return The new node, or <code>null</code> if the current node has no
+      * @return The new node, or {@code null} if the current node has no
       *          next sibling in the TreeWalker's logical view.
       */
     @JsxFunction
@@ -434,9 +434,9 @@ public class TreeWalker extends SimpleScriptable {
      * relative to the current node, and returns the new node. If the current
      * node has no previous node, or if the search for previousNode attempts
      * to step upward from the TreeWalker's root node, returns
-     * <code>null</code>, and retains the current node.
+     * {@code null}, and retains the current node.
      *
-     * @return The new node, or <code>null</code> if the current node has no
+     * @return The new node, or {@code null} if the current node has no
      *          previous node in the TreeWalker's logical view.
      */
     @JsxFunction
@@ -486,10 +486,10 @@ public class TreeWalker extends SimpleScriptable {
      * Moves the TreeWalker to the next visible node in document order
      * relative to the current node, and returns the new node. If the current
      * node has no next node, or if the search for nextNode attempts to step
-     * upward from the TreeWalker's root node, returns <code>null</code>, and
+     * upward from the TreeWalker's root node, returns {@code null}, and
      * retains the current node.
      *
-     * @return The new node, or <code>null</code> if the current node has no
+     * @return The new node, or {@code null} if the current node has no
      *          next node in the TreeWalker's logical view.
      */
     @JsxFunction
