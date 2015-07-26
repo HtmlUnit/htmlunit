@@ -226,7 +226,7 @@ public class CSSRule extends SimpleScriptable {
 
     /**
      * If this rule is contained inside another rule (e.g. a style rule inside an @media block),
-     * this is the containing rule. If this rule is not nested inside any other rules, this returns <code>null</code>.
+     * this is the containing rule. If this rule is not nested inside any other rules, this returns {@code null}.
      * @return the parent rule
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })

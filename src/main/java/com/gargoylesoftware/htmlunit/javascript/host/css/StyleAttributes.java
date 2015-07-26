@@ -50,7 +50,7 @@ final class StyleAttributes {
     /**
      * Gets the style attributes definition with the given name for the specified browser version.
      * @param browserVersion the browser version
-     * @return <code>null</code> if no definition exists for this browser version
+     * @return {@code null} if no definition exists for this browser version
      */
     public static Definition getDefinition(final String propertyName, final BrowserVersion browserVersion) {
         if (browserVersion == null) {
