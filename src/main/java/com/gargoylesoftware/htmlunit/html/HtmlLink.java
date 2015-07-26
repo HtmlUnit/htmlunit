@@ -158,7 +158,7 @@ public class HtmlLink extends HtmlElement {
      * for later use.<br>
      *
      * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
-     * @return <code>null</code> if no download should be performed and when this wasn't already done; the response
+     * @return {@code null} if no download should be performed and when this wasn't already done; the response
      * received when performing a request for the content referenced by this tag otherwise
      * @throws IOException if an error occurs while downloading the content
      */
