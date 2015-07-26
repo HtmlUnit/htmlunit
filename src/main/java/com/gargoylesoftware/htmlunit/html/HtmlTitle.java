@@ -68,7 +68,7 @@ public class HtmlTitle extends HtmlElement {
     /**
      * Indicates if a node without children should be written in expanded form as XML
      * (i.e. with closing tag rather than with "/&gt;").
-     * @return <code>true</code> as required by Internet Explorer
+     * @return {@code true} as required by Internet Explorer
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {
