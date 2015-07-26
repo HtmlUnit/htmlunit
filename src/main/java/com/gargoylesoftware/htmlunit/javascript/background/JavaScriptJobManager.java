@@ -126,14 +126,14 @@ public interface JavaScriptJobManager extends Serializable {
 
     /**
      * Gets the earliest job for this manager.
-     * @return <code>null</code> if none
+     * @return {@code null} if none
      */
     JavaScriptJob getEarliestJob();
 
     /**
      * Gets the earliest job for this manager.
      * @param filter the JavaScriptJobFilter
-     * @return <code>null</code> if none
+     * @return {@code null} if none
      */
     JavaScriptJob getEarliestJob(JavaScriptJobFilter filter);
 
