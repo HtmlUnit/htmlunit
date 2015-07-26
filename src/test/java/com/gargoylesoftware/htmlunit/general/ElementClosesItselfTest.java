@@ -419,8 +419,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
+            CHROME = "0",
             IE = "0")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ CHROME, IE })
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
