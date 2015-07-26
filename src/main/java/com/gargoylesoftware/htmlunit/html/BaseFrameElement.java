@@ -144,7 +144,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * Indicates if the content specified by the src attribute has been loaded or not.
      * The initial state of a frame contains an "about:blank" that is not loaded like
      * something specified in src attribute.
-     * @return <code>false</code> if the frame is still in its initial state.
+     * @return {@code false} if the frame is still in its initial state.
      */
     boolean isContentLoaded() {
         return contentLoaded_;
@@ -192,7 +192,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     /**
      * Test if the provided URL is the one of one of the parents which would cause an infinite loop.
      * @param url the URL to test
-     * @return <code>false</code> if no parent has already this URL
+     * @return {@code false} if no parent has already this URL
      */
     private boolean isAlreadyLoadedByAncestor(final URL url) {
         WebWindow window = getPage().getEnclosingWindow();

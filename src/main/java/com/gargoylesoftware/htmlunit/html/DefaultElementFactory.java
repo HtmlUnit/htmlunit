@@ -102,7 +102,7 @@ class DefaultElementFactory implements ElementFactory {
     /**
      * @param page the owning page
      * @param tagName the HTML tag name
-     * @param attributes initial attributes, possibly <code>null</code>
+     * @param attributes initial attributes, possibly {@code null}
      * @return the newly created element
      */
     @Override
@@ -114,7 +114,7 @@ class DefaultElementFactory implements ElementFactory {
      * @param page the owning page
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
-     * @param attributes initial attributes, possibly <code>null</code>
+     * @param attributes initial attributes, possibly {@code null}
      * @return the newly created element
      */
     @Override
@@ -127,7 +127,7 @@ class DefaultElementFactory implements ElementFactory {
      * @param page the owning page
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
-     * @param attributes initial attributes, possibly <code>null</code>
+     * @param attributes initial attributes, possibly {@code null}
      * @param checkBrowserCompatibility if true and the page doesn't support this element, return null
      * @return the newly created element
      */
