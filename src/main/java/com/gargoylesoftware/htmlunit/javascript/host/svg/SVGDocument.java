@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for SVGDocument.
+ * A JavaScript object for {@code SVGDocument}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
