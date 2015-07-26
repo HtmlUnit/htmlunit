@@ -73,7 +73,7 @@ public class RowContainer extends HTMLElement {
     /**
      * Indicates if the row belongs to this container.
      * @param row the row to test
-     * @return <code>true</code> if it belongs to this container
+     * @return {@code true} if it belongs to this container
      */
     protected boolean isContainedRow(final HtmlTableRow row) {
         return row.getParentNode() == getDomNodeOrDie();
