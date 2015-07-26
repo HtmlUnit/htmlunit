@@ -170,7 +170,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "alt" property.
+     * Sets the value of the "alt" property.
      * @param alt the value
      */
     @JsxSetter
