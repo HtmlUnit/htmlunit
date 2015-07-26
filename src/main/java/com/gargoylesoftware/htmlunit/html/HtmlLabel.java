@@ -123,7 +123,7 @@ public class HtmlLabel extends HtmlElement {
     /**
      * Gets the element referenced by this label. That is the element in the page which id is
      * equal to the value of the for attribute of this label.
-     * @return the element, <code>null</code> if not found
+     * @return the element, {@code null} if not found
      */
     public HtmlElement getReferencedElement() {
         final String elementId = getForAttribute();
