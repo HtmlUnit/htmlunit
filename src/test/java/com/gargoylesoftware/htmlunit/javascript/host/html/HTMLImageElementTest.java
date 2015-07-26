@@ -631,4 +631,43 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "test", "string", "hui", "", "null", "false", "true", "" })
+    public void alt() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var testImg = document.getElementById('myImage');\n"
+            + "        alert(testImg.alt);\n"
+            + "        alert(typeof testImg.alt);\n"
+
+            + "        testImg.alt = 'hui';\n"
+            + "        alert(testImg.alt);\n"
+
+            + "        testImg.alt = '';\n"
+            + "        alert(testImg.alt);\n"
+
+            + "        testImg.alt = null;\n"
+            + "        alert(testImg.alt);\n"
+            + "        alert(testImg.alt === null);\n"
+            + "        alert(testImg.alt === 'null');\n"
+
+            + "        var testImg = document.getElementById('myImageWithoutAlt');\n"
+            + "        alert(testImg.alt);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <img id='myImage' src='" + URL_SECOND + "' alt='test'>\n"
+            + "    <img id='myImageWithoutAlt' src='" + URL_SECOND + "'>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }
