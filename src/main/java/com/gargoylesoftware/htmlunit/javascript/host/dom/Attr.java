@@ -128,7 +128,7 @@ public class Attr extends Node {
 
     /**
      * {@inheritDoc}
-     * @return <code>null</code>
+     * @return {@code null}
      */
     @Override
     public Node getParentNode() {

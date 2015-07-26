@@ -301,7 +301,7 @@ public class AbstractList extends SimpleScriptable implements Function {
      * Indicates if the node should belong to the collection.
      * Belongs to the refactoring effort to improve HTMLCollection's performance.
      * @param node the node to test. Will be a child node of the reference node.
-     * @return <code>false</code> here as subclasses for concrete collections should decide it.
+     * @return {@code false} here as subclasses for concrete collections should decide it.
      */
     protected boolean isMatching(final DomNode node) {
         return false;
