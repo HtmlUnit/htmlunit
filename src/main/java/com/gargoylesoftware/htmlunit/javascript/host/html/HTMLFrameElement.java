@@ -75,7 +75,7 @@ public class HTMLFrameElement extends HTMLElement {
 
     /**
      * Returns the document the frame contains, if any.
-     * @return <code>null</code> if no document is contained
+     * @return {@code null} if no document is contained
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
      */
     @JsxGetter

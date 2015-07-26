@@ -453,7 +453,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Indicates if the element can be reached by id or name in expressions like "myForm.myField".
      * @param element the element to test
      * @param name the name used to address the element
-     * @return <code>true</code> if this element matches the conditions
+     * @return {@code true} if this element matches the conditions
      */
     private boolean isAccessibleByIdOrName(final HtmlElement element, final String name) {
         if (element instanceof FormFieldWithNameHistory && !(element instanceof HtmlImageInput)) {

@@ -274,7 +274,7 @@ public class HTMLTableElement extends RowContainer {
     /**
      * Indicates if the row belongs to this container.
      * @param row the row to test
-     * @return <code>true</code> if it belongs to this container
+     * @return {@code true} if it belongs to this container
      */
     @Override
     protected boolean isContainedRow(final HtmlTableRow row) {
