@@ -7,6 +7,8 @@
     </properties>
 
     <body>
+        <release version="2.19" date="" description="Bugfixes">
+        </release>
         <release version="2.18" date="July 26, 2015" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
             <action type="add" dev="asashour">
                 Introduce AbstractPage.
