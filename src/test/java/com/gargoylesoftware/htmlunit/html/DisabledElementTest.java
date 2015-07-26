@@ -78,7 +78,7 @@ public class DisabledElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Tests that the <code>isDisabled()</code> method returns <code>false</code> when the <code>disabled</code>
+     * Tests that the <code>isDisabled()</code> method returns {@code false} when the <code>disabled</code>
      * attribute does not exist.
      *
      * @throws Exception if the test fails
@@ -89,7 +89,7 @@ public class DisabledElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Tests that the <code>isDisabled()</code> method returns <code>true</code> when the <code>disabled</code>
+     * Tests that the <code>isDisabled()</code> method returns {@code true} when the <code>disabled</code>
      * attribute exists and is blank.
      *
      * @throws Exception if the test fails
@@ -100,7 +100,7 @@ public class DisabledElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Tests that the <code>isDisabled()</code> method returns <code>false</code> when the <code>disabled</code>
+     * Tests that the <code>isDisabled()</code> method returns {@code false} when the <code>disabled</code>
      * attribute exists and is <em>not</em> blank.
      *
      * @throws Exception if the test fails
