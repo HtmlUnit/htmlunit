@@ -37,12 +37,6 @@ public class MutationRecord extends SimpleScriptable {
 
     private String type_;
     private ScriptableObject target_;
-    private NodeList addedNodes_;
-    private NodeList removedNodes_;
-    private Node previousSibling_;
-    private Node nextSibling_;
-    private String attributeName_;
-    private String attributeNamespace_;
     private String oldValue_;
 
     /**
@@ -57,7 +51,7 @@ public class MutationRecord extends SimpleScriptable {
      * @param type the {@code type} property
      */
     void setType(final String type) {
-        this.type_ = type;
+        type_ = type;
     }
 
     /**
@@ -74,7 +68,7 @@ public class MutationRecord extends SimpleScriptable {
      * @param target the {@code target} property
      */
     void setTarget(final ScriptableObject target) {
-        this.target_ = target;
+        target_ = target;
     }
 
     /**
@@ -91,7 +85,7 @@ public class MutationRecord extends SimpleScriptable {
      * @param oldValue the {@code oldValue} property
      */
     void setOldValue(final String oldValue) {
-        this.oldValue_ = oldValue;
+        oldValue_ = oldValue;
     }
 
     /**

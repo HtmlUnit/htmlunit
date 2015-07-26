@@ -53,7 +53,6 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
     private boolean attaributes_;
     private boolean attributeOldValue_;
     private NativeArray attributeFilter_;
-    private boolean childList_;
     private boolean characterData_;
     private boolean characterDataOldValue_;
     private boolean subtree_;
@@ -83,7 +82,6 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
         node_ = node;
         attaributes_ = Boolean.TRUE.equals(options.get("attributes"));
         attributeOldValue_ = Boolean.TRUE.equals(options.get("attributeOldValue"));
-        childList_ = Boolean.TRUE.equals(options.get("childList"));
         characterData_ = Boolean.TRUE.equals(options.get("characterData"));
         characterDataOldValue_ = Boolean.TRUE.equals(options.get("characterDataOldValue"));
         subtree_ = Boolean.TRUE.equals(options.get("subtree"));
