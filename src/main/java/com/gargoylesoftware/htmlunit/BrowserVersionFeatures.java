@@ -1208,7 +1208,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT,
 
-    /** If an event handler has the value <code>undefined</code> <code>null</code> is returned instead. */
+    /** If an event handler has the value <code>undefined</code> {@code null} is returned instead. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     JS_EVENT_HANDLER_UNDEFINED_AS_NULL,
 
@@ -1874,7 +1874,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
-    /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always <code>false</code>. */
+    /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always {@code false}. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
 

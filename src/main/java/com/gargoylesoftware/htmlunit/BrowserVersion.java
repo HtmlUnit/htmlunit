@@ -448,7 +448,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Returns <tt>true</tt> if the browser is currently online.
-     * Default value is <code>true</code> if not explicitly configured.
+     * Default value is {@code true} if not explicitly configured.
      * @return <tt>true</tt> if the browser is currently online
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534307.aspx">MSDN documentation</a>
      */
@@ -701,7 +701,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * Indicates if this instance has the given feature. Used for HtmlUnit internal processing.
      * @param property the property name
-     * @return <code>false</code> if this browser doesn't have this feature
+     * @return {@code false} if this browser doesn't have this feature
      */
     public boolean hasFeature(final BrowserVersionFeatures property) {
         return features_.contains(property);
