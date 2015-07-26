@@ -52,7 +52,7 @@ public final class MimeType {
     /**
      * Gets the preferred file extension for a content type.
      * @param contentType the mime type
-     * @return <code>null</code> if none is known
+     * @return {@code null} if none is known
      */
     public static String getFileExtension(final String contentType) {
         final String value = type2extension.get(contentType.toLowerCase(Locale.ENGLISH));

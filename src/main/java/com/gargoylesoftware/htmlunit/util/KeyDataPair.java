@@ -105,7 +105,7 @@ public class KeyDataPair extends NameValuePair {
 
     /**
      * Gets in-memory data assigned to file value.
-     * @return <code>null</code> if the file content should be used.
+     * @return {@code null} if the file content should be used.
      */
     public byte[] getData() {
         return data_;

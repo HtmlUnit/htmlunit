@@ -39,7 +39,7 @@ public class WebResponseWrapper extends WebResponse {
     /**
      * Constructs a WebResponse object wrapping provided WebResponse.
      * @param webResponse the webResponse that does the real work
-     * @throws IllegalArgumentException if the webResponse is <code>null</code>
+     * @throws IllegalArgumentException if the webResponse is {@code null}
      */
     public WebResponseWrapper(final WebResponse webResponse) throws IllegalArgumentException {
         super(null, null, 0);

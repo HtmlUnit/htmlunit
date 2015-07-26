@@ -37,7 +37,7 @@ public class WebConnectionWrapper implements WebConnection {
     /**
      * Constructs a WebConnection object wrapping provided WebConnection.
      * @param webConnection the webConnection that does the real work
-     * @throws IllegalArgumentException if the connection is <code>null</code>
+     * @throws IllegalArgumentException if the connection is {@code null}
      */
     public WebConnectionWrapper(final WebConnection webConnection) throws IllegalArgumentException {
         if (webConnection == null) {
@@ -50,7 +50,7 @@ public class WebConnectionWrapper implements WebConnection {
      * Constructs a WebConnection object wrapping the connection of the WebClient and places itself as
      * connection of the WebClient.
      * @param webClient the WebClient which WebConnection should be wrapped
-     * @throws IllegalArgumentException if the WebClient is <code>null</code>
+     * @throws IllegalArgumentException if the WebClient is {@code null}
      */
     public WebConnectionWrapper(final WebClient webClient) throws IllegalArgumentException {
         if (webClient == null) {

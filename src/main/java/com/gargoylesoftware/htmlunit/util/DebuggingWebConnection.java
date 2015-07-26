@@ -241,7 +241,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     /**
      * Indicates if the response contains JavaScript content.
      * @param contentType the response's content type
-     * @return <code>false</code> if it is not recognized as JavaScript
+     * @return {@code false} if it is not recognized as JavaScript
      */
     static boolean isJavaScript(final String contentType) {
         return contentType.contains("javascript") || contentType.contains("ecmascript")
@@ -250,7 +250,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
 
     /**
      * Indicates if it should try to format responses recognized as JavaScript.
-     * @return default is <code>false</code> to deliver the original content
+     * @return default is {@code false} to deliver the original content
      */
     public boolean isUncompressJavaScript() {
         return uncompressJavaScript_;
@@ -260,7 +260,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * Indicates that responses recognized as JavaScript should be formatted or not.
      * Formatting is interesting for debugging when the original script is compressed on a single line.
      * It allows to better follow with a debugger and to obtain more interesting error messages.
-     * @param decompress <code>true</code> if JavaScript responses should be uncompressed
+     * @param decompress {@code true} if JavaScript responses should be uncompressed
      */
     public void setUncompressJavaScript(final boolean decompress) {
         uncompressJavaScript_ = decompress;

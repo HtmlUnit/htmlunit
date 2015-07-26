@@ -37,7 +37,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
     /**
      * Constructs a WebConnection object wrapping provided WebConnection.
      * @param webConnection the webConnection that does the real work
-     * @throws IllegalArgumentException if the connection is <code>null</code>
+     * @throws IllegalArgumentException if the connection is {@code null}
      */
     public FalsifyingWebConnection(final WebConnection webConnection) throws IllegalArgumentException {
         super(webConnection);
@@ -46,7 +46,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
     /**
      * Constructs an instance and places itself as connection of the WebClient.
      * @param webClient the WebClient which WebConnection should be wrapped
-     * @throws IllegalArgumentException if the WebClient is <code>null</code>
+     * @throws IllegalArgumentException if the WebClient is {@code null}
      */
     public FalsifyingWebConnection(final WebClient webClient) throws IllegalArgumentException {
         super(webClient);
