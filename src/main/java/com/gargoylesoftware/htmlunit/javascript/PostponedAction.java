@@ -39,7 +39,7 @@ public abstract class PostponedAction {
 
     /**
      * Gets the owning page.
-     * @return the page that initiated this action or <code>null</code> if it has already been GCed
+     * @return the page that initiated this action or {@code null} if it has already been GCed
      */
     protected Page getOwningPage() {
         return owningPageRef_.get();
@@ -53,7 +53,7 @@ public abstract class PostponedAction {
 
     /**
      * Indicates if the action still needs to be executed.
-     * @return <code>true</code> if the action needs to be executed
+     * @return {@code true} if the action needs to be executed
      */
     public boolean isStillAlive() {
         final Page owningPage = getOwningPage();

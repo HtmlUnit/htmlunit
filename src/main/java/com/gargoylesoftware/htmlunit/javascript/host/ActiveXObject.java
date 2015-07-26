@@ -166,7 +166,7 @@ public class ActiveXObject extends SimpleScriptable {
      * @param clazz the class to search on
      * @param name the name of the searched method
      * @param annotationClass the class of the annotation required
-     * @return <code>null</code> if not found
+     * @return {@code null} if not found
      */
     static Method getMethod(final Class<? extends SimpleScriptable> clazz,
             final String name, final Class<? extends Annotation> annotationClass) {
