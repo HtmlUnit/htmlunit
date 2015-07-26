@@ -117,7 +117,7 @@ public interface WebWindow extends Serializable {
 
     /**
      * Indicates if this window is closed. No action should be performed on a closed window.
-     * @return <code>true</code> when the window is closed
+     * @return {@code true} when the window is closed
      */
     boolean isClosed();
 

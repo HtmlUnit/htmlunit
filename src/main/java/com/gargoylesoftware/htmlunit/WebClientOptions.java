@@ -52,7 +52,7 @@ public class WebClientOptions implements Serializable {
     private int maxInMemory_ = 500 * 1024;
 
     /**
-     * If set to <code>true</code>, the client will accept connections to any host, regardless of
+     * If set to {@code true}, the client will accept connections to any host, regardless of
      * whether they have valid certificates or not. This is especially useful when you are trying to
      * connect to a server with expired or corrupt certificates.
      * @param useInsecureSSL whether or not to use insecure SSL
@@ -63,7 +63,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Indicates if insecure SSL should be used.
-     * @return <code>true</code> if insecure SSL should be used. Default is <code>false</code>.
+     * @return {@code true} if insecure SSL should be used. Default is {@code false}.
      */
     public boolean isUseInsecureSSL() {
         return useInsecureSSL_;
@@ -137,7 +137,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets the protocol versions enabled for use on SSL connections,
-     * <code>null</code> to use default ones.
+     * {@code null} to use default ones.
      *
      * @param sslClientProtocols the protocol versions
      * @see javax.net.ssl.SSLSocket#setEnabledProtocols(String[])
@@ -158,7 +158,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets the cipher suites enabled for use on SSL connections,
-     * <code>null</code> to use default ones.
+     * {@code null} to use default ones.
      *
      * @param sslClientCipherSuites the cipher suites
      * @see javax.net.ssl.SSLSocket#setEnabledCipherSuites(String[])
@@ -328,7 +328,7 @@ public class WebClientOptions implements Serializable {
      * Indicates if an exception should be thrown when a script execution fails
      * (the default) or if it should be caught and just logged to allow page
      * execution to continue.
-     * @return <code>true</code> if an exception is thrown on script error (the default)
+     * @return {@code true} if an exception is thrown on script error (the default)
      */
     public boolean isThrowExceptionOnScriptError() {
         return throwExceptionOnScriptError_;
@@ -417,16 +417,16 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the SSL protocol, used only when {@link #setUseInsecureSSL(boolean)} is set to <code>true</code>.
+     * Sets the SSL protocol, used only when {@link #setUseInsecureSSL(boolean)} is set to {@code true}.
      * @param sslInsecureProtocol the SSL protocol for insecure SSL connections,
-     *      <code>null</code> to use for default value
+     *      {@code null} to use for default value
      */
     public void setSSLInsecureProtocol(final String sslInsecureProtocol) {
         sslInsecureProtocol_ = sslInsecureProtocol;
     }
 
     /**
-     * Gets the SSL protocol, to be used only when {@link #setUseInsecureSSL(boolean)} is set to <code>true</code>.
+     * Gets the SSL protocol, to be used only when {@link #setUseInsecureSSL(boolean)} is set to {@code true}.
      * @return the SSL protocol for insecure SSL connections
      */
     public String getSSLInsecureProtocol() {

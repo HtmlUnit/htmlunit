@@ -25,7 +25,7 @@ public interface WebWindowListener {
     /**
      * A web window has been opened.
      *
-     * @param event the event (the oldPage and newPage properties will be <code>null</code>
+     * @param event the event (the oldPage and newPage properties will be {@code null}
      * because the event is generated when the window is opened before the content is loaded)
      */
     void webWindowOpened(final WebWindowEvent event);

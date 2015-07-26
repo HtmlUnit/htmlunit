@@ -95,7 +95,7 @@ public class WebResponse implements Serializable {
     /**
      * Returns the value of the specified response header.
      * @param headerName the name of the header whose value is to be returned
-     * @return the header value, <code>null</code> if no response header exists with this name
+     * @return the header value, {@code null} if no response header exists with this name
      */
     public String getResponseHeaderValue(final String headerName) {
         for (final NameValuePair pair : responseData_.getResponseHeaders()) {
