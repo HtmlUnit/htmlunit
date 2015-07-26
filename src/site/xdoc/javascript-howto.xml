@@ -4,7 +4,6 @@
     <properties>
         <title>JavaScript Tutorial</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-        <revision>$Revision$</revision>
     </properties>
 
     <body>
@@ -139,9 +138,9 @@ public void alerts() throws Exception {
                 They will be triggered at the appropriate time just like in a "real browser".  
             </p>
             <p>
-            	If the event that you wish to test is not yet supported then you can 
-            	directly invoke it through the ScriptEngine.  Note that while the script 
-            	engine is publicly 
+                If the event that you wish to test is not yet supported then you can 
+                directly invoke it through the ScriptEngine.  Note that while the script 
+                engine is publicly 
                 accessible, we do not recommend using it directly unless you have no
                 other choice.  It is much better to manipulate the page as a user would
                 by clicking on elements and shifting the focus around.

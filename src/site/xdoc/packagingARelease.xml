@@ -5,7 +5,6 @@
         <title>Packaging a release</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
-        <revision>$Revision$</revision>
     </properties>
 
     <body>
@@ -15,12 +14,12 @@
                 of much use to anyone else.
             </p>
             <p>
-            	If this is the first time you're doing a release you'll need to perform
-            	some setup.
-            	<ol>
-           			<li>
-           				Configure your SourceForge username in ~/.m2/settings.xml (see <a href="http://maven.apache.org/guides/mini/guide-deployment-security-settings.html">Security and Deployment Settings</a>). 
-						As an example, my settings.xml looks like:
+                If this is the first time you're doing a release you'll need to perform
+                some setup.
+                <ol>
+                       <li>
+                           Configure your SourceForge username in ~/.m2/settings.xml (see <a href="http://maven.apache.org/guides/mini/guide-deployment-security-settings.html">Security and Deployment Settings</a>). 
+                        As an example, my settings.xml looks like:
 <source>
 <![CDATA[<settings>
   ...
@@ -49,9 +48,9 @@
   </servers>
   ...
 </settings>]]></source>
-           			</li>
-           		</ol>
-       		</p>
+                       </li>
+                   </ol>
+               </p>
             <p>
                 For SnapShots:
                 <ol>
@@ -134,11 +133,11 @@ mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/stagin
 mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.17-sources.jar -Dclassifier=sources
 mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.17-javadoc.jar -Dclassifier=javadoc
 </source>
-					and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories">Sonatype OSS staging repository</a> to close and release the artifacts.
+                    and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories">Sonatype OSS staging repository</a> to close and release the artifacts.
                     </li>
                     <li>
-                    	Create a shell to shell.sourceforge.net with your username and project group
-                    	(see <a href="http://maven.apache.org/plugins/maven-site-plugin/examples/site-deploy-to-sourceforge.net.html">Maven site plugin for details</a>).
+                        Create a shell to shell.sourceforge.net with your username and project group
+                        (see <a href="http://maven.apache.org/plugins/maven-site-plugin/examples/site-deploy-to-sourceforge.net.html">Maven site plugin for details</a>).
                         <source>ssh -t mguillem,htmlunit@shell.sf.net create</source>
                         
                         (On Windows, PuTTY: Connection -> SSH -> Remote Command -> "create")

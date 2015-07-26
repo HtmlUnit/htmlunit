@@ -4,7 +4,6 @@
     <properties>
         <title>Submitting Bugs</title>
         <author>Chris Erskine</author>
-        <revision>$Revision$</revision>
     </properties>
 
     <body>
@@ -30,30 +29,30 @@
             </p>
         </section>
         <section name="How to submit reports that get responses">
-						<p>
+            <p>
                 Development of HtmlUnit is done as a volunteer effort.  As such, the developers respond when they
                 get a chance.  There are a number of things that you can do to help get a quicker response
-								<ul>
-								 	  <li>
+                <ul>
+                    <li>
                         Describe the bug in as much detail as possible.  To be able to fix a bug, the developer
-                        has to be able to reproduce it.  The more detail provided, the easier this is to do. 	Include
+                        has to be able to reproduce it. The more detail provided, the easier this is to do. Include
                         the source code that you have to produce the bug and the HTML page.  Reduce this down to the
                         least amount of code required to produce the error on both the executing code and the HTML.
                         If the developer has to look through 2 pages 
                         of HTML and JavaScript to see what is happening, it may not happen.
-								 	 </li>
-								 	 <li>
-								 	      If you can, write a <a href="http://www.junit.org">JUnit</a> test that reproduces the error.
-								 	      This makes it much easier to find the bug since the developer has to just run the unit test to
-								 	      reproduce the error.
-								 	 </li>
-								 	 <li>
-								 	      Best is to review the code and find what is causing the bug and not only write a unit test that
-								 	      produces the bug, but also a patch that fixes the bug.  Include these files in the bug report
-								 	      following the rules for <a href="submittingPatches.html">submitting patches.</a>
-								 	 </li>
-							  </ul>
-						</p>
+                    </li>
+                    <li>
+                        If you can, write a <a href="http://www.junit.org">JUnit</a> test that reproduces the error.
+                        This makes it much easier to find the bug since the developer has to just run the unit test to
+                        reproduce the error.
+                   </li>
+                   <li>
+                        Best is to review the code and find what is causing the bug and not only write a unit test that
+                        produces the bug, but also a patch that fixes the bug.  Include these files in the bug report
+                        following the rules for <a href="submittingPatches.html">submitting patches.</a>
+                   </li>
+               </ul>
+            </p>
         </section>
     </body>
 </document>

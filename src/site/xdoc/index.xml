@@ -3,7 +3,6 @@
 
     <properties>
         <title>Welcome to HtmlUnit</title>
-        <revision>$Revision$</revision>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
@@ -153,6 +152,15 @@
                 Place <a href="dependencies.html">all the required jars</a> in your classpath.
                 All of these can be found in the lib directory of the HtmlUnit installation.
             </p>
+            <p>
+                For maven, you would add:
+            <source><![CDATA[
+<dependency>
+    <groupId>net.sourceforge.htmlunit</groupId>
+    <artifactId>htmlunit</artifactId>
+    <version>2.17</version>
+</dependency>]]></source>
+            </p>
         </section>
 
         <section name="JavaScript Support">
@@ -176,11 +184,10 @@
                     <li>YUI 2.3.0: Good support (see unit test <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/YuiTest.java">here</a>)</li>
                 </ul>
             </p>
-            <note title="Disabling JavaScript support">
-                <p>
-                    To disable JavaScript processing for one WebClient, call webClient.getOptions().setJavaScriptEnabled(false).
-                </p>
-            </note>
+            <p>
+                Disabling JavaScript support: to disable JavaScript processing for one WebClient,
+                call <tt>webClient.getOptions().setJavaScriptEnabled(false)</tt>.
+            </p>
             <p>
                 JavaScript code is executed just like in normal browsers when the page loads or when an handler is triggered.
                 Additionally HtmlUnit provides the ability to inject code into an existing page via

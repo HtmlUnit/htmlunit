@@ -4,30 +4,29 @@
     <properties>
         <title>Submitting JavaScript Bugs</title>
         <author>Ahmed Ashour</author>
-        <revision>$Revision$</revision>
     </properties>
 
     <body>
         <section>
             <p>
-				HtmlUnit has a good support for JavaScript which gets continuously improved,
-				and test cases for complex libraries (Dojo, jQuery, Prototype,
-				Google Web Toolkit, Yahoo User Interface and Sarissa) are already included.
-				However, not all test cases succeed, and you would probably face an issue in real-life example.
+                HtmlUnit has a good support for JavaScript which gets continuously improved,
+                and test cases for complex libraries (Dojo, jQuery, Prototype,
+                Google Web Toolkit, Yahoo User Interface and Sarissa) are already included.
+                However, not all test cases succeed, and you would probably face an issue in real-life example.
             </p>
             <p>
-				Before reporting an issue with JavaScript, it is very preferred if you 
-				isolate the root cause of a single JavaScript property or method,
-				but just saying 'jQuery' or a given web site is not working, doesn't help much.<br/>
-				To find the offending line, you can put <code>alert()</code> at various places,
-				compare the result of HtmlUnit to a real browser (Chrome, Firefox or Internet Explorer),
-				and you will mostly be able to provide a tiny failing test case which contains
-				few lines of JavaScript (independent of the whole JavaScript library),
-				please have a look at <a href="https://sourceforge.net/p/htmlunit/code/HEAD/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/javascript/ArgumentsTest.java">some sample test cases</a>.<br/>
-				Once the cause is identified, it is very likely to be fixed in a timely manner.<br/>
+                Before reporting an issue with JavaScript, it is very preferred if you 
+                isolate the root cause of a single JavaScript property or method,
+                but just saying 'jQuery' or a given web site is not working, doesn't help much.<br/>
+                To find the offending line, you can put <code>alert()</code> at various places,
+                compare the result of HtmlUnit to a real browser (Chrome, Firefox or Internet Explorer),
+                and you will mostly be able to provide a tiny failing test case which contains
+                few lines of JavaScript (independent of the whole JavaScript library),
+                please have a look at <a href="https://sourceforge.net/p/htmlunit/code/HEAD/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/javascript/ArgumentsTest.java">some sample test cases</a>.<br/>
+                Once the cause is identified, it is very likely to be fixed in a timely manner.<br/>
             </p>
             <p>
-				If you need help in tracing, please don't hesitate to ask the team.
+                If you need help in tracing, please don't hesitate to ask the team.
             </p>
         </section>
 
@@ -70,7 +69,7 @@ net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call met
             </p>
             <p>
                 Use the latest released version at least, if not the
-                <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&buildId=lastSuccessful&tab=artifacts">
+                <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">
                 latest snapshot</a>.
             </p>
         </section>
@@ -84,7 +83,7 @@ function myfunction(a, b) {
     alert(c);
     return c;
 }]]></source>
-			</p>
+            </p>
             <p>
                 To know what is the called function, you can use:
             <source><![CDATA[
@@ -93,7 +92,7 @@ function myfunction(a, b) {
     alert(arguments.callee.caller);
     return c;
 }]]></source> which will print the content of the caller function.
-			</p>
+            </p>
             <p>
                 To know what function will be called, you can use:
             <source><![CDATA[
@@ -102,7 +101,7 @@ function myfunction(a, b) {
     alert(anotherFunction);
     return anotherFunction(c + 'something');
 }]]></source>
-			</p>
+            </p>
             <p>
                 If a function is called too many times, you can put conditional <code>alert</code>
             <source><![CDATA[
@@ -129,7 +128,7 @@ function myfunction(a, b) {
     }
     return anotherFunction(c + 'something');
 }}]]></source>
-			</p>
+            </p>
         </section>
     </body>
 </document>

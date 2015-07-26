@@ -3,7 +3,6 @@
 
     <properties>
         <title>Submitting Patches</title>
-        <revision>$Revision$</revision>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
     </properties>
@@ -42,8 +41,8 @@
                         Whenever possible, tests classes should extend WebDriverTestCase.
                     </li>
                     <li>
-                    	If you are fixing a bug but not adding new functionality then we still require
-                    	tests that would fail with the old behavior.
+                        If you are fixing a bug but not adding new functionality then we still require
+                        tests that would fail with the old behavior.
                     </li>
                     <li>
                         All existing unit tests must pass.
@@ -67,18 +66,18 @@
                         Patches should be in "unified diff" format.
                     </li>
                     <li>
-                    	Please provide only one patch that contains all the files.  Some people
-	                    will submit separate patches for each file in the diff and this just
-	                    makes more work for the committer.  Please also submit it as one single diff, 
-	                    not zipped up - again because it's easier for the committers.
+                        Please provide only one patch that contains all the files.  Some people
+                        will submit separate patches for each file in the diff and this just
+                        makes more work for the committer.  Please also submit it as one single diff, 
+                        not zipped up - again because it's easier for the committers.
                     </li>
                 </ul>
             </p>
             <p>
-            	<b>IMPORTANT: Patches without tests will be rejected</b>.  Occasionally
-            	one of the committers will have the time to write the tests for you but this
-            	is rare.  If you are not sure how to write a test for a given situation then
-            	ask on the developer mailing list.
+                <b>IMPORTANT: Patches without tests will be rejected</b>.  Occasionally
+                one of the committers will have the time to write the tests for you but this
+                is rare.  If you are not sure how to write a test for a given situation then
+                ask on the developer mailing list.
             </p>
             <p>
                 Additional documentation or code samples are always appreciated.  We're focused on writing
