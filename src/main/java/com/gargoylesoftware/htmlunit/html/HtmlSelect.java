@@ -386,7 +386,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Indicates if this select is submittable
-     * @return <code>false</code> if not
+     * @return {@code false} if not
      */
     boolean isValidForSubmission() {
         return getOptionSize() > 0;

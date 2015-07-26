@@ -353,7 +353,7 @@ public class HtmlTable extends HtmlElement {
         }
 
         /**
-         * @return <code>true</code> if there are more rows available
+         * @return {@code true} if there are more rows available
          */
         @Override
         public boolean hasNext() {
@@ -438,7 +438,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * {@inheritDoc}
-     * @return <code>true</code> as browsers ignore self closing <code>table</code> tags.
+     * @return {@code true} as browsers ignore self closing <code>table</code> tags.
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {

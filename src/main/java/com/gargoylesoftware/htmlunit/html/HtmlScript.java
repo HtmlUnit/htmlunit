@@ -425,7 +425,7 @@ public class HtmlScript extends HtmlElement {
     /**
      * Indicates if script execution is necessary and/or possible.
      *
-     * @return <code>true</code> if the script should be executed
+     * @return {@code true} if the script should be executed
      */
     private boolean isExecutionNeeded() {
         if (executed_) {
@@ -548,7 +548,7 @@ public class HtmlScript extends HtmlElement {
     /**
      * Indicates if a node without children should be written in expanded form as XML
      * (i.e. with closing tag rather than with "/&gt;")
-     * @return <code>true</code> to make generated XML readable as HTML
+     * @return {@code true} to make generated XML readable as HTML
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {
