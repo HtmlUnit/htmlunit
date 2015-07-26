@@ -106,7 +106,7 @@ public class MockWebConnection implements WebConnection {
 
         /**
          * Gets the configured content bytes.
-         * @return <code>null</code> if a String content has been configured
+         * @return {@code null} if a String content has been configured
          */
         public byte[] getByteContent() {
             return byteContent_;
@@ -114,7 +114,7 @@ public class MockWebConnection implements WebConnection {
 
         /**
          * Gets the configured content String.
-         * @return <code>null</code> if a byte content has been configured
+         * @return {@code null} if a byte content has been configured
          */
         public String getStringContent() {
             return stringContent_;
@@ -138,7 +138,7 @@ public class MockWebConnection implements WebConnection {
 
         /**
          * Gets the configured charset.
-         * @return <code>null</code> for byte content
+         * @return {@code null} for byte content
          */
         public String getCharset() {
             return charset_;
@@ -477,7 +477,7 @@ public class MockWebConnection implements WebConnection {
     /**
      * Indicates if a response has already been configured for this URL.
      * @param url the url
-     * @return <code>false</code> if no response has been configured
+     * @return {@code false} if no response has been configured
      */
     public boolean hasResponse(final URL url) {
         return responseMap_.containsKey(url.toExternalForm());

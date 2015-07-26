@@ -69,7 +69,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
 
     /**
      * Indicates if the currently executing thread is the one in which this instance has been created.
-     * @return <code>true</code> if it's the same thread
+     * @return {@code true} if it's the same thread
      */
     boolean isInOriginalThread() {
         return Thread.currentThread() == originatedThread_.get();
