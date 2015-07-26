@@ -21,10 +21,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link JavaScriptErrorListener}.
@@ -49,23 +49,23 @@ public class JavascriptErrorListener2Test extends SimpleWebTestCase {
         webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
 
             @Override
-            public void loadScriptError(final HtmlPage htmlPage, final URL scriptUrl, final Exception exception) {
+            public void loadScriptError(final InteractivePage page, final URL scriptUrl, final Exception exception) {
                 // nothing
             }
 
             @Override
-            public void malformedScriptURL(final HtmlPage htmlPage, final String url,
+            public void malformedScriptURL(final InteractivePage page, final String url,
                     final MalformedURLException malformedURLException) {
                 // nothing
             }
 
             @Override
-            public void scriptException(final HtmlPage htmlPage, final ScriptException scriptException) {
+            public void scriptException(final InteractivePage page, final ScriptException scriptException) {
                 scriptExceptions.append(scriptException.getCause() + "\n");
             }
 
             @Override
-            public void timeoutError(final HtmlPage htmlPage, final long allowedTime, final long executionTime) {
+            public void timeoutError(final InteractivePage page, final long allowedTime, final long executionTime) {
                 // nothing
             }
         });

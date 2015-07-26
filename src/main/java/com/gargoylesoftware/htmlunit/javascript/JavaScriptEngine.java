@@ -49,6 +49,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -125,7 +126,7 @@ public class JavaScriptEngine {
     public static final String KEY_STARTING_SCOPE = "startingScope";
 
     /**
-     * Key used to place the {@link HtmlPage} for which the JavaScript code is executed
+     * Key used to place the {@link InteractivePage} for which the JavaScript code is executed
      * as thread local attribute in current context.
      */
     public static final String KEY_STARTING_PAGE = "startingPage";
@@ -667,13 +668,13 @@ public class JavaScriptEngine {
     /**
      * Compiles the specified JavaScript code in the context of a given HTML page.
      *
-     * @param htmlPage the page that the code will execute within
+     * @param page the page that the code will execute within
      * @param sourceCode the JavaScript code to execute
      * @param sourceName the name that will be displayed on error conditions
      * @param startLine the line at which the script source starts
      * @return the result of executing the specified code
      */
-    public Script compile(final HtmlPage htmlPage, final String sourceCode,
+    public Script compile(final InteractivePage page, final String sourceCode,
                            final String sourceName, final int startLine) {
 
         WebAssert.notNull("sourceCode", sourceCode);
@@ -683,9 +684,9 @@ public class JavaScriptEngine {
             LOG.trace("Javascript compile " + sourceName + newline + sourceCode + newline);
         }
 
-        final Scriptable scope = getScope(htmlPage, null);
+        final Scriptable scope = getScope(page, null);
         final String source = sourceCode;
-        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
+        final ContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
                 return cx.compileString(source, sourceName, startLine, null);
@@ -701,37 +702,37 @@ public class JavaScriptEngine {
     }
 
     /**
-     * Executes the specified JavaScript code in the context of a given HTML page.
+     * Executes the specified JavaScript code in the context of a given page.
      *
-     * @param htmlPage the page that the code will execute within
+     * @param page the page that the code will execute within
      * @param sourceCode the JavaScript code to execute
      * @param sourceName the name that will be displayed on error conditions
      * @param startLine the line at which the script source starts
      * @return the result of executing the specified code
      */
-    public Object execute(final HtmlPage htmlPage,
+    public Object execute(final InteractivePage page,
                            final String sourceCode,
                            final String sourceName,
                            final int startLine) {
 
-        final Script script = compile(htmlPage, sourceCode, sourceName, startLine);
+        final Script script = compile(page, sourceCode, sourceName, startLine);
         if (script == null) { // happens with syntax error + throwExceptionOnScriptError = false
             return null;
         }
-        return execute(htmlPage, script);
+        return execute(page, script);
     }
 
     /**
-     * Executes the specified JavaScript code in the context of a given HTML page.
+     * Executes the specified JavaScript code in the context of a given page.
      *
-     * @param htmlPage the page that the code will execute within
+     * @param page the page that the code will execute within
      * @param script the script to execute
      * @return the result of executing the specified code
      */
-    public Object execute(final HtmlPage htmlPage, final Script script) {
-        final Scriptable scope = getScope(htmlPage, null);
+    public Object execute(final InteractivePage page, final Script script) {
+        final Scriptable scope = getScope(page, null);
 
-        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
+        final ContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
                 return script.exec(cx, scope);
@@ -748,38 +749,38 @@ public class JavaScriptEngine {
 
     /**
      * Calls a JavaScript function and return the result.
-     * @param htmlPage the page
+     * @param page the page
      * @param javaScriptFunction the function to call
      * @param thisObject the this object for class method calls
      * @param args the list of arguments to pass to the function
-     * @param htmlElement the HTML element that will act as the context
+     * @param node the HTML element that will act as the context
      * @return the result of the function call
      */
     public Object callFunction(
-            final HtmlPage htmlPage,
+            final InteractivePage page,
             final Function javaScriptFunction,
             final Scriptable thisObject,
             final Object[] args,
-            final DomNode htmlElement) {
+            final DomNode node) {
 
-        final Scriptable scope = getScope(htmlPage, htmlElement);
+        final Scriptable scope = getScope(page, node);
 
-        return callFunction(htmlPage, javaScriptFunction, scope, thisObject, args);
+        return callFunction(page, javaScriptFunction, scope, thisObject, args);
     }
 
     /**
      * Calls the given function taking care of synchronization issues.
-     * @param htmlPage the HTML page that caused this script to executed
+     * @param page the interactive page that caused this script to executed
      * @param function the JavaScript function to execute
      * @param scope the execution scope
      * @param thisObject the 'this' object
      * @param args the function's arguments
      * @return the function result
      */
-    public Object callFunction(final HtmlPage htmlPage, final Function function,
+    public Object callFunction(final InteractivePage page, final Function function,
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
 
-        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
+        final ContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
                 if (ScriptRuntime.hasTopCall(cx)) {
@@ -795,17 +796,17 @@ public class JavaScriptEngine {
         return getContextFactory().call(action);
     }
 
-    private Scriptable getScope(final HtmlPage htmlPage, final DomNode htmlElement) {
-        if (htmlElement != null) {
-            return htmlElement.getScriptObject();
+    private Scriptable getScope(final InteractivePage page, final DomNode node) {
+        if (node != null) {
+            return node.getScriptObject();
         }
-        return (Window) htmlPage.getEnclosingWindow().getScriptObject();
+        return (Window) page.getEnclosingWindow().getScriptObject();
     }
 
     /**
      * Indicates if JavaScript is running in current thread.<br/>
      * This allows code to know if there own evaluation is has been triggered by some JS code.
-     * @return <code>true</code> if JavaScript is running
+     * @return {@code true} if JavaScript is running
      */
     public boolean isScriptRunning() {
         return Boolean.TRUE.equals(javaScriptRunning_.get());
@@ -818,10 +819,10 @@ public class JavaScriptEngine {
      */
     private abstract class HtmlUnitContextAction implements ContextAction {
         private final Scriptable scope_;
-        private final HtmlPage htmlPage_;
-        public HtmlUnitContextAction(final Scriptable scope, final HtmlPage htmlPage) {
+        private final InteractivePage page_;
+        public HtmlUnitContextAction(final Scriptable scope, final InteractivePage page) {
             scope_ = scope;
-            htmlPage_ = htmlPage;
+            page_ = page;
         }
 
         @Override
@@ -841,9 +842,9 @@ public class JavaScriptEngine {
                 final Object response;
                 stack.push(scope_);
                 try {
-                    cx.putThreadLocal(KEY_STARTING_PAGE, htmlPage_);
-                    synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
-                        if (htmlPage_ != htmlPage_.getEnclosingWindow().getEnclosedPage()) {
+                    cx.putThreadLocal(KEY_STARTING_PAGE, page_);
+                    synchronized (page_) { // 2 scripts can't be executed in parallel for one page
+                        if (page_ != page_.getEnclosingWindow().getEnclosedPage()) {
                             return null; // page has been unloaded
                         }
                         response = doRun(cx);
@@ -861,13 +862,13 @@ public class JavaScriptEngine {
                 return response;
             }
             catch (final Exception e) {
-                handleJavaScriptException(new ScriptException(htmlPage_, e, getSourceCode(cx)), true);
+                handleJavaScriptException(new ScriptException(page_, e, getSourceCode(cx)), true);
                 return null;
             }
             catch (final TimeoutError e) {
                 final JavaScriptErrorListener javaScriptErrorListener = getWebClient().getJavaScriptErrorListener();
                 if (javaScriptErrorListener != null) {
-                    javaScriptErrorListener.timeoutError(htmlPage_, e.getAllowedTime(), e.getExecutionTime());
+                    javaScriptErrorListener.timeoutError(page_, e.getAllowedTime(), e.getExecutionTime());
                 }
                 if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
                     throw new RuntimeException(e);
@@ -939,7 +940,7 @@ public class JavaScriptEngine {
      */
     protected void handleJavaScriptException(final ScriptException scriptException, final boolean triggerOnError) {
         // Trigger window.onerror, if it has been set.
-        final HtmlPage page = scriptException.getPage();
+        final InteractivePage page = scriptException.getPage();
         if (triggerOnError && page != null) {
             final WebWindow window = page.getEnclosingWindow();
             if (window != null) {
@@ -1015,7 +1016,7 @@ public class JavaScriptEngine {
     /**
      * Gets the class of the JavaScript object for the node class.
      * @param c the node class {@link DomNode} or some subclass.
-     * @return <code>null</code> if none found
+     * @return {@code null} if none found
      */
     public Class<? extends SimpleScriptable> getJavaScriptClass(final Class<?> c) {
         return jsConfig_.getDomJavaScriptMapping().get(c);

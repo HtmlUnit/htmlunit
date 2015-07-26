@@ -16,6 +16,10 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_11;
 import static java.util.Arrays.asList;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
@@ -2192,5 +2196,21 @@ public class WebClientTest extends SimpleWebTestCase {
         Assert.assertNotNull(secondWindow);
         final WebRequest secondRequest = secondWindow.getEnclosedPage().getWebResponse().getWebRequest();
         assertEquals("about:blank", secondRequest.getUrl().toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void closeToClearCache() throws Exception {
+        final WebClient webClient = getWebClient();
+        final Cache cache = createMock(Cache.class);
+        webClient.setCache(cache);
+        cache.clear();
+        expectLastCall().atLeastOnce();
+
+        replay(cache);
+        webClient.close();
+        verify(cache);
     }
 }

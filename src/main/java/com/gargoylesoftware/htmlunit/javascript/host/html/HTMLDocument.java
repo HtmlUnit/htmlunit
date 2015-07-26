@@ -385,16 +385,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the HTML page that this document is modeling.
      * @return the HTML page that this document is modeling
      */
-    public HtmlPage getHtmlPage() {
+    public HtmlPage getPage() {
         return (HtmlPage) getDomNodeOrDie();
-    }
-
-    /**
-     * Returns the HTML page that this document is modeling, or <tt>null</tt> if the page is empty.
-     * @return the HTML page that this document is modeling, or <tt>null</tt> if the page is empty
-     */
-    public HtmlPage getHtmlPageOrNull() {
-        return (HtmlPage) getDomNodeOrNull();
     }
 
     /**
@@ -710,7 +702,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Indicates if the content is a well formed HTML snippet that can already be parsed to be added to the DOM.
      *
      * @param content the HTML snippet
-     * @return <code>false</code> if it not well formed
+     * @return {@code false} if it not well formed
      */
     static boolean canAlreadyBeParsed(final String content) {
         // all <script> must have their </script> because the parser doesn't close automatically this tag
@@ -838,7 +830,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getCookie() {
-        final HtmlPage page = getHtmlPage();
+        final HtmlPage page = getPage();
 
         final URL url = page.getUrl();
 
@@ -912,7 +904,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     private boolean isQuirksDocType(final BrowserVersion browserVersion) {
-        final DocumentType docType = getHtmlPage().getDoctype();
+        final DocumentType docType = getPage().getDoctype();
         if (docType != null) {
             final String systemId = docType.getSystemId();
             if (systemId != null) {
@@ -951,10 +943,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setCookie(final String newCookie) {
-        final HtmlPage page = getHtmlPage();
+        final HtmlPage page = getPage();
         final WebClient client = page.getWebClient();
 
-        client.addCookie(newCookie, getHtmlPage().getUrl(), this);
+        client.addCookie(newCookie, getPage().getUrl(), this);
     }
 
     /**
@@ -980,7 +972,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public String getInputEncoding() {
-        final String encoding = getHtmlPage().getPageEncoding();
+        final String encoding = getPage().getPageEncoding();
         if (encoding != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
             return EncodingSniffer.translateEncodingLabel(encoding);
         }
@@ -993,7 +985,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public String getCharacterSet() {
-        final String charset = getHtmlPage().getPageEncoding();
+        final String charset = getPage().getPageEncoding();
         if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
             return charset.toLowerCase(Locale.ENGLISH);
         }
@@ -1009,7 +1001,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public String getCharset() {
-        String charset = getHtmlPage().getPageEncoding();
+        String charset = getPage().getPageEncoding();
         if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
             return EncodingSniffer.translateEncodingLabel(charset);
         }
@@ -1034,7 +1026,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter(propertyName = "URL")
     public String getURL() {
-        return getHtmlPage().getUrl().toExternalForm();
+        return getPage().getUrl().toExternalForm();
     }
 
     /**
@@ -1087,7 +1079,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             final Object replace) {
         // Any open() invocations are ignored during the parsing stage, because write() and
         // writeln() invocations will directly append content to the current insertion point.
-        final HtmlPage page = getHtmlPage();
+        final HtmlPage page = getPage();
         if (page.isBeingParsed()) {
             LOG.warn("Ignoring call to open() during the parsing stage.");
             return null;
@@ -1120,7 +1112,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             LOG.warn("close() called when document is not open.");
         }
         else {
-            final HtmlPage page = getHtmlPage();
+            final HtmlPage page = getPage();
             final URL url = page.getUrl();
             final StringWebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
             webResponse.setFromJavascript(true);
@@ -1255,9 +1247,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the element with the specified ID, or <tt>null</tt> if that element could not be found.
+     * Returns the element with the specified ID, or {@code null} if that element could not be found.
      * @param id the ID to search for
-     * @return the element, or <tt>null</tt> if it could not be found
+     * @return the element, or {@code null} if it could not be found
      */
     @JsxFunction
     public Object getElementById(final String id) {
@@ -1265,13 +1257,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         Object result = null;
         try {
             final boolean caseSensitive = getBrowserVersion().hasFeature(JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE);
-            final DomElement htmlElement = getHtmlPage().getElementById(id, caseSensitive);
-            final Object jsElement = getScriptableFor(htmlElement);
+            final DomElement domElement = getPage().getElementById(id, caseSensitive);
+            final Object jsElement = getScriptableFor(domElement);
             if (jsElement == NOT_FOUND) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("getElementById(" + id
                             + ") cannot return a result as there isn't a JavaScript object for the HTML element "
-                            + htmlElement.getClass().getName());
+                            + domElement.getClass().getName());
                 }
             }
             else {
@@ -1282,7 +1274,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             // Just fall through - result is already set to null
             final BrowserVersion browser = getBrowserVersion();
             if (browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE)
-                    && getHtmlPage().isQuirksMode()) {
+                    && getPage().isQuirksMode()) {
                 final HTMLCollection elements = getElementsByName(id);
                 result = elements.get(0, elements);
                 if (result instanceof UniqueTag) {
@@ -1442,7 +1434,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
     public HTMLElement getBody() {
-        final HtmlPage page = getHtmlPage();
+        final HtmlPage page = getPage();
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
         if (getBrowserVersion().hasFeature(JS_FRAME_BODY_NULL_IF_NOT_LOADED)
                 && (page.getEnclosingWindow() instanceof FrameWindow)) {
@@ -1465,7 +1457,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public HTMLElement getHead() {
-        final HtmlElement head = getHtmlPage().getHead();
+        final HtmlElement head = getPage().getHead();
         if (head != null) {
             return (HTMLElement) head.getScriptObject();
         }
@@ -1478,7 +1470,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getTitle() {
-        return getHtmlPage().getTitleText();
+        return getPage().getTitleText();
     }
 
     /**
@@ -1487,7 +1479,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setTitle(final String title) {
-        getHtmlPage().setTitleText(title);
+        getPage().setTitleText(title);
     }
 
     /**
@@ -1497,7 +1489,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getBgColor() {
-        String color = getHtmlPage().getBody().getAttribute("bgColor");
+        String color = getPage().getBody().getAttribute("bgColor");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#ffffff";
         }
@@ -1514,7 +1506,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setBgColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject();
         body.setBgColor(color);
     }
 
@@ -1524,7 +1516,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getAlinkColor() {
-        String color = getHtmlPage().getBody().getAttribute("aLink");
+        String color = getPage().getBody().getAttribute("aLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#0000ff";
         }
@@ -1540,7 +1532,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setAlinkColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject();
         body.setALink(color);
     }
 
@@ -1550,7 +1542,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getLinkColor() {
-        String color = getHtmlPage().getBody().getAttribute("link");
+        String color = getPage().getBody().getAttribute("link");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#0000ff";
         }
@@ -1566,7 +1558,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setLinkColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject();
         body.setLink(color);
     }
 
@@ -1576,7 +1568,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getVlinkColor() {
-        String color = getHtmlPage().getBody().getAttribute("vLink");
+        String color = getPage().getBody().getAttribute("vLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#800080";
         }
@@ -1592,7 +1584,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setVlinkColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject();
         body.setVLink(color);
     }
 
@@ -1602,7 +1594,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getFgColor() {
-        String color = getHtmlPage().getBody().getAttribute("text");
+        String color = getPage().getBody().getAttribute("text");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#000000";
         }
@@ -1618,7 +1610,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setFgColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject();
         body.setText(color);
     }
 
@@ -1647,7 +1639,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public String getDomain() {
         if (domain_ == null) {
-            URL url = getHtmlPage().getUrl();
+            URL url = getPage().getUrl();
             if (url == WebClient.URL_ABOUT_BLANK) {
                 final WebWindow w = getWindow().getWebWindow();
                 if (w instanceof FrameWindow) {
@@ -1901,7 +1893,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param filter the NodeFilter to be used with this TreeWalker, or null to indicate no filter
      * @param expandEntityReferences If false,
      *        the contents of EntityReference nodes are not presented in the logical view
-     * @throws DOMException on attempt to create a TreeWalker with a root that is <code>null</code>
+     * @throws DOMException on attempt to create a TreeWalker with a root that is {@code null}
      * @return a new TreeWalker
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
@@ -1983,7 +1975,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Indicates if the command can be successfully executed using <tt>execCommand</tt>, given
      * the current state of the document.
      * @param cmd the command identifier
-     * @return <code>true</code> if the command can be successfully executed
+     * @return {@code true} if the command can be successfully executed
      */
     @JsxFunction
     public boolean queryCommandEnabled(final String cmd) {
@@ -2018,7 +2010,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public Object getActiveElement() {
         if (activeElement_ == null) {
-            final HtmlElement body = getHtmlPage().getBody();
+            final HtmlElement body = getPage().getBody();
             if (body != null) {
                 activeElement_ = (HTMLElement) getScriptableFor(body);
             }
@@ -2123,7 +2115,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 document = ((DocumentProxy) start).getDelegee();
             }
             else {
-                final HtmlPage page = ((HTMLDocument) start).getHtmlPageOrNull();
+                final DomNode page = ((HTMLDocument) start).getDomNodeOrNull();
                 if (page != null) {
                     document = (Document) page.getScriptObject();
                 }

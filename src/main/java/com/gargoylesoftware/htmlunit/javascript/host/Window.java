@@ -132,6 +132,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
+import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -274,7 +275,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
         }
         else {
-            handler.handleAlert(((HTMLDocument) document_).getHtmlPage(), stringMessage);
+            handler.handleAlert(document_.getPage(), stringMessage);
         }
     }
 
@@ -311,7 +312,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                     + message + "\") no confirm handler installed, simulating the OK button");
             return true;
         }
-        return handler.handleConfirm(((HTMLDocument) document_).getHtmlPage(), message);
+        return handler.handleConfirm(document_.getPage(), message);
     }
 
     /**
@@ -326,7 +327,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
             return null;
         }
-        return handler.handlePrompt(((HTMLDocument) document_).getHtmlPage(), message);
+        return handler.handlePrompt(document_.getPage(), message);
     }
 
     /**
@@ -716,7 +717,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         windowProxy_ = new WindowProxy(webWindow_);
 
         final Page enclosedPage = webWindow.getEnclosedPage();
-        if (enclosedPage instanceof XmlPage) {
+        if (enclosedPage instanceof XmlPage || enclosedPage instanceof SvgPage) {
             document_ = new XMLDocument();
         }
         else {
@@ -865,7 +866,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the (i)frame in which the window is contained.
-     * @return <code>null</code> for a top level window
+     * @return {@code null} for a top level window
      */
     @JsxGetter
     public Object getFrameElement() {
@@ -949,7 +950,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Indicates if this window is closed.
-     * @return <code>true</code> if this window is closed
+     * @return {@code true} if this window is closed
      */
     @JsxGetter
     @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
@@ -1174,7 +1175,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param type the event type to listen for (like "load")
      * @param listener the event listener
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
-     * @return <code>true</code> if the listener has been added
+     * @return {@code true} if the listener has been added
      */
     @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public boolean attachEvent(final String type, final Function listener) {

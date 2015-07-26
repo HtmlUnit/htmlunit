@@ -237,23 +237,7 @@ public final class XmlUtil {
             final ElementFactory factory = HTMLParser.getFactory(localName);
             return factory.createElementNS(page, ns, localName, namedNodeMapToSaxAttributes(source.getAttributes()));
         }
-        final Map<String, DomAttr> attributes = new LinkedHashMap<>();
         final NamedNodeMap nodeAttributes = source.getAttributes();
-        for (int i = 0; i < nodeAttributes.getLength(); i++) {
-            final Attr attribute = (Attr) nodeAttributes.item(i);
-            final String namespaceURI = attribute.getNamespaceURI();
-            final String qualifiedName;
-            if (attribute.getPrefix() != null) {
-                qualifiedName = attribute.getPrefix() + ':' + attribute.getLocalName();
-            }
-            else {
-                qualifiedName = attribute.getLocalName();
-            }
-            final String value = attribute.getNodeValue();
-            final boolean specified = attribute.getSpecified();
-            final DomAttr xmlAttribute = new DomAttr(page, namespaceURI, qualifiedName, value, specified);
-            attributes.put(attribute.getNodeName(), xmlAttribute);
-        }
         if (page != null && page.isHtmlPage()) {
             localName = localName.toUpperCase(Locale.ENGLISH);
         }
@@ -264,7 +248,31 @@ public final class XmlUtil {
         else {
             qualifiedName = source.getPrefix() + ':' + localName;
         }
-        return new DomElement(source.getNamespaceURI(), qualifiedName, page, attributes);
+
+        final String namespaceURI = source.getNamespaceURI();
+        if (HTMLParser.SVG_NAMESPACE.equals(namespaceURI)) {
+            return HTMLParser.SVG_FACTORY.createElementNS(page, namespaceURI, qualifiedName,
+                    namedNodeMapToSaxAttributes(nodeAttributes));
+        }
+
+        final Map<String, DomAttr> attributes = new LinkedHashMap<>();
+        for (int i = 0; i < nodeAttributes.getLength(); i++) {
+            final Attr attribute = (Attr) nodeAttributes.item(i);
+            final String attributeNamespaceURI = attribute.getNamespaceURI();
+            final String attributeQualifiedName;
+            if (attribute.getPrefix() != null) {
+                attributeQualifiedName = attribute.getPrefix() + ':' + attribute.getLocalName();
+            }
+            else {
+                attributeQualifiedName = attribute.getLocalName();
+            }
+            final String value = attribute.getNodeValue();
+            final boolean specified = attribute.getSpecified();
+            final DomAttr xmlAttribute =
+                    new DomAttr(page, attributeNamespaceURI, attributeQualifiedName, value, specified);
+            attributes.put(attribute.getNodeName(), xmlAttribute);
+        }
+        return new DomElement(namespaceURI, qualifiedName, page, attributes);
     }
 
     private static Attributes namedNodeMapToSaxAttributes(final NamedNodeMap attributesMap) {

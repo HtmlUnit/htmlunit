@@ -234,7 +234,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
     /**
      * Checks that not passing the async flag to <code>open()</code>
-     * results in async execution.  If this gets interpreted as <code>false</code>
+     * results in async execution.  If this gets interpreted as {@code false}
      * then you will see the alert order 1-2-4-3 instead of 1-2-3-4.
      * @throws Exception if the test fails
      */

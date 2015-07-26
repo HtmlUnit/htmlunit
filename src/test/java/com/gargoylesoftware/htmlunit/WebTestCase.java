@@ -476,7 +476,7 @@ public abstract class WebTestCase {
     /**
      * From Junit. Test if the method is a junit test.
      * @param method the method
-     * @return <code>true</code> if this is a junit test
+     * @return {@code true} if this is a junit test
      */
     private boolean isPublicTestMethod(final Method method) {
         return method.getParameterTypes().length == 0

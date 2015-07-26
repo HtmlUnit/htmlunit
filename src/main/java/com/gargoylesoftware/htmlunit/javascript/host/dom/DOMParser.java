@@ -57,7 +57,7 @@ public class DOMParser extends SimpleScriptable {
      * @param str the Unicode string to be parsed
      * @param type the MIME type of the string -
      *        <code>text/html</code>, <code>text/xml</code>, <code>application/xml</code>,
-     *        <code>application/xhtml+xml</code>, <code>image/svg+xml</code>. Must not be <code>null</code>.
+     *        <code>application/xhtml+xml</code>, <code>image/svg+xml</code>. Must not be {@code null}.
      * @return the generated document
      */
     @JsxFunction

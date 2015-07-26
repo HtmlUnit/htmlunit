@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.svg.SvgElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -208,7 +209,19 @@ public class XMLDocument extends Document {
 
         // TODO: cleanup, getScriptObject() should be used!!!
         if (domNode instanceof DomElement && !(domNode instanceof HtmlElement)) {
-            scriptable = new Element();
+            if (domNode instanceof SvgElement) {
+                final Class<? extends SimpleScriptable> javaScriptClass = getWindow().getWebWindow().getWebClient()
+                        .getJavaScriptEngine().getJavaScriptClass(domNode.getClass());
+                try {
+                    scriptable = javaScriptClass.newInstance();
+                }
+                catch (final Exception e) {
+                    throw Context.throwAsScriptRuntimeEx(e);
+                }
+            }
+            else {
+                scriptable = new Element();
+            }
         }
         else if (domNode instanceof DomAttr) {
             scriptable = new Attr();
@@ -260,18 +273,16 @@ public class XMLDocument extends Document {
      */
     @JsxFunction
     public Object getElementById(final String id) {
-        final XmlPage xmlPage = (XmlPage) getDomNodeOrDie();
-        final Object domElement = xmlPage.getFirstByXPath("//*[@id = \"" + id + "\"]");
-        if (domElement == null) {
-            return null;
-        }
-
-        if (domElement instanceof HtmlElement
-                || getBrowserVersion().hasFeature(JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT)) {
-            return ((DomElement) domElement).getScriptObject();
-        }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("getElementById(" + id + "): no HTML DOM node found with this ID");
+        final DomNode domNode = getDomNodeOrDie();
+        final Object domElement = domNode.getFirstByXPath("//*[@id = \"" + id + "\"]");
+        if (domElement != null) {
+            if (!(domNode instanceof XmlPage) || domElement instanceof HtmlElement
+                    || getBrowserVersion().hasFeature(JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT)) {
+                return ((DomElement) domElement).getScriptObject();
+            }
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("getElementById(" + id + "): no HTML DOM node found with this ID");
+            }
         }
         return null;
     }

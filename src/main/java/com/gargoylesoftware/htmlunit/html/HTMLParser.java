@@ -39,9 +39,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -71,6 +68,7 @@ import org.xml.sax.ext.LexicalHandler;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -79,6 +77,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * <p>SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
@@ -355,10 +356,9 @@ public final class HTMLParser {
      * @param qualifiedName the qualified name
      * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
      */
-    static ElementFactory getElementFactory(final HtmlPage page, final String namespaceURI,
+    static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
             final String qualifiedName) {
-        if (SVG_NAMESPACE.equals(namespaceURI)
-                && page.hasFeature(SVG)) {
+        if (SVG_NAMESPACE.equals(namespaceURI) && page.hasFeature(SVG)) {
             return SVG_FACTORY;
         }
         if (namespaceURI == null || namespaceURI.isEmpty()

@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -1031,35 +1032,35 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         /** {@inheritDoc} */
         @Override
         public Object execute(
-                final HtmlPage htmlPage, final String sourceCode,
+                final InteractivePage page, final String sourceCode,
                 final String sourceName, final int startLine) {
             scriptExecutionCount_++;
-            return super.execute(htmlPage, sourceCode, sourceName, startLine);
+            return super.execute(page, sourceCode, sourceName, startLine);
         }
 
         /** {@inheritDoc} */
         @Override
-        public Object execute(final HtmlPage htmlPage, final Script script) {
+        public Object execute(final InteractivePage page, final Script script) {
             scriptExecuteScriptCount_++;
-            return super.execute(htmlPage, script);
+            return super.execute(page, script);
         }
 
         /** {@inheritDoc} */
         @Override
-        public Script compile(final HtmlPage htmlPage, final String sourceCode,
+        public Script compile(final InteractivePage page, final String sourceCode,
                 final String sourceName, final int startLine) {
             scriptCompileCount_++;
-            return super.compile(htmlPage, sourceCode, sourceName, startLine);
+            return super.compile(page, sourceCode, sourceName, startLine);
         }
 
         /** {@inheritDoc} */
         @Override
         public Object callFunction(
-                final HtmlPage htmlPage, final Function javaScriptFunction,
+                final InteractivePage page, final Function javaScriptFunction,
                 final Scriptable thisObject, final Object[] args,
                 final DomNode htmlElementScope) {
             scriptCallCount_++;
-            return super.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
+            return super.callFunction(page, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
         /** @return the number of times that this engine has called functions */
@@ -1192,14 +1193,14 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setJavaScriptEngine(new JavaScriptEngine(client) {
             @Override
-            public Object execute(final HtmlPage htmlPage, final String sourceCode,
+            public Object execute(final InteractivePage htmlPage, final String sourceCode,
                     final String sourceName, final int startLine) {
                 collectedScripts.add(sourceCode);
                 return null;
             }
             @Override
             public Object callFunction(
-                    final HtmlPage htmlPage, final Function javaScriptFunction,
+                    final InteractivePage htmlPage, final Function javaScriptFunction,
                     final Scriptable thisObject, final Object[] args,
                     final DomNode htmlElement) {
                 return null;

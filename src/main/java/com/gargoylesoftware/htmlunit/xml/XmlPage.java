@@ -164,7 +164,7 @@ public class XmlPage extends SgmlPage {
 
     /**
      * Returns the DOM representation of the XML content.
-     * @return <code>null</code> if the content couldn't be parsed
+     * @return {@code null} if the content couldn't be parsed
      */
     public Document getXmlDocument() {
         if (node_ != null) {

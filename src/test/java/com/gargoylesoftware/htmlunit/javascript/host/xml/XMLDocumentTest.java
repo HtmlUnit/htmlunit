@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -22,10 +23,14 @@ import java.net.URL;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -1074,6 +1079,45 @@ public class XMLDocumentTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLDocument]",
+            IE8 = "[object]",
+            IE11 = "[object Document]")
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    public void html() throws Exception {
+        final String svg
+            = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+            + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
+            + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"green\" onclick=\"alert(document)\"/>\n"
+            + "</svg>";
+        final WebDriver driver = loadPage2(svg);
+        driver.findElement(By.id("rect")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            IE8 = {},
+            IE11 = "[object Document]")
+    @BuggyWebDriver(CHROME)
+    @NotYetImplemented
+    public void svg() throws Exception {
+        final String svg
+            = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+            + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
+            + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"green\" onclick=\"alert(document)\"/>\n"
+            + "</svg>";
+        final WebDriver driver = loadPage2(svg, URL_FIRST, "text/xml", TextUtil.DEFAULT_CHARSET);
+        driver.findElement(By.id("rect")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
 }

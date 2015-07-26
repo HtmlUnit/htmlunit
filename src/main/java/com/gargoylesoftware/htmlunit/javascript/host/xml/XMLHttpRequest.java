@@ -473,7 +473,7 @@ public class XMLHttpRequest extends EventTarget {
      * Assigns the destination URL, method and other optional attributes of a pending request.
      * @param method the method to use to send the request to the server (GET, POST, etc)
      * @param urlParam the URL to send the request to
-     * @param asyncParam Whether or not to send the request to the server asynchronously, defaults to <code>true</code>
+     * @param asyncParam Whether or not to send the request to the server asynchronously, defaults to {@code true}
      * @param user If authentication is needed for the specified URL, the username to use to authenticate
      * @param password If authentication is needed for the specified URL, the password to use to authenticate
      */
@@ -882,7 +882,7 @@ public class XMLHttpRequest extends EventTarget {
      * Not all request headers can be set from JavaScript.
      * @see <a href="http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method">W3C doc</a>
      * @param name the header name
-     * @return <code>true</code> if the header can be set from JavaScript
+     * @return {@code true} if the header can be set from JavaScript
      */
     static boolean isAuthorizedHeader(final String name) {
         final String nameLowerCase = name.toLowerCase(Locale.ENGLISH);

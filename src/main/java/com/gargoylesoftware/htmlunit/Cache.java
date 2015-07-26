@@ -147,6 +147,9 @@ public class Cache implements Serializable {
             while (entries_.size() > maxSize_) {
                 final Entry oldestEntry = Collections.min(entries_.values());
                 entries_.remove(oldestEntry.key_);
+                if (oldestEntry.response_ != null) {
+                    oldestEntry.response_.cleanUp();
+                }
             }
         }
     }
@@ -156,7 +159,7 @@ public class Cache implements Serializable {
      *
      * @param request the performed request
      * @param response the received response
-     * @return <code>true</code> if the response can be cached
+     * @return {@code true} if the response can be cached
      */
     protected boolean isCacheable(final WebRequest request, final WebResponse response) {
         return HttpMethod.GET == response.getWebRequest().getHttpMethod()
@@ -176,7 +179,7 @@ public class Cache implements Serializable {
      *
      * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">RFC 2616</a>
      * @param response the response to examine
-     * @return <code>true</code> if the response should be considered as dynamic and therefore uncacheable
+     * @return {@code true} if the response should be considered as dynamic and therefore uncacheable
      */
     protected boolean isDynamicContent(final WebResponse response) {
         final Date lastModified = parseDateHeader(response, "Last-Modified");
@@ -201,8 +204,7 @@ public class Cache implements Serializable {
 
     /**
      * Parses and returns the specified date header of the specified response. This method
-     * returns <tt>null</tt> if the specified header cannot be found or cannot be parsed as
-     * a date.
+     * returns {@code null} if the specified header cannot be found or cannot be parsed as a date.
      *
      * @param response the response
      * @param headerName the header name
@@ -222,7 +224,7 @@ public class Cache implements Serializable {
 
     /**
      * Returns the cached response corresponding to the specified request. If there is
-     * no corresponding cached object, this method returns <tt>null</tt>.
+     * no corresponding cached object, this method returns {@code null}.
      *
      * @param request the request whose corresponding response is sought
      * @return the cached response corresponding to the specified request if any
@@ -243,7 +245,7 @@ public class Cache implements Serializable {
 
     /**
      * Returns the cached object corresponding to the specified request. If there is
-     * no corresponding cached object, this method returns <tt>null</tt>.
+     * no corresponding cached object, this method returns {@code null}.
      *
      * @param request the request whose corresponding cached compiled script is sought
      * @return the cached object corresponding to the specified request if any
@@ -264,7 +266,7 @@ public class Cache implements Serializable {
 
     /**
      * Returns the cached parsed version of the specified CSS snippet. If there is no
-     * corresponding cached stylesheet, this method returns <tt>null</tt>.
+     * corresponding cached stylesheet, this method returns {@code null}.
      *
      * @param css the CSS snippet whose cached stylesheet is sought
      * @return the cached stylesheet corresponding to the specified CSS snippet
@@ -318,6 +320,11 @@ public class Cache implements Serializable {
      */
     public void clear() {
         synchronized (entries_) {
+            for (final Entry entry : entries_.values()) {
+                if (entry.response_ != null) {
+                    entry.response_.cleanUp();
+                }
+            }
             entries_.clear();
         }
     }

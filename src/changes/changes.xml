@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.18" date="???" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
+            <action type="add" dev="asashour">
+                Introduce AbstractPage.
+            </action>
+            <action type="update" dev="asashour">
+                HtmlPage: change return type of .getFocusedElement() to DomElement.
+            </action>
+            <action type="fix" dev="asashour">
+                Cache: clean up cached WebResponse only when it moves out of cache.
+            </action>
             <action type="update" dev="asashour">
                 XmlPage: deprecate .getContent(), .createXmlElement(), .createXmlElementNS()
                 and .getXmlElementDescendants().

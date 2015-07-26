@@ -728,7 +728,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the specified attribute.
      * @param namespaceURI the namespace URI
      * @param localName the local name of the attribute to look for
-     * @return the specified attribute, <code>null</code> if the attribute is not defined
+     * @return the specified attribute, {@code null} if the attribute is not defined
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Object getAttributeNodeNS(final String namespaceURI, final String localName) {
@@ -1655,7 +1655,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Downloads all the components queued via {@link #addComponentRequest(String, String, String)}.
      * @return <tt>true</tt> if the components are downloaded successfully
-     * Current implementation always return <code>false</code>
+     * Current implementation always return {@code false}
      */
     public boolean doComponentRequest() {
         return false;
@@ -2684,8 +2684,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the offset parent or <code>null</code> if this is not an {@link HTMLElement}.
-     * @return the offset parent or <code>null</code>
+     * Gets the offset parent or {@code null} if this is not an {@link HTMLElement}.
+     * @return the offset parent or {@code null}
      */
     private HTMLElement getOffsetParent() {
         final Object offsetParent = getOffsetParentInternal(false);
@@ -2782,7 +2782,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * <tt>offsetTop</tt> attributes are relative to the <tt>offsetParent</tt>.
      *
      * @return this element's <tt>offsetParent</tt>. This may be <code>undefined</code> when this node is
-     * not attached or <code>null</code> for <code>body</code>.
+     * not attached or {@code null} for <code>body</code>.
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534302.aspx">MSDN Documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM Reference</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>

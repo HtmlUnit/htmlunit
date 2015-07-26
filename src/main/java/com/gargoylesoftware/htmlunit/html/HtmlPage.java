@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IN_STANDARDS_MODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 
 import java.io.File;
@@ -56,16 +55,15 @@ import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.ProcessingInstruction;
-import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.History;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -74,12 +72,9 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
-import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
-import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
@@ -88,7 +83,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -134,7 +128,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlPage extends SgmlPage {
+public class HtmlPage extends InteractivePage {
 
     private static final Log LOG = LogFactory.getLog(HtmlPage.class);
 
@@ -149,13 +143,11 @@ public class HtmlPage extends SgmlPage {
             = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
 
     private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<>(documentPositionComparator);
-    private DomElement elementWithFocus_;
     private int parserCount_;
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
     private Collection<HtmlAttributeChangeListener> attributeListeners_;
     private final Object lock_ = new String(); // used for synchronization
-    private List<Range> selectionRanges_ = new ArrayList<>(3);
     private List<PostponedAction> afterLoadActions_ = new ArrayList<>();
     private boolean cleaning_;
     private HtmlBase base_;
@@ -238,7 +230,7 @@ public class HtmlPage extends SgmlPage {
         // see Node.initInlineFrameIfNeeded()
         if (!isAboutBlank) {
             if (hasFeature(FOCUS_BODY_ELEMENT_AT_START)) {
-                elementWithFocus_ = getBody();
+                setElementWithFocus(getBody());
             }
             setReadyState(READY_STATE_COMPLETE);
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
@@ -954,33 +946,6 @@ public class HtmlPage extends SgmlPage {
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Execute a Function in the given context.
-     *
-     * @param function the JavaScript Function to call
-     * @param thisObject the "this" object to be used during invocation
-     * @param args the arguments to pass into the call
-     * @param htmlElementScope the HTML element for which this script is being executed
-     * This element will be the context during the JavaScript execution. If null,
-     * the context will default to the page.
-     * @return a ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a JavaScript result object.
-     */
-    public ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
-            final Object[] args, final DomNode htmlElementScope) {
-
-        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
-            return new ScriptResult(null, this);
-        }
-
-        final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
-        final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
-
-        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
-    }
-
     /** Various possible external JavaScript file loading results. */
     enum JavaScriptLoadResult {
         /** The load was aborted and nothing was done. */
@@ -1210,7 +1175,7 @@ public class HtmlPage extends SgmlPage {
      * Gets the first child of startElement that is an instance of the given class.
      * @param startElement the parent element
      * @param clazz the class to search for
-     * @return <code>null</code> if no child found
+     * @return {@code null} if no child found
      */
     private DomElement getFirstChildElement(final DomElement startElement, final Class<?> clazz) {
         if (startElement == null) {
@@ -1229,7 +1194,7 @@ public class HtmlPage extends SgmlPage {
      * Gets the first child of startElement or it's children that is an instance of the given class.
      * @param startElement the parent element
      * @param clazz the class to search for
-     * @return <code>null</code> if no child found
+     * @return {@code null} if no child found
      */
     private DomElement getFirstChildElementRecursive(final DomElement startElement, final Class<?> clazz) {
         if (startElement == null) {
@@ -1938,7 +1903,7 @@ public class HtmlPage extends SgmlPage {
      * Indicates if the attribute name indicates that the owning element is mapped.
      * @param document the owning document
      * @param attributeName the name of the attribute to consider
-     * @return <code>true</code> if the owning element should be mapped in its owning page
+     * @return {@code true} if the owning element should be mapped in its owning page
      */
     static boolean isMappedElement(final Document document, final String attributeName) {
         return (document instanceof HtmlPage)
@@ -1997,101 +1962,8 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Moves the focus to the specified element. This will trigger any relevant JavaScript
-     * event handlers.
-     *
-     * @param newElement the element that will receive the focus, use <code>null</code> to remove focus from any element
-     * @return true if the specified element now has the focus
-     * @see #getFocusedElement()
-     * @see #tabToNextElement()
-     * @see #tabToPreviousElement()
-     * @see #pressAccessKey(char)
-     * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
-     */
-    public boolean setFocusedElement(final DomElement newElement) {
-        return setFocusedElement(newElement, false);
-    }
-
-    /**
-     * Moves the focus to the specified element. This will trigger any relevant JavaScript
-     * event handlers.
-     *
-     * @param newElement the element that will receive the focus, use <code>null</code> to remove focus from any element
-     * @param windowActivated - whether the enclosing window got focus resulting in specified element getting focus
-     * @return true if the specified element now has the focus
-     * @see #getFocusedElement()
-     * @see #tabToNextElement()
-     * @see #tabToPreviousElement()
-     * @see #pressAccessKey(char)
-     * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
-     */
-    public boolean setFocusedElement(final DomElement newElement, final boolean windowActivated) {
-        if (elementWithFocus_ == newElement && !windowActivated) {
-            // nothing to do
-            return true;
-        }
-
-        final DomElement oldFocusedElement = elementWithFocus_;
-        elementWithFocus_ = null;
-
-        if (!windowActivated) {
-            if (oldFocusedElement != null) {
-                oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
-            }
-
-            if (newElement != null) {
-                newElement.fireEvent(Event.TYPE_FOCUS_IN);
-            }
-
-            if (oldFocusedElement != null) {
-                oldFocusedElement.removeFocus();
-                oldFocusedElement.fireEvent(Event.TYPE_BLUR);
-            }
-        }
-
-        elementWithFocus_ = newElement;
-
-        if (elementWithFocus_ instanceof SelectableTextInput
-                && hasFeature(PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
-            final SelectableTextInput sti = (SelectableTextInput) elementWithFocus_;
-            setSelectionRange(new SimpleRange(sti, sti.getSelectionStart(), sti, sti.getSelectionEnd()));
-        }
-
-        if (elementWithFocus_ != null) {
-            elementWithFocus_.focus();
-            elementWithFocus_.fireEvent(Event.TYPE_FOCUS);
-        }
-
-        // If a page reload happened as a result of the focus change then obviously this
-        // element will not have the focus because its page has gone away.
-        return this == getEnclosingWindow().getEnclosedPage();
-    }
-
-    /**
-     * Returns the element with the focus or null if no element has the focus.
-     * @return the element with focus or null
-     * @see #setFocusedElement(DomElement)
-     * @deprecated as of 2.18, the return type will be {@code DomNode} in the next release
-     */
-    @Deprecated
-    public HtmlElement getFocusedElement() {
-        return (HtmlElement) elementWithFocus_;
-    }
-
-    /**
-     * Returns the element with the focus or null if no element has the focus.
-     * @return the element with focus or null
-     * @see #setFocusedElement(DomElement)
-     * @deprecated as of 2.18, please use {@link #getFocusedElement()}
-     */
-    @Deprecated
-    public DomElement getDomFocusedElement() {
-        return elementWithFocus_;
-    }
-
-    /**
-     * Gets the meta tag for a given http-equiv value.
-     * @param httpEquiv the http-equiv value
+     * Gets the meta tag for a given {@code http-equiv} value.
+     * @param httpEquiv the {@code http-equiv} value
      * @return a list of {@link HtmlMeta}
      */
     protected List<HtmlMeta> getMetaTags(final String httpEquiv) {
@@ -2110,8 +1982,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Creates a clone of this instance, and clears cached state
-     * to be not shared with the original.
+     * Creates a clone of this instance, and clears cached state to be not shared with the original.
      *
      * @return a clone of this instance
      */
@@ -2119,33 +1990,27 @@ public class HtmlPage extends SgmlPage {
     protected HtmlPage clone() {
         final HtmlPage result = (HtmlPage) super.clone();
 
-        result.elementWithFocus_ = null;
-        result.idMap_.clear();
-        result.nameMap_.clear();
+        result.idMap_ = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
+        result.nameMap_ = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
 
         return result;
     }
 
     /**
      * {@inheritDoc}
-     * Override cloneNode to add cloned elements to the clone, not to the original.
      */
     @Override
     public HtmlPage cloneNode(final boolean deep) {
         // we need the ScriptObject clone before cloning the kids.
-        final HtmlPage result = (HtmlPage) super.cloneNode(false);
-        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptObject()).clone();
-        jsObjClone.setDomNode(result);
+        final HtmlPage result = (HtmlPage) super.cloneNode(deep);
 
         // if deep, clone the kids too, and re initialize parts of the clone
         if (deep) {
             synchronized (lock_) {
                 result.attributeListeners_ = null;
             }
-            result.selectionRanges_ = new ArrayList<>(3);
             result.afterLoadActions_ = new ArrayList<>();
             result.frameElements_ = new TreeSet<>(documentPositionComparator);
-
             for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
                 result.appendChild(child.cloneNode(true));
             }
@@ -2373,30 +2238,6 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
-     *
-     * <p>Returns the page's current selection ranges. Note that some browsers, like IE, only allow
-     * a single selection at a time.</p>
-     *
-     * @return the page's current selection ranges
-     */
-    public List<Range> getSelectionRanges() {
-        return selectionRanges_;
-    }
-
-    /**
-     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
-     *
-     * <p>Makes the specified selection range the *only* selection range on this page.</p>
-     *
-     * @param selectionRange the selection range
-     */
-    public void setSelectionRange(final Range selectionRange) {
-        selectionRanges_.clear();
-        selectionRanges_.add(selectionRange);
-    }
-
-    /**
      * <p>Returns all namespaces defined in the root element of this page.</p>
      * <p>The default namespace has a key of an empty string.</p>
      * @return all namespaces defined in the root element of this page
@@ -2466,5 +2307,14 @@ public class HtmlPage extends SgmlPage {
     @Override
     public boolean isHtmlPage() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    //TODO: to be removed, once WebDriver 2.47.0 is released
+    public HtmlElement getFocusedElement() {
+        return (HtmlElement) super.getFocusedElement();
     }
 }

@@ -445,7 +445,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    void removeFocus() {
+    public void removeFocus() {
         super.removeFocus();
         if (!valueAtFocus_.equals(getText())) {
             HtmlInput.executeOnChangeHandlerIfAppropriate(this);
@@ -515,7 +515,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * {@inheritDoc}
-     * @return <code>true</code> to make generated XML readable as HTML
+     * @return {@code true} to make generated XML readable as HTML
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {

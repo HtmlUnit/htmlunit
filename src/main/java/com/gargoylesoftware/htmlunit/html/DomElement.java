@@ -42,6 +42,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -87,7 +88,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
-     * <code>null</code>. The map will be stored as is, not copied.
+     * {@code null}. The map will be stored as is, not copied.
      */
     public DomElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
@@ -202,7 +203,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     /**
      * Indicates if a node without children should be written in expanded form as XML
      * (i.e. with closing tag rather than with "/&gt;")
-     * @return <code>false</code> by default
+     * @return {@code false} by default
      */
     protected boolean isEmptyXmlTagExpanded() {
         return false;
@@ -348,7 +349,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
 
     /**
      * Indicates if the attribute names are case sensitive.
-     * @return <code>true</code>
+     * @return {@code true}
      */
     protected boolean isAttributeCaseSensitive() {
         return true;
@@ -700,7 +701,8 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         final SgmlPage page = getPage();
         page.getWebClient().setCurrentWindow(page.getEnclosingWindow());
 
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+        if (!(page instanceof InteractivePage)
+                || (this instanceof DisabledElement && ((DisabledElement) this).isDisabled())) {
             return (P) page;
         }
 
@@ -715,7 +717,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             else if (this instanceof HtmlOption) {
                 elementToFocus = ((HtmlOption) this).getEnclosingSelect();
             }
-            ((HtmlPage) page).setFocusedElement(elementToFocus);
+            ((InteractivePage) page).setFocusedElement(elementToFocus);
 
             mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
 
@@ -1101,7 +1103,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
-        final HtmlPage page = (HtmlPage) getPage();
+        final Page page = getPage();
         final Event event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
             && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
@@ -1126,7 +1128,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      *
      * Shortcut for {@link #fireEvent(Event)}.
      * @param eventType the event type (like "load", "click")
-     * @return the execution result, or <code>null</code> if nothing is executed
+     * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final String eventType) {
         return fireEvent(new Event(this, eventType));
@@ -1196,9 +1198,11 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
-     * Gets notified that it has lost the focus
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Gets notified that it has lost the focus.
      */
-    void removeFocus() {
+    public void removeFocus() {
         // nothing
     }
 

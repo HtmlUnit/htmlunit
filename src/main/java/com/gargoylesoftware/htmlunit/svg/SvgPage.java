@@ -22,9 +22,10 @@ import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
@@ -35,7 +36,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class SvgPage extends SgmlPage {
+public class SvgPage extends InteractivePage {
 
     private Node node_;
 
@@ -134,11 +135,10 @@ public class SvgPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
-    public Element getElementById(final String elementId) {
-        throw new UnsupportedOperationException("SvgPage.getElementById is not yet implemented.");
+    public DomElement getElementById(final String elementId) {
+        return getFirstByXPath("//*[@id='" + elementId + "']");
     }
 
     /**

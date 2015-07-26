@@ -15,6 +15,11 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.util.StringUtils.formatHttpDate;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -32,6 +37,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Tests for {@link Cache}.
@@ -351,6 +357,67 @@ public class CacheTest extends SimpleWebTestCase {
         loadPageWithAlerts(html);
 
         assertEquals(2, connection.getRequestCount());
+    }
+
+    /**
+     * Ensures {@link WebResponse#cleanUp()} is called for overflow deleted entries.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cleanUpOverflow() throws Exception {
+        final WebRequest request1 = new WebRequest(URL_FIRST, HttpMethod.GET);
+        final WebResponse response1 = createMock(WebResponse.class);
+        expect(response1.getWebRequest()).andReturn(request1);
+        expectLastCall().atLeastOnce();
+        expect(response1.getResponseHeaderValue("Last-Modified")).andReturn(null);
+        expect(response1.getResponseHeaderValue("Expires")).andReturn(
+                StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1)));
+
+        final WebRequest request2 = new WebRequest(URL_SECOND, HttpMethod.GET);
+        final WebResponse response2 = createMock(WebResponse.class);
+        expect(response2.getWebRequest()).andReturn(request2);
+        expectLastCall().atLeastOnce();
+        expect(response2.getResponseHeaderValue("Last-Modified")).andReturn(null);
+        expect(response2.getResponseHeaderValue("Expires")).andReturn(
+                StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1)));
+
+        response1.cleanUp();
+
+        replay(response1, response2);
+
+        final Cache cache = new Cache();
+        cache.setMaxSize(1);
+        cache.cacheIfPossible(request1, response1, null);
+        Thread.sleep(10);
+        cache.cacheIfPossible(request2, response2, null);
+
+        verify(response1);
+    }
+
+    /**
+     * Ensures {@link WebResponse#cleanUp()} is called on calling {@link Cache#clear()}.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cleanUpOnClear() throws Exception {
+        final WebRequest request1 = new WebRequest(URL_FIRST, HttpMethod.GET);
+        final WebResponse response1 = createMock(WebResponse.class);
+        expect(response1.getWebRequest()).andReturn(request1);
+        expectLastCall().atLeastOnce();
+        expect(response1.getResponseHeaderValue("Last-Modified")).andReturn(null);
+        expect(response1.getResponseHeaderValue("Expires")).andReturn(
+                StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1)));
+
+        response1.cleanUp();
+
+        replay(response1);
+
+        final Cache cache = new Cache();
+        cache.cacheIfPossible(request1, response1, null);
+
+        cache.clear();
+
+        verify(response1);
     }
 }
 

@@ -65,7 +65,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
         setParentScope(doc);
         setPrototype(getPrototype(getClass()));
 
-        final Map<String, String> namespacesMap = doc_.getHtmlPage().getNamespaces();
+        final Map<String, String> namespacesMap = doc_.getPage().getNamespaces();
         for (final Map.Entry<String, String> entry : namespacesMap.entrySet()) {
             final String key = entry.getKey();
             if (!key.isEmpty()) {

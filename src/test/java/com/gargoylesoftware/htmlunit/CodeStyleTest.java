@@ -104,7 +104,7 @@ public class CodeStyleTest {
                 else {
                     final String relativePath = file.getAbsolutePath().substring(
                             new File(".").getAbsolutePath().length() - 1);
-                    svnProperties(file, relativePath);
+                    //svnProperties(file, relativePath);
                     if (file.getName().endsWith(".java")) {
                         final List<String> lines = FileUtils.readLines(file);
                         openingCurlyBracket(lines, relativePath);

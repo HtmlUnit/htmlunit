@@ -14,22 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.net.URL;
-
 /**
  * A generic page that will be returned for JavaScript content.
- * Specifically any content types of "text/javascript"
+ * Specifically any content types of {@code text/javascript}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
-public class JavaScriptPage implements Page {
-
-    private final WebResponse webResponse_;
-    private final String content_;
-    private WebWindow enclosingWindow_;
+public class JavaScriptPage extends AbstractPage {
 
     /**
      * Creates an instance.
@@ -38,25 +33,7 @@ public class JavaScriptPage implements Page {
      * @param enclosingWindow the window that holds the page
      */
     public JavaScriptPage(final WebResponse webResponse, final WebWindow enclosingWindow) {
-        webResponse_ = webResponse;
-        content_ = webResponse.getContentAsString();
-        enclosingWindow_ = enclosingWindow;
-    }
-
-    /**
-     * Initializes this page.
-     */
-    @Override
-    public void initialize() {
-        // nothing to do
-    }
-
-    /**
-     * Cleans up this page.
-     */
-    @Override
-    public void cleanUp() {
-        webResponse_.cleanUp();
+        super(webResponse, enclosingWindow);
     }
 
     /**
@@ -65,40 +42,7 @@ public class JavaScriptPage implements Page {
      * @return the content of the page
      */
     public String getContent() {
-        return content_;
+        return getWebResponse().getContentAsString();
     }
 
-    /**
-     * Returns the web response that was originally used to create this page.
-     *
-     * @return the web response that was originally used to create this page
-     */
-    @Override
-    public WebResponse getWebResponse() {
-        return webResponse_;
-    }
-
-    /**
-     * Returns the window that this page is sitting inside.
-     *
-     * @return the enclosing frame or null if this page isn't inside a frame
-     */
-    @Override
-    public WebWindow getEnclosingWindow() {
-        return enclosingWindow_;
-    }
-
-    /**
-     * Returns the URL of this page.
-     * @return the URL of this page
-     */
-    @Override
-    public URL getUrl() {
-        return getWebResponse().getWebRequest().getUrl();
-    }
-
-    @Override
-    public boolean isHtmlPage() {
-        return false;
-    }
 }

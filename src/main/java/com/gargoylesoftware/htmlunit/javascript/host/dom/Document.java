@@ -271,7 +271,7 @@ public class Document extends EventNode {
      * Returns the page that this document is modeling.
      * @return the page that this document is modeling
      */
-    protected SgmlPage getPage() {
+    public SgmlPage getPage() {
         return (SgmlPage) getDomNodeOrDie();
     }
 

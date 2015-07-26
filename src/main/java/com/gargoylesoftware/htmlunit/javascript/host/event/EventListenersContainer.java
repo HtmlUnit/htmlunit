@@ -27,6 +27,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
@@ -86,8 +87,8 @@ public class EventListenersContainer implements Serializable {
      * Adds an event listener.
      * @param type the event type to listen for (like "load")
      * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
-     * @return <code>true</code> if the listener has been added
+     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
+     * @return {@code true} if the listener has been added
      */
     public boolean addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         if (null == listener) {
@@ -225,7 +226,7 @@ public class EventListenersContainer implements Serializable {
         final Function handler = getEventHandler(event.getType());
         if (handler != null) {
             event.setCurrentTarget(jsNode_);
-            final HtmlPage page = (HtmlPage) (node != null
+            final InteractivePage page = (InteractivePage) (node != null
                     ? node.getPage()
                     : jsNode_.getWindow().getWebWindow().getEnclosedPage());
             if (LOG.isDebugEnabled()) {
@@ -278,7 +279,7 @@ public class EventListenersContainer implements Serializable {
     /**
      * Gets an event handler.
      * @param eventName the event name (e.g. "click")
-     * @return the handler function, <code>null</code> if the property is null or not a function
+     * @return the handler function, {@code null} if the property is null or not a function
      */
     public Function getEventHandler(final String eventName) {
         final Object handler = getEventHandlerProp(eventName.toLowerCase(Locale.ENGLISH));

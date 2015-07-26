@@ -584,8 +584,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         valueAtFocus_ = getInternalValue();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    final void removeFocus() {
+    public final void removeFocus() {
         super.removeFocus();
 
         if (!valueAtFocus_.equals(getInternalValue())) {
