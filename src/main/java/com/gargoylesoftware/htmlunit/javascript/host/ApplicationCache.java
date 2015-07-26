@@ -210,7 +210,7 @@ public class ApplicationCache extends EventTarget {
      * Allows the registration of event listeners on the event target.
      * @param type the event type to listen for (like "onload")
      * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      */
     @Override
@@ -223,7 +223,7 @@ public class ApplicationCache extends EventTarget {
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "load")
      * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
      * documentation</a>
      */

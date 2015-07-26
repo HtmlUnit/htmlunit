@@ -196,7 +196,7 @@ public class Element extends EventNode {
      * Returns the value of the specified attribute.
      * @param attributeName attribute name
      * @param flags IE-specific flags (see the MSDN documentation for more info)
-     * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
+     * @return the value of the specified attribute, {@code null} if the attribute is not defined
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
@@ -296,7 +296,7 @@ public class Element extends EventNode {
     /**
      * Retrieves an attribute node by name.
      * @param name the name of the attribute to retrieve
-     * @return the XMLAttr node with the specified name or <code>null</code> if there is no such attribute
+     * @return the XMLAttr node with the specified name or {@code null} if there is no such attribute
      */
     @JsxFunction
     public Object getAttributeNode(final String name) {
@@ -537,7 +537,7 @@ public class Element extends EventNode {
      * Gets the specified attribute.
      * @param namespaceURI the namespace URI
      * @param localName the local name of the attribute to look for
-     * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
+     * @return the value of the specified attribute, {@code null} if the attribute is not defined
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public String getAttributeNS(final String namespaceURI, final String localName) {
@@ -551,7 +551,7 @@ public class Element extends EventNode {
      *
      * @param namespaceURI the namespace URI
      * @param localName the local name of the attribute to look for
-     * @return <code>true</code> if the node has this attribute
+     * @return {@code true} if the node has this attribute
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean hasAttributeNS(final String namespaceURI, final String localName) {
