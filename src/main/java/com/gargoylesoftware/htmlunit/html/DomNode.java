@@ -136,7 +136,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private DomNode previousSibling_;
 
     /**
-     * The next sibling. The last child's <code>nextSibling</code> is <code>null</code>
+     * The next sibling. The last child's <code>nextSibling</code> is {@code null}
      */
     private DomNode nextSibling_;
 
@@ -800,7 +800,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Indicates if the text representation of this element is made as a block, ie if new lines need
      * to be inserted before and after it.
-     * @return <code>true</code> if this element represents a block
+     * @return {@code true} if this element represents a block
      */
     protected boolean isBlock() {
         return false;
@@ -1509,7 +1509,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         /**
          * Indicates if the node is accepted. If not it won't be explored at all.
          * @param node the node to test
-         * @return <code>true</code> if accepted
+         * @return {@code true} if accepted
          */
         protected boolean isAccepted(final DomNode node) {
             return type_.isAssignableFrom(node.getClass());
@@ -1919,7 +1919,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Indicates if this node is currently directly attached to the page.
-     * @return <code>true</code> if the page is one ancestor of the node.
+     * @return {@code true} if the page is one ancestor of the node.
      */
     public boolean isDirectlyAttachedToPage() {
         return directlyAttachedToPage_;
@@ -1943,7 +1943,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Helper for a common call sequence.
      * @param feature the feature to check
-     * @return <code>true</code> if the currently emulated browser has this feature.
+     * @return {@code true} if the currently emulated browser has this feature.
      */
     public boolean hasFeature(final BrowserVersionFeatures feature) {
         return getPage().getWebClient().getBrowserVersion().hasFeature(feature);

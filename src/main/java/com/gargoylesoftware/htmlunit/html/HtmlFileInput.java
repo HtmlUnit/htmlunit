@@ -88,7 +88,7 @@ public class HtmlFileInput extends HtmlInput {
 
     /**
      * Returns the in-memory data assigned to this file input element, if any.
-     * @return <code>null</code> if {@link #setData(byte[])} hasn't be used
+     * @return {@code null} if {@link #setData(byte[])} hasn't be used
      */
     public final byte[] getData() {
         return data_;

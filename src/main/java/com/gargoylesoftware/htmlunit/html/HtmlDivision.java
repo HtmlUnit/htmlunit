@@ -60,7 +60,7 @@ public class HtmlDivision extends HtmlElement {
 
     /**
      * {@inheritDoc}
-     * @return <code>true</code> to make generated XML readable as HTML
+     * @return {@code true} to make generated XML readable as HTML
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {

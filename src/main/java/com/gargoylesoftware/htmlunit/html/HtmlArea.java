@@ -210,7 +210,7 @@ public class HtmlArea extends HtmlElement {
      * Indicates if this area contains the specified point.
      * @param x the x coordinate of the point
      * @param y the y coordinate of the point
-     * @return <code>true</code> if the point is contained in this area
+     * @return {@code true} if the point is contained in this area
      */
     boolean containsPoint(final int x, final int y) {
         final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase(Locale.ENGLISH);

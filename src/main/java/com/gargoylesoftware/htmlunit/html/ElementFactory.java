@@ -19,7 +19,7 @@ import org.xml.sax.Attributes;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * Specification of a factory capable of creating {@link HtmlElement} objects.
+ * Specification of a factory capable of creating {@link DomElement} objects.
  *
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
