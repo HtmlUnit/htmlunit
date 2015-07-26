@@ -47,10 +47,10 @@ import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
  * &#064;RunWith(BrowserRunner.class)
  * public class SomeTest extends WebTestCase {
  *
- *    &#064;Test
- *    public void test() {
- *      getBrowserVersion();// returns the currently used BrowserVersion
- *    }
+ *     &#064;Test
+ *     public void test() {
+ *         getBrowserVersion();// returns the currently used BrowserVersion
+ *     }
  * }
  * </pre>
  * @version $Revision$
