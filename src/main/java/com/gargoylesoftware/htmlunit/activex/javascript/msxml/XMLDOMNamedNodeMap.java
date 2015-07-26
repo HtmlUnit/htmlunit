@@ -113,7 +113,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
      * @see #getNamedItem(String)
      *
      * @param name attribute name
-     * @return the attribute node, <code>null</code> if the attribute is not defined
+     * @return the attribute node, {@code null} if the attribute is not defined
      */
     public Object getNamedItemWithoutSyntheticClassAttr(final String name) {
         final DomNode attr = (DomNode) attributes_.getNamedItem(name);
@@ -126,7 +126,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
     /**
      * Retrieves the attribute with the specified name.
      * @param name specifies the name of the attribute
-     * @return the attribute node, <code>null</code> if the attribute is not defined
+     * @return the attribute node, {@code null} if the attribute is not defined
      */
     @JsxFunction
     public Object getNamedItem(final String name) {
@@ -157,7 +157,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
 
     /**
      * Returns the next node in the collection.
-     * @return the next node in the collection or <code>null</code> if there is no next node
+     * @return the next node in the collection or {@code null} if there is no next node
      */
     @JsxFunction
     public Object nextNode() {
@@ -167,7 +167,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
     /**
      * Removes an attribute from the collection.
      * @param name the string specifying the name of the attribute to remove from the collection
-     * @return the node removed from the collection or <code>null</code> if the named node is not an attribute
+     * @return the node removed from the collection or {@code null} if the named node is not an attribute
      */
     @JsxFunction
     public Object removeNamedItem(final String name) {

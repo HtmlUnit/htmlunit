@@ -379,8 +379,8 @@ public class XMLDOMNode extends MSXMLScriptable {
     /**
      * Clones a new node.
      * @param deep flag that indicates whether to recursively clone all nodes that are descendants of this node;
-     *     if <code>true</code>, creates a clone of the complete tree below this node,
-     *     if <code>false</code>, clones this node and its attributes only
+     *     if {@code true}, creates a clone of the complete tree below this node,
+     *     if {@code false}, clones this node and its attributes only
      * @return the newly created clone node
      */
     @JsxFunction
@@ -394,7 +394,7 @@ public class XMLDOMNode extends MSXMLScriptable {
 
     /**
      * Provides a fast way to determine whether a node has children.
-     * @return boolean <code>true</code> if this node has children
+     * @return boolean {@code true} if this node has children
      */
     @JsxFunction
     public boolean hasChildNodes() {
@@ -422,7 +422,7 @@ public class XMLDOMNode extends MSXMLScriptable {
      * <ul>
      *   <li>args[0]=<b>newChild</b> the new node to be inserted
      *   <li>args[1]=<b>refChild</b> the reference node; the <code>newChild</code> parameter is inserted to the left
-     *   of the <code>refChild</code> parameter; if <code>null</code>, the <code>newChild</code> parameter is inserted
+     *   of the <code>refChild</code> parameter; if {@code null}, the <code>newChild</code> parameter is inserted
      *   at the end of the child list
      * </ul>
      * @return on success, returns the child node that was inserted
@@ -506,7 +506,7 @@ public class XMLDOMNode extends MSXMLScriptable {
 
     /**
      * Replaces the specified old child node with the supplied new child node.
-     * @param newChild the new child that is to replace the old child; if <code>null</code>,
+     * @param newChild the new child that is to replace the old child; if {@code null},
      * <code>oldChild</code> is removed without a replacement
      * @param oldChild the old child that is to be replaced by the new child
      * @return the old child that is replaced
@@ -574,7 +574,7 @@ public class XMLDOMNode extends MSXMLScriptable {
      * Applies the specified pattern-matching operation to this node's context and returns the first matching node.
      * @param expression a string specifying an XPath expression
      * @return the first node that matches the given pattern-matching operation;
-     *     if no nodes match the expression, returns <code>null</code>
+     *     if no nodes match the expression, returns {@code null}
      */
     @JsxFunction
     public Object selectSingleNode(final String expression) {

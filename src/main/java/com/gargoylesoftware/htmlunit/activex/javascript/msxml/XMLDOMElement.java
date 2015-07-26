@@ -170,7 +170,7 @@ public class XMLDOMElement extends XMLDOMNode {
     /**
      * Returns the value of the attribute.
      * @param name the name of the attribute to return
-     * @return the value of the specified attribute, <code>null</code> if the named attribute does not have a
+     * @return the value of the specified attribute, {@code null} if the named attribute does not have a
      *     specified value
      */
     @JsxFunction
@@ -192,7 +192,7 @@ public class XMLDOMElement extends XMLDOMNode {
     /**
      * Returns the attribute node.
      * @param name the name of the attribute to return
-     * @return the attribute node with the supplied name, <code>null</code> if the named attribute cannot be found
+     * @return the attribute node with the supplied name, {@code null} if the named attribute cannot be found
      *     on this element
      */
     @JsxFunction
@@ -277,7 +277,7 @@ public class XMLDOMElement extends XMLDOMNode {
     /**
      * Sets or updates the supplied attribute node on this element.
      * @param newAtt the attribute node to be associated with this element
-     * @return the replaced attribute node, if any, <code>null</code> otherwise
+     * @return the replaced attribute node, if any, {@code null} otherwise
      */
     @JsxFunction
     public XMLDOMAttribute setAttributeNode(final XMLDOMAttribute newAtt) {

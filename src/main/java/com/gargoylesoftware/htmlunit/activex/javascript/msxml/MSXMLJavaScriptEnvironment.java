@@ -156,7 +156,7 @@ public class MSXMLJavaScriptEnvironment {
     /**
      * Gets the class of the JavaScript object for the node class.
      * @param c the node class <code>DomNode</code> or some subclass.
-     * @return <code>null</code> if none found
+     * @return {@code null} if none found
      */
     @SuppressWarnings("unchecked")
     public Class<? extends MSXMLScriptable> getJavaScriptClass(final Class<?> c) {

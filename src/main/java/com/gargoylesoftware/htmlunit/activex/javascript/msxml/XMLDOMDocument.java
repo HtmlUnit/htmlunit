@@ -570,7 +570,7 @@ public class XMLDOMDocument extends XMLDOMNode {
     /**
      * Loads an XML document from the specified location.
      * @param xmlSource a URL that specifies the location of the XML file
-     * @return <code>true</code> if the load succeeded; <code>false</code> if the load failed
+     * @return {@code true} if the load succeeded; {@code false} if the load failed
      */
     @JsxFunction
     public boolean load(final String xmlSource) {
@@ -611,7 +611,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      * Loads an XML document using the supplied string.
      * @param strXML the XML string to load into this XML document object;
      *     this string can contain an entire XML document or a well-formed fragment
-     * @return <code>true</code> if the load succeeded; <code>false</code> if the load failed
+     * @return {@code true} if the load succeeded; {@code false} if the load failed
      */
     @JsxFunction
     public boolean loadXML(final String strXML) {
@@ -645,7 +645,7 @@ public class XMLDOMDocument extends XMLDOMNode {
     /**
      * Returns the node that matches the ID attribute.
      * @param id the value of the ID to match
-     * @return since we are not processing DTD, this method always returns <code>null</code>
+     * @return since we are not processing DTD, this method always returns {@code null}
      */
     @JsxFunction
     public Object nodeFromID(final String id) {

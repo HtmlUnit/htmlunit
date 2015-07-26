@@ -62,7 +62,7 @@ public class MSXMLActiveXObjectFactory {
     /**
      * Indicates whether the ActiveX name is one flavor of XMLDOMDocument.
      * @param name the ActiveX name
-     * @return <code>true</code> if this is an XMLDOMDocument
+     * @return {@code true} if this is an XMLDOMDocument
      */
     static boolean isXMLDOMDocument(String name) {
         if (name == null) {
@@ -77,7 +77,7 @@ public class MSXMLActiveXObjectFactory {
     /**
      * Indicates whether the ActiveX name is one flavor of XMLHTTPRequest.
      * @param name the ActiveX name
-     * @return <code>true</code> if this is an XMLHTTPRequest
+     * @return {@code true} if this is an XMLHTTPRequest
      */
     static boolean isXMLHTTPRequest(String name) {
         if (name == null) {
@@ -91,7 +91,7 @@ public class MSXMLActiveXObjectFactory {
     /**
      * Indicates if the ActiveX name is one flavor of XSLTemplate.
      * @param name the ActiveX name
-     * @return <code>true</code> if this is an XSLTemplate
+     * @return {@code true} if this is an XSLTemplate
      */
     static boolean isXSLTemplate(String name) {
         if (name == null) {

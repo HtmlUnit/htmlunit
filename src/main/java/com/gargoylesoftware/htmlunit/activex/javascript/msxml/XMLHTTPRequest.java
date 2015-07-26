@@ -157,7 +157,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      * Sets the state as specified and invokes the state change handler if one has been set.
      * @param state the new state
      * @param context the context within which the state change handler is to be invoked;
-     *     if <code>null</code>, the current thread's context is used
+     *     if {@code null}, the current thread's context is used
      */
     private void setState(final int state, Context context) {
         state_ = state;
@@ -355,8 +355,8 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      * @param method the HTTP method used to open the connection, such as GET, POST, PUT, or PROPFIND;
      *      for XMLHTTP, this parameter is not case-sensitive; the verbs TRACE and TRACK are not allowed.
      * @param url the requested URL; this can be either an absolute URL or a relative URL
-     * @param asyncParam indicator of whether the call is asynchronous; the default is <code>true</code> (the call
-     *     returns immediately); if set to <code>true</code>, attach an <code>onreadystatechange</code> property
+     * @param asyncParam indicator of whether the call is asynchronous; the default is {@code true} (the call
+     *     returns immediately); if set to {@code true}, attach an <code>onreadystatechange</code> property
      *     callback so that you can tell when the <code>send</code> call has completed
      * @param user the name of the user for authentication
      * @param password the password for authentication
@@ -701,7 +701,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      * Not all request headers can be set from JavaScript.
      * @see <a href="http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method">W3C doc</a>
      * @param name the header name
-     * @return <code>true</code> if the header can be set from JavaScript
+     * @return {@code true} if the header can be set from JavaScript
      */
     static boolean isAuthorizedHeader(final String name) {
         final String nameLowerCase = name.toLowerCase(Locale.ENGLISH);

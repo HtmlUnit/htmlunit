@@ -119,7 +119,7 @@ public class XMLDOMAttribute extends XMLDOMNode {
 
     /**
      * Returns the parent node.
-     * @return <code>null</code>
+     * @return {@code null}
      */
     @Override
     public Node getParentNode() {
@@ -129,7 +129,7 @@ public class XMLDOMAttribute extends XMLDOMNode {
     /**
      * Indicates whether the attribute is explicitly specified or derived from a default value in
      * the document type definition (DTD) or schema.
-     * @return <code>true</code> if this attribute has been explicitly specified
+     * @return {@code true} if this attribute has been explicitly specified
      */
     @JsxGetter
     public boolean getSpecified() {
