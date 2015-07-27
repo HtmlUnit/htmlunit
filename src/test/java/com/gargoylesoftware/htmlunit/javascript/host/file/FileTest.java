@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,39 +43,42 @@ public class FileTest extends WebDriverTestCase {
     @Alerts(CHROME = { "1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
                             "1437920507152", "", "291", "text/plain" },
-            FF31 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
-                            "undefined", "undefined", "291", "text/plain" },
             FF38 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
                             "1437920507152", "undefined", "291", "text/plain" },
             IE11 = { "1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
-                            "undefined", "undefined", "291", "text/plain" })
-    @NotYetImplemented({ FF, IE8 })
+                            "undefined", "undefined", "291", "text/plain" },
+            IE8 = { "" })
+    @NotYetImplemented(FF)
     public void properties() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var files = document.testForm.fileupload.files;\n"
-            + "  alert(files.length);\n"
+            + "  if (document.testForm.fileupload.files) {\n"
+            + "    var files = document.testForm.fileupload.files;\n"
+            + "    alert(files.length);\n"
 
-            + "  var file = files[0];\n"
-            + "  alert(file.name);\n"
-            + "  alert(file.lastModifiedDate);\n"
-            + "  alert(file.lastModified);\n"
-            + "  alert(file.webkitRelativePath);\n"
-            + "  alert(file.size);\n"
-            + "  alert(file.type);\n"
+            + "    var file = files[0];\n"
+            + "    alert(file.name);\n"
+            + "    alert(file.lastModifiedDate);\n"
+            + "    alert(file.lastModified);\n"
+            + "    alert(file.webkitRelativePath);\n"
+            + "    alert(file.size);\n"
+            + "    alert(file.type);\n"
+            + "  }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body >\n"
+            + "<body>\n"
             + "  <form name='testForm'>\n"
             + "    <input type='file' id='fileupload' name='fileupload'>\n"
-            + "    <input type='button' id='testBtn' onclick='test()'>Tester</button>\n"
             + "  </form>\n"
-            + "</body></html>";
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
 
         final WebDriver driver = loadPage2(html);
 
