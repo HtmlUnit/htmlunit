@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlBaseFont;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -46,8 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
         @JsxClass(domClass = HtmlSpan.class,
             isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF)),
-        @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(value = FF, maxVersion = 31))
+        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF))
     })
 public class HTMLSpanElement extends HTMLElement {
 

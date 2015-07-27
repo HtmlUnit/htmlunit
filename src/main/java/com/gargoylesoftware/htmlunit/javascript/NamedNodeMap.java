@@ -52,9 +52,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
-            @WebBrowser(value = FF, minVersion = 38) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-            browsers = @WebBrowser(value = FF, maxVersion = 31)),
+            @WebBrowser(FF) }),
         @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
     })
 public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter {

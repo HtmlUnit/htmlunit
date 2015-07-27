@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XMLHTTPREQUEST_OBJECT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XSLTPROCESSOR_OBJECT;
 
 import java.lang.reflect.Member;
 import java.util.LinkedHashSet;
@@ -121,9 +120,6 @@ public class RecursiveFunctionObject extends FunctionObject {
             return "[object " + functionName + ']';
         }
         if ("HTMLOptionElement".equals(functionName) && getBrowserVersion().hasFeature(JS_OPTION_OBJECT)) {
-            return "[object " + functionName + ']';
-        }
-        if ("XSLTProcessor".equals(functionName) && getBrowserVersion().hasFeature(JS_XSLTPROCESSOR_OBJECT)) {
             return "[object " + functionName + ']';
         }
         if ("XMLHttpRequest".equals(functionName) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
