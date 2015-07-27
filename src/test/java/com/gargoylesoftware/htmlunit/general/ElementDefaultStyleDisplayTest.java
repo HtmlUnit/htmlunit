@@ -1589,8 +1589,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "inline-block",
-            FF31 = "inline",
-            FF38 = "inline")
+            FF = "inline")
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
     }

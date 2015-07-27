@@ -828,8 +828,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
             CHROME = { "3", "2", "2", "3", "2", "2" },
-            FF31 = { "1", "0", "1", "1", "0", "1" },
-            FF38 = { "1", "0", "1", "1", "0", "1" },
+            FF = { "1", "0", "1", "1", "0", "1" },
             IE11 = { "1", "0", "1", "1", "0", "1" })
     @NotYetImplemented({ FF, IE11 })
     public void isindex() throws Exception {

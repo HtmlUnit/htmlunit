@@ -7,9 +7,12 @@
     </properties>
 
     <body>
-        <release version="2.19" date="" description="Bugfixes">
+        <release version="2.19" date="???" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                Remove deprecated BrowserVersion.FIREFOX_31.
+            </action>
         </release>
-        <release version="2.18" date="July 26, 2015" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
+        <release version="2.18" date="Jul 26, 2015" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
             <action type="add" dev="asashour">
                 Introduce AbstractPage.
             </action>

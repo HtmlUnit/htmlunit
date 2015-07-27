@@ -202,8 +202,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF31 = "false")
+    @Alerts("true")
     public void _NamedNodeMap_NamedNodeMap() throws Exception {
         test("NamedNodeMap", "NamedNodeMap");
     }
@@ -2545,8 +2544,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
+    @Alerts("false")
     public void _LockedFile_LockedFile() throws Exception {
         test("LockedFile", "LockedFile");
     }
@@ -2627,8 +2625,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
+    @Alerts("false")
     public void _MozMmsEvent_MozMmsEvent() throws Exception {
         test("MozMmsEvent", "MozMmsEvent");
     }
@@ -2647,8 +2644,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
+    @Alerts("false")
     public void _MozMobileMessageManager_MozMobileMessageManager() throws Exception {
         test("MozMobileMessageManager", "MozMobileMessageManager");
     }
@@ -2677,8 +2673,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
+    @Alerts("false")
     public void _MozSmsEvent_MozSmsEvent() throws Exception {
         test("MozSmsEvent", "MozSmsEvent");
     }
@@ -2687,8 +2682,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
+    @Alerts("false")
     public void _MozSmsFilter_MozSmsFilter() throws Exception {
         test("MozSmsFilter", "MozSmsFilter");
     }
@@ -2707,8 +2701,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
+    @Alerts("false")
     public void _MozSmsSegmentInfo_MozSmsSegmentInfo() throws Exception {
         test("MozSmsSegmentInfo", "MozSmsSegmentInfo");
     }
@@ -2918,8 +2911,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false",
-            FF31 = "false")
+            IE8 = "false")
     public void _PerformanceEntry_PerformanceMark() throws Exception {
         test("PerformanceEntry", "PerformanceMark");
     }
@@ -2929,8 +2921,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false",
-            FF31 = "false")
+            IE8 = "false")
     public void _PerformanceEntry_PerformanceMeasure() throws Exception {
         test("PerformanceEntry", "PerformanceMeasure");
     }
@@ -2950,8 +2941,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false",
-            FF31 = "false")
+            IE8 = "false")
     public void _PerformanceMark_PerformanceMark() throws Exception {
         test("PerformanceMark", "PerformanceMark");
     }
@@ -2961,8 +2951,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false",
-            FF31 = "false")
+            IE8 = "false")
     public void _PerformanceMeasure_PerformanceMeasure() throws Exception {
         test("PerformanceMeasure", "PerformanceMeasure");
     }

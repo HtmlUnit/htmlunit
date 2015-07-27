@@ -565,8 +565,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "foo3.html", "foo2.html" },
-            CHROME = {"", "foo2.html" },
-            FF31 = {"", "foo2.html" })
+            CHROME = {"", "foo2.html" })
     public void onlick_set_location_WithHref() throws Exception {
         final String html =
             "<html><head></head>\n"

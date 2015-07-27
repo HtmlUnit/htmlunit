@@ -102,7 +102,6 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF31 = "false",
             IE8 = "false")
     public void _HTMLAllCollection_HTMLAllCollection() throws Exception {
         test("HTMLAllCollection", "HTMLAllCollection");

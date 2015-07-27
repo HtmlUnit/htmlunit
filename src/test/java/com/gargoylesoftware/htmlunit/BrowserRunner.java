@@ -76,9 +76,6 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("chrome")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, true));
                 }
-                if (browsers.contains("ff31")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_31, true));
-                }
                 if (browsers.contains("ff38")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, true));
                 }
@@ -92,9 +89,6 @@ public class BrowserRunner extends Suite {
 
             if (browsers.contains("hu-chrome")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
-            }
-            if (browsers.contains("hu-ff31")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_31, false));
             }
             if (browsers.contains("hu-ff38")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, false));
@@ -203,9 +197,6 @@ public class BrowserRunner extends Suite {
 
         /** Alerts for any Firefox, it can be overridden by specific FF version. */
         String[] FF() default { EMPTY_DEFAULT };
-
-        /** Alerts for Firefox 31. If not defined, {@link #FF()} is used. */
-        String[] FF31() default { EMPTY_DEFAULT };
 
         /** Alerts for Firefox 38. If not defined, {@link #FF()} is used. */
         String[] FF38() default { EMPTY_DEFAULT };
