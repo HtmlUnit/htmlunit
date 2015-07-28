@@ -2052,7 +2052,7 @@ public enum BrowserVersionFeatures {
     PROTOCOL_DATA,
 
     /** Indicates <code>.querySelectorAll()</code> and <code>.querySelector()</code> is not supported in quirks mode. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
+    @BrowserFeature(@WebBrowser(IE))
     QUERYSELECTORALL_NOT_IN_QUIRKS,
 
     /** IE11 throws a syntax error if a css3 pseudo selector is used on an detached node. */
