@@ -1164,7 +1164,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_ELEMENT_EXTENT_WITHOUT_PADDING,
 
-    /** Element.removeAttirbute emoves the named property also. */
+    /** Element.removeAttirbute removes the named property also. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY,
 

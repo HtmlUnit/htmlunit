@@ -43,6 +43,8 @@ public class FileTest extends WebDriverTestCase {
     @Alerts(CHROME = { "1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
                             "1437920507152", "", "291", "text/plain" },
+            FF31 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
+                            "undefined", "undefined", "291", "text/plain" },
             FF38 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
                             "1437920507152", "undefined", "291", "text/plain" },
             IE11 = { "1", "ScriptExceptionTest1.txt",
