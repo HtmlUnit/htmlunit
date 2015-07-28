@@ -41,7 +41,7 @@ public class Plugin extends SimpleArray {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 31) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public Plugin() {
     }
 

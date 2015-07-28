@@ -85,7 +85,7 @@ public class StyleSheetList extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 31) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public StyleSheetList() {
     }
 

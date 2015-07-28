@@ -45,7 +45,7 @@ public class MediaList extends SimpleScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 31) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public MediaList() {
         wrappedList_ = null;
     }

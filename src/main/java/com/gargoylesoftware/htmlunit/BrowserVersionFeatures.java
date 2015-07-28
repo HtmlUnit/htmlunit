@@ -232,8 +232,7 @@ public enum BrowserVersionFeatures {
     EVENT_BEFOREUNLOAD_AUTO_TYPE,
 
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false as default. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(value = FF, minVersion = 31) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE,
 
     /** Triggers "DOMContentLoaded" event. */
@@ -568,7 +567,7 @@ public enum BrowserVersionFeatures {
     HTMLIMAGE_HTMLUNKNOWNELEMENT,
 
     /** Mark the image as invisible if no src attribute defined. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 31), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLIMAGE_INVISIBLE_NO_SRC,
 
     /** Clicking an image input submits the value as param if defined. */
@@ -1306,7 +1305,7 @@ public enum BrowserVersionFeatures {
     JS_HTML_GENERIC_ELEMENT_CLASS_NAME,
 
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 31), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
 
     /** HTMLElement instead of HTMLUnknownElement for ruby elements. */
@@ -1346,7 +1345,7 @@ public enum BrowserVersionFeatures {
      * Getting the width and height of an image tag without a source returns 18x20;
      * for invalid values returns 1.
      */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 31))
+    @BrowserFeature(@WebBrowser(FF))
     JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0,
 
     /**
@@ -1444,17 +1443,16 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_MAP_CONSTRUCTOR_ARGUMENT,
 
-    /** Indicates that an empty media list is represented by thse string 'all'. */
+    /** Indicates that an empty media list is represented by the string 'all'. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_MEDIA_LIST_ALL,
 
-    /** Indicates that an empty media list is represented by thse string 'all'. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 31))
+    /** Indicates that an empty media list is represented by the string 'all'. */
+    @BrowserFeature(@WebBrowser(FF))
     JS_MEDIA_LIST_EMPTY_STRING,
 
     /**
-     * Method mergeAttributes will merge all attribs instead only the
-     * known/supported ones.
+     * Method mergeAttributes will merge all attributes instead only the known/supported ones.
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_MERGE_ATTRIBUTES_ALL,
@@ -1930,8 +1928,7 @@ public enum BrowserVersionFeatures {
 
     /** <code>Window.onerror</code> gets the column number as as 4th
      * and the error as 5th argument. */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 31),
-                        @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT,
 
     /**
@@ -1949,7 +1946,7 @@ public enum BrowserVersionFeatures {
     /**
      * Difference of window.outer/inner height is 94.
      */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 31))
+    @BrowserFeature(@WebBrowser(FF))
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94,
 
     /** Window.postMessage is sent when the targetOrigin port is different than the current port. */

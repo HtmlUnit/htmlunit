@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
         @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
             browsers = { @WebBrowser(value = IE, maxVersion = 8) }),
         @JsxClass(className = "DOMRect",
-            browsers = { @WebBrowser(value = FF, minVersion = 31) })
+            browsers = { @WebBrowser(FF) })
     })
 public class ClientRect extends SimpleScriptable {
 

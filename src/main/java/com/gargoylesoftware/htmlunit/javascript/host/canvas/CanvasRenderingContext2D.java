@@ -448,7 +448,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Dummy placeholder.
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 31), @WebBrowser(CHROME) })
+    @JsxFunction
     public void getLineDash() {
         //empty
     }
@@ -563,7 +563,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Dummy placeholder.
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 31), @WebBrowser(CHROME) })
+    @JsxFunction
     public void setLineDash() {
         //empty
     }
