@@ -35,14 +35,17 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
+import org.junit.runners.model.TestClass;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.StandardsMode;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -75,6 +78,34 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private void setAlerts(final WebTestCase testCase, final Method method) {
         final Alerts alerts = method.getAnnotation(Alerts.class);
+        String[] expectedAlerts = {};
+        if (alerts != null) {
+            if (isDefined(alerts.value())) {
+                expectedAlerts = alerts.value();
+            }
+            else {
+                if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
+                    expectedAlerts = firstDefined(alerts.IE8(), alerts.IE(), alerts.DEFAULT());
+                }
+                else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_11) {
+                    expectedAlerts = firstDefined(alerts.IE11(), alerts.IE(), alerts.DEFAULT());
+                }
+                else if (browserVersion_ == BrowserVersion.FIREFOX_31) {
+                    expectedAlerts = firstDefined(alerts.FF31(), alerts.FF(), alerts.DEFAULT());
+                }
+                else if (browserVersion_ == BrowserVersion.FIREFOX_38) {
+                    expectedAlerts = firstDefined(alerts.FF38(), alerts.FF(), alerts.DEFAULT());
+                }
+                else if (browserVersion_ == BrowserVersion.CHROME) {
+                    expectedAlerts = firstDefined(alerts.CHROME(), alerts.DEFAULT());
+                }
+            }
+        }
+        testCase.setExpectedAlerts(expectedAlerts);
+    }
+
+    private void setAlertsStandards(final WebTestCase testCase, final Method method) {
+        final AlertsStandards alerts = method.getAnnotation(AlertsStandards.class);
         String[] expectedAlerts = {};
         if (alerts != null) {
             if (isDefined(alerts.value())) {
@@ -311,7 +342,12 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             notYetImplemented = isNotYetImplemented(method);
             tries = getTries(method);
         }
-        setAlerts(testCase, method.getMethod());
+        if (method instanceof StandardsFrameworkMethod && ((StandardsFrameworkMethod) method).isStandards()) {
+            setAlertsStandards(testCase, method.getMethod());
+        }
+        else {
+            setAlerts(testCase, method.getMethod());
+        }
         statement = new BrowserStatement(statement, method, realBrowser_,
                 notYetImplemented, tries, browserVersion_);
         return statement;
@@ -388,5 +424,16 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
      */
     protected boolean isRealBrowser() {
         return realBrowser_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected TestClass createTestClass(final Class<?> testClass) {
+        if (testClass.getAnnotation(StandardsMode.class) != null) {
+            return new StandardsTestClass(testClass);
+        }
+        return super.createTestClass(testClass);
     }
 }

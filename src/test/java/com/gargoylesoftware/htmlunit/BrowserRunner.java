@@ -218,6 +218,43 @@ public class BrowserRunner extends Suite {
     }
 
     /**
+     * Same as {@link Alerts} but only in {@code Standards Mode}.
+     *
+     * It is typically used with {@link StandardsMode}.
+     */
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public static @interface AlertsStandards {
+
+        /** Alerts that is used for all browsers (if defined, the other values are ignored). */
+        String[] value() default { EMPTY_DEFAULT };
+
+        /** Alerts for any Internet Explorer, it can be overridden by specific IE version. */
+        String[] IE() default { EMPTY_DEFAULT };
+
+        /** Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used. */
+        String[] IE8() default { EMPTY_DEFAULT };
+
+        /** Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used. */
+        String[] IE11() default { EMPTY_DEFAULT };
+
+        /** Alerts for any Firefox, it can be overridden by specific FF version. */
+        String[] FF() default { EMPTY_DEFAULT };
+
+        /** Alerts for Firefox 31. If not defined, {@link #FF()} is used. */
+        String[] FF31() default { EMPTY_DEFAULT };
+
+        /** Alerts for Firefox 38. If not defined, {@link #FF()} is used. */
+        String[] FF38() default { EMPTY_DEFAULT };
+
+        /** Alerts for latest Chrome. */
+        String[] CHROME() default { EMPTY_DEFAULT };
+
+        /** The default alerts, if nothing more specific is defined. */
+        String[] DEFAULT() default { EMPTY_DEFAULT };
+    }
+
+    /**
      * Marks a test as not yet working for a particular browser (default value is all).
      * This will cause a failure to be considered as success and a success as failure forcing
      * us to remove this annotation when a feature has been implemented even unintentionally.

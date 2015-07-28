@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -64,6 +66,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -129,6 +132,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static ChromeDriverService CHROME_SERVICE_;
 
     private boolean useRealBrowser_;
+    private Boolean useStandards_;
     private static Boolean LAST_TEST_MockWebConnection_;
 
     private WebClient webClient_;
@@ -241,6 +245,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     public void setUseRealBrowser(final boolean useRealBrowser) {
         useRealBrowser_ = useRealBrowser;
+    }
+
+    /**
+     * Sets whether to use {@code Standards Mode} or not.
+     * @param useStandards whether to use {@code Standards Mode} or not
+     */
+    public void setUseStandards(final boolean useStandards) {
+        useStandards_ = useStandards;
     }
 
     /**
@@ -577,8 +589,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the web driver
      * @throws Exception if something goes wrong
      */
-    protected final WebDriver loadPage2(final String html, final URL url,
+    protected final WebDriver loadPage2(String html, final URL url,
             final String contentType, final String charset) throws Exception {
+        if (useStandards_ != null) {
+            if (html.startsWith(HtmlPageTest.STANDARDS_MODE_PREFIX_)) {
+                fail("HTML must not be prefixed with Standards Mode.");
+            }
+            if (useStandards_) {
+                html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + html;
+            }
+        }
         final MockWebConnection mockWebConnection = getMockWebConnection();
         mockWebConnection.setResponse(url, html, contentType, charset);
         startWebServer(mockWebConnection);
