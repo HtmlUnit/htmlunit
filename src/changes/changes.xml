@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                File.lastModifiedDate now produces the correct output in all browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                File.lastModified is not available in FF31.
+            </action>
         </release>
         <release version="2.18" date="July 26, 2015" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
             <action type="add" dev="asashour">

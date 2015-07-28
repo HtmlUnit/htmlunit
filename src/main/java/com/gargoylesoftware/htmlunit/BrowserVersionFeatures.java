@@ -1223,6 +1223,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     JS_EVENT_WINDOW_EXECUTE_IF_DITACHED,
 
+    /** FF uses a different date format for file.lastModifiedDate. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_FILE_SHORT_DATE_FORMAT,
+
     /** Indicates that the action property of a form is the fully qualified URL. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_FORM_ACTION_EXPANDURL,

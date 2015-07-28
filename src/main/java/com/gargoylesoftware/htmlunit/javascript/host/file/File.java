@@ -20,9 +20,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
+import org.apache.commons.lang3.time.FastDateFormat;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -37,6 +41,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class File extends Blob {
+    private static final String LAST_MODIFIED_DATE_FORMAT = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzzz)";
+    private static final String LAST_MODIFIED_DATE_FORMAT_FF = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z";
 
     private java.io.File file_;
 
@@ -67,15 +73,23 @@ public class File extends Blob {
     @JsxGetter
     public String getLastModifiedDate() {
         final Date date = new Date(getLastModified());
-        return new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss").format(date)
-            + " GMT" + new SimpleDateFormat("Z (zzzz)").format(date);
+        final BrowserVersion browser = getBrowserVersion();
+        final Locale locale = new Locale(browser.getSystemLanguage());
+
+        if (browser.hasFeature(BrowserVersionFeatures.JS_FILE_SHORT_DATE_FORMAT)) {
+            final FastDateFormat format =  FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT_FF, locale);
+            return format.format(date);
+        }
+
+        final FastDateFormat format =  FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT, locale);
+        return format.format(date);
     }
 
     /**
      * Returns the {@code lastModified} property.
      * @return the {@code lastModified} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
     public long getLastModified() {
         return file_.lastModified();
     }
