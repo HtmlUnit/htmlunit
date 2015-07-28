@@ -17,6 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.file;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
+import java.util.List;
+
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -31,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class FileList extends SimpleScriptable {
@@ -48,10 +52,13 @@ public class FileList extends SimpleScriptable {
      * Creates a new instance.
      * @param pathnames the path names
      */
-    public FileList(final String[] pathnames) {
-        files_ = new File[pathnames.length];
-        for (int i = 0; i < pathnames.length; i++) {
-            files_[i] = new File(pathnames[i]);
+    public FileList(final List<java.io.File> pathnames) {
+        files_ = new File[pathnames.size()];
+
+        int i = 0;
+        for (java.io.File file : pathnames) {
+            files_[i] = new File(file.getAbsolutePath());
+            i++;
         }
     }
 

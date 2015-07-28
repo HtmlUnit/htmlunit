@@ -21,6 +21,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,8 +42,11 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlFileInput extends HtmlInput {
+
+    private static final String FILE_SEPARATOR = "\u00A7";
 
     private String contentType_;
     private byte[] data_;
@@ -120,7 +124,34 @@ public class HtmlFileInput extends HtmlInput {
         }
 
         final List<NameValuePair> list = new ArrayList<>();
-        for (String value : valueAttribute.split("§")) {
+        for (File file : splitFiles(valueAttribute)) {
+            // contentType and charset are determined from browser and page
+            // perhaps it could be interesting to have setters for it in this class
+            // to give finer control to user
+            final String contentType;
+            if (contentType_ == null) {
+                contentType = getPage().getWebClient().guessContentType(file);
+            }
+            else {
+                contentType = contentType_;
+            }
+            final String charset = getPage().getPageEncoding();
+            final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, contentType, charset);
+            keyDataPair.setData(data_);
+            list.add(keyDataPair);
+        }
+        return list.toArray(new NameValuePair[list.size()]);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param valueAttribute the string to split
+     * @return the list of files
+     */
+    public static List<File> splitFiles(final String valueAttribute) {
+        final List<File> files = new LinkedList<>();
+        for (String value : valueAttribute.split(FILE_SEPARATOR)) {
             File file = null;
             // to tolerate file://
             if (value.startsWith("file:/")) {
@@ -139,22 +170,9 @@ public class HtmlFileInput extends HtmlInput {
                 file = new File(value);
             }
 
-            // contentType and charset are determined from browser and page
-            // perhaps it could be interesting to have setters for it in this class
-            // to give finer control to user
-            final String contentType;
-            if (contentType_ == null) {
-                contentType = getPage().getWebClient().guessContentType(file);
-            }
-            else {
-                contentType = contentType_;
-            }
-            final String charset = getPage().getPageEncoding();
-            final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, contentType, charset);
-            keyDataPair.setData(data_);
-            list.add(keyDataPair);
+            files.add(file);
         }
-        return list.toArray(new NameValuePair[list.size()]);
+        return files;
     }
 
     /**
@@ -210,7 +228,7 @@ public class HtmlFileInput extends HtmlInput {
         final StringBuilder builder = new StringBuilder();
         for (final String p : paths) {
             if (builder.length() != 0) {
-                builder.append('\u00A7');
+                builder.append(FILE_SEPARATOR);
             }
             builder.append(p);
         }

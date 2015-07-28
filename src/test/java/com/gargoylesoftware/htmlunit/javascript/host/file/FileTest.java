@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
+import java.io.File;
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -80,11 +83,10 @@ public class FileTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        String url = getClass().getClassLoader().getResource("ScriptExceptionTest1.txt").toExternalForm();
-        url = url.substring(6);
-        url = url.replace('/', java.io.File.separatorChar);
-
-        driver.findElement(By.id("fileupload")).sendKeys(url);
+        final URL url = getClass().getClassLoader().getResource("ScriptExceptionTest1.txt");
+        final File file = new File(url.toURI());
+        final String path = file.getCanonicalPath();
+        driver.findElement(By.name("fileupload")).sendKeys(path);
 
         driver.findElement(By.id("testBtn")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));

@@ -550,7 +550,7 @@ public class HTMLInputElement extends FormField {
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object getFiles() {
         if (getDomNodeOrDie() instanceof HtmlFileInput) {
-            final FileList list = new FileList(getValue().split("\u00A7"));
+            final FileList list = new FileList(HtmlFileInput.splitFiles(getValue()));
             list.setParentScope(getParentScope());
             list.setPrototype(getPrototype(list.getClass()));
             return list;
