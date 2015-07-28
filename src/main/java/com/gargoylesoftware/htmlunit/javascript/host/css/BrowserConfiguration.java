@@ -53,6 +53,18 @@ class BrowserConfiguration {
         return browserConfiguration;
     }
 
+    public static BrowserConfiguration ffBelow31(final String defaultValue) {
+        return ff(defaultValue).upTo(30);
+    }
+
+    public static BrowserConfiguration ff31up(final String defaultValue) {
+        return ff(defaultValue).startingWith(31);
+    }
+
+    public static BrowserConfiguration ffBelow38(final String defaultValue) {
+        return ff(defaultValue).upTo(37);
+    }
+
     public static BrowserConfiguration ff38up(final String defaultValue) {
         return ff(defaultValue).startingWith(38);
     }

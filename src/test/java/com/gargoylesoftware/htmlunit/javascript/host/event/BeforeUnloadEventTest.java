@@ -69,9 +69,11 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = { "[object BeforeUnloadEvent]", "", "false", "false", "" },
-            CHROME = { "[object BeforeUnloadEvent]", "beforeunload", "false", "true", "" })
+    @Alerts(DEFAULT = { "[object BeforeUnloadEvent]", "", "true", "true", "" },
+            FF31 = { "[object BeforeUnloadEvent]", "", "false", "false", "" },
+            FF38 = { "[object BeforeUnloadEvent]", "", "false", "false", "" },
+            CHROME = { "[object BeforeUnloadEvent]", "beforeunload", "false", "true", "" },
+            IE = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

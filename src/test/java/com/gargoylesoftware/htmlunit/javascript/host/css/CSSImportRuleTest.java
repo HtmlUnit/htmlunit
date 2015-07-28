@@ -43,7 +43,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object CSSImportRule]", "§§URL§§second/",
                 "[object MediaList]", "0", "[object CSSStyleSheet]" },
-            FF = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
+            FF31 = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
+            FF38 = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
             IE11 = { "[object CSSImportRule]", "§§URL§§second/",
                 "all", "0", "[object CSSStyleSheet]" },
             IE8 = "cssRules undefined")
@@ -59,7 +60,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object CSSImportRule]", "foo.css",
                 "[object MediaList]", "0", "[object CSSStyleSheet]" },
-            FF = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
+            FF31 = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
+            FF38 = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
             IE11 = { "[object CSSImportRule]", "foo.css", "all", "0", "[object CSSStyleSheet]" },
             IE8 = "cssRules undefined")
     // IE8 does not support CSSStyleSheet.cssRules

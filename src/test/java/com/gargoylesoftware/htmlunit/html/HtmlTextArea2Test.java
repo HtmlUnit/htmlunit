@@ -283,7 +283,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(" foo \n bar\n test\n a <p>html snippet</p>")
+    @Alerts(DEFAULT = " foo \n bar\n test\n a <p>html snippet</p>",
+            FF31 = "foo bar test a <p>html snippet</p>")
     public void asText() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -318,7 +319,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(" foo \n bar <p>html snippet</p>")
+    @Alerts(DEFAULT = " foo \n bar <p>html snippet</p>",
+            FF31 = "foo bar <p>html snippet</p>")
     public void parentAsText() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"

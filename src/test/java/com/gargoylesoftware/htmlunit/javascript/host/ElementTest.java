@@ -1017,7 +1017,8 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "", "a b c" },
-            FF = { "", "a b c" },
+            FF31 = { "null", "a b c" },
+            FF38 = { "", "a b c" },
             IE = { "undefined", "undefined" },
             IE11 = { "undefined", "a b c" })
     public void classList() throws Exception {

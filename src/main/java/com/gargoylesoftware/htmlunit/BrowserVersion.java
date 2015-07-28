@@ -110,6 +110,17 @@ public class BrowserVersion implements Serializable, Cloneable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /**
+     * Firefox 31 ESR.
+     * @since 2.16
+     * @deprecated as of 2.17
+     */
+    @Deprecated
+    public static final BrowserVersion FIREFOX_31 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows)",
+        "Mozilla/5.0 (Windows NT 6.1; rv:31.0) Gecko/20100101 Firefox/31.0",
+        (float) 31.0, "FF31", null);
+
+    /**
      * Firefox 38 ESR.
      * @since 2.17
      */
@@ -147,7 +158,18 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER_8.initDefaultFeatures();
         INTERNET_EXPLORER_11.initDefaultFeatures();
 
+        FIREFOX_31.initDefaultFeatures();
         FIREFOX_38.initDefaultFeatures();
+
+        FIREFOX_31.setBrowserLanguage("en-US");
+        FIREFOX_31.setVendor("");
+        FIREFOX_31.buildId_ = "20150504194141";
+        FIREFOX_31.setHeaderNamesOrdered(new String[] {
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
+        FIREFOX_31.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_31.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_31.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_31.setCssAcceptHeader("text/css,*/*;q=0.1");
 
         FIREFOX_38.setBrowserLanguage("en-US");
         FIREFOX_38.setVendor("");
@@ -175,6 +197,7 @@ public class BrowserVersion implements Serializable, Cloneable {
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
+        FIREFOX_31.getPlugins().add(flash);
         FIREFOX_38.getPlugins().add(flash);
 
         CHROME.initDefaultFeatures();

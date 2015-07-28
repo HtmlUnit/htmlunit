@@ -84,8 +84,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * The file should contain four properties: "browsers", "ie.bin", "ff38.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie8", "hu-ff38",
- *   "ff38", "ie8", "ie11", "chrome", which will be used to driver real browsers,
+ *   "hu-ie8", "hu-ff31",
+ *   "ff31", "ff38", "ie8", "ie11", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
  *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
@@ -115,6 +115,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static Set<String> BROWSERS_PROPERTIES_;
     private static String IE_BIN_;
+    private static String FF31_BIN_;
     private static String FF38_BIN_;
     private static String CHROME_BIN_;
 
@@ -154,6 +155,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     BROWSERS_PROPERTIES_
                         = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "").toLowerCase().split(",")));
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
+                    FF31_BIN_ = properties.getProperty("ff31.bin");
                     FF38_BIN_ = properties.getProperty("ff38.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
 
@@ -169,6 +171,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             if (BROWSERS_PROPERTIES_.contains("hu")) {
                 BROWSERS_PROPERTIES_.add("hu-chrome");
+                BROWSERS_PROPERTIES_.add("hu-ff31");
                 BROWSERS_PROPERTIES_.add("hu-ff38");
                 BROWSERS_PROPERTIES_.add("hu-ie8");
                 BROWSERS_PROPERTIES_.add("hu-ie11");
@@ -272,6 +275,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             String ffBinary = null;
+            if (BrowserVersion.FIREFOX_31 == getBrowserVersion()) {
+                ffBinary = FF31_BIN_;
+            }
             if (BrowserVersion.FIREFOX_38 == getBrowserVersion()) {
                 ffBinary = FF38_BIN_;
             }

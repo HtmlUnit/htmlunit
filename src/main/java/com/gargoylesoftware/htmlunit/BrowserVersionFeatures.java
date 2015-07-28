@@ -161,7 +161,7 @@ public enum BrowserVersionFeatures {
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The default value of the display property for the 'ruby' tag is 'inline'. */
-    @BrowserFeature(@WebBrowser(CHROME))
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 31), @WebBrowser(CHROME) })
     CSS_RUBY_DISPLAY_INLINE,
 
     /** The default value of the display property for the 'script' tag is 'inline' instead of the default one. */
@@ -397,6 +397,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLALLCOLLECTION,
 
+    /** HtmlAllCollection default value is [object HTML document.all class]. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
+    HTMLALLCOLLECTION_DEFAULT_DESCRIPTION,
+
     /** HtmlAllCollection.item does not check the name, only the id. */
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLALLCOLLECTION_DO_NOT_CHECK_NAME,
@@ -465,6 +469,10 @@ public enum BrowserVersionFeatures {
     /** Allow detection of object type for collection elements. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLCOLLECTION_OBJECT_DETECTION,
+
+    /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlCommand} have no end tag. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
+    HTMLCOMMAND_END_TAG_FORBIDDEN,
 
     /**
      * Supports Conditional Comments.
@@ -624,6 +632,10 @@ public enum BrowserVersionFeatures {
     /** Trims the value of the type attribute before to verify it. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLSCRIPT_TRIM_TYPE,
+
+    /** asText returns no newlines. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
+    HTMLTEXTAREA_REMOVE_NEWLINE_FROM_TEXT,
 
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -1142,13 +1154,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_ECMA5_FUNCTIONS,
 
+    /** Element.classList returns null. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
+    JS_ELEMENT_CLASS_LIST_NULL,
+
     /** Javascript calculation of element clientHeight/Width does not
      * include the padding.
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_ELEMENT_EXTENT_WITHOUT_PADDING,
 
-    /** Element.removeAttirbute removes the named property also. */
+    /** Element.removeAttirbute emoves the named property also. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY,
 
@@ -1996,6 +2012,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser uses the ActiveXObject for implementing XML support (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
+
+    /** If <code>alert(XSLTProcessor)</code> returns an object, not function. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
+    JS_XSLTPROCESSOR_OBJECT,
 
     /** With special keys [in .type(int)], should we trigger onkeypress event or not. */
     @BrowserFeature(@WebBrowser(FF))

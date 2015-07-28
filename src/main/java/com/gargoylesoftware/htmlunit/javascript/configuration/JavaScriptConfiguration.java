@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
 import com.gargoylesoftware.htmlunit.javascript.host.ClipboardData;
 import com.gargoylesoftware.htmlunit.javascript.host.Console;
+import com.gargoylesoftware.htmlunit.javascript.host.DeviceStorage;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.External;
 import com.gargoylesoftware.htmlunit.javascript.host.FontFace;
@@ -196,6 +197,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceLightEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceMotionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceOrientationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceProximityEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceStorageChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -219,7 +221,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseScrollEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MozContactChangeEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MozMmsEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MozSettingsEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MozSmsEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.OfflineAudioCompletionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PageTransitionEvent;
@@ -251,8 +255,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.file.DataTransferItem;
 import com.gargoylesoftware.htmlunit.javascript.host.file.DataTransferItemList;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileError;
+import com.gargoylesoftware.htmlunit.javascript.host.file.FileHandle;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileReader;
+import com.gargoylesoftware.htmlunit.javascript.host.file.FileRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.file.LockedFile;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Position;
@@ -324,8 +331,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCPeerConnect
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.webkitRTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMmsMessage;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMobileMessageManager;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMobileMessageThread;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsMessage;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsSegmentInfo;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceEntry;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceMark;
@@ -384,15 +394,15 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CSSUnknownRule.class, CSSValue.class, CSSViewportRule.class, CustomEvent.class, DataTransfer.class,
         DataTransferItem.class,
         DataTransferItemList.class, DataView.class, DelayNode.class, DeviceLightEvent.class, DeviceMotionEvent.class,
-        DeviceOrientationEvent.class, DeviceProximityEvent.class,
+        DeviceOrientationEvent.class, DeviceProximityEvent.class, DeviceStorage.class, DeviceStorageChangeEvent.class,
         Document.class, DocumentFragment.class, DocumentType.class, DOMCursor.class, DOMError.class, DOMException.class,
         DOMImplementation.class, DOMMatrix.class, DOMMatrixReadOnly.class, DOMParser.class, DOMPoint.class,
         DOMPointReadOnly.class, DOMRectReadOnly.class, DOMRequest.class,
         DOMSettableTokenList.class, DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
         DragEvent.class, DynamicsCompressorNode.class,
         Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,
-        EventTarget.class, External.class, File.class, FileError.class, FileList.class,
-        FileReader.class, Float32Array.class, Float64Array.class, FocusEvent.class, FontFace.class,
+        EventTarget.class, External.class, File.class, FileError.class, FileHandle.class, FileList.class,
+        FileReader.class, FileRequest.class, Float32Array.class, Float64Array.class, FocusEvent.class, FontFace.class,
         FormChild.class, FormData.class, FormField.class, GainNode.class, Gamepad.class, GamepadButton.class,
         GamepadEvent.class, Geolocation.class, HashChangeEvent.class, Headers.class, History.class,
         HTMLAllCollection.class,
@@ -429,7 +439,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IDBVersionChangeEvent.class, Image.class, ImageBitmap.class, ImageData.class, InputEvent.class,
         InputMethodContext.class, Int16Array.class, Int32Array.class, Int8Array.class, KeyboardEvent.class,
         LocalMediaStream.class,
-        Location.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
+        Location.class, LockedFile.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
         MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
         MediaKeyError.class, MediaKeyEvent.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
         MediaKeyStatusMap.class, MediaKeySystemAccess.class, MediaList.class, MediaQueryList.class,
@@ -439,9 +449,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
         MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
-        MouseWheelEvent.class, MozContactChangeEvent.class, MozMmsMessage.class,
-        MozMobileMessageThread.class, mozRTCIceCandidate.class,
-        mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class, MozSmsMessage.class,
+        MouseWheelEvent.class, MozContactChangeEvent.class, MozMmsEvent.class, MozMmsMessage.class,
+        MozMobileMessageManager.class, MozMobileMessageThread.class, mozRTCIceCandidate.class,
+        mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class,
+        MozSmsEvent.class, MozSmsFilter.class, MozSmsMessage.class, MozSmsSegmentInfo.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
         NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeIterator.class, NodeList.class, Notification.class,

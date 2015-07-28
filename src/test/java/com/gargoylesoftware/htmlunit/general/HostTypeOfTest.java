@@ -461,6 +461,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void domException() throws Exception {
@@ -621,6 +622,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void external() throws Exception {
         test("External");
@@ -707,6 +709,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void history() throws Exception {
@@ -923,7 +926,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE8 = "undefined",
-            IE11 = "object")
+            IE11 = "object",
+            FF31 = "undefined")
     public void htmlAllCollection() throws Exception {
         test("HTMLAllCollection");
     }
@@ -2019,6 +2023,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void mediaList() throws Exception {
@@ -2047,6 +2052,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void mimeType() throws Exception {
@@ -2061,6 +2067,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void mimeTypeArray() throws Exception {
@@ -2103,7 +2110,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE8 = "undefined",
-            IE11 = "object")
+            IE11 = "object",
+            FF31 = "undefined")
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
     }
@@ -2138,6 +2146,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void navigator() throws Exception {
@@ -2194,6 +2203,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void plugin() throws Exception {
@@ -2208,6 +2218,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void pluginArray() throws Exception {
@@ -3256,6 +3267,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void selection() throws Exception {
@@ -3307,6 +3319,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE8 = "undefined")
     public void styleSheetList() throws Exception {
@@ -3500,7 +3513,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
     }
@@ -3807,6 +3821,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedLengthList() throws Exception {
@@ -3828,6 +3843,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void pageTransitionEvent() throws Exception {
@@ -3840,6 +3856,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedNumber() throws Exception {
@@ -3852,6 +3869,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "object",
             FF38 = "object",
             IE11 = "object")
     public void cssPageRule() throws Exception {
@@ -3864,6 +3882,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgTextPositioningElement() throws Exception {
@@ -3876,6 +3895,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void validityState() throws Exception {
@@ -3886,7 +3906,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
     public void mozSmsSegmentInfo() throws Exception {
         test("MozSmsSegmentInfo");
     }
@@ -3897,6 +3918,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void closeEvent() throws Exception {
@@ -3908,6 +3930,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "object",
             FF38 = "object")
     public void mozMobileMessageThread() throws Exception {
         test("MozMobileMessageThread");
@@ -3919,6 +3942,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedRect() throws Exception {
@@ -3931,6 +3955,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void progressEvent() throws Exception {
@@ -3943,6 +3968,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedString() throws Exception {
@@ -3955,6 +3981,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbDatabase() throws Exception {
@@ -3967,6 +3994,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedEnumeration() throws Exception {
@@ -3979,6 +4007,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void textMetrics() throws Exception {
@@ -3991,6 +4020,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbIndex() throws Exception {
@@ -4013,6 +4043,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void wheelEvent() throws Exception {
@@ -4035,6 +4066,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedNumberList() throws Exception {
@@ -4057,6 +4089,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbFactory() throws Exception {
@@ -4069,6 +4102,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgNumberList() throws Exception {
@@ -4081,6 +4115,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void customEvent() throws Exception {
@@ -4093,6 +4128,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void errorEvent() throws Exception {
@@ -4116,6 +4152,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedBoolean() throws Exception {
@@ -4128,6 +4165,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedPreserveAspectRatio() throws Exception {
@@ -4139,6 +4177,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "object",
             FF38 = "object")
     public void mozMmsMessage() throws Exception {
         test("MozMmsMessage");
@@ -4148,7 +4187,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    @NotYetImplemented(FF31)
     public void mozSmsFilter() throws Exception {
         test("MozSmsFilter");
     }
@@ -4159,6 +4200,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void mediaQueryList() throws Exception {
@@ -4171,6 +4213,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void transitionEvent() throws Exception {
@@ -4193,6 +4236,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void styleSheet() throws Exception {
@@ -4205,6 +4249,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgPreserveAspectRatio() throws Exception {
@@ -4217,6 +4262,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void characterData() throws Exception {
@@ -4229,6 +4275,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "object",
             FF38 = "function",
             IE11 = "object")
     public void svgNumber() throws Exception {
@@ -4241,6 +4288,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void canvasGradient() throws Exception {
@@ -4253,6 +4301,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void nodeIterator() throws Exception {
@@ -4265,6 +4314,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void timeRanges() throws Exception {
@@ -4289,6 +4339,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void performance() throws Exception {
@@ -4301,6 +4352,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void compositionEvent() throws Exception {
@@ -4313,6 +4365,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedLength() throws Exception {
@@ -4325,6 +4378,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "object",
             FF38 = "object")
     public void cssSupportsRule() throws Exception {
         test("CSSSupportsRule");
@@ -4336,6 +4390,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbKeyRange() throws Exception {
@@ -4348,6 +4403,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgStringList() throws Exception {
@@ -4360,6 +4416,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void domError() throws Exception {
@@ -4372,6 +4429,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedInteger() throws Exception {
@@ -4407,6 +4465,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedTransformList() throws Exception {
@@ -4419,6 +4478,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void performanceNavigation() throws Exception {
@@ -4441,6 +4501,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void performanceTiming() throws Exception {
@@ -4453,6 +4514,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbObjectStore() throws Exception {
@@ -4465,6 +4527,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void url() throws Exception {
@@ -4477,6 +4540,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbTransaction() throws Exception {
@@ -4498,6 +4562,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbRequest() throws Exception {
@@ -4521,6 +4586,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbCursorWithValue() throws Exception {
@@ -4533,6 +4599,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void focusEvent() throws Exception {
@@ -4545,6 +4612,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void domStringList() throws Exception {
@@ -4556,6 +4624,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "object",
             FF38 = "object")
     public void cssConditionRule() throws Exception {
         test("CSSConditionRule");
@@ -4567,6 +4636,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgLengthList() throws Exception {
@@ -4579,6 +4649,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgGradientElement() throws Exception {
@@ -4591,6 +4662,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgLength() throws Exception {
@@ -4603,6 +4675,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void storageEvent() throws Exception {
@@ -4615,6 +4688,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbCursor() throws Exception {
@@ -4627,6 +4701,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void crypto() throws Exception {
@@ -4639,6 +4714,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbOpenDBRequest() throws Exception {
@@ -4650,6 +4726,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "object",
             FF38 = "object")
     public void cssGroupingRule() throws Exception {
         test("CSSGroupingRule");
@@ -4661,6 +4738,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgPoint() throws Exception {
@@ -4673,6 +4751,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "object",
+            FF31 = "function",
             FF38 = "function")
     public void css() throws Exception {
         test("CSS");
@@ -4684,6 +4763,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void dataTransfer() throws Exception {
@@ -4696,6 +4776,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgTransformList() throws Exception {
@@ -4708,6 +4789,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void imageData() throws Exception {
@@ -4720,6 +4802,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void idbVersionChangeEvent() throws Exception {
@@ -4732,6 +4815,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void popStateEvent() throws Exception {
@@ -4744,6 +4828,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgAnimatedAngle() throws Exception {
@@ -4754,7 +4839,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
     public void mozMobileMessageManager() throws Exception {
         test("MozMobileMessageManager");
     }
@@ -4765,6 +4851,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void fileList() throws Exception {
@@ -4788,6 +4875,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     @NotYetImplemented(FF31)
@@ -4812,6 +4900,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "object",
             FF38 = "object")
     public void mozSmsMessage() throws Exception {
         test("MozSmsMessage");
@@ -4823,6 +4912,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void canvasPattern() throws Exception {
@@ -4834,6 +4924,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void dragEvent() throws Exception {
@@ -4846,6 +4937,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void svgTransform() throws Exception {
@@ -4895,6 +4987,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void domCursor() throws Exception {
         test("DOMCursor");
@@ -4919,6 +5012,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void localMediaStream() throws Exception {
         test("LocalMediaStream");
@@ -5193,6 +5287,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void htmlDataElement() throws Exception {
         test("HTMLDataElement");
@@ -5242,7 +5337,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
     public void deviceStorageChangeEvent() throws Exception {
         test("DeviceStorageChangeEvent");
     }
@@ -5382,6 +5478,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void inputEvent() throws Exception {
         test("InputEvent");
@@ -5403,6 +5500,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void mozRTCIceCandidate() throws Exception {
         test("mozRTCIceCandidate");
@@ -5413,6 +5511,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void mozRTCPeerConnection() throws Exception {
         test("mozRTCPeerConnection");
@@ -5423,6 +5522,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription");
@@ -5433,6 +5533,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void rtcDataChannelEvent() throws Exception {
         test("RTCDataChannelEvent");
@@ -5453,6 +5554,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void rtcPeerConnectionIceEvent() throws Exception {
         test("RTCPeerConnectionIceEvent");
@@ -5493,6 +5595,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void mediaRecorder() throws Exception {
         test("MediaRecorder");
@@ -5564,6 +5667,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void blobEvent() throws Exception {
         test("BlobEvent");
@@ -5574,6 +5678,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void caretPosition() throws Exception {
         test("CaretPosition");
@@ -5594,7 +5699,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
     public void deviceStorage() throws Exception {
         test("DeviceStorage");
     }
@@ -5604,6 +5710,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void domRequest() throws Exception {
         test("DOMRequest");
@@ -5623,7 +5730,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
     public void fileHandle() throws Exception {
         test("FileHandle");
     }
@@ -5652,7 +5760,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
     public void lockedFile() throws Exception {
         test("LockedFile");
     }
@@ -5673,6 +5782,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
+            FF31 = "function",
             FF38 = "function",
             IE11 = "object")
     public void mutationRecord() throws Exception {
@@ -5736,7 +5846,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
     public void fileRequest() throws Exception {
         test("FileRequest");
     }
@@ -5795,6 +5906,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void mozContactChangeEvent() throws Exception {
         test("MozContactChangeEvent");
@@ -5804,7 +5916,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
     public void mozSmsEvent() throws Exception {
         test("MozSmsEvent");
     }
@@ -5813,7 +5926,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
     public void mozMmsEvent() throws Exception {
         test("MozMmsEvent");
     }
@@ -5823,6 +5937,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void mozSettingsEvent() throws Exception {
         test("MozSettingsEvent");
@@ -5833,6 +5948,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void proxy() throws Exception {
         test("Proxy");
@@ -6817,6 +6933,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
+            FF31 = "object",
             IE = "undefined")
     @NotYetImplemented(FF31)
     public void xPathExpression() throws Exception {
@@ -7115,6 +7232,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void domPoint() throws Exception {
         test("DOMPoint");
@@ -7125,6 +7243,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void domPointReadOnly() throws Exception {
         test("DOMPointReadOnly");
@@ -7135,6 +7254,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
             FF38 = "function")
     public void domRectReadOnly() throws Exception {
         test("DOMRectReadOnly");

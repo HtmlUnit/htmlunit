@@ -1189,6 +1189,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
+        FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
         IE8 = "9, 1, 10")
@@ -1704,6 +1705,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 4, 4",
+        FF31 = "0, 4, 4",
         FF38 = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
@@ -3318,6 +3320,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
+        FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
         IE8 = "0, 3, 3")
@@ -3611,6 +3614,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 5, 5",
+        FF31 = "0, 5, 5",
         FF38 = "0, 5, 5",
         IE11 = "1, 4, 5",
         IE8 = "0, 5, 5")
@@ -3976,6 +3980,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 7, 7",
+        FF31 = "0, 7, 7",
         FF38 = "0, 7, 7",
         IE11 = "0, 7, 7",
         IE8 = "2, 1, 3")
@@ -4092,6 +4097,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2, 2, 4",
+        FF31 = "0, 4, 4",
         FF38 = "0, 4, 4",
         IE11 = "0, 4, 4",
         IE8 = "0, 4, 4")
@@ -6271,6 +6277,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
+        FF31 = "0, 1, 1",
         FF38 = "0, 1, 1",
         IE11 = "0, 1, 1",
         IE8 = "0, 2, 2")

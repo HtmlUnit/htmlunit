@@ -2474,7 +2474,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object ClientRect]",
-            FF = "[object DOMRect]",
+            FF31 = "[object DOMRect]",
+            FF38 = "[object DOMRect]",
             IE8 = "[object]")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><div id='div1'>hello</div><script>\n"
@@ -2552,7 +2553,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object ClientRectList]", "1" },
-            FF = { "[object DOMRect]", "1" },
+            FF31 = { "[object DOMRect]", "1" },
+            FF38 = { "[object DOMRect]", "1" },
             IE8 = { "[object]", "1" })
     @NotYetImplemented
     public void getClientRects() throws Exception {

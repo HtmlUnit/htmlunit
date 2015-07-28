@@ -12,36 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.xml;
+package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code XMLHttpRequestEventTarget}.
+ * A JavaScript object for {@code MozMmsEvent}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClasses({
-    @JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
-            @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(value = FF, maxVersion = 31))
-    })
-public class XMLHttpRequestEventTarget extends EventTarget {
+@JsxClass(browsers = @WebBrowser(value = FF, maxVersion = 31))
+public class MozMmsEvent extends Event {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
-    public XMLHttpRequestEventTarget() {
+    @JsxConstructor
+    public MozMmsEvent() {
     }
 
 }

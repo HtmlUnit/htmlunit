@@ -89,7 +89,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "getLineDash",
                         "removeHitRegion", "scrollPathIntoView", "setLineDash", "33 methods" },
-            FF = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
+            FF31 = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
+                        "removeHitRegion", "scrollPathIntoView", "35 methods" },
+            FF38 = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
                         "removeHitRegion", "scrollPathIntoView", "35 methods" },
             IE8 = "exception",
             IE11 = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "removeHitRegion",
@@ -235,7 +237,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P8x8DwHwAFAQH/pKAYUwAAAABJRU5ErkJggg==",
-            FF = "data:image/png;base64,"
+            FF31 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
+            FF38 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
             IE11 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhX"
@@ -257,7 +261,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P8x8DwHwAFAQH/pKAYUwAAAABJRU5ErkJggg==",
-            FF = "data:image/png;base64,"
+            FF31 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
+            FF38 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
             IE11 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhX"

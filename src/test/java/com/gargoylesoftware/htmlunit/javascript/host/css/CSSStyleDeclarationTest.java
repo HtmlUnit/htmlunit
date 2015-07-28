@@ -79,7 +79,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = { "black", "pink", "color: pink; background: blue; foo: bar;" },
-            FF = { "black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
+            FF31 = { "black", "pink", "color: pink; background: none repeat scroll 0% 0% blue;" },
+            FF38 = { "black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
             CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203); background: blue;" },
             IE11 = { "black", "pink", "background: blue; color: pink; foo: bar;" })
     @NotYetImplemented({ FF, IE11, CHROME })
@@ -236,7 +237,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "blue",
-            FF = "blue none repeat scroll 0% 0%",
+            FF31 = "none repeat scroll 0% 0% blue",
+            FF38 = "blue none repeat scroll 0% 0%",
             IE8 = "exception")
     @NotYetImplemented(FF)
     public void getPropertyValue() throws Exception {

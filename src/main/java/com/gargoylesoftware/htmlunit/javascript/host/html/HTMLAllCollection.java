@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DEFAULT_DESCRIPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CHECK_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES;
@@ -172,6 +173,18 @@ public class HTMLAllCollection extends HTMLCollection {
         final HTMLCollection collection = new HTMLCollection(domNode, matchingByName);
         collection.setAvoidObjectDetection(!browser.hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
         return collection;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if ((String.class.equals(hint) || hint == null)
+                && getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DEFAULT_DESCRIPTION)) {
+            return "[object HTML document.all class]";
+        }
+        return super.getDefaultValue(hint);
     }
 
     /**
