@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -145,9 +144,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" },
-            FF38 = { "myAttr", "myattr2", "not found", "myattr2", "myattr2" })
-    @NotYetImplemented(FF38)
+    @Alerts(DEFAULT = { "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" })
     public void getNamedItem_HTML_Case() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
