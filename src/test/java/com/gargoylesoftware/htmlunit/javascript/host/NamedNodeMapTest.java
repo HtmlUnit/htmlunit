@@ -138,13 +138,13 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     }
 
     /**
-     * Looks like FF38 has a strange bug when using attrib names with uppercase letters.
-     * see https://bugzilla.mozilla.org/show_bug.cgi?id=1169384
+     * FF38 had a strange bug when using attrib names with uppercase letters.
+     * see https://bugzilla.mozilla.org/show_bug.cgi?id=1169384; fixed in 38.1.0
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" })
+    @Alerts({ "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" })
     public void getNamedItem_HTML_Case() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
