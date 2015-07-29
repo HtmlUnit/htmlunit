@@ -42,11 +42,11 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
-                            "1437920507152", "", "14", "text/plain" },
+                            "1437920507000", "", "14", "text/plain" },
             FF31 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
                             "undefined", "undefined", "14", "text/plain" },
             FF38 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
-                            "1437920507152", "undefined", "14", "text/plain" },
+                            "1437920507000", "undefined", "14", "text/plain" },
             IE11 = { "1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
                             "undefined", "undefined", "14", "text/plain" },
@@ -87,7 +87,9 @@ public class FileTest extends WebDriverTestCase {
         try {
             FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
 
-            tstFile.setLastModified(1437920507152L);
+            // do not use millis here because different file systems
+            // have different precisions
+            tstFile.setLastModified(1437920507000L);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("fileupload")).sendKeys(path);
