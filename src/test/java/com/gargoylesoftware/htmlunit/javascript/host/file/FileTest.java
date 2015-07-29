@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
 import java.io.File;
-import java.net.URL;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -42,14 +42,14 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
-                            "1437920507152", "", "291", "text/plain" },
+                            "1437920507152", "", "14", "text/plain" },
             FF31 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
-                            "undefined", "undefined", "291", "text/plain" },
+                            "undefined", "undefined", "14", "text/plain" },
             FF38 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
-                            "1437920507152", "undefined", "291", "text/plain" },
+                            "1437920507152", "undefined", "14", "text/plain" },
             IE11 = { "1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
-                            "undefined", "undefined", "291", "text/plain" },
+                            "undefined", "undefined", "14", "text/plain" },
             IE8 = { "" })
     public void properties() throws Exception {
         final String html
@@ -83,13 +83,26 @@ public class FileTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        final URL url = getClass().getClassLoader().getResource("ScriptExceptionTest1.txt");
-        final File file = new File(url.toURI());
-        final String path = file.getCanonicalPath();
-        driver.findElement(By.name("fileupload")).sendKeys(path);
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
+        try {
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
 
-        driver.findElement(By.id("testBtn")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+            tstFile.setLastModified(1437920507152L);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            final String[] expected = getExpectedAlerts();
+            if (expected.length > 1) {
+                expected[1] = tstFile.getName();
+            }
+            assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
     }
 
 }
