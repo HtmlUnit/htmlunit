@@ -38,7 +38,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * Tests against external websites, this should be done once every while.
  *
  * @version $Revision$
- * @author Ahmed Ashour
+ * @author Ahmed Ashour,
+ * @author Ronald Brill
  */
 public class ExternalTest {
 
@@ -196,9 +197,14 @@ public class ExternalTest {
             final HtmlTable table = page.getFirstByXPath("//table[@class='statusTable']");
             assumeTrue(page.asXml(), table != null);
             final HtmlTableCell cell = table.getRow(1).getCell(3);
-            final String string = cell.asText().substring("Subversion on ".length());
+            final String triggerText = cell.asText();
+
+            final String marker = "Subversion on ";
+            final int start = triggerText.indexOf(marker);
+            final String triggerDate = triggerText.substring(start + marker.length());
+
             final Calendar buildCalendar = Calendar.getInstance();
-            buildCalendar.setTime(TEAM_CITY_FORMAT_.parse(string));
+            buildCalendar.setTime(TEAM_CITY_FORMAT_.parse(triggerDate));
             return Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) != buildCalendar.get(Calendar.WEEK_OF_YEAR);
         }
     }
