@@ -40,6 +40,9 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -88,7 +91,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -114,9 +116,6 @@ import com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
 import com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code CSSStyleSheet}.
@@ -923,9 +922,8 @@ public class CSSStyleSheet extends StyleSheet {
      * @param source the source from which to retrieve the media to be parsed
      * @return the media parsed from the specified input source
      */
-    static SACMediaList parseMedia(final SimpleScriptable scripatble, final String mediaString) {
+    static SACMediaList parseMedia(final ErrorHandler errorHandler, final String mediaString) {
         try {
-            final ErrorHandler errorHandler = scripatble.getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
 
@@ -1150,7 +1148,8 @@ public class CSSStyleSheet extends StyleSheet {
             return true;
         }
 
-        final SACMediaList mediaList = parseMedia(this, media);
+        final WebClient webClient = getWindow().getWebWindow().getWebClient();
+        final SACMediaList mediaList = parseMedia(webClient.getCssErrorHandler(), media);
         return isActive(new MediaListImpl(mediaList));
     }
 

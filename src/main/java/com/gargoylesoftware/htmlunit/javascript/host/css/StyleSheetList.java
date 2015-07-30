@@ -14,12 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.css.sac.SACMediaList;
+
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -37,9 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import com.steadystate.css.dom.MediaListImpl;
 
 /**
  * <p>An ordered list of stylesheets, accessible via <tt>document.styleSheets</tt>, as specified by the
@@ -83,6 +88,30 @@ public class StyleSheetList extends SimpleScriptable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Verifies if the provided node is a link node pointing to an active stylesheet.
+     *
+     * @param domNode the mode to check
+     * @return true if the provided node is a stylesheet link
+     */
+    public boolean isActiveStyleSheetLink(final DomNode domNode) {
+        if (domNode instanceof HtmlLink) {
+            final HtmlLink link = (HtmlLink) domNode;
+            if ("stylesheet".equalsIgnoreCase(link.getRelAttribute())) {
+                final String media = link.getMediaAttribute();
+                if (StringUtils.isBlank(media)) {
+                    return true;
+                }
+                final WebClient webClient = getWindow().getWebWindow().getWebClient();
+                final SACMediaList mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
+                return CSSStyleSheet.isActive(new MediaListImpl(mediaList));
+            }
+        }
+        return false;
+    }
+
+    /**
      * Creates an instance.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
@@ -98,13 +127,21 @@ public class StyleSheetList extends SimpleScriptable {
         setParentScope(document);
         setPrototype(getPrototype(getClass()));
 
-        final boolean cssEnabled = getWindow().getWebWindow().getWebClient().getOptions().isCssEnabled();
+        final WebClient webClient = getWindow().getWebWindow().getWebClient();
+        final boolean cssEnabled = webClient.getOptions().isCssEnabled();
+        final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
+
         if (cssEnabled) {
             nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true, "stylesheets") {
                 @Override
                 protected boolean isMatching(final DomNode node) {
-                    return node instanceof HtmlStyle
-                        || isStyleSheetLink(node);
+                    if (node instanceof HtmlStyle) {
+                        return true;
+                    }
+                    if (onlyActive) {
+                        return isActiveStyleSheetLink(node);
+                    }
+                    return isStyleSheetLink(node);
                 }
 
                 @Override

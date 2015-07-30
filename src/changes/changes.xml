@@ -9,6 +9,9 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Stylesheet list contains only active style sheets when simulating Chrome.
+            </action>
+            <action type="fix" dev="rbri">
                 File.lastModifiedDate now produces the correct output in all browsers.
             </action>
             <action type="fix" dev="rbri">

@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.SACMediaList;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -69,7 +70,8 @@ public class MediaQueryList extends EventTarget {
      */
     @JsxGetter
     public boolean getMatches() {
-        final SACMediaList mediaList = CSSStyleSheet.parseMedia(this, media_);
+        final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+        final SACMediaList mediaList = CSSStyleSheet.parseMedia(errorHandler, media_);
         return CSSStyleSheet.isActive(new MediaListImpl(mediaList));
     }
 }

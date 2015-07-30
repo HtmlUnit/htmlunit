@@ -1740,6 +1740,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     JS_STORAGE_PRESERVED_INCLUDED,
 
+    /** Stylesheet list contains only active style sheets. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_STYLESHEETLIST_ACTIVE_ONLY,
+
     /** When addressing an item in a stylesheet list using a negative index an exception is thrown. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX,

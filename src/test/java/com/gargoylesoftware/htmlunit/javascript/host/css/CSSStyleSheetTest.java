@@ -659,7 +659,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "1" },
             CHROME = { "block", "0" })
-    @NotYetImplemented(CHROME)
     public void mediaOnLinkTag_notScreen() throws Exception {
         mediaOnLinkTag("print");
     }
@@ -679,7 +678,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "1" },
             CHROME = { "block", "0" })
-    @NotYetImplemented(CHROME)
     public void mediaOnLinkTag_multipleWithoutScreen() throws Exception {
         mediaOnLinkTag("print, projection, tv");
     }
