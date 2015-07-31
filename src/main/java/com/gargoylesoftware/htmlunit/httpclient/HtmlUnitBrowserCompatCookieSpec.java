@@ -42,7 +42,6 @@ import org.apache.http.impl.cookie.CookieSpecBase;
 import org.apache.http.impl.cookie.NetscapeDraftHeaderParser;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicHeaderElement;
-import org.apache.http.message.BasicHeaderValueFormatter;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.message.ParserCursor;
 import org.apache.http.util.CharArrayBuffer;
@@ -228,7 +227,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             final String cookieName = cookie.getName();
             final String cookieValue = cookie.getValue();
             if (cookie.getVersion() > 0 && !isQuoteEnclosed(cookieValue)) {
-                BasicHeaderValueFormatter.INSTANCE.formatHeaderElement(
+                HtmlUnitBrowserCompatCookieHeaderValueFormatter.INSTANCE.formatHeaderElement(
                         buffer,
                         new BasicHeaderElement(cookieName, cookieValue),
                         false);

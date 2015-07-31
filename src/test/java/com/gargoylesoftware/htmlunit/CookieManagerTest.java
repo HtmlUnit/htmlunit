@@ -168,6 +168,35 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * If a Version 1 cookie is set with a value that requires quoting,
+     * but wasn't quoted by the server, then this value should be
+     * sent back unquoted as well.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void unquotedCookieValueIsSentBackUnquotedAsWell() throws Exception {
+        ensureCookieValueIsSentBackUnquoted("SID=1234");
+
+        // even if there are special chars
+        ensureCookieValueIsSentBackUnquoted("SID=1234=");
+        ensureCookieValueIsSentBackUnquoted("SID=1234:");
+        ensureCookieValueIsSentBackUnquoted("SID=1234<");
+    }
+
+    private void ensureCookieValueIsSentBackUnquoted(final String cookie) throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Set-Cookie", cookie + "; Path=/; Version=1"));
+        getMockWebConnection().setResponse(getDefaultUrl(), "", 200, "OK", "text/html", responseHeaders);
+        getMockWebConnection().setDefaultResponse("");
+
+        final WebDriver driver = loadPageWithAlerts2(getDefaultUrl());
+        driver.get(URL_SECOND.toExternalForm());
+
+        final String lastCookie = getMockWebConnection().getLastAdditionalHeaders().get("Cookie");
+        assertEquals(cookie, lastCookie);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
