@@ -37,6 +37,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,11 +67,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * Base class for tests using WebDriver.
@@ -308,7 +309,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             @Override
-            protected WebElement newHtmlUnitWebElement(final HtmlElement element) {
+            protected WebElement newHtmlUnitWebElement(final DomElement element) {
                 return new FixedWebDriverHtmlUnitWebElement(this, element);
             }
         };
@@ -928,7 +929,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
  */
 class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
 
-    public FixedWebDriverHtmlUnitWebElement(final HtmlUnitDriver parent, final HtmlElement element) {
+    public FixedWebDriverHtmlUnitWebElement(final HtmlUnitDriver parent, final DomElement element) {
         super(parent, element);
     }
 
