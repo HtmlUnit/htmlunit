@@ -14,7 +14,7 @@
                 to the selenium project.
             </p>
             <p>
-                First of all: ALWAYS work wich branches.
+                First of all: ALWAYS work with branches.
                 <ol>
                    <li>bring our fork master in sync with the origin</li>
                    <li>create a new branch names 'htmlunit_x_xx'</li>
