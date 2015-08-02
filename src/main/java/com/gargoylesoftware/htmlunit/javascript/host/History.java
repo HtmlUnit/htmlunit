@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HISTORY_ENUMS_ENTRIES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -29,9 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for the client's browsing history.
@@ -57,38 +55,6 @@ public class History extends SimpleScriptable {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object[] getIds() {
-        Object[] ids = super.getIds();
-        if (getBrowserVersion().hasFeature(JS_HISTORY_ENUMS_ENTRIES)) {
-            final int len = getWindow().getWebWindow().getHistory().getLength();
-            if (len > 0) {
-                final Object[] allIds = new Object[ids.length + len];
-                System.arraycopy(ids, 0, allIds, 0, ids.length);
-                for (int i = 0; i < len; i++) {
-                    allIds[ids.length + i] = Integer.valueOf(i);
-                }
-                ids = allIds;
-            }
-        }
-        return ids;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(final int index, final Scriptable start) {
-        final History h = (History) start;
-        if (index < 0 || index >= h.getLength()) {
-            return NOT_FOUND;
-        }
-        throw Context.reportRuntimeError("Permission denied to call method History.item");
-    }
-
-    /**
      * Returns the "length" property.
      * @return the "length" property
      */
@@ -96,6 +62,16 @@ public class History extends SimpleScriptable {
     public int getLength() {
         final WebWindow w = getWindow().getWebWindow();
         return w.getHistory().getLength();
+    }
+
+    /**
+     * Returns the "state" property.
+     * @return the "state" property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public Object getState() {
+        // empty default impl
+        return null;
     }
 
     /**

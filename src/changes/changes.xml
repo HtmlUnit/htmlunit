@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Dummy implementation for History.state together with some more tests added.
+            </action>
             <action type="fix" dev="rbri">
                 Latest FF versions are no longer defining these methods: History.next, History.current, History.previous.
             </action>

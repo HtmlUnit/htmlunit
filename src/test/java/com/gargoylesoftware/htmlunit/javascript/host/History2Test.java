@@ -142,7 +142,7 @@ public class History2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("itemZero")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -162,7 +162,7 @@ public class History2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("itemZero")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -182,7 +182,7 @@ public class History2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("itemZero")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -202,7 +202,7 @@ public class History2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("itemZero")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -227,7 +227,68 @@ public class History2Test extends WebDriverTestCase {
         driver.findElement(By.name("hasZero")).click();
         driver.findElement(By.name("hasPositiveOne")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void arrayAccess() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<a name='arrayAccess' href='' onclick='alert(history[0]);return false;'>array access</a><br>\n"
+                + "</body></html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.name("arrayAccess")).click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "undefined")
+    public void state() throws Exception {
+        final String html = "<html><head><script>\n"
+                + "  function test() {\n"
+                + "    alert(history.state);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "back", "forward", "go", "length", "pushState", "replaceState", "state" },
+            IE8 = "length")
+    public void properties() throws Exception {
+        final String html = "<html><head><script>\n"
+                + "  function test() {\n"
+                + "    var props = [];\n"
+                + "    var i = 0;\n"
+                + "    for (prop in window.history) {\n"
+                + "      props[i++] = prop;\n"
+                + "    }\n"
+                + "    props.sort();\n"
+                + "    for (i = 0; i < props.length; i++) {\n"
+                + "      alert(props[i]);\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

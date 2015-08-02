@@ -1300,10 +1300,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
 
-    /** History entries are enumerated as properties. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    JS_HISTORY_ENUMS_ENTRIES,
-
     /** HTMLGenericElement instead of HTMLUnknownElement. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_HTML_GENERIC_ELEMENT_CLASS_NAME,
