@@ -41,6 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Chris Erskine
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
@@ -79,26 +80,12 @@ public class History extends SimpleScriptable {
      * {@inheritDoc}
      */
     @Override
-    public boolean has(final int index, final Scriptable start) {
-        if (getBrowserVersion().hasFeature(JS_HISTORY_ENUMS_ENTRIES)) {
-            final History h = (History) start;
-            if (index >= 0 && index < h.getLength()) {
-                return true;
-            }
-        }
-        return super.has(index, start);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Object get(final int index, final Scriptable start) {
         final History h = (History) start;
         if (index < 0 || index >= h.getLength()) {
             return NOT_FOUND;
         }
-        return item(index);
+        throw Context.reportRuntimeError("Permission denied to call method History.item");
     }
 
     /**
@@ -152,43 +139,6 @@ public class History extends SimpleScriptable {
         catch (final IOException e) {
             Context.throwAsScriptRuntimeEx(e);
         }
-    }
-
-    /**
-     * Returns the "current" property.
-     * @return the "current" property
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getCurrent() {
-        throw Context.reportRuntimeError("Permission denied to get property History.current");
-    }
-
-    /**
-     * Returns the "previous" property.
-     * @return the "previous" property
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getPrevious() {
-        throw Context.reportRuntimeError("Permission denied to get property History.previous");
-    }
-
-    /**
-     * Returns the "next" property.
-     * @return the "next" property
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getNext() {
-        throw Context.reportRuntimeError("Permission denied to get property History.next");
-    }
-
-    /**
-     * JavaScript function "item".
-     * @param index the index
-     * @return the URL of the history item at the specified index
-     */
-    @JsxFunction(@WebBrowser(FF))
-    public String item(final int index) {
-        throw Context.reportRuntimeError("Permission denied to call method History.item");
     }
 
     /**

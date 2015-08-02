@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class History2Test extends WebDriverTestCase {
@@ -86,6 +87,147 @@ public class History2Test extends WebDriverTestCase {
             driver.navigate().back();
         }
         verifyAlerts(driver, expectedAlerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void length() throws Exception {
+        final String second = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<a name='length' href='' onclick='alert(history.length);return false;'>length</a><br>\n"
+                + "<a name='x' href='#x'>x</a><br>\n"
+                + "</body></html>\n";
+
+        getMockWebConnection().setResponse(URL_SECOND, second);
+
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<a name='length' href='' onclick='alert(history.length);return false;'>length</a><br>\n"
+                + "<a name='b' href='" + URL_SECOND.toExternalForm() + "'>b</a><br>\n"
+                + "</body></html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.name("length")).click();
+
+        // when testing with real browsers we are facing different offsets
+        final int start = Integer.parseInt(getCollectedAlerts(driver).get(0));
+
+        driver.findElement(By.name("b")).click();
+        driver.findElement(By.name("length")).click();
+
+        driver.findElement(By.name("x")).click();
+        driver.findElement(By.name("length")).click();
+
+        assertEquals(new String[] {"" + (start + 1), "" + (start + 2)}, getCollectedAlerts(driver));
+    }
+
+    /**
+     * History.previous was defined in old FF versions.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void previous() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<a name='itemZero' href='' onclick='alert(history.previous); return false;'>item zero</a>\n"
+                + "</body></html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.name("itemZero")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * History.current was defined in old FF versions.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void current() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<a name='itemZero' href='' onclick='alert(history.current); return false;'>item zero</a>\n"
+                + "</body></html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.name("itemZero")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * History.next was defined in old FF versions.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void next() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<a name='itemZero' href='' onclick='alert(history.next); return false;'>item zero</a>\n"
+                + "</body></html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.name("itemZero")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * History.item was defined in old FF versions.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void item() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<a name='itemZero' href='' onclick='alert(history.item); return false;'>item zero</a>\n"
+                + "</body></html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.name("itemZero")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "false", "false", "false", "false", "false", "false" })
+    public void byIndex() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<a name='hasNegativeOne' href='' onclick="
+                    + "'alert(\"-1\" in history);alert(-1 in history);return false;'>has negative one</a><br>\n"
+                + "<a name='hasZero' href='' onclick="
+                    + "'alert(\"0\" in history);alert(0 in history);return false;'>has zero</a><br>\n"
+                + "<a name='hasPositiveOne' href='' onclick="
+                    + "'alert(\"1\" in history);alert(1 in history);return false;'>has positive one</a><br>\n"
+                + "</body></html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.name("hasNegativeOne")).click();
+        driver.findElement(By.name("hasZero")).click();
+        driver.findElement(By.name("hasPositiveOne")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
 }

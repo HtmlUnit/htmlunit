@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Latest FF versions are no longer defining these methods: History.next, History.current, History.previous.
+            </action>
             <action type="fix" dev="rbri" issue="1705">
                 Cookies: quote only if the cookie was sent with quotes.
             </action>

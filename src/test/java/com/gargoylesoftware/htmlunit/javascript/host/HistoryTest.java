@@ -14,19 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.History;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -165,107 +157,4 @@ public class HistoryTest extends WebServerTestCase {
         assertEquals(1, history.getIndex());
         assertEquals(urlB, page.getUrl());
     }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts({ "1", "2", "3" })
-    public void length() throws Exception {
-        final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(alerts));
-
-        HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
-        page = page.getAnchorByName("length").click();
-
-        page = page.getAnchorByName("b").click();
-        page = page.getAnchorByName("length").click();
-
-        page = page.getAnchorByName("x").click();
-        page = page.getAnchorByName("length").click();
-
-        assertEquals(getExpectedAlerts(), alerts);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = "error",
-            IE = "undefined")
-    @NotYetImplemented(CHROME)
-    public void previous() throws Exception {
-        final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(alerts));
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
-        page.getAnchorByName("previous").click();
-        assertEquals(getExpectedAlerts(), alerts);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = "error",
-            IE = "undefined")
-    @NotYetImplemented(CHROME)
-    public void current() throws Exception {
-        final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(alerts));
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
-        page.getAnchorByName("current").click();
-        assertEquals(getExpectedAlerts(), alerts);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = "error",
-            IE = "undefined")
-    @NotYetImplemented(CHROME)
-    public void next() throws Exception {
-        final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(alerts));
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
-        page.getAnchorByName("next").click();
-        assertEquals(getExpectedAlerts(), alerts);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = "error")
-    public void item() throws Exception {
-        final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(alerts));
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
-        page.getAnchorByName("itemZero").click();
-        assertEquals(getExpectedAlerts(), alerts);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = { "false", "false", "true", "true", "false", "false" },
-            IE = { "false", "false", "false", "false", "false", "false" })
-    @NotYetImplemented(CHROME)
-    public void byIndex() throws Exception {
-        final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(alerts));
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
-        page.getAnchorByName("hasNegativeOne").click();
-        page.getAnchorByName("hasZero").click();
-        page.getAnchorByName("hasPositiveOne").click();
-        assertEquals(getExpectedAlerts(), alerts);
-    }
-
 }
