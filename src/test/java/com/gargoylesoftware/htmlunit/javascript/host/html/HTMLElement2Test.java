@@ -1227,7 +1227,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("b")));
         actions.perform();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -1273,7 +1273,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("b")).click();
         driver.findElement(By.id("c")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

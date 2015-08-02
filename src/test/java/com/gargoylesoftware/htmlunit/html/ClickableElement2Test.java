@@ -51,6 +51,6 @@ public class ClickableElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("textfield1")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

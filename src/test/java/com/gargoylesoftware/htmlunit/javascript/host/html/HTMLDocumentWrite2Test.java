@@ -188,7 +188,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.linkText("a link")).click();
         driver.findElement(By.id("clickMe")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

@@ -276,7 +276,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("a1")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

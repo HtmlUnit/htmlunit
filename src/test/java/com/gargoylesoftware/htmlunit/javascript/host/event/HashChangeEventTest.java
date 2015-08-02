@@ -229,6 +229,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(getDefaultUrl());
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

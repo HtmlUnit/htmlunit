@@ -154,7 +154,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys(" 0123456789");
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -178,7 +179,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -201,7 +203,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys(" 0123456789");
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -225,7 +228,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -250,7 +254,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys(" 0123456789");
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -280,7 +285,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

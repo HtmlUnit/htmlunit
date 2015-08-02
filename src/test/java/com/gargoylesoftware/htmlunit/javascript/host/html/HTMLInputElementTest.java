@@ -218,7 +218,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         driver.findElement(By.id("clickme")).click();
         assertTrue(checkBox.isSelected());
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -262,7 +262,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertTrue(radioB.isSelected());
         assertFalse(radioC.isSelected());
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -308,7 +308,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertTrue(button2.isEnabled());
         assertFalse(button3.isEnabled());
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -474,7 +474,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         button.click();
         assertEquals("from button", textinput.getAttribute("value"));
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -505,7 +505,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         button.click();
         assertEquals("from button", textinput.getAttribute("value"));
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -663,7 +663,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickme")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

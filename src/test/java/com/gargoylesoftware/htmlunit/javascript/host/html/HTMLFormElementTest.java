@@ -1017,7 +1017,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             // ok
         }
         driver.switchTo().window("foo1");
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

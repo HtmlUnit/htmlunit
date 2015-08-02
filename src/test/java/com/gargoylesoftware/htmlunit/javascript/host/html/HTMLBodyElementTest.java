@@ -96,7 +96,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myInput")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

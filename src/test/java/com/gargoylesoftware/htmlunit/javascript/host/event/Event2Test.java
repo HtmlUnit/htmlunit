@@ -302,7 +302,8 @@ public class Event2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -337,7 +338,7 @@ public class Event2Test extends WebDriverTestCase {
         element.sendKeys("b");
         element.click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -371,7 +372,7 @@ public class Event2Test extends WebDriverTestCase {
         final WebElement element = driver.findElement(By.id("div"));
         element.click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -511,7 +512,7 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -551,7 +552,7 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("b")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -597,7 +598,7 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("theSpan")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -669,7 +670,7 @@ public class Event2Test extends WebDriverTestCase {
         driver.findElement(By.id("theSpan")).click();
         driver.findElement(By.id("theSpan")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -714,6 +715,6 @@ public class Event2Test extends WebDriverTestCase {
         driver.findElement(By.id("theSpan")).click();
         driver.findElement(By.id("theSpan")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

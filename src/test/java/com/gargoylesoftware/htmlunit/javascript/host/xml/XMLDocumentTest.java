@@ -1097,7 +1097,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "</svg>";
         final WebDriver driver = loadPage2(svg);
         driver.findElement(By.id("rect")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -1117,7 +1118,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "</svg>";
         final WebDriver driver = loadPage2(svg, URL_FIRST, "text/xml", TextUtil.DEFAULT_CHARSET);
         driver.findElement(By.id("rect")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
 }

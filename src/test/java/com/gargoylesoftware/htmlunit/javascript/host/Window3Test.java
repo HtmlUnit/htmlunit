@@ -1326,7 +1326,7 @@ public class Window3Test extends WebDriverTestCase {
 
         driver.findElement(By.id("theDiv")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -1367,7 +1367,7 @@ public class Window3Test extends WebDriverTestCase {
 
         driver.findElement(By.id("myButton")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

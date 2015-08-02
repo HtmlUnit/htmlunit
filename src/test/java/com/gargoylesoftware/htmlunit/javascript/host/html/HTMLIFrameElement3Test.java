@@ -246,7 +246,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         driver.findElement(By.id("test")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
         assertEquals(3, getMockWebConnection().getRequestCount());
     }
 

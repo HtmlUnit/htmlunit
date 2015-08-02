@@ -476,7 +476,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         tmpFile.delete();
         driver.findElement(By.tagName("body")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

@@ -204,7 +204,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         assertEquals("first", driver.getTitle());
 
         expandExpectedAlertsVariables(URL_FIRST);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -298,7 +299,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("btn2")).click();
         driver.findElement(By.id("btn3")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

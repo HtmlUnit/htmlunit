@@ -100,7 +100,8 @@ public class FileTest extends WebDriverTestCase {
             if (expected.length > 1) {
                 expected[1] = tstFile.getName();
             }
-            assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+            verifyAlerts(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);

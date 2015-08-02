@@ -305,7 +305,7 @@ public class Document2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("text1")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -361,7 +361,7 @@ public class Document2Test extends WebDriverTestCase {
         driver.switchTo().frame(driver.findElement(By.id("innerFrame")));
         assertEquals("another frame text", driver.findElement(By.tagName("body")).getText());
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

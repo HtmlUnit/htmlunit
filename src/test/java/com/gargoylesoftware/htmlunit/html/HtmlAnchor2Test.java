@@ -63,7 +63,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
         driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -86,7 +86,8 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
         driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

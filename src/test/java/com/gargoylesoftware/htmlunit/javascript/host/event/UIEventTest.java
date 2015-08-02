@@ -112,7 +112,8 @@ public class UIEventTest extends WebDriverTestCase {
         final Actions action = new Actions(driver);
         action.doubleClick(driver.findElement(By.id("b")));
         action.perform();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -135,6 +136,7 @@ public class UIEventTest extends WebDriverTestCase {
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("b")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

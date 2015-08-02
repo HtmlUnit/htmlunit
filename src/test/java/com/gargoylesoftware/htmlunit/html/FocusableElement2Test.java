@@ -69,7 +69,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("focusId")).click();
         driver.findElement(By.id("other")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     private void testWithCallFocusBlur(String tag) throws Exception {

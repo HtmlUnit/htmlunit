@@ -95,7 +95,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
         textarea.sendKeys("foo");
         driver.findElement(By.name("myButton")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

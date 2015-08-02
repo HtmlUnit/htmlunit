@@ -283,7 +283,7 @@ public class NodeTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("div1")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -966,7 +966,8 @@ public class NodeTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstHtml, URL_FIRST);
         driver.findElement(By.id("myInput")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

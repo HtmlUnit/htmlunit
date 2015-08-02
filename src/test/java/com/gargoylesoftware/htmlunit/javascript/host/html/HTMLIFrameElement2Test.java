@@ -292,7 +292,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("test")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 
@@ -553,7 +553,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("it")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -878,7 +878,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("d1")).click();
         driver.findElement(By.id("d2")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

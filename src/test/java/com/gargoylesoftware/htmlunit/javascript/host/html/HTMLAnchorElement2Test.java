@@ -99,7 +99,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("link")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -128,7 +129,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("link")).click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -224,7 +226,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         driver.findElement(By.name("testanchor")).click();
 
         expandExpectedAlertsVariables(URL_FIRST);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -256,7 +259,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
 
         expandExpectedAlertsVariables(URL_FIRST);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -289,7 +293,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, UrlUtils.getUrlWithNewRef(URL_FIRST, "ref"));
 
         expandExpectedAlertsVariables(URL_FIRST);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -324,7 +329,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, UrlUtils.getUrlWithNewPath(URL_FIRST, "/index.html"));
 
         expandExpectedAlertsVariables(URL_FIRST);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -533,7 +539,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("tester")).click();
         assertEquals(1 + newWindows, driver.getWindowHandles().size());
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

@@ -1176,7 +1176,7 @@ public class Window2Test extends WebDriverTestCase {
         driver.findElement(By.id("it")).sendKeys("hello");
         driver.findElement(By.tagName("html")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -1267,7 +1267,7 @@ public class Window2Test extends WebDriverTestCase {
         driver.switchTo().frame("myFrame");
         driver.findElement(By.id("clickme")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

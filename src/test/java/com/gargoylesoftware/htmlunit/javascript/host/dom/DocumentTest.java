@@ -902,7 +902,8 @@ public class DocumentTest extends WebDriverTestCase {
         driver.findElement(By.linkText("click me")).click();
 
         expandExpectedAlertsVariables(URL_FIRST);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -2058,7 +2059,7 @@ public class DocumentTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("s")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -2107,7 +2108,7 @@ public class DocumentTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("text1")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -2133,7 +2134,7 @@ public class DocumentTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(content);
         driver.findElement(By.id("theDiv")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

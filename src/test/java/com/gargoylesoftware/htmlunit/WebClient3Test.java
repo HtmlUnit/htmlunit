@@ -414,8 +414,8 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstContent);
         driver.findElement(By.id("testAnchor")).click();
-        Thread.sleep(1000);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -461,8 +461,8 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstContent);
         driver.findElement(By.id("testSubmit")).click();
-        Thread.sleep(1000);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -506,8 +506,8 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstContent);
         driver.findElement(By.id("testAnchor")).click();
-        Thread.sleep(1000);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -556,8 +556,8 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstContent);
         driver.findElement(By.id("testSubmit")).click();
-        Thread.sleep(1000);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
