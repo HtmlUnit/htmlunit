@@ -303,17 +303,20 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "** string", "blue" },
             CHROME = { "*null* object", "blue" },
-            IE8 = { })
-    @NotYetImplemented(CHROME)
+            IE8 = "removeProperty not available")
     public void removePropertyUndefined() throws Exception {
-        final String html = "<html><head><title>First</title><script>\n"
+        final String html = "<html>\n"
+            + "<head><title>First</title>\n"
+            + "<script>\n"
             + "function doTest() {\n"
             + "  var oDiv1 = document.getElementById('div1');\n"
-            + "  if (oDiv1.style.removeProperty) {\n"
-            + "    var value = oDiv1.style.removeProperty(undefined);\n"
-            + "    alert('*' + value + '* ' + typeof(value));\n"
-            + "    alert(oDiv1.style.getPropertyValue('color'));\n"
+            + "  if (!oDiv1.style.removeProperty) {\n"
+            + "    alert('removeProperty not available');\n"
+            + "    return;\n"
             + "  }\n"
+            + "  var value = oDiv1.style.removeProperty(undefined);\n"
+            + "  alert('*' + value + '* ' + typeof(value));\n"
+            + "  alert(oDiv1.style.getPropertyValue('color'));\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -1550,7 +1553,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "none" },
-            IE = "exception",
+            CHROME = { "undefined", "before", "none", "exception" },
+            IE8 = "exception",
             IE11 = { "function", "before", "none", "after", "none" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void interceptSetter() throws Exception {

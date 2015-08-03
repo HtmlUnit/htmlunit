@@ -148,6 +148,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_PROGRESS_DISPLAY_INLINE,
 
+    /** CSSStyleDeclaration.removeStyleAttribute() returns null instead of an empty string if not found. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    CSS_REMOVE_STYLE_ATTRIBUTE_RETURNS_NULL_FOR_UNDEFINED,
+
     /** The default value of the display property for the 'rp' tag is 'none'. */
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
     CSS_RP_DISPLAY_NONE,

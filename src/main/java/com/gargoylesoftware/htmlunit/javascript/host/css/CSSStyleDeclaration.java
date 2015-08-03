@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_IMAGE_URL_QUOTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PIXEL_VALUES_INT_ONLY;
+import static com.gargoylesoftware.htmlunit.
+                    BrowserVersionFeatures.CSS_REMOVE_STYLE_ATTRIBUTE_RETURNS_NULL_FOR_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
@@ -54,6 +56,12 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
@@ -81,12 +89,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.steadystate.css.dom.CSSValueImpl;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
 
 /**
  * A JavaScript object for a CSSStyleDeclaration.
@@ -5486,8 +5488,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the value deleted
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    public String removeProperty(final String name) {
-        return removeStyleAttribute(name);
+    public String removeProperty(final Object name) {
+        if (Undefined.instance == name
+                && getBrowserVersion().hasFeature(CSS_REMOVE_STYLE_ATTRIBUTE_RETURNS_NULL_FOR_UNDEFINED)) {
+            return null;
+        }
+        return removeStyleAttribute(Context.toString(name));
     }
 
     /**
