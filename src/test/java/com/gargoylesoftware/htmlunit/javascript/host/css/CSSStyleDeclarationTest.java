@@ -1558,21 +1558,29 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             IE11 = { "function", "before", "none", "after", "none" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void interceptSetter() throws Exception {
-        final String html = "<html><body><div id='d'>foo</div><script>\n"
-            + "try {\n"
-            + "var css = window.CSSStyleDeclaration;\n"
-            + "var oldDisplay = css.prototype.__lookupSetter__('display');\n"
-            + "alert(typeof oldDisplay);\n"
-            + "\n"
-            + "var newDisplay = function(x){ alert('before'); alert(x); oldDisplay.call(this, x); alert('after'); };\n"
-            + "css.prototype.__defineSetter__('display', newDisplay);\n"
-            + "\n"
-            + "var div = document.getElementById('d');\n"
-            + "div.style.display = 'none';\n"
-            + "alert(div.style.display);\n"
-            + "} catch(e) { alert('exception'); }\n"
-            + "\n"
-            + "</script></body></html>";
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<div id='d'>foo</div>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var css = window.CSSStyleDeclaration;\n"
+            + "    var oldDisplay = css.prototype.__lookupSetter__('display');\n"
+            + "    alert(typeof oldDisplay);\n"
+
+            + "    var newDisplay = function(x){\n"
+            + "                       alert('before');\n"
+            + "                       alert(x);\n"
+            + "                       oldDisplay.call(this, x);\n"
+            + "                       alert('after');\n"
+            + "                     };\n"
+            + "    css.prototype.__defineSetter__('display', newDisplay);\n"
+
+            + "    var div = document.getElementById('d');\n"
+            + "    div.style.display = 'none';\n"
+            + "    alert(div.style.display);\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
