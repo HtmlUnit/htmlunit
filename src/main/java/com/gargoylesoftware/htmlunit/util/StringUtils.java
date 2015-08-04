@@ -98,21 +98,6 @@ public final class StringUtils {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified string contains whitespace, <tt>false</tt> otherwise.
-     *
-     * @param s the string to check for whitespace
-     * @return <tt>true</tt> if the specified string contains whitespace, <tt>false</tt> otherwise
-     */
-    public static boolean containsWhitespace(final String s) {
-        for (final char c : s.toCharArray()) {
-            if (Character.isWhitespace(c)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Returns the index within the specified string of the first occurrence of
      * the specified search character.
      *

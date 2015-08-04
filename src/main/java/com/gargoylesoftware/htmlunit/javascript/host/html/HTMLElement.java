@@ -64,6 +64,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyberneko.html.HTMLElements;
@@ -1006,7 +1007,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 final String name = attr.getName();
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
                 final boolean quote = doQoute
-                    || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value)
+                    || StringUtils.containsWhitespace(value)
                     || value.isEmpty()
                     || (element instanceof HtmlAnchor && "href".equals(name));
                 buffer.append(' ').append(name).append("=");
