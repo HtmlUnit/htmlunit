@@ -64,7 +64,7 @@ net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call met
             </p>
             <p>
                 To quickly modify the content, you can save the file locally and tell the proxy to replace the content
-                of a specific URL with that file. This is call <code>MAP LOCAL</code> in Charles.<br/>
+                of a specific URL with that file. This is called <code>MAP LOCAL</code> in Charles.<br/>
                 You can also beautify the JavaScript, look for online tools.
             </p>
             <p>
@@ -85,13 +85,13 @@ function myfunction(a, b) {
 }]]></source>
             </p>
             <p>
-                To know the caller function, you can use:
+                To know the <code>caller</code> function, you can use:
             <source><![CDATA[
 function myfunction(a, b) {
     var c = a + b;
     alert(arguments.callee.caller);
     return c;
-}]]></source> which will print the content of the caller function.
+}]]></source> which will print the content of the <code>caller</code> function.
             </p>
             <p>
                 To know what function will be called, you can use:
