@@ -85,7 +85,7 @@ function myfunction(a, b) {
 }]]></source>
             </p>
             <p>
-                To know what is the called function, you can use:
+                To know the caller function, you can use:
             <source><![CDATA[
 function myfunction(a, b) {
     var c = a + b;
