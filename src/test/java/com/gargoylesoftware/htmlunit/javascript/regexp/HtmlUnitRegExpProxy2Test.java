@@ -27,6 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
@@ -34,6 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
@@ -147,5 +149,20 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
         finally {
             Context.exit();
         }
+    }
+
+    /**
+     * Test if replace() and test() do not change {@link SubString#emptySubString}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void emptySubStringChanged() throws Exception {
+        final String html = "<html></html>";
+        final HtmlPage page = loadPage(html);
+
+        assertTrue(SubString.emptySubString.toString().isEmpty());
+        page.executeJavaScript("'alpha'.replace(/alpha/, '');/beta/.test('abc beta def');");
+        assertTrue(SubString.emptySubString.toString().isEmpty());
     }
 }

@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1706" due-to="Carsten Steul">
+                RegExp: there was a mutable 'singleton' shared between different regex results; this introduces
+                strange side effects.
+            </action>
             <action type="fix" dev="rbri">
                 Return value of CSSStyleDeclaration.removeStyleAttribute() fixed when simulating Chrome.
             </action>

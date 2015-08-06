@@ -44,6 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Carsten Steul
  */
 public class HtmlUnitRegExpProxy extends RegExpImpl {
 
@@ -285,10 +286,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         // lastMatch
         final String match = matcher.group();
         if (match == null) {
-            lastMatch = SubString.emptySubString;
+            lastMatch = new SubString();
         }
         else {
-            lastMatch = new FixedSubString(match);
+            lastMatch = new SubString(match, 0, match.length());
         }
 
         // parens
@@ -302,10 +303,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             for (int i = 0; i < count; i++) {
                 final String group = matcher.group(i + 1);
                 if (group == null) {
-                    parens[i] = SubString.emptySubString;
+                    parens[i] = new SubString();
                 }
                 else {
-                    parens[i] = new FixedSubString(group);
+                    parens[i] = new SubString(group, 0, group.length());
                 }
             }
         }
@@ -313,15 +314,15 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         // lastParen
         if (groupCount > 0) {
             if (groupCount > 9 && browserVersion_.hasFeature(JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS)) {
-                lastParen = SubString.emptySubString;
+                lastParen = new SubString();
             }
             else {
                 final String last = matcher.group(groupCount);
                 if (last == null) {
-                    lastParen = SubString.emptySubString;
+                    lastParen = new SubString();
                 }
                 else {
-                    lastParen = new FixedSubString(last);
+                    lastParen = new SubString(last, 0, last.length());
                 }
             }
         }
@@ -331,7 +332,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             leftContext = new SubString(thisString, 0, startPos);
         }
         else {
-            leftContext = SubString.emptySubString;
+            leftContext = new SubString();
         }
 
         // rightContext
@@ -340,7 +341,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             rightContext = new SubString(thisString, endPos, length - endPos);
         }
         else {
-            rightContext = SubString.emptySubString;
+            rightContext = new SubString();
         }
     }
 
@@ -431,29 +432,4 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         return regExpJsToJavaFSM.convert(re);
     }
 
-    /**
-     *  Static version of a SubString that does not fill the
-     *  chars array. This helps in some situations to solve
-     *  performance issues.
-     *  Use this only if you sure, that the chars are no longer
-     *  needed.
-     */
-    private static class FixedSubString extends SubString {
-
-        private String value_;
-
-        /**
-         * Constructor.
-         *
-         * @param str the value
-         */
-        public FixedSubString(final String str) {
-            value_ = str;
-        }
-
-        @Override
-        public String toString() {
-            return value_;
-        }
-    }
 }
