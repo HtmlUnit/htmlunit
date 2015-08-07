@@ -37,6 +37,7 @@ public class Plugin extends SimpleArray {
     private String description_;
     private String filename_;
     private String name_;
+    private String version_;
 
     /**
      * Creates an instance.
@@ -49,11 +50,13 @@ public class Plugin extends SimpleArray {
      * C'tor initializing fields.
      * @param name the plugin name
      * @param description the plugin description
+     * @param version the version
      * @param filename the plugin filename
      */
-    public Plugin(final String name, final String description, final String filename) {
+    public Plugin(final String name, final String description, final String version, final String filename) {
         name_ = name;
         description_ = description;
+        version_ = version;
         filename_ = filename;
     }
 
@@ -92,5 +95,14 @@ public class Plugin extends SimpleArray {
     @JsxGetter
     public String getName() {
         return name_;
+    }
+
+    /**
+     * Gets the plugin's version.
+     * @return the name
+     */
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    public String getVersion() {
+        return version_;
     }
 }

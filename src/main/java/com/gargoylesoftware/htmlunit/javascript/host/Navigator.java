@@ -217,7 +217,7 @@ public class Navigator extends SimpleScriptable {
 
         for (final PluginConfiguration pluginConfig : getBrowserVersion().getPlugins()) {
             final Plugin plugin = new Plugin(pluginConfig.getName(), pluginConfig.getDescription(),
-                pluginConfig.getFilename());
+                    pluginConfig.getVersion(), pluginConfig.getFilename());
             plugin.setParentScope(this);
             plugin.setPrototype(getPrototype(Plugin.class));
             plugins_.add(plugin);

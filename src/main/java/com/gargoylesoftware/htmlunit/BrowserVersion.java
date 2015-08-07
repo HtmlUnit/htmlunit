@@ -193,13 +193,6 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
         INTERNET_EXPLORER_11.setScriptAcceptHeader("application/javascript, */*;q=0.8");
 
-        final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-            "Shockwave Flash 9.0 r31", "libflashplayer.so");
-        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
-            "Shockwave Flash", "swf"));
-        FIREFOX_31.getPlugins().add(flash);
-        FIREFOX_38.getPlugins().add(flash);
-
         CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
         CHROME.setVendor("Google Inc.");
@@ -213,6 +206,26 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.setCssAcceptHeader("text/css,*/*;q=0.1");
         CHROME.setScriptAcceptHeader("*/*");
         // there are other issues with Chrome; a different productSub, etc.
+
+        // flush plugin (windows version)
+        PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
+                "Shockwave Flash 18.0 r0", "undefined", "pepflashplayer.dll");
+        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+                "Shockwave Flash", "swf"));
+        CHROME.getPlugins().add(flash);
+
+        flash = new PluginConfiguration("Shockwave Flash",
+                "Shockwave Flash 18.0 r0", "18.0.0.209", "NPSWF32_18_0_0_209.dll");
+        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+                "Shockwave Flash", "swf"));
+        FIREFOX_31.getPlugins().add(flash);
+        FIREFOX_38.getPlugins().add(flash);
+
+        flash = new PluginConfiguration("Shockwave Flash",
+                "Shockwave Flash 18.0 r0", "18.0.0.209", "Flash32_18_0_0_209.ocx");
+        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+                "Shockwave Flash", "swf"));
+        INTERNET_EXPLORER_11.getPlugins().add(flash);
     }
 
     private String applicationCodeName_ = "Mozilla";

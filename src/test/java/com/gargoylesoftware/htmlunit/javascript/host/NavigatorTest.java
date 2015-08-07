@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NavigatorTest extends WebDriverTestCase {
@@ -199,6 +200,39 @@ public class NavigatorTest extends WebDriverTestCase {
         for (PluginConfiguration plugin : getBrowserVersion().getPlugins()) {
             assertTrue(alerts.contains(plugin.getName()));
         }
+    }
+
+    /**
+     * Tests the Shockwave Flash plugin property.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.209", "NPSWF32_18_0_0_209.dll"},
+            CHROME = { "Shockwave Flash", "Shockwave Flash 18.0 r0", "undefined", "pepflashplayer.dll"},
+            IE11 = {"Shockwave Flash, Shockwave Flash 18.0 r0", "18.0.0.209", "Flash32_18_0_0_209.ocx"})
+    public void pluginsShockwaveFlash() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       for (var i=0; i<window.navigator.plugins.length; i++) {\n"
+                + "         var plugin = window.navigator.plugins[i];\n"
+                + "         if ('Shockwave Flash' == window.navigator.plugins[i].name) {\n"
+                + "           alert(plugin.name);\n"
+                + "           alert(plugin.description);\n"
+                + "           alert(plugin.version);\n"
+                + "           alert(plugin.filename);\n"
+                + "         }\n"
+                + "      }\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**

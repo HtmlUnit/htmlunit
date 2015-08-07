@@ -20,10 +20,11 @@ import java.util.Set;
 
 /**
  * Contains information about a plugin as available in JavaScript via <tt>document.navigator.plugins</tt>,
- * as well as the associated mime types (for Firefox browser simulation).
+ * as well as the associated mime types.
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  * @see <a href="http://www.xulplanet.com/references/objref/Plugin.html">XUL Planet Documentation</a>
  */
 public class PluginConfiguration implements Serializable, Cloneable {
@@ -31,18 +32,22 @@ public class PluginConfiguration implements Serializable, Cloneable {
     private final String description_;
     private final String filename_;
     private final String name_;
+    private final String version_;
     private final Set<PluginConfiguration.MimeType> mimeTypes_ = new HashSet<>();
 
     /**
      * Creates a new instance.
      * @param name the plugin name
      * @param description the plugin description
+     * @param version the version
      * @param filename the plugin filename
      */
-    public PluginConfiguration(final String name, final String description, final String filename) {
+    public PluginConfiguration(final String name, final String description, final String version,
+                final String filename) {
         WebAssert.notNull("name", name);
         name_ = name;
         description_ = description;
+        version_ = version;
         filename_ = filename;
     }
 
@@ -68,6 +73,14 @@ public class PluginConfiguration implements Serializable, Cloneable {
      */
     public String getName() {
         return name_;
+    }
+
+    /**
+     * Gets the plugin's version.
+     * @return the version
+     */
+    public String getVersion() {
+        return version_;
     }
 
     /**
@@ -105,7 +118,8 @@ public class PluginConfiguration implements Serializable, Cloneable {
      */
     @Override
     public PluginConfiguration clone() {
-        final PluginConfiguration clone = new PluginConfiguration(getName(), getDescription(), getFilename());
+        final PluginConfiguration clone = new PluginConfiguration(getName(), getDescription(), getVersion(),
+                    getFilename());
         clone.getMimeTypes().addAll(getMimeTypes());
 
         return clone;
