@@ -32,8 +32,8 @@ import org.w3c.dom.Document;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -264,7 +264,7 @@ public class EventTarget extends SimpleScriptable {
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
-        final HtmlElement element = (HtmlElement) getDomNodeOrNull();
+        final DomElement element = (DomElement) getDomNodeOrNull();
         ScriptResult result = null;
         if (event.getType().equals(MouseEvent.TYPE_CLICK)) {
             try {

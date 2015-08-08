@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class SVGTest extends WebDriverTestCase {
@@ -47,6 +48,40 @@ public class SVGTest extends WebDriverTestCase {
             + "  alert(document.getElementById('svgElem').getAttribute('id'));\n"
             + "} catch (e) { alert('exception'); }\n"
             + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for issue 3313921.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "clicked",
+            IE8 = "exception")
+    public void triggerEvent() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function init() {\n"
+                + "    try {\n"
+                + "      var rect = document.getElementById('rect');\n"
+                + "      rect.addEventListener('click', function() { alert('clicked') });\n"
+
+                + "      var e = document.createEvent('MouseEvents');\n"
+                + "      e.initEvent('click', true, false);\n"
+                + "      document.getElementById('rect').dispatchEvent(e);\n"
+                + "    } catch (e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='init()'>\n"
+                + "<svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
+                + "  <rect id='rect'  width='300' height='100' />\n"
+                + "</svg>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageWithAlerts2(html);
     }
