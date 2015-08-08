@@ -31,6 +31,7 @@ import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
@@ -1123,7 +1124,9 @@ public class WebClient implements Serializable, AutoCloseable {
             cleanUrl = UrlUtils.getUrlWithNewRef(cleanUrl, null);
         }
 
-        final File file = new File(cleanUrl.toExternalForm().substring(5));
+        String fileUrl = cleanUrl.toExternalForm();
+        fileUrl = URLDecoder.decode(fileUrl, "UTF-8");
+        final File file = new File(fileUrl.substring(5));
         if (!file.exists()) {
             // construct 404
             final List<NameValuePair> compiledHeaders = new ArrayList<>();

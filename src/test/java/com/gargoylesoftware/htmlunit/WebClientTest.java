@@ -777,6 +777,46 @@ public class WebClientTest extends SimpleWebTestCase {
     }
 
     /**
+     * Test loading a file page with non ascii names.
+     *
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void loadFilePageEncoded() throws Exception {
+        final WebClient client = getWebClient();
+
+        final String whitespaceFilename = "white space.txt";
+        String path = getClass().getClassLoader().getResource(whitespaceFilename).toExternalForm();
+        File file = new File(new URI(path));
+        assertTrue(file.exists());
+
+        String url = "file://" + file.getCanonicalPath();
+        Page page = client.getPage(url);
+        assertEquals("the name of this file contains a blank", page.getWebResponse().getContentAsString());
+
+        // encode the whitespace
+        url = "file://" + file.getCanonicalPath().replace(" ", "%20");
+        page = client.getPage(url);
+        assertEquals("the name of this file contains a blank", page.getWebResponse().getContentAsString());
+
+        final String unicodeFilename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
+
+        path = getClass().getClassLoader().getResource(unicodeFilename).toExternalForm();
+        file = new File(new URI(path));
+        assertTrue(file.exists());
+
+        url = "file://" + file.getCanonicalPath();
+        page = client.getPage(url);
+        assertEquals("", page.getWebResponse().getContentAsString());
+
+        url = url.replace(
+                unicodeFilename,
+                "%e6%aa%94%e6%a1%88%ed%8c%8c%ec%9d%bc%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%d9%85%d9%84%d9%81.txt");
+        page = client.getPage(url);
+        assertEquals("", page.getWebResponse().getContentAsString());
+    }
+
+    /**
      * Test loading a file page with XML content. Regression test for bug 1113487.
      *
      * @throws Exception if something goes wrong
