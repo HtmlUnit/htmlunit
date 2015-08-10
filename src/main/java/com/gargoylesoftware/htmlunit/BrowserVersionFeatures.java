@@ -819,6 +819,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CALL_RESULT_IS_LAST_RETURN_VALUE,
 
+    /** toDataURL for canvas returns the CHROME version of the png. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_CANVAS_DATA_URL_CHROME_PNG,
+
     /** toDataURL for canvas returns the IE11 version of the png. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_CANVAS_DATA_URL_IE_PNG,
