@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLCanvasElementTest extends WebDriverTestCase {
@@ -174,8 +174,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3, 3")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"3", "3"},
+            IE8 = {"3.1", "3.1"})
     public void getWidthDot() throws Exception {
         getWidth("3.1");
     }
@@ -184,8 +184,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3, 3")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"3", "3"},
+            IE8 = {"3a1", "3a1"})
     public void getWidthDigitAlpha() throws Exception {
         getWidth("3a1");
     }
@@ -194,8 +194,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("300, 150")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"300", "150"},
+            IE8 = {"abb", "abb"})
     public void getWidthAlpha() throws Exception {
         getWidth("abb");
     }
