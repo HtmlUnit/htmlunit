@@ -16,13 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlTime;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -40,36 +36,5 @@ public class HTMLTimeElement extends HTMLElement {
      */
     @JsxConstructor
     public HTMLTimeElement() {
-    }
-
-    /**
-     * Returns the <tt>text</tt> attribute.
-     * @return the <tt>text</tt> attribute
-     */
-    @Override
-    @JsxGetter
-    public String getText() {
-        final DomNode firstChild = getDomNodeOrDie().getFirstChild();
-        if (firstChild != null) {
-            return firstChild.getNodeValue();
-        }
-        return "";
-    }
-
-    /**
-     * Sets the <tt>text</tt> attribute.
-     * @param text the <tt>text</tt> attribute
-     */
-    @JsxSetter
-    public void setText(final String text) {
-        final DomNode htmlElement = getDomNodeOrDie();
-        DomNode firstChild = htmlElement.getFirstChild();
-        if (firstChild == null) {
-            firstChild = new DomText(htmlElement.getPage(), text);
-            htmlElement.appendChild(firstChild);
-        }
-        else {
-            firstChild.setNodeValue(text);
-        }
     }
 }
