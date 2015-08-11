@@ -157,8 +157,8 @@ public class RegExpJsToJavaConverter {
         insideCharClass_ = false;
         insideRepetition_ = false;
 
-        parsingSubexpressions_ = new Stack<Subexpresion>();
-        subexpressions_ = new LinkedList<Subexpresion>();
+        parsingSubexpressions_ = new Stack<>();
+        subexpressions_ = new LinkedList<>();
 
         int current = tape_.read();
         while (current > -1) {

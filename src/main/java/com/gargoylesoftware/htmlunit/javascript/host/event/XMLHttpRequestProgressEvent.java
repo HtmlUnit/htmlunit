@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -35,4 +36,14 @@ public class XMLHttpRequestProgressEvent extends ProgressEvent {
     @JsxConstructor
     public XMLHttpRequestProgressEvent() {
     }
+
+    /**
+     * Creates a new event instance.
+     * @param scriptable the SimpleScriptable that triggered the event
+     * @param type the event type
+     */
+    public XMLHttpRequestProgressEvent(final SimpleScriptable scriptable, final String type) {
+        super(scriptable, type);
+    }
+
 }

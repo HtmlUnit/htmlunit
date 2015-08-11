@@ -2189,9 +2189,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     XHR_ERRORHANDLER_NOT_SUPPORTED,
 
-    /** XMLHttpRequest triggers the opened event at the beginning of the send
-     * method again.
-     */
+    /** XMLHttpRequest triggers the opened event at the beginning of the send method again. */
     @BrowserFeature(@WebBrowser(IE))
     XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,
 
@@ -2209,16 +2207,11 @@ public enum BrowserVersionFeatures {
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
 
     /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED,
 
-    /** Indicates that the onreadystatechange handler is not triggered for sync requests. */
+    /** Indicates that the onreadystatechange handler is triggered with an event parameter. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED,
-
-    /** Indicates that the onreadystatechange handler is triggered with an event parameter (FF). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
 
     /** Indicates if an empty url is allowed as url param for the open method. */

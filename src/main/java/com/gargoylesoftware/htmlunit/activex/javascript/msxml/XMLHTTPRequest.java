@@ -470,7 +470,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                     Stack<Scriptable> stack =
                             (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                     if (null == stack) {
-                        stack = new Stack<Scriptable>();
+                        stack = new Stack<>();
                         cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
                     }
                     stack.push(startingScope);

@@ -835,7 +835,7 @@ public class JavaScriptEngine {
                 @SuppressWarnings("unchecked")
                 Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                 if (null == stack) {
-                    stack = new Stack<Scriptable>();
+                    stack = new Stack<>();
                     cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
                 }
 

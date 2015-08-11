@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
@@ -44,14 +43,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Stack;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
@@ -81,12 +72,21 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.event.XMLHttpRequestProgressEvent;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 /**
- * A JavaScript object for a XMLHttpRequest.
+ * A JavaScript object for an {@code XMLHttpRequest}.
  *
  * @version $Revision$
  * @author Daniel Gredler
@@ -202,12 +202,9 @@ public class XMLHttpRequest extends EventTarget {
         state_ = state;
 
         final BrowserVersion browser = getBrowserVersion();
-        // Firefox doesn't trigger onreadystatechange handler for sync requests except for completed for FF10
-        final boolean noTriggerForSync = browser.hasFeature(
-                XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED);
-        final boolean triggerForSyncCompleted = (state == DONE)
-            && browser.hasFeature(XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED);
-        if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || triggerForSyncCompleted)) {
+        // Firefox doesn't trigger onreadystatechange handler for sync requests except for 'completed'
+        final boolean noTriggerForSync = browser.hasFeature(XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED);
+        if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || state == DONE)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
@@ -216,9 +213,7 @@ public class XMLHttpRequest extends EventTarget {
             }
             Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
             if (browser.hasFeature(XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
-                params = new Object[1];
-                final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
-                params[0] = event;
+                params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
             }
 
             jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
@@ -233,10 +228,33 @@ public class XMLHttpRequest extends EventTarget {
 
         // Firefox has a separate onload handler, too.
         final boolean triggerOnload = browser.hasFeature(XHR_TRIGGER_ONLOAD_ON_COMPLETED);
-        if (triggerOnload && loadHandler_ != null && state == DONE) {
-            final Scriptable scope = loadHandler_.getParentScope();
+        if (triggerOnload && state == DONE) {
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            jsEngine.callFunction(containingPage_, loadHandler_, scope, this, ArrayUtils.EMPTY_OBJECT_ARRAY);
+            final Object[] params = new Event[] {new XMLHttpRequestProgressEvent(this, Event.TYPE_LOAD)};
+
+            if (loadHandler_ != null) {
+                jsEngine.callFunction(containingPage_, loadHandler_, loadHandler_.getParentScope(), this, params);
+            }
+
+            List<Scriptable> handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, false);
+            if (handlers != null) {
+                for (final Scriptable scriptable : handlers) {
+                    if (scriptable instanceof Function) {
+                        final Function function = (Function) scriptable;
+                        jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
+                    }
+                }
+            }
+
+            handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, true);
+            if (handlers != null) {
+                for (final Scriptable scriptable : handlers) {
+                    if (scriptable instanceof Function) {
+                        final Function function = (Function) scriptable;
+                        jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
+                    }
+                }
+            }
         }
     }
 
@@ -621,7 +639,7 @@ public class XMLHttpRequest extends EventTarget {
                     Stack<Scriptable> stack =
                             (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                     if (null == stack) {
-                        stack = new Stack<Scriptable>();
+                        stack = new Stack<>();
                         cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
                     }
                     stack.push(startingScope);

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                XMLHttpRequest: call onload handler with a ProgressEvent parameter.
+            </action>
             <action type="fix" dev="rbri">
                 Support for text property removed from HTMLTimeElement.
             </action>
@@ -49,7 +52,7 @@
                 File.lastModified is not available in FF31.
             </action>
         </release>
-        <release version="2.18" date="July 26, 2015" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
+        <release version="2.18" date="Jul 26, 2015" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
             <action type="add" dev="asashour">
                 Introduce AbstractPage.
             </action>

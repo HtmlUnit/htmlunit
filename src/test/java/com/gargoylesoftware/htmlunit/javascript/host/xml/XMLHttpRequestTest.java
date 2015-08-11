@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.BufferedReader;
@@ -851,9 +852,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     public void refererHeader() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + " req = " + XHR_INSTANTIATION + ";\n"
-            + " req.open('post', 'foo.xml', false);\n"
-            + " req.send('');\n"
+            + "  req = " + XHR_INSTANTIATION + ";\n"
+            + "  req.open('post', 'foo.xml', false);\n"
+            + "  req.send('');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
@@ -1131,10 +1132,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <script>\n"
             + "      function test() {\n"
             + "        try {\n"
-            + "        var request = " + XHR_INSTANTIATION + ";\n"
-            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
-            + "        request.send('');\n"
-            + "        alert(request.responseXML.getElementById('myID').id);\n"
+            + "          var request = " + XHR_INSTANTIATION + ";\n"
+            + "          request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "          request.send('');\n"
+            + "          alert(request.responseXML.getElementById('myID').id);\n"
             + "        } catch (e) { alert('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
@@ -1170,10 +1171,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <script>\n"
             + "      function test() {\n"
             + "        try {\n"
-            + "        var request = " + XHR_INSTANTIATION + ";\n"
-            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
-            + "        request.send('');\n"
-            + "        alert(request.responseXML.getElementById('myID').myInput.name);\n"
+            + "          var request = " + XHR_INSTANTIATION + ";\n"
+            + "          request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "          request.send('');\n"
+            + "          alert(request.responseXML.getElementById('myID').myInput.name);\n"
             + "        } catch (e) { alert('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
@@ -1290,8 +1291,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * Helper method Bug #1623.
-     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1311,4 +1310,76 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             assertEquals(39, output.codePointAt(3));
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object ProgressEvent]",
+            CHROME = "[object XMLHttpRequestProgressEvent]")
+    @NotYetImplemented(IE8)
+    public void loadParameter() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function someLoad(e) {\n"
+            + "        alert(e);\n"
+            + "      }\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var request = " + XHR_INSTANTIATION + ";\n"
+            + "          request.onload = someLoad;"
+            + "          request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "          request.send('');\n"
+            + "        } catch (e) { alert('exception'); }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml = "<abc></abc>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            CHROME = "function")
+    @NotYetImplemented
+    public void addEventListener() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function someLoad(e) {\n"
+            + "        var caller = arguments.callee.caller;\n"
+            + "        alert(typeof caller == 'function' ? 'function' : caller);\n"
+            + "      }\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var request = " + XHR_INSTANTIATION + ";\n"
+            + "          request.addEventListener('load', someLoad, false);"
+            + "          request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "          request.send('');\n"
+            + "        } catch (e) { alert('exception'); }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml = "<abc></abc>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
 }

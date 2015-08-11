@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -37,4 +38,14 @@ public class ProgressEvent extends Event {
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public ProgressEvent() {
     }
+
+    /**
+     * Creates a new event instance.
+     * @param scriptable the SimpleScriptable that triggered the event
+     * @param type the event type
+     */
+    public ProgressEvent(final SimpleScriptable scriptable, final String type) {
+        super(scriptable, type);
+    }
+
 }

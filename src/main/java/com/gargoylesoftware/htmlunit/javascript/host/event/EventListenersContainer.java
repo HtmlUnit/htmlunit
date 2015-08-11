@@ -116,7 +116,13 @@ public class EventListenersContainer implements Serializable {
         return handlers;
     }
 
-    private List<Scriptable> getHandlers(final String eventType, final boolean useCapture) {
+    /**
+     * Returns the relevant handlers.
+     * @param eventType the event type
+     * @param useCapture whether to use capture of not
+     * @return the handlers list
+     */
+    public List<Scriptable> getHandlers(final String eventType, final boolean useCapture) {
         final Handlers handlers = eventHandlers_.get(eventType.toLowerCase(Locale.ENGLISH));
         if (handlers != null) {
             return handlers.getHandlers(useCapture);
