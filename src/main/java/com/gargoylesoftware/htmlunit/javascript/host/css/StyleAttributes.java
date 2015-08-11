@@ -2598,7 +2598,7 @@ final class StyleAttributes {
         private final String attributeName_;
         private final BrowserConfiguration[] browserConfigurations_;
 
-        private Definition(final String propertyName,
+        Definition(final String propertyName,
                 final String attributeName,
                 final BrowserConfiguration... browserConfigurations) {
             propertyName_ = propertyName;

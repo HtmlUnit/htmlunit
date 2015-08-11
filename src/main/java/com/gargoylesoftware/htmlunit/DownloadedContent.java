@@ -37,7 +37,7 @@ public interface DownloadedContent extends Serializable {
     /**
      * Implementation keeping content in memory.
      */
-    static class InMemory implements DownloadedContent {
+    class InMemory implements DownloadedContent {
         private final byte[] bytes_;
 
         public InMemory(final byte[] byteArray) {
@@ -68,7 +68,7 @@ public interface DownloadedContent extends Serializable {
     /**
      * Implementation keeping content on the file system.
      */
-    static class OnFile implements DownloadedContent {
+    class OnFile implements DownloadedContent {
         private final File file_;
         private boolean temporary_;
 
