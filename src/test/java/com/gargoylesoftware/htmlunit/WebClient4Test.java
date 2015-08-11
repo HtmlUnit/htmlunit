@@ -363,4 +363,5 @@ public class WebClient4Test extends WebServerTestCase {
             writer.close();
         }
     }
+
 }
