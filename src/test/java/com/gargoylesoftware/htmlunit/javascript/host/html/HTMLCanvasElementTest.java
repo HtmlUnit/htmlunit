@@ -119,7 +119,6 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             + "AwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqU"
             + "pQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIG"
             + "Cw/QIBARsBgZaoSlACBB1YxAJfjJb2jAAAAAElFTkSuQmCC" })
-    @NotYetImplemented(CHROME)
     public void toDataUrl() throws Exception {
         final String html =
             "<html>\n"
