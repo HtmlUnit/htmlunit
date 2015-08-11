@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -46,13 +47,14 @@ public class ExternalTest {
     private static final DateFormat TEAM_CITY_FORMAT_ = new SimpleDateFormat("dd MMM yy HH:mm");
 
     /**
-     * Tests that pom dependencies are the latest.
+     * Tests that POM dependencies are the latest.
      *
      * Currently it is configured to check every week.
      *
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void pom() throws Exception {
         if (isDifferentWeek()) {
             final List<String> lines = FileUtils.readLines(new File("pom.xml"));
