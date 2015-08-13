@@ -47,6 +47,79 @@ public class Console2Test extends SimpleWebTestCase {
         log("['one', 'two', 'three', document.body.children]");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "info: string: HtmlUnit; numb: 4, 4; float: 4.2,"
+            + " link: http://htmlunit.sourceforge.net/" },
+            IE8 = "")
+    public void logSimplePlaceholder() throws Exception {
+        log("'string: %s; numb: %d, %i; float: %f, link: %o', 'HtmlUnit', 4.2, 4, 4.2,"
+                + " 'http://htmlunit.sourceforge.net/'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "info: string: %s; %i;" },
+            IE8 = "")
+    public void logMissingParam() throws Exception {
+        log("'string: %s; %i;'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "info: string: #; %i; %i;" },
+            IE8 = "")
+    public void logMissingParam2() throws Exception {
+        log("'string: %s; %i; %i;', '#'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "info: string: param1; param2" },
+            IE8 = "")
+    public void logMissingPlaceholder() throws Exception {
+        log("'string: %s;', 'param1', 'param2'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "info: %i; 1; %i; % 2.0 3.0 4.0" },
+            IE8 = "")
+    public void logEscaping() throws Exception {
+        log("'%%i; %i; %%i; %', 1, 2, 3, 4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "info: 12%i3; 4.0" },
+            IE8 = "")
+    public void logContinous() throws Exception {
+        log("'%i%i%%i%i;', 1, 2, 3, 4");
+    }
+
+    /**
+     * Regression test for issue #1711.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "info: $Version$" },
+            IE8 = "")
+    public void logDollar() throws Exception {
+        log("'%s', '$Version$'");
+    }
+
     private void log(final String logInput) throws Exception {
         final WebConsole console = getWebClient().getWebConsole();
         final List<String> messages = new ArrayList<>();

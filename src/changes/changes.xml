@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1711">
+                String substitution in window.console.log fixed (handing of special chars like $,
+                escaped percent sign, handling of missing replacement parameters).
+            </action>
             <action type="fix" dev="rbri">
                 Window.dump() is available in FF only.
             </action>

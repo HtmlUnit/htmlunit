@@ -17,8 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -209,33 +207,43 @@ public class WebConsole {
         final Formatter formatter = getFormatter();
 
         if (args.size() > 1 && args.get(0) instanceof String) {
-            // Format specification regular expression.
-            final Pattern p = Pattern.compile("%(\\d*).?(\\d*)[a-zA-Z]");
-            final Matcher m = p.matcher((String) args.remove(0));
+            final StringBuilder msg = new StringBuilder((String) args.remove(0));
+            int startPos = msg.indexOf("%");
 
-            while (m.find()) {
-                final String group = m.group();
-                final char ch = group.charAt(group.length() - 1);
-                String replacement = null;
-                switch (ch) {
-                    case 'o':
-                    case 's':
-                        replacement = formatter.parameterAsString(pop(args));
-                        break;
-                    case 'd':
-                    case 'i':
-                        replacement = formatter.parameterAsInteger(pop(args));
-                        break;
-                    case 'f':
-                        replacement = formatter.parameterAsFloat(pop(args));
-                        break;
-                    default:
-                        replacement = group;
-                        break;
+            while (startPos > -1 && startPos < msg.length() - 1 && args.size() > 0) {
+                if (startPos != 0 && msg.charAt(startPos - 1) == '%') {
+                    // double %
+                    msg.replace(startPos, startPos + 1, "");
                 }
-                m.appendReplacement(sb, replacement);
+                else {
+                    final char type = msg.charAt(startPos + 1);
+                    String replacement = null;
+                    switch (type) {
+                        case 'o':
+                        case 's':
+                            replacement = formatter.parameterAsString(pop(args));
+                            break;
+                        case 'd':
+                        case 'i':
+                            replacement = formatter.parameterAsInteger(pop(args));
+                            break;
+                        case 'f':
+                            replacement = formatter.parameterAsFloat(pop(args));
+                            break;
+                        default:
+                            break;
+                    }
+                    if (replacement != null) {
+                        msg.replace(startPos, startPos + 2, replacement);
+                        startPos = startPos + replacement.length();
+                    }
+                    else {
+                        startPos++;
+                    }
+                }
+                startPos = msg.indexOf("%", startPos);
             }
-            m.appendTail(sb);
+            sb.append(msg);
         }
 
         for (final Object o : args) {
