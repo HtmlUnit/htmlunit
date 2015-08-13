@@ -669,7 +669,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Prints messages to the console.
      * @param message the message to log
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction(@WebBrowser(FF))
     public void dump(final String message) {
         if (console_ instanceof Console) {
             Console.log(null, console_, new Object[] {message}, null);

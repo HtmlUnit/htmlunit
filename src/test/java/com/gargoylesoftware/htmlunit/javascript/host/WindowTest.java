@@ -43,9 +43,11 @@ import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
+import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -72,6 +74,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WindowTest extends SimpleWebTestCase {
@@ -1325,4 +1328,49 @@ public class WindowTest extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            FF = "info: Dumper")
+    public void dump() throws Exception {
+        final WebConsole console = getWebClient().getWebConsole();
+        final List<String> messages = new ArrayList<>();
+        console.setLogger(new Logger() {
+
+            @Override
+            public void warn(final Object message) {
+            }
+
+            @Override
+            public void trace(final Object message) {
+            }
+
+            @Override
+            public void info(final Object message) {
+                messages.add("info: " + message);
+            }
+
+            @Override
+            public void error(final Object message) {
+            }
+
+            @Override
+            public void debug(final Object message) {
+            }
+        });
+
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  if (window.dump) {\n"
+            + "    window.dump('Dumper');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        loadPage(html);
+        assertEquals(getExpectedAlerts(), messages);
+    }
 }

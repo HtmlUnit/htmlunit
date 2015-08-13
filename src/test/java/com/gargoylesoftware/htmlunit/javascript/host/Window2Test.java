@@ -1555,4 +1555,22 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void dump() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  alert(typeof window.dump);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
