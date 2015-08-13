@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Window.dump() is available in FF only.
+            </action>
             <action type="fix" dev="asashour">
                 XMLHttpRequest: call onload handler with a ProgressEvent parameter.
             </action>
