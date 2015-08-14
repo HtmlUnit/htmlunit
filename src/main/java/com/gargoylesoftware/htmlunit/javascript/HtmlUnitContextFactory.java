@@ -337,9 +337,10 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_HTMLUNIT_ERROR_STACK:
                 return browserVersion_.hasFeature(JS_ERROR_STACK);
             case Context.FEATURE_HTMLUNIT_CONSTRUCTOR:
+                final HtmlPage htmlPage = (HtmlPage) Context.getCurrentContext()
+                    .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_CONSTRUCTOR)
-                        ||   !((HtmlPage) Context.getCurrentContext()
-                                .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE)).isQuirksMode();
+                        || htmlPage == null || !htmlPage.isQuirksMode();
             case Context.FEATURE_HTMLUNIT_FUNCTION_OBJECT_METHOD:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_OBJECT_METHOD);
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:

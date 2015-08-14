@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -299,20 +300,22 @@ public class JavaScriptEngine {
             }
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor != null) {
-                    final FunctionObject functionObject;
+                    final BaseFunction function;
                     if ("Window".equals(jsClassName)) {
-                        functionObject = (FunctionObject) ScriptableObject.getProperty(window, "constructor");
+                        function = (BaseFunction) ScriptableObject.getProperty(window, "constructor");
                     }
                     else {
-                        functionObject = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
+                        function = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
                     }
 
                     if ("Image".equals(hostClassSimpleName) || "Option".equals(hostClassSimpleName)) {
                         final Object prototypeProperty = ScriptableObject.getProperty(window, prototype.getClassName());
 
-                        functionObject.addAsConstructor(window, prototype);
+                        if (function instanceof FunctionObject) {
+                            ((FunctionObject) function).addAsConstructor(window, prototype);
+                        }
 
-                        ScriptableObject.defineProperty(window, hostClassSimpleName, functionObject,
+                        ScriptableObject.defineProperty(window, hostClassSimpleName, function,
                                 ScriptableObject.DONTENUM);
 
                         // the prototype class name is set as a side effect of functionObject.addAsConstructor
@@ -328,17 +331,19 @@ public class JavaScriptEngine {
                         }
                     }
                     else {
-                        functionObject.addAsConstructor(window, prototype);
+                        if (function instanceof FunctionObject) {
+                            ((FunctionObject) function).addAsConstructor(window, prototype);
+                        }
                     }
 
-                    configureConstants(config, functionObject);
+                    configureConstants(config, function);
 
                     for (final Entry<String, Method> staticfunctionInfo : config.getStaticFunctionEntries()) {
                         final String functionName = staticfunctionInfo.getKey();
                         final Method method = staticfunctionInfo.getValue();
                         final FunctionObject staticFunctionObject = new FunctionObject(functionName, method,
-                                functionObject);
-                        functionObject.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
+                                function);
+                        function.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
                     }
 
                     for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry
@@ -348,7 +353,7 @@ public class JavaScriptEngine {
                         final Method writeMethod = propertyEntry.getValue().getWriteMethod();
                         final int flag = ScriptableObject.EMPTY;
 
-                        functionObject.defineProperty(propertyName, null, readMethod, writeMethod, flag);
+                        function.defineProperty(propertyName, null, readMethod, writeMethod, flag);
                     }
                 }
                 else {
