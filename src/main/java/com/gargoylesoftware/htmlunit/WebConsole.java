@@ -395,7 +395,9 @@ public class WebConsole {
 
         @Override
         public void trace(final Object message) {
-            LOG.trace(message);
+            if (LOG.isTraceEnabled()) {
+                LOG.trace(message);
+            }
         }
 
         @Override
@@ -405,7 +407,9 @@ public class WebConsole {
 
         @Override
         public void debug(final Object message) {
-            LOG.debug(message);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(message);
+            }
         }
 
         @Override
