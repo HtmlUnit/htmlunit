@@ -40,11 +40,33 @@ public class WebConsole {
     public interface Logger {
 
         /**
+         * Is trace logging currently enabled?
+         * <p>
+         * Call this method to prevent having to perform expensive operations
+         * (for example, <code>String</code> concatenation)
+         * when the log level is more than trace.
+         *
+         * @return true if trace is enabled in the underlying logger.
+         */
+        boolean isTraceEnabled();
+
+        /**
          * Logs a message with trace log level.
          *
          * @param message log this message
          */
         void trace(final Object message);
+
+        /**
+         * Is debug logging currently enabled?
+         * <p>
+         * Call this method to prevent having to perform expensive operations
+         * (for example, <code>String</code> concatenation)
+         * when the log level is more than debug.
+         *
+         * @return true if debug is enabled in the underlying logger.
+         */
+        boolean isDebugEnabled();
 
         /**
          * Logs a message with debug log level.
@@ -54,6 +76,17 @@ public class WebConsole {
         void debug(final Object message);
 
         /**
+         * Is info logging currently enabled?
+         * <p>
+         * Call this method to prevent having to perform expensive operations
+         * (for example, <code>String</code> concatenation)
+         * when the log level is more than info.
+         *
+         * @return true if info is enabled in the underlying logger.
+         */
+        boolean isInfoEnabled();
+
+        /**
          * Logs a message with info log level.
          *
          * @param message log this message
@@ -61,11 +94,33 @@ public class WebConsole {
         void info(final Object message);
 
         /**
+         * Is warn logging currently enabled?
+         * <p>
+         * Call this method to prevent having to perform expensive operations
+         * (for example, <code>String</code> concatenation)
+         * when the log level is more than warn.
+         *
+         * @return true if warn is enabled in the underlying logger.
+         */
+        boolean isWarnEnabled();
+
+        /**
          * Logs a message with warn log level.
          *
          * @param message log this message
          */
         void warn(final Object message);
+
+        /**
+         * Is error logging currently enabled?
+         * <p>
+         * Call this method to prevent having to perform expensive operations
+         * (for example, <code>String</code> concatenation)
+         * when the log level is more than error.
+         *
+         * @return true if error is enabled in the underlying logger.
+         */
+        boolean isErrorEnabled();
 
         /**
          * Logs a message with error log level.
@@ -152,7 +207,9 @@ public class WebConsole {
      * @param args the logging parameters
      */
     public void trace(final Object... args) {
-        logger_.trace(process(args));
+        if (logger_.isTraceEnabled()) {
+            logger_.trace(process(args));
+        }
     }
 
     /**
@@ -160,7 +217,9 @@ public class WebConsole {
      * @param args the logging parameters
      */
     public void debug(final Object... args) {
-        logger_.debug(process(args));
+        if (logger_.isDebugEnabled()) {
+            logger_.debug(process(args));
+        }
     }
 
     /**
@@ -168,7 +227,9 @@ public class WebConsole {
      * @param args the logging parameters
      */
     public void info(final Object... args) {
-        logger_.info(process(args));
+        if (logger_.isInfoEnabled()) {
+            logger_.info(process(args));
+        }
     }
 
     /**
@@ -176,7 +237,9 @@ public class WebConsole {
      * @param args the logging parameters
      */
     public void warn(final Object... args) {
-        logger_.warn(process(args));
+        if (logger_.isWarnEnabled()) {
+            logger_.warn(process(args));
+        }
     }
 
     /**
@@ -184,7 +247,9 @@ public class WebConsole {
      * @param args the logging parameters
      */
     public void error(final Object... args) {
-        logger_.error(process(args));
+        if (logger_.isErrorEnabled()) {
+            logger_.error(process(args));
+        }
     }
 
     /**
@@ -324,38 +389,53 @@ public class WebConsole {
         private static final Log LOG = LogFactory.getLog(WebConsole.class);
 
         @Override
+        public boolean isTraceEnabled() {
+            return LOG.isTraceEnabled();
+        }
+
+        @Override
         public void trace(final Object message) {
-            if (LOG.isTraceEnabled()) {
-                LOG.trace(message);
-            }
+            LOG.trace(message);
+        }
+
+        @Override
+        public boolean isDebugEnabled() {
+            return LOG.isDebugEnabled();
         }
 
         @Override
         public void debug(final Object message) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(message);
-            }
+            LOG.debug(message);
+        }
+
+        @Override
+        public boolean isInfoEnabled() {
+            return LOG.isInfoEnabled();
         }
 
         @Override
         public void info(final Object message) {
-            if (LOG.isInfoEnabled()) {
-                LOG.info(message);
-            }
+            LOG.info(message);
+        }
+
+        @Override
+        public boolean isWarnEnabled() {
+            return LOG.isWarnEnabled();
         }
 
         @Override
         public void warn(final Object message) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn(message);
-            }
+            LOG.warn(message);
+        }
+
+        @Override
+        public boolean isErrorEnabled() {
+            return LOG.isErrorEnabled();
         }
 
         @Override
         public void error(final Object message) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error(message);
-            }
+            LOG.error(message);
         }
     }
 }

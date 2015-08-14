@@ -110,6 +110,16 @@ public class Console2Test extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "info: %x 1 10%  % ; 2.0" },
+            IE8 = "")
+    public void logPercent() throws Exception {
+        log("'%x %i 10%  %% ;', 1, 2");
+    }
+
+    /**
      * Regression test for issue #1711.
      * @throws Exception if the test fails
      */
@@ -144,6 +154,31 @@ public class Console2Test extends SimpleWebTestCase {
 
             @Override
             public void debug(final Object message) {
+            }
+
+            @Override
+            public boolean isTraceEnabled() {
+                return false;
+            }
+
+            @Override
+            public boolean isDebugEnabled() {
+                return false;
+            }
+
+            @Override
+            public boolean isInfoEnabled() {
+                return true;
+            }
+
+            @Override
+            public boolean isWarnEnabled() {
+                return true;
+            }
+
+            @Override
+            public boolean isErrorEnabled() {
+                return true;
             }
         });
 

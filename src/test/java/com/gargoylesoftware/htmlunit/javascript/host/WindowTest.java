@@ -1359,6 +1359,31 @@ public class WindowTest extends SimpleWebTestCase {
             @Override
             public void debug(final Object message) {
             }
+
+            @Override
+            public boolean isTraceEnabled() {
+                return false;
+            }
+
+            @Override
+            public boolean isDebugEnabled() {
+                return false;
+            }
+
+            @Override
+            public boolean isInfoEnabled() {
+                return true;
+            }
+
+            @Override
+            public boolean isWarnEnabled() {
+                return true;
+            }
+
+            @Override
+            public boolean isErrorEnabled() {
+                return true;
+            }
         });
 
         final String html
