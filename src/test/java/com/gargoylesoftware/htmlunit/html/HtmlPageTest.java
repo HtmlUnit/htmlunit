@@ -448,23 +448,12 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void testBase_InsideBody() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "</head>\n"
-            + "<body>\n"
+        final String html = "<html><body>\n"
             + "  <base href='" + URL_SECOND + "'>\n"
-            + "  <a href='somepage.html'>\n"
+            + "  <a href='somepage.html'>link</a>\n"
             + "</body></html>";
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedIncorrectness = new ArrayList<>();
-        final IncorrectnessListener listener = new IncorrectnessListener() {
-            @Override
-            public void notify(final String message, final Object origin) {
-                collectedIncorrectness.add(message);
-            }
-        };
-        webClient.setIncorrectnessListener(listener);
 
         final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
@@ -473,11 +462,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final HtmlAnchor anchor = page.getAnchors().get(0);
         final HtmlPage secondPage = (HtmlPage) anchor.click();
 
-        final String[] expectedIncorrectness = {
-            "Element 'base' must appear in <head>, it is ignored."
-        };
-        assertEquals(expectedIncorrectness, collectedIncorrectness);
-        assertEquals(URL_FIRST + "somepage.html", secondPage.getUrl());
+        assertEquals(URL_SECOND + "somepage.html", secondPage.getUrl());
     }
 
     /**
