@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="add" dev="mguillem">
+                Added HtmlPage.getBaseURL and HTMLDocument.baseURI.
+            </action>
             <action type="fix" dev="rbri">
                 INCOMPATIBLE CHANGE: The usual isXxxxEnabled() methods are added to the Interface WebConsole.Logger
                 for better performance.

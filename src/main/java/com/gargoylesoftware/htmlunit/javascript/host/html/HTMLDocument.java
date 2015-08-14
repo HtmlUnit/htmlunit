@@ -825,6 +825,15 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
+     * Returns the base URL to resolve relative URLs.
+     * @return the base URL
+     */
+    @JsxGetter
+    public String getBaseURI() {
+        return getPage().getBaseURL().toString();
+    }
+
+    /**
      * Returns the cookie attribute.
      * @return the cookie attribute
      */

@@ -657,51 +657,7 @@ public class HtmlPage extends InteractivePage {
      * @exception MalformedURLException if an error occurred when creating a URL object
      */
     public URL getFullyQualifiedUrl(String relativeUrl) throws MalformedURLException {
-        URL baseUrl;
-        if (base_ == null) {
-            baseUrl = getUrl();
-            final WebWindow window = getEnclosingWindow();
-            final boolean frame = window != window.getTopWindow();
-            if (frame) {
-                final boolean frameSrcIsNotSet = baseUrl == WebClient.URL_ABOUT_BLANK;
-                final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
-                if (frameSrcIsNotSet || frameSrcIsJs) {
-                    baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
-                        .getWebRequest().getUrl();
-                }
-            }
-            else if (baseUrl_ != null) {
-                baseUrl = baseUrl_;
-            }
-        }
-        else {
-            boolean insideHead = false;
-            for (DomNode parent = base_.getParentNode(); parent != null; parent = parent.getParentNode()) {
-                if (parent instanceof HtmlHead) {
-                    insideHead = true;
-                    break;
-                }
-            }
-
-            //http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#edef-BASE
-            if (!insideHead) {
-                notifyIncorrectness("Element 'base' must appear in <head>, it is ignored.");
-            }
-
-            final String href = base_.getHrefAttribute();
-            if (!insideHead || StringUtils.isEmpty(href)) {
-                baseUrl = getUrl();
-            }
-            else {
-                try {
-                    baseUrl = new URL(href);
-                }
-                catch (final MalformedURLException e) {
-                    notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
-                    baseUrl = getUrl();
-                }
-            }
-        }
+        final URL baseUrl = getBaseURL();
 
         // to handle http: and http:/ in FF (Bug 1714767)
         if (hasFeature(URL_MISSING_SLASHES)) {
@@ -2316,5 +2272,46 @@ public class HtmlPage extends InteractivePage {
     //TODO: to be removed, once WebDriver 2.47.0 is released
     public HtmlElement getFocusedElement() {
         return (HtmlElement) super.getFocusedElement();
+    }
+
+    /**
+     * The base URL used to resolve relative URLs.
+     * @return the base URL
+     */
+    public URL getBaseURL() {
+        URL baseUrl;
+        if (base_ == null) {
+            baseUrl = getUrl();
+            final WebWindow window = getEnclosingWindow();
+            final boolean frame = window != window.getTopWindow();
+            if (frame) {
+                final boolean frameSrcIsNotSet = baseUrl == WebClient.URL_ABOUT_BLANK;
+                final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
+                if (frameSrcIsNotSet || frameSrcIsJs) {
+                    baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
+                        .getWebRequest().getUrl();
+                }
+            }
+            else if (baseUrl_ != null) {
+                baseUrl = baseUrl_;
+            }
+        }
+        else {
+            final String href = base_.getHrefAttribute();
+            if (StringUtils.isEmpty(href)) {
+                baseUrl = getUrl();
+            }
+            else {
+                try {
+                    baseUrl = new URL(href);
+                }
+                catch (final MalformedURLException e) {
+                    notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
+                    baseUrl = getUrl();
+                }
+            }
+        }
+
+        return baseUrl;
     }
 }

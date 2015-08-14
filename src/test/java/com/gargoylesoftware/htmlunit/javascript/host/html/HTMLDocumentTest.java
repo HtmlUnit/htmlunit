@@ -2366,4 +2366,48 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§")
+    public void baseURI_noBaseTag() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "alert(document.baseURI);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("http://myotherwebsite.com/foo")
+    public void baseURI_withBaseTag() throws Exception {
+        final String html = "<html><head>\n"
+            + "<base href='http://myotherwebsite.com/foo'>"
+            + "</head>\n"
+            + "<body><script>\n"
+            + "alert(document.baseURI);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("http://myotherwebsite.com/foo")
+    public void baseURI_withBaseTagInBody() throws Exception {
+        final String html = "<html><body>\n"
+            + "<base href='http://myotherwebsite.com/foo'>"
+            + "<script>\n"
+            + "alert(document.baseURI);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
