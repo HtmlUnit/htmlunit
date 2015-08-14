@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
@@ -35,13 +34,11 @@ public class HtmlUnitContextFactoryTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Iterator not available",
-            FF = { "first,1", "second,2" })
     public void customBrowserVersion() throws Exception {
         final String html = "<html></html>";
-        final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0";
+        final String userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0";
         final BrowserVersion browserVersion = new BrowserVersion("Firefox",
-                "5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0", USER_AGENT, 39.0f);
+                "5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0", userAgent, 39.0f);
 
         loadPage(browserVersion, html, null, URL_FIRST);
     }
