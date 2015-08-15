@@ -33,7 +33,7 @@ public class HTMLTextElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "New Title" })
+    @Alerts({"undefined", "New Text" })
     public void text() throws Exception {
         final String html =
             "<html>\n"
@@ -43,7 +43,7 @@ public class HTMLTextElementTest extends WebDriverTestCase {
             + "      function test() {\n"
             + "         var wbr = document.getElementsByTagName('wbr')[0];\n"
             + "         alert(wbr.text);\n"
-            + "         wbr.text='New Title';\n"
+            + "         wbr.text='New Text';\n"
             + "         alert(wbr.text);\n"
             + "      }\n"
             + "    </script>\n"
@@ -59,8 +59,7 @@ public class HTMLTextElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "New Title" },
-            IE8 = { "undefined", "New Title" })
+    @Alerts({"undefined", "New Text" })
     public void textCreateElement() throws Exception {
         final String html =
             "<html>\n"
@@ -69,7 +68,7 @@ public class HTMLTextElementTest extends WebDriverTestCase {
             + "      function test() {\n"
             + "         var wbr = document.createElement('wbr');\n"
             + "         alert(wbr.text);\n"
-            + "         wbr.text='New Title';\n"
+            + "         wbr.text='New Text';\n"
             + "         alert(wbr.text);\n"
             + "      }\n"
             + "    </script>\n"
