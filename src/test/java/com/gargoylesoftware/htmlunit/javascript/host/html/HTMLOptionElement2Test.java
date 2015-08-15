@@ -815,6 +815,33 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"text1", "New Text" })
+    public void text() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Page Title</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "         var option = document.getElementsByTagName('option')[0];\n"
+            + "         alert(option.text);\n"
+            + "         option.text='New Text';\n"
+            + "         alert(option.text);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <select>\n"
+            + "      <option value='value1' label='label1'>text1</option>\n"
+            + "    </select>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 
     /**
      * @throws Exception if the test fails
@@ -825,7 +852,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             IE8 = { "null", "[object]", "null" },
             IE11 = { "null", "[object Text]", "null" })
     @NotYetImplemented(CHROME)
-    public void text() throws Exception {
+    public void setText() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

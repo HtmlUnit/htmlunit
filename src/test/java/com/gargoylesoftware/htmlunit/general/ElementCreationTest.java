@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -1525,7 +1527,12 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTitleElement]",
             IE8 = "[object HTMLTextElement]")
+    @NotYetImplemented(Browser.IE8)
     public void title() throws Exception {
+        // there seems to be a bug in ie8
+        // document.createElement('title') creates a text element
+        // instead of a title. But if you use the title html tag
+        // you end with a title element.
         test("title");
     }
 
