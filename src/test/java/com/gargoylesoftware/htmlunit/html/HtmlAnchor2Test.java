@@ -361,7 +361,8 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "My Link", "", "abcd" })
+    @Alerts(DEFAULT = { "My Link", "", "abcd" },
+            IE8 = {"undefined", "undefined", "undefined" })
     public void getText() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -384,7 +385,8 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0" })
+    @Alerts(DEFAULT = { "My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0" },
+            IE8 = { "undefined 0", "Hello 0", "undefined 1", "Hello 1", "undefined 2", "Hello 2" })
     public void setText() throws Exception {
         final String html =
               "<html><head><script>\n"

@@ -81,7 +81,6 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the <tt>text</tt> attribute.
      * @return the <tt>text</tt> attribute
      */
-    @Override
     @JsxGetter
     public String getText() {
         final StringBuilder scriptCode = new StringBuilder();

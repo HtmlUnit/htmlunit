@@ -310,45 +310,6 @@ public class Element extends EventNode {
     }
 
     /**
-     * Represents the text content of the node or the concatenated text representing the node and its descendants.
-     * @return the text content of the node or the concatenated text representing the node and its descendants
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getText() {
-        final StringBuilder buffer = new StringBuilder();
-        toText(getDomNodeOrDie(), buffer);
-        return buffer.toString();
-    }
-
-    private void toText(final DomNode node, final StringBuilder buffer) {
-        switch (node.getNodeType()) {
-            case Node.DOCUMENT_TYPE_NODE:
-            case Node.NOTATION_NODE:
-                return;
-            case Node.TEXT_NODE:
-            case Node.CDATA_SECTION_NODE:
-            case Node.COMMENT_NODE:
-            case Node.PROCESSING_INSTRUCTION_NODE:
-                buffer.append(node.getNodeValue());
-                break;
-            default:
-        }
-        for (final DomNode child : node.getChildren()) {
-            switch (child.getNodeType()) {
-                case ELEMENT_NODE:
-                    toText(child, buffer);
-                    break;
-
-                case TEXT_NODE:
-                case CDATA_SECTION_NODE:
-                    buffer.append(child.getNodeValue());
-                    break;
-                default:
-            }
-        }
-    }
-
-    /**
      * Returns a list of elements with the given tag name belonging to the given namespace.
      * @param namespaceURI the namespace URI of elements to look for
      * @param localName is either the local name of elements to look for or the special value "*",

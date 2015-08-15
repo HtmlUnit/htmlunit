@@ -412,7 +412,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "substringData(),"
                 + "wholeText",
             IE8 = "appendData(),data,deleteData(),insertData(),length,replaceData(),splitText(),substringData()")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void text() throws Exception {
         testString("document.createTextNode('some text'), unknown");
     }
@@ -2526,6 +2526,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "text",
             IE8 = "")
+    @NotYetImplemented(IE8)
     public void title() throws Exception {
         test("title");
     }

@@ -17,13 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -34,9 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlWordBreak.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlTitle.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+            browsers = @WebBrowser(value = IE, maxVersion = 8))
     })
 public class HTMLTextElement extends HTMLElement {
     private boolean endTagForbidden_;
@@ -50,37 +44,6 @@ public class HTMLTextElement extends HTMLElement {
         super.setDomNode(domNode);
         if (domNode instanceof HtmlWordBreak) {
             endTagForbidden_ = true;
-        }
-    }
-
-    /**
-     * Returns the <tt>text</tt> attribute.
-     * @return the <tt>text</tt> attribute
-     */
-    @Override
-    @JsxGetter
-    public String getText() {
-        final DomNode firstChild = getDomNodeOrDie().getFirstChild();
-        if (firstChild != null) {
-            return firstChild.getNodeValue();
-        }
-        return "";
-    }
-
-    /**
-     * Sets the <tt>text</tt> attribute.
-     * @param text the <tt>text</tt> attribute
-     */
-    @JsxSetter
-    public void setText(final String text) {
-        final DomNode htmlElement = getDomNodeOrDie();
-        DomNode firstChild = htmlElement.getFirstChild();
-        if (firstChild == null) {
-            firstChild = new DomText(htmlElement.getPage(), text);
-            htmlElement.appendChild(firstChild);
-        }
-        else {
-            firstChild.setNodeValue(text);
         }
     }
 

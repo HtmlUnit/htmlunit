@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -28,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object "HTMLTitleElement".
@@ -42,7 +41,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClasses({
         @JsxClass(domClass = HtmlTitle.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        @JsxClass(domClass = HtmlTitle.class, isJSObject = false,
+                browsers = @WebBrowser(value = IE, maxVersion = 8))
     })
 public class HTMLTitleElement extends HTMLElement {
 
@@ -57,7 +57,6 @@ public class HTMLTitleElement extends HTMLElement {
      * Returns the <tt>text</tt> attribute.
      * @return the <tt>text</tt> attribute
      */
-    @Override
     @JsxGetter
     public String getText() {
         final DomNode firstChild = getDomNodeOrDie().getFirstChild();

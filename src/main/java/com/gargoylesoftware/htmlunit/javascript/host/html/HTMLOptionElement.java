@@ -124,7 +124,6 @@ public class HTMLOptionElement extends FormChild {
      * Returns the value of the "text" property.
      * @return the text property
      */
-    @Override
     @JsxGetter
     public String getText() {
         if (getDomNodeOrNull() instanceof HtmlOption) {

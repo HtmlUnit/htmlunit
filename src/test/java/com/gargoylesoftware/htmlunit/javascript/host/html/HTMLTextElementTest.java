@@ -14,30 +14,26 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Unit tests for {@link HTMLTitleElement}.
+ * Unit tests for {@link HTMLTextElement}.
  * @version $Revision$
- * @author Sudhan Moghe
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HTMLTitleElementTest extends WebDriverTestCase {
+public class HTMLTextElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Page Title", "New Title" })
+    @Alerts({"undefined", "New Title" })
     public void text() throws Exception {
         final String html =
             "<html>\n"
@@ -45,14 +41,15 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
             + "    <title>Page Title</title>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "         var title = document.getElementsByTagName('title')[0];\n"
-            + "         alert(title.text);\n"
-            + "         title.text='New Title';\n"
-            + "         alert(title.text);\n"
+            + "         var wbr = document.getElementsByTagName('wbr')[0];\n"
+            + "         alert(wbr.text);\n"
+            + "         wbr.text='New Title';\n"
+            + "         alert(wbr.text);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
+            + "    <p>wbr test <wbr>wbr<wbr></p>\n"
             + "  </body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
@@ -62,19 +59,18 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "New Title" },
+    @Alerts(DEFAULT = {"undefined", "New Title" },
             IE8 = { "undefined", "New Title" })
-    @NotYetImplemented(IE8)
     public void textCreateElement() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "         var title = document.createElement('title');\n"
-            + "         alert(title.text);\n"
-            + "         title.text='New Title';\n"
-            + "         alert(title.text);\n"
+            + "         var wbr = document.createElement('wbr');\n"
+            + "         alert(wbr.text);\n"
+            + "         wbr.text='New Title';\n"
+            + "         alert(wbr.text);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

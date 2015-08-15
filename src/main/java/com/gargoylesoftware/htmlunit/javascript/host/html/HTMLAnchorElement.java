@@ -509,8 +509,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the <tt>text</tt> attribute.
      * @return the <tt>text</tt> attribute
      */
-    @Override
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getText() {
         final DomNode htmlElement = getDomNodeOrDie();
         return htmlElement.asText();
@@ -520,7 +519,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the <tt>text</tt> attribute.
      * @param text the <tt>text</tt> attribute
      */
-    @JsxSetter
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void setText(final String text) {
         final DomNode htmlElement = getDomNodeOrDie();
         htmlElement.setTextContent(text);
