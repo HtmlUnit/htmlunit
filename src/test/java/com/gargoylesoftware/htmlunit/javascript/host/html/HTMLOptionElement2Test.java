@@ -815,6 +815,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
