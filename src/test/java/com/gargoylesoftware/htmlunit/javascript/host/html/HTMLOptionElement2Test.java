@@ -820,7 +820,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"text1", "New Text" })
+    @Alerts({"text1", "New Text" })
     public void text() throws Exception {
         final String html =
             "<html>\n"
