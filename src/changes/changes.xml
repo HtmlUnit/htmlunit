@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Index property for HTMLOptionElement added.
+            </action>
             <action type="fix" dev="mguillem">
                 Consider base tag even when misplaced within body.
             </action>

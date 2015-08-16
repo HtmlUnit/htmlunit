@@ -287,4 +287,20 @@ public class HTMLOptionElement extends FormChild {
     public void setDataSrc(final String dataSrc) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
+
+    /**
+     * Returns the {@code index} property.
+     * @return the {@code index} property
+     */
+    @JsxGetter
+    public int getIndex() {
+        final HtmlOption optionNode = (HtmlOption) getDomNodeOrNull();
+        if (optionNode != null) {
+            final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
+            if (enclosingSelect != null) {
+                return enclosingSelect.indexOf(optionNode);
+            }
+        }
+        return 0;
+    }
 }

@@ -707,4 +707,25 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             setSelectedIndex(0);
         }
     }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param option the option to search for
+     * @return the index of the provided option or zero if not found
+     */
+    public int indexOf(final HtmlOption option) {
+        if (option == null) {
+            return 0;
+        }
+
+        int index = 0;
+        for (final HtmlElement element : getHtmlElementDescendants()) {
+            if (option == element) {
+                return index;
+            }
+            index++;
+        }
+        return 0;
+    }
 }

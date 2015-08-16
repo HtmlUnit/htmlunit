@@ -1094,4 +1094,42 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "1", "2", "0" })
+    public void index() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var opt = document.getElementById('o1');\n"
+            + "    alert(opt.index);\n"
+
+            + "    opt = document.getElementById('o2');\n"
+            + "    alert(opt.index);\n"
+
+            + "    opt = document.getElementById('o3');\n"
+            + "    alert(opt.index);\n"
+
+            + "    opt = document.createElement('option');\n"
+            + "    alert(opt.index);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <select id='s1'>\n"
+            + "      <option id='o1' value='option1'>Option1</option>\n"
+            + "      <option id='o2' value='option2' selected='selected'>Option2</option>\n"
+            + "      <option id='o3'value='option3'>Option3</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
