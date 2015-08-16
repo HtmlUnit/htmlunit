@@ -2019,7 +2019,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "defaultSelected,disabled,form,index,label,selected,text,value",
             IE11 = "defaultSelected,form,index,label,selected,text,value",
             IE8 = "dataFld,dataFormatAs,dataSrc,defaultSelected,form,index,label,selected,text,value")
-    @NotYetImplemented
     public void option() throws Exception {
         test("option");
     }
