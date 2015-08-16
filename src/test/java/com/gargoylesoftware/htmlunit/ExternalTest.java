@@ -201,7 +201,7 @@ public class ExternalTest {
             final HtmlTableCell cell = table.getRow(1).getCell(3);
             final String triggerText = cell.asText();
 
-            final String marker = "Subversion on ";
+            final String marker = " on ";
             final int start = triggerText.indexOf(marker);
             final String triggerDate = triggerText.substring(start + marker.length());
 
