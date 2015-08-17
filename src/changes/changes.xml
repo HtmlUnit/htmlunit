@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="update" dev="asashour">
+                CSS: cssparser updated to 0.9.17.
+            </action>
             <action type="add" dev="rbri">
                 Index property for HTMLOptionElement added.
             </action>
