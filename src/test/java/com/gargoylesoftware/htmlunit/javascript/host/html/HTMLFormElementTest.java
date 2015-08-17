@@ -1300,4 +1300,134 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(getDefaultUrl() + "page2"), page2);
         loadPageWithAlerts2(container);
     }
+
+    /**
+     * Verifies that the event object is correctly made available.
+     * Regression test for http://sourceforge.net/p/htmlunit/bugs/425/
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "srcElement null: false", "srcElement==form: true",
+                                                        "target null: false", "target==form: true" },
+            FF = { "srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true" },
+            IE8 = { "srcElement null: false", "srcElement==form: true", "target null: true", "target==form: false" })
+    public void onSubmitEvent() throws Exception {
+        final String html = "<html><head><title>first</title>\n"
+            + "<script>\n"
+            + "function test(_event) {\n"
+            + "  var oEvent = _event ? _event : window.event;\n"
+            + "  alert('srcElement null: ' + (oEvent.srcElement == null));\n"
+            + "  alert('srcElement==form: ' + (oEvent.srcElement == document.forms[0]));\n"
+            + "  alert('target null: ' + (oEvent.target == null));\n"
+            + "  alert('target==form: ' + (oEvent.target == document.forms[0]));\n"
+
+            + "  if (_event.preventDefault) { _event.preventDefault(); }\n"
+            + "  return false;\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<form name='formPage1' action='about:blank' onsubmit='return test(event);'>\n"
+            + "<input type='submit' id='theButton'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("theButton")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * This test is used to check that when a form having a target is submitted
+     * and if the target is an iframe and the iframe has an onload event, then
+     * the onload event is called.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "prepare frame", "submit form", "submitted ok" })
+    public void submitWithTargetOnIFrameAndOnload_script() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='form1' name='form1' method='get' action='" + URL_SECOND + "'>\n"
+            + "  <input type='button' name='button1' />\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "  // Prepare the iframe for the target\n"
+            + "  alert('prepare frame');\n"
+            + "  var div = document.createElement('div');\n"
+            + "  div.style.display = 'none';\n"
+            + "  div.innerHTML = \"<iframe name='frame' id='frame'></iframe>\";\n"
+            + "  document.body.appendChild(div);\n"
+            + "  // Get the form and set the target\n"
+            + "  var form = document.getElementById('form1');\n"
+            + "  form.target = 'frame';\n"
+            + "  // Finally submit the form with a delay to make sure that the onload of the iframe\n"
+            + "  // is called for the submit and not for the page creation\n"
+            + "  var t = setTimeout(function() {\n"
+            + "    clearTimeout(t);\n"
+            + "    var iframe = document.getElementById('frame');\n"
+            + "    iframe.onload = function() {\n"
+            + "      alert('submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
+            + "    };\n"
+            + "    alert('submit form');\n"
+            + "    form.submit();\n"
+            + "  }, 1000);\n"
+            + "</script></body></html>";
+        final String html2
+            = "<?xml version='1.0'?>\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml'><body id='ok'><span id='result'>OK</span></body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        loadPageWithAlerts2(html, getDefaultUrl(), 5000);
+    }
+
+    /**
+     * This test is used to check that when a form having a target is submitted
+     * and if the target is an iframe and the iframe has an onload event, then
+     * the onload event is called.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "submit form", "listener: submitted ok" },
+            IE8 = { "submit form", "eventHandler: submitted ok" })
+    public void submitWithTargetOnIFrameAndOnload_bubbling() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='form1' name='form1' method='get' action='" + URL_SECOND + "' target='frame'>\n"
+            + "  <input type='button' name='button1' />\n"
+            + "</form>\n"
+            + "<div style='display:none;'><iframe name='frame' id='frame'></iframe></div>\n"
+            + "<script>\n"
+            + "  // Get the form and set the target\n"
+            + "  var form = document.getElementById('form1');\n"
+            + "  var iframe = document.getElementById('frame');\n"
+            + "  // Finally submit the form with a delay to make sure that the onload of the iframe\n"
+            + "  // is called for the submit and not for the page creation\n"
+            + "  var t = setTimeout(function() {\n"
+            + "    clearTimeout(t);\n"
+            + "    if (iframe.addEventListener) {\n"
+            + "      iframe.addEventListener('load', function() {\n"
+            + "        alert('listener: submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
+            + "      }, true);\n"
+            + "    }\n"
+            + "    else {\n"
+            + "      iframe.attachEvent('onload', function() {\n"
+            + "        alert('eventHandler: submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
+            + "      });\n"
+            + "    }\n"
+            + "    alert('submit form');\n"
+            + "    form.submit();\n"
+            + "  }, 1000);\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String html2
+            = "<?xml version='1.0'?>\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml'><body id='ok'><span id='result'>OK</span></body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        loadPageWithAlerts2(html, getDefaultUrl(), 5000);
+    }
 }

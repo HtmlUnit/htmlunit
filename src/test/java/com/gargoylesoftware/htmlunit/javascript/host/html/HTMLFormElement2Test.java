@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -26,12 +25,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
@@ -82,6 +77,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("javaScript")
     public void formSubmitWithJavascript() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -93,19 +89,19 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final String[] expectedAlerts = {"javaScript"};
 
         final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
 
         assertEquals(page1, page2);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("javaScript")
     public void formSubmitWithJavascriptLeadingWhitespace() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -117,19 +113,19 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final String[] expectedAlerts = {"javaScript"};
 
         final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
 
         assertEquals(page1, page2);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("javaScript")
     public void formSubmitWithJavascriptMixedCase() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -141,13 +137,12 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final String[] expectedAlerts = {"javaScript"};
 
         final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
 
         assertEquals(page1, page2);
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -256,6 +251,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
     * @throws Exception if the test fails
     */
     @Test
+    @Alerts("hi!")
     public void lostFunction() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -270,14 +266,14 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         button.click();
-        final String[] expectedAlerts = {"hi!"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("hi!")
     public void assignedOnsubmit() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -294,48 +290,6 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         button.click();
-        final String[] expectedAlerts = {"hi!"};
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Verifies that the event object is correctly made available.
-     * Regression test for http://sourceforge.net/p/htmlunit/bugs/425/
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = { "srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true" },
-            IE = { "srcElement null: false", "srcElement==form: true", "target null: true", "target==form: false" },
-            IE11 = { "srcElement null: false", "srcElement==form: true", "target null: false", "target==form: true" })
-    @NotYetImplemented(CHROME)
-    public void onSubmitEvent() throws Exception {
-        final WebClient client = getWebClient();
-        final MockWebConnection webConnection = getMockWebConnection();
-
-        final String html = "<html><head><title>first</title>\n"
-            + "<script>\n"
-            + "function test(_event) {\n"
-            + "  var oEvent = _event ? _event : window.event;\n"
-            + "  alert('srcElement null: ' + (oEvent.srcElement == null));\n"
-            + "  alert('srcElement==form: ' + (oEvent.srcElement == document.forms[0]));\n"
-            + "  alert('target null: ' + (oEvent.target == null));\n"
-            + "  alert('target==form: ' + (oEvent.target == document.forms[0]));\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body>\n"
-            + "<form name='formPage1' action='about:blank' onsubmit='test(event)'>\n"
-            + "<input type='submit' id='theButton'>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        webConnection.setResponse(URL_FIRST, html);
-        client.setWebConnection(webConnection);
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-        page.getHtmlElementById("theButton").click();
-
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
@@ -344,6 +298,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
     public void thisInJavascriptAction() throws Exception {
         final String content
             = "<html>\n"
@@ -354,11 +309,10 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final String[] expectedAlerts = {"true"};
         final HtmlPage page1 = loadPage(getBrowserVersion(), content, collectedAlerts);
         final Page page2 = page1.getHtmlElementById("theButton").click();
 
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
         assertSame(page1, page2);
     }
 
@@ -366,6 +320,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("dummy.txt")
     public void fileInput_fireOnChange() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<form>\n"
@@ -374,7 +329,6 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"dummy.txt"};
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlFileInput fileInput = page.getHtmlElementById("myFile");
@@ -383,99 +337,6 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         // remove focus to trigger onchange
         page.setFocusedElement(null);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * This test is used to check that when a form having a target is submitted
-     * and if the target is an iframe and the iframe has an onload event, then
-     * the onload event is called.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "prepare frame", "submit form", "submitted ok" })
-    public void submitWithTargetOnIFrameAndOnload_script() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head><body>\n"
-            + "<p>hello world</p>\n"
-            + "<form id='form1' name='form1' method='get' action='" + URL_SECOND + "'>\n"
-            + "  <input type='button' name='button1' />\n"
-            + "</form>\n"
-            + "<script>\n"
-            + "  // Prepare the iframe for the target\n"
-            + "  alert('prepare frame');\n"
-            + "  var div = document.createElement('div');\n"
-            + "  div.style.display = 'none';\n"
-            + "  div.innerHTML = \"<iframe name='frame' id='frame'></iframe>\";\n"
-            + "  document.body.appendChild(div);\n"
-            + "  // Get the form and set the target\n"
-            + "  var form = document.getElementById('form1');\n"
-            + "  form.target = 'frame';\n"
-            + "  // Finally submit the form with a delay to make sure that the onload of the iframe\n"
-            + "  // is called for the submit and not for the page creation\n"
-            + "  var t = setTimeout(function() {\n"
-            + "    clearTimeout(t);\n"
-            + "    var iframe = document.getElementById('frame');\n"
-            + "    iframe.onload = function() {\n"
-            + "      alert('submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
-            + "    };\n"
-            + "    alert('submit form');\n"
-            + "    form.submit();\n"
-            + "  }, 1000);\n"
-            + "</script></body></html>";
-        final String html2
-            = "<?xml version='1.0'?>\n"
-            + "<html xmlns='http://www.w3.org/1999/xhtml'><body id='ok'><span id='result'>OK</span></body></html>";
-        getMockWebConnection().setDefaultResponse(html2);
-        loadPageWithAlerts(html, getDefaultUrl(), 5000);
-    }
-
-    /**
-     * This test is used to check that when a form having a target is submitted
-     * and if the target is an iframe and the iframe has an onload event, then
-     * the onload event is called.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "submit form", "listener: submitted ok" },
-            IE8 = { "submit form", "eventHandler: submitted ok" })
-    public void submitWithTargetOnIFrameAndOnload_bubbling() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head><body>\n"
-            + "<p>hello world</p>\n"
-            + "<form id='form1' name='form1' method='get' action='" + URL_SECOND + "' target='frame'>\n"
-            + "  <input type='button' name='button1' />\n"
-            + "</form>\n"
-            + "<div style='display:none;'><iframe name='frame' id='frame'></iframe></div>\n"
-            + "<script>\n"
-            + "  // Get the form and set the target\n"
-            + "  var form = document.getElementById('form1');\n"
-            + "  var iframe = document.getElementById('frame');\n"
-            + "  // Finally submit the form with a delay to make sure that the onload of the iframe\n"
-            + "  // is called for the submit and not for the page creation\n"
-            + "  var t = setTimeout(function() {\n"
-            + "    clearTimeout(t);\n"
-            + "    if (iframe.addEventListener) {\n"
-            + "      iframe.addEventListener('load', function() {\n"
-            + "        alert('listener: submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
-            + "      }, true);\n"
-            + "    }\n"
-            + "    else {\n"
-            + "      iframe.attachEvent('onload', function() {\n"
-            + "        alert('eventHandler: submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
-            + "      });\n"
-            + "    }\n"
-            + "    alert('submit form');\n"
-            + "    form.submit();\n"
-            + "  }, 1000);\n"
-            + "</script>\n"
-            + "</body></html>";
-        final String html2
-            = "<?xml version='1.0'?>\n"
-            + "<html xmlns='http://www.w3.org/1999/xhtml'><body id='ok'><span id='result'>OK</span></body></html>";
-        getMockWebConnection().setDefaultResponse(html2);
-        loadPageWithAlerts(html, getDefaultUrl(), 5000);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 }
