@@ -29,7 +29,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -46,8 +47,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object "HTMLImageElement".
@@ -273,10 +272,7 @@ public class HTMLImageElement extends HTMLElement {
                     return 28;
                 }
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
-                    if (StringUtils.isBlank(src)) {
-                        return 0;
-                    }
-                    return 18;
+                    return 0;
                 }
                 return 24;
             }
@@ -338,10 +334,7 @@ public class HTMLImageElement extends HTMLElement {
                     return 30;
                 }
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
-                    if (StringUtils.isBlank(src)) {
-                        return 0;
-                    }
-                    return 20;
+                    return 0;
                 }
                 return 24;
             }

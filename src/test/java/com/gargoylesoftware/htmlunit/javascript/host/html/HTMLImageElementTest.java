@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -565,7 +564,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             CHROME = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" },
             IE8 = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
             IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" })
-    @NotYetImplemented(CHROME)
     public void widthHeightInvalidSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
