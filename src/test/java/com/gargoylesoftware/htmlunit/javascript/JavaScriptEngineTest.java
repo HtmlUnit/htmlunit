@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -30,13 +29,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -60,12 +64,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Tests for the {@link JavaScriptEngine}.
@@ -1089,7 +1087,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(IE = "2")
-    @NotYetImplemented(CHROME)
     public void commentNoDoubleSlash() throws Exception {
         final String html =
             "<html><head>\n"
@@ -1109,7 +1106,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             assertEquals(4, e.getFailingLineNumber());
         }
 
-        assertEquals(getBrowserVersion().isFirefox(), exceptionThrown);
+        assertEquals(getBrowserVersion().isFirefox() || getBrowserVersion().isChrome(), exceptionThrown);
     }
 
     /**

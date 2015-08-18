@@ -1266,7 +1266,7 @@ public enum BrowserVersionFeatures {
     /**
      * Indicates that function is defined even before its declaration, inside a block.
      */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK,
 
     /**

@@ -130,7 +130,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"in goo", "in hoo", "in foo" },
             FF = {"in goo", "in hoo", "foo error" })
-    @NotYetImplemented(CHROME)
     public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
