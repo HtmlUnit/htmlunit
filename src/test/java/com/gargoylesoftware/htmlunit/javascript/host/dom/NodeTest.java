@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NodeTest extends WebDriverTestCase {
@@ -665,6 +666,15 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts({ "3", "H2" })
     public void insertBefore_nullRef() throws Exception {
         insertBefore("aNode.insertBefore(nodeToInsert, null);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "exception" })
+    public void insertBefore_myself() throws Exception {
+        insertBefore("aNode.insertBefore(nodeToInsert, nodeToInsert);");
     }
 
     /**
