@@ -1019,8 +1019,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             else {
                 if (refChild.getParentNode() != this) {
-                    Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_FOUND_ERR,
-                                                        "Reference node is not a child of this node."));
+                    throw new DOMException(DOMException.NOT_FOUND_ERR, "Reference node is not a child of this node.");
                 }
                 ((DomNode) refChild).insertBefore((DomNode) newChild);
             }
