@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -530,6 +531,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"nodeDeleted: div,p", "nodeDeleted: div,p"})
     public void testDomChangeListenerTestImpl_removeChild() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -546,7 +548,6 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "<input id='myButton' type='button' onclick='clickMe()'>\n"
             + "</body></html>";
 
-        final String[] expectedValues = {"nodeDeleted: div,p", "nodeDeleted: div,p"};
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
@@ -555,7 +556,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
 
         myButton.click();
-        assertEquals(expectedValues, listenerImpl.getCollectedValues());
+        assertEquals(getExpectedAlerts(), listenerImpl.getCollectedValues());
     }
 
     /**

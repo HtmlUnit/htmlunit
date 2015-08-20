@@ -696,7 +696,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "exception" })
+    @Alerts("exception")
     public void insertBefore_myself() throws Exception {
         insertBefore("aNode.insertBefore(nodeToInsert, nodeToInsert);");
     }
