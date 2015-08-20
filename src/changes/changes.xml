@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
-            <action type="update" dev="asashour">
+            <action type="fix" dev="rbri" issue="1700">
+                Improved width calculation if the style defines the width using a percent value.
+            </action>
+            <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.17.
             </action>
             <action type="add" dev="rbri">

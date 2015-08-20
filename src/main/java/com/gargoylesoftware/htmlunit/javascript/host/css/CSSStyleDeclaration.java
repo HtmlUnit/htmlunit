@@ -5829,15 +5829,34 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @see #pixelValue(String)
      */
     protected static int pixelValue(final Element element, final CssValue value) {
+        return pixelValue(element, value, false);
+    }
+
+    private static int pixelValue(final Element element, final CssValue value, final boolean percentMode) {
         final String s = value.get(element);
         if (s.endsWith("%") || (s.isEmpty() && element instanceof HTMLHtmlElement)) {
             final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(s).replaceAll("$1"), 100);
             final Element parent = element.getParentElement();
-            final int absoluteValue = (parent == null) ? value.getWindowDefaultValue() : pixelValue(parent, value);
+            final int absoluteValue = (parent == null)
+                            ? value.getWindowDefaultValue() : pixelValue(parent, value, true);
             return (int) ((i / 100D) * absoluteValue);
         }
-        if (s.isEmpty() && element instanceof HTMLCanvasElement) {
-            return value.getWindowDefaultValue();
+        if (s.isEmpty()) {
+            if (element instanceof HTMLCanvasElement) {
+                return value.getWindowDefaultValue();
+            }
+
+            // if the call was originated from a percent value we have to go up until
+            // we can provide some kind of base value for percent calculation
+            if (percentMode) {
+                final Element parent = element.getParentElement();
+                if (parent == null || parent instanceof HTMLHtmlElement) {
+                    return value.getWindowDefaultValue();
+                }
+                return pixelValue(parent, value, true);
+            }
+
+            return 0;
         }
         return pixelValue(s);
     }

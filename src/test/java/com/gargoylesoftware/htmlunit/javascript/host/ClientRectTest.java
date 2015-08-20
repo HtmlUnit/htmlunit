@@ -36,7 +36,7 @@ public class ClientRectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "100", "400", "100", "450", "50", "0" },
             IE8 = { "102", "402", "102", "452", "undefined", "undefined" })
-    public void width() throws Exception {
+    public void properties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
@@ -53,6 +53,36 @@ public class ClientRectTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>"
             + "<div id='div1'></div></div>"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true" },
+            IE8 = { "false", "false" })
+    public void getBoundingClientRect_WidthPercent() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var input = document.getElementById('myInput');\n"
+            + "      alert(input.getBoundingClientRect().height > 10);\n"
+            + "      alert(input.getBoundingClientRect().width > 100);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<style>.full { width:100%; }</style>\n"
+            + "<div class='foo bar'>\n"
+            + "    <form action='javascript:void(0)' method='post'>\n"
+            + "        <div class='full'>\n"
+            + "            <input class='full' type='text' id='myInput'>\n"
+            + "        </div>\n"
+            + "    </form>\n"
+            + "</div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
