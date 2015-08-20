@@ -9,7 +9,11 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="rbri">
-                DomNode.insertBefore now throws a javascript exception instead of an DOMException.
+                Node.removeChild now throws a javascript exception if the node to be removed is not
+                a descendant of the receiver.
+            </action>
+            <action type="fix" dev="rbri">
+                Node.insertBefore now throws a javascript exception instead of an DOMException.
             </action>
             <action type="fix" dev="rbri" issue="1700">
                 Improved width calculation if the style defines the width using a percent value.

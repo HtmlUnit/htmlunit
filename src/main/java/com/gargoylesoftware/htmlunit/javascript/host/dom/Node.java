@@ -427,6 +427,10 @@ public class Node extends EventTarget {
             // Get XML node for the DOM node passed in
             final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
 
+            if (!childNode.isDescendant(this.getDomNodeOrDie())) {
+                Context.throwAsScriptRuntimeEx(new Exception("NotFoundError: Failed to execute 'removeChild' on '"
+                            + this + "': The node to be removed is not a child of this node."));
+            }
             // Remove the child from the parent node
             childNode.remove();
             removedChild = childObject;

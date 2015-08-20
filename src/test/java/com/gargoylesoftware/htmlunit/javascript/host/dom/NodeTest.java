@@ -111,6 +111,30 @@ public class NodeTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void removeChildSibling() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "  var div1 = document.getElementById('div1');\n"
+            + "  var div2 = document.getElementById('div2');\n"
+            + "  try {\n"
+            + "    div1.removeChild(div2);\n"
+            + "  } catch(e) { alert('exception') };\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <div id='div1'></div>\n"
+            + "  <div id='div2'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for replaceChild.
      * @throws Exception if the test fails
      */

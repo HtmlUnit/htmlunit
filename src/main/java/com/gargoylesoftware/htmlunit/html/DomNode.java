@@ -1950,11 +1950,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Checks whether the specified node is descendant of this node or not.
      * @param node the node to check if it is descendant or not
      * @return whether the specified node is descendant of this node or not
      */
-    protected boolean isDescendant(final DomNode node) {
+    public boolean isDescendant(final DomNode node) {
         for (DomNode parent = node; parent != null; parent = parent.getParentNode()) {
             if (parent == this) {
                 return true;
