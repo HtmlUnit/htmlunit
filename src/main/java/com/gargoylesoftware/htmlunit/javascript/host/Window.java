@@ -677,6 +677,28 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
+     * Dummy implementation for requestAnimationFrame.
+     * @param callback the function to call when it's time to update the animation
+     * @return an identification id
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">MDN Doc</a>
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
+    public int requestAnimationFrame(final Object callback) {
+        // nothing for now
+        return 1;
+    }
+
+    /**
+     * Dummy implementation for cancelAnimationFrame.
+     * @param requestId the ID value returned by the call to window.requestAnimationFrame()
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame">MDN Doc</a>
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
+    public void cancelAnimationFrame(final Object requestId) {
+        // nothing for now
+    }
+
+    /**
      * Returns the "screen" property.
      * @return the screen property
      */

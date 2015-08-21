@@ -1573,4 +1573,19 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function", "function" }, IE8 = { "undefined", "undefined" })
+    public void requestAnimationFrame() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  alert(typeof window.requestAnimationFrame);\n"
+            + "  alert(typeof window.cancelAnimationFrame);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

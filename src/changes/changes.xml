@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="update" dev="mguillem">
+                JavaScript: added dummy implementations of Window.requestAnimationFrame and Window.cancelAnimationFrame.
+            </action>
             <action type="fix" dev="rbri">
                 Reflect fix done in latest Chrome for Node.compareDocumentPosition.
             </action>
