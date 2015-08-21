@@ -110,6 +110,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
@@ -203,6 +204,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     private Object controllers_;
     private Object opener_;
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
+    private Crypto crypto_;
 
     /**
      * Cache computed styles when possible, because their calculation is very expensive.
@@ -2312,6 +2314,17 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         return true;
     }
 
+    /**
+     * Returns the crypto property.
+     * @return the crypto property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public Crypto getCrypto() {
+        if (crypto_ == null) {
+            crypto_ = new Crypto(this);
+        }
+        return crypto_;
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {

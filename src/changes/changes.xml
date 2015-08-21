@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
-            <action type="update" dev="mguillem">
+            <action type="add" dev="mguillem">
+                JavaScript: added support for Window.crypto.getRandomValues.
+            </action>
+            <action type="add" dev="mguillem">
                 JavaScript: added dummy implementations of Window.requestAnimationFrame and Window.cancelAnimationFrame.
             </action>
             <action type="fix" dev="rbri">

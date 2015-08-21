@@ -18,16 +18,24 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.Random;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
 
 /**
  * A JavaScript object for {@code Crypto}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class Crypto extends SimpleScriptable {
@@ -39,4 +47,29 @@ public class Crypto extends SimpleScriptable {
     public Crypto() {
     }
 
+    /**
+     * Facility constructor.
+     * @param window the owning window
+     */
+    public Crypto(final Window window) {
+        setParentScope(window);
+        setPrototype(window.getPrototype(Crypto.class));
+    }
+
+    /**
+     * Fills array with random values.
+     * @param array the array to fill
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">MDN Doc</a>
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
+    public void getRandomValues(final ArrayBufferViewBase array) {
+        if (array == null) {
+            throw Context.reportRuntimeError("TypeError: Argument 1 of Crypto.getRandomValues is not an object.");
+        }
+
+        final Random random = new Random();
+        for (int i = 0; i < array.getLength(); ++i) {
+            array.put(i, array, random.nextInt());
+        }
+    }
 }
