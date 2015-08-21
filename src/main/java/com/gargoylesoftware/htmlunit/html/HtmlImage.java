@@ -429,7 +429,7 @@ public class HtmlImage extends HtmlElement {
         downloadImageIfNeeded();
         if (imageData_ == null) {
             if (null == imageWebResponse_) {
-                throw new IOException("No image response available");
+                throw new IOException("No image response available (src=" + getSrcAttribute() + ")");
             }
             final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
             final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);

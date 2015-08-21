@@ -201,6 +201,28 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "rendering...", "exception" }, IE8 = "exception")
+    public void drawImage_noImage() throws Exception {
+        final String html = "<html><body>\n"
+            + "<img id='myImage'>\n"
+            + "<canvas id='myCanvas'></canvas>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var img = document.getElementById('myImage');\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  var context = canvas.getContext('2d');\n"
+            + "  alert('rendering...');\n"
+            + "  context.drawImage(img, 0, 0, 10, 10);\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     private void drawImage(final String fileName) throws Exception {
         final InputStream is = getClass().getResourceAsStream(fileName);
         final byte[] directBytes = IOUtils.toByteArray(is);
