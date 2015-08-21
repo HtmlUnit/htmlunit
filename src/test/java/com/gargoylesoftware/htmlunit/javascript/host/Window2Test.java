@@ -1578,7 +1578,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "function" }, IE8 = { "undefined", "undefined" })
+    @Alerts(DEFAULT = { "function", "function" },
+        IE8 = { "undefined", "undefined" })
     public void requestAnimationFrame() throws Exception {
         final String html
             = "<html><body><script>\n"
