@@ -170,6 +170,25 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Was throwing exception as of HU 2.18.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object CanvasRenderingContext2D]", IE8 = "")
+    public void getContextShouldNotThrowForSize0() throws Exception {
+        final String html = "<html><body>\n"
+            + "<canvas id='it' width=0 height=0></canvas>\n"
+            + "<script>\n"
+            + "var canvas = document.getElementById('it');\n"
+            + "if (canvas.getContext){\n"
+            + "  alert(canvas.getContext('2d'));\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

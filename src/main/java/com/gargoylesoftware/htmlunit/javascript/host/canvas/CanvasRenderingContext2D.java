@@ -80,7 +80,9 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     public CanvasRenderingContext2D(final HTMLCanvasElement canvas) {
         canvas_ = canvas;
-        image_ = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
+        final int imageWidth = Math.max(1, canvas.getWidth());
+        final int imageHeight = Math.max(1, canvas.getHeight());
+        image_ = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
         graphics2D_ = image_.createGraphics();
     }
 
