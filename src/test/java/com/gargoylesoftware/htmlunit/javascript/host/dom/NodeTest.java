@@ -580,7 +580,6 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "20", "20", "4", "10", "10", "2", "20", "exception" },
-            CHROME = { "0", "20", "20", "4", "10", "10", "2", "20", "1" },
             IE8 = "compareDocumentPosition not available")
     public void compareDocumentPosition() throws Exception {
         final String html
@@ -687,9 +686,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "H2" })
+    @Alerts({ "3", "SPAN" })
     public void insertBefore_nullRef() throws Exception {
-        insertBefore("aNode.insertBefore(nodeToInsert, null);");
+        insertBefore("aNode.insertBefore(newNode, null);");
     }
 
     /**
@@ -698,7 +697,16 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void insertBefore_myself() throws Exception {
-        insertBefore("aNode.insertBefore(nodeToInsert, nodeToInsert);");
+        insertBefore("aNode.insertBefore(newNode, newNode);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void insertBefore_sibling() throws Exception {
+        insertBefore("aNode.insertBefore(newNode, siblingNode);");
     }
 
     /**
@@ -730,32 +738,36 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "3", "H2" })
+            IE = { "3", "SPAN" })
     public void insertBefore_noSecondArg() throws Exception {
-        insertBefore("aNode.insertBefore(nodeToInsert);");
+        insertBefore("aNode.insertBefore(newNode);");
     }
 
     /**
      * @throws Exception if the test fails
      */
     private void insertBefore(final String insertJSLine) throws Exception {
-        final String html = "<html><head><title>test_insertBefore</title>\n"
-            + "<script>\n"
-            + "function doTest() {\n"
-            + "  var nodeToInsert = document.getElementById('nodeToInsert');\n"
-            + "  var aNode = document.getElementById('myNode');\n"
-            + "  try {\n"
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test_insertBefore</title>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      var newNode = document.createElement('span');\n"
+            + "      var siblingNode = document.getElementById('sibingNode');\n"
+            + "      var aNode = document.getElementById('myNode');\n"
+            + "      try {\n"
             + insertJSLine
-            + "    alert(aNode.childNodes.length);\n"
-            + "    alert(aNode.childNodes[2].nodeName);\n"
-            + "  }\n"
-            + "  catch (e) { alert('exception'); }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='doTest()'>\n"
-            + "<h2 id='nodeToInsert'>Bottom</h2>\n"
+            + "        alert(aNode.childNodes.length);\n"
+            + "        alert(aNode.childNodes[2].nodeName);\n"
+            + "      }\n"
+            + "      catch (e) { alert('exception'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
             + "<div id='myNode'><span>Child Node 1-A</span>"
             + "<h1>Child Node 2-A</h1></div>\n"
+            + "<h2 id='sibingNode'>Sibling</h2>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

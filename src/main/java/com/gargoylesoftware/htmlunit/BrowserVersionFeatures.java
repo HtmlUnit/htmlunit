@@ -1485,10 +1485,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES,
 
-    /** <code>Node.compareDocumentPosition</code> doesn't throw an exception, if the argument is not node. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_NODE_COMPARE_DOCUMENT_POSITION_ALLOW_INVALID,
-
     /** <code>Node.contains</code> returns false instead of throwing an exception. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG,

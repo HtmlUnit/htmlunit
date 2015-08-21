@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_COMPARE_DOCUMENT_POSITION_ALLOW_INVALID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT;
@@ -766,9 +765,6 @@ public class Node extends EventTarget {
     @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public short compareDocumentPosition(final Object node) {
         if (!(node instanceof Node)) {
-            if (getBrowserVersion().hasFeature(JS_NODE_COMPARE_DOCUMENT_POSITION_ALLOW_INVALID)) {
-                return DOCUMENT_POSITION_DISCONNECTED;
-            }
             throw Context.reportRuntimeError("Could not convert JavaScript argument arg 0");
         }
         return getDomNodeOrDie().compareDocumentPosition(((Node) node).getDomNodeOrDie());

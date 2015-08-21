@@ -1758,7 +1758,7 @@ public class HtmlPage extends InteractivePage {
      * @param recurse indicates if children must be added too
      */
     void addMappedElement(final DomElement element, final boolean recurse) {
-        if (isDescendant(element)) {
+        if (isAncestorOf(element)) {
             addElement(idMap_, element, "id", recurse);
             addElement(nameMap_, element, "name", recurse);
         }
@@ -1816,7 +1816,7 @@ public class HtmlPage extends InteractivePage {
      * @param descendant indicates of the element was descendant of this HtmlPage, but now its parent might be null
      */
     void removeMappedElement(final DomElement element, final boolean recurse, final boolean descendant) {
-        if (descendant || isDescendant(element)) {
+        if (descendant || isAncestorOf(element)) {
             removeElement(idMap_, element, "id", recurse);
             removeElement(nameMap_, element, "name", recurse);
         }

@@ -9,6 +9,9 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Reflect fix done in latest Chrome for Node.compareDocumentPosition.
+            </action>
+            <action type="fix" dev="rbri">
                 Node.removeChild now throws a javascript exception if the node to be removed is not
                 a descendant of the receiver.
             </action>
