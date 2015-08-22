@@ -43,7 +43,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
-            + "<link id='myId' href='file1.css'></link>\n"
+            + "<link id='myId' href='file1.css'>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
@@ -67,7 +67,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final String html
                 = "<html>\n"
                 + "<head>\n"
-                + "  <link id='l' href='file1.css'></link>\n"
+                + "  <link id='l' href='file1.css'>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body>\n"
@@ -85,7 +85,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final String html
                 = "<html>\n"
                 + "<head>\n"
-                + "  <link id='l' href='file1.css'></link>\n"
+                + "  <link id='l' href='file1.css'>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body>\n"
