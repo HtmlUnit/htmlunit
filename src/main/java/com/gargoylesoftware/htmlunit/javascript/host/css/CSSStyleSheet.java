@@ -389,21 +389,22 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element) {
-        if (selector instanceof GeneralAdjacentSelectorImpl) {
-            final SiblingSelector ss = (SiblingSelector) selector;
-            final Selector ssSelector = ss.getSelector();
-            final SimpleSelector ssSiblingSelector = ss.getSiblingSelector();
-            for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
-                if (prev instanceof HtmlElement
-                    && selects(browserVersion, ssSelector, (HtmlElement) prev)
-                    && selects(browserVersion, ssSiblingSelector, element)) {
-                    return true;
-                }
-            }
-            return false;
-        }
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
+                if (selector instanceof GeneralAdjacentSelectorImpl) {
+                    final SiblingSelector ss = (SiblingSelector) selector;
+                    final Selector ssSelector = ss.getSelector();
+                    final SimpleSelector ssSiblingSelector = ss.getSiblingSelector();
+                    for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
+                        if (prev instanceof HtmlElement
+                            && selects(browserVersion, ssSelector, (HtmlElement) prev)
+                            && selects(browserVersion, ssSiblingSelector, element)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
                 return true;
             case Selector.SAC_CHILD_SELECTOR:
                 final DomNode parentNode = element.getParentNode();
@@ -414,9 +415,8 @@ public class CSSStyleSheet extends StyleSheet {
                     return false; // for instance parent is a DocumentFragment
                 }
                 final DescendantSelector cs = (DescendantSelector) selector;
-                final HtmlElement parent = (HtmlElement) parentNode;
                 return selects(browserVersion, cs.getSimpleSelector(), element)
-                    && selects(browserVersion, cs.getAncestorSelector(), parent);
+                    && selects(browserVersion, cs.getAncestorSelector(), (HtmlElement) parentNode);
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 if (selects(browserVersion, ds.getSimpleSelector(), element)) {
