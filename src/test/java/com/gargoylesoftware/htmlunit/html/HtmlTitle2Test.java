@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTitle2Test extends WebDriverTestCase {
@@ -56,4 +58,27 @@ public class HtmlTitle2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html = "<html><head><title id='t'>Title</title></head><body></body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final String text = driver.findElement(By.id("t")).getText();
+        assertEquals("", text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isDisplayed() throws Exception {
+        final String html = "<html><head><title id='t'>Title</title></head><body></body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final boolean displayed = driver.findElement(By.id("t")).isDisplayed();
+        assertFalse(displayed);
+    }
 }
