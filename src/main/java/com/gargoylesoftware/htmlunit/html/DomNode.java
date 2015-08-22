@@ -35,7 +35,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -1844,34 +1843,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return list of all found nodes
      */
     public DomNodeList<DomNode> querySelectorAll(final String selectors) {
-        final List<DomNode> elements = new ArrayList<>();
         try {
             final WebClient webClient = getPage().getWebClient();
-            final AtomicBoolean errorOccured = new AtomicBoolean(false);
-            final ErrorHandler errorHandler = new ErrorHandler() {
-                @Override
-                public void warning(final CSSParseException exception) throws CSSException {
-                    // ignore
-                }
-
-                @Override
-                public void fatalError(final CSSParseException exception) throws CSSException {
-                    errorOccured.set(true);
-                }
-
-                @Override
-                public void error(final CSSParseException exception) throws CSSException {
-                    errorOccured.set(true);
-                }
-            };
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            final CheckErrorHandler errorHandler = new CheckErrorHandler();
             parser.setErrorHandler(errorHandler);
+
             final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
             // in case of error parseSelectors returns null
-            if (errorOccured.get()) {
+            if (errorHandler.errorDetected()) {
                 throw new CSSException("Invalid selectors: " + selectors);
             }
 
+            final List<DomNode> elements = new ArrayList<>();
             if (selectorList != null) {
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
                 int documentMode = 9;
@@ -1893,11 +1877,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     }
                 }
             }
+            return new StaticDomNodeList(elements);
         }
         catch (final IOException e) {
             throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
         }
-        return new StaticDomNodeList(elements);
     }
 
     /**
@@ -1948,4 +1932,31 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public boolean hasFeature(final BrowserVersionFeatures feature) {
         return getPage().getWebClient().getBrowserVersion().hasFeature(feature);
     }
+
+    private static final class CheckErrorHandler implements ErrorHandler {
+        private boolean errorDetected_;
+
+        protected CheckErrorHandler() {
+            errorDetected_ = false;
+        }
+
+        protected boolean errorDetected() {
+            return errorDetected_;
+        }
+
+        @Override
+        public void warning(final CSSParseException exception) throws CSSException {
+            // ignore
+        }
+
+        @Override
+        public void fatalError(final CSSParseException exception) throws CSSException {
+            errorDetected_ = true;
+        }
+
+        @Override
+        public void error(final CSSParseException exception) throws CSSException {
+            errorDetected_ = true;
+        }
+    };
 }
