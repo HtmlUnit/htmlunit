@@ -774,6 +774,77 @@ public class NodeTest extends WebDriverTestCase {
     }
 
     /**
+     * Regression test to verify that insertBefore correctly appends
+     * the new child object when the reference child object is null.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "SPAN" })
+    public void insertBeforeFragment_nullRef() throws Exception {
+        insertBeforeFragment("aNode.insertBefore(fragment, null);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void insertBeforeFragment_myself() throws Exception {
+        insertBeforeFragment("aNode.insertBefore(fragment, fragment);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void insertBeforeFragment_sibling() throws Exception {
+        insertBeforeFragment("aNode.insertBefore(fragment, siblingNode);");
+    }
+
+    /**
+     * Regression test to verify that insertBefore correctly appends
+     * the new child object when the reference child object is null.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = { "3", "SPAN" })
+    public void insertBeforeFragment_noSecondArg() throws Exception {
+        insertBeforeFragment("aNode.insertBefore(fragment);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void insertBeforeFragment(final String insertJSLine) throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test_insertBefore</title>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      var fragment = document.createDocumentFragment('span');\n"
+            + "      fragment.appendChild(document.createElement('span'));\n"
+            + "      var aNode = document.getElementById('myNode');\n"
+            + "      try {\n"
+            + insertJSLine
+            + "        alert(aNode.childNodes.length);\n"
+            + "        alert(aNode.childNodes[2].nodeName);\n"
+            + "      }\n"
+            + "      catch (e) { alert('exception'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='myNode'><h6>Child Node 1-A</h6>"
+            + "<h1>Child Node 2-A</h1></div>\n"
+            + "<h2 id='sibingNode'>Sibling</h2>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test element.appendChild: If the parent has a null parentNode,
      * IE creates a DocumentFragment be the parent's parentNode.
      *
