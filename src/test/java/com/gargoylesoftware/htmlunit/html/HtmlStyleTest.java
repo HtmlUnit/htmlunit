@@ -37,12 +37,16 @@ public class HtmlStyleTest extends SimpleWebTestCase {
     @Test
     public void asText() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
-            + "<style type='text/css' id='testStyle'>\n"
-            + "img { border: 0px }\n"
-            + "</style>\n"
-            + "</head><body>\n"
-            + "</body></html>";
+            = "<html>\n"
+            + "<head>\n"
+            + "  <title>foo</title>\n"
+            + "  <style type='text/css' id='testStyle'>\n"
+            + "    img { border: 0px }\n"
+            + "  </style>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body>\n"
+            + "</html>";
 
         final HtmlPage page = loadPage(html);
 
