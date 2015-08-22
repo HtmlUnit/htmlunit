@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlLink extends HtmlElement {
 
@@ -192,5 +193,13 @@ public class HtmlLink extends HtmlElement {
             return DisplayStyle.NONE;
         }
         return DisplayStyle.INLINE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean mayBeDisplayed() {
+        return false;
     }
 }
