@@ -118,4 +118,12 @@ public class HtmlStyle extends HtmlElement {
         }
         return DisplayStyle.NONE;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean mayBeDisplayed() {
+        return false;
+    }
 }
