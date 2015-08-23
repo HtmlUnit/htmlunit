@@ -160,10 +160,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "onchange-select; onclick-select;",
-            FF = "onchange-select; onclick-option; onclick-select;")
-    @BuggyWebDriver(FF)
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "onchange-select; onclick-option; onclick-select;",
+            IE = "onchange-select; onclick-select;")
+    @BuggyWebDriver({ CHROME, FF })
     public void clickOptionEventSequence1() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -200,10 +199,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "change-SELECT; click-SELECT;",
-            FF = "change-SELECT; click-OPTION; click-OPTION;")
-    @BuggyWebDriver(FF)
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "change-SELECT; click-OPTION; click-OPTION;",
+            IE = "change-SELECT; click-SELECT;")
+    @BuggyWebDriver({ CHROME, FF })
     public void clickOptionEventSequence2() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -262,10 +260,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
-            FF = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;")
-    @BuggyWebDriver(FF)
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;",
+            IE = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
+    @BuggyWebDriver({ CHROME, FF })
     public void clickOptionEventSequence3() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
