@@ -62,18 +62,6 @@ public class HtmlTitle2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void asText() throws Exception {
-        final String html = "<html><head><title id='t'>Title</title></head><body></body></html>";
-
-        final WebDriver driver = loadPageWithAlerts2(html);
-        final String text = driver.findElement(By.id("t")).getText();
-        assertEquals("", text);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
     public void isDisplayed() throws Exception {
         final String html = "<html><head><title id='t'>Title</title></head><body></body></html>";
 
