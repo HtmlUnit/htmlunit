@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 
@@ -72,12 +73,13 @@ public class HtmlOption2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "oDown,sDown,dDown,oUp,sUp,dUp,",
-            CHROME = "sUp,dUp,",
             IE = "sDown,dDown,sUp,dUp,")
     // there seems to be a bug in selenium; for FF >= 10 this triggers
     // "sDown,dDown,sUp,dUp,oDown,sDown,dDown,oUp,sUp,dUp," but a
     // manual test shows, that this is wrong.
-    @BuggyWebDriver({ FF31, FF38 })
+    // for Chrome selenium shows only "sUp,dUp," but again
+    // manual test are showing something different
+    @BuggyWebDriver({ CHROME, FF31, FF38 })
     public void onMouse() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

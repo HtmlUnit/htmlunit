@@ -321,15 +321,15 @@ public enum BrowserVersionFeatures {
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(IE))
     EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(IE))
     EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT,
 
     /** Does not trigger "onmouseup" event handler for the select options. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(IE))
     EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION,
 
     /** Triggers "onreadystatechange" event. */

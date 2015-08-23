@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: mouse events fixed when clicking an option (Chrome).
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: added support for Window.crypto.getRandomValues.
             </action>
