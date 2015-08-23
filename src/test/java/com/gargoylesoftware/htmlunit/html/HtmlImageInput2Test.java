@@ -75,7 +75,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
-            CHROME = "§§URL§§?button.x=20&button.y=7",
+            CHROME = "§§URL§§?button.x=22&button.y=7",
             IE8 = "§§URL§§?button.x=15&button.y=16",
             IE11 = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({ CHROME, IE })
@@ -298,7 +298,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("i")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(webDriver));
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -312,7 +312,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("i")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(webDriver));
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -329,7 +329,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("myInput")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(webDriver));
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**

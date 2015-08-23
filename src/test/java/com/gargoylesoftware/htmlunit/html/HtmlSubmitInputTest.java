@@ -27,6 +27,8 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -80,12 +82,12 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "    <input type='submit' name='button' value='foo' onClick='alert(\"foo\")'/>\n"
             + "</form></body></html>";
 
-        final WebDriver wd = loadPage2(html);
+        final WebDriver webDriver = loadPage2(html);
 
-        final WebElement button = wd.findElement(By.name("button"));
+        final WebElement button = webDriver.findElement(By.name("button"));
         button.click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(wd));
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -123,17 +125,20 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "<input id='myInput' type='submit' onclick='alert(1)'>\n"
             + "</body></html>";
 
-        final WebDriver wd = loadPage2(html);
-        final WebElement input = wd.findElement(By.id("myInput"));
+        final WebDriver webDriver = loadPage2(html);
+        final WebElement input = webDriver.findElement(By.id("myInput"));
         input.click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(wd));
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "2",
+            CHROME = "1")
+    @NotYetImplemented(Browser.CHROME)
     public void doubleSubmission() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -152,11 +157,11 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("");
-        final WebDriver wd = loadPageWithAlerts2(html);
-        final WebElement input = wd.findElement(By.name("submitBtn"));
+        final WebDriver webDriver = loadPage2(html);
+        final WebElement input = webDriver.findElement(By.name("submitBtn"));
         input.click();
 
-        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
     }
 
     /**
@@ -198,7 +203,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-", "-", "-" },
-            IE = { "Submit Query-", "Submit Query-", "Submit Query-" },
+            IE8 = { "Submit Query-", "Submit Query-", "Submit Query-" },
             IE11 = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
