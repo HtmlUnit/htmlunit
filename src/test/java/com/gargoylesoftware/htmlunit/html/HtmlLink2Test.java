@@ -77,6 +77,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final String text = driver.findElement(By.id("l")).getText();
         assertEquals("", text);
     }
+
     /**
      * @throws Exception if an error occurs
      */

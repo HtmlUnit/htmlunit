@@ -82,6 +82,7 @@ public class HtmlStyle2Test extends WebDriverTestCase {
         final String text = driver.findElement(By.id("s")).getText();
         assertEquals("", text);
     }
+
     /**
      * @throws Exception if an error occurs
      */
