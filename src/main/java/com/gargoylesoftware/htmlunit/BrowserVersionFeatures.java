@@ -1680,7 +1680,7 @@ public enum BrowserVersionFeatures {
 
     /** When expanding the collection by setting the length don't add
      * a empty text node. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
 
     /** Indicates that select.options.childNodes is a valid property (IE). */

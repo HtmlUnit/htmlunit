@@ -852,7 +852,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             CHROME = { "null", "[object Text]", "[object Text]" },
             IE8 = { "null", "[object]", "null" },
             IE11 = { "null", "[object Text]", "null" })
-    @NotYetImplemented(CHROME)
     public void setText() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
