@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: add window.location.origin.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: OptionsCollection length setter fix (Chrome).
             </action>

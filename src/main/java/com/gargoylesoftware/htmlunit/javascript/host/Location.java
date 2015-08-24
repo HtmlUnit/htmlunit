@@ -512,4 +512,14 @@ public class Location extends SimpleScriptable {
     private void setUrl(final URL url) throws IOException {
         window_.getWebWindow().getWebClient().getPage(window_.getWebWindow(), new WebRequest(url));
     }
+
+    /**
+     * Returns the {@code origin} property.
+     * @return the {@code origin} property
+     */
+    @JsxGetter
+    public String getOrigin() {
+        return getUrl().getProtocol() + "://" + getHost();
+    }
+
 }

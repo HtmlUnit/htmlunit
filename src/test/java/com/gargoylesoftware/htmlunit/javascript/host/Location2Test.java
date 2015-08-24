@@ -823,4 +823,31 @@ public class Location2Test extends WebDriverTestCase {
         lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§ORIGIN§§")
+    public void origin() throws Exception {
+        final String html =
+            "<html><body><script>\n"
+            + " window.onhashchange = function(event) {\n"
+            + "    alert(window.location.origin);\n"
+            + " }\n"
+            + "</script></body></html>";
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final URL url = URL_FIRST;
+        for (int i = 0; i < expectedAlerts.length; ++i) {
+            expectedAlerts[i] = expectedAlerts[i].replaceAll("§§ORIGIN§§",
+                    url.getProtocol() + "://" + url.getHost() + ':' + url.getPort());
+        }
+
+        final WebDriver driver = loadPage2(html);
+        driver.navigate().to(driver.getCurrentUrl() + "#/foo");
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
 }
