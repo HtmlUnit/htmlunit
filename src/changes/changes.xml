@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: fix FormData to correctly handle File.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add window.location.origin.
             </action>

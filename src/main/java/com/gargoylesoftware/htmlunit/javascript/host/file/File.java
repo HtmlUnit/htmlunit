@@ -77,11 +77,11 @@ public class File extends Blob {
         final Locale locale = new Locale(browser.getSystemLanguage());
 
         if (browser.hasFeature(BrowserVersionFeatures.JS_FILE_SHORT_DATE_FORMAT)) {
-            final FastDateFormat format =  FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT_FF, locale);
+            final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT_FF, locale);
             return format.format(date);
         }
 
-        final FastDateFormat format =  FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT, locale);
+        final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT, locale);
         return format.format(date);
     }
 
@@ -138,5 +138,13 @@ public class File extends Blob {
      */
     @JsxFunction(@WebBrowser(value = IE, minVersion = 11))
     public void msClose() {
+    }
+
+    /**
+     * Returns the underlying file.
+     * @return the underlying file
+     */
+    public java.io.File getFile() {
+        return file_;
     }
 }

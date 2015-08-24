@@ -28,10 +28,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.file.File;
+import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
- * A JavaScript object for FormData.
+ * A JavaScript object for {@code FormData}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -57,7 +59,13 @@ public class FormData extends SimpleScriptable {
      */
     @JsxFunction
     public void append(final String name, final Object value, final Object filename) {
-        requestParameters_.add(new NameValuePair(name, value.toString()));
+        if (value instanceof File) {
+            final File file = (File) value;
+            requestParameters_.add(new KeyDataPair(name, file.getFile(), file.getType(), null));
+        }
+        else {
+            requestParameters_.add(new NameValuePair(name, value.toString()));
+        }
     }
 
     /**

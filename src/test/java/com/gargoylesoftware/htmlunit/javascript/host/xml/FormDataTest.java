@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
@@ -27,12 +28,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -127,6 +131,67 @@ public class FormDataTest extends WebDriverTestCase {
                 writer.write('\n');
             }
             writer.close();
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void xmlHttpRequest() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.testForm.fileupload.files) {\n"
+            + "    var files = document.testForm.fileupload.files;\n"
+            + "    var xhr = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    var formData = new FormData();\n"
+            + "    formData.append('myKey', files[0]);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
+        try {
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            final List<String> alerts = getCollectedAlerts(driver);
+            if (!alerts.isEmpty()) {
+                final String[] lines = alerts.get(0).split("\\n");
+                assertEquals(6, lines.length);
+                assertTrue(lines[1].startsWith("Content-Disposition: form-data; name=\"myKey\"; filename="));
+                assertEquals("Content-Type: text/plain", lines[2]);
+                assertEquals("", lines[3]);
+                assertEquals("Hello HtmlUnit", lines[4]);
+                assertEquals(lines[0] + "--", lines[5]);
+            }
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
         }
     }
 }
