@@ -828,26 +828,22 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§ORIGIN§§")
+    @Alerts(DEFAULT = "§§ORIGIN§§",
+            IE8 = "undefined")
     public void origin() throws Exception {
         final String html =
-            "<html><body><script>\n"
-            + " window.onhashchange = function(event) {\n"
-            + "    alert(window.location.origin);\n"
-            + " }\n"
-            + "</script></body></html>";
+                "<html><body><script>\n"
+                + "  alert(window.location.origin);\n"
+                + "</script></body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
         final URL url = URL_FIRST;
+        final String origin = url.getProtocol() + "://" + url.getHost() + ':' + url.getPort();
         for (int i = 0; i < expectedAlerts.length; ++i) {
-            expectedAlerts[i] = expectedAlerts[i].replaceAll("§§ORIGIN§§",
-                    url.getProtocol() + "://" + url.getHost() + ':' + url.getPort());
+            expectedAlerts[i] = expectedAlerts[i].replaceAll("§§ORIGIN§§", origin);
         }
 
         final WebDriver driver = loadPage2(html);
-        driver.navigate().to(driver.getCurrentUrl() + "#/foo");
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, expectedAlerts);
     }
-
 }
