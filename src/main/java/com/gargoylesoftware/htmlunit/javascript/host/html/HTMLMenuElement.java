@@ -14,13 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MENU_TYPE_EMPTY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import org.apache.commons.lang3.StringUtils;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.html.HtmlMenu;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -29,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlMenu.class,
     browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
@@ -41,4 +49,48 @@ public class HTMLMenuElement extends HTMLListElement {
     public HTMLMenuElement() {
     }
 
+    /**
+     * Returns the value of the "type" property.
+     * @return the value of the "type" property
+     */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
+    public String getType() {
+        if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
+            return "";
+        }
+
+        final String type = getDomNodeOrDie().getAttribute("type");
+        if ("context".equalsIgnoreCase(type)) {
+            return "context";
+        }
+        if ("toolbar".equalsIgnoreCase(type)) {
+            return "toolbar";
+        }
+        return "list";
+    }
+
+    /**
+     * Sets the value of the "type" property.
+     * @param type the value of the "type" property
+     */
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
+    public void setType(final String type) {
+        if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
+            if (StringUtils.isEmpty(type)) {
+                return;
+            }
+            throw Context.reportRuntimeError("Cannot set the type property to invalid value: '" + type + "'");
+        }
+
+        if ("context".equalsIgnoreCase(type)) {
+            getDomNodeOrDie().setAttribute("type", "context");
+            return;
+        }
+        if ("toolbar".equalsIgnoreCase(type)) {
+            getDomNodeOrDie().setAttribute("type", "toolbar");
+            return;
+        }
+
+        getDomNodeOrDie().setAttribute("type", "list");
+    }
 }

@@ -1459,6 +1459,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_MEDIA_LIST_EMPTY_STRING,
 
+    /** Type property of menu has always '' as value. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_MENU_TYPE_EMPTY,
+
     /**
      * Method mergeAttributes will merge all attributes instead only the known/supported ones.
      */

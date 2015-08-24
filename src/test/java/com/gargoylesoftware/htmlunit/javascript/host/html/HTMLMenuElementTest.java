@@ -14,8 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -117,14 +116,16 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "list", "list", "list", "list", "null", "", "blah",
-                        "A", "list", "list", "list", "list", "list", "list" },
-            CHROME = { "undefined", "undefined", "undefined", "undefined", "null", "", "blah",
-                    "A", "1", "a", "A", "i", "I", "u" },
-            IE8 = { "false", "true", "true", "true", "false", "true", "true",
-                    "true", "true", "false", "true", "false", "true", "false", "true", "false" },
-            IE11 = { "", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" })
-    @NotYetImplemented({ FF, IE })
+    @Alerts(DEFAULT = { "list", "list", "list", "context", "toolbar", "null", "", "blah",
+                        "context", "ToolBar", "list", "context", "toolbar", "context", "list", "list" },
+            CHROME = { "undefined", "undefined", "undefined", "undefined", "undefined",
+                    "null", "", "blah", "context", "ToolBar", "list",
+                    "context", "toolbar", "ConText", "", "unknown" },
+            IE8 = { "", "", "", "", "", "", "", "blah",
+                    "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", "" },
+            IE11 = { "", "", "", "", "", "null", "", "blah",
+                    "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", "" })
+    @NotYetImplemented(IE8)
     public void type() throws Exception {
         final String html =
                 "<html>\n"
@@ -135,27 +136,29 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 + "        alert(document.getElementById('menu2').type);\n"
                 + "        alert(document.getElementById('menu3').type);\n"
                 + "        alert(document.getElementById('menu4').type);\n"
+                + "        alert(document.getElementById('menu5').type);\n"
                 + "        alert(document.getElementById('menu1').getAttribute('type'));\n"
                 + "        alert(document.getElementById('menu2').getAttribute('type'));\n"
                 + "        alert(document.getElementById('menu3').getAttribute('type'));\n"
                 + "        alert(document.getElementById('menu4').getAttribute('type'));\n"
+                + "        alert(document.getElementById('menu5').getAttribute('type'));\n"
 
-                + "        document.getElementById('menu1').type = '1';\n"
+                + "        try { document.getElementById('menu1').type = 'list' } catch(e) {alert('ex');};\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        document.getElementById('menu1').type = 'a';\n"
+                + "        try { document.getElementById('menu1').type = 'context' } catch(e) {alert('ex');};\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        document.getElementById('menu1').type = 'A';\n"
+                + "        try { document.getElementById('menu1').type = 'toolbar' } catch(e) {alert('ex');};\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        document.getElementById('menu1').type = 'i';\n"
+                + "        try { document.getElementById('menu1').type = 'ConText' } catch(e) {alert('ex');};\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        document.getElementById('menu1').type = 'I';\n"
+                + "        try { document.getElementById('menu1').type = '' } catch(e) {alert('ex');};\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'u' } catch(e) {alert('exception');};\n"
+                + "        try { document.getElementById('menu1').type = 'unknown' } catch(e) {alert('ex');};\n"
                 + "        alert(document.getElementById('menu1').type);\n"
                 + "      }\n"
                 + "    </script>\n"
@@ -164,7 +167,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 + "    <menu id='menu1'><li>a</li><li>b</li></menu>\n"
                 + "    <menu type='' id='menu2'><li>a</li><li>b</li></menu>\n"
                 + "    <menu type='blah' id='menu3'><li>a</li><li>b</li></menu>\n"
-                + "    <menu type='A' id='menu4'><li>a</li><li>b</li></menu>\n"
+                + "    <menu type='context' id='menu4'><li>a</li><li>b</li></menu>\n"
+                + "    <menu type='ToolBar' id='menu5'><li>a</li><li>b</li></menu>\n"
                 + "  </body>\n"
                 + "</html>";
         loadPageWithAlerts2(html);
