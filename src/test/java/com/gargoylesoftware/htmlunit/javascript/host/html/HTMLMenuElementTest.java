@@ -173,4 +173,38 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "new", "" },
+            FF = { "", "", "new", "" })
+    public void label() throws Exception {
+        final String html =
+                "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      function test() {\n"
+                + "        var menu1 = document.getElementById('menu1');\n"
+                + "        alert(menu1.label);\n"
+
+                + "        var menu2 = document.getElementById('menu1');\n"
+                + "        alert(menu2.label);\n"
+
+                + "        menu1.label = 'new';\n"
+                + "        alert(menu1.label);\n"
+
+                + "        menu1.label = '';\n"
+                + "        alert(menu1.label);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "    <menu id='menu1' ><li>a</li><li>b</li></menu>\n"
+                + "    <menu id='menu2' label='Menu1'><li>a</li><li>b</li></menu>\n"
+                + "  </body>\n"
+                + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

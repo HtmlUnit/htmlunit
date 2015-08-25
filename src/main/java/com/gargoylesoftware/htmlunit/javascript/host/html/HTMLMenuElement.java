@@ -42,11 +42,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
     browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLMenuElement extends HTMLListElement {
 
+    private String label_;
+
     /**
      * Creates an instance.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public HTMLMenuElement() {
+        label_ = "";
     }
 
     /**
@@ -92,5 +95,23 @@ public class HTMLMenuElement extends HTMLListElement {
         }
 
         getDomNodeOrDie().setAttribute("type", "list");
+    }
+
+    /**
+     * Returns the value of the "label" property.
+     * @return the value of the "label" property
+     */
+    @JsxGetter(@WebBrowser(FF))
+    public String getLabel() {
+        return label_;
+    }
+
+    /**
+     * Sets the value of the "label" property.
+     * @param label the value of the "label" property
+     */
+    @JsxSetter(@WebBrowser(FF))
+    public void setLabel(final String label) {
+        label_ = label;
     }
 }

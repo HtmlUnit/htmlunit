@@ -1823,7 +1823,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF31 = "compact,label,type",
             FF38 = "compact,label,type",
             IE = "compact,type")
-    @NotYetImplemented(FF)
     public void menu() throws Exception {
         test("menu");
     }
