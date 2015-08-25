@@ -378,6 +378,11 @@ public class RegExpJsToJavaConverter {
             }
             else {
                 tape_.move(-1);
+                if ('0' == aFirstChar) {
+                    // \0 has to be replaced by \x00
+                    tape_.insert("x0", -1);
+                    return false;
+                }
             }
         }
 

@@ -140,6 +140,22 @@ public class RegExpJsToJavaConverterTest {
     }
 
     /**
+     * JS is special for \0.
+     */
+    @Test
+    public void escapeNullChar() {
+        final RegExpJsToJavaConverter regExpJsToJavaConverter = new RegExpJsToJavaConverter();
+
+        String in = "[\\0-\\x08]";
+        String out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals("[\\x00-\\x08]", out);
+
+        in = "[\\0\\9]";
+        out = regExpJsToJavaConverter.convert(in);
+        Assert.assertEquals("[\\x00\\09]", out);
+    }
+
+    /**
      * Test not required escape.
      */
     @Test

@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Carsten Steurl
  */
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
@@ -899,6 +900,30 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "alert(huge.length);\n"
             + "alert(huge.replace(/\\\\./g, '@').length);\n"
             + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    public void nullCharacter() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var regex = new RegExp('[\\0-\\x08]');\n"
+            + "    alert(regex.test('\\0'));\n"
+            + "    alert('\\0'.match(regex) != null);\n"
+            + "    regex = new RegExp('[\\\\0-\\x08]');\n"
+            + "    alert(regex.test('\\0'));\n"
+            + "    alert('\\0'.match(regex) != null);\n"
+            + "    regex = new RegExp('[\\\\\\0-\\x08]');\n"
+            + "    alert(regex.test('\\0'));\n"
+            + "    alert('\\0'.match(regex) != null);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
