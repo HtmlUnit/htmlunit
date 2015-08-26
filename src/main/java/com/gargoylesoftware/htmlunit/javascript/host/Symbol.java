@@ -45,6 +45,7 @@ public class Symbol extends SimpleScriptable {
 
     /**
      * Creates an instance.
+     * @param name the name
      */
     @JsxConstructor
     public Symbol(final String name) {
