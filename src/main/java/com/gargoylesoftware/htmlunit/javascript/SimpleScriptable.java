@@ -284,7 +284,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * @return the prototype
      */
     @SuppressWarnings("unchecked")
-    protected Scriptable getPrototype(final Class<? extends SimpleScriptable> javaScriptClass) {
+    public Scriptable getPrototype(final Class<? extends SimpleScriptable> javaScriptClass) {
         final Scriptable prototype = getWindow().getPrototype(javaScriptClass);
         if (prototype == null && javaScriptClass != SimpleScriptable.class) {
             return getPrototype((Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());

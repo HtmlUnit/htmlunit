@@ -95,7 +95,7 @@ public class MSXMLScriptable extends SimpleScriptable {
      */
     @Override
     @SuppressWarnings("unchecked")
-    protected Scriptable getPrototype(final Class<? extends SimpleScriptable> javaScriptClass) {
+    public Scriptable getPrototype(final Class<? extends SimpleScriptable> javaScriptClass) {
         final Scriptable prototype = getEnvironment().getPrototype(javaScriptClass);
         if (prototype == null && javaScriptClass != SimpleScriptable.class) {
             return getPrototype((Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());

@@ -20,7 +20,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code Symbol}.
@@ -31,11 +35,64 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
 public class Symbol extends SimpleScriptable {
 
+    private String name_;
+
+    /**
+     * Default constructor.
+     */
+    public Symbol() {
+    }
+
     /**
      * Creates an instance.
      */
     @JsxConstructor
-    public Symbol() {
+    public Symbol(final String name) {
+        name_ = name;
     }
 
+    /**
+     * Returns the {@code iterator} static property.
+     * @param thisObj the scriptable
+     * @return the {@code iterator} static property
+     */
+    @JsxStaticGetter
+    public static Symbol getIterator(final Scriptable thisObj) {
+        final Symbol symbol = new Symbol("iterator");
+        final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
+        symbol.setParentScope(scope);
+        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
+        return symbol;
+    }
+
+    /**
+     * Returns the {@code unscopables} static property.
+     * @param thisObj the scriptable
+     * @return the {@code unscopables} static property
+     */
+    @JsxStaticGetter(@WebBrowser(CHROME))
+    public static Symbol getUnscopables(final Scriptable thisObj) {
+        final Symbol symbol = new Symbol("unscopables");
+        final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
+        symbol.setParentScope(scope);
+        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
+        return symbol;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTypeOf() {
+        return "symbol";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction
+    public String toString() {
+        return "Symbol(Symbol." + name_ + ')';
+    }
 }
