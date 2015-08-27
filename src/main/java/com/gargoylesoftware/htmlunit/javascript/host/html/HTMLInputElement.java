@@ -97,14 +97,14 @@ public class HTMLInputElement extends FormField {
                 newInput.markAsCreatedByJavascript();
             }
 
-            if (input.getParentNode() != null) {
-                input.getParentNode().replaceChild(newInput, input);
-            }
-            else {
+            if (input.getParentNode() == null) {
                 // the input hasn't yet been inserted into the DOM tree (likely has been
                 // created via document.createElement()), so simply replace it with the
                 // new Input instance created in the code above
                 input = newInput;
+            }
+            else {
+                input.getParentNode().replaceChild(newInput, input);
             }
 
             input.setScriptObject(null);
