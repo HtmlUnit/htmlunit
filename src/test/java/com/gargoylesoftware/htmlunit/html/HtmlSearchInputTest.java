@@ -38,7 +38,7 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
     @Test
     public void type() throws Exception {
         final String html = "<html><head></head><body><input id='t' type='search'/></body></html>";
-        
+
         final WebDriver webDriver = loadPage2(html);
         final WebElement input = webDriver.findElement(By.id("t"));
         input.sendKeys("abc");
