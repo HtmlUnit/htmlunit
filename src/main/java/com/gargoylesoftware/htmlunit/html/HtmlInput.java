@@ -116,7 +116,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute "type" or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        final String type = getAttribute("type");
+        if (ATTRIBUTE_NOT_DEFINED == type) {
+            return "text";
+        }
+        return type;
     }
 
     /**

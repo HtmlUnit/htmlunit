@@ -18,11 +18,14 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
+
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
@@ -45,8 +48,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
-
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object for form input elements (html tag &lt;input ...&gt;).
@@ -85,30 +86,40 @@ public class HTMLInputElement extends FormField {
     public void setType(final String newType) {
         HtmlInput input = getDomNodeOrDie();
 
-        if (!input.getTypeAttribute().equalsIgnoreCase(newType)) {
+        final String currentType = input.getAttribute("type");
+
+        if (!currentType.equalsIgnoreCase(newType)) {
             final AttributesImpl attributes = readAttributes(input);
             final int index = attributes.getIndex("type");
-            attributes.setValue(index, newType);
-
-            final HtmlInput newInput = (HtmlInput) InputElementFactory.instance
-                .createElement(input.getPage(), "input", attributes);
-
-            if (input.wasCreatedByJavascript()) {
-                newInput.markAsCreatedByJavascript();
-            }
-
-            if (input.getParentNode() == null) {
-                // the input hasn't yet been inserted into the DOM tree (likely has been
-                // created via document.createElement()), so simply replace it with the
-                // new Input instance created in the code above
-                input = newInput;
+            if (index > -1) {
+                attributes.setValue(index, newType);
             }
             else {
-                input.getParentNode().replaceChild(newInput, input);
+                attributes.addAttribute(null, "type", "type", null, newType);
             }
 
-            input.setScriptObject(null);
-            setDomNode(newInput, true);
+            // create a new one only if we have a new type
+            if (ATTRIBUTE_NOT_DEFINED != currentType || !"text".equalsIgnoreCase(newType)) {
+                final HtmlInput newInput = (HtmlInput) InputElementFactory.instance
+                    .createElement(input.getPage(), "input", attributes);
+
+                if (input.wasCreatedByJavascript()) {
+                    newInput.markAsCreatedByJavascript();
+                }
+
+                if (input.getParentNode() == null) {
+                    // the input hasn't yet been inserted into the DOM tree (likely has been
+                    // created via document.createElement()), so simply replace it with the
+                    // new Input instance created in the code above
+                    input = newInput;
+                }
+                else {
+                    input.getParentNode().replaceChild(newInput, input);
+                }
+
+                input.setScriptObject(null);
+                setDomNode(newInput, true);
+            }
         }
     }
 
@@ -455,12 +466,13 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * {@inheritDoc} Overridden to modify browser configurations.
+     * {@inheritDoc}
+     * Overridden to modify browser configurations.
      */
     @Override
     @JsxGetter
     public String getType() {
-        return super.getType();
+        return getDomNodeOrDie().getTypeAttribute();
     }
 
     /**

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Correct simulation of type handling for input tags without type attribute being set.
+            </action>
             <action type="fix" dev="mguillem">
                 Handle typing in inputs of type search like in inputs of type text.
             </action>

@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -1406,7 +1405,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<input>",
             IE8 = "<INPUT>")
-    @NotYetImplemented
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
     }

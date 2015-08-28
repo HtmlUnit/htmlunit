@@ -103,9 +103,6 @@ public final class InputElementFactory implements ElementFactory {
                 // This not an illegal value, as it defaults to "text"
                 // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
                 // and the common browsers seem to treat it as a "text" input so we will as well.
-                final DomAttr newAttr = new DomAttr(page, null, "type", "text", true);
-                attributeMap.put("type", newAttr);
-
             case "text":
                 result = new HtmlTextInput(qualifiedName, page, attributeMap);
                 break;

@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -335,7 +331,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     "<basefont xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<br xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<hr xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<input xmlns=\"http://www.w3.org/1999/xhtml\" type=\"text\" />",
+                    "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<link xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />" },
             IE8 = "XMLSerializer not defined")
@@ -353,15 +349,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + "      alert(new XMLSerializer().serializeToString(t));\n"
             + "      var t = document.createElement('hr');\n"
             + "      alert(new XMLSerializer().serializeToString(t));\n"
-
-            // there is a small difference between HtmlUnit and FF
-            // HtmlUnit adds type=text per default to the input
-            // FF handles input without type as type=text
-            // the fix for this is too big, so i made this workaround
-            // and add another (not yet implemented) test
             + "      var t = document.createElement('input');\n"
-            + "      t.setAttribute('type', 'text');\n"
-
             + "      alert(new XMLSerializer().serializeToString(t));\n"
             + "      var t = document.createElement('link');\n"
             + "      alert(new XMLSerializer().serializeToString(t));\n"
@@ -386,7 +374,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
             IE8 = "XMLSerializer not defined")
-    @NotYetImplemented({ FF, IE11, CHROME })
     public void inputTagWithoutType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
