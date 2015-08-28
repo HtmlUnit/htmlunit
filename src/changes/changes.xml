@@ -8,8 +8,11 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                Handle typing in inputs of type search like in inputs of type text.
+            </action>
             <action type="fix" dev="rbri" issue="1713">
-                RegExp: fix translation of \0 when translating a js regexp into a java one
+                RegExp: fix translation of \0 when translating a js regexp into a java one.
             </action>
             <action type="add" dev="rbri">
                 JavaScript: label property implemented for menu element.

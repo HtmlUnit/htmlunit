@@ -23,8 +23,9 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
-public class HtmlSearchInput extends HtmlInput {
+public class HtmlSearchInput extends HtmlTextInput {
 
     /**
      * Creates an instance.
