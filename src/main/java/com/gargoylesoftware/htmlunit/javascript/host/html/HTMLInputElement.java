@@ -120,6 +120,9 @@ public class HTMLInputElement extends FormField {
                 input.setScriptObject(null);
                 setDomNode(newInput, true);
             }
+            else {
+                super.setAttribute("type", newType);
+            }
         }
     }
 

@@ -629,7 +629,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text", "hidden" })
+    @Alerts({"text", "null", "hidden", "hidden" })
     public void createInputAndChangeType() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -637,9 +637,34 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "function doTest() {\n"
             + "    var input = document.createElement('INPUT');\n"
             + "    alert(input.type);\n"
+            + "    alert(input.getAttribute('type'));\n"
             + "    input.type = 'hidden';\n"
             + "    alert(input.type);\n"
-            + "    myForm.appendChild(input);\n"
+            + "    alert(input.getAttribute('type'));\n"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='myForm' action='foo'>\n"
+            + "</form></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"text", "null", "text", "text" })
+    public void createInputAndChangeTypeToText() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var input = document.createElement('INPUT');\n"
+            + "    alert(input.type);\n"
+            + "    alert(input.getAttribute('type'));\n"
+            + "    input.type = 'text';\n"
+            + "    alert(input.type);\n"
+            + "    alert(input.getAttribute('type'));\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
