@@ -1828,11 +1828,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = { "off", "off", "on", "on", "off", "off", "off", "off", "off" },
-            FF = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
+    @Alerts(DEFAULT = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
             IE = { "Inherit", "!", "Inherit", "Off", "Off", "!", "Off", "Off", "Off", "Off", "Off" },
             IE11 = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
-    @NotYetImplemented(CHROME)
     public void designMode_root() throws Exception {
         designMode("document");
     }
@@ -1842,11 +1840,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = { "off", "off", "on", "on", "off", "off", "off", "off", "off" },
-            FF = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
+    @Alerts(DEFAULT = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
             IE = { "Inherit", "!", "Inherit", "On", "On", "!", "On", "Off", "Off", "Inherit", "Inherit" },
             IE11 = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
-    @NotYetImplemented(CHROME)
     public void designMode_iframe() throws Exception {
         designMode("window.frames['f'].document");
     }
