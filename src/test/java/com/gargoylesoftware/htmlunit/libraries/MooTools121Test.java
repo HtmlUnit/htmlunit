@@ -97,7 +97,10 @@ public class MooTools121Test extends WebDriverTestCase {
             failures.add(elt.getText());
         }
 
-        // FileUtils.writeStringToFile(File.createTempFile("htmlunit", "mootools.html"), driver.getPageSource());
+        // final File tmpFile = File.createTempFile("htmlunit", "mootools.html");
+        // System.out.println(tmpFile.getAbsolutePath());
+        // FileUtils.writeStringToFile(tmpFile, driver.getPageSource());
+
         assertEquals(Arrays.copyOfRange(getExpectedAlerts(), 3, getExpectedAlerts().length), failures);
 
         assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("total_examples")).getText());
