@@ -853,15 +853,21 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts({ "tangerine", "ginger" })
     public void allProperty_KeyByName() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
-            + "  function doTest() {\n"
-            + "    alert(document.all['input1'].value);\n"
-            + "    alert(document.all['foo2'].value);\n"
-            + "  }\n"
-            + "</script></head><body onload='doTest()'><form id='form1'>\n"
+            = "<html>\n"
+            + "<head>\n"
+            + "  <title>First</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      alert(document.all['input1'].value);\n"
+            + "      alert(document.all['foo2'].value);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form id='form1'>\n"
             + "    <input id='input1' name='foo1' type='text' value='tangerine' />\n"
             + "    <input id='input2' name='foo2' type='text' value='ginger' />\n"
-            + "</form>\n"
+            + "  </form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
