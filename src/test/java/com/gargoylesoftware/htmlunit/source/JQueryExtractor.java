@@ -78,8 +78,8 @@ public final class JQueryExtractor {
         // final String browser = "FF38";
         // final String browser = "FF31";
         // final String browser = "CHROME";
-        final String browser = "IE11";
-        // final String browser = "IE8";
+        // final String browser = "IE11";
+        final String browser = "IE8";
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
         extractExpectations(new File(baseDir, browser + ".out"), new File(baseDir, "results." + browser + ".txt"));
