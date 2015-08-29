@@ -39,7 +39,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.libraries.JQuery182Test;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.libraries.JQuery1113Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
@@ -71,12 +72,18 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
-        final String version = "1.8.2";
-        final String browser = "ff38";
+        final String version = "1.11.3";
+        final Class<? extends WebDriverTestCase> testClass = JQuery1113Test.class;
+
+        // final String browser = "FF38";
+        // final String browser = "FF31";
+        // final String browser = "CHROME";
+        final String browser = "IE11";
+        // final String browser = "IE8";
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
         extractExpectations(new File(baseDir, browser + ".out"), new File(baseDir, "results." + browser + ".txt"));
-        generateTestCases(baseDir);
+        generateTestCases(testClass, baseDir);
     }
 
     /**
@@ -95,7 +102,10 @@ public final class JQueryExtractor {
         while ((line = reader.readLine()) != null) {
             line = line.trim();
             final int endPos = line.indexOf("Rerun");
-            if (line.startsWith("" + testNumber + '.') && endPos > -1) {
+            // the test number is at least for 1.11.3 no longer part of the output
+            // instead a ordered list is used by qunit
+            // if (line.startsWith("" + testNumber + '.') && endPos > -1) {
+            if (endPos > -1) {
                 line = line.substring(0, endPos);
                 writer.write(line + "\n");
                 testNumber++;
@@ -117,10 +127,12 @@ public final class JQueryExtractor {
 
     /**
      * Generates the java code of the test cases.
+     * @param testClass the class containing the tests
      * @param dir the directory which holds the expectations
      * @throws Exception if an error occurs.
      */
-    public static void generateTestCases(final File dir) throws Exception {
+    public static void generateTestCases(final Class<? extends WebDriverTestCase> testClass,
+            final File dir) throws Exception {
         final Browser[] browsers = Browser.values();
         // main browsers regardless of version e.g. "FF"
         final List<String> mainNames = new ArrayList<>();
@@ -214,7 +226,7 @@ public final class JQueryExtractor {
 
             final String methodName = test.getName().replaceAll("\\W", "_");
             try {
-                final Method method = JQuery182Test.class.getMethod(methodName);
+                final Method method = testClass.getMethod(methodName);
                 final NotYetImplemented notYetImplemented = method.getAnnotation(NotYetImplemented.class);
                 if (null != notYetImplemented) {
                     final Browser[] notYetImplementedBrowsers = notYetImplemented.value();
