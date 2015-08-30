@@ -1313,7 +1313,7 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public boolean isDisplayed() {
         if (!hasFeature(HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED)
-                && DomElement.ATTRIBUTE_NOT_DEFINED != getAttribute("hidden")) {
+                && ATTRIBUTE_NOT_DEFINED != getAttribute("hidden")) {
             return false;
         }
         return super.isDisplayed();
