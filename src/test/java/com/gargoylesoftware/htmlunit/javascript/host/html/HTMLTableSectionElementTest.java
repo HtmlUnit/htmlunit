@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTableSectionElementTest extends WebDriverTestCase {
@@ -455,6 +456,87 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
 
             + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
             + "  alert(node.innerText);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" },
+            IE8 = { "undefined", "[object]", "abc", "[object]", "" })
+    public void textContent_body() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table>\n"
+            + "    <tbody id='tab_row'><tr><td>cell1</td></tr></tbody>\n"
+            + "  </table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tab_row');\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" },
+            IE8 = { "undefined", "[object]", "abc", "[object]", "" })
+    public void textContent_header() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table>\n"
+            + "    <thead id='tab_row'><tr><td>cell1</td></tr></thead>\n"
+            + "  </table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tab_row');\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" },
+            IE8 = { "undefined", "[object]", "abc", "[object]", "" })
+    public void textContent_footer() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table>\n"
+            + "    <tfoot id='tab_row'><tr><td>cell1</td></tr></tfoot>\n"
+            + "  </table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tab_row');\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }

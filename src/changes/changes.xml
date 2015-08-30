@@ -9,6 +9,9 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="rbri">
+                JavaScript: textContent property is writable for table elements in Chrome also.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: HTMLScriptElement.src should return complete URL if src was defined.
             </action>
             <action type="fix" dev="rbri">

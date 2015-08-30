@@ -193,12 +193,13 @@ public class HTMLTableSectionElement extends RowContainer {
      * Overwritten to throw an exception because this is readonly.
      * @param value the new value for the contents of this node
      */
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     @Override
-    protected void setInnerTextImpl(final String value) {
+    public void setInnerText(final String value) {
         if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
             throw Context.reportRuntimeError("innerText is read-only for tag '"
                     + getDomNodeOrDie().getNodeName() + "'");
         }
-        super.setInnerTextImpl(value);
+        super.setInnerText(value);
     }
 }

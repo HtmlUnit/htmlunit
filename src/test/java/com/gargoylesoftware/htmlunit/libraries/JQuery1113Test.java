@@ -3647,7 +3647,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented(CHROME)
     public void traversing__contents__() throws Exception {
         runTest("traversing: contents()");
     }
