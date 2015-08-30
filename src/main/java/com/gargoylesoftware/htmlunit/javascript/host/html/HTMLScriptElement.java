@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SCR_NOT_EXPANDED;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -75,12 +76,14 @@ public class HTMLScriptElement extends HTMLElement {
         if (ATTRIBUTE_NOT_DEFINED == src) {
             return src;
         }
-        try {
-            final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
-            src = expandedSrc.toString();
-        }
-        catch (final MalformedURLException e) {
-            // ignore
+        if (!getBrowserVersion().hasFeature(JS_SCRIPT_SCR_NOT_EXPANDED)) {
+            try {
+                final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
+                src = expandedSrc.toString();
+            }
+            catch (final MalformedURLException e) {
+                // ignore
+            }
         }
         return src;
     }

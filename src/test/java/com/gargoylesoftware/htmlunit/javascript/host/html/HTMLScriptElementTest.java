@@ -100,7 +100,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "§§URL§§foo.js", "foo.js", "§§URL§§", "" })
+    @Alerts(DEFAULT = { "§§URL§§foo.js", "foo.js", "§§URL§§", "" },
+            IE8 = { "foo.js", "foo.js", "", "" })
     public void srcPropertyShouldBeAFullUrl() throws Exception {
         final String html =
                 "<html>\n"
@@ -132,7 +133,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "null", "", "null" })
+    @Alerts(DEFAULT = { "", "null", "", "null" },
+            IE8 = { "", "", "", "" })
     public void srcPropertyNoSource() throws Exception {
         final String html =
                 "<html>\n"

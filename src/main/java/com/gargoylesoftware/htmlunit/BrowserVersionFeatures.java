@@ -1644,6 +1644,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION,
 
+    /** Javascript script.src returns the plain value. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_SCRIPT_SCR_NOT_EXPANDED,
+
     /** Javascript script tags supports the 'for' and the 'event'
      * attribute (IE).
      */
