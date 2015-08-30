@@ -21,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
 import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -40,7 +42,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for compatibility with web server loading of
- * version 1.8.2 of the <a href="http://jquery.com/">jQuery</a> JavaScript library.
+ * version 1.11.3 of the <a href="http://jquery.com/">jQuery</a> JavaScript library.
  *
  * All test method inside this class are generated. Please have a look
  * at {@link com.gargoylesoftware.htmlunit.source.JQueryExtractor}.
@@ -80,8 +82,8 @@ public class JQuery1113Test extends WebDriverTestCase {
 
         try {
             final WebDriver webdriver = getWebDriver();
-            webdriver.get("http://localhost:" + PORT + "/jquery/test/index.html?testNumber="
-                    + testNumber);
+            final String url = "http://localhost:" + PORT + "/jquery/test/index.html?testNumber=" + testNumber;
+            webdriver.get(url);
 
             WebElement status = webdriver.findElement(By.id("qunit-testresult"));
             while (!status.getText().startsWith("Tests completed")) {
@@ -103,7 +105,18 @@ public class JQuery1113Test extends WebDriverTestCase {
             result = result.substring(0, result.indexOf("Rerun")).trim();
             final String expected = testName + " (" + getExpectedAlerts()[0] + ")";
             if (!expected.contains(result)) {
-                System.out.println("-> " + webdriver.findElement(By.id("qunit-tests")).getText());
+                System.out.println("--------------------------------------------");
+                System.out.println("URL: " + url);
+                System.out.println("--------------------------------------------");
+                System.out.println("Test: " + webdriver.findElement(By.id("qunit-tests")).getText());
+                System.out.println("--------------------------------------------");
+                System.out.println("Failures:");
+                final List<WebElement> failures = webdriver.findElements(By.cssSelector(".qunit-assert-list li.fail"));
+                for (WebElement webElement : failures) {
+                    System.out.println("  " + webElement.getText());
+                }
+                System.out.println("--------------------------------------------");
+
                 fail(new ComparisonFailure("", expected, result).getMessage());
             }
         }
