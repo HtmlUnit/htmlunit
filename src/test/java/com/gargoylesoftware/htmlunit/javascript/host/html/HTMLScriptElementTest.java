@@ -100,17 +100,62 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "foo.js", "§§URL§§foo.js" })
-    @NotYetImplemented
+    @Alerts({ "§§URL§§foo.js", "foo.js", "§§URL§§", "" })
     public void srcPropertyShouldBeAFullUrl() throws Exception {
-        final String html = "<html><body>\n"
-                + "<script src='foo.js'></script>\n"
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var script = document.getElementById('my');\n"
+                + "      alert(script.src);\n"
+                + "      alert(script.getAttribute('src'));\n"
+
+                + "      var script2 = document.getElementById('my2');\n"
+                + "      alert(script2.src);\n"
+                + "      alert(script2.getAttribute('src'));\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <script id='my' src='foo.js'></script>\n"
+                + "  <script id='my2' src=''></script>\n"
                 + "</body></html>";
 
-        final String js = "var script = document.getElementsByTagName('script')[0];\n"
-                + "alert(script.getAttribute('src'));\n"
-                + "alert(script.src);";
-        getMockWebConnection().setDefaultResponse(js , "text/javascript");
+        getMockWebConnection().setDefaultResponse("" , "text/javascript");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "", "null", "", "null" })
+    public void srcPropertyNoSource() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var script = document.getElementById('my');\n"
+                + "      alert(script.src);\n"
+                + "      alert(script.getAttribute('src'));\n"
+
+                + "      var script2 = document.createElement('script');\n"
+                + "      alert(script2.src);\n"
+                + "      alert(script2.getAttribute('src'));\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <script id='my'></script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("" , "text/javascript");
+
         loadPageWithAlerts2(html);
     }
 

@@ -17,14 +17,20 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -65,7 +71,18 @@ public class HTMLScriptElement extends HTMLElement {
     @JsxGetter
     public String getSrc() {
         final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
-        return tmpScript.getSrcAttribute();
+        String src = tmpScript.getSrcAttribute();
+        if (ATTRIBUTE_NOT_DEFINED == src) {
+            return src;
+        }
+        try {
+            final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
+            src = expandedSrc.toString();
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
+        return src;
     }
 
     /**

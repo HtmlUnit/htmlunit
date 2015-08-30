@@ -1758,7 +1758,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 50, 50")
-    @NotYetImplemented({ CHROME, FF31, FF38, IE11, IE8 })
     public void attributes__attr_String_() throws Exception {
         runTest("attributes: attr(String)");
     }
