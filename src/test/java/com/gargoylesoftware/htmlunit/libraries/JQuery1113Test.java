@@ -354,7 +354,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(IE8)
     public void core__jQuery__html___context_() throws Exception {
         runTest("core: jQuery('html', context)");
     }
@@ -850,7 +849,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(IE8)
     public void callbacks__jQuery_Callbacks___stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'stopOnFalse' ) - filter");
     }
@@ -1091,7 +1089,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(IE8)
     public void callbacks__jQuery_Callbacks___unique_stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - filter");
     }
@@ -1759,7 +1756,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(IE8)
     public void attributes__attr_String__on_cloned_elements___9646() throws Exception {
         runTest("attributes: attr(String) on cloned elements, #9646");
     }
@@ -1891,7 +1887,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 17, 17")
-    @NotYetImplemented(IE8)
     public void attributes__prop_String__Object_() throws Exception {
         runTest("attributes: prop(String, Object)");
     }
@@ -2084,7 +2079,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 52, 52")
-    @NotYetImplemented(IE8)
     public void attributes__removeClass_Function__with_incoming_value() throws Exception {
         runTest("attributes: removeClass(Function) with incoming value");
     }
@@ -5738,7 +5732,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(IE8)
     public void ajax__jQuery_ajax_____cross_domain_detection() throws Exception {
         runTest("ajax: jQuery.ajax() - cross-domain detection");
     }
@@ -5769,7 +5762,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE8)
     public void ajax__jQuery_ajax_____events_without_context() throws Exception {
         runTest("ajax: jQuery.ajax() - events without context");
     }
@@ -5780,7 +5772,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(IE8)
     public void ajax___15118___jQuery_ajax_____function_without_jQuery_event() throws Exception {
         runTest("ajax: #15118 - jQuery.ajax() - function without jQuery.event");
     }
@@ -5941,7 +5932,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(IE8)
     public void ajax__jQuery_ajax_____JSONP___Callback_in_data___Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Callback in data - Same Domain");
     }
@@ -6128,7 +6118,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE8)
     public void ajax__jQuery_ajax_____If_Modified_Since_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax() - If-Modified-Since support (cache)");
     }
@@ -6309,7 +6298,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(IE8)
     public void ajax___8205___jQuery_ajax_____JSONP___re_use_callbacks_name___Same_Domain() throws Exception {
         runTest("ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Same Domain");
     }
@@ -6418,7 +6406,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(IE8)
     public void ajax___13276___jQuery_ajax_____compatibility_between_XML_documents_from_ajax_requests_and_parsed_string() throws Exception {
         runTest("ajax: #13276 - jQuery.ajax() - compatibility between XML documents from ajax requests and parsed string");
     }
@@ -6623,7 +6610,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(IE8)
     public void ajax___8082___jQuery_getScript__String__Function_____source_as_responseText() throws Exception {
         runTest("ajax: #8082 - jQuery.getScript( String, Function ) - source as responseText");
     }
@@ -7426,7 +7412,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(IE8)
     public void effects__JS_50_to_50() throws Exception {
         runTest("effects: JS 50 to 50");
     }
@@ -7437,7 +7422,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(IE8)
     public void effects__JS_50_to_100() throws Exception {
         runTest("effects: JS 50 to 100");
     }
@@ -7518,7 +7502,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(IE8)
     public void effects__JS_0_to_0() throws Exception {
         runTest("effects: JS 0 to 0");
     }
