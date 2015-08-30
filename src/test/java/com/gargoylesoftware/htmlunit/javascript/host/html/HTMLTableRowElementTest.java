@@ -383,6 +383,34 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", "" },
+            IE8 = { "undefined", "[object]", "abc", "[object]", "" },
+            IE11 = { "cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", "" })
+    public void textContent() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table>\n"
+            + "    <tr id='tab_row'><td>cell1</td></tr>\n"
+            + "  </table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tab_row');\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
     private void insertCell(final String cellIndex) throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"

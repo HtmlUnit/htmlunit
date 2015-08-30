@@ -598,7 +598,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 17, 17")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_parseHTML() throws Exception {
         runTest("core: jQuery.parseHTML");
     }
