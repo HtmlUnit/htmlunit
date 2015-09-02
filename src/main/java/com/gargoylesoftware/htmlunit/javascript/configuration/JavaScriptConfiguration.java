@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
+import com.gargoylesoftware.htmlunit.javascript.host.AppBannerPromptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
 import com.gargoylesoftware.htmlunit.javascript.host.BarProp;
 import com.gargoylesoftware.htmlunit.javascript.host.BatteryManager;
@@ -234,6 +235,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.RTCDataChannelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.RTCPeerConnectionIceEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.SVGZoomEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.ServiceWorkerMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.SpeechSynthesisEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.StorageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.TextEvent;
@@ -375,9 +377,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
 
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
-        AbstractList.class, ActiveXObject.class, AnalyserNode.class, AnimationEvent.class, ApplicationCache.class,
-        ApplicationCacheErrorEvent.class, ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
-        Attr.class, AudioBuffer.class,
+        AbstractList.class, ActiveXObject.class, AnalyserNode.class, AnimationEvent.class, AppBannerPromptResult.class,
+        ApplicationCache.class, ApplicationCacheErrorEvent.class, ArrayBuffer.class, ArrayBufferView.class,
+        ArrayBufferViewBase.class, Attr.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AutocompleteErrorEvent.class, BarProp.class,
         BatteryManager.class, BeforeUnloadEvent.class, BiquadFilterNode.class,
@@ -454,9 +456,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class,
         MozSmsEvent.class, MozSmsFilter.class, MozSmsMessage.class, MozSmsSegmentInfo.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
-        NamespaceCollection.class, Navigator.class,
-        Node.class, NodeFilter.class, NodeIterator.class, NodeList.class, Notification.class,
-        OfflineAudioCompletionEvent.class,
+        NamespaceCollection.class, Navigator.class, Node.class, NodeFilter.class, NodeIterator.class,
+        NodeList.class, Notification.class, OfflineAudioCompletionEvent.class,
         OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
         Path2D.class, Performance.class, PerformanceEntry.class, PerformanceMark.class,
         PerformanceMeasure.class, PerformanceNavigation.class, PerformanceResourceTiming.class, PerformanceTiming.class,
@@ -467,8 +468,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ReadableByteStream.class, ReadableStream.class, Request.class, Response.class, RowContainer.class,
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScreenOrientation.class, ScriptProcessorNode.class, SecurityPolicyViolationEvent.class,
-        Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
-        ServiceWorkerRegistration.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
+        Selection.class, ServiceWorker.class, ServiceWorkerContainer.class, ServiceWorkerRegistration.class,
+        ServiceWorkerMessageEvent.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
         SpeechSynthesis.class, SpeechSynthesisEvent.class, SpeechSynthesisUtterance.class,
         StaticNodeList.class, StereoPannerNode.class, Storage.class, StorageEvent.class, StyleMedia.class,
         StyleSheet.class, StyleSheetList.class, SubtleCrypto.class,
@@ -504,9 +505,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGPathSegList.class, SVGPathSegMovetoAbs.class, SVGPathSegMovetoRel.class, SVGPatternElement.class,
         SVGPoint.class, SVGPointList.class, SVGPolygonElement.class, SVGPolylineElement.class,
         SVGPreserveAspectRatio.class, SVGRadialGradientElement.class, SVGRect.class, SVGRectElement.class,
-        SVGRenderingIntent.class, SVGScriptElement.class,
-        SVGSetElement.class, SVGStopElement.class, SVGStringList.class,
-        SVGStyleElement.class, SVGSVGElement.class, SVGSwitchElement.class,
+        SVGRenderingIntent.class, SVGScriptElement.class, SVGSetElement.class, SVGStopElement.class,
+        SVGStringList.class, SVGStyleElement.class, SVGSVGElement.class, SVGSwitchElement.class,
         SVGSymbolElement.class, SVGTextContentElement.class, SVGTextElement.class,
         SVGTextPathElement.class, SVGTextPositioningElement.class, SVGTitleElement.class, SVGTransform.class,
         SVGTransformList.class, SVGTSpanElement.class, SVGUnitTypes.class, SVGUseElement.class, SVGViewElement.class,
@@ -514,8 +514,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         TextEvent.class, TextMetrics.class, TextRange.class, TextTrack.class, TextTrackCue.class,
         TextTrackCueList.class, TextTrackList.class, TimeEvent.class, TimeRanges.class,
         Touch.class, TouchEvent.class, TouchList.class, TrackEvent.class, TransitionEvent.class, TreeWalker.class,
-        UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
-        URL.class,
+        UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class, URL.class,
         URLSearchParams.class, UserProximityEvent.class, ValidityState.class, VTTCue.class, WaveShaperNode.class,
         WeakMap.class,
         WeakSet.class, WebGLActiveInfo.class, WebGLBuffer.class, WebGLContextEvent.class, WebGLFramebuffer.class,

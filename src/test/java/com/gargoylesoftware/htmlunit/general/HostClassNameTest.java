@@ -9935,4 +9935,24 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("webkitURL");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AppBannerPromptResult() { [native code] }")
+    public void appBannerPromptResult() throws Exception {
+        test("AppBannerPromptResult");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ServiceWorkerMessageEvent() { [native code] }")
+    public void serviceWorkerMessageEvent() throws Exception {
+        test("ServiceWorkerMessageEvent");
+    }
+
 }

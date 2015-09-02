@@ -7400,4 +7400,24 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("ReadableStream");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function")
+    public void appBannerPromptResult() throws Exception {
+        test("AppBannerPromptResult");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function")
+    public void serviceWorkerMessageEvent() throws Exception {
+        test("ServiceWorkerMessageEvent");
+    }
+
 }

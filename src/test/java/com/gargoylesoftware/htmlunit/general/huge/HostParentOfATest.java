@@ -6418,4 +6418,24 @@ public class HostParentOfATest extends HostParentOf {
         test("Event", "MIDIMessageEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AppBannerPromptResult_AppBannerPromptResult() throws Exception {
+        test("AppBannerPromptResult", "AppBannerPromptResult");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_ServiceWorkerMessageEvent() throws Exception {
+        test("Event", "ServiceWorkerMessageEvent");
+    }
+
 }

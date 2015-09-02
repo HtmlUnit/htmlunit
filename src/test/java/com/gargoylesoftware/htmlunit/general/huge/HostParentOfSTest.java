@@ -2846,4 +2846,14 @@ public class HostParentOfSTest extends HostParentOf {
         test("ScreenOrientation", "ScreenOrientation");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ServiceWorkerMessageEvent_ServiceWorkerMessageEvent() throws Exception {
+        test("ServiceWorkerMessageEvent", "ServiceWorkerMessageEvent");
+    }
+
 }

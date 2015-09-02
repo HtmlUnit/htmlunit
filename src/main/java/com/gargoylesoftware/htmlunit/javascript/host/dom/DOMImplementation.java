@@ -300,16 +300,15 @@ public class DOMImplementation extends SimpleScriptable {
      * @param doctype the document types of the document
      * @return the newly created {@link XMLDocument}
      */
-    //TODO: change doctype type to "DocType"
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public XMLDocument createDocument(final String namespaceURI, final String qualifiedName,
-            final Object doctype) {
+            final DocumentType doctype) {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(document.getClass()));
         if (qualifiedName != null && !qualifiedName.isEmpty()) {
             final XmlPage page = (XmlPage) document.getDomNodeOrDie();
-            page.appendChild(page.createXmlElementNS("".equals(namespaceURI) ? null : namespaceURI, qualifiedName));
+            page.appendChild(page.createElementNS("".equals(namespaceURI) ? null : namespaceURI, qualifiedName));
         }
         return document;
     }
