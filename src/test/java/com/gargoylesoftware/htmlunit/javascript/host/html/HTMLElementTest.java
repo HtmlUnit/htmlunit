@@ -297,22 +297,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {
             "null",
             "expando=undefined",
-            "firstChild=[object Text]",
-            "lastChild=[object Text]",
-            "name=custom_attribute",
-            "nextSibling=null",
-            "nodeName=custom_attribute",
-            "nodeType=2",
-            "nodeValue=bleh",
-            "(ownerDocument==document)=true",
-            "parentNode=null",
-            "previousSibling=null",
-            "specified=true",
-            "value=bleh"
-            },
-            FF = {
-            "null",
-            "expando=undefined",
             "firstChild=null",
             "lastChild=null",
             "name=custom_attribute",

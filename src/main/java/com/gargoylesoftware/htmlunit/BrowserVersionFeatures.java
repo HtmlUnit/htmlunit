@@ -792,7 +792,7 @@ public enum BrowserVersionFeatures {
     JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
 
     /** firstChild and lastChild returns null for Attr (like IE does). */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(FF) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(FF) })
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
     /** HTMLBGSoundElement reported as HTMLUnknownElement. */
@@ -1815,7 +1815,7 @@ public enum BrowserVersionFeatures {
     JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES,
 
     /** Calling deleteCell without an index throws an exeption. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,
 
     /** Value of attribute 'sectionRowIndex' is a big int if the row is not attached to a table. */
