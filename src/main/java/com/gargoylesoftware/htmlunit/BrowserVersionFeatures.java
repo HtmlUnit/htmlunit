@@ -272,7 +272,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONBEFOREUNLOAD_USES_EVENT,
 
     /** Triggers "onchange" event handler after "onclick" event handler. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_ONCHANGE_AFTER_ONCLICK,
 
     /** Triggers "onchange" event handler on losing focus. */

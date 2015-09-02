@@ -106,8 +106,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onchange; onclick;", "" },
-            FF = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
+    @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
+            IE11 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" },
             IE8 = { "mousedown; onfocus; mouseup; onclick;", "onchange;" })
     @BuggyWebDriver(IE8)
     public void clickCheckboxEventSequence() throws Exception {
@@ -131,8 +131,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onchange; onclick;", "" },
-            FF = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
+    @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
+            IE11 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" },
             IE8 = { "mousedown; onfocus; mouseup; onclick;", "onchange;" })
     @BuggyWebDriver(IE8)
     public void clickRadioEventSequence() throws Exception {
