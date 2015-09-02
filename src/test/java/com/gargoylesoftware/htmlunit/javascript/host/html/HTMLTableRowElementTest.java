@@ -99,8 +99,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "4", "3" },
-            FF = { "4", "exception", "4" })
+    @Alerts(DEFAULT = { "4", "exception", "4" },
+            IE = { "4", "3" })
     public void deleteCell_noArg() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
