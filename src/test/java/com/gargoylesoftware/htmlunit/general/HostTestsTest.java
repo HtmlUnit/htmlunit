@@ -64,7 +64,6 @@ public class HostTestsTest {
         }
 
         ensure(new File(testRoot + HostClassNameTest.class.getName().replace('.', '/') + ".java"), set);
-        ensure(new File(testRoot + HostClassNameStandardsTest.class.getName().replace('.', '/') + ".java"), set);
         ensure(new File(testRoot + HostTypeOfTest.class.getName().replace('.', '/') + ".java"), set);
     }
 

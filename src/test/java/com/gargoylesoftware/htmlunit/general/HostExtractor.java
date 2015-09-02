@@ -64,7 +64,7 @@ public final class HostExtractor {
             fillMDNWebAPI(webClient, set);
             fillMDNJavaScriptGlobalObjects(webClient, set);
             final String testRoot = "src/test/java/";
-            ensure(new File(testRoot + HostClassNameStandardsTest.class.getName().replace('.', '/') + ".java"), set);
+            ensure(new File(testRoot + HostClassNameTest.class.getName().replace('.', '/') + ".java"), set);
         }
     }
 

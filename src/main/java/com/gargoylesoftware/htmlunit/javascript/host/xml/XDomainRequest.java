@@ -29,4 +29,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = @WebBrowser(value = IE, maxVersion = 8))
 public class XDomainRequest extends SimpleScriptable {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        return "[object " + getClassName() + "]";
+    }
 }
