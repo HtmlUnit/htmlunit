@@ -714,4 +714,22 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public void setAutocomplete(final String autocomplete) {
         setAttribute("autocomplete", autocomplete);
     }
+
+    /**
+     * Returns the value of the {@code placeholder} attribute.
+     *
+     * @return the value of the {@code placeholder} attribute
+     */
+    public String getPlaceholder() {
+        return getAttribute("placeholder");
+    }
+
+    /**
+     * Sets the {@code placeholder} attribute.
+     *
+     * @param placeholder the {@code placeholder} attribute
+     */
+    public void setPlaceholder(final String placeholder) {
+        setAttribute("placeholder", placeholder);
+    }
 }

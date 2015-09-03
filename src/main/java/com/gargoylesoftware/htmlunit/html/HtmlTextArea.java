@@ -532,4 +532,22 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         }
         return DisplayStyle.INLINE_BLOCK;
     }
+
+    /**
+     * Returns the value of the {@code placeholder} attribute.
+     *
+     * @return the value of the {@code placeholder} attribute
+     */
+    public String getPlaceholder() {
+        return getAttribute("placeholder");
+    }
+
+    /**
+     * Sets the {@code placeholder} attribute.
+     *
+     * @param placeholder the {@code placeholder} attribute
+     */
+    public void setPlaceholder(final String placeholder) {
+        setAttribute("placeholder", placeholder);
+    }
 }

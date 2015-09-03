@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="asashour" dev="asashour">
+                JavaScript: add .placeholder property (HTMLInputElement and HTMLTextAreaElement).
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: textContent property is writable for table elements in Chrome also.
             </action>

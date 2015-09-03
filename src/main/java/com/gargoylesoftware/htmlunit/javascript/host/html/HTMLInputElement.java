@@ -576,4 +576,22 @@ public class HTMLInputElement extends FormField {
         return null;
     }
 
+    /**
+     * Returns the {@code placeholder} attribute.
+     * @return the {@code placeholder} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public String getPlaceholder() {
+        return getDomNodeOrDie().getPlaceholder();
+    }
+
+    /**
+     * Sets the {@code placeholder} attribute.
+     * @param placeholder the new {@code placeholder} value
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public void setPlaceholder(final String placeholder) {
+        getDomNodeOrDie().setPlaceholder(placeholder);
+    }
+
 }

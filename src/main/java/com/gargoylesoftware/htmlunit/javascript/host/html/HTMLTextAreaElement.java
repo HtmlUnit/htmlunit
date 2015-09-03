@@ -395,4 +395,22 @@ public class HTMLTextAreaElement extends FormField {
             return;
         }
     }
+
+    /**
+     * Returns the {@code placeholder} attribute.
+     * @return the {@code placeholder} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public String getPlaceholder() {
+        return ((HtmlTextArea) getDomNodeOrDie()).getPlaceholder();
+    }
+
+    /**
+     * Sets the {@code placeholder} attribute.
+     * @param placeholder the new {@code placeholder} value
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public void setPlaceholder(final String placeholder) {
+        ((HtmlTextArea) getDomNodeOrDie()).setPlaceholder(placeholder);
+    }
 }

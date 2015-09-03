@@ -212,4 +212,25 @@ public final class HtmlInput2Test extends WebDriverTestCase {
         alerts.add(log.getAttribute("value").trim());
         assertEquals(getExpectedAlerts(), alerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("something")
+    public void placeholder() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('myInput');\n"
+            + "    alert(elem.placeholder);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload=test()>\n"
+            + "  <input id='myInput' placeholder='something'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
