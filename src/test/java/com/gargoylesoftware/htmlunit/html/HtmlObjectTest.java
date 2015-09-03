@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -44,9 +41,8 @@ public class HtmlObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "false",
-            FF = "undefined")
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "undefined",
+            IE = "false")
     public void classid() throws Exception {
         if (getBrowserVersion().isIE() && !ActiveXObjectTest.isJacobInstalled()) {
             return;
