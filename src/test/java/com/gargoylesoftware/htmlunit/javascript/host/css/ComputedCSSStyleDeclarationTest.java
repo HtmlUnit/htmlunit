@@ -70,6 +70,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void stringProperties() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -253,7 +254,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none" },
             CHROME = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block",
-                            "block", "inline" },
+                            "block", "none" },
             IE8 = { "inline", "inline", "inline", "block", /* "none", */ "inline", "inline", "inline", "inline" },
             IE11 = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none" })
     public void defaultDisplayValues_A() throws Exception {
