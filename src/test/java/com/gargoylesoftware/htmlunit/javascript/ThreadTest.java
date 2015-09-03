@@ -83,7 +83,7 @@ public class ThreadTest extends TestCase {
         return suite;
     }
 
-    /** A test object for threads*/
+    /** A test object for threads. */
     private static class TestThread extends Thread {
 
         private boolean successful_ = false;
@@ -92,7 +92,7 @@ public class ThreadTest extends TestCase {
          * Creates an instance.
          * @param name the name of the thread
          */
-        public TestThread(final String name) {
+        TestThread(final String name) {
             super(name);
         }
 

@@ -940,7 +940,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
             IE = { "", "", "", "", "", "", "" })
-    @NotYetImplemented({ IE8, IE11 })
+    @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -970,7 +970,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
             IE = { "", "error", "", "error", "", "", "", "", "", "" })
-    @NotYetImplemented({ IE8, IE11 })
+    @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

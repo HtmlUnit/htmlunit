@@ -893,7 +893,7 @@ public final class UrlUtils {
         /**
          * Creates a <tt>Url</tt> object.
          */
-        public Url() {
+        Url() {
         }
 
         /**
@@ -902,7 +902,7 @@ public final class UrlUtils {
          *
          * @param url a <tt>Url</tt> object.
          */
-        public Url(final Url url) {
+        Url(final Url url) {
             scheme_ = url.scheme_;
             location_ = url.location_;
             path_ = url.path_;

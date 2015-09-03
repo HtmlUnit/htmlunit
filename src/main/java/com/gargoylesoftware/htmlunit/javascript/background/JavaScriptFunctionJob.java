@@ -39,7 +39,7 @@ class JavaScriptFunctionJob extends JavaScriptExecutionJob {
      * @param window the window to which the job belongs
      * @param function the JavaScript code to execute
      */
-    public JavaScriptFunctionJob(final int initialDelay, final Integer period, final String label,
+    JavaScriptFunctionJob(final int initialDelay, final Integer period, final String label,
         final WebWindow window, final Function function) {
         super(initialDelay, period, label, window);
         function_ = function;

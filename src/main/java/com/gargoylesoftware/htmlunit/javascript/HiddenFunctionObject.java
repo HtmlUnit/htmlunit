@@ -30,7 +30,7 @@ class HiddenFunctionObject extends FunctionObject {
     /**
      * Constructor.
      */
-    public HiddenFunctionObject(final String name, final Member methodOrConstructor, final Scriptable scope) {
+    HiddenFunctionObject(final String name, final Member methodOrConstructor, final Scriptable scope) {
         super(name, methodOrConstructor, scope);
     }
 

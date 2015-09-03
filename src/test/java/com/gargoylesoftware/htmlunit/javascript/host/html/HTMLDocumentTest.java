@@ -2215,7 +2215,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
             IE = { "8", "CSS1Compat", "object", "object" })
-    @NotYetImplemented({ IE8, IE11 })
+    @NotYetImplemented(IE)
     public void documentMode_metaIE8() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }
@@ -2226,7 +2226,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
             IE = { "8", "CSS1Compat", "object", "object" })
-    @NotYetImplemented({ IE8, IE11 })
+    @NotYetImplemented(IE)
     public void documentMode_metaIE8_doctypeStrict() throws Exception {
         documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_, "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }

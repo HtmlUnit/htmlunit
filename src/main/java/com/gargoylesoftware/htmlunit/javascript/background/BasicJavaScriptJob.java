@@ -44,7 +44,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
     private long targetExecutionTime_;
 
     /** Creates a new job instance that executes once, immediately. */
-    public BasicJavaScriptJob() {
+    BasicJavaScriptJob() {
         this(0, null);
     }
 
@@ -53,7 +53,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
      * @param initialDelay the initial amount of time to wait before executing this job
      * @param period the amount of time to wait between executions of this job (may be <tt>null</tt>)
      */
-    public BasicJavaScriptJob(final int initialDelay, final Integer period) {
+    BasicJavaScriptJob(final int initialDelay, final Integer period) {
         initialDelay_ = initialDelay;
         period_ = period;
         setTargetExecutionTime(initialDelay + System.currentTimeMillis());

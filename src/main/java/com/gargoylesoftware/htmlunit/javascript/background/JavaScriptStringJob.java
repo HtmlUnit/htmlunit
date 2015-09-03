@@ -35,7 +35,7 @@ class JavaScriptStringJob extends JavaScriptExecutionJob {
      * @param window the window to which the job belongs
      * @param script the JavaScript code to execute
      */
-    public JavaScriptStringJob(final int initialDelay, final Integer period, final String label,
+    JavaScriptStringJob(final int initialDelay, final Integer period, final String label,
         final WebWindow window, final String script) {
         super(initialDelay, period, label, window);
         script_ = script;

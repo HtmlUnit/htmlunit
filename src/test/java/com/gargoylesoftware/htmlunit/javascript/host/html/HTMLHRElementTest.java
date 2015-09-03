@@ -14,8 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,7 +64,7 @@ public class HTMLHRElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "center" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "center" })
-    @NotYetImplemented({ IE8, IE11 })
+    @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

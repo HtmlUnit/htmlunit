@@ -14,8 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,7 +41,7 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "left", "right", "bottom", "top", "wrong", "" },
             IE = { "left", "right", "bottom", "top", "", "" })
-    @NotYetImplemented({ IE8, IE11 })
+    @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -70,7 +69,7 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "top" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "top" })
-    @NotYetImplemented({ IE8, IE11 })
+    @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

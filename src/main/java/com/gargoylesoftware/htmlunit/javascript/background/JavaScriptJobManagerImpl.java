@@ -74,7 +74,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      *
      * @param window the window associated with the new job manager
      */
-    public JavaScriptJobManagerImpl(final WebWindow window) {
+    JavaScriptJobManagerImpl(final WebWindow window) {
         window_ = new WeakReference<>(window);
     }
 

@@ -26,7 +26,7 @@ final class JavascriptXMLHttpRequestJob extends BasicJavaScriptJob {
     private final ContextFactory contextFactory_;
     private final ContextAction action_;
 
-    public JavascriptXMLHttpRequestJob(final ContextFactory contextFactory, final ContextAction action) {
+    JavascriptXMLHttpRequestJob(final ContextFactory contextFactory, final ContextAction action) {
         super();
         contextFactory_ = contextFactory;
         action_ = action;

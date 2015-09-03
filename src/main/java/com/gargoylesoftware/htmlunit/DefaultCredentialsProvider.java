@@ -181,7 +181,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     private static class AuthScopeProxy implements Serializable {
         private AuthScope authScope_;
-        public AuthScopeProxy(final AuthScope authScope) {
+        AuthScopeProxy(final AuthScope authScope) {
             authScope_ = authScope;
         }
         public AuthScope getAuthScope() {
@@ -217,7 +217,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         private String username_;
         private String password_;
 
-        public UsernamePasswordCredentialsFactory(final String username, final String password) {
+        UsernamePasswordCredentialsFactory(final String username, final String password) {
             username_ = username;
             password_ = password;
         }
@@ -242,7 +242,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         private String workstation_;
         private String domain_;
 
-        public NTCredentialsFactory(final String username, final String password, final String workstation,
+        NTCredentialsFactory(final String username, final String password, final String workstation,
                 final String domain) {
             username_ = username;
             password_ = password;

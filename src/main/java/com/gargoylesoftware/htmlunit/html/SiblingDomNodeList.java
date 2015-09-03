@@ -30,7 +30,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
 
     private DomNode parent_;
 
-    public SiblingDomNodeList(final DomNode parent) {
+    SiblingDomNodeList(final DomNode parent) {
         parent_ = parent;
     }
 
@@ -98,7 +98,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
         private DomNode next_;
         private int nextIndex_;
 
-        public SiblingListIterator(final int index) {
+        SiblingListIterator(final int index) {
             next_ = parent_.getFirstChild();
             nextIndex_ = 0;
             for (int i = 0; i < index; i++) {

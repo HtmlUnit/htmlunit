@@ -53,7 +53,7 @@ final class DownloadBehaviorJob extends BasicJavaScriptJob {
      * @param callback the callback function to call
      * @param client the client
      */
-    public DownloadBehaviorJob(final URL url, final Function callback, final WebClient client) {
+    DownloadBehaviorJob(final URL url, final Function callback, final WebClient client) {
         url_ = url;
         callback_ = callback;
         client_ = client;

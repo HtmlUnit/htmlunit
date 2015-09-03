@@ -140,7 +140,7 @@ class MiniServer extends Thread {
         mockWebConnection.setResponse(url, DROP_CONNECTION);
     }
 
-    public MiniServer(final int port, final MockWebConnection mockWebConnection) {
+    MiniServer(final int port, final MockWebConnection mockWebConnection) {
         port_ = port;
         mockWebConnection_ = mockWebConnection;
         setDaemon(true);

@@ -15,8 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import java.util.Arrays;
 
@@ -79,7 +78,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
     // manual test shows, that this is wrong.
     // for Chrome selenium shows only "sUp,dUp," but again
     // manual test are showing something different
-    @BuggyWebDriver({ CHROME, FF31, FF38 })
+    @BuggyWebDriver({ CHROME, FF })
     public void onMouse() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

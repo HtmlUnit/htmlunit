@@ -310,7 +310,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "false", "false", "true" })
-    @BuggyWebDriver({ CHROME, IE8, IE11 })
+    @BuggyWebDriver({ CHROME, IE })
     public void closed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

@@ -49,7 +49,7 @@ abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
      * @param label the label for the job
      * @param window the window to which the job belongs
      */
-    public JavaScriptExecutionJob(final int initialDelay, final Integer period, final String label,
+    JavaScriptExecutionJob(final int initialDelay, final Integer period, final String label,
         final WebWindow window) {
         super(initialDelay, period);
         label_ = label;
