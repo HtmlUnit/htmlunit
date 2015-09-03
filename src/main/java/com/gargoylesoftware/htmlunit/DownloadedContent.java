@@ -40,7 +40,7 @@ public interface DownloadedContent extends Serializable {
     class InMemory implements DownloadedContent {
         private final byte[] bytes_;
 
-        public InMemory(final byte[] byteArray) {
+        InMemory(final byte[] byteArray) {
             if (byteArray == null) {
                 bytes_ = ArrayUtils.EMPTY_BYTE_ARRAY;
             }
@@ -76,7 +76,7 @@ public interface DownloadedContent extends Serializable {
          * @param file the file
          * @param temporary if true, the file will be deleted when cleanUp() is called.
          */
-        public OnFile(final File file, final boolean temporary) {
+        OnFile(final File file, final boolean temporary) {
             file_ = file;
             temporary_ = temporary;
         }

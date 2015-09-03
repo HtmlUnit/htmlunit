@@ -449,7 +449,7 @@ public class HTMLCollection extends AbstractList {
 class HTMLSubCollection extends HTMLCollection {
     private final HTMLCollection mainCollection_;
 
-    public HTMLSubCollection(final HTMLCollection mainCollection, final String subDescription) {
+    HTMLSubCollection(final HTMLCollection mainCollection, final String subDescription) {
         super(mainCollection.getDomNodeOrDie(), false, mainCollection.toString() + subDescription);
         mainCollection_ = mainCollection;
     }

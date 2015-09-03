@@ -663,7 +663,7 @@ public class WebClientTest extends SimpleWebTestCase {
          * Creates an instance.
          * @param list the list that will contain the data
          */
-        public CollectingPageCreator(final List<Page> list) {
+        CollectingPageCreator(final List<Page> list) {
             collectedPages_ = list;
         }
 

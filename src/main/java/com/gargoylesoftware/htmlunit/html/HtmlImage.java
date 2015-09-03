@@ -543,7 +543,7 @@ public class HtmlImage extends HtmlElement {
 
         private final ImageReader imageReader_;
 
-        public ImageData(final ImageReader imageReader) {
+        ImageData(final ImageReader imageReader) {
             imageReader_ = imageReader;
         }
 

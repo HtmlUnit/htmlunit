@@ -47,7 +47,7 @@ public class RegExpJsToJavaConverter {
          *
          * @param input the Javascript RegExp
          */
-        public Tape(final String input) {
+        Tape(final String input) {
             currentPos_ = 0;
             tape_ = new StringBuilder(input);
         }

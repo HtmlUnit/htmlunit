@@ -2330,7 +2330,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 class HTMLCollectionFrames extends HTMLCollection {
     private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames.class);
 
-    public HTMLCollectionFrames(final HtmlPage page) {
+    HTMLCollectionFrames(final HtmlPage page) {
         super(page, false, "Window.frames");
     }
 

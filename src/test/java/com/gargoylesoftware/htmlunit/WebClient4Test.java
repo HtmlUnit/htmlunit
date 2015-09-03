@@ -317,7 +317,6 @@ public class WebClient4Test extends WebServerTestCase {
     }
 
     /**
-     * .
      * @throws Exception if an error occurs
      */
     @Test

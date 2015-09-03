@@ -163,7 +163,7 @@ public final class XmlUtil {
         private Reader reader_;
         private boolean wasBlank_ = true;
 
-        public TrackBlankContentReader(final Reader characterStream) {
+        TrackBlankContentReader(final Reader characterStream) {
             reader_ = characterStream;
         }
 

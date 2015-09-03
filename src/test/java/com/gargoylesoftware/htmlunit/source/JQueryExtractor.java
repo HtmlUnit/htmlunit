@@ -322,7 +322,7 @@ public final class JQueryExtractor {
         private final String testName_;
         private final String testResult_;
 
-        public Expectation(final int line, final String string) {
+        Expectation(final int line, final String string) {
             line_ = line;
             final Matcher matcher = pattern_.matcher(string);
             if (!matcher.matches()) {
@@ -354,7 +354,7 @@ public final class JQueryExtractor {
         private final List<Integer> lines_ = new ArrayList<>();
         private final String name_;
 
-        public Test(final String name) {
+        Test(final String name) {
             name_ = name;
         }
 

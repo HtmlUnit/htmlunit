@@ -348,7 +348,7 @@ public class HtmlTable extends HtmlElement {
         private TableRowGroup currentGroup_;
 
         /** Creates a new instance. */
-        public RowIterator() {
+        RowIterator() {
             setNextRow(getFirstChild());
         }
 
