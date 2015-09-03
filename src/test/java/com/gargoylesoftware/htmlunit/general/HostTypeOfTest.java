@@ -7404,7 +7404,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "undefined",
             CHROME = "function")
     public void appBannerPromptResult() throws Exception {
         test("AppBannerPromptResult");
@@ -7414,7 +7414,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "undefined",
             CHROME = "function")
     public void serviceWorkerMessageEvent() throws Exception {
         test("ServiceWorkerMessageEvent");
