@@ -455,7 +455,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "accessKey,click(),contentEditable,dir,draggable,hidden,innerText,isContentEditable,lang,onabort,"
+    @Alerts(DEFAULT = "accessKey,blur(),click(),contentEditable,dataset,dir,draggable,focus(),hidden,"
+                + "innerText,isContentEditable,lang,onabort,"
                 + "onautocomplete,onautocompleteerror,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,"
                 + "onclose,oncontextmenu,oncuechange,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
                 + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,"
@@ -463,7 +464,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,"
                 + "onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,outerText,"
-                + "spellcheck,tabIndex,title,translate,"
+                + "spellcheck,style,tabIndex,title,translate,"
                 + "webkitdropzone",
             FF31 = "accessKey,accessKeyLabel,blur(),className,click(),contentEditable,contextMenu,dataset,dir,"
                 + "draggable,focus(),hidden,isContentEditable,itemId,itemProp,itemRef,itemScope,itemType,itemValue,"
@@ -589,12 +590,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
+    @Alerts(CHROME = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "captureEvents(),chrome,clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),"
-                + "console,createXmlDocument(),crypto,CSS,defaultStatus,defaultstatus,devicePixelRatio,"
+                + "console,createXmlDocument(),crypto,defaultStatus,defaultstatus,devicePixelRatio,"
                 + "dispatchEvent(),document,external,fetch(),find(),focus(),frameElement,frames,getComputedStyle(),"
                 + "getMatchedCSSRules(),getSelection(),history,ieMethods,indexedDB,innerHeight,innerWidth,length,"
                 + "localStorage,location,locationbar,matchMedia(),menubar,moveBy(),moveTo(),name,navigator,onabort,"
+                + "onanimationend,onanimationiteration,onanimationstart,"
                 + "onautocomplete,onautocompleteerror,onbeforeunload,onblur,oncancel,oncanplay,oncanplaythrough,"
                 + "onchange,onclick,onclose,oncontextmenu,oncuechange,ondblclick,ondevicemotion,ondeviceorientation,"
                 + "ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,"
@@ -1749,7 +1751,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "charset,crossOrigin,disabled,href,hreflang,import,media,rel,rev,sheet,sizes,target,type",
+    @Alerts(DEFAULT = "charset,crossOrigin,disabled,href,hreflang,import,integrity,"
+                            + "media,rel,rev,sheet,sizes,target,type",
             FF31 = "charset,crossOrigin,disabled,href,hreflang,media,rel,relList,rev,sheet,sizes,target,type",
             FF38 = "charset,crossOrigin,disabled,href,hreflang,media,rel,relList,rev,sheet,sizes,target,type",
             IE11 = "charset,href,hreflang,media,rel,rev,sheet,target,type",
@@ -2177,6 +2180,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "async,charset,crossOrigin,defer,event,htmlFor,src,text,type",
+            CHROME = "async,charset,crossOrigin,defer,event,htmlFor,integrity,src,text,type",
             IE11 = "async,charset,defer,event,htmlFor,src,text,type",
             IE8 = "charset,defer,event,htmlFor,onerror,src,text,type")
     @NotYetImplemented
@@ -2443,10 +2447,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "autofocus,checkValidity(),cols,defaultValue,dirName,disabled,form,labels,maxLength,minLength,"
-                + "name,placeholder,readOnly,reportValidity(),required,rows,select(),selectionDirection,"
-                + "selectionEnd,selectionStart,setCustomValidity(),setRangeText(),setSelectionRange(),textLength,"
-                + "type,validationMessage,validity,value,willValidate,"
+    @Alerts(CHROME = "autocapitalize,autofocus,checkValidity(),cols,defaultValue,dirName,disabled,form,labels,"
+                + "maxLength,minLength,name,placeholder,readOnly,reportValidity(),required,rows,select(),"
+                + "selectionDirection,selectionEnd,selectionStart,setCustomValidity(),setRangeText(),"
+                + "setSelectionRange(),textLength,type,validationMessage,validity,value,willValidate,"
                 + "wrap",
             FF31 = "autofocus,checkValidity(),cols,defaultValue,disabled,form,maxLength,name,placeholder,readOnly,"
                 + "required,rows,select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),"
@@ -2581,15 +2585,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+    @Alerts(CHROME = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,muted,NETWORK_EMPTY,"
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,onwebkitkeyadded,"
                 + "onwebkitkeyerror,onwebkitkeymessage,onwebkitneedkey,pause(),paused,play(),playbackRate,played,"
                 + "poster,preload,readyState,seekable,seeking,setMediaKeys(),src,textTracks,videoHeight,videoWidth,"
                 + "volume,webkitAddKey(),webkitAudioDecodedByteCount,webkitCancelKeyRequest(),webkitDecodedFrameCount,"
-                + "webkitDisplayingFullscreen,webkitDroppedFrameCount,webkitEnterFullScreen(),"
-                + "webkitEnterFullscreen(),webkitExitFullscreen(),webkitExitFullScreen(),webkitGenerateKeyRequest(),"
+                + "webkitDisplayingFullscreen,webkitDroppedFrameCount,webkitEnterFullscreen(),"
+                + "webkitEnterFullScreen(),webkitExitFullscreen(),webkitExitFullScreen(),webkitGenerateKeyRequest(),"
                 + "webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
                 + "width",
             FF31 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
@@ -2681,7 +2685,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setCustomValidity(),setSelectionRange(),size,src,start,status,step,stepDown(),stepUp(),type,"
                 + "useMap,validationMessage,validity,value,valueAsNumber,vrml,vspace,width,"
                 + "willValidate",
-            CHROME = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
+            CHROME = "accept,align,alt,autocapitalize,autocomplete,autofocus,checked,checkValidity(),"
+                + "defaultChecked,defaultValue,"
                 + "dirName,disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
                 + "incremental,indeterminate,labels,list,max,maxLength,min,minLength,multiple,name,pattern,"
                 + "placeholder,readOnly,reportValidity(),required,select(),selectionDirection,selectionEnd,"
