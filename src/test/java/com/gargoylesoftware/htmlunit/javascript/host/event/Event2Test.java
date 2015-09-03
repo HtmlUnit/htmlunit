@@ -93,8 +93,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "[object Event] change b:true c:false [radio] [-]",
-                "[object MouseEvent] click b:true c:true [radio] [1]" },
+    @Alerts(CHROME = { "[object MouseEvent] click b:true c:true [radio] [1]",
+                "[object Event] change b:true c:false [radio] [-]" },
             FF = { "[object MouseEvent] click b:true c:true [radio] [1]",
                 "[object Event] change b:true c:false [radio] [-]" },
             IE = { "[object Event] change b:true c:false [radio] [-]",
@@ -112,8 +112,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "[object Event] change b:true c:false [checkbox] [-]",
-                "[object MouseEvent] click b:true c:true [checkbox] [1]" },
+    @Alerts(CHROME = { "[object MouseEvent] click b:true c:true [checkbox] [1]",
+                "[object Event] change b:true c:false [checkbox] [-]" },
             FF = { "[object MouseEvent] click b:true c:true [checkbox] [1]",
                 "[object Event] change b:true c:false [checkbox] [-]" },
             IE = { "[object Event] change b:true c:false [checkbox] [-]",
