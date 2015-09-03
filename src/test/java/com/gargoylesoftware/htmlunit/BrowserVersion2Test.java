@@ -128,7 +128,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: image/png,image/*;q=0.8,*/*;q=0.5",
-            CHROME = "Accept: image/webp,*/*;q=0.8",
+            CHROME = "Accept: image/webp,image/*,*/*;q=0.8",
             IE = "Accept: */*",
             IE11 = "Accept: image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5")
     public void acceptHeaderImage() throws Exception {
