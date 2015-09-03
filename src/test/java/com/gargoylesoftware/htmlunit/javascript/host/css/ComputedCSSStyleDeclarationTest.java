@@ -70,7 +70,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(CHROME)
     public void stringProperties() throws Exception {
         final String html
             = "<html><head><body>\n"
