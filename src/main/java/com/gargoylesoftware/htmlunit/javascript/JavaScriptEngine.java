@@ -825,7 +825,7 @@ public class JavaScriptEngine {
     private abstract class HtmlUnitContextAction implements ContextAction {
         private final Scriptable scope_;
         private final InteractivePage page_;
-        public HtmlUnitContextAction(final Scriptable scope, final InteractivePage page) {
+        HtmlUnitContextAction(final Scriptable scope, final InteractivePage page) {
             scope_ = scope;
             page_ = page;
         }

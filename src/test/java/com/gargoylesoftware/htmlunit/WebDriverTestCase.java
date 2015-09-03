@@ -929,7 +929,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
  */
 class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
 
-    public FixedWebDriverHtmlUnitWebElement(final HtmlUnitDriver parent, final DomElement element) {
+    FixedWebDriverHtmlUnitWebElement(final HtmlUnitDriver parent, final DomElement element) {
         super(parent, element);
     }
 

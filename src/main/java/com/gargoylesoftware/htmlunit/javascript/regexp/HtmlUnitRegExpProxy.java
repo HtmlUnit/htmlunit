@@ -395,7 +395,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             jsSource_ = StringUtils.substringBeforeLast(str.substring(1), "/");
             jsFlags_ = StringUtils.substringAfterLast(str, "/");
         }
-        public RegExpData(final String string) {
+        RegExpData(final String string) {
             jsSource_ = string;
             jsFlags_ = "";
         }

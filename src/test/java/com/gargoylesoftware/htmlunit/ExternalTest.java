@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -54,7 +53,6 @@ public class ExternalTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Ignore
     public void pom() throws Exception {
         if (isDifferentWeek()) {
             final List<String> lines = FileUtils.readLines(new File("pom.xml"));
