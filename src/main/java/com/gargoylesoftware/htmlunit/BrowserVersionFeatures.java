@@ -49,12 +49,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     APPLET_INLINE_BLOCK,
 
-    /**
-     * Is the default display style of Audio is 'inline'.
-     */
-    @BrowserFeature(@WebBrowser(CHROME))
-    AUDIO_INLINE,
-
     /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     BUTTON_EMPTY_TYPE_BUTTON,

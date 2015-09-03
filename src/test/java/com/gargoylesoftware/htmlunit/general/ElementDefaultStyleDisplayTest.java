@@ -147,7 +147,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "none",
-            CHROME = "inline",
             IE8 = "inline")
     public void audio() throws Exception {
         loadPageWithAlerts2(test("audio"));
