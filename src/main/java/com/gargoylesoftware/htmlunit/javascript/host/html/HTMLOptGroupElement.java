@@ -65,8 +65,8 @@ public class HTMLOptGroupElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "label" property.
-     * @return the value of the "label" property
+     * Returns the value of the {@code label} property.
+     * @return the value of the {@code label} property
      */
     @JsxGetter
     public String getLabel() {
@@ -78,7 +78,7 @@ public class HTMLOptGroupElement extends HTMLElement {
     }
 
     /**
-     * Updates the value of the "label" property.
+     * Updates the value of the {@code label} property.
      * @param newLabel the new value
      */
     @JsxSetter

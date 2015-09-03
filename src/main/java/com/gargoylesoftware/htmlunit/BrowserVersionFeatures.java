@@ -597,10 +597,9 @@ public enum BrowserVersionFeatures {
     HTMLLIST_LIMIT_COMPACT_TO_BOOLEAN,
 
     /**
-     * Set this property if the browser does NOT
-     * support the disabling of an individual option group.
+     * Set this property if the browser does NOT support the disabling of an individual option group.
      */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLOPTIONGROUP_NO_DISABLED,
 
     /** */
