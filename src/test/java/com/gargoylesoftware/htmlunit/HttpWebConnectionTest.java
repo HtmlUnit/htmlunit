@@ -361,7 +361,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Host", IE = { })
+    @Alerts(DEFAULT = "Host",
+        IE = { })
     public void hostHeaderFirst() throws Exception {
         final Logger logger = Logger.getLogger("org.apache.http.headers");
         final Level oldLevel = logger.getLevel();
