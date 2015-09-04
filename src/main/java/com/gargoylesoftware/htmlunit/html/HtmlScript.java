@@ -380,6 +380,7 @@ public class HtmlScript extends HtmlElement {
 
         final String src = getSrcAttribute();
         if (src.equals(SLASH_SLASH_COLON)) {
+            executeEventIfBrowserHasFeature(Event.TYPE_ERROR, EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
             return;
         }
 

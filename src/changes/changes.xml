@@ -9,6 +9,9 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="asashour">
+                Correctly handle script's wehn src attribute is only "http://".
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: process scripts with 'application/javascript' type (add IE11).
             </action>
             <action type="fix" dev="rbri" issue="1716">

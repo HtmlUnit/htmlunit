@@ -281,7 +281,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONCLICK_USES_POINTEREVENT,
 
     /** Triggers "onerror" if external loading of an external javascript failed. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_ONERROR_EXTERNAL_JAVASCRIPT,
 
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
