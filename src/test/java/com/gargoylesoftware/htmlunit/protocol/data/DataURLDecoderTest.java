@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.data;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder.decodeDataURL;
 
 import org.junit.Test;
@@ -22,7 +21,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -30,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class DataURLDecoderTest extends SimpleWebTestCase {
@@ -62,10 +61,9 @@ public class DataURLDecoderTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts(FF = { "one", "two", "three", "four", "five's" },
+    @Alerts(DEFAULT = { "one", "two", "three", "four", "five's" },
             IE = { "undefined", "undefined", "undefined", "undefined", "undefined" })
-    @NotYetImplemented(CHROME)
-    public void testDataProtocol() throws Exception {
+    public void dataProtocol() throws Exception {
         final String html = "<html><head><title>foo</title>"
             + "<script>"
             + "var d1, d2, d3, d4, d5;\n"
