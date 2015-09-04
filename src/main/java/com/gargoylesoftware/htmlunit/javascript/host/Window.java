@@ -1179,7 +1179,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * been set).
      * @return the onhashchange property
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter
     public Object getOnhashchange() {
         return getEventListenersContainer().getEventHandlerProp(Event.TYPE_HASH_CHANGE);
     }
@@ -1188,7 +1188,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Sets the value of the onhashchange event handler.
      * @param newHandler the new handler
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setOnhashchange(final Object newHandler) {
         getEventListenersContainer().setEventHandlerProp(Event.TYPE_HASH_CHANGE, newHandler);
     }

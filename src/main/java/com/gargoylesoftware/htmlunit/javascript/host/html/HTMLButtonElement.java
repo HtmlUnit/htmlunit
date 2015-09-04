@@ -20,14 +20,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -95,15 +93,6 @@ public class HTMLButtonElement extends FormField {
             return "button";
         }
         return "submit";
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public void click() throws IOException {
-        super.click();
     }
 
     /**

@@ -44,19 +44,17 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConsole;
+import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
-import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -477,7 +475,7 @@ public class WindowTest extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage("http://foo");
-        ((HtmlDivision) page.getHtmlElementById("d")).click();
+        page.getHtmlElementById("d").click();
         final String[] expected = {"null"};
         assertEquals(expected, actual);
     }
@@ -729,7 +727,7 @@ public class WindowTest extends SimpleWebTestCase {
         assertEquals(1, webClient.getWebWindows().size());
         final WebWindow firstWindow = firstPage.getEnclosingWindow();
 
-        final HtmlPage secondPage = (HtmlPage) ((HtmlAnchor) firstPage.getHtmlElementById("link")).click();
+        final HtmlPage secondPage = firstPage.getHtmlElementById("link").click();
         assertEquals("Second", secondPage.getTitleText());
         assertEquals(2, webClient.getWebWindows().size());
         final WebWindow secondWindow = secondPage.getEnclosingWindow();
@@ -738,7 +736,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(webClient);
-        ((HtmlSubmitInput) secondPage.getHtmlElementById("button")).click();
+        secondPage.getHtmlElementById("button").click();
 
         final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[]{
             new WebWindowEvent(secondWindow, WebWindowEvent.CLOSE, secondPage, null)

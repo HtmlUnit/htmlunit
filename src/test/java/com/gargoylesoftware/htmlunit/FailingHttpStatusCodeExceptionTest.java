@@ -23,7 +23,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -107,7 +106,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
         final WebClient client = getWebClientWithMockWebConnection();
         try {
             final HtmlPage page = loadPageWithAlerts(html);
-            ((HtmlElement) page.getElementById("mySubmit")).click();
+            page.getElementById("mySubmit").click();
         }
         catch (final FailingHttpStatusCodeException e) {
             // expected

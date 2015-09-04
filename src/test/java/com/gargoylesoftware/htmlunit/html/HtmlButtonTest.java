@@ -57,7 +57,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         final String[] expectedAlerts = {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);

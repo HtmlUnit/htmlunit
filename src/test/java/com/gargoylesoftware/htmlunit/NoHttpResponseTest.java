@@ -35,7 +35,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -111,7 +110,7 @@ public class NoHttpResponseTest {
             miniServer.start();
             try {
                 final HtmlPage page = getWebClient().getPage(getDefaultUrl());
-                ((HtmlElement) page.getElementById("loginButton")).click();
+                page.getElementById("loginButton").click();
             }
             finally {
                 miniServer.shutDown();

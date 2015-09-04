@@ -142,7 +142,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         select.setSelectedAttribute("option3", true);
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         assertEquals("url", getDefaultUrl() + "?select1=option3&button=foo", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());

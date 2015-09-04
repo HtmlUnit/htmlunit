@@ -1183,7 +1183,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * Sets the focus on this element.
      */
     public void focus() {
-        final HtmlPage page = (HtmlPage) getPage();
+        final InteractivePage page = (InteractivePage) getPage();
         page.setFocusedElement(this);
         final HTMLElement jsElt = (HTMLElement) getScriptObject();
         jsElt.setActive();
@@ -1193,7 +1193,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * Removes focus from this element.
      */
     public void blur() {
-        ((HtmlPage) getPage()).setFocusedElement(null);
+        ((InteractivePage) getPage()).setFocusedElement(null);
     }
 
     /**

@@ -115,7 +115,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = (HtmlPage) anchor.click();
+        final HtmlPage secondPage = anchor.click();
 
         assertEquals(new String[] {"clicked"}, collectedAlerts);
         assertSame(page, secondPage);

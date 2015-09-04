@@ -1461,26 +1461,10 @@ public class HtmlPage extends InteractivePage {
         if (element != null) {
             element.focus();
             final Page newPage;
-            if (element instanceof HtmlAnchor) {
-                newPage = ((HtmlAnchor) element).click();
-            }
-            else if (element instanceof HtmlArea) {
-                newPage = ((HtmlArea) element).click();
-            }
-            else if (element instanceof HtmlButton) {
-                newPage = ((HtmlButton) element).click();
-            }
-            else if (element instanceof HtmlInput) {
-                newPage = ((HtmlInput) element).click();
-            }
-            else if (element instanceof HtmlLabel) {
-                newPage = ((HtmlLabel) element).click();
-            }
-            else if (element instanceof HtmlLegend) {
-                newPage = ((HtmlLegend) element).click();
-            }
-            else if (element instanceof HtmlTextArea) {
-                newPage = ((HtmlTextArea) element).click();
+            if (element instanceof HtmlAnchor || element instanceof HtmlArea || element instanceof HtmlButton
+                    || element instanceof HtmlInput || element instanceof HtmlLabel || element instanceof HtmlLegend
+                    || element instanceof HtmlTextArea || element instanceof HtmlArea || element instanceof HtmlArea) {
+                newPage = element.click();
             }
             else {
                 newPage = this;

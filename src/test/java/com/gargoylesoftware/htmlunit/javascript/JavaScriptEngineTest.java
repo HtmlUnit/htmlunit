@@ -29,12 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,16 +48,20 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
-import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Tests for the {@link JavaScriptEngine}.
@@ -583,7 +581,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
-        ((HtmlSubmitInput) page.getFormByName("form1").getInputByName("button1")).click();
+        page.getFormByName("form1").getInputByName("button1").click();
 
         final String[] expectedAlerts = {"button1"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -727,11 +725,11 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(0, countingJavaScriptEngine.getCallCount());
 
-        ((HtmlAnchor) page.getHtmlElementById("unqualified")).click();
+        page.getHtmlElementById("unqualified").click();
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(1, countingJavaScriptEngine.getCallCount());
 
-        ((HtmlAnchor) page.getHtmlElementById("qualified")).click();
+        page.getHtmlElementById("qualified").click();
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(2, countingJavaScriptEngine.getCallCount());
 

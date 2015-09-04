@@ -847,7 +847,7 @@ public class Node extends EventTarget {
      * @param element element object that specifies the element to check
      * @return true if the element is contained within this object
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction
     public boolean contains(final Object element) {
         if (!(element instanceof Node)) {
             if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {

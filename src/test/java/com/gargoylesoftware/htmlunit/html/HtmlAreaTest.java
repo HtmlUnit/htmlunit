@@ -73,7 +73,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
         final HtmlArea area = page.getHtmlElementById("third");
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage thirdPage = (HtmlPage) area.click();
+        final HtmlPage thirdPage = area.click();
         assertEquals("third", thirdPage.getTitleText());
     }
 
@@ -89,7 +89,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlArea area = page.getHtmlElementById("second");
 
-        final HtmlPage thirdPage = (HtmlPage) area.click();
+        final HtmlPage thirdPage = area.click();
         assertEquals(new String[] {"foo"}, collectedAlerts);
         assertEquals("first", thirdPage.getTitleText());
     }
@@ -106,7 +106,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlArea area = page.getHtmlElementById("second");
 
-        final HtmlPage thirdPage = (HtmlPage) area.click();
+        final HtmlPage thirdPage = area.click();
         assertEquals(new String[] {"foo"}, collectedAlerts);
         assertEquals("second", thirdPage.getTitleText());
     }

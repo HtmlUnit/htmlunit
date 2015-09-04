@@ -110,7 +110,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         textInput.setValueAttribute("foo");
 
         final HtmlSubmitInput button = form.getInputByName("submitInput1");
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         final List<NameValuePair> expectedParameters = new ArrayList<>();
         expectedParameters.add(new NameValuePair("textInput1", "foo"));
@@ -459,7 +459,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(html);
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getAnchors().get(0);
-        final HtmlPage secondPage = (HtmlPage) anchor.click();
+        final HtmlPage secondPage = anchor.click();
 
         assertEquals(URL_SECOND + "somepage.html", secondPage.getUrl());
     }

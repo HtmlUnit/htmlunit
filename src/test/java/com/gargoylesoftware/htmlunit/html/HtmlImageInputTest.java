@@ -59,16 +59,14 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlImageInput imageInput = form.getInputByName("button");
-        final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
+        final HtmlPage secondPage = imageInput.click(100, 200);
         assertNotNull(secondPage);
 
         final List<NameValuePair> expectedPairs = new ArrayList<>();
         expectedPairs.add(new NameValuePair("button.x", "100"));
         expectedPairs.add(new NameValuePair("button.y", "200"));
 
-        assertEquals(
-            expectedPairs,
-            webConnection.getLastParameters());
+        assertEquals(expectedPairs, webConnection.getLastParameters());
     }
 
     /**
@@ -89,7 +87,7 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlImageInput imageInput = form.getInputByValue("foo");
-        final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
+        final HtmlPage secondPage = imageInput.click(100, 200);
         assertNotNull(secondPage);
 
         final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
@@ -97,8 +95,6 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
             new NameValuePair("y", "200")
         });
 
-        assertEquals(
-            expectedPairs,
-            webConnection.getLastParameters());
+        assertEquals(expectedPairs, webConnection.getLastParameters());
     }
 }

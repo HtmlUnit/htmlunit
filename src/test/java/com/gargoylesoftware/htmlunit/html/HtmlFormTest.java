@@ -339,7 +339,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertEquals("First", firstPage.getTitleText());
         assertEquals("Second", secondPage.getTitleText());
 
@@ -460,7 +460,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertSame(firstPage, secondPage);
     }
 
@@ -504,7 +504,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlResetInput button = (HtmlResetInput) firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertSame(firstPage, secondPage);
 
         final String[] expectedAlerts = {"clicked", "reset"};
@@ -541,10 +541,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(secondHtml);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link1");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link1");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        final HtmlPage secondPage = (HtmlPage) anchor.click();
+        final HtmlPage secondPage = anchor.click();
         assertEquals("Second", secondPage.getTitleText());
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -909,8 +909,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlPage secondPage =
-            (HtmlPage) page.getHtmlElementById("clickMe").click();
+        final HtmlPage secondPage = page.getHtmlElementById("clickMe").click();
 
         assertNotNull(secondPage);
         Assert.assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
@@ -930,7 +929,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<input type='submit' id='mySubmit'>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlPage secondPage = (HtmlPage) page.getHtmlElementById("mySubmit").click();
+        final HtmlPage secondPage = page.getHtmlElementById("mySubmit").click();
 
         assertNotNull(secondPage);
         assertEquals(page.getUrl() + "action.html?select=second+value", secondPage.getUrl());

@@ -586,7 +586,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
         });
 
         final HtmlPage page = client_.getPage(URL_FIRST);
-        ((HtmlElement) page.getElementById("it")).click();
+        page.getElementById("it").click();
         Thread.sleep(500);
         assertThat(scriptExceptions, is(Collections.<ScriptException>emptyList()));
     }
