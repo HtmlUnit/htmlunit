@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
-            <action type="fix" dev="rbri" issue="#1716">
+            <action type="fix" dev="rbri" issue="1716">
                 JavaScript: Iterating through the .attributes property modifies outerHTML result.
             </action>
             <action type="fix" dev="asashour">
@@ -99,7 +99,7 @@
                 Support for text property removed from HTMLTimeElement.
             </action>
             <action type="fix" dev="rbri" issue="1495">
-                Fix ClassCastException when triggering a click event for svg elements.
+                Fix ClassCastException when triggering a click event for SVG elements.
             </action>
             <action type="fix" dev="rbri" issue="1708">
                 Correct handling of file URL's containing encoded character.

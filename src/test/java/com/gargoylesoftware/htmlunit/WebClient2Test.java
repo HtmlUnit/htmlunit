@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
 import static org.junit.Assert.assertNotNull;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -46,21 +46,12 @@ public class WebClient2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "http://first/?param=\u00A3",
-            FF = "http://first/?param=%A3")
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "http://first/?param=%A3",
+            IE = "http://first/?param=\u00A3")
     public void encodeURL() throws Exception {
         final String html = "<body onload='alert(window.location.href)'></body>";
-        final WebClient webClient = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(html);
-
-        webClient.setWebConnection(webConnection);
-        webClient.getPage("http://first/?param=\u00A3");
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts(html, new URL("http://first/?param=\u00A3"), -1);
     }
 
     /**
