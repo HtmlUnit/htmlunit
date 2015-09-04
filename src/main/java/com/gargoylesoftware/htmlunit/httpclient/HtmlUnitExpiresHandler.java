@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_START_DATE_1970;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.http.client.utils.DateUtils;
@@ -50,9 +51,10 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
         "EEE dd MMM yy HH mm ss z ",
         "EEE dd MMM yyyy HH mm ss z ",
         "EEE dd MM yy HH mm ss z ",
-        "EEE dd MM yyyy HH mm ss z ",
+        "EEE dd MM yyyy HH mm ss z "
     };
-    private static final String[] EXTENDED_DATE_PATTERNS = new String[] {
+
+    private static final String[] EXTENDED_DATE_PATTERNS_1 = new String[] {
         "EEE dd MMM yy HH mm ss zzz",
         "EEE dd MMM yyyy HH mm ss zzz",
         "EEE MMM d HH mm ss yyyy",
@@ -60,8 +62,20 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
         "EEE dd MMM yyyy HH mm ss z ",
         "EEE dd MM yy HH mm ss z ",
         "EEE dd MM yyyy HH mm ss z ",
-        "d/M/yyyy",
+        "d/M/yyyy"
     };
+
+    private static final String[] EXTENDED_DATE_PATTERNS_2 = new String[] {
+            "EEE dd MMM yy HH mm ss zzz",
+            "EEE dd MMM yyyy HH mm ss zzz",
+            "EEE MMM d HH mm ss yyyy",
+            "EEE dd MMM yy HH mm ss z ",
+            "EEE dd MMM yyyy HH mm ss z ",
+            "EEE dd MM yy HH mm ss z ",
+            "EEE dd MM yyyy HH mm ss z ",
+            "EEE dd MMM yy HH MM ss z",
+            "MMM dd yy HH mm ss",
+        };
 
     private final BrowserVersion browserVersion_;
 
@@ -85,8 +99,18 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
                 startDate = HtmlUnitBrowserCompatCookieSpec.DATE_1_1_1970;
             }
 
-            if (browserVersion_.hasFeature(HTTP_COOKIE_EXTENDED_DATE_PATTERNS)) {
-                datePatterns = EXTENDED_DATE_PATTERNS;
+            if (browserVersion_.hasFeature(HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1)) {
+                datePatterns = EXTENDED_DATE_PATTERNS_1;
+            }
+
+            if (browserVersion_.hasFeature(HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2)) {
+                final Calendar calendar = Calendar.getInstance();
+                calendar.setTimeZone(DateUtils.GMT);
+                calendar.set(1969, Calendar.JANUARY, 1, 0, 0, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                startDate = calendar.getTime();
+
+                datePatterns = EXTENDED_DATE_PATTERNS_2;
             }
         }
 

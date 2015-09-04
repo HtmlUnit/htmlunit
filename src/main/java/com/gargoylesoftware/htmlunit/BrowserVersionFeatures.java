@@ -684,7 +684,11 @@ public enum BrowserVersionFeatures {
 
     /** Additionally support dates in format "d/M/yyyy". */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8) })
-    HTTP_COOKIE_EXTENDED_DATE_PATTERNS,
+    HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1,
+
+    /** Dates format pattern 2. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2,
 
     /** Indicates that the pas is extracted from the location (IE11).
      * Sample: from the location /foo/boo only /foo is used.

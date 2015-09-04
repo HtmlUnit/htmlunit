@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                Cookies: fix handling of two digits expiry date in Chrome.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add .placeholder property (HTMLInputElement and HTMLTextAreaElement).
             </action>

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +28,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
@@ -264,7 +261,6 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "first=1; second=2; third=3",
             CHROME = "fourth=4; third=3",
             IE11 = "first=1; fourth=4; second=2; third=3")
-    @NotYetImplemented(CHROME)
     public void setCookieExpired_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Dec-1-94 16:00:00"));
@@ -284,7 +280,6 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
             CHROME = "cookie1=1",
             IE11 = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
-    @NotYetImplemented(CHROME)
     public void setCookieExpires_twoDigits() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun 01-Dec-68 16:00:00 GMT"));
@@ -307,7 +302,6 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
             CHROME = "cookie1=1",
             IE11 = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
-    @NotYetImplemented(CHROME)
     public void setCookieExpires_twoDigits2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun,01 Dec 68 16:00:00 GMT"));
