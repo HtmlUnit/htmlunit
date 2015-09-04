@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for a ProcessingInstruction.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = DomProcessingInstruction.class,

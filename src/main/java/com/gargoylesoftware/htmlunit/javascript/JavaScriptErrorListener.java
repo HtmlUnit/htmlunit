@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 /**
  * A listener for JavaScript exceptions.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public interface JavaScriptErrorListener {

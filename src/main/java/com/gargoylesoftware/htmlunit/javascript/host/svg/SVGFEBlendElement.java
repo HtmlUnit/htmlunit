@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeBlend;
 /**
  * A JavaScript object for SVGFEBlendElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeBlend.class,

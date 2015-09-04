@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgPattern;
 /**
  * A JavaScript object for SVGPatternElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgPattern.class,

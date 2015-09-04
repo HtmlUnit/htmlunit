@@ -72,7 +72,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  *
  * @see com.gargoylesoftware.htmlunit.javascript.host.Window#getComputedStyle(Element, String)
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill

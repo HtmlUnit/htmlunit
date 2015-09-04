@@ -21,7 +21,6 @@ import java.net.URL;
  * This refresh handler performs an immediate refresh if the refresh delay is
  * less or equal to the configured time and otherwise ignores totally the refresh instruction.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class NiceRefreshHandler extends ImmediateRefreshHandler {

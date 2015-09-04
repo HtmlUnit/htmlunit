@@ -32,7 +32,6 @@ import org.apache.http.client.CredentialsProvider;
  * credentials for both web servers and proxies. Supports Digest
  * authentication, and Basic HTTP authentication.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Vikram Shitole
  * @author Marc Guillemot

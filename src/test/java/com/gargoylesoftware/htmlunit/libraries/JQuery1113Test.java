@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * All test method inside this class are generated. Please have a look
  * at {@link com.gargoylesoftware.htmlunit.source.JQueryExtractor}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot

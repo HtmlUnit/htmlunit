@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 /**
  * Tests for {@link AbstractPage}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

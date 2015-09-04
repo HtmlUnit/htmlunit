@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * are directly useful for the user. To easily have a testable state, these calls
  * are performed synchronously.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class NicelyResynchronizingAjaxController extends AjaxController {

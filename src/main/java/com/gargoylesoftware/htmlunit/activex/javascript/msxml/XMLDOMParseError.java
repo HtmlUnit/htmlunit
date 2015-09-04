@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * position, and a text description.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms757019.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

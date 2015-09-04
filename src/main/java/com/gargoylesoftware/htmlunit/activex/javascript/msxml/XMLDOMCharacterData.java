@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * Provides text manipulation methods that are used by several objects.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms767515.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Frank Danek

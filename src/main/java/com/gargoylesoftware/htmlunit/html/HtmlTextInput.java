@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
 /**
  * Wrapper for the HTML element "input" with type="text".
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

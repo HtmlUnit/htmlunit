@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for {@code CSSConditionRule}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

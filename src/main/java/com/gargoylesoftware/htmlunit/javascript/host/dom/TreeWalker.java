@@ -35,7 +35,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
  * DOM-Level-2-Traversal-Range</a>
- * @version $Revision$
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @author Frank Danek
  * @author Ahmed Ashour

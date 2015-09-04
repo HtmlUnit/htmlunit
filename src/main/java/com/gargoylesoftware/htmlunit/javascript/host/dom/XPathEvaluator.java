@@ -32,7 +32,6 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 /**
  * A JavaScript object for {@code XPathEvaluator}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Chuck Dumont
  * @author Ronald Brill

@@ -29,7 +29,6 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 /**
  * A cookie. This class is immutable.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Nicolas Belisle
  * @author Ahmed Ashour

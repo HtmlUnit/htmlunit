@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlObject}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

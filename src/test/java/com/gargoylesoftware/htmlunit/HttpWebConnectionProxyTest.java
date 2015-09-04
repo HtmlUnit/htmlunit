@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 /**
  * Tests methods in {@link HttpWebConnection}.
  *
- * @version $Revision$
  * @author John J Murdoch
  * @author Ronald Brill
  */

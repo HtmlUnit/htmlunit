@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link CSSImportRule}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)

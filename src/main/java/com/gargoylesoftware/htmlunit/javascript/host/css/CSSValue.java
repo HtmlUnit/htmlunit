@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * A JavaScript object for a CSSValue.
  *
  * @see org.w3c.dom.css.CSSValue
- * @version $Revision$
  * @author Marc Guillemot
  */
 @JsxClass(browsers = @WebBrowser(FF))

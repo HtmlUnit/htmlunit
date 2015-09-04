@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 /**
  * The JavaScript object "HTMLBlockElement".
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

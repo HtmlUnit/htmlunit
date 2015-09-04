@@ -43,7 +43,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object that represents an "HTMLScriptElement".
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour

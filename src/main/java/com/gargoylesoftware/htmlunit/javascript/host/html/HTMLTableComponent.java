@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 /**
  * Contains attributes common to various table components.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 @JsxClass(isJSObject = false, isDefinedInStandardsMode = false)

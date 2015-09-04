@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 /**
  * Tests for {@link WebResponseData}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */

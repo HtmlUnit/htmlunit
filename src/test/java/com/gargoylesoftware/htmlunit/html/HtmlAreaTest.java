@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for {@link HtmlArea}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Ahmed Ashour

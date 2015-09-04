@@ -72,7 +72,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 /**
  * A JavaScript object for DOMImplementation.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill

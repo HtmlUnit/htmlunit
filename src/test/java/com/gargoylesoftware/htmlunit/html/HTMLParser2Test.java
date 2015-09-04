@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Test class for {@link HTMLParser}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot

@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlFieldSet}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Frank Danek

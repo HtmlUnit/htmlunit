@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 /**
  * This is a Java object that is used to test the ActiveX binding to Java objects.
  *
- * @version $Revision$
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Ronald Brill
  */

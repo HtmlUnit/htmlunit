@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.util.URLCreator.URLCreatorGAE;
 /**
  * Tests for {@link URLCreator}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class UrlCreatorTest {

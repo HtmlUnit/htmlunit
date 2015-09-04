@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "picture".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class HtmlPicture extends HtmlElement {

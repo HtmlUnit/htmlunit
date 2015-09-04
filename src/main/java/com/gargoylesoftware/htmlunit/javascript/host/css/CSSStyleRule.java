@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 /**
  * A JavaScript object for a CSSStyleRule.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

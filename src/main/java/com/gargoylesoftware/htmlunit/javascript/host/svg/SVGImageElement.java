@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgImage;
 /**
  * A JavaScript object for SVGImageElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgImage.class,

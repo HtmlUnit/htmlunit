@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 /**
  * Tests for {@link HtmlImage}.
  *
- * @version $Revision$
  * @author Knut Johannes Dahle
  * @author Ahmed Ashour
  * @author Marc Guillemot

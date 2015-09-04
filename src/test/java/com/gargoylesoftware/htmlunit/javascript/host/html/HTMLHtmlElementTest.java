@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 /**
  * Unit tests for {@link HTMLHtmlElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Frank Danek

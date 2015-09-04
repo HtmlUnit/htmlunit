@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLBRElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill

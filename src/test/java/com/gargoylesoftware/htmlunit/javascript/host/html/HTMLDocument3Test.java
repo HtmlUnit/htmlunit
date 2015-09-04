@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link HTMLDocument}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill

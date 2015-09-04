@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for {@code XDomainRequest}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(value = IE, maxVersion = 8))

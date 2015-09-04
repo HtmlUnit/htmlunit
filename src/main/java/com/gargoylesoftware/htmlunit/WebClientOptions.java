@@ -21,7 +21,6 @@ import java.security.KeyStore;
 /**
  * Represents options of a {@link WebClient}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

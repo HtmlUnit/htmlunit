@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for NativeError.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek

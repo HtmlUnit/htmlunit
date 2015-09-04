@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * Tests for {@link ClassConfiguration}.
  *
- * @version $Revision$
  * @author Chris Erskine
  * @author Ahmed Ashour
  */

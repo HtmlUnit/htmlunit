@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link XMLSerializer}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Darrell DeBoer
  * @author Frank Danek

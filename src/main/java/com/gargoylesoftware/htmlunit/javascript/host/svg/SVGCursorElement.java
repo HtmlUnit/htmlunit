@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgCursor;
 /**
  * A JavaScript object for SVGCursorElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgCursor.class,

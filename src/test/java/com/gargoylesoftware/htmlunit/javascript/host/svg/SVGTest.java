@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Very simple test for SVG "support".
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill

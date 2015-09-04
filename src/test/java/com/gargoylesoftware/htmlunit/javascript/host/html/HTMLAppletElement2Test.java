@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link HTMLAppletElement}.
- * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
  */

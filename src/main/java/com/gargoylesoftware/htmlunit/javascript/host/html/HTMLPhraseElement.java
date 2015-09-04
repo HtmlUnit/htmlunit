@@ -57,7 +57,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 /**
  * The JavaScript object "HTMLPhraseElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill

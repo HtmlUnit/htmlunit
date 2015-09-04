@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * A fake {@link WebConnection} designed to mock out the actual HTTP connections.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author Marc Guillemot

@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * but case-sensitive when used with a {@link com.gargoylesoftware.htmlunit.html.DomElement}.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms763824.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot

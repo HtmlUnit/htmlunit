@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlScript}, but as WebDriverTestCase.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour

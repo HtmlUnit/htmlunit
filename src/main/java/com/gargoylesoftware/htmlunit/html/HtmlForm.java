@@ -49,7 +49,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 /**
  * Wrapper for the HTML element "form".
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Brad Clarke

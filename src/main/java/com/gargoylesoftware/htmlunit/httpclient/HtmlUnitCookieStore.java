@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.CookieManager;
  * Implementation of {@link CookieStore} like {@link org.apache.http.impl.client.BasicCookieStore}
  * BUT using our own {@link CookieManager} as back end.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

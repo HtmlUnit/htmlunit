@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgLine;
 /**
  * A JavaScript object for SVGLineElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgLine.class,

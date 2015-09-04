@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for {@link DomText}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Rodney Gitzel

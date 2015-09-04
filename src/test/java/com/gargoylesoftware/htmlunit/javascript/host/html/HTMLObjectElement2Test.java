@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Unit tests for {@link HTMLObjectElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill

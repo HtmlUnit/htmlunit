@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 /**
  * Tests for {@link DomNode}.
  *
- * @version $Revision$
  * @author Chris Erskine
  * @author Ahmed Ashour
  */

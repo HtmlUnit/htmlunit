@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link TreeWalker}.
  *
- * @version $Revision$
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @author Marc Guillemot
  * @author Frank Danek

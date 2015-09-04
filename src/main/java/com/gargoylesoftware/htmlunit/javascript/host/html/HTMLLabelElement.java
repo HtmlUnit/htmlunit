@@ -31,7 +31,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * A JavaScript object for a Label.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

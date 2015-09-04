@@ -20,7 +20,6 @@ import java.util.Map;
 
 /**
  * Utility holding information about association between MIME type and file extensions.
- * @version $Revision$
  * @author Marc Guillemot
  */
 public final class MimeType {

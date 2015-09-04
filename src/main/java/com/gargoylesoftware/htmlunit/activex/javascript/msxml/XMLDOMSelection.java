@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * Represents the list of nodes that match a given XML Path Language (XPath) expression.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms759171.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Frank Danek
  */
 @JsxClass(browsers = @WebBrowser(IE))

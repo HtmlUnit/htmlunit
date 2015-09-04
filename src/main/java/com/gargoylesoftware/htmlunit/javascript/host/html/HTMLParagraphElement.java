@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLParagraphElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill

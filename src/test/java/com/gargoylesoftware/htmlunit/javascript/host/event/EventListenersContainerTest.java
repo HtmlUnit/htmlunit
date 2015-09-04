@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link EventListenersContainer}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

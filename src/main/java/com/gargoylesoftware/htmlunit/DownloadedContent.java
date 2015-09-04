@@ -28,7 +28,6 @@ import org.apache.commons.lang3.ArrayUtils;
 /**
  * Wrapper for content downloaded from a remote server.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

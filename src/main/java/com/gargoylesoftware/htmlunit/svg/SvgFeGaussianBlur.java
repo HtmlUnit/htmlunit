@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 /**
  * Wrapper for the SVG element "feGaussianBlur".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class SvgFeGaussianBlur extends SvgElement {

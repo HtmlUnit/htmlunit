@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link WebAssert}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)

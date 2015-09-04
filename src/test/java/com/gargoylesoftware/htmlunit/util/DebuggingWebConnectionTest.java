@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 /**
  * Tests for {@link DebuggingWebConnection}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class DebuggingWebConnectionTest extends SimpleWebTestCase {

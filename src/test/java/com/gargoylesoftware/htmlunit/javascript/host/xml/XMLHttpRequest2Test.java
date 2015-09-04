@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Additional tests for {@link XMLHttpRequest} using already WebDriverTestCase.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

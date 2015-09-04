@@ -19,7 +19,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Test utility stuff for MSXML tests.
  *
- * @version $Revision$
  * @author Frank Danek
  * @author Ronald Brill
  */

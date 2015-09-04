@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * An element that is returned for an HTML tag that is not supported by this framework.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

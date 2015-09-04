@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link XMLDOMDocument}.
  * @see com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Chuck Dumont

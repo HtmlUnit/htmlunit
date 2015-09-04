@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Test for {@link External}.
  *
- * @version $Revision$
  * @author Peter Faller
  * @author Ahmed Ashour
  * @author Ronald Brill

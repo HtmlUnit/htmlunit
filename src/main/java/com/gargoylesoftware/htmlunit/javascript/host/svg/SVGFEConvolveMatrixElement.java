@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeConvolveMatrix;
 /**
  * A JavaScript object for SVGFEConvolveMatrixElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeConvolveMatrix.class,

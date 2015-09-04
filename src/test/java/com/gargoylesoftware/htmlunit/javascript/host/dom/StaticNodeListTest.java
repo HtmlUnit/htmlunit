@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link StaticNodeList}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)

@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for {@code SVGDiscardElement}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))

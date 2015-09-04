@@ -74,6 +74,10 @@
         <property name="message" value="No need to specify serialVersionUID"/>
     </module>
 
+    <module name="RegexpSingleline">
+        <property name="format" value="@version"/>
+    </module>
+
     <!--
         at the moment there is a problem with disabling this check for some files
         without disabling all RegexpMultiline checks; for this reason this is not active
@@ -116,7 +120,6 @@
         <module name="JavadocType">
             <property name="scope" value="protected"/>
             <property name="authorFormat" value="\S \S"/>
-            <property name="versionFormat" value="\$Revision.*\$"/>
         </module>
         <module name="JavadocVariable">
             <property name="scope" value="protected"/>

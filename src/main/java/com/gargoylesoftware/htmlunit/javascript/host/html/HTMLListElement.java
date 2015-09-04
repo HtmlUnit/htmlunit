@@ -26,7 +26,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * Base class for list-type elements (<tt>ul</tt>, <tt>ol</tt>, <tt>dir</tt>, etc).
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
  * @author Ronald Brill

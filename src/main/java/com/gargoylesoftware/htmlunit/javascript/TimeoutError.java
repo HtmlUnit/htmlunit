@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 /**
  * An error that is thrown when a script has been running too long.
  *
- * @version $Revision$
  * @author Andre Soereng
  * @author Ronald Brill
  */

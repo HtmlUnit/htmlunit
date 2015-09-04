@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgDesc;
 /**
  * A JavaScript object for SVGDescElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgDesc.class,

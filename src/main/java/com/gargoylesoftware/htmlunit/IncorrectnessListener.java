@@ -19,7 +19,6 @@ package com.gargoylesoftware.htmlunit;
  * (but not the parser messages), headers, ...
  * that HtmlUnit can handle but that denote a badly written application.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public interface IncorrectnessListener {

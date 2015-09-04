@@ -105,7 +105,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * <p>
  * Note: a {@link WebClient} instance is <b>not thread safe</b>. It is intended to be used from a single thread.
  * </p>
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author Dominique Broeglin

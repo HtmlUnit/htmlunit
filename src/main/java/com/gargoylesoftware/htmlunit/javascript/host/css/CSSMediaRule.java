@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 /**
  * A JavaScript object for a {@link org.w3c.dom.css.CSSMediaRule}.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

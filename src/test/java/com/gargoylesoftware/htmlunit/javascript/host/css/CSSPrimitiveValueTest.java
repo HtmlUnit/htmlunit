@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link CSSPrimitiveValue}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

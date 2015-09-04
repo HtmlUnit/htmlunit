@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for a CSSRule.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMError;
 /**
  * A JavaScript object for {@code FileError}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))

@@ -21,7 +21,6 @@ import java.util.List;
 /**
  * A simple alert handler that keeps track of alerts in a list.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class CollectingAlertHandler implements AlertHandler, Serializable {

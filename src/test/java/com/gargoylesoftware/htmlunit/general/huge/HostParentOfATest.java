@@ -35,7 +35,6 @@ import com.google.common.base.Predicate;
  *
  * This class handles all host names which starts by character 'A' to 'G'.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserParameterizedRunner.class)

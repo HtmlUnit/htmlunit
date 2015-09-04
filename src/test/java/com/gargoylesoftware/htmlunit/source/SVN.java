@@ -24,7 +24,6 @@ import org.apache.commons.io.FileUtils;
 /**
  * Subversion utilities.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class SVN {
@@ -34,7 +33,7 @@ public final class SVN {
      */
     private static List<String> EOL_EXTENSIONS_
         = Arrays.asList(".html", ".htm", ".js", ".css", ".xml", ".txt", ".properties", "*.php",
-                "*.ini", "*.sh", "*.bat", "*.log");
+                "*.ini", "*.sh", "*.bat", "*.log", "*.java");
 
     private SVN() { }
 

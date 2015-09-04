@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLQuoteElement}.
  *
- * @version $Revision$
  * @author Carsten Steul
  * @author Ahmed Ashour
  */

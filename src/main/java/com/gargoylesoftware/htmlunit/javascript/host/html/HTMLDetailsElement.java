@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLDetailsElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = HtmlDetails.class, browsers = @WebBrowser(CHROME))

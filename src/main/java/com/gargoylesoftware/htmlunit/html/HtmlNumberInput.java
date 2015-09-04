@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
 /**
  * Wrapper for the HTML element "input" where type is "number".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {

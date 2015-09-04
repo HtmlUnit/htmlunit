@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLTableRowElement}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill

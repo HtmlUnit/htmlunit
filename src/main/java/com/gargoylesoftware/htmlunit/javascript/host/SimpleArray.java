@@ -29,7 +29,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * A JavaScript object for simple array allowing access per key and index (like {@link MimeTypeArray}).
  *
- * @version $Revision$
  * @author Marc Guillemot
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>

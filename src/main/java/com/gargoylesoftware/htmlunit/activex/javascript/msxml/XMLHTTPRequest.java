@@ -67,7 +67,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * Provides client-side protocol support for communication with HTTP servers.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms759148.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour

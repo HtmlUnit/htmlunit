@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for {@link Navigator}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

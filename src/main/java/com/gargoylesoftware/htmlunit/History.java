@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 /**
  * Representation of the navigation history of a single window.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */

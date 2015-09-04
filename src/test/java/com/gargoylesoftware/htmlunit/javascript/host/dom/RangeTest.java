@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link Range}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author James Phillpotts

@@ -110,7 +110,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * </code>
  * </p>
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Alex Nikiforoff
  * @author Noboru Sinohara

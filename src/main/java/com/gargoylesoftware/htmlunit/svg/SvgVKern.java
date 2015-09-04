@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 /**
  * Wrapper for the SVG element "vkern".
  *
- * @version $Revision$
  * @author Frank Danek
  */
 public class SvgVKern extends SvgElement {

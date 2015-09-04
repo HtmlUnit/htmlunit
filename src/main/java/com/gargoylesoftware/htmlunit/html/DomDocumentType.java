@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * A DOM object for DocumentType.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class DomDocumentType extends DomNode implements DocumentType {

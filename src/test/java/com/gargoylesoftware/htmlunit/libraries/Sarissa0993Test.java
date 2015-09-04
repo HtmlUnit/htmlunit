@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for 0.9.9.3 version of <a href="http://sarissa.sourceforge.net">Sarissa</a>.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek

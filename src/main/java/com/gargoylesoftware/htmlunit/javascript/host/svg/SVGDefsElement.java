@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgDefs;
 /**
  * A JavaScript object for SVGDefsElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgDefs.class,

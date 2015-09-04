@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Wrapper for the HTML element "isindex". Note that this element has been deprecated in the HTML spec.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

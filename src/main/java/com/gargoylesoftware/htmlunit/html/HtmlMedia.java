@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * HTML Media element, e.g. {@link HtmlAudio} or {@link HtmlVideo}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

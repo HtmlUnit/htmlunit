@@ -26,7 +26,6 @@ import java.lang.annotation.Target;
 /**
  * An annotation to mark a feature in {@link com.gargoylesoftware.htmlunit.BrowserVersionFeatures}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)

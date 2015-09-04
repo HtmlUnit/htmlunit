@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgRect;
 /**
  * A JavaScript object for {@code SVGRectElement}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgRect.class,

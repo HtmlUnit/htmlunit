@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link HtmlImage}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link Window} that use background jobs.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)

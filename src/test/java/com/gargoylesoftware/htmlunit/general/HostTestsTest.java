@@ -35,7 +35,6 @@ import org.junit.Test;
  * This classes parses all the test code, searching for [object some_name], and ensures that
  * {@link HostClassNameTest}, {@link HostClassNameStandardsTest} and {@link HostTypeOfTest} include those objects.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class HostTestsTest {

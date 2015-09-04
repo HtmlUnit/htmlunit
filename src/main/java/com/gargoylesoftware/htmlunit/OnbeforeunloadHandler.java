@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 /**
  * A handler for <tt>onbeforeunload</tt> events.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public interface OnbeforeunloadHandler {

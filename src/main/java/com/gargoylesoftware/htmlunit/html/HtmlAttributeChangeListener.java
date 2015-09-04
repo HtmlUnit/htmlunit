@@ -20,7 +20,6 @@ import java.io.Serializable;
  * Implementations of this interface receive notifications of changes to the attribute
  * list on the HtmlElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @see HtmlAttributeChangeEvent
  */

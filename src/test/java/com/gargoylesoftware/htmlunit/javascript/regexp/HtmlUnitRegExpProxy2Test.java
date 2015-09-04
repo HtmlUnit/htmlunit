@@ -32,7 +32,6 @@ import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Carsten Steul

@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Extended FunctionObject that overrides avoidObjectDetection().
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 class HiddenFunctionObject extends FunctionObject {

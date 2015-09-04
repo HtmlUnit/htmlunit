@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Representation of a CDATA node in the HTML DOM.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author David K. Taylor
  */

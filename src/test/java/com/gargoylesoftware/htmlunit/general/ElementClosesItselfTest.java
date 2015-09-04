@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Unit tests for an element to close itself, which is defined in {@link org.cyberneko.html.HTMLElements}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill

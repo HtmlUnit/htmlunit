@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * A data type that is used to represent a generic, fixed-length binary data buffer.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill

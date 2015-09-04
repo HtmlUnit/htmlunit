@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 /**
  * Thrown if an object could not be instantiated for some reason.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */

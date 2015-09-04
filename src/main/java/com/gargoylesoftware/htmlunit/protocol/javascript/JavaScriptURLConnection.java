@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 /**
  * A URLConnection for supporting JavaScript URLs.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class JavaScriptURLConnection extends URLConnection {

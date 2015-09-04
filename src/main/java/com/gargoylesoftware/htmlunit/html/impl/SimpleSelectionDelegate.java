@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html.impl;
 /**
  * Contains selection-related functionality without an associated node.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class SimpleSelectionDelegate implements SelectionDelegate {

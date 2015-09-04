@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 /**
  * Represents a real browser family.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public enum BrowserName {

@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link DOMParser}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek

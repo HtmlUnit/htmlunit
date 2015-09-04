@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for {@link XHtmlPage}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)

@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link XMLDOMParseError}.
  *
- * @version $Revision$
  * @author Frank Danek
  * @author Ronald Brill
  */

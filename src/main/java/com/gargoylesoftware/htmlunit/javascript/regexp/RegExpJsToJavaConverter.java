@@ -28,7 +28,6 @@ import java.util.Stack;
  * Escape curly braces that are not used in an expression
  * like "{n}", "{n,}" or "{n,m}" (where n and m are positive integers).
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public class RegExpJsToJavaConverter {

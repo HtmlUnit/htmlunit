@@ -45,7 +45,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 /**
  * Tests for version 2.5.0 of <a href="https://developers.google.com/web-toolkit/">Google Web Toolkit</a>.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

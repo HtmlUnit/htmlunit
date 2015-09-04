@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link Window}. The only difference with {@link WindowTest} is that these
  * tests already run with BrowserRunner.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

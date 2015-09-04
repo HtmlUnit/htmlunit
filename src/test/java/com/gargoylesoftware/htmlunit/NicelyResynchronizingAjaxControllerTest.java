@@ -19,7 +19,6 @@ import org.junit.Test;
 /**
  * Tests for {@link NicelyResynchronizingAjaxController}.
  *
- * @version $Revision$
  * @author <a href="mailto:nnk@google.com">Nick Kralevich</a>
  */
 public class NicelyResynchronizingAjaxControllerTest extends WebServerTestCase {

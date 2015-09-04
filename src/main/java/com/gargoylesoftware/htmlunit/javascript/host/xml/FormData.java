@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * A JavaScript object for {@code FormData}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })

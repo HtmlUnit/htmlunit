@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Base class for MSXML's (ActiveX) JavaScript host objects in HtmlUnit.
  *
- * @version $Revision$
  * @author Frank Danek
  */
 public class MSXMLScriptable extends SimpleScriptable {

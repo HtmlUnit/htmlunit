@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link HTMLFrameElement} when used for {@link com.gargoylesoftware.htmlunit.html.HtmlFrame}.
  *
- * @version $Revision$
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Thomas Robbs

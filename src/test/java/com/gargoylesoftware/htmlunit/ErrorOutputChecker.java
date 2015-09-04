@@ -28,7 +28,6 @@ import org.junit.runners.model.Statement;
  * during test execution. If this is the case, the rule generates a failure for
  * the unit test.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

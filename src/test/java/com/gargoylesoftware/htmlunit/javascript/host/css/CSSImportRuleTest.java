@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link CSSImportRule}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ronald Brill

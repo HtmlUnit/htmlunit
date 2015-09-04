@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests that depend on one of JavaScript libraries.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

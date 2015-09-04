@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * A JavaScript object for {@code XPathResult}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Chuck Dumont
  * @author Ronald Brill

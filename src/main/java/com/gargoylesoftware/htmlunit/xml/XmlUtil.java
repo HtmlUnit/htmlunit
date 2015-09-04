@@ -60,7 +60,6 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
  *
  * Provides facility method to work with XML responses.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Sudhan Moghe

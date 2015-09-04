@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 /**
  * Tests against external websites, this should be done once every while.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

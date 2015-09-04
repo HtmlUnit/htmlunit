@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeColorMatrix;
 /**
  * A JavaScript object for SVGFEColorMatrixElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeColorMatrix.class,

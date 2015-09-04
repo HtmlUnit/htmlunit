@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 /**
  * Tests for 2.2 version of <a href="http://www.extjs.com/">Ext JS</a>.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

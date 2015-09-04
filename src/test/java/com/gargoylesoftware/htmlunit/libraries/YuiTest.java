@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for compatibility with the <a href="http://developer.yahoo.com/yui/">YUI JavaScript library</a>.
  *
- * @version $Revision$
  * @author Rob Di Marco
  * @author Daniel Gredler
  * @author Marc Guillemot

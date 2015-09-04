@@ -31,7 +31,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * The ArrayBufferView type describes a particular view on the contents of an {@link ArrayBuffer}'s data.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

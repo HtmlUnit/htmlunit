@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeTile;
 /**
  * A JavaScript object for SVGFETileElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeTile.class,

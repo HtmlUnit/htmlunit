@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * attribute:  <code>button</code>, <code>input</code>, <code>optgroup</code>, <code>option</code>, <code>select</code>
  * and <code>textarea</code>.
  *
- * @version $Revision$
  * @author David D. Kilzer
  * @author Ahmed Ashour
  */

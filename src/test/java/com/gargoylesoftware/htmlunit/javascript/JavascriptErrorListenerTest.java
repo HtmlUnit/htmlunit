@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link JavaScriptErrorListener}.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Marc Guillemot
  */

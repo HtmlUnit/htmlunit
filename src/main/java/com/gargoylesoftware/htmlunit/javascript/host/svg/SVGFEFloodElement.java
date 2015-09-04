@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeFlood;
 /**
  * A JavaScript object for SVGFEFloodElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeFlood.class,

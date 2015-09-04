@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 /**
  * The JavaScript object that represents an "Option", this is used to construct {@literal HTMLOptionElement}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass

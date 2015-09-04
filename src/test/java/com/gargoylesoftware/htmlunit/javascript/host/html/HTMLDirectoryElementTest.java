@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlDirectory;
 /**
  * Unit tests for {@link HTMLDirectoryElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
  * @author Ronald Brill

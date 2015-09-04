@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 /**
  * An event loop to execute all the JavaScript jobs.
  *
- * @version $Revision$
  * @author Amit Manjhi
  * @author Kostadin Chikov
  * @author Ronald Brill

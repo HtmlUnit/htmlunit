@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeDistantLight;
 /**
  * A JavaScript object for SVGFEDistantLightElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeDistantLight.class,

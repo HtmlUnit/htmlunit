@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link HtmlHeading1} to {@link HtmlHeading6}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

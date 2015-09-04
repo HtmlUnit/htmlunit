@@ -56,7 +56,6 @@ import com.gargoylesoftware.htmlunit.libraries.JQuery1113Test;
  *   <li>Put all outputs in one folder and call {@link #generateTestCases(File)}</li>
  * </ol>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill

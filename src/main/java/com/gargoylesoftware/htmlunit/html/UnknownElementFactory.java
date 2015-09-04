@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * A factory for elements encountered in parsing the input which are not represented
  * by dedicated element classes.
  *
- * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author David K. Taylor

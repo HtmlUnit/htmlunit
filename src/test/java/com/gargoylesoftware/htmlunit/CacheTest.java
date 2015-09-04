@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 /**
  * Tests for {@link Cache}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

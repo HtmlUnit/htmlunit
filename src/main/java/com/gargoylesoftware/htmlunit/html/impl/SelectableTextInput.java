@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.Page;
  * required by the {@link SelectableTextSelectionDelegate} so that it can do its job.
  * This interface is not public because it is an internal contract.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 public interface SelectableTextInput extends Node {

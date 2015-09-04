@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link HtmlUnorderedList}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

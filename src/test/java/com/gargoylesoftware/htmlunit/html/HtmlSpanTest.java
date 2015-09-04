@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link HtmlSpan}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */

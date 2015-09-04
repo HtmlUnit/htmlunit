@@ -52,7 +52,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * A JavaScript object for XSLTProcessor.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

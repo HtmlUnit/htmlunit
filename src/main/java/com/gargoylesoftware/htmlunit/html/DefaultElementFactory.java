@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * where the first one is the owning page of the element, the second one is a map
  * holding the initial attributes for the element.
  *
- * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author David K. Taylor

@@ -20,7 +20,6 @@ package com.gargoylesoftware.htmlunit;
  * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
  * @see <a href="http://tools.ietf.org/html/rfc5789">RFC5789</a>
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  * @author Marc Guillemot

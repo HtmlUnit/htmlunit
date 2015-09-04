@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 /**
  * Tests for compatibility with version 1.2.1 of the <a href="http://mootools.net/">MooTools JavaScript library</a>.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Frank Danek

@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the DOM node ProcessingInstruction.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class DomProcessingInstruction extends DomNode implements ProcessingInstruction {

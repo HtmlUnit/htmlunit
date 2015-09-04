@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLNoShowElement".
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 @JsxClasses({

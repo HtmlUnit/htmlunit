@@ -29,7 +29,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 /**
  * Base class for all JavaScript object corresponding to form fields.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot

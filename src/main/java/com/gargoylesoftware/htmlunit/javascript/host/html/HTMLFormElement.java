@@ -66,7 +66,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * A JavaScript object for a Form.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Kent Tong

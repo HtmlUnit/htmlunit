@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * A representation of an HTML element "html".
  *
- * @version $Revision$
  * @author David K. Taylor
  * @author Ahmed Ashour
  * @author Frank Danek

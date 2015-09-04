@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * Provides methods that are independent of any particular instance of the Document Object Model (DOM).
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms762259.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Frank Danek
  */
 @JsxClass(browsers = @WebBrowser(IE))

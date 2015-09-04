@@ -22,7 +22,6 @@ import org.w3c.dom.Node;
 /**
  * An implementation of DomNodeList that is static.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 class StaticDomNodeList extends AbstractList<DomNode> implements DomNodeList<DomNode> {

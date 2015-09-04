@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
  * across a series of pages, and all of these pages need to be usable -- so we can't just leave these old
  * pages without a <tt>window.document</tt> object.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 public class DocumentProxy extends SimpleScriptableProxy<Document> {

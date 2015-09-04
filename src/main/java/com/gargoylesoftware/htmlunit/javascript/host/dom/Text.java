@@ -33,7 +33,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * A JavaScript object for {@code Text}.
  *
- * @version $Revision$
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Ahmed Ashour

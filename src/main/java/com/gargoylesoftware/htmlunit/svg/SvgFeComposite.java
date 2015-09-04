@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 /**
  * Wrapper for the SVG element "feComposite".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class SvgFeComposite extends SvgElement {

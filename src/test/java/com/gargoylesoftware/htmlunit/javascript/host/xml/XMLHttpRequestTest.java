@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link XMLHttpRequest}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour

@@ -59,7 +59,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * A JavaScript object for XMLDocument.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Sudhan Moghe

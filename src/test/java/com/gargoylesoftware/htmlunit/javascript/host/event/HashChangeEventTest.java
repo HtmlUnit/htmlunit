@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link HashChangeEvent}.
  *
- * @version $Revision$
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)

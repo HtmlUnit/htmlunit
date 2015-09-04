@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLOptionsCollection}.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)

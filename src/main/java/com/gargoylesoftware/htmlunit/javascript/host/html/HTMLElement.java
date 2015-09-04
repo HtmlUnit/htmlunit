@@ -182,7 +182,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * The JavaScript object "HTMLElement" which is the base class for all HTML
  * objects. This will typically wrap an instance of {@link HtmlElement}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Barnaby Court

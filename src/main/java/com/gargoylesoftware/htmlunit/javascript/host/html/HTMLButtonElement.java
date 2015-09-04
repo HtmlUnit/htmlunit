@@ -37,7 +37,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * The JavaScript object that represents a {@link HtmlButton} (&lt;button type=...&gt;).
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour

@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Unit tests for {@link StyleSheetList}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot

@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour

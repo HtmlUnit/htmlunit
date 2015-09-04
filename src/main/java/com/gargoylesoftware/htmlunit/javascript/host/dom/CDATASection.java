@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for CDATASection.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = DomCDataSection.class,

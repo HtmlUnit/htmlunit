@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link StringUtils}.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public class StringUtilsTest extends SimpleWebTestCase {

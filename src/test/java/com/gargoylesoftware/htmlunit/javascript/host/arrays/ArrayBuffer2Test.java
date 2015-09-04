@@ -21,7 +21,6 @@ import org.junit.Test;
 /**
  * Tests for {@link ArrayBuffer}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class ArrayBuffer2Test {

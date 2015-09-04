@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgRadialGradient;
 /**
  * A JavaScript object for SVGRadialGradientElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgRadialGradient.class,

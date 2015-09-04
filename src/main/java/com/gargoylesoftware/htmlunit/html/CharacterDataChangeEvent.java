@@ -19,7 +19,6 @@ import java.util.EventObject;
 /**
  * This is the event class for notifications about changes to the Character Data.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @see CharacterDataChangeListener
  */

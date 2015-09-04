@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame;
  * An adapter class for debug frame implementations. The methods in this class are empty. This class
  * exists as a convenience for creating debug frame objects.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 public class DebugFrameAdapter implements DebugFrame {

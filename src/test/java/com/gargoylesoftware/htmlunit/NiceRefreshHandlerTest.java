@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link NiceRefreshHandler}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)

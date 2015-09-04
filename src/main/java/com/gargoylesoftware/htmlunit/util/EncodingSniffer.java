@@ -33,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
  * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#determining-the-character-encoding">HTML5
  * encoding sniffing algorithm</a>.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill

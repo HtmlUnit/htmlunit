@@ -20,7 +20,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlApplet;
  * A handler for Applets. Like in real browsers, you have to confirm
  * before the browser starts an applet.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public interface AppletConfirmHandler {

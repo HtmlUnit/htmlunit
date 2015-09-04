@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link org.mozilla.javascript.Arguments}, which is the object for "function.arguments".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

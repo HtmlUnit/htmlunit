@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingConte
 /**
  * A JavaScript object for {@link HtmlCanvas}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek

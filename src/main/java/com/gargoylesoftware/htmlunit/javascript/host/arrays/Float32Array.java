@@ -31,7 +31,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Represents an array of 32-bit floating point numbers.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

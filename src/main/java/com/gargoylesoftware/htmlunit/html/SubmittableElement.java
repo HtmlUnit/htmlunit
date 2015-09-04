@@ -19,7 +19,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * An element that can have it's values sent to the server during a form submit.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  */

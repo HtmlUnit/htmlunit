@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Unit tests for {@link UIEvent}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
  * @author Ronald Brill

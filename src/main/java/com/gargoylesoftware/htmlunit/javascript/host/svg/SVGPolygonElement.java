@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgPolygon;
 /**
  * A JavaScript object for SVGPolygonElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgPolygon.class,

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgCircle;
 /**
  * A JavaScript object for SVGCircleElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgCircle.class,

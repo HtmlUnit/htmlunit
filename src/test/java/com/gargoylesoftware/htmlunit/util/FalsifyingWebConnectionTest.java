@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 /**
  * Tests for {@link FalsifyingWebConnection}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)

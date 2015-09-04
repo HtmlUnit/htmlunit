@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for setup done in {@link net.sourceforge.htmlunit.corejs.javascript.NativeGlobal}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  */

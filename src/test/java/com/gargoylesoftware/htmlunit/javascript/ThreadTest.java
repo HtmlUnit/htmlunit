@@ -31,7 +31,6 @@ import junit.framework.TestSuite;
 /**
  * Multi-threaded JavaScript engine test.
  *
- * @version $Revision$
  * @author David D. Kilzer
  * @author Ahmed Ashour
  */

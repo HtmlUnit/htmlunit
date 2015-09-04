@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * A JavaScript object for a CSSPrimitiveValue.
  *
  * @see org.w3c.dom.css.CSSPrimitiveValue
- * @version $Revision$
  * @author Marc Guillemot
  */
 @JsxClass(browsers = @WebBrowser(FF))

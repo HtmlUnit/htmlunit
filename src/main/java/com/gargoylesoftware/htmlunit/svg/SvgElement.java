@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 /**
  * Parent elements of all SVG elements, and wrapper for any unknown one.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class SvgElement extends DomElement {

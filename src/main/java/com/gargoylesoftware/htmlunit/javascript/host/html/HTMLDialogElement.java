@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLDialogElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = HtmlDialog.class, browsers = @WebBrowser(CHROME))

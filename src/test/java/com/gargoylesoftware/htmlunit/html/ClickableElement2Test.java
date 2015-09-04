@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for various clickable elements.
  *
- * @version $Revision$
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Marc Guillemot

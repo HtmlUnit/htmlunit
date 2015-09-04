@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * A specialized creator that knows how to create input objects.
  *
- * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour

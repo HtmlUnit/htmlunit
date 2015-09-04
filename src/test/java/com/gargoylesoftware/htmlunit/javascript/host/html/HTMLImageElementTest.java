@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link HTMLImageElement}.
  *
- * @version $Revision$
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Marc Guillemot
  * @author Ronald Brill

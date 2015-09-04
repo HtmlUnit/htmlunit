@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link SvgFont}.
  *
- * @version $Revision$
  * @author Frank Danek
  * @author Ahmed Ashour
  */

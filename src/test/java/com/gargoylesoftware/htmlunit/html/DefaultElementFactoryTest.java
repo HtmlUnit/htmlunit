@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link DefaultElementFactory}.
  *
- * @version $Revision$
  * @author <a href="mailto:marvin.java@gmail.com">Marcos Vinicius B. de Souza</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour

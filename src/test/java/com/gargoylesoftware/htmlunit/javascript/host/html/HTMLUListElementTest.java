@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
 /**
  * Unit tests for {@link HTMLUListElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ronald Brill

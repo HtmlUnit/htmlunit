@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * Tests for compatibility with version 1.6.0 of
  * <a href="http://www.prototypejs.org/">Prototype JavaScript library</a>.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill

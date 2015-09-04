@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 /**
  * Tests for {@link HTMLDocument}'s write(ln) function.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek

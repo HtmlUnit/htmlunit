@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 /**
  * Tests for compatibility with <a href="http://www.curvycorners.net">curvyCorners</a>.
  *
- * @version $Revision$
  * @author Gareth Davis
  * @author Ronald Brill
  */

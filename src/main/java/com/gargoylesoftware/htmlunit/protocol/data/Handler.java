@@ -21,7 +21,6 @@ import java.net.URLStreamHandler;
 /**
  * Stream handler for data URLs.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class Handler extends URLStreamHandler {

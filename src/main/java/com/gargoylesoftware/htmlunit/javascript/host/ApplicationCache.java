@@ -36,7 +36,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * <p>A collection of offline resources as defined in the HTML5 spec.
  * Intended to support offline web applications.</p>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
  * @author Ronald Brill

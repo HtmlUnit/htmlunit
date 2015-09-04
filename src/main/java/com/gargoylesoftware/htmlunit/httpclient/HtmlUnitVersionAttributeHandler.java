@@ -23,7 +23,6 @@ import org.apache.http.impl.cookie.AbstractCookieAttributeHandler;
 /**
  * VersionAttributeHandler for HtmlUnit.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 final class HtmlUnitVersionAttributeHandler extends AbstractCookieAttributeHandler

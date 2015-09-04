@@ -18,7 +18,6 @@ package com.gargoylesoftware.htmlunit.gae;
  * Utilities for <a href="http://code.google.com/appengine/">Google App Engine</a>
  * support.
  *
- * @version $Revision$
  * @author Amit Manjhi
  */
 public final class GAEUtils {

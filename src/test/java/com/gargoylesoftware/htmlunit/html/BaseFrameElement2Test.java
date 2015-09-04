@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link BaseFrameElement}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

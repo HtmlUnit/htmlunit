@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgEllipse;
 /**
  * A JavaScript object for SVGEllipseElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgEllipse.class,

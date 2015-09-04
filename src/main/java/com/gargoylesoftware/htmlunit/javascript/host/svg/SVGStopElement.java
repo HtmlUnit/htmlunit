@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgStop;
 /**
  * A JavaScript object for SVGStopElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgStop.class,

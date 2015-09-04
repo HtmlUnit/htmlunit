@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "figcaption".
  *
- * @version $Revision$
  * @author Frank Danek
  */
 public class HtmlFigureCaption extends HtmlElement {

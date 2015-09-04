@@ -109,7 +109,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 /**
  * Default implementation of {@link WebConnection}, using the HttpClient library to perform HTTP requests.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David D. Kilzer

@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgLinearGradient;
 /**
  * A JavaScript object for SVGLinearGradientElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgLinearGradient.class,

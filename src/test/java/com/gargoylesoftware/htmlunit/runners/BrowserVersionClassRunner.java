@@ -52,7 +52,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * The runner for test methods that run with a specific browser ({@link BrowserRunner.Browser}).
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

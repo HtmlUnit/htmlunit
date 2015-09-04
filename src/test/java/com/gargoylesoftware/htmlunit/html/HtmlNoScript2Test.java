@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for elements inside {@link HtmlNoScript}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill

@@ -19,7 +19,6 @@ import java.net.URL;
 /**
  * A basic {@link Page} implementation.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class AbstractPage implements Page {

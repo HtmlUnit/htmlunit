@@ -20,7 +20,6 @@ import java.net.URLConnection;
 /**
  * A {@link URLConnection} for "about:" URLs.
  *
- * @version $Revision$
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */
 public class AboutURLConnection extends URLConnection {

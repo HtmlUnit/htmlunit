@@ -32,7 +32,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * A JavaScript object for a Screen. Combines properties from both Mozilla's DOM and IE's DOM.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Chris Erskine

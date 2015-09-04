@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLDListElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

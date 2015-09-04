@@ -46,7 +46,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @see <a href="http://www.xulplanet.com/references/objref/Range.html">XULPlanet</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html">
  * DOM-Level-2-Traversal-Range</a>
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler

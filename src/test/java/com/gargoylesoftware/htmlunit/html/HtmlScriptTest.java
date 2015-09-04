@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link HtmlScript}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour

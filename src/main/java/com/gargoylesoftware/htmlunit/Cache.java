@@ -30,7 +30,6 @@ import org.w3c.dom.css.CSSStyleSheet;
  * compiled JavaScript files avoids unnecessary web requests and additional compilation overhead, while
  * caching parsed CSS snippets avoids very expensive CSS parsing.</p>
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
  */

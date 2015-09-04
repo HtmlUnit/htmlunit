@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the DOM node Comment.
  *
- * @version $Revision$
  * @author Karel Kolman
  * @author Ahmed Ashour
  */

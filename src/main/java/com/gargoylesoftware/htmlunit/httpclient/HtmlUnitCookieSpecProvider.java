@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 /**
  * Customized CookieSpecProvider for HtmlUnit.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public final class HtmlUnitCookieSpecProvider implements CookieSpecProvider {

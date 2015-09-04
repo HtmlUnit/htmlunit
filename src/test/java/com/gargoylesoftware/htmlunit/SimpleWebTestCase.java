@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * <b>Note that {@link WebDriverTestCase} should be used unless HtmlUnit-specific feature
  * is needed and Selenium does not support it.</b>
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David D. Kilzer
  * @author Marc Guillemot

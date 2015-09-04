@@ -47,7 +47,6 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
  * HtmlUnit itself, rather than the debugging and development of web applications.
  * </p>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @see DebuggerImpl

@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
  * DOM-Level-2-Traversal-Range</a>
  *
- * @version $Revision$
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @author Ahmed Ashour
  */

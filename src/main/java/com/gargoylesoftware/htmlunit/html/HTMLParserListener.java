@@ -27,7 +27,6 @@ import org.apache.commons.logging.LogFactory;
  * the problem has to be solved is located lines before.
  * In some cases (when parsing a html snippet), the html content is also available.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public interface HTMLParserListener {

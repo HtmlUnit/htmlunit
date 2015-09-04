@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * However, in DOM, Comment is CharacterDataImpl.
  *
- * @version $Revision$
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour
  * @author Frank Danek

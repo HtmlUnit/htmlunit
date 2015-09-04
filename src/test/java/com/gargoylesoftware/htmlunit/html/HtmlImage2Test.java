@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link HtmlImage}.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)

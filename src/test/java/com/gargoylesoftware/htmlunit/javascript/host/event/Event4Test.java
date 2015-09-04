@@ -20,7 +20,6 @@ import org.junit.Test;
 /**
  * Tests for {@link Event}.
  *
- * @version $Revision$
  * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Ahmed Ashour
  * @author Daniel Gredler

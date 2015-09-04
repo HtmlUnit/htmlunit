@@ -52,7 +52,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * The JavaScript object that represents an anchor.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
  * @author David D. Kilzer

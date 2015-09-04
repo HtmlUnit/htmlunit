@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link HtmlCheckBoxInput}.
  *
- * @version $Revision$
  * @author Mike Bresnahan
  * @author Marc Guillemot
  * @author Ahmed Ashour

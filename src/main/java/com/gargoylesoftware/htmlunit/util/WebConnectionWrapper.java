@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * <p>This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped
  * web connection object.</p>
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class WebConnectionWrapper implements WebConnection {

@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * Used for caching compiled XSL Transformations (XSLT) templates.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms767644.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

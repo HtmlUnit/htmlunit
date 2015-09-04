@@ -121,7 +121,6 @@ import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
  * A JavaScript object for {@code CSSStyleSheet}.
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535871.aspx">MSDN doc</a>
- * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour

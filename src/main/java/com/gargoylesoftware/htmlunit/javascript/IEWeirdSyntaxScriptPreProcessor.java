@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * A script preprocessor removing weird syntax supported by IE like semicolons before <code>catch</code> or
  * before <code>finally</code> in a try-catch-finally block.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class IEWeirdSyntaxScriptPreProcessor implements ScriptPreProcessor {

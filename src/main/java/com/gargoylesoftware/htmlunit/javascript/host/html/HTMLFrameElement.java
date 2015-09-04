@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * A JavaScript object for a {@link HtmlFrame}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour

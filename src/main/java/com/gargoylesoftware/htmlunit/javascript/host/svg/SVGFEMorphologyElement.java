@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeMorphology;
 /**
  * A JavaScript object for SVGFEMorphologyElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeMorphology.class,

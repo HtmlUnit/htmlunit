@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * Quite experimental: it allows to do more than what we had previously but let's see if
  * this is the right way.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ahmed Ashour

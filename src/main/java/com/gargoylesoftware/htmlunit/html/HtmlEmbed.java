@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 /**
  * Wrapper for the HTML element "embed".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek

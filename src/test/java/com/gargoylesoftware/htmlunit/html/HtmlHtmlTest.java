@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link HtmlHtml}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 /**
  * A representation of a Scalable Vector Graphics (SVG) page returned from a server.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class SvgPage extends InteractivePage {

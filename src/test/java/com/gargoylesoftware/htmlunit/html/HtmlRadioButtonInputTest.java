@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for {@link HtmlRadioButtonInput}.
  *
- * @version $Revision$
  * @author Mike Bresnahan
  * @author Marc Guillemot
  * @author Bruce Faulkner

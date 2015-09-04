@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
 
 /**
  * Responsible for URL creation.
- * @version $Revision$
  * @author Marc Guillemot
  */
 abstract class URLCreator {

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeFuncR;
 /**
  * A JavaScript object for SVGFEFuncRElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeFuncR.class,

@@ -23,7 +23,6 @@ import org.apache.commons.io.FileUtils;
 /**
  * Utility for automatically transforming Moalla JavaScript tests to WebDriver test cases.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class MozillaTestGenerator {
@@ -58,7 +57,6 @@ public final class MozillaTestGenerator {
         System.out.println("/**");
         System.out.println(" * Tests originally in '" + jsPath + "'.");
         System.out.println(" *");
-        System.out.println(" * @version $Revision$");
         System.out.println(" * @author " + author);
         System.out.println(" */");
         System.out.println("@RunWith(BrowserRunner.class)");

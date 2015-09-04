@@ -24,7 +24,6 @@ import org.w3c.css.sac.ErrorHandler;
 /**
  * HtmlUnit's default implementation of {@link ErrorHandler}, which logs all CSS problems.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @see SilentCssErrorHandler
  */

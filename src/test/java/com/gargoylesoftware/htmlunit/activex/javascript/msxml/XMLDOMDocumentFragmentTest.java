@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link XMLDOMDocumentFragment}.
  *
- * @version $Revision$
  * @author Frank Danek
  * @author Ronald Brill
  */

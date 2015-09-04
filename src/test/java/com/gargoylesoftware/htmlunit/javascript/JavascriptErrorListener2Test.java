@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for {@link JavaScriptErrorListener}.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)

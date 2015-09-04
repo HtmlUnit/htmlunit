@@ -88,7 +88,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * A JavaScript object for an {@code XMLHttpRequest}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour

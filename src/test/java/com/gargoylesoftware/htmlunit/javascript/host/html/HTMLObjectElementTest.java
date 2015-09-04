@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.MockActiveXObject;
 /**
  * Unit tests for {@link HTMLObjectElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill

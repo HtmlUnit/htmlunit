@@ -31,7 +31,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * A JavaScript object for DOMParser.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  *

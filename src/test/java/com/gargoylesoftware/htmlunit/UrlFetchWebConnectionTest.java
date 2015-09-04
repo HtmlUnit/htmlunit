@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Unit tests for {@link UrlFetchWebConnection}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Pieter Herroelen
  */

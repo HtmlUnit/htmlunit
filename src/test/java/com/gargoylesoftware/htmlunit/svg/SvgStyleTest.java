@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 /**
  * Tests for {@link SvgStyle}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 /**
  * Keeps track of the typed keys.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class Keyboard {

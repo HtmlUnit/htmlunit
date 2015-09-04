@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 /**
  * Tests for {@link HTMLOptionElement}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

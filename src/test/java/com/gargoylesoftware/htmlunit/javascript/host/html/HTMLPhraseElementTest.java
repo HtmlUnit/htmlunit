@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Unit tests for {@link HTMLPhraseElement}.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  */

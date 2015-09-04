@@ -61,7 +61,6 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 /**
  * Tests methods in {@link HttpWebConnection}.
  *
- * @version $Revision$
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Ahmed Ashour

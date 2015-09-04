@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "noembed".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeImage;
 /**
  * A JavaScript object for SVGFEImageElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeImage.class,

@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link PointerEvent}.
  *
- * @version $Revision$
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)

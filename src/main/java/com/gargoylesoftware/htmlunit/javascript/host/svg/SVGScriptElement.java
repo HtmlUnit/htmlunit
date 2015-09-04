@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgScript;
 /**
  * A JavaScript object for SVGScriptElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgScript.class,

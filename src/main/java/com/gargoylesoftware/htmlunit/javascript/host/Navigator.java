@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 /**
  * A JavaScript object for a Navigator.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Chris Erskine

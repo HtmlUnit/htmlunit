@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
 /**
  * A JavaScript object for {@code ImageData}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })

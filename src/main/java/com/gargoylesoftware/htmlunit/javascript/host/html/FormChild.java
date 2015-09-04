@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 /**
  * Base class for elements which have a parent form.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 @JsxClass(isJSObject = false, isDefinedInStandardsMode = false)

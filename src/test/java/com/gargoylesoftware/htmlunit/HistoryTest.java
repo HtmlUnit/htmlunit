@@ -34,7 +34,6 @@ import org.openqa.selenium.WebDriver;
 /**
  * Tests for {@link History}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

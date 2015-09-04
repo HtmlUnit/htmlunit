@@ -44,7 +44,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link HtmlPage}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

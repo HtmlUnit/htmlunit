@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 /**
  * Tests for {@link SvgHKern}.
  *
- * @version $Revision$
  * @author Frank Danek
  * @author Ahmed Ashour
  */

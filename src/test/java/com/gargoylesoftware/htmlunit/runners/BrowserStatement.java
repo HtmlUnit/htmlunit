@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * The Browser Statement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 class BrowserStatement extends Statement {

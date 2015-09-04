@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Utility class which contains standard assertions for HTML pages.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour

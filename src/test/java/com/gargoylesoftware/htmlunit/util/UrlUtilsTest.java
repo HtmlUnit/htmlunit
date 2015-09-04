@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 /**
  * Tests for {@link UrlUtils}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Martin Tamme
  * @author Sudhan Moghe

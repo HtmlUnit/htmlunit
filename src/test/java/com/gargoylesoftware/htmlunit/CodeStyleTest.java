@@ -45,7 +45,6 @@ import com.gargoylesoftware.htmlunit.source.SVN;
 /**
  * Test of coding style for things that cannot be detected by Checkstyle.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class CodeStyleTest {
@@ -121,7 +120,6 @@ public class CodeStyleTest {
                         staticLoggers(lines, relativePath);
                         loggingEnabled(lines, relativePath);
                         browserVersion_isIE(lines, relativePath);
-                        versionBeforeAuthor(lines, relativePath);
                         alerts(lines, relativePath);
                     }
                 }
@@ -221,22 +219,16 @@ public class CodeStyleTest {
     }
 
     /**
-     * Checks properties svn:eol-style and svn:keywords.
+     * Checks property {@code svn:eol-style}.
      */
     private void svnProperties(final File file, final String relativePath) {
         if (!isSvnPropertiesDefined(file)) {
-            if (file.getName().endsWith(".java")) {
-                addFailure("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
-            }
-            else {
-                addFailure("'svn:eol-style' property is not defined for " + relativePath);
-            }
+            addFailure("'svn:eol-style' property is not defined for " + relativePath);
         }
     }
 
     private boolean isSvnPropertiesDefined(final File file) {
         try {
-            final AtomicBoolean keywords = new AtomicBoolean();
             final AtomicBoolean eol = new AtomicBoolean();
             svnWCClient_.doGetProperty(file, null, SVNRevision.WORKING, SVNRevision.WORKING, SVNDepth.EMPTY,
                     new ISVNPropertyHandler() {
@@ -258,16 +250,10 @@ public class CodeStyleTest {
                         if ("svn:eol-style".equals(name) && "native".equals(value)) {
                             eol.set(true);
                         }
-                        else if ("svn:keywords".equals(name) && "Author Date Id Revision".equals(value)) {
-                            keywords.set(true);
-                        }
                     }
                 }, null);
 
             final String fileName = file.getName().toLowerCase();
-            if (fileName.endsWith(".java")) {
-                return eol.get() && keywords.get();
-            }
 
             for (final String extension : SVN.getEolExtenstions()) {
                 if (fileName.endsWith(extension)) {
@@ -593,21 +579,6 @@ public class CodeStyleTest {
                             + relativePath + ", line: " + index);
                 }
                 index++;
-            }
-        }
-    }
-
-    /**
-     * Verifies that \@version is always before \@author.
-     */
-    private void versionBeforeAuthor(final List<String> lines, final String relativePath) {
-        boolean versionFound = false;
-        for (final String line : lines) {
-            if (line.startsWith(" * @version")) {
-                versionFound = true;
-            }
-            else if (line.startsWith(" * @author") && !versionFound) {
-                addFailure("@version should exist before @author in: " + relativePath);
             }
         }
     }

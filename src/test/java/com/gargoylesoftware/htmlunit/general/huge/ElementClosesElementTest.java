@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for an element to close another element, which is defined in {@link org.cyberneko.html.HTMLElements}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserParameterizedRunner.class)

@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebResponseData;
 /**
  * Tests for {@link WebConnectionWrapper}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class WebConnectionWrapperTest extends SimpleWebTestCase {

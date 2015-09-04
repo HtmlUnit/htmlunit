@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "input" where type is "search".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

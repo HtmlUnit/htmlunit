@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlHeading1} to {@link HtmlHeading6}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek

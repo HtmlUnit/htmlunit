@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * An attachment represents a page received from the server which contains a
  * {@code Content-Disposition=attachment} header.
  *
- * @version $Revision$
  * @author Bruce Chapman
  * @author Sudhan Moghe
  * @author Daniel Gredler

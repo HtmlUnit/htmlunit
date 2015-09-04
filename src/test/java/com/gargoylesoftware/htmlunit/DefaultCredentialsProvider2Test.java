@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link DefaultCredentialsProvider}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

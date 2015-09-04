@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 /**
  * Test class for {@link HTMLParser}.
  *
- * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour

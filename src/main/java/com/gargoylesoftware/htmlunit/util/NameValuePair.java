@@ -23,7 +23,6 @@ import org.apache.http.util.LangUtils;
 /**
  * A name/value pair.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Nicolas Belisle
  */

@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * Note that this class must not be used for collections that can be modified, for example
  * <tt>map.areas</tt> and <tt>select.options</tt>.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Chris Erskine

@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for general scriptable objects in the browser context.
  *
- * @version $Revision$
  * @author Jake Cobb
  */
 @RunWith(BrowserRunner.class)

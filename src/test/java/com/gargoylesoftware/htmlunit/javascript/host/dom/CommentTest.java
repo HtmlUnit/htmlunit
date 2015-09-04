@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link Comment}.
  *
- * @version $Revision$
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour
  * @author Frank Danek

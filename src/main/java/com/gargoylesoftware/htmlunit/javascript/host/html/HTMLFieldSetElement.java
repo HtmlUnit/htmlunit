@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLFieldSetElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

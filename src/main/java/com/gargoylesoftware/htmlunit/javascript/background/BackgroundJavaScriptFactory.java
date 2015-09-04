@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * A factory for all the things we have to construct from outside of the
  * JavaScript engine.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public class BackgroundJavaScriptFactory {

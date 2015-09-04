@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  *
  * This is meant to be run against real browsers.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @Ignore

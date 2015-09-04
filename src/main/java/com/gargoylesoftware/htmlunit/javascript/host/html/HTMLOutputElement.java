@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLOutputElement".
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

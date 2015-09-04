@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link SvgAnchor}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

@@ -53,7 +53,6 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  * </p>
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)

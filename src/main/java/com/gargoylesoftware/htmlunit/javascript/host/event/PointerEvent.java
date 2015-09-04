@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @see <a href="http://www.w3.org/TR/pointerevents/">W3C Spec</a>
  * @see <a href="http://msdn.microsoft.com/en-us/library/ie/hh772103.aspx">MSDN</a>
  *
- * @version $Revision$
  * @author Frank Danek
  */
 @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) })

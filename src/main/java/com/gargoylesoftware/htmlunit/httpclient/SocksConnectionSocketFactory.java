@@ -26,7 +26,6 @@ import org.apache.http.protocol.HttpContext;
 /**
  * SOCKS aware {@link org.apache.http.conn.scheme.SchemeSocketFactory}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot

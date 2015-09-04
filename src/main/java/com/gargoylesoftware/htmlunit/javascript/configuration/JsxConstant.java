@@ -26,7 +26,6 @@ import java.lang.annotation.Target;
 /**
  * An annotation to mark a Java field as JavaScript constant.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)

@@ -44,7 +44,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * which Java class is instantiated.
  *
  * @see com.gargoylesoftware.htmlunit.WebClient
- * @version $Revision$
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Ahmed Ashour
  * @author Chuck Dumont

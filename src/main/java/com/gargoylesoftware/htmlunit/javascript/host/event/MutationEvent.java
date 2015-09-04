@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MutationEvent">
  * DOM Level 2 Events</a>.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

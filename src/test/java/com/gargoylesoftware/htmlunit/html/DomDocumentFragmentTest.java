@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 /**
  * Tests for {@link DomDocumentFragment}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

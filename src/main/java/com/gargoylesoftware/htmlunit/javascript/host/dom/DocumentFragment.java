@@ -42,7 +42,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * A JavaScript object for {@code DocumentFragment}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  *

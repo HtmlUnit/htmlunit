@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.html.ElementFactory;
  * Element factory which creates elements by calling the constructor on a
  * given {@link com.gargoylesoftware.htmlunit.svg.SvgElement} subclass.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

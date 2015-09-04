@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgTitle;
 /**
  * A JavaScript object for SVGTitleElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgTitle.class,

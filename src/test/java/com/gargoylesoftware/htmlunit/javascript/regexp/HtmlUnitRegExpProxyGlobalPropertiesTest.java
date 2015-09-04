@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Test the various properties.
  *
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  */

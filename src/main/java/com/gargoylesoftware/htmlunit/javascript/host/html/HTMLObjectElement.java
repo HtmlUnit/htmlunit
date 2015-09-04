@@ -43,7 +43,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
 /**
  * The JavaScript object "HTMLObjectElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek

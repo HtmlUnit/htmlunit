@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgMask;
 /**
  * A JavaScript object for SVGMaskElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgMask.class,

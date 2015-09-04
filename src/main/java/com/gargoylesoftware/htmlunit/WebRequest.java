@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 /**
  * Parameter object for making web requests.
  *
- * @version $Revision$
  * @author Brad Clarke
  * @author Hans Donner
  * @author Ahmed Ashour

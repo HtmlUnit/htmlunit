@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * to be sure that we have the expected results (for instance "bind" is an EcmaScript 5 method that is not
  * available in FF2 or FF3).
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link XPathEvaluator}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Chuck Dumont
  * @author Ronald Brill

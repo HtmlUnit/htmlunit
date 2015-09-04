@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlForm}, with BrowserRunner.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

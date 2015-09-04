@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 /**
  * A handler for changes to <tt>window.status</tt>.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface StatusHandler {

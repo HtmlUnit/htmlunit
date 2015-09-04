@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link WaitingRefreshHandlerTest}.
  *
- * @version $Revision$
  * @author Brad Clarke
  */
 @RunWith(BrowserRunner.class)

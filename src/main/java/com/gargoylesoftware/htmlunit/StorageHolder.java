@@ -24,7 +24,6 @@ import java.util.Map;
  * Holder for different types of storages.
  * <p><span style="color:red">Experimental API: May be changed in next release!</span></p>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot

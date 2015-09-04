@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 /**
  * Wrapper for the SVG element "feFuncA".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class SvgFeFuncA extends SvgElement {

@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * document.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms765480.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

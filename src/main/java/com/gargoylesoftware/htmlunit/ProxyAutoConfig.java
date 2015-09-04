@@ -35,7 +35,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @see <a href="http://lib.ru/WEBMASTER/proxy-live.txt">PAC file format</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class ProxyAutoConfig {

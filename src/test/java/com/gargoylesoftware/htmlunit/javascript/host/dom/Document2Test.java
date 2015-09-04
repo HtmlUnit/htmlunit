@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link Document}.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Marc Guillemot
  * @author Frank Danek

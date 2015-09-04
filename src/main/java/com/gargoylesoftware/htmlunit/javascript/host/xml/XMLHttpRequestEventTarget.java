@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 /**
  * A JavaScript object for {@code XMLHttpRequestEventTarget}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

@@ -22,7 +22,6 @@ import org.junit.runner.RunWith;
 /**
  * Tests for {@link BrowserRunner}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)

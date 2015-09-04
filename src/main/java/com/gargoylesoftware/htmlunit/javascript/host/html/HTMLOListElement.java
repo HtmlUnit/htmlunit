@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLOListElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

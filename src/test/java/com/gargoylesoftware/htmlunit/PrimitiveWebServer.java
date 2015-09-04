@@ -28,7 +28,6 @@ import java.util.List;
  * A very simple implementation of a Web Server.
  * This covers some cases which are not possible with Jetty.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class PrimitiveWebServer {

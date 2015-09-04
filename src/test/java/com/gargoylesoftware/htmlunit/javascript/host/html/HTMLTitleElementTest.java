@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Unit tests for {@link HTMLTitleElement}.
- * @version $Revision$
  * @author Sudhan Moghe
  * @author Ronald Brill
  */

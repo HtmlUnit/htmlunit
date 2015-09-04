@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 /**
  * Tests for {@link SvgFontFaceSrc}.
  *
- * @version $Revision$
  * @author Frank Danek
  * @author Ahmed Ashour
  */

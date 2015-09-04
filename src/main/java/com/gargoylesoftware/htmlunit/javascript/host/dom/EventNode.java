@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
  *
  * Basically contains any event-related features that both elements and the document support.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Frank Danek

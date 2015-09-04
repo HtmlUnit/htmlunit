@@ -35,7 +35,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * A JavaScript object for {@code Intl.v8BreakIterator}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })

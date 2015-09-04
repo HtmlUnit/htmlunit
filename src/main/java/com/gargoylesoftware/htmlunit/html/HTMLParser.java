@@ -85,7 +85,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * <p>SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
  * to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>
  *
- * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author David K. Taylor
  * @author Chris Erskine

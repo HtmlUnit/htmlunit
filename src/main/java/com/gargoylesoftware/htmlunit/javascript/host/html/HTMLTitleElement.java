@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLTitleElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Ronald Brill

@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * A JavaScript object for {@code Promise}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })

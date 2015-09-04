@@ -58,7 +58,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * Represents the top level of the XML source. Includes members for retrieving and creating all other XML objects.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms756987.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Sudhan Moghe

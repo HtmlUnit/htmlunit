@@ -31,7 +31,6 @@ import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.SourceProvider;
 /**
  * Utility class containing miscellaneous {@link WebClient}-related methods.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 public final class WebClientUtils {

@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * Minimal tests for {@link JavaScriptJobManagerImpl}. Tests which use the full HtmlUnit stack
  * go in {@link JavaScriptJobManagerTest}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Amit Manjhi
  * @author Ronald Brill

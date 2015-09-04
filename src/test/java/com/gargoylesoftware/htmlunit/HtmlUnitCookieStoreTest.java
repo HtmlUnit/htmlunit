@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * Tests the HtmlUnitCookieStore, which is a wrapper around the CookieManager.
- * @version $Revision$
+ *
  * @author James Phillpotts
  */
 public class HtmlUnitCookieStoreTest {

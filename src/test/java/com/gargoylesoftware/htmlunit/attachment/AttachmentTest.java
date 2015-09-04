@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link Attachment}.
  *
- * @version $Revision$
  * @author Bruce Chapman
  * @author Sudhan Moghe
  * @author Daniel Gredler

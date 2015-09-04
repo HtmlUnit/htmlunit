@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "input" where type is "week".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class HtmlWeekInput extends HtmlInput {

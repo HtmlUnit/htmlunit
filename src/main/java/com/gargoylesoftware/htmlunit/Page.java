@@ -21,7 +21,6 @@ import java.net.URL;
 /**
  * An abstract page that represents some content returned from a server.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Marc Guillemot

@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * CookieManager itself takes care of this and ignores all cookie request if
  * disabled. If you override this your methods have to do the same.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Nicolas Belisle

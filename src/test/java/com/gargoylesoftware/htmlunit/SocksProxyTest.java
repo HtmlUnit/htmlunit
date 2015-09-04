@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  * This test {@link org.junit.Assume assumes} a SOCKS proxy to be available on port
  * {@link WebTestCase#SOCKS_PROXY_PORT} of {@link WebTestCase#SOCKS_PROXY_HOST}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 /**
  * Tests for {@link SgmlPage}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

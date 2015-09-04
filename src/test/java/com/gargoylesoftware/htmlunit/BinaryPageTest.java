@@ -31,7 +31,6 @@ import org.junit.runner.RunWith;
 /**
  * Tests for binary content.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

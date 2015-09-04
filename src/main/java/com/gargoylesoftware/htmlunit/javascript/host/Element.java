@@ -55,7 +55,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * A JavaScript object for {@link DomElement}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Sudhan Moghe

@@ -20,7 +20,6 @@ import java.util.Locale;
 /**
  * A collection of constants that represent the various ways a form can be encoded when submitted.
  *
- * @version $Revision$
  * @author Brad Clarke
  * @author Ahmed Ashour
  */

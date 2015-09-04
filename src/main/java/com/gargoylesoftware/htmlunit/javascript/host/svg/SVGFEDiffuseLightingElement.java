@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeDiffuseLighting;
 /**
  * A JavaScript object for SVGFEDiffuseLightingElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeDiffuseLighting.class,

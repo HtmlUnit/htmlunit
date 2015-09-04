@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
  * An adapter class for debugger implementations. The methods in this class are empty. This class
  * exists as a convenience for creating debugger objects.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 public class DebuggerAdapter implements Debugger {

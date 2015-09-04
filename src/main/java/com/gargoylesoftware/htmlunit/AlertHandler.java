@@ -18,7 +18,6 @@ package com.gargoylesoftware.htmlunit;
  * A handler for JavaScript alerts. Alerts are triggered when the JavaScript method Window.alert()
  * is called.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface AlertHandler {

@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link CSSFontFaceRule} rule.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  */

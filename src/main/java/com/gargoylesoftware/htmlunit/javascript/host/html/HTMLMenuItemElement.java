@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLMenuItemElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = HtmlMenuItem.class, browsers = @WebBrowser(FF))

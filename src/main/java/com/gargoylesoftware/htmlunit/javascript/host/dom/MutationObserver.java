@@ -41,7 +41,6 @@ import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
 /**
  * A JavaScript object for {@code MutationObserver}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })

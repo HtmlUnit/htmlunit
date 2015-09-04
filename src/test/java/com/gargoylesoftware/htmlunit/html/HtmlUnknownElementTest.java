@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlUnknownElement}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

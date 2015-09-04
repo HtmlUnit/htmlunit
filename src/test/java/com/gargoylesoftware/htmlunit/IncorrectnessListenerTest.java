@@ -23,7 +23,6 @@ import org.junit.runner.RunWith;
 /**
  * Tests for {@link IncorrectnessListener}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

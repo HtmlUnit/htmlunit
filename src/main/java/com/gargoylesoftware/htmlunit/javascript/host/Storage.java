@@ -38,7 +38,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * The JavaScript object that represents a Storage.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

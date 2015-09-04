@@ -77,7 +77,6 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 /**
  * A JavaScript object for a Document.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>

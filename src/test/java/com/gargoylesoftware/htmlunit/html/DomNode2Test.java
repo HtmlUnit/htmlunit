@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link DomNode}.
  *
- * @version $Revision$
  * @author Chris Erskine
  * @author Ahmed Ashour
  */

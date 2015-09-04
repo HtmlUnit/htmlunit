@@ -26,7 +26,6 @@ import java.lang.annotation.Target;
 /**
  * An annotation to mark a Java class as JavaScript class.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)

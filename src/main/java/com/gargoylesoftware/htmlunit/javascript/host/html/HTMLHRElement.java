@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLHRElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

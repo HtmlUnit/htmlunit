@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 /**
  * Unit tests for {@link CSSStyleSheet}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

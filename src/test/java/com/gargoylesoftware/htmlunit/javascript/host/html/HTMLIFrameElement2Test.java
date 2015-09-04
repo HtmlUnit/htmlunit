@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLIFrameElement}.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  * @author Marc Guillemot

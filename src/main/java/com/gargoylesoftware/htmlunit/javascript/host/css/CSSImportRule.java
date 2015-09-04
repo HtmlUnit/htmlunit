@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 /**
  * A JavaScript object for a CSSImportRule.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */

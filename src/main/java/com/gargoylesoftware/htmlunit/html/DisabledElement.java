@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 /**
  * A marker interface for those classes that can be disabled.
  *
- * @version $Revision$
  * @author David D. Kilzer
  */
 public interface DisabledElement {

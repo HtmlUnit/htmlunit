@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for handling HttpClient's {@link org.apache.http.NoHttpResponseException}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  */
@@ -63,7 +62,6 @@ public class NoHttpResponseTest {
     /**
      * Test using WebDriver.
      * @author Marc Guillemot
-     * @version $Revision$
      */
     @RunWith(BrowserRunner.class)
     public static class WithWebDriverTest extends WebDriverTestCase {
@@ -97,7 +95,6 @@ public class NoHttpResponseTest {
     /**
      * Test using WebClient with default configuration allowing to throw exception.
      * @author Marc Guillemot
-     * @version $Revision$
      */
     @RunWith(BrowserRunner.class)
     public static class WithWebClientTest extends SimpleWebTestCase {

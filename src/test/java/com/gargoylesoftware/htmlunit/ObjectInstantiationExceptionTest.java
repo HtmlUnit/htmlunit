@@ -25,7 +25,6 @@ import org.junit.Test;
 /**
  * Tests for {@link ObjectInstantiationException}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class ObjectInstantiationExceptionTest {

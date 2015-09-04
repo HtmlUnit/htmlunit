@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link ApplicationCache}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
  */

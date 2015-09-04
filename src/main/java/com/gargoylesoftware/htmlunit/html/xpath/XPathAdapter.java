@@ -38,7 +38,6 @@ import org.apache.xpath.res.XPATHMessages;
 /**
  * XPath adapter implementation for HtmlUnit.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 class XPathAdapter {

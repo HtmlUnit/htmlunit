@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A {@link JavaScriptJob} created from a {@link Function} object.
- * @version $Revision$
  * @author Brad Clarke
  */
 class JavaScriptFunctionJob extends JavaScriptExecutionJob {

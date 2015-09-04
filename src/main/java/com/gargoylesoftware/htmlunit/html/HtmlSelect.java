@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Wrapper for the HTML element "select".
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor

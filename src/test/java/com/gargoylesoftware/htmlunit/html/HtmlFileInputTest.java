@@ -67,7 +67,6 @@ import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 /**
  * Tests for {@link HtmlFileInput}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

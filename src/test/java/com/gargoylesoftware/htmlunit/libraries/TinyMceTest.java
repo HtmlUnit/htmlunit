@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * <p>TODO: more tests to add</p>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Frank Danek

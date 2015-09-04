@@ -35,7 +35,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * An interactive SGML page, which is able to handle JavaScript events.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public abstract class InteractivePage extends SgmlPage {

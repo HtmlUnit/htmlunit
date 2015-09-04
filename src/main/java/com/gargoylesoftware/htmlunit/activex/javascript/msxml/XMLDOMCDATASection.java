@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * Used to quote or escape blocks of text to keep that text from being interpreted as markup language.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms762780.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

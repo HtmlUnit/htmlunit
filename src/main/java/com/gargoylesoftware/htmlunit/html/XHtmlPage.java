@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 /**
  * A representation of an XHTML page returned from a server.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 public class XHtmlPage extends HtmlPage {

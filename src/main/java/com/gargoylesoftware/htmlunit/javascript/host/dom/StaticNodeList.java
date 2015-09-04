@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * A JavaScript object for {@code StaticNodeList}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

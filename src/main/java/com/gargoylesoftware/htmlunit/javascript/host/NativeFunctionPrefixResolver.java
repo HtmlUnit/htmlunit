@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * A special {@link PrefixResolver} for {@link NativeFunction}s.
  *
- * @version $Revision$
  * @author Chuck Dumont
  */
 public class NativeFunctionPrefixResolver implements PrefixResolver {

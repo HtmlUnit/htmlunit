@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * Specifies a rectangle that contains a line of text in either an element or a TextRange object.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535906.aspx">MSDN Documentation</a>
  */

@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link EventNode}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

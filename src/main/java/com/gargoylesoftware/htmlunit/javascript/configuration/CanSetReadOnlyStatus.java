@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 /**
  * Status for {@link CanSetReadOnly}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public enum CanSetReadOnlyStatus {

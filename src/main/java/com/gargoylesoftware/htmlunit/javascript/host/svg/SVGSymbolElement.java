@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgSymbol;
 /**
  * A JavaScript object for SVGSymbolElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgSymbol.class,

@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlDefinitionList;
 /**
  * Unit tests for {@link HTMLDListElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
  * @author Ronald Brill

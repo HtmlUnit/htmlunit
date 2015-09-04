@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeGaussianBlur;
 /**
  * A JavaScript object for SVGFEGaussianBlurElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeGaussianBlur.class,

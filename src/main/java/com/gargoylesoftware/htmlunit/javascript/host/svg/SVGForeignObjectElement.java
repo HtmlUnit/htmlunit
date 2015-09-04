@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgForeignObject;
 /**
  * A JavaScript object for SVGForeignObjectElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

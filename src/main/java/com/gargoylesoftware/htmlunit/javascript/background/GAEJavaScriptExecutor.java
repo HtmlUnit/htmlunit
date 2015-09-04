@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
  *
  * Google App Engine specific subclass to facilitate execution of JS jobs.
  *
- * @version $Revision$
  * @author Amit Manjhi
  * @author Kostadin Chikov
  * @author Ronald Brill

@@ -27,7 +27,6 @@ import org.junit.runners.model.TestClass;
 /**
  * A {@link FrameworkMethod} with parameters.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class FrameworkMethodWithParameters extends FrameworkMethod {

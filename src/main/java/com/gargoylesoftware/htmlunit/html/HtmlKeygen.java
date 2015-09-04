@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "keygen".
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

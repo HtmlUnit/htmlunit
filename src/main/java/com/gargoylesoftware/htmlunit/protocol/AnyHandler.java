@@ -21,7 +21,6 @@ import java.net.URLStreamHandler;
 /**
  * Stream handler for URLs with unknown protocol which should simply not be opened.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class AnyHandler extends URLStreamHandler {

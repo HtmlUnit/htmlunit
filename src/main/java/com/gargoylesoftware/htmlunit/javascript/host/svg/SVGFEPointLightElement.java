@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFePointLight;
 /**
  * A JavaScript object for SVGFEPointLightElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFePointLight.class,

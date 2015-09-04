@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 /**
  * Custom {@link PrefixResolverDefault} extension.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 final class HtmlUnitPrefixResolver extends PrefixResolverDefault {

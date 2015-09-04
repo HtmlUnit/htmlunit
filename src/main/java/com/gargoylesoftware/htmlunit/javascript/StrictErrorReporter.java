@@ -25,7 +25,6 @@ import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 /**
  * A JavaScript error reporter that will log all warnings and errors, no matter how trivial.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ronald Brill

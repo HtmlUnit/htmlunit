@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

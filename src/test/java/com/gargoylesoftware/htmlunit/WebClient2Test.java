@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
 /**
  * Tests for {@link WebClient} that run with BrowserRunner.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

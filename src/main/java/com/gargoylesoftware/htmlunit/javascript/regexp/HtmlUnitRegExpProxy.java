@@ -40,7 +40,6 @@ import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
 /**
  * Begins customization of JavaScript RegExp base on JDK regular expression support.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

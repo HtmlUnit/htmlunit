@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * The JavaScript object "HTMLBRElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

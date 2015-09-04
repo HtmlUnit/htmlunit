@@ -19,7 +19,6 @@ import java.io.Serializable;
 /**
  * Implementations of this interface receive notifications of changes to the Character Data.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @see CharacterDataChangeEvent
  */

@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.gae.GAETestRunner;
 /**
  * Minimal tests for {@link JavaScriptJobManagerImpl} on GoogleAppEngine.
  *
- * @version $Revision$
  * @author Amit Manjhi
  */
 @RunWith(GAETestRunner.class)

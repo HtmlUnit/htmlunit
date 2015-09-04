@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * Wraps a Java method to make it available as a JavaScript function
  * (more flexible than Rhino's {@link FunctionObject}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class MethodWrapper extends ScriptableObject implements Function {

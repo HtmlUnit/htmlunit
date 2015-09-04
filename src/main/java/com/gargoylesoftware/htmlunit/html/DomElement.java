@@ -60,7 +60,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 /**
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>

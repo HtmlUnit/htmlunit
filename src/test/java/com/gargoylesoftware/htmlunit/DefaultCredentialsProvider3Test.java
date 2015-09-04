@@ -24,7 +24,6 @@ import org.junit.Test;
 /**
  * Tests for {@link DefaultCredentialsProvider}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class DefaultCredentialsProvider3Test {

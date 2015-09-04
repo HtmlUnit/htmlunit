@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLPreElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

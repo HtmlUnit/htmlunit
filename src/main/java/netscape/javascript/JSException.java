@@ -20,7 +20,6 @@ package netscape.javascript;
  *
  * TODO: we have to evaluate if it is possible to use plugin.jar from jdk
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public class JSException extends RuntimeException {

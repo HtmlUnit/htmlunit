@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * 127.0.0.1       htmlunit
  * </pre>
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  * @author Jacob Childress

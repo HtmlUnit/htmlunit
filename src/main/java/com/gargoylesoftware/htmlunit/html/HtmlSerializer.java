@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 /**
  * Utility to handle conversion from HTML code to string.
  * TODO: simplify it (it is just copied from what was available in DomNode and subclasses).
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

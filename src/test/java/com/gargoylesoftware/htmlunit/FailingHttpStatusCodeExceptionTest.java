@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link FailingHttpStatusCodeException}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

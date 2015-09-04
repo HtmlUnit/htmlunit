@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  *
  * <p>This job manager is serializable, but any running jobs are transient and are not serialized.</p>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Katharina Probst
  * @author Amit Manjhi

@@ -44,7 +44,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * A JavaScript object representing a TR.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour

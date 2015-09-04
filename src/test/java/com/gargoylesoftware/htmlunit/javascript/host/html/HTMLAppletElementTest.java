@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HTMLAppletElement}.
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  * @author Ahmed Ashour

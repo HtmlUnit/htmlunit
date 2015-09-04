@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLMenuElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill

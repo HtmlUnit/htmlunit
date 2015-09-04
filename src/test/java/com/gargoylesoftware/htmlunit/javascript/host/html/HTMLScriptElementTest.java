@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Unit tests for {@link HTMLScriptElement}.
  * TODO: check event order with defer in real browser WITHOUT using alert(...) as it impacts ordering.
  * Some expectations seems to be incorrect.
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot

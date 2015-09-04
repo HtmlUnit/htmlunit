@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Superclass for the wrappers for the HTML elements "thead", "tbody" and "tfoot".
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

@@ -40,7 +40,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * The JavaScript object "HTMLAppletElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Daniel Gredler

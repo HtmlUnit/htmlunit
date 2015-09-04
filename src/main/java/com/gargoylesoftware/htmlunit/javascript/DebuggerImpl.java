@@ -39,7 +39,6 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
  * an instance of this class, and make sure your loggers are configured to output <tt>TRACE</tt> level log messages.
  * </p>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @see DebugFrameImpl
  * @see HtmlUnitContextFactory#setDebugger(net.sourceforge.htmlunit.corejs.javascript.debug.Debugger)

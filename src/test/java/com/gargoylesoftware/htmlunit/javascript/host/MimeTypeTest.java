@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Unit tests for {@link MimeType}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class MimeTypeTest extends SimpleWebTestCase {

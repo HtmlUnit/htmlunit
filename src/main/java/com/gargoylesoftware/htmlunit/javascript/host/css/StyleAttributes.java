@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 /**
  * Contains information about the style attribute defined for different browser as well as their default values.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ahmed Ashour

@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Simple data object to simplify WebResponse creation.
  *
- * @version $Revision$
  * @author Brad Clarke
  * @author Daniel Gredler
  * @author Ahmed Ashour

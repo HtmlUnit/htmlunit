@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlPreformattedText}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill

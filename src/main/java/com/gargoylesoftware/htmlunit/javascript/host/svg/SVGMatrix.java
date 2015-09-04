@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 /**
  * A JavaScript object for SVGMatrix.
  * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/SVGMatrix">MDN doc</a>
- * @version $Revision$
  * @author Marc Guillemot
  */
 @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })

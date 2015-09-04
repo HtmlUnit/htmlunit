@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object {@code HTMLPictureElement}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = HtmlPicture.class, browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })

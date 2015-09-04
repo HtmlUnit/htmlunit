@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * properties and functions should occur from the XML configuration according to
  * the browser to simulate.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

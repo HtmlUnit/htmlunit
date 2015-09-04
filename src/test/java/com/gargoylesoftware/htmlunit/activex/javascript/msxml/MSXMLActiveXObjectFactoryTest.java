@@ -22,7 +22,6 @@ import org.junit.Test;
 /**
  * Tests for {@link MSXMLActiveXObjectFactory}.
  *
- * @version $Revision$
  * @author Frank Danek
  */
 public class MSXMLActiveXObjectFactoryTest {

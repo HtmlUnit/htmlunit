@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * exposed in any other places of the API. Internally we can cast to this class
  * when we need access to functionality that is not present in {@link WebWindow}
  *
- * @version $Revision$
  * @author Brad Clarke
  * @author David K. Taylor
  * @author Ahmed Ashour

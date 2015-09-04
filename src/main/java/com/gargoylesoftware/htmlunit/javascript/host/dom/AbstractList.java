@@ -53,7 +53,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * The parent class of {@link NodeList} and {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Chris Erskine

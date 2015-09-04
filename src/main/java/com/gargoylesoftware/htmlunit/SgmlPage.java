@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 /**
  * A basic class of Standard Generalized Markup Language (SGML), e.g. HTML and XML.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.httpclient;
 /**
  * Customized CookieAttributeHandler for handling of the httponly attribute.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David D. Kilzer

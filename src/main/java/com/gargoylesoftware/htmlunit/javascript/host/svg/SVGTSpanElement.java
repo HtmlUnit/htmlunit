@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgTSpan;
 /**
  * A JavaScript object for SVGTSpanElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgTSpan.class,

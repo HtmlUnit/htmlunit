@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
 /**
  * Unit tests for {@link CookieManager}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot

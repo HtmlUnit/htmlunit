@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A dummy implementation of a JavaScript object for External.
  *
- * @version $Revision$
  * @author Peter Faller
  * @author Ronald Brill
  * @author Ahmed Ashour

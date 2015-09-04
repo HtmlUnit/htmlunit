@@ -19,7 +19,6 @@ import java.net.URL;
 /**
  * An exception that is thrown when the server returns a failing status code.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  */

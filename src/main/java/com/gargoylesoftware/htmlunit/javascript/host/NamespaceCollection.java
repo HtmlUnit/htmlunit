@@ -36,7 +36,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * A collection of {@link Namespace}s.
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))

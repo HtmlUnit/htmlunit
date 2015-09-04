@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgAnimate;
 /**
  * A JavaScript object for SVGAnimateElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

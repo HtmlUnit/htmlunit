@@ -27,7 +27,6 @@ import org.w3c.dom.Node;
  *
  * @param <E> The element type
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill

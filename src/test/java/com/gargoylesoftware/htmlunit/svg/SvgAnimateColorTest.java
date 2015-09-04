@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 /**
  * Tests for {@link SvgAnimateColor}.
  *
- * @version $Revision$
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)

@@ -40,7 +40,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * For general information on which properties and functions should be supported, see
  * <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">DOM Level 2 Events</a>.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

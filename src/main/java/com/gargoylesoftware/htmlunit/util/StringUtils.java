@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 /**
  * String utilities class for utility functions not covered by third party libraries.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Martin Tamme

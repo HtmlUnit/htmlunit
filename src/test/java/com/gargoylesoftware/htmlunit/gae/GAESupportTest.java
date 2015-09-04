@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * support. Tests are run through the {@link GAETestRunner} which tries to enforce (some of) GAE rules
  * like for instance class white list.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(GAETestRunner.class)

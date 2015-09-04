@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 /**
  * Tests for {@link StyleAttributes}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class StyleAttributesTest {

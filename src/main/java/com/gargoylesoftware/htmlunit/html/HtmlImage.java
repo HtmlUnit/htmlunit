@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 /**
  * Wrapper for the HTML element "img".
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

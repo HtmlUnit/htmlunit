@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 /**
  * Tests for {@link SvgPage}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

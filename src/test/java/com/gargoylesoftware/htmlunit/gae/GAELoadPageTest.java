@@ -36,10 +36,8 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 
 /**
- * Tests to see if pages can be loaded using <a href="http://code.google.com/appengine/">Google App Engine</a>
- * support.
+ * Tests to see if pages can be loaded using <a href="http://code.google.com/appengine/">Google App Engine</a> support.
  *
- * @version $Revision$
  * @author Amit Manjhi
  * @author Marc Guillemot
  * @author Ronald Brill
@@ -244,7 +242,6 @@ public class GAELoadPageTest {
      * Use special MockWebConnection here as the UrlFetchWebConnection handles
      * special URLs that are normally not even requested to the WebConnection (like "about:blank").
      * @author Marc Guillemot
-     * @version $Revision$
      */
     static class GAEMockWebConnection extends MockWebConnection {
         private final UrlFetchWebConnection urlFetchWebconnection_;

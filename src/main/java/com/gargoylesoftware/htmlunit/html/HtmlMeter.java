@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * HTML 5 "meter" element.
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/HTML/Element/meter">MDN documentation</a>
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek

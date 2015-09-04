@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlBackgroundSound}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

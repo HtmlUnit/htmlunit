@@ -49,7 +49,6 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 /**
  * A JavaScript object for XMLSerializer.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Darrell DeBoer
  * @author Ronald Brill

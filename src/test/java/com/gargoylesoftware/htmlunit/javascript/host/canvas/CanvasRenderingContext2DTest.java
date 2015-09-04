@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Unit tests for {@link CanvasRenderingContext2D}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek

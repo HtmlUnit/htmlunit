@@ -34,7 +34,6 @@ import org.junit.runners.model.FrameworkMethod;
  * same loader what allows to write tests "normally" without any need
  * for reflection to access method/members.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Amit Manjhi
  */

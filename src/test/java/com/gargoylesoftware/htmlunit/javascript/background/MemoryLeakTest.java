@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.util.MemoryLeakDetector;
  * eliminated. Once you have a fix, repeat the above steps in order to verify that the
  * fix works.</p>
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 public class MemoryLeakTest extends SimpleWebTestCase {

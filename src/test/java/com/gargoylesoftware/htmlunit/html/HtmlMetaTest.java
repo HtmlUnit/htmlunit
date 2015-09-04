@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlMeta}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill

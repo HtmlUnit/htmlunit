@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for {@code FileList}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

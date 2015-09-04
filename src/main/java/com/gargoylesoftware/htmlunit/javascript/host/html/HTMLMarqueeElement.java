@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * The JavaScript object "HTMLMarqueeElement".
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

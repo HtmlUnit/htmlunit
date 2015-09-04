@@ -26,7 +26,6 @@ import org.junit.Test;
 /**
  * Unit tests for {@link EncodingSniffer}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */

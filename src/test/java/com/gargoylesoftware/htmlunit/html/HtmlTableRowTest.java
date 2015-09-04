@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * Tests for {@link HtmlTableRow}.
  *
- * @version $Revision$
  * @author <a href="mailto:gallaherm@pragmatics.com">Mike Gallaher</a>
  * @author Mike Bowler
  * @author Ahmed Ashour

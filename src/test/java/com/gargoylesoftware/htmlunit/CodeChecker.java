@@ -28,7 +28,6 @@ package com.gargoylesoftware.htmlunit;
  *   <li>org.eclipse.osgi_x.jar</li>
  * </ul>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class CodeChecker {

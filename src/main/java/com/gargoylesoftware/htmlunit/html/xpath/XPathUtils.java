@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 /**
  * Collection of XPath utility methods.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Chuck Dumont
  */

@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.Page;
  * are not registered with new <tt>WebClient</tt> instances, in order to maintain backwards
  * compatibility with HtmlUnit 2.1 and earlier. This will likely change in the future.</p>
  *
- * @version $Revision$
  * @author Bruce Chapman
  * @author Sudhan Moghe
  * @author Daniel Gredler

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeSpecularLighting;
 /**
  * A JavaScript object for SVGFESpecularLightingElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeSpecularLighting.class,

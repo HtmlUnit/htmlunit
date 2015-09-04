@@ -19,7 +19,6 @@ import org.junit.Test;
 /**
  * Tests for {@link BrowserVersion}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek

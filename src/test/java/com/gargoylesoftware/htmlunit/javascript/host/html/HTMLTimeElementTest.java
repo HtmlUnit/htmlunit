@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Unit tests for {@link HTMLTimeElement}.
- * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)

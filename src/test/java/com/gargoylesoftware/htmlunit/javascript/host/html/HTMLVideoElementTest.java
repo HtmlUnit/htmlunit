@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLVideoElement}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  */

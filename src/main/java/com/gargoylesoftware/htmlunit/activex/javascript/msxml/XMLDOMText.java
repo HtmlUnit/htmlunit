@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * Represents the text content of an element or attribute.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms757862.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Ahmed Ashour

@@ -18,7 +18,6 @@ package com.gargoylesoftware.htmlunit;
  * A generic page that will be returned for JavaScript content.
  * Specifically any content types of {@code text/javascript}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Ronald Brill

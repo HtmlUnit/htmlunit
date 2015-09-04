@@ -44,7 +44,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * The JavaScript object representing a TD or TH.
  *
- * @version $Revision$
  * @author <a href="https://sourceforge.net/users/marlee/">Mark van Leeuwen</a>
  * @author Ahmed Ashour
  * @author Sudhan Moghe

@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * A DOM object for DocumentFragment.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class DomDocumentFragment extends DomNode implements DocumentFragment {

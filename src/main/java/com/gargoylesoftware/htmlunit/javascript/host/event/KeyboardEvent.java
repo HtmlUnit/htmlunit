@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * <a href="http://www.w3c.org/TR/DOM-Level-3-Events/#Events-KeyboardEvents-Interfaces">
  * DOM Level 3 Events</a>.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

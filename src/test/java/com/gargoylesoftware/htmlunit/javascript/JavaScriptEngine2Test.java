@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Same scope as {@link JavaScriptEngineTest} but extending {@link WebDriverTestCase}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

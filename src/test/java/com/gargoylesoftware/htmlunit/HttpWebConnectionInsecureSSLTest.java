@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
 /**
  * Tests for insecure SSL.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebResponseData;
  * Extension of {@link WebConnectionWrapper} providing facility methods to deliver something other than
  * what the wrapped connection would deliver.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public abstract class FalsifyingWebConnection extends WebConnectionWrapper {

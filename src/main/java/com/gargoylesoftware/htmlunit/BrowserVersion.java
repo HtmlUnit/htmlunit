@@ -73,7 +73,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * However, note that the constants are not enough to fully customize the browser,
  *   you also need to look into the {@link BrowserVersionFeatures} and the classes inside "javascript" package.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Marc Guillemot

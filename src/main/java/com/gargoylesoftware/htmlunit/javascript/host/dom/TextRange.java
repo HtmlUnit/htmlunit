@@ -41,7 +41,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535872.aspx">MSDN documentation (1)</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms533042.aspx">MSDN documentation (2)</a>
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author David Gileadi

@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlResetInput}.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  */

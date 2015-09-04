@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 /**
  * Wrapper for the SVG element "set".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class SvgSet extends SvgElement {

@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgMPath;
 /**
  * A JavaScript object for SVGMPathElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

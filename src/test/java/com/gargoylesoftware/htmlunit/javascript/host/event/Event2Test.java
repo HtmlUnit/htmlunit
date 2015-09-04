@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests that the events triggered in the right order.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  */

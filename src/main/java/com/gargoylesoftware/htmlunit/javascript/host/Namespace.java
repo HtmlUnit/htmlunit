@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * A JavaScript object for a Namespace.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535854.aspx">MSDN documentation</a>

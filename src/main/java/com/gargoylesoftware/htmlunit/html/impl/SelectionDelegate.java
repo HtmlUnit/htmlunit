@@ -19,7 +19,6 @@ import java.io.Serializable;
 /**
  * Contains selection-related functionality used by elements.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public interface SelectionDelegate extends Serializable {

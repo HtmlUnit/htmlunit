@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 /**
  * The JavaScript object that represents an "Image", this is historically used to construct {@literal HTMLImageElement}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass

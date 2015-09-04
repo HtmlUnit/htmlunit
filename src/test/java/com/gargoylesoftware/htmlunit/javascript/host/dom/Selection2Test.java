@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 /**
  * Unit tests for {@link Selection}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Frank Danek

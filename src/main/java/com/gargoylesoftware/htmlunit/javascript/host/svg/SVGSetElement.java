@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgSet;
 /**
  * A JavaScript object for SVGSetElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

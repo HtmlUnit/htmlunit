@@ -52,7 +52,6 @@ import org.junit.rules.TestRule;
 /**
  * Common superclass for HtmlUnit tests.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David D. Kilzer
  * @author Marc Guillemot

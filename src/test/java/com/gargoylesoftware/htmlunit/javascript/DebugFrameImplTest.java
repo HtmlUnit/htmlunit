@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.WebConnection;
 /**
  * Tests for {@link DebugFrameImpl}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class DebugFrameImplTest extends SimpleWebTestCase {

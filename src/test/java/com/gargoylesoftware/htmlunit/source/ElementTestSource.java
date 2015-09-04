@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
 /**
  * Use to generate test cases similar to the ones in the 'general' package.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class ElementTestSource {

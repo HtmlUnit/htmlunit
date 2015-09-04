@@ -41,7 +41,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535869.aspx">MSDN Documentation</a>
  * @see <a href="https://developer.mozilla.org/en/DOM/Selection">Gecko DOM Reference</a>
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Frank Danek

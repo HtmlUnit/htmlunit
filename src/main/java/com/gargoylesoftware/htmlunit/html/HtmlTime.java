@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "time".
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public class HtmlTime extends HtmlElement {

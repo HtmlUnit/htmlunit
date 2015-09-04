@@ -19,7 +19,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * A JavaScript object for ClipboardData.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class ClipboardData extends SimpleScriptable {

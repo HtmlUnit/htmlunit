@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLDDElement".
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

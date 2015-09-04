@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for SimpleRange.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)

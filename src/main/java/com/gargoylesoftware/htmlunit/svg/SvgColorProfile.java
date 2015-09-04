@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 /**
  * Wrapper for the SVG element "color-profile".
  *
- * @version $Revision$
  * @author Frank Danek
  */
 public class SvgColorProfile extends SvgElement {

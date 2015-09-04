@@ -24,7 +24,6 @@ import org.apache.commons.io.FileUtils;
 /**
  * Patches utilities.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class Patch {

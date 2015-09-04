@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests the host class names.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  *

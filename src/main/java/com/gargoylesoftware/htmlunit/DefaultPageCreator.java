@@ -74,7 +74,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *    </tr>
  *  </table>
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:yourgod@users.sourceforge.net">Brad Clarke</a>

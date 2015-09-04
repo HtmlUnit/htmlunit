@@ -33,7 +33,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * Wrapper for the HTML element "frameset".
  *
- * @version $Revision$
  * @author Bruce Chapman
  * @author Ahmed Ashour
  * @author Ronald Brill

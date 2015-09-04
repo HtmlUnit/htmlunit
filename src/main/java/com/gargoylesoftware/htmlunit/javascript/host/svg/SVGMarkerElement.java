@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgMarker;
 /**
  * A JavaScript object for SVGMarkerElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgMarker.class,

@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * <blockquote>Mostly for historical reasons, in addition to the browsing context's selection, each
  * textarea and input element has an independent selection. These are the text field selections.</blockquote>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Ahmed Ashour

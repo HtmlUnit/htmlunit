@@ -54,7 +54,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * Tests for {@link Window} that use background jobs.
  *
- * @version $Revision$
  * @author Brad Clarke
  * @author Daniel Gredler
  * @author Frank Danek

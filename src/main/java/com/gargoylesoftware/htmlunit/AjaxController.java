@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * For instance, it can turn asynchronous AJAX calls into synchronous AJAX calls, making test code
  * deterministic and avoiding calls to <tt>Thread.sleep()</tt>.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class AjaxController implements Serializable {

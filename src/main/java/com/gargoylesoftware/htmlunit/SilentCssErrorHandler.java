@@ -22,7 +22,6 @@ import org.w3c.css.sac.ErrorHandler;
 /**
  * Implementation of {@link ErrorHandler} which ignores all CSS problems.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @see DefaultCssErrorHandler
  */

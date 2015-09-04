@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
  * A JavaScript object for XSLTemplate.
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms767644.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class XSLTemplate extends SimpleScriptable {

@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * JavaScript environment for the MSXML ActiveX library.
  *
- * @version $Revision$
  * @author Frank Danek
  */
 public class MSXMLJavaScriptEnvironment {

@@ -366,7 +366,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XSLTemplate;
 /**
  * A container for all the JavaScript configuration information.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Chris Erskine
  * @author Ahmed Ashour

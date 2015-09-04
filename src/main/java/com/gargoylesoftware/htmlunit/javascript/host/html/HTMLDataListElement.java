@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLDataListElement".
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

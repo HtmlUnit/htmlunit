@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * Represents the content of an XML comment.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms765529.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour
  * @author Frank Danek

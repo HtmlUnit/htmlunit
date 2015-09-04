@@ -28,7 +28,6 @@ import org.apache.commons.logging.LogFactory;
  * If you want a refresh handler that ignores the wait time, see
  * {@link ImmediateRefreshHandler}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  */

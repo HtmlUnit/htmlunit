@@ -54,7 +54,6 @@ import com.gargoylesoftware.htmlunit.WebClientOptions;
  * This looks rather like a hack than like clean code but at the time of the writing it seems to
  * be the easiest way to provide SOCKS proxy support for HTTPS.
  *
- * @version $Revision$
  * @author Nicolas Belisle
  * @author Ahmed Ashour
  * @author Martin Huber
@@ -243,7 +242,6 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
  * A completely insecure (yet very easy to use) x509 trust manager. This manager trusts all servers
  * and all clients, regardless of credentials or lack thereof.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  */

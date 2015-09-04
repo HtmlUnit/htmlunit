@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgAnchor;
 /**
  * A JavaScript object for SVGAElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgAnchor.class,

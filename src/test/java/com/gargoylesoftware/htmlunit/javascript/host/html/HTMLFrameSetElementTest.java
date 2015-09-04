@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Unit tests for {@link HTMLFrameSetElement}.
  *
- * @version $Revision$
  * @author Bruce Chapman
  * @author Ahmed Ashour
  * @author Ronald Brill

@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgSvg;
 /**
  * A JavaScript object for SVGSVGElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgSvg.class,

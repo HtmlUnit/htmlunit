@@ -52,7 +52,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * <b>Note that {@link WebDriverTestCase} should be used unless HtmlUnit-specific feature
  * is needed and Selenium does not support it.</b>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

@@ -32,7 +32,6 @@ import org.junit.Test;
 /**
  * Tests for {@link WebClient}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>

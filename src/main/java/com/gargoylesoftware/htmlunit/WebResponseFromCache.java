@@ -20,7 +20,6 @@ import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
  * A {@link WebResponse} implementation to deliver with content from cache. The response
  * is the same but the request may have some variation like an anchor.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 class WebResponseFromCache extends WebResponseWrapper {

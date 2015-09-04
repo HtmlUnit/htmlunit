@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  *
  * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/MessageEvent">
  *          Mozilla documentation</a>
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

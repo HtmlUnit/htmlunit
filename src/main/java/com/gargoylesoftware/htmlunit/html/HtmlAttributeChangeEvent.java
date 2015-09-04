@@ -20,7 +20,6 @@ import java.util.EventObject;
  * This is the event class for notifications about changes to the attributes of the
  * HtmlElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @see HtmlAttributeChangeListener
  */

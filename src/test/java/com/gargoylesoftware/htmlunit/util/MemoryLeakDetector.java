@@ -23,7 +23,6 @@ import java.util.Map;
  *
  * <p>Based on <a href="http://blogs.ilog.com/jviews/2008/05/05/unit-testing-memory-leaks/">this</a>.</p>
  *
- * @version $Revision$
  * @author Daniel Gredler
  */
 public class MemoryLeakDetector {

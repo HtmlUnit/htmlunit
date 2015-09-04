@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 /**
  * A JavaScript object for {@code BatteryManager}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })

@@ -23,7 +23,6 @@ import java.lang.annotation.Target;
  * An annotation to check of whether this getter read-only method allows to set the value,
  * ignore it, or throw an exception.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)

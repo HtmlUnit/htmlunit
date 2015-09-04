@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * A servlet that wraps static content.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public abstract class ServletContentWrapper extends HttpServlet {

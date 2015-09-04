@@ -48,7 +48,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 /**
  * A JavaScript object for Geolocation.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

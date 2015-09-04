@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link CSSStyleDeclaration} background shorthand.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  */

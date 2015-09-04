@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLMapElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

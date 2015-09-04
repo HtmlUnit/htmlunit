@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLFieldSetElement}.
  *
- * @version $Revision$
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Ronald Brill
  * @author Frank Danek

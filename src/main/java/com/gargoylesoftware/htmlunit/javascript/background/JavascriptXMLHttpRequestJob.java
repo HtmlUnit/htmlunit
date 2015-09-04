@@ -19,7 +19,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 /**
  * A helper class for XMLHttpRequest.
- * @version $Revision$
  * @author Ronald Brill
  */
 final class JavascriptXMLHttpRequestJob extends BasicJavaScriptJob {

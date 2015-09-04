@@ -32,7 +32,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * The parent class of all typed arrays, {@link DataView} is not included.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek

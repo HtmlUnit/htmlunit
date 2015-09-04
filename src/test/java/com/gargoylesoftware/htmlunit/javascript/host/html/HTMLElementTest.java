@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link HTMLElement}.
  *
- * @version $Revision$
  * @author Brad Clarke
  * @author Chris Erskine
  * @author David D. Kilzer

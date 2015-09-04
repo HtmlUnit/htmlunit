@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped
  * web response object.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

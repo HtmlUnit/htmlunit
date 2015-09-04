@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * Contains information associated with the document type declaration.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms762752.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

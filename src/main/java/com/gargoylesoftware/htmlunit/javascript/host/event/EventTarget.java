@@ -51,7 +51,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * A JavaScript object for {@code EventTarget}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * It doesn't currently support multipart POST.
  * </p>
  *
- * @version $Revision$
  * @author Amit Manjhi
  * @author Marc Guillemot
  * @author Pieter Herroelen

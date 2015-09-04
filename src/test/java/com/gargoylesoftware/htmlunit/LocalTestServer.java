@@ -23,7 +23,6 @@ import org.apache.http.protocol.HttpRequestHandler;
 /**
  * Simple HTTPS server, a class with same name existed in HttpComponents 4.3 test suite.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class LocalTestServer extends LocalServerTestBase {

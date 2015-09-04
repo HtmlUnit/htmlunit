@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * Superclass for all row-containing JavaScript host classes, including tables,
  * table headers, table bodies and table footers.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Marc Guillemot

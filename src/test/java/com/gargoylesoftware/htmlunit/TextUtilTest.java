@@ -26,7 +26,6 @@ import org.junit.Test;
 /**
  * Tests for {@link TextUtil}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public final class TextUtilTest extends SimpleWebTestCase {

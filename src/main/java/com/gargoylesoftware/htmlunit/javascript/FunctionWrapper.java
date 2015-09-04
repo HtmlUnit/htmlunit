@@ -21,7 +21,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Wrapper for a {@link Function} delegating all calls to the wrapped instance.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

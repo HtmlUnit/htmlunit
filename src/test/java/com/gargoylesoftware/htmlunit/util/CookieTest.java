@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link Cookie}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class CookieTest extends SimpleWebTestCase {

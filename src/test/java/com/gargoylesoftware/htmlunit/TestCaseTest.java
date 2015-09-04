@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 /**
  * Tests for various test cases.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class TestCaseTest {

@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgView;
 /**
  * A JavaScript object for SVGViewElement.
  *
- * @version $Revision$
  * @author Frank Danek
  */
 @JsxClass(domClass = SvgView.class,

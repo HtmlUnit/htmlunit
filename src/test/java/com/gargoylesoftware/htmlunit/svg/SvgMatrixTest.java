@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMatrix}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  */

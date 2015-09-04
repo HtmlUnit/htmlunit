@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for {@link HTMLCollection}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

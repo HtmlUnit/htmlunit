@@ -33,7 +33,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * A JavaScript object for {@code CharacterData}.
  *
- * @version $Revision$
  * @author David K. Taylor
  * @author Chris Erskine
  */

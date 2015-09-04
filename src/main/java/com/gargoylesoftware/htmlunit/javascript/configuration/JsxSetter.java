@@ -26,7 +26,6 @@ import java.lang.annotation.Target;
 /**
  * An annotation to mark a Java method as JavaScript setter.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)

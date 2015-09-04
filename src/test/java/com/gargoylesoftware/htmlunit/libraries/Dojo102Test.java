@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * TODO: add tests for IE6 and IE7
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill

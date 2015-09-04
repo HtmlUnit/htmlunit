@@ -56,7 +56,6 @@ import com.steadystate.css.dom.MediaListImpl;
  * of this class will always be empty. This allows us to check for CSS enablement/disablement in a single
  * location, without having to sprinkle checks throughout the code.</p>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill

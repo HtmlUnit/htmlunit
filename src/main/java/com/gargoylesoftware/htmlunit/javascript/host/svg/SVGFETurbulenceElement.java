@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeTurbulence;
 /**
  * A JavaScript object for SVGFETurbulenceElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeTurbulence.class,

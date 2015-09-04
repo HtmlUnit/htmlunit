@@ -24,7 +24,6 @@ import org.apache.http.impl.cookie.BasicDomainHandler;
 /**
  * Customized BasicDomainHandler for HtmlUnit.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

@@ -54,7 +54,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * Level 2 Event Documentation</a> or <a href="http://msdn2.microsoft.com/en-us/library/aa703876.aspx">IE's
  * IHTMLEventObj interface</a>.
  *
- * @version $Revision$
  * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Mike Bowler
  * @author Chris Erskine

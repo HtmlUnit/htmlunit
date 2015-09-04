@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for a {@link org.w3c.dom.css.CSSCharsetRule}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

@@ -44,7 +44,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * Extends the core node with support for data types, namespaces, document type definitions (DTDs), and schemas.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms765513.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Barnaby Court

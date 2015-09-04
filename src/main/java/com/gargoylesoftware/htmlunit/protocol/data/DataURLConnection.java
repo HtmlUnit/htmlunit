@@ -27,7 +27,6 @@ import org.apache.commons.logging.LogFactory;
 /**
  * A URLConnection for supporting data URLs.
  * @see <a href="http://www.ietf.org/rfc/rfc2397.txt">RFC2397</a>
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class DataURLConnection extends URLConnection {

@@ -45,7 +45,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * Supports iteration through the live collection, in addition to indexed access.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms757073.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Chris Erskine

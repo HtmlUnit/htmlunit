@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for {@link HtmlFrame}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */

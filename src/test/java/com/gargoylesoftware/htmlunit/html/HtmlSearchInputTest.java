@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlSearchInput}.
  *
- * @version $Revision$
  * @author Marc Guillemot
 */
 @RunWith(BrowserRunner.class)

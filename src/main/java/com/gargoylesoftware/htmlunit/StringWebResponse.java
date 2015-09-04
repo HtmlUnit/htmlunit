@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * A simple WebResponse created from a string. Content is assumed to be of type <tt>text/html</tt>.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Brad Clarke

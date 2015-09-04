@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgUse;
 /**
  * A JavaScript object for SVGUseElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgUse.class,

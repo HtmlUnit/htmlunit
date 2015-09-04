@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 /**
  * A page that will be returned for response with content type "text/xml".
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour

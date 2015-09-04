@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * Tests for {@link WebClient#waitForBackgroundJavaScriptStartingBefore(long)} and
  * {@link WebClient#waitForBackgroundJavaScript(long)}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgStyle;
 /**
  * A JavaScript object for SVGStyleElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgStyle.class,

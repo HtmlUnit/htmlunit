@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 /**
  * Tests for {@link SelectorSpecificity}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)

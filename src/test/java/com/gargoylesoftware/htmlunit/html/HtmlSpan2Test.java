@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlSpan}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Ronald Brill

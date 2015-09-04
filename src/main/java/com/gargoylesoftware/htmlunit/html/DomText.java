@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 /**
  * Representation of a text node in the HTML DOM.
  *
- * @version $Revision$
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Rodney Gitzel

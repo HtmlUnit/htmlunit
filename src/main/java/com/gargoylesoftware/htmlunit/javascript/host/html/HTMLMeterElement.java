@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLMeterElement".
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Ahmed Ashour

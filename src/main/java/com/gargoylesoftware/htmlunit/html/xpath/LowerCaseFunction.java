@@ -25,7 +25,6 @@ import org.apache.xpath.objects.XString;
  * Custom XPath function to convert the argument to lower case (using the default locale
  * as in {@link java.lang.String#toLowerCase()}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

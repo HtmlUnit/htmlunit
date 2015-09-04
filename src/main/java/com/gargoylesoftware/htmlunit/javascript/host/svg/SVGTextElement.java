@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgText;
 /**
  * A JavaScript object for SVGTextElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgText.class,

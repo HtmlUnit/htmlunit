@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HTMLMeterElement}.
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  */

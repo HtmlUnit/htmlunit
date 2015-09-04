@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlHiddenInput}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek

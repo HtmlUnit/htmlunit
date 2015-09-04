@@ -19,7 +19,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * This object contains the result of executing a chunk of script code.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  */

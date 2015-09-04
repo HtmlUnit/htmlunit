@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeComponentTransfer;
 /**
  * A JavaScript object for SVGFEComponentTransferElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeComponentTransfer.class,

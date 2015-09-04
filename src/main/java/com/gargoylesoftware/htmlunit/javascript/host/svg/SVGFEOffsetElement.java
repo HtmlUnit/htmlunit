@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeOffset;
 /**
  * A JavaScript object for SVGFEOffsetElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeOffset.class,

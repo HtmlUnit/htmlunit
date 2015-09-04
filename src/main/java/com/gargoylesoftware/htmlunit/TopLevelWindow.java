@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * A window representing a top level browser window.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author David D. Kilzer

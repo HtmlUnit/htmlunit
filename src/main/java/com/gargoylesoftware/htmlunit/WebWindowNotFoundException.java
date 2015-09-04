@@ -18,7 +18,6 @@ package com.gargoylesoftware.htmlunit;
  * Exception to indicate that no {@link WebWindow} could be found that matched
  * a given name.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class WebWindowNotFoundException extends RuntimeException {

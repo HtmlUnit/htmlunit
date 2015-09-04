@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLTableCaptionElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek

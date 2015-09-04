@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 /**
  * Wrapper for the SVG element "feDistantLight".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class SvgFeDistantLight extends SvgElement {

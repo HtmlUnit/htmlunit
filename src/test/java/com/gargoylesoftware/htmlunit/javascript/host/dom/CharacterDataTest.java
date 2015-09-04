@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link CharacterData}.
  *
- * @version $Revision$
  * @author David K. Taylor
  */
 @RunWith(BrowserRunner.class)

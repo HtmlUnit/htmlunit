@@ -44,7 +44,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * The JavaScript object that represents a textarea.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Chris Erskine

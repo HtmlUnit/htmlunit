@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * Tests for {@link HtmlApplet}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill

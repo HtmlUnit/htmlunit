@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link Notification}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Ahmed Ashour

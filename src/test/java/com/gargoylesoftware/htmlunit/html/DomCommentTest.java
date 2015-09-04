@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link DomComment}.
  *
- * @version $Revision$
  * @author Karel Kolman
  * @author Ahmed Ashour
  * @author Philip Graf

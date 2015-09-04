@@ -40,7 +40,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * The JavaScript object for {@link HtmlSelect}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Marc Guillemot

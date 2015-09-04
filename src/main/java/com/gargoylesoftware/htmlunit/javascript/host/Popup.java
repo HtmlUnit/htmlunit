@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 /**
  * A JavaScript object for IE's Popup.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour

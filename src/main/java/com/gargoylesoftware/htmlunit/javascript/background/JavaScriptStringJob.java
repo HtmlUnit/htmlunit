@@ -19,7 +19,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * A {@link JavaScriptJob} created from a string of code.
- * @version $Revision$
  * @author Brad Clarke
  */
 class JavaScriptStringJob extends JavaScriptExecutionJob {

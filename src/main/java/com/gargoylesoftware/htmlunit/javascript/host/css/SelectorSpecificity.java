@@ -30,7 +30,6 @@ import org.w3c.css.sac.SiblingSelector;
 /**
  * Calculates a selector's specificity.
  * @see <a href="http://www.w3.org/TR/CSS21/cascade.html#specificity">W3C CSS21</a>
- * @version $Revision$
  * @author Marc Guillemot
  */
 class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializable {

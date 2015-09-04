@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
 /**
  * A JavaScript object for {@code Crypto}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

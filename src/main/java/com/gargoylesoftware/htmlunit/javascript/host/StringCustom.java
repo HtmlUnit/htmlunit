@@ -21,7 +21,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Contains some missing features of Rhino NativeString.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

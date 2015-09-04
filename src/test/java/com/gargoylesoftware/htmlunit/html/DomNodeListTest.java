@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link DomNodeList}.
  *
- * @version $Revision$
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Frank Danek
  */

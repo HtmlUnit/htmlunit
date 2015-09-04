@@ -55,7 +55,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * This class (like all classes in this package) is specific for the JavaScript engine.
  * Users of HtmlUnit shouldn't use it directly.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Chris Erskine

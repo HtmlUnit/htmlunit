@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link XSLProcessor}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek

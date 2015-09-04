@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 /**
  * Tests for {@link HtmlTextInput}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Sudhan Moghe

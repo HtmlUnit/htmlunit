@@ -30,7 +30,6 @@ import java.util.Collection;
  * </code><br>
  * Depending on the simulated browser the form field is reachable only through its original name
  * or through all the names it has had.
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 /**
  * Tests for page reloading in various situations.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  */

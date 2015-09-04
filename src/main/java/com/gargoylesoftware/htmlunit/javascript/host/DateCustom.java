@@ -35,7 +35,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Contains some missing features of Rhino NativeDate.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek

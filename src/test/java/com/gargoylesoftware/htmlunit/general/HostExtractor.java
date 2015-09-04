@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Ensures all defined Host classes in internet references (e.g. Mozilla Developer Network)
  * are defined in {@link HostClassNameStandardsTest}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class HostExtractor {

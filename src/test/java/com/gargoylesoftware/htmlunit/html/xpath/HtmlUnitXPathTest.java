@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for XPath evaluation on HtmlUnit DOM.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

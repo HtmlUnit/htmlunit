@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 /**
  * Wrapper for the SVG element "animateColor".
  *
- * @version $Revision$
  * @author Frank Danek
  */
 public class SvgAnimateColor extends SvgElement {

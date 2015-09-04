@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link HtmlHiddenInput}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

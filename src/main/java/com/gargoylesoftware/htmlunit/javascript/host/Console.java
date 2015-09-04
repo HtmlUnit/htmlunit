@@ -46,7 +46,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * A JavaScript object for a console. This implementation simulates Firefox's console, which utilizes FireBug API.
  *
- * @version $Revision$
  * @author Andrea Martino
  */
 @JsxClasses({

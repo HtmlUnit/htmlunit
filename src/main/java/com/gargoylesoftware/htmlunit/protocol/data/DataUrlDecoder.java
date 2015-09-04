@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Helper to work with data URLs.
  * @see <a href="http://www.ietf.org/rfc/rfc2397.txt">RFC2397</a>
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class DataUrlDecoder {

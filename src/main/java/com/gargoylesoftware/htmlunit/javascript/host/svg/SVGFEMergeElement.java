@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeMerge;
 /**
  * A JavaScript object for SVGFEMergeElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeMerge.class,

@@ -57,7 +57,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.Stre
 /**
  * Tests for {@link XMLHttpRequest}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour

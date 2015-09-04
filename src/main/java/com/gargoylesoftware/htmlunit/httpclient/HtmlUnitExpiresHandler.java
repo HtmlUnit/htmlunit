@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 /**
  * Customized BasicExpiresHandler for HtmlUnit.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David D. Kilzer

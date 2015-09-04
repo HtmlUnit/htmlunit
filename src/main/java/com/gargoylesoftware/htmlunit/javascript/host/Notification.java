@@ -33,7 +33,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @see <a href="https://developer.mozilla.org/en/docs/Web/API/notification">
  * MDN - Notification</a>
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Ahmed Ashour

@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Set of tests for ill formed HTML code.
- * @version $Revision$
  * @author Marc Guillemot
  * @author Sudhan Moghe
  * @author Ahmed Ashour

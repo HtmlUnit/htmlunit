@@ -25,7 +25,6 @@ import org.junit.Test;
 /**
  * Tests for {@link WebRequest}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Rodney Gitzel

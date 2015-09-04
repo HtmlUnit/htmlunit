@@ -38,7 +38,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * A JavaScript object for a DocumentType.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms762752.aspx">MSDN documentation</a>

@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "input" where type is "date".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class HtmlDateInput extends HtmlInput {

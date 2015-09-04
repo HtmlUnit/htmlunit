@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 /**
  * A JavaScript object for a MediaList.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Ahmed Ashour

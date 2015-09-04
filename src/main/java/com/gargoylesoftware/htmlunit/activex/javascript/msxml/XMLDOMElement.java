@@ -40,7 +40,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * Represents the element object.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms760248.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Sudhan Moghe

@@ -43,7 +43,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * used with an {@link HtmlElement},
  * but case-sensitive when used with a {@link DomElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot

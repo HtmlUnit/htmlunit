@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * "@_win16", "@_mac", "@_alpha", "@_mc680x0", "@_PowerPC", "@_debug", "@_fast",
  * "@_win32", "@_x86", "@_jscript", "@_jscript_version" and "@_jscript_build"
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill

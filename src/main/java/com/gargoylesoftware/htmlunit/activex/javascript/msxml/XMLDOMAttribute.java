@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * document type definition (DTD) or schema.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms762738.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Sudhan Moghe
  * @author Frank Danek
  */

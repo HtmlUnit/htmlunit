@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLBaseElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

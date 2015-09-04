@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
 
 /**
  * Tests for {@link HTMLParagraphElement}.
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Frank Danek

@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
 /**
  * Tests for {@link SvgScript}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

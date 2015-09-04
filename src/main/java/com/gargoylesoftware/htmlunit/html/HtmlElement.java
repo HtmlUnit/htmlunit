@@ -60,7 +60,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 /**
  * An abstract wrapper for HTML elements.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
  * @author David K. Taylor

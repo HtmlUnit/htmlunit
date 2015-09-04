@@ -55,7 +55,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests all properties of an object.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

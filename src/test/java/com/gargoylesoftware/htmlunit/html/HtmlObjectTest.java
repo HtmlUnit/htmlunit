@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectTest;
 /**
  * Tests for {@link HtmlObject}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

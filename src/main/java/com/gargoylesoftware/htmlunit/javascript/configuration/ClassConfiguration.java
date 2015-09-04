@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * A container for all the JavaScript configuration information for one class.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Chris Erskine
  * @author Ahmed Ashour

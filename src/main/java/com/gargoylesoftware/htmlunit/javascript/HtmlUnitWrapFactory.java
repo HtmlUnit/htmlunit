@@ -26,7 +26,6 @@ import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
 /**
  * Called by Rhino to Wrap Object as {@link Scriptable}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class HtmlUnitWrapFactory extends WrapFactory implements Serializable {

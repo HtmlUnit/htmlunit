@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
 /**
  * Unit tests for {@link HTMLOListElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek

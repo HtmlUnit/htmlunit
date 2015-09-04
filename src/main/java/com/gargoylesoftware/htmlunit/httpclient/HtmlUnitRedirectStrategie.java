@@ -23,7 +23,6 @@ import org.apache.http.protocol.HttpContext;
 /**
  * Customized DefaultRedirectStrategy for HtmlUnit.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public final class HtmlUnitRedirectStrategie extends DefaultRedirectStrategy {

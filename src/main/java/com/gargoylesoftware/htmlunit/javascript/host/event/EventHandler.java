@@ -29,7 +29,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Allows to wrap event handler code as Function object.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class EventHandler extends BaseFunction {

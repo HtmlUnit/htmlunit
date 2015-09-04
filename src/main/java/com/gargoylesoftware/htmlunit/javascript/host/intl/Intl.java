@@ -29,7 +29,6 @@ import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 /**
  * A JavaScript object for Intl.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class Intl extends SimpleScriptable {

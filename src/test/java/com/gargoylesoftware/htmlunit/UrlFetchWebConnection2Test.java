@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 /**
  * Unit tests for {@link UrlFetchWebConnection}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Pieter Herroelen
  */

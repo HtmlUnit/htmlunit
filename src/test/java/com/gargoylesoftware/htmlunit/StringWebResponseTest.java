@@ -19,7 +19,6 @@ import org.junit.Test;
 /**
  * Unit tests for {@link StringWebResponse}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Carsten Steul
  */

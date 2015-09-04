@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.Page;
  * An action triggered by a script execution but that should be executed first when the script is finished.
  * Example: when a script sets the source of an (i)frame, the request to the specified page will be first
  * triggered after the script execution.
- * @version $Revision$
  * @author Marc Guillemot
  */
 public abstract class PostponedAction {

@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * A {@link BrowserVersionClassRunner} which is also parameterized.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClassRunner {

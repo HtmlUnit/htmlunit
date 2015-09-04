@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 /**
  * The JavaScript object "HTMLUnknownElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

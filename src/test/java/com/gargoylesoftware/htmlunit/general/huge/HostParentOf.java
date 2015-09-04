@@ -31,7 +31,6 @@ import com.google.common.base.Predicate;
 /**
  * Tests two Host classes, if one prototype is parent of another.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public abstract class HostParentOf extends WebDriverTestCase {

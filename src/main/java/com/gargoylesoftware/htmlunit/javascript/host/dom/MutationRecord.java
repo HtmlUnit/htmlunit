@@ -29,7 +29,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * A JavaScript object for {@code MutationRecord}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })

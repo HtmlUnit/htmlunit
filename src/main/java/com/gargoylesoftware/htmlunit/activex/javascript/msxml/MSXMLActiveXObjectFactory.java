@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * ActiveXObjectFactory for the MSXML ActiveX library.
  *
- * @version $Revision$
  * @author Frank Danek
  */
 public class MSXMLActiveXObjectFactory {

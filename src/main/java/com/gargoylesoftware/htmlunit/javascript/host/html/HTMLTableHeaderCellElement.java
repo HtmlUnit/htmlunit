@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object representing a TH.
  *
- * @version $Revision$
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlTableHeaderCell.class, browsers = @WebBrowser(value = IE, minVersion = 11))

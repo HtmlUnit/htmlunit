@@ -54,7 +54,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 /**
  * A JavaScript object for a Location.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Michael Ottati
  * @author Marc Guillemot

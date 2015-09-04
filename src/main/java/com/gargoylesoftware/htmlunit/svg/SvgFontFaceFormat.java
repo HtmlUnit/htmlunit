@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 /**
  * Wrapper for the SVG element "font-face-format".
  *
- * @version $Revision$
  * @author Frank Danek
  */
 public class SvgFontFaceFormat extends SvgElement {

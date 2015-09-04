@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests methods in {@link HttpWebConnection}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

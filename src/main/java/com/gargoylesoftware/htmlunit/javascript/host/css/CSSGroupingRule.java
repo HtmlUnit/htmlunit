@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for {@code CSSGroupingRule}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

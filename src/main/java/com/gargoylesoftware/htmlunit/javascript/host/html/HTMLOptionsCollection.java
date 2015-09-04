@@ -51,7 +51,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * This is the array returned by the "options" property of Select.
  *
- * @version $Revision$
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgClipPath;
 /**
  * A JavaScript object for SVGClipPathElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgClipPath.class,

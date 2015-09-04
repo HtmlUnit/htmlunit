@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link IEConditionalCommentExpressionEvaluator}.
  * Due to current implementation, conditional comment expressions get evaluated only when the simulated browser is IE.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

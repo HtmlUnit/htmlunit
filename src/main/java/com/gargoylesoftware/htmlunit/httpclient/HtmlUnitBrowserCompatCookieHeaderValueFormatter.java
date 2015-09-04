@@ -24,7 +24,6 @@ import org.apache.http.message.BasicHeaderValueFormatter;
  * I guess this is something special for HttpClient because HttpClient also removes
  * the quotes from cookies (@see {@link HtmlUnitBrowserCompatCookieSpec})
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public class HtmlUnitBrowserCompatCookieHeaderValueFormatter extends BasicHeaderValueFormatter {

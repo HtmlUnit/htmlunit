@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 /**
  * A response from a web server.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Brad Clarke
  * @author Noboru Sinohara

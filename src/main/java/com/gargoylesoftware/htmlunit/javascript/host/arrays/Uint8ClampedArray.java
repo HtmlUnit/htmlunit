@@ -28,7 +28,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Represents an array of unsigned 16-bit integers. Values stored in this array are clamped to the range 0-255.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

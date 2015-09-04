@@ -32,7 +32,6 @@ import org.junit.runner.RunWith;
 /**
  * Tests for insecure SSL, with client certificate.
  *
- * @version $Revision$
  * @author Martin Huber
  * @author Ahmed Ashour
  */

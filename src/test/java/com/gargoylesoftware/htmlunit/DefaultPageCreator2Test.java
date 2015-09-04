@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.DefaultPageCreator.PageType;
 /**
  * Tests for {@link DefaultPageCreator}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

@@ -31,7 +31,6 @@ import com.steadystate.css.dom.MediaListImpl;
 /**
  * A JavaScript object for {@code StyleMedia}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

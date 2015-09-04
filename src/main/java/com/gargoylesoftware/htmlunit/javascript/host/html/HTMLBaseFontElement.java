@@ -29,7 +29,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * The JavaScript object "HTMLBaseFontElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgMetadata;
 /**
  * A JavaScript object for SVGMetadataElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgMetadata.class,

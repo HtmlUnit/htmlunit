@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * URL utilities class that makes it easy to create new URLs based off of old URLs
  * without having to assemble or parse them yourself.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Martin Tamme
  * @author Sudhan Moghe

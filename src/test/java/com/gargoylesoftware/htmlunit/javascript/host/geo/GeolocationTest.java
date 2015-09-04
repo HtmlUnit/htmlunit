@@ -46,7 +46,6 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 /**
  * Tests for {@link Geolocation}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

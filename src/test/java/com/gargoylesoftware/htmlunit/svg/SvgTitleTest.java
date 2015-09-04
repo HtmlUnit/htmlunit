@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 /**
  * Tests for {@link SvgTitle}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

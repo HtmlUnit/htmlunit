@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * Evaluator for IE conditional expressions.
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms537512.aspx">MSDN documentation</a>
- * @version $Revision$
  * @author Marc Guillemot
  */
 final class IEConditionalCommentExpressionEvaluator {

@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * A JavaScript-triggered background job representing the execution of some JavaScript code.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ronald Brill
  * @see MemoryLeakTest

@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 /**
  * Tests for {@link SvgSwitch}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

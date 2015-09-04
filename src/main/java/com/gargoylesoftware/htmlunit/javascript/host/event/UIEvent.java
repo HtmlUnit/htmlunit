@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * JavaScript object representing a UI event. For general information on which properties and functions should be
  * supported, see <a href="http://www.w3.org/TR/DOM-Level-3-Events/events.html#Events-UIEvent">DOM Level 3 Events</a>.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Frank Danek

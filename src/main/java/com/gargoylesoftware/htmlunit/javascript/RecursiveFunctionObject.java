@@ -36,7 +36,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * A FunctionObject that returns IDs of this object and all its parent classes.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class RecursiveFunctionObject extends FunctionObject {

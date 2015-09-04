@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.general.ElementPropertiesTest;
 /**
  * Generates HTML file with all <tt>NotYetImplemented</tt> methods.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
@@ -69,7 +68,6 @@ public class NotYetImplementedTest {
 
     private void process(final List<String> lines, final String path) {
         int index = 1;
-        String revision = "-1";
         for (final String line : lines) {
             if (line.startsWith("    @NotYetImplemented")) {
                 String browser = "All";
@@ -89,11 +87,8 @@ public class NotYetImplementedTest {
                 }
                 final int lineNumber = getLineNumber(lines, index);
                 final String description = getDescription(lines, index);
-                entries_.add(path + ';' + revision + ';' + methodName + ';' + lineNumber + ";" + browser
+                entries_.add(path + ';' + methodName + ';' + lineNumber + ";" + browser
                         + ';' + description);
-            }
-            else if (line.startsWith(" * @version $Revision: ")) {
-                revision = line.substring(" * @version $Revision: ".length(), line.lastIndexOf(' '));
             }
             index++;
         }
@@ -163,10 +158,9 @@ public class NotYetImplementedTest {
             final String[] values = entry.split(";");
             final String file = values[0];
             final String fileName = file.substring(file.lastIndexOf('/') + 1, file.length() - 5);
-            final String revision = values[1];
-            final String method = values[2];
-            final String line = values[3];
-            final String browser = values[4];
+            final String method = values[1];
+            final String line = values[2];
+            final String browser = values[3];
             final String description = entry.endsWith(";") ? "&nbsp;"
                     : values[values.length - 1].replace("__semicolon__", ";");
             builder.append("  <tr>\n");
@@ -188,7 +182,7 @@ public class NotYetImplementedTest {
                 lastFile = file;
             }
             builder.append("    <td>").append(Integer.toString(count++)).append("</td>\n");
-            builder.append("    <td><a href='https://sourceforge.net/p/htmlunit/code/" + revision
+            builder.append("    <td><a href='https://sourceforge.net/p/htmlunit/code/" + "HEAD"
                     + "/tree/trunk/htmlunit/" + file + "#l" + line + "'>").append(method).append("</a> ")
                     .append(browser).append("</td>\n");
             builder.append("    <td class='numeric'>").append(line).append("</td>\n");

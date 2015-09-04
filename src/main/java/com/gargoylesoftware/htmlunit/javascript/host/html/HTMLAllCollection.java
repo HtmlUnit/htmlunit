@@ -48,7 +48,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * A special {@link HTMLCollection} for <code>document.all</code>.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

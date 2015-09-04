@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 /**
  * A JavaScript object for {@code XPathNSResolver}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Chuck Dumont
  */

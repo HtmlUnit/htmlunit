@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLAllCollection}.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  */

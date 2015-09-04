@@ -53,7 +53,6 @@ import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
  *     }
  * }
  * </pre>
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

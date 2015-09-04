@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Unit tests for {@link CSSStyleDeclaration}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

@@ -52,7 +52,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
 /**
  * The JavaScript object for form input elements (html tag &lt;input ...&gt;).
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot

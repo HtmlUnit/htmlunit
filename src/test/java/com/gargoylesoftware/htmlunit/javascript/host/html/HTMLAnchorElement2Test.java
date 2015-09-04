@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 /**
  * Unit tests for {@link HTMLAnchorElement}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot

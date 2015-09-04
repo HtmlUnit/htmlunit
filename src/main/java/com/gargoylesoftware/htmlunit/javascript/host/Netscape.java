@@ -21,7 +21,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * A JavaScript object for window.netscape (FF simulation only).
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class Netscape extends SimpleScriptable {

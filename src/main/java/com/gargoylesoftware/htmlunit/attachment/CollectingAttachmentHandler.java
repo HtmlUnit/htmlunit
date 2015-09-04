@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * An {@link AttachmentHandler} implementation which creates an {@link Attachment} for
  * each attached page, collecting all created attachments into a list.
  *
- * @version $Revision$
  * @author Bruce Chapman
  * @author Sudhan Moghe
  * @author Daniel Gredler

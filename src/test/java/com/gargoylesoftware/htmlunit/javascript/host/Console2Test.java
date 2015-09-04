@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 /**
  * Tests for {@link Console}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill

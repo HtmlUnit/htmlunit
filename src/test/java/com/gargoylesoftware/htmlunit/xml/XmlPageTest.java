@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 /**
  * Tests for {@link XmlPage}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

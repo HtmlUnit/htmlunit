@@ -21,7 +21,6 @@ import java.net.URLStreamHandler;
 /**
  * Stream handler for JavaScript URLs.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class Handler extends URLStreamHandler {

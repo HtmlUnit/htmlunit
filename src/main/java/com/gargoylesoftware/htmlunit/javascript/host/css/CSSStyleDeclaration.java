@@ -93,7 +93,6 @@ import com.steadystate.css.parser.SACParserCSS3;
 /**
  * A JavaScript object for a CSSStyleDeclaration.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler

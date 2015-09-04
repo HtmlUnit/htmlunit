@@ -31,7 +31,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Represents an array of twos-complement 32-bit signed integers.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

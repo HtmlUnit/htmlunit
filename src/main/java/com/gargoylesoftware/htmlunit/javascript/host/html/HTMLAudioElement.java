@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLAudioElement".
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Ahmed Ashour
  * @author Frank Danek

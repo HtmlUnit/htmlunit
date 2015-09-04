@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  * {@link AppletStub} implementation for HtmlUnit. This is what is used by an applet to communicate
  * with the browser.
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  */

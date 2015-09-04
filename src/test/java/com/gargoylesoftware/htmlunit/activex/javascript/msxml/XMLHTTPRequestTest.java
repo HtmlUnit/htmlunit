@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link XMLHTTPRequest}.
  *
- * @version $Revision$
  * @author Frank Danek
  * @author Ronald Brill
  */

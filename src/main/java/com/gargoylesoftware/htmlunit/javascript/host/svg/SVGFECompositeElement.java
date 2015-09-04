@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeComposite;
 /**
  * A JavaScript object for SVGFECompositeElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeComposite.class,

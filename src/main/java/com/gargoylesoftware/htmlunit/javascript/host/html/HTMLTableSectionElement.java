@@ -37,7 +37,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * A JavaScript object representing "HTMLTableSectionElement", it is used by
  * {@link HtmlTableBody}, {@link HtmlTableHeader}, and {@link HtmlTableFooter}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill

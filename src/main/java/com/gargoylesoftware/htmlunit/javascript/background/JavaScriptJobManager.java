@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.Page;
 /**
  * A manager for {@link JavaScriptJob}s.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ronald Brill
  */

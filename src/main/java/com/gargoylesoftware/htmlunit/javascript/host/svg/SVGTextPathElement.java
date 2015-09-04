@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgTextPath;
 /**
  * A JavaScript object for SVGTextPathElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgTextPath.class,

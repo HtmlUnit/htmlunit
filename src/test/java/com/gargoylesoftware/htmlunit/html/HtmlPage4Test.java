@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 /**
  * Tests for {@link HtmlPage}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author David K. Taylor

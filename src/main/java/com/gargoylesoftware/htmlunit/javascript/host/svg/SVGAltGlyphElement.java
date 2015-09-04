@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgAltGlyph;
 /**
  * A JavaScript object for SVGAltGlyphElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

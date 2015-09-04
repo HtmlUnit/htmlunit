@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLLegendElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek

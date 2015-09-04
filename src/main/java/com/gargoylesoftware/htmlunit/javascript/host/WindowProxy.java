@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * Proxy for a {@link Window} script object.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 public class WindowProxy extends SimpleScriptableProxy<Window> {

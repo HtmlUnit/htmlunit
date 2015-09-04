@@ -33,7 +33,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.onbeforeunload">Mozilla Developer Network</a>
  * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ff974336.aspx">MSDN</a>
  *
- * @version $Revision$
  * @author Frank Danek
  * @author Ahmed Ashour
  */

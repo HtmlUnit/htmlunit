@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 /**
  * Tests for the {@link ProxyAutoConfig}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class ProxyAutoConfigTest extends SimpleWebTestCase {

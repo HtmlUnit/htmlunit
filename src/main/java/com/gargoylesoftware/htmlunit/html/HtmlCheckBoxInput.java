@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 /**
  * Wrapper for the HTML element "input".
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>

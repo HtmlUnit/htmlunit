@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlMenu;
 /**
  * Unit tests for {@link HTMLMenuElement}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek

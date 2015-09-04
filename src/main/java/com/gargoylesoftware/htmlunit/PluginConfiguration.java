@@ -22,7 +22,6 @@ import java.util.Set;
  * Contains information about a plugin as available in JavaScript via <tt>document.navigator.plugins</tt>,
  * as well as the associated mime types.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  * @see <a href="http://www.xulplanet.com/references/objref/Plugin.html">XUL Planet Documentation</a>

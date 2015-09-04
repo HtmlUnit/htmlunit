@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * A lightweight object that is useful for tree insert operations.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms759155.aspx">MSDN documentation</a>
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

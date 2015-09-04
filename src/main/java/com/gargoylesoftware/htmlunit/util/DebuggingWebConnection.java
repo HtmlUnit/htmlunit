@@ -63,7 +63,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
  * <br>
  * <em>This class is only intended as an help during the conception.</em>
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

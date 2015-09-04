@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Utility to handle conversion from HTML code to XML string.
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot

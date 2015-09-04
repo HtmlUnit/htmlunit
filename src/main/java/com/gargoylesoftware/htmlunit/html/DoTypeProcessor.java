@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 /**
  * The process for {@link HtmlElement#doType(char, boolean, boolean, boolean)}.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Ahmed Ashour

@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeDisplacementMap;
 /**
  * A JavaScript object for SVGFEDisplacementMapElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeDisplacementMap.class,

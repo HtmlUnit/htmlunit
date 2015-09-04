@@ -36,7 +36,6 @@ import org.apache.http.protocol.HttpRequestHandler;
 /**
  * Simple insecure HTTPS server.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */

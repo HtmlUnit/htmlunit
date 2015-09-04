@@ -36,7 +36,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * A JavaScript object for a CSSRuleList.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

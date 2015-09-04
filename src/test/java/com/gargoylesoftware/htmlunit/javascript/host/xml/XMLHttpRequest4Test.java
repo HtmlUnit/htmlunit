@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 /**
  * Tests for {@link XMLHttpRequest}.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour

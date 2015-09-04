@@ -68,7 +68,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for the {@link JavaScriptEngine}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author Darrell DeBoer

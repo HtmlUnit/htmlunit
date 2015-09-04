@@ -19,7 +19,6 @@ import java.io.Serializable;
 /**
  * Implementations of this interface receive notifications of changes to the DOM structure.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @see DomChangeEvent
  */

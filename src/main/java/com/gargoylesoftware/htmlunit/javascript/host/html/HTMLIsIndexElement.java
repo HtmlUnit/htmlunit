@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLIsIndexElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "ruby".
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  */

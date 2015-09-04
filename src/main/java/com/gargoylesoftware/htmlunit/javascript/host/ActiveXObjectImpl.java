@@ -25,7 +25,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * An implementation of native ActiveX components using <a href="http://jacob-project.wiki.sourceforge.net/">Jacob</a>.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 public class ActiveXObjectImpl extends SimpleScriptable {

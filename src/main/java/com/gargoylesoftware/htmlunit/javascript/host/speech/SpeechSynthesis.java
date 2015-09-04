@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 /**
  * A JavaScript object for {@code SpeechSynthesis}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(CHROME))

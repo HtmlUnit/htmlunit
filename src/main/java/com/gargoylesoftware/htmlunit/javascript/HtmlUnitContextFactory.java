@@ -48,7 +48,6 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from
  * <a href="http://www.mozilla.org/rhino/apidocs/org/mozilla/javascript/ContextFactory.html">ContextFactory</a>.
  *
- * @version $Revision$
  * @author Andre Soereng
  * @author Ahmed Ashour
  * @author Marc Guillemot

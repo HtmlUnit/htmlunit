@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 /**
  * Tests for {@link TopLevelWindow}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  * @author Daniel Gredler

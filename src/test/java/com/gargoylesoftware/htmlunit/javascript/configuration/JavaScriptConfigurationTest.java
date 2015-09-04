@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 /**
  * Tests for {@link JavaScriptConfiguration}.
  *
- * @version $Revision$
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill

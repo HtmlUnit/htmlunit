@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link XMLDOMNodeList}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

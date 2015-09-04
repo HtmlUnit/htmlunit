@@ -33,7 +33,6 @@ import org.junit.runner.RunWith;
 /**
  * Tests for custom trust store.
  *
- * @version $Revision$
  * @author Carsten Steul
  * @author Ahmed Ashour
  */

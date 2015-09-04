@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLHeadingElement".
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

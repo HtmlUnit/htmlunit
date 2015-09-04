@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgPolyline;
 /**
  * A JavaScript object for SVGPolylineElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgPolyline.class,

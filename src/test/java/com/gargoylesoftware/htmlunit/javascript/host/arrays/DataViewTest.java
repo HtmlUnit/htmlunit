@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link DataView}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */

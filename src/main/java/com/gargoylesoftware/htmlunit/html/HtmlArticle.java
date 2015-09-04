@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "article".
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  */

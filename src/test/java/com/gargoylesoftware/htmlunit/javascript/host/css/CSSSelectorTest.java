@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 /**
  * Tests for CSS selectors.
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Marc Guillemot
  * @author Ahmed Ashour

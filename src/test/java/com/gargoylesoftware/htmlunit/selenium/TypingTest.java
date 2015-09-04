@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * <a href="https://github.com/SeleniumHQ/selenium/blob/master/java/client/test/org/openqa/selenium/TypingTest.java">
  * TypingTest.java</a>.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)

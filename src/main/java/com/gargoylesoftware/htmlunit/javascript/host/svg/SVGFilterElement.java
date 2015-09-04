@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.svg.SvgFilter;
 /**
  * A JavaScript object for SVGFilterElement.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFilter.class,

@@ -33,7 +33,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.onhashchange">Mozilla Developer Network</a>
  * @see <a href="http://msdn.microsoft.com/en-us/library/cc288209.aspx">MSDN</a>
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Marc Guillemot
  * @author Frank Danek

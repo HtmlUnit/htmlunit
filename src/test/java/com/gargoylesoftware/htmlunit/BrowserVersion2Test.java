@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * For some details on IE view you can have a look at
  * http://blogs.msdn.com/b/ieinternals/archive/2009/07/01/ie-and-the-accept-header.aspx
  *
- * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
  */

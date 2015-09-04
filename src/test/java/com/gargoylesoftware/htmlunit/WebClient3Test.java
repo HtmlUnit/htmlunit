@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link WebClient} using WebDriverTestCase.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill

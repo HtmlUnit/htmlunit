@@ -20,7 +20,6 @@ import org.junit.Test;
 /**
  * Tests for {@link RegExpJsToJavaConverter}.
  *
- * @version $Revision$
  * @author Ronald Brill
  */
 public class RegExpJsToJavaConverterTest {

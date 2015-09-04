@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 /**
  * Test for IE weird JavaScript syntax.
  *
- * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)

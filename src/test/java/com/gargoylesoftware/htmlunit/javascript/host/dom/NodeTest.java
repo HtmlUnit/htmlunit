@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link Node}.
  *
- * @version $Revision$
  * @author Brad Clarke
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Bruce Faulkner

@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Base class for tests for compatibility with <a href="http://prototype.conio.net/">Prototype</a>.
  *
- * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot

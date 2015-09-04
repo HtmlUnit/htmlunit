@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for {@code DataTransfer}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClasses({

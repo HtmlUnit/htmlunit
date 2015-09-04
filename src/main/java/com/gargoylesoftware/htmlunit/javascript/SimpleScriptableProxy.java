@@ -23,7 +23,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * Proxy for a {@link SimpleScriptable}.
  *
  * @param <T> the type of scriptable object being wrapped
- * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
  */

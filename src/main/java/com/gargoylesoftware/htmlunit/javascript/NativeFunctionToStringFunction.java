@@ -32,7 +32,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * Replacement (in fact a wrapper) for Rhino's native toString function on Function prototype
  * allowing to produce the desired formatting.
  *
- * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Ahmed Ashour

@@ -44,7 +44,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 /**
  * Tests for {@link HtmlAnchor}.
  *
- * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Stefan Anzinger

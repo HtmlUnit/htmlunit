@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for elements with onblur and onfocus attributes.
  *
- * @version $Revision$
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Ahmed Ashour

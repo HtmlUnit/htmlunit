@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HTMLHeadingElement}.
- * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)

@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 /**
  * Tests for {@link HtmlLink}.
  *
- * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
