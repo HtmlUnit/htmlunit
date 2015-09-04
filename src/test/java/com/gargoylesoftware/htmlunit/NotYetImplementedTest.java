@@ -47,16 +47,17 @@ public class NotYetImplementedTest {
 
     private void process(final File dir) throws IOException {
         for (final File file : dir.listFiles()) {
+            final String fileName = file.getName();
             if (file.isDirectory()
-                    && !"huge".equals(file.getName())
-                    && !".svn".equals(file.getName())) {
+                    && !"huge".equals(fileName)
+                    && !".svn".equals(fileName)) {
                 process(file);
             }
             else {
-                if (file.getName().endsWith(".java")
-                        && !"SimpleWebTestCase.java".equals(file.getName())
-                        && !"NotYetImplementedTest.java".equals(file.getName())
-                        && !"CodeStyleTest.java".equals(file.getName())) {
+                if (fileName.endsWith(".java")
+                        && !"SimpleWebTestCase.java".equals(fileName)
+                        && !"NotYetImplementedTest.java".equals(fileName)
+                        && !"CodeStyleTest.java".equals(fileName)) {
                     final List<String> lines = FileUtils.readLines(file);
                     final String relativePath = file.getAbsolutePath().substring(
                         new File(".").getAbsolutePath().length() - 1).replace('\\', '/');
@@ -70,20 +71,7 @@ public class NotYetImplementedTest {
         int index = 1;
         String revision = "-1";
         for (final String line : lines) {
-            if (line.contains("@NotYetImplemented()")) {
-                String methodName = null;
-                for (int i = index; i < lines.size(); i++) {
-                    final String l = lines.get(i);
-                    if (l.startsWith("    public ")) {
-                        methodName = l.split(" ")[6];
-                        break;
-                    }
-                }
-                final int lineNumber = getLineNumber(lines, index);
-                final String description = getDescription(lines, index);
-                entries_.add(path + ';' + revision + ';' + methodName + ';' + lineNumber + ";All;" + description);
-            }
-            else if (line.startsWith("    @NotYetImplemented")) {
+            if (line.startsWith("    @NotYetImplemented")) {
                 String browser = "All";
                 if (line.contains("(")) {
                     browser = line.replaceAll(".*\\((.*)\\).*", "$1");
