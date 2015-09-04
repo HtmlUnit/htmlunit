@@ -9,7 +9,7 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="asashour">
-                Correctly handle script's wehn src attribute is only "http://".
+                Correctly handle script's when src attribute is only "://".
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: process scripts with 'application/javascript' type (add IE11).
