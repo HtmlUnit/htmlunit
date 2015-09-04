@@ -8743,7 +8743,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function BeforeInstallPromptEvent() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void beforeInstallPromptEvent() throws Exception {
         test("BeforeInstallPromptEvent");
     }

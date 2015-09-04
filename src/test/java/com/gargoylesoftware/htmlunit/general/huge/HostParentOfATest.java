@@ -6437,4 +6437,24 @@ public class HostParentOfATest extends HostParentOf {
         test("Event", "ServiceWorkerMessageEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BeforeInstallPromptEvent_BeforeInstallPromptEvent() throws Exception {
+        test("BeforeInstallPromptEvent", "BeforeInstallPromptEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_BeforeInstallPromptEvent() throws Exception {
+        test("Event", "BeforeInstallPromptEvent");
+    }
+
 }

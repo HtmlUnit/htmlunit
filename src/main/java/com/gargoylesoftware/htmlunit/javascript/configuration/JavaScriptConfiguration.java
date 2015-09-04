@@ -188,6 +188,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.AnimationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ApplicationCacheErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.AudioProcessingEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.AutocompleteErrorEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeInstallPromptEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BlobEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ClipboardEvent;
@@ -381,7 +382,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ArrayBufferViewBase.class, Attr.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AutocompleteErrorEvent.class, BarProp.class,
-        BatteryManager.class, BeforeUnloadEvent.class, BiquadFilterNode.class,
+        BatteryManager.class, BeforeInstallPromptEvent.class, BeforeUnloadEvent.class, BiquadFilterNode.class,
         Blob.class, BlobEvent.class, BroadcastChannel.class, Cache.class, CacheStorage.class,
         CanvasGradient.class, CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class,
         CDATASection.class, ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class,

@@ -7419,4 +7419,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("ServiceWorkerMessageEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void beforeInstallPromptEvent() throws Exception {
+        test("BeforeInstallPromptEvent");
+    }
+
 }
