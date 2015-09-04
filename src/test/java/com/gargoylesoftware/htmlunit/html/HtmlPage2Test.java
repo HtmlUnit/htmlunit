@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -34,7 +32,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -507,40 +504,6 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "Hello")
-    @NotYetImplemented(CHROME)
-    public void application_javascript_type() throws Exception {
-        final String html = "<html>\n"
-            + "<body>\n"
-            + "  <script type='application/javascript'>\n"
-            + "    alert('Hello');\n"
-            + "  </script>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "Hello")
-    @NotYetImplemented(CHROME)
-    public void application_x_javascript_type() throws Exception {
-        final String html = "<html>\n"
-            + "<body>\n"
-            + "  <script type='application/x-javascript'>\n"
-            + "    alert('Hello');\n"
-            + "  </script>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**

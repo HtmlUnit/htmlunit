@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
@@ -25,7 +24,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -44,7 +42,6 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(CHROME)
     public void click_WithPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -65,6 +62,10 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
         final List<NameValuePair> expectedPairs = new ArrayList<>();
         expectedPairs.add(new NameValuePair("button.x", "100"));
         expectedPairs.add(new NameValuePair("button.y", "200"));
+
+        if ("Chrome".equals(getBrowserVersion().getNickname())) {
+            expectedPairs.add(new NameValuePair("button", "foo"));
+        }
 
         assertEquals(expectedPairs, webConnection.getLastParameters());
     }

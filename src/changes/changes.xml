@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: process scripts with 'application/javascript' type (add IE11).
+            </action>
             <action type="fix" dev="rbri" issue="1716">
                 JavaScript: Iterating through the .attributes property modifies outerHTML result.
             </action>

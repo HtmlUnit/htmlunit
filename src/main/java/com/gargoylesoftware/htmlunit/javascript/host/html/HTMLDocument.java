@@ -1631,7 +1631,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see DomNode#READY_STATE_INTERACTIVE
      * @see DomNode#READY_STATE_COMPLETE
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter
     public String getReadyState() {
         final DomNode node = getDomNodeOrDie();
         return node.getReadyState();
@@ -1735,7 +1735,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute <tt>scripts</tt>.
      * @return the value of the JavaScript attribute <tt>scripts</tt>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter
     public Object getScripts() {
         if (scripts_ == null) {
             scripts_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.scripts") {

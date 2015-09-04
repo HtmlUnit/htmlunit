@@ -235,4 +235,39 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Hello",
+            IE8 = { })
+    public void application_javascript_type() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <script type='application/javascript'>\n"
+            + "    alert('Hello');\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Hello",
+            IE8 = { })
+    public void application_x_javascript_type() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <script type='application/x-javascript'>\n"
+            + "    alert('Hello');\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

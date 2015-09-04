@@ -619,9 +619,9 @@ public enum BrowserVersionFeatures {
 
     /**
      * Set this property if the script tag supports the
-     * types 'application/javascript' and 'application/x-javascript'.
+     * types {@code application/javascript} and {@code application/x-javascript}.
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLSCRIPT_APPLICATION_JAVASCRIPT,
 
     /** Trims the value of the type attribute before to verify it. */
