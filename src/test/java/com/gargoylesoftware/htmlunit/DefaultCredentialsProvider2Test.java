@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -66,7 +66,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             loadPage("Hi There");
-            Assert.fail("Should not be authorized");
+            fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
             //success
@@ -86,7 +86,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             loadPage("Hi There");
-            Assert.fail("Should not be authorized");
+            fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
             //success
@@ -167,8 +167,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "SecRet")
-    @NotYetImplemented(CHROME)
+    @Alerts("SecRet")
     public void basicAuthenticationUserFromUrl() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -177,23 +176,24 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             loadPage(html, new URL("http://localhost:" + PORT + "/"));
-            Assert.fail("Should not be authorized");
+            fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
             //success
         }
 
+        final boolean urlWithCredentials = !getBrowserVersion().isIE();
+
         try {
             //  now a url with credentials
             final URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
             loadPageWithAlerts(html, url);
+            if (!urlWithCredentials) {
+                fail("Should not be authorized");
+            }
         }
         catch (final FailingHttpStatusCodeException e) {
-            //  TODO: asashour: check real IE8, original test case didn't throw exception
-            if (getBrowserVersion().isIE()) {
-                //success
-            }
-            else {
+            if (urlWithCredentials) {
                 throw e;
             }
         }
@@ -202,13 +202,12 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             // next step without credentials but the credentials are still known
             final URL url = new URL("http://localhost:" + PORT + "/");
             loadPageWithAlerts(html, url);
+            if (!urlWithCredentials) {
+                fail("Should not be authorized");
+            }
         }
         catch (final FailingHttpStatusCodeException e) {
-            //  TODO: asashour: check real IE8, original test case didn't throw exception
-            if (getBrowserVersion().isIE()) {
-                //success
-            }
-            else {
+            if (urlWithCredentials) {
                 throw e;
             }
         }
@@ -218,8 +217,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "SecRet")
-    @NotYetImplemented(CHROME)
+    @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlUsedForNextSteps() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -229,23 +227,24 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         try {
             // no credentials
             loadPage(html, new URL("http://localhost:" + PORT + "/"));
-            Assert.fail("Should not be authorized");
+            fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
             //success
         }
 
+        final boolean urlWithCredentials = !getBrowserVersion().isIE();
+
         try {
             // now a url with credentials
             final URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
             loadPageWithAlerts(url);
+            if (!urlWithCredentials) {
+                fail("Should not be authorized");
+            }
         }
         catch (final FailingHttpStatusCodeException e) {
-            //  TODO: asashour: check real IE8, original test case didn't throw exception
-            if (getBrowserVersion().isIE()) {
-                //success
-            }
-            else {
+            if (urlWithCredentials) {
                 throw e;
             }
         }
@@ -254,13 +253,12 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             // next step without credentials but the credentials are still known
             final URL url = new URL("http://localhost:" + PORT + "/");
             loadPageWithAlerts(url);
+            if (!urlWithCredentials) {
+                fail("Should not be authorized");
+            }
         }
         catch (final FailingHttpStatusCodeException e) {
-            //  TODO: asashour: check real IE8, original test case didn't throw exception
-            if (getBrowserVersion().isIE()) {
-                //success
-            }
-            else {
+            if (urlWithCredentials) {
                 throw e;
             }
         }
@@ -269,13 +267,12 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             // different path
             final URL url = new URL("http://localhost:" + PORT + "/somewhere");
             loadPageWithAlerts(url);
+            if (!urlWithCredentials) {
+                fail("Should not be authorized");
+            }
         }
         catch (final FailingHttpStatusCodeException e) {
-            //  TODO: asashour: check real IE8, original test case didn't throw exception
-            if (getBrowserVersion().isIE()) {
-                //success
-            }
-            else {
+            if (urlWithCredentials) {
                 throw e;
             }
         }
@@ -285,8 +282,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "SecRet")
-    @NotYetImplemented(CHROME)
+    @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlOverwrite() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -296,23 +292,24 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         try {
             // no credentials
             loadPage(html, new URL("http://localhost:" + PORT + "/"));
-            Assert.fail("Should not be authorized");
+            fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
             //success
         }
 
+        final boolean urlWithCredentials = !getBrowserVersion().isIE();
+
         try {
             // now a url with credentials
             final URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
             loadPageWithAlerts(url);
+            if (!urlWithCredentials) {
+                fail("Should not be authorized");
+            }
         }
         catch (final FailingHttpStatusCodeException e) {
-            //  TODO: asashour: check real IE8, original test case didn't throw exception
-            if (getBrowserVersion().isIE()) {
-                //success
-            }
-            else {
+            if (urlWithCredentials) {
                 throw e;
             }
         }
@@ -321,13 +318,12 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             // next step without credentials but the credentials are still known
             final URL url = new URL("http://localhost:" + PORT + "/");
             loadPageWithAlerts(url);
+            if (!urlWithCredentials) {
+                fail("Should not be authorized");
+            }
         }
         catch (final FailingHttpStatusCodeException e) {
-            //  TODO: asashour: check real IE8, original test case didn't throw exception
-            if (getBrowserVersion().isIE()) {
-                //success
-            }
-            else {
+            if (urlWithCredentials) {
                 throw e;
             }
         }
@@ -335,7 +331,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         try {
             final URL url = new URL("http://jetty:wrong@localhost:" + PORT + "/");
             loadPage(html, url);
-            Assert.fail("Should not be authorized");
+            fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
             //success
@@ -365,12 +361,12 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
                 assertTrue(getCollectedAlerts(page).contains("SecRet"));
             }
             else {
-                Assert.fail("Should not be authorized");
+                fail("Should not be authorized");
             }
         }
         catch (final FailingHttpStatusCodeException e) {
             if (getBrowserVersion().isIE()) {
-                Assert.fail("Should be authorized");
+                fail("Should be authorized");
             }
             else {
                 //success
@@ -382,8 +378,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "SecRet")
-    @NotYetImplemented(CHROME)
+    @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlOverwriteWrongDefaultCredentials() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -395,23 +390,24 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         URL url = new URL("http://localhost:" + PORT + "/");
         try {
             loadPage(html, url);
-            Assert.fail("Should not be authorized");
+            fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
             //success
         }
 
+        final boolean urlWithCredentials = !getBrowserVersion().isIE();
+
         try {
             // now a url with correct credentials
             url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
             loadPageWithAlerts(url);
+            if (!urlWithCredentials) {
+                fail("Should not be authorized");
+            }
         }
         catch (final FailingHttpStatusCodeException e) {
-            //  TODO: asashour: check real IE8, original test case didn't throw exception
-            if (getBrowserVersion().isIE()) {
-                //success
-            }
-            else {
+            if (urlWithCredentials) {
                 throw e;
             }
         }
@@ -422,7 +418,6 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      */
     @Test
     @Alerts("Hello World")
-    //  TODO: asashour: check real IE8, original test case didn't have any alerts
     public void basicAuthenticationXHR() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -436,7 +431,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             + "</script></head><body></body></html>";
 
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
-        getMockWebConnection().setDefaultResponse("Hello World");
+        getMockWebConnection().setResponse(URL_FIRST, html);
+        getMockWebConnection().setResponse(URL_SECOND, "Hello World");
         loadPageWithAlerts(html, URL_FIRST, 200);
     }
 
@@ -444,8 +440,9 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("HTTP ERROR 401")
-    //  TODO: asashour: check real IE8, original test case didn't have any alerts
+    @Alerts(DEFAULT = "HTTP ERROR 401",
+            IE = "HTTP ERROR 500")
+    @NotYetImplemented(IE)
     public void basicAuthenticationXHRWithUsername() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -462,7 +459,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             + "</script></head><body></body></html>";
 
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
-        getMockWebConnection().setDefaultResponse("Hello World");
+        getMockWebConnection().setResponse(URL_FIRST, html);
+        getMockWebConnection().setResponse(URL_SECOND, "Hello World");
         loadPageWithAlerts(html, URL_FIRST, 100);
     }
 
@@ -471,7 +469,6 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      */
     @Test
     @Alerts("HTTP ERROR 401")
-    //  TODO: asashour: check real IE8, original test case didn't have any alerts
     public void basicAuthenticationXHRWithUser() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -488,7 +485,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             + "</script></head><body></body></html>";
 
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
-        getMockWebConnection().setDefaultResponse("Hello World");
+        getMockWebConnection().setResponse(URL_FIRST, html);
+        getMockWebConnection().setResponse(URL_SECOND, "Hello World");
         loadPageWithAlerts(html, URL_FIRST, 100);
     }
 }
