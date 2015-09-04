@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -87,7 +86,11 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var f = document.getElementById('f');\n"
             + "    for(var i = 0; i < f.attributes.length; i++) {\n"
-            + "      alert(f.attributes[i].name + '=' + f.attributes[i].value);\n"
+            + "      if (f.attributes[i]) {\n"
+            + "        alert(f.attributes[i].name + '=' + f.attributes[i].value);\n"
+            + "      } else {\n"
+            + "        alert(i);\n"
+            + "      }\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -328,7 +331,6 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("media=\"screen\"")
-    @NotYetImplemented(IE8)
     public void changedAttribute() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
@@ -351,6 +353,34 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * See issue #1716.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<input id=\"myinput\" name=\"test_input\">",
+            IE8 = "<INPUT id=myinput name=test_input>")
+    public void readAccessOnlyDefinesNewAttribs() throws Exception {
+        final String html =
+                "<html>\n"
+              + "<head>\n"
+              + "  <title>Test page</title>\n"
+              + "</head>\n"
+              + "<body>\n"
+              + "  <input id='myinput' name='test_input' />\n"
+              + "  <script type='text/javascript'>\n"
+              + "    var input = document.getElementById('myinput');\n"
+              + "    var attrs = input.attributes;\n"
+              + "    for(i=0; i<attrs.length; i++) {\n"
+              + "      attrs[i];\n"
+              + "    }\n"
+              + "    alert(input.outerHTML);\n"
+              + "  </script>\n"
+              + "</body>\n"
+              + "</html>";
         loadPageWithAlerts2(html);
     }
 }

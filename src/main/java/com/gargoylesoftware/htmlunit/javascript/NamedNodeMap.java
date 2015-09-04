@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.HashSet;
+
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -190,14 +192,19 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return the item at the specified index
      */
     @JsxFunction
-    public Object item(int index) {
+    public Object item(final int index) {
         final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
             return attr.getScriptObject();
         }
         if (useRecursiveAttributeForIE()) {
-            index -= attributes_.getLength();
-            final String name = getRecusiveAttributeNameAt(index);
+            // we have to search only inside not yet defined items
+            final HashSet<String> tmpIds = new HashSet<String>();
+            for (int i = 0; i < attributes_.getLength(); i++) {
+                tmpIds.add(attributes_.item(i).getNodeName());
+            }
+
+            final String name = getRecusiveAttributeNameAt(index + 1, tmpIds);
             if (name != null) {
                 return getUnspecifiedAttributeNode(name);
             }
@@ -230,7 +237,13 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     public int getLength() {
         int length = attributes_.getLength();
         if (useRecursiveAttributeForIE()) {
-            length += getRecursiveAttributesLength();
+            // we have to count only inside not yet defined items
+            final HashSet<String> tmpIds = new HashSet<String>();
+            for (int i = 0; i < length; i++) {
+                tmpIds.add(attributes_.item(i).getNodeName());
+            }
+            collectRecursiveAttributes(tmpIds);
+            length = tmpIds.size();
         }
         return length;
     }
@@ -247,24 +260,24 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         return false;
     }
 
-    private int getRecursiveAttributesLength() {
-        int length = 0;
-        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null;
-            object = object.getPrototype()) {
-            length += object.getIds().length;
-        }
-        return length;
-    }
-
-    private String getRecusiveAttributeNameAt(final int index) {
-        int i = 0;
+    private void collectRecursiveAttributes(final HashSet<String> ids) {
         for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null;
             object = object.getPrototype()) {
             for (final Object id : object.getIds()) {
-                if (i == index) {
-                    return Context.toString(id);
+                ids.add(Context.toString(id));
+            }
+        }
+    }
+
+    private String getRecusiveAttributeNameAt(final int index, final HashSet<String> ids) {
+        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null;
+            object = object.getPrototype()) {
+            for (final Object id : object.getIds()) {
+                final String name = Context.toString(id);
+                ids.add(name);
+                if (ids.size() == index) {
+                    return name;
                 }
-                i++;
             }
         }
         return null;

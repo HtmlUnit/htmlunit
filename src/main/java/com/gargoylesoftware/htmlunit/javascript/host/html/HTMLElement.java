@@ -1004,6 +1004,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // Add the attributes. IE does not use quotes, FF does.
             final boolean doQoute = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES);
             for (final DomAttr attr : element.getAttributesMap().values()) {
+                if (!attr.getSpecified()) {
+                    continue;
+                }
+
                 final String name = attr.getName();
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
                 final boolean quote = doQoute
