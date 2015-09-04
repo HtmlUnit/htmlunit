@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.io.StringReader;
 
 import org.junit.Test;
@@ -25,7 +23,6 @@ import org.w3c.css.sac.Selector;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -184,15 +181,13 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(CHROME)
     public void selects_pseudoClass_lang() throws Exception {
-        if (getBrowserVersion().isFirefox() || getBrowserVersion().isIE()
-                && getBrowserVersion().getBrowserVersionNumeric() >= 10) {
-            testSelects(":lang(en)", false, true, true);
+        if ("IE8".equals(getBrowserVersion().getNickname())) {
+            testSelects(":lang(en)", false, false, false);
             testSelects(":lang(de)", false, false, false);
         }
         else {
-            testSelects(":lang(en)", false, false, false);
+            testSelects(":lang(en)", false, true, true);
             testSelects(":lang(de)", false, false, false);
         }
     }
@@ -216,7 +211,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
             + "      <span>x</span>\n"
             + "      <span id='s'>a</span>b\n"
             + "    </div>\n"
-            + "  </body>"
+            + "  </body>\n"
             + "</html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
