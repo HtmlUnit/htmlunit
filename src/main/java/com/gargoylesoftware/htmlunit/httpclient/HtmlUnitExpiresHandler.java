@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_START_DATE_1970;
 
 import java.util.Calendar;
@@ -66,16 +67,16 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
     };
 
     private static final String[] EXTENDED_DATE_PATTERNS_2 = new String[] {
-            "EEE dd MMM yy HH mm ss zzz",
-            "EEE dd MMM yyyy HH mm ss zzz",
-            "EEE MMM d HH mm ss yyyy",
-            "EEE dd MMM yy HH mm ss z ",
-            "EEE dd MMM yyyy HH mm ss z ",
-            "EEE dd MM yy HH mm ss z ",
-            "EEE dd MM yyyy HH mm ss z ",
-            "EEE dd MMM yy HH MM ss z",
-            "MMM dd yy HH mm ss",
-        };
+        "EEE dd MMM yy HH mm ss zzz",
+        "EEE dd MMM yyyy HH mm ss zzz",
+        "EEE MMM d HH mm ss yyyy",
+        "EEE dd MMM yy HH mm ss z ",
+        "EEE dd MMM yyyy HH mm ss z ",
+        "EEE dd MM yy HH mm ss z ",
+        "EEE dd MM yyyy HH mm ss z ",
+        "EEE dd MMM yy HH MM ss z",
+        "MMM dd yy HH mm ss",
+    };
 
     private final BrowserVersion browserVersion_;
 
