@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -777,11 +777,10 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown-3-mouseup-3-contextmenu-3-",
-            IE11 = "mousedown-2-mouseup-2-contextmenu-2-",
+    @Alerts(DEFAULT = "mousedown-2-mouseup-2-contextmenu-2-",
+            FF = "mousedown-3-mouseup-3-contextmenu-3-",
             IE8 = "mousedown-2-mouseup-2-contextmenu-0-")
-    @NotYetImplemented(CHROME)
-    public void testRightClick() throws Exception {
+    public void rightClick() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -817,10 +816,10 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown-1-mouseup-1-",
-            IE11 = "mousedown-0-mouseup-0-")
-    @NotYetImplemented(CHROME)
-    public void testMouse_Down_Up() throws Exception {
+    @Alerts(DEFAULT = "mousedown-2-mouseup-2-",
+            FF = "mousedown-3-mouseup-3-")
+    @NotYetImplemented
+    public void mouse_Down_Up() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -951,7 +950,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented(IE11)
     public void asTextVisibilityCollapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -963,10 +962,9 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "some more hidden text</p>\n"
             + "</body>\n"
             + "</html>";
-
-        final String expected = getBrowserVersion().isFirefox()
-            ? "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "to the world"
-            : "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "hidden text to the world some more hidden text";
+        final String expected = "IE8".equals(getBrowserVersion().getNickname())
+            ? "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "hidden text to the world some more hidden text"
+            : "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "to the world";
 
         final HtmlPage page = loadPage(html);
         assertEquals(expected, page.asText());
