@@ -1167,14 +1167,15 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
             + "<input id='it'/>\n"
+            + "<div id='tester'>Tester</div>\n"
             + "<script>\n"
             + "window.onchange = function() {\n"
             + "  alert('changed');\n"
             + "}\n"
             + "</script></body></html>";
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("it")).sendKeys("hello");
-        driver.findElement(By.tagName("html")).click();
+        driver.findElement(By.id("it")).sendKeys("X");
+        driver.findElement(By.id("tester")).click();
 
         verifyAlerts(driver, getExpectedAlerts());
     }
