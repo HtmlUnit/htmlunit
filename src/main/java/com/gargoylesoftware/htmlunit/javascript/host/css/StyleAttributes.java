@@ -711,7 +711,7 @@ final class StyleAttributes {
         FLOOD_OPACITY_("flood-opacity", "flood-opacity", ff38up("1")),
 
         /** The style property {@code font}. */
-        FONT("font", "font", chrome("normal normal normal normal 16px/normal 'Times New Roman'")),
+        FONT("font", "font", chrome("normal normal normal normal 16px / normal 'Times New Roman'")),
 
         /** The style property {@code fontFamily}. */
         FONT_FAMILY("fontFamily", "font-family", chrome("'Times New Roman'"), ie11up("Times New Roman"), ff("serif")),
@@ -2109,43 +2109,11 @@ final class StyleAttributes {
         /** The style property volume. */
         VOLUME("volume", "volume"),
 
-        /** The style property {@code webkitAnimation}. */
-        WEBKIT_ANIMATION("webkitAnimation", "webkit-animation", chrome("none 0s ease 0s 1 normal none running")),
-
-        /** The style property {@code webkitAnimationDelay}. */
-        WEBKIT_ANIMATION_DELAY("webkitAnimationDelay", "webkit-animation-delay", chrome("0s")),
-
-        /** The style property {@code webkitAnimationDirection}. */
-        WEBKIT_ANIMATION_DIRECTION("webkitAnimationDirection", "webkit-animation-direction", chrome("normal")),
-
-        /** The style property {@code webkitAnimationDuration}. */
-        WEBKIT_ANIMATION_DURATION("webkitAnimationDuration", "webkit-animation-duration", chrome("0s")),
-
-        /** The style property {@code webkitAnimationFillMode}. */
-        WEBKIT_ANIMATION_FILL_MODE("webkitAnimationFillMode", "webkit-animation-fill-mode", chrome("none")),
-
-        /** The style property {@code webkitAnimationIterationCount}. */
-        WEBKIT_ANIMATION_ITERATION_COUNT("webkitAnimationIterationCount", "webkit-animation-iteration-count",
-                chrome("1")),
-
-        /** The style property {@code webkitAnimationName}. */
-        WEBKIT_ANIMATION_NAME("webkitAnimationName", "webkit-animation-name", chrome("none")),
-
-        /** The style property {@code webkitAnimationPlayState}. */
-        WEBKIT_ANIMATION_PLAY_STATE("webkitAnimationPlayState", "webkit-animation-play-state", chrome("running")),
-
-        /** The style property {@code webkitAnimationTimingFunction}. */
-        WEBKIT_ANIMATION_TIMING_FUNCTION("webkitAnimationTimingFunction", "webkit-animation-timing-function",
-                chrome("ease")),
-
         /** The style property {@code webkitAppRegion}. */
         WEBKIT_APP_REGION("webkitAppRegion", "webkit-app-region", chrome("no-drag")),
 
         /** The style property {@code webkitAppearance}. */
         WEBKIT_APPEARANCE("webkitAppearance", "webkit-appearance", chrome("none")),
-
-        /** The style property {@code webkitBackfaceVisibility}. */
-        WEBKIT_BACKFACE_VISIBILITY("webkitBackfaceVisibility", "webkit-backface-visibility", chrome("visible")),
 
         /** The style property {@code webkitBackgroundClip}. */
         WEBKIT_BACKGROUND_CLIP("webkitBackgroundClip", "webkit-background-clip", chrome("border-box")),
@@ -2155,9 +2123,6 @@ final class StyleAttributes {
 
         /** The style property {@code webkitBackgroundOrigin}. */
         WEBKIT_BACKGROUND_ORIGIN("webkitBackgroundOrigin", "webkit-background-origin", chrome("padding-box")),
-
-        /** The style property {@code webkitBackgroundSize}. */
-        WEBKIT_BACKGROUND_SIZE("webkitBackgroundSize", "webkit-background-size", chrome("auto")),
 
         /** The style property {@code webkitBorderAfter}. */
         WEBKIT_BORDER_AFTER("webkitBorderAfter", "webkit-border-after", chrome("0px none rgb(0, 0, 0)")),
@@ -2201,9 +2166,6 @@ final class StyleAttributes {
 
         /** The style property {@code webkitBorderImage}. */
         WEBKIT_BORDER_IMAGE("webkitBorderImage", "webkit-border-image", chrome("none")),
-
-        /** The style property {@code webkitBorderRadius}. */
-        WEBKIT_BORDER_RADIUS("webkitBorderRadius", "webkit-border-radius", chrome("")),
 
         /** The style property {@code webkitBorderStart}. */
         WEBKIT_BORDER_START("webkitBorderStart", "webkit-border-start", chrome("0px none rgb(0, 0, 0)")),
@@ -2249,9 +2211,6 @@ final class StyleAttributes {
 
         /** The style property {@code webkitBoxReflect}. */
         WEBKIT_BOX_REFLECT("webkitBoxReflect", "webkit-box-reflect", chrome("none")),
-
-        /** The style property {@code webkitBoxShadow}. */
-        WEBKIT_BOX_SHADOW("webkitBoxShadow", "webkit-box-shadow", chrome("none")),
 
         /** The style property {@code webkitClipPath}. */
         WEBKIT_CLIP_PATH("webkitClipPath", "webkit-clip-path", chrome("none")),
@@ -2435,12 +2394,6 @@ final class StyleAttributes {
         /** The style property {@code webkitPaddingStart}. */
         WEBKIT_PADDING_START("webkitPaddingStart", "webkit-padding-start", chrome("0px")),
 
-        /** The style property {@code webkitPerspective}. */
-        WEBKIT_PERSPECTIVE("webkitPerspective", "webkit-perspective", chrome("none")),
-
-        /** The style property {@code webkitPerspectiveOrigin}. */
-        WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin", chrome("620px 161px")),
-
         /** The style property {@code webkitPerspectiveOriginX}. */
         WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chrome("")),
 
@@ -2497,12 +2450,6 @@ final class StyleAttributes {
         /** The style property {@code webkitTextStrokeWidth}. */
         WEBKIT_TEXT_STROKE_WIDTH("webkitTextStrokeWidth", "webkit-text-stroke-width", chrome("0px")),
 
-        /** The style property {@code webkitTransform}. */
-        WEBKIT_TRANSFORM("webkitTransform", "webkit-transform", chrome("none")),
-
-        /** The style property {@code webkitTransformOrigin}. */
-        WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin", chrome("620px 161px")),
-
         /** The style property {@code webkitTransformOriginX}. */
         WEBKIT_TRANSFORM_ORIGIN_X("webkitTransformOriginX", "webkit-transform-origin-x", chrome("")),
 
@@ -2511,25 +2458,6 @@ final class StyleAttributes {
 
         /** The style property {@code webkitTransformOriginZ}. */
         WEBKIT_TRANSFORM_ORIGIN_Z("webkitTransformOriginZ", "webkit-transform-origin-z", chrome("")),
-
-        /** The style property {@code webkitTransformStyle}. */
-        WEBKIT_TRANSFORM_STYLE("webkitTransformStyle", "webkit-transform-style", chrome("flat")),
-
-        /** The style property {@code webkitTransition}. */
-        WEBKIT_TRANSITION("webkitTransition", "webkit-transition", chrome("all 0s ease 0s")),
-
-        /** The style property {@code webkitTransitionDelay}. */
-        WEBKIT_TRANSITION_DELAY("webkitTransitionDelay", "webkit-transition-delay", chrome("0s")),
-
-        /** The style property {@code webkitTransitionDuration}. */
-        WEBKIT_TRANSITION_DURATION("webkitTransitionDuration", "webkit-transition-duration", chrome("0s")),
-
-        /** The style property {@code webkitTransitionProperty}. */
-        WEBKIT_TRANSITION_PROPERTY("webkitTransitionProperty", "webkit-transition-property", chrome("all")),
-
-        /** The style property {@code webkitTransitionTimingFunction}. */
-        WEBKIT_TRANSITION_TIMING_FUNCTION("webkitTransitionTimingFunction", "webkit-transition-timing-function",
-                chrome("ease")),
 
         /** The style property {@code webkitUserDrag}. */
         WEBKIT_USER_DRAG("webkitUserDrag", "webkit-user-drag", chrome("auto")),
