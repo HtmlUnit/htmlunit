@@ -1104,63 +1104,12 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the value of the onload event handler.
-     * @param newOnload the new handler
-     */
-    @JsxSetter
-    public void setOnload(final Object newOnload) {
-        if (getBrowserVersion().hasFeature(EVENT_ONLOAD_UNDEFINED_THROWS_ERROR)
-            && Context.getUndefinedValue().equals(newOnload)) {
-            throw Context.reportRuntimeError("Invalid onload value: undefined.");
-        }
-        getEventListenersContainer().setEventHandlerProp("load", newOnload);
-    }
-
-    /**
-     * Sets the value of the onclick event handler.
-     * @param newOnload the new handler
-     */
-    @JsxSetter
-    public void setOnclick(final Object newOnload) {
-        getEventListenersContainer().setEventHandlerProp("click", newOnload);
-    }
-
-    /**
-     * Returns the onclick property (caution this is not necessary a function if something else has
-     * been set).
-     * @return the onclick property
-     */
-    @JsxGetter
-    public Object getOnclick() {
-        return getEventListenersContainer().getEventHandlerProp("click");
-    }
-
-    /**
-     * Sets the value of the ondblclick event handler.
-     * @param newHandler the new handler
-     */
-    @JsxSetter
-    public void setOndblclick(final Object newHandler) {
-        getEventListenersContainer().setEventHandlerProp("dblclick", newHandler);
-    }
-
-    /**
-     * Returns the ondblclick property (caution this is not necessary a function if something else has
-     * been set).
-     * @return the ondblclick property
-     */
-    @JsxGetter
-    public Object getOndblclick() {
-        return getEventListenersContainer().getEventHandlerProp("dblclick");
-    }
-
-    /**
      * Returns the onload property. Note that this is not necessarily a function if something else has been set.
      * @return the onload property
      */
     @JsxGetter
     public Object getOnload() {
-        final Object onload = getEventListenersContainer().getEventHandlerProp("load");
+        final Object onload = getHandlerForJavaScript("load");
         if (onload == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
@@ -1175,13 +1124,64 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
+     * Sets the value of the onload event handler.
+     * @param newOnload the new handler
+     */
+    @JsxSetter
+    public void setOnload(final Object newOnload) {
+        if (getBrowserVersion().hasFeature(EVENT_ONLOAD_UNDEFINED_THROWS_ERROR)
+            && Context.getUndefinedValue().equals(newOnload)) {
+            throw Context.reportRuntimeError("Invalid onload value: undefined.");
+        }
+        getEventListenersContainer().setEventHandlerProp("load", newOnload);
+    }
+
+    /**
+     * Returns the onclick property (caution this is not necessary a function if something else has
+     * been set).
+     * @return the onclick property
+     */
+    @JsxGetter
+    public Object getOnclick() {
+        return getHandlerForJavaScript("click");
+    }
+
+    /**
+     * Sets the value of the onclick event handler.
+     * @param newOnload the new handler
+     */
+    @JsxSetter
+    public void setOnclick(final Object newOnload) {
+        setHandlerForJavaScript("click", newOnload);
+    }
+
+    /**
+     * Returns the ondblclick property (caution this is not necessary a function if something else has
+     * been set).
+     * @return the ondblclick property
+     */
+    @JsxGetter
+    public Object getOndblclick() {
+        return getHandlerForJavaScript("dblclick");
+    }
+
+    /**
+     * Sets the value of the ondblclick event handler.
+     * @param newHandler the new handler
+     */
+    @JsxSetter
+    public void setOndblclick(final Object newHandler) {
+        setHandlerForJavaScript("dblclick", newHandler);
+    }
+
+    /**
      * Returns the onhashchange property (caution this is not necessary a function if something else has
      * been set).
      * @return the onhashchange property
      */
     @JsxGetter
     public Object getOnhashchange() {
-        return getEventListenersContainer().getEventHandlerProp(Event.TYPE_HASH_CHANGE);
+        return getHandlerForJavaScript(Event.TYPE_HASH_CHANGE);
     }
 
     /**
@@ -1190,7 +1190,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @JsxSetter
     public void setOnhashchange(final Object newHandler) {
-        getEventListenersContainer().setEventHandlerProp(Event.TYPE_HASH_CHANGE, newHandler);
+        setHandlerForJavaScript(Event.TYPE_HASH_CHANGE, newHandler);
     }
 
     /**
@@ -2173,7 +2173,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
-    public Object getSnsubmit() {
+    public Object getOnsubmit() {
         return getHandlerForJavaScript(Event.TYPE_SUBMIT);
     }
 
