@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link Window}. The only difference with {@link WindowTest} is that these
@@ -1187,7 +1188,8 @@ public class Window2Test extends WebDriverTestCase {
             IE8 = { "false", "undefined" })
     public void onsubmit_noHandler() throws Exception {
         final String html
-            = "<html>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  alert('onsubmit' in window);\n"
@@ -1203,15 +1205,16 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "onsubmit" },
             IE8 = { })
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void onsubmit_withHandler() throws Exception {
         final String html
-            = "<html>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "<body>\n"
             + "<form>\n"
             + "  <input type='submit' id='it' value='submit' />\n"
             + "</form>\n"
             + "<script>\n"
-            + "  window.captureEvents(Event.SUBMIT);\n"
             + "  window.onsubmit = function() {\n"
             + "    alert('onsubmit');\n"
             + "  }\n"
