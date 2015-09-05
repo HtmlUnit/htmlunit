@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.event;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
@@ -21,17 +21,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code WebKitTransitionEvent}.
+ * A JavaScript object for {@code webkitURL}.
  *
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class WebKitTransitionEvent extends TransitionEvent {
+public class webkitURL extends URL {
 
     /**
      * Creates an instance.
      */
     @JsxConstructor
-    public WebKitTransitionEvent() {
+    public webkitURL() {
     }
 }

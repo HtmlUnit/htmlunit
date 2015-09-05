@@ -79,6 +79,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.WeakSet;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathExpression;
+import com.gargoylesoftware.htmlunit.javascript.host.webkitURL;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferView;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
@@ -181,6 +182,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.WebKitMutationObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathEvaluator;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
@@ -247,9 +249,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.TransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UserProximityEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.WebKitAnimationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WebKitTransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.XMLHttpRequestProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.webkitSpeechRecognitionError;
+import com.gargoylesoftware.htmlunit.javascript.host.event.webkitSpeechRecognitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.fetch.Headers;
 import com.gargoylesoftware.htmlunit.javascript.host.fetch.Request;
 import com.gargoylesoftware.htmlunit.javascript.host.fetch.Response;
@@ -278,6 +283,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBObjectStore;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBOpenDBRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBTransaction;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.webkitIDBCursor;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.webkitIDBDatabase;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.webkitIDBFactory;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.webkitIDBIndex;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.webkitIDBKeyRange;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.webkitIDBObjectStore;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.webkitIDBRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.webkitIDBTransaction;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AnalyserNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBufferSourceNode;
@@ -321,6 +334,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.TextTrackList;
 import com.gargoylesoftware.htmlunit.javascript.host.media.TimeRanges;
 import com.gargoylesoftware.htmlunit.javascript.host.media.VTTCue;
 import com.gargoylesoftware.htmlunit.javascript.host.media.WaveShaperNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.webkitAudioContext;
+import com.gargoylesoftware.htmlunit.javascript.host.media.webkitMediaStream;
+import com.gargoylesoftware.htmlunit.javascript.host.media.webkitOfflineAudioContext;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIAccess;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIInput;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIInputMap;
@@ -348,6 +364,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceReso
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechGrammar;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechGrammarList;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechRecognition;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.*;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorker;
@@ -519,8 +537,14 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WeakMap.class,
         WeakSet.class, WebGLActiveInfo.class, WebGLBuffer.class, WebGLContextEvent.class, WebGLFramebuffer.class,
         WebGLProgram.class, WebGLRenderbuffer.class, WebGLRenderingContext.class, WebGLShader.class,
-        WebGLShaderPrecisionFormat.class, WebGLTexture.class, WebGLUniformLocation.class, WebKitCSSMatrix.class,
-        webkitRTCPeerConnection.class, webkitSpeechRecognition.class, WebKitTransitionEvent.class,
+        WebGLShaderPrecisionFormat.class, WebGLTexture.class, WebGLUniformLocation.class, WebKitAnimationEvent.class,
+        webkitAudioContext.class,
+        WebKitCSSMatrix.class, webkitIDBCursor.class, webkitIDBDatabase.class, webkitIDBFactory.class,
+        webkitIDBIndex.class, webkitIDBKeyRange.class, webkitIDBObjectStore.class, webkitIDBRequest.class,
+        webkitIDBTransaction.class, webkitMediaStream.class, webkitOfflineAudioContext.class,
+        WebKitMutationObserver.class, webkitRTCPeerConnection.class, webkitSpeechGrammar.class,
+        webkitSpeechGrammarList.class, webkitSpeechRecognition.class, webkitSpeechRecognitionError.class,
+        webkitSpeechRecognitionEvent.class, WebKitTransitionEvent.class, webkitURL.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XDomainRequest.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestProgressEvent.class,
         XMLHttpRequestUpload.class, XMLSerializer.class,

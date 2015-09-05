@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.event;
+package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
@@ -20,18 +20,28 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+
 /**
- * A JavaScript object for {@code WebKitTransitionEvent}.
+ * A JavaScript object for {@code WebKitMutationObserver}.
  *
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class WebKitTransitionEvent extends TransitionEvent {
+public class WebKitMutationObserver extends MutationObserver {
 
     /**
      * Creates an instance.
      */
+    public WebKitMutationObserver() {
+    }
+
+    /**
+     * Creates an instance.
+     * @param function the function to observe
+     */
     @JsxConstructor
-    public WebKitTransitionEvent() {
+    public WebKitMutationObserver(final Function function) {
+        super(function);
     }
 }

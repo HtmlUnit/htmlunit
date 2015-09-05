@@ -297,6 +297,66 @@ public class JavaScriptEngine {
                     && browserVersion.hasFeature(JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION)) {
                 prototype = prototypesPerJSName.get("HTMLOptionElement");
             }
+
+            switch (hostClassSimpleName) {
+                case "WebKitAnimationEvent":
+                    prototype = prototypesPerJSName.get("AnimationEvent");
+                    break;
+
+                case "WebKitMutationObserver":
+                    prototype = prototypesPerJSName.get("MutationObserver");
+                    break;
+
+                case "WebKitTransitionEvent":
+                    prototype = prototypesPerJSName.get("TransitionEvent");
+                    break;
+
+                case "webkitAudioContext":
+                    prototype = prototypesPerJSName.get("AudioContext");
+                    break;
+
+                case "webkitIDBCursor":
+                    prototype = prototypesPerJSName.get("IDBCursor");
+                    break;
+
+                case "webkitIDBDatabase":
+                    prototype = prototypesPerJSName.get("IDBDatabase");
+                    break;
+
+                case "webkitIDBFactory":
+                    prototype = prototypesPerJSName.get("IDBFactory");
+                    break;
+
+                case "webkitIDBIndex":
+                    prototype = prototypesPerJSName.get("IDBIndex");
+                    break;
+
+                case "webkitIDBKeyRange":
+                    prototype = prototypesPerJSName.get("IDBKeyRange");
+                    break;
+
+                case "webkitIDBObjectStore":
+                    prototype = prototypesPerJSName.get("IDBObjectStore");
+                    break;
+
+                case "webkitIDBRequest":
+                    prototype = prototypesPerJSName.get("IDBRequest");
+                    break;
+
+                case "webkitIDBTransaction":
+                    prototype = prototypesPerJSName.get("IDBTransaction");
+                    break;
+
+                case "webkitOfflineAudioContext":
+                    prototype = prototypesPerJSName.get("OfflineAudioContext");
+                    break;
+
+                case "webkitURL":
+                    prototype = prototypesPerJSName.get("URL");
+                  break;
+
+                default:
+            }
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor != null) {
                     final BaseFunction function;
@@ -307,7 +367,23 @@ public class JavaScriptEngine {
                         function = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
                     }
 
-                    if ("Image".equals(hostClassSimpleName) || "Option".equals(hostClassSimpleName)) {
+                    if ("WebKitAnimationEvent".equals(hostClassSimpleName)
+                            || "WebKitMutationObserver".equals(hostClassSimpleName)
+                            || "WebKitTransitionEvent".equals(hostClassSimpleName)
+                            || "webkitAudioContext".equals(hostClassSimpleName)
+                            || "webkitIDBCursor".equals(hostClassSimpleName)
+                            || "webkitIDBDatabase".equals(hostClassSimpleName)
+                            || "webkitIDBFactory".equals(hostClassSimpleName)
+                            || "webkitIDBIndex".equals(hostClassSimpleName)
+                            || "webkitIDBKeyRange".equals(hostClassSimpleName)
+                            || "webkitIDBObjectStore".equals(hostClassSimpleName)
+                            || "webkitIDBRequest".equals(hostClassSimpleName)
+                            || "webkitIDBTransaction".equals(hostClassSimpleName)
+                            || "webkitOfflineAudioContext".equals(hostClassSimpleName)
+                            || "webkitOfflineAudioContext".equals(hostClassSimpleName)
+                            || "webkitURL".equals(hostClassSimpleName)
+                            || "Image".equals(hostClassSimpleName)
+                            || "Option".equals(hostClassSimpleName)) {
                         final Object prototypeProperty = ScriptableObject.getProperty(window, prototype.getClassName());
 
                         if (function instanceof FunctionObject) {

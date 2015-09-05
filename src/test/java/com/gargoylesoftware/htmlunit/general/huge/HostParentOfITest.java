@@ -3186,4 +3186,104 @@ public class HostParentOfITest extends HostParentOf {
         test("ReadableStream", "ReadableStream");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IDBCursor_webkitIDBCursor() throws Exception {
+        test("IDBCursor", "webkitIDBCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IDBDatabase_webkitIDBDatabase() throws Exception {
+        test("IDBDatabase", "webkitIDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IDBFactory_webkitIDBFactory() throws Exception {
+        test("IDBFactory", "webkitIDBFactory");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IDBIndex_webkitIDBIndex() throws Exception {
+        test("IDBIndex", "webkitIDBIndex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IDBKeyRange_webkitIDBKeyRange() throws Exception {
+        test("IDBKeyRange", "webkitIDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IDBObjectStore_webkitIDBObjectStore() throws Exception {
+        test("IDBObjectStore", "webkitIDBObjectStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IDBRequest_webkitIDBRequest() throws Exception {
+        test("IDBRequest", "webkitIDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IDBTransaction_webkitIDBTransaction() throws Exception {
+        test("IDBTransaction", "webkitIDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MutationObserver_WebKitMutationObserver() throws Exception {
+        test("MutationObserver", "WebKitMutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _OfflineAudioContext_webkitOfflineAudioContext() throws Exception {
+        test("OfflineAudioContext", "webkitOfflineAudioContext");
+    }
+
 }

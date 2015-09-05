@@ -21,17 +21,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code WebKitTransitionEvent}.
+ * A JavaScript object for {@code webkitSpeechRecognitionEvent}.
  *
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class WebKitTransitionEvent extends TransitionEvent {
+public class webkitSpeechRecognitionEvent extends Event {
 
     /**
      * Creates an instance.
      */
     @JsxConstructor
-    public WebKitTransitionEvent() {
+    public webkitSpeechRecognitionEvent() {
     }
 }

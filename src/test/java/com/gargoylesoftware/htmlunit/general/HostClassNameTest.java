@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -9590,7 +9589,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function AnimationEvent() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent");
     }
@@ -9611,7 +9609,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function TransitionEvent() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webKitTransitionEvent() throws Exception {
         test("WebKitTransitionEvent");
     }
@@ -9645,7 +9642,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function XPathExpression() { [native code] }",
             FF31 = "[object XPathExpression]",
             FF38 = "function XPathExpression() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void xPathExpression() throws Exception {
         test("XPathExpression");
     }
@@ -9756,7 +9752,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MutationObserver() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webKitMutationObserver() throws Exception {
         test("WebKitMutationObserver");
     }
@@ -9767,7 +9762,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function AudioContext() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitAudioContext() throws Exception {
         test("webkitAudioContext");
     }
@@ -9778,7 +9772,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function IDBCursor() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitIDBCursor() throws Exception {
         test("webkitIDBCursor");
     }
@@ -9789,7 +9782,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function IDBDatabase() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitIDBDatabase() throws Exception {
         test("webkitIDBDatabase");
     }
@@ -9800,7 +9792,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function IDBFactory() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitIDBFactory() throws Exception {
         test("webkitIDBFactory");
     }
@@ -9811,7 +9802,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function IDBIndex() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitIDBIndex() throws Exception {
         test("webkitIDBIndex");
     }
@@ -9822,7 +9812,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function IDBKeyRange() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitIDBKeyRange() throws Exception {
         test("webkitIDBKeyRange");
     }
@@ -9833,7 +9822,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function IDBObjectStore() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitIDBObjectStore() throws Exception {
         test("webkitIDBObjectStore");
     }
@@ -9844,7 +9832,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function IDBRequest() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitIDBRequest() throws Exception {
         test("webkitIDBRequest");
     }
@@ -9855,7 +9842,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function IDBTransaction() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitIDBTransaction() throws Exception {
         test("webkitIDBTransaction");
     }
@@ -9866,7 +9852,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaStream() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitMediaStream() throws Exception {
         test("webkitMediaStream");
     }
@@ -9877,7 +9862,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function OfflineAudioContext() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitOfflineAudioContext() throws Exception {
         test("webkitOfflineAudioContext");
     }
@@ -9888,7 +9872,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function SpeechGrammar() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar");
     }
@@ -9899,7 +9882,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function SpeechGrammarList() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList");
     }
@@ -9910,7 +9892,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function SpeechRecognitionError() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError");
     }
@@ -9921,7 +9902,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function SpeechRecognitionEvent() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent");
     }
@@ -9932,7 +9912,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function URL() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webkitURL() throws Exception {
         test("webkitURL");
     }

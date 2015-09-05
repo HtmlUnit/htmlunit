@@ -184,6 +184,63 @@ public class RecursiveFunctionObject extends FunctionObject {
             case "webkitSpeechRecognition":
                 return "SpeechRecognition";
 
+            case "WebKitAnimationEvent":
+                return "AnimationEvent";
+
+            case "WebKitMutationObserver":
+                return "MutationObserver";
+
+            case "WebKitTransitionEvent":
+                return "TransitionEvent";
+
+            case "webkitAudioContext":
+                return "AudioContext";
+
+            case "webkitIDBCursor":
+                return "IDBCursor";
+
+            case "webkitIDBDatabase":
+                return "IDBDatabase";
+
+            case "webkitIDBFactory":
+                return "IDBFactory";
+
+            case "webkitIDBIndex":
+                return "IDBIndex";
+
+            case "webkitIDBKeyRange":
+                return "IDBKeyRange";
+
+            case "webkitIDBObjectStore":
+                return "IDBObjectStore";
+
+            case "webkitIDBRequest":
+                return "IDBRequest";
+
+            case "webkitIDBTransaction":
+                return "IDBTransaction";
+
+            case "webkitMediaStream":
+                return "MediaStream";
+
+            case "webkitOfflineAudioContext":
+                return "OfflineAudioContext";
+
+            case "webkitSpeechGrammar":
+                return "SpeechGrammar";
+
+            case "webkitSpeechGrammarList":
+                return "SpeechGrammarList";
+
+            case "webkitSpeechRecognitionError":
+                return "SpeechRecognitionError";
+
+            case "webkitSpeechRecognitionEvent":
+                return "SpeechRecognitionEvent";
+
+            case "webkitURL":
+                return "URL";
+
             default:
         }
         return functionName;

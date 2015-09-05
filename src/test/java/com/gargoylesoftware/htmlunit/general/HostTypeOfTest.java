@@ -6882,7 +6882,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent");
     }
@@ -6934,7 +6933,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             FF31 = "object",
             IE = "undefined")
-    @NotYetImplemented(FF31)
     public void xPathExpression() throws Exception {
         test("XPathExpression");
     }
@@ -7045,7 +7043,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webKitMutationObserver() throws Exception {
         test("WebKitMutationObserver");
     }
@@ -7056,7 +7053,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitAudioContext() throws Exception {
         test("webkitAudioContext");
     }
@@ -7067,7 +7063,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitIDBCursor() throws Exception {
         test("webkitIDBCursor");
     }
@@ -7078,7 +7073,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitIDBDatabase() throws Exception {
         test("webkitIDBDatabase");
     }
@@ -7089,7 +7083,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitIDBFactory() throws Exception {
         test("webkitIDBFactory");
     }
@@ -7100,7 +7093,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitIDBIndex() throws Exception {
         test("webkitIDBIndex");
     }
@@ -7111,7 +7103,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitIDBKeyRange() throws Exception {
         test("webkitIDBKeyRange");
     }
@@ -7122,7 +7113,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitIDBObjectStore() throws Exception {
         test("webkitIDBObjectStore");
     }
@@ -7133,7 +7123,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitIDBRequest() throws Exception {
         test("webkitIDBRequest");
     }
@@ -7144,7 +7133,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitIDBTransaction() throws Exception {
         test("webkitIDBTransaction");
     }
@@ -7155,7 +7143,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitMediaStream() throws Exception {
         test("webkitMediaStream");
     }
@@ -7166,7 +7153,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitOfflineAudioContext() throws Exception {
         test("webkitOfflineAudioContext");
     }
@@ -7177,7 +7163,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar");
     }
@@ -7188,7 +7173,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList");
     }
@@ -7199,7 +7183,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError");
     }
@@ -7210,7 +7193,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent");
     }
@@ -7221,7 +7203,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void webkitURL() throws Exception {
         test("webkitURL");
     }

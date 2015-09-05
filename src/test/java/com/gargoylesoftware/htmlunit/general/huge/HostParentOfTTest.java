@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.util.Collection;
 
 import org.junit.Test;
@@ -24,7 +22,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.google.common.base.Predicate;
 
 /**
@@ -639,17 +636,6 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented(CHROME)
-    public void _TransitionEvent_WebKitTransitionEvent() throws Exception {
-        test("TransitionEvent", "WebKitTransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _UIEvent_SVGZoomEvent() throws Exception {
@@ -784,40 +770,8 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    @NotYetImplemented(CHROME)
-    public void _WebKitAnimationEvent_WebKitAnimationEvent() throws Exception {
-        test("WebKitAnimationEvent", "WebKitAnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
     public void _WebKitCSSMatrix_WebKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix", "WebKitCSSMatrix");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented(CHROME)
-    public void _WebKitTransitionEvent_TransitionEvent() throws Exception {
-        test("WebKitTransitionEvent", "TransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _WebKitTransitionEvent_WebKitTransitionEvent() throws Exception {
-        test("WebKitTransitionEvent", "WebKitTransitionEvent");
     }
 
     /**
@@ -861,4 +815,393 @@ public class HostParentOfTTest extends HostParentOf {
         test("XPathExpression", "XPathExpression");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitAnimationEvent_AnimationEvent() throws Exception {
+        test("WebKitAnimationEvent", "AnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitAnimationEvent_WebKitAnimationEvent() throws Exception {
+        test("WebKitAnimationEvent", "WebKitAnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _TransitionEvent_WebKitTransitionEvent() throws Exception {
+        test("TransitionEvent", "WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _URL_webkitURL() throws Exception {
+        test("URL", "webkitURL");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitMutationObserver_MutationObserver() throws Exception {
+        test("WebKitMutationObserver", "MutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitMutationObserver_WebKitMutationObserver() throws Exception {
+        test("WebKitMutationObserver", "WebKitMutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitTransitionEvent_TransitionEvent() throws Exception {
+        test("WebKitTransitionEvent", "TransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitTransitionEvent_WebKitTransitionEvent() throws Exception {
+        test("WebKitTransitionEvent", "WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitAudioContext_AudioContext() throws Exception {
+        test("webkitAudioContext", "AudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitAudioContext_OfflineAudioContext() throws Exception {
+        test("webkitAudioContext", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitAudioContext_webkitAudioContext() throws Exception {
+        test("webkitAudioContext", "webkitAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitAudioContext_webkitOfflineAudioContext() throws Exception {
+        test("webkitAudioContext", "webkitOfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBCursor_IDBCursor() throws Exception {
+        test("webkitIDBCursor", "IDBCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBCursor_IDBCursorWithValue() throws Exception {
+        test("webkitIDBCursor", "IDBCursorWithValue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBCursor_webkitIDBCursor() throws Exception {
+        test("webkitIDBCursor", "webkitIDBCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBDatabase_IDBDatabase() throws Exception {
+        test("webkitIDBDatabase", "IDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBDatabase_webkitIDBDatabase() throws Exception {
+        test("webkitIDBDatabase", "webkitIDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBFactory_IDBFactory() throws Exception {
+        test("webkitIDBFactory", "IDBFactory");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBFactory_webkitIDBFactory() throws Exception {
+        test("webkitIDBFactory", "webkitIDBFactory");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBIndex_IDBIndex() throws Exception {
+        test("webkitIDBIndex", "IDBIndex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBIndex_webkitIDBIndex() throws Exception {
+        test("webkitIDBIndex", "webkitIDBIndex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBKeyRange_IDBKeyRange() throws Exception {
+        test("webkitIDBKeyRange", "IDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBKeyRange_webkitIDBKeyRange() throws Exception {
+        test("webkitIDBKeyRange", "webkitIDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBObjectStore_IDBObjectStore() throws Exception {
+        test("webkitIDBObjectStore", "IDBObjectStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBObjectStore_webkitIDBObjectStore() throws Exception {
+        test("webkitIDBObjectStore", "webkitIDBObjectStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBRequest_IDBOpenDBRequest() throws Exception {
+        test("webkitIDBRequest", "IDBOpenDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBRequest_IDBRequest() throws Exception {
+        test("webkitIDBRequest", "IDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBRequest_webkitIDBRequest() throws Exception {
+        test("webkitIDBRequest", "webkitIDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBTransaction_IDBTransaction() throws Exception {
+        test("webkitIDBTransaction", "IDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitIDBTransaction_webkitIDBTransaction() throws Exception {
+        test("webkitIDBTransaction", "webkitIDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitMediaStream_webkitMediaStream() throws Exception {
+        test("webkitMediaStream", "webkitMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitOfflineAudioContext_OfflineAudioContext() throws Exception {
+        test("webkitOfflineAudioContext", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitOfflineAudioContext_webkitOfflineAudioContext() throws Exception {
+        test("webkitOfflineAudioContext", "webkitOfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitSpeechGrammarList_webkitSpeechGrammarList() throws Exception {
+        test("webkitSpeechGrammarList", "webkitSpeechGrammarList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitSpeechGrammar_webkitSpeechGrammar() throws Exception {
+        test("webkitSpeechGrammar", "webkitSpeechGrammar");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitSpeechRecognitionError_webkitSpeechRecognitionError() throws Exception {
+        test("webkitSpeechRecognitionError", "webkitSpeechRecognitionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitSpeechRecognitionEvent_webkitSpeechRecognitionEvent() throws Exception {
+        test("webkitSpeechRecognitionEvent", "webkitSpeechRecognitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitURL_URL() throws Exception {
+        test("webkitURL", "URL");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitURL_webkitURL() throws Exception {
+        test("webkitURL", "webkitURL");
+    }
 }

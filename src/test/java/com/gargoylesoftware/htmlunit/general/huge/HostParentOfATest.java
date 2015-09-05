@@ -6132,27 +6132,6 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    @NotYetImplemented(CHROME)
-    public void _Event_WebKitAnimationEvent() throws Exception {
-        test("Event", "WebKitAnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Event_WebKitTransitionEvent() throws Exception {
-        test("Event", "WebKitTransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
     public void _Event_XMLHttpRequestProgressEvent() throws Exception {
         test("Event", "XMLHttpRequestProgressEvent");
     }
@@ -6455,6 +6434,136 @@ public class HostParentOfATest extends HostParentOf {
             CHROME = "true")
     public void _Event_BeforeInstallPromptEvent() throws Exception {
         test("Event", "BeforeInstallPromptEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AnimationEvent_WebKitAnimationEvent() throws Exception {
+        test("AnimationEvent", "WebKitAnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_WebKitAnimationEvent() throws Exception {
+        test("Event", "WebKitAnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AudioContext_webkitAudioContext() throws Exception {
+        test("AudioContext", "webkitAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AudioContext_webkitOfflineAudioContext() throws Exception {
+        test("AudioContext", "webkitOfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_webkitAudioContext() throws Exception {
+        test("EventTarget", "webkitAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_webkitIDBDatabase() throws Exception {
+        test("EventTarget", "webkitIDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_webkitIDBRequest() throws Exception {
+        test("EventTarget", "webkitIDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_webkitIDBTransaction() throws Exception {
+        test("EventTarget", "webkitIDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_webkitMediaStream() throws Exception {
+        test("EventTarget", "webkitMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_webkitOfflineAudioContext() throws Exception {
+        test("EventTarget", "webkitOfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_WebKitTransitionEvent() throws Exception {
+        test("Event", "WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_webkitSpeechRecognitionError() throws Exception {
+        test("Event", "webkitSpeechRecognitionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_webkitSpeechRecognitionEvent() throws Exception {
+        test("Event", "webkitSpeechRecognitionEvent");
     }
 
 }

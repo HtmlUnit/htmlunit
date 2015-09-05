@@ -21,17 +21,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code WebKitTransitionEvent}.
+ * A JavaScript object for {@code WebKitAnimationEvent}.
  *
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class WebKitTransitionEvent extends TransitionEvent {
+public class WebKitAnimationEvent extends AnimationEvent {
 
     /**
-     * Creates an instance.
+     * Default constructor.
      */
     @JsxConstructor
-    public WebKitTransitionEvent() {
+    public WebKitAnimationEvent() {
     }
 }
