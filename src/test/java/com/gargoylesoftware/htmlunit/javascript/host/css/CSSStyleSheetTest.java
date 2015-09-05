@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Unit tests for {@link CSSStyleSheet}.
@@ -228,11 +229,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2", ".testStyleDef", ".testStyle" },
-            IE8 = { },
-            CHROME = { "2", ".teststyledef", ".teststyle" })
-    @NotYetImplemented(CHROME)
+            IE8 = { })
     public void insertRuleLeadingWhitespace() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
             + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
