@@ -849,8 +849,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         }
 
         final WebWindow top = getWebWindow().getTopWindow();
-        top_ = getProxy(top);
-        return top_;
+        return getProxy(top);
     }
 
     /**
