@@ -1183,6 +1183,51 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "true", "null" },
+            IE8 = { "false", "undefined" })
+    public void onsubmit_noHandler() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  alert('onsubmit' in window);\n"
+            + "  alert(window.onsubmit);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "onsubmit" },
+            IE8 = { })
+    public void onsubmit_withHandler() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<form>\n"
+            + "  <input type='submit' id='it' value='submit' />\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "  window.captureEvents(Event.SUBMIT);\n"
+            + "  window.onsubmit = function() {\n"
+            + "    alert('onsubmit');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("it")).click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(FF31 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: " },
             FF38 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",

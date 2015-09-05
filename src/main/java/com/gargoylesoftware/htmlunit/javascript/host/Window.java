@@ -2168,6 +2168,26 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
+     * Getter for the onsubmit event handler.
+     * @return the handler
+     */
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME),
+        @WebBrowser(value = IE, minVersion = 11) })
+    public Object getSnsubmit() {
+        return getHandlerForJavaScript(Event.TYPE_SUBMIT);
+    }
+
+    /**
+     * Setter for the onsubmit event handler.
+     * @param onsubmit the handler
+     */
+    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME),
+        @WebBrowser(value = IE, minVersion = 11) })
+    public void setOnsubmit(final Object onsubmit) {
+        setHandlerForJavaScript(Event.TYPE_SUBMIT, onsubmit);
+    }
+
+    /**
      * Posts a message.
      * @param message the object passed to the window
      * @param targetOrigin the origin this window must be for the event to be dispatched

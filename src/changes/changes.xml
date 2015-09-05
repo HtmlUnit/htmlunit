@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: window.onsubmit support added.
+            </action>
             <action type="fix" dev="asashour">
                 Correctly handle script when src attribute is only "://".
             </action>
