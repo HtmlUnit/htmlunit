@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: Window.top property is only writable in IE.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: window.onsubmit support added.
             </action>

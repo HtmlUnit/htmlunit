@@ -1198,28 +1198,11 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for http://sourceforge.net/p/htmlunit/bugs/234/
-     * and https://bugzilla.mozilla.org/show_bug.cgi?id=443491.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void overwriteFunctions_alert() throws Exception {
-        final String html = "<html><head><script language='JavaScript'>\n"
-            + "function alert(x) {\n"
-            + "  document.title = x;\n"
-            + "}\n"
-            + "alert('hello');\n"
-            + "</script></head><body></body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("hello", page.getTitleText());
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "123", "123" })
+    @Alerts(DEFAULT = { "true", "[object Window]", "[object Window]" },
+            IE = { "true", "123", "123" })
     public void overwriteProperty_top() throws Exception {
         final String html
             = "<html><body><script>\n"

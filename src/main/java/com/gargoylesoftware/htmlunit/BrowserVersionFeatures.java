@@ -1973,6 +1973,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
 
+    /** Window.top property is writable. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_WINDOW_TOP_WRITABLE,
+
     /** Supports XML. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,

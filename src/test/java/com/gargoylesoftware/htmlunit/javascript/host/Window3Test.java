@@ -1647,4 +1647,26 @@ public class Window3Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Regression test for http://sourceforge.net/p/htmlunit/bugs/234/
+     * and https://bugzilla.mozilla.org/show_bug.cgi?id=443491.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void overwriteFunctions_alert() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script language='JavaScript'>\n"
+            + "    function alert(x) {\n"
+            + "      document.title = x;\n"
+            + "    }\n"
+            + "    alert('hello');\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body></body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        driver.getTitle();
+    }
 }
