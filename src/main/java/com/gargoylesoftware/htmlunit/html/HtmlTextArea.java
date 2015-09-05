@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.io.PrintWriter;
@@ -92,12 +93,29 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public final String getText() {
+        if (hasFeature(HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN)) {
+            return readValueIE();
+        }
         return readValue();
     }
 
     private String readValue() {
         final StringBuilder buffer = new StringBuilder();
         for (final DomNode node : getChildren()) {
+            if (node instanceof DomText) {
+                buffer.append(((DomText) node).getData());
+            }
+        }
+        // if content starts with new line, it is ignored (=> for the parser?)
+        if (buffer.length() != 0 && buffer.charAt(0) == '\n') {
+            buffer.deleteCharAt(0);
+        }
+        return buffer.toString();
+    }
+
+    private String readValueIE() {
+        final StringBuilder buffer = new StringBuilder();
+        for (final DomNode node : getDescendants()) {
             if (node instanceof DomText) {
                 buffer.append(((DomText) node).getData());
             }
@@ -126,13 +144,33 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     private void setTextInternal(final String newValue) {
         initDefaultValue();
-        final DomText child = (DomText) getFirstChild();
+        DomNode child = getFirstChild();
         if (child == null) {
             final DomText newChild = new DomText(getPage(), newValue);
             appendChild(newChild);
         }
         else {
-            child.setData(newValue);
+            if (hasFeature(HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN)) {
+                removeAllChildren();
+                final DomText newChild = new DomText(getPage(), newValue);
+                appendChild(newChild);
+            }
+            else {
+                DomNode next = child.getNextSibling();
+                while (next != null && !(next instanceof DomText)) {
+                    child = next;
+                    next = child.getNextSibling();
+                }
+
+                if (next == null) {
+                    removeChild(child);
+                    final DomText newChild = new DomText(getPage(), newValue);
+                    appendChild(newChild);
+                }
+                else {
+                    ((DomText) next).setData(newValue);
+                }
+            }
         }
 
         int pos = 0;

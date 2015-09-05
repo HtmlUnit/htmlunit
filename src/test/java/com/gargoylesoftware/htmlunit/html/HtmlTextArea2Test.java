@@ -333,4 +333,160 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
         final WebElement textArea = driver.findElement(By.id("form1"));
         Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts({ "1", "a", "", "b", "<!--comment-->2", "c", "<!--comment-->", "d" })
+    public void textUpdate() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<textarea id='myText'>1</textarea>\n"
+            + "<textarea id='myTextEmpty'></textarea>\n"
+            + "<textarea id='myTextComment'><!--comment-->2</textarea>\n"
+            + "<textarea id='myTextCommentOnly'><!--comment--></textarea>\n"
+            + "<script>\n"
+            + "    var text = document.getElementById('myText');\n"
+            + "    alert(text.value);\n"
+            + "    text.value = 'a';\n"
+            + "    alert(text.value);\n"
+
+            + "    text = document.getElementById('myTextEmpty');\n"
+            + "    alert(text.value);\n"
+            + "    text.value = 'b';\n"
+            + "    alert(text.value);\n"
+
+            + "    text = document.getElementById('myTextComment');\n"
+            + "    alert(text.value);\n"
+            + "    text.value = 'c';\n"
+            + "    alert(text.value);\n"
+
+            + "    text = document.getElementById('myTextCommentOnly');\n"
+            + "    alert(text.value);\n"
+            + "    text.value = 'd';\n"
+            + "    alert(text.value);\n"
+
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts({ "", "xyz", "1", "a", "1" })
+    public void textUpdateFromJSText() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<textarea id='myText'></textarea>\n"
+            + "<script>\n"
+            + "    var text = document.getElementById('myText');\n"
+            + "    alert(text.value);\n"
+
+            + "    var txt = document.createTextNode('xyz');\n"
+            + "    text.appendChild(txt);\n"
+            + "    alert(text.value);\n"
+            + "    alert(text.childNodes.length);\n"
+
+            + "    text.value = 'a';\n"
+            + "    alert(text.value);\n"
+            + "    alert(text.childNodes.length);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "", "1", "a", "1" },
+            IE = { "", "123", "1", "a", "1" })
+    public void textUpdateFromJSSpan() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<textarea id='myText'></textarea>\n"
+            + "<script>\n"
+            + "    var text = document.getElementById('myText');\n"
+            + "    alert(text.value);\n"
+
+            + "    var span = document.createElement('span');\n"
+            + "    span.innerHTML = '123';\n"
+            + "    text.appendChild(span);\n"
+            + "    alert(text.value);\n"
+            + "    alert(text.childNodes.length);\n"
+
+            + "    text.value = 'a';\n"
+            + "    alert(text.value);\n"
+            + "    alert(text.childNodes.length);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "", "1", "xyz", "2", "a", "2" },
+            IE = { "", "123", "1", "123xyz", "2", "a", "1" })
+    public void textUpdateFromJSSpanAndText() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<textarea id='myText'></textarea>\n"
+            + "<script>\n"
+            + "    var text = document.getElementById('myText');\n"
+            + "    alert(text.value);\n"
+
+            + "    var span = document.createElement('span');\n"
+            + "    span.innerHTML = '123';\n"
+            + "    text.appendChild(span);\n"
+            + "    alert(text.value);\n"
+            + "    alert(text.childNodes.length);\n"
+
+            + "    var txt = document.createTextNode('xyz');\n"
+            + "    text.appendChild(txt);\n"
+            + "    alert(text.value);\n"
+            + "    alert(text.childNodes.length);\n"
+
+            + "    text.value = 'a';\n"
+            + "    alert(text.value);\n"
+            + "    alert(text.childNodes.length);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts({ "", "", "1", "a", "1" })
+    public void textUpdateFromJSComment() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<textarea id='myText'></textarea>\n"
+            + "<script>\n"
+            + "    var text = document.getElementById('myText');\n"
+            + "    alert(text.value);\n"
+
+            + "    var comment = document.createComment('comment');\n"
+            + "    text.appendChild(comment);\n"
+            + "    alert(text.value);\n"
+            + "    alert(text.childNodes.length);\n"
+
+            + "    text.value = 'a';\n"
+            + "    alert(text.value);\n"
+            + "    alert(text.childNodes.length);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

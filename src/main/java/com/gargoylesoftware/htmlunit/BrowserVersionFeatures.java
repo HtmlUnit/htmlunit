@@ -636,6 +636,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
 
+    /** When calculation the value of an text area ie uses a recursive approach. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN,
+
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden}. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     HTMLTRACK_END_TAG_FORBIDDEN,

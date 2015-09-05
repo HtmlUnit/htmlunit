@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1719">
+                JavaScript: TextArea now works correct if the children are manipulated from js.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: Window.top property is only writable in IE.
             </action>
