@@ -9,6 +9,12 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="rbri">
+                JavaScript: fix MediaList.item() and MediaList.mediaText results for media queries.
+            </action>
+            <action type="update" dev="rbri">
+                CSS: cssparser updated to 0.9.18.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: Property style.boxSizing is available in Chrome and FF too.
             </action>
             <action type="fix" dev="asashour">
@@ -92,9 +98,6 @@
             </action>
             <action type="fix" dev="rbri" issue="1700">
                 Improved width calculation if the style defines the width using a percent value.
-            </action>
-            <action type="update" dev="rbri">
-                CSS: cssparser updated to 0.9.17.
             </action>
             <action type="add" dev="rbri">
                 Index property for HTMLOptionElement added.

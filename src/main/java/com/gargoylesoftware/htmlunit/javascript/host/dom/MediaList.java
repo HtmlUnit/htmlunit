@@ -28,6 +28,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.steadystate.css.dom.MediaListImpl;
+import com.steadystate.css.parser.media.MediaQuery;
 
 /**
  * A JavaScript object for a MediaList.
@@ -70,7 +72,8 @@ public class MediaList extends SimpleScriptable {
         if (index < 0 || index >= getLength()) {
             return null;
         }
-        return wrappedList_.item(index);
+        final MediaQuery mq = ((MediaListImpl) wrappedList_).mediaQuery(index);
+        return mq.toString();
     }
 
     /**

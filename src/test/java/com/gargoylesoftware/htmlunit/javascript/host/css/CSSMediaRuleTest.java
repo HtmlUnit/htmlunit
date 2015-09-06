@@ -36,13 +36,46 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "2", "screen", "print", "screen, print" },
             IE8 = { "Your browser does not support this example!" })
-    // TODO: check which IE versions support what
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"
 
             + "<style>"
             + "  @media screen, print { p { background-color:#FFFFFF; }};"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  if (styleSheet.cssRules) {\n"
+            + "    var rule = styleSheet.cssRules[0];\n"
+            + "    var mediaList = rule.media;\n"
+            + "    alert(mediaList.length);\n"
+            + "    for (var i = 0; i < mediaList.length; i++) {\n"
+            + "      alert(mediaList.item(i));\n"
+            + "    }\n"
+            + "    alert(mediaList.mediaText);\n"
+            + "  } else {// Internet Explorer\n"
+            + "    alert('Your browser does not support this example!');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "2", "only screen and (color)", "print", "only screen and (color)", "print" },
+            IE8 = { "Your browser does not support this example!" })
+    public void mediaQuery() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>"
+            + "  @media only screen and (color), print { p { background-color:#FFFFFF; }};"
             + "</style>\n"
 
             + "<script>\n"
