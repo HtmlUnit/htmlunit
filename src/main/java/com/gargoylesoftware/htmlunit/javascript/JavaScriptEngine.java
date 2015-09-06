@@ -353,7 +353,7 @@ public class JavaScriptEngine {
 
                 case "webkitURL":
                     prototype = prototypesPerJSName.get("URL");
-                  break;
+                    break;
 
                 default:
             }
