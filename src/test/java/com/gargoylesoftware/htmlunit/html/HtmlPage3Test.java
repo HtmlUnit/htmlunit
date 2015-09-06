@@ -270,4 +270,82 @@ public class HtmlPage3Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePath()  throws Exception {
+        basePath("base_path", URL_SECOND + "path");
+    }
+
+    private void basePath(final String baseUrl, final String expected) throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <base href='" + baseUrl + "'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <a id='testLink' href='path'>click me</a>\n"
+            + "</body></html>";
+        final WebDriver webDriver = loadPage2(html, URL_SECOND);
+        webDriver.findElement(By.id("testLink")).click();
+        assertEquals(expected, webDriver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathAndSlash()  throws Exception {
+        basePath("base_path/", URL_SECOND + "base_path/path");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathAfterSlash()  throws Exception {
+        basePath("/base_path", "http://localhost:" + PORT + "/path");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathSlashes()  throws Exception {
+        basePath("/base_path/", URL_FIRST + "base_path/path");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathFullyQualified()  throws Exception {
+        basePath("http://localhost:12345/base_path", "http://localhost:" + PORT + "/path");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathFullyQualifiedSlash()  throws Exception {
+        basePath("http://localhost:12345/base_path/", "http://localhost:" + PORT + "/base_path/path");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    //TODO: fails with ChromeDriver if run with other tests
+    public void basePathNoProtocol()  throws Exception {
+        basePath("//localhost:12345/base_path", "http://localhost:" + PORT + "/path");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathNoProtocolSlash()  throws Exception {
+        basePath("//localhost:12345/base_path/", "http://localhost:" + PORT + "/base_path/path");
+    }
+
 }

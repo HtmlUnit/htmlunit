@@ -731,6 +731,9 @@
         <contributor>
             <name>Joerg Werner</name>
         </contributor>
+        <contributor>
+            <name>Adam Afeltowicz</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

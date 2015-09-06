@@ -2261,7 +2261,12 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         jsEngine.addPostponedAction(action);
     }
 
-    private static int getPort(final URL url) {
+    /**
+     * Returns the port of the specified URL.
+     * @param url the URL
+     * @return the port
+     */
+    public static int getPort(final URL url) {
         int port = url.getPort();
         if (port == -1) {
             if ("http".equals(url.getProtocol())) {

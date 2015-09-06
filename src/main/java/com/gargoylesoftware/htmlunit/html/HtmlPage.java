@@ -2285,12 +2285,28 @@ public class HtmlPage extends InteractivePage {
                 baseUrl = getUrl();
             }
             else {
+                final URL url = getUrl();
                 try {
-                    baseUrl = new URL(href);
+                    if (href.startsWith("http://") || href.startsWith("https://")) {
+                        baseUrl = new URL(href);
+                    }
+                    else if (href.startsWith("//")) {
+                        baseUrl = new URL(String.format("%s:%s", url.getProtocol(), href));
+                    }
+                    else if (href.startsWith("/")) {
+                        final int port = Window.getPort(url);
+                        baseUrl = new URL(String.format("%s://%s:%d%s", url.getProtocol(), url.getHost(), port, href));
+                    }
+                    else if (url.toString().endsWith("/")) {
+                        baseUrl = new URL(String.format("%s%s", url.toString(), href));
+                    }
+                    else {
+                        baseUrl = new URL(String.format("%s/%s", url.toString(), href));
+                    }
                 }
                 catch (final MalformedURLException e) {
                     notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
-                    baseUrl = getUrl();
+                    baseUrl = url;
                 }
             }
         }
