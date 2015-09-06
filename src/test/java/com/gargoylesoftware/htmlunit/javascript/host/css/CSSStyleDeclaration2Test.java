@@ -275,7 +275,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='myDiv'><br>\n"
+            + "  <div id='myDiv'><br></div>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
 
@@ -311,7 +311,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='myDiv'><br>\n"
+            + "  <div id='myDiv'><br></div>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
 

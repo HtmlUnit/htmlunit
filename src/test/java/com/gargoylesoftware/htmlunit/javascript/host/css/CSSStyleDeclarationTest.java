@@ -1641,4 +1641,29 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "true", "border-box" })
+    public void boxSizing() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var style = document.getElementById('test').style;\n"
+            + "    alert(style.boxSizing === '');\n"
+
+            + "    style = document.createElement('div').style;\n"
+            + "    alert(style.boxSizing === '');\n"
+            + "    style.boxSizing = 'border-box';\n"
+            + "    alert(style.boxSizing);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='test'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -1634,7 +1634,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "boxSizing" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter
     public String getBoxSizing() {
         return getStyleAttribute(BOX_SIZING);
     }
@@ -1643,7 +1643,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "boxSizing" style attribute.
      * @param boxSizing the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter
     public void setBoxSizing(final String boxSizing) {
         setStyleAttribute(BOX_SIZING, boxSizing);
     }
