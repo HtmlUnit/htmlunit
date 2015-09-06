@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: Property style.boxSizing is available in Chrome and FF too.
+            </action>
             <action type="fix" dev="asashour">
                 CSS: fix @font-face for Chrome.
             </action>
