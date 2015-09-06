@@ -1666,4 +1666,34 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Another one from the jQuery browser support tests.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "auto", "auto" },
+            CHROME = { "auto", "" },
+            IE8 = { "undefined", "undefined" })
+    @NotYetImplemented(CHROME)
+    public void jQueryPixelPosition() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('test');\n"
+            + "    var style = window.getComputedStyle ? window.getComputedStyle(div, null) : {};\n"
+            + "    alert(style.top);\n"
+
+            + "    div = document.createElement('div');\n"
+            + "    style = window.getComputedStyle ? window.getComputedStyle(div, null) : {};\n"
+            + "    alert(style.top);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='test'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

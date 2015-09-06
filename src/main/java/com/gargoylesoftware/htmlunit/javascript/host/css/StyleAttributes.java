@@ -2022,7 +2022,7 @@ final class StyleAttributes {
         TEXT_UNDERLINE_POSITION("textUnderlinePosition", "text-underline-position", ie11up("auto")),
 
         /** The style property {@code top}. */
-        TOP("top", "top", chrome("auto")),
+        TOP("top", "top", ff("auto"), ie11up("auto"), chrome("auto")),
 
         /** The style property touch-action. */
         TOUCH_ACTION("touchAction", "touch-action", ie11up("auto"), chrome("auto")),
