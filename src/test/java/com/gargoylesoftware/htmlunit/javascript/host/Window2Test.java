@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -1203,20 +1204,22 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "onsubmit" },
-            IE8 = { })
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = { "-onsubmit-" },
+            IE8 = { "" })
     public void onsubmit_withHandler() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
+            + "<head>\n"
+            + "  <title>Title</title>\n"
+            + "</head>\n"
             + "<body>\n"
             + "<form>\n"
             + "  <input type='submit' id='it' value='submit' />\n"
             + "</form>\n"
             + "<script>\n"
             + "  window.onsubmit = function() {\n"
-            + "    alert('onsubmit');\n"
+            + "    window.name = window.name + '-onsubmit-';\n" // hack
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
@@ -1224,7 +1227,11 @@ public class Window2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("it")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        // we can't use the usual alert here because of the page change
+        final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        final Object result = jsExecutor.executeScript("return window.name");
+
+        assertEquals(getExpectedAlerts()[0], result);
     }
 
     /**
