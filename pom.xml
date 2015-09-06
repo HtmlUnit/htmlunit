@@ -804,7 +804,7 @@
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
             <artifactId>cssparser</artifactId>
-            <version>0.9.17</version>
+            <version>0.9.18-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
