@@ -395,19 +395,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testGetFullQualifiedUrl_WithInvalidBase() throws Exception {
-        final String htmlContent = "<html><head><base href='---****://=='/></head></html>";
-        final HtmlPage page = loadPage(htmlContent);
-
-        // invalid base URL should be ignored
-        assertEquals("http://somewhere.com/", page.getFullyQualifiedUrl("http://somewhere.com/"));
-        assertEquals(page.getUrl() + "foo.html", page.getFullyQualifiedUrl("foo.html"));
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test

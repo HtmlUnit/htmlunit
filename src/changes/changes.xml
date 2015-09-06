@@ -9,7 +9,7 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="asashour">
-                CSS: support for @font-face fixed for Chrome.
+                CSS: fix @font-face for Chrome.
             </action>
             <action type="fix" dev="asashour" issue="1718" due-to="Adam Afeltowicz">
                 Fix base tag for relative URI.
