@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -44,7 +41,6 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             IE8 = { "exception" },
             IE11 = { "[object CSSFontFaceRule]", "5",
             "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(Delicious-Bold.otf);\r\n}\r\n" })
-    @NotYetImplemented(CHROME)
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"

@@ -200,7 +200,7 @@ public class CSSRule extends SimpleScriptable {
      * This reflects the current state of the rule and not its initial value.
      * @return the parsable textual representation of the rule.
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getCssText() {
         return rule_.getCssText();
     }

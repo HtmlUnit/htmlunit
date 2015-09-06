@@ -15,18 +15,23 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_CRLF;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_NO_CRLF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for a {@link org.w3c.dom.css.CSSFontFaceRule}.
@@ -58,20 +63,41 @@ public class CSSFontFaceRule extends CSSRule {
         super(stylesheet, rule);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public short getType() {
         return FONT_FACE_RULE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getCssText() {
         String cssText = super.getCssText();
-        if (getBrowserVersion().hasFeature(CSS_FONTFACERULE_CSSTEXT_CRLF)) {
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(CSS_FONTFACERULE_CSSTEXT_CRLF)) {
             cssText = StringUtils.replace(cssText, "{", "{\r\n\t");
             cssText = StringUtils.replace(cssText, "}", ";\r\n}\r\n");
             cssText = StringUtils.replace(cssText, "; ", ";\r\n\t");
+        }
+        else if (browserVersion.hasFeature(CSS_FONTFACERULE_CSSTEXT_NO_CRLF)) {
+            cssText = StringUtils.replace(cssText, "{", "{ ");
+            cssText = StringUtils.replace(cssText, "}", "; }");
+            cssText = StringUtils.replace(cssText, "; ", "; ");
+            final Matcher matcher = REPLACEMENT_2.matcher(cssText);
+            matcher.find();
+            final String url = matcher.group(1);
+            final HtmlPage page = (HtmlPage)
+                    ((CSSStyleSheet) getParentScope()).getWindow().getWebWindow().getEnclosedPage();
+            try {
+                cssText = matcher.replaceFirst("src: url(" + page.getFullyQualifiedUrl(url) + ");");
+            }
+            catch (final Exception e) {
+                throw Context.throwAsScriptRuntimeEx(e);
+            }
         }
         else {
             cssText = StringUtils.replace(cssText, "{", "{\n  ");

@@ -97,9 +97,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CSS_DISPLAY_BLOCK2,
 
-    /** <code>CSSFontFaceRule.cssText</code> uses \r\n to break lines. */
+    /** {@code CSSFontFaceRule.cssText} uses {@code \r\n} to break lines. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_FONTFACERULE_CSSTEXT_CRLF,
+
+    /** {@code CSSFontFaceRule.cssText} has no {@code \n}. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    CSS_FONTFACERULE_CSSTEXT_NO_CRLF,
 
     /** Default is 'normal'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
