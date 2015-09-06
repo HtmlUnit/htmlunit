@@ -320,7 +320,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     public void basePathFullyQualified()  throws Exception {
-        basePath("http://localhost:12345/base_path", "http://localhost:" + PORT + "/path");
+        basePath("http://localhost:" + PORT + "/base_path", "http://localhost:" + PORT + "/path");
     }
 
     /**
@@ -328,7 +328,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     public void basePathFullyQualifiedSlash()  throws Exception {
-        basePath("http://localhost:12345/base_path/", "http://localhost:" + PORT + "/base_path/path");
+        basePath("http://localhost:" + PORT + "/base_path/", "http://localhost:" + PORT + "/base_path/path");
     }
 
     /**
@@ -337,7 +337,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     //TODO: fails with ChromeDriver if run with other tests
     public void basePathNoProtocol()  throws Exception {
-        basePath("//localhost:12345/base_path", "http://localhost:" + PORT + "/path");
+        basePath("//localhost:" + PORT + "/base_path", "http://localhost:" + PORT + "/path");
     }
 
     /**
@@ -345,7 +345,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     public void basePathNoProtocolSlash()  throws Exception {
-        basePath("//localhost:12345/base_path/", "http://localhost:" + PORT + "/base_path/path");
+        basePath("//localhost:" + PORT + "/base_path/", "http://localhost:" + PORT + "/base_path/path");
     }
 
 }
