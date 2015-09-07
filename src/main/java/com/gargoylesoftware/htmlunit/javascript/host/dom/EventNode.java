@@ -379,7 +379,7 @@ public class EventNode extends Node {
         }
 
         // Create the event, whose class will depend on the type specified.
-        final String cleanedType = StringUtils.removeStart(type.toLowerCase(Locale.ENGLISH), "on");
+        final String cleanedType = StringUtils.removeStart(type.toLowerCase(Locale.ROOT), "on");
         if (MouseEvent.isMouseEvent(cleanedType)) {
             event.setPrototype(getPrototype(MouseEvent.class));
         }

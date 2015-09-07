@@ -279,7 +279,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             "Paste"
         );
         for (String cmd : cmds) {
-            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ENGLISH));
+            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
         }
 
         cmds = Arrays.asList(
@@ -298,8 +298,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             "Underline", "Undo", "Unlink", "Unselect"
         );
         for (String cmd : cmds) {
-            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ENGLISH));
-            EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ENGLISH));
+            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
+            EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
         }
 
         cmds = Arrays.asList(
@@ -312,7 +312,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             "useCSS", "styleWithCSS"
         );
         for (String cmd : cmds) {
-            EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ENGLISH));
+            EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ROOT));
         }
     }
 
@@ -995,7 +995,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public String getCharacterSet() {
         final String charset = getPage().getPageEncoding();
         if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            return charset.toLowerCase(Locale.ENGLISH);
+            return charset.toLowerCase(Locale.ROOT);
         }
         if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
             return EncodingSniffer.translateEncodingLabel(charset);
@@ -1014,7 +1014,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return EncodingSniffer.translateEncodingLabel(charset);
         }
         if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            charset = charset.toLowerCase(Locale.ENGLISH);
+            charset = charset.toLowerCase(Locale.ROOT);
         }
         return charset;
     }
@@ -1659,7 +1659,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             domain_ = url.getHost();
             if (getBrowserVersion().hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
-                domain_ = domain_.toLowerCase(Locale.ENGLISH);
+                domain_ = domain_.toLowerCase(Locale.ROOT);
             }
         }
 
@@ -1717,14 +1717,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         if (currentDomain.indexOf('.') > -1
-                && !currentDomain.toLowerCase(Locale.ENGLISH).endsWith("." + newDomain.toLowerCase(Locale.ENGLISH))) {
+                && !currentDomain.toLowerCase(Locale.ROOT).endsWith("." + newDomain.toLowerCase(Locale.ROOT))) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
                     + currentDomain + "\" to: \"" + newDomain + "\"");
         }
 
         // Netscape down shifts the case of the domain
         if (browserVersion.hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
-            domain_ = newDomain.toLowerCase(Locale.ENGLISH);
+            domain_ = newDomain.toLowerCase(Locale.ROOT);
         }
         else {
             domain_ = newDomain;
@@ -1969,7 +1969,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return false;
         }
 
-        final String cmdLC = cmd.toLowerCase(Locale.ENGLISH);
+        final String cmdLC = cmd.toLowerCase(Locale.ROOT);
         if (getBrowserVersion().isIE()) {
             return EXECUTE_CMDS_IE.contains(cmdLC);
         }

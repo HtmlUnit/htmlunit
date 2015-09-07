@@ -150,7 +150,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     @Override
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final String contentType = determineContentType(webResponse.getContentType().toLowerCase(Locale.ENGLISH),
+        final String contentType = determineContentType(webResponse.getContentType().toLowerCase(Locale.ROOT),
             webResponse.getContentAsStream());
 
         final PageType pageType = determinePageType(contentType);
@@ -202,7 +202,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return "text/plain";
             }
 
-            final String asAsciiString = new String(bytes, "ASCII").toUpperCase(Locale.ENGLISH);
+            final String asAsciiString = new String(bytes, "ASCII").toUpperCase(Locale.ROOT);
             if (asAsciiString.contains("<HTML")) {
                 return "text/html";
             }

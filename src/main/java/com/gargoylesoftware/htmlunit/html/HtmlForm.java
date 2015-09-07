@@ -230,7 +230,7 @@ public class HtmlForm extends HtmlElement {
         String charset = getAcceptCharsetAttribute();
         if (!charset.isEmpty()) {
             charset = charset.trim();
-            return SUBMIT_CHARSET_PATTERN.matcher(charset).replaceAll("").toUpperCase(Locale.ENGLISH);
+            return SUBMIT_CHARSET_PATTERN.matcher(charset).replaceAll("").toUpperCase(Locale.ROOT);
         }
         return getPage().getPageEncoding();
     }
@@ -329,7 +329,7 @@ public class HtmlForm extends HtmlElement {
         }
 
         if (element instanceof HtmlInput) {
-            final String type = element.getAttribute("type").toLowerCase(Locale.ENGLISH);
+            final String type = element.getAttribute("type").toLowerCase(Locale.ROOT);
             if ("radio".equals(type) || "checkbox".equals(type)) {
                 return element.hasAttribute("checked");
             }
@@ -361,7 +361,7 @@ public class HtmlForm extends HtmlElement {
         }
         if (element instanceof HtmlInput) {
             final HtmlInput input = (HtmlInput) element;
-            final String type = input.getTypeAttribute().toLowerCase(Locale.ENGLISH);
+            final String type = input.getTypeAttribute().toLowerCase(Locale.ROOT);
             if ("submit".equals(type) || "image".equals(type) || "reset".equals(type) || "button".equals(type)) {
                 return false;
             }
@@ -402,7 +402,7 @@ public class HtmlForm extends HtmlElement {
             final String attributeValue) {
 
         final List<E> list = new ArrayList<>();
-        final String lowerCaseTagName = elementName.toLowerCase(Locale.ENGLISH);
+        final String lowerCaseTagName = elementName.toLowerCase(Locale.ROOT);
 
         for (final HtmlElement next : getFormHtmlElementDescendants()) {
             if (next.getTagName().equals(lowerCaseTagName)) {

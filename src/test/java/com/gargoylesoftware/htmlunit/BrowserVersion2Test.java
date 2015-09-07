@@ -311,7 +311,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
         final StringBuilder sb = new StringBuilder();
         for (final Entry<String, String> headerEntry : headers.entrySet()) {
             final String headerName = headerEntry.getKey();
-            final String headerNameLower = headerName.toLowerCase(Locale.ENGLISH);
+            final String headerNameLower = headerName.toLowerCase(Locale.ROOT);
             if ("accept".equals(headerNameLower)) {
                 sb.append(headerName);
                 sb.append(": ");

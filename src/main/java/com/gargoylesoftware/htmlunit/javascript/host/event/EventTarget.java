@@ -247,7 +247,7 @@ public class EventTarget extends SimpleScriptable {
             return null;
         }
 
-        final String name = StringUtils.substring(eventName.toLowerCase(Locale.ENGLISH), 2);
+        final String name = StringUtils.substring(eventName.toLowerCase(Locale.ROOT), 2);
         return eventListenersContainer_.getEventHandlerProp(name);
     }
 

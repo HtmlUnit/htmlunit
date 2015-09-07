@@ -238,7 +238,7 @@ public final class XmlUtil {
         }
         final NamedNodeMap nodeAttributes = source.getAttributes();
         if (page != null && page.isHtmlPage()) {
-            localName = localName.toUpperCase(Locale.ENGLISH);
+            localName = localName.toUpperCase(Locale.ROOT);
         }
         final String qualifiedName;
         if (source.getPrefix() == null) {

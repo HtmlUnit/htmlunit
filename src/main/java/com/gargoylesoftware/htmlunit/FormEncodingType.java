@@ -53,7 +53,7 @@ public final class FormEncodingType implements Serializable {
      * @return the constant corresponding to the specified name, {@link #URL_ENCODED} if none match.
      */
     public static FormEncodingType getInstance(final String name) {
-        final String lowerCaseName = name.toLowerCase(Locale.ENGLISH);
+        final String lowerCaseName = name.toLowerCase(Locale.ROOT);
 
         if (MULTIPART.getName().equals(lowerCaseName)) {
             return MULTIPART;

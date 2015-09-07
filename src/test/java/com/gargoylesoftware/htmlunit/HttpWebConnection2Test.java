@@ -98,14 +98,14 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final StringBuilder sb = new StringBuilder();
         for (final Entry<String, String> headerEntry : headers.entrySet()) {
             final String headerName = headerEntry.getKey();
-            final String headerNameLower = headerName.toLowerCase(Locale.ENGLISH);
+            final String headerNameLower = headerName.toLowerCase(Locale.ROOT);
             if (ignoredHeaders.contains(headerNameLower)) {
                 continue;
             }
             sb.append(headerName);
             sb.append(": ");
             if (caseInsensitiveHeaders.contains(headerNameLower)) {
-                sb.append(headerEntry.getValue().toLowerCase(Locale.ENGLISH));
+                sb.append(headerEntry.getValue().toLowerCase(Locale.ROOT));
             }
             else if ("user-agent".equals(headerNameLower)) {
                 // ignore the 64bit difference

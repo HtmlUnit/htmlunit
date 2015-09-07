@@ -228,7 +228,7 @@ public final class ProxyAutoConfig {
         }
         final Calendar calendar = Calendar.getInstance(timezone);
         for (int i = 0; i < 7; i++) {
-            final String day = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ENGLISH);
+            final String day = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ROOT);
             if (day.equals(wd2)) {
                 return true;
             }

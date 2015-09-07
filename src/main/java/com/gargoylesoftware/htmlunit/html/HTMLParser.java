@@ -369,7 +369,7 @@ public final class HTMLParser {
                 tagName = tagName.substring(index + 1);
             }
             else {
-                tagName = tagName.toLowerCase(Locale.ENGLISH);
+                tagName = tagName.toLowerCase(Locale.ROOT);
             }
             final ElementFactory factory = ELEMENT_FACTORIES.get(tagName);
 
@@ -526,7 +526,7 @@ public final class HTMLParser {
 
             handleCharacters();
 
-            final String tagLower = localName.toLowerCase(Locale.ENGLISH);
+            final String tagLower = localName.toLowerCase(Locale.ROOT);
             if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
                 return;
             }
@@ -763,7 +763,7 @@ public final class HTMLParser {
 
             handleCharacters();
 
-            final String tagLower = localName.toLowerCase(Locale.ENGLISH);
+            final String tagLower = localName.toLowerCase(Locale.ROOT);
 
             if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
                 return;
@@ -1012,7 +1012,7 @@ public final class HTMLParser {
                 // add the attributes that don't already exist
                 final int length = attrs.getLength();
                 for (int i = 0; i < length; i++) {
-                    final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ENGLISH);
+                    final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
                     if (body_.getAttributes().getNamedItem(attrName) == null) {
                         body_.setAttribute(attrName, attrs.getValue(i));
                         if (attrName.startsWith("on") && body_.getScriptObject() != null) {

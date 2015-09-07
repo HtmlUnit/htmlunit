@@ -591,12 +591,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             final String prefix = domNode.getPrefix();
             if (prefix != null) {
                 // create string builder only if needed (performance)
-                final StringBuilder localName = new StringBuilder(prefix.toLowerCase(Locale.ENGLISH));
+                final StringBuilder localName = new StringBuilder(prefix.toLowerCase(Locale.ROOT));
                 localName.append(':');
-                localName.append(domNode.getLocalName().toLowerCase(Locale.ENGLISH));
+                localName.append(domNode.getLocalName().toLowerCase(Locale.ROOT));
                 return localName.toString();
             }
-            return domNode.getLocalName().toLowerCase(Locale.ENGLISH);
+            return domNode.getLocalName().toLowerCase(Locale.ROOT);
         }
         return domNode.getLocalName();
     }
@@ -750,7 +750,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // call corresponding event handler setOnxxx if found
         if (getBrowserVersion().hasFeature(JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS) && !name.isEmpty()) {
-            name = name.toLowerCase(Locale.ENGLISH);
+            name = name.toLowerCase(Locale.ROOT);
             if (name.startsWith("on")) {
                 try {
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
@@ -996,7 +996,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (scriptObject instanceof HTMLElement) {
                 htmlElement = (HTMLElement) scriptObject;
                 if (isUpperCase && !htmlElement.isLowerCaseInOuterHtml()) {
-                    tag = tag.toUpperCase(Locale.ENGLISH);
+                    tag = tag.toUpperCase(Locale.ROOT);
                 }
             }
             buffer.append("<").append(tag);
@@ -1163,7 +1163,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             public DomNode appendChild(final org.w3c.dom.Node node) {
                 if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROW_EXCEPTION_WHEN_CLOSES)
                     && node instanceof DomElement) {
-                    final String parentName = parent.getNodeName().toUpperCase(Locale.ENGLISH);
+                    final String parentName = parent.getNodeName().toUpperCase(Locale.ROOT);
                     final short[] closes = HTMLElements.getElement(node.getNodeName()).closes;
                     if (closes != null) {
                         for (final short close : closes) {
@@ -2164,7 +2164,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
         if (domNode.getHtmlPageOrNull() != null) {
-            nodeName = nodeName.toUpperCase(Locale.ENGLISH);
+            nodeName = nodeName.toUpperCase(Locale.ROOT);
         }
         return nodeName;
     }
@@ -2417,7 +2417,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                     if (key.equalsIgnoreCase(value)) {
                         isName = true;
                         if (replaceNameByHex) {
-                            s = COLORS_MAP_IE.get(key).toLowerCase(Locale.ENGLISH);
+                            s = COLORS_MAP_IE.get(key).toLowerCase(Locale.ROOT);
                         }
                         break;
                     }
@@ -2456,7 +2456,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
             }
             if (getBrowserVersion().hasFeature(HTML_COLOR_TO_LOWER)) {
-                s = s.toLowerCase(Locale.ENGLISH);
+                s = s.toLowerCase(Locale.ROOT);
             }
         }
         getDomNodeOrDie().setAttribute(name, s);
@@ -2489,7 +2489,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *        (i.e., it will not actually set the align attribute)
      */
     protected void setAlign(final String align, final boolean ignoreIfNoError) {
-        final String alignLC = align.toLowerCase(Locale.ENGLISH);
+        final String alignLC = align.toLowerCase(Locale.ROOT);
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
         if (acceptArbitraryValues
                 || "center".equals(alignLC)
@@ -2526,7 +2526,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param valid the valid values; if <tt>null</tt>, any value is valid
      */
     protected void setVAlign(final Object vAlign, final String[] valid) {
-        final String s = Context.toString(vAlign).toLowerCase(Locale.ENGLISH);
+        final String s = Context.toString(vAlign).toLowerCase(Locale.ROOT);
         if (valid == null || ArrayUtils.contains(valid, s)) {
             getDomNodeOrDie().setAttribute("valign", s);
         }

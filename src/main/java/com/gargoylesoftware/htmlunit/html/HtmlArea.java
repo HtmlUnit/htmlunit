@@ -212,7 +212,7 @@ public class HtmlArea extends HtmlElement {
      * @return {@code true} if the point is contained in this area
      */
     boolean containsPoint(final int x, final int y) {
-        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase(Locale.ENGLISH);
+        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase(Locale.ROOT);
 
         if ("default".equals(shape) && getCoordsAttribute() != null) {
             return true;
@@ -318,7 +318,7 @@ public class HtmlArea extends HtmlElement {
     }
 
     private boolean isEmpty() {
-        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase(Locale.ENGLISH);
+        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase(Locale.ROOT);
 
         if ("default".equals(shape) && getCoordsAttribute() != null) {
             return false;

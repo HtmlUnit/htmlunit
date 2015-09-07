@@ -54,7 +54,7 @@ public final class MimeType {
      * @return {@code null} if none is known
      */
     public static String getFileExtension(final String contentType) {
-        final String value = type2extension.get(contentType.toLowerCase(Locale.ENGLISH));
+        final String value = type2extension.get(contentType.toLowerCase(Locale.ROOT));
         if (value == null) {
             return "unknown";
         }

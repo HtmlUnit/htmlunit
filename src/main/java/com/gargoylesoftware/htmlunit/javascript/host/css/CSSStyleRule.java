@@ -79,14 +79,14 @@ public class CSSStyleRule extends CSSRule {
             if (!fixedName.isEmpty() && ('.' == fixedName.charAt(0)) || ('#' == fixedName.charAt(0))) {
                 if (getBrowserVersion().hasFeature(JS_SELECTOR_ID_LOWERCASE)
                         && ((HtmlPage) getWindow().getWebWindow().getEnclosedPage()).isQuirksMode()) {
-                    fixedName = fixedName.toLowerCase(Locale.ENGLISH);
+                    fixedName = fixedName.toLowerCase(Locale.ROOT);
                 }
             }
             else if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_UPPERCASE)) {
-                fixedName = fixedName.toUpperCase(Locale.ENGLISH);
+                fixedName = fixedName.toUpperCase(Locale.ROOT);
             }
             else if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_LOWERCASE)) {
-                fixedName = fixedName.toLowerCase(Locale.ENGLISH);
+                fixedName = fixedName.toLowerCase(Locale.ROOT);
             }
             fixedName = StringUtils.sanitizeForAppendReplacement(fixedName);
             m.appendReplacement(sb, fixedName);

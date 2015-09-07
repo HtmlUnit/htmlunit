@@ -399,7 +399,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             request.setCharset("UTF-8");
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
-            request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ENGLISH)));
+            request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
 
             // password is ignored if no user defined
             final boolean userIsNull = null == user || Undefined.instance == user;
@@ -543,7 +543,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                 // header request-headers
                 final StringBuilder builder = new StringBuilder();
                 for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-                    final String name = header.getKey().toLowerCase(Locale.ENGLISH);
+                    final String name = header.getKey().toLowerCase(Locale.ROOT);
                     if (isPreflightHeader(name, header.getValue())) {
                         if (builder.length() != 0) {
                             builder.append(REQUEST_HEADERS_SEPARATOR);
@@ -611,7 +611,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             return true;
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-            if (isPreflightHeader(header.getKey().toLowerCase(Locale.ENGLISH),
+            if (isPreflightHeader(header.getKey().toLowerCase(Locale.ROOT),
                     header.getValue())) {
                 return true;
             }
@@ -630,10 +630,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             headersHeader = "";
         }
         else {
-            headersHeader = headersHeader.toLowerCase(Locale.ENGLISH);
+            headersHeader = headersHeader.toLowerCase(Locale.ROOT);
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-            final String key = header.getKey().toLowerCase(Locale.ENGLISH);
+            final String key = header.getKey().toLowerCase(Locale.ROOT);
             if (isPreflightHeader(key, header.getValue())
                     && !headersHeader.contains(key)) {
                 return false;
@@ -648,7 +648,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      */
     private boolean isPreflightHeader(final String name, final String value) {
         if ("content-type".equals(name)) {
-            final String lcValue = value.toLowerCase(Locale.ENGLISH);
+            final String lcValue = value.toLowerCase(Locale.ROOT);
             if (FormEncodingType.URL_ENCODED.getName().equals(lcValue)
                 || FormEncodingType.MULTIPART.getName().equals(lcValue)
                 || "text/plain".equals(lcValue)
@@ -703,7 +703,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      * @return {@code true} if the header can be set from JavaScript
      */
     static boolean isAuthorizedHeader(final String name) {
-        final String nameLowerCase = name.toLowerCase(Locale.ENGLISH);
+        final String nameLowerCase = name.toLowerCase(Locale.ROOT);
         if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
             return false;
         }

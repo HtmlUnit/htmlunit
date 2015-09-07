@@ -78,7 +78,7 @@ public class HTMLButtonElement extends FormField {
     public String getType() {
         String type = ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
         if (null != type) {
-            type = type.toLowerCase(Locale.ENGLISH);
+            type = type.toLowerCase(Locale.ROOT);
         }
         if ("reset".equals(type)) {
             return "reset";

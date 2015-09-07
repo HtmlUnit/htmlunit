@@ -167,7 +167,7 @@ public class AttributesTest extends TestCase {
                 && methodName.endsWith("Attribute")
                 && !EXCLUDED_METHODS.contains(methodName)) {
 
-                String attributeName = methodName.substring(3, methodName.length() - 9).toLowerCase(Locale.ENGLISH);
+                String attributeName = methodName.substring(3, methodName.length() - 9).toLowerCase(Locale.ROOT);
                 if ("xmllang".equals(attributeName)) {
                     attributeName = "xml:lang";
                 }

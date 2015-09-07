@@ -139,10 +139,10 @@ class DefaultElementFactory implements ElementFactory {
         final String tagName;
         final int colonIndex = qualifiedName.indexOf(':');
         if (colonIndex == -1) {
-            tagName = qualifiedName.toLowerCase(Locale.ENGLISH);
+            tagName = qualifiedName.toLowerCase(Locale.ROOT);
         }
         else {
-            tagName = qualifiedName.substring(colonIndex + 1).toLowerCase(Locale.ENGLISH);
+            tagName = qualifiedName.substring(colonIndex + 1).toLowerCase(Locale.ROOT);
         }
 
         switch (tagName) {

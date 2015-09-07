@@ -540,7 +540,7 @@ public class XMLHttpRequest extends EventTarget {
             }
 
             try {
-                request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ENGLISH)));
+                request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
             }
             catch (final IllegalArgumentException e) {
                 LOG.info("Incorrect HTTP Method '" + method + "'");
@@ -709,7 +709,7 @@ public class XMLHttpRequest extends EventTarget {
                 // header request-headers
                 final StringBuilder builder = new StringBuilder();
                 for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-                    final String name = header.getKey().toLowerCase(Locale.ENGLISH);
+                    final String name = header.getKey().toLowerCase(Locale.ROOT);
                     if (isPreflightHeader(name, header.getValue())) {
                         if (builder.length() != 0) {
                             builder.append(REQUEST_HEADERS_SEPARATOR);
@@ -820,7 +820,7 @@ public class XMLHttpRequest extends EventTarget {
             return true;
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-            if (isPreflightHeader(header.getKey().toLowerCase(Locale.ENGLISH),
+            if (isPreflightHeader(header.getKey().toLowerCase(Locale.ROOT),
                     header.getValue())) {
                 return true;
             }
@@ -839,10 +839,10 @@ public class XMLHttpRequest extends EventTarget {
             headersHeader = "";
         }
         else {
-            headersHeader = headersHeader.toLowerCase(Locale.ENGLISH);
+            headersHeader = headersHeader.toLowerCase(Locale.ROOT);
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-            final String key = header.getKey().toLowerCase(Locale.ENGLISH);
+            final String key = header.getKey().toLowerCase(Locale.ROOT);
             if (isPreflightHeader(key, header.getValue())
                     && !headersHeader.contains(key)) {
                 return false;
@@ -857,7 +857,7 @@ public class XMLHttpRequest extends EventTarget {
      */
     private boolean isPreflightHeader(final String name, final String value) {
         if ("content-type".equals(name)) {
-            final String lcValue = value.toLowerCase(Locale.ENGLISH);
+            final String lcValue = value.toLowerCase(Locale.ROOT);
             if (FormEncodingType.URL_ENCODED.getName().equals(lcValue)
                 || FormEncodingType.MULTIPART.getName().equals(lcValue)
                 || "text/plain".equals(lcValue)
@@ -902,7 +902,7 @@ public class XMLHttpRequest extends EventTarget {
      * @return {@code true} if the header can be set from JavaScript
      */
     static boolean isAuthorizedHeader(final String name) {
-        final String nameLowerCase = name.toLowerCase(Locale.ENGLISH);
+        final String nameLowerCase = name.toLowerCase(Locale.ROOT);
         if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
             return false;
         }

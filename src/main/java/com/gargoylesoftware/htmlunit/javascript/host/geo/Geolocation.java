@@ -124,7 +124,7 @@ public class Geolocation extends SimpleScriptable {
     }
 
     private void doGetPosition() {
-        final String os = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
+        final String os = System.getProperty("os.name").toLowerCase(Locale.ROOT);
         String wifiStringString = null;
         if (os.contains("win")) {
             wifiStringString = getWifiStringWindows();

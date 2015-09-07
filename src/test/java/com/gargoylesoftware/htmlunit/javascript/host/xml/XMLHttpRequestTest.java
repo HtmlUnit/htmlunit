@@ -1248,7 +1248,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             "user-agent", "via" };
         for (final String header : headers) {
             assertFalse(XMLHttpRequest.isAuthorizedHeader(header));
-            assertFalse(XMLHttpRequest.isAuthorizedHeader(header.toUpperCase(Locale.ENGLISH)));
+            assertFalse(XMLHttpRequest.isAuthorizedHeader(header.toUpperCase(Locale.ROOT)));
         }
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-"));
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Control"));

@@ -105,7 +105,7 @@ class XPathAdapter {
         final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
         while (matcher.find()) {
             final String attribute = matcher.group(1);
-            xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ENGLISH));
+            xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ROOT));
         }
         return xpath;
     }

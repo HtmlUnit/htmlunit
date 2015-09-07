@@ -417,7 +417,7 @@ public class Console extends SimpleScriptable {
                         break;
                     default:
                         if (ch < ' ' || ch > '~') {
-                            sb.append("\\u" + Integer.toHexString(ch).toUpperCase(Locale.ENGLISH));
+                            sb.append("\\u" + Integer.toHexString(ch).toUpperCase(Locale.ROOT));
                         }
                         else {
                             sb.append(ch);

@@ -67,7 +67,7 @@ public class MSXMLActiveXObjectFactory {
         if (name == null) {
             return false;
         }
-        name = name.toLowerCase(Locale.ENGLISH);
+        name = name.toLowerCase(Locale.ROOT);
         return "microsoft.xmldom".equals(name)
             || name.startsWith("msxml2.domdocument")
             || name.startsWith("msxml2.freethreadeddomdocument");
@@ -82,7 +82,7 @@ public class MSXMLActiveXObjectFactory {
         if (name == null) {
             return false;
         }
-        name = name.toLowerCase(Locale.ENGLISH);
+        name = name.toLowerCase(Locale.ROOT);
         return "microsoft.xmlhttp".equals(name)
             || name.startsWith("msxml2.xmlhttp");
     }
@@ -96,7 +96,7 @@ public class MSXMLActiveXObjectFactory {
         if (name == null) {
             return false;
         }
-        name = name.toLowerCase(Locale.ENGLISH);
+        name = name.toLowerCase(Locale.ROOT);
         return name.startsWith("msxml2.xsltemplate");
     }
 

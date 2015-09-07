@@ -1955,7 +1955,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                 return;
             }
             if (changed instanceof HtmlLink) {
-                final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase(Locale.ENGLISH);
+                final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase(Locale.ROOT);
                 if ("stylesheet".equals(rel)) {
                     synchronized (computedStyles_) {
                         computedStyles_.clear();

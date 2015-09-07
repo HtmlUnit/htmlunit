@@ -231,7 +231,7 @@ public class XMLSerializer extends SimpleScriptable {
             }
         }
         if (!startTagClosed) {
-            final String tagName = nodeName.toLowerCase(Locale.ENGLISH);
+            final String tagName = nodeName.toLowerCase(Locale.ROOT);
             final boolean nonEmptyTagsSupported = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_NON_EMPTY_TAGS);
             if (nonEmptyTagsSupported && NON_EMPTY_TAGS.contains(tagName)) {
                 buffer.append('>');

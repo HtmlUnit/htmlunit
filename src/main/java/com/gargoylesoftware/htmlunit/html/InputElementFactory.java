@@ -92,7 +92,7 @@ public final class InputElementFactory implements ElementFactory {
             type = "";
         }
         else {
-            type = type.toLowerCase(Locale.ENGLISH);
+            type = type.toLowerCase(Locale.ROOT);
             attributeMap.get("type").setValue(type); // type value has to be lower case
         }
 

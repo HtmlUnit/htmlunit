@@ -657,7 +657,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         for (final String token : StringUtils.split(styleAttribute, ';')) {
             final int index = token.indexOf(":");
             if (index != -1) {
-                final String key = token.substring(0, index).trim().toLowerCase(Locale.ENGLISH);
+                final String key = token.substring(0, index).trim().toLowerCase(Locale.ROOT);
                 String value = token.substring(index + 1).trim();
                 String priority = "";
                 if (StringUtils.endsWithIgnoreCase(value, "!important")) {
@@ -5751,7 +5751,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return whether the token is a reserved color keyword or not
      */
     private static boolean isColorKeyword(final String token) {
-        return CSSColors_.containsKey(token.toLowerCase(Locale.ENGLISH));
+        return CSSColors_.containsKey(token.toLowerCase(Locale.ROOT));
     }
 
     /**
@@ -5761,7 +5761,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * in the form "rgb(x, y, z)" otherwise
      */
     public static String toRGBColor(final String color) {
-        final String rgbValue = CSSColors_.get(color.toLowerCase(Locale.ENGLISH));
+        final String rgbValue = CSSColors_.get(color.toLowerCase(Locale.ROOT));
         if (rgbValue != null) {
             return rgbValue;
         }

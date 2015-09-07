@@ -504,10 +504,10 @@ public final class EncodingSniffer {
                 if (i != -1) {
                     value = value.substring(0, i);
                 }
-                value = value.trim().toLowerCase(Locale.ENGLISH);
+                value = value.trim().toLowerCase(Locale.ROOT);
                 boolean found = false;
                 for (String ending : contentTypeEndings) {
-                    if (value.endsWith(ending.toLowerCase(Locale.ENGLISH))) {
+                    if (value.endsWith(ending.toLowerCase(Locale.ROOT))) {
                         found = true;
                         break;
                     }
@@ -625,7 +625,7 @@ public final class EncodingSniffer {
                 final String value = pair.getValue();
                 encoding = extractEncodingFromContentType(value);
                 if (encoding != null) {
-                    encoding = encoding.toUpperCase(Locale.ENGLISH);
+                    encoding = encoding.toUpperCase(Locale.ROOT);
                     break;
                 }
             }
@@ -713,7 +713,7 @@ public final class EncodingSniffer {
                             charset = UTF8;
                         }
                         if (isSupportedCharset(charset)) {
-                            charset = charset.toUpperCase(Locale.ENGLISH);
+                            charset = charset.toUpperCase(Locale.ROOT);
                             if (LOG.isDebugEnabled()) {
                                 LOG.debug("Encoding found in meta tag: '" + charset + "'.");
                             }
@@ -1148,7 +1148,7 @@ public final class EncodingSniffer {
         if (null == encodingLabel) {
             return null;
         }
-        final String encLC = encodingLabel.trim().toLowerCase(Locale.ENGLISH);
+        final String encLC = encodingLabel.trim().toLowerCase(Locale.ROOT);
         final String enc = ENCODING_FROM_LABEL.get(encLC);
         if (encLC.equals(enc)) {
             return encodingLabel;

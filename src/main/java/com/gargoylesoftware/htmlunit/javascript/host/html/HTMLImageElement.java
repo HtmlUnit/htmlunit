@@ -208,7 +208,7 @@ public class HTMLImageElement extends HTMLElement {
             return align;
         }
 
-        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase(Locale.ENGLISH));
+        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase(Locale.ROOT));
         if (null != normalizedValue) {
             return normalizedValue;
         }
@@ -227,7 +227,7 @@ public class HTMLImageElement extends HTMLElement {
             return;
         }
 
-        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase(Locale.ENGLISH));
+        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase(Locale.ROOT));
         if (null != normalizedValue) {
             getDomNodeOrDie().setAttribute("align", normalizedValue);
             return;

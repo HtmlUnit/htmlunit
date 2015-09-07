@@ -99,7 +99,7 @@ public class Element extends EventNode {
         final DomElement htmlElt = (DomElement) domNode;
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
             final String eventName = attr.getName();
-            if (eventName.toLowerCase(Locale.ENGLISH).startsWith("on")) {
+            if (eventName.toLowerCase(Locale.ROOT).startsWith("on")) {
                 createEventHandler(eventName, attr.getValue());
             }
         }
@@ -257,7 +257,7 @@ public class Element extends EventNode {
      */
     @JsxFunction
     public HTMLCollection getElementsByTagName(final String tagName) {
-        final String tagNameLC = tagName.toLowerCase(Locale.ENGLISH);
+        final String tagNameLC = tagName.toLowerCase(Locale.ROOT);
 
         if (elementsByTagName_ == null) {
             elementsByTagName_ = new HashMap<>();

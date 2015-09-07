@@ -84,7 +84,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     protected boolean doClickStateUpdate() throws IOException {
-        final String type = getTypeAttribute().toLowerCase(Locale.ENGLISH);
+        final String type = getTypeAttribute().toLowerCase(Locale.ROOT);
 
         final HtmlForm form = getEnclosingForm();
         if (form != null) {

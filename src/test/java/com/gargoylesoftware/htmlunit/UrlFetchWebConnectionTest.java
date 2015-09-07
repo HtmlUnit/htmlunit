@@ -165,7 +165,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
             sb.append(headerEntry.getKey());
             sb.append(": ");
             if (caseInsensitiveHeaders.contains(headerEntry.getKey())) {
-                sb.append(headerEntry.getValue().toLowerCase(Locale.ENGLISH));
+                sb.append(headerEntry.getValue().toLowerCase(Locale.ROOT));
             }
             else {
                 sb.append(headerEntry.getValue());

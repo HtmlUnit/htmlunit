@@ -106,7 +106,7 @@ public class EventListenersContainer implements Serializable {
     }
 
     private Handlers getHandlersOrCreateIt(final String type) {
-        final String typeLC = type.toLowerCase(Locale.ENGLISH);
+        final String typeLC = type.toLowerCase(Locale.ROOT);
         Handlers handlers = eventHandlers_.get(typeLC);
         if (handlers == null) {
             handlers = new Handlers();
@@ -122,7 +122,7 @@ public class EventListenersContainer implements Serializable {
      * @return the handlers list
      */
     public List<Scriptable> getHandlers(final String eventType, final boolean useCapture) {
-        final Handlers handlers = eventHandlers_.get(eventType.toLowerCase(Locale.ENGLISH));
+        final Handlers handlers = eventHandlers_.get(eventType.toLowerCase(Locale.ROOT));
         if (handlers != null) {
             return handlers.getHandlers(useCapture);
         }
@@ -287,7 +287,7 @@ public class EventListenersContainer implements Serializable {
      * @return the handler function, {@code null} if the property is null or not a function
      */
     public Function getEventHandler(final String eventName) {
-        final Object handler = getEventHandlerProp(eventName.toLowerCase(Locale.ENGLISH));
+        final Object handler = getEventHandlerProp(eventName.toLowerCase(Locale.ROOT));
         if (handler instanceof Function) {
             return (Function) handler;
         }

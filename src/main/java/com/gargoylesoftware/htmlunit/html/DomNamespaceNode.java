@@ -83,7 +83,7 @@ public abstract class DomNamespaceNode extends DomNode {
     public String getLocalName() {
         final boolean caseSensitive = getPage().hasCaseSensitiveTagNames();
         if (!caseSensitive && XPathUtils.isProcessingXPath()) { // and this method was called from Xalan
-            return localName_.toLowerCase(Locale.ENGLISH);
+            return localName_.toLowerCase(Locale.ROOT);
         }
         return localName_;
     }
