@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeComponentTransfer;
 
 /**
- * A JavaScript object for SVGFEComponentTransferElement.
+ * A JavaScript object for {@code SVGFEComponentTransferElement}.
  *
  * @author Ahmed Ashour
  */

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
- * A JavaScript object for a Namespace.
+ * A JavaScript object for {@code Namespace}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

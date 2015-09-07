@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgSet;
 
 /**
- * A JavaScript object for SVGSetElement.
+ * A JavaScript object for {@code SVGSetElement}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeMergeNode;
 
 /**
- * A JavaScript object for SVGFEMergeNodeElement.
+ * A JavaScript object for {@code SVGFEMergeNodeElement}.
  *
  * @author Ahmed Ashour
  */

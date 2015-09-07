@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgStop;
 
 /**
- * A JavaScript object for SVGStopElement.
+ * A JavaScript object for {@code SVGStopElement}.
  *
  * @author Ahmed Ashour
  */

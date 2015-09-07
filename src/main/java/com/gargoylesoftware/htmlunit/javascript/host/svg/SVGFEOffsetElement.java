@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeOffset;
 
 /**
- * A JavaScript object for SVGFEOffsetElement.
+ * A JavaScript object for {@code SVGFEOffsetElement}.
  *
  * @author Ahmed Ashour
  */

@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for URLSearchParams.
+ * A JavaScript object for {@code URLSearchParams}.
  *
  * @author Ahmed Ashour
  */

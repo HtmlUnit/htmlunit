@@ -70,7 +70,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- * A JavaScript object for DOMImplementation.
+ * A JavaScript object for {@code DOMImplementation}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

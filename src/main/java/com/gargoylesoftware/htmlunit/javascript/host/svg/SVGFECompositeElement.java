@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeComposite;
 
 /**
- * A JavaScript object for SVGFECompositeElement.
+ * A JavaScript object for {@code SVGFECompositeElement}.
  *
  * @author Ahmed Ashour
  */

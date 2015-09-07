@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFilter;
 
 /**
- * A JavaScript object for SVGFilterElement.
+ * A JavaScript object for {@code SVGFilterElement}.
  *
  * @author Ahmed Ashour
  */

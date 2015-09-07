@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgPolyline;
 
 /**
- * A JavaScript object for SVGPolylineElement.
+ * A JavaScript object for {@code SVGPolylineElement}.
  *
  * @author Ahmed Ashour
  */

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgForeignObject;
 
 /**
- * A JavaScript object for SVGForeignObjectElement.
+ * A JavaScript object for {@code SVGForeignObjectElement}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

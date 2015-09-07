@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgAnimateTransform;
 
 /**
- * A JavaScript object for SVGAnimateTransformElement.
+ * A JavaScript object for {@code SVGAnimateTransformElement}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

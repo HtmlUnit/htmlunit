@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeFuncB;
 
 /**
- * A JavaScript object for SVGFEFuncBElement.
+ * A JavaScript object for {@code SVGFEFuncBElement}.
  *
  * @author Ahmed Ashour
  */

@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 
 /**
- * A JavaScript object for XSLTemplate.
+ * A JavaScript object for {@code XSLTemplate}.
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms767644.aspx">MSDN documentation</a>
  *
  * @author Ahmed Ashour

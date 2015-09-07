@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
 
 /**
- * The JavaScript object for form input elements (html tag &lt;input ...&gt;).
+ * The JavaScript object for {@code HTMLInputElement}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

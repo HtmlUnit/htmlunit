@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for Coordinates.
+ * A JavaScript object for {@code Coordinates}.
  *
  * @author Ahmed Ashour
  */

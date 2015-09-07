@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeBlend;
 
 /**
- * A JavaScript object for SVGFEBlendElement.
+ * A JavaScript object for {@code SVGFEBlendElement}.
  *
  * @author Ahmed Ashour
  */

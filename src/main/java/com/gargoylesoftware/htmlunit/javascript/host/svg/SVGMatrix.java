@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * A JavaScript object for SVGMatrix.
+ * A JavaScript object for {@code SVGMatrix}.
  * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/SVGMatrix">MDN doc</a>
  * @author Marc Guillemot
  */

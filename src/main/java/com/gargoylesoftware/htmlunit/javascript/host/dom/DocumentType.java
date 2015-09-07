@@ -36,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * A JavaScript object for a DocumentType.
+ * A JavaScript object for {@code DocumentType}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

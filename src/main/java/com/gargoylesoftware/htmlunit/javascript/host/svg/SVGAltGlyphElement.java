@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgAltGlyph;
 
 /**
- * A JavaScript object for SVGAltGlyphElement.
+ * A JavaScript object for {@code SVGAltGlyphElement}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

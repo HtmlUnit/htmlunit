@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeDiffuseLighting;
 
 /**
- * A JavaScript object for SVGFEDiffuseLightingElement.
+ * A JavaScript object for {@code SVGFEDiffuseLightingElement}.
  *
  * @author Ahmed Ashour
  */

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeMorphology;
 
 /**
- * A JavaScript object for SVGFEMorphologyElement.
+ * A JavaScript object for {@code SVGFEMorphologyElement}.
  *
  * @author Ahmed Ashour
  */

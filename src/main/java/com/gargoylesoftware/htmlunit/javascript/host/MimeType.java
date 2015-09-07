@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for a document.navigator.mimeTypes elements.
+ * A JavaScript object for {@code MimeType}.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour

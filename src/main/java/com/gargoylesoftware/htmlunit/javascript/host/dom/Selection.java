@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * A JavaScript object for a Selection.
+ * A JavaScript object for {@code Selection}.
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535869.aspx">MSDN Documentation</a>
  * @see <a href="https://developer.mozilla.org/en/DOM/Selection">Gecko DOM Reference</a>

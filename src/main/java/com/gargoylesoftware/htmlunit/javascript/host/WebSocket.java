@@ -44,7 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * A JavaScript object for a WebSocket.
+ * A JavaScript object for {@code WebSocket}.
  *
  * @author Ahmed Ashour
  *

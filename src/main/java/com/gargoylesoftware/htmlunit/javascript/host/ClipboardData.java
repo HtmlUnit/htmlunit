@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A JavaScript object for ClipboardData.
+ * A JavaScript object for {@code ClipboardData}.
  *
  * @author Ahmed Ashour
  */

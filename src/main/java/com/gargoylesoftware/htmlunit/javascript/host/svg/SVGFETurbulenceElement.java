@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeTurbulence;
 
 /**
- * A JavaScript object for SVGFETurbulenceElement.
+ * A JavaScript object for {@code SVGFETurbulenceElement}.
  *
  * @author Ahmed Ashour
  */

@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * A JavaScript object for DOMTokenList.
+ * A JavaScript object for {@code DOMTokenList}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * A JavaScript object for MessageEvent.
+ * A JavaScript object for {@code MessageEvent}.
  *
  * For general information on which properties and functions should be supported, see
  * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#messageevent">

@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgPolygon;
 
 /**
- * A JavaScript object for SVGPolygonElement.
+ * A JavaScript object for {@code SVGPolygonElement}.
  *
  * @author Ahmed Ashour
  */

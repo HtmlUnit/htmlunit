@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * A JavaScript object for XMLDocument.
+ * A JavaScript object for {@code XMLDocument}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot

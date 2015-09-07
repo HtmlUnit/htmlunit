@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeDisplacementMap;
 
 /**
- * A JavaScript object for SVGFEDisplacementMapElement.
+ * A JavaScript object for {@code SVGFEDisplacementMapElement}.
  *
  * @author Ahmed Ashour
  */

@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
- * A JavaScript object for Geolocation.
+ * A JavaScript object for {@code Geolocation}.
  *
  * @author Ahmed Ashour
  */

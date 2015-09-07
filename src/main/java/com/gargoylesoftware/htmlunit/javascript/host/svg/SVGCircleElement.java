@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgCircle;
 
 /**
- * A JavaScript object for SVGCircleElement.
+ * A JavaScript object for {@code SVGCircleElement}.
  *
  * @author Ahmed Ashour
  */

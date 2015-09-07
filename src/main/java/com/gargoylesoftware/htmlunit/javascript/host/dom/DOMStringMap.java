@@ -31,7 +31,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
- * A JavaScript object for DOMStringMap.
+ * A JavaScript object for {@code DOMStringMap}.
  *
  * @author Ahmed Ashour
  */

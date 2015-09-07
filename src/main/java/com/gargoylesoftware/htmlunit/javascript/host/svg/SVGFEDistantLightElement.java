@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeDistantLight;
 
 /**
- * A JavaScript object for SVGFEDistantLightElement.
+ * A JavaScript object for {@code SVGFEDistantLightElement}.
  *
  * @author Ahmed Ashour
  */

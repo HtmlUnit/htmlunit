@@ -94,79 +94,79 @@ final class StyleAttributes {
         /** The style property {@code accelerator}. */
         ACCELERATOR("accelerator", "accelerator", ie11up("undefined")),
 
-        /** The style property alignment-content. */
+        /** The style property {@code alignContent}. */
         ALIGN_CONTENT("alignContent", "align-content", ie11up("stretch"), ff("stretch"), chrome("start")),
 
         /** The style property {@code align-content}. */
         ALIGN_CONTENT_("align-content", "align-content", ff38up("stretch")),
 
-        /** The style property {@code align-items}. */
+        /** The style property {@code alignItems}. */
         ALIGN_ITEMS("alignItems", "align-items", ff("stretch"), ie11up("stretch"), chrome("start")),
 
         /** The style property {@code align-items}. */
         ALIGN_ITEMS_("align-items", "align-items", ff38up("stretch")),
 
-        /** The style property alignment-self. */
+        /** The style property {@code alignSelf}. */
         ALIGN_SELF("alignSelf", "align-self", ff("stretch"), ie11up("auto"), chrome("start")),
 
         /** The style property {@code align-self}. */
         ALIGN_SELF_("align-self", "align-self", ff38up("stretch")),
 
-        /** The style property alignment-baseline. */
+        /** The style property {@code alignmentBaseline}. */
         ALIGNMENT_BASELINE("alignmentBaseline", "alignment-baseline", ie11up("auto"), chrome("auto")),
 
-        /** The style property all. */
+        /** The style property {@code all}. */
         ALL("all", "all", ff(""), chrome("")),
 
-        /** The style property animation. */
+        /** The style property {@code animation}. */
         ANIMATION("animation", "animation", ff(""), ie11up(""), chrome("none 0s ease 0s 1 normal none running")),
 
-        /** The style property animation-delay. */
+        /** The style property {@code animationDelay}. */
         ANIMATION_DELAY("animationDelay", "animation-delay", ff("0s"), ie11up("0s"), chrome("0s")),
 
         /** The style property {@code animation-delay}. */
         ANIMATION_DELAY_("animation-delay", "animation-delay", ff38up("0s")),
 
-        /** The style property animation-direction. */
+        /** The style property {@code animationDirection}. */
         ANIMATION_DIRECTION("animationDirection", "animation-direction",
                 ff("normal"), ie11up("normal"), chrome("normal")),
 
         /** The style property {@code animation-direction}. */
         ANIMATION_DIRECTION_("animation-direction", "animation-direction", ff38up("normal")),
 
-        /** The style property animation-duration. */
+        /** The style property {@code animationDuration}. */
         ANIMATION_DURATION("animationDuration", "animation-duration", ff("0s"), ie11up("0s"), chrome("0s")),
 
         /** The style property {@code animation-duration}. */
         ANIMATION_DURATION_("animation-duration", "animation-duration", ff38up("0s")),
 
-        /** The style property animation-fill-mode. */
+        /** The style property {@code animationFillMode}. */
         ANIMATION_FILL_MODE("animationFillMode", "animation-fill-mode", ff("none"), ie11up("none"), chrome("none")),
 
         /** The style property {@code animation-fill-mode}. */
         ANIMATION_FILL_MODE_("animation-fill-mode", "animation-fill-mode", ff38up("none")),
 
-        /** The style property animation-iteration-count. */
+        /** The style property {@code animationIterationCount}. */
         ANIMATION_ITERATION_COUNT("animationIterationCount", "animation-iteration-count",
                 ff("1"), ie11up("1"), chrome("1")),
 
         /** The style property {@code animation-iteration-count}. */
         ANIMATION_ITERATION_COUNT_("animation-iteration-count", "animation-iteration-count", ff38up("1")),
 
-        /** The style property animation-name. */
+        /** The style property {@code animationName}. */
         ANIMATION_NAME("animationName", "animation-name", ff("none"), ie11up("none"), chrome("none")),
 
-        /** The style property animation-name. */
+        /** The style property {@code animation-name}. */
         ANIMATION_NAME_("animation-name", "animation-name", ff38up("none")),
 
-        /** The style property animation-play-state. */
+        /** The style property {@code animationPlayState}. */
         ANIMATION_PLAY_STATE("animationPlayState", "animation-play-state",
                 ff("running"), ie11up("running"), chrome("running")),
 
         /** The style property {@code animation-play-state}. */
         ANIMATION_PLAY_STATE_("animation-play-state", "animation-play-state", ff38up("running")),
 
-        /** The style property animation-timing-function. */
+        /** The style property {@code animationTimingFunction}. */
         ANIMATION_TIMING_FUNCTION("animationTimingFunction",
                 "animation-timing-function",
                 ff("cubic-bezier(0.25, 0.1, 0.25, 1)"),
@@ -176,10 +176,10 @@ final class StyleAttributes {
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function",
                 ff38up("cubic-bezier(0.25, 0.1, 0.25, 1)")),
 
-        /** The style property azimuth. */
+        /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
 
-        /** The style property backface-visibility. */
+        /** The style property {@code backfaceVisibility}. */
         BACKFACE_VISIBILITY("backfaceVisibility", "backface-visibility",
                 ff("visible"), ie11up("visible"), chrome("visible")),
 
@@ -197,13 +197,13 @@ final class StyleAttributes {
         /** The style property {@code background-attachment}. */
         BACKGROUND_ATTACHMENT_("background-attachment", "background-attachment", ff38up("scroll")),
 
-        /** The style property background-blend-mode. */
+        /** The style property {@code backgroundBlendMode}. */
         BACKGROUND_BLEND_MODE("backgroundBlendMode", "background-blend-mode", ff("normal"), chrome("normal")),
 
         /** The style property {@code background-blend-mode}. */
         BACKGROUND_BLEND_MODE_("background-blend-mode", "background-blend-mode", ff38up("normal")),
 
-        /** The style property background-clip. */
+        /** The style property {@code backgroundClip}. */
         BACKGROUND_CLIP("backgroundClip", "background-clip",
                 ff("border-box"), ie11up("border-box"), chrome("border-box")),
 
@@ -223,7 +223,7 @@ final class StyleAttributes {
         /** The style property {@code background-image}. */
         BACKGROUND_IMAGE_("background-image", "background-image", ff38up("none")),
 
-        /** The style property background-origin. */
+        /** The style property {@code backgroundOrigin}. */
         BACKGROUND_ORIGIN("backgroundOrigin", "background-origin",
                 ff("padding-box"), ie11up("padding-box"), chrome("padding-box")),
 
@@ -236,11 +236,11 @@ final class StyleAttributes {
         /** The style property {@code background-position}. */
         BACKGROUND_POSITION_("background-position", "background-position", ff38up("0% 0%")),
 
-        /** The style property background-position-x. */
+        /** The style property {@code backgroundPositionX}. */
         BACKGROUND_POSITION_X("backgroundPositionX", "background-position-x",
                 ie11up("undefined"), chrome("0%")),
 
-        /** The style property background-position-y. */
+        /** The style property {@code backgroundPositionY}. */
         BACKGROUND_POSITION_Y("backgroundPositionY", "background-position-y", ie11up("undefined"), chrome("0%")),
 
         /** The style property {@code backgroundRepeat}. */
@@ -255,16 +255,16 @@ final class StyleAttributes {
         /** The style property {@code backgroundRepeatY}. */
         BACKGROUND_REPEAT_Y("backgroundRepeatY", "background-repeat-y", chrome("")),
 
-        /** The style property background-size. */
+        /** The style property {@code backgroundSize}. */
         BACKGROUND_SIZE("backgroundSize", "background-size", ff("auto auto"), ie11up("auto"), chrome("auto")),
 
         /** The style property {@code background-size}. */
         BACKGROUND_SIZE_("background-size", "background-size", ff38up("auto auto")),
 
-        /** The style property baseline-shift. */
+        /** The style property {@code baselineShift}. */
         BASELINE_SHIFT("baselineShift", "baseline-shift", ie11up("baseline"), chrome("0px")),
 
-        /** The style property behavior. */
+        /** The style property {@code behavior}. */
         BEHAVIOR("behavior", "behavior"),
 
         /** The style property {@code border}. */
@@ -283,14 +283,14 @@ final class StyleAttributes {
         /** The style property {@code border-bottom-color}. */
         BORDER_BOTTOM_COLOR_("border-bottom-color", "border-bottom-color", ff38up("rgb(0, 0, 0)")),
 
-        /** The style property border-bottom-left-radius. */
+        /** The style property {@code borderBottomLeftRadius}. */
         BORDER_BOTTOM_LEFT_RADIUS("borderBottomLeftRadius", "border-bottom-left-radius",
                 ff("0px"), ie11up("0px"), chrome("0px")),
 
         /** The style property {@code border-bottom-left-radius}. */
         BORDER_BOTTOM_LEFT_RADIUS_("border-bottom-left-radius", "border-bottom-left-radius", ff38up("0px")),
 
-        /** The style property border-bottom-right-radius. */
+        /** The style property {@code borderBottomRightRadius}. */
         BORDER_BOTTOM_RIGHT_RADIUS("borderBottomRightRadius", "border-bottom-right-radius",
                 ff("0px"), ie11up("0px"), chrome("0px")),
 
@@ -321,39 +321,39 @@ final class StyleAttributes {
         /** The style property {@code border-color}. */
         BORDER_COLOR_("border-color", "border-color", ff38up("")),
 
-        /** The style property border-image. */
+        /** The style property {@code borderImage}. */
         BORDER_IMAGE("borderImage", "border-image", ff(""), ie11up(""), chrome("none")),
 
         /** The style property {@code border-image}. */
         BORDER_IMAGE_("border-image", "border-image", ff38up("")),
 
-        /** The style property border-image-outset. */
+        /** The style property {@code borderImageOutset}. */
         BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ff("0 0 0 0"), ie11up("0"), chrome("0px")),
 
         /** The style property {@code border-image-outset}. */
         BORDER_IMAGE_OUTSET_("border-image-outset", "border-image-outset", ff38up("0 0 0 0")),
 
-        /** The style property border-image-repeat. */
+        /** The style property {@code borderImageRepeat}. */
         BORDER_IMAGE_REPEAT("borderImageRepeat", "border-image-repeat",
                 ff("stretch stretch"), ie11up("stretch"), chrome("stretch")),
 
         /** The style property {@code border-image-repeat}. */
         BORDER_IMAGE_REPEAT_("border-image-repeat", "border-image-repeat", ff38up("stretch stretch")),
 
-        /** The style property border-image-slice. */
+        /** The style property {@code borderImageSlice}. */
         BORDER_IMAGE_SLICE("borderImageSlice", "border-image-slice",
                 ff("100% 100% 100% 100%"), ie11up("100%"), chrome("100%")),
 
         /** The style property {@code border-image-slice}. */
         BORDER_IMAGE_SLICE_("border-image-slice", "border-image-slice", ff38up("100% 100% 100% 100%")),
 
-        /** The style property border-image-source. */
+        /** The style property {@code borderImageSource}. */
         BORDER_IMAGE_SOURCE("borderImageSource", "border-image-source", ff("none"), ie11up("none"), chrome("none")),
 
         /** The style property {@code border-image-source}. */
         BORDER_IMAGE_SOURCE_("border-image-source", "border-image-source", ff38up("none")),
 
-        /** The style property border-image-width. */
+        /** The style property {@code borderImageWidth}. */
         BORDER_IMAGE_WIDTH("borderImageWidth", "border-image-width", ff("1 1 1 1"), ie11up("1"), chrome("1")),
 
         /** The style property {@code border-image-width}. */
@@ -384,7 +384,7 @@ final class StyleAttributes {
         /** The style property {@code border-left-width}. */
         BORDER_LEFT_WIDTH_("border-left-width", "border-left-width", ff38up("0px")),
 
-        /** The style property border-radius. */
+        /** The style property {@code borderRadius}. */
         BORDER_RADIUS("borderRadius", "border-radius", ff(""), ie11up(""), chrome("0px")),
 
         /** The style property {@code border-radius}. */
@@ -438,14 +438,14 @@ final class StyleAttributes {
         /** The style property {@code border-top-color}. */
         BORDER_TOP_COLOR_("border-top-color", "border-top-color", ff38up("rgb(0, 0, 0)")),
 
-        /** The style property border-top-left-radius. */
+        /** The style property {@code borderTopLeftRadius}. */
         BORDER_TOP_LEFT_RADIUS("borderTopLeftRadius", "border-top-left-radius",
                 ff("0px"), ie11up("0px"), chrome("0px")),
 
         /** The style property {@code border-top-left-radius}. */
         BORDER_TOP_LEFT_RADIUS_("border-top-left-radius", "border-top-left-radius", ff38up("0px")),
 
-        /** The style property border-top-right-radius. */
+        /** The style property {@code borderTopRightRadius}. */
         BORDER_TOP_RIGHT_RADIUS("borderTopRightRadius", "border-top-right-radius",
                 ff("0px"), ie11up("0px"), chrome("0px")),
 
@@ -473,31 +473,31 @@ final class StyleAttributes {
         /** The style property {@code bottom}. */
         BOTTOM("bottom", "bottom", chrome("auto")),
 
-        /** The style property box-decoration-break. */
+        /** The style property {@code boxDecorationBreak}. */
         BOX_DECORATION_BREAK("boxDecorationBreak", "box-decoration-break", ff38up("slice")),
 
         /** The style property {@code box-decoration-break}. */
         BOX_DECORATION_BREAK_("box-decoration-break", "box-decoration-break", ff38up("slice")),
 
-        /** The style property box-shadow. */
+        /** The style property {@code boxShadow}. */
         BOX_SHADOW("boxShadow", "box-shadow", ff("none"), ie11up("none"), chrome("none")),
 
         /** The style property {@code box-shadow}. */
         BOX_SHADOW_("box-shadow", "box-shadow", ff38up("none")),
 
-        /** The style property box-sizing. */
+        /** The style property {@code boxSizing}. */
         BOX_SIZING("boxSizing", "box-sizing", ff("content-box"), ie11up("content-box"), chrome("content-box")),
 
         /** The style property {@code box-sizing}. */
         BOX_SIZING_("box-sizing", "box-sizing", ff38up("content-box")),
 
-        /** The style property break-after. */
+        /** The style property {@code breakAfter}. */
         BREAK_AFTER("breakAfter", "break-after", ie11up("auto")),
 
-        /** The style property break-before. */
+        /** The style property {@code breakBefore}. */
         BREAK_BEFORE("breakBefore", "break-before", ie11up("auto")),
 
-        /** The style property break-inside. */
+        /** The style property {@code breakInside}. */
         BREAK_INSIDE("breakInside", "break-inside", ie11up("auto")),
 
         /** The style property {@code bufferedRendering}. */
@@ -515,13 +515,13 @@ final class StyleAttributes {
         /** The style property {@code clip}. */
         CLIP("clip", "clip", chrome("auto")),
 
-        /** The style property clip-path. */
+        /** The style property {@code clipPath}. */
         CLIP_PATH("clipPath", "clip-path", ff("none"), ie11up("none"), chrome("none")),
 
         /** The style property {@code clip-path}. */
         CLIP_PATH_("clip-path", "clip-path", ff38up("none")),
 
-        /** The style property clip-rule. */
+        /** The style property {@code clipRule}. */
         CLIP_RULE("clipRule", "clip-rule", ff("nonzero"), ie11up("nonzero"), chrome("nonzero")),
 
         /** The style property {@code clip-rule}. */
@@ -530,13 +530,13 @@ final class StyleAttributes {
         /** The style property {@code color}. */
         COLOR("color", "color", chrome("rgb(0, 0, 0)")),
 
-        /** The style property color-interpolation. */
+        /** The style property {@code colorInterpolation}. */
         COLOR_INTERPOLATION("colorInterpolation", "color-interpolation", ff("srgb"), chrome("sRGB")),
 
         /** The style property {@code color-interpolation}. */
         COLOR_INTERPOLATION_("color-interpolation", "color-interpolation", ff38up("srgb")),
 
-        /** The style property color-interpolation-filters. */
+        /** The style property {@code colorInterpolationFilters}. */
         COLOR_INTERPOLATION_FILTERS("colorInterpolationFilters",
                 "color-interpolation-filters", ff("linearrgb"), ie11up(""), chrome("linearRGB")),
 
@@ -546,37 +546,37 @@ final class StyleAttributes {
         /** The style property {@code colorRendering}. */
         COLOR_RENDERING("colorRendering", "color-rendering", chrome("auto")),
 
-        /** The style property column-count. */
+        /** The style property {@code columnCount}. */
         COLUMN_COUNT("columnCount", "column-count", ie11up("auto")),
 
-        /** The style property column-fill. */
+        /** The style property {@code columnFill}. */
         COLUMN_FILL("columnFill", "column-fill", ie11up("balance")),
 
-        /** The style property column-gap. */
+        /** The style property {@code columnGap}. */
         COLUMN_GAP("columnGap", "column-gap", ie11up("normal")),
 
-        /** The style property column-rule. */
+        /** The style property {@code columnRule}. */
         COLUMN_RULE("columnRule", "column-rule", ie11up("")),
 
-        /** The style property column-rule-color. */
+        /** The style property {@code columnRuleColor}. */
         COLUMN_RULE_COLOR("columnRuleColor", "column-rule-color", ie11up("rgb(0, 0, 0)")),
 
-        /** The style property column-rule-style. */
+        /** The style property {@code columnRuleStyle}. */
         COLUMN_RULE_STYLE("columnRuleStyle", "column-rule-style", ie11up("none")),
 
-        /** The style property column-rule-width. */
+        /** The style property {@code columnRuleWidth}. */
         COLUMN_RULE_WIDTH("columnRuleWidth", "column-rule-width", ie11up("medium")),
 
-        /** The style property column-span. */
+        /** The style property {@code columnSpan}. */
         COLUMN_SPAN("columnSpan", "column-span", ie11up("1")),
 
-        /** The style property column-width. */
+        /** The style property {@code columnWidth}. */
         COLUMN_WIDTH("columnWidth", "column-width", ie11up("auto")),
 
-        /** The style property columns. */
+        /** The style property {@code columns}. */
         COLUMNS("columns", "columns", ie11up("")),
 
-        /** The style property content. */
+        /** The style property {@code content}. */
         CONTENT("content", "content", ie11up("normal"), chrome(""), ff("none")),
 
         /** The style property {@code counterIncrement}. */
@@ -598,13 +598,13 @@ final class StyleAttributes {
         /** The style property {@code cssText}. */
         CSS_TEXT("cssText", "css-text", chrome("")),
 
-        /** The style property cue. */
+        /** The style property {@code cue}. */
         CUE("cue", "cue"),
 
-        /** The style property cue-after. */
+        /** The style property {@code cueAfter}. */
         CUE_AFTER("cueAfter", "cue-after"),
 
-        /** The style property cue-before. */
+        /** The style property {@code cueBefore}. */
         CUE_BEFORE("cueBefore", "cue-before"),
 
         /** The style property {@code cursor}. */
@@ -622,71 +622,71 @@ final class StyleAttributes {
         /** The style property {@code display}. */
         DISPLAY("display", "display", chrome("block")),
 
-        /** The style property dominant-baseline. */
+        /** The style property {@code dominantBaseline}. */
         DOMINANT_BASELINE("dominantBaseline", "dominant-baseline", ff("auto"), ie11up("auto"), chrome("auto")),
 
         /** The style property {@code dominant-baseline}. */
         DOMINANT_BASELINE_("dominant-baseline", "dominant-baseline", ff38up("auto")),
 
-        /** The style property elevation. */
+        /** The style property {@code elevation}. */
         ELEVATION("elevation", "elevation"),
 
-        /** The style property empty-cells. */
+        /** The style property {@code emptyCells}. */
         EMPTY_CELLS("emptyCells", "empty-cells", ie11up("show"), ffBelow38("-moz-show-background"), ff38up("show"),
                 chrome("show")),
 
         /** The style property {@code empty-cells}. */
         EMPTY_CELLS_("empty-cells", "empty-cells", ff38up("show")),
 
-        /** The style property enable-background. */
+        /** The style property {@code enableBackground}. */
         ENABLE_BACKGROUND("enableBackground", "enable-background", ie11up("accumulate"), chrome("")),
 
-        /** The style property fill. */
+        /** The style property {@code fill}. */
         FILL("fill", "fill", ff("rgb(0, 0, 0)"), ie11up("black"), chrome("rgb(0, 0, 0)")),
 
-        /** The style property fill-opacity. */
+        /** The style property {@code fillOpacity}. */
         FILL_OPACITY("fillOpacity", "fill-opacity", ff("1"), ie11up("1"), chrome("1")),
 
         /** The style property {@code fill-opacity}. */
         FILL_OPACITY_("fill-opacity", "fill-opacity", ff38up("1")),
 
-        /** The style property fill-rule. */
+        /** The style property {@code fillRule}. */
         FILL_RULE("fillRule", "fill-rule", ff("nonzero"), ie11up("nonzero"), chrome("nonzero")),
 
         /** The style property {@code fill-rule}. */
         FILL_RULE_("fill-rule", "fill-rule", ff38up("nonzero")),
 
-        /** The style property filter. */
+        /** The style property {@code filter}. */
         FILTER("filter", "filter", ff("none"), ieBelow11(""), ie11up("none"), chrome("none")),
 
-        /** The style property flex. */
+        /** The style property {@code flex}. */
         FLEX("flex", "flex", ff(""), ie11up("0 1 auto"), chrome("0 1 auto")),
 
-        /** The style property flex-basis. */
+        /** The style property {@code flexBasis}. */
         FLEX_BASIS("flexBasis", "flex-basis", ff("auto"), ie11up("auto"), chrome("auto")),
 
         /** The style property {@code flex-basis}. */
         FLEX_BASIS_("flex-basis", "flex-basis", ff38up("auto")),
 
-        /** The style property flex-direction. */
+        /** The style property {@code flexDirection}. */
         FLEX_DIRECTION("flexDirection", "flex-direction", ff("row"), ie11up("row"), chrome("row")),
 
         /** The style property {@code flex-direction}. */
         FLEX_DIRECTION_("flex-direction", "flex-direction", ff38up("row")),
 
-        /** The style property flex-flow. */
+        /** The style property {@code flexFlow}. */
         FLEX_FLOW("flexFlow", "flex-flow", ff(""), ie11up("row nowrap"), chrome("row nowrap")),
 
         /** The style property {@code flex-flow}. */
         FLEX_FLOW_("flex-flow", "flex-flow", ff38up("")),
 
-        /** The style property flex-grow. */
+        /** The style property {@code flexGrow}. */
         FLEX_GROW("flexGrow", "flex-grow", ff("0"), ie11up("0"), chrome("0")),
 
         /** The style property {@code flex-grow}. */
         FLEX_GROW_("flex-grow", "flex-grow", ff38up("0")),
 
-        /** The style property flex-shrink. */
+        /** The style property {@code flexShrink}. */
         FLEX_SHRINK("flexShrink", "flex-shrink", ff("1"), ie11up("1"), chrome("1")),
 
         /** The style property {@code flex-shrink}. */
@@ -707,7 +707,7 @@ final class StyleAttributes {
         /** The style property {@code flood-color}. */
         FLOOD_COLOR_("flood-color", "flood-color", ff38up("rgb(0, 0, 0)")),
 
-        /** The style property flood-opacity. */
+        /** The style property {@code floodOpacity}. */
         FLOOD_OPACITY("floodOpacity", "flood-opacity", ff("1"), ie11up("1"), chrome("1")),
 
         /** The style property {@code flood-opacity}. */
@@ -722,19 +722,19 @@ final class StyleAttributes {
         /** The style property {@code font-family}. */
         FONT_FAMILY_("font-family", "font-family", ff38up("serif")),
 
-        /** The style property font-feature-settings. */
+        /** The style property {@code fontFeatureSettings}. */
         FONT_FEATURE_SETTINGS("fontFeatureSettings", "font-feature-settings", ie11up("normal"), ff38up("normal")),
 
         /** The style property {@code font-feature-settings}. */
         FONT_FEATURE_SETTINGS_("font-feature-settings", "font-feature-settings", ff38up("normal")),
 
-        /** The style property font-kerning. */
+        /** The style property {@code fontKerning}. */
         FONT_KERNING("fontKerning", "font-kerning", ff38up("auto"), chrome("auto")),
 
         /** The style property {@code font-kerning}. */
         FONT_KERNING_("font-kerning", "font-kerning", ff38up("auto")),
 
-        /** The style property font-language-override. */
+        /** The style property {@code fontLanguageOverride}. */
         FONT_LANGUAGE_OVERRIDE("fontLanguageOverride", "font-language-override", ff38up("normal")),
 
         /** The style property {@code font-language-override}. */
@@ -761,7 +761,7 @@ final class StyleAttributes {
         /** The style property {@code font-style}. */
         FONT_STYLE_("font-style", "font-style", ff38up("normal")),
 
-        /** The style property font-synthesis. */
+        /** The style property {@code fontSynthesis}. */
         FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff38up("weight style")),
 
         /** The style property {@code font-synthesis}. */
@@ -773,37 +773,37 @@ final class StyleAttributes {
         /** The style property {@code font-variant}. */
         FONT_VARIANT_("font-variant", "font-variant", ff38up("normal")),
 
-        /** The style property font-variant-alternates. */
+        /** The style property {@code fontVariantAlternates}. */
         FONT_VARIANT_ALTERNATES("fontVariantAlternates", "font-variant-alternates", ff38up("normal")),
 
         /** The style property {@code font-variant-alternates}. */
         FONT_VARIANT_ALTERNATES_("font-variant-alternates", "font-variant-alternates", ff38up("normal")),
 
-        /** The style property font-variant-caps. */
+        /** The style property {@code fontVariantCaps}. */
         FONT_VARIANT_CAPS("fontVariantCaps", "font-variant-caps", ff38up("normal")),
 
         /** The style property {@code font-variant-caps}. */
         FONT_VARIANT_CAPS_("font-variant-caps", "font-variant-caps", ff38up("normal")),
 
-        /** The style property font-variant-east-asian. */
+        /** The style property {@code fontVariantEastAsian}. */
         FONT_VARIANT_EAST_ASIAN("fontVariantEastAsian", "font-variant-east-asian", ff38up("normal")),
 
         /** The style property {@code font-variant-east-asian}. */
         FONT_VARIANT_EAST_ASIAN_("font-variant-east-asian", "font-variant-east-asian", ff38up("normal")),
 
-        /** The style property font-variant-ligatures. */
+        /** The style property {@code fontVariantLigatures}. */
         FONT_VARIANT_LIGATURES("fontVariantLigatures", "font-variant-ligatures", ff38up("normal"), chrome("normal")),
 
         /** The style property {@code font-variant-ligatures}. */
         FONT_VARIANT_LIGATURES_("font-variant-ligatures", "font-variant-ligatures", ff38up("normal")),
 
-        /** The style property font-variant-numeric. */
+        /** The style property {@code fontVariantNumeric}. */
         FONT_VARIANT_NUMERIC("fontVariantNumeric", "font-variant-numeric", ff38up("normal")),
 
         /** The style property {@code font-variant-numeric}. */
         FONT_VARIANT_NUMERIC_("font-variant-numeric", "font-variant-numeric", ff38up("normal")),
 
-        /** The style property font-variant-position. */
+        /** The style property {@code fontVariantPosition}. */
         FONT_VARIANT_POSITION("fontVariantPosition", "font-variant-position", ff38up("normal")),
 
         /** The style property {@code font-variant-position}. */
@@ -815,30 +815,30 @@ final class StyleAttributes {
         /** The style property {@code font-weight}. */
         FONT_WEIGHT_("font-weight", "font-weight", ff38up("400")),
 
-        /** The style property glyph-orientation-horizontal. */
+        /** The style property {@code glyphOrientationHorizontal}. */
         GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal",
                 ie11up("0deg"), chrome("0deg")),
 
-        /** The style property glyph-orientation-vertical. */
+        /** The style property {@code glyphOrientationVertical}. */
         GLYPH_ORIENTATION_VERTICAL("glyphOrientationVertical", "glyph-orientation-vertical",
                 ie11up("auto"), chrome("auto")),
 
         /** The style property {@code height}. */
         HEIGHT("height", "height", chrome("skipped")),
 
-        /** The style property image-orientation. */
+        /** The style property {@code imageOrientation}. */
         IMAGE_ORIENTATION("imageOrientation", "image-orientation", ff("0deg")),
 
         /** The style property {@code image-orientation}. */
         IMAGE_ORIENTATION_("image-orientation", "image-orientation", ff38up("0deg")),
 
-        /** The style property image-rendering. */
+        /** The style property {@code imageRendering}. */
         IMAGE_RENDERING("imageRendering", "image-rendering", ff("auto"), chrome("auto")),
 
         /** The style property {@code image-rendering}. */
         IMAGE_RENDERING_("image-rendering", "image-rendering", ff38up("auto")),
 
-        /** The style property ime-mode. */
+        /** The style property {@code imeMode}. */
         IME_MODE("imeMode", "ime-mode", ie11up("undefined"), ff("auto")),
 
         /** The style property {@code ime-mode}. */
@@ -847,32 +847,32 @@ final class StyleAttributes {
         /** The style property {@code isolation}. */
         ISOLATION("isolation", "isolation", ff38up("auto"), chrome("auto")),
 
-        /** The style property {@code justify-content}. */
+        /** The style property {@code justifyContent}. */
         JUSTIFY_CONTENT("justifyContent", "justify-content",
                 ff("flex-start"), ie11up("flex-start"), chrome("start")),
 
         /** The style property {@code justify-content}. */
         JUSTIFY_CONTENT_("justify-content", "justify-content", ff38up("flex-start")),
 
-        /** The style property kerning. */
+        /** The style property {@code kerning}. */
         KERNING("kerning", "kerning", ie11up("auto")),
 
-        /** The style property layout-flow. */
+        /** The style property {@code layoutFlow}. */
         LAYOUT_FLOW("layoutFlow", "layout-flow", ie11up("undefined")),
 
-        /** The style property layout-grid. */
+        /** The style property {@code layoutGrid}. */
         LAYOUT_GRID("layoutGrid", "layout-grid", ie11up("undefined")),
 
-        /** The style property layout-grid-char. */
+        /** The style property {@code layoutGridChar}. */
         LAYOUT_GRID_CHAR("layoutGridChar", "layout-grid-char", ie11up("undefined")),
 
-        /** The style property layout-grid-line. */
+        /** The style property {@code layoutGridLine}. */
         LAYOUT_GRID_LINE("layoutGridLine", "layout-grid-line", ie11up("undefined")),
 
-        /** The style property layout-grid-mode. */
+        /** The style property {@code layoutGridMode}. */
         LAYOUT_GRID_MODE("layoutGridMode", "layout-grid-mode", ie11up("undefined")),
 
-        /** The style property layout-grid-type. */
+        /** The style property {@code layoutGridType}. */
         LAYOUT_GRID_TYPE("layoutGridType", "layout-grid-type", ie11up("undefined")),
 
         /** The style property {@code left}. */
@@ -884,17 +884,17 @@ final class StyleAttributes {
         /** The style property {@code letter-spacing}. */
         LETTER_SPACING_("letter-spacing", "letter-spacing", ff38up("normal")),
 
-        /** The style property lighting-color. */
+        /** The style property {@code lightingColor}. */
         LIGHTING_COLOR("lightingColor", "lighting-color",
                 ff("rgb(255, 255, 255)"), ie11up(""), chrome("rgb(255, 255, 255)")),
 
         /** The style property {@code lighting-color}. */
         LIGHTING_COLOR_("lighting-color", "lighting-color", ff38up("rgb(255, 255, 255)")),
 
-        /** The style property line-break. */
+        /** The style property {@code lineBreak}. */
         LINE_BREAK("lineBreak", "line-break", ie11up("undefined")),
 
-        /** The style property line-height. */
+        /** The style property {@code lineHeight}. */
         LINE_HEIGHT("lineHeight", "line-height", ff("20px"), ieBelow11("20px"), ie11up("normal"), chrome("normal")),
 
         /** The style property {@code line-height}. */
@@ -951,16 +951,16 @@ final class StyleAttributes {
         /** The style property {@code margin-top}. */
         MARGIN_TOP_("margin-top", "margin-top", ff38up("0px")),
 
-        /** The style property marker. */
+        /** The style property {@code marker}. */
         MARKER("marker", "marker", ff(""), ie11up("none"), chrome("")),
 
-        /** The style property marker-end. */
+        /** The style property {@code markerEnd}. */
         MARKER_END("markerEnd", "marker-end", ff("none"), ie11up("none"), chrome("none")),
 
         /** The style property {@code marker-end}. */
         MARKER_END_("marker-end", "marker-end", ff38up("none")),
 
-        /** The style property marker-mid. */
+        /** The style property {@code markerMid}. */
         MARKER_MID("markerMid", "marker-mid", ff("none"), ie11up("none"), chrome("none")),
 
         /** The style property {@code marker-mid}. */
@@ -969,16 +969,16 @@ final class StyleAttributes {
         /** The style property {@code marker-offset}. */
         MARKER_OFFSET_("marker-offset", "marker-offset", ff38up("auto")),
 
-        /** The style property marker-start. */
+        /** The style property {@code markerStart}. */
         MARKER_START("markerStart", "marker-start", ff("none"), ie11up("none"), chrome("none")),
 
         /** The style property {@code marker-start}. */
         MARKER_START_("marker-start", "marker-start", ff38up("none")),
 
-        /** The style property mask. */
+        /** The style property {@code mask}. */
         MASK("mask", "mask", ff("none"), ie11up("none"), chrome("none")),
 
-        /** The style property mask-type. */
+        /** The style property {@code maskType}. */
         MASK_TYPE("maskType", "mask-type", ff38up("luminance"), chrome("luminance")),
 
         /** The style property {@code mask-type}. */
@@ -1014,605 +1014,605 @@ final class StyleAttributes {
         /** The style property {@code minZoom}. */
         MIN_ZOOM("minZoom", "min-zoom", chrome("")),
 
-        /** The style property mix-blend-mode. */
+        /** The style property {@code mixBlendMode}. */
         MIX_BLEND_MODE("mixBlendMode", "mix-blend-mode", ff38up("normal"), chrome("normal")),
 
         /** The style property {@code mix-blend-mode}. */
         MIX_BLEND_MODE_("mix-blend-mode", "mix-blend-mode", ff38up("normal")),
 
-        /** The style property -moz-animation. */
+        /** The style property {@code MozAnimation}. */
         MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("")),
 
-        /** The style property -moz-animation-delay. */
+        /** The style property {@code MozAnimationDelay}. */
         MOZ_ANIMATION_DELAY("MozAnimationDelay", "-moz-animation-delay",
                 ff("0s")),
 
-        /** The style property -moz-animation-direction. */
+        /** The style property {@code MozAnimationDirection}. */
         MOZ_ANIMATION_DIRECTION("MozAnimationDirection", "-moz-animation-direction", ff("normal")),
 
-        /** The style property -moz-animation-duration. */
+        /** The style property {@code MozAnimationDuration}. */
         MOZ_ANIMATION_DURATION("MozAnimationDuration",
                 "-moz-animation-duration", ff("0s")),
 
-        /** The style property -moz-animation-fill-mode. */
+        /** The style property {@code MozAnimationFillMode}. */
         MOZ_ANIMATION_FILL_MODE("MozAnimationFillMode",
                 "moz-animation-fill-mode", ff("none")),
 
-        /** The style property -moz-animation-iteration-count. */
+        /** The style property {@code MozAnimationIterationCount}. */
         MOZ_ANIMATION_ITERATION_COUNT("MozAnimationIterationCount",
                 "-moz-animation-iteration-count", ff("1")),
 
-        /** The style property -moz-animation-name. */
+        /** The style property {@code MozAnimationName}. */
         MOZ_ANIMATION_NAME("MozAnimationName", "moz-annimation-name",
                 ff("none")),
 
-        /** The style property -moz-animation-play-state. */
+        /** The style property {@code MozAnimationPlayState}. */
         MOZ_ANIMATION_PLAY_STATE("MozAnimationPlayState",
                 "moz-annimation-play-state", ff("running")),
 
-        /** The style property -moz-animation-timing-function. */
+        /** The style property {@code MozAnimationTimingFunction}. */
         MOZ_ANIMATION_TIMING_FUNCTION("MozAnimationTimingFunction",
                 "moz-annimation-timing-function",
                 ff("cubic-bezier(0.25, 0.1, 0.25, 1)")),
 
-        /** The style property -moz-appearance. */
+        /** The style property {@code MozAppearance}. */
         MOZ_APPEARANCE("MozAppearance", "-moz-appearance", ff("none")),
 
-        /** The style property -moz-backface-visibility. */
+        /** The style property {@code MozBackfaceVisibility}. */
         MOZ_BACKFACE_VISIBILITY("MozBackfaceVisibility",
                 "-moz-backface-visibility", ff("visible")),
 
-        /** The style property -moz-background-clip. */
+        /** The style property {@code MozBackgroundClip}. */
         MOZ_BACKGROUND_CLIP("MozBackgroundClip", "-moz-background-clip"),
 
-        /** The style property -moz-background-inline-policy. */
+        /** The style property {@code MozBackgroundInlinePolicy}. */
         MOZ_BACKGROUND_INLINE_POLICY("MozBackgroundInlinePolicy",
                 "-moz-background-inline-policy", ffBelow38("continuous")),
 
-        /** The style property -moz-background-origin. */
+        /** The style property {@code MozBackgroundOrigin}. */
         MOZ_BACKGROUND_ORIGIN("MozBackgroundOrigin", "-moz-background-origin"),
 
-        /** The style property -moz-background-size. */
+        /** The style property {@code MozBackgroundSize}. */
         MOZ_BACKGROUND_SIZE("MozBackgroundSize", "-moz-background-size"),
 
-        /** The style property -moz-binding. */
+        /** The style property {@code MozBinding}. */
         MOZ_BINDING("MozBinding", "-moz-binding", ff("none")),
 
-        /** The style property -moz-border-bottom-colors. */
+        /** The style property {@code MozBorderBottomColors}. */
         MOZ_BORDER_BOTTOM_COLORS("MozBorderBottomColors",
                 "-moz-border-bottom-colors", ff("none")),
 
-        /** The style property -moz-border-end. */
+        /** The style property {@code MozBorderEnd}. */
         MOZ_BORDER_END("MozBorderEnd", "-moz-border-end", ff("")),
 
-        /** The style property -moz-border-end-color. */
+        /** The style property {@code MozBorderEndColor}. */
         MOZ_BORDER_END_COLOR("MozBorderEndColor", "-moz-border-end-color", ff("")),
 
-        /** The style property -moz-border-end-style. */
+        /** The style property {@code MozBorderEndStyle}. */
         MOZ_BORDER_END_STYLE("MozBorderEndStyle", "-moz-border-end-style", ff("")),
 
-        /** The style property -moz-border-end-width. */
+        /** The style property {@code MozBorderEndWidth}. */
         MOZ_BORDER_END_WIDTH("MozBorderEndWidth", "-moz-border-end-width", ff("")),
 
-        /** The style property -moz-border-image. */
+        /** The style property {@code MozBorderImage}. */
         MOZ_BORDER_IMAGE("MozBorderImage", "-moz-border-image", ff("")),
 
-        /** The style property -moz-border-left-colors. */
+        /** The style property {@code MozBorderLeftColors}. */
         MOZ_BORDER_LEFT_COLORS("MozBorderLeftColors", "-moz-border-left-colors", ff("none")),
 
-        /** The style property -moz-border-radius. */
+        /** The style property {@code MozBorderRadius}. */
         MOZ_BORDER_RADIUS("MozBorderRadius", "-moz-border-radius"),
 
-        /** The style property -moz-border-radius-bottomleft. */
+        /** The style property {@code MozBorderRadiusBottomleft}. */
         MOZ_BORDER_RADIUS_BOTTOMLEFT("MozBorderRadiusBottomleft", "-moz-border-radius-bottomleft"),
 
-        /** The style property -moz-border-radius-bottomright. */
+        /** The style property {@code MozBorderRadiusBottomright}. */
         MOZ_BORDER_RADIUS_BOTTOMRIGHT("MozBorderRadiusBottomright", "-moz-border-radius-bottomright"),
 
-        /** The style property -moz-border-radius-topleft. */
+        /** The style property {@code MozBorderRadiusTopleft}. */
         MOZ_BORDER_RADIUS_TOPLEFT("MozBorderRadiusTopleft", "-moz-border-radius-topleft"),
 
-        /** The style property -moz-border-radius-topright. */
+        /** The style property {@code MozBorderRadiusTopright}. */
         MOZ_BORDER_RADIUS_TOPRIGHT("MozBorderRadiusTopright", "-moz-border-radius-topright"),
 
-        /** The style property -moz-border-right-colors. */
+        /** The style property {@code MozBorderRightColors}. */
         MOZ_BORDER_RIGHT_COLORS("MozBorderRightColors", "-moz-border-right-colors", ff("none")),
 
-        /** The style property -moz-border-start. */
+        /** The style property {@code MozBorderStart}. */
         MOZ_BORDER_START("MozBorderStart", "-moz-border-start", ff("")),
 
-        /** The style property -moz-border-start-color. */
+        /** The style property {@code MozBorderStartColor}. */
         MOZ_BORDER_START_COLOR("MozBorderStartColor", "-moz-border-start-color", ff("")),
 
-        /** The style property -moz-border-start-style. */
+        /** The style property {@code MozBorderStartStyle}. */
         MOZ_BORDER_START_STYLE("MozBorderStartStyle", "-moz-border-start-style", ff("")),
 
-        /** The style property -moz-border-start-width. */
+        /** The style property {@code MozBorderStartWidth}. */
         MOZ_BORDER_START_WIDTH("MozBorderStartWidth", "-moz-border-start-width", ff("")),
 
-        /** The style property -moz-border-top-colors. */
+        /** The style property {@code MozBorderTopColors}. */
         MOZ_BORDER_TOP_COLORS("MozBorderTopColors", "-moz-border-top-colors", ff("none")),
 
-        /** The style property -moz-box-align. */
+        /** The style property {@code MozBoxAlign}. */
         MOZ_BOX_ALIGN("MozBoxAlign", "-moz-box-align", ff("stretch")),
 
-        /** The style property -moz-box-direction. */
+        /** The style property {@code MozBoxDirection}. */
         MOZ_BOX_DIRECTION("MozBoxDirection", "-moz-box-direction", ff("normal")),
 
-        /** The style property -moz-box-flex. */
+        /** The style property {@code MozBoxFlex}. */
         MOZ_BOX_FLEX("MozBoxFlex", "-moz-box-flex", ff("0")),
 
-        /** The style property -moz-box-ordinal-group. */
+        /** The style property {@code MozBoxOrdinalGroup}. */
         MOZ_BOX_ORDINAL_GROUP("MozBoxOrdinalGroup", "-moz-box-ordinal-group", ff("1")),
 
-        /** The style property -moz-box-orient. */
+        /** The style property {@code MozBoxOrient}. */
         MOZ_BOX_ORIENT("MozBoxOrient", "-moz-box-orient", ff("horizontal")),
 
-        /** The style property -moz-box-pack. */
+        /** The style property {@code MozBoxPack}. */
         MOZ_BOX_PACK("MozBoxPack", "-moz-box-pack", ff("start")),
 
-        /** The style property -moz-box-shadow. */
+        /** The style property {@code MozBoxShadow}. */
         MOZ_BOX_SHADOW("MozBoxShadow", "-moz-box-shadow"),
 
-        /** The style property -moz-box-sizing. */
+        /** The style property {@code MozBoxSizing}. */
         MOZ_BOX_SIZING("MozBoxSizing", "-moz-box-sizing", ff("content-box")),
 
-        /** The style property -moz-column-count. */
+        /** The style property {@code MozColumnCount}. */
         MOZ_COLUMN_COUNT("MozColumnCount", "-moz-column-count", ff("auto")),
 
-        /** The style property -moz-column-fill. */
+        /** The style property {@code MozColumnFill}. */
         MOZ_COLUMN_FILL("MozColumnFill", "-moz-column-fill", ff("balance")),
 
-        /** The style property -moz-column-gap. */
+        /** The style property {@code MozColumnGap}. */
         MOZ_COLUMN_GAP("MozColumnGap", "-moz-column-gap", ff("16px")),
 
-        /** The style property -moz-column-rule. */
+        /** The style property {@code MozColumnRule}. */
         MOZ_COLUMN_RULE("MozColumnRule", "-moz-column-rule", ff("")),
 
-        /** The style property -moz-column-rule-color. */
+        /** The style property {@code MozColumnRuleColor}. */
         MOZ_COLUMN_RULE_COLOR("MozColumnRuleColor", "-moz-column-rule-color",
                 ff("rgb(0, 0, 0)")),
 
-        /** The style property -moz-column-rule-style. */
+        /** The style property {@code MozColumnRuleStyle}. */
         MOZ_COLUMN_RULE_STYLE("MozColumnRuleStyle", "-moz-column-rule-style",
                 ff("none")),
 
-        /** The style property -moz-column-rule-width. */
+        /** The style property {@code MozColumnRuleWidth}. */
         MOZ_COLUMN_RULE_WIDTH("MozColumnRuleWidth", "-moz-column-rule-width",
                 ff("0px")),
 
-        /** The style property -moz-column-width. */
+        /** The style property {@code MozColumnWidth}. */
         MOZ_COLUMN_WIDTH("MozColumnWidth", "-moz-column-width", ff("auto")),
 
-        /** The style property -moz-columns. */
+        /** The style property {@code MozColumns}. */
         MOZ_COLUMNS("MozColumns", "-moz-columns", ff("")),
 
-        /** The style property -moz-float-edge. */
+        /** The style property {@code MozFloatEdge}. */
         MOZ_FLOAT_EDGE("MozFloatEdge", "-moz-float-edge", ff("content-box")),
 
-        /** The style property -moz-font-feature-settings. */
+        /** The style property {@code MozFontFeatureSettings}. */
         MOZ_FONT_FEATURE_SETTINGS("MozFontFeatureSettings",
                 "-moz-font-feature-settings", ff("normal")),
 
-        /** The style property -moz-font-language-override. */
+        /** The style property {@code MozFontLanguageOverride}. */
         MOZ_FONT_LANGUAGE_OVERRIDE("MozFontLanguageOverride",
                 "-moz-font-language-override", ff("normal")),
 
-        /** The style property -moz-force-broken-image-icon. */
+        /** The style property {@code MozForceBrokenImageIcon}. */
         MOZ_FORCE_BROKEN_IMAGE_ICON("MozForceBrokenImageIcon",
                 "-moz-force-broken-image-icon", ff("0")),
 
-        /** The style property -moz-hyphens. */
+        /** The style property {@code MozHyphens}. */
         MOZ_HYPHENS("MozHyphens", "-moz-hyphens", ff("manual")),
 
-        /** The style property -moz-image-region. */
+        /** The style property {@code MozImageRegion}. */
         MOZ_IMAGE_REGION("MozImageRegion", "-moz-image-region", ff("auto")),
 
-        /** The style property -moz-margin-end. */
+        /** The style property {@code MozMarginEnd}. */
         MOZ_MARGIN_END("MozMarginEnd", "-moz-margin-end", ff("")),
 
-        /** The style property -moz-margin-start. */
+        /** The style property {@code MozMarginStart}. */
         MOZ_MARGIN_START("MozMarginStart", "-moz-margin-start", ff("")),
 
-        /** The style property -moz-opacity. */
+        /** The style property {@code MozOpacity}. */
         MOZ_OPACITY("MozOpacity", "-moz-opacity"),
 
-        /** The style property -moz-orient. */
+        /** The style property {@code MozOrient}. */
         MOZ_ORIENT("MozOrient", "-moz-orient", ff("auto"), ff("horizontal")),
 
-        /** The style property -moz-outline. */
+        /** The style property {@code MozOutline}. */
         MOZ_OUTLINE("MozOutline", "-moz-outline"),
 
-        /** The style property -moz-outline-color. */
+        /** The style property {@code MozOutlineColor}. */
         MOZ_OUTLINE_COLOR("MozOutlineColor", "-moz-outline-color"),
 
-        /** The style property -moz-outline-offset. */
+        /** The style property {@code MozOutlineOffset}. */
         MOZ_OUTLINE_OFFSET("MozOutlineOffset", "-moz-outline-offset"),
 
-        /** The style property -mz-outline-radius. */
+        /** The style property {@code MozOutlineRadius}. */
         MOZ_OUTLINE_RADIUS("MozOutlineRadius", "-mz-outline-radius", ff("")),
 
-        /** The style property -moz-outline-radius-bottomleft. */
+        /** The style property {@code MozOutlineRadiusBottomleft}. */
         MOZ_OUTLINE_RADIUS_BOTTOMLEFT("MozOutlineRadiusBottomleft",
                 "-moz-outline-radius-bottomleft", ff("0px")),
 
-        /** The style property -moz-outline-radius-bottomright. */
+        /** The style property {@code MozOutlineRadiusBottomright}. */
         MOZ_OUTLINE_RADIUS_BOTTOMRIGHT("MozOutlineRadiusBottomright",
                 "-moz-outline-radius-bottomright", ff("0px")),
 
-        /** The style property -moz-outline-radius-topleft. */
+        /** The style property {@code MozOutlineRadiusTopleft}. */
         MOZ_OUTLINE_RADIUS_TOPLEFT("MozOutlineRadiusTopleft",
                 "-moz-outline-radius-topleft", ff("0px")),
 
-        /** The style property -moz-outline-radius-topright. */
+        /** The style property {@code MozOutlineRadiusTopright}. */
         MOZ_OUTLINE_RADIUS_TOPRIGHT("MozOutlineRadiusTopright",
                 "-moz-outline-radius-topright", ff("0px")),
 
-        /** The style property -moz-outline-style. */
+        /** The style property {@code MozOutlineStyle}. */
         MOZ_OUTLINE_STYLE("MozOutlineStyle", "-moz-outline-style"),
 
-        /** The style property -moz-outline-width. */
+        /** The style property {@code MozOutlineWidth}. */
         MOZ_OUTLINE_WIDTH("MozOutlineWidth", "-moz-outline-width"),
 
-        /** The style property -moz-padding-end. */
+        /** The style property {@code MozPaddingEnd}. */
         MOZ_PADDING_END("MozPaddingEnd", "-moz-padding-end", ff("")),
 
-        /** The style property -moz-padding-start. */
+        /** The style property {@code MozPaddingStart}. */
         MOZ_PADDING_START("MozPaddingStart", "-moz-padding-start", ff("")),
 
-        /** The style property -moz-perspective. */
+        /** The style property {@code MozPerspective}. */
         MOZ_PERSPECTIVE("MozPerspective", "-moz-perspective", ff("none")),
 
-        /** The style property -moz-perspective-origin. */
+        /** The style property {@code MozPerspectiveOrigin}. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
                 "-moz-perspective-origin", ff("621px 172.5px")),
 
-        /** The style property -moz-stack-sizing. */
+        /** The style property {@code MozStackSizing}. */
         MOZ_STACK_SIZING("MozStackSizing", "-moz-stack-sizing",
                 ff("stretch-to-fit")),
 
-        /** The style property -moz-tab-size. */
+        /** The style property {@code MozTabSize}. */
         MOZ_TAB_SIZE("MozTabSize", "-moz-tab-size", ff("8")),
 
-        /** The style property -moz-text-align-last. */
+        /** The style property {@code MozTextAlignLast}. */
         MOZ_TEXT_ALIGN_LAST("MozTextAlignLast", "-moz-text-align-last",
                 ff("auto")),
 
-        /** The style property -moz-text-blink. */
+        /** The style property {@code MozTextBlink}. */
         MOZ_TEXT_BLINK("MozTextBlink", "-moz-text-blink", ffBelow31("none")),
 
-        /** The style property -moz-text-decoration-color. */
+        /** The style property {@code MozTextDecorationColor}. */
         MOZ_TEXT_DECORATION_COLOR("MozTextDecorationColor",
                 "-moz-text-decoration-color", ff("rgb(0, 0, 0)")),
 
-        /** The style property -moz-text-decoration-line. */
+        /** The style property {@code MozTextDecorationLine}. */
         MOZ_TEXT_DECORATION_LINE("MozTextDecorationLine",
                 "-moz-text-decoration-line", ff("none")),
 
-        /** The style property -moz-text-decoration-style. */
+        /** The style property {@code MozTextDecorationStyle}. */
         MOZ_TEXT_DECORATION_STYLE("MozTextDecorationStyle",
                 "-moz-text-decoration-style", ff("solid")),
 
-        /** The style property -moz-text-size-adjust. */
+        /** The style property {@code MozTextSizeAdjust}. */
         MOZ_TEXT_SIZE_ADJUST("MozTextSizeAdjust", "-moz-text-size-adjust",
                 ff("auto")),
 
-        /** The style property -moz-transform. */
+        /** The style property {@code MozTransform}. */
         MOZ_TRANSFORM("MozTransform", "-moz-transform", ff("none")),
 
-        /** The style property -moz-transform-origin. */
+        /** The style property {@code MozTransformOrigin}. */
         MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin", ff("621px 172.5px")),
 
-        /** The style property -moz-transform-style. */
+        /** The style property {@code MozTransformStyle}. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
                 ff("flat")),
 
-        /** The style property -moz-transition. */
+        /** The style property {@code MozTransition}. */
         MOZ_TRANSITION("MozTransition", "-moz-transition", ff("")),
 
-        /** The style property -moz-transition-delay. */
+        /** The style property {@code MozTransitionDelay}. */
         MOZ_TRANSITION_DELAY("MozTransitionDelay", "-moz-transition-delay",
                 ff("0s")),
 
-        /** The style property -moz-transition-duration. */
+        /** The style property {@code MozTransitionDuration}. */
         MOZ_TRANSITION_DURATION("MozTransitionDuration",
                 "-moz-transition-duration", ff("0s")),
 
-        /** The style property -moz-transition-property. */
+        /** The style property {@code MozTransitionProperty}. */
         MOZ_TRANSITION_PROPERTY("MozTransitionProperty",
                 "-moz-transition-property", ff("all")),
 
-        /** The style property -moz-transition-timing-function. */
+        /** The style property {@code MozTransitionTimingFunction}. */
         MOZ_TRANSITION_TIMING_FUNCTION("MozTransitionTimingFunction",
                 "-moz-transition-timing-function",
                 ff("cubic-bezier(0.25, 0.1, 0.25, 1)")),
 
-        /** The style property -moz-user-focus. */
+        /** The style property {@code MozUserFocus}. */
         MOZ_USER_FOCUS("MozUserFocus", "-moz-user-focus", ff("none")),
 
-        /** The style property -moz-user-input. */
+        /** The style property {@code MozUserInput}. */
         MOZ_USER_INPUT("MozUserInput", "-moz-user-input", ff("auto")),
 
-        /** The style property -moz-user-modify. */
+        /** The style property {@code MozUserModify}. */
         MOZ_USER_MODIFY("MozUserModify", "-moz-user-modify", ff("read-only")),
 
-        /** The style property -moz-user-select. */
+        /** The style property {@code MozUserSelect}. */
         MOZ_USER_SELECT("MozUserSelect", "-moz-user-select", ff("auto")),
 
-        /** The style property -moz-window-dragging. */
+        /** The style property {@code MozWindowDragging}. */
         MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging", ff38up("no-drag")),
 
-        /** The style property -moz-window-shadow. */
+        /** The style property {@code MozWindowShadow}. */
         MOZ_WINDOW_SHADOW("MozWindowShadow", "-moz-window-shadow", ff("default")),
 
-        /** The style property -ms-animation. */
+        /** The style property {@code msAnimation}. */
         MS_ANIMATION("msAnimation", "-ms-animation", ie11up("")),
 
-        /** The style property -ms-animation-delay. */
+        /** The style property {@code msAnimationDelay}. */
         MS_ANIMATION_DELAY("msAnimationDelay", "-ms-animation-delay",
                 ie11up("0s")),
 
-        /** The style property -ms-animation-direction. */
+        /** The style property {@code msAnimationDirection}. */
         MS_ANIMATION_DIRECTION("msAnimationDirection",
                 "-ms-animation-direction", ie11up("normal")),
 
-        /** The style property -ms-animation-duration. */
+        /** The style property {@code msAnimationDuration}. */
         MS_ANIMATION_DURATION("msAnimationDuration",
                 "-ms-animation-duration", ie11up("0s")),
 
-        /** The style property -ms-animation-fill-mode. */
+        /** The style property {@code msAnimationFillMode}. */
         MS_ANIMATION_FILL_MODE("msAnimationFillMode",
                 "-ms-animation-fill-mode", ie11up("none")),
 
-        /** The style property -ms-animation-iteration-count. */
+        /** The style property {@code msAnimationIterationCount}. */
         MS_ANIMATION_ITERATION_COUNT("msAnimationIterationCount",
                 "-ms-animation-iteration-count", ie11up("1")),
 
-        /** The style property -ms-animation-name. */
+        /** The style property {@code msAnimationName}. */
         MS_ANIMATION_NAME("msAnimationName", "-ms-annimation-name",
                 ie11up("none")),
 
-        /** The style property -ms-animation-play-state. */
+        /** The style property {@code msAnimationPlayState}. */
         MS_ANIMATION_PLAY_STATE("msAnimationPlayState",
                 "-ms-animation-play-state", ie11up("running")),
 
-        /** The style property -ms-animation-timing-function. */
+        /** The style property {@code msAnimationTimingFunction}. */
         MS_ANIMATION_TIMING_FUNCTION("msAnimationTimingFunction",
                 "-ms-animation-timing-function",
                 ie11up("cubic-bezier(0.25, 0.1, 0.25, 1)")),
 
-        /** The style property -ms-backface-visibility. */
+        /** The style property {@code msBackfaceVisibility}. */
         MS_BACKFACE_VISIBILITY("msBackfaceVisibility",
                 "-ms-backface-visibility", ie11up("visible")),
 
-        /** The style property -ms-block-progression. */
+        /** The style property {@code msBlockProgression}. */
         MS_BLOCK_PROGRESSION("msBlockProgression", "-ms-block-progression",
                 ie11up("undefined")),
 
-        /** The style property -ms-content-zoom-chaining. */
+        /** The style property {@code msContentZoomChaining}. */
         MS_CONTENT_ZOOM_CHAINING("msContentZoomChaining",
                 "-ms-content-zoom-chaining", ie11up("none")),
 
-        /** The style property -ms-content-zoom-limit. */
+        /** The style property {@code msContentZoomLimit}. */
         MS_CONTENT_ZOOM_LIMIT("msContentZoomLimit", "-ms-content-zoom-limit",
                 ie11up("")),
 
-        /** The style property -ms-content-zoom-limit-max. */
+        /** The style property {@code msContentZoomLimitMax}. */
         MS_CONTENT_ZOOM_LIMIT_MAX("msContentZoomLimitMax", "-ms-content-zoom-limit-max",
                 ie11up("400%")),
 
-        /** The style property -ms-content-zoom-limit-min. */
+        /** The style property {@code msContentZoomLimitMin}. */
         MS_CONTENT_ZOOM_LIMIT_MIN("msContentZoomLimitMin", "-ms-content-zoom-limit-min",
                 ie11up("100%")),
 
-        /** The style property -ms-content-zoom-snap. */
+        /** The style property {@code msContentZoomSnap}. */
         MS_CONTENT_ZOOM_SNAP("msContentZoomSnap",
                 "-ms-content-zoom-snap", ie11up("none snapInterval(0%, 100%)")),
 
-        /** The style property -ms-content-zoom-snap-points. */
+        /** The style property {@code msContentZoomSnapPoints}. */
         MS_CONTENT_ZOOM_SNAP_POINTS("msContentZoomSnapPoints",
                 "-ms-content-zoom-snap-points", ie11up("snapInterval(0%, 100%)")),
 
-        /** The style property -ms-content-zoom-snap-type. */
+        /** The style property {@code msContentZoomSnapType}. */
         MS_CONTENT_ZOOM_SNAP_TYPE("msContentZoomSnapType", "-ms-content-zoom-snap-type", ie11up("none")),
 
-        /** The style property -ms-content-zooming. */
+        /** The style property {@code msContentZooming}. */
         MS_CONTENT_ZOOMING("msContentZooming", "-ms-content-zooming", ie11up("none")),
 
-        /** The style property -ms-flex. */
+        /** The style property {@code msFlex}. */
         MS_FLEX("msFlex", "-ms-flex", ie11up("0 1 auto")),
 
-        /** The style property -ms-flex-align. */
+        /** The style property {@code msFlexAlign}. */
         MS_FLEX_ALIGN("msFlexAlign", "-ms-flex-align", ie11up("stretch")),
 
-        /** The style property -ms-flex-direction. */
+        /** The style property {@code msFlexDirection}. */
         MS_FLEX_DIRECTION("msFlexDirection", "-ms-flex-direction", ie11up("row")),
 
-        /** The style property -ms-flex-flow. */
+        /** The style property {@code msFlexFlow}. */
         MS_FLEX_FLOW("msFlexFlow", "-ms-flex-flow", ie11up("row nowrap")),
 
-        /** The style property -ms-flex-item-align. */
+        /** The style property {@code msFlexItemAlign}. */
         MS_FLEX_ITEM_ALIGN("msFlexItemAlign", "-ms-flex-item-align", ie11up("auto")),
 
-        /** The style property -ms-flex-line-pack. */
+        /** The style property {@code msFlexLinePack}. */
         MS_FLEX_LINE_PACK("msFlexLinePack", "-ms-flex-line-pack", ie11up("stretch")),
 
-        /** The style property -ms-flex-negative. */
+        /** The style property {@code msFlexNegative}. */
         MS_FLEX_NEGATIVE("msFlexNegative", "-ms-flex-negative", ie11up("1")),
 
-        /** The style property -ms-flex-order. */
+        /** The style property {@code msFlexOrder}. */
         MS_FLEX_ORDER("msFlexOrder", "-ms-flex-order", ie11up("0")),
 
-        /** The style property -ms-flex-pack. */
+        /** The style property {@code msFlexPack}. */
         MS_FLEX_PACK("msFlexPack", "-ms-flex-pack", ie11up("start")),
 
-        /** The style property -ms-flex-positive. */
+        /** The style property {@code msFlexPositive}. */
         MS_FLEX_POSITIVE("msFlexPositive", "-ms-flex-positive", ie11up("0")),
 
-        /** The style property -ms-flex-preferred-size. */
+        /** The style property {@code msFlexPreferredSize}. */
         MS_FLEX_PREFERRED_SIZE("msFlexPreferredSize", "-ms-flex-preferred-size", ie11up("auto")),
 
-        /** The style property -ms-flex-wrap. */
+        /** The style property {@code msFlexWrap}. */
         MS_FLEX_WRAP("msFlexWrap", "-ms-flex-wrap", ie11up("nowrap")),
 
-        /** The style property -ms-flow-from. */
+        /** The style property {@code msFlowFrom}. */
         MS_FLOW_FROM("msFlowFrom", "-ms-flow-from", ie11up("none")),
 
-        /** The style property -ms-flow-into. */
+        /** The style property {@code msFlowInto}. */
         MS_FLOW_INTO("msFlowInto", "-ms-flow-into", ie11up("none")),
 
-        /** The style property -ms-font-feature-settings. */
+        /** The style property {@code msFontFeatureSettings}. */
         MS_FONT_FEATURE_SETTINGS("msFontFeatureSettings", "-ms-font-feature-settings", ie11up("normal")),
 
-        /** The style property -ms-grid-column. */
+        /** The style property {@code msGridColumn}. */
         MS_GRID_COLUMN("msGridColumn", "-ms-grid-column", ie11up("1")),
 
-        /** The style property -ms-grid-column-align. */
+        /** The style property {@code msGridColumnAlign}. */
         MS_GRID_COLUMN_ALIGN("msGridColumnAlign", "-ms-grid-column-align", ie11up("stretch")),
 
-        /** The style property -ms-grid-column-span. */
+        /** The style property {@code msGridColumnSpan}. */
         MS_GRID_COLUMN_SPAN("msGridColumnSpan", "-ms-grid-column-span", ie11up("1")),
 
-        /** The style property -ms-grid-columns. */
+        /** The style property {@code msGridColumns}. */
         MS_GRID_COLUMNS("msGridColumns", "-ms-grid-columns", ie11up("none")),
 
-        /** The style property -ms-grid-row. */
+        /** The style property {@code msGridRow}. */
         MS_GRID_ROW("msGridRow", "-ms-grid-row", ie11up("1")),
 
-        /** The style property -ms-grid-row-align. */
+        /** The style property {@code msGridRowAlign}. */
         MS_GRID_ROW_ALIGN("msGridRowAlign", "-ms-grid-row-align", ie11up("stretch")),
 
-        /** The style property -ms-grid-row-span. */
+        /** The style property {@code msGridRowSpan}. */
         MS_GRID_ROW_SPAN("msGridRowSpan", "-ms-grid-row-span", ie11up("1")),
 
-        /** The style property -ms-grid-rows. */
+        /** The style property {@code msGridRows}. */
         MS_GRID_ROWS("msGridRows", "-ms-grid-rows", ie11up("none")),
 
-        /** The style property -ms-high-contrast-adjust. */
+        /** The style property {@code msHighContrastAdjust}. */
         MS_HIGH_CONTRAST_ADJUST("msHighContrastAdjust", "-ms-high-contrast-adjust", ie11up("auto")),
 
-        /** The style property -ms-hyphenate-limit-chars. */
+        /** The style property {@code msHyphenateLimitChars}. */
         MS_HYPHENATE_LIMIT_CHARS("msHyphenateLimitChars", "-ms-hyphenate-limit-chars", ie11up("5 2 2")),
 
-        /** The style property -ms-hyphenate-limit-lines. */
+        /** The style property {@code msHyphenateLimitLines}. */
         MS_HYPHENATE_LIMIT_LINES("msHyphenateLimitLines", "-ms-hyphenate-limit-lines", ie11up("no-limit")),
 
-        /** The style property -ms-hyphenate-limit-zone. */
+        /** The style property {@code msHyphenateLimitZone}. */
         MS_HYPHENATE_LIMIT_ZONE("msHyphenateLimitZone", "-ms-hyphenate-limit-zone", ie11up("0px")),
 
-        /** The style property -ms-hyphens. */
+        /** The style property {@code msHyphens}. */
         MS_HYPHENS("msHyphens", "-ms-hyphens", ie11up("manual")),
 
-        /** The style property -ms-ime-align. */
+        /** The style property {@code msImeAlign}. */
         MS_IME_ALIGN("msImeAlign", "-ms-ime-align", ie11up("")),
 
-        /** The style property -ms-interpolation-mode. */
+        /** The style property {@code msInterpolationMode}. */
         MS_INTERPOLATION_MODE("msInterpolationMode", "-ms-interpolation-mode", ie11up("undefined")),
 
-        /** The style property -ms-overflow-style. */
+        /** The style property {@code msOverflowStyle}. */
         MS_OVERFLOW_STYLE("msOverflowStyle", "-ms-overflow-style", ie11up("scrollbar")),
 
-        /** The style property -ms-perspective. */
+        /** The style property {@code msPerspective}. */
         MS_PERSPECTIVE("msPerspective", "-ms-perspective", ie11up("none")),
 
-        /** The style property -ms-perspective-origin. */
+        /** The style property {@code msPerspectiveOrigin}. */
         MS_PERSPECTIVE_ORIGIN("msPerspectiveOrigin", "-ms-perspective-origin", ie11up("620px 163.2px")),
 
-        /** The style property -ms-scroll-chaining. */
+        /** The style property {@code msScrollChaining}. */
         MS_SCROLL_CHAINING("msScrollChaining", "-ms-scroll-chaining", ie11up("chained")),
 
-        /** The style property -ms-scroll-limit. */
+        /** The style property {@code msScrollLimit}. */
         MS_SCROLL_LIMIT("msScrollLimit", "-ms-scroll-limit", ie11up("")),
 
-        /** The style property -ms-scroll-limit-x-max. */
+        /** The style property {@code msScrollLimitXMax}. */
         MS_SCROLL_LIMIT_X_MAX("msScrollLimitXMax", "-ms-scroll-limit-x-max", ie11up("0px")),
 
-        /** The style property -ms-scroll-limit-x-min. */
+        /** The style property {@code msScrollLimitXMin}. */
         MS_SCROLL_LIMIT_X_MIN("msScrollLimitXMin", "-ms-scroll-limit-x-min", ie11up("0px")),
 
-        /** The style property -ms-scroll-limit. */
+        /** The style property {@code msScrollLimitYMax}. */
         MS_SCROLL_LIMIT_Y_MAX("msScrollLimitYMax", "-ms-scroll-limit-y-max", ie11up("0px")),
 
-        /** The style property -ms-scroll-limit. */
+        /** The style property {@code msScrollLimitYMin}. */
         MS_SCROLL_LIMIT_Y_MIN("msScrollLimitYMin", "-ms-scroll-limit-y-min", ie11up("0px")),
 
-        /** The style property -ms-scroll-rails. */
+        /** The style property {@code msScrollRails}. */
         MS_SCROLL_RAILS("msScrollRails", "-ms-scroll-rails", ie11up("railed")),
 
-        /** The style property -ms-scroll-snap-points-x. */
+        /** The style property {@code msScrollSnapPointsX}. */
         MS_SCROLL_SNAP_POINTS_X("msScrollSnapPointsX", "-ms-scroll-snap-points-x", ie11up("snapInterval(0%, 100%)")),
 
-        /** The style property -ms-scroll-snap-points-y. */
+        /** The style property {@code msScrollSnapPointsY}. */
         MS_SCROLL_SNAP_POINTS_Y("msScrollSnapPointsY", "-ms-scroll-snap-points-y", ie11up("snapInterval(0%, 100%)")),
 
-        /** The style property -ms-scroll-snap-type. */
+        /** The style property {@code msScrollSnapType}. */
         MS_SCROLL_SNAP_TYPE("msScrollSnapType", "-ms-scroll-snap-type", ie11up("none")),
 
-        /** The style property -ms-scroll-snap-x. */
+        /** The style property {@code msScrollSnapX}. */
         MS_SCROLL_SNAP_X("msScrollSnapX", "-ms-scroll-snap-x", ie11up("none snapInterval(0%, 100%)")),
 
-        /** The style property -ms-scroll-snap-y. */
+        /** The style property {@code msScrollSnapY}. */
         MS_SCROLL_SNAP_Y("msScrollSnapY", "-ms-scroll-snap-y", ie11up("none snapInterval(0%, 100%)")),
 
-        /** The style property -ms-scroll-translation. */
+        /** The style property {@code msScrollTranslation}. */
         MS_SCROLL_TRANSLATION("msScrollTranslation", "-ms-scroll-translation", ie11up("none")),
 
-        /** The style property -ms-text-combine-horizontal. */
+        /** The style property {@code msTextCombineHorizontal}. */
         MS_TEXT_COMBINE_HORIZONTAL("msTextCombineHorizontal", "-ms-text-combine-horizontal", ie11up("none")),
 
-        /** The style property -ms-touch-action. */
+        /** The style property {@code msTouchAction}. */
         MS_TOUCH_ACTION("msTouchAction", "-ms-touch-action", ie11up("auto")),
 
-        /** The style property -ms-touch-select. */
+        /** The style property {@code msTouchSelect}. */
         MS_TOUCH_SELECT("msTouchSelect", "-ms-touch-select", ie11up("")),
 
-        /** The style property -ms-transform. */
+        /** The style property {@code msTransform}. */
         MS_TRANSFORM("msTransform", "-ms-transform", ie11up("none")),
 
-        /** The style property -ms-transform-origin. */
+        /** The style property {@code msTransformOrigin}. */
         MS_TRANSFORM_ORIGIN("msTransformOrigin", "-ms-transform-origin", ie11up("620px 163.2px")),
 
-        /** The style property -ms-transform-style. */
+        /** The style property {@code msTransformStyle}. */
         MS_TRANSFORM_STYLE("msTransformStyle", "-ms-transform-style", ie11up("flat")),
 
-        /** The style property -ms-transition. */
+        /** The style property {@code msTransition}. */
         MS_TRANSITION("msTransition", "-ms-transition", ie11up("")),
 
-        /** The style property -ms-transition-delay. */
+        /** The style property {@code msTransitionDelay}. */
         MS_TRANSITION_DELAY("msTransitionDelay", "-ms-transition-delay", ie11up("0s")),
 
-        /** The style property -ms-transition-duration. */
+        /** The style property {@code msTransitionDuration}. */
         MS_TRANSITION_DURATION("msTransitionDuration",
                 "-ms-transition-duration", ie11up("0s")),
 
-        /** The style property -ms-transition-property. */
+        /** The style property {@code msTransitionProperty}. */
         MS_TRANSITION_PROPERTY("msTransitionProperty",
                 "-ms-transition-property", ie11up("all")),
 
-        /** The style property -ms-transition-timing-function. */
+        /** The style property {@code msTransitionTimingFunction}. */
         MS_TRANSITION_TIMING_FUNCTION("msTransitionTimingFunction",
                 "-ms-transition-timing-function",
                 ie11up("cubic-bezier(0.25, 0.1, 0.25, 1)")),
 
-        /** The style property -ms-user-select. */
+        /** The style property {@code msUserSelect}. */
         MS_USER_SELECT("msUserSelect", "-ms-user-select", ie11up("text")),
 
-        /** The style property -ms-wrap-flow. */
+        /** The style property {@code msWrapFlow}. */
         MS_WRAP_FLOW("msWrapFlow", "-ms-wrap-flow", ie11up("auto")),
 
-        /** The style property -ms-wrap-margin. */
+        /** The style property {@code msWrapMargin}. */
         MS_WRAP_MARGIN("msWrapMargin", "-ms-wrap-margin", ie11up("auto")),
 
-        /** The style property -ms-wrap-through. */
+        /** The style property {@code msWrapThrough}. */
         MS_WRAP_THROUGH("msWrapThrough", "-ms-wrap-through", ie11up("wrap")),
 
-        /** The style property {@code object-fit}. */
+        /** The style property {@code objectFit}. */
         OBJECT_FIT("objectFit", "object-fit", ff38up("fill"), chrome("fill")),
 
         /** The style property {@code object-fit}. */
         OBJECT_FIT_("object-fit", "object-fit", ff38up("fill")),
 
-        /** The style property object-position. */
+        /** The style property {@code objectPosition}. */
         OBJECT_POSITION("objectPosition", "object-position", ff38up("50% 50%"), chrome("50% 50%")),
 
         /** The style property {@code object-position}. */
@@ -1621,19 +1621,19 @@ final class StyleAttributes {
         /** The style property {@code opacity}. */
         OPACITY("opacity", "opacity", chrome("1")),
 
-        /** The style property order. */
+        /** The style property {@code order}. */
         ORDER("order", "order", ff("0"), ie11up("0"), chrome("0")),
 
         /** The style property {@code orientation}. */
         ORIENTATION("orientation", "orientation", chrome("")),
 
-        /** The style property page-break-inside. */
+        /** The style property {@code orphans}. */
         ORPHANS("orphans", "orphans", ie11up("2"), chrome("auto")),
 
         /** The style property {@code outline}. */
         OUTLINE("outline", "outline", chrome("rgb(0, 0, 0) none 0px")),
 
-        /** The style property outline-color. */
+        /** The style property {@code outlineColor}. */
         OUTLINE_COLOR("outlineColor", "outline-color", ie11up("transparent"), chrome("rgb(0, 0, 0)"),
                 ff("rgb(0, 0, 0)")),
 
@@ -1718,44 +1718,44 @@ final class StyleAttributes {
         /** The style property {@code page-break-before}. */
         PAGE_BREAK_BEFORE_("page-break-before", "page-break-before", ff38up("auto")),
 
-        /** The style property page-break-inside. */
+        /** The style property {@code pageBreakInside}. */
         PAGE_BREAK_INSIDE("pageBreakInside", "page-break-inside", ff("auto"), ie11up("auto"), chrome("auto")),
 
         /** The style property {@code page-break-inside}. */
         PAGE_BREAK_INSIDE_("page-break-inside", "page-break-inside", ff38up("auto")),
 
-        /** The style property paint-order. */
+        /** The style property {@code paintOrder}. */
         PAINT_ORDER("paintOrder", "paint-order", ff("normal"), chrome("fill stroke markers")),
 
         /** The style property {@code paint-order}. */
         PAINT_ORDER_("paint-order", "paint-order", ff38up("normal")),
 
-        /** The style property pause. */
+        /** The style property {@code pause}. */
         PAUSE("pause", "pause"),
 
-        /** The style property pause-after. */
+        /** The style property {@code pauseAfter}. */
         PAUSE_AFTER("pauseAfter", "pause-after"),
 
-        /** The style property pause-before. */
+        /** The style property {@code pauseBefore}. */
         PAUSE_BEFORE("pauseBefore", "pause-before"),
 
-        /** The style property perspective. */
+        /** The style property {@code perspective}. */
         PERSPECTIVE("perspective", "perspective", ff("none"), ie11up("none"), chrome("none")),
 
-        /** The style property perspective-origin. */
+        /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
                 ff("621px 172.5px"), ie11up("620px 163.2px"), chrome("620px 161px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ff38up("621px 172.5px")),
 
-        /** The style property pitch. */
+        /** The style property {@code pitch}. */
         PITCH("pitch", "pitch"),
 
-        /** The style property pitch-range. */
+        /** The style property {@code pitchRange}. */
         PITCH_RANGE("pitchRange", "pitch-range"),
 
-        /** The style property pointer-events. */
+        /** The style property {@code pointerEvents}. */
         POINTER_EVENTS("pointerEvents", "pointer-events", ie11up("visiblePainted"), chrome("auto"), ff("auto")),
 
         /** The style property {@code pointer-events}. */
@@ -1764,31 +1764,31 @@ final class StyleAttributes {
         /** The style property {@code position}. */
         POSITION("position", "position", chrome("static")),
 
-        /** The style property quotes. */
+        /** The style property {@code quotes}. */
         QUOTES("quotes", "quotes", ff("\"“\" \"”\" \"‘\" \"’\""), ie8up(""), chrome("")),
 
         /** The style property {@code r}. */
         R("r", "r", chrome("0px")),
 
-        /** The style property resize. */
+        /** The style property {@code resize}. */
         RESIZE("resize", "resize", ff("none"), chrome("none")),
 
-        /** The style property richness. */
+        /** The style property {@code richness}. */
         RICHNESS("richness", "richness"),
 
         /** The style property {@code right}. */
         RIGHT("right", "right", chrome("auto")),
 
-        /** The style property ruby-align. */
+        /** The style property {@code rubyAlign}. */
         RUBY_ALIGN("rubyAlign", "ruby-align", ff38up("space-around")),
 
         /** The style property {@code ruby-align}. */
         RUBY_ALIGN_("ruby-align", "ruby-align", ff38up("space-around")),
 
-        /** The style property ruby-overhang. */
+        /** The style property {@code rubyOverhang}. */
         RUBY_OVERHANG("rubyOverhang", "ruby-overhang", ie11up("auto")),
 
-        /** The style property ruby-position. */
+        /** The style property {@code rubyPosition}. */
         RUBY_POSITION("rubyPosition", "ruby-position", ie11up("above"), ff38up("over")),
 
         /** The style property {@code ruby-position}. */
@@ -1800,34 +1800,34 @@ final class StyleAttributes {
         /** The style property {@code ry}. */
         RY("ry", "ry", chrome("0px")),
 
-        /** The style property scroll-behavior. */
+        /** The style property {@code scrollBehavior}. */
         SCROLL_BEHAVIOR("scrollBehavior", "scroll-behavior", ff38up("auto")),
 
         /** The style property {@code scroll-behavior}. */
         SCROLL_BEHAVIOR_("scroll-behavior", "scroll-behavior", ff38up("auto")),
 
-        /** The style property scrollbar-3dlight-color. */
+        /** The style property {@code scrollbar3dLightColor}. */
         SCROLLBAR_3DLIGHT_COLOR("scrollbar3dLightColor", "scrollbar-3dlight-color", ie11up("undefined")),
 
-        /** The style property scrollbar-arrow-color. */
+        /** The style property {@code scrollbarArrowColor}. */
         SCROLLBAR_ARROW_COLOR("scrollbarArrowColor", "scrollbar-arrow-color", ie11up("undefined")),
 
-        /** The style property scrollbar-base-color. */
+        /** The style property {@code scrollbarBaseColor}. */
         SCROLLBAR_BASE_COLOR("scrollbarBaseColor", "scrollbar-base-color", ie11up("undefined")),
 
-        /** The style property scrollbar-darkshadow-color. */
+        /** The style property {@code scrollbarDarkShadowColor}. */
         SCROLLBAR_DARKSHADOW_COLOR("scrollbarDarkShadowColor", "scrollbar-darkshadow-color", ie11up("undefined")),
 
-        /** The style property scrollbar-face-color. */
+        /** The style property {@code scrollbarFaceColor}. */
         SCROLLBAR_FACE_COLOR("scrollbarFaceColor", "scrollbar-face-color", ie11up("undefined")),
 
-        /** The style property scrollbar-highlight-color. */
+        /** The style property {@code scrollbarHighlightColor}. */
         SCROLLBAR_HIGHLIGHT_COLOR("scrollbarHighlightColor", "scrollbar-highlight-color", ie11up("undefined")),
 
-        /** The style property scrollbar-shadow-color. */
+        /** The style property {@code scrollbarShadowColor}. */
         SCROLLBAR_SHADOW_COLOR("scrollbarShadowColor", "scrollbar-shadow-color", ie11up("undefined")),
 
-        /** The style property scrollbar-track-color. */
+        /** The style property {@code scrollbarTrackColor}. */
         SCROLLBAR_TRACK_COLOR("scrollbarTrackColor", "scrollbar-track-color", ie11up("undefined")),
 
         /** The style property {@code shapeImageThreshold}. */
@@ -1839,7 +1839,7 @@ final class StyleAttributes {
         /** The style property {@code shapeOutside}. */
         SHAPE_OUTSIDE("shapeOutside", "shape-outside", chrome("none")),
 
-        /** The style property shape-rendering. */
+        /** The style property {@code shapeRendering}. */
         SHAPE_RENDERING("shapeRendering", "shape-rendering", ff("auto"), chrome("auto")),
 
         /** The style property {@code shape-rendering}. */
@@ -1848,85 +1848,85 @@ final class StyleAttributes {
         /** The style property {@code size}. */
         SIZE("size", "size", chrome("")),
 
-        /** The style property speak. */
+        /** The style property {@code speak}. */
         SPEAK("speak", "speak", chrome("normal")),
 
-        /** The style property speak. */
+        /** The style property {@code speakHeader}. */
         SPEAK_HEADER("speakHeader", "speak-header"),
 
-        /** The style property speak-numeral. */
+        /** The style property {@code speakNumeral}. */
         SPEAK_NUMERAL("speakNumeral", "speak-numeral"),
 
-        /** The style property speak-punktuation. */
+        /** The style property {@code speakPunctuation}. */
         SPEAK_PUNCTUATION("speakPunctuation", "speak-punctuation"),
 
-        /** The style property speech-rate. */
+        /** The style property {@code speechRate}. */
         SPEECH_RATE("speechRate", "speech-rate"),
 
         /** The style property {@code src}. */
         SRC("src", "src", chrome("")),
 
-        /** The style property stop-color. */
+        /** The style property {@code stopColor}. */
         STOP_COLOR("stopColor", "stop-color", ff("rgb(0, 0, 0)"), ie11up(""), chrome("rgb(0, 0, 0)")),
 
         /** The style property {@code stop-color}. */
         STOP_COLOR_("stop-color", "stop-color", ff38up("rgb(0, 0, 0)")),
 
-        /** The style property stop-opacity. */
+        /** The style property {@code stopOpacity}. */
         STOP_OPACITY("stopOpacity", "stop-opacity", ff("1"), ie11up("1"), chrome("1")),
 
         /** The style property {@code stop-opacity}. */
         STOP_OPACITY_("stop-opacity", "stop-opacity", ff38up("1")),
 
-        /** The style property stress. */
+        /** The style property {@code stress}. */
         STRESS("stress", "stress"),
 
-        /** The style property stroke. */
+        /** The style property {@code stroke}. */
         STROKE("stroke", "stroke", ff("none"), ie11up(""), chrome("none")),
 
-        /** The style property stroke-dasharray. */
+        /** The style property {@code strokeDasharray}. */
         STROKE_DASHARRAY("strokeDasharray", "stroke-dasharray", ff("none"), ie11up("none"), chrome("none")),
 
         /** The style property {@code stroke-dasharray}. */
         STROKE_DASHARRAY_("stroke-dasharray", "stroke-dasharray", ff38up("none")),
 
-        /** The style property stroke-dashoffset. */
+        /** The style property {@code strokeDashoffset}. */
         STROKE_DASHOFFSET("strokeDashoffset", "stroke-dashoffset", ff("0px"), ie11up("0px"), chrome("0px")),
 
         /** The style property {@code stroke-dashoffset}. */
         STROKE_DASHOFFSET_("stroke-dashoffset", "stroke-dashoffset", ff38up("0px")),
 
-        /** The style property stroke-linecap. */
+        /** The style property {@code strokeLinecap}. */
         STROKE_LINECAP("strokeLinecap", "stroke-linecap", ff("butt"), ie11up("butt"), chrome("butt")),
 
         /** The style property {@code stroke-linecap}. */
         STROKE_LINECAP_("stroke-linecap", "stroke-linecap", ff38up("butt")),
 
-        /** The style property stroke-linejoin. */
+        /** The style property {@code strokeLinejoin}. */
         STROKE_LINEJOIN("strokeLinejoin", "stroke-linejoin", ff("miter"), ie11up("miter"), chrome("miter")),
 
         /** The style property {@code stroke-linejoin}. */
         STROKE_LINEJOIN_("stroke-linejoin", "stroke-linejoin", ff38up("miter")),
 
-        /** The style property stroke-miterlimit. */
+        /** The style property {@code strokeMiterlimit}. */
         STROKE_MITERLIMIT("strokeMiterlimit", "stroke-miterlimit", ff("4"), ie11up("4"), chrome("4")),
 
         /** The style property {@code stroke-miterlimit}. */
         STROKE_MITERLIMIT_("stroke-miterlimit", "stroke-miterlimit", ff38up("4")),
 
-        /** The style property stroke-opacity. */
+        /** The style property {@code strokeOpacity}. */
         STROKE_OPACITY("strokeOpacity", "stroke-opacity", ff("1"), ie11up("1"), chrome("1")),
 
         /** The style property {@code stroke-opacity}. */
         STROKE_OPACITY_("stroke-opacity", "stroke-opacity", ff38up("1")),
 
-        /** The style property stroke-width. */
+        /** The style property {@code strokeWidth}. */
         STROKE_WIDTH("strokeWidth", "stroke-width", ff("1px"), ie11up("0.01px"), chrome("1px")),
 
         /** The style property {@code stroke-width}. */
         STROKE_WIDTH_("stroke-width", "stroke-width", ff38up("1px")),
 
-        /** The style property style-float. */
+        /** The style property {@code styleFloat}. */
         STYLE_FLOAT("styleFloat", "style-float", ie11up("undefined")),
 
         /** The style property {@code tabSize}. */
@@ -1938,22 +1938,22 @@ final class StyleAttributes {
         /** The style property {@code table-layout}. */
         TABLE_LAYOUT_("table-layout", "table-layout", ff38up("auto")),
 
-        /** The style property text-align. */
+        /** The style property {@code textAlign}. */
         TEXT_ALIGN("textAlign", "text-align", ie11up("left"), chrome("start"), ff("start")),
 
         /** The style property {@code text-align}. */
         TEXT_ALIGN_("text-align", "text-align", ff38up("start")),
 
-        /** The style property text-align-last. */
+        /** The style property {@code textAlignLast}. */
         TEXT_ALIGN_LAST("textAlignLast", "text-align-last", ie11up("auto")),
 
-        /** The style property text-anchor. */
+        /** The style property {@code textAnchor}. */
         TEXT_ANCHOR("textAnchor", "text-anchor", ff("start"), ie11up("start"), chrome("start")),
 
         /** The style property {@code text-anchor}. */
         TEXT_ANCHOR_("text-anchor", "text-anchor", ff38up("start")),
 
-        /** The style property text-autospace. */
+        /** The style property {@code textAutospace}. */
         TEXT_AUTOSPACE("textAutospace", "text-autospace", ie11up("undefined")),
 
         /** The style property {@code textDecoration}. */
@@ -1962,19 +1962,19 @@ final class StyleAttributes {
         /** The style property {@code text-decoration}. */
         TEXT_DECORATION_("text-decoration", "text-decoration", ff38up("none")),
 
-        /** The style property text-decoration-color. */
+        /** The style property {@code textDecorationColor}. */
         TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color", ff38up("rgb(0, 0, 0)")),
 
         /** The style property {@code text-decoration-color}. */
         TEXT_DECORATION_COLOR_("text-decoration-color", "text-decoration-color", ff38up("rgb(0, 0, 0)")),
 
-        /** The style property text-decoration-line. */
+        /** The style property {@code textDecorationLine}. */
         TEXT_DECORATION_LINE("textDecorationLine", "text-decoration-line", ff38up("none")),
 
         /** The style property {@code text-decoration-line}. */
         TEXT_DECORATION_LINE_("text-decoration-line", "text-decoration-line", ff38up("none")),
 
-        /** The style property text-decoration-style. */
+        /** The style property {@code textDecorationStyle}. */
         TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", ff38up("solid")),
 
         /** The style property {@code text-decoration-style}. */
@@ -1986,25 +1986,25 @@ final class StyleAttributes {
         /** The style property {@code text-indent}. */
         TEXT_INDENT_("text-indent", "text-indent", ff38up("0px")),
 
-        /** The style property text-justify. */
+        /** The style property {@code textJustify}. */
         TEXT_JUSTIFY("textJustify", "text-justify", ie11up("auto")),
 
-        /** The style property text-justify-trim. */
+        /** The style property {@code textJustifyTrim}. */
         TEXT_JUSTIFY_TRIM("textJustifyTrim", "text-justify-trim", ie11up("undefined")),
 
-        /** The style property text-kashida. */
+        /** The style property {@code textKashida}. */
         TEXT_KASHIDA("textKashida", "text-kashida", ie11up("undefined")),
 
-        /** The style property text-kashida-space. */
+        /** The style property {@code textKashidaSpace}. */
         TEXT_KASHIDA_SPACE("textKashidaSpace", "text-kashida-space", ie11up("undefined")),
 
-        /** The style property text-overflow. */
+        /** The style property {@code textOverflow}. */
         TEXT_OVERFLOW("textOverflow", "text-overflow", ff("clip"), ie11up("clip"), chrome("clip")),
 
         /** The style property {@code text-overflow}. */
         TEXT_OVERFLOW_("text-overflow", "text-overflow", ff38up("clip")),
 
-        /** The style property text-rendering. */
+        /** The style property {@code textRendering}. */
         TEXT_RENDERING("textRendering", "text-rendering", ff("auto"), chrome("auto")),
 
         /** The style property {@code text-rendering}. */
@@ -2022,53 +2022,53 @@ final class StyleAttributes {
         /** The style property {@code text-transform}. */
         TEXT_TRANSFORM_("text-transform", "text-transform", ff38up("none")),
 
-        /** The style property text-underline-position. */
+        /** The style property {@code textUnderlinePosition}. */
         TEXT_UNDERLINE_POSITION("textUnderlinePosition", "text-underline-position", ie11up("auto")),
 
         /** The style property {@code top}. */
         TOP("top", "top", ff("auto"), ie11up("auto"), chrome("auto")),
 
-        /** The style property touch-action. */
+        /** The style property {@code touchAction}. */
         TOUCH_ACTION("touchAction", "touch-action", ie11up("auto"), chrome("auto")),
 
-        /** The style property transform. */
+        /** The style property {@code transform}. */
         TRANSFORM("transform", "transform", ff("none"), ie11up("none"), chrome("none")),
 
-        /** The style property transform-origin. */
+        /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
                 ff("621px 172.5px"), ie11up("620px 163.2px"), chrome("620px 161px")),
 
         /** The style property {@code transform-origin}. */
         TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff38up("621px 172.5px")),
 
-        /** The style property transform-style. */
+        /** The style property {@code transformStyle}. */
         TRANSFORM_STYLE("transformStyle", "transform-style", ff("flat"), ie11up("flat"), chrome("flat")),
 
         /** The style property {@code transform-style}. */
         TRANSFORM_STYLE_("transform-style", "transform-style", ff38up("flat")),
 
-        /** The style property transition. */
+        /** The style property {@code transition}. */
         TRANSITION("transition", "transition", ff(""), ie11up(""), chrome("all 0s ease 0s")),
 
-        /** The style property transition-delay. */
+        /** The style property {@code transitionDelay}. */
         TRANSITION_DELAY("transitionDelay", "transition-delay", ff("0s"), ie11up("0s"), chrome("0s")),
 
         /** The style property {@code transition-delay}. */
         TRANSITION_DELAY_("transition-delay", "transition-delay", ff38up("0s")),
 
-        /** The style property transition-duration. */
+        /** The style property {@code transitionDuration}. */
         TRANSITION_DURATION("transitionDuration", "transition-duration", ff("0s"), ie11up("0s"), chrome("0s")),
 
         /** The style property {@code transition-duration}. */
         TRANSITION_DURATION_("transition-duration", "transition-duration", ff38up("0s")),
 
-        /** The style property transition-property. */
+        /** The style property {@code transitionProperty}. */
         TRANSITION_PROPERTY("transitionProperty", "transition-property", ff("all"), ie11up("all"), chrome("all")),
 
         /** The style property {@code transition-property}. */
         TRANSITION_PROPERTY_("transition-property", "transition-property", ff38up("all")),
 
-        /** The style property transition-timing-function. */
+        /** The style property {@code transitionTimingFunction}. */
         TRANSITION_TIMING_FUNCTION("transitionTimingFunction",
                 "transition-timing-function",
                 ff("cubic-bezier(0.25, 0.1, 0.25, 1)"),
@@ -2078,7 +2078,7 @@ final class StyleAttributes {
         TRANSITION_TIMING_FUNCTION_("transition-timing-function", "transition-timing-function",
                 ff38up("cubic-bezier(0.25, 0.1, 0.25, 1)")),
 
-        /** The style property unicode-bidi. */
+        /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",
                 ff("-moz-isolate"), ieBelow11("embed"), ie11up("normal"), chrome("normal")),
 
@@ -2091,7 +2091,7 @@ final class StyleAttributes {
         /** The style property {@code userZoom}. */
         USER_ZOOM("userZoom", "user-zoom", chrome("")),
 
-        /** The style property vector-effect. */
+        /** The style property {@code vectorEffect}. */
         VECTOR_EFFECT("vectorEffect", "vector-effect", ff("none"), chrome("none")),
 
         /** The style property {@code vector-effect}. */
@@ -2106,10 +2106,10 @@ final class StyleAttributes {
         /** The style property {@code visibility}. */
         VISIBILITY("visibility", "visibility", chrome("visible")),
 
-        /** The style property "voice-family". */
+        /** The style property {@code voiceFamily}. */
         VOICE_FAMILY("voiceFamily", "voice-family"),
 
-        /** The style property volume. */
+        /** The style property {@code volume}. */
         VOLUME("volume", "volume"),
 
         /** The style property {@code webkitAppRegion}. */
@@ -2480,19 +2480,19 @@ final class StyleAttributes {
         /** The style property {@code white-space}. */
         WHITE_SPACE_("white-space", "white-space", ff38up("normal")),
 
-        /** The style property widows. */
+        /** The style property {@code widows}. */
         WIDOWS("widows", "widows", ie11up("2"), chrome("1")),
 
         /** The style property {@code width}. */
         WIDTH("width", "width", chrome("skipped")),
 
-        /** The style property will-change. */
+        /** The style property {@code willChange}. */
         WILL_CHANGE("willChange", "will-change", ff38up("auto"), chrome("auto")),
 
         /** The style property {@code will-change}. */
         WILL_CHANGE_("will-change", "will-change", ff38up("auto")),
 
-        /** The style property word-break. */
+        /** The style property {@code wordBreak}. */
         WORD_BREAK("wordBreak", "word-break", ff("normal"), ieBelow11(""), ie11up("normal"), chrome("normal")),
 
         /** The style property {@code word-break}. */
@@ -2504,13 +2504,13 @@ final class StyleAttributes {
         /** The style property {@code word-spacing}. */
         WORD_SPACING_("word-spacing", "word-spacing", ff38up("0px")),
 
-        /** The style property word-wrap. */
+        /** The style property {@code wordWrap}. */
         WORD_WRAP("wordWrap", "word-wrap", ie11up(""), chrome("normal"), ff("normal")),
 
         /** The style property {@code word-wrap}. */
         WORD_WRAP_("word-wrap", "word-wrap", ff38up("normal")),
 
-        /** The style property writing-mode. */
+        /** The style property {@code writingMode}. */
         WRITING_MODE("writingMode", "writing-mode", ie11up("undefined"), chrome("lr-tb")),
 
         /** The style property {@code x}. */
@@ -2522,7 +2522,7 @@ final class StyleAttributes {
         /** The style property {@code z-index}. */
         Z_INDEX_("z-index", "z-index", ff38up("auto")),
 
-        /** The style property zoom. */
+        /** The style property {@code zoom}. */
         ZOOM("zoom", "zoom", ie11up("undefined"), chrome("1"));
 
         private final String propertyName_;

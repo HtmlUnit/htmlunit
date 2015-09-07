@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for LocalMediaStream.
+ * A JavaScript object for {@code LocalMediaStream}.
  *
  * @author Ahmed Ashour
  */

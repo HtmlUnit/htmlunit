@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * A JavaScript object for a Label.
+ * A JavaScript object for {@code Label}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

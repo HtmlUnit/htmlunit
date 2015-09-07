@@ -27,7 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 
 /**
- * A JavaScript object for Intl.
+ * A JavaScript object for {@code Intl}.
  *
  * @author Ahmed Ashour
  */

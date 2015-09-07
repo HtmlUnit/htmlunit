@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for Position.
+ * A JavaScript object for {@code Position}.
  *
  * @author Ahmed Ashour
  */

@@ -148,7 +148,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
 /**
- * A JavaScript object for a Document.
+ * A JavaScript object for {@code Document}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor

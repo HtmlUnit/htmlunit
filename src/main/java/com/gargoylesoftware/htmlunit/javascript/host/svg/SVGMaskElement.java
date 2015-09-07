@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgMask;
 
 /**
- * A JavaScript object for SVGMaskElement.
+ * A JavaScript object for {@code SVGMaskElement}.
  *
  * @author Ahmed Ashour
  */

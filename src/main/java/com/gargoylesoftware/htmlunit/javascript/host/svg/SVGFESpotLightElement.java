@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeSpotLight;
 
 /**
- * A JavaScript object for SVGFESpotLightElement.
+ * A JavaScript object for {@code SVGFESpotLightElement}.
  *
  * @author Ahmed Ashour
  */

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for SVGTextPositioningElement.
+ * A JavaScript object for {@code SVGTextPositioningElement}.
  *
  * @author Ahmed Ashour
  */

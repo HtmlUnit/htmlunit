@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgSymbol;
 
 /**
- * A JavaScript object for SVGSymbolElement.
+ * A JavaScript object for {@code SVGSymbolElement}.
  *
  * @author Ahmed Ashour
  */

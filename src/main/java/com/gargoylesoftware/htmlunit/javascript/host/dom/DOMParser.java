@@ -29,7 +29,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * A JavaScript object for DOMParser.
+ * A JavaScript object for {@code DOMParser}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

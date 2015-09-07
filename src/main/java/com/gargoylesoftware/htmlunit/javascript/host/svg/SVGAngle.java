@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for SVGAngle.
+ * A JavaScript object for {@code SVGAngle}.
  *
  * @author Marc Guillemot
  */

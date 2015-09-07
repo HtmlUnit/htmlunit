@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for SVGPreserveAspectRatio.
+ * A JavaScript object for {@code SVGPreserveAspectRatio}.
  *
  * @author Ahmed Ashour
  */

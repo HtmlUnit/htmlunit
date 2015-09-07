@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgView;
 
 /**
- * A JavaScript object for SVGViewElement.
+ * A JavaScript object for {@code SVGViewElement}.
  *
  * @author Frank Danek
  */

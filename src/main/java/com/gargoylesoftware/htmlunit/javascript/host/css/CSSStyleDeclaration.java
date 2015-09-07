@@ -91,7 +91,7 @@ import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
 
 /**
- * A JavaScript object for a CSSStyleDeclaration.
+ * A JavaScript object for {@code CSSStyleDeclaration}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

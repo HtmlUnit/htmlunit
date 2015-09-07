@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for a document.navigator.plugins.
+ * A JavaScript object for {@code document.navigator.plugins}.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour

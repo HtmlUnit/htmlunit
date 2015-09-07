@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
- * A JavaScript object for a Location.
+ * A JavaScript object for {@code Location}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Michael Ottati

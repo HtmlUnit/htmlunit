@@ -27,7 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * A JavaScript object for simple array allowing access per key and index (like {@link MimeTypeArray}).
+ * A JavaScript object for {@code SimpleArray} allowing access per key and index (like {@link MimeTypeArray}).
  *
  * @author Marc Guillemot
  *

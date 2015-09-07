@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for SVGRect.
+ * A JavaScript object for {@code SVGRect}.
  *
  * @author Ahmed Ashour
  */

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for SharedWorker.
+ * A JavaScript object for {@code SharedWorker}.
  *
  * @author Ahmed Ashour
  */

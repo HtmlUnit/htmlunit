@@ -39,7 +39,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
- * A JavaScript object for MessagePort.
+ * A JavaScript object for {@code MessagePort}.
  *
  * @author Ahmed Ashour
  */

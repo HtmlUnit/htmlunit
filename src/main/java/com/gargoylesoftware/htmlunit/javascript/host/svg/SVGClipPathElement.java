@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgClipPath;
 
 /**
- * A JavaScript object for SVGClipPathElement.
+ * A JavaScript object for {@code SVGClipPathElement}.
  *
  * @author Ahmed Ashour
  */

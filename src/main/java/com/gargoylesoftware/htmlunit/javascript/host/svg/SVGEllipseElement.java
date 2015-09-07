@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgEllipse;
 
 /**
- * A JavaScript object for SVGEllipseElement.
+ * A JavaScript object for {@code SVGEllipseElement}.
  *
  * @author Ahmed Ashour
  */

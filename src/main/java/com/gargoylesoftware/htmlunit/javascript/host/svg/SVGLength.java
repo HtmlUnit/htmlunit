@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for SVGLength.
+ * A JavaScript object for {@code SVGLength}.
  *
  * @author Ahmed Ashour
  */

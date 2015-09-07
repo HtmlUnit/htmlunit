@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgRadialGradient;
 
 /**
- * A JavaScript object for SVGRadialGradientElement.
+ * A JavaScript object for {@code SVGRadialGradientElement}.
  *
  * @author Ahmed Ashour
  */

@@ -37,7 +37,7 @@ import com.steadystate.css.dom.CSSRuleListImpl;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * A JavaScript object for a CSSRuleList.
+ * A JavaScript object for {@code CSSRuleList}.
  *
  * @author Ahmed Ashour
  */

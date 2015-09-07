@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for SVGAnimatedInteger.
+ * A JavaScript object for {@code SVGAnimatedInteger}.
  *
  * @author Ahmed Ashour
  */

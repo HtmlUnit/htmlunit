@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeConvolveMatrix;
 
 /**
- * A JavaScript object for SVGFEConvolveMatrixElement.
+ * A JavaScript object for {@code SVGFEConvolveMatrixElement}.
  *
  * @author Ahmed Ashour
  */

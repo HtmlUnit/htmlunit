@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
- * A JavaScript object for a CSSImportRule.
+ * A JavaScript object for {@code CSSImportRule}.
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour

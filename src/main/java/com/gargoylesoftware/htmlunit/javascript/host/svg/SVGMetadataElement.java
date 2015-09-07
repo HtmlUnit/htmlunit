@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgMetadata;
 
 /**
- * A JavaScript object for SVGMetadataElement.
+ * A JavaScript object for {@code SVGMetadataElement}.
  *
  * @author Ahmed Ashour
  */

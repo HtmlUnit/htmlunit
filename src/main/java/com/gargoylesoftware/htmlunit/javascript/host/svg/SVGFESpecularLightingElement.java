@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeSpecularLighting;
 
 /**
- * A JavaScript object for SVGFESpecularLightingElement.
+ * A JavaScript object for {@code SVGFESpecularLightingElement}.
  *
  * @author Ahmed Ashour
  */

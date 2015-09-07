@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgLine;
 
 /**
- * A JavaScript object for SVGLineElement.
+ * A JavaScript object for {@code SVGLineElement}.
  *
  * @author Ahmed Ashour
  */

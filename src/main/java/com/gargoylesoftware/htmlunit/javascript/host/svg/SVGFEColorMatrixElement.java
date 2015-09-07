@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeColorMatrix;
 
 /**
- * A JavaScript object for SVGFEColorMatrixElement.
+ * A JavaScript object for {@code SVGFEColorMatrixElement}.
  *
  * @author Ahmed Ashour
  */

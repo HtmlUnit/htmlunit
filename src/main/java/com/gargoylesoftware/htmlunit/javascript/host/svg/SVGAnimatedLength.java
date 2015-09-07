@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for SVGAnimatedLength.
+ * A JavaScript object for {@code SVGAnimatedLength}.
  *
  * @author Ahmed Ashour
  */

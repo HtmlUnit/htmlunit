@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgTextPath;
 
 /**
- * A JavaScript object for SVGTextPathElement.
+ * A JavaScript object for {@code SVGTextPathElement}.
  *
  * @author Ahmed Ashour
  */

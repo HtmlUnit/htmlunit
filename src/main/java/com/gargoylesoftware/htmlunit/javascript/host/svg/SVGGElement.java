@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgGroup;
 
 /**
- * A JavaScript object for SVGGElement.
+ * A JavaScript object for {@code SVGGElement}.
  *
  * @author Ahmed Ashour
  */

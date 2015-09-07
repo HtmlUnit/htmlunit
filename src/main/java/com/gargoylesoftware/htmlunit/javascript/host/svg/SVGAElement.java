@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgAnchor;
 
 /**
- * A JavaScript object for SVGAElement.
+ * A JavaScript object for {@code SVGAElement}.
  *
  * @author Ahmed Ashour
  */

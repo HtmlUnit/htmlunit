@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for SVGAnimatedBoolean.
+ * A JavaScript object for {@code SVGAnimatedBoolean}.
  *
  * @author Ahmed Ashour
  */

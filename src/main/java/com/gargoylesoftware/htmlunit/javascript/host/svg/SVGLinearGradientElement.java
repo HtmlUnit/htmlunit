@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgLinearGradient;
 
 /**
- * A JavaScript object for SVGLinearGradientElement.
+ * A JavaScript object for {@code SVGLinearGradientElement}.
  *
  * @author Ahmed Ashour
  */

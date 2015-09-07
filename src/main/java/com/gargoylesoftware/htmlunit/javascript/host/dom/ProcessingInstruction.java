@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for a ProcessingInstruction.
+ * A JavaScript object for {@code ProcessingInstruction}.
  *
  * @author Ahmed Ashour
  */

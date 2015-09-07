@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgMPath;
 
 /**
- * A JavaScript object for SVGMPathElement.
+ * A JavaScript object for {@code SVGMPathElement}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

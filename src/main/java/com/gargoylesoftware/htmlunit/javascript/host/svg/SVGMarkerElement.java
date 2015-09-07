@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgMarker;
 
 /**
- * A JavaScript object for SVGMarkerElement.
+ * A JavaScript object for {@code SVGMarkerElement}.
  *
  * @author Ahmed Ashour
  */

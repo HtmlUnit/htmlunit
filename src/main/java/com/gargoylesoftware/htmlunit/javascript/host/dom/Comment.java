@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for a Comment.
+ * A JavaScript object for {@code Comment}.
  *
  * JavaScript: in IE, Comment is Element, but in FF: Comment is CharacterDataImpl.
  *

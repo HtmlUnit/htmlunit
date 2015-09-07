@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgTSpan;
 
 /**
- * A JavaScript object for SVGTSpanElement.
+ * A JavaScript object for {@code SVGTSpanElement}.
  *
  * @author Ahmed Ashour
  */

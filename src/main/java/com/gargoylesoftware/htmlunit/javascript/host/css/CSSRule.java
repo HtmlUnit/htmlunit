@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for a CSSRule.
+ * A JavaScript object for {@code CSSRule}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

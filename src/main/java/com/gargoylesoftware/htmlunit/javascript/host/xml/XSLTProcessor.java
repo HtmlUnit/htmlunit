@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * A JavaScript object for XSLTProcessor.
+ * A JavaScript object for {@code XSLTProcessor}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

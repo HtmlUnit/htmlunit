@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
- * A JavaScript object for a CSSStyleRule.
+ * A JavaScript object for {@code CSSStyleRule}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot

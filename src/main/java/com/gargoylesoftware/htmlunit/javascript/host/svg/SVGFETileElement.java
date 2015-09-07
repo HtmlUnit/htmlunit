@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeTile;
 
 /**
- * A JavaScript object for SVGFETileElement.
+ * A JavaScript object for {@code SVGFETileElement}.
  *
  * @author Ahmed Ashour
  */

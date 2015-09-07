@@ -32,7 +32,7 @@ import com.steadystate.css.dom.MediaListImpl;
 import com.steadystate.css.parser.media.MediaQuery;
 
 /**
- * A JavaScript object for a MediaList.
+ * A JavaScript object for {@code MediaList}.
  *
  * @author Daniel Gredler
  * @author Ronald Brill

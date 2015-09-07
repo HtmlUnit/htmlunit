@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgFeGaussianBlur;
 
 /**
- * A JavaScript object for SVGFEGaussianBlurElement.
+ * A JavaScript object for {@code SVGFEGaussianBlurElement}.
  *
  * @author Ahmed Ashour
  */

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A dummy implementation of a JavaScript object for External.
+ * A JavaScript object for {@code External}. 
  *
  * @author Peter Faller
  * @author Ronald Brill
