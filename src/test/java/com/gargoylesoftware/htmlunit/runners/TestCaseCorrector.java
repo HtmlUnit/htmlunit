@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -46,7 +47,7 @@ final class TestCaseCorrector {
     static void correct(final FrameworkMethod method, final boolean realBrowser, final BrowserVersion browserVersion,
             final boolean notYetImplemented, final Throwable t) throws IOException {
         final String testRoot = "src/test/java/";
-        final String browserString = browserVersion.getNickname().toUpperCase();
+        final String browserString = browserVersion.getNickname().toUpperCase(Locale.ROOT);
         final File file = new File(testRoot + method.getDeclaringClass().getName().replace('.', '/') + ".java");
         final List<String> lines = FileUtils.readLines(file);
         final String methodLine = "    public void " + method.getName() + "()";

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1154,7 +1155,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(html, 200, "ok", contentType);
         final HtmlPage page = client.getPage(getDefaultUrl());
 
-        final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset).toUpperCase();
+        final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset).toUpperCase(Locale.ROOT);
         assertEquals(firstPageEncoding, page.getPageEncoding());
 
         final HtmlForm form = page.getFormByName("form1");

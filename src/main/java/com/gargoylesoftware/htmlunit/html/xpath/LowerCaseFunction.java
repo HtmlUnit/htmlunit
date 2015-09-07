@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
+import java.util.Locale;
+
 import javax.xml.transform.TransformerException;
 
 import org.apache.xpath.XPathContext;
@@ -35,6 +37,6 @@ public class LowerCaseFunction extends FunctionDef1Arg {
      */
     @Override
     public XObject execute(final XPathContext xctxt) throws TransformerException {
-        return new XString(((XString) getArg0AsString(xctxt)).str().toLowerCase());
+        return new XString(((XString) getArg0AsString(xctxt)).str().toLowerCase(Locale.ROOT));
     }
 }

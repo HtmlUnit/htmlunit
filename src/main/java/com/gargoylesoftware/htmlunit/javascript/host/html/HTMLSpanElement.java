@@ -19,6 +19,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.Locale;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBaseFont;
@@ -30,8 +34,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object "HTMLSpanElement".
@@ -68,7 +70,7 @@ public class HTMLSpanElement extends HTMLElement {
         super.setDomNode(domNode);
         final BrowserVersion browser = getBrowserVersion();
         if (browser.hasFeature(HTMLBASEFONT_END_TAG_FORBIDDEN)) {
-            switch (domNode.getLocalName().toLowerCase()) {
+            switch (domNode.getLocalName().toLowerCase(Locale.ROOT)) {
                 case "basefont":
                 case "keygen":
                     endTagForbidden_ = true;

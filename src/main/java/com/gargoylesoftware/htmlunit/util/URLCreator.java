@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.util;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLStreamHandler;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -64,7 +65,8 @@ abstract class URLCreator {
 
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
-            final String protocol = org.apache.commons.lang3.StringUtils.substringBefore(url, ":").toLowerCase();
+            final String protocol = org.apache.commons.lang3.StringUtils.substringBefore(url, ":")
+                    .toLowerCase(Locale.ROOT);
 
             if (protocol.isEmpty() || UrlUtils.isNormalUrlProtocol(protocol)) {
                 return toNormalUrl(url);

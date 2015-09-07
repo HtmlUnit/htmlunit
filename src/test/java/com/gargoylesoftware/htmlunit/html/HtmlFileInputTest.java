@@ -28,6 +28,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -477,7 +478,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
                         if ("myInput".equals(item.getFieldName())) {
                             final String path = item.getName();
                             for (final char ch : path.toCharArray()) {
-                                writer.write(Integer.toHexString(ch).toUpperCase() + " ");
+                                writer.write(Integer.toHexString(ch).toUpperCase(Locale.ROOT) + " ");
                             }
                             writer.write("<br>");
                             writer.write(item.getFieldName());

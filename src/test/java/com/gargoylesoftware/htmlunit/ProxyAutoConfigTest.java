@@ -16,10 +16,11 @@ package com.gargoylesoftware.htmlunit;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import org.junit.Test;
+import java.util.Locale;
 
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
+import org.junit.Test;
 
 /**
  * Tests for the {@link ProxyAutoConfig}.
@@ -43,11 +44,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void weekdayRange() {
         final Calendar calendar = Calendar.getInstance();
-        final String today = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase();
+        final String today = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ROOT);
         calendar.add(Calendar.DAY_OF_MONTH, 1);
-        final String tomorrow = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase();
+        final String tomorrow = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ROOT);
         calendar.add(Calendar.DAY_OF_MONTH, -2);
-        final String yesterday = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase();
+        final String yesterday = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ROOT);
         assertTrue(ProxyAutoConfig.weekdayRange(today, Undefined.instance, Undefined.instance));
         assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, Undefined.instance));
         assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, Undefined.instance));

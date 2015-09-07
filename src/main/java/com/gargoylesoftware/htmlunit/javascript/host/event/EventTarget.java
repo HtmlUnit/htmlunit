@@ -298,7 +298,8 @@ public class EventTarget extends SimpleScriptable {
      * @param value the property ({@code null} to reset it)
      */
     protected void setEventHandlerProp(final String eventName, final Object value) {
-        getEventListenersContainer().setEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2), value);
+        getEventListenersContainer().setEventHandlerProp(
+                StringUtils.substring(eventName.toLowerCase(Locale.ROOT), 2), value);
     }
 
     /**

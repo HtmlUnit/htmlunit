@@ -759,7 +759,7 @@ public class XMLHttpRequest extends EventTarget {
                     webResponse_ = webResponse;
                 }
                 else {
-                    final int index = overriddenMimeType_.toLowerCase().indexOf("charset=");
+                    final int index = overriddenMimeType_.toLowerCase(Locale.ROOT).indexOf("charset=");
                     String charsetString = "";
                     if (index != -1) {
                         charsetString = overriddenMimeType_.substring(index + "charset=".length());
