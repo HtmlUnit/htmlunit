@@ -75,6 +75,11 @@
     </module>
 
     <module name="RegexpSingleline">
+        <property name="format" value="\{ &quot;&quot; \}"/>
+        <property name="message" value="No need for the curly brackets"/>
+    </module>
+
+    <module name="RegexpSingleline">
         <property name="format" value="@version"/>
     </module>
 

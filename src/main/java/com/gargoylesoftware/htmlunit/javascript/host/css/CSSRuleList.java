@@ -71,7 +71,7 @@ public class CSSRuleList extends SimpleScriptable {
 
         if (!getBrowserVersion().hasFeature(JS_CSSRULELIST_CHARSET_RULE) && rules_ instanceof CSSRuleListImpl) {
             final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) rules_).getRules();
-            for (Iterator<org.w3c.dom.css.CSSRule> it = rules.iterator(); it.hasNext(); ) {
+            for (Iterator<org.w3c.dom.css.CSSRule> it = rules.iterator(); it.hasNext();) {
                 if (it.next() instanceof org.w3c.dom.css.CSSCharsetRule) {
                     it.remove();
                 }

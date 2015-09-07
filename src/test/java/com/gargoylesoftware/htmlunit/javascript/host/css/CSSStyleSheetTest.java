@@ -140,7 +140,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "false", "false", "0", "2", "p" },
             FF = { "1", "false", "true", "0", "2", "p" },
-            IE8 = { "1", "true", "false", "-1", "2", "DIV" })
+            IE8 = { "1", "true", "false", "-1", "2", "DIV" },
+            CHROME = { "" })
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -169,10 +170,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "2", "false", "true", "undefined", "1", "div" },
-            IE = { "2", "true", "false", "undefined", "1", "DIV" },
-            IE11 = { "2", "false", "false", "undefined", "1", "div" },
-            CHROME = { "2", "false", "false", "undefined", "1", "div" })
+    @Alerts(DEFAULT = { "2", "false", "false", "undefined", "1", "div" },
+            FF = { "2", "false", "true", "undefined", "1", "div" },
+            IE8 = { "2", "true", "false", "undefined", "1", "DIV" })
     public void removeRule_deleteRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
