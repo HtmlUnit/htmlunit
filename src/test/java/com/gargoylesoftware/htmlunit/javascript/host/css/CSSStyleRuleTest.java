@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -175,11 +173,10 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" },
-            CHROME = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byid" },
-            FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
-            IE8 = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" })
-    @NotYetImplemented({ FF, CHROME })
+    @Alerts(DEFAULT = { "body", "h1", "a.foo", ".foo", ".foo .foo2", ".myFoo", "#byId" },
+            CHROME = { "body", "h1", "a.foo", ".foo", ".foo .foo2", ".myfoo", "#byid" },
+            FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId" },
+            IE8 = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId" })
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -188,13 +185,14 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  A.foo  { color: blue; }\n"
                 + "  .foo  { color: blue; }\n"
                 + "  .foo .foo2 { font: 8pt; }\n"
+                + "  .myFoo { font: 10pt; }\n"
                 + "  #byId { font: 8pt; }\n"
                 + "</style>\n"
                 + "<script>\n"
                 + "  function test(){\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
-                + "    for (var i=0; i<rules.length; ++i)\n"
+                + "    for (var i = 0; i < rules.length; i++)\n"
                 + "      alert(rules[i].selectorText);\n"
                 + "  }\n"
                 + "</script>\n"

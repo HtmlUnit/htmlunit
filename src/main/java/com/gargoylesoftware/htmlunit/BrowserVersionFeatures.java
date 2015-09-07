@@ -1680,8 +1680,16 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SELECTION_ONLY_ONE_PER_PAGE,
 
-    /** Javascript selectorText property returns selectors in uppercase. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8) })
+    /** Javascript selectorText property returns ID selectors in lower case. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_SELECTOR_ID_LOWERCASE,
+
+    /** Javascript selectorText property returns selectors in lower case. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    JS_SELECTOR_TEXT_LOWERCASE,
+
+    /** Javascript selectorText property returns selectors in upper case. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SELECTOR_TEXT_UPPERCASE,
 
     /** Indicates if calling HTMLSelectElement.add the second parameter

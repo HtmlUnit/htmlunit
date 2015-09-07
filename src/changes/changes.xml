@@ -9,6 +9,9 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: fix CSSStyleRule.selectorText.
+            </action>
+            <action type="fix" dev="asashour">
                 CSS: only FF supports CSSCharsetRule.
             </action>
             <action type="fix" dev="rbri">

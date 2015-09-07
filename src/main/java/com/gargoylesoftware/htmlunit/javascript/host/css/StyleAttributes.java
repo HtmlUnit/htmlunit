@@ -55,6 +55,12 @@ final class StyleAttributes {
         if (browserVersion == null) {
             return null;
         }
+
+        if (styles_.isEmpty()) {
+            // initialize the enumeration
+            Definition.values();
+        }
+
         final Definition definition = styles_.get(propertyName);
         if (definition == null) {
             return null;
@@ -82,8 +88,7 @@ final class StyleAttributes {
     }
 
     /**
-     * Holds information about a style attribute (CSS name, property name, browser availability,
-     * default computed value.
+     * Holds information about a style attribute (CSS name, property name, browser availability, default computed value.
      * TODO: move all (?) style attribute definitions here.
      */
     public static enum Definition {

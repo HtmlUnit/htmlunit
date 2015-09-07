@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_ID_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_TEXT_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_TEXT_UPPERCASE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -23,6 +25,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -74,12 +77,15 @@ public class CSSStyleRule extends CSSRule {
             String fixedName = m.group();
             // this should be handled with the right regex but...
             if (!fixedName.isEmpty() && ('.' == fixedName.charAt(0)) || ('#' == fixedName.charAt(0))) {
-                // nothing
+                if (getBrowserVersion().hasFeature(JS_SELECTOR_ID_LOWERCASE)
+                        && ((HtmlPage) getWindow().getWebWindow().getEnclosedPage()).isQuirksMode()) {
+                    fixedName = fixedName.toLowerCase(Locale.ENGLISH);
+                }
             }
             else if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_UPPERCASE)) {
                 fixedName = fixedName.toUpperCase(Locale.ENGLISH);
             }
-            else {
+            else if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_LOWERCASE)) {
                 fixedName = fixedName.toLowerCase(Locale.ENGLISH);
             }
             fixedName = StringUtils.sanitizeForAppendReplacement(fixedName);
