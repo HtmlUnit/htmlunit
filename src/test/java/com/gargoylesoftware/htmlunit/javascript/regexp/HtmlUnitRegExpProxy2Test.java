@@ -52,7 +52,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     private static final String scriptTestMatch_ = "function arrayToString(_arr) {\n"
             + "  if (_arr == null) return null;\n"
             + "  var s = '[';\n"
-            + "  for (var i=0; i<_arr.length; ++i)\n"
+            + "  for (var i = 0; i < _arr.length; i++)\n"
             + "  {\n"
             + "    if (i != 0) s += ', '\n"
             + "    s += _arr[i];\n"

@@ -277,7 +277,7 @@ public final class XmlUtil {
     private static Attributes namedNodeMapToSaxAttributes(final NamedNodeMap attributesMap) {
         final AttributesImpl attributes = new AttributesImpl();
         final int length = attributesMap.getLength();
-        for (int i = 0; i < length; ++i) {
+        for (int i = 0; i < length; i++) {
             final Node attr = attributesMap.item(i);
             attributes.addAttribute(attr.getNamespaceURI(), attr.getLocalName(),
                 attr.getNodeName(), null, attr.getNodeValue());

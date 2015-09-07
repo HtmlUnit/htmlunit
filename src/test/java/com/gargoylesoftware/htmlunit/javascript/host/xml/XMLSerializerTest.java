@@ -205,7 +205,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
               "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
             + "    var xml = " + XMLDocumentTest.callSerializeXMLDocumentToString("doc") + ";\n"
             + "    var ta = document.getElementById('myTextArea');\n"
-            + "    for (var i=0; i < xml.length; i++) {\n"
+            + "    for (var i = 0; i < xml.length; i++) {\n"
             + "      if (xml.charCodeAt(i) < 33)\n"
             + "        ta.value += xml.charCodeAt(i);\n"
             + "      else\n"

@@ -149,7 +149,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 }
             }
             else {
-                for (int i = 0; i <= matcher.groupCount(); ++i) {
+                for (int i = 0; i <= matcher.groupCount(); i++) {
                     Object group = matcher.group(i);
                     if (group == null) {
                         group = Context.getUndefinedValue();

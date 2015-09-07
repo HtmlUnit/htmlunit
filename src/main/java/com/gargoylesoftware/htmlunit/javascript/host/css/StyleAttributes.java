@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff31up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff38up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow31;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow38;
@@ -42,6 +41,11 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 final class StyleAttributes {
     private static final Map<String, Definition> styles_ = new HashMap<>();
 
+    static {
+        // initialize the enumeration
+        Definition.values();
+    }
+
     private StyleAttributes() {
         // nothing
     }
@@ -54,11 +58,6 @@ final class StyleAttributes {
     public static Definition getDefinition(final String propertyName, final BrowserVersion browserVersion) {
         if (browserVersion == null) {
             return null;
-        }
-
-        if (styles_.isEmpty()) {
-            // initialize the enumeration
-            Definition.values();
         }
 
         final Definition definition = styles_.get(propertyName);
@@ -96,7 +95,7 @@ final class StyleAttributes {
         ACCELERATOR("accelerator", "accelerator", ie11up("undefined")),
 
         /** The style property alignment-content. */
-        ALIGN_CONTENT("alignContent", "align-content", ie11up("stretch"), ff31up("stretch"), chrome("start")),
+        ALIGN_CONTENT("alignContent", "align-content", ie11up("stretch"), ff("stretch"), chrome("start")),
 
         /** The style property {@code align-content}. */
         ALIGN_CONTENT_("align-content", "align-content", ff38up("stretch")),
@@ -117,7 +116,7 @@ final class StyleAttributes {
         ALIGNMENT_BASELINE("alignmentBaseline", "alignment-baseline", ie11up("auto"), chrome("auto")),
 
         /** The style property all. */
-        ALL("all", "all", ff31up(""), chrome("")),
+        ALL("all", "all", ff(""), chrome("")),
 
         /** The style property animation. */
         ANIMATION("animation", "animation", ff(""), ie11up(""), chrome("none 0s ease 0s 1 normal none running")),
@@ -199,7 +198,7 @@ final class StyleAttributes {
         BACKGROUND_ATTACHMENT_("background-attachment", "background-attachment", ff38up("scroll")),
 
         /** The style property background-blend-mode. */
-        BACKGROUND_BLEND_MODE("backgroundBlendMode", "background-blend-mode", ff31up("normal"), chrome("normal")),
+        BACKGROUND_BLEND_MODE("backgroundBlendMode", "background-blend-mode", ff("normal"), chrome("normal")),
 
         /** The style property {@code background-blend-mode}. */
         BACKGROUND_BLEND_MODE_("background-blend-mode", "background-blend-mode", ff38up("normal")),
@@ -487,7 +486,7 @@ final class StyleAttributes {
         BOX_SHADOW_("box-shadow", "box-shadow", ff38up("none")),
 
         /** The style property box-sizing. */
-        BOX_SIZING("boxSizing", "box-sizing", ff31up("content-box"), ie11up("content-box"), chrome("content-box")),
+        BOX_SIZING("boxSizing", "box-sizing", ff("content-box"), ie11up("content-box"), chrome("content-box")),
 
         /** The style property {@code box-sizing}. */
         BOX_SIZING_("box-sizing", "box-sizing", ff38up("content-box")),
@@ -676,7 +675,7 @@ final class StyleAttributes {
         FLEX_DIRECTION_("flex-direction", "flex-direction", ff38up("row")),
 
         /** The style property flex-flow. */
-        FLEX_FLOW("flexFlow", "flex-flow", ff31up(""), ie11up("row nowrap"), chrome("row nowrap")),
+        FLEX_FLOW("flexFlow", "flex-flow", ff(""), ie11up("row nowrap"), chrome("row nowrap")),
 
         /** The style property {@code flex-flow}. */
         FLEX_FLOW_("flex-flow", "flex-flow", ff38up("")),
@@ -694,7 +693,7 @@ final class StyleAttributes {
         FLEX_SHRINK_("flex-shrink", "flex-shrink", ff38up("1")),
 
         /** The style property {@code flexWrap}. */
-        FLEX_WRAP("flexWrap", "flex-wrap", ff31up("nowrap"), ie11up("nowrap"), chrome("nowrap")),
+        FLEX_WRAP("flexWrap", "flex-wrap", ff("nowrap"), ie11up("nowrap"), chrome("nowrap")),
 
         /** The style property {@code flex-wrap}. */
         FLEX_WRAP_("flex-wrap", "flex-wrap", ff38up("nowrap")),
@@ -828,7 +827,7 @@ final class StyleAttributes {
         HEIGHT("height", "height", chrome("skipped")),
 
         /** The style property image-orientation. */
-        IMAGE_ORIENTATION("imageOrientation", "image-orientation", ff31up("0deg")),
+        IMAGE_ORIENTATION("imageOrientation", "image-orientation", ff("0deg")),
 
         /** The style property {@code image-orientation}. */
         IMAGE_ORIENTATION_("image-orientation", "image-orientation", ff38up("0deg")),
@@ -1726,7 +1725,7 @@ final class StyleAttributes {
         PAGE_BREAK_INSIDE_("page-break-inside", "page-break-inside", ff38up("auto")),
 
         /** The style property paint-order. */
-        PAINT_ORDER("paintOrder", "paint-order", ff31up("normal"), chrome("fill stroke markers")),
+        PAINT_ORDER("paintOrder", "paint-order", ff("normal"), chrome("fill stroke markers")),
 
         /** The style property {@code paint-order}. */
         PAINT_ORDER_("paint-order", "paint-order", ff38up("normal")),

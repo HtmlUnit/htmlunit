@@ -45,8 +45,8 @@ public class HTMLHeadingElementTest extends WebDriverTestCase {
             + "  <h2 id='h6' ></h2>\n"
 
             + "<script>\n"
-            + "  for (i=1; i<=6; i++) {\n"
-            + "    alert(document.getElementById('h'+i).align);\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('h' + i).align);\n"
             + "  };\n"
             + "</script>\n"
             + "</body></html>";

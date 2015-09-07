@@ -188,7 +188,7 @@ public class WebClient4Test extends WebServerTestCase {
         }
 
         private void writeSomeContent(final Writer writer) throws IOException {
-            for (int i = 0; i < 1000; ++i) {
+            for (int i = 0; i < 1000; i++) {
                 writer.append((char) ('a' + (i % 26)));
             }
         }

@@ -64,7 +64,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "<script>\n"
             + "function alertFields(m) {\n"
             + "  var fields = ['a', 'b', 'c', 'd', 'e', 'f'];\n"
-            + "  for (var i=0; i<fields.length; ++i) {\n"
+            + "  for (var i = 0; i < fields.length; i++) {\n"
             + "    fields[i] = m[fields[i]];\n"
             + "  }\n"
             + "  alert(fields.join(', '));\n"

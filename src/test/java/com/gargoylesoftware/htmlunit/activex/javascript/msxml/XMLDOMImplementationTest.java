@@ -394,7 +394,7 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var feature = '" + feature + "';\n"
             + "    var versions = " + versions + ";\n"
-            + "    for (var j=0; j<versions.length; ++j) {\n"
+            + "    for (var j = 0; j < versions.length; j++) {\n"
             + "      var version = versions[j];\n"
             + "      alert(feature + ' ' + version + ': ' + doc.implementation.hasFeature(feature, version));\n"
             + "    }\n"

@@ -107,7 +107,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "        'shiftKey', 'metaKey', 'keyCode', 'charCode'];\n"
             + "  function dumpEvent(e) {\n"
             + "    var str = '';\n"
-            + "    for (var i=0; i<properties.length; ++i) str += ', ' + e[properties[i]];\n"
+            + "    for (var i = 0; i < properties.length; i++) str += ', ' + e[properties[i]];\n"
             + "    alert(str.substring(2));\n"
             + "  }\n"
             + "  function test() {\n"

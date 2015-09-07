@@ -241,7 +241,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             return false;
         }
 
-        for (int i = 0; i < lookFor.length; ++i) {
+        for (int i = 0; i < lookFor.length; i++) {
             if (bytes[i] != lookFor[i]) {
                 return false;
             }

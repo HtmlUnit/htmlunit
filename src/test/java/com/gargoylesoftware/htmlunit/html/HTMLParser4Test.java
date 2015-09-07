@@ -99,7 +99,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @NotYetImplemented(IE8)
     public void badlyFormedHTML_scriptBeforeHead() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<script>var i=7;</script>\n"
+            + "<script>var i = 7;</script>\n"
             + "<html>\n"
             + "  <head>\n"
             + "     <title>first</title>\n"
@@ -128,7 +128,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             IE8 = { "3", "[object]", "[object]", "[object]", "undefined" })
     @NotYetImplemented(IE8)
     public void badlyFormedHTML_scriptBeforeDoctype() throws Exception {
-        final String html = "<script>var i=7;</script>\n"
+        final String html = "<script>var i = 7;</script>\n"
             + HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
@@ -175,7 +175,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "  </head>\n"
             + "  <body onload='test()'><p>HtmlUnit</p></body>\n"
             + "</html>"
-            + "<script>var i=7;</script>\n";
+            + "<script>var i = 7;</script>\n";
 
         loadPageWithAlerts2(html);
     }
@@ -331,13 +331,13 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "        function test() {\n"
             + "            alert('titles');\n"
             + "            var titles = document.getElementsByTagName('title');\n"
-            + "            for(var i=0; i < titles.length; ++i) {\n"
+            + "            for(var i = 0; i < titles.length; i++) {\n"
             + "                alert(titles[i].parentNode.nodeName);\n"
             + "                alert(titles[i].text);\n"
             + "            }\n"
             + "            alert('bodyTitles');\n"
             + "            var bodyTitles = document.body.getElementsByTagName('title');\n"
-            + "            for(var i=0; i < bodyTitles.length; ++i) {\n"
+            + "            for(var i = 0; i < bodyTitles.length; i++) {\n"
             + "                alert(bodyTitles[i].parentNode.nodeName);\n"
             + "                alert(bodyTitles[i].text);\n"
             + "            }\n"
@@ -393,13 +393,13 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "        function test() {\n"
             + "            alert('titles');\n"
             + "            var titles = document.getElementsByTagName('title');\n"
-            + "            for(var i=0; i < titles.length; ++i) {\n"
+            + "            for(var i = 0; i < titles.length; i++) {\n"
             + "                alert(titles[i].parentNode.nodeName);\n"
             + "                alert(titles[i].text);\n"
             + "            }\n"
             + "            alert('bodyTitles');\n"
             + "            var bodyTitles = document.body.getElementsByTagName('title');\n"
-            + "            for(var i=0; i < bodyTitles.length; ++i) {\n"
+            + "            for(var i = 0; i < bodyTitles.length; i++) {\n"
             + "                alert(bodyTitles[i].parentNode.nodeName);\n"
             + "                alert(bodyTitles[i].text);\n"
             + "            }\n"
@@ -447,13 +447,13 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "        function test() {\n"
             + "            alert('titles');\n"
             + "            var titles = document.getElementsByTagName('title');\n"
-            + "            for(var i=0; i < titles.length; ++i) {\n"
+            + "            for(var i = 0; i < titles.length; i++) {\n"
             + "                alert(titles[i].parentNode.nodeName);\n"
             + "                alert(titles[i].text);\n"
             + "            }\n"
             + "            alert('bodyTitles');\n"
             + "            var bodyTitles = document.body.getElementsByTagName('title');\n"
-            + "            for(var i=0; i < bodyTitles.length; ++i) {\n"
+            + "            for(var i = 0; i < bodyTitles.length; i++) {\n"
             + "                alert(bodyTitles[i].parentNode.nodeName);\n"
             + "                alert(bodyTitles[i].text);\n"
             + "            }\n"
@@ -501,7 +501,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "        function test() {\n"
             + "            alert('titles');\n"
             + "            var titles = document.getElementsByTagName('title');\n"
-            + "            for(var i=0; i < titles.length; ++i) {\n"
+            + "            for(var i = 0; i < titles.length; i++) {\n"
             + "                alert(titles[i].parentNode.nodeName);\n"
             + "                alert(titles[i].text);\n"
             + "            }\n"

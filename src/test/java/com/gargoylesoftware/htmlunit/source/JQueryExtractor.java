@@ -291,7 +291,7 @@ public final class JQueryExtractor {
         static Expectations readExpectations(final File file) throws IOException {
             final Expectations expectations = new Expectations();
             final List<String> lines = FileUtils.readLines(file);
-            for (int i = 0; i < lines.size(); ++i) {
+            for (int i = 0; i < lines.size(); i++) {
                 expectations.add(new Expectation(i + 1, lines.get(i)));
             }
 

@@ -132,7 +132,7 @@ public class JQuery1113Test extends WebDriverTestCase {
     private int readTestNumber(final String testName) throws Exception {
         final String testResults = loadExpectation("/libraries/jQuery/" + getVersion() + "/expectations/results", ".txt");
         final String[] lines = testResults.split("\n");
-        for (int i = 0; i < lines.length; ++i) {
+        for (int i = 0; i < lines.length; i++) {
             final String line = lines[i];
             final int pos = line.indexOf(testName);
             if (pos != -1

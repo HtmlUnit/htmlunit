@@ -64,7 +64,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.form1.length)\n"
-            + "    for (var i=0; i< document.form1.length; i++) {\n"
+            + "    for (var i = 0; i < document.form1.length; i++) {\n"
             + "        var element = document.form1.elements[i];\n"
             + "        if (element.type != 'radio' && element != document.form1[element.name]) {\n"
             + "            alert('name index not working for '+element.name);\n"
@@ -134,7 +134,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "function doTest(){\n"
             + "    var radioArray = document.form1['radio1'];\n"
             + "    alert(radioArray.length)\n"
-            + "    for (var i=0; i< radioArray.length; i++) {\n"
+            + "    for (var i = 0; i < radioArray.length; i++) {\n"
             + "        var element = radioArray[i];\n"
             + "        alert(element.value)\n"
             + "    }\n"
@@ -402,7 +402,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "function clickAction(){\n"
             + "    var value = -1;\n"
             + "    radios = document.forms['whatsnew'].elements['second'];\n"
-            + "    for (var i=0; i < radios.length; i++){\n"
+            + "    for (var i = 0; i < radios.length; i++){\n"
             + "        if (radios[i].checked == true) {\n"
             + "            value = radios[i].value;\n"
             + "            break;\n"
@@ -1154,7 +1154,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var f = document.forms[0];\n"
-            + "  for (var i=0; i<5; ++i) {\n"
+            + "  for (var i = 0; i < 5; i+) {\n"
             + "    f.action = 'foo' + i;\n"
             + "    f.submit();\n"
             + "  }\n"
@@ -1165,7 +1165,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</form></body></html>";
 
         final MockWebConnection connection = getMockWebConnection();
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 5; i++) {
             final String htmlX = "<html><head>\n"
                 + "<title>Page " + i + "</title>\n"
                 + "<script src='script" + i + ".js'></script>\n"

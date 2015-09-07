@@ -1437,7 +1437,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 @Override
                 public void run() {
                     try {
-                        for (int i = 0; i < runs; ++i) {
+                        for (int i = 0; i < runs; i++) {
                             webClient.getPage(window1, new WebRequest(URL_FIRST));
                         }
                     }
@@ -1452,7 +1452,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 @Override
                 public void run() {
                     try {
-                        for (int i = 0; i < runs; ++i) {
+                        for (int i = 0; i < runs; i++) {
                             webClient.getPage(window2, new WebRequest(URL_FIRST));
                         }
                     }

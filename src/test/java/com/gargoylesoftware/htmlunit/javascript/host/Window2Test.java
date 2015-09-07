@@ -166,7 +166,7 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
             + "  var props = ['" + StringUtils.join(properties, "', '") + "'];\n"
-            + "  for (var i=0; i<props.length; ++i)\n"
+            + "  for (var i = 0; i < props.length; i++)\n"
             + "    alert(props[i] + ': ' + typeof(window[props[i]]));\n"
             + "</script>\n"
             + "</body></html>";
@@ -1120,7 +1120,7 @@ public class Window2Test extends WebDriverTestCase {
             + "function stop() {\n"
             + "  window.stopIt = true;\n"
             + "}\n"
-            + "for (var i=0; i<1000; ++i) {\n"
+            + "for (var i = 0; i < 1000; i++) {\n"
             + "  var handler = function(e) {\n"
             + "    if (window.stopIt) {\n"
             + "      e.preventDefault ?  e.preventDefault() : e.returnValue = false;\n"

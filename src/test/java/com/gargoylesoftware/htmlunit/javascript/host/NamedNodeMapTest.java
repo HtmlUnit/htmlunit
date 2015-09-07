@@ -373,7 +373,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
               + "  <script type='text/javascript'>\n"
               + "    var input = document.getElementById('myinput');\n"
               + "    var attrs = input.attributes;\n"
-              + "    for(i=0; i<attrs.length; i++) {\n"
+              + "    for(var i = 0; i < attrs.length; i++) {\n"
               + "      attrs[i];\n"
               + "    }\n"
               + "    alert(input.outerHTML);\n"

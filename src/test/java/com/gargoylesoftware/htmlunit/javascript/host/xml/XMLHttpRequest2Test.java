@@ -200,7 +200,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "<script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
             + "var values = [null, '', ' ', '  \\t  '];\n"
-            + "for (var i=0; i<values.length; ++i) {\n"
+            + "for (var i = 0; i < values.length; i++) {\n"
             + "  try {\n"
             + "    xhr.open('GET', values[i], false);\n"
             + "    xhr.send('');\n"

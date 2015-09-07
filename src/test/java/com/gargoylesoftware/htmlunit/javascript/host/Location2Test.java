@@ -838,7 +838,7 @@ public class Location2Test extends WebDriverTestCase {
         final String[] expectedAlerts = getExpectedAlerts();
         final URL url = URL_FIRST;
         final String origin = url.getProtocol() + "://" + url.getHost() + ':' + url.getPort();
-        for (int i = 0; i < expectedAlerts.length; ++i) {
+        for (int i = 0; i < expectedAlerts.length; i++) {
             expectedAlerts[i] = expectedAlerts[i].replaceAll("§§ORIGIN§§", origin);
         }
 

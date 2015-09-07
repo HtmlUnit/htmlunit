@@ -91,7 +91,7 @@ public class HTMLAppletElement extends HTMLElement {
                         final Scriptable thisObj, final Object[] args) {
 
                     final Object[] realArgs = new Object[method.getParameterTypes().length];
-                    for (int i = 0; i < realArgs.length; ++i) {
+                    for (int i = 0; i < realArgs.length; i++) {
                         final Object arg;
                         if (i > args.length) {
                             arg = null;

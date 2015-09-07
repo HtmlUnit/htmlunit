@@ -293,7 +293,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlFourth, fourthContent);
 
         final String[] expectedAlerts = getExpectedAlerts();
-        for (int i = 0; i < expectedAlerts.length; ++i) {
+        for (int i = 0; i < expectedAlerts.length; i++) {
             expectedAlerts[i] = expectedAlerts[i].replaceAll("Â§Â§URL2Â§Â§", URL_SECOND.toExternalForm())
                     .replaceAll("Â§Â§URL3Â§Â§", urlThird.toExternalForm());
         }

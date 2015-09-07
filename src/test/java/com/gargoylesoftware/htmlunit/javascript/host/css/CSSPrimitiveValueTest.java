@@ -48,7 +48,7 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
             + "'CSS_S', 'CSS_HZ', 'CSS_KHZ', 'CSS_DIMENSION', 'CSS_STRING', 'CSS_URI', 'CSS_IDENT', 'CSS_ATTR', "
             + "'CSS_COUNTER', 'CSS_RECT', 'CSS_RGBCOLOR'];\n"
             + "    var str = '';\n"
-            + "    for (var i=0; i<props.length; ++i)\n"
+            + "    for (var i = 0; i<props.length; i++)\n"
             + "      str += CSSPrimitiveValue[props[i]];\n"
             + "    alert(str);\n"
             + "  } catch(e) { alert('exception') }\n"

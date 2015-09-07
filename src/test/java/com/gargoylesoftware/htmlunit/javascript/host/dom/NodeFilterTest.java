@@ -44,7 +44,7 @@ public class NodeFilterTest extends WebDriverTestCase {
             + "'SHOW_ENTITY_REFERENCE', 'SHOW_ENTITY', 'SHOW_PROCESSING_INSTRUCTION', 'SHOW_COMMENT',\n"
             + "'SHOW_DOCUMENT', 'SHOW_DOCUMENT_TYPE', 'SHOW_DOCUMENT_FRAGMENT', 'SHOW_NOTATION'];\n"
             + "  try {\n"
-            + "    for (var i=0; i<properties.length; ++i) {\n"
+            + "    for (var i = 0; i < properties.length; i++) {\n"
             + "      alert(NodeFilter[properties[i]]);\n"
             + "    }\n"
             + "  } catch(e) { alert('exception');}\n"

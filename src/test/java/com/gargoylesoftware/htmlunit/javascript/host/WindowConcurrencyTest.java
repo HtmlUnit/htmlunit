@@ -157,7 +157,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "    function test() {\n"
             + "      threadID = setInterval(doAlert, 100);\n"
             + "    }\n"
-            + "    var iterationNumber=0;\n"
+            + "    var iterationNumber = 0;\n"
             + "    function doAlert() {\n"
             + "      alert('blah');\n"
             + "      if (++iterationNumber >= 3) {\n"

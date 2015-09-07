@@ -84,8 +84,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
             + "  </table>\n"
 
             + "<script>\n"
-            + "  for (i=1; i<=6; i++) {\n"
-            + "    alert(document.getElementById('d'+i).align);\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('d' + i).align);\n"
             + "  };\n"
             + "</script>\n"
             + "</body></html>";

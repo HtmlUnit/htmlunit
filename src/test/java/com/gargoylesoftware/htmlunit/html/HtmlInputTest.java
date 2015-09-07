@@ -272,7 +272,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var form = document.getElementById('form1');\n"
-            + "    for (var i=0; i<form.elements.length; ++i)\n"
+            + "    for (var i = 0; i < form.elements.length; i++)\n"
             + "      form.elements[i].select();\n"
             + "  }\n"
             + "</script>\n"

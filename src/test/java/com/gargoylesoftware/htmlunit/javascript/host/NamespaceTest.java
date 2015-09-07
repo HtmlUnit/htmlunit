@@ -43,7 +43,7 @@ public class NamespaceTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    if (document.namespaces) {\n"
-            + "      for (var i=0; i < document.namespaces.length; i++) {\n"
+            + "      for (var i = 0; i < document.namespaces.length; i++) {\n"
             + "        alert(document.namespaces[i].name + ', ' + document.namespaces[i].urn);\n"
             + "      }\n"
             + "    } else {\n"

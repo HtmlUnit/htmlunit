@@ -1011,7 +1011,7 @@ public final class HTMLParser {
             if (body_ != null && "body".equalsIgnoreCase(elem.localpart) && attrs != null) {
                 // add the attributes that don't already exist
                 final int length = attrs.getLength();
-                for (int i = 0; i < length; ++i) {
+                for (int i = 0; i < length; i++) {
                     final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ENGLISH);
                     if (body_.getAttributes().getNamedItem(attrName) == null) {
                         body_.setAttribute(attrName, attrs.getValue(i));
@@ -1112,7 +1112,7 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
                 try {
                     if (IEConditionalCommentExpressionEvaluator.evaluate(condition, browserVersion_)) {
                         // skip until ">"
-                        for (int i = 0; i < condition.length() + 6; ++i) {
+                        for (int i = 0; i < condition.length() + 6; i++) {
                             read();
                         }
                         if (s.contains("]><!-->")) {
@@ -1163,7 +1163,7 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
             try {
                 if (IEConditionalCommentExpressionEvaluator.evaluate(condition, contentScanner.browserVersion_)) {
                     // skip until ">"
-                    for (int i = 0; i < condition.length() + 6; ++i) {
+                    for (int i = 0; i < condition.length() + 6; i++) {
                         read();
                     }
                     return true;

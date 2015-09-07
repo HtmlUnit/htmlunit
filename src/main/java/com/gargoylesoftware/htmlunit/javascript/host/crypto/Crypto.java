@@ -67,7 +67,7 @@ public class Crypto extends SimpleScriptable {
         }
 
         final Random random = new Random();
-        for (int i = 0; i < array.getLength(); ++i) {
+        for (int i = 0; i < array.getLength(); i++) {
             array.put(i, array, random.nextInt());
         }
     }

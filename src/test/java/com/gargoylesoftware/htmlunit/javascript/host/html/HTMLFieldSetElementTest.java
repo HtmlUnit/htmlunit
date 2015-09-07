@@ -61,8 +61,8 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "<script>\n"
-            + "  for (i=1; i<=11; i++) {\n"
-            + "    alert(document.getElementById('f'+i).align);\n"
+            + "  for (var i = 1; i <= 11; i++) {\n"
+            + "    alert(document.getElementById('f' + i).align);\n"
             + "  };\n"
             + "</script>\n"
             + "</body></html>";

@@ -62,8 +62,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  <embed id='e11' ></embed>\n"
 
             + "<script>\n"
-            + "  for (i=1; i<=11; i++) {\n"
-            + "    alert(document.getElementById('e'+i).align);\n"
+            + "  for (var i = 1; i <= 11; i++) {\n"
+            + "    alert(document.getElementById('e' + i).align);\n"
             + "  };\n"
             + "</script>\n"
             + "</body></html>";
@@ -135,8 +135,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  <embed id='e6' ></embed>\n"
 
             + "<script>\n"
-            + "  for (i=1; i<=6; i++) {\n"
-            + "    alert(document.getElementById('e'+i).height);\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('e' + i).height);\n"
             + "  };\n"
             + "</script>\n"
             + "</body></html>";
@@ -193,8 +193,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  <embed id='e6' ></embed>\n"
 
             + "<script>\n"
-            + "  for (i=1; i<=6; i++) {\n"
-            + "    alert(document.getElementById('e'+i).width);\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('e' + i).width);\n"
             + "  };\n"
             + "</script>\n"
             + "</body></html>";

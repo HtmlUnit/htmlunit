@@ -112,7 +112,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  var methods = ['" + StringUtils.join(methods, "', '") + "'];\n"
             + "  try {\n"
             + "    var ctx = canvas.getContext('2d');\n"
-            + "    for (var i=0; i<methods.length; ++i) {\n"
+            + "    for (var i = 0; i < methods.length; i++) {\n"
             + "      if (typeof ctx[methods[i]] == 'function')\n"
             + "        nbMethods++;\n"
             + "      else\n"

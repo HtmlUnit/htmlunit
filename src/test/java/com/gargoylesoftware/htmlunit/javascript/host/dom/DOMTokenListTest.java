@@ -179,7 +179,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "function test() {\n"
             + "    var list = document.getElementById('d1').classList;\n"
             + "    if (list) {\n"
-            + "      for (i=0; i<list.length; i++) {\n"
+            + "      for (var i = 0; i < list.length; i++) {\n"
             + "        alert(list.item(i));\n"
             + "      }\n"
             + "      alert(list.item(-1));\n"

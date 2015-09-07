@@ -308,7 +308,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var a = [1, 2, 3];\n"
-            + "    for (var i=10; i<20; ++i)\n"
+            + "    for (var i = 10; i < 20; i++)\n"
             + "      a[i] = 't' + i;\n"
             + "    var b = [1, 2, 3];\n"
             + "    b.concat(a);\n"

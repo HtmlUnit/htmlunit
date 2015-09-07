@@ -120,7 +120,7 @@ public class NativeDateTest extends WebDriverTestCase {
             + "function doTest() {\n"
             + "  var o = " + object + ";\n"
             + "  var props = [" + methodList.substring(2) + "];\n"
-            + "  for (var i=0; i<props.length; ++i) {\n"
+            + "  for (var i = 0; i < props.length; i++) {\n"
             + "    var p = props[i];\n"
             + "    alert(p + ': ' + typeof(o[p]));\n"
             + "  }\n"

@@ -218,7 +218,7 @@ public class NodeTest extends WebDriverTestCase {
             + "<body><!-- comment --><script>\n"
             + "var nodes = document.body.childNodes;\n"
             + "alert('nb nodes: ' + nodes.length);\n"
-            + "for (var i=0; i<nodes.length; i++)\n"
+            + "for (var i = 0; i < nodes.length; i++)\n"
             + "  alert(nodes[i].nodeType);\n"
             + "</script></body></html>";
 
@@ -240,7 +240,7 @@ public class NodeTest extends WebDriverTestCase {
             + "    var childNodes = testForm.childNodes;\n"
             + "    var length = childNodes.length;\n"
             + "    alert('length: ' + length);\n"
-            + "    for (var i=0; i < length; i++) {\n"
+            + "    for (var i = 0; i < length; i++) {\n"
             + "        var tempNode = childNodes.item(i);\n"
             + "        alert('tempNode.name: ' + tempNode.name);\n"
             + "    }\n"

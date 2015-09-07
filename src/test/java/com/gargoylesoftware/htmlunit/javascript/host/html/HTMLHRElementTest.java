@@ -49,8 +49,8 @@ public class HTMLHRElementTest extends WebDriverTestCase {
             + "  <hr id='h5' />\n"
 
             + "<script>\n"
-            + "  for (i=1; i<=5; i++) {\n"
-            + "    alert(document.getElementById('h'+i).align);\n"
+            + "  for (var i = 1; i <= 5; i++) {\n"
+            + "    alert(document.getElementById('h' + i).align);\n"
             + "  };\n"
             + "</script>\n"
             + "</body></html>";

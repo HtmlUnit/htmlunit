@@ -243,7 +243,7 @@ class MiniServer extends Thread {
 
         // wait until the listener on the port has been starTed to be sure
         // that the main thread doesn't perform the first request before the listener is ready
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 10; i++) {
             if (!started_.get()) {
                 try {
                     Thread.sleep(100);

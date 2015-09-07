@@ -44,7 +44,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + " 'NOT_FOUND_ERR', 'NOT_SUPPORTED_ERR', 'INUSE_ATTRIBUTE_ERR', 'INVALID_STATE_ERR', 'SYNTAX_ERR',"
             + " 'INVALID_MODIFICATION_ERR', 'NAMESPACE_ERR', 'INVALID_ACCESS_ERR'];\n"
             + "  try {\n"
-            + "    for (var i=0; i<properties.length; ++i) {\n"
+            + "    for (var i = 0; i < properties.length; i++) {\n"
             + "      alert(DOMException[properties[i]]);\n"
             + "    }\n"
             + "  } catch(e) { alert('exception');}\n"

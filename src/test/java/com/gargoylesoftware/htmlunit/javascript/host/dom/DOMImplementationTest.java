@@ -318,7 +318,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var feature = '" + feature + "';\n"
             + "    var versions = " + versions + ";\n"
-            + "    for (var j=0; j<versions.length; ++j) {\n"
+            + "    for (var j = 0; j < versions.length; j++) {\n"
             + "      var version = versions[j];\n"
             + "      alert(feature + ' ' + version + ': ' + document.implementation.hasFeature(feature, version));\n"
             + "    }\n"

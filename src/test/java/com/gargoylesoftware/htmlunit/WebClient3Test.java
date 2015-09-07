@@ -283,7 +283,7 @@ public class WebClient3Test extends WebDriverTestCase {
         final MockWebConnection mockConnection = getMockWebConnection();
         final byte[] binaryContent = new byte[4818];
         final Random random = new Random();
-        for (int i = 0; i < binaryContent.length; ++i) {
+        for (int i = 0; i < binaryContent.length; i++) {
             binaryContent[i] = (byte) (random.nextInt(Byte.MAX_VALUE));
         }
         mockConnection.setDefaultResponse(binaryContent, 200, "OK", "application/octet-stream");

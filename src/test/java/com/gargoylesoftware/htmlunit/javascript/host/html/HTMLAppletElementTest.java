@@ -52,8 +52,8 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
             + "  <applet id='a7' ></applet>\n"
 
             + "<script>\n"
-            + "  for (i=1; i<=7; i++) {\n"
-            + "    alert(document.getElementById('a'+i).align);\n"
+            + "  for (var i = 1; i <= 7; i++) {\n"
+            + "    alert(document.getElementById('a' + i).align);\n"
             + "  };\n"
             + "</script>\n"
             + "</body></html>";

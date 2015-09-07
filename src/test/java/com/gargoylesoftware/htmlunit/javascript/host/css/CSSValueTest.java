@@ -43,7 +43,7 @@ public class CSSValueTest extends WebDriverTestCase {
                 + "    alert(CSSValue);\n"
                 + "    var props = ['CSS_INHERIT', 'CSS_PRIMITIVE_VALUE', 'CSS_VALUE_LIST', 'CSS_CUSTOM'];\n"
                 + "    var str = '';\n"
-                + "    for (var i=0; i<props.length; ++i)\n"
+                + "    for (var i = 0; i < props.length; i++)\n"
                 + "      str += CSSValue[props[i]];\n"
                 + "    alert(str);\n"
                 + "  } catch(e) { alert('exception') }\n"

@@ -619,7 +619,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
      */
     @Test
     public void noScript_onClick() throws Exception {
-        onClickBodyTest("<body><script>var i=0;</script><noscript id='clickId' "
+        onClickBodyTest("<body><script>var i = 0;</script><noscript id='clickId' "
             + "onClick='alert(\"foo\")'>Item</noscript></body>\n");
     }
 

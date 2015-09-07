@@ -527,7 +527,7 @@ public abstract class WebTestCase {
         if (expectedAlerts_ == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
-        for (int i = 0; i < expectedAlerts_.length; ++i) {
+        for (int i = 0; i < expectedAlerts_.length; i++) {
             expectedAlerts_[i] = expectedAlerts_[i].replaceAll("§§URL§§", url.toExternalForm());
         }
     }

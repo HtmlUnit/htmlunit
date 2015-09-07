@@ -401,8 +401,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<div id='o9' style='opacity: auto'>d</div>\n"
 
             + "<script>\n"
-            + "for (i=1; i<10; i++) {\n"
-            + "  d = document.getElementById('o'+i);\n"
+            + "for (var i = 1; i < 10; i++) {\n"
+            + "  d = document.getElementById('o' + i);\n"
             + "  alert(d.style.opacity);\n"
             + "}\n"
             + "</script>\n"

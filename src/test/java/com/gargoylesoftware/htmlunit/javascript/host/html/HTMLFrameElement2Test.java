@@ -126,7 +126,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "    alert('frame=OK');\n"
             + "    var len = frame.frames.length;\n"
             + "    alert('frames.length=' + len);\n"
-            + "    for (var i=0; i<len; i++) {\n"
+            + "    for (var i = 0; i < len; i++) {\n"
             + "      listframes(frame.frames[i]);\n"
             + "    }\n"
             + "  }\n"

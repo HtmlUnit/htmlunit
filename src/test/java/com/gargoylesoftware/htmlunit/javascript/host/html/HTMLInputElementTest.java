@@ -955,8 +955,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "<script>\n"
-            + "  for (i=1; i<=7; i++) {\n"
-            + "    alert(document.getElementById('i'+i).align);\n"
+            + "  for (var i = 1; i <= 7; i++) {\n"
+            + "    alert(document.getElementById('i' + i).align);\n"
             + "  };\n"
             + "</script>\n"
             + "</body></html>";

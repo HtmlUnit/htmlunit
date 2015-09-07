@@ -1180,7 +1180,7 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public static void validateSelectors(final SelectorList selectorList, final int documentMode,
                 final DomNode domNode) throws CSSException {
-        for (int i = 0; i < selectorList.getLength(); ++i) {
+        for (int i = 0; i < selectorList.getLength(); i++) {
             final Selector item = selectorList.item(i);
             if (!isValidSelector(item, documentMode, domNode)) {
                 throw new CSSException("Invalid selector: " + item);

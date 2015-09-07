@@ -213,7 +213,7 @@ public class Range extends SimpleScriptable {
         Node node = refNode;
         while (node.getPreviousSibling() != null) {
             node = node.getPreviousSibling();
-            ++i;
+            i++;
         }
         return i;
     }

@@ -44,7 +44,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "    var expr = 'string(//option)';\n"
             + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
             + "    var value = result.stringValue;\n"
-            + "    for (i=0; i < value.length; i++) {\n"
+            + "    for (var i = 0; i < value.length; i++) {\n"
             + "      alert(value.charCodeAt(i));\n"
             + "    }\n"
             + "  } catch (e) {alert('error')}\n"

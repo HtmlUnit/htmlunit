@@ -104,7 +104,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         int index = -1;
         while (row != null) {
             if (row instanceof HtmlTableRow) {
-                ++index;
+                index++;
             }
             row = row.getPreviousSibling();
         }
