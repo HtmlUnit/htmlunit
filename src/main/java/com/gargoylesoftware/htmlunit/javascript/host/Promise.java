@@ -104,7 +104,6 @@ public class Promise extends SimpleScriptable {
      */
     @JsxFunction
     public Promise then(final Function onFulfilled, final Function onRejected) {
-
         final Window window = getWindow();
         final Promise promise = new Promise(window);
         final Promise thisPromise = this;
@@ -145,7 +144,6 @@ public class Promise extends SimpleScriptable {
     }
 
     private static class WasCalledFunctionWrapper extends FunctionWrapper {
-
         private boolean wasCalled_;
         private Object value_;
 
