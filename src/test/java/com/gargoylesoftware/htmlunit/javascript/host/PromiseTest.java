@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link Promise}.
  *
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class PromiseTest extends WebDriverTestCase {
@@ -235,4 +236,20 @@ public class PromiseTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "end", "in then" },
+            IE = "exception")
+    public void then() throws Exception {
+        final String html = "<html><body><script>"
+            + "try {\n"
+            + "  var p = Promise.resolve(void 0);\n"
+            + "  p.then(function() { alert('in then'); });\n"
+            + "  alert('end');\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

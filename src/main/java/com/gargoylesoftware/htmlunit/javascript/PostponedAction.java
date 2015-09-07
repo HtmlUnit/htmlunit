@@ -27,13 +27,24 @@ import com.gargoylesoftware.htmlunit.Page;
 public abstract class PostponedAction {
 
     private final WeakReference<Page> owningPageRef_; // as weak ref in case it may allow page to be GCed
+    private final String description_;
 
     /**
      * C'tor.
      * @param owningPage the page that initiates this action
      */
     public PostponedAction(final Page owningPage) {
+        this(owningPage, null);
+    }
+
+    /**
+     * C'tor.
+     * @param owningPage the page that initiates this action
+     * @param description information making debugging easier
+     */
+    public PostponedAction(final Page owningPage, final String description) {
         owningPageRef_ = new WeakReference<>(owningPage);
+        description_ = description;
     }
 
     /**
@@ -57,5 +68,14 @@ public abstract class PostponedAction {
     public boolean isStillAlive() {
         final Page owningPage = getOwningPage();
         return (owningPage != null) && (owningPage == owningPage.getEnclosingWindow().getEnclosedPage());
+    }
+
+    @Override
+    public String toString() {
+        if (description_ == null) {
+            return super.toString();
+        }
+
+        return "PostponedAction(" + description_ + ")";
     }
 }

@@ -16,8 +16,15 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.FunctionWrapper;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -25,16 +32,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 /**
  * A JavaScript object for {@code Promise}.
  *
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
 public class Promise extends SimpleScriptable {
@@ -45,6 +47,15 @@ public class Promise extends SimpleScriptable {
      * Default constructor.
      */
     public Promise() {
+    }
+
+    /**
+     * Facility constructor.
+     * @param window the owning window
+     */
+    public Promise(final Window window) {
+        setParentScope(window);
+        setPrototype(window.getPrototype(Promise.class));
     }
 
     /**
@@ -93,31 +104,43 @@ public class Promise extends SimpleScriptable {
      */
     @JsxFunction
     public Promise then(final Function onFulfilled, final Function onRejected) {
-        Object newValue = null;
-        if (value_ instanceof Function) {
-            final WasCalledFunctionWrapper wrapper = new WasCalledFunctionWrapper(onFulfilled);
-            try {
-                ((Function) value_).call(Context.getCurrentContext(), getParentScope(), this,
-                    new Object[] {wrapper, onRejected});
-                if (wrapper.wasCalled_) {
-                    newValue = wrapper.value_;
+
+        final Window window = getWindow();
+        final Promise promise = new Promise(window);
+        final Promise thisPromise = this;
+
+        PostponedAction thenAction = new PostponedAction(window.getDocument().getPage(), "Promise.then") {
+
+            @Override
+            public void execute() throws Exception {
+                Object newValue = null;
+                if (value_ instanceof Function) {
+                    final WasCalledFunctionWrapper wrapper = new WasCalledFunctionWrapper(onFulfilled);
+                    try {
+                        ((Function) value_).call(Context.getCurrentContext(), window, thisPromise,
+                            new Object[] {wrapper, onRejected});
+                        if (wrapper.wasCalled_) {
+                            newValue = wrapper.value_;
+                        }
+                    }
+                    catch (final JavaScriptException e) {
+                        if (!wrapper.wasCalled_) {
+                            newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
+                                    new Object[] {e.getValue()});
+                        }
+                    }
                 }
-            }
-            catch (final JavaScriptException e) {
-                if (!wrapper.wasCalled_) {
-                    newValue = onRejected.call(Context.getCurrentContext(), getParentScope(), this,
-                            new Object[] {e.getValue()});
+                else {
+                    newValue = onFulfilled.call(Context.getCurrentContext(), window, thisPromise,
+                            new Object[] {value_});
                 }
+                promise.value_ = newValue;
             }
-        }
-        else {
-            newValue = onFulfilled.call(Context.getCurrentContext(), getParentScope(), this,
-                    new Object[] {value_});
-        }
-        final Promise promise = new Promise();
-        promise.setParentScope(this.getParentScope());
-        promise.setPrototype(getPrototype(promise.getClass()));
-        promise.value_ = newValue;
+        };
+
+        final JavaScriptEngine jsEngine = window.getWebWindow().getWebClient().getJavaScriptEngine();
+        jsEngine.addPostponedAction(thenAction);
+
         return promise;
     }
 
