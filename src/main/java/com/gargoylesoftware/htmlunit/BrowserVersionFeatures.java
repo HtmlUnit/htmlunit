@@ -860,6 +860,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_CONSTRUCTOR,
 
+    /** Supports {@code CSSCharsetRule}. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_CSSRULELIST_CHARSET_RULE,
+
     /** item is not a enumerable property of CSSRuleList. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_CSSRULELIST_DONT_ENUM_ITEM,

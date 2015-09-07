@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                CSS: only FF supports CSSCharsetRule.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: fix MediaList.item() and MediaList.mediaText results for media queries.
             </action>

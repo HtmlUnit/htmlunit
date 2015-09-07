@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_CHARSET_RULE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_DONT_ENUM_ITEM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_ENUM_ITEM_LENGTH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -21,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -30,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.steadystate.css.dom.CSSRuleListImpl;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -65,6 +68,15 @@ public class CSSRuleList extends SimpleScriptable {
         rules_ = stylesheet.getWrappedSheet().getCssRules();
         setParentScope(stylesheet.getParentScope());
         setPrototype(getPrototype(getClass()));
+
+        if (!getBrowserVersion().hasFeature(JS_CSSRULELIST_CHARSET_RULE) && rules_ instanceof CSSRuleListImpl) {
+            final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) rules_).getRules();
+            for (Iterator<org.w3c.dom.css.CSSRule> it = rules.iterator(); it.hasNext(); ) {
+                if (it.next() instanceof org.w3c.dom.css.CSSCharsetRule) {
+                    it.remove();
+                }
+            }
+        }
     }
 
     /**

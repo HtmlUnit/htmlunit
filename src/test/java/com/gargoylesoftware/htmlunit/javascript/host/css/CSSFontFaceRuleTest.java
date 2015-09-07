@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link CSSFontFaceRule} rule.
+ * Tests for {@link CSSFontFaceRule}.
  *
  * @author Marc Guillemot
  * @author Frank Danek
