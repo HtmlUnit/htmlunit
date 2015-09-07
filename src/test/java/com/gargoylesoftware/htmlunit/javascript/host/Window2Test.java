@@ -1205,7 +1205,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-onsubmit-" },
-            IE8 = { })
+            IE8 = "")
     public void onsubmit_withHandler() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
