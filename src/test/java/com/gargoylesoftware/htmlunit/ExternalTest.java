@@ -118,7 +118,10 @@ public class ExternalTest {
                 }
             }
         }
-        assertEquals(groupId + ":" + artifactId, latestVersion, version);
+        if (!version.endsWith("-SNAPSHOT")
+                || !isVersionAfter(version.substring(0, version.length() - "-SNAPSHOT".length()), latestVersion)) {
+            assertEquals(groupId + ":" + artifactId, latestVersion, version);
+        }
     }
 
     private static boolean isVersionAfter(final String version1, final String version2) {

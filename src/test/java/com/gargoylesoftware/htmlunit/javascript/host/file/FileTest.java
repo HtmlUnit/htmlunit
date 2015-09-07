@@ -49,7 +49,7 @@ public class FileTest extends WebDriverTestCase {
             IE11 = { "1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
                             "undefined", "undefined", "14", "text/plain" },
-            IE8 = { "" })
+            IE8 = { })
     public void properties() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

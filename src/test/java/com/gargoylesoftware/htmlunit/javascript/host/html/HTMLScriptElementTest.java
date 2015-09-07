@@ -985,7 +985,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "\n    <script id=\"testScript\">function foo() { return a > b}</script>\n  " },
-            IE8 = { "" })
+            IE8 = "")
     @NotYetImplemented(IE8)
     public void innerHTMLGetSet() throws Exception {
         final String html

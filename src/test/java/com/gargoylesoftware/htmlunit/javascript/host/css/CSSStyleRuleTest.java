@@ -207,7 +207,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "" },
+    @Alerts(DEFAULT = "",
             IE8 = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" })
     @NotYetImplemented(IE8)
     public void colon() throws Exception {
