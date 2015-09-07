@@ -140,8 +140,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "false", "false", "0", "2", "p" },
             FF = { "1", "false", "true", "0", "2", "p" },
-            IE8 = { "1", "true", "false", "-1", "2", "DIV" },
-            CHROME = { "" })
+            IE8 = { "1", "true", "false", "-1", "2", "DIV" })
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"

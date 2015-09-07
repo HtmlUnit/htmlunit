@@ -30,12 +30,13 @@ import org.junit.runners.model.Statement;
  *
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 public class ErrorOutputChecker implements TestRule {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern WEB_DRIVER_CHROME_MSG =
-            Pattern.compile("Starting ChromeDriver \\(?v?[\\.0-9]* ?\\(?[0-9a-f]*\\)?\\)? on port \\d*\r?\n"
+            Pattern.compile("Starting ChromeDriver 2.18.343845 ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
                     + "Only local connections are allowed\\.\r?\n");
     private static final Pattern WEB_DRIVER_IE_MSG =
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
@@ -69,6 +70,9 @@ public class ErrorOutputChecker implements TestRule {
             output = WEB_DRIVER_CHROME_MSG.matcher(output).replaceAll("");
             output = WEB_DRIVER_IE_MSG.matcher(output).replaceAll("");
             if (!output.isEmpty()) {
+                if (output.contains("ChromeDriver")) {
+                    throw new RuntimeException("Outdated ChromeDriver version: " + output);
+                }
                 throw new RuntimeException("Test has produced output to System.err: " + output);
             }
         }
