@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
@@ -27,7 +26,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -67,7 +65,6 @@ public class MouseEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true" },
             IE8 = "exception")
-    @NotYetImplemented(CHROME)
     public void initMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

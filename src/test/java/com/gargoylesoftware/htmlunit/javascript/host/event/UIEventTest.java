@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
@@ -26,7 +25,6 @@ import org.openqa.selenium.interactions.Actions;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -66,7 +64,6 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object UIEvent]", "click", "true", "true", "true", "7" },
             IE8 = "exception")
-    @NotYetImplemented(CHROME)
     public void initUIEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -91,7 +88,6 @@ public class UIEventTest extends WebDriverTestCase {
             IE8 = { "[object]", "undefined", "[object]", "undefined", "[object]", "undefined" },
             IE11 = { "[object Event]", "undefined", "[object PointerEvent]", "0", "[object PointerEvent]", "0" })
     @BuggyWebDriver(FF)
-    @NotYetImplemented(CHROME)
     // FF31/38 has a detail of '1' for the double click but it is '2' when executed manually
     public void detail() throws Exception {
         final String html =
@@ -121,7 +117,6 @@ public class UIEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "[object Window]" },
             IE8 = { "[object]", "undefined", "[object]", "undefined" },
             IE11 = { "[object Event]", "undefined", "[object PointerEvent]", "[object Window]" })
-    @NotYetImplemented(CHROME)
     public void view() throws Exception {
         final String html =
               "<html><body onload='alertView(event)'><script>\n"
