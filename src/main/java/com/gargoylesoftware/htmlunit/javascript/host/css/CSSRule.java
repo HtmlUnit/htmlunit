@@ -218,7 +218,7 @@ public class CSSRule extends SimpleScriptable {
      * Returns the style sheet that contains this rule.
      * @return the style sheet that contains this rule.
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public CSSStyleSheet getParentStyleSheet() {
         return stylesheet_;
     }
@@ -228,7 +228,7 @@ public class CSSRule extends SimpleScriptable {
      * this is the containing rule. If this rule is not nested inside any other rules, this returns {@code null}.
      * @return the parent rule
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public CSSRule getParentRule() {
         final org.w3c.dom.css.CSSRule parentRule = rule_.getParentRule();
         if (parentRule != null) {

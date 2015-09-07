@@ -1681,7 +1681,7 @@ public enum BrowserVersionFeatures {
     JS_SELECTION_ONLY_ONE_PER_PAGE,
 
     /** Javascript selectorText property returns selectors in uppercase. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8) })
     JS_SELECTOR_TEXT_UPPERCASE,
 
     /** Indicates if calling HTMLSelectElement.add the second parameter

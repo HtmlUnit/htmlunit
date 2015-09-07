@@ -44,7 +44,6 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
             CHROME = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px", "", "red" },
             IE8 = { "[object]", "H1", "", "10px, ", "red" },
             IE11 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" })
-    @NotYetImplemented({ FF, CHROME })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
