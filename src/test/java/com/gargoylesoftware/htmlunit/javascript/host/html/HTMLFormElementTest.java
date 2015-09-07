@@ -1154,7 +1154,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var f = document.forms[0];\n"
-            + "  for (var i = 0; i < 5; i+) {\n"
+            + "  for (var i = 0; i < 5; i++) {\n"
             + "    f.action = 'foo' + i;\n"
             + "    f.submit();\n"
             + "  }\n"
