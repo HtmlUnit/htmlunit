@@ -115,6 +115,9 @@ public class HTMLAllCollection extends HTMLCollection {
 
         final Object object = get(numb.intValue(), this);
         if (object == NOT_FOUND) {
+            if (browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME) && index instanceof Number && numb >= 0) {
+                return null;
+            }
             return itemNotFound(browser);
         }
         return object;

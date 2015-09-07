@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CHECK_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
@@ -206,12 +207,14 @@ public class HTMLCollection extends AbstractList {
             return collection;
         }
 
-        // no element found by id, let's search by name
-        for (final Object next : elements) {
-            if (next instanceof DomElement) {
-                final String nodeName = ((DomElement) next).getAttribute("name");
-                if (name.equals(nodeName)) {
-                    matchingElements.add(next);
+        if (!getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME)) {
+            // no element found by id, let's search by name
+            for (final Object next : elements) {
+                if (next instanceof DomElement) {
+                    final String nodeName = ((DomElement) next).getAttribute("name");
+                    if (name.equals(nodeName)) {
+                        matchingElements.add(next);
+                    }
                 }
             }
         }

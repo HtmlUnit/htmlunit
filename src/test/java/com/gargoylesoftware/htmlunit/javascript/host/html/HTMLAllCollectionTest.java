@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -111,69 +110,66 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHtml-undefined",
-            IE8 = "[object HTMLCommentElement]")
+    @Alerts(DEFAULT = "null",
+            IE11 = "undefined",
+            FF31 = "undefined")
     public void namedItem_ZeroIndex() throws Exception {
-        item("0");
+        namedItem("0");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            IE8 = "myHtml-undefined")
+    @Alerts(DEFAULT = "null",
+            IE11 = "undefined",
+            FF31 = "undefined")
     public void namedItem_ValidIndex() throws Exception {
-        item("1");
+        namedItem("1");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "myHead-undefined",
-            IE11 = "myHead-undefined",
-            IE8 = "myHtml-undefined")
+    @Alerts(DEFAULT = "null",
+            IE11 = "undefined",
+            FF31 = "undefined")
     public void namedItem_DoubleIndex() throws Exception {
-        item("1.1");
+        namedItem("1.1");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "null",
-            IE = "null",
-            CHROME = "null")
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "null",
+            IE11 = "undefined",
+            FF31 = "undefined")
     public void namedItem_InvalidIndex() throws Exception {
-        item("200");
+        namedItem("200");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            FF38 = "null",
-            IE11 = "null",
-            IE8 = "myHtml-undefined")
+    @Alerts(DEFAULT = "null",
+            IE11 = "undefined",
+            FF31 = "undefined")
     public void namedItem_IndexAsString() throws Exception {
-        item("'1'");
+        namedItem("'1'");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "null",
-            IE11 = "null",
-            IE8 = "myHtml-undefined")
+    @Alerts(DEFAULT = "null",
+            IE11 = "undefined",
+            FF31 = "undefined")
     public void namedItem_IndexDoubleAsString() throws Exception {
-        item("'1.1'");
+        namedItem("'1.1'");
     }
 
     private void namedItem(final String name) throws Exception {
@@ -305,7 +301,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             FF38 = "null",
             IE = "null",
             CHROME = "null")
-    @NotYetImplemented(CHROME)
     public void item_InvalidIndex() throws Exception {
         item("200");
     }
@@ -392,7 +387,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "b2-button2",
             CHROME = "undefined")
-    @NotYetImplemented(CHROME)
     public void arrayIndex_ByName() throws Exception {
         arrayIndex("'button2'");
     }
