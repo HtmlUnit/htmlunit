@@ -1863,6 +1863,7 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT,
+
     /** Getting the property maxLength if it is not defined in the DOM returns undefined (IE8).
      * FF and Chrome return -1.
      */
@@ -1903,6 +1904,11 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
+
+    /** Property title.text returns undefined instead of an empty string.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_TITLE_TEXT_UNDEFINED,
 
     /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always {@code false}. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })

@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -63,7 +60,6 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "New Title" },
             IE8 = { "undefined", "New Title" })
-    @NotYetImplemented(IE8)
     public void textCreateElement() throws Exception {
         final String html =
             "<html>\n"
