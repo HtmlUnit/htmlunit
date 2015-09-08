@@ -34,6 +34,5 @@ public class MozPowerManager extends SimpleScriptable {
      */
     @JsxConstructor
     public MozPowerManager() {
-        
     }
 }
