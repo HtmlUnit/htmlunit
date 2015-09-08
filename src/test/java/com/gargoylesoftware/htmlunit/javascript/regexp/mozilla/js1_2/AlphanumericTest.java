@@ -215,7 +215,7 @@ public class AlphanumericTest extends WebDriverTestCase {
             html += "  var string = " + script + ".toString();\n"
                 + "  var output = '';\n"
                 + "  for (var i = 0; i < string.length; i++) {\n"
-                + "    output += string.charCodeAt(i).toString(16).toUpperCase(Locale.ROOT) + '-';\n"
+                + "    output += string.charCodeAt(i).toString(16).toUpperCase() + '-';\n"
                 + "  }\n"
                 + "  alert(output);\n";
         }
