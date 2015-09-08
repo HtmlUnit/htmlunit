@@ -1541,7 +1541,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String html = "<html><body><script>\n"
             + "var r = /-([a-z])/ig;\n"
             + "var s = 'font-size';\n"
-            + "s = s.replace(r, function(z,b){return b.toUpperCase(Locale.ROOT);});\n"
+            + "s = s.replace(r, function(z,b){return b.toUpperCase();});\n"
             + "alert(s);\n"
             + "</script></body></html>";
         final String[] expectedAlerts = {"fontSize"};
