@@ -195,7 +195,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all.namedItem(" + name + ");\n"
             + "      report(item);\n"
-            + "    } catch(e) { alert(e); }"
+            + "    } catch(e) { alert(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"

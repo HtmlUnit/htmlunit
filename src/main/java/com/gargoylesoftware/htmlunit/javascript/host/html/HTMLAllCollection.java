@@ -123,14 +123,6 @@ public class HTMLAllCollection extends HTMLCollection {
         return object;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isGetWithPreemptionSearchByName() {
-        return !getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);
-    }
-
     private Object itemNotFound(final BrowserVersion browser) {
         if (browser.hasFeature(HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
             return null;
