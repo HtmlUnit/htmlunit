@@ -81,7 +81,7 @@ public class JQuery1113Test extends WebDriverTestCase {
 
         try {
             final WebDriver webdriver = getWebDriver();
-            final String url = "http://localhost:" + PORT + "/jquery/test/index.html?testNumber=" + testNumber;
+            final String url = "http://localhost:" + PORT + "/jquery/test/index.html?dev&testNumber=" + testNumber;
             webdriver.get(url);
 
             WebElement status = webdriver.findElement(By.id("qunit-testresult"));
