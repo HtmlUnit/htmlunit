@@ -400,7 +400,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             forms_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.forms") {
                 @Override
                 protected boolean isMatching(final DomNode node) {
-                    return node instanceof HtmlForm;
+                    return node instanceof HtmlForm && node.getPrefix() == null;
                 }
 
                 @Override
