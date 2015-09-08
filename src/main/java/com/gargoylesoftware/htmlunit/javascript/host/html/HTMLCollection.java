@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CHECK_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
@@ -209,11 +208,11 @@ public class HTMLCollection extends AbstractList {
             return collection;
         }
 
-        final boolean doNotCheckNames = getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);
+        final boolean searchName = isGetWithPreemptionSearchName();
         // no element found by id, let's search by name
         for (final Object next : elements) {
             if (next instanceof DomElement
-                    && (!doNotCheckNames || next instanceof HtmlInput || next instanceof HtmlForm)) {
+                    && (searchName || next instanceof HtmlInput || next instanceof HtmlForm)) {
                 final String nodeName = ((DomElement) next).getAttribute("name");
                 if (name.equals(nodeName)) {
                     matchingElements.add(next);
@@ -242,6 +241,14 @@ public class HTMLCollection extends AbstractList {
         final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
         collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
         return collection;
+    }
+
+    /**
+     * Returns whether {@link #getWithPreemption(String)} should search by name or not.
+     * @return whether {@link #getWithPreemption(String)} should search by name or not
+     */
+    protected boolean isGetWithPreemptionSearchName() {
+        return true;
     }
 
     /**

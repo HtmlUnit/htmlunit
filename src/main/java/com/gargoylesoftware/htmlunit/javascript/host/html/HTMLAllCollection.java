@@ -130,6 +130,14 @@ public class HTMLAllCollection extends HTMLCollection {
         return Undefined.instance;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isGetWithPreemptionSearchName() {
+        return !getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);
+    }
+
     @JsxFunction
     @Override
     public final Object namedItem(final String name) {
