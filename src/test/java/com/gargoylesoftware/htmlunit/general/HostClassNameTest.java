@@ -10020,6 +10020,15 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("exception")
+    public void installTriggerImpl() throws Exception {
+        test("InstallTriggerImpl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "exception",
             FF = "function MozPowerManager() {\n    [native code]\n}")
     public void mozPowerManager() throws Exception {
