@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLDTElement".
+ * The JavaScript object {@code HTMLDTElement}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour

@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLStyleElement".
+ * The JavaScript object {@code HTMLStyleElement}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot

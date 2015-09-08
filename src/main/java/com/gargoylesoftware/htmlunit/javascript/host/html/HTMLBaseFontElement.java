@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLBaseFontElement".
+ * The JavaScript object {@code HTMLBaseFontElement}.
  *
  * @author Ahmed Ashour
  */

@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLTitleElement".
+ * The JavaScript object {@code HTMLTitleElement}.
  *
  * @author Ahmed Ashour
  * @author Sudhan Moghe

@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- * The JavaScript object "HTMLUnknownElement".
+ * The JavaScript object {@code HTMLUnknownElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

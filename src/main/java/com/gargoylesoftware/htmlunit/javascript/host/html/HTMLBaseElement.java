@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLBaseElement".
+ * The JavaScript object {@code HTMLBaseElement}.
  *
  * @author Ahmed Ashour
  */
@@ -47,7 +47,7 @@ public class HTMLBaseElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "href" property.
+     * Returns the value of the {@code href} property.
      * @return the value of the "href" property
      */
     @JsxGetter
@@ -56,7 +56,7 @@ public class HTMLBaseElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "href" property.
+     * Sets the value of the {@code href} property.
      * @param href the value of the "href" property
      */
     @JsxSetter
@@ -65,7 +65,7 @@ public class HTMLBaseElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "target" property.
+     * Returns the value of the {@code target} property.
      * @return the value of the "target" property
      */
     @JsxGetter
@@ -74,7 +74,7 @@ public class HTMLBaseElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "target" property.
+     * Sets the value of the {@code target} property.
      * @param target the value of the "target" property
      */
     @JsxSetter

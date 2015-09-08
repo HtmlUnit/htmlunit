@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLMeterElement".
+ * The JavaScript object {@code HTMLMeterElement}.
  *
  * @author Marc Guillemot
  * @author Ronald Brill

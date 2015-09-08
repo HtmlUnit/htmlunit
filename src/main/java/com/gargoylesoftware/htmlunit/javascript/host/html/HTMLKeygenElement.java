@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLKeygenElement".
+ * The JavaScript object {@code HTMLKeygenElement}.
  *
  * @author Ahmed Ashour
  * @author Daniel Gredler

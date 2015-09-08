@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLModElement".
+ * The JavaScript object {@code HTMLModElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -49,7 +49,7 @@ public class HTMLModElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "cite" property.
+     * Returns the value of the {@code cite} property.
      * @return the value of the "cite" property
      */
     @JsxGetter
@@ -59,7 +59,7 @@ public class HTMLModElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "cite" property.
+     * Returns the value of the {@code cite} property.
      * @param cite the value
      */
     @JsxSetter
@@ -68,7 +68,7 @@ public class HTMLModElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "dateTime" property.
+     * Returns the value of the {@code dateTime} property.
      * @return the value of the "dateTime" property
      */
     @JsxGetter
@@ -78,7 +78,7 @@ public class HTMLModElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "dateTime" property.
+     * Returns the value of the {@code dateTime} property.
      * @param dateTime the value
      */
     @JsxSetter

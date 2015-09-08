@@ -595,7 +595,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the "self" property.
+     * Returns the {@code self} property.
      * @return this
      */
     @JsxGetter
@@ -710,7 +710,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the "screen" property.
+     * Returns the {@code screen} property.
      * @return the screen property
      */
     @JsxGetter
@@ -719,7 +719,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the "history" property.
+     * Returns the {@code history} property.
      * @return the "history" property
      */
     @JsxGetter
@@ -728,7 +728,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the "external" property.
+     * Returns the {@code external} property.
      * @return the "external" property
      */
     @JsxGetter
@@ -1229,8 +1229,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of the window's <tt>name</tt> property.
-     * @return the value of the window's <tt>name</tt> property
+     * Returns the value of the window's {@code name} property.
+     * @return the value of the window's {@code name} property
      */
     @JsxGetter
     public String getName() {
@@ -1238,8 +1238,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
      /**
-     * Sets the value of the window's <tt>name</tt> property.
-     * @param name the value of the window's <tt>name</tt> property
+     * Sets the value of the window's {@code name} property.
+     * @param name the value of the window's {@code name} property
      */
     @JsxSetter
     public void setName(final String name) {
@@ -1247,8 +1247,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of the window's <tt>onbeforeunload</tt> property.
-     * @return the value of the window's <tt>onbeforeunload</tt> property
+     * Returns the value of the window's {@code onbeforeunload} property.
+     * @return the value of the window's {@code onbeforeunload} property
      */
     @JsxGetter
     public Object getOnbeforeunload() {
@@ -1256,8 +1256,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the value of the window's <tt>onbeforeunload</tt> property.
-     * @param onbeforeunload the value of the window's <tt>onbeforeunload</tt> property
+     * Sets the value of the window's {@code onbeforeunload} property.
+     * @param onbeforeunload the value of the window's {@code onbeforeunload} property
      */
     @JsxSetter
     public void setOnbeforeunload(final Object onbeforeunload) {
@@ -1265,8 +1265,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of the window's <tt>onerror</tt> property.
-     * @return the value of the window's <tt>onerror</tt> property
+     * Returns the value of the window's {@code onerror} property.
+     * @return the value of the window's {@code onerror} property
      */
     @JsxGetter
     public Object getOnerror() {
@@ -1274,8 +1274,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the value of the window's <tt>onerror</tt> property.
-     * @param onerror the value of the window's <tt>onerror</tt> property
+     * Sets the value of the window's {@code onerror} property.
+     * @param onerror the value of the window's {@code onerror} property
      */
     @JsxSetter
     public void setOnerror(final Object onerror) {
@@ -1771,7 +1771,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param url the URL of the document to load and display
      * @param arguments object to be made available via <tt>window.dialogArguments</tt> in the dialog window
      * @param features string that specifies the window ornaments for the dialog window
-     * @return the value of the <tt>returnValue</tt> property as set by the modal dialog's window
+     * @return the value of the {@code returnValue} property as set by the modal dialog's window
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
      * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
      */
@@ -1838,7 +1838,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of "mozInnerScreenX" property.
+     * Returns the value of {@code mozInnerScreenX} property.
      * @return the value of "mozInnerScreenX" property
      */
     @JsxGetter(@WebBrowser(FF))
@@ -1847,7 +1847,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of "mozInnerScreenY" property.
+     * Returns the value of {@code mozInnerScreenY} property.
      * @return the value of "mozInnerScreenY" property
      */
     @JsxGetter(@WebBrowser(FF))
@@ -1856,7 +1856,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of "mozPaintCount" property.
+     * Returns the value of {@code mozPaintCount} property.
      * @return the value of "mozPaintCount" property
      */
     @JsxGetter(@WebBrowser(FF))
@@ -2038,7 +2038,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of "pageXOffset" property.
+     * Returns the value of {@code pageXOffset} property.
      * @return the value of "pageXOffset" property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
@@ -2047,7 +2047,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of "pageYOffset" property.
+     * Returns the value of {@code pageYOffset} property.
      * @return the value of "pageYOffset" property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
@@ -2056,7 +2056,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of "scrollX" property.
+     * Returns the value of {@code scrollX} property.
      * @return the value of "scrollX" property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -2065,7 +2065,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of "scrollY" property.
+     * Returns the value of {@code scrollY} property.
      * @return the value of "scrollY" property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -2074,7 +2074,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of "netscape" property.
+     * Returns the value of {@code netscape} property.
      * @return the value of "netscape" property
      */
     @JsxGetter(@WebBrowser(FF))

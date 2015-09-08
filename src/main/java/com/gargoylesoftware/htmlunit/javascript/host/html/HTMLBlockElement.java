@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
 /**
- * The JavaScript object "HTMLBlockElement".
+ * The JavaScript object {@code HTMLBlockElement}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
@@ -73,7 +73,7 @@ public class HTMLBlockElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "cite" property.
+     * Returns the value of the {@code cite} property.
      * @return the value of the "cite" property
      */
     public String getCite() {
@@ -82,7 +82,7 @@ public class HTMLBlockElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "cite" property.
+     * Returns the value of the {@code cite} property.
      * @param cite the value
      */
     public void setCite(final String cite) {
@@ -90,7 +90,7 @@ public class HTMLBlockElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "dateTime" property.
+     * Returns the value of the {@code dateTime} property.
      * @return the value of the "dateTime" property
      */
     public String getDateTime() {
@@ -99,7 +99,7 @@ public class HTMLBlockElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "dateTime" property.
+     * Returns the value of the {@code dateTime} property.
      * @param dateTime the value
      */
     public void setDateTime(final String dateTime) {

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLParamElement".
+ * The JavaScript object {@code HTMLParamElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

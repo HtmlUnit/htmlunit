@@ -59,8 +59,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>availHeight</tt> property.
-     * @return the <tt>availHeight</tt> property
+     * Returns the {@code availHeight} property.
+     * @return the {@code availHeight} property
      */
     @JsxGetter
     public int getAvailHeight() {
@@ -68,8 +68,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>availHeight</tt> property.
-     * @param availHeight the <tt>availHeight</tt> property
+     * Sets the {@code availHeight} property.
+     * @param availHeight the {@code availHeight} property
      */
     @JsxSetter
     public void setAvailHeight(final int availHeight) {
@@ -80,8 +80,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>availLeft</tt> property.
-     * @return the <tt>availLeft</tt> property
+     * Returns the {@code availLeft} property.
+     * @return the {@code availLeft} property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public int getAvailLeft() {
@@ -89,8 +89,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>availLeft</tt> property.
-     * @param availLeft the <tt>availLeft</tt> property
+     * Sets the {@code availLeft} property.
+     * @param availLeft the {@code availLeft} property
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setAvailLeft(final int availLeft) {
@@ -98,8 +98,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>availTop</tt> property.
-     * @return the <tt>availTop</tt> property
+     * Returns the {@code availTop} property.
+     * @return the {@code availTop} property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public int getAvailTop() {
@@ -107,8 +107,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>availTop</tt> property.
-     * @param availTop the <tt>availTop</tt> property
+     * Sets the {@code availTop} property.
+     * @param availTop the {@code availTop} property
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setAvailTop(final int availTop) {
@@ -119,8 +119,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>availWidth</tt> property.
-     * @return the <tt>availWidth</tt> property
+     * Returns the {@code availWidth} property.
+     * @return the {@code availWidth} property
      */
     @JsxGetter
     public int getAvailWidth() {
@@ -128,8 +128,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>availWidth</tt> property.
-     * @param availWidth the <tt>availWidth</tt> property
+     * Sets the {@code availWidth} property.
+     * @param availWidth the {@code availWidth} property
      */
     @JsxSetter
     public void setAvailWidth(final int availWidth) {
@@ -140,8 +140,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>bufferDepth</tt> property.
-     * @return the <tt>bufferDepth</tt> property
+     * Returns the {@code bufferDepth} property.
+     * @return the {@code bufferDepth} property
      */
     @JsxGetter(@WebBrowser(IE))
     public int getBufferDepth() {
@@ -149,8 +149,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>bufferDepth</tt> property.
-     * @param bufferDepth the <tt>bufferDepth</tt> property
+     * Sets the {@code bufferDepth} property.
+     * @param bufferDepth the {@code bufferDepth} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setBufferDepth(final int bufferDepth) {
@@ -161,8 +161,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>colorDepth</tt> property.
-     * @return the <tt>colorDepth</tt> property
+     * Returns the {@code colorDepth} property.
+     * @return the {@code colorDepth} property
      */
     @JsxGetter
     public int getColorDepth() {
@@ -170,8 +170,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>colorDepth</tt> property.
-     * @param colorDepth the <tt>colorDepth</tt> property
+     * Sets the {@code colorDepth} property.
+     * @param colorDepth the {@code colorDepth} property
      */
     @JsxSetter
     public void setColorDepth(final int colorDepth) {
@@ -182,8 +182,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>deviceXDPI</tt> property.
-     * @return the <tt>deviceXDPI</tt> property
+     * Returns the {@code deviceXDPI} property.
+     * @return the {@code deviceXDPI} property
      */
     @JsxGetter(@WebBrowser(IE))
     public int getDeviceXDPI() {
@@ -191,8 +191,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>deviceXDPI</tt> property.
-     * @param deviceXDPI the <tt>deviceXDPI</tt> property
+     * Sets the {@code deviceXDPI} property.
+     * @param deviceXDPI the {@code deviceXDPI} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setDeviceXDPI(final int deviceXDPI) {
@@ -203,8 +203,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>deviceYDPI</tt> property.
-     * @return the <tt>deviceYDPI</tt> property
+     * Returns the {@code deviceYDPI} property.
+     * @return the {@code deviceYDPI} property
      */
     @JsxGetter(@WebBrowser(IE))
     public int getDeviceYDPI() {
@@ -212,8 +212,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>deviceYDPI</tt> property.
-     * @param deviceYDPI the <tt>deviceYDPI</tt> property
+     * Sets the {@code deviceYDPI} property.
+     * @param deviceYDPI the {@code deviceYDPI} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setDeviceYDPI(final int deviceYDPI) {
@@ -224,8 +224,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>fontSmoothingEnabled</tt> property.
-     * @return the <tt>fontSmoothingEnabled</tt> property
+     * Returns the {@code fontSmoothingEnabled} property.
+     * @return the {@code fontSmoothingEnabled} property
      */
     @JsxGetter(@WebBrowser(IE))
     public boolean getFontSmoothingEnabled() {
@@ -233,8 +233,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>fontSmoothingEnabled</tt> property.
-     * @param fontSmoothingEnabled the <tt>fontSmoothingEnabled</tt> property
+     * Sets the {@code fontSmoothingEnabled} property.
+     * @param fontSmoothingEnabled the {@code fontSmoothingEnabled} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setFontSmoothingEnabled(final boolean fontSmoothingEnabled) {
@@ -245,8 +245,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>height</tt> property.
-     * @return the <tt>height</tt> property
+     * Returns the {@code height} property.
+     * @return the {@code height} property
      */
     @JsxGetter
     public int getHeight() {
@@ -254,8 +254,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>height</tt> property.
-     * @param height the <tt>height</tt> property
+     * Sets the {@code height} property.
+     * @param height the {@code height} property
      */
     @JsxSetter
     public void setHeight(final int height) {
@@ -266,8 +266,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>left</tt> property.
-     * @return the <tt>left</tt> property
+     * Returns the {@code left} property.
+     * @return the {@code left} property
      */
     @JsxGetter(@WebBrowser(FF))
     public int getLeft() {
@@ -275,8 +275,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>left</tt> property.
-     * @param left the <tt>left</tt> property
+     * Sets the {@code left} property.
+     * @param left the {@code left} property
      */
     @JsxSetter(@WebBrowser(FF))
     public void setLeft(final int left) {
@@ -284,8 +284,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>logicalXDPI</tt> property.
-     * @return the <tt>logicalXDPI</tt> property
+     * Returns the {@code logicalXDPI} property.
+     * @return the {@code logicalXDPI} property
      */
     @JsxGetter(@WebBrowser(IE))
     public int getLogicalXDPI() {
@@ -293,8 +293,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>logicalXDPI</tt> property.
-     * @param logicalXDPI the <tt>logicalXDPI</tt> property
+     * Sets the {@code logicalXDPI} property.
+     * @param logicalXDPI the {@code logicalXDPI} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setLogicalXDPI(final int logicalXDPI) {
@@ -305,8 +305,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>logicalYDPI</tt> property.
-     * @return the <tt>logicalYDPI</tt> property
+     * Returns the {@code logicalYDPI} property.
+     * @return the {@code logicalYDPI} property
      */
     @JsxGetter(@WebBrowser(IE))
     public int getLogicalYDPI() {
@@ -314,8 +314,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>logicalYDPI</tt> property.
-     * @param logicalYDPI the <tt>logicalYDPI</tt> property
+     * Sets the {@code logicalYDPI} property.
+     * @param logicalYDPI the {@code logicalYDPI} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setLogicalYDPI(final int logicalYDPI) {
@@ -326,8 +326,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>pixelDepth</tt> property.
-     * @return the <tt>pixelDepth</tt> property
+     * Returns the {@code pixelDepth} property.
+     * @return the {@code pixelDepth} property
      */
     @JsxGetter
     public int getPixelDepth() {
@@ -335,8 +335,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>pixelDepth</tt> property.
-     * @param pixelDepth the <tt>pixelDepth</tt> property
+     * Sets the {@code pixelDepth} property.
+     * @param pixelDepth the {@code pixelDepth} property
      */
     @JsxSetter
     public void setPixelDepth(final int pixelDepth) {
@@ -344,8 +344,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>systemXDPI</tt> property.
-     * @return the <tt>systemXDPI</tt> property
+     * Returns the {@code systemXDPI} property.
+     * @return the {@code systemXDPI} property
      */
     @JsxGetter(@WebBrowser(IE))
     public int getSystemXDPI() {
@@ -353,8 +353,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>systemXDPI</tt> property.
-     * @param systemXDPI the <tt>systemXDPI</tt> property
+     * Sets the {@code systemXDPI} property.
+     * @param systemXDPI the {@code systemXDPI} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setSystemXDPI(final int systemXDPI) {
@@ -365,8 +365,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>systemYDPI</tt> property.
-     * @return the <tt>systemYDPI</tt> property
+     * Returns the {@code systemYDPI} property.
+     * @return the {@code systemYDPI} property
      */
     @JsxGetter(@WebBrowser(IE))
     public int getSystemYDPI() {
@@ -374,8 +374,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>systemYDPI</tt> property.
-     * @param systemYDPI the <tt>systemYDPI</tt> property
+     * Sets the {@code systemYDPI} property.
+     * @param systemYDPI the {@code systemYDPI} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setSystemYDPI(final int systemYDPI) {
@@ -386,8 +386,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>top</tt> property.
-     * @return the <tt>top</tt> property
+     * Returns the {@code top} property.
+     * @return the {@code top} property
      */
     @JsxGetter(@WebBrowser(FF))
     public int getTop() {
@@ -395,8 +395,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>top</tt> property.
-     * @param top the <tt>top</tt> property
+     * Sets the {@code top} property.
+     * @param top the {@code top} property
      */
     @JsxSetter(@WebBrowser(FF))
     public void setTop(final int top) {
@@ -404,8 +404,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>updateInterval</tt> property.
-     * @return the <tt>updateInterval</tt> property
+     * Returns the {@code updateInterval} property.
+     * @return the {@code updateInterval} property
      */
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public int getUpdateInterval() {
@@ -413,8 +413,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the <tt>width</tt> property.
-     * @return the <tt>width</tt> property
+     * Returns the {@code width} property.
+     * @return the {@code width} property
      */
     @JsxGetter
     public int getWidth() {
@@ -422,8 +422,8 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Sets the <tt>width</tt> property.
-     * @param width the <tt>width</tt> property
+     * Sets the {@code width} property.
+     * @param width the {@code width} property
      */
     @JsxSetter
     public void setWidth(final int width) {

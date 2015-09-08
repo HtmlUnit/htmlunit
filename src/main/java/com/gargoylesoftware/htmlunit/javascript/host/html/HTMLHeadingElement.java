@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLHeadingElement".
+ * The JavaScript object {@code HTMLHeadingElement}.
  *
  * @author Ahmed Ashour
  */
@@ -72,8 +72,8 @@ public class HTMLHeadingElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the <tt>align</tt> property.
-     * @return the value of the <tt>align</tt> property
+     * Returns the value of the {@code align} property.
+     * @return the value of the {@code align} property
      */
     @JsxGetter
     public String getAlign() {
@@ -81,8 +81,8 @@ public class HTMLHeadingElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the <tt>align</tt> property.
-     * @param align the value of the <tt>align</tt> property
+     * Sets the value of the {@code align} property.
+     * @param align the value of the {@code align} property
      */
     @JsxSetter
     public void setAlign(final String align) {

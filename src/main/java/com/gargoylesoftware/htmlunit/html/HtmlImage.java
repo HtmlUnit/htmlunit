@@ -82,8 +82,7 @@ public class HtmlImage extends HtmlElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlImage(final String qualifiedName, final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
+    HtmlImage(final String qualifiedName, final SgmlPage page, final Map<String, DomAttr> attributes) {
         super(unifyLocalName(qualifiedName), page, attributes);
         originalQualifiedName_ = qualifiedName;
     }

@@ -36,7 +36,7 @@ public class HTMLTableComponent extends HTMLElement {
     private static final String VALIGN_DEFAULT_VALUE = "top";
 
     /**
-     * Returns the value of the "align" property.
+     * Returns the value of the {@code align} property.
      * @return the value of the "align" property
      */
     @JsxGetter
@@ -46,7 +46,7 @@ public class HTMLTableComponent extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "align" property.
+     * Sets the value of the {@code align} property.
      * @param align the value of the "align" property
      */
     @JsxSetter
@@ -55,7 +55,7 @@ public class HTMLTableComponent extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "vAlign" property.
+     * Returns the value of the {@code vAlign} property.
      * @return the value of the "vAlign" property
      */
     @JsxGetter
@@ -64,7 +64,7 @@ public class HTMLTableComponent extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "vAlign" property.
+     * Sets the value of the {@code vAlign} property.
      * @param vAlign the value of the "vAlign" property
      */
     @JsxSetter
@@ -88,7 +88,7 @@ public class HTMLTableComponent extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "ch" property.
+     * Returns the value of the {@code ch} property.
      * @return the value of the "ch" property
      */
     @Override
@@ -98,7 +98,7 @@ public class HTMLTableComponent extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "ch" property.
+     * Sets the value of the {@code ch} property.
      * @param ch the value of the "ch" property
      */
     @Override
@@ -108,7 +108,7 @@ public class HTMLTableComponent extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "chOff" property.
+     * Returns the value of the {@code chOff} property.
      * @return the value of the "chOff" property
      */
     @Override
@@ -118,7 +118,7 @@ public class HTMLTableComponent extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "chOff" property.
+     * Sets the value of the {@code chOff} property.
      * @param chOff the value of the "chOff" property
      */
     @Override

@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLAudioElement".
+ * The JavaScript object {@code HTMLAudioElement}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour

@@ -68,7 +68,7 @@ public class HTMLListElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "type" property.
+     * Returns the value of the {@code type} property.
      * @return the value of the "type" property
      */
     protected String getType() {
@@ -87,7 +87,7 @@ public class HTMLListElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "type" property.
+     * Sets the value of the {@code type} property.
      * @param type the value of the "type" property
      */
     protected void setType(final String type) {

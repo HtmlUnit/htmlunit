@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLBGSoundElement".
+ * The JavaScript object {@code HTMLBGSoundElement}.
  *
  * @author Ahmed Ashour
  */

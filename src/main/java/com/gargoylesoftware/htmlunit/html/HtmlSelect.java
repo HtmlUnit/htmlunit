@@ -661,7 +661,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns the value of the "selectedIndex" property.
+     * Returns the value of the {@code selectedIndex} property.
      * @return the selectedIndex property
      */
     public int getSelectedIndex() {
@@ -674,7 +674,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Sets the value of the "selectedIndex" property.
+     * Sets the value of the {@code selectedIndex} property.
      * @param index the new value
      */
     public void setSelectedIndex(final int index) {

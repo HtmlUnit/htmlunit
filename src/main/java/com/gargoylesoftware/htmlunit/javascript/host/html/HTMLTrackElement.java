@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLTrackElement".
+ * The JavaScript object {@code HTMLTrackElement}.
  *
  * @author Ahmed Ashour
  */

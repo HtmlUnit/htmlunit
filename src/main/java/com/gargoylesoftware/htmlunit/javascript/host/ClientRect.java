@@ -142,7 +142,7 @@ public class ClientRect extends SimpleScriptable {
     }
 
     /**
-     * Returns the "width" property.
+     * Returns the {@code width} property.
      * @return the "width" property
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
@@ -151,7 +151,7 @@ public class ClientRect extends SimpleScriptable {
     }
 
     /**
-     * Returns the "height" property.
+     * Returns the {@code height} property.
      * @return the "height" property
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })

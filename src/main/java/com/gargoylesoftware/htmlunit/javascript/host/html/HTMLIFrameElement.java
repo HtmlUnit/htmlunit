@@ -153,7 +153,7 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Returns the value of the {@code align} property.
      * @return the value of the "align" property
      */
     @JsxGetter
@@ -162,7 +162,7 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "align" property.
+     * Sets the value of the {@code align} property.
      * @param align the value of the "align" property
      */
     @JsxSetter
@@ -171,7 +171,7 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "width" property.
+     * Returns the value of the {@code width} property.
      * @return the value of the "width" property
      */
     @JsxGetter(propertyName = "width")
@@ -180,7 +180,7 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "width" property.
+     * Sets the value of the {@code width} property.
      * @param width the value of the "width" property
      */
     @JsxSetter
@@ -189,7 +189,7 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "width" property.
+     * Returns the value of the {@code width} property.
      * @return the value of the "width" property
      */
     @JsxGetter(propertyName = "height")
@@ -198,7 +198,7 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "height" property.
+     * Sets the value of the {@code height} property.
      * @param height the value of the "height" property
      */
     @JsxSetter

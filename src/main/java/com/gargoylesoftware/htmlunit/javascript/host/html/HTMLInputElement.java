@@ -375,7 +375,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Returns the value of the "alt" property.
+     * Returns the value of the {@code alt} property.
      * @return the value of the "alt" property
      */
     @JsxGetter
@@ -384,7 +384,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Returns the value of the "alt" property.
+     * Returns the value of the {@code alt} property.
      * @param alt the value
      */
     @JsxSetter
@@ -411,7 +411,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Returns the value of the {@code align} property.
      * @return the value of the "align" property
      */
     @JsxGetter
@@ -420,7 +420,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Sets the value of the "align" property.
+     * Sets the value of the {@code align} property.
      * @param align the value of the "align" property
      */
     @JsxSetter

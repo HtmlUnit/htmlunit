@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLDListElement".
+ * The JavaScript object {@code HTMLDListElement}.
  *
  * @author Ahmed Ashour
  */

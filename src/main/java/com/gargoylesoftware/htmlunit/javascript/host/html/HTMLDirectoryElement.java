@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLDirectoryElement".
+ * The JavaScript object {@code HTMLDirectoryElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

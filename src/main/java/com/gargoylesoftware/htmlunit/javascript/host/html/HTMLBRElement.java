@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLBRElement".
+ * The JavaScript object {@code HTMLBRElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -56,8 +56,8 @@ public class HTMLBRElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the <tt>clear</tt> property.
-     * @return the value of the <tt>clear</tt> property
+     * Returns the value of the {@code clear} property.
+     * @return the value of the {@code clear} property
      */
     @JsxGetter
     public String getClear() {
@@ -69,8 +69,8 @@ public class HTMLBRElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the <tt>clear</tt> property.
-     * @param clear the value of the <tt>clear</tt> property
+     * Sets the value of the {@code clear} property.
+     * @param clear the value of the {@code clear} property
      */
     @JsxSetter
     public void setClear(final String clear) {

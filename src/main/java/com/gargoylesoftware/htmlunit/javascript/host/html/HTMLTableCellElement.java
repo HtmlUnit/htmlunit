@@ -311,7 +311,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the "width" property.
+     * Returns the value of the {@code width} property.
      * @return the value of the "width" property
      */
     @JsxGetter(propertyName = "width")
@@ -322,7 +322,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the "width" property.
+     * Sets the value of the {@code width} property.
      * @param width the value of the "width" property
      */
     @JsxSetter
@@ -332,7 +332,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the "width" property.
+     * Returns the value of the {@code width} property.
      * @return the value of the "width" property
      */
     @JsxGetter(propertyName = "height")
@@ -343,7 +343,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the "height" property.
+     * Sets the value of the {@code height} property.
      * @param height the value of the "height" property
      */
     @JsxSetter

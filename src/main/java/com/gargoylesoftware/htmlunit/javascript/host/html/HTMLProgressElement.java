@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLProgressElement".
+ * The JavaScript object {@code HTMLProgressElement}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot

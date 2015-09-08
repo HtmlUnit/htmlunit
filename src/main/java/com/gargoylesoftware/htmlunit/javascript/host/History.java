@@ -54,7 +54,7 @@ public class History extends SimpleScriptable {
     }
 
     /**
-     * Returns the "length" property.
+     * Returns the {@code length} property.
      * @return the "length" property
      */
     @JsxGetter
@@ -64,7 +64,7 @@ public class History extends SimpleScriptable {
     }
 
     /**
-     * Returns the "state" property.
+     * Returns the {@code state} property.
      * @return the "state" property
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })

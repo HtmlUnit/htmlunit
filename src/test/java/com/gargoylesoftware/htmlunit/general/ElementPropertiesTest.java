@@ -1530,7 +1530,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("version")
-    @NotYetImplemented
     public void html() throws Exception {
         test("html");
     }

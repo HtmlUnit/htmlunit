@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContain
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLBodyElement".
+ * The JavaScript object {@code HTMLBodyElement}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot

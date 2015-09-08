@@ -41,7 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
 
 /**
- * The JavaScript object "HTMLObjectElement".
+ * The JavaScript object {@code HTMLObjectElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -65,7 +65,7 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
     }
 
     /**
-     * Returns the value of the "alt" property.
+     * Returns the value of the {@code alt} property.
      * @return the value of the "alt" property
      */
     @JsxGetter(@WebBrowser(IE))
@@ -75,7 +75,7 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
     }
 
     /**
-     * Returns the value of the "alt" property.
+     * Returns the value of the {@code alt} property.
      * @param alt the value
      */
     @JsxSetter(@WebBrowser(IE))

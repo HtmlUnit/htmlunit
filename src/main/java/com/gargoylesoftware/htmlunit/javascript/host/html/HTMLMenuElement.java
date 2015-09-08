@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLMenuElement".
+ * The JavaScript object {@code HTMLMenuElement}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek
@@ -52,7 +52,7 @@ public class HTMLMenuElement extends HTMLListElement {
     }
 
     /**
-     * Returns the value of the "type" property.
+     * Returns the value of the {@code type} property.
      * @return the value of the "type" property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
@@ -72,7 +72,7 @@ public class HTMLMenuElement extends HTMLListElement {
     }
 
     /**
-     * Sets the value of the "type" property.
+     * Sets the value of the {@code type} property.
      * @param type the value of the "type" property
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
@@ -97,7 +97,7 @@ public class HTMLMenuElement extends HTMLListElement {
     }
 
     /**
-     * Returns the value of the "label" property.
+     * Returns the value of the {@code label} property.
      * @return the value of the "label" property
      */
     @JsxGetter(@WebBrowser(FF))
@@ -106,7 +106,7 @@ public class HTMLMenuElement extends HTMLListElement {
     }
 
     /**
-     * Sets the value of the "label" property.
+     * Sets the value of the {@code label} property.
      * @param label the value of the "label" property
      */
     @JsxSetter(@WebBrowser(FF))

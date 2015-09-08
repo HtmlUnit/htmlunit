@@ -41,8 +41,7 @@ public class HtmlInlineFrame extends BaseFrameElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlInlineFrame(final String qualifiedName, final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
+    HtmlInlineFrame(final String qualifiedName, final SgmlPage page, final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
     }
 

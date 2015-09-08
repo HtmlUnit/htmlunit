@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLParagraphElement".
+ * The JavaScript object {@code HTMLParagraphElement}.
  *
  * @author Ahmed Ashour
  * @author Daniel Gredler
@@ -49,7 +49,7 @@ public class HTMLParagraphElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Returns the value of the {@code align} property.
      * @return the value of the "align" property
      */
     @JsxGetter
@@ -58,7 +58,7 @@ public class HTMLParagraphElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "align" property.
+     * Sets the value of the {@code align} property.
      * @param align the value of the "align" property
      */
     @JsxSetter

@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLDivElement".
+ * The JavaScript object {@code HTMLDivElement}.
  *
  * @author Ahmed Ashour
  * @author Daniel Gredler
@@ -53,7 +53,7 @@ public class HTMLDivElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Returns the value of the {@code align} property.
      * @return the value of the "align" property
      */
     @JsxGetter
@@ -62,7 +62,7 @@ public class HTMLDivElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "align" property.
+     * Sets the value of the {@code align} property.
      * @param align the value of the "align" property
      */
     @JsxSetter

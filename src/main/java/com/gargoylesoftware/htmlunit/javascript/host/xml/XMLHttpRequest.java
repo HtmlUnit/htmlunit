@@ -925,7 +925,7 @@ public class XMLHttpRequest extends EventTarget {
     }
 
     /**
-     * Returns the "withCredentials" property.
+     * Returns the {@code withCredentials} property.
      * @return the "withCredentials" property
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -934,8 +934,8 @@ public class XMLHttpRequest extends EventTarget {
     }
 
     /**
-     * Sets the "withCredentials" property.
-     * @param withCredentials the "withCredentials" property.
+     * Sets the {@code withCredentials} property.
+     * @param withCredentials the {@code withCredentials} property.
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setWithCredentials(final boolean withCredentials) {

@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLFieldSetElement".
+ * The JavaScript object {@code HTMLFieldSetElement}.
  *
  * @author Ahmed Ashour
  */
@@ -47,8 +47,8 @@ public class HTMLFieldSetElement extends FormChild {
     }
 
     /**
-     * Returns the value of the <tt>align</tt> property.
-     * @return the value of the <tt>align</tt> property
+     * Returns the value of the {@code align} property.
+     * @return the value of the {@code align} property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getAlign() {
@@ -56,8 +56,8 @@ public class HTMLFieldSetElement extends FormChild {
     }
 
     /**
-     * Sets the value of the <tt>align</tt> property.
-     * @param align the value of the <tt>align</tt> property
+     * Sets the value of the {@code align} property.
+     * @param align the value of the {@code align} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setAlign(final String align) {

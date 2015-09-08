@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLTextElement".
+ * The JavaScript object {@code HTMLTextElement}.
  *
  * @author Ronald Brill
  */

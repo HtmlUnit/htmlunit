@@ -51,7 +51,7 @@ public class HTMLCanvasElement extends HTMLElement {
     }
 
     /**
-     * Returns the "width" property.
+     * Returns the {@code width} property.
      * @return the "width" property
      */
     @Override
@@ -77,7 +77,7 @@ public class HTMLCanvasElement extends HTMLElement {
     }
 
     /**
-     * Sets the "width" property.
+     * Sets the {@code width} property.
      * @param width the "width" property
      */
     @JsxSetter
@@ -86,7 +86,7 @@ public class HTMLCanvasElement extends HTMLElement {
     }
 
     /**
-     * Returns the "height" property.
+     * Returns the {@code height} property.
      * @return the "height" property
      */
     @Override
@@ -101,7 +101,7 @@ public class HTMLCanvasElement extends HTMLElement {
     }
 
     /**
-     * Sets the "height" property.
+     * Sets the {@code height} property.
      * @param height the "height" property
      */
     @JsxSetter

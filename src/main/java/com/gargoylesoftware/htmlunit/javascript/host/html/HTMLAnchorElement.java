@@ -78,8 +78,8 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>href</tt> property.
-     * @param href the <tt>href</tt> property value
+     * Sets the {@code href} property.
+     * @param href the {@code href} property value
      */
     @JsxSetter
     public void setHref(final String href) {
@@ -87,8 +87,8 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of this link's <tt>href</tt> property.
-     * @return the value of this link's <tt>href</tt> property
+     * Returns the value of this link's {@code href} property.
+     * @return the value of this link's {@code href} property
      */
     @JsxGetter
     public String getHref() {

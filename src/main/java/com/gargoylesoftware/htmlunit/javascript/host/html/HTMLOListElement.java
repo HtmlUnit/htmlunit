@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLOListElement".
+ * The JavaScript object {@code HTMLOListElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

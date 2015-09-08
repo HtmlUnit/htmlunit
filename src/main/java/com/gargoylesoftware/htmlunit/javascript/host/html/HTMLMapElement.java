@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLMapElement".
+ * The JavaScript object {@code HTMLMapElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

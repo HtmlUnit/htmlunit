@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLQuoteElement".
+ * The JavaScript object {@code HTMLQuoteElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -47,7 +47,7 @@ public class HTMLQuoteElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "cite" property.
+     * Returns the value of the {@code cite} property.
      * @return the value of the "cite" property
      */
     @JsxGetter
@@ -57,7 +57,7 @@ public class HTMLQuoteElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "cite" property.
+     * Returns the value of the {@code cite} property.
      * @param cite the value
      */
     @JsxSetter

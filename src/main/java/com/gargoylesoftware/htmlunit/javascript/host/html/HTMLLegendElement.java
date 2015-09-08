@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLLegendElement".
+ * The JavaScript object {@code HTMLLegendElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

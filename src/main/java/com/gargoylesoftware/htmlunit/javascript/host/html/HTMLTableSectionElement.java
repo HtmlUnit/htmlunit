@@ -71,7 +71,7 @@ public class HTMLTableSectionElement extends RowContainer {
     }
 
     /**
-     * Returns the value of the "vAlign" property.
+     * Returns the value of the {@code vAlign} property.
      * @return the value of the "vAlign" property
      */
     @JsxGetter
@@ -80,7 +80,7 @@ public class HTMLTableSectionElement extends RowContainer {
     }
 
     /**
-     * Sets the value of the "vAlign" property.
+     * Sets the value of the {@code vAlign} property.
      * @param vAlign the value of the "vAlign" property
      */
     @JsxSetter
@@ -104,7 +104,7 @@ public class HTMLTableSectionElement extends RowContainer {
     }
 
     /**
-     * Returns the value of the "ch" property.
+     * Returns the value of the {@code ch} property.
      * @return the value of the "ch" property
      */
     @Override
@@ -114,7 +114,7 @@ public class HTMLTableSectionElement extends RowContainer {
     }
 
     /**
-     * Sets the value of the "ch" property.
+     * Sets the value of the {@code ch} property.
      * @param ch the value of the "ch" property
      */
     @Override
@@ -124,7 +124,7 @@ public class HTMLTableSectionElement extends RowContainer {
     }
 
     /**
-     * Returns the value of the "chOff" property.
+     * Returns the value of the {@code chOff} property.
      * @return the value of the "chOff" property
      */
     @Override
@@ -134,7 +134,7 @@ public class HTMLTableSectionElement extends RowContainer {
     }
 
     /**
-     * Sets the value of the "chOff" property.
+     * Sets the value of the {@code chOff} property.
      * @param chOff the value of the "chOff" property
      */
     @Override

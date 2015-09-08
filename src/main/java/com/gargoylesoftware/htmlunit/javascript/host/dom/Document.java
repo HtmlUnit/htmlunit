@@ -124,7 +124,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Returns the value of the "location" property.
+     * Returns the value of the {@code location} property.
      * @return the value of the "location" property
      */
     @JsxGetter
@@ -160,7 +160,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Returns the value of the "referrer" property.
+     * Returns the value of the {@code referrer} property.
      * @return the value of the "referrer" property
      */
     @JsxGetter

@@ -182,7 +182,7 @@ public class RowContainer extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Returns the value of the {@code align} property.
      * @return the value of the "align" property
      */
     @JsxGetter
@@ -191,7 +191,7 @@ public class RowContainer extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "align" property.
+     * Sets the value of the {@code align} property.
      * @param align the value of the "align" property
      */
     @JsxSetter

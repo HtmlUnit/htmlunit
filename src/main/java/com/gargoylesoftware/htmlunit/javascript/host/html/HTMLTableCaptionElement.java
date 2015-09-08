@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLTableCaptionElement".
+ * The JavaScript object {@code HTMLTableCaptionElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -57,7 +57,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Returns the value of the {@code align} property.
      * @return the value of the "align" property
      */
     @JsxGetter
@@ -67,7 +67,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "align" property.
+     * Sets the value of the {@code align} property.
      * @param align the value of the "align" property
      */
     @JsxSetter
@@ -76,7 +76,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "vAlign" property.
+     * Returns the value of the {@code vAlign} property.
      * @return the value of the "vAlign" property
      */
     @JsxGetter(@WebBrowser(IE))
@@ -85,7 +85,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "vAlign" property.
+     * Sets the value of the {@code vAlign} property.
      * @param vAlign the value of the "vAlign" property
      */
     @JsxSetter(@WebBrowser(IE))

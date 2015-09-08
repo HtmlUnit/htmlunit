@@ -165,7 +165,7 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Returns the value of the "options" property.
+     * Returns the value of the {@code options} property.
      * @return the options property
      */
     @JsxGetter
@@ -177,7 +177,7 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Returns the value of the "selectedIndex" property.
+     * Returns the value of the {@code selectedIndex} property.
      * @return the selectedIndex property
      */
     @JsxGetter
@@ -186,7 +186,7 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Sets the value of the "selectedIndex" property.
+     * Sets the value of the {@code selectedIndex} property.
      * @param index the new value
      */
     @JsxSetter
@@ -209,7 +209,7 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Returns the value of the "length" property.
+     * Returns the value of the {@code length} property.
      * @return the length property
      */
     @JsxGetter

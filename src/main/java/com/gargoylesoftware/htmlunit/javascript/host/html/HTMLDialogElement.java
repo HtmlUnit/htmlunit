@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLDialogElement".
+ * The JavaScript object {@code HTMLDialogElement}.
  *
  * @author Ahmed Ashour
  */

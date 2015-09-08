@@ -37,8 +37,7 @@ public final class HtmlHtml extends HtmlElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlHtml(final String qualifiedName, final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
+    HtmlHtml(final String qualifiedName, final SgmlPage page, final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
     }
 }

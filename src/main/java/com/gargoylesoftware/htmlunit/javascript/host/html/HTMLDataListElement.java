@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLDataListElement".
+ * The JavaScript object {@code HTMLDataListElement}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour

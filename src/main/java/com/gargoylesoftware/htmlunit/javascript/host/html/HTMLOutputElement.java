@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLOutputElement".
+ * The JavaScript object {@code HTMLOutputElement}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour

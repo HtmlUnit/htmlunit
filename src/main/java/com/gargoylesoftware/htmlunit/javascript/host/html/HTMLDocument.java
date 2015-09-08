@@ -958,7 +958,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the "images" property.
+     * Returns the value of the {@code images} property.
      * @return the value of the "images" property
      */
     @JsxGetter
@@ -1029,7 +1029,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the "URL" property.
+     * Returns the value of the {@code URL} property.
      * @return the value of the "URL" property
      */
     @JsxGetter(propertyName = "URL")
@@ -1051,7 +1051,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the "all" property.
+     * Returns the value of the {@code all} property.
      * @return the value of the "all" property
      */
     @JsxGetter
@@ -1758,7 +1758,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the <tt>frames</tt> property.
+     * Returns the value of the {@code frames} property.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537459.aspx">MSDN documentation</a>
      * @return the live collection of frames contained by this document
      */
@@ -2011,7 +2011,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the "activeElement" property.
+     * Returns the value of the {@code activeElement} property.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533065.aspx">MSDN documentation</a>
      * @return the value of the "activeElement" property
      */

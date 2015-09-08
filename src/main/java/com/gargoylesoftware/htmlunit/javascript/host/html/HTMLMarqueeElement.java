@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLMarqueeElement".
+ * The JavaScript object {@code HTMLMarqueeElement}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour

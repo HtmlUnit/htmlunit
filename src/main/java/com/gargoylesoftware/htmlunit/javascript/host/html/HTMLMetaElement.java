@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLMetaElement".
+ * The JavaScript object {@code HTMLMetaElement}.
  *
  * @author Ahmed Ashour
  */

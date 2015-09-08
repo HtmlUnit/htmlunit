@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLNextIdElement".
+ * The JavaScript object {@code HTMLNextIdElement}.
  *
  * @author Ronald Brill
  */

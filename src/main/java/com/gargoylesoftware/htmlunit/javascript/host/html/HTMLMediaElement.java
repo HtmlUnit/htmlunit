@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLMediaElement".
+ * The JavaScript object {@code HTMLMediaElement}.
  *
  * @author Ahmed Ashour
  */

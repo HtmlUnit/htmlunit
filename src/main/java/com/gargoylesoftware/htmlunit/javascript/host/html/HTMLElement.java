@@ -179,7 +179,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
- * The JavaScript object "HTMLElement" which is the base class for all HTML
+ * The JavaScript object {@code HTMLElement} which is the base class for all HTML
  * objects. This will typically wrap an instance of {@link HtmlElement}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -480,7 +480,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the value of the "all" property.
+     * Returns the value of the {@code all} property.
      * @return the value of the "all" property
      */
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
@@ -2200,7 +2200,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the "spellcheck" property.
+     * Returns the {@code spellcheck} property.
      * @return the "spellcheck" property
      */
     @JsxGetter(@WebBrowser(FF))
@@ -2209,7 +2209,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the "spellcheck" property.
+     * Sets the {@code spellcheck} property.
      * @param spellcheck the "spellcheck" property
      */
     @JsxSetter(@WebBrowser(FF))
@@ -2218,7 +2218,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the "lang" property.
+     * Returns the {@code lang} property.
      * @return the "lang" property
      */
     @JsxGetter
@@ -2227,7 +2227,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the "lang" property.
+     * Sets the {@code lang} property.
      * @param lang the "lang" property
      */
     @JsxSetter
@@ -2236,7 +2236,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the "language" property.
+     * Returns the {@code language} property.
      * @return the "language" property
      */
     @JsxGetter(@WebBrowser(IE))
@@ -2245,7 +2245,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the "language" property.
+     * Sets the {@code language} property.
      * @param language the "language" property
      */
     @JsxSetter(@WebBrowser(IE))
@@ -2254,7 +2254,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the "dir" property.
+     * Returns the {@code dir} property.
      * @return the "dir" property
      */
     @JsxGetter
@@ -2263,7 +2263,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the "dir" property.
+     * Sets the {@code dir} property.
      * @param dir the "dir" property
      */
     @JsxSetter
@@ -2281,7 +2281,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the "tabIndex" property.
+     * Sets the {@code tabIndex} property.
      * @param tabIndex the "tabIndex" property
      */
     @JsxSetter
@@ -2303,7 +2303,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the "accessKey" property.
+     * Returns the {@code accessKey} property.
      * @return the "accessKey" property
      */
     @JsxGetter
@@ -2312,7 +2312,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the "accessKey" property.
+     * Sets the {@code accessKey} property.
      * @param accessKey the "accessKey" property
      */
     @JsxSetter
@@ -2463,7 +2463,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Returns the value of the {@code align} property.
      * @param returnInvalidValues if {@code true}, this method will return any value, including technically
      *        invalid values; if {@code false}, this method will return an empty string instead of invalid values
      * @return the value of the "align" property
@@ -2483,7 +2483,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the value of the "align" property.
+     * Sets the value of the {@code align} property.
      * @param align the value of the "align" property
      * @param ignoreIfNoError if {@code true}, the invocation will be a no-op if it does not trigger an error
      *        (i.e., it will not actually set the align attribute)
@@ -2507,7 +2507,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the value of the "vAlign" property.
+     * Returns the value of the {@code vAlign} property.
      * @param valid the valid values; if {@code null}, any value is valid
      * @param defaultValue the default value to use, if necessary
      * @return the value of the "vAlign" property
@@ -2521,7 +2521,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the value of the "vAlign" property.
+     * Sets the value of the {@code vAlign} property.
      * @param vAlign the value of the "vAlign" property
      * @param valid the valid values; if {@code null}, any value is valid
      */
@@ -2536,7 +2536,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the value of the "ch" property.
+     * Returns the value of the {@code ch} property.
      * @return the value of the "ch" property
      */
     protected String getCh() {
@@ -2549,7 +2549,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the value of the "ch" property.
+     * Sets the value of the {@code ch} property.
      * @param ch the value of the "ch" property
      */
     protected void setCh(final String ch) {
@@ -2563,7 +2563,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the value of the "chOff" property.
+     * Returns the value of the {@code chOff} property.
      * @return the value of the "chOff" property
      */
     protected String getChOff() {
@@ -2575,7 +2575,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the value of the "chOff" property.
+     * Sets the value of the {@code chOff} property.
      * @param chOff the value of the "chOff" property
      */
     protected void setChOff(String chOff) {

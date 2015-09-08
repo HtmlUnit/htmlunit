@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLAreaElement".
+ * The JavaScript object {@code HTMLAreaElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -67,7 +67,7 @@ public class HTMLAreaElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "alt" property.
+     * Returns the value of the {@code alt} property.
      * @return the value of the "alt" property
      */
     @JsxGetter
@@ -76,7 +76,7 @@ public class HTMLAreaElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "alt" property.
+     * Returns the value of the {@code alt} property.
      * @param alt the value
      */
     @JsxSetter

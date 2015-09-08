@@ -86,7 +86,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Returns the "fillStyle" property.
+     * Returns the {@code fillStyle} property.
      * @return the "fillStyle" property
      */
     @JsxGetter
@@ -95,7 +95,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Sets the "fillStyle" property.
+     * Sets the {@code fillStyle} property.
      * @param fillStyle the "fillStyle" property
      */
     @JsxSetter
@@ -128,7 +128,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Returns the "strokeStyle" property.
+     * Returns the {@code strokeStyle} property.
      * @return the "strokeStyle" property
      */
     @JsxGetter
@@ -137,7 +137,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Sets the "strokeStyle" property.
+     * Sets the {@code strokeStyle} property.
      * @param strokeStyle the "strokeStyle" property
      */
     @JsxSetter
@@ -146,7 +146,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Returns the "lineWidth" property.
+     * Returns the {@code lineWidth} property.
      * @return the "lineWidth" property
      */
     @JsxGetter
@@ -155,7 +155,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Sets the "lineWidth" property.
+     * Sets the {@code lineWidth} property.
      * @param lineWidth the "lineWidth" property
      */
     @JsxSetter
@@ -164,7 +164,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Returns the "globalAlpha" property.
+     * Returns the {@code globalAlpha} property.
      * @return the "globalAlpha" property
      */
     @JsxGetter
@@ -173,7 +173,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Sets the "globalAlpha" property.
+     * Sets the {@code globalAlpha} property.
      * @param globalAlpha the "globalAlpha" property
      */
     @JsxSetter

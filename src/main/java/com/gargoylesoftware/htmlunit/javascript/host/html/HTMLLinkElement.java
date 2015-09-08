@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLLinkElement".
+ * The JavaScript object {@code HTMLLinkElement}.
  *
  * @author Ahmed Ashour
  */

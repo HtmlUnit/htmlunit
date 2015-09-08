@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLSpanElement".
+ * The JavaScript object {@code HTMLSpanElement}.
  *
  * @author Ahmed Ashour
  * @author Daniel Gredler
@@ -81,7 +81,7 @@ public class HTMLSpanElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "cite" property.
+     * Returns the value of the {@code cite} property.
      * @return the value of the "cite" property
      */
     public String getCite() {
@@ -90,7 +90,7 @@ public class HTMLSpanElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "cite" property.
+     * Returns the value of the {@code cite} property.
      * @param cite the value
      */
     public void setCite(final String cite) {
@@ -98,7 +98,7 @@ public class HTMLSpanElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "dateTime" property.
+     * Returns the value of the {@code dateTime} property.
      * @return the value of the "dateTime" property
      */
     public String getDateTime() {
@@ -107,7 +107,7 @@ public class HTMLSpanElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "dateTime" property.
+     * Returns the value of the {@code dateTime} property.
      * @param dateTime the value
      */
     public void setDateTime(final String dateTime) {

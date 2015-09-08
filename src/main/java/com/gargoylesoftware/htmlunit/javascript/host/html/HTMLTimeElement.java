@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLTimeElement".
+ * The JavaScript object {@code HTMLTimeElement}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour

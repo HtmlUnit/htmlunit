@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLTableColElement".
+ * The JavaScript object {@code HTMLTableColElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -58,7 +58,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the "span" property.
+     * Returns the value of the {@code span} property.
      * @return the value of the "span" property
      */
     @JsxGetter
@@ -78,7 +78,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the "span" property.
+     * Sets the value of the {@code span} property.
      * @param span the value of the "span" property
      */
     @JsxSetter
@@ -98,7 +98,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the "width" property.
+     * Returns the value of the {@code width} property.
      * @return the value of the "width" property
      */
     @JsxGetter(propertyName = "width")
@@ -109,7 +109,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the "width" property.
+     * Sets the value of the {@code width} property.
      * @param width the value of the "width" property
      */
     @JsxSetter

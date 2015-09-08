@@ -24,13 +24,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * The JavaScript object "HTMLHtmlElement".
+ * The JavaScript object {@code HTMLHtmlElement}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
@@ -124,4 +125,23 @@ public class HTMLHtmlElement extends HTMLElement {
     protected void setInnerTextImpl(final String value) {
         throw Context.reportRuntimeError("innerText is read-only for tag 'html'");
     }
+
+    /**
+     * Returns {@code version} property.
+     * @return the {@code version} property
+     */
+    @JsxGetter
+    public String getVersion() {
+        return getDomNodeOrDie().getAttribute("version");
+    }
+
+    /**
+     * Sets {@code version} property.
+     * @param version the {@code version} property
+     */
+    @JsxSetter
+    public void setVersion(final String version) {
+        getDomNodeOrDie().setAttribute("version", version);
+    }
+
 }

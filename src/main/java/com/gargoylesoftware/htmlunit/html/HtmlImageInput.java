@@ -53,8 +53,7 @@ public class HtmlImageInput extends HtmlInput {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlImageInput(final String qualifiedName, final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
+    HtmlImageInput(final String qualifiedName, final SgmlPage page, final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
     }
 

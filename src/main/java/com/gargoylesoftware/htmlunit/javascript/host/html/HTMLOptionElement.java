@@ -95,7 +95,7 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Returns the value of the "value" property.
+     * Returns the value of the {@code value} property.
      * @return the value property
      */
     @JsxGetter
@@ -109,7 +109,7 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Sets the value of the "value" property.
+     * Sets the value of the {@code value} property.
      * @param newValue the value property
      */
     @JsxSetter
@@ -120,7 +120,7 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Returns the value of the "text" property.
+     * Returns the value of the {@code text} property.
      * @return the text property
      */
     @JsxGetter
@@ -132,7 +132,7 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Sets the value of the "text" property.
+     * Sets the value of the {@code text} property.
      * @param newText the text property
      */
     @JsxSetter
@@ -143,7 +143,7 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Returns the value of the "selected" property.
+     * Returns the value of the {@code selected} property.
      * @return the text property
      */
     @JsxGetter
@@ -155,7 +155,7 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Sets the value of the "selected" property.
+     * Sets the value of the {@code selected} property.
      * @param selected the new selected property
      */
     @JsxSetter
@@ -176,7 +176,7 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Returns the value of the "defaultSelected" property.
+     * Returns the value of the {@code defaultSelected} property.
      * @return the text property
      */
     @JsxGetter
@@ -188,7 +188,7 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Returns the value of the "label" property.
+     * Returns the value of the {@code label} property.
      * @return the label property
      */
     @JsxGetter
@@ -201,7 +201,7 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Sets the value of the "label" property.
+     * Sets the value of the {@code label} property.
      * @param label the new label property
      */
     @JsxSetter

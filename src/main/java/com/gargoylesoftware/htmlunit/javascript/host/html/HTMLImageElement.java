@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLImageElement".
+ * The JavaScript object {@code HTMLImageElement}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
@@ -158,7 +158,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "alt" property.
+     * Returns the value of the {@code alt} property.
      * @return the value of the "alt" property
      */
     @JsxGetter
@@ -168,7 +168,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "alt" property.
+     * Sets the value of the {@code alt} property.
      * @param alt the value
      */
     @JsxSetter
@@ -196,7 +196,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "align" property.
+     * Returns the value of the {@code align} property.
      * @return the value of the "align" property
      */
     @JsxGetter
@@ -216,7 +216,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "align" property.
+     * Sets the value of the {@code align} property.
      * @param align the value of the "align" property
      */
     @JsxSetter
@@ -237,7 +237,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "width" property.
+     * Returns the value of the {@code width} property.
      * @return the value of the "width" property
      */
     @Override
@@ -290,7 +290,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "width" property.
+     * Sets the value of the {@code width} property.
      * @param width the value of the "width" property
      */
     @JsxSetter
@@ -299,7 +299,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the "height" property.
+     * Returns the value of the {@code height} property.
      * @return the value of the "height" property
      */
     @Override
@@ -352,7 +352,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "height" property.
+     * Sets the value of the {@code height} property.
      * @param height the value of the "height" property
      */
     @JsxSetter
