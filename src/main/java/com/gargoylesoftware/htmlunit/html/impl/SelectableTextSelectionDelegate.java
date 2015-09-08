@@ -60,8 +60,8 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
     }
 
     /**
-     * Returns the selected text in the owner element, or <tt>null</tt> if there is no selected text.
-     * @return the selected text in the owner element, or <tt>null</tt> if there is no selected text
+     * Returns the selected text in the owner element, or {@code null} if there is no selected text.
+     * @return the selected text in the owner element, or {@code null} if there is no selected text
      */
     public String getSelectedText() {
         return selection_.toString();

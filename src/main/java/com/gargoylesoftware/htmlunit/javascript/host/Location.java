@@ -130,7 +130,7 @@ public class Location extends SimpleScriptable {
     /**
      * Reloads the current page, possibly forcing retrieval from the server even if
      * the browser cache contains the latest version of the document.
-     * @param force if <tt>true</tt>, force reload from server; otherwise, may reload from cache
+     * @param force if {@code true}, force reload from server; otherwise, may reload from cache
      * @throws IOException if there is a problem reloading the page
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
      */

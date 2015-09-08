@@ -48,20 +48,20 @@ public interface JavaScriptJob extends Runnable, Comparable<JavaScriptJob> {
     void setTargetExecutionTime(final long targetExecutionTime);
 
     /**
-     * Returns the amount of time to wait between executions of this job (may be <tt>null</tt>).
-     * @return the amount of time to wait between executions of this job (may be <tt>null</tt>)
+     * Returns the amount of time to wait between executions of this job (may be {@code null}).
+     * @return the amount of time to wait between executions of this job (may be {@code null})
      */
     Integer getPeriod();
 
     /**
-     * Returns <tt>true</tt> if this job executes periodically.
-     * @return <tt>true</tt> if this job executes periodically
+     * Returns {@code true} if this job executes periodically.
+     * @return {@code true} if this job executes periodically
      */
     boolean isPeriodic();
 
     /**
-     * Returns <tt>true</tt> if has to be executed ASAP.
-     * @return <tt>true</tt> if has to be executed ASAP
+     * Returns {@code true} if has to be executed ASAP.
+     * @return {@code true} if has to be executed ASAP
      */
     boolean isExecuteAsap();
 }

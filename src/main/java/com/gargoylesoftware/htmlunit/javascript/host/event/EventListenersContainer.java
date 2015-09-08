@@ -295,9 +295,9 @@ public class EventListenersContainer implements Serializable {
     }
 
     /**
-     * Returns <tt>true</tt> if there are any event handlers for the specified event.
+     * Returns {@code true} if there are any event handlers for the specified event.
      * @param eventName the event name (e.g. "click")
-     * @return <tt>true</tt> if there are any event handlers for the specified event, <tt>false</tt> otherwise
+     * @return {@code true} if there are any event handlers for the specified event, {@code false} otherwise
      */
     public boolean hasEventHandlers(final String eventName) {
         final Handlers h = eventHandlers_.get(eventName);

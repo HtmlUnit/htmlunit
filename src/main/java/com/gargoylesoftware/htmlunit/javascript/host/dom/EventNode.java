@@ -370,7 +370,7 @@ public class EventNode extends Node {
      * for more information.
      * @param type specifies the name of the event to fire.
      * @param event specifies the event object from which to obtain event object properties.
-     * @return <tt>true</tt> if the event fired successfully, <tt>false</tt> if it was canceled
+     * @return {@code true} if the event fired successfully, {@code false} if it was canceled
      */
     @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public boolean fireEvent(final String type, Event event) {

@@ -146,24 +146,24 @@ public class Cookie implements Serializable {
     }
 
     /**
-     * Returns the domain to which this cookie applies (<tt>null</tt> for all domains).
-     * @return the domain to which this cookie applies (<tt>null</tt> for all domains)
+     * Returns the domain to which this cookie applies ({@code null} for all domains).
+     * @return the domain to which this cookie applies ({@code null} for all domains)
      */
     public String getDomain() {
         return httpClientCookie_.getDomain();
     }
 
     /**
-     * Returns the path to which this cookie applies (<tt>null</tt> for all paths).
-     * @return the path to which this cookie applies (<tt>null</tt> for all paths)
+     * Returns the path to which this cookie applies ({@code null} for all paths).
+     * @return the path to which this cookie applies ({@code null} for all paths)
      */
     public String getPath() {
         return httpClientCookie_.getPath();
     }
 
     /**
-     * Returns the date on which this cookie expires (<tt>null</tt> if it never expires).
-     * @return the date on which this cookie expires (<tt>null</tt> if it never expires)
+     * Returns the date on which this cookie expires ({@code null} if it never expires).
+     * @return the date on which this cookie expires ({@code null} if it never expires)
      */
     public Date getExpires() {
         return httpClientCookie_.getExpiryDate();

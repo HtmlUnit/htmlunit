@@ -1513,7 +1513,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
 
-    /** If <tt>true</tt>, Date.prototype.getYear subtracts 1900 only if 1900 &lt;= date &lt; 2000. */
+    /** If {@code true}, Date.prototype.getYear subtracts 1900 only if 1900 &lt;= date &lt; 2000. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_NON_ECMA_GET_YEAR,
 
@@ -1602,7 +1602,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_OUTER_HTML_THROW_EXCEPTION_WHEN_CLOSES,
 
-    /** If <tt>true</tt>, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
+    /** If {@code true}, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
     @BrowserFeature(@WebBrowser(IE))
     JS_PARENT_PROTO_PROPERTIES,
 

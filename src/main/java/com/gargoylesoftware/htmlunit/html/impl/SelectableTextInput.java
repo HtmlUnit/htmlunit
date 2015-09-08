@@ -57,8 +57,8 @@ public interface SelectableTextInput extends Node {
     void setText(String text);
 
     /**
-     * Returns the selected text in this element, or <tt>null</tt> if there is no selected text in this element.
-     * @return the selected text in this element, or <tt>null</tt> if there is no selected text in this element
+     * Returns the selected text in this element, or {@code null} if there is no selected text in this element.
+     * @return the selected text in this element, or {@code null} if there is no selected text in this element
      */
     String getSelectedText();
 

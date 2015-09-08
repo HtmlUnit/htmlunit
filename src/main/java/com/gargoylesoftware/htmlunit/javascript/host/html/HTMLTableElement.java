@@ -70,7 +70,7 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the table's caption element, or <tt>null</tt> if none exists. If more than one
+     * Returns the table's caption element, or {@code null} if none exists. If more than one
      * caption is declared in the table, this method returns the first one.
      * @return the table's caption element
      */
@@ -104,7 +104,7 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the table's tfoot element, or <tt>null</tt> if none exists. If more than one
+     * Returns the table's tfoot element, or {@code null} if none exists. If more than one
      * tfoot is declared in the table, this method returns the first one.
      * @return the table's tfoot element
      */
@@ -139,7 +139,7 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the table's thead element, or <tt>null</tt> if none exists. If more than one
+     * Returns the table's thead element, or {@code null} if none exists. If more than one
      * thead is declared in the table, this method returns the first one.
      * @return the table's thead element
      */

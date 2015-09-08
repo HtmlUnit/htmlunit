@@ -58,15 +58,15 @@ public class CookieManager implements Serializable {
 
     /**
      * Enables/disables cookie support. Cookies are enabled by default.
-     * @param enabled <tt>true</tt> to enable cookie support, <tt>false</tt> otherwise
+     * @param enabled {@code true} to enable cookie support, {@code false} otherwise
      */
     public synchronized void setCookiesEnabled(final boolean enabled) {
         cookiesEnabled_ = enabled;
     }
 
     /**
-     * Returns <tt>true</tt> if cookies are enabled. Cookies are enabled by default.
-     * @return <tt>true</tt> if cookies are enabled, <tt>false</tt> otherwise
+     * Returns {@code true} if cookies are enabled. Cookies are enabled by default.
+     * @return {@code true} if cookies are enabled, {@code false} otherwise
      */
     public synchronized boolean isCookiesEnabled() {
         return cookiesEnabled_;
@@ -167,10 +167,10 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * Returns the currently configured cookie with the specified name, or <tt>null</tt> if one does not exist.
+     * Returns the currently configured cookie with the specified name, or {@code null} if one does not exist.
      * If disabled, this returns null.
      * @param name the name of the cookie to return
-     * @return the currently configured cookie with the specified name, or <tt>null</tt> if one does not exist
+     * @return the currently configured cookie with the specified name, or {@code null} if one does not exist
      */
     public synchronized Cookie getCookie(final String name) {
         if (!isCookiesEnabled()) {

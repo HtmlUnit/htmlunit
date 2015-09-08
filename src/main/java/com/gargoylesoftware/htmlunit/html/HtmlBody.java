@@ -146,10 +146,10 @@ public class HtmlBody extends HtmlElement {
     }
 
     /**
-     * Returns <tt>true</tt> if this body is temporary (created because the <tt>body</tt> tag
+     * Returns {@code true} if this body is temporary (created because the <tt>body</tt> tag
      * has not yet been parsed).
      *
-     * @return <tt>true</tt> if this body is temporary (created because the <tt>body</tt> tag
+     * @return {@code true} if this body is temporary (created because the <tt>body</tt> tag
      *         has not yet been parsed)
      */
     public final boolean isTemporary() {

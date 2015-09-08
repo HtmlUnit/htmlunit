@@ -66,9 +66,9 @@ public final class ScriptResult {
     }
 
     /**
-     * Utility method testing if a script result is <tt>false</tt>.
-     * @param scriptResult a script result (may be <tt>null</tt>)
-     * @return <tt>true</tt> if <tt>scriptResult</tt> is <tt>false</tt>
+     * Utility method testing if a script result is {@code false}.
+     * @param scriptResult a script result (may be {@code null})
+     * @return {@code true} if <tt>scriptResult</tt> is {@code false}
      */
     public static boolean isFalse(final ScriptResult scriptResult) {
         return scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult());
@@ -76,8 +76,8 @@ public final class ScriptResult {
 
     /**
      * Utility method testing if a script result is undefined (there was no return value).
-     * @param scriptResult a script result (may be <tt>null</tt>)
-     * @return <tt>true</tt> if <tt>scriptResult</tt> is undefined (there was no return value)
+     * @param scriptResult a script result (may be {@code null})
+     * @return {@code true} if <tt>scriptResult</tt> is undefined (there was no return value)
      */
     public static boolean isUndefined(final ScriptResult scriptResult) {
         return scriptResult != null && scriptResult.getJavaScriptResult() instanceof Undefined;
@@ -88,8 +88,8 @@ public final class ScriptResult {
      * method defines how the return values for multiple event handlers are combined during event capturing and
      * bubbling. The behavior of this method varies based on whether or not we are emulating IE.
      *
-     * @param newResult the new {@link ScriptResult} (may be <tt>null</tt>)
-     * @param originalResult the original {@link ScriptResult} (may be <tt>null</tt>)
+     * @param newResult the new {@link ScriptResult} (may be {@code null})
+     * @param originalResult the original {@link ScriptResult} (may be {@code null})
      * @param ie whether or not we are emulating IE
      * @return a composite {@link ScriptResult}, based on the two input {@link ScriptResult}s
      */

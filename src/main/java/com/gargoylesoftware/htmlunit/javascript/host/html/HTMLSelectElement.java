@@ -294,8 +294,8 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Returns <tt>true</tt> if the <tt>multiple</tt> attribute is set.
-     * @return <tt>true</tt> if the <tt>multiple</tt> attribute is set
+     * Returns {@code true} if the <tt>multiple</tt> attribute is set.
+     * @return {@code true} if the <tt>multiple</tt> attribute is set
      */
     @JsxGetter
     public boolean getMultiple() {
@@ -304,7 +304,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Sets or clears the <tt>multiple</tt> attribute.
-     * @param multiple <tt>true</tt> to set the <tt>multiple</tt> attribute, <tt>false</tt> to clear it
+     * @param multiple {@code true} to set the <tt>multiple</tt> attribute, {@code false} to clear it
      */
     @JsxSetter
     public void setMultiple(final boolean multiple) {

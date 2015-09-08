@@ -48,8 +48,8 @@ public class Attachment {
 
     /**
      * Returns the attachment's filename, as suggested by the <tt>Content-Disposition</tt>
-     * header, or <tt>null</tt> if no filename was suggested.
-     * @return the attachment's suggested filename, or <tt>null</tt> if none was suggested
+     * header, or {@code null} if no filename was suggested.
+     * @return the attachment's suggested filename, or {@code null} if none was suggested
      */
     public String getSuggestedFilename() {
         final WebResponse response = page_.getWebResponse();
@@ -71,9 +71,9 @@ public class Attachment {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified response represents an attachment.
+     * Returns {@code true} if the specified response represents an attachment.
      * @param response the response to check
-     * @return <tt>true</tt> if the specified response represents an attachment, <tt>false</tt> otherwise
+     * @return {@code true} if the specified response represents an attachment, {@code false} otherwise
      * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
      */
     public static boolean isAttachment(final WebResponse response) {

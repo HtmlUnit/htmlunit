@@ -101,7 +101,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * The HtmlUnit default implementation ({@link DebuggerImpl}, {@link DebugFrameImpl}) may be
      * used, or a custom debugger may be used instead. By default, no debugger is used.
      *
-     * @param debugger the JavaScript debugger to use (may be <tt>null</tt>)
+     * @param debugger the JavaScript debugger to use (may be {@code null})
      */
     public void setDebugger(final Debugger debugger) {
         debugger_ = debugger;
@@ -109,7 +109,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
     /**
      * Returns the JavaScript debugger to use to receive JavaScript execution debugging information.
-     * By default, no debugger is used, and this method returns <tt>null</tt>.
+     * By default, no debugger is used, and this method returns {@code null}.
      *
      * @return the JavaScript debugger to use to receive JavaScript execution debugging information
      */

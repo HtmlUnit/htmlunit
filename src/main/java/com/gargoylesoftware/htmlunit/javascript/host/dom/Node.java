@@ -486,7 +486,7 @@ public class Node extends EventTarget {
 
     /**
      * Clones this node.
-     * @param deep if <tt>true</tt>, recursively clones all descendants
+     * @param deep if {@code true}, recursively clones all descendants
      * @return the newly cloned node
      */
     @JsxFunction

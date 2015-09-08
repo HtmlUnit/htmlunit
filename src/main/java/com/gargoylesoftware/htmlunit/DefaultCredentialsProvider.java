@@ -61,9 +61,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * digest and basic HTTP authentication.
      * @param username the username for the new credentials
      * @param password the password for the new credentials
-     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     * @param realm the realm to which to the new credentials apply (<tt>null</tt> if applicable to any realm)
+     * @param realm the realm to which to the new credentials apply ({@code null} if applicable to any realm)
      */
     public void addCredentials(final String username, final String password, final String host,
             final int port, final String realm) {
@@ -77,7 +77,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param username the username for the new credentials; should not include the domain to authenticate with;
      *        for example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not
      * @param password the password for the new credentials
-     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
      * @param workstation The workstation the authentication request is originating from.
      *        Essentially, the computer name for this machine.

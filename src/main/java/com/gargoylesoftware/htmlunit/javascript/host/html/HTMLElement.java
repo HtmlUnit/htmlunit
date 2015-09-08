@@ -685,7 +685,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * An IE-only method which copies all custom attributes from the specified source element
      * to this element.
      * @param source the source element from which to copy the custom attributes
-     * @param preserveIdentity if <tt>false</tt>, the <tt>name</tt> and <tt>id</tt> attributes are not copied
+     * @param preserveIdentity if {@code false}, the <tt>name</tt> and <tt>id</tt> attributes are not copied
      */
     @JsxFunction(@WebBrowser(IE))
     public void mergeAttributes(final HTMLElement source, final Object preserveIdentity) {
@@ -1540,7 +1540,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns <tt>true</tt> if cookies are enabled. Part of the <tt>#default#clientCaps</tt>
+     * Returns {@code true} if cookies are enabled. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
      * @return whether or not cookies are enabled
      */
@@ -1567,7 +1567,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns <tt>true</tt> if Java is enabled. Part of the <tt>#default#clientCaps</tt>
+     * Returns {@code true} if Java is enabled. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
      * @return whether or not Java is enabled
      */
@@ -1658,7 +1658,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Downloads all the components queued via {@link #addComponentRequest(String, String, String)}.
-     * @return <tt>true</tt> if the components are downloaded successfully
+     * @return {@code true} if the components are downloaded successfully
      * Current implementation always return {@code false}
      */
     public boolean doComponentRequest() {
@@ -1681,11 +1681,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns <tt>true</tt> if the specified component is installed.
+     * Returns {@code true} if the specified component is installed.
      * @param id the identifier for the component to check for
      * @param idType the type of id specified
      * @param minVersion the minimum version to check for
-     * @return <tt>true</tt> if the specified component is installed
+     * @return {@code true} if the specified component is installed
      */
     public boolean isComponentInstalled(final String id, final String idType, final String minVersion) {
         return false;
@@ -1716,12 +1716,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     //----------------------- START #default#homePage BEHAVIOR -----------------------
 
     /**
-     * Returns <tt>true</tt> if the specified URL is the web client's current
+     * Returns {@code true} if the specified URL is the web client's current
      * homepage and the document calling the method is on the same domain as the
      * user's homepage. Part of the <tt>#default#homePage</tt> default IE behavior
      * implementation.
      * @param url the URL to check
-     * @return <tt>true</tt> if the specified URL is the current homepage
+     * @return {@code true} if the specified URL is the current homepage
      */
     public boolean isHomePage(final String url) {
         try {
@@ -1819,9 +1819,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns <tt>true</tt> if this element's node is an ancestor of the specified event's target node.
+     * Returns {@code true} if this element's node is an ancestor of the specified event's target node.
      * @param event the event whose target node is to be checked
-     * @return <tt>true</tt> if this element's node is an ancestor of the specified event's target node
+     * @return {@code true} if this element's node is an ancestor of the specified event's target node
      */
     protected boolean isAncestorOfEventTarget(final MouseEvent event) {
         if (event == null) {
@@ -2324,9 +2324,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the value of the specified attribute (width or height).
      * @return the value of the specified attribute (width or height)
      * @param attributeName the name of the attribute to return (<tt>"width"</tt> or <tt>"height"</tt>)
-     * @param returnNegativeValues if <tt>true</tt>, negative values are returned;
-     *        if <tt>false</tt>, this method returns an empty string in lieu of negative values;
-     *        if <tt>null</tt>, this method returns <tt>0</tt> in lieu of negative values
+     * @param returnNegativeValues if {@code true}, negative values are returned;
+     *        if {@code false}, this method returns an empty string in lieu of negative values;
+     *        if {@code null}, this method returns <tt>0</tt> in lieu of negative values
      */
     protected String getWidthOrHeight(final String attributeName, final Boolean returnNegativeValues) {
         String value = getDomNodeOrDie().getAttribute(attributeName);
@@ -2365,8 +2365,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the value of the specified attribute (width or height).
      * @param attributeName the name of the attribute to set (<tt>"width"</tt> or <tt>"height"</tt>)
      * @param value the value of the specified attribute (width or height)
-     * @param allowNegativeValues if <tt>true</tt>, negative values will be stored;
-     *        if <tt>false</tt>, negative values cause an exception to be thrown;<br>
+     * @param allowNegativeValues if {@code true}, negative values will be stored;
+     *        if {@code false}, negative values cause an exception to be thrown;<br>
      *        this check/conversion is only done if the feature JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES
      *        is set for the simulated browser
      */
@@ -2464,8 +2464,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the value of the "align" property.
-     * @param returnInvalidValues if <tt>true</tt>, this method will return any value, including technically
-     *        invalid values; if <tt>false</tt>, this method will return an empty string instead of invalid values
+     * @param returnInvalidValues if {@code true}, this method will return any value, including technically
+     *        invalid values; if {@code false}, this method will return an empty string instead of invalid values
      * @return the value of the "align" property
      */
     protected String getAlign(final boolean returnInvalidValues) {
@@ -2485,7 +2485,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Sets the value of the "align" property.
      * @param align the value of the "align" property
-     * @param ignoreIfNoError if <tt>true</tt>, the invocation will be a no-op if it does not trigger an error
+     * @param ignoreIfNoError if {@code true}, the invocation will be a no-op if it does not trigger an error
      *        (i.e., it will not actually set the align attribute)
      */
     protected void setAlign(final String align, final boolean ignoreIfNoError) {
@@ -2508,7 +2508,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the value of the "vAlign" property.
-     * @param valid the valid values; if <tt>null</tt>, any value is valid
+     * @param valid the valid values; if {@code null}, any value is valid
      * @param defaultValue the default value to use, if necessary
      * @return the value of the "vAlign" property
      */
@@ -2523,7 +2523,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Sets the value of the "vAlign" property.
      * @param vAlign the value of the "vAlign" property
-     * @param valid the valid values; if <tt>null</tt>, any value is valid
+     * @param valid the valid values; if {@code null}, any value is valid
      */
     protected void setVAlign(final Object vAlign, final String[] valid) {
         final String s = Context.toString(vAlign).toLowerCase(Locale.ROOT);

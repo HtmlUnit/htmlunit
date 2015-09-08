@@ -369,7 +369,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the current event (used by JavaScript only when emulating IE).
-     * @return the current event, or <tt>null</tt> if no event is currently available
+     * @return the current event, or {@code null} if no event is currently available
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public Object getEvent() {
@@ -378,7 +378,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the current event (used internally regardless of the emulation mode).
-     * @return the current event, or <tt>null</tt> if no event is currently available
+     * @return the current event, or {@code null} if no event is currently available
      */
     public Event getCurrentEvent() {
         return currentEvent_;
@@ -400,7 +400,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param name the name
      * @param features the features
      * @param replace whether to replace in the history list or no
-     * @return the newly opened window, or <tt>null</tt> if popup windows have been disabled
+     * @return the newly opened window, or {@code null} if popup windows have been disabled
      * @see com.gargoylesoftware.htmlunit.WebClientOptions#isPopupBlockerEnabled()
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
      */
@@ -875,7 +875,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the value of the opener property.
-     * @return the value of window.opener, <tt>null</tt> for a top level window
+     * @return the value of window.opener, {@code null} for a top level window
      */
     @JsxGetter
     public Object getOpener() {
@@ -1699,7 +1699,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * that of <tt>element.style</tt>, but the value returned by this method is read-only.
      *
      * @param element the element
-     * @param pseudo a string specifying the pseudo-element to match (may be <tt>null</tt>)
+     * @param pseudo a string specifying the pseudo-element to match (may be {@code null})
      * @return the computed style
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
@@ -2148,8 +2148,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * DOM reference</a> for more information.
      *
      * @param event the event to be dispatched
-     * @return <tt>false</tt> if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
+     * @return {@code false} if at least one of the event handlers which handled the event
+     *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Override
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })

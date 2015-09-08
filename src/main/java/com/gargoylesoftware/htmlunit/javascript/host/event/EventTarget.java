@@ -214,9 +214,9 @@ public class EventTarget extends SimpleScriptable {
     }
 
     /**
-     * Returns <tt>true</tt> if there are any event handlers for the specified event.
+     * Returns {@code true} if there are any event handlers for the specified event.
      * @param eventName the event name (e.g. "onclick")
-     * @return <tt>true</tt> if there are any event handlers for the specified event, <tt>false</tt> otherwise
+     * @return {@code true} if there are any event handlers for the specified event, {@code false} otherwise
      */
     public boolean hasEventHandlers(final String eventName) {
         if (eventListenersContainer_ == null) {
@@ -228,7 +228,7 @@ public class EventTarget extends SimpleScriptable {
     /**
      * Returns the specified event handler.
      * @param eventName the event name (e.g. "onclick")
-     * @return the handler function, or <tt>null</tt> if the property is null or not a function
+     * @return the handler function, or {@code null} if the property is null or not a function
      */
     public Function getEventHandler(final String eventName) {
         if (eventListenersContainer_ == null) {
@@ -257,8 +257,8 @@ public class EventTarget extends SimpleScriptable {
      * DOM reference</a> for more information.
      *
      * @param event the event to be dispatched
-     * @return <tt>false</tt> if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
+     * @return {@code false} if at least one of the event handlers which handled the event
+     *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean dispatchEvent(final Event event) {

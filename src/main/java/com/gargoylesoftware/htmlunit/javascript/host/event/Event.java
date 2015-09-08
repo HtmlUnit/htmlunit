@@ -593,9 +593,9 @@ public class Event extends SimpleScriptable {
     }
 
     /**
-     * Returns <tt>true</tt> if both <tt>cancelable</tt> is <tt>true</tt> and <tt>preventDefault()</tt> has been
-     * called for this event. Otherwise this attribute must return <tt>false</tt>.
-     * @return <tt>true</tt> if this event has been cancelled or not
+     * Returns {@code true} if both <tt>cancelable</tt> is {@code true} and <tt>preventDefault()</tt> has been
+     * called for this event. Otherwise this attribute must return {@code false}.
+     * @return {@code true} if this event has been cancelled or not
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getDefaultPrevented() {
@@ -685,12 +685,12 @@ public class Event extends SimpleScriptable {
     }
 
     /**
-     * Returns <tt>true</tt> if this event has been aborted via <tt>preventDefault()</tt> in
+     * Returns {@code true} if this event has been aborted via <tt>preventDefault()</tt> in
      * standards-compliant browsers, or via the event's <tt>returnValue</tt> property in IE, or
-     * by the event handler returning <tt>false</tt>.
+     * by the event handler returning {@code false}.
      *
-     * @param result the event handler result (if <tt>false</tt>, the event is considered aborted)
-     * @return <tt>true</tt> if this event has been aborted
+     * @param result the event handler result (if {@code false}, the event is considered aborted)
+     * @return {@code true} if this event has been aborted
      */
     public boolean isAborted(final ScriptResult result) {
         final boolean checkReturnValue = getBrowserVersion().hasFeature(JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE);

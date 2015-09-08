@@ -177,8 +177,8 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns <tt>true</tt> if this script is deferred.
-     * @return <tt>true</tt> if this script is deferred
+     * Returns {@code true} if this script is deferred.
+     * @return {@code true} if this script is deferred
      */
     protected boolean isDeferred() {
         return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;

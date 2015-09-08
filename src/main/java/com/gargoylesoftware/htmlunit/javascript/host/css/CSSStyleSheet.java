@@ -289,8 +289,8 @@ public class CSSStyleSheet extends StyleSheet {
      * Loads the stylesheet at the specified link or href.
      * @param window the current window
      * @param element the parent DOM element
-     * @param link the stylesheet's link (may be <tt>null</tt> if an <tt>url</tt> is specified)
-     * @param url the stylesheet's url (may be <tt>null</tt> if a <tt>link</tt> is specified)
+     * @param link the stylesheet's link (may be {@code null} if an <tt>url</tt> is specified)
+     * @param url the stylesheet's url (may be {@code null} if a <tt>link</tt> is specified)
      * @return the loaded stylesheet
      */
     public static CSSStyleSheet loadStylesheet(final Window window, final HTMLElement element,
@@ -368,23 +368,23 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified selector selects the specified element.
+     * Returns {@code true} if the specified selector selects the specified element.
      *
      * @param selector the selector to test
      * @param element the element to test
-     * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
+     * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     boolean selects(final Selector selector, final DomElement element) {
         return selects(getBrowserVersion(), selector, element);
     }
 
     /**
-     * Returns <tt>true</tt> if the specified selector selects the specified element.
+     * Returns {@code true} if the specified selector selects the specified element.
      *
      * @param browserVersion the browser version
      * @param selector the selector to test
      * @param element the element to test
-     * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
+     * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element) {
@@ -465,12 +465,12 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified condition selects the specified element.
+     * Returns {@code true} if the specified condition selects the specified element.
      *
      * @param browserVersion the browser version
      * @param condition the condition to test
      * @param element the element to test
-     * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
+     * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element) {
         if (condition instanceof PrefixAttributeConditionImpl) {
@@ -1125,8 +1125,8 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * Returns <tt>true</tt> if this stylesheet is active, based on the media types it is associated with (if any).
-     * @return <tt>true</tt> if this stylesheet is active, based on the media types it is associated with (if any)
+     * Returns {@code true} if this stylesheet is active, based on the media types it is associated with (if any).
+     * @return {@code true} if this stylesheet is active, based on the media types it is associated with (if any)
      */
     public boolean isActive() {
         final String media;

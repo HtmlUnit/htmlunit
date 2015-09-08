@@ -277,10 +277,10 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /**
-     * Returns the window to which this job manager belongs, or <tt>null</tt> if
+     * Returns the window to which this job manager belongs, or {@code null} if
      * it has been garbage collected.
      *
-     * @return the window to which this job manager belongs, or <tt>null</tt> if
+     * @return the window to which this job manager belongs, or {@code null} if
      *         it has been garbage collected
      */
     private WebWindow getWindow() {

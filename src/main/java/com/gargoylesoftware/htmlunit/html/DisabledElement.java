@@ -22,8 +22,8 @@ package com.gargoylesoftware.htmlunit.html;
 public interface DisabledElement {
 
     /**
-     * Returns <tt>true</tt> if the disabled attribute is set for this element.
-     * @return <tt>true</tt> if the disabled attribute is set for this element
+     * Returns {@code true} if the disabled attribute is set for this element.
+     * @return {@code true} if the disabled attribute is set for this element
      */
     boolean isDisabled();
 

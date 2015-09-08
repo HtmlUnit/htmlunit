@@ -360,7 +360,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * on these two functions work. See {@link HTMLDocumentTest#documentMethodsWithoutDocument()}
      * for sample JavaScript code.
      *
-     * @return the real document's DOM node, or <tt>null</tt> if we're not emulating IE
+     * @return the real document's DOM node, or {@code null} if we're not emulating IE
      */
     private DomNode getDomNodeOrNullFromRealDocument() {
         DomNode node = null;
@@ -1638,7 +1638,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the domain name of the server that served the document, or <tt>null</tt> if the server
+     * Returns the domain name of the server that served the document, or {@code null} if the server
      * cannot be identified by a domain name.
      * @return the domain name of the server that served the document
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
@@ -1886,12 +1886,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     /**
      * Creates and returns a new TreeWalker. The following JavaScript parameters are passed into this method:
      * <ul>
-     *   <li>JavaScript param 1: The root node of the TreeWalker. Must not be <tt>null</tt>.</li>
+     *   <li>JavaScript param 1: The root node of the TreeWalker. Must not be {@code null}.</li>
      *   <li>JavaScript param 2: Flag specifying which types of nodes appear in the logical view of the TreeWalker.
      *       See {@link NodeFilter} for the set of possible Show_ values.</li>
-     *   <li>JavaScript param 3: The {@link NodeFilter} to be used with this TreeWalker, or <tt>null</tt>
+     *   <li>JavaScript param 3: The {@link NodeFilter} to be used with this TreeWalker, or {@code null}
      *       to indicate no filter.</li>
-     *   <li>JavaScript param 4: If <tt>false</tt>, the contents of EntityReference nodes are not present
+     *   <li>JavaScript param 4: If {@code false}, the contents of EntityReference nodes are not present
      *       in the logical view.</li>
      * </ul>
      *
@@ -1996,7 +1996,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param cmd the command identifier
      * @param userInterface display a user interface if the command supports one
      * @param value the string, number, or other value to assign (possible values depend on the command)
-     * @return <tt>true</tt> if the command was successful, <tt>false</tt> otherwise
+     * @return {@code true} if the command was successful, {@code false} otherwise
      */
     @JsxFunction
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
@@ -2052,8 +2052,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * DOM reference</a> for more information.
      *
      * @param event the event to be dispatched
-     * @return <tt>false</tt> if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
+     * @return {@code false} if at least one of the event handlers which handled the event
+     *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Override
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })

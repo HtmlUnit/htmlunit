@@ -322,8 +322,8 @@ public class HtmlPage extends InteractivePage {
     }
 
     /**
-     * Returns the <tt>body</tt> element (or <tt>frameset</tt> element), or <tt>null</tt> if it does not yet exist.
-     * @return the <tt>body</tt> element (or <tt>frameset</tt> element), or <tt>null</tt> if it does not yet exist
+     * Returns the <tt>body</tt> element (or <tt>frameset</tt> element), or {@code null} if it does not yet exist.
+     * @return the <tt>body</tt> element (or <tt>frameset</tt> element), or {@code null} if it does not yet exist
      */
     public HtmlElement getBody() {
         final HtmlElement doc = getDocumentElement();
@@ -989,12 +989,12 @@ public class HtmlPage extends InteractivePage {
     }
 
     /**
-     * Loads JavaScript from the specified URL. This method may return <tt>null</tt> if
+     * Loads JavaScript from the specified URL. This method may return {@code null} if
      * there is a problem loading the code from the specified URL.
      *
      * @param url the URL of the script
      * @param charset the charset to use to read the text
-     * @return the content of the file, or <tt>null</tt> if we ran into a compile error
+     * @return the content of the file, or {@code null} if we ran into a compile error
      * @throws IOException if there is a problem downloading the JavaScript file
      * @throws FailingHttpStatusCodeException if the request's status code indicates a request
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
@@ -1180,7 +1180,7 @@ public class HtmlPage extends InteractivePage {
     /**
      * Looks for and executes any appropriate event handlers. Looks for body and frame tags.
      * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD}, or {@link Event#TYPE_BEFORE_UNLOAD}
-     * @return <tt>true</tt> if user accepted <tt>onbeforeunload</tt> (not relevant to other events)
+     * @return {@code true} if user accepted <tt>onbeforeunload</tt> (not relevant to other events)
      */
     private boolean executeEventHandlersIfNeeded(final String eventType) {
         // If JavaScript isn't enabled, there's nothing for us to do.
@@ -1870,7 +1870,7 @@ public class HtmlPage extends InteractivePage {
      * Loads the content of the contained frames. This is done after the page is completely loaded, to allow script
      * contained in the frames to reference elements from the page located after the closing &lt;/frame&gt; tag.
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to <tt>true</tt>
+     *         {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to {@code true}
      */
     void loadFrames() throws FailingHttpStatusCodeException {
         for (final FrameWindow w : getFrames()) {
@@ -2064,8 +2064,8 @@ public class HtmlPage extends InteractivePage {
     }
 
     /**
-     * Returns <tt>true</tt> if an HTML parser is operating on this page, adding content to it.
-     * @return <tt>true</tt> if an HTML parser is operating on this page, adding content to it
+     * Returns {@code true} if an HTML parser is operating on this page, adding content to it.
+     * @return {@code true} if an HTML parser is operating on this page, adding content to it
      */
     public boolean isBeingParsed() {
         return parserCount_ > 0;
@@ -2086,13 +2086,13 @@ public class HtmlPage extends InteractivePage {
     }
 
     /**
-     * Returns <tt>true</tt> if an HTML parser is parsing a non-inline HTML snippet to add content
+     * Returns {@code true} if an HTML parser is parsing a non-inline HTML snippet to add content
      * to this page. Non-inline content is content that is parsed for the page, but not in the
      * same stream as the page itself -- basically anything other than <tt>document.write()</tt>
      * or <tt>document.writeln()</tt>: <tt>innerHTML</tt>, <tt>outerHTML</tt>,
      * <tt>document.createElement()</tt>, etc.
      *
-     * @return <tt>true</tt> if an HTML parser is parsing a non-inline HTML snippet to add content
+     * @return {@code true} if an HTML parser is parsing a non-inline HTML snippet to add content
      *         to this page
      */
     boolean isParsingHtmlSnippet() {
@@ -2114,11 +2114,11 @@ public class HtmlPage extends InteractivePage {
     }
 
     /**
-     * Returns <tt>true</tt> if an HTML parser is parsing an inline HTML snippet to add content
+     * Returns {@code true} if an HTML parser is parsing an inline HTML snippet to add content
      * to this page. Inline content is content inserted into the parser stream dynamically
      * while the page is being parsed (i.e. <tt>document.write()</tt> or <tt>document.writeln()</tt>).
      *
-     * @return <tt>true</tt> if an HTML parser is parsing an inline HTML snippet to add content
+     * @return {@code true} if an HTML parser is parsing an inline HTML snippet to add content
      *         to this page
      */
     boolean isParsingInlineHtmlSnippet() {

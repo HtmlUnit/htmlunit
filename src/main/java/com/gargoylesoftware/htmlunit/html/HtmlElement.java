@@ -416,7 +416,7 @@ public abstract class HtmlElement extends DomElement {
      * Returns this element's tab index, if it has one. If the tab index is outside of the
      * valid range (less than <tt>0</tt> or greater than <tt>32767</tt>), this method
      * returns {@link #TAB_INDEX_OUT_OF_BOUNDS}. If this element does not have
-     * a tab index, or its tab index is otherwise invalid, this method returns <tt>null</tt>.
+     * a tab index, or its tab index is otherwise invalid, this method returns {@code null}.
      *
      * @return this element's tab index
      */
@@ -439,7 +439,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the first element with the specified tag name that is an ancestor to this element, or
-     * <tt>null</tt> if no such element is found.
+     * {@code null} if no such element is found.
      * @param tagName the name of the tag searched (case insensitive)
      * @return the first element with the specified tag name that is an ancestor to this element
      */
@@ -455,7 +455,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns the form which contains this element, or <tt>null</tt> if this element is not inside
+     * Returns the form which contains this element, or {@code null} if this element is not inside
      * of a form.
      * @return the form which contains this element
      */
@@ -531,9 +531,9 @@ public abstract class HtmlElement extends DomElement {
      * submits the enclosed form.
      *
      * @param c the character you wish to simulate typing
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
-     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     * @param shiftKey {@code true} if SHIFT is pressed during the typing
+     * @param ctrlKey {@code true} if CTRL is pressed during the typing
+     * @param altKey {@code true} if ALT is pressed during the typing
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
@@ -742,9 +742,9 @@ public abstract class HtmlElement extends DomElement {
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
      * @param keyCode the key code wish to simulate typing
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
-     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     * @param shiftKey {@code true} if SHIFT is pressed during the typing
+     * @param ctrlKey {@code true} if CTRL is pressed during the typing
+     * @param altKey {@code true} if ALT is pressed during the typing
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
@@ -828,9 +828,9 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      * @param c the character you with to simulate typing
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
-     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     * @param shiftKey {@code true} if SHIFT is pressed during the typing
+     * @param ctrlKey {@code true} if CTRL is pressed during the typing
+     * @param altKey {@code true} if ALT is pressed during the typing
      */
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final DomNode domNode = getDoTypeNode();
@@ -853,9 +853,9 @@ public abstract class HtmlElement extends DomElement {
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
      * @param keyCode the key code wish to simulate typing
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
-     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     * @param shiftKey {@code true} if SHIFT is pressed during the typing
+     * @param ctrlKey {@code true} if CTRL is pressed during the typing
+     * @param altKey {@code true} if ALT is pressed during the typing
      */
     protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final DomNode domNode = getDoTypeNode();
@@ -920,9 +920,9 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns <tt>true</tt> if clicking Enter (ASCII 10, or '\n') should submit the enclosed form (if any).
-     * The default implementation returns <tt>false</tt>.
-     * @return <tt>true</tt> if clicking Enter should submit the enclosed form (if any)
+     * Returns {@code true} if clicking Enter (ASCII 10, or '\n') should submit the enclosed form (if any).
+     * The default implementation returns {@code false}.
+     * @return {@code true} if clicking Enter should submit the enclosed form (if any)
      */
     protected boolean isSubmittableByEnter() {
         return false;
@@ -1024,7 +1024,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * Returns <tt>true</tt> if this element has any JavaScript functions that need to be executed when the
+     * Returns {@code true} if this element has any JavaScript functions that need to be executed when the
      * specified event occurs.
      * @param eventName the name of the event, such as "onclick" or "onblur", etc
      * @return true if an event handler has been defined otherwise false

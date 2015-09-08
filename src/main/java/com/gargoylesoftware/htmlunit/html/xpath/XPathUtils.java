@@ -113,7 +113,7 @@ public final class XPathUtils {
      * @param contextNode the node to start searching from
      * @param str a valid XPath string
      * @param a prefix resolver to use for resolving namespace prefixes, or null
-     * @return an XObject, which can be used to obtain a string, number, nodelist, etc (should never be <tt>null</tt>)
+     * @return an XObject, which can be used to obtain a string, number, nodelist, etc (should never be {@code null})
      * @throws TransformerException if a syntax or other error occurs
      */
     private static XObject evaluateXPath(final DomNode contextNode,

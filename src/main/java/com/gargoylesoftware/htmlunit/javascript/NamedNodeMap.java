@@ -84,7 +84,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     /**
-     * Returns the element at the specified index, or <tt>NOT_FOUND</tt> if the index is invalid.
+     * Returns the element at the specified index, or {@link #NOT_FOUND} if the index is invalid.
      *
      * {@inheritDoc}
      */
@@ -99,7 +99,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     /**
-     * Returns the element with the specified name, or <tt>NOT_FOUND</tt> if the name is invalid.
+     * Returns the element with the specified name, or {@link #NOT_FOUND} if the name is invalid.
      *
      * {@inheritDoc}
      */

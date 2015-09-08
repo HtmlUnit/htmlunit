@@ -73,8 +73,8 @@ public class Attr extends Node {
     }
 
     /**
-     * Returns <tt>true</tt> if this attribute is an ID.
-     * @return <tt>true</tt> if this attribute is an ID
+     * Returns {@code true} if this attribute is an ID.
+     * @return {@code true} if this attribute is an ID
      */
     @JsxGetter(@WebBrowser(value = FF, maxVersion = 23))
     public boolean getIsId() {
@@ -82,8 +82,8 @@ public class Attr extends Node {
     }
 
     /**
-     * Returns <tt>true</tt> if the attribute is an custom property.
-     * @return <tt>true</tt> if the attribute is an custom property
+     * Returns {@code true} if the attribute is an custom property.
+     * @return {@code true} if the attribute is an custom property
      */
     @JsxGetter(@WebBrowser(IE))
     public boolean getExpando() {
@@ -135,8 +135,8 @@ public class Attr extends Node {
     }
 
     /**
-     * Returns <tt>true</tt> if this attribute has been specified.
-     * @return <tt>true</tt> if this attribute has been specified
+     * Returns {@code true} if this attribute has been specified.
+     * @return {@code true} if this attribute has been specified
      */
     @JsxGetter
     public boolean getSpecified() {

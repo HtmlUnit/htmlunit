@@ -198,9 +198,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified CSS property is inheritable from parent elements.
+     * Returns {@code true} if the specified CSS property is inheritable from parent elements.
      * @param name the name of the style attribute to check for inheritability
-     * @return <tt>true</tt> if the specified CSS property is inheritable from parent elements
+     * @return {@code true} if the specified CSS property is inheritable from parent elements
      * @see <a href="http://www.w3.org/TR/CSS21/propidx.html">CSS Property Table</a>
      */
     private boolean isInheritable(final String name) {
@@ -2303,10 +2303,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns <tt>true</tt> if the element is scrollable along the specified axis.
-     * @param horizontal if <tt>true</tt>, the caller is interested in scrollability along the x-axis;
-     *        if <tt>false</tt>, the caller is interested in scrollability along the y-axis
-     * @return <tt>true</tt> if the element is scrollable along the specified axis
+     * Returns {@code true} if the element is scrollable along the specified axis.
+     * @param horizontal if {@code true}, the caller is interested in scrollability along the x-axis;
+     *        if {@code false}, the caller is interested in scrollability along the y-axis
+     * @return {@code true} if the element is scrollable along the specified axis
      */
     public boolean isScrollable(final boolean horizontal) {
         final boolean scrollable;

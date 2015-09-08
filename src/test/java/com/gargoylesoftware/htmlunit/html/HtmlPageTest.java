@@ -1648,7 +1648,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
     /**
      * @param browserVersion the browser version to use
-     * @param handlerOk whether <tt>OnbeforeunloadHandler.handleEvent</tt> will return <tt>true</tt> of <tt>false</tt>
+     * @param handlerOk whether <tt>OnbeforeunloadHandler.handleEvent</tt> will return {@code true} of {@code false}
      * @param expectedPageTitle the expected title of the page after clicking
      */
     private void testOnbeforeunloadHandler(final boolean handlerOk, final String expectedPageTitle) throws Exception {

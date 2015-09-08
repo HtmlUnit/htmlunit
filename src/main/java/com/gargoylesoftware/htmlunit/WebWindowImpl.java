@@ -137,8 +137,8 @@ public abstract class WebWindowImpl implements WebWindow {
     }
 
     /**
-     * Returns <tt>true</tt> if this window needs JavaScript initialization to occur when the enclosed page is set.
-     * @return <tt>true</tt> if this window needs JavaScript initialization to occur when the enclosed page is set
+     * Returns {@code true} if this window needs JavaScript initialization to occur when the enclosed page is set.
+     * @return {@code true} if this window needs JavaScript initialization to occur when the enclosed page is set
      */
     protected abstract boolean isJavaScriptInitializationNeeded();
 

@@ -167,9 +167,9 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      * @param c the character you with to simulate typing
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
-     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     * @param shiftKey {@code true} if SHIFT is pressed during the typing
+     * @param ctrlKey {@code true} if CTRL is pressed during the typing
+     * @param altKey {@code true} if ALT is pressed during the typing
      */
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         initDoTypeProcessor();
@@ -180,9 +180,9 @@ public class DomText extends DomCharacterData implements Text {
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      *
      * @param keyCode the key code wish to simulate typing
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
-     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     * @param shiftKey {@code true} if SHIFT is pressed during the typing
+     * @param ctrlKey {@code true} if CTRL is pressed during the typing
+     * @param altKey {@code true} if ALT is pressed during the typing
      */
     protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         initDoTypeProcessor();

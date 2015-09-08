@@ -215,7 +215,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     }
 
     /**
-     * Returns the element at the specified index, or <tt>NOT_FOUND</tt> if the index is invalid.
+     * Returns the element at the specified index, or {@link #NOT_FOUND} if the index is invalid.
      * {@inheritDoc}
      */
     @Override
@@ -357,10 +357,10 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     }
 
     /**
-     * Returns the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
+     * Returns the specified object, unless it is the {@link #NOT_FOUND} constant, in which case {@code null}
      * is returned for IE.
      * @param object the object to return
-     * @return the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
+     * @return the specified object, unless it is the {@link #NOT_FOUND} constant, in which case {@code null}
      *         is returned for IE.
      */
     private Object nullIfNotFound(final Object object) {

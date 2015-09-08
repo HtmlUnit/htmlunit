@@ -607,7 +607,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that {@code document.forms.form_name} should be evaluated to <tt>undefined</tt> if the form has a prefix.
+     * Test that {@code document.forms.form_name} should be evaluated to {@code undefined} if the form has a prefix.
      * @throws Exception if the test fails
      */
     @Test

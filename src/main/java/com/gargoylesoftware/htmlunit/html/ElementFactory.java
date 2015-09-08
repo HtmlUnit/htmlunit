@@ -33,7 +33,7 @@ public interface ElementFactory {
      * @param page the enclosing page for the new element
      * @param tagName the tag name (most factories will be responsible for a specific tag, but this
      *        parameter is passed in for factories that don't follow this rule)
-     * @param attributes the attributes encountered during XML/HTML parsing (possibly <tt>null</tt>
+     * @param attributes the attributes encountered during XML/HTML parsing (possibly {@code null}
      *        if no attributes specified
      * @return the newly created and initialized element
      */
@@ -46,7 +46,7 @@ public interface ElementFactory {
      * @param page the enclosing page for the new element
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
-     * @param attributes the attributes encountered during XML/HTML parsing (possibly <tt>null</tt>
+     * @param attributes the attributes encountered during XML/HTML parsing (possibly {@code null}
      *        if no attributes specified
      * @return the newly created and initialized element
      */
@@ -60,7 +60,7 @@ public interface ElementFactory {
      * @param page the enclosing page for the new element
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
-     * @param attributes the attributes encountered during XML/HTML parsing (possibly <tt>null</tt>
+     * @param attributes the attributes encountered during XML/HTML parsing (possibly {@code null}
      *        if no attributes specified
      * @param checkBrowserCompatibility if true and the page doesn't support this element, return null
      * @return the newly created and initialized element

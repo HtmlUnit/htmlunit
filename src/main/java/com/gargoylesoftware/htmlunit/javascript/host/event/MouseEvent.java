@@ -87,10 +87,10 @@ public class MouseEvent extends UIEvent {
     /** The button code for IE (1: left button, 4: middle button, 2: right button). */
     private static final int[] buttonCodeToIE = {1, 4, 2};
 
-    /** The event's screen coordinates; initially <tt>null</tt> and lazily initialized for performance reasons. */
+    /** The event's screen coordinates; initially {@code null} and lazily initialized for performance reasons. */
     private Integer screenX_, screenY_;
 
-    /** The event's client coordinates; initially <tt>null</tt> and lazily initialized for performance reasons. */
+    /** The event's client coordinates; initially {@code null} and lazily initialized for performance reasons. */
     private Integer clientX_, clientY_;
 
     /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
@@ -336,7 +336,7 @@ public class MouseEvent extends UIEvent {
     }
 
     /**
-     * Returns the mouse event currently firing, or <tt>null</tt> if no mouse event is being processed.
+     * Returns the mouse event currently firing, or {@code null} if no mouse event is being processed.
      * @return the mouse event currently firing
      */
     @SuppressWarnings("unchecked")
@@ -350,9 +350,9 @@ public class MouseEvent extends UIEvent {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified event type should be managed as a mouse event.
+     * Returns {@code true} if the specified event type should be managed as a mouse event.
      * @param type the type of event to check
-     * @return <tt>true</tt> if the specified event type should be managed as a mouse event
+     * @return {@code true} if the specified event type should be managed as a mouse event
      */
     public static boolean isMouseEvent(final String type) {
         return TYPE_CLICK.equals(type)

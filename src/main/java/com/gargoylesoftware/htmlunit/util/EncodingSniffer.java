@@ -445,12 +445,12 @@ public final class EncodingSniffer {
      * <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Byte Order Mark</a> information in the content.</p>
      *
      * <p>Note that if an encoding is found but it is not supported on the current platform, this method returns
-     * <tt>null</tt>, as if no encoding had been found.</p>
+     * {@code null}, as if no encoding had been found.</p>
      *
      * @param headers the HTTP response headers sent back with the content to be sniffed
      * @param content the content to be sniffed
      * @return the encoding sniffed from the specified content and/or the corresponding HTTP headers,
-     *         or <tt>null</tt> if the encoding could not be determined
+     *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
     public static String sniffEncoding(final List<NameValuePair> headers, final InputStream content)
@@ -467,32 +467,32 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified HTTP response headers indicate an HTML response.
+     * Returns {@code true} if the specified HTTP response headers indicate an HTML response.
      *
      * @param headers the HTTP response headers
-     * @return <tt>true</tt> if the specified HTTP response headers indicate an HTML response
+     * @return {@code true} if the specified HTTP response headers indicate an HTML response
      */
     static boolean isHtml(final List<NameValuePair> headers) {
         return contentTypeEndsWith(headers, "text/html");
     }
 
     /**
-     * Returns <tt>true</tt> if the specified HTTP response headers indicate an XML response.
+     * Returns {@code true} if the specified HTTP response headers indicate an XML response.
      *
      * @param headers the HTTP response headers
-     * @return <tt>true</tt> if the specified HTTP response headers indicate an XML response
+     * @return {@code true} if the specified HTTP response headers indicate an XML response
      */
     static boolean isXml(final List<NameValuePair> headers) {
         return contentTypeEndsWith(headers, "text/xml", "application/xml", "text/vnd.wap.wml", "+xml");
     }
 
     /**
-     * Returns <tt>true</tt> if the specified HTTP response headers contain a <tt>Content-Type</tt> that
+     * Returns {@code true} if the specified HTTP response headers contain a <tt>Content-Type</tt> that
      * ends with one of the specified strings.
      *
      * @param headers the HTTP response headers
      * @param contentTypeEndings the content type endings to search for
-     * @return <tt>true</tt> if the specified HTTP response headers contain a <tt>Content-Type</tt> that
+     * @return {@code true} if the specified HTTP response headers contain a <tt>Content-Type</tt> that
      *         ends with one of the specified strings
      */
     static boolean contentTypeEndsWith(final List<NameValuePair> headers, final String... contentTypeEndings) {
@@ -524,12 +524,12 @@ public final class EncodingSniffer {
      * encoding sniffing algorithm</a>.</p>
      *
      * <p>Note that if an encoding is found but it is not supported on the current platform, this method returns
-     * <tt>null</tt>, as if no encoding had been found.</p>
+     * {@code null}, as if no encoding had been found.</p>
      *
      * @param headers the HTTP response headers sent back with the HTML content to be sniffed
      * @param content the HTML content to be sniffed
      * @return the encoding sniffed from the specified HTML content and/or the corresponding HTTP headers,
-     *         or <tt>null</tt> if the encoding could not be determined
+     *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
     public static String sniffHtmlEncoding(final List<NameValuePair> headers, final InputStream content)
@@ -556,12 +556,12 @@ public final class EncodingSniffer {
      * a custom algorithm.</p>
      *
      * <p>Note that if an encoding is found but it is not supported on the current platform, this method returns
-     * <tt>null</tt>, as if no encoding had been found.</p>
+     * {@code null}, as if no encoding had been found.</p>
      *
      * @param headers the HTTP response headers sent back with the XML content to be sniffed
      * @param content the XML content to be sniffed
      * @return the encoding sniffed from the specified XML content and/or the corresponding HTTP headers,
-     *         or <tt>null</tt> if the encoding could not be determined
+     *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
     public static String sniffXmlEncoding(final List<NameValuePair> headers, final InputStream content)
@@ -589,12 +589,12 @@ public final class EncodingSniffer {
      * information in the content.</p>
      *
      * <p>Note that if an encoding is found but it is not supported on the current platform, this method returns
-     * <tt>null</tt>, as if no encoding had been found.</p>
+     * {@code null}, as if no encoding had been found.</p>
      *
      * @param headers the HTTP response headers sent back with the content to be sniffed
      * @param content the content to be sniffed
      * @return the encoding sniffed from the specified content and/or the corresponding HTTP headers,
-     *         or <tt>null</tt> if the encoding could not be determined
+     *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
     public static String sniffUnknownContentTypeEncoding(final List<NameValuePair> headers, final InputStream content)
@@ -614,7 +614,7 @@ public final class EncodingSniffer {
      * Attempts to sniff an encoding from the specified HTTP headers.
      *
      * @param headers the HTTP headers to examine
-     * @return the encoding sniffed from the specified HTTP headers, or <tt>null</tt> if the encoding
+     * @return the encoding sniffed from the specified HTTP headers, or {@code null} if the encoding
      *         could not be determined
      */
     static String sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
@@ -641,7 +641,7 @@ public final class EncodingSniffer {
      * in the specified byte array.
      *
      * @param bytes the bytes to check for a Byte Order Mark
-     * @return the encoding sniffed from the specified bytes, or <tt>null</tt> if the encoding
+     * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
      *         could not be determined
      */
     static String sniffEncodingFromUnicodeBom(final byte[] bytes) {
@@ -680,7 +680,7 @@ public final class EncodingSniffer {
      * Attempts to sniff an encoding from an HTML <tt>meta</tt> tag in the specified byte array.
      *
      * @param bytes the bytes to check for an HTML <tt>meta</tt> tag
-     * @return the encoding sniffed from the specified bytes, or <tt>null</tt> if the encoding
+     * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
      *         could not be determined
      */
     static String sniffEncodingFromMetaTag(final byte[] bytes) {
@@ -759,7 +759,7 @@ public final class EncodingSniffer {
      *
      * @param bytes the byte array to extract an attribute from
      * @param i the index to start searching from
-     * @return the next attribute in the specified byte array, or <tt>null</tt> if one is not available
+     * @return the next attribute in the specified byte array, or {@code null} if one is not available
      */
     static Attribute getAttribute(final byte[] bytes, int i) {
         if (i >= bytes.length) {
@@ -858,10 +858,10 @@ public final class EncodingSniffer {
     /**
      * Extracts an encoding from the specified <tt>Content-Type</tt> value using
      * <a href="http://ietfreport.isoc.org/idref/draft-abarth-mime-sniff/">the IETF algorithm</a>; if
-     * no encoding is found, this method returns <tt>null</tt>.
+     * no encoding is found, this method returns {@code null}.
      *
      * @param s the <tt>Content-Type</tt> value to search for an encoding
-     * @return the encoding found in the specified <tt>Content-Type</tt> value, or <tt>null</tt> if no
+     * @return the encoding found in the specified <tt>Content-Type</tt> value, or {@code null} if no
      *         encoding was found
      */
     static String extractEncodingFromContentType(final String s) {
@@ -930,10 +930,10 @@ public final class EncodingSniffer {
 
     /**
      * Searches the specified XML content for an XML declaration and returns the encoding if found,
-     * otherwise returns <tt>null</tt>.
+     * otherwise returns {@code null}.
      *
      * @param bytes the XML content to sniff
-     * @return the encoding of the specified XML content, or <tt>null</tt> if it could not be determined
+     * @return the encoding of the specified XML content, or {@code null} if it could not be determined
      */
     static String sniffEncodingFromXmlDeclaration(final byte[] bytes) {
         String encoding = null;
@@ -979,10 +979,10 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified charset is supported on this platform.
+     * Returns {@code true} if the specified charset is supported on this platform.
      *
      * @param charset the charset to check
-     * @return <tt>true</tt> if the specified charset is supported on this platform
+     * @return {@code true} if the specified charset is supported on this platform
      */
     static boolean isSupportedCharset(final String charset) {
         try {
@@ -994,13 +994,13 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Returns <tt>true</tt> if the byte in the specified byte array at the specified index matches one of the
+     * Returns {@code true} if the byte in the specified byte array at the specified index matches one of the
      * specified byte array patterns.
      *
      * @param bytes the byte array to search in
      * @param i the index at which to search
      * @param sought the byte array patterns to search for
-     * @return <tt>true</tt> if the byte in the specified byte array at the specified index matches one of the
+     * @return {@code true} if the byte in the specified byte array at the specified index matches one of the
      *         specified byte array patterns
      */
     static boolean matches(final byte[] bytes, final int i, final byte[][] sought) {

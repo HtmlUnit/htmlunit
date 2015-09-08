@@ -131,11 +131,11 @@ public class ProxyConfig implements Serializable {
     }
 
     /**
-     * Returns <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
+     * Returns {@code true} if the host with the specified hostname should be accessed bypassing the
      * configured proxy.
      * @param hostname the name of the host to check
-     * @return <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
-     * configured proxy, <tt>false</tt> otherwise.
+     * @return {@code true} if the host with the specified hostname should be accessed bypassing the
+     * configured proxy, {@code false} otherwise.
      */
     protected boolean shouldBypassProxy(final String hostname) {
         boolean bypass = false;

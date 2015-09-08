@@ -170,16 +170,16 @@ public class WebClientOptions implements Serializable {
     /**
      * Enables/disables JavaScript support. By default, this property is enabled.
      *
-     * @param enabled <tt>true</tt> to enable JavaScript support
+     * @param enabled {@code true} to enable JavaScript support
      */
     public void setJavaScriptEnabled(final boolean enabled) {
         javaScriptEnabled_ = enabled;
     }
 
     /**
-     * Returns <tt>true</tt> if JavaScript is enabled and the script engine was loaded successfully.
+     * Returns {@code true} if JavaScript is enabled and the script engine was loaded successfully.
      *
-     * @return <tt>true</tt> if JavaScript is enabled
+     * @return {@code true} if JavaScript is enabled
      */
     public boolean isJavaScriptEnabled() {
         return javaScriptEnabled_;
@@ -188,16 +188,16 @@ public class WebClientOptions implements Serializable {
     /**
      * Enables/disables CSS support. By default, this property is enabled.
      *
-     * @param enabled <tt>true</tt> to enable CSS support
+     * @param enabled {@code true} to enable CSS support
      */
     public void setCssEnabled(final boolean enabled) {
         cssEnabled_ = enabled;
     }
 
     /**
-     * Returns <tt>true</tt> if CSS is enabled.
+     * Returns {@code true} if CSS is enabled.
      *
-     * @return <tt>true</tt> if CSS is enabled
+     * @return {@code true} if CSS is enabled
      */
     public boolean isCssEnabled() {
         return cssEnabled_;
@@ -208,7 +208,7 @@ public class WebClientOptions implements Serializable {
      * <p>
      * Note: as of HtmlUnit-2.4, Applet support is experimental and minimal
      * </p>
-     * @param enabled <tt>true</tt> to enable Applet support
+     * @param enabled {@code true} to enable Applet support
      * @since HtmlUnit-2.4
      */
     public void setAppletEnabled(final boolean enabled) {
@@ -216,9 +216,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns <tt>true</tt> if Applet are enabled.
+     * Returns {@code true} if Applet are enabled.
      *
-     * @return <tt>true</tt> if Applet is enabled
+     * @return {@code true} if Applet is enabled
      */
     public boolean isAppletEnabled() {
         return appletEnabled_;
@@ -226,19 +226,19 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Enable/disable the popup window blocker. By default, the popup blocker is disabled, and popup
-     * windows are allowed. When set to <tt>true</tt>, <tt>window.open()</tt> has no effect and
-     * returns <tt>null</tt>.
+     * windows are allowed. When set to {@code true}, <tt>window.open()</tt> has no effect and
+     * returns {@code null}.
      *
-     * @param enabled <tt>true</tt> to enable the popup window blocker
+     * @param enabled {@code true} to enable the popup window blocker
      */
     public void setPopupBlockerEnabled(final boolean enabled) {
         popupBlockerEnabled_ = enabled;
     }
 
     /**
-     * Returns <tt>true</tt> if the popup window blocker is enabled.
+     * Returns {@code true} if the popup window blocker is enabled.
      *
-     * @return <tt>true</tt> if the popup window blocker is enabled
+     * @return {@code true} if the popup window blocker is enabled
      */
     public boolean isPopupBlockerEnabled() {
         return popupBlockerEnabled_;
@@ -247,16 +247,16 @@ public class WebClientOptions implements Serializable {
     /**
      * Enables/disables Geolocation support. By default, this property is disabled.
      *
-     * @param enabled <tt>true</tt> to enable Geolocation support
+     * @param enabled {@code true} to enable Geolocation support
      */
     public void setGeolocationEnabled(final boolean enabled) {
         geolocationEnabled_ = enabled;
     }
 
     /**
-     * Returns <tt>true</tt> if Geolocation is enabled.
+     * Returns {@code true} if Geolocation is enabled.
      *
-     * @return <tt>true</tt> if Geolocation is enabled
+     * @return {@code true} if Geolocation is enabled
      */
     public boolean isGeolocationEnabled() {
         return geolocationEnabled_;
@@ -265,16 +265,16 @@ public class WebClientOptions implements Serializable {
     /**
      * Enables/disables "Do Not Track" support. By default, this property is disabled.
      *
-     * @param enabled <tt>true</tt> to enable "Do Not Track" support
+     * @param enabled {@code true} to enable "Do Not Track" support
      */
     public void setDoNotTrackEnabled(final boolean enabled) {
         doNotTrackEnabled_ = enabled;
     }
 
     /**
-     * Returns <tt>true</tt> if "Do Not Track" is enabled.
+     * Returns {@code true} if "Do Not Track" is enabled.
      *
-     * @return <tt>true</tt> if "Do Not Track" is enabled
+     * @return {@code true} if "Do Not Track" is enabled
      */
     public boolean isDoNotTrackEnabled() {
         return doNotTrackEnabled_;
@@ -292,10 +292,10 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns <tt>true</tt> if the content of the resulting document will be printed to
+     * Returns {@code true} if the content of the resulting document will be printed to
      * the console in the event of a failing response code.
      *
-     * @return <tt>true</tt> if the content of the resulting document will be printed to
+     * @return {@code true} if the content of the resulting document will be printed to
      *         the console in the event of a failing response code
      * @see #setPrintContentOnFailingStatusCode
      */
@@ -308,15 +308,15 @@ public class WebClientOptions implements Serializable {
      * failing status code. Successful status codes are in the range 200-299.
      * The default is true.
      *
-     * @param enabled <tt>true</tt> to enable this feature
+     * @param enabled {@code true} to enable this feature
      */
     public void setThrowExceptionOnFailingStatusCode(final boolean enabled) {
         throwExceptionOnFailingStatusCode_ = enabled;
     }
 
     /**
-     * Returns <tt>true</tt> if an exception will be thrown in the event of a failing response code.
-     * @return <tt>true</tt> if an exception will be thrown in the event of a failing response code
+     * Returns {@code true} if an exception will be thrown in the event of a failing response code.
+     * @return {@code true} if an exception will be thrown in the event of a failing response code
      * @see #setThrowExceptionOnFailingStatusCode
      */
     public boolean isThrowExceptionOnFailingStatusCode() {

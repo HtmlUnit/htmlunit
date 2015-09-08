@@ -237,8 +237,8 @@ public class ApplicationCache extends EventTarget {
      * DOM reference</a> for more information.
      *
      * @param event the event to be dispatched
-     * @return <tt>false</tt> if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
+     * @return {@code false} if at least one of the event handlers which handled the event
+     *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Override
     @JsxFunction
@@ -287,9 +287,9 @@ public class ApplicationCache extends EventTarget {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified URI represents a resource that's in the application cache's list.
+     * Returns {@code true} if the specified URI represents a resource that's in the application cache's list.
      * @param uri the URI to check
-     * @return <tt>true</tt> if the specified URI represents a resource that's in the application cache's list
+     * @return {@code true} if the specified URI represents a resource that's in the application cache's list
      */
     @JsxFunction
     public boolean hasItem(final String uri) {

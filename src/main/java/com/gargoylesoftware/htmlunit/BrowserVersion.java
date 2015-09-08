@@ -366,7 +366,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
+     * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Internet Explorer.
      * @return whether or not this version is a version of IE
      */
@@ -375,7 +375,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
+     * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Google Chrome. Note that Google Chrome does not return 'Chrome'
      * in the application name, we have to look in the nickname.
      * @return whether or not this version is a version of a Chrome browser.
@@ -385,7 +385,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
+     * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Firefox.
      * @return whether or not this version is a version of a Firefox browser
      */
@@ -459,9 +459,9 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns <tt>true</tt> if the browser is currently online.
+     * Returns {@code true} if the browser is currently online.
      * Default value is {@code true} if not explicitly configured.
-     * @return <tt>true</tt> if the browser is currently online
+     * @return {@code true} if the browser is currently online
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534307.aspx">MSDN documentation</a>
      */
     public boolean isOnLine() {

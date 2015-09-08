@@ -85,7 +85,7 @@ public interface JavaScriptJobManager extends Serializable {
     /**
      * Blocks until all active jobs have finished executing. If a job is scheduled to begin executing after
      * <tt>(now + timeoutMillis)</tt>, this method will wait for <tt>timeoutMillis</tt> milliseconds and then
-     * return <tt>false</tt>.
+     * return {@code false}.
      * @param timeoutMillis the maximum amount of time to wait (in milliseconds); may be negative, in which
      *        case this method returns immediately
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this

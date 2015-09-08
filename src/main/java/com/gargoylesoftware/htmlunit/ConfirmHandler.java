@@ -26,8 +26,8 @@ public interface ConfirmHandler {
      * Handles a confirm for the specified page.
      * @param page the page on which the confirm occurred
      * @param message the message in the confirm
-     * @return <tt>true</tt> if we are simulating clicking the OK button,
-     *         <tt>false</tt> if we are simulating clicking the Cancel button
+     * @return {@code true} if we are simulating clicking the OK button,
+     *         {@code false} if we are simulating clicking the Cancel button
      */
     boolean handleConfirm(final Page page, final String message);
 }

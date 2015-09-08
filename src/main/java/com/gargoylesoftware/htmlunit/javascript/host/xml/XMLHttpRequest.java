@@ -195,7 +195,7 @@ public class XMLHttpRequest extends EventTarget {
      * Sets the state as specified and invokes the state change handler if one has been set.
      * @param state the new state
      * @param context the context within which the state change handler is to be invoked;
-     *                if <tt>null</tt>, the current thread's context is used.
+     *                if {@code null}, the current thread's context is used.
      */
     private void setState(final int state, Context context) {
         state_ = state;
@@ -296,7 +296,7 @@ public class XMLHttpRequest extends EventTarget {
     /**
      * Invokes the onerror handler if one has been set.
      * @param context the context within which the onerror handler is to be invoked;
-     *                if <tt>null</tt>, the current thread's context is used.
+     *                if {@code null}, the current thread's context is used.
      */
     private void processError(Context context) {
         if (errorHandler_ != null && !getBrowserVersion().hasFeature(XHR_ERRORHANDLER_NOT_SUPPORTED)) {

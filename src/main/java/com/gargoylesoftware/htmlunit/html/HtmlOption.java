@@ -65,8 +65,8 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Returns <tt>true</tt> if this option is currently selected.
-     * @return <tt>true</tt> if this option is currently selected
+     * Returns {@code true} if this option is currently selected.
+     * @return {@code true} if this option is currently selected
      */
     public boolean isSelected() {
         return selected_;
@@ -164,11 +164,11 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Returns <tt>true</tt> if the disabled attribute is set for this element. Note that this
-     * method always returns <tt>false</tt> when emulating IE, because IE does not allow individual
+     * Returns {@code true} if the disabled attribute is set for this element. Note that this
+     * method always returns {@code false} when emulating IE, because IE does not allow individual
      * options to be disabled.
      *
-     * @return <tt>true</tt> if the disabled attribute is set for this element (always <tt>false</tt>
+     * @return {@code true} if the disabled attribute is set for this element (always {@code false}
      *         when emulating IE)
      */
     @Override

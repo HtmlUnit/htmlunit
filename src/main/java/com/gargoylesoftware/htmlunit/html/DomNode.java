@@ -351,10 +351,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns <tt>true</tt> if this node is an ancestor of the specified node.
+     * Returns {@code true} if this node is an ancestor of the specified node.
      *
      * @param node the node to check
-     * @return <tt>true</tt> if this node is an ancestor of the specified node
+     * @return {@code true} if this node is an ancestor of the specified node
      */
     public boolean isAncestorOf(DomNode node) {
         while (node != null) {
@@ -367,10 +367,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns <tt>true</tt> if this node is an ancestor of any of the specified nodes.
+     * Returns {@code true} if this node is an ancestor of any of the specified nodes.
      *
      * @param nodes the nodes to check
-     * @return <tt>true</tt> if this node is an ancestor of any of the specified nodes
+     * @return {@code true} if this node is an ancestor of any of the specified nodes
      */
     public boolean isAncestorOfAny(final DomNode... nodes) {
         for (final DomNode node : nodes) {
@@ -707,7 +707,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns a flag indicating whether or not this node should have any leading and trailing
      * whitespace removed when {@link #asText()} is called. This method should usually return
-     * <tt>true</tt>, but must return <tt>false</tt> for such things as text formatting tags.
+     * {@code true}, but must return {@code false} for such things as text formatting tags.
      *
      * @return a flag indicating whether or not this node should have any leading and trailing
      *         whitespace removed when {@link #asText()} is called
@@ -717,7 +717,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * <p>Returns <tt>true</tt> if this node is displayed and can be visible to the user
+     * <p>Returns {@code true} if this node is displayed and can be visible to the user
      * (ignoring screen size, scrolling limitations, color, font-size, or overlapping nodes).</p>
      *
      * <p><b>NOTE:</b> If CSS is
@@ -727,7 +727,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see <a href="http://www.w3.org/TR/CSS2/visufx.html#visibility">CSS2 Visibility</a>
      * @see <a href="http://www.w3.org/TR/CSS2/visuren.html#propdef-display">CSS2 Display</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531180.aspx">MSDN Documentation</a>
-     * @return <tt>true</tt> if the node is visible to the user, <tt>false</tt> otherwise
+     * @return {@code true} if the node is visible to the user, {@code false} otherwise
      * @see #mayBeDisplayed()
      */
     public boolean isDisplayed() {
@@ -772,9 +772,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns <tt>true</tt> if nodes of this type can ever be displayed, <tt>false</tt> otherwise. Examples of nodes
+     * Returns {@code true} if nodes of this type can ever be displayed, {@code false} otherwise. Examples of nodes
      * that can never be displayed are <tt>&lt;head&gt;</tt>, <tt>&lt;meta&gt;</tt>, <tt>&lt;script&gt;</tt>, etc.
-     * @return <tt>true</tt> if nodes of this type can ever be displayed, <tt>false</tt> otherwise
+     * @return {@code true} if nodes of this type can ever be displayed, {@code false} otherwise
      * @see #isDisplayed()
      */
     public boolean mayBeDisplayed() {
@@ -1629,7 +1629,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Evaluates the specified XPath expression from this node, returning the first matching element,
-     * or <tt>null</tt> if no node matches the specified XPath expression.
+     * or {@code null} if no node matches the specified XPath expression.
      *
      * @param xpathExpr the XPath expression
      * @param <X> the expression type
@@ -1643,7 +1643,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Evaluates the specified XPath expression from this node, returning the first matching element,
-     * or <tt>null</tt> if no node matches the specified XPath expression.
+     * or {@code null} if no node matches the specified XPath expression.
      *
      * @param xpathExpr the XPath expression
      * @param <X> the expression type

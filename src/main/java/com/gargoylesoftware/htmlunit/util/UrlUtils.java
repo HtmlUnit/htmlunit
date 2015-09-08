@@ -417,12 +417,12 @@ public final class UrlUtils {
 
     /**
      * Creates a new URL based on the specified fragments.
-     * @param protocol the protocol to use (may not be <tt>null</tt>)
-     * @param host the host to use (may not be <tt>null</tt>)
+     * @param protocol the protocol to use (may not be {@code null})
+     * @param host the host to use (may not be {@code null})
      * @param port the port to use (may be <tt>-1</tt> if no port is specified)
-     * @param path the path to use (may be <tt>null</tt> and may omit the initial <tt>'/'</tt>)
-     * @param ref the reference to use (may be <tt>null</tt> and must not include the <tt>'#'</tt>)
-     * @param query the query to use (may be <tt>null</tt> and must not include the <tt>'?'</tt>)
+     * @param path the path to use (may be {@code null} and may omit the initial <tt>'/'</tt>)
+     * @param ref the reference to use (may be {@code null} and must not include the <tt>'#'</tt>)
+     * @param query the query to use (may be {@code null} and must not include the <tt>'?'</tt>)
      * @return a new URL based on the specified fragments
      * @throws MalformedURLException if there is a problem creating the new URL
      */
@@ -457,11 +457,11 @@ public final class UrlUtils {
 
     /**
      * Creates a new URL based on the specified fragments.
-     * @param protocol the protocol to use (may not be <tt>null</tt>)
-     * @param authority the authority to use (may not be <tt>null</tt>)
-     * @param path the path to use (may be <tt>null</tt> and may omit the initial <tt>'/'</tt>)
-     * @param ref the reference to use (may be <tt>null</tt> and must not include the <tt>'#'</tt>)
-     * @param query the query to use (may be <tt>null</tt> and must not include the <tt>'?'</tt>)
+     * @param protocol the protocol to use (may not be {@code null})
+     * @param authority the authority to use (may not be {@code null})
+     * @param path the path to use (may be {@code null} and may omit the initial <tt>'/'</tt>)
+     * @param ref the reference to use (may be {@code null} and must not include the <tt>'#'</tt>)
+     * @param query the query to use (may be {@code null} and must not include the <tt>'?'</tt>)
      * @return a new URL based on the specified fragments
      * @throws MalformedURLException if there is a problem creating the new URL
      */

@@ -90,7 +90,7 @@ public class HtmlForm extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * <p>Submits this form to the server. If <tt>submitElement</tt> is <tt>null</tt>, then
+     * <p>Submits this form to the server. If <tt>submitElement</tt> is {@code null}, then
      * the submission is treated as if it was triggered by JavaScript, and the <tt>onsubmit</tt>
      * handler will not be executed.</p>
      *
@@ -240,7 +240,7 @@ public class HtmlForm extends HtmlElement {
      * sent to the server when this form is submitted. This is primarily intended to aid
      * debugging.
      *
-     * @param submitElement the element used to submit the form, or <tt>null</tt> if the
+     * @param submitElement the element used to submit the form, or {@code null} if the
      *        form was submitted by JavaScript
      * @return the list of {@link KeyValuePair}s that represent that data that will be sent
      *         to the server when this form is submitted
@@ -285,7 +285,7 @@ public class HtmlForm extends HtmlElement {
      * Returns a collection of elements that represent all the "submittable" elements in this form,
      * assuming that the specified element is used to submit the form.
      *
-     * @param submitElement the element used to submit the form, or <tt>null</tt> if the
+     * @param submitElement the element used to submit the form, or {@code null} if the
      *        form is submitted by JavaScript
      * @return a collection of elements that represent all the "submittable" elements in this form
      */
@@ -341,13 +341,13 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified element gets submitted when this form is submitted,
+     * Returns {@code true} if the specified element gets submitted when this form is submitted,
      * assuming that the form is submitted using the specified submit element.
      *
      * @param element the element to check
-     * @param submitElement the element used to submit the form, or <tt>null</tt> if the form is
+     * @param submitElement the element used to submit the form, or {@code null} if the form is
      *        submitted by JavaScript
-     * @return <tt>true</tt> if the specified element gets submitted when this form is submitted
+     * @return {@code true} if the specified element gets submitted when this form is submitted
      */
     private boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
@@ -609,7 +609,7 @@ public class HtmlForm extends HtmlElement {
 
     /**
      * Returns the first checked radio button with the specified name. If none of
-     * the radio buttons by that name are checked, this method returns <tt>null</tt>.
+     * the radio buttons by that name are checked, this method returns {@code null}.
      *
      * @param name the name of the radio button
      * @return the first checked radio button with the specified name

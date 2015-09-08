@@ -354,9 +354,9 @@ public class Selection extends SimpleScriptable {
 
     /**
      * Returns the scriptable object corresponding to the specified HtmlUnit DOM object.
-     * @param object the HtmlUnit DOM object whose scriptable object is to be returned (may be <tt>null</tt>)
-     * @return the scriptable object corresponding to the specified HtmlUnit DOM object, or <tt>null</tt> if
-     *         <tt>object</tt> was <tt>null</tt>
+     * @param object the HtmlUnit DOM object whose scriptable object is to be returned (may be {@code null})
+     * @return the scriptable object corresponding to the specified HtmlUnit DOM object, or {@code null} if
+     *         <tt>object</tt> was {@code null}
      */
     private SimpleScriptable getScriptableNullSafe(final Object object) {
         final SimpleScriptable scriptable;

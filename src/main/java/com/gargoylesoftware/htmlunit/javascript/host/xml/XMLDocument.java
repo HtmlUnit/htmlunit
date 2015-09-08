@@ -266,9 +266,9 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Returns the element with the specified ID, as long as it is an HTML element; <tt>null</tt> otherwise.
+     * Returns the element with the specified ID, as long as it is an HTML element; {@code null} otherwise.
      * @param id the ID to search for
-     * @return the element with the specified ID, as long as it is an HTML element; <tt>null</tt> otherwise
+     * @return the element with the specified ID, as long as it is an HTML element; {@code null} otherwise
      */
     @JsxFunction
     public Object getElementById(final String id) {

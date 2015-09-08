@@ -439,7 +439,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * {@inheritDoc}
-     * This implementation returns <tt>false</tt>; only checkboxes and
+     * This implementation returns {@code false}; only checkboxes and
      * radio buttons really care what the default checked value is.
      * @see SubmittableElement#isDefaultChecked()
      * @see HtmlRadioButtonInput#isDefaultChecked()
@@ -451,8 +451,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns <tt>true</tt> if this select is using "multiple select".
-     * @return <tt>true</tt> if this select is using "multiple select"
+     * Returns {@code true} if this select is using "multiple select".
+     * @return {@code true} if this select is using "multiple select"
      */
     public boolean isMultipleSelectEnabled() {
         return getAttribute("multiple") != ATTRIBUTE_NOT_DEFINED;

@@ -412,7 +412,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * {@inheritDoc} The default implementation returns <tt>false</tt>; only checkboxes and
+     * {@inheritDoc} The default implementation returns {@code false}; only checkboxes and
      * radio buttons really care what the default checked value is.
      * @see SubmittableElement#isDefaultChecked()
      * @see HtmlRadioButtonInput#isDefaultChecked()
@@ -428,7 +428,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * the attribute. Note that the returned page may or may not be the original page, depending on
      * the presence of JavaScript event handlers, etc.
      *
-     * @param isChecked <tt>true</tt> if this element is to be selected
+     * @param isChecked {@code true} if this element is to be selected
      * @return the page that occupies this input's window after setting the attribute
      */
     public Page setChecked(final boolean isChecked) {
@@ -439,7 +439,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * Sets the "readOnly" attribute.
      *
-     * @param isReadOnly <tt>true</tt> if this element is read only
+     * @param isReadOnly {@code true} if this element is read only
      */
     public void setReadOnly(final boolean isReadOnly) {
         if (isReadOnly) {
@@ -451,16 +451,16 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns <tt>true</tt> if this element is currently selected.
-     * @return <tt>true</tt> if this element is currently selected
+     * Returns {@code true} if this element is currently selected.
+     * @return {@code true} if this element is currently selected
      */
     public boolean isChecked() {
         return hasAttribute("checked");
     }
 
     /**
-     * Returns <tt>true</tt> if this element is read only.
-     * @return <tt>true</tt> if this element is read only
+     * Returns {@code true} if this element is read only.
+     * @return {@code true} if this element is read only
      */
     public boolean isReadOnly() {
         return hasAttribute("readOnly");

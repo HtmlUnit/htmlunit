@@ -25,7 +25,7 @@ public interface OnbeforeunloadHandler {
      * Handles an <tt>onbeforeunload</tt> event for the specified page.
      * @param page the page on which the event occurred
      * @param returnValue the event's <tt>returnValue</tt>
-     * @return <tt>true</tt> to accept the event, <tt>false</tt> otherwise
+     * @return {@code true} to accept the event, {@code false} otherwise
      */
     boolean handleEvent(final Page page, final String returnValue);
 }

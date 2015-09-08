@@ -210,7 +210,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
 
     /**
      * Returns the qualified name (prefix:local) for the specified namespace and local name,
-     * or <tt>null</tt> if the specified namespace URI does not exist.
+     * or {@code null} if the specified namespace URI does not exist.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param localName the name within the namespace
@@ -685,9 +685,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
      *
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the click
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the click
-     * @param altKey <tt>true</tt> if ALT is pressed during the click
+     * @param shiftKey {@code true} if SHIFT is pressed during the click
+     * @param ctrlKey {@code true} if CTRL is pressed during the click
+     * @param altKey {@code true} if ALT is pressed during the click
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
@@ -872,9 +872,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * action listeners, etc. Note also that {@link #click(boolean, boolean, boolean)} is automatically
      * called first.
      *
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the double-click
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the double-click
-     * @param altKey <tt>true</tt> if ALT is pressed during the double-click
+     * @param shiftKey {@code true} if SHIFT is pressed during the double-click
+     * @param ctrlKey {@code true} if CTRL is pressed during the double-click
+     * @param altKey {@code true} if ALT is pressed during the double-click
      * @param <P> the page type
      * @return the page that occupies this element's window after the element has been double-clicked
      * @exception IOException if an IO error occurs
@@ -927,9 +927,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * after the mouse move. The returned page may or may not be the same as the original page, depending
      * on JavaScript event handlers, etc.
      *
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse move
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse move
-     * @param altKey <tt>true</tt> if ALT is pressed during the mouse move
+     * @param shiftKey {@code true} if SHIFT is pressed during the mouse move
+     * @param ctrlKey {@code true} if CTRL is pressed during the mouse move
+     * @param altKey {@code true} if ALT is pressed during the mouse move
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
      * @return the page which this element's window contains after the mouse move
@@ -954,9 +954,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * after the mouse move. The returned page may or may not be the same as the original page, depending
      * on JavaScript event handlers, etc.
      *
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse move
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse move
-     * @param altKey <tt>true</tt> if ALT is pressed during the mouse move
+     * @param shiftKey {@code true} if SHIFT is pressed during the mouse move
+     * @param ctrlKey {@code true} if CTRL is pressed during the mouse move
+     * @param altKey {@code true} if ALT is pressed during the mouse move
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
      * @return the page which this element's window contains after the mouse move
@@ -981,9 +981,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * after the mouse move. The returned page may or may not be the same as the original page, depending
      * on JavaScript event handlers, etc.
      *
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse move
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse move
-     * @param altKey <tt>true</tt> if ALT is pressed during the mouse move
+     * @param shiftKey {@code true} if SHIFT is pressed during the mouse move
+     * @param ctrlKey {@code true} if CTRL is pressed during the mouse move
+     * @param altKey {@code true} if ALT is pressed during the mouse move
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
      * @return the page which this element's window contains after the mouse move
@@ -1008,9 +1008,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * after the mouse click. The returned page may or may not be the same as the original page, depending
      * on JavaScript event handlers, etc.
      *
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse click
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse click
-     * @param altKey <tt>true</tt> if ALT is pressed during the mouse click
+     * @param shiftKey {@code true} if SHIFT is pressed during the mouse click
+     * @param ctrlKey {@code true} if CTRL is pressed during the mouse click
+     * @param altKey {@code true} if ALT is pressed during the mouse click
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
      * @return the page which this element's window contains after the mouse click
@@ -1035,9 +1035,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * after the mouse click release. The returned page may or may not be the same as the original page, depending
      * on JavaScript event handlers, etc.
      *
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse click release
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse click release
-     * @param altKey <tt>true</tt> if ALT is pressed during the mouse click release
+     * @param shiftKey {@code true} if SHIFT is pressed during the mouse click release
+     * @param ctrlKey {@code true} if CTRL is pressed during the mouse click release
+     * @param altKey {@code true} if ALT is pressed during the mouse click release
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
      * @return the page which this element's window contains after the mouse click release
@@ -1062,9 +1062,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * contains after the mouse click. The returned page may or may not be the same as the original page,
      * depending on JavaScript event handlers, etc.
      *
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse click
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse click
-     * @param altKey <tt>true</tt> if ALT is pressed during the mouse click
+     * @param shiftKey {@code true} if SHIFT is pressed during the mouse click
+     * @param ctrlKey {@code true} if CTRL is pressed during the mouse click
+     * @param altKey {@code true} if ALT is pressed during the mouse click
      * @return the page which this element's window contains after the mouse click
      */
     public Page rightClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
@@ -1090,9 +1090,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * The returned page may or may not be the same as the original page, depending on JavaScript event handlers, etc.
      *
      * @param eventType the mouse event type to simulate
-     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse event
-     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse event
-     * @param altKey <tt>true</tt> if ALT is pressed during the mouse event
+     * @param shiftKey {@code true} if SHIFT is pressed during the mouse event
+     * @param ctrlKey {@code true} if CTRL is pressed during the mouse event
+     * @param altKey {@code true} if ALT is pressed during the mouse event
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
      * @return the page which this element's window contains after the event
@@ -1138,7 +1138,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      *
      * Fires the event on the element. Nothing is done if JavaScript is disabled.
      * @param event the event to fire
-     * @return the execution result, or <tt>null</tt> if nothing is executed
+     * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final Event event) {
         final WebClient client = getPage().getWebClient();
@@ -1171,7 +1171,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
 
     /**
      * This method is called if the current fired event is canceled by <tt>preventDefault()</tt> in FireFox,
-     * or by returning <tt>false</tt> in Internet Explorer.
+     * or by returning {@code false} in Internet Explorer.
      *
      * The default implementation does nothing.
      */
@@ -1206,10 +1206,10 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
-     * Returns <tt>true</tt> if state updates should be done before onclick event handling. This method
-     * returns <tt>false</tt> by default, and is expected to be overridden to return <tt>true</tt> by
+     * Returns {@code true} if state updates should be done before onclick event handling. This method
+     * returns {@code false} by default, and is expected to be overridden to return {@code true} by
      * derived classes like {@link HtmlCheckBoxInput}.
-     * @return <tt>true</tt> if state updates should be done before onclick event handling
+     * @return {@code true} if state updates should be done before onclick event handling
      */
     protected boolean isStateUpdateFirst() {
         return false;

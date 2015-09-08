@@ -117,10 +117,10 @@ public final class StringUtils {
 
     /**
      * Parses the specified date string, assuming that it is formatted according to RFC 1123, RFC 1036 or as an ANSI
-     * C HTTP date header. This method returns <tt>null</tt> if the specified string is <tt>null</tt> or unparseable.
+     * C HTTP date header. This method returns {@code null} if the specified string is {@code null} or unparseable.
      *
      * @param s the string to parse as a date
-     * @return the date version of the specified string, or <tt>null</tt>
+     * @return the date version of the specified string, or {@code null}
      */
     public static Date parseHttpDate(final String s) {
         if (s == null) {

@@ -46,10 +46,10 @@ public class MemoryLeakDetector {
     }
 
     /**
-     * Returns <tt>true</tt> if the object registered with the specified ID can be garbage collected.
+     * Returns {@code true} if the object registered with the specified ID can be garbage collected.
      *
      * @param id the ID corresponding to the object to check
-     * @return <tt>true</tt> if the object registered with the specified ID can be garbage collected
+     * @return {@code true} if the object registered with the specified ID can be garbage collected
      */
     public boolean canBeGCed(final String id) {
         final WeakReference<Object> ref = map_.get(id);

@@ -80,7 +80,7 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * @return the {@link File} object if the file exists, else <tt>null</tt>
+     * @return the {@link File} object if the file exists, else {@code null}
      */
     public File getFile() {
         return fileObject_;

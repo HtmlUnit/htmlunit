@@ -5584,7 +5584,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536696.aspx">MSDN Documentation</a>
      * @param name the name of the attribute
      * @param flag 0 for case insensitive, 1 (default) for case sensitive
-     * @return <tt>true</tt> if the attribute was successfully removed, <tt>false</tt> otherwise
+     * @return {@code true} if the attribute was successfully removed, {@code false} otherwise
      */
     @JsxFunction(@WebBrowser(IE))
     public boolean removeAttribute(final String name, final Object flag) {
@@ -6042,12 +6042,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         /**
-         * Returns <tt>true</tt> if this style element contains a default value. This method isn't
+         * Returns {@code true} if this style element contains a default value. This method isn't
          * currently used anywhere because default style elements are applied before non-default
          * style elements, so the natural ordering results in correct precedence rules being applied
          * (i.e. default style elements don't override non-default style elements) without the need
          * for special checks.
-         * @return <tt>true</tt> if this style element contains a default value
+         * @return {@code true} if this style element contains a default value
          */
         public boolean isDefault() {
             return index_ == Long.MIN_VALUE;

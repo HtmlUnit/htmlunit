@@ -140,9 +140,9 @@ public class WebResponse implements Serializable {
 
     /**
      * Returns the content charset specified explicitly in the header or in the content,
-     * or <tt>null</tt> if none was specified.
+     * or {@code null} if none was specified.
      * @return the content charset specified explicitly in the header or in the content,
-     *         or <tt>null</tt> if none was specified
+     *         or {@code null} if none was specified
      */
     public String getContentCharsetOrNull() {
         InputStream is = null;

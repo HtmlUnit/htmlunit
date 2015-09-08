@@ -504,7 +504,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      *
      * <p>Logs the response's content if its status code indicates a request failure and
-     * {@link WebClientOptions#getPrintContentOnFailingStatusCode()} returns <tt>true</tt>.
+     * {@link WebClientOptions#getPrintContentOnFailingStatusCode()} returns {@code true}.
      *
      * @param webResponse the response whose content may be logged
      */
@@ -522,7 +522,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      *
      * <p>Throws a {@link FailingHttpStatusCodeException} if the request's status code indicates a request
-     * failure and {@link WebClientOptions#isThrowExceptionOnFailingStatusCode()} returns <tt>true</tt>.
+     * failure and {@link WebClientOptions#isThrowExceptionOnFailingStatusCode()} returns {@code true}.
      *
      * @param webResponse the response which may trigger a {@link FailingHttpStatusCodeException}
      */

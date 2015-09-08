@@ -36,10 +36,10 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      * Instantiate a new attribute.
      *
      * @param page the page that the attribute belongs to
-     * @param namespaceURI the namespace that defines the attribute name (may be <tt>null</tt>)
+     * @param namespaceURI the namespace that defines the attribute name (may be {@code null})
      * @param qualifiedName the name of the attribute
      * @param value the value of the attribute
-     * @param specified <tt>true</tt> if this attribute was explicitly given a value in the source document,
+     * @param specified {@code true} if this attribute was explicitly given a value in the source document,
      *        or if the application changed the value of the attribute
      */
     public DomAttr(final SgmlPage page, final String namespaceURI, final String qualifiedName, final String value,

@@ -28,7 +28,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
     /** The initial amount of time to wait before executing this job. */
     private final int initialDelay_;
 
-    /** The amount of time to wait between executions of this job (may be <tt>null</tt>). */
+    /** The amount of time to wait between executions of this job (may be {@code null}). */
     private final Integer period_;
 
     private final boolean executeAsap_;
@@ -50,7 +50,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
     /**
      * Creates a new job instance.
      * @param initialDelay the initial amount of time to wait before executing this job
-     * @param period the amount of time to wait between executions of this job (may be <tt>null</tt>)
+     * @param period the amount of time to wait between executions of this job (may be {@code null})
      */
     BasicJavaScriptJob(final int initialDelay, final Integer period) {
         initialDelay_ = initialDelay;
@@ -86,8 +86,8 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
     }
 
     /**
-     * Returns the amount of time to wait between executions of this job (may be <tt>null</tt>).
-     * @return the amount of time to wait between executions of this job (may be <tt>null</tt>)
+     * Returns the amount of time to wait between executions of this job (may be {@code null}).
+     * @return the amount of time to wait between executions of this job (may be {@code null})
      */
     @Override
     public Integer getPeriod() {
@@ -95,8 +95,8 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
     }
 
     /**
-     * Returns <tt>true</tt> if this job executes periodically.
-     * @return <tt>true</tt> if this job executes periodically
+     * Returns {@code true} if this job executes periodically.
+     * @return {@code true} if this job executes periodically
      */
     @Override
     public boolean isPeriodic() {
@@ -104,8 +104,8 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
     }
 
     /**
-     * Returns <tt>true</tt> if has to be executed asap.
-     * @return <tt>true</tt> if has to be executed asap
+     * Returns {@code true} if has to be executed asap.
+     * @return {@code true} if has to be executed asap
      */
     @Override
     public boolean isExecuteAsap() {

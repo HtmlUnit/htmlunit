@@ -202,7 +202,7 @@ public class AbstractList extends SimpleScriptable implements Function {
     }
 
     /**
-     * Returns the element at the specified index, or <tt>NOT_FOUND</tt> if the index is invalid.
+     * Returns the element at the specified index, or {@link #NOT_FOUND} if the index is invalid.
      * {@inheritDoc}
      */
     @Override

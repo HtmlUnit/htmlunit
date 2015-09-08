@@ -82,9 +82,9 @@ public class History implements Serializable {
     }
 
     /**
-     * Returns the URL at the specified index in the navigation history, or <tt>null</tt> if the index is not valid.
+     * Returns the URL at the specified index in the navigation history, or {@code null} if the index is not valid.
      * @param index the index of the URL to be returned
-     * @return the URL at the specified index in the navigation history, or <tt>null</tt> if the index is not valid
+     * @return the URL at the specified index in the navigation history, or {@code null} if the index is not valid
      */
     public URL getUrl(final int index) {
         if (index >= 0 && index < webRequests_.size()) {

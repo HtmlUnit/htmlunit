@@ -299,7 +299,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the row element which contains this cell's HTML element; may return <tt>null</tt>.
+     * Returns the row element which contains this cell's HTML element; may return {@code null}.
      * @return the row element which contains this cell's HTML element
      */
     private HtmlTableRow getRow() {

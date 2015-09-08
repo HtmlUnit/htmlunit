@@ -244,7 +244,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     /**
-     * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
+     * {@inheritDoc} This implementation returns {@code false}; only checkboxes and
      * radio buttons really care what the default checked value is.
      * @see SubmittableElement#isDefaultChecked()
      * @see HtmlRadioButtonInput#isDefaultChecked()
@@ -493,7 +493,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * Sets the "readOnly" attribute.
      *
-     * @param isReadOnly <tt>true</tt> if this element is read only
+     * @param isReadOnly {@code true} if this element is read only
      */
     public void setReadOnly(final boolean isReadOnly) {
         if (isReadOnly) {
@@ -505,8 +505,8 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     /**
-     * Returns <tt>true</tt> if this element is read only.
-     * @return <tt>true</tt> if this element is read only
+     * Returns {@code true} if this element is read only.
+     * @return {@code true} if this element is read only
      */
     public boolean isReadOnly() {
         return hasAttribute("readOnly");

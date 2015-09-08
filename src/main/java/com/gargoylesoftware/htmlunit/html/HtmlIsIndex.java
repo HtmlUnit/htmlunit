@@ -117,7 +117,7 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
     }
 
     /**
-     * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
+     * {@inheritDoc} This implementation returns {@code false}; only checkboxes and
      * radio buttons really care what the default checked value is.
      * @see SubmittableElement#isDefaultChecked()
      * @see HtmlRadioButtonInput#isDefaultChecked()

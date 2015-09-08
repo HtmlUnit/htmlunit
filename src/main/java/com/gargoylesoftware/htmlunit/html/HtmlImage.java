@@ -382,11 +382,11 @@ public class HtmlImage extends HtmlElement {
     /**
      * <p>Returns the <tt>WebResponse</tt> for the image contained by this image element.</p>
      * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
-     * <p>If the image has not already been downloaded and <tt>downloadIfNeeded</tt> is <tt>true</tt>, this method
+     * <p>If the image has not already been downloaded and <tt>downloadIfNeeded</tt> is {@code true}, this method
      * triggers a download and caches the image.</p>
      *
      * @param downloadIfNeeded whether or not the image should be downloaded (if it hasn't already been downloaded)
-     * @return <tt>null</tt> if no download should be performed and one hasn't already been triggered; otherwise,
+     * @return {@code null} if no download should be performed and one hasn't already been triggered; otherwise,
      *         the response received when performing a request for the image referenced by this element
      * @throws IOException if an error occurs while downloading the image
      */

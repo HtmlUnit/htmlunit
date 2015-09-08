@@ -196,7 +196,7 @@ public class HtmlFileInput extends HtmlInput {
     /**
      * Sets the content type value that should be sent together with the uploaded file.
      * If content type is not explicitly set, HtmlUnit will try to guess it from the file content.
-     * @param contentType the content type (<tt>null</tt> resets it)
+     * @param contentType the content type ({@code null} resets it)
      */
     public void setContentType(final String contentType) {
         contentType_ = contentType;
@@ -204,7 +204,7 @@ public class HtmlFileInput extends HtmlInput {
 
     /**
      * Gets the content type that should be sent together with the uploaded file.
-     * @return the content type, or <tt>null</tt> if this has not been explicitly set
+     * @return the content type, or {@code null} if this has not been explicitly set
      * and should be guessed from file content
      */
     public String getContentType() {
