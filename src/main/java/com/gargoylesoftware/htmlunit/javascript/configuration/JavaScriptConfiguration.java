@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Gamepad;
 import com.gargoylesoftware.htmlunit.javascript.host.GamepadButton;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
 import com.gargoylesoftware.htmlunit.javascript.host.ImageBitmap;
-import com.gargoylesoftware.htmlunit.javascript.host.InputMethodContext;
+import com.gargoylesoftware.htmlunit.javascript.host.InstallTrigger;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageChannel;
 import com.gargoylesoftware.htmlunit.javascript.host.MessagePort;
@@ -132,7 +132,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSSupportsRule;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSUnknownRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSViewportRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CaretPosition;
@@ -352,6 +351,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.webkitRTCPeerConn
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMmsMessage;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMobileMessageManager;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMobileMessageThread;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozPowerManager;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsMessage;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsSegmentInfo;
@@ -411,8 +411,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CSSGroupingRule.class, CSSImportRule.class, CSSKeyframeRule.class, CSSKeyframesRule.class,
         CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class, CSSPrimitiveValue.class, CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSSupportsRule.class,
-        CSSUnknownRule.class, CSSValue.class, CSSViewportRule.class, CustomEvent.class, DataTransfer.class,
-        DataTransferItem.class,
+        CSSValue.class, CSSViewportRule.class, CustomEvent.class, DataTransfer.class, DataTransferItem.class,
         DataTransferItemList.class, DataView.class, DelayNode.class, DeviceLightEvent.class, DeviceMotionEvent.class,
         DeviceOrientationEvent.class, DeviceProximityEvent.class, DeviceStorage.class, DeviceStorageChangeEvent.class,
         Document.class, DocumentFragment.class, DocumentType.class, DOMCursor.class, DOMError.class, DOMException.class,
@@ -457,8 +456,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
         IDBKeyRange.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class, IDBTransaction.class,
         IDBVersionChangeEvent.class, Image.class, ImageBitmap.class, ImageData.class, InputEvent.class,
-        InputMethodContext.class, Int16Array.class, Int32Array.class, Int8Array.class, KeyboardEvent.class,
-        LocalMediaStream.class,
+        InstallTrigger.class, Int16Array.class, Int32Array.class, Int8Array.class,
+        KeyboardEvent.class, LocalMediaStream.class,
         Location.class, LockedFile.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
         MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
         MediaKeyError.class, MediaKeyEvent.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
@@ -470,7 +469,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
         MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
         MouseWheelEvent.class, MozContactChangeEvent.class, MozMmsEvent.class, MozMmsMessage.class,
-        MozMobileMessageManager.class, MozMobileMessageThread.class, mozRTCIceCandidate.class,
+        MozMobileMessageManager.class, MozMobileMessageThread.class, MozPowerManager.class, mozRTCIceCandidate.class,
         mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class,
         MozSmsEvent.class, MozSmsFilter.class, MozSmsMessage.class, MozSmsSegmentInfo.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
@@ -523,7 +522,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGPathSegList.class, SVGPathSegMovetoAbs.class, SVGPathSegMovetoRel.class, SVGPatternElement.class,
         SVGPoint.class, SVGPointList.class, SVGPolygonElement.class, SVGPolylineElement.class,
         SVGPreserveAspectRatio.class, SVGRadialGradientElement.class, SVGRect.class, SVGRectElement.class,
-        SVGRenderingIntent.class, SVGScriptElement.class, SVGSetElement.class, SVGStopElement.class,
+        SVGScriptElement.class, SVGSetElement.class, SVGStopElement.class,
         SVGStringList.class, SVGStyleElement.class, SVGSVGElement.class, SVGSwitchElement.class,
         SVGSymbolElement.class, SVGTextContentElement.class, SVGTextElement.class,
         SVGTextPathElement.class, SVGTextPositioningElement.class, SVGTitleElement.class, SVGTransform.class,

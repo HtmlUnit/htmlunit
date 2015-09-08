@@ -35,7 +35,7 @@ public class CSS extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor(@WebBrowser(FF))
+    @JsxConstructor
     public CSS() {
     }
 

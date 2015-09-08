@@ -12,26 +12,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.css;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code CSSUnknownRule}.
+ * A JavaScript object for {@code InstallTrigger}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(CHROME))
-public class CSSUnknownRule extends CSSRule {
+@JsxClass(browsers = @WebBrowser(FF))
+public class InstallTrigger extends SimpleScriptable {
 
-    /**
-     * Creates an instance.
-     */
-    @JsxConstructor
-    public CSSUnknownRule() {
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        return "[object InstallTriggerImpl]";
     }
 }

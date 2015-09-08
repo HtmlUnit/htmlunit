@@ -6027,6 +6027,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSGroupingRule() { [native code] }",
             FF = "[object CSSGroupingRule]")
     public void cssGroupingRule() throws Exception {
         test("CSSGroupingRule");
@@ -8035,7 +8036,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "[object CSS]",
+            CHROME = "function CSS() { [native code] }",
             FF = "function CSS() {\n    [native code]\n}")
     public void css() throws Exception {
         test("CSS");
@@ -8871,8 +8872,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function CSSUnknownRule() { [native code] }")
+    @Alerts("exception")
     public void cssUnknownRule() throws Exception {
         test("CSSUnknownRule");
     }
@@ -9311,8 +9311,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGRenderingIntent() { [native code] }")
+    @Alerts("exception")
     public void svgRenderingIntent() throws Exception {
         test("SVGRenderingIntent");
     }
@@ -9690,8 +9689,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function InputMethodContext() { [native code] }")
+    @Alerts("exception")
     public void inputMethodContext() throws Exception {
         test("InputMethodContext");
     }
@@ -9936,4 +9934,248 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("ServiceWorkerMessageEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webSockets() throws Exception {
+        test("WebSockets");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void telephonyCallGroup() throws Exception {
+        test("TelephonyCallGroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Int8x16() throws Exception {
+        test("SIMD.Int8x16");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webVTT() throws Exception {
+        test("WebVTT");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void uDPSocket() throws Exception {
+        test("UDPSocket");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webSMS() throws Exception {
+        test("WebSMS");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Int16x8() throws Exception {
+        test("SIMD.Int16x8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void animation() throws Exception {
+        test("Animation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "[object InstallTriggerImpl]")
+    public void installTrigger() throws Exception {
+        test("InstallTrigger");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function MozPowerManager() {\n    [native code]\n}")
+    public void mozPowerManager() throws Exception {
+        test("MozPowerManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void pushRegistrationManager() throws Exception {
+        test("PushRegistrationManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Int32x4() throws Exception {
+        test("SIMD.Int32x4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void canvasCaptureMediaStream() throws Exception {
+        test("CanvasCaptureMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void promiseRejection() throws Exception {
+        test("PromiseRejection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Float64x2() throws Exception {
+        test("SIMD.Float64x2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fontFaceSet() throws Exception {
+        test("FontFaceSet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void l10n() throws Exception {
+        test("L10n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Float32x4() throws Exception {
+        test("SIMD.Float32x4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void imageBitmapFactories() throws Exception {
+        test("ImageBitmapFactories");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothGATTRemoteServer() throws Exception {
+        test("BluetoothGATTRemoteServer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void beforeInstallPrompt() throws Exception {
+        test("BeforeInstallPrompt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothGATTService() throws Exception {
+        test("BluetoothGATTService");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void notificationEvent() throws Exception {
+        test("NotificationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void indexedDB() throws Exception {
+        test("IndexedDB");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void pushMessageData() throws Exception {
+        test("PushMessageData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothAdvertisingData() throws Exception {
+        test("BluetoothAdvertisingData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL() throws Exception {
+        test("WebGL");
+    }
 }

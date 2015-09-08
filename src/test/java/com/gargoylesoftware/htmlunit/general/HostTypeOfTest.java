@@ -4748,10 +4748,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "object",
-            FF31 = "function",
-            FF38 = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void css() throws Exception {
         test("CSS");
     }
@@ -4762,8 +4760,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            FF31 = "function",
-            FF38 = "function",
+            FF = "function",
             IE11 = "object")
     public void dataTransfer() throws Exception {
         test("DataTransfer");
@@ -6179,16 +6176,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    public void cssUnknownRule() throws Exception {
-        test("CSSUnknownRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
     public void dataTransferItem() throws Exception {
         test("DataTransferItem");
     }
@@ -6606,16 +6593,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void svgRenderingIntent() throws Exception {
-        test("SVGRenderingIntent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
             CHROME = "function",
             FF = "function",
             IE11 = "object")
@@ -6975,16 +6952,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function")
     public void imageBitmap() throws Exception {
         test("ImageBitmap");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void inputMethodContext() throws Exception {
-        test("InputMethodContext");
     }
 
     /**

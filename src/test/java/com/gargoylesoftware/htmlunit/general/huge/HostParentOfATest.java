@@ -4854,8 +4854,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CSSGroupingRule_CSSGroupingRule() throws Exception {
         test("CSSGroupingRule", "CSSGroupingRule");
     }
@@ -4864,8 +4864,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CSSGroupingRule_CSSMediaRule() throws Exception {
         test("CSSGroupingRule", "CSSMediaRule");
     }
@@ -4894,8 +4894,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CSSRule_CSSGroupingRule() throws Exception {
         test("CSSRule", "CSSGroupingRule");
     }
@@ -5188,7 +5188,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _CSS_CSS() throws Exception {
         test("CSS", "CSS");
     }
@@ -5829,16 +5830,6 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    public void _CSSRule_CSSUnknownRule() throws Exception {
-        test("CSSRule", "CSSUnknownRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
     public void _CSSUnknownRule_CSSUnknownRule() throws Exception {
         test("CSSUnknownRule", "CSSUnknownRule");
     }
@@ -6184,16 +6175,6 @@ public class HostParentOfATest extends HostParentOf {
             CHROME = "true")
     public void _Element_SVGGeometryElement() throws Exception {
         test("Element", "SVGGeometryElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _EventTarget_InputMethodContext() throws Exception {
-        test("EventTarget", "InputMethodContext");
     }
 
     /**

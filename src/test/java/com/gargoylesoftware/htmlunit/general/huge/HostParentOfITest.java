@@ -3002,16 +3002,6 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    public void _InputMethodContext_InputMethodContext() throws Exception {
-        test("InputMethodContext", "InputMethodContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
     public void _MediaEncryptedEvent_MediaEncryptedEvent() throws Exception {
         test("MediaEncryptedEvent", "MediaEncryptedEvent");
     }
@@ -3284,6 +3274,16 @@ public class HostParentOfITest extends HostParentOf {
             CHROME = "true")
     public void _OfflineAudioContext_webkitOfflineAudioContext() throws Exception {
         test("OfflineAudioContext", "webkitOfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _MozPowerManager_MozPowerManager() throws Exception {
+        test("MozPowerManager", "MozPowerManager");
     }
 
 }

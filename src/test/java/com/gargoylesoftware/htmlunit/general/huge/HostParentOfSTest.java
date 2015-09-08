@@ -2449,16 +2449,6 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _SVGRenderingIntent_SVGRenderingIntent() throws Exception {
-        test("SVGRenderingIntent", "SVGRenderingIntent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _SVGTextContentElement_SVGTSpanElement() throws Exception {
