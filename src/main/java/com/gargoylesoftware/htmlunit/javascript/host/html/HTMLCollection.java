@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CHECK_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
@@ -207,7 +206,7 @@ public class HTMLCollection extends AbstractList {
             return collection;
         }
 
-        if (!getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME)) {
+        if (isGetWithPreemptionSearchByName()) {
             // no element found by id, let's search by name
             for (final Object next : elements) {
                 if (next instanceof DomElement) {
@@ -240,6 +239,14 @@ public class HTMLCollection extends AbstractList {
         final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
         collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
         return collection;
+    }
+
+    /**
+     * Returns whether {@link #getWithPreemption(String)} should search by name or not.
+     * @return whether we should search by name or not
+     */
+    protected boolean isGetWithPreemptionSearchByName() {
+        return true;
     }
 
     /**
