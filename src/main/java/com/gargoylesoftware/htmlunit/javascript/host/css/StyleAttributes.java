@@ -42,8 +42,9 @@ final class StyleAttributes {
     private static final Map<String, Definition> styles_ = new HashMap<>();
 
     static {
-        // initialize the enumeration
-        Definition.values();
+        for (final Definition definition : Definition.values()) {
+            styles_.put(definition.getPropertyName(), definition);
+        }
     }
 
     private StyleAttributes() {
@@ -2529,18 +2530,15 @@ final class StyleAttributes {
         private final String attributeName_;
         private final BrowserConfiguration[] browserConfigurations_;
 
-        Definition(final String propertyName,
-                final String attributeName,
+        Definition(final String propertyName, final String attributeName,
                 final BrowserConfiguration... browserConfigurations) {
             propertyName_ = propertyName;
             attributeName_ = attributeName;
             browserConfigurations_ = browserConfigurations;
-            styles_.put(propertyName_, this);
         }
 
         private boolean isAvailable(final BrowserVersion browserVersion) {
-            return BrowserConfiguration.isDefined(browserVersion,
-                    browserConfigurations_);
+            return BrowserConfiguration.isDefined(browserVersion, browserConfigurations_);
         }
 
         /**
