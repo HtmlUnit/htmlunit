@@ -575,7 +575,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLIMAGE_NAME_VALUE_PARAMS,
 
-    /** When clicking a input the the surrounding anchor is not clicked. */
+    /** When clicking a {@code checkbox} or {@code radio} input the surrounding anchor is not clicked. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
+
+    /** When clicking a input the surrounding anchor is not clicked. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
 

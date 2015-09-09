@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANG
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 
 import java.io.IOException;
 import java.util.List;
@@ -348,4 +349,14 @@ public class HtmlRadioButtonInput extends HtmlInput {
         }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean propagateClickStateUpdateToParent() {
+        return !hasFeature(HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR)
+                && super.propagateClickStateUpdateToParent();
+    }
+
 }

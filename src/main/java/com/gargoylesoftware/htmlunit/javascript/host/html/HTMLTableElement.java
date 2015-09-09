@@ -153,8 +153,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the tHead.
-     * @param o the tHead
+     * Sets the {@code tHead}.
+     * @param o the {@code tHead}
      */
     @JsxSetter
     public void setTHead(final Object o) {

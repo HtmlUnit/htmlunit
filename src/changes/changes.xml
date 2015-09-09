@@ -9,6 +9,9 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="asashour">
+                Do not click surrounding anchor for 'checkbox' and 'radio' input (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: fix document.forms.form_name with prefixed forms.
             </action>
             <action type="fix" dev="rbri">

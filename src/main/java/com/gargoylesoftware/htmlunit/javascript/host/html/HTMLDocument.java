@@ -1667,7 +1667,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the the domain of this document.
+     * Sets the domain of this document.
      *
      * Domains can only be set to suffixes of the existing domain
      * with the exception of setting the domain to itself.
