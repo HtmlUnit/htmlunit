@@ -313,7 +313,7 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
 
     /**
      * Sets the value of the {@code height} property.
-     * @param width the value of the {@code height} property
+     * @param height the value of the {@code height} property
      */
     @JsxSetter
     public void setHeight(final String height) {
