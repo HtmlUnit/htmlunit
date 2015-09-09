@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PRE_WIDTH_STRING;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -72,9 +73,11 @@ public class HTMLPreElement extends HTMLElement {
      * Returns the {@code width} property.
      * @return the {@code width} property
      */
-    @Override
-    @JsxGetter
-    public int getWidth() {
+    @JsxGetter(propertyName = "width")
+    public Object getWidth_js() {
+        if (getBrowserVersion().hasFeature(JS_PRE_WIDTH_STRING)) {
+            return getWidthOrHeight("width", Boolean.TRUE);
+        }
         final String value = getDomNodeOrDie().getAttribute("width");
         final Integer intValue = HTMLCanvasElement.getValue(value);
         if (intValue != null) {
@@ -88,8 +91,13 @@ public class HTMLPreElement extends HTMLElement {
      * @param width the {@code width} property
      */
     @JsxSetter
-    public void setWidth(final int width) {
-        getDomNodeOrDie().setAttribute("width", Integer.toString(width));
+    public void setWidth(final String width) {
+        if (getBrowserVersion().hasFeature(JS_PRE_WIDTH_STRING)) {
+            setWidthOrHeight("width", width, true);
+        }
+        else {
+            getDomNodeOrDie().setAttribute("width", width);
+        }
     }
 
 }

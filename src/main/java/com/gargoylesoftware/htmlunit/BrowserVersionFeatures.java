@@ -1620,6 +1620,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED,
 
+    /** Indicates that the {@code pre.width} is string. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_PRE_WIDTH_STRING,
+
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS,
