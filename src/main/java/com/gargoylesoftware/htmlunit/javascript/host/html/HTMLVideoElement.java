@@ -21,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.html.HtmlVideo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -39,6 +41,30 @@ public class HTMLVideoElement extends HTMLMediaElement {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public HTMLVideoElement() {
+    }
+
+    /**
+     * Returns the {@code width} property.
+     * @return the {@code width} property
+     */
+    @Override
+    @JsxGetter
+    public int getWidth() {
+        final String value = getDomNodeOrDie().getAttribute("width");
+        final Integer intValue = HTMLCanvasElement.getValue(value);
+        if (intValue != null) {
+            return intValue;
+        }
+        return 0;
+    }
+
+    /**
+     * Sets the {@code width} property.
+     * @param width the {@code width} property
+     */
+    @JsxSetter
+    public void setWidth(final int width) {
+        getDomNodeOrDie().setAttribute("width", Integer.toString(width));
     }
 
 }

@@ -742,10 +742,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,rel,rev,search,shape,target,text,type,"
                 + "username",
-            FF31 = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
-                + "port,protocol,rel,relList,rev,search,searchParams,shape,target,text,type,"
-                + "username",
-            FF38 = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
+            FF = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,rel,relList,rev,search,searchParams,shape,target,text,type,"
                 + "username",
             IE11 = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
@@ -798,10 +795,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "alt,coords,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,search,"
                 + "shape,target,"
                 + "username",
-            FF31 = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
-                + "rel,relList,search,searchParams,shape,target,"
-                + "username",
-            FF38 = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
+            FF = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
                 + "rel,relList,search,searchParams,shape,target,"
                 + "username",
             IE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,search,shape,target")
@@ -1048,8 +1042,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "getContext(),height,toDataURL(),width",
-            FF31 = "getContext(),height,mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
-            FF38 = "getContext(),height,mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
+            FF = "getContext(),height,mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             IE11 = "getContext(),height,msToBlob(),toDataURL(),width",
             IE8 = "")
     @NotYetImplemented({ IE11, FF })
@@ -1273,9 +1266,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,"
                 + "willValidate",
-            FF31 = "checkValidity(),disabled,elements,form,name,setCustomValidity(),type,validationMessage,validity,"
-                + "willValidate",
-            FF38 = "checkValidity(),disabled,elements,form,name,setCustomValidity(),type,validationMessage,validity,"
+            FF = "checkValidity(),disabled,elements,form,name,setCustomValidity(),type,validationMessage,validity,"
                 + "willValidate",
             IE11 = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate",
             IE8 = "align,form")
@@ -1324,10 +1315,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reportValidity(),requestAutocomplete(),reset(),submit(),"
                 + "target",
-            FF31 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
-                + "noValidate,reset(),submit(),"
-                + "target",
-            FF38 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
+            FF = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reset(),submit(),"
                 + "target",
             IE11 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,item(),length,method,"
@@ -1360,10 +1348,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "contentDocument,contentWindow,frameBorder,getSVGDocument(),longDesc,marginHeight,marginWidth,"
                 + "name,noResize,scrolling,"
                 + "src",
-            FF31 = "contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,name,noResize,"
-                + "scrolling,"
-                + "src",
-            FF38 = "contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,name,noResize,"
+            FF = "contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,name,noResize,"
                 + "scrolling,"
                 + "src",
             IE11 = "border,borderColor,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),"
@@ -1724,7 +1709,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF31 = "",
             IE11 = "cite,clear,width",
             IE8 = "cite,clear,clear(),width")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE)
     public void listing() throws Exception {
         test("listing");
     }
@@ -1749,8 +1734,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "charset,crossOrigin,disabled,href,hreflang,import,integrity,"
                             + "media,rel,rev,sheet,sizes,target,type",
-            FF31 = "charset,crossOrigin,disabled,href,hreflang,media,rel,relList,rev,sheet,sizes,target,type",
-            FF38 = "charset,crossOrigin,disabled,href,hreflang,media,rel,relList,rev,sheet,sizes,target,type",
+            FF = "charset,crossOrigin,disabled,href,hreflang,media,rel,relList,rev,sheet,sizes,target,type",
             IE11 = "charset,href,hreflang,media,rel,rev,sheet,target,type",
             IE8 = "charset,href,hreflang,media,onerror,onload,rel,rev,styleSheet,target,type")
     @NotYetImplemented
@@ -1797,16 +1781,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "behavior,bgColor,direction,height,hspace,loop,scrollAmount,scrollDelay,start(),stop(),trueSpeed,"
-                + "vspace,"
-                + "width",
-            FF31 = "align",
-            FF38 = "align",
+                + "vspace,width",
+            FF = "align",
             IE11 = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,"
-                + "start(),stop(),trueSpeed,vspace,"
-                + "width",
+                + "start(),stop(),trueSpeed,vspace,width",
             IE8 = "behavior,bgColor,dataFld,dataFormatAs,dataSrc,direction,height,hspace,loop,onbounce,onfinish,"
-                + "onstart,scrollAmount,scrollDelay,start(),stop(),trueSpeed,vspace,"
-                + "width")
+                + "onstart,scrollAmount,scrollDelay,start(),stop(),trueSpeed,vspace,width")
     @NotYetImplemented({ IE, CHROME })
     public void marquee() throws Exception {
         test("marquee");
@@ -1819,8 +1799,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "compact",
-            FF31 = "compact,label,type",
-            FF38 = "compact,label,type",
+            FF = "compact,label,type",
             IE = "compact,type")
     public void menu() throws Exception {
         test("menu");
@@ -1832,8 +1811,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF31 = "checked,defaultChecked,disabled,icon,label,radiogroup,type",
-            FF38 = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
+    @Alerts(FF = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
     @NotYetImplemented(FF)
     public void menuitem() throws Exception {
         test("menuitem");
@@ -1858,8 +1836,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "high,labels,low,max,min,optimum,value",
-            FF31 = "high,low,max,min,optimum,value",
-            FF38 = "high,low,max,min,optimum,value",
+            FF = "high,low,max,min,optimum,value",
             IE = "")
     @NotYetImplemented(CHROME)
     public void meter() throws Exception {
@@ -2030,10 +2007,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "checkValidity(),defaultValue,form,htmlFor,labels,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,value,"
                 + "willValidate",
-            FF31 = "checkValidity(),defaultValue,form,htmlFor,name,setCustomValidity(),type,validationMessage,"
-                + "validity,value,"
-                + "willValidate",
-            FF38 = "checkValidity(),defaultValue,form,htmlFor,name,setCustomValidity(),type,validationMessage,"
+            FF = "checkValidity(),defaultValue,form,htmlFor,name,setCustomValidity(),type,validationMessage,"
                 + "validity,value,"
                 + "willValidate",
             IE = "")
@@ -2090,7 +2064,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "width",
             IE11 = "cite,clear,width",
             IE8 = "cite,clear,clear(),width")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void pre() throws Exception {
         test("pre");
     }
@@ -2102,8 +2076,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "labels,max,position,value",
-            FF31 = "max,position,value",
-            FF38 = "max,position,value",
+            FF = "max,position,value",
             IE11 = "form,max,position,value",
             IE8 = "")
     @NotYetImplemented({ CHROME, IE11, FF })
@@ -2289,8 +2262,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "disabled,media,sheet,type",
-            FF31 = "disabled,media,scoped,sheet,type",
-            FF38 = "disabled,media,scoped,sheet,type",
+            FF = "disabled,media,scoped,sheet,type",
             IE11 = "media,sheet,type",
             IE8 = "media,onerror,onload,styleSheet,type")
     @NotYetImplemented({ FF, IE8, CHROME })
@@ -2509,8 +2481,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF31 = "dateTime",
-            FF38 = "dateTime")
+    @Alerts(FF = "dateTime")
     @NotYetImplemented(FF)
     public void time() throws Exception {
         test("time");
@@ -2640,11 +2611,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "width",
-            FF31 = "",
-            FF38 = "",
+            FF = "",
             IE11 = "cite,clear,width",
             IE8 = "cite,clear,clear(),width")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE)
     public void xmp() throws Exception {
         test("xmp");
     }
@@ -2658,29 +2628,25 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(IE8 = "accept,align,alt,border,checked,complete,createTextRange(),dataFld,dataFormatAs,dataSrc,"
                 + "defaultChecked,dynsrc,form,height,hspace,indeterminate,loop,lowsrc,maxLength,name,onabort,"
                 + "onchange,onerror,onload,onselect,readOnly,select(),size,src,start,start(),status,type,useMap,"
-                + "value,vrml,vspace,"
-                + "width",
+                + "value,vrml,vspace,width",
             FF31 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
                 + "indeterminate,list,max,maxLength,min,mozIsTextField(),multiple,name,pattern,placeholder,readOnly,"
                 + "required,select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),"
                 + "setRangeText(),setSelectionRange(),size,src,step,stepDown(),stepUp(),textLength,type,useMap,"
-                + "validationMessage,validity,value,valueAsNumber,width,"
-                + "willValidate",
+                + "validationMessage,validity,value,valueAsNumber,width,willValidate",
             FF38 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
                 + "indeterminate,list,max,maxLength,min,mozIsTextField(),multiple,name,pattern,placeholder,readOnly,"
                 + "required,select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),"
                 + "setRangeText(),setSelectionRange(),size,src,step,stepDown(),stepUp(),textLength,type,useMap,"
-                + "validationMessage,validity,value,valueAsNumber,width,"
-                + "willValidate",
+                + "validationMessage,validity,value,valueAsNumber,width,willValidate",
             IE11 = "accept,align,alt,autocomplete,autofocus,border,checked,checkValidity(),complete,"
                 + "createTextRange(),defaultChecked,defaultValue,dynsrc,files,form,formAction,formEnctype,"
                 + "formMethod,formNoValidate,formTarget,height,hspace,indeterminate,list,loop,lowsrc,max,maxLength,"
                 + "min,multiple,name,pattern,placeholder,readOnly,required,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),size,src,start,status,step,stepDown(),stepUp(),type,"
-                + "useMap,validationMessage,validity,value,valueAsNumber,vrml,vspace,width,"
-                + "willValidate",
+                + "useMap,validationMessage,validity,value,valueAsNumber,vrml,vspace,width,willValidate",
             CHROME = "accept,align,alt,autocapitalize,autocomplete,autofocus,checked,checkValidity(),"
                 + "defaultChecked,defaultValue,"
                 + "dirName,disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
@@ -2688,8 +2654,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "placeholder,readOnly,reportValidity(),required,select(),selectionDirection,selectionEnd,"
                 + "selectionStart,setCustomValidity(),setRangeText(),setSelectionRange(),size,src,step,stepDown(),"
                 + "stepUp(),type,useMap,validationMessage,validity,value,valueAsDate,valueAsNumber,webkitdirectory,"
-                + "webkitEntries,width,"
-                + "willValidate")
+                + "webkitEntries,width,willValidate")
     @NotYetImplemented
     public void input() throws Exception {
         test("input");

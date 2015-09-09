@@ -101,4 +101,29 @@ public class HTMLMarqueeElement extends HTMLElement {
     public void setDataSrc(final String dataSrc) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
+
+    /**
+     * Returns the {@code width} property.
+     * @return the {@code width} property
+     */
+    @Override
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public int getWidth() {
+        final String value = getDomNodeOrDie().getAttribute("width");
+        final Integer intValue = HTMLCanvasElement.getValue(value);
+        if (intValue != null) {
+            return intValue;
+        }
+        return 0;
+    }
+
+    /**
+     * Sets the {@code width} property.
+     * @param width the {@code width} property
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public void setWidth(final int width) {
+        getDomNodeOrDie().setAttribute("width", Integer.toString(width));
+    }
+
 }

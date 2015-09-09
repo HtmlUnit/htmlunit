@@ -65,7 +65,7 @@ public class HTMLCanvasElement extends HTMLElement {
         return 300;
     }
 
-    private static Integer getValue(final String value) {
+    static Integer getValue(final String value) {
         int index = -1;
         while (index + 1 < value.length() && Character.isDigit(value.charAt(index + 1))) {
             index++;

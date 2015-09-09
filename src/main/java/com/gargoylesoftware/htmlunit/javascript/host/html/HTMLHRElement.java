@@ -22,6 +22,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -51,4 +53,23 @@ public class HTMLHRElement extends HTMLElement {
     protected boolean isEndTagForbidden() {
         return true;
     }
+
+    /**
+     * Returns the value of the {@code width} property.
+     * @return the value of the {@code width} property
+     */
+    @JsxGetter(propertyName = "width")
+    public String getWidth_js() {
+        return getWidthOrHeight("width", Boolean.TRUE);
+    }
+
+    /**
+     * Sets the value of the {@code width} property.
+     * @param width the value of the {@code width} property
+     */
+    @JsxSetter
+    public void setWidth(final String width) {
+        setWidthOrHeight("width", width, true);
+    }
+
 }
