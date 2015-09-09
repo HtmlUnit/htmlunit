@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -710,7 +711,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final String lastModified = driver.findElement(By.id("i")).getAttribute("value");
 
         try {
-            new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(lastModified);
+            new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.ROOT).parse(lastModified);
         }
         catch (final ParseException e) {
             fail(e.getMessage());

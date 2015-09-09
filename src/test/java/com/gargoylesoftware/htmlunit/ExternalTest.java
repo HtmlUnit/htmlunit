@@ -23,6 +23,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -42,7 +43,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class ExternalTest {
 
-    private static final DateFormat TEAM_CITY_FORMAT_ = new SimpleDateFormat("dd MMM yy HH:mm");
+    private static final DateFormat TEAM_CITY_FORMAT_ = new SimpleDateFormat("dd MMM yy HH:mm", Locale.ROOT);
 
     /**
      * Tests that POM dependencies are the latest.
@@ -92,7 +93,7 @@ public class ExternalTest {
                     final XmlPage page = webClient.getPage("https://oss.sonatype.org/content/repositories/snapshots/"
                             + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
                     final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
-                    final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss");
+                    final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss", Locale.ROOT);
                     final long snapshotMillis = format.parse(timestamp).getTime();
                     final long nowMillis = System.currentTimeMillis();
                     final long days = TimeUnit.MILLISECONDS.toDays(nowMillis - snapshotMillis);
@@ -205,7 +206,7 @@ public class ExternalTest {
             final int start = triggerText.indexOf(marker);
             final String triggerDate = triggerText.substring(start + marker.length());
 
-            final Calendar buildCalendar = Calendar.getInstance();
+            final Calendar buildCalendar = Calendar.getInstance(Locale.ROOT);
             buildCalendar.setTime(TEAM_CITY_FORMAT_.parse(triggerDate));
             return Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) != buildCalendar.get(Calendar.WEEK_OF_YEAR);
         }

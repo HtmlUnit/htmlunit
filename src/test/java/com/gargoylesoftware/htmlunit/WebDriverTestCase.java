@@ -27,6 +27,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -157,7 +158,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         browsersValue = "hu";
                     }
                     BROWSERS_PROPERTIES_
-                        = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "").toLowerCase().split(",")));
+                        = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "")
+                                .toLowerCase(Locale.ROOT).split(",")));
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     FF31_BIN_ = properties.getProperty("ff31.bin");
                     FF38_BIN_ = properties.getProperty("ff38.bin");

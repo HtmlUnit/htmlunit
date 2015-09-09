@@ -83,7 +83,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
     static final Date DATE_1_1_1970;
 
     static {
-        final Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance(Locale.ROOT);
         calendar.setTimeZone(DateUtils.GMT);
         calendar.set(1970, Calendar.JANUARY, 1, 0, 0, 0);
         calendar.set(Calendar.MILLISECOND, 0);

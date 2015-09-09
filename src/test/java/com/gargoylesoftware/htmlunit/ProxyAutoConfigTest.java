@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 import org.junit.Test;
+
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * Tests for the {@link ProxyAutoConfig}.
@@ -43,12 +44,13 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
      */
     @Test
     public void weekdayRange() {
-        final Calendar calendar = Calendar.getInstance();
-        final String today = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ROOT);
+        final Calendar calendar = Calendar.getInstance(Locale.ROOT);
+        final DateFormat dateFormat = new SimpleDateFormat("EEE", Locale.ROOT);
+        final String today = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
         calendar.add(Calendar.DAY_OF_MONTH, 1);
-        final String tomorrow = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ROOT);
+        final String tomorrow = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
         calendar.add(Calendar.DAY_OF_MONTH, -2);
-        final String yesterday = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ROOT);
+        final String yesterday = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
         assertTrue(ProxyAutoConfig.weekdayRange(today, Undefined.instance, Undefined.instance));
         assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, Undefined.instance));
         assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, Undefined.instance));
@@ -62,7 +64,7 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void dateRange() {
         final Object undefined = Undefined.instance;
-        final Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance(Locale.ROOT);
         final int today = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         final int tomorrow = calendar.get(Calendar.DAY_OF_MONTH);
@@ -82,7 +84,7 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void timeRange() {
         final Object undefined = Undefined.instance;
-        final Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance(Locale.ROOT);
         final int now = calendar.get(Calendar.HOUR_OF_DAY);
         calendar.add(Calendar.HOUR_OF_DAY, 2);
         final int after = calendar.get(Calendar.HOUR_OF_DAY);

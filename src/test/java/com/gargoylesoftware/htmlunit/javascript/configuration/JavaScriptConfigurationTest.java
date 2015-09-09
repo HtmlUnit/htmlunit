@@ -26,6 +26,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -176,7 +177,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         else {
             try {
                 String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
-                if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win")) {
                     jarPath = jarPath.replace("%20", " ");
                 }
                 final JarFile jarFile = new JarFile(jarPath);

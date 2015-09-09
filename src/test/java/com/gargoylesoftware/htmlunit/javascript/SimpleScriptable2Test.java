@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -189,7 +190,8 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
+        final String timeZone = new SimpleDateFormat("Z", Locale.ROOT)
+                .format(Calendar.getInstance(Locale.ROOT).getTime());
         final String hour = timeZone.substring(1, 3);
         String strMinutes = timeZone.substring(3, 5);
         final int minutes = Integer.parseInt(strMinutes);

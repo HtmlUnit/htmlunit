@@ -228,7 +228,8 @@ public final class ProxyAutoConfig {
         }
         final Calendar calendar = Calendar.getInstance(timezone);
         for (int i = 0; i < 7; i++) {
-            final String day = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ROOT);
+            final String day = new SimpleDateFormat("EEE", Locale.ROOT)
+                    .format(calendar.getTime()).toUpperCase(Locale.ROOT);
             if (day.equals(wd2)) {
                 return true;
             }
@@ -362,9 +363,9 @@ public final class ProxyAutoConfig {
         final String s = Context.toString(object);
         if (Character.isLetter(s.charAt(0))) {
             try {
-                final Calendar cal = Calendar.getInstance();
+                final Calendar cal = Calendar.getInstance(Locale.ROOT);
                 cal.clear();
-                cal.setTime(new SimpleDateFormat("MMM").parse(s));
+                cal.setTime(new SimpleDateFormat("MMM", Locale.ROOT).parse(s));
                 return cal.get(Calendar.MONTH);
             }
             catch (final Exception e) {

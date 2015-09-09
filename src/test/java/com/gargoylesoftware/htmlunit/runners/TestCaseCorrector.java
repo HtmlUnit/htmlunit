@@ -280,7 +280,7 @@ final class TestCaseCorrector {
             String method = parent;
             for (final String prefix : HostExtractor.PREFIXES_) {
                 if (method.startsWith(prefix)) {
-                    method = prefix.toLowerCase() + method.substring(prefix.length());
+                    method = prefix.toLowerCase(Locale.ROOT) + method.substring(prefix.length());
                     break;
                 }
             }

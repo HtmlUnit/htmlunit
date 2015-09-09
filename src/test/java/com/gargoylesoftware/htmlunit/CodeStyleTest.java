@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -144,7 +145,7 @@ public class CodeStyleTest {
      * Checks the year in the source.
      */
     private void year(final List<String> lines, final String path) {
-        final int year = Calendar.getInstance().get(Calendar.YEAR);
+        final int year = Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR);
         if (lines.size() < 2 || !lines.get(1).contains("Copyright (c) 2002-" + year)) {
             addFailure("Incorrect year in " + path);
         }
@@ -253,7 +254,7 @@ public class CodeStyleTest {
                     }
                 }, null);
 
-            final String fileName = file.getName().toLowerCase();
+            final String fileName = file.getName().toLowerCase(Locale.ROOT);
 
             for (final String extension : SVN.getEolExtenstions()) {
                 if (fileName.endsWith(extension)) {
@@ -349,7 +350,7 @@ public class CodeStyleTest {
      */
     private void licenseYear() throws IOException {
         final List<String> lines = FileUtils.readLines(new File("LICENSE.txt"));
-        if (!lines.get(1).contains("Copyright (c) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
+        if (!lines.get(1).contains("Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
             addFailure("Incorrect year in LICENSE.txt");
         }
     }
@@ -361,7 +362,7 @@ public class CodeStyleTest {
         final List<String> lines =
                 FileUtils.readLines(new File("src/main/java/com/gargoylesoftware/htmlunit/Version.java"));
         for (final String line : lines) {
-            if (line.contains("return \"Copyright (c) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
+            if (line.contains("return \"Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
                 return;
             }
         }
@@ -423,7 +424,7 @@ public class CodeStyleTest {
     private void deprecated(final List<String> lines, final String relativePath) {
         int i = 0;
         for (String line : lines) {
-            line = line.trim().toLowerCase();
+            line = line.trim().toLowerCase(Locale.ROOT);
             if (line.startsWith("* @deprecated")) {
                 if (!line.startsWith("* @deprecated as of ") && !line.startsWith("* @deprecated since ")) {
                     addFailure("@deprecated must be immediately followed by \"As of \" or \"since \" in "

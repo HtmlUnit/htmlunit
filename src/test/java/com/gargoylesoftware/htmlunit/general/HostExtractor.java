@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -118,7 +119,7 @@ public final class HostExtractor {
                 String methodName = name;
                 for (final String prefix : PREFIXES_) {
                     if (methodName.startsWith(prefix)) {
-                        methodName = prefix.toLowerCase() + methodName.substring(prefix.length());
+                        methodName = prefix.toLowerCase(Locale.ROOT) + methodName.substring(prefix.length());
                         break;
                     }
                 }

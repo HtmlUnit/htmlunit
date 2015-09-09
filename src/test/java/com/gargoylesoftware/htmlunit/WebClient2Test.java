@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -245,7 +246,8 @@ public class WebClient2Test extends SimpleWebTestCase {
         final String html = "<html><body></body></html>";
         final HtmlPage p = loadPageWithAlerts(html);
         // browsers are using different casing, but this is not relevant for this test
-        assertEquals("en-us", getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language").toLowerCase());
+        assertEquals("en-us",
+                getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language").toLowerCase(Locale.ROOT));
 
         final WebClient client = p.getWebClient();
         final String lang = client.getBrowserVersion().getBrowserLanguage();

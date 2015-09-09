@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.io.FileUtils;
 
@@ -76,7 +77,7 @@ public final class SVN {
                 }
             }
             else {
-                final String fileName = f.getName().toLowerCase();
+                final String fileName = f.getName().toLowerCase(Locale.ROOT);
                 for (final String extension : EOL_EXTENSIONS_) {
                     if (fileName.endsWith(extension)) {
                         FileUtils.writeLines(f, FileUtils.readLines(f));

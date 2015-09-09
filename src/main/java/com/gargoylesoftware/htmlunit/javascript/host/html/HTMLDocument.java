@@ -458,7 +458,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 stringDate = webResponse.getResponseHeaderValue("Date");
             }
             final Date lastModified = parseDateOrNow(stringDate);
-            lastModified_ = new SimpleDateFormat(LAST_MODIFIED_DATE_FORMAT).format(lastModified);
+            lastModified_ = new SimpleDateFormat(LAST_MODIFIED_DATE_FORMAT, Locale.ROOT).format(lastModified);
         }
         return lastModified_;
     }

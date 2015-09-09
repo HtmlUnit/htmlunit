@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.Servlet;
@@ -265,7 +266,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         final String content = "<html><head><script>\n"
             + "function test() {\n"
             + "  var req = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
-            + "  req.open('" + method.name().toLowerCase() + "', 'foo.xml', false);\n"
+            + "  req.open('" + method.name().toLowerCase(Locale.ROOT) + "', 'foo.xml', false);\n"
             + "  req.send('');\n"
             + "}\n"
             + "</script></head>\n"

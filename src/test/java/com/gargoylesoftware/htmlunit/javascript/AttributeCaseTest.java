@@ -48,7 +48,8 @@ public class AttributeCaseTest extends SimpleWebTestCase {
     @Test
     public void getAttributeLowerCase() throws Exception {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttribute(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE,
+                element_.getAttribute(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT)));
     }
 
     /**
@@ -78,9 +79,9 @@ public class AttributeCaseTest extends SimpleWebTestCase {
      */
     @Test
     public void setAttributeLowerCase() throws Exception {
-        setupSetAttributeTest(ATTRIBUTE_NAME.toLowerCase(), ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
+        setupSetAttributeTest(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT), ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
         Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW,
-            element_.getAttribute(ATTRIBUTE_NAME.toLowerCase()));
+            element_.getAttribute(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT)));
     }
 
     /**
@@ -91,7 +92,7 @@ public class AttributeCaseTest extends SimpleWebTestCase {
     public void setAttributeMixedCase() throws Exception {
         setupSetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
         Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW,
-            element_.getAttribute(ATTRIBUTE_NAME.toLowerCase()));
+            element_.getAttribute(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT)));
     }
 
     /**
@@ -102,7 +103,7 @@ public class AttributeCaseTest extends SimpleWebTestCase {
     public void setAttributeUpperCase() throws Exception {
         setupSetAttributeTest(ATTRIBUTE_NAME.toUpperCase(Locale.ROOT), ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
         Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW,
-            element_.getAttribute(ATTRIBUTE_NAME.toLowerCase()));
+            element_.getAttribute(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT)));
     }
 
     /**
@@ -112,8 +113,8 @@ public class AttributeCaseTest extends SimpleWebTestCase {
     @Test
     public void removeAttributeLowerCase() throws Exception {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        element_.removeAttribute(ATTRIBUTE_NAME.toLowerCase());
-        Assert.assertEquals(page_.asXml(), "", element_.getAttribute(ATTRIBUTE_NAME.toLowerCase()));
+        element_.removeAttribute(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT));
+        Assert.assertEquals(page_.asXml(), "", element_.getAttribute(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT)));
     }
 
     /**
@@ -124,7 +125,7 @@ public class AttributeCaseTest extends SimpleWebTestCase {
     public void removeAttributeMixedCase() throws Exception {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         element_.removeAttribute(ATTRIBUTE_NAME);
-        Assert.assertEquals(page_.asXml(), "", element_.getAttribute(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), "", element_.getAttribute(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT)));
     }
 
     /**
@@ -135,7 +136,7 @@ public class AttributeCaseTest extends SimpleWebTestCase {
     public void removeAttributeUpperCase() throws Exception {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         element_.removeAttribute(ATTRIBUTE_NAME.toUpperCase(Locale.ROOT));
-        Assert.assertEquals(page_.asXml(), "", element_.getAttribute(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), "", element_.getAttribute(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT)));
     }
 
     /**
@@ -145,7 +146,7 @@ public class AttributeCaseTest extends SimpleWebTestCase {
     @Test
     public void hasAttributeLowerCase() throws Exception {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertTrue(page_.asXml(), element_.hasAttribute(ATTRIBUTE_NAME.toLowerCase()));
+        assertTrue(page_.asXml(), element_.hasAttribute(ATTRIBUTE_NAME.toLowerCase(Locale.ROOT)));
     }
 
     /**
