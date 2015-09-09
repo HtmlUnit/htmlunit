@@ -94,16 +94,6 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "type".
-     *
-     * @return the value of this attribute
-     */
-    @JsxGetter
-    public String getType() {
-        return getDomNodeOrDie().getAttribute("type");
-    }
-
-    /**
      * Sets the <tt>onchange</tt> event handler for this element.
      * @param onchange the <tt>onchange</tt> event handler for this element
      */

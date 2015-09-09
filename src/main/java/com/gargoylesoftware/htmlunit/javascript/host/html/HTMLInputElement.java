@@ -465,9 +465,10 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code type} property.
+     * @return the {@code type} property
      */
-    @Override
+    @JsxGetter
     public String getType() {
         return getDomNodeOrDie().getTypeAttribute();
     }

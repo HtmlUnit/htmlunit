@@ -71,9 +71,9 @@ public class HTMLButtonElement extends FormField {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code type} property.
+     * @return the {@code type} property
      */
-    @Override
     @JsxGetter
     public String getType() {
         String type = ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
