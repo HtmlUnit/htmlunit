@@ -240,8 +240,7 @@ public class HTMLAppletElement extends HTMLElement {
      */
     @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
     public String getClassid() {
-        final String classid = getDomNodeOrDie().getAttribute("classid");
-        return classid;
+        return getDomNodeOrDie().getAttribute("classid");
     }
 
     /**
@@ -253,4 +252,41 @@ public class HTMLAppletElement extends HTMLElement {
         getDomNodeOrDie().setAttribute("classid", classid);
         // see HTMLObjectElement.setClassid
     }
+
+    /**
+     * Returns the value of the {@code width} property.
+     * @return the value of the {@code width} property
+     */
+    @JsxGetter(propertyName = "width")
+    public String getWidth_js() {
+        return getWidthOrHeight("width", Boolean.TRUE);
+    }
+
+    /**
+     * Sets the value of the {@code width} property.
+     * @param width the value of the {@code width} property
+     */
+    @JsxSetter
+    public void setWidth(final String width) {
+        setWidthOrHeight("width", width, true);
+    }
+
+    /**
+     * Returns the value of the {@code height} property.
+     * @return the value of the {@code height} property
+     */
+    @JsxGetter(propertyName = "height")
+    public String getHeight_js() {
+        return getWidthOrHeight("height", Boolean.TRUE);
+    }
+
+    /**
+     * Sets the value of the {@code height} property.
+     * @param width the value of the {@code height} property
+     */
+    @JsxSetter
+    public void setHeight(final String height) {
+        setWidthOrHeight("height", height, true);
+    }
+
 }

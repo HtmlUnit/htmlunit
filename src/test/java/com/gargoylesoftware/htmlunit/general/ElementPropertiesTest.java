@@ -776,11 +776,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align,alt,archive,code,codeBase,height,hspace,name,object,vspace,width",
             IE11 = "align,alt,altHtml,archive,BaseHref,border,classid,code,codeBase,codeType,contentDocument,data,"
-                + "declare,form,height,hspace,name,object,standby,type,useMap,vspace,"
-                + "width",
+                + "declare,form,height,hspace,name,object,standby,type,useMap,vspace,width",
             IE8 = "align,alt,altHtml,archive,BaseHref,border,code,codeBase,codeType,contentDocument,dataFld,"
-                + "dataFormatAs,dataSrc,declare,form,height,hspace,name,onerror,standby,type,useMap,vspace,"
-                + "width")
+                + "dataFormatAs,dataSrc,declare,form,height,hspace,name,onerror,standby,type,useMap,vspace,width")
     @NotYetImplemented
     public void applet() throws Exception {
         test("applet");
@@ -793,11 +791,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "alt,coords,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,search,"
-                + "shape,target,"
-                + "username",
+                + "shape,target,username",
             FF = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
-                + "rel,relList,search,searchParams,shape,target,"
-                + "username",
+                + "rel,relList,search,searchParams,shape,target,username",
             IE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,search,shape,target")
     @NotYetImplemented
     public void area() throws Exception {
@@ -836,31 +832,27 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,onwebkitkeyadded,onwebkitkeyerror,"
                 + "onwebkitkeymessage,onwebkitneedkey,pause(),paused,play(),playbackRate,played,preload,readyState,"
                 + "seekable,seeking,setMediaKeys(),src,textTracks,volume,webkitAddKey(),webkitAudioDecodedByteCount,"
-                + "webkitCancelKeyRequest(),webkitGenerateKeyRequest(),"
-                + "webkitVideoDecodedByteCount",
+                + "webkitCancelKeyRequest(),webkitGenerateKeyRequest(),webkitVideoDecodedByteCount",
             FF31 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
                 + "HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mozAudioCaptured,"
                 + "mozAudioChannelType,mozAutoplayEnabled,mozCaptureStream(),mozCaptureStreamUntilEnded(),"
                 + "mozFragmentEnd,mozGetMetadata(),mozPreservesPitch,mozSrcObject,muted,NETWORK_EMPTY,NETWORK_IDLE,"
                 + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,pause(),paused,play(),playbackRate,played,preload,"
-                + "readyState,seekable,seeking,src,textTracks,"
-                + "volume",
+                + "readyState,seekable,seeking,src,textTracks,volume",
             FF38 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
                 + "HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mozAudioCaptured,"
                 + "mozAudioChannelType,mozAutoplayEnabled,mozCaptureStream(),mozCaptureStreamUntilEnded(),"
                 + "mozFragmentEnd,mozGetMetadata(),mozPreservesPitch,mozSrcObject,muted,NETWORK_EMPTY,NETWORK_IDLE,"
                 + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,pause(),paused,play(),playbackRate,played,preload,"
-                + "readyState,seekable,seeking,src,textTracks,"
-                + "volume",
+                + "readyState,seekable,seeking,src,textTracks,volume",
             IE11 = "addTextTrack(),audioTracks,autobuffer,autoplay,buffered,canPlayType(),controls,currentSrc,"
                 + "currentTime,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,initialTime,load(),loop,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,"
                 + "NETWORK_NO_SOURCE,networkState,pause(),paused,play(),playbackRate,played,preload,readyState,"
-                + "seekable,seeking,src,textTracks,"
-                + "volume",
+                + "seekable,seeking,src,textTracks,volume",
             IE8 = "")
     @NotYetImplemented({ CHROME, IE11, FF })
     public void audio() throws Exception {
@@ -1934,24 +1926,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,data,declare,form,"
                 + "getSVGDocument(),height,hspace,name,reportValidity(),setCustomValidity(),standby,type,useMap,"
-                + "validationMessage,validity,vspace,width,"
-                + "willValidate",
+                + "validationMessage,validity,vspace,width,willValidate",
             FF31 = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
                 + "declare,form,getSVGDocument(),height,hspace,name,setCustomValidity(),standby,type,typeMustMatch,"
-                + "useMap,validationMessage,validity,vspace,width,"
-                + "willValidate",
+                + "useMap,validationMessage,validity,vspace,width,willValidate",
             FF38 = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
                 + "declare,form,getSVGDocument(),height,hspace,name,setCustomValidity(),standby,type,typeMustMatch,"
-                + "useMap,validationMessage,validity,vspace,width,"
-                + "willValidate",
+                + "useMap,validationMessage,validity,vspace,width,willValidate",
             IE11 = "align,alt,altHtml,archive,BaseHref,border,checkValidity(),classid,code,codeBase,codeType,"
                 + "contentDocument,data,declare,form,getSVGDocument(),height,hspace,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,object,readyState,setCustomValidity(),standby,"
-                + "type,useMap,validationMessage,validity,vspace,width,"
-                + "willValidate",
+                + "type,useMap,validationMessage,validity,vspace,width,willValidate",
             IE8 = "align,alt,altHtml,archive,BaseHref,border,code,codeBase,codeType,contentDocument,dataFld,"
-                + "dataFormatAs,dataSrc,declare,form,height,hspace,name,onerror,standby,type,useMap,vspace,"
-                + "width")
+                + "dataFormatAs,dataSrc,declare,form,height,hspace,name,onerror,standby,type,useMap,vspace,width")
     @NotYetImplemented
     public void object() throws Exception {
         test("object");

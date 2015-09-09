@@ -283,4 +283,41 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
     public void setDataSrc(final String dataSrc) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
+
+    /**
+     * Returns the value of the {@code width} property.
+     * @return the value of the {@code width} property
+     */
+    @JsxGetter(propertyName = "width")
+    public String getWidth_js() {
+        return getWidthOrHeight("width", Boolean.TRUE);
+    }
+
+    /**
+     * Sets the value of the {@code width} property.
+     * @param width the value of the {@code width} property
+     */
+    @JsxSetter
+    public void setWidth(final String width) {
+        setWidthOrHeight("width", width, true);
+    }
+
+    /**
+     * Returns the value of the {@code height} property.
+     * @return the value of the {@code height} property
+     */
+    @JsxGetter(propertyName = "height")
+    public String getHeight_js() {
+        return getWidthOrHeight("height", Boolean.TRUE);
+    }
+
+    /**
+     * Sets the value of the {@code height} property.
+     * @param width the value of the {@code height} property
+     */
+    @JsxSetter
+    public void setHeight(final String height) {
+        setWidthOrHeight("height", height, true);
+    }
+
 }

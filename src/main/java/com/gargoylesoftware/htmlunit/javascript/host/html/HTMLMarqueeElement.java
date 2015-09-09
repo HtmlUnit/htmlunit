@@ -126,4 +126,28 @@ public class HTMLMarqueeElement extends HTMLElement {
         getDomNodeOrDie().setAttribute("width", Integer.toString(width));
     }
 
+    /**
+     * Returns the {@code height} property.
+     * @return the {@code height} property
+     */
+    @Override
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public int getHeight() {
+        final String value = getDomNodeOrDie().getAttribute("height");
+        final Integer intValue = HTMLCanvasElement.getValue(value);
+        if (intValue != null) {
+            return intValue;
+        }
+        return 0;
+    }
+
+    /**
+     * Sets the {@code height} property.
+     * @param height the {@code height} property
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public void setHeight(final int height) {
+        getDomNodeOrDie().setAttribute("height", Integer.toString(height));
+    }
+
 }

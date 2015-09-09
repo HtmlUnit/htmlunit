@@ -67,4 +67,28 @@ public class HTMLVideoElement extends HTMLMediaElement {
         getDomNodeOrDie().setAttribute("width", Integer.toString(width));
     }
 
+    /**
+     * Returns the {@code height} property.
+     * @return the {@code height} property
+     */
+    @Override
+    @JsxGetter
+    public int getHeight() {
+        final String value = getDomNodeOrDie().getAttribute("height");
+        final Integer intValue = HTMLCanvasElement.getValue(value);
+        if (intValue != null) {
+            return intValue;
+        }
+        return 0;
+    }
+
+    /**
+     * Sets the {@code height} property.
+     * @param height the {@code height} property
+     */
+    @JsxSetter
+    public void setHeight(final int height) {
+        getDomNodeOrDie().setAttribute("height", Integer.toString(height));
+    }
+
 }

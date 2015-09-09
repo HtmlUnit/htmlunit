@@ -439,21 +439,18 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * {@inheritDoc} Overridden to modify browser configurations.
+     * {@inheritDoc}
      */
     @Override
-    @JsxFunction(@WebBrowser(FF))
     public void click() throws IOException {
         final HtmlInput domNode = getDomNodeOrDie();
         final boolean originalState = domNode.isChecked();
         final Event event;
         if (getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-            event = new PointerEvent(domNode, MouseEvent.TYPE_CLICK, false,
-                    false, false, MouseEvent.BUTTON_LEFT);
+            event = new PointerEvent(domNode, MouseEvent.TYPE_CLICK, false, false, false, MouseEvent.BUTTON_LEFT);
         }
         else {
-            event = new MouseEvent(domNode, MouseEvent.TYPE_CLICK, false,
-                    false, false, MouseEvent.BUTTON_LEFT);
+            event = new MouseEvent(domNode, MouseEvent.TYPE_CLICK, false, false, false, MouseEvent.BUTTON_LEFT);
         }
         domNode.click(event);
 
@@ -469,10 +466,8 @@ public class HTMLInputElement extends FormField {
 
     /**
      * {@inheritDoc}
-     * Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter
     public String getType() {
         return getDomNodeOrDie().getTypeAttribute();
     }
@@ -615,6 +610,30 @@ public class HTMLInputElement extends FormField {
     @JsxSetter
     public void setWidth(final int width) {
         getDomNodeOrDie().setAttribute("width", Integer.toString(width));
+    }
+
+    /**
+     * Returns the {@code height} property.
+     * @return the {@code height} property
+     */
+    @Override
+    @JsxGetter
+    public int getHeight() {
+        final String value = getDomNodeOrDie().getAttribute("height");
+        final Integer intValue = HTMLCanvasElement.getValue(value);
+        if (intValue != null) {
+            return intValue;
+        }
+        return 0;
+    }
+
+    /**
+     * Sets the {@code height} property.
+     * @param height the {@code height} property
+     */
+    @JsxSetter
+    public void setHeight(final int height) {
+        getDomNodeOrDie().setAttribute("height", Integer.toString(height));
     }
 
 }
