@@ -799,6 +799,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
 
+    /** Is {@code baseURI} null. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_ATTR_BASE_URI_NULL,
+
     /** firstChild and lastChild returns null for Attr (like IE does). */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(FF) })
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
