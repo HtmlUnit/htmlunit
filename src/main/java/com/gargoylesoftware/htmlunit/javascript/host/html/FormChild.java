@@ -27,9 +27,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 public class FormChild extends HTMLElement {
 
     /**
-     * Returns the value of the JavaScript <tt>form</tt> attribute.
+     * Returns the value of the JavaScript {@code form} attribute.
      *
-     * @return the value of the JavaScript <tt>form</tt> attribute
+     * @return the value of the JavaScript {@code form} attribute
      */
     @JsxGetter
     public HTMLFormElement getForm() {

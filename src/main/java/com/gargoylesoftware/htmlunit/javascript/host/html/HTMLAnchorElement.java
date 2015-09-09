@@ -154,8 +154,8 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>href</tt> attribute of this link to the specified URL.
-     * @param url the new value of the <tt>href</tt> attribute
+     * Sets the {@code href} attribute of this link to the specified URL.
+     * @param url the new value of the {@code href} attribute
      */
     private void setUrl(final URL url) {
         getDomNodeOrDie().setAttribute("href", url.toString());
@@ -505,8 +505,8 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Returns the <tt>text</tt> attribute.
-     * @return the <tt>text</tt> attribute
+     * Returns the {@code text} attribute.
+     * @return the {@code text} attribute
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getText() {
@@ -515,8 +515,8 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>text</tt> attribute.
-     * @param text the <tt>text</tt> attribute
+     * Sets the {@code text} attribute.
+     * @param text the {@code text} attribute
      */
     @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void setText(final String text) {

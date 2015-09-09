@@ -137,8 +137,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the <tt>abbr</tt> attribute.
-     * @return the value of the <tt>abbr</tt> attribute
+     * Returns the value of the {@code abbr} attribute.
+     * @return the value of the {@code abbr} attribute
      */
     @JsxGetter
     public String getAbbr() {
@@ -146,8 +146,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the <tt>abbr</tt> attribute.
-     * @param abbr the value of the <tt>abbr</tt> attribute
+     * Sets the value of the {@code abbr} attribute.
+     * @param abbr the value of the {@code abbr} attribute
      */
     @JsxSetter
     public void setAbbr(final String abbr) {
@@ -155,8 +155,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the <tt>axis</tt> attribute.
-     * @return the value of the <tt>axis</tt> attribute
+     * Returns the value of the {@code axis} attribute.
+     * @return the value of the {@code axis} attribute
      */
     @JsxGetter
     public String getAxis() {
@@ -164,8 +164,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the <tt>axis</tt> attribute.
-     * @param axis the value of the <tt>axis</tt> attribute
+     * Sets the value of the {@code axis} attribute.
+     * @param axis the value of the {@code axis} attribute
      */
     @JsxSetter
     public void setAxis(final String axis) {
@@ -173,8 +173,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the <tt>bgColor</tt> attribute.
-     * @return the value of the <tt>bgColor</tt> attribute
+     * Returns the value of the {@code bgColor} attribute.
+     * @return the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -183,8 +183,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the <tt>bgColor</tt> attribute.
-     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * Sets the value of the {@code bgColor} attribute.
+     * @param bgColor the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
@@ -193,8 +193,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the <tt>colSpan</tt> attribute.
-     * @return the value of the <tt>colSpan</tt> attribute
+     * Returns the value of the {@code colSpan} attribute.
+     * @return the value of the {@code colSpan} attribute
      */
     @JsxGetter
     public int getColSpan() {
@@ -208,8 +208,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the <tt>colSpan</tt> attribute.
-     * @param colSpan the value of the <tt>colSpan</tt> attribute
+     * Sets the value of the {@code colSpan} attribute.
+     * @param colSpan the value of the {@code colSpan} attribute
      */
     @JsxSetter
     public void setColSpan(final String colSpan) {
@@ -233,8 +233,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the <tt>rowSpan</tt> attribute.
-     * @return the value of the <tt>rowSpan</tt> attribute
+     * Returns the value of the {@code rowSpan} attribute.
+     * @return the value of the {@code rowSpan} attribute
      */
     @JsxGetter
     public int getRowSpan() {
@@ -248,8 +248,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the <tt>rowSpan</tt> attribute.
-     * @param rowSpan the value of the <tt>rowSpan</tt> attribute
+     * Sets the value of the {@code rowSpan} attribute.
+     * @param rowSpan the value of the {@code rowSpan} attribute
      */
     @JsxSetter
     public void setRowSpan(final String rowSpan) {
@@ -273,8 +273,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the <tt>noWrap</tt> attribute.
-     * @return the value of the <tt>noWrap</tt> attribute
+     * Returns the value of the {@code noWrap} attribute.
+     * @return the value of the {@code noWrap} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -283,8 +283,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the <tt>noWrap</tt> attribute.
-     * @param noWrap the value of the <tt>noWrap</tt> attribute
+     * Sets the value of the {@code noWrap} attribute.
+     * @param noWrap the value of the {@code noWrap} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
     @JsxSetter

@@ -65,8 +65,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the <tt>src</tt> attribute.
-     * @return the <tt>src</tt> attribute
+     * Returns the {@code src} attribute.
+     * @return the {@code src} attribute
      */
     @JsxGetter
     public String getSrc() {
@@ -88,8 +88,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>src</tt> attribute.
-     * @param src the <tt>src</tt> attribute
+     * Sets the {@code src} attribute.
+     * @param src the {@code src} attribute
      */
     @JsxSetter
     public void setSrc(final String src) {
@@ -97,8 +97,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the <tt>text</tt> attribute.
-     * @return the <tt>text</tt> attribute
+     * Returns the {@code text} attribute.
+     * @return the {@code text} attribute
      */
     @JsxGetter
     public String getText() {
@@ -113,8 +113,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>text</tt> attribute.
-     * @param text the <tt>text</tt> attribute
+     * Sets the {@code text} attribute.
+     * @param text the {@code text} attribute
      */
     @JsxSetter
     public void setText(final String text) {
@@ -131,8 +131,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the <tt>type</tt> attribute.
-     * @return the <tt>type</tt> attribute
+     * Returns the {@code type} attribute.
+     * @return the {@code type} attribute
      */
     @JsxGetter
     public String getType() {
@@ -140,8 +140,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>type</tt> attribute.
-     * @param type the <tt>type</tt> attribute
+     * Sets the {@code type} attribute.
+     * @param type the {@code type} attribute
      */
     @JsxSetter
     public void setType(final String type) {

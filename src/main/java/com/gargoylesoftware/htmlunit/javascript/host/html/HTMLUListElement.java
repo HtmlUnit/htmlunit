@@ -53,8 +53,8 @@ public class HTMLUListElement extends HTMLListElement {
     }
 
     /**
-     * Returns the value of the <tt>type</tt> attribute.
-     * @return the value of the <tt>type</tt> attribute
+     * Returns the value of the {@code type} attribute.
+     * @return the value of the {@code type} attribute
      */
     @Override
     @JsxGetter
@@ -63,8 +63,8 @@ public class HTMLUListElement extends HTMLListElement {
     }
 
     /**
-     * Sets the value of the <tt>type</tt> attribute.
-     * @param type the value of the <tt>type</tt> attribute
+     * Sets the value of the {@code type} attribute.
+     * @param type the value of the {@code type} attribute
      */
     @Override
     @JsxSetter

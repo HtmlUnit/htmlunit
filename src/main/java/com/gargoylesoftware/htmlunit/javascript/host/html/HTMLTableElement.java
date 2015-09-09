@@ -298,8 +298,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the <tt>width</tt> attribute.
-     * @return the <tt>width</tt> attribute
+     * Returns the {@code width} attribute.
+     * @return the {@code width} attribute
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
@@ -307,8 +307,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the <tt>width</tt> attribute.
-     * @param width the <tt>width</tt> attribute
+     * Sets the {@code width} attribute.
+     * @param width the {@code width} attribute
      */
     @JsxSetter
     public void setWidth(final String width) {
@@ -316,8 +316,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the <tt>cellSpacing</tt> attribute.
-     * @return the <tt>cellSpacing</tt> attribute
+     * Returns the {@code cellSpacing} attribute.
+     * @return the {@code cellSpacing} attribute
      */
     @JsxGetter
     public String getCellSpacing() {
@@ -325,8 +325,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the <tt>cellSpacing</tt> attribute.
-     * @param cellSpacing the <tt>cellSpacing</tt> attribute
+     * Sets the {@code cellSpacing} attribute.
+     * @param cellSpacing the {@code cellSpacing} attribute
      */
     @JsxSetter
     public void setCellSpacing(final String cellSpacing) {
@@ -334,8 +334,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the <tt>cellPadding</tt> attribute.
-     * @return the <tt>cellPadding</tt> attribute
+     * Returns the {@code cellPadding} attribute.
+     * @return the {@code cellPadding} attribute
      */
     @JsxGetter
     public String getCellPadding() {
@@ -343,8 +343,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the <tt>cellPadding</tt> attribute.
-     * @param cellPadding the <tt>cellPadding</tt> attribute
+     * Sets the {@code cellPadding} attribute.
+     * @param cellPadding the {@code cellPadding} attribute
      */
     @JsxSetter
     public void setCellPadding(final String cellPadding) {
@@ -352,8 +352,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the <tt>border</tt> attribute.
-     * @return the <tt>border</tt> attribute
+     * Gets the {@code border} attribute.
+     * @return the {@code border} attribute
      */
     @JsxGetter
     public String getBorder() {
@@ -362,8 +362,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the <tt>border</tt> attribute.
-     * @param border the <tt>border</tt> attribute
+     * Sets the {@code border} attribute.
+     * @param border the {@code border} attribute
      */
     @JsxSetter
     public void setBorder(final String border) {
@@ -371,8 +371,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the value of the <tt>bgColor</tt> attribute.
-     * @return the value of the <tt>bgColor</tt> attribute
+     * Returns the value of the {@code bgColor} attribute.
+     * @return the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -381,8 +381,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the value of the <tt>bgColor</tt> attribute.
-     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * Sets the value of the {@code bgColor} attribute.
+     * @param bgColor the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter

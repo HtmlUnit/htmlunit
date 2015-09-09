@@ -2484,8 +2484,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the CSS <tt>position</tt> attribute, replacing inherited values with the actual parent values.
-     * @return the CSS <tt>position</tt> attribute, replacing inherited values with the actual parent values
+     * Returns the CSS {@code position} attribute, replacing inherited values with the actual parent values.
+     * @return the CSS {@code position} attribute, replacing inherited values with the actual parent values
      */
     public String getPositionWithInheritance() {
         String p = getPosition();
@@ -2508,8 +2508,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the CSS <tt>left</tt> attribute, replacing inherited values with the actual parent values.
-     * @return the CSS <tt>left</tt> attribute, replacing inherited values with the actual parent values
+     * Returns the CSS {@code left} attribute, replacing inherited values with the actual parent values.
+     * @return the CSS {@code left} attribute, replacing inherited values with the actual parent values
      */
     public String getLeftWithInheritance() {
         String left = getLeft();
@@ -2532,8 +2532,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the CSS <tt>right</tt> attribute, replacing inherited values with the actual parent values.
-     * @return the CSS <tt>right</tt> attribute, replacing inherited values with the actual parent values
+     * Returns the CSS {@code right} attribute, replacing inherited values with the actual parent values.
+     * @return the CSS {@code right} attribute, replacing inherited values with the actual parent values
      */
     public String getRightWithInheritance() {
         String right = getRight();
@@ -2556,8 +2556,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the CSS <tt>top</tt> attribute, replacing inherited values with the actual parent values.
-     * @return the CSS <tt>top</tt> attribute, replacing inherited values with the actual parent values
+     * Returns the CSS {@code top} attribute, replacing inherited values with the actual parent values.
+     * @return the CSS {@code top} attribute, replacing inherited values with the actual parent values
      */
     public String getTopWithInheritance() {
         String top = getTop();
@@ -2580,8 +2580,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the CSS <tt>bottom</tt> attribute, replacing inherited values with the actual parent values.
-     * @return the CSS <tt>bottom</tt> attribute, replacing inherited values with the actual parent values
+     * Returns the CSS {@code bottom} attribute, replacing inherited values with the actual parent values.
+     * @return the CSS {@code bottom} attribute, replacing inherited values with the actual parent values
      */
     public String getBottomWithInheritance() {
         String bottom = getBottom();

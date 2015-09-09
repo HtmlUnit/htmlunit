@@ -113,8 +113,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the <tt>aLink</tt> attribute.
-     * @return the value of the <tt>aLink</tt> attribute
+     * Returns the value of the {@code aLink} attribute.
+     * @return the value of the {@code aLink} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -123,8 +123,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the <tt>aLink</tt> attribute.
-     * @param aLink the value of the <tt>aLink</tt> attribute
+     * Sets the value of the {@code aLink} attribute.
+     * @param aLink the value of the {@code aLink} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
      */
     @JsxSetter
@@ -133,8 +133,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the <tt>background</tt> attribute.
-     * @return the value of the <tt>background</tt> attribute
+     * Returns the value of the {@code background} attribute.
+     * @return the value of the {@code background} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533498.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -144,8 +144,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the <tt>background</tt> attribute.
-     * @param background the value of the <tt>background</tt> attribute
+     * Sets the value of the {@code background} attribute.
+     * @param background the value of the {@code background} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533498.aspx">MSDN Documentation</a>
      */
     @JsxSetter
@@ -154,8 +154,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the <tt>bgColor</tt> attribute.
-     * @return the value of the <tt>bgColor</tt> attribute
+     * Returns the value of the {@code bgColor} attribute.
+     * @return the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -164,8 +164,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the <tt>bgColor</tt> attribute.
-     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * Sets the value of the {@code bgColor} attribute.
+     * @param bgColor the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
@@ -174,8 +174,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the <tt>link</tt> attribute.
-     * @return the value of the <tt>link</tt> attribute
+     * Returns the value of the {@code link} attribute.
+     * @return the value of the {@code link} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -184,8 +184,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the <tt>link</tt> attribute.
-     * @param link the value of the <tt>link</tt> attribute
+     * Sets the value of the {@code link} attribute.
+     * @param link the value of the {@code link} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
      */
     @JsxSetter
@@ -194,8 +194,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the <tt>text</tt> attribute.
-     * @return the value of the <tt>text</tt> attribute
+     * Returns the value of the {@code text} attribute.
+     * @return the value of the {@code text} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -204,8 +204,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the <tt>text</tt> attribute.
-     * @param text the value of the <tt>text</tt> attribute
+     * Sets the value of the {@code text} attribute.
+     * @param text the value of the {@code text} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
     @JsxSetter
@@ -214,8 +214,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the <tt>vLink</tt> attribute.
-     * @return the value of the <tt>vLink</tt> attribute
+     * Returns the value of the {@code vLink} attribute.
+     * @return the value of the {@code vLink} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -224,8 +224,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the <tt>vLink</tt> attribute.
-     * @param vLink the value of the <tt>vLink</tt> attribute
+     * Sets the value of the {@code vLink} attribute.
+     * @param vLink the value of the {@code vLink} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
     @JsxSetter

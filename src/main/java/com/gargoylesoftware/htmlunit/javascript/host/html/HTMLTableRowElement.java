@@ -130,8 +130,8 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     }
 
     /**
-     * Returns the value of the <tt>bgColor</tt> attribute.
-     * @return the value of the <tt>bgColor</tt> attribute
+     * Returns the value of the {@code bgColor} attribute.
+     * @return the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -140,8 +140,8 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the <tt>bgColor</tt> attribute.
-     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * Sets the value of the {@code bgColor} attribute.
+     * @param bgColor the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter

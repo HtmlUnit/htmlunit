@@ -430,8 +430,8 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Returns the value of the <tt>src</tt> attribute.
-     * @return the value of the <tt>src</tt> attribute
+     * Returns the value of the {@code src} attribute.
+     * @return the value of the {@code src} attribute
      */
     @JsxGetter
     public String getSrc() {

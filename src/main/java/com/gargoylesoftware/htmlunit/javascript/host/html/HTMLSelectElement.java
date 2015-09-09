@@ -147,9 +147,10 @@ public class HTMLSelectElement extends FormField {
         }
         return option;
     }
+
     /**
      * Returns the value of the {@code options} property.
-     * @return the options property
+     * @return the {@code options} property
      */
     @JsxGetter
     public HTMLOptionsCollection getOptions() {
@@ -161,7 +162,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the value of the {@code selectedIndex} property.
-     * @return the selectedIndex property
+     * @return the {@code selectedIndex} property
      */
     @JsxGetter
     public int getSelectedIndex() {
@@ -193,7 +194,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the value of the {@code length} property.
-     * @return the length property
+     * @return the {@code length} property
      */
     @JsxGetter
     public int getLength() {
@@ -201,8 +202,8 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Removes options by reducing the "length" property.
-     * @param newLength the new length property value
+     * Removes options by reducing the {@code length} property.
+     * @param newLength the new {@code length} property value
      */
     @JsxSetter
     public void setLength(final int newLength) {
@@ -249,8 +250,8 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Returns the <tt>size</tt> attribute.
-     * @return the <tt>size</tt> attribute
+     * Returns the {@code size} attribute.
+     * @return the {@code size} attribute
      */
     @JsxGetter
     public int getSize() {
@@ -268,8 +269,8 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Sets the <tt>size</tt> attribute.
-     * @param size the <tt>size</tt> attribute
+     * Sets the {@code size} attribute.
+     * @param size the {@code size} attribute
      */
     @JsxSetter
     public void setSize(final String size) {
@@ -277,8 +278,8 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Returns {@code true} if the <tt>multiple</tt> attribute is set.
-     * @return {@code true} if the <tt>multiple</tt> attribute is set
+     * Returns {@code true} if the {@code multiple} attribute is set.
+     * @return {@code true} if the {@code multiple} attribute is set
      */
     @JsxGetter
     public boolean getMultiple() {
@@ -286,8 +287,8 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Sets or clears the <tt>multiple</tt> attribute.
-     * @param multiple {@code true} to set the <tt>multiple</tt> attribute, {@code false} to clear it
+     * Sets or clears the {@code multiple} attribute.
+     * @param multiple {@code true} to set the {@code multiple} attribute, {@code false} to clear it
      */
     @JsxSetter
     public void setMultiple(final boolean multiple) {

@@ -34,8 +34,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 public class HTMLListElement extends HTMLElement {
 
     /**
-     * Returns the value of the <tt>compact</tt> attribute.
-     * @return the value of the <tt>compact</tt> attribute
+     * Returns the value of the {@code compact} attribute.
+     * @return the value of the {@code compact} attribute
      */
     @JsxGetter
     public boolean getCompact() {
@@ -43,8 +43,8 @@ public class HTMLListElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the <tt>compact</tt> attribute.
-     * @param compact the value of the <tt>compact</tt> attribute
+     * Sets the value of the {@code compact} attribute.
+     * @param compact the value of the {@code compact} attribute
      */
     @JsxSetter
     public void setCompact(final Object compact) {

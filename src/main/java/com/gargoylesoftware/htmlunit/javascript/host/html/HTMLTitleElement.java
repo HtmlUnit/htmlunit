@@ -55,8 +55,8 @@ public class HTMLTitleElement extends HTMLElement {
     }
 
     /**
-     * Returns the <tt>text</tt> attribute.
-     * @return the <tt>text</tt> attribute
+     * Returns the {@code text} attribute.
+     * @return the {@code text} attribute
      */
     @JsxGetter
     public Object getText() {
@@ -71,8 +71,8 @@ public class HTMLTitleElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>text</tt> attribute.
-     * @param text the <tt>text</tt> attribute
+     * Sets the {@code text} attribute.
+     * @param text the {@code text} attribute
      */
     @JsxSetter
     public void setText(final String text) {

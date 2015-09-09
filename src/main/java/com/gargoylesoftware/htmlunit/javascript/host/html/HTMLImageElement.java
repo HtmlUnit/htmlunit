@@ -105,8 +105,8 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>src</tt> attribute.
-     * @param src the <tt>src</tt> attribute value
+     * Sets the {@code src} attribute.
+     * @param src the {@code src} attribute value
      */
     @JsxSetter
     public void setSrc(final String src) {
@@ -115,8 +115,8 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the <tt>src</tt> attribute.
-     * @return the value of the <tt>src</tt> attribute
+     * Returns the value of the {@code src} attribute.
+     * @return the value of the {@code src} attribute
      */
     @JsxGetter
     public String getSrc() {

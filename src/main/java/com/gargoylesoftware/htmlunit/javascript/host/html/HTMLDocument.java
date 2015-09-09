@@ -1491,8 +1491,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the <tt>bgColor</tt> attribute.
-     * @return the value of the <tt>bgColor</tt> attribute
+     * Returns the value of the {@code bgColor} attribute.
+     * @return the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -1508,8 +1508,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the <tt>bgColor</tt> attribute.
-     * @param color the value of the <tt>bgColor</tt> attribute
+     * Sets the value of the {@code bgColor} attribute.
+     * @param color the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
@@ -1519,8 +1519,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the <tt>alinkColor</tt> attribute.
-     * @return the value of the <tt>alinkColor</tt> attribute
+     * Returns the value of the {@code alinkColor} attribute.
+     * @return the value of the {@code alinkColor} attribute
      */
     @JsxGetter
     public String getAlinkColor() {
@@ -1535,8 +1535,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the <tt>alinkColor</tt> attribute.
-     * @param color the value of the <tt>alinkColor</tt> attribute
+     * Sets the value of the {@code alinkColor} attribute.
+     * @param color the value of the {@code alinkColor} attribute
      */
     @JsxSetter
     public void setAlinkColor(final String color) {
@@ -1545,8 +1545,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the <tt>linkColor</tt> attribute.
-     * @return the value of the <tt>linkColor</tt> attribute
+     * Returns the value of the {@code linkColor} attribute.
+     * @return the value of the {@code linkColor} attribute
      */
     @JsxGetter
     public String getLinkColor() {
@@ -1561,8 +1561,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the <tt>linkColor</tt> attribute.
-     * @param color the value of the <tt>linkColor</tt> attribute
+     * Sets the value of the {@code linkColor} attribute.
+     * @param color the value of the {@code linkColor} attribute
      */
     @JsxSetter
     public void setLinkColor(final String color) {
@@ -1571,8 +1571,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the <tt>vlinkColor</tt> attribute.
-     * @return the value of the <tt>vlinkColor</tt> attribute
+     * Returns the value of the {@code vlinkColor} attribute.
+     * @return the value of the {@code vlinkColor} attribute
      */
     @JsxGetter
     public String getVlinkColor() {
@@ -1587,8 +1587,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the <tt>vlinkColor</tt> attribute.
-     * @param color the value of the <tt>vlinkColor</tt> attribute
+     * Sets the value of the {@code vlinkColor} attribute.
+     * @param color the value of the {@code vlinkColor} attribute
      */
     @JsxSetter
     public void setVlinkColor(final String color) {
@@ -1597,8 +1597,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the <tt>fgColor</tt> attribute.
-     * @return the value of the <tt>fgColor</tt> attribute
+     * Returns the value of the {@code fgColor} attribute.
+     * @return the value of the {@code fgColor} attribute
      */
     @JsxGetter
     public String getFgColor() {
@@ -1613,8 +1613,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the <tt>fgColor</tt> attribute.
-     * @param color the value of the <tt>fgColor</tt> attribute
+     * Sets the value of the {@code fgColor} attribute.
+     * @param color the value of the {@code fgColor} attribute
      */
     @JsxSetter
     public void setFgColor(final String color) {

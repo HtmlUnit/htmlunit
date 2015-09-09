@@ -98,7 +98,7 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Sets the <tt>async</tt> attribute.
+     * Sets the {@code async} attribute.
      * @param async Whether or not to send the request to the server asynchronously
      */
     @JsxSetter(@WebBrowser(FF))
@@ -108,7 +108,7 @@ public class XMLDocument extends Document {
 
     /**
      * Returns Whether or not to send the request to the server asynchronously.
-     * @return the <tt>async</tt> attribute
+     * @return the {@code async} attribute
      */
     @JsxGetter(@WebBrowser(FF))
     public boolean getAsync() {
