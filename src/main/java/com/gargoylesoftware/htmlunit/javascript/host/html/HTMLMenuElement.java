@@ -53,7 +53,7 @@ public class HTMLMenuElement extends HTMLListElement {
 
     /**
      * Returns the value of the {@code type} property.
-     * @return the value of the "type" property
+     * @return the value of the {@code type} property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public String getType() {
@@ -73,7 +73,7 @@ public class HTMLMenuElement extends HTMLListElement {
 
     /**
      * Sets the value of the {@code type} property.
-     * @param type the value of the "type" property
+     * @param type the value of the {@code type} property
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public void setType(final String type) {
@@ -98,7 +98,7 @@ public class HTMLMenuElement extends HTMLListElement {
 
     /**
      * Returns the value of the {@code label} property.
-     * @return the value of the "label" property
+     * @return the value of the {@code label} property
      */
     @JsxGetter(@WebBrowser(FF))
     public String getLabel() {
@@ -107,7 +107,7 @@ public class HTMLMenuElement extends HTMLListElement {
 
     /**
      * Sets the value of the {@code label} property.
-     * @param label the value of the "label" property
+     * @param label the value of the {@code label} property
      */
     @JsxSetter(@WebBrowser(FF))
     public void setLabel(final String label) {

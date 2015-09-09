@@ -491,7 +491,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     /**
-     * Sets the "readOnly" attribute.
+     * Sets the {@code readOnly} attribute.
      *
      * @param isReadOnly {@code true} if this element is read only
      */

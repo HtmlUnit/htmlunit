@@ -84,7 +84,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Sets the content of the "value" attribute, executing onchange handlers if appropriate.
+     * Sets the content of the {@code value} attribute, executing onchange handlers if appropriate.
      * This method returns the page contained by this element's window after the value is set,
      * which may or may not be the same as the original page.
      * @param newValue the new content
@@ -424,7 +424,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Sets the "checked" attribute, returning the page that occupies this input's window after setting
+     * Sets the {@code checked} attribute, returning the page that occupies this input's window after setting
      * the attribute. Note that the returned page may or may not be the original page, depending on
      * the presence of JavaScript event handlers, etc.
      *
@@ -437,7 +437,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Sets the "readOnly" attribute.
+     * Sets the {@code readOnly} attribute.
      *
      * @param isReadOnly {@code true} if this element is read only
      */

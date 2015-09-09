@@ -37,7 +37,7 @@ public class HTMLTableComponent extends HTMLElement {
 
     /**
      * Returns the value of the {@code align} property.
-     * @return the value of the "align" property
+     * @return the value of the {@code align} property
      */
     @JsxGetter
     public String getAlign() {
@@ -47,7 +47,7 @@ public class HTMLTableComponent extends HTMLElement {
 
     /**
      * Sets the value of the {@code align} property.
-     * @param align the value of the "align" property
+     * @param align the value of the {@code align} property
      */
     @JsxSetter
     public void setAlign(final String align) {
@@ -56,7 +56,7 @@ public class HTMLTableComponent extends HTMLElement {
 
     /**
      * Returns the value of the {@code vAlign} property.
-     * @return the value of the "vAlign" property
+     * @return the value of the {@code vAlign} property
      */
     @JsxGetter
     public String getVAlign() {
@@ -65,7 +65,7 @@ public class HTMLTableComponent extends HTMLElement {
 
     /**
      * Sets the value of the {@code vAlign} property.
-     * @param vAlign the value of the "vAlign" property
+     * @param vAlign the value of the {@code vAlign} property
      */
     @JsxSetter
     public void setVAlign(final Object vAlign) {
@@ -89,7 +89,7 @@ public class HTMLTableComponent extends HTMLElement {
 
     /**
      * Returns the value of the {@code ch} property.
-     * @return the value of the "ch" property
+     * @return the value of the {@code ch} property
      */
     @Override
     @JsxGetter
@@ -99,7 +99,7 @@ public class HTMLTableComponent extends HTMLElement {
 
     /**
      * Sets the value of the {@code ch} property.
-     * @param ch the value of the "ch" property
+     * @param ch the value of the {@code ch} property
      */
     @Override
     @JsxSetter
@@ -109,7 +109,7 @@ public class HTMLTableComponent extends HTMLElement {
 
     /**
      * Returns the value of the {@code chOff} property.
-     * @return the value of the "chOff" property
+     * @return the value of the {@code chOff} property
      */
     @Override
     @JsxGetter
@@ -119,7 +119,7 @@ public class HTMLTableComponent extends HTMLElement {
 
     /**
      * Sets the value of the {@code chOff} property.
-     * @param chOff the value of the "chOff" property
+     * @param chOff the value of the {@code chOff} property
      */
     @Override
     @JsxSetter

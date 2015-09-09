@@ -68,7 +68,7 @@ public class HTMLAreaElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code alt} property.
-     * @return the value of the "alt" property
+     * @return the value of the {@code alt} property
      */
     @JsxGetter
     public String getAlt() {

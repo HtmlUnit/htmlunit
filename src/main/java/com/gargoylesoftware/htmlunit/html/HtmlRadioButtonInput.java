@@ -112,7 +112,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     }
 
     /**
-     * Sets the "checked" attribute.
+     * Sets the {@code checked} attribute.
      *
      * @param isChecked true if this element is to be selected
      * @return the page that occupies this window after setting checked status

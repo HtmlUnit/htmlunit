@@ -365,7 +365,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Gets the "backgroundPosition" style attribute.
+     * Gets the {@code backgroundPosition} style attribute.
      * @return the style attribute
      */
     @Override

@@ -481,7 +481,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the value of the {@code all} property.
-     * @return the value of the "all" property
+     * @return the value of the {@code all} property
      */
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public HTMLCollection getAll() {
@@ -877,7 +877,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientHeight" attribute.
-     * @return the "clientHeight" attribute
+     * @return the {@code clientHeight} attribute
      */
     @JsxGetter
     public int getClientHeight() {
@@ -888,7 +888,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientWidth" attribute.
-     * @return the "clientWidth" attribute
+     * @return the {@code clientWidth} attribute
      */
     @JsxGetter
     public int getClientWidth() {
@@ -2201,7 +2201,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the {@code spellcheck} property.
-     * @return the "spellcheck" property
+     * @return the {@code spellcheck} property
      */
     @JsxGetter(@WebBrowser(FF))
     public boolean getSpellcheck() {
@@ -2210,7 +2210,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the {@code spellcheck} property.
-     * @param spellcheck the "spellcheck" property
+     * @param spellcheck the {@code spellcheck} property
      */
     @JsxSetter(@WebBrowser(FF))
     public void setSpellcheck(final boolean spellcheck) {
@@ -2219,7 +2219,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the {@code lang} property.
-     * @return the "lang" property
+     * @return the {@code lang} property
      */
     @JsxGetter
     public String getLang() {
@@ -2228,7 +2228,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the {@code lang} property.
-     * @param lang the "lang" property
+     * @param lang the {@code lang} property
      */
     @JsxSetter
     public void setLang(final String lang) {
@@ -2237,7 +2237,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the {@code language} property.
-     * @return the "language" property
+     * @return the {@code language} property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getLanguage() {
@@ -2246,7 +2246,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the {@code language} property.
-     * @param language the "language" property
+     * @param language the {@code language} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setLanguage(final String language) {
@@ -2255,7 +2255,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the {@code dir} property.
-     * @return the "dir" property
+     * @return the {@code dir} property
      */
     @JsxGetter
     public String getDir() {
@@ -2264,7 +2264,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the {@code dir} property.
-     * @param dir the "dir" property
+     * @param dir the {@code dir} property
      */
     @JsxSetter
     public void setDir(final String dir) {
@@ -2282,7 +2282,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the {@code tabIndex} property.
-     * @param tabIndex the "tabIndex" property
+     * @param tabIndex the {@code tabIndex} property
      */
     @JsxSetter
     public void setTabIndex(final int tabIndex) {
@@ -2304,7 +2304,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the {@code accessKey} property.
-     * @return the "accessKey" property
+     * @return the {@code accessKey} property
      */
     @JsxGetter
     public String getAccessKey() {
@@ -2313,7 +2313,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the {@code accessKey} property.
-     * @param accessKey the "accessKey" property
+     * @param accessKey the {@code accessKey} property
      */
     @JsxSetter
     public void setAccessKey(final String accessKey) {
@@ -2466,7 +2466,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the value of the {@code align} property.
      * @param returnInvalidValues if {@code true}, this method will return any value, including technically
      *        invalid values; if {@code false}, this method will return an empty string instead of invalid values
-     * @return the value of the "align" property
+     * @return the value of the {@code align} property
      */
     protected String getAlign(final boolean returnInvalidValues) {
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
@@ -2484,7 +2484,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the value of the {@code align} property.
-     * @param align the value of the "align" property
+     * @param align the value of the {@code align} property
      * @param ignoreIfNoError if {@code true}, the invocation will be a no-op if it does not trigger an error
      *        (i.e., it will not actually set the align attribute)
      */
@@ -2510,7 +2510,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the value of the {@code vAlign} property.
      * @param valid the valid values; if {@code null}, any value is valid
      * @param defaultValue the default value to use, if necessary
-     * @return the value of the "vAlign" property
+     * @return the value of the {@code vAlign} property
      */
     protected String getVAlign(final String[] valid, final String defaultValue) {
         final String valign = getDomNodeOrDie().getAttribute("valign");
@@ -2522,7 +2522,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the value of the {@code vAlign} property.
-     * @param vAlign the value of the "vAlign" property
+     * @param vAlign the value of the {@code vAlign} property
      * @param valid the valid values; if {@code null}, any value is valid
      */
     protected void setVAlign(final Object vAlign, final String[] valid) {
@@ -2537,7 +2537,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the value of the {@code ch} property.
-     * @return the value of the "ch" property
+     * @return the value of the {@code ch} property
      */
     protected String getCh() {
         final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_EMULATED);
@@ -2550,7 +2550,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the value of the {@code ch} property.
-     * @param ch the value of the "ch" property
+     * @param ch the value of the {@code ch} property
      */
     protected void setCh(final String ch) {
         final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_EMULATED);
@@ -2564,7 +2564,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the value of the {@code chOff} property.
-     * @return the value of the "chOff" property
+     * @return the value of the {@code chOff} property
      */
     protected String getChOff() {
         final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_OFF_EMULATED);
@@ -2576,7 +2576,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the value of the {@code chOff} property.
-     * @param chOff the value of the "chOff" property
+     * @param chOff the value of the {@code chOff} property
      */
     protected void setChOff(String chOff) {
         final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_OFF_EMULATED);
@@ -2701,7 +2701,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientLeft" attribute.
-     * @return the "clientLeft" attribute
+     * @return the {@code clientLeft} attribute
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public int getClientLeft() {
@@ -2714,7 +2714,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientTop" attribute.
-     * @return the "clientTop" attribute
+     * @return the {@code clientTop} attribute
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public int getClientTop() {
@@ -2922,8 +2922,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the "dataset" attribute.
-     * @return the "dataset" attribute
+     * Returns the {@code dataset} attribute.
+     * @return the {@code dataset} attribute
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })

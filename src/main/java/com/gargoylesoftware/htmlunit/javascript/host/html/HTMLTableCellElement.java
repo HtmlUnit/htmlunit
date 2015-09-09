@@ -312,7 +312,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
 
     /**
      * Returns the value of the {@code width} property.
-     * @return the value of the "width" property
+     * @return the value of the {@code width} property
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
@@ -323,7 +323,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
 
     /**
      * Sets the value of the {@code width} property.
-     * @param width the value of the "width" property
+     * @param width the value of the {@code width} property
      */
     @JsxSetter
     public void setWidth(final String width) {
@@ -333,7 +333,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
 
     /**
      * Returns the value of the {@code width} property.
-     * @return the value of the "width" property
+     * @return the value of the {@code width} property
      */
     @JsxGetter(propertyName = "height")
     public String getHeight_js() {
@@ -344,7 +344,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
 
     /**
      * Sets the value of the {@code height} property.
-     * @param height the value of the "height" property
+     * @param height the value of the {@code height} property
      */
     @JsxSetter
     public void setHeight(final String height) {
@@ -364,7 +364,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Gets the "borderColor" attribute.
+     * Gets the {@code borderColor} attribute.
      * @return the attribute
      */
     @JsxGetter(@WebBrowser(IE))
@@ -373,7 +373,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the "borderColor" attribute.
+     * Sets the {@code borderColor} attribute.
      * @param borderColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
@@ -382,7 +382,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Gets the "borderColor" attribute.
+     * Gets the {@code borderColor} attribute.
      * @return the attribute
      */
     @JsxGetter(@WebBrowser(IE))
@@ -391,7 +391,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the "borderColor" attribute.
+     * Sets the {@code borderColor} attribute.
      * @param borderColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
@@ -400,7 +400,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Gets the "borderColor" attribute.
+     * Gets the {@code borderColor} attribute.
      * @return the attribute
      */
     @JsxGetter(@WebBrowser(IE))
@@ -409,7 +409,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the "borderColor" attribute.
+     * Sets the {@code borderColor} attribute.
      * @param borderColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))

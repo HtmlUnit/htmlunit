@@ -69,7 +69,7 @@ public class HTMLListElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code type} property.
-     * @return the value of the "type" property
+     * @return the value of the {@code type} property
      */
     protected String getType() {
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_TYPE_ACCEPTS_ARBITRARY_VALUES);
@@ -88,7 +88,7 @@ public class HTMLListElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code type} property.
-     * @param type the value of the "type" property
+     * @param type the value of the {@code type} property
      */
     protected void setType(final String type) {
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_TYPE_ACCEPTS_ARBITRARY_VALUES);

@@ -42,7 +42,7 @@ public class ProcessingInstruction extends CharacterData {
     }
 
     /**
-     * Returns the "target" attribute.
+     * Returns the {@code target} attribute.
      * @return the target
      */
     @JsxGetter
@@ -51,7 +51,7 @@ public class ProcessingInstruction extends CharacterData {
     }
 
     /**
-     * Returns the "data" attribute.
+     * Returns the {@code data} attribute.
      * @return the data
      */
     @Override
@@ -61,7 +61,7 @@ public class ProcessingInstruction extends CharacterData {
     }
 
     /**
-     * Sets the "data" attribute.
+     * Sets the {@code data} attribute.
      * @param data the data
      */
     @Override

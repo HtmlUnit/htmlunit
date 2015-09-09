@@ -926,7 +926,7 @@ public class XMLHttpRequest extends EventTarget {
 
     /**
      * Returns the {@code withCredentials} property.
-     * @return the "withCredentials" property
+     * @return the {@code withCredentials} property
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     public boolean getWithCredentials() {

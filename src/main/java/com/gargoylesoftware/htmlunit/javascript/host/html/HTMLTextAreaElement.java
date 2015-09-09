@@ -80,8 +80,8 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Returns the value of the "value" attribute.
-     * @return the value of the "value" attribute
+     * Returns the value of the {@code value} attribute.
+     * @return the value of the {@code value} attribute
      */
     @Override
     public String getValue() {
@@ -93,7 +93,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Sets the value of the "value" attribute.
+     * Sets the value of the {@code value} attribute.
      * @param value the new value
      */
     @Override
@@ -208,7 +208,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Gets the value of "textLength" attribute.
+     * Gets the value of {@code textLength} attribute.
      * @return the text length
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
@@ -217,7 +217,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Gets the value of "selectionStart" attribute.
+     * Gets the value of {@code selectionStart} attribute.
      * @return the selection start
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
@@ -226,7 +226,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Sets the value of "selectionStart" attribute.
+     * Sets the value of {@code selectionStart} attribute.
      * @param start selection start
      */
     @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
@@ -235,7 +235,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Gets the value of "selectionEnd" attribute.
+     * Gets the value of {@code selectionEnd} attribute.
      * @return the selection end
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
@@ -244,7 +244,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Sets the value of "selectionEnd" attribute.
+     * Sets the value of {@code selectionEnd} attribute.
      * @param end selection end
      */
     @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
@@ -272,7 +272,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Gets the value of "readOnly" attribute.
+     * Gets the value of {@code readOnly} attribute.
      * @return the readOnly attribute
      */
     @JsxGetter
@@ -281,7 +281,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Sets the value of "readOnly" attribute.
+     * Sets the value of {@code readOnly} attribute.
      * @param readOnly the new value
      */
     @JsxSetter

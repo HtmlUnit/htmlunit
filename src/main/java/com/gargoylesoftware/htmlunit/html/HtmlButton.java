@@ -71,7 +71,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Sets the content of the "value" attribute.
+     * Sets the content of the {@code value} attribute.
      *
      * @param newValue the new content
      */

@@ -131,7 +131,7 @@ public class HTMLInputElement extends FormField {
      * implementation does nothing. The implementations in Checkbox and Radio
      * actually do the work.
      *
-     * @param checked True if this input should have the "checked" attribute set
+     * @param checked True if this input should have the {@code checked} attribute set
      */
     @JsxSetter
     public void setChecked(final boolean checked) {
@@ -227,7 +227,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Gets the value of "textLength" attribute.
+     * Gets the value of {@code textLength} attribute.
      * @return the text length
      */
     @JsxGetter(@WebBrowser(FF))
@@ -236,7 +236,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Gets the value of "selectionStart" attribute.
+     * Gets the value of {@code selectionStart} attribute.
      * @return the selection start
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
@@ -245,7 +245,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Sets the value of "selectionStart" attribute.
+     * Sets the value of {@code selectionStart} attribute.
      * @param start selection start
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
@@ -254,7 +254,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Gets the value of "selectionEnd" attribute.
+     * Gets the value of {@code selectionEnd} attribute.
      * @return the selection end
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
@@ -263,7 +263,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Sets the value of "selectionEnd" attribute.
+     * Sets the value of {@code selectionEnd} attribute.
      * @param end selection end
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
@@ -282,7 +282,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Sets the value of "maxLength" attribute.
+     * Sets the value of {@code maxLength} attribute.
      * @param length the new value
      */
     @JsxSetter
@@ -346,7 +346,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Gets the value of "readOnly" attribute.
+     * Gets the value of {@code readOnly} attribute.
      * @return the readOnly attribute
      */
     @JsxGetter
@@ -355,7 +355,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Sets the value of "readOnly" attribute.
+     * Sets the value of {@code readOnly} attribute.
      * @param readOnly the new value
      */
     @JsxSetter
@@ -376,7 +376,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Returns the value of the {@code alt} property.
-     * @return the value of the "alt" property
+     * @return the value of the {@code alt} property
      */
     @JsxGetter
     public String getAlt() {
@@ -393,8 +393,8 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Gets the "border" attribute.
-     * @return the "border" attribute
+     * Gets the {@code border} attribute.
+     * @return the {@code border} attribute
      */
     @JsxGetter(@WebBrowser(IE))
     public String getBorder() {
@@ -402,8 +402,8 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Sets the "border" attribute.
-     * @param border the "border" attribute
+     * Sets the {@code border} attribute.
+     * @param border the {@code border} attribute
      */
     @JsxSetter(@WebBrowser(IE))
     public void setBorder(final String border) {
@@ -412,7 +412,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Returns the value of the {@code align} property.
-     * @return the value of the "align" property
+     * @return the value of the {@code align} property
      */
     @JsxGetter
     public String getAlign() {
@@ -421,7 +421,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Sets the value of the {@code align} property.
-     * @param align the value of the "align" property
+     * @param align the value of the {@code align} property
      */
     @JsxSetter
     public void setAlign(final String align) {

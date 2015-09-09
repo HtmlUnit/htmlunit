@@ -720,7 +720,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the {@code history} property.
-     * @return the "history" property
+     * @return the {@code history} property
      */
     @JsxGetter
     public History getHistory() {
@@ -729,7 +729,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the {@code external} property.
-     * @return the "external" property
+     * @return the {@code external} property
      */
     @JsxGetter
     public External getExternal() {
@@ -1839,7 +1839,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the value of {@code mozInnerScreenX} property.
-     * @return the value of "mozInnerScreenX" property
+     * @return the value of {@code mozInnerScreenX} property
      */
     @JsxGetter(@WebBrowser(FF))
     public int getMozInnerScreenX() {
@@ -1848,7 +1848,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the value of {@code mozInnerScreenY} property.
-     * @return the value of "mozInnerScreenY" property
+     * @return the value of {@code mozInnerScreenY} property
      */
     @JsxGetter(@WebBrowser(FF))
     public int getMozInnerScreenY() {
@@ -1857,7 +1857,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the value of {@code mozPaintCount} property.
-     * @return the value of "mozPaintCount" property
+     * @return the value of {@code mozPaintCount} property
      */
     @JsxGetter(@WebBrowser(FF))
     public int getMozPaintCount() {
@@ -2039,7 +2039,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the value of {@code pageXOffset} property.
-     * @return the value of "pageXOffset" property
+     * @return the value of {@code pageXOffset} property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public int getPageXOffset() {
@@ -2048,7 +2048,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the value of {@code pageYOffset} property.
-     * @return the value of "pageYOffset" property
+     * @return the value of {@code pageYOffset} property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public int getPageYOffset() {
@@ -2057,7 +2057,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the value of {@code scrollX} property.
-     * @return the value of "scrollX" property
+     * @return the value of {@code scrollX} property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public int getScrollX() {
@@ -2066,7 +2066,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the value of {@code scrollY} property.
-     * @return the value of "scrollY" property
+     * @return the value of {@code scrollY} property
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public int getScrollY() {
@@ -2075,7 +2075,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the value of {@code netscape} property.
-     * @return the value of "netscape" property
+     * @return the value of {@code netscape} property
      */
     @JsxGetter(@WebBrowser(FF))
     public Netscape getNetscape() {

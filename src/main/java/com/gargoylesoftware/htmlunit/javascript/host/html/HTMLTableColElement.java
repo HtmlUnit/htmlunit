@@ -59,7 +59,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
 
     /**
      * Returns the value of the {@code span} property.
-     * @return the value of the "span" property
+     * @return the value of the {@code span} property
      */
     @JsxGetter
     public int getSpan() {
@@ -79,7 +79,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
 
     /**
      * Sets the value of the {@code span} property.
-     * @param span the value of the "span" property
+     * @param span the value of the {@code span} property
      */
     @JsxSetter
     public void setSpan(final Object span) {
@@ -99,7 +99,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
 
     /**
      * Returns the value of the {@code width} property.
-     * @return the value of the "width" property
+     * @return the value of the {@code width} property
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
@@ -110,7 +110,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
 
     /**
      * Sets the value of the {@code width} property.
-     * @param width the value of the "width" property
+     * @param width the value of the {@code width} property
      */
     @JsxSetter
     public void setWidth(final Object width) {

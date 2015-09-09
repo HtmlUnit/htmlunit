@@ -87,7 +87,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Returns the {@code fillStyle} property.
-     * @return the "fillStyle" property
+     * @return the {@code fillStyle} property
      */
     @JsxGetter
     public Object getFillStyle() {
@@ -96,7 +96,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Sets the {@code fillStyle} property.
-     * @param fillStyle the "fillStyle" property
+     * @param fillStyle the {@code fillStyle} property
      */
     @JsxSetter
     public void setFillStyle(String fillStyle) {
@@ -129,7 +129,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Returns the {@code strokeStyle} property.
-     * @return the "strokeStyle" property
+     * @return the {@code strokeStyle} property
      */
     @JsxGetter
     public Object getStrokeStyle() {
@@ -138,7 +138,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Sets the {@code strokeStyle} property.
-     * @param strokeStyle the "strokeStyle" property
+     * @param strokeStyle the {@code strokeStyle} property
      */
     @JsxSetter
     public void setStrokeStyle(final Object strokeStyle) {
@@ -147,7 +147,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Returns the {@code lineWidth} property.
-     * @return the "lineWidth" property
+     * @return the {@code lineWidth} property
      */
     @JsxGetter
     public double getLineWidth() {
@@ -156,7 +156,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Sets the {@code lineWidth} property.
-     * @param lineWidth the "lineWidth" property
+     * @param lineWidth the {@code lineWidth} property
      */
     @JsxSetter
     public void setLineWidth(final Object lineWidth) {
@@ -165,7 +165,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Returns the {@code globalAlpha} property.
-     * @return the "globalAlpha" property
+     * @return the {@code globalAlpha} property
      */
     @JsxGetter
     public double getGlobalAlpha() {
@@ -174,7 +174,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Sets the {@code globalAlpha} property.
-     * @param globalAlpha the "globalAlpha" property
+     * @param globalAlpha the {@code globalAlpha} property
      */
     @JsxSetter
     public void setGlobalAlpha(final Object globalAlpha) {

@@ -56,7 +56,7 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Sets the "charset" attribute.
+     * Sets the {@code charset} attribute.
      * @param charset the charset attribute
      */
     @JsxSetter(@WebBrowser(IE))
@@ -74,7 +74,7 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Sets the "content" attribute.
+     * Sets the {@code content} attribute.
      * @param content the content attribute
      */
     @JsxSetter
@@ -92,7 +92,7 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Sets the "http-equiv" attribute.
+     * Sets the {@code http-equiv} attribute.
      * @param httpEquiv the http-equiv attribute
      */
     @JsxSetter
@@ -110,7 +110,7 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Sets the "name" attribute.
+     * Sets the {@code name} attribute.
      * @param name the name attribute
      */
     @JsxSetter
@@ -128,7 +128,7 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Sets the "scheme" attribute.
+     * Sets the {@code scheme} attribute.
      * @param scheme the scheme attribute
      */
     @JsxSetter
@@ -146,7 +146,7 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Sets the "url" attribute.
+     * Sets the {@code url} attribute.
      * @param url the url attribute
      */
     @JsxSetter(@WebBrowser(IE))

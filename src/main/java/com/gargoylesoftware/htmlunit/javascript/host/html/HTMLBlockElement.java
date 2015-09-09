@@ -74,7 +74,7 @@ public class HTMLBlockElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code cite} property.
-     * @return the value of the "cite" property
+     * @return the value of the {@code cite} property
      */
     public String getCite() {
         final String cite = getDomNodeOrDie().getAttribute("cite");
@@ -91,7 +91,7 @@ public class HTMLBlockElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code dateTime} property.
-     * @return the value of the "dateTime" property
+     * @return the value of the {@code dateTime} property
      */
     public String getDateTime() {
         final String dateTime = getDomNodeOrDie().getAttribute("datetime");

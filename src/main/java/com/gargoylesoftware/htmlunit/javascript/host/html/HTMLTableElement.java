@@ -391,7 +391,7 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the "borderColor" attribute.
+     * Gets the {@code borderColor} attribute.
      * @return the attribute
      */
     @JsxGetter(@WebBrowser(IE))
@@ -400,7 +400,7 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the "borderColor" attribute.
+     * Sets the {@code borderColor} attribute.
      * @param borderColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
@@ -409,7 +409,7 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the "borderColor" attribute.
+     * Gets the {@code borderColor} attribute.
      * @return the attribute
      */
     @JsxGetter(@WebBrowser(IE))
@@ -418,7 +418,7 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the "borderColor" attribute.
+     * Sets the {@code borderColor} attribute.
      * @param borderColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
@@ -427,7 +427,7 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the "borderColor" attribute.
+     * Gets the {@code borderColor} attribute.
      * @return the attribute
      */
     @JsxGetter(@WebBrowser(IE))
@@ -436,7 +436,7 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the "borderColor" attribute.
+     * Sets the {@code borderColor} attribute.
      * @param borderColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))

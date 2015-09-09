@@ -51,7 +51,7 @@ public class HTMLPreElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code cite} property.
-     * @return the value of the "cite" property
+     * @return the value of the {@code cite} property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getCite() {

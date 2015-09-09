@@ -171,8 +171,8 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the request which will allow us to retrieve the content referenced by the "href" attribute.
-     * @return the request which will allow us to retrieve the content referenced by the "href" attribute
+     * Returns the request which will allow us to retrieve the content referenced by the {@code href} attribute.
+     * @return the request which will allow us to retrieve the content referenced by the {@code href} attribute
      * @throws MalformedURLException in case of problem resolving the URL
      */
     public WebRequest getWebRequest() throws MalformedURLException {

@@ -66,7 +66,7 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
 
     /**
      * Returns the value of the {@code alt} property.
-     * @return the value of the "alt" property
+     * @return the value of the {@code alt} property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getAlt() {
@@ -84,8 +84,8 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
     }
 
     /**
-     * Gets the "border" attribute.
-     * @return the "border" attribute
+     * Gets the {@code border} attribute.
+     * @return the {@code border} attribute
      */
     @JsxGetter
     public String getBorder() {
@@ -94,8 +94,8 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
     }
 
     /**
-     * Sets the "border" attribute.
-     * @param border the "border" attribute
+     * Sets the {@code border} attribute.
+     * @param border the {@code border} attribute
      */
     @JsxSetter
     public void setBorder(final String border) {
@@ -103,8 +103,8 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
     }
 
     /**
-     * Gets the "classid" attribute.
-     * @return the "classid" attribute
+     * Gets the {@code classid} attribute.
+     * @return the {@code classid} attribute
      */
     @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
     public String getClassid() {
@@ -113,8 +113,8 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
     }
 
     /**
-     * Sets the "classid" attribute.
-     * @param classid the "classid" attribute
+     * Sets the {@code classid} attribute.
+     * @param classid the {@code classid} attribute
      */
     @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
     public void setClassid(final String classid) {

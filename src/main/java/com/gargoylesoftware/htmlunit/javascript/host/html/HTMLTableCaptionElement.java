@@ -58,7 +58,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code align} property.
-     * @return the value of the "align" property
+     * @return the value of the {@code align} property
      */
     @JsxGetter
     public String getAlign() {
@@ -68,7 +68,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code align} property.
-     * @param align the value of the "align" property
+     * @param align the value of the {@code align} property
      */
     @JsxSetter
     public void setAlign(final String align) {
@@ -77,7 +77,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code vAlign} property.
-     * @return the value of the "vAlign" property
+     * @return the value of the {@code vAlign} property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getVAlign() {
@@ -86,7 +86,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code vAlign} property.
-     * @param vAlign the value of the "vAlign" property
+     * @param vAlign the value of the {@code vAlign} property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setVAlign(final Object vAlign) {

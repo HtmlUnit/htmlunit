@@ -50,7 +50,7 @@ public class HTMLModElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code cite} property.
-     * @return the value of the "cite" property
+     * @return the value of the {@code cite} property
      */
     @JsxGetter
     public String getCite() {
@@ -69,7 +69,7 @@ public class HTMLModElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code dateTime} property.
-     * @return the value of the "dateTime" property
+     * @return the value of the {@code dateTime} property
      */
     @JsxGetter
     public String getDateTime() {

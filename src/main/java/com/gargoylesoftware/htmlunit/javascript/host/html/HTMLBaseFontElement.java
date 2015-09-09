@@ -39,8 +39,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 public class HTMLBaseFontElement extends HTMLElement {
 
     /**
-     * Gets the "color" attribute.
-     * @return the "color" attribute
+     * Gets the {@code color} attribute.
+     * @return the {@code color} attribute
      */
     @JsxGetter
     public String getColor() {
@@ -49,8 +49,8 @@ public class HTMLBaseFontElement extends HTMLElement {
     }
 
     /**
-     * Sets the "color" attribute.
-     * @param color the "color" attribute
+     * Sets the {@code color} attribute.
+     * @param color the {@code color} attribute
      */
     @JsxSetter
     public void setColor(final String color) {
@@ -77,8 +77,8 @@ public class HTMLBaseFontElement extends HTMLElement {
     }
 
     /**
-     * Gets the "size" attribute.
-     * @return the "size" attribute
+     * Gets the {@code size} attribute.
+     * @return the {@code size} attribute
      */
     @JsxGetter
     public int getSize() {
@@ -87,8 +87,8 @@ public class HTMLBaseFontElement extends HTMLElement {
     }
 
     /**
-     * Sets the "size" attribute.
-     * @param size the "size" attribute
+     * Sets the {@code size} attribute.
+     * @param size the {@code size} attribute
      */
     @JsxSetter
     public void setSize(final int size) {

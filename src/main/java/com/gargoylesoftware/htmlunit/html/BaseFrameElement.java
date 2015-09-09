@@ -233,7 +233,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * Sets the value of the "name" attribute.
+     * Sets the value of the {@code name} attribute.
      *
      * @param name the new window name
      */
@@ -337,8 +337,8 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * Sets the value of the "src" attribute. Also loads the frame with the specified URL, if possible.
-     * @param attribute the new value of the "src" attribute
+     * Sets the value of the {@code src} attribute. Also loads the frame with the specified URL, if possible.
+     * @param attribute the new value of the {@code src} attribute
      */
     public final void setSrcAttribute(final String attribute) {
         setAttribute("src", attribute);

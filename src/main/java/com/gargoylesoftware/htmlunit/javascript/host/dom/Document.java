@@ -125,7 +125,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the {@code location} property.
-     * @return the value of the "location" property
+     * @return the value of the {@code location} property
      */
     @JsxGetter
     public Location getLocation() {
@@ -133,7 +133,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Sets the value of the "location" property. The location's default property is "href",
+     * Sets the value of the {@code location} property. The location's default property is "href",
      * so setting "document.location='http://www.sf.net'" is equivalent to setting
      * "document.location.href='http://www.sf.net'".
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN documentation</a>
@@ -161,7 +161,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the {@code referrer} property.
-     * @return the value of the "referrer" property
+     * @return the value of the {@code referrer} property
      */
     @JsxGetter
     public String getReferrer() {

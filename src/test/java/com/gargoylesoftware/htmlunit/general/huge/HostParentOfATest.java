@@ -5828,16 +5828,6 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _CSSUnknownRule_CSSUnknownRule() throws Exception {
-        test("CSSUnknownRule", "CSSUnknownRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _DOMSettableTokenList_DOMSettableTokenList() throws Exception {

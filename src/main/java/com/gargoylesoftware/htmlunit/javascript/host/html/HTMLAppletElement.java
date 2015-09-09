@@ -115,7 +115,7 @@ public class HTMLAppletElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code alt} property.
-     * @return the value of the "alt" property
+     * @return the value of the {@code alt} property
      */
     @JsxGetter
     public String getAlt() {
@@ -133,8 +133,8 @@ public class HTMLAppletElement extends HTMLElement {
     }
 
     /**
-     * Gets the "border" attribute.
-     * @return the "border" attribute
+     * Gets the {@code border} attribute.
+     * @return the {@code border} attribute
      */
     @JsxGetter(@WebBrowser(IE))
     public String getBorder() {
@@ -143,8 +143,8 @@ public class HTMLAppletElement extends HTMLElement {
     }
 
     /**
-     * Sets the "border" attribute.
-     * @param border the "border" attribute
+     * Sets the {@code border} attribute.
+     * @param border the {@code border} attribute
      */
     @JsxSetter(@WebBrowser(IE))
     public void setBorder(final String border) {
@@ -153,7 +153,7 @@ public class HTMLAppletElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code align} property.
-     * @return the value of the "align" property
+     * @return the value of the {@code align} property
      */
     @JsxGetter
     public String getAlign() {
@@ -162,7 +162,7 @@ public class HTMLAppletElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code align} property.
-     * @param align the value of the "align" property
+     * @param align the value of the {@code align} property
      */
     @JsxSetter
     public void setAlign(final String align) {
@@ -235,8 +235,8 @@ public class HTMLAppletElement extends HTMLElement {
     }
 
     /**
-     * Gets the "classid" attribute.
-     * @return the "classid" attribute
+     * Gets the {@code classid} attribute.
+     * @return the {@code classid} attribute
      */
     @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
     public String getClassid() {
@@ -245,8 +245,8 @@ public class HTMLAppletElement extends HTMLElement {
     }
 
     /**
-     * Sets the "classid" attribute.
-     * @param classid the "classid" attribute
+     * Sets the {@code classid} attribute.
+     * @param classid the {@code classid} attribute
      */
     @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
     public void setClassid(final String classid) {

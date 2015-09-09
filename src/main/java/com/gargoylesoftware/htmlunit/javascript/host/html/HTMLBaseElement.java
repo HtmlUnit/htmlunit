@@ -48,7 +48,7 @@ public class HTMLBaseElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code href} property.
-     * @return the value of the "href" property
+     * @return the value of the {@code href} property
      */
     @JsxGetter
     public String getHref() {
@@ -57,7 +57,7 @@ public class HTMLBaseElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code href} property.
-     * @param href the value of the "href" property
+     * @param href the value of the {@code href} property
      */
     @JsxSetter
     public void setHref(final String href) {
@@ -66,7 +66,7 @@ public class HTMLBaseElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code target} property.
-     * @return the value of the "target" property
+     * @return the value of the {@code target} property
      */
     @JsxGetter
     public String getTarget() {
@@ -75,7 +75,7 @@ public class HTMLBaseElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code target} property.
-     * @param target the value of the "target" property
+     * @param target the value of the {@code target} property
      */
     @JsxSetter
     public void setTarget(final String target) {

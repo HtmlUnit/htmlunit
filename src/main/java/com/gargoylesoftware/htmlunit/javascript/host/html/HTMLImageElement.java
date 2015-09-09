@@ -159,7 +159,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code alt} property.
-     * @return the value of the "alt" property
+     * @return the value of the {@code alt} property
      */
     @JsxGetter
     public String getAlt() {
@@ -177,8 +177,8 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Gets the "border" attribute.
-     * @return the "border" attribute
+     * Gets the {@code border} attribute.
+     * @return the {@code border} attribute
      */
     @JsxGetter
     public String getBorder() {
@@ -187,8 +187,8 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Sets the "border" attribute.
-     * @param border the "border" attribute
+     * Sets the {@code border} attribute.
+     * @param border the {@code border} attribute
      */
     @JsxSetter
     public void setBorder(final String border) {
@@ -197,7 +197,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code align} property.
-     * @return the value of the "align" property
+     * @return the value of the {@code align} property
      */
     @JsxGetter
     public String getAlign() {
@@ -217,7 +217,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code align} property.
-     * @param align the value of the "align" property
+     * @param align the value of the {@code align} property
      */
     @JsxSetter
     public void setAlign(final String align) {
@@ -238,7 +238,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code width} property.
-     * @return the value of the "width" property
+     * @return the value of the {@code width} property
      */
     @Override
     @JsxGetter
@@ -291,7 +291,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code width} property.
-     * @param width the value of the "width" property
+     * @param width the value of the {@code width} property
      */
     @JsxSetter
     public void setWidth(final String width) {
@@ -300,7 +300,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code height} property.
-     * @return the value of the "height" property
+     * @return the value of the {@code height} property
      */
     @Override
     @JsxGetter
@@ -353,7 +353,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code height} property.
-     * @param height the value of the "height" property
+     * @param height the value of the {@code height} property
      */
     @JsxSetter
     public void setHeight(final String height) {
@@ -370,7 +370,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Support for the image.complete property.
-     * @return the value of the "complete" property
+     * @return the value of the {@code complete} property
      */
     @JsxGetter
     public boolean getComplete() {

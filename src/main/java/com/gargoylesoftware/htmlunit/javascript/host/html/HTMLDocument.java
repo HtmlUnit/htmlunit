@@ -959,7 +959,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /**
      * Returns the value of the {@code images} property.
-     * @return the value of the "images" property
+     * @return the value of the {@code images} property
      */
     @JsxGetter
     public Object getImages() {
@@ -1030,7 +1030,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /**
      * Returns the value of the {@code URL} property.
-     * @return the value of the "URL" property
+     * @return the value of the {@code URL} property
      */
     @JsxGetter(propertyName = "URL")
     public String getURL() {
@@ -1052,7 +1052,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /**
      * Returns the value of the {@code all} property.
-     * @return the value of the "all" property
+     * @return the value of the {@code all} property
      */
     @JsxGetter
     public HTMLCollection getAll() {
@@ -1315,7 +1315,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
      * The DOM spec</a> for details.
      *
-     * @param elementName - value of the "name" attribute to look for
+     * @param elementName - value of the {@code name} attribute to look for
      * @return all HTML elements that have a "name" attribute with the specified value
      */
     @JsxFunction
@@ -2013,7 +2013,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     /**
      * Returns the value of the {@code activeElement} property.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533065.aspx">MSDN documentation</a>
-     * @return the value of the "activeElement" property
+     * @return the value of the {@code activeElement} property
      */
     @JsxGetter
     public Object getActiveElement() {

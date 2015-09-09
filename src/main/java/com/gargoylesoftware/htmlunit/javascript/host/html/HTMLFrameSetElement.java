@@ -113,8 +113,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Gets the "border" attribute.
-     * @return the "border" attribute
+     * Gets the {@code border} attribute.
+     * @return the {@code border} attribute
      */
     @JsxGetter(@WebBrowser(IE))
     public String getBorder() {
@@ -123,8 +123,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the "border" attribute.
-     * @param border the "border" attribute
+     * Sets the {@code border} attribute.
+     * @param border the {@code border} attribute
      */
     @JsxSetter(@WebBrowser(IE))
     public void setBorder(final String border) {

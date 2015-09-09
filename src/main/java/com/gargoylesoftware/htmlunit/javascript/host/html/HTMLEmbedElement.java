@@ -52,7 +52,7 @@ public class HTMLEmbedElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code align} property.
-     * @return the value of the "align" property
+     * @return the value of the {@code align} property
      */
     @JsxGetter(@WebBrowser(FF))
     public String getAlign() {
@@ -61,7 +61,7 @@ public class HTMLEmbedElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code align} property.
-     * @param align the value of the "align" property
+     * @param align the value of the {@code align} property
      */
     @JsxSetter(@WebBrowser(FF))
     public void setAlign(final String align) {
@@ -70,7 +70,7 @@ public class HTMLEmbedElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code height} property.
-     * @return the value of the "height" property
+     * @return the value of the {@code height} property
      */
     @JsxGetter(propertyName = "height")
     public String getHeightString() {
@@ -79,7 +79,7 @@ public class HTMLEmbedElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code height} property.
-     * @param height the value of the "height" property
+     * @param height the value of the {@code height} property
      */
     @JsxSetter(propertyName = "height")
     public void setHeightString(final String height) {
@@ -88,7 +88,7 @@ public class HTMLEmbedElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code width} property.
-     * @return the value of the "width" property
+     * @return the value of the {@code width} property
      */
     @JsxGetter(propertyName = "width")
     public String getWidthString() {
@@ -97,7 +97,7 @@ public class HTMLEmbedElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code width} property.
-     * @param width the value of the "width" property
+     * @param width the value of the {@code width} property
      */
     @JsxSetter(propertyName = "width")
     public void setWidthString(final String width) {
