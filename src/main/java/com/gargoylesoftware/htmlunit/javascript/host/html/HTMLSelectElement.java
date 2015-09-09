@@ -149,6 +149,22 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
+     * Returns the type of this input.
+     * @return the type
+     */
+    @JsxGetter
+    public String getType() {
+        final String type;
+        if (getHtmlSelect().isMultipleSelectEnabled()) {
+            type = "select-multiple";
+        }
+        else {
+            type = "select-one";
+        }
+        return type;
+    }
+
+    /**
      * Returns the value of the {@code options} property.
      * @return the {@code options} property
      */

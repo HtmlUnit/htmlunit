@@ -71,6 +71,15 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
+     * Returns the type of this input.
+     * @return the type of this input
+     */
+    @JsxGetter
+    public String getType() {
+        return "textarea";
+    }
+
+    /**
      * Returns the value of the {@code value} attribute.
      * @return the value of the {@code value} attribute
      */
