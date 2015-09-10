@@ -78,16 +78,20 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "button, button, checkbox, file, hidden, select-one, select-multiple, password, reset, reset, "
+    @Alerts(CHROME = "button, button, checkbox, file, hidden, select-one, select-multiple, "
+                + "password, radio, reset, reset, "
                 + "submit, submit, text, textarea, color, date, text, datetime-local, time, week, month, number, "
                 + "range, search, email, tel, url",
-            FF = "button, button, checkbox, file, hidden, select-one, select-multiple, password, reset, reset, "
+            FF = "button, button, checkbox, file, hidden, select-one, select-multiple, "
+                + "password, radio, reset, reset, "
                 + "submit, submit, text, textarea, color, text, text, text, text, text, text, number, range, "
                 + "search, email, tel, url",
-            IE11 = "button, button, checkbox, file, hidden, select-one, select-multiple, password, reset, reset, "
+            IE11 = "button, button, checkbox, file, hidden, select-one, select-multiple, "
+                + "password, radio, reset, reset, "
                 + "submit, submit, text, textarea, text, text, text, text, text, text, text, number, range, "
                 + "search, email, tel, url",
-            IE8 = "button, button, checkbox, file, hidden, select-one, select-multiple, password, reset, reset, "
+            IE8 = "button, button, checkbox, file, hidden, select-one, select-multiple, "
+                + "radio,  password, reset, reset, "
                 + "submit, submit, text, textarea, text, text, text, text, text, text, text, text, text, "
                 + "text, text, text, text"
             )
@@ -99,23 +103,60 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = "null, undefined, null, [object FileList], null, undefined, undefined, null, null, undefined,"
-                + " null, undefined, null, undefined, null, null, null, null, null, null, null, null, null, null,"
-                + " null, null, null",
+    @Alerts(DEFAULT = "null, undefined, null, [object FileList], null, undefined, undefined, null, null, null,"
+                + " undefined, null, undefined, null, undefined, null, null, null, null, null, null, null,"
+                + " null, null, null, null, null, null",
             IE8 = "undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
                 + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
                 + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
-                + " undefined, undefined, undefined",
+                + " undefined, undefined, undefined, undefined",
             IE11 = "undefined, undefined, undefined, [object FileList], undefined, undefined, undefined, undefined,"
                 + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
                 + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
-                + " undefined, undefined, undefined")
+                + " undefined, undefined, undefined, undefined")
     @Test
     public void files() throws Exception {
         test("files");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts({ "false", "undefined", "false", "false", "false", "undefined", "undefined",
+                "false", "false", "false", "undefined", "false", "undefined", "false",
+                "undefined", "false", "false", "false", "false", "false", "false",
+                "false", "false", "false", "false", "false", "false", "false" })
+    @Test
+    public void checked() throws Exception {
+        test("checked");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "true", "undefined", "true", "true", "true", "undefined", "undefined",
+                "true", "true", "true", "undefined", "true", "undefined", "true",
+                "undefined", "true", "true", "true", "true", "true", "true",
+                "true", "true", "true", "true", "true", "true", "true" },
+            IE11 = { "false", "undefined", "true", "false", "false", "undefined", "undefined",
+                "false", "true", "false", "undefined", "false", "undefined", "false",
+                "undefined", "false", "false", "false", "false", "false", "false",
+                "false", "false", "false", "false", "false", "false", "false" },
+            IE8 = { "false", "", "true", "false", "false", "", "",
+                "false", "true", "false", "", "false", "", "false",
+                "", "false", "false", "false", "false", "false", "false",
+                "false", "false", "false", "false", "false", "false", "false" })
+    @Test
+    @NotYetImplemented(IE)
+    public void checkedWithAttribute() throws Exception {
+        test("checked", "checked");
+    }
+
     private void test(final String property) throws Exception {
+        test(property, "");
+    }
+
+    private void test(final String property, final String attrib) throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -128,6 +169,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "    alert(document.form1.select1." + property + ");\n"
             + "    alert(document.form1.select2." + property + ");\n"
             + "    alert(document.form1.password1." + property + ");\n"
+            + "    alert(document.form1.radio1." + property + ");\n"
             + "    alert(document.form1.reset1." + property + ");\n"
             + "    alert(document.form1.reset2." + property + ");\n"
             + "    alert(document.form1.submit1." + property + ");\n"
@@ -151,38 +193,38 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + "    <input type='button' name='button1'></button>\n"
-            + "    <button type='button' name='button2'></button>\n"
-            + "    <input type='checkbox' name='checkbox1' />\n"
-            + "    <input type='file' name='fileupload1' />\n"
-            + "    <input type='hidden' name='hidden1' />\n"
-            + "    <select name='select1'>\n"
+            + "    <input type='button' name='button1'" + attrib + "></button>\n"
+            + "    <button type='button' name='button2'" + attrib + "></button>\n"
+            + "    <input type='checkbox' name='checkbox1' " + attrib + "/>\n"
+            + "    <input type='file' name='fileupload1' " + attrib + "/>\n"
+            + "    <input type='hidden' name='hidden1' " + attrib + "/>\n"
+            + "    <select name='select1' " + attrib + ">\n"
             + "        <option>foo</option>\n"
             + "    </select>\n"
-            + "    <select multiple='multiple' name='select2'>\n"
+            + "    <select multiple='multiple' name='select2' " + attrib + ">\n"
             + "        <option>foo</option>\n"
             + "    </select>\n"
-            + "    <input type='password' name='password1' />\n"
-            + "    <input type='radio' name='radio1' />\n"
-            + "    <input type='reset' name='reset1' />\n"
-            + "    <button type='reset' name='reset2'></button>\n"
-            + "    <input type='submit' name='submit1' />\n"
-            + "    <button type='submit' name='submit2'></button>\n"
-            + "    <input type='text' name='textInput1' />\n"
-            + "    <textarea name='textarea1'>foo</textarea>\n"
-            + "    <input type='color' name='color1' />\n"
-            + "    <input type='date' name='date1' />\n"
-            + "    <input type='datetime' name='datetime1' />\n"
-            + "    <input type='datetime-local' name='datetimeLocal1' />\n"
-            + "    <input type='time' name='time1' />\n"
-            + "    <input type='week' name='week1' />\n"
-            + "    <input type='month' name='month1' />\n"
-            + "    <input type='number' name='number1' />\n"
-            + "    <input type='range' name='range1' />\n"
-            + "    <input type='search' name='search1' />\n"
-            + "    <input type='email' name='email1' />\n"
-            + "    <input type='tel' name='tel1' />\n"
-            + "    <input type='url' name='url1' />\n"
+            + "    <input type='password' name='password1' " + attrib + "/>\n"
+            + "    <input type='radio' name='radio1' " + attrib + "/>\n"
+            + "    <input type='reset' name='reset1' " + attrib + "/>\n"
+            + "    <button type='reset' name='reset2' " + attrib + "></button>\n"
+            + "    <input type='submit' name='submit1' " + attrib + "/>\n"
+            + "    <button type='submit' name='submit2' " + attrib + "></button>\n"
+            + "    <input type='text' name='textInput1' " + attrib + "/>\n"
+            + "    <textarea name='textarea1' " + attrib + ">foo</textarea>\n"
+            + "    <input type='color' name='color1' " + attrib + "/>\n"
+            + "    <input type='date' name='date1' " + attrib + "/>\n"
+            + "    <input type='datetime' name='datetime1' " + attrib + "/>\n"
+            + "    <input type='datetime-local' name='datetimeLocal1' " + attrib + "/>\n"
+            + "    <input type='time' name='time1' " + attrib + "/>\n"
+            + "    <input type='week' name='week1' " + attrib + "/>\n"
+            + "    <input type='month' name='month1' " + attrib + "/>\n"
+            + "    <input type='number' name='number1' " + attrib + "/>\n"
+            + "    <input type='range' name='range1' " + attrib + "/>\n"
+            + "    <input type='search' name='search1' " + attrib + "/>\n"
+            + "    <input type='email' name='email1' " + attrib + "/>\n"
+            + "    <input type='tel' name='tel1' " + attrib + "/>\n"
+            + "    <input type='url' name='url1' " + attrib + "/>\n"
             + "</form>\n"
             + "</body></html>";
 
