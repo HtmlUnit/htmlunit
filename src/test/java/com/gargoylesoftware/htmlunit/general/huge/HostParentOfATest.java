@@ -4876,6 +4876,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
+    @NotYetImplemented(CHROME)
     public void _CSSGroupingRule_CSSSupportsRule() throws Exception {
         test("CSSGroupingRule", "CSSSupportsRule");
     }
@@ -5190,6 +5191,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(CHROME)
     public void _CSS_CSS() throws Exception {
         test("CSS", "CSS");
     }

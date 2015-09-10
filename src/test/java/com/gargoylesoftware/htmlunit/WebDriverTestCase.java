@@ -125,6 +125,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /** The driver cache. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<>();
+
+    /** The driver cache for real browsers. */
+    protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_REAL_BROWSERS = new HashMap<>();
+
     private static Server STATIC_SERVER_;
     // second server for cross-origin tests.
     private static Server STATIC_SERVER2_;
@@ -192,17 +196,33 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected WebDriver getWebDriver() {
         final BrowserVersion browserVersion = getBrowserVersion();
-        WebDriver driver = WEB_DRIVERS_.get(browserVersion);
-        if (driver == null) {
-            try {
-                driver = buildWebDriver();
-            }
-            catch (final IOException e) {
-                throw new RuntimeException(e);
-            }
+        WebDriver driver;
+        if (useRealBrowser_) {
+            driver = WEB_DRIVERS_REAL_BROWSERS.get(browserVersion);
+            if (driver == null) {
+                try {
+                    driver = buildWebDriver();
+                }
+                catch (final IOException e) {
+                    throw new RuntimeException(e);
+                }
 
-            if (isWebClientCached() || !(driver instanceof HtmlUnitDriver)) {
-                WEB_DRIVERS_.put(browserVersion, driver);
+                WEB_DRIVERS_REAL_BROWSERS.put(browserVersion, driver);
+            }
+        }
+        else {
+            driver = WEB_DRIVERS_.get(browserVersion);
+            if (driver == null) {
+                try {
+                    driver = buildWebDriver();
+                }
+                catch (final IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                if (isWebClientCached()) {
+                    WEB_DRIVERS_.put(browserVersion, driver);
+                }
             }
         }
         return driver;
@@ -218,6 +238,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
             driver.quit();
         }
         WEB_DRIVERS_.clear();
+        for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
+            driver.quit();
+        }
+        WEB_DRIVERS_REAL_BROWSERS.clear();
         stopWebServers();
         LAST_TEST_MockWebConnection_ = null;
     }

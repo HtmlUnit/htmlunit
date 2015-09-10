@@ -3286,4 +3286,14 @@ public class HostParentOfITest extends HostParentOf {
         test("MozPowerManager", "MozPowerManager");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(FF)
+    public void _InstallTrigger_InstallTrigger() throws Exception {
+        test("InstallTrigger", "InstallTrigger");
+    }
+
 }
