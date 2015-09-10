@@ -377,7 +377,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             final boolean fromHtml,
             final boolean useFragment,
             boolean cloneNode) throws Exception {
-        String html = "<!DOCTYPE HTML>\n<html>\n"
+        String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
@@ -467,7 +469,8 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts({ "true-true", "false-false", "true-true", "false-false", "false-false", "false-false" })
     public void defaultChecked() throws Exception {
         final String html =
-            "<!DOCTYPE HTML>\n<html>\n"
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
@@ -502,7 +505,8 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts({ "false-false", "false-false", "true-true", "false-false", "false-false", "false-false" })
     public void defaultChecked_notchecked() throws Exception {
         final String html =
-            "<!DOCTYPE HTML>\n<html>\n"
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
@@ -539,8 +543,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "send request", "response read" })
     public void checkedOnXmlResponse() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body>\n"
             + "<script>\n"
             + "  alert('send request');\n"
             + "  var xhr = (window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'));\n"
@@ -569,7 +574,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "foo,change,",
             IE8 = "")
     public void onchangeFires() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function debug(string) {\n"
             + "    document.getElementById('myTextarea').value += string + ',';\n"
@@ -596,7 +603,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     @Alerts("foo,change,boo,blur,")
     public void onchangeFires2() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function debug(string) {\n"
             + "    document.getElementById('myTextarea').value += string + ',';\n"
@@ -628,8 +637,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "Second",
             IE8 = "First")
     public void setChecked() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>First</title></head><body>\n"
             + "<form>\n"
             + "<input type='radio' name='radioGroup' id='radio'"
             + " onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
@@ -652,8 +662,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "Second",
             IE8 = { "First", "Second" })
     public void setChecked2() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>First</title></head><body>\n"
             + "<form>\n"
             + "<input type='radio' name='radioGroup' id='radio'"
             + " onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
@@ -681,7 +692,8 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     public void preventDefault() throws Exception {
         final String html =
-              "<html><head><script>\n"
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e)\n"
             + "      e.preventDefault();\n"
@@ -709,8 +721,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     public void defaultState() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <input type='radio' name='radio' id='radio'>Check me</input>\n"
             + "</form></body></html>";
@@ -725,7 +738,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "on-", "on-", "on-", "on-" })
     public void defaultValues() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('radio1');\n"
@@ -761,7 +776,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "on-", "on-", "on-", "on-" },
             IE8 = { "on-on", "on-on", "on-on", "on-on" })
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('radio1');\n"
@@ -801,7 +818,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault" })
     public void resetByClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var radio = document.getElementById('testId');\n"
@@ -840,7 +859,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault" })
     public void resetByJS() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var radio = document.getElementById('testId');\n"
@@ -877,7 +898,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" })
     public void defaultValue() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var radio = document.getElementById('testId');\n"
@@ -911,7 +934,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             IE8 = { })
     @NotYetImplemented(IE8)
     public void clickShouldTriggerOnchange() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><title>foo</title>\n"
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var elt = document.getElementById('it');\n"
@@ -936,8 +961,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "false,false", "true,false", "false,true" })
     public void radioInputChecked() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "<form name='myForm'>\n"
@@ -953,6 +979,102 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "  r2.checked = true;\n"
             + "  alert(r1.checked + ',' + r2.checked);\n"
             + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "null", "true", "null", "false", "null", "true", "", "false", "", "true", "" },
+            IE8 = { "false", "", "true", "", "false", "", "true", "checked", "false", "checked", "true", "checked" })
+    @NotYetImplemented
+    public void checkedAttribute() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var checkbox = document.getElementById('r1');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = true;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('r2');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = true;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='r1' name='myRadio'>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='r2' name='myRadio' checked>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "null", "false", "null", "true", "", "true", "" },
+            IE8 = { "false", "", "false", "", "true", "checked", "true", "checked" })
+    @NotYetImplemented
+    public void defaultCheckedAttribute() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var checkbox = document.getElementById('r1');\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = true;\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('r2');\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='r1' name='myRadio'>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='r2' name='myRadio' checked>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
