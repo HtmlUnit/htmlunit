@@ -152,15 +152,85 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         test("checked", "checked");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "true", "undefined", "true", "true", "true", "undefined", "undefined",
+                "true", "true", "true", "undefined", "true", "undefined", "true",
+                "undefined", "true", "true", "true", "true", "true", "true",
+                "true", "true", "true", "true", "true", "true", "true" },
+            IE8 = { "true", "true", "true", "true", "true", "true", "true",
+                "true", "true", "true", "true", "true", "true", "true",
+                "true", "true", "true", "true", "true", "true", "true",
+                "true", "true", "true", "true", "true", "true", "true" })
+    @Test
+    public void setCheckedTrue() throws Exception {
+        test("checked", "", "true");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "true", "undefined", "true", "true", "true", "undefined", "undefined",
+                "true", "true", "true", "undefined", "true", "undefined", "true",
+                "undefined", "true", "true", "true", "true", "true", "true",
+                "true", "true", "true", "true", "true", "true", "true" },
+            IE8 = { "true", "", "true", "true", "true", "", "",
+                "true", "true", "true", "", "true", "", "true",
+                "", "true", "true", "true", "true", "true", "true",
+                "true", "true", "true", "true", "true", "true", "true" })
+    @Test
+    public void setCheckedBlank() throws Exception {
+        test("checked", "", "");
+    }
+
     private void test(final String property) throws Exception {
-        test(property, "");
+        test(property, "", null);
     }
 
     private void test(final String property, final String attrib) throws Exception {
-        final String html
+        test(property, attrib, null);
+    }
+
+    private void test(final String property, final String attrib, final String value) throws Exception {
+        String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest(){\n";
+
+        if (value != null) {
+            html = html
+                + "    document.form1.button1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.button2.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.checkbox1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.fileupload1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.hidden1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.select1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.select2.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.password1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.radio1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.reset1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.reset2.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.submit1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.submit2.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.textInput1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.textarea1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.color1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.date1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.datetime1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.datetimeLocal1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.time1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.week1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.month1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.number1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.range1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.search1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.email1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.tel1.setAttribute('" + property + "', '" + value + "');\n"
+                + "    document.form1.url1.setAttribute('" + property + "', '" + value + "');\n";
+        }
+
+        html = html
             + "    alert(document.form1.button1." + property + ");\n"
             + "    alert(document.form1.button2." + property + ");\n"
             + "    alert(document.form1.checkbox1." + property + ");\n"
