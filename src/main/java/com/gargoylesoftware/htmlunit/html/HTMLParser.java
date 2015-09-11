@@ -648,7 +648,7 @@ public final class HTMLParser {
 
         /**
          * Adds the new node to the right parent that is not necessary the currentNode in case of
-         * malformed HTML code. The method tries to emulate the behaviour of Firefox.
+         * malformed HTML code. The method tries to emulate the behavior of Firefox.
          */
         private void addNodeToRightParent(final DomNode currentNode, final DomElement newElement) {
             final String currentNodeName = currentNode.getNodeName();

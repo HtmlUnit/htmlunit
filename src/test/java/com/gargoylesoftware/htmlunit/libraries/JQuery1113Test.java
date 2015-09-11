@@ -1796,7 +1796,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 50, 50")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void attributes__attr_String_() throws Exception {
         runTest("attributes: attr(String)");
     }
@@ -1827,6 +1827,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented(IE11)
     public void attributes__attr_String__Function_() throws Exception {
         runTest("attributes: attr(String, Function)");
     }
@@ -1837,6 +1838,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented(IE11)
     public void attributes__attr_Hash_() throws Exception {
         runTest("attributes: attr(Hash)");
     }
@@ -2080,6 +2082,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
+    @NotYetImplemented(IE11)
     public void attributes__addClass_String_() throws Exception {
         runTest("attributes: addClass(String)");
     }
@@ -2090,6 +2093,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
+    @NotYetImplemented(IE11)
     public void attributes__addClass_Function_() throws Exception {
         runTest("attributes: addClass(Function)");
     }
@@ -2100,6 +2104,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 52, 52")
+    @NotYetImplemented(IE11)
     public void attributes__addClass_Function__with_incoming_value() throws Exception {
         runTest("attributes: addClass(Function) with incoming value");
     }
@@ -2190,6 +2195,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 17, 17")
+    @NotYetImplemented(IE11)
     public void attributes__addClass__removeClass__hasClass() throws Exception {
         runTest("attributes: addClass, removeClass, hasClass");
     }
@@ -2200,6 +2206,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 19, 19")
+    @NotYetImplemented(IE11)
     public void attributes__addClass__removeClass__hasClass_on_many_elements() throws Exception {
         runTest("attributes: addClass, removeClass, hasClass on many elements");
     }
@@ -2252,6 +2259,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented(IE11)
     public void attributes__Insignificant_white_space_returned_for___option__val_____14858_() throws Exception {
         runTest("attributes: Insignificant white space returned for $(option).val() (#14858)");
     }
@@ -6695,6 +6703,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_get__String__Hash__Function_____parse_xml_and_use_text___on_nodes() throws Exception {
         runTest("ajax: jQuery.get( String, Hash, Function ) - parse xml and use text() on nodes");
     }
@@ -6716,6 +6725,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_getJSON__String__Hash__Function_____JSON_array() throws Exception {
         runTest("ajax: jQuery.getJSON( String, Hash, Function ) - JSON array");
     }
@@ -6726,6 +6736,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_getJSON__String__Function_____JSON_object() throws Exception {
         runTest("ajax: jQuery.getJSON( String, Function ) - JSON object");
     }
@@ -6736,6 +6747,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_getJSON_____Using_Native_JSON() throws Exception {
         runTest("ajax: jQuery.getJSON() - Using Native JSON");
     }
@@ -6746,6 +6758,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_getJSON__String__Function_____JSON_object_with_absolute_url_to_local_content() throws Exception {
         runTest("ajax: jQuery.getJSON( String, Function ) - JSON object with absolute url to local content");
     }
@@ -6756,6 +6769,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_getScript__String__Function_____with_callback() throws Exception {
         runTest("ajax: jQuery.getScript( String, Function ) - with callback");
     }
@@ -6766,6 +6780,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_getScript__String__Function_____no_callback() throws Exception {
         runTest("ajax: jQuery.getScript( String, Function ) - no callback");
     }
@@ -6796,6 +6811,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_fn_load_____404_error_callbacks() throws Exception {
         runTest("ajax: jQuery.fn.load() - 404 error callbacks");
     }
@@ -6816,6 +6832,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_fn_load__String__undefined__() throws Exception {
         runTest("ajax: jQuery.fn.load( String, undefined )");
     }
@@ -6826,6 +6843,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_fn_load__URL_SELECTOR__() throws Exception {
         runTest("ajax: jQuery.fn.load( URL_SELECTOR )");
     }
@@ -6836,6 +6854,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_fn_load__URL_SELECTOR_with_spaces__() throws Exception {
         runTest("ajax: jQuery.fn.load( URL_SELECTOR with spaces )");
     }
@@ -6908,6 +6927,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_fn_load_____callbacks_get_the_correct_parameters() throws Exception {
         runTest("ajax: jQuery.fn.load() - callbacks get the correct parameters");
     }
@@ -6938,6 +6958,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_post_____data() throws Exception {
         runTest("ajax: jQuery.post() - data");
     }
@@ -6948,6 +6969,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_post__String__Hash__Function_____simple_with_xml() throws Exception {
         runTest("ajax: jQuery.post( String, Hash, Function ) - simple with xml");
     }
