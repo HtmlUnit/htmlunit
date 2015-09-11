@@ -29,6 +29,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.ComparisonFailure;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -53,6 +54,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @author Marc Guillemot
  * @author Frank Danek
  */
+@Ignore
 @RunWith(BrowserRunner.class)
 public class JQuery1113Test extends WebDriverTestCase {
 
