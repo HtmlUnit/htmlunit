@@ -24,6 +24,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -335,7 +336,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             final boolean fromHtml,
             final boolean useFragment,
             boolean cloneNode) throws Exception {
-        String html = "<!DOCTYPE HTML>\n<html>\n"
+        String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n";
@@ -426,7 +429,8 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Alerts({ "true-true", "true-true", "false-false", "false-false", "true-true", "false-false" })
     public void defaultChecked() throws Exception {
         final String html =
-            "<!DOCTYPE HTML>\n<html>\n"
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
@@ -462,7 +466,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "foo,change,",
             IE8 = { })
     public void onchangeFires() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function debug(string) {\n"
             + "    document.getElementById('myTextarea').value += string + ',';\n"
@@ -488,7 +494,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Test
     @Alerts("foo,change,boo,blur,")
     public void onchangeFires2() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function debug(string) {\n"
             + "    document.getElementById('myTextarea').value += string + ',';\n"
@@ -520,8 +528,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "Second",
             IE8 = "First")
     public void setChecked() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>First</title></head><body>\n"
             + "<form>\n"
             + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
             + "</form>\n"
@@ -543,8 +552,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "Second",
             IE8 = { "First", "Second" })
     public void setChecked2() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>First</title></head><body>\n"
             + "<form>\n"
             + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
             + "<input id='myInput' type='text'>\n"
@@ -571,7 +581,8 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Test
     public void preventDefault() throws Exception {
         final String html =
-              "<html><head><script>\n"
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e)\n"
             + "      e.preventDefault();\n"
@@ -599,8 +610,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     public void defaultState() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
             + "</form></body></html>";
@@ -615,7 +627,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "on-", "on-", "on-", "on-" })
     public void defaultValues() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('chkbox1');\n"
@@ -651,7 +665,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "on-", "on-", "on-", "on-" },
             IE8 = { "on-on", "on-on", "on-on", "on-on" })
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('chkbox1');\n"
@@ -691,7 +707,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault" })
     public void resetByClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('testId');\n"
@@ -730,7 +748,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault" })
     public void resetByJS() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('testId');\n"
@@ -767,7 +787,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" })
     public void defaultValue() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('testId');\n"
@@ -800,7 +822,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "changed",
             IE8 = { })
     public void clickShouldTriggerOnchange() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><title>foo</title>\n"
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var elt = document.getElementById('it');\n"
@@ -815,6 +839,120 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
                 + "  <input type='text' id='next'>\n"
                 + "</form>\n"
                 + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "null", "true", "null", "false", "null", "true", "", "false", "", "true", "",
+                        "true", "yes", "false", "yes", "true", "yes"},
+            IE8 = { "false", "", "true", "", "false", "", "true", "checked", "false", "checked",
+                    "true", "checked", "true", "checked", "false", "checked", "true", "checked" })
+    @NotYetImplemented
+    public void checkedAttribute() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var checkbox = document.getElementById('c1');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = true;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('c2');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = true;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('c3');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = true;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='checkbox' id='c1' name='radar' value='initial'>\n"
+            + "  <input type='checkbox' id='c2' name='radar' value='initial' checked>\n"
+            + "  <input type='checkbox' id='c3' name='radar' value='initial' checked='yes'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "null", "false", "null", "true", "", "true", "",
+                        "true", "yes", "true", "yes"},
+            IE8 = { "false", "", "false", "", "true", "checked",
+                    "true", "checked", "true", "checked", "true", "checked" })
+    @NotYetImplemented
+    public void defaultCheckedAttribute() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var checkbox = document.getElementById('c1');\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = true;\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('c2');\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('c3');\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='checkbox' id='c1' name='radar' value='initial'>\n"
+            + "  <input type='checkbox' id='c2' name='radar' value='initial' checked>\n"
+            + "  <input type='checkbox' id='c3' name='radar' value='initial' checked='yes'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }

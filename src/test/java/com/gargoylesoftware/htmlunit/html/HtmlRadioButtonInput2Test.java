@@ -988,7 +988,8 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "null", "true", "null", "false", "null", "true", "", "false", "", "true", "" },
+    @Alerts(DEFAULT = { "false", "null", "true", "null", "false", "null", "true", "", "false", "",
+                        "true", "", "true", "yes", "false", "yes", "true", "yes" },
             IE8 = { "false", "", "true", "", "false", "", "true", "checked", "false", "checked", "true", "checked" })
     @NotYetImplemented
     public void checkedAttribute() throws Exception {
@@ -1020,6 +1021,18 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "    checkbox.checked = true;\n"
             + "    alert(checkbox.checked);\n"
             + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('r3');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = true;\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -1031,6 +1044,10 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "  <input type='radio' id='r2' name='myRadio' checked>\n"
             + "  <input type='radio' name='myRadio'>\n"
             + "</form>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='r3' name='myRadio' checked='yes'>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -1040,7 +1057,8 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "null", "false", "null", "true", "", "true", "" },
+    @Alerts(DEFAULT = { "false", "null", "false", "null", "true", "", "true", "",
+                        "true", "yes", "true", "yes"},
             IE8 = { "false", "", "false", "", "true", "checked", "true", "checked" })
     @NotYetImplemented
     public void defaultCheckedAttribute() throws Exception {
@@ -1064,6 +1082,14 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "    checkbox.checked = false;\n"
             + "    alert(checkbox.defaultChecked);\n"
             + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('r3');\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox.checked = false;\n"
+            + "    alert(checkbox.defaultChecked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -1073,6 +1099,10 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "<form name='myForm'>\n"
             + "  <input type='radio' id='r2' name='myRadio' checked>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='r3' name='myRadio' checked='yes'>\n"
             + "  <input type='radio' name='myRadio'>\n"
             + "</form>\n"
             + "</body></html>";
