@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -93,7 +92,7 @@ public class JQuery1113Test extends WebDriverTestCase {
                 // starting with jQuery 1.11.3 the control seems to be replaced by
                 // a new one if the test is finished (when using HtmlUnit;
                 // i guess this is an error
-                // but i like to focus on the new jQuery problems first
+                // but i like to focus on the new jQuery problems first)
                 status = webdriver.findElement(By.id("qunit-testresult"));
                 Thread.sleep(100);
 
@@ -1449,7 +1448,7 @@ public class JQuery1113Test extends WebDriverTestCase {
         FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
         IE8 = "1, 1, 2")
-    @NotYetImplemented({ CHROME, IE11, FF })
+    @NotYetImplemented({ CHROME, IE11 })
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
     }
@@ -5373,7 +5372,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ CHROME, IE11, FF })
+    @NotYetImplemented({ CHROME, IE11 })
     public void manipulation__buildFragment_works_even_if_document_0__is_iframe_s_window_object_in_IE9_10___12266_() throws Exception {
         runTest("manipulation: buildFragment works even if document[0] is iframe's window object in IE9/10 (#12266)");
     }
@@ -6683,7 +6682,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____failing_cross_domain() throws Exception {
         runTest("ajax: jQuery.ajax() - failing cross-domain");
     }
@@ -6749,7 +6748,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ FF38, CHROME })
+    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____empty_json_gets_to_error_callback_instead_of_success_callback_() throws Exception {
         runTest("ajax: jQuery.ajax() - empty json gets to error callback instead of success callback.");
     }
