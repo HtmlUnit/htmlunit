@@ -847,6 +847,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_CHAR_OFF_EMULATED,
 
+    /** Checkbox checked property returns always 'checked' instead of the set attrib value. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_CHECKED_RETURNS_CHECKED_OR_EMPTY,
+
     /** Do not allow invalid clear values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_CLEAR_RESTRICT,
@@ -1303,7 +1307,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that the getAttribute method supports IE style flags, only in quirks mode . */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE,
-
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB,

@@ -50,7 +50,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     private static final String DEFAULT_VALUE = "on";
 
     private boolean defaultCheckedState_;
-    private boolean forceChecked_;
+    private boolean checkedState_;
 
     /**
      * Creates an instance.
@@ -73,6 +73,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
         }
 
         defaultCheckedState_ = hasAttribute("checked");
+        checkedState_ = defaultCheckedState_;
     }
 
     /**
@@ -107,16 +108,19 @@ public class HtmlCheckBoxInput extends HtmlInput {
     }
 
     /**
+     * Returns {@code true} if this element is currently selected.
+     * @return {@code true} if this element is currently selected
+     */
+    public boolean isChecked() {
+        return checkedState_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Page setChecked(final boolean isChecked) {
-        if (isChecked) {
-            setAttribute("checked", "checked");
-        }
-        else {
-            removeAttribute("checked");
-        }
+        checkedState_ = isChecked;
 
         if (hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
             return getPage();
@@ -140,13 +144,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     @Override
     protected boolean doClickStateUpdate() throws IOException {
-        final boolean isChecked = !isChecked();
-        if (isChecked) {
-            setAttribute("checked", "checked");
-        }
-        else {
-            removeAttribute("checked");
-        }
+        checkedState_ = !isChecked();
         super.doClickStateUpdate();
         return true;
     }
@@ -188,7 +186,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     @Override
     protected void preventDefault() {
-        setChecked(!isChecked());
+        checkedState_ = !checkedState_;
     }
 
     /**
@@ -211,7 +209,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
         setChecked(defaultChecked);
         if (hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
             reset();
-            forceChecked_ = true;
         }
     }
 
@@ -228,37 +225,10 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    protected void onAddedToPage() {
-        super.onAddedToPage();
-
-        if (forceChecked_) {
-            reset();
-            forceChecked_ = wasCreatedByJavascript();
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void onAddedToDocumentFragment() {
-        super.onAddedToDocumentFragment();
-
-        if (forceChecked_) {
-            reset();
-            forceChecked_ = false;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public DomNode cloneNode(final boolean deep) {
         final HtmlCheckBoxInput clone = (HtmlCheckBoxInput) super.cloneNode(deep);
         if (wasCreatedByJavascript() && hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
-            clone.removeAttribute("checked");
-            clone.forceChecked_ = isDefaultChecked();
+            clone.checkedState_ = false;
         }
         if (hasFeature(HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE)) {
             clone.setDefaultValue(getValueAttribute(), false);
@@ -287,6 +257,9 @@ public class HtmlCheckBoxInput extends HtmlInput {
         if ("value".equals(qualifiedName)) {
             setDefaultValue(attributeValue, false);
         }
+        if ("checked".equals(qualifiedName)) {
+            checkedState_ = true;
+        }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }
 
@@ -298,5 +271,4 @@ public class HtmlCheckBoxInput extends HtmlInput {
         return !hasFeature(HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR)
                 && super.propagateClickStateUpdateToParent();
     }
-
 }

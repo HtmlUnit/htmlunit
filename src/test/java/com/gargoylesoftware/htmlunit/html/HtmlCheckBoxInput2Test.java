@@ -24,7 +24,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -850,7 +849,6 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
                         "true", "yes", "false", "yes", "true", "yes"},
             IE8 = { "false", "", "true", "", "false", "", "true", "checked", "false", "checked",
                     "true", "checked", "true", "checked", "false", "checked", "true", "checked" })
-    @NotYetImplemented
     public void checkedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -913,7 +911,6 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
                         "true", "yes", "true", "yes"},
             IE8 = { "false", "", "false", "", "true", "checked",
                     "true", "checked", "true", "checked", "true", "checked" })
-    @NotYetImplemented
     public void defaultCheckedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
