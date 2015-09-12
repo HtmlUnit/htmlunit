@@ -191,6 +191,21 @@ public class HtmlRadioButtonInput extends HtmlInput {
                 + "and @name='" + getNameAttribute() + "']");
 
         pageInputs.removeAll(formInputs);
+
+        boolean foundInPage = false;
+        for (final HtmlRadioButtonInput input : pageInputs) {
+            if (input == this) {
+                setCheckedInternal(true);
+                foundInPage = true;
+            }
+            else {
+                input.setCheckedInternal(false);
+            }
+        }
+
+        if (!foundInPage && !formInputs.contains(this)) {
+            setCheckedInternal(true);
+        }
     }
 
     /**
@@ -224,6 +239,14 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     public String asText() {
         return super.asText();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preventDefault() {
+        checkedState_ = !checkedState_;
     }
 
     /**

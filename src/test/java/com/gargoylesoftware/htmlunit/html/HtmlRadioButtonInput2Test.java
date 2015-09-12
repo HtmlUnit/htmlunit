@@ -1113,4 +1113,62 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setCheckedOutsideForm() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<input type='radio' id='radio1' name='myRadio'>\n"
+            + "<input type='radio' id='radio2' name='myRadio'>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='radio3' name='myRadio'>\n"
+            + "  <input type='radio' id='radio4' name='myRadio'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        final WebElement radio1 = driver.findElement(By.id("radio1"));
+        final WebElement radio2 = driver.findElement(By.id("radio2"));
+        final WebElement radio3 = driver.findElement(By.id("radio3"));
+        final WebElement radio4 = driver.findElement(By.id("radio4"));
+
+        assertFalse(radio1.isSelected());
+        assertFalse(radio2.isSelected());
+        assertFalse(radio3.isSelected());
+        assertFalse(radio4.isSelected());
+
+        radio1.click();
+
+        assertTrue(radio1.isSelected());
+        assertFalse(radio2.isSelected());
+        assertFalse(radio3.isSelected());
+        assertFalse(radio4.isSelected());
+
+        radio2.click();
+
+        assertFalse(radio1.isSelected());
+        assertTrue(radio2.isSelected());
+        assertFalse(radio3.isSelected());
+        assertFalse(radio4.isSelected());
+
+        radio3.click();
+
+        assertFalse(radio1.isSelected());
+        assertTrue(radio2.isSelected());
+        assertTrue(radio3.isSelected());
+        assertFalse(radio4.isSelected());
+
+        radio4.click();
+
+        assertFalse(radio1.isSelected());
+        assertTrue(radio2.isSelected());
+        assertFalse(radio3.isSelected());
+        assertTrue(radio4.isSelected());
+    }
 }

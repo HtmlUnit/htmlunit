@@ -185,65 +185,6 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void setCheckedOutsideForm() throws Exception {
-        final String html
-            = "<html><head>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "<input type='radio' id='radio1' name='myRadio'>\n"
-            + "<input type='radio' id='radio2' name='myRadio'>\n"
-            + "<form name='myForm'>\n"
-            + "  <input type='radio' id='radio3' name='myRadio'>\n"
-            + "  <input type='radio' id='radio4' name='myRadio'>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(html, collectedAlerts);
-
-        final HtmlRadioButtonInput radio1 = page.getHtmlElementById("radio1");
-        final HtmlRadioButtonInput radio2 = page.getHtmlElementById("radio2");
-        final HtmlRadioButtonInput radio3 = page.getHtmlElementById("radio3");
-        final HtmlRadioButtonInput radio4 = page.getHtmlElementById("radio4");
-
-        assertFalse(radio1.isChecked());
-        assertFalse(radio2.isChecked());
-        assertFalse(radio3.isChecked());
-        assertFalse(radio4.isChecked());
-
-        radio1.setChecked(true);
-
-        assertTrue(radio1.isChecked());
-        assertFalse(radio2.isChecked());
-        assertFalse(radio3.isChecked());
-        assertFalse(radio4.isChecked());
-
-        radio2.setChecked(true);
-
-        assertFalse(radio1.isChecked());
-        assertTrue(radio2.isChecked());
-        assertFalse(radio3.isChecked());
-        assertFalse(radio4.isChecked());
-
-        radio3.setChecked(true);
-
-        assertFalse(radio1.isChecked());
-        assertTrue(radio2.isChecked());
-        assertTrue(radio3.isChecked());
-        assertFalse(radio4.isChecked());
-
-        radio4.setChecked(true);
-
-        assertFalse(radio1.isChecked());
-        assertTrue(radio2.isChecked());
-        assertFalse(radio3.isChecked());
-        assertTrue(radio4.isChecked());
-    }
-
-    /**
      * Regression test for bug 2815614.
      * Clicking an element should force the enclosing window to become the current one.
      * @throws Exception if the test fails
