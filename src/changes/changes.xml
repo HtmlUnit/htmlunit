@@ -9,7 +9,8 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="fix" dev="rbri">
-                Various fixes for our checkbox simulation.
+                Various fixes for our checkbox and radiobutton simulation. This also fixes
+                css selectors working with the checked attribute.
             </action>
             <action type="fix" dev="asashour">
                 Do not click surrounding anchor for 'checkbox' and 'radio' input (Chrome).

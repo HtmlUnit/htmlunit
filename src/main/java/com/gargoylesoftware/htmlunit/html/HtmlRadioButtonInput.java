@@ -52,7 +52,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     private static final String DEFAULT_VALUE = "on";
 
     private boolean defaultCheckedState_;
-    private boolean forceChecked_;
+    private boolean checkedState_;
 
     /**
      * Creates an instance.
@@ -75,6 +75,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
         }
 
         defaultCheckedState_ = hasAttribute("checked");
+        checkedState_ = defaultCheckedState_;
     }
 
     /**
@@ -99,17 +100,24 @@ public class HtmlRadioButtonInput extends HtmlInput {
     }
 
     /**
+     * Returns {@code true} if this element is currently selected.
+     * @return {@code true} if this element is currently selected
+     */
+    public boolean isChecked() {
+        return checkedState_;
+    }
+
+    /**
      * {@inheritDoc}
      * @see SubmittableElement#reset()
      */
     @Override
     public void reset() {
-        if (defaultCheckedState_) {
-            setAttribute("checked", "checked");
-        }
-        else {
-            removeAttribute("checked");
-        }
+        setChecked(defaultCheckedState_);
+    }
+
+    void setCheckedInternal(final boolean isChecked) {
+        checkedState_ = isChecked;
     }
 
     /**
@@ -121,20 +129,18 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     @Override
     public Page setChecked(final boolean isChecked) {
-        final HtmlForm form = getEnclosingForm();
-        final boolean changed = isChecked() != isChecked;
-
         Page page = getPage();
+
+        final boolean changed = isChecked() != isChecked;
+        checkedState_ = isChecked;
         if (isChecked) {
+            final HtmlForm form = getEnclosingForm();
             if (form != null) {
                 form.setCheckedRadioButton(this);
             }
             else if (page != null && page.isHtmlPage()) {
                 setCheckedForPage((HtmlPage) page);
             }
-        }
-        else {
-            removeAttribute("checked");
         }
 
         if (changed && !hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
@@ -185,21 +191,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
                 + "and @name='" + getNameAttribute() + "']");
 
         pageInputs.removeAll(formInputs);
-
-        boolean foundInPage = false;
-        for (final HtmlRadioButtonInput input : pageInputs) {
-            if (input == this) {
-                input.setAttribute("checked", "checked");
-                foundInPage = true;
-            }
-            else {
-                input.removeAttribute("checked");
-            }
-        }
-
-        if (!foundInPage && !formInputs.contains(this)) {
-            setAttribute("checked", "checked");
-        }
     }
 
     /**
@@ -237,14 +228,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
 
     /**
      * {@inheritDoc}
-     */
-    @Override
-    protected void preventDefault() {
-        setChecked(!isChecked());
-    }
-
-    /**
-     * {@inheritDoc}
      * Also sets the value to the new default value.
      * @see SubmittableElement#setDefaultValue(String)
      */
@@ -264,7 +247,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
         setChecked(isDefaultChecked());
         if (hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
             reset();
-            forceChecked_ = true;
         }
     }
 
@@ -291,21 +273,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     protected void onAddedToPage() {
         super.onAddedToPage();
-
-        if (forceChecked_) {
-            return;
-        }
-        setChecked(isChecked());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void onAddedToDocumentFragment() {
-        super.onAddedToDocumentFragment();
-        if (hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
-            forceChecked_ = true;
+        if (!hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
+            setChecked(isChecked());
         }
     }
 
@@ -315,10 +284,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     public DomNode cloneNode(final boolean deep) {
         final HtmlRadioButtonInput clone = (HtmlRadioButtonInput) super.cloneNode(deep);
-        clone.forceChecked_ = false;
         if (wasCreatedByJavascript() && hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
-            clone.removeAttribute("checked");
-            clone.forceChecked_ = true;
+            clone.checkedState_ = false;
         }
         if (hasFeature(HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE)) {
             clone.setDefaultValue(getValueAttribute(), false);
@@ -346,6 +313,9 @@ public class HtmlRadioButtonInput extends HtmlInput {
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
         if ("value".equals(qualifiedName)) {
             setDefaultValue(attributeValue, false);
+        }
+        if ("checked".equals(qualifiedName)) {
+            checkedState_ = true;
         }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }

@@ -1211,6 +1211,132 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "2", "cb1", "rd1", "2", "cb2", "rd2" },
+            IE8 = { "exception", "exception" })
+    public void checkedChanged() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll(':checked');\n"
+            + "      alert(found.length);\n"
+            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "    } catch(e) {alert('exception')}\n"
+
+            + "    document.getElementById('cb1').checked = false;\n"
+            + "    document.getElementById('cb2').checked = true;\n"
+            + "    document.getElementById('rd1').checked = false;\n"
+            + "    document.getElementById('rd2').checked = true;\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll(':checked');\n"
+            + "      alert(found.length);\n"
+            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='checkbox' name='checkboxes' id='cb1' checked='checked' value='On' />\n"
+            + "  <input type='checkbox' name='checkboxes' id='cb2' value='Off' />\n"
+            + "  <input type='radio' name='radiobuttons' id='rd1' checked='checked' value='On' />\n"
+            + "  <input type='radio' name='radiobuttons' id='rd2' value='Off' />\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "2", "cb1", "rd1", "2", "cb1", "rd1" })
+    public void checkedAttribute() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll('[checked]');\n"
+            + "      alert(found.length);\n"
+            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "    } catch(e) {alert('exception')}\n"
+
+            + "    document.getElementById('cb1').checked = false;\n"
+            + "    document.getElementById('cb2').checked = true;\n"
+            + "    document.getElementById('rd1').checked = false;\n"
+            + "    document.getElementById('rd2').checked = true;\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll('[checked]');\n"
+            + "      alert(found.length);\n"
+            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='checkbox' name='checkboxes' id='cb1' checked='checked' value='On' />\n"
+            + "  <input type='checkbox' name='checkboxes' id='cb2' value='Off' />\n"
+            + "  <input type='radio' name='radiobuttons' id='rd1' checked='checked' value='On' />\n"
+            + "  <input type='radio' name='radiobuttons' id='rd2' value='Off' />\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "1-iy", "1-iy", "2", "1-iy", "1-iz"},
+            IE8 = { "1", "exception", "exception", "2", "exception", "exception" })
+    @NotYetImplemented(IE8)
+    public void selectedChecked() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      alert(document.getElementById('s1').selectedIndex);\n"
+            + "      var sel = document.querySelectorAll('[selected]');\n"
+            + "      alert(sel.length + '-' + sel[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "    try {\n"
+            + "      sel = document.querySelectorAll(':checked');\n"
+            + "      alert(sel.length + '-' + sel[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+
+            + "    document.getElementById('iz').selected = 'selected';\n"
+            + "    try {\n"
+            + "      alert(document.getElementById('s1').selectedIndex);\n"
+            + "      var sel = document.querySelectorAll('[selected]');\n"
+            + "      alert(sel.length + '-' + sel[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "    try {\n"
+            + "      sel = document.querySelectorAll(':checked');\n"
+            + "      alert(sel.length + '-' + sel[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='s1'>\n"
+            + "    <option id='ix' value='x'>x</option>\n"
+            + "    <option id='iy' value='y' selected>y</option> \n"
+            + "    <option id='iz' value='z'>z</option> \n"
+            + "  </select>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = { "2", "id1", "id3" },
             IE8 = "exception")
     public void enabled() throws Exception {
