@@ -331,7 +331,7 @@ public class HtmlForm extends HtmlElement {
         if (element instanceof HtmlInput) {
             final String type = element.getAttribute("type").toLowerCase(Locale.ROOT);
             if ("radio".equals(type) || "checkbox".equals(type)) {
-                return element.hasAttribute("checked");
+                return ((HtmlInput) element).isChecked();
             }
         }
         if ("select".equals(tagName)) {
@@ -598,12 +598,7 @@ public class HtmlForm extends HtmlElement {
         final List<HtmlRadioButtonInput> radios = getRadioButtonsByName(radioButtonInput.getNameAttribute());
 
         for (final HtmlRadioButtonInput input : radios) {
-            if (input == radioButtonInput) {
-                input.setAttribute("checked", "checked");
-            }
-            else {
-                input.removeAttribute("checked");
-            }
+            input.setCheckedInternal(input == radioButtonInput);
         }
     }
 
