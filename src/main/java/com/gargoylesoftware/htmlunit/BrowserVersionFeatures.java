@@ -617,6 +617,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLOPTION_PREVENT_DISABLED,
 
+    /** Removing the selected attribute, de selects the option. */
+    @BrowserFeature(@WebBrowser(FF))
+    HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
+
     /** Un-selecting an option in a (single-value) select causes the first option to become selected. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLOPTION_UNSELECT_SELECTS_FIRST,

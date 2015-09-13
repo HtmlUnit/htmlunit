@@ -503,17 +503,22 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     public void setAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "function doTest() {\n"
-            + "  document.getElementById('option1').setAttribute('class', 'bla bla');\n"
-            + "  var o = new Option('some text', 'some value');\n"
-            + "  o.setAttribute('class', 'myClass');\n"
-            + "}</script></head><body onload='doTest()'>\n"
-            + "<form name='form1'>\n"
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            + "    document.getElementById('option1').setAttribute('class', 'bla bla');\n"
+            + "    var o = new Option('some text', 'some value');\n"
+            + "    o.setAttribute('class', 'myClass');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='form1'>\n"
             + "    <select name='select1'>\n"
             + "        <option value='option1' id='option1' name='option1'>One</option>\n"
             + "    </select>\n"
-            + "</form>\n"
+            + "  </form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -1200,6 +1205,111 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "      <option value='option1' id='option1'>Option1</option>\n"
             + "      <option value='option2' id='option2' selected='selected'>Option2</option>\n"
             + "      <option value='option3' id='option3'>Option3</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false-null", "true-true", "true-null",
+                        "false-selected", "false-null", "true-true" },
+            FF = { "false-null", "true-true", "true-null",
+                    "false-selected", "false-null", "false-true" },
+            IE8 = { "false-", "true-selected", "true-selected",
+                    "false-", "false-", "true-selected" })
+    @NotYetImplemented({ FF, IE8 })
+    public void setSelectedAttribute() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var o1 = document.getElementById('option1');\n"
+            + "    alert(o1.selected + '-' + o1.getAttribute('selected'));\n"
+
+            + "    o1.setAttribute('selected', true);\n"
+            + "    alert(o1.selected + '-' + o1.getAttribute('selected'));\n"
+
+            + "    o1.removeAttribute('selected');\n"
+            + "    alert(o1.selected + '-' + o1.getAttribute('selected'));\n"
+
+            + "    var o2 = document.getElementById('option2');\n"
+            + "    alert(o2.selected + '-' + o2.getAttribute('selected'));\n"
+
+            + "    o2.removeAttribute('selected');\n"
+            + "    alert(o2.selected + '-' + o2.getAttribute('selected'));\n"
+
+            + "    o2.setAttribute('selected', true);\n"
+            + "    alert(o2.selected + '-' + o2.getAttribute('selected'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1'>\n"
+            + "      <option value='option1' id='option1'>Option1</option>\n"
+            + "      <option value='option2' id='option2' selected='selected'>Option2</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false-null", "true-true", "false-null",
+                        "false-null", "true-true", "false-null" },
+            CHROME  = { "false-null", "true-true", "true-null",
+                        "false-null", "true-true", "true-null" },
+            IE11 = { "false-null", "true-true", "true-",
+                    "false-null", "true-true", "false-null" },
+            IE8 = { "false-", "true-selected", "true-selected",
+                    "false-", "true-selected", "true-selected" })
+    @NotYetImplemented(IE)
+    public void createOption() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var o1 = document.createElement('option');\n"
+
+            + "    alert(o1.selected + '-' + o1.getAttribute('selected'));\n"
+
+            + "    o1.setAttribute('selected', true);\n"
+            + "    alert(o1.selected + '-' + o1.getAttribute('selected'));\n"
+
+            + "    o1.removeAttribute('selected');\n"
+            + "    alert(o1.selected + '-' + o1.getAttribute('selected'));\n"
+
+            + "    var s1 = document.getElementById('select1');\n"
+            + "    var o2 = document.createElement('option');\n"
+            + "    s1.appendChild(o2);\n"
+
+            + "    alert(o2.selected + '-' + o2.getAttribute('selected'));\n"
+
+            + "    o2.setAttribute('selected', true);\n"
+            + "    alert(o2.selected + '-' + o2.getAttribute('selected'));\n"
+
+            + "    o2.removeAttribute('selected');\n"
+            + "    alert(o2.selected + '-' + o2.getAttribute('selected'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1'>\n"
+            + "      <option value='option1' id='option1'>Option1</option>\n"
             + "    </select>\n"
             + "  </form>\n"
             + "</body></html>";
