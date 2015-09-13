@@ -16,9 +16,7 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -28,16 +26,17 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.ComparisonFailure;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
@@ -53,7 +52,6 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@Ignore
 @RunWith(BrowserRunner.class)
 public class JQuery1113Test extends WebDriverTestCase {
 
@@ -82,7 +80,13 @@ public class JQuery1113Test extends WebDriverTestCase {
         final long endTime = System.currentTimeMillis() + runTime;
 
         try {
+            // ignore IE8 for the moment
             final WebDriver webdriver = getWebDriver();
+            if (webdriver instanceof HtmlUnitDriver
+                    && ((HtmlUnitDriver) webdriver).getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_8) {
+                return;
+            }
+
             final String url = "http://localhost:" + PORT + "/jquery/test/index.html?dev&testNumber=" + testNumber;
             webdriver.get(url);
 
@@ -168,7 +172,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__jQuery_isReady() throws Exception {
         runTest("event: jQuery.isReady");
     }
@@ -179,7 +182,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void event__jQuery_ready() throws Exception {
         runTest("event: jQuery ready");
     }
@@ -190,7 +192,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void core__Unit_Testing_Environment() throws Exception {
         runTest("core: Unit Testing Environment");
     }
@@ -201,7 +202,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void core__Basic_requirements() throws Exception {
         runTest("core: Basic requirements");
     }
@@ -212,7 +212,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 28, 28")
-    @NotYetImplemented({ IE8, CHROME })
     public void core__jQuery__() throws Exception {
         runTest("core: jQuery()");
     }
@@ -223,7 +222,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_selector__context_() throws Exception {
         runTest("core: jQuery(selector, context)");
     }
@@ -234,7 +232,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 18, 18")
-    @NotYetImplemented(CHROME)
     public void core__selector_state() throws Exception {
         runTest("core: selector state");
     }
@@ -245,7 +242,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void core__globalEval() throws Exception {
         runTest("core: globalEval");
     }
@@ -256,7 +252,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void core__noConflict() throws Exception {
         runTest("core: noConflict");
     }
@@ -267,7 +262,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 13, 13")
-    @NotYetImplemented(CHROME)
     public void core__trim() throws Exception {
         runTest("core: trim");
     }
@@ -278,7 +272,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 28, 28")
-    @NotYetImplemented(CHROME)
     public void core__type() throws Exception {
         runTest("core: type");
     }
@@ -289,7 +282,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 16, 16")
-    @NotYetImplemented(CHROME)
     public void core__isPlainObject() throws Exception {
         runTest("core: isPlainObject");
     }
@@ -300,7 +292,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 19, 19")
-    @NotYetImplemented(CHROME)
     public void core__isFunction() throws Exception {
         runTest("core: isFunction");
     }
@@ -311,7 +302,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 38, 38")
-    @NotYetImplemented(CHROME)
     public void core__isNumeric() throws Exception {
         runTest("core: isNumeric");
     }
@@ -322,7 +312,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented({ IE8, CHROME })
     public void core__isXMLDoc___HTML() throws Exception {
         runTest("core: isXMLDoc - HTML");
     }
@@ -333,7 +322,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void core__XSS_via_location_hash() throws Exception {
         runTest("core: XSS via location.hash");
     }
@@ -344,7 +332,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
     public void core__isXMLDoc___XML() throws Exception {
         runTest("core: isXMLDoc - XML");
     }
@@ -355,7 +342,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 14, 14")
-    @NotYetImplemented(CHROME)
     public void core__isWindow() throws Exception {
         runTest("core: isWindow");
     }
@@ -366,7 +352,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 18, 18")
-    @NotYetImplemented(CHROME)
     public void core__jQuery__html__() throws Exception {
         runTest("core: jQuery('html')");
     }
@@ -377,7 +362,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void core__jQuery__massive_html__7990__() throws Exception {
         runTest("core: jQuery('massive html #7990')");
     }
@@ -388,7 +372,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void core__jQuery__html___context_() throws Exception {
         runTest("core: jQuery('html', context)");
     }
@@ -399,7 +382,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_selector__xml__text_str____loaded_via_xml_document() throws Exception {
         runTest("core: jQuery(selector, xml).text(str) - loaded via xml document");
     }
@@ -410,7 +392,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void core__end__() throws Exception {
         runTest("core: end()");
     }
@@ -421,7 +402,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void core__length() throws Exception {
         runTest("core: length");
     }
@@ -432,7 +412,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void core__get__() throws Exception {
         runTest("core: get()");
     }
@@ -443,7 +422,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void core__toArray__() throws Exception {
         runTest("core: toArray()");
     }
@@ -454,7 +432,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 19, 19")
-    @NotYetImplemented(CHROME)
     public void core__inArray__() throws Exception {
         runTest("core: inArray()");
     }
@@ -465,7 +442,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void core__get_Number_() throws Exception {
         runTest("core: get(Number)");
     }
@@ -476,7 +452,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void core__get__Number_() throws Exception {
         runTest("core: get(-Number)");
     }
@@ -487,7 +462,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void core__each_Function_() throws Exception {
         runTest("core: each(Function)");
     }
@@ -498,7 +472,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void core__slice__() throws Exception {
         runTest("core: slice()");
     }
@@ -509,7 +482,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void core__first___last__() throws Exception {
         runTest("core: first()/last()");
     }
@@ -520,7 +492,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void core__map__() throws Exception {
         runTest("core: map()");
     }
@@ -531,7 +502,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 25, 25")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_map() throws Exception {
         runTest("core: jQuery.map");
     }
@@ -542,7 +512,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_merge__() throws Exception {
         runTest("core: jQuery.merge()");
     }
@@ -553,7 +522,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_grep__() throws Exception {
         runTest("core: jQuery.grep()");
     }
@@ -564,7 +532,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 28, 28")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_extend_Object__Object_() throws Exception {
         runTest("core: jQuery.extend(Object, Object)");
     }
@@ -575,7 +542,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 23, 23")
-    @NotYetImplemented({ IE8, CHROME })
     public void core__jQuery_each_Object_Function_() throws Exception {
         runTest("core: jQuery.each(Object,Function)");
     }
@@ -586,7 +552,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void core__JIT_compilation_does_not_interfere_with_length_retrieval__gh_2145_() throws Exception {
         runTest("core: JIT compilation does not interfere with length retrieval (gh-2145)");
     }
@@ -597,7 +562,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 15, 15")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_makeArray() throws Exception {
         runTest("core: jQuery.makeArray");
     }
@@ -608,7 +572,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_inArray() throws Exception {
         runTest("core: jQuery.inArray");
     }
@@ -619,7 +582,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_isEmptyObject() throws Exception {
         runTest("core: jQuery.isEmptyObject");
     }
@@ -630,7 +592,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_proxy() throws Exception {
         runTest("core: jQuery.proxy");
     }
@@ -641,7 +602,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 17, 17")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_parseHTML() throws Exception {
         runTest("core: jQuery.parseHTML");
     }
@@ -652,7 +612,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 20, 20")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_parseJSON() throws Exception {
         runTest("core: jQuery.parseJSON");
     }
@@ -674,7 +633,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_camelCase__() throws Exception {
         runTest("core: jQuery.camelCase()");
     }
@@ -685,7 +643,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void core__Conditional_compilation_compatibility___13274_() throws Exception {
         runTest("core: Conditional compilation compatibility (#13274)");
     }
@@ -696,7 +653,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void core__document_ready_when_jQuery_loaded_asynchronously___13655_() throws Exception {
         runTest("core: document ready when jQuery loaded asynchronously (#13655)");
     }
@@ -707,7 +664,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void core__Tolerating_alias_masked_DOM_properties___14074_() throws Exception {
         runTest("core: Tolerating alias-masked DOM properties (#14074)");
     }
@@ -718,7 +674,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void core__Don_t_call_window_onready___14802_() throws Exception {
         runTest("core: Don't call window.onready (#14802)");
     }
@@ -729,7 +684,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_________no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( '' ) - no filter");
     }
@@ -740,7 +694,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks__________no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { } ) - no filter");
     }
@@ -751,7 +704,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented({ IE11, CHROME })
     public void callbacks__jQuery_Callbacks_________filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( '' ) - filter");
     }
@@ -762,7 +714,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks__________filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { } ) - filter");
     }
@@ -773,7 +724,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___once______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once' ) - no filter");
     }
@@ -784,7 +734,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____once___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true } ) - no filter");
     }
@@ -795,7 +744,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___once______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once' ) - filter");
     }
@@ -806,7 +754,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____once___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true } ) - filter");
     }
@@ -817,7 +764,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___memory______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory' ) - no filter");
     }
@@ -828,7 +774,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____memory___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true } ) - no filter");
     }
@@ -839,7 +784,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___memory______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory' ) - filter");
     }
@@ -850,7 +794,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____memory___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true } ) - filter");
     }
@@ -861,7 +804,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___unique______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'unique' ) - no filter");
     }
@@ -872,7 +814,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'unique': true } ) - no filter");
     }
@@ -883,7 +824,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___unique______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'unique' ) - filter");
     }
@@ -894,7 +834,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____unique___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'unique': true } ) - filter");
     }
@@ -905,7 +844,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___stopOnFalse______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'stopOnFalse' ) - no filter");
     }
@@ -916,7 +854,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - no filter");
     }
@@ -927,7 +864,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'stopOnFalse' ) - filter");
     }
@@ -938,7 +874,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - filter");
     }
@@ -949,7 +884,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___once_memory______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once memory' ) - no filter");
     }
@@ -960,7 +894,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____once___true___memory___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - no filter");
     }
@@ -971,7 +904,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___once_memory______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once memory' ) - filter");
     }
@@ -982,7 +914,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____once___true___memory___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - filter");
     }
@@ -993,7 +924,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___once_unique______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once unique' ) - no filter");
     }
@@ -1004,7 +934,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____once___true___unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - no filter");
     }
@@ -1015,7 +944,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___once_unique______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once unique' ) - filter");
     }
@@ -1026,7 +954,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____once___true___unique___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - filter");
     }
@@ -1037,7 +964,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___once_stopOnFalse______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - no filter");
     }
@@ -1048,7 +974,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - no filter");
     }
@@ -1059,7 +984,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___once_stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - filter");
     }
@@ -1070,7 +994,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - filter");
     }
@@ -1081,7 +1004,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___memory_unique______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory unique' ) - no filter");
     }
@@ -1092,7 +1014,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - no filter");
     }
@@ -1103,7 +1024,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___memory_unique______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory unique' ) - filter");
     }
@@ -1114,7 +1034,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - filter");
     }
@@ -1125,7 +1044,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___memory_stopOnFalse______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - no filter");
     }
@@ -1136,7 +1054,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____memory___true___stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - no filter");
     }
@@ -1147,7 +1064,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___memory_stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - filter");
     }
@@ -1158,7 +1074,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented({ IE8, CHROME })
     public void callbacks__jQuery_Callbacks_____memory___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - filter");
     }
@@ -1169,7 +1084,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks___unique_stopOnFalse______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - no filter");
     }
@@ -1180,7 +1094,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____unique___true___stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - no filter");
     }
@@ -1191,7 +1104,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented({ IE8, CHROME })
     public void callbacks__jQuery_Callbacks___unique_stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - filter");
     }
@@ -1202,7 +1114,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____unique___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - filter");
     }
@@ -1213,7 +1124,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks__options_____options_are_copied() throws Exception {
         runTest("callbacks: jQuery.Callbacks( options ) - options are copied");
     }
@@ -1224,7 +1134,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_fireWith___arguments_are_copied() throws Exception {
         runTest("callbacks: jQuery.Callbacks.fireWith - arguments are copied");
     }
@@ -1235,7 +1144,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_remove___should_remove_all_instances() throws Exception {
         runTest("callbacks: jQuery.Callbacks.remove - should remove all instances");
     }
@@ -1246,7 +1154,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 13, 13")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_has() throws Exception {
         runTest("callbacks: jQuery.Callbacks.has");
     }
@@ -1257,7 +1164,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void callbacks__jQuery_Callbacks_____adding_a_string_doesn_t_cause_a_stack_overflow() throws Exception {
         runTest("callbacks: jQuery.Callbacks() - adding a string doesn't cause a stack overflow");
     }
@@ -1268,7 +1174,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 23, 23")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred() throws Exception {
         runTest("deferred: jQuery.Deferred");
     }
@@ -1279,7 +1184,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 23, 23")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred___new_operator() throws Exception {
         runTest("deferred: jQuery.Deferred - new operator");
     }
@@ -1290,7 +1194,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred___chainability() throws Exception {
         runTest("deferred: jQuery.Deferred - chainability");
     }
@@ -1301,7 +1204,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___filtering__done_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (done)");
     }
@@ -1312,7 +1214,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___filtering__fail_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (fail)");
     }
@@ -1323,7 +1224,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___filtering__progress_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (progress)");
     }
@@ -1334,7 +1234,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___deferred__done_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - deferred (done)");
     }
@@ -1345,7 +1244,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___deferred__fail_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - deferred (fail)");
     }
@@ -1356,7 +1254,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___deferred__progress_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - deferred (progress)");
     }
@@ -1367,7 +1264,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___context() throws Exception {
         runTest("deferred: jQuery.Deferred.then - context");
     }
@@ -1378,7 +1274,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 37, 37")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_when() throws Exception {
         runTest("deferred: jQuery.when");
     }
@@ -1389,7 +1284,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 119, 119")
-    @NotYetImplemented({ IE8, CHROME })
     public void deferred__jQuery_when___joined() throws Exception {
         runTest("deferred: jQuery.when - joined");
     }
@@ -1400,7 +1294,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void support__zoom_of_doom___13089_() throws Exception {
         runTest("support: zoom of doom (#13089)");
     }
@@ -1411,7 +1304,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void support__body_background_is_not_lost_if_set_prior_to_loading_jQuery___9239_() throws Exception {
         runTest("support: body background is not lost if set prior to loading jQuery (#9239)");
     }
@@ -1422,7 +1314,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void support__A_background_on_the_testElement_does_not_cause_IE8_to_crash___9823_() throws Exception {
         runTest("support: A background on the testElement does not cause IE8 to crash (#9823)");
     }
@@ -1433,7 +1324,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void support__box_sizing_does_not_affect_jQuery_support_shrinkWrapBlocks() throws Exception {
         runTest("support: box-sizing does not affect jQuery.support.shrinkWrapBlocks");
     }
@@ -1448,7 +1338,6 @@ public class JQuery1113Test extends WebDriverTestCase {
         FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
         IE8 = "1, 1, 2")
-    @NotYetImplemented({ CHROME, IE11 })
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
     }
@@ -1459,7 +1348,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 34, 34")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void support__Verify_that_the_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that the support tests resolve as expected per browser");
     }
@@ -1470,7 +1359,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void data__expando() throws Exception {
         runTest("data: expando");
     }
@@ -1481,7 +1369,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 25, 25")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_data_div_() throws Exception {
         runTest("data: jQuery.data(div)");
     }
@@ -1492,7 +1379,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 25, 25")
-    @NotYetImplemented({ IE8, CHROME })
     public void data__jQuery_data____() throws Exception {
         runTest("data: jQuery.data({})");
     }
@@ -1503,7 +1389,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 25, 25")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_data_window_() throws Exception {
         runTest("data: jQuery.data(window)");
     }
@@ -1514,7 +1399,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 25, 25")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_data_document_() throws Exception {
         runTest("data: jQuery.data(document)");
     }
@@ -1525,7 +1409,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void data__Expando_cleanup() throws Exception {
         runTest("data: Expando cleanup");
     }
@@ -1536,7 +1419,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void data__Data_is_not_being_set_on_comment_and_text_nodes() throws Exception {
         runTest("data: Data is not being set on comment and text nodes");
     }
@@ -1547,7 +1429,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_acceptData() throws Exception {
         runTest("data: jQuery.acceptData");
     }
@@ -1558,7 +1439,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void data__jQuery___data_______undefined___14101_() throws Exception {
         runTest("data: jQuery().data() === undefined (#14101)");
     }
@@ -1569,7 +1449,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void data___data__() throws Exception {
         runTest("data: .data()");
     }
@@ -1580,7 +1459,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 18, 18")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_Element__data_String__Object__data_String_() throws Exception {
         runTest("data: jQuery(Element).data(String, Object).data(String)");
     }
@@ -1591,7 +1469,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 16, 16")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_plain_Object__data_String__Object__data_String_() throws Exception {
         runTest("data: jQuery(plain Object).data(String, Object).data(String)");
     }
@@ -1602,7 +1479,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 43, 43")
-    @NotYetImplemented(CHROME)
     public void data__data___attributes() throws Exception {
         runTest("data: data-* attributes");
     }
@@ -1613,7 +1489,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void data___data_Object_() throws Exception {
         runTest("data: .data(Object)");
     }
@@ -1624,7 +1499,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_removeData() throws Exception {
         runTest("data: jQuery.removeData");
     }
@@ -1635,7 +1509,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void data___removeData__() throws Exception {
         runTest("data: .removeData()");
     }
@@ -1646,7 +1519,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void data__JSON_serialization___8108_() throws Exception {
         runTest("data: JSON serialization (#8108)");
     }
@@ -1657,7 +1529,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_data_should_follow_html5_specification_regarding_camel_casing() throws Exception {
         runTest("data: jQuery.data should follow html5 specification regarding camel casing");
     }
@@ -1668,7 +1539,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_data_should_not_miss_data_with_preset_hyphenated_property_names() throws Exception {
         runTest("data: jQuery.data should not miss data with preset hyphenated property names");
     }
@@ -1679,7 +1549,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented(IE8)
     public void data__jQuery_data_supports_interoperable_hyphenated_camelCase_get_set_of_properties_with_arbitrary_non_null_NaN_undefined_values() throws Exception {
         runTest("data: jQuery.data supports interoperable hyphenated/camelCase get/set of properties with arbitrary non-null|NaN|undefined values");
     }
@@ -1690,7 +1559,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 27, 27")
-    @NotYetImplemented(CHROME)
     public void data__jQuery_data_supports_interoperable_removal_of_hyphenated_camelCase_properties() throws Exception {
         runTest("data: jQuery.data supports interoperable removal of hyphenated/camelCase properties");
     }
@@ -1701,7 +1569,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void data___removeData_supports_removal_of_hyphenated_properties_via_array___12786_() throws Exception {
         runTest("data: .removeData supports removal of hyphenated properties via array (#12786)");
     }
@@ -1712,7 +1579,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void data__Triggering_the_removeData_should_not_throw_exceptions____10080_() throws Exception {
         runTest("data: Triggering the removeData should not throw exceptions. (#10080)");
     }
@@ -1723,7 +1589,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void data__Only_check_element_attributes_once_when_calling__data______8909() throws Exception {
         runTest("data: Only check element attributes once when calling .data() - #8909");
     }
@@ -1734,7 +1599,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void data__JSON_data__attributes_can_have_newlines() throws Exception {
         runTest("data: JSON data- attributes can have newlines");
     }
@@ -1745,7 +1609,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void data__enumerate_data_attrs_on_body___14894_() throws Exception {
         runTest("data: enumerate data attrs on body (#14894)");
     }
@@ -1756,7 +1619,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 14, 14")
-    @NotYetImplemented(CHROME)
     public void queue__queue___with_other_types() throws Exception {
         runTest("queue: queue() with other types");
     }
@@ -1767,7 +1629,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void queue__queue_name__passes_in_the_next_item_in_the_queue_as_a_parameter() throws Exception {
         runTest("queue: queue(name) passes in the next item in the queue as a parameter");
     }
@@ -1778,7 +1639,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void queue__queue___passes_in_the_next_item_in_the_queue_as_a_parameter_to_fx_queues() throws Exception {
         runTest("queue: queue() passes in the next item in the queue as a parameter to fx queues");
     }
@@ -1789,7 +1649,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void queue__callbacks_keep_their_place_in_the_queue() throws Exception {
         runTest("queue: callbacks keep their place in the queue");
     }
@@ -1800,7 +1659,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void queue__delay__() throws Exception {
         runTest("queue: delay()");
     }
@@ -1811,7 +1669,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void queue__clearQueue_name__clears_the_queue() throws Exception {
         runTest("queue: clearQueue(name) clears the queue");
     }
@@ -1822,7 +1679,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void queue__clearQueue___clears_the_fx_queue() throws Exception {
         runTest("queue: clearQueue() clears the fx queue");
     }
@@ -1833,7 +1689,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void queue__fn_promise_____called_when_fx_queue_is_empty() throws Exception {
         runTest("queue: fn.promise() - called when fx queue is empty");
     }
@@ -1844,7 +1699,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented({ IE8, CHROME })
     public void queue__fn_promise___queue______called_whenever_last_queue_function_is_dequeued() throws Exception {
         runTest("queue: fn.promise( \"queue\" ) - called whenever last queue function is dequeued");
     }
@@ -1855,7 +1709,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void queue__fn_promise___queue______waits_for_animation_to_complete_before_resolving() throws Exception {
         runTest("queue: fn.promise( \"queue\" ) - waits for animation to complete before resolving");
     }
@@ -1866,7 +1719,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void queue___promise_obj_() throws Exception {
         runTest("queue: .promise(obj)");
     }
@@ -1877,7 +1729,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void queue__delay___can_be_stopped() throws Exception {
         runTest("queue: delay() can be stopped");
     }
@@ -1888,7 +1739,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void queue__queue_stop_hooks() throws Exception {
         runTest("queue: queue stop hooks");
     }
@@ -1899,7 +1749,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void attributes__jQuery_propFix_integrity_test() throws Exception {
         runTest("attributes: jQuery.propFix integrity test");
     }
@@ -1910,7 +1759,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 50, 50")
-    @NotYetImplemented({ IE8, CHROME })
     public void attributes__attr_String_() throws Exception {
         runTest("attributes: attr(String)");
     }
@@ -1921,7 +1769,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void attributes__attr_String__on_cloned_elements___9646() throws Exception {
         runTest("attributes: attr(String) on cloned elements, #9646");
     }
@@ -1932,7 +1779,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void attributes__attr_String__in_XML_Files() throws Exception {
         runTest("attributes: attr(String) in XML Files");
     }
@@ -1943,7 +1789,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void attributes__attr_String__Function_() throws Exception {
         runTest("attributes: attr(String, Function)");
     }
@@ -1954,7 +1799,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void attributes__attr_Hash_() throws Exception {
         runTest("attributes: attr(Hash)");
     }
@@ -1965,7 +1809,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 71, 71")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void attributes__attr_String__Object_() throws Exception {
         runTest("attributes: attr(String, Object)");
     }
@@ -1976,7 +1820,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void attributes__attr___extending_the_boolean_attrHandle() throws Exception {
         runTest("attributes: attr - extending the boolean attrHandle");
     }
@@ -1987,7 +1830,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void attributes__attr_String__Object____Loaded_via_XML_document() throws Exception {
         runTest("attributes: attr(String, Object) - Loaded via XML document");
     }
@@ -1998,7 +1840,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void attributes__attr_String__Object____Loaded_via_XML_fragment() throws Exception {
         runTest("attributes: attr(String, Object) - Loaded via XML fragment");
     }
@@ -2009,7 +1850,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void attributes__attr__tabindex__() throws Exception {
         runTest("attributes: attr('tabindex')");
     }
@@ -2020,7 +1860,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void attributes__attr__tabindex___value_() throws Exception {
         runTest("attributes: attr('tabindex', value)");
     }
@@ -2031,7 +1870,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented({ IE8, CHROME })
     public void attributes__removeAttr_String_() throws Exception {
         runTest("attributes: removeAttr(String)");
     }
@@ -2042,7 +1880,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented({ IE8, CHROME })
     public void attributes__removeAttr_String__in_XML() throws Exception {
         runTest("attributes: removeAttr(String) in XML");
     }
@@ -2053,7 +1890,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void attributes__removeAttr_Multi_String__variable_space_width_() throws Exception {
         runTest("attributes: removeAttr(Multi String, variable space width)");
     }
@@ -2064,7 +1900,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 17, 17")
-    @NotYetImplemented(CHROME)
     public void attributes__prop_String__Object_() throws Exception {
         runTest("attributes: prop(String, Object)");
     }
@@ -2075,7 +1910,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 14, 14")
-    @NotYetImplemented(CHROME)
     public void attributes__prop_String__Object__on_null_undefined() throws Exception {
         runTest("attributes: prop(String, Object) on null/undefined");
     }
@@ -2086,7 +1920,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 11, 11")
-    @NotYetImplemented(CHROME)
     public void attributes__prop__tabindex__() throws Exception {
         runTest("attributes: prop('tabindex')");
     }
@@ -2097,7 +1930,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void attributes__prop__tabindex___value_() throws Exception {
         runTest("attributes: prop('tabindex', value)");
     }
@@ -2108,7 +1940,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void attributes__removeProp_String_() throws Exception {
         runTest("attributes: removeProp(String)");
     }
@@ -2119,7 +1950,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void attributes__val___after_modification() throws Exception {
         runTest("attributes: val() after modification");
     }
@@ -2130,7 +1960,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 26, 26")
-    @NotYetImplemented(CHROME)
     public void attributes__val__() throws Exception {
         runTest("attributes: val()");
     }
@@ -2141,7 +1970,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void attributes__val___with_non_matching_values_on_dropdown_list() throws Exception {
         runTest("attributes: val() with non-matching values on dropdown list");
     }
@@ -2154,7 +1982,6 @@ public class JQuery1113Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 4, 4",
         FF31 = "0, 4, 4",
         FF38 = "0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -2165,7 +1992,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void attributes__val_String_Number_() throws Exception {
         runTest("attributes: val(String/Number)");
     }
@@ -2176,7 +2002,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void attributes__val_Function_() throws Exception {
         runTest("attributes: val(Function)");
     }
@@ -2187,7 +2012,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void attributes__val_Array_of_Numbers___Bug__7123_() throws Exception {
         runTest("attributes: val(Array of Numbers) (Bug #7123)");
     }
@@ -2198,7 +2022,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void attributes__val_Function__with_incoming_value() throws Exception {
         runTest("attributes: val(Function) with incoming value");
     }
@@ -2209,7 +2032,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void attributes__val_select__after_form_reset____Bug__2551_() throws Exception {
         runTest("attributes: val(select) after form.reset() (Bug #2551)");
     }
@@ -2220,7 +2042,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void attributes__addClass_String_() throws Exception {
         runTest("attributes: addClass(String)");
     }
@@ -2231,7 +2052,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void attributes__addClass_Function_() throws Exception {
         runTest("attributes: addClass(Function)");
     }
@@ -2242,7 +2062,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 52, 52")
-    @NotYetImplemented(CHROME)
     public void attributes__addClass_Function__with_incoming_value() throws Exception {
         runTest("attributes: addClass(Function) with incoming value");
     }
@@ -2253,7 +2072,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void attributes__removeClass_String____simple() throws Exception {
         runTest("attributes: removeClass(String) - simple");
     }
@@ -2264,7 +2082,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void attributes__removeClass_Function____simple() throws Exception {
         runTest("attributes: removeClass(Function) - simple");
     }
@@ -2275,7 +2092,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 52, 52")
-    @NotYetImplemented(CHROME)
     public void attributes__removeClass_Function__with_incoming_value() throws Exception {
         runTest("attributes: removeClass(Function) with incoming value");
     }
@@ -2286,7 +2102,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void attributes__removeClass___removes_duplicates() throws Exception {
         runTest("attributes: removeClass() removes duplicates");
     }
@@ -2297,7 +2112,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void attributes__removeClass_undefined__is_a_no_op() throws Exception {
         runTest("attributes: removeClass(undefined) is a no-op");
     }
@@ -2308,7 +2122,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 17, 17")
-    @NotYetImplemented(CHROME)
     public void attributes__toggleClass_String_boolean_undefined___boolean__() throws Exception {
         runTest("attributes: toggleClass(String|boolean|undefined[, boolean])");
     }
@@ -2319,7 +2132,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 17, 17")
-    @NotYetImplemented(CHROME)
     public void attributes__toggleClass_Function___boolean__() throws Exception {
         runTest("attributes: toggleClass(Function[, boolean])");
     }
@@ -2330,7 +2142,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 14, 14")
-    @NotYetImplemented(CHROME)
     public void attributes__toggleClass_Function___boolean___with_incoming_value() throws Exception {
         runTest("attributes: toggleClass(Function[, boolean]) with incoming value");
     }
@@ -2341,7 +2152,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 17, 17")
-    @NotYetImplemented(CHROME)
     public void attributes__addClass__removeClass__hasClass() throws Exception {
         runTest("attributes: addClass, removeClass, hasClass");
     }
@@ -2352,7 +2162,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 19, 19")
-    @NotYetImplemented(CHROME)
     public void attributes__addClass__removeClass__hasClass_on_many_elements() throws Exception {
         runTest("attributes: addClass, removeClass, hasClass on many elements");
     }
@@ -2363,7 +2172,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void attributes__contents___hasClass___returns_correct_values() throws Exception {
         runTest("attributes: contents().hasClass() returns correct values");
     }
@@ -2374,7 +2182,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void attributes__hasClass_correctly_interprets_non_space_separators___13835_() throws Exception {
         runTest("attributes: hasClass correctly interprets non-space separators (#13835)");
     }
@@ -2385,7 +2192,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void attributes__coords_returns_correct_values_in_IE6_IE7__see__10828() throws Exception {
         runTest("attributes: coords returns correct values in IE6/IE7, see #10828");
     }
@@ -2396,7 +2202,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void attributes__should_not_throw_at___option__val_____14686_() throws Exception {
         runTest("attributes: should not throw at $(option).val() (#14686)");
     }
@@ -2407,7 +2212,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void attributes__Insignificant_white_space_returned_for___option__val_____14858_() throws Exception {
         runTest("attributes: Insignificant white space returned for $(option).val() (#14858)");
     }
@@ -2418,7 +2222,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__null_or_undefined_handler() throws Exception {
         runTest("event: null or undefined handler");
     }
@@ -2429,7 +2232,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__on___with_non_null_defined_data() throws Exception {
         runTest("event: on() with non-null,defined data");
     }
@@ -2440,7 +2242,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE8, CHROME })
     public void event__Handler_changes_and__trigger___order() throws Exception {
         runTest("event: Handler changes and .trigger() order");
     }
@@ -2451,7 +2252,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void event__on____with_data() throws Exception {
         runTest("event: on(), with data");
     }
@@ -2462,7 +2262,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void event__click____with_data() throws Exception {
         runTest("event: click(), with data");
     }
@@ -2473,7 +2272,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void event__on____with_data__trigger_with_data() throws Exception {
         runTest("event: on(), with data, trigger with data");
     }
@@ -2484,7 +2282,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__on____multiple_events_at_once() throws Exception {
         runTest("event: on(), multiple events at once");
     }
@@ -2495,7 +2292,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__on____five_events_at_once() throws Exception {
         runTest("event: on(), five events at once");
     }
@@ -2506,7 +2302,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void event__on____multiple_events_at_once_and_namespaces() throws Exception {
         runTest("event: on(), multiple events at once and namespaces");
     }
@@ -2517,7 +2312,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 27, 27")
-    @NotYetImplemented(CHROME)
     public void event__on____namespace_with_special_add() throws Exception {
         runTest("event: on(), namespace with special add");
     }
@@ -2528,7 +2322,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__on____no_data() throws Exception {
         runTest("event: on(), no data");
     }
@@ -2539,7 +2332,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void event__on_one_off_Object_() throws Exception {
         runTest("event: on/one/off(Object)");
     }
@@ -2550,7 +2342,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void event__on_off_Object___on_off_Object__String_() throws Exception {
         runTest("event: on/off(Object), on/off(Object, String)");
     }
@@ -2561,7 +2352,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__on_immediate_propagation() throws Exception {
         runTest("event: on immediate propagation");
     }
@@ -2583,7 +2373,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__on____iframes() throws Exception {
         runTest("event: on(), iframes");
     }
@@ -2594,7 +2383,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void event__on____trigger_change_on_select() throws Exception {
         runTest("event: on(), trigger change on select");
     }
@@ -2605,7 +2393,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 18, 18")
-    @NotYetImplemented(CHROME)
     public void event__on____namespaced_events__cloned_events() throws Exception {
         runTest("event: on(), namespaced events, cloned events");
     }
@@ -2616,7 +2403,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void event__on____multi_namespaced_events() throws Exception {
         runTest("event: on(), multi-namespaced events");
     }
@@ -2627,7 +2413,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void event__namespace_only_event_binding_is_a_no_op() throws Exception {
         runTest("event: namespace-only event binding is a no-op");
     }
@@ -2638,7 +2423,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__on____with_same_function() throws Exception {
         runTest("event: on(), with same function");
     }
@@ -2649,7 +2433,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__on____make_sure_order_is_maintained() throws Exception {
         runTest("event: on(), make sure order is maintained");
     }
@@ -2660,7 +2443,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented({ IE8, CHROME })
     public void event__on____with_different_this_object() throws Exception {
         runTest("event: on(), with different this object");
     }
@@ -2671,7 +2453,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void event__on_name__false___off_name__false_() throws Exception {
         runTest("event: on(name, false), off(name, false)");
     }
@@ -2682,7 +2463,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void event__on_name__selector__false___off_name__selector__false_() throws Exception {
         runTest("event: on(name, selector, false), off(name, selector, false)");
     }
@@ -2693,7 +2473,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void event__on___trigger___off___on_plain_object() throws Exception {
         runTest("event: on()/trigger()/off() on plain object");
     }
@@ -2704,7 +2483,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__off_type_() throws Exception {
         runTest("event: off(type)");
     }
@@ -2715,7 +2493,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void event__off_eventObject_() throws Exception {
         runTest("event: off(eventObject)");
     }
@@ -2726,7 +2503,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__hover___mouseenter_mouseleave() throws Exception {
         runTest("event: hover() mouseenter mouseleave");
     }
@@ -2737,7 +2513,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__mouseover_triggers_mouseenter() throws Exception {
         runTest("event: mouseover triggers mouseenter");
     }
@@ -2748,7 +2523,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__pointerover_triggers_pointerenter() throws Exception {
         runTest("event: pointerover triggers pointerenter");
     }
@@ -2759,7 +2533,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__withinElement_implemented_with_jQuery_contains__() throws Exception {
         runTest("event: withinElement implemented with jQuery.contains()");
     }
@@ -2770,7 +2543,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__mouseenter__mouseleave_don_t_catch_exceptions() throws Exception {
         runTest("event: mouseenter, mouseleave don't catch exceptions");
     }
@@ -2781,7 +2553,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void event__trigger___shortcuts() throws Exception {
         runTest("event: trigger() shortcuts");
     }
@@ -2792,7 +2563,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 18, 18")
-    @NotYetImplemented(CHROME)
     public void event__trigger___bubbling() throws Exception {
         runTest("event: trigger() bubbling");
     }
@@ -2803,7 +2573,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 16, 16")
-    @NotYetImplemented(CHROME)
     public void event__trigger_type___data____fn__() throws Exception {
         runTest("event: trigger(type, [data], [fn])");
     }
@@ -2814,7 +2583,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
     public void event__submit_event_bubbles_on_copied_forms___11649_() throws Exception {
         runTest("event: submit event bubbles on copied forms (#11649)");
     }
@@ -2825,7 +2593,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
     public void event__change_event_bubbles_on_copied_forms___11796_() throws Exception {
         runTest("event: change event bubbles on copied forms (#11796)");
     }
@@ -2836,7 +2603,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 28, 28")
-    @NotYetImplemented(CHROME)
     public void event__trigger_eventObject___data____fn__() throws Exception {
         runTest("event: trigger(eventObject, [data], [fn])");
     }
@@ -2847,7 +2613,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event___trigger___bubbling_on_disconnected_elements___10489_() throws Exception {
         runTest("event: .trigger() bubbling on disconnected elements (#10489)");
     }
@@ -2858,7 +2623,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event___trigger___doesn_t_bubble_load_event___10717_() throws Exception {
         runTest("event: .trigger() doesn't bubble load event (#10717)");
     }
@@ -2869,7 +2633,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__Delegated_events_in_SVG___10791___13180_() throws Exception {
         runTest("event: Delegated events in SVG (#10791; #13180)");
     }
@@ -2880,7 +2643,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void event__Delegated_events_in_forms___10844___11145___8165___11382___11764_() throws Exception {
         runTest("event: Delegated events in forms (#10844; #11145; #8165; #11382, #11764)");
     }
@@ -2902,7 +2664,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void event__on_beforeunload_() throws Exception {
         runTest("event: on(beforeunload)");
     }
@@ -2913,7 +2675,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void event__jQuery_Event__type__props__() throws Exception {
         runTest("event: jQuery.Event( type, props )");
     }
@@ -2924,7 +2685,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented({ IE8, CHROME })
     public void event__jQuery_Event_properties() throws Exception {
         runTest("event: jQuery.Event properties");
     }
@@ -2935,7 +2695,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 65, 65")
-    @NotYetImplemented(CHROME)
     public void event___on____off__() throws Exception {
         runTest("event: .on()/.off()");
     }
@@ -2946,7 +2705,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__jQuery_off_using_dispatched_jQuery_Event() throws Exception {
         runTest("event: jQuery.off using dispatched jQuery.Event");
     }
@@ -2957,7 +2715,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void event__delegated_event_with_delegateTarget_relative_selector() throws Exception {
         runTest("event: delegated event with delegateTarget-relative selector");
     }
@@ -2968,7 +2725,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__delegated_event_with_selector_matching_Object_prototype_property___13203_() throws Exception {
         runTest("event: delegated event with selector matching Object.prototype property (#13203)");
     }
@@ -2979,7 +2735,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__delegated_event_with_intermediate_DOM_manipulation___13208_() throws Exception {
         runTest("event: delegated event with intermediate DOM manipulation (#13208)");
     }
@@ -2990,7 +2745,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__stopPropagation___stops_directly_bound_events_on_delegated_target() throws Exception {
         runTest("event: stopPropagation() stops directly-bound events on delegated target");
     }
@@ -3001,7 +2755,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__off_all_bound_delegated_events() throws Exception {
         runTest("event: off all bound delegated events");
     }
@@ -3012,7 +2765,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__on_with_multiple_delegated_events() throws Exception {
         runTest("event: on with multiple delegated events");
     }
@@ -3023,7 +2775,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void event__delegated_on_with_change() throws Exception {
         runTest("event: delegated on with change");
     }
@@ -3034,7 +2785,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__delegated_on_with_submit() throws Exception {
         runTest("event: delegated on with submit");
     }
@@ -3045,7 +2795,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__delegated_off___with_only_namespaces() throws Exception {
         runTest("event: delegated off() with only namespaces");
     }
@@ -3056,7 +2805,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__Non_DOM_element_events() throws Exception {
         runTest("event: Non DOM element events");
     }
@@ -3067,7 +2815,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__inline_handler_returning_false_stops_default() throws Exception {
         runTest("event: inline handler returning false stops default");
     }
@@ -3078,7 +2825,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__window_resize() throws Exception {
         runTest("event: window resize");
     }
@@ -3089,7 +2835,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__focusin_bubbles() throws Exception {
         runTest("event: focusin bubbles");
     }
@@ -3100,7 +2845,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__custom_events_with_colons___3533___8272_() throws Exception {
         runTest("event: custom events with colons (#3533, #8272)");
     }
@@ -3111,7 +2855,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void event___on_and__off() throws Exception {
         runTest("event: .on and .off");
     }
@@ -3122,7 +2865,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void event__special_on_name_mapping() throws Exception {
         runTest("event: special on name mapping");
     }
@@ -3133,7 +2875,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented({ IE8, CHROME })
     public void event___on_and__off__selective_mixed_removal___10705_() throws Exception {
         runTest("event: .on and .off, selective mixed removal (#10705)");
     }
@@ -3144,7 +2885,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event___on__event_map__null_selector__data____11130() throws Exception {
         runTest("event: .on( event-map, null-selector, data ) #11130");
     }
@@ -3155,7 +2895,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void event__clone___delegated_events___11076_() throws Exception {
         runTest("event: clone() delegated events (#11076)");
     }
@@ -3166,7 +2905,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void event__checkbox_state___3827_() throws Exception {
         runTest("event: checkbox state (#3827)");
     }
@@ -3177,7 +2915,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__hover_event_no_longer_special_since_1_9() throws Exception {
         runTest("event: hover event no longer special since 1.9");
     }
@@ -3188,7 +2925,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__fixHooks_extensions() throws Exception {
         runTest("event: fixHooks extensions");
     }
@@ -3199,7 +2935,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__focusin_using_non_element_targets() throws Exception {
         runTest("event: focusin using non-element targets");
     }
@@ -3210,7 +2945,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__focusin_from_an_iframe() throws Exception {
         runTest("event: focusin from an iframe");
     }
@@ -3221,7 +2955,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__jQuery_ready_promise() throws Exception {
         runTest("event: jQuery.ready promise");
     }
@@ -3232,7 +2965,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__Focusing_iframe_element() throws Exception {
         runTest("event: Focusing iframe element");
     }
@@ -3243,7 +2975,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__triggerHandler_onbeforeunload_() throws Exception {
         runTest("event: triggerHandler(onbeforeunload)");
     }
@@ -3254,7 +2985,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__jQuery_ready_synchronous_load_with_long_loading_subresources() throws Exception {
         runTest("event: jQuery.ready synchronous load with long loading subresources");
     }
@@ -3265,7 +2995,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__change_handler_should_be_detached_from_element() throws Exception {
         runTest("event: change handler should be detached from element");
     }
@@ -3276,7 +3005,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__trigger_click_on_checkbox__fires_change_event() throws Exception {
         runTest("event: trigger click on checkbox, fires change event");
     }
@@ -3287,7 +3015,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void event__Namespace_preserved_when_passed_an_Event___12739_() throws Exception {
         runTest("event: Namespace preserved when passed an Event (#12739)");
     }
@@ -3298,7 +3025,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 18, 18")
-    @NotYetImplemented({ IE8, CHROME })
     public void event__make_sure_events_cloned_correctly() throws Exception {
         runTest("event: make sure events cloned correctly");
     }
@@ -3309,7 +3035,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__String_prototype_namespace_does_not_cause_trigger___to_throw___13360_() throws Exception {
         runTest("event: String.prototype.namespace does not cause trigger() to throw (#13360)");
     }
@@ -3320,7 +3045,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__Inline_event_result_is_returned___13993_() throws Exception {
         runTest("event: Inline event result is returned (#13993)");
     }
@@ -3333,7 +3057,6 @@ public class JQuery1113Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         IE11 = "0, 2, 2",
         IE8 = "0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void event__Check_order_of_focusin_focusout_events() throws Exception {
         runTest("event: Check order of focusin/focusout events");
     }
@@ -3346,7 +3069,6 @@ public class JQuery1113Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 5, 5",
         IE11 = "0, 5, 5",
         IE8 = "0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void event__focus_blur_order___12868_() throws Exception {
         runTest("event: focus-blur order (#12868)");
     }
@@ -3357,7 +3079,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void selector__element___jQuery_only() throws Exception {
         runTest("selector: element - jQuery only");
     }
@@ -3368,7 +3089,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 26, 26")
-    @NotYetImplemented(CHROME)
     public void selector__id() throws Exception {
         runTest("selector: id");
     }
@@ -3379,7 +3099,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void selector__class___jQuery_only() throws Exception {
         runTest("selector: class - jQuery only");
     }
@@ -3390,7 +3109,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void selector__name() throws Exception {
         runTest("selector: name");
     }
@@ -3401,7 +3119,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void selector__selectors_with_comma() throws Exception {
         runTest("selector: selectors with comma");
     }
@@ -3412,7 +3129,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 27, 27")
-    @NotYetImplemented(CHROME)
     public void selector__child_and_adjacent() throws Exception {
         runTest("selector: child and adjacent");
     }
@@ -3427,7 +3143,7 @@ public class JQuery1113Test extends WebDriverTestCase {
         FF38 = "0, 54, 54",
         IE11 = "0, 54, 54",
         IE8 = "1, 53, 54")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void selector__attributes() throws Exception {
         runTest("selector: attributes");
     }
@@ -3438,7 +3154,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void selector__disconnected_nodes() throws Exception {
         runTest("selector: disconnected nodes");
     }
@@ -3449,7 +3164,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void selector__disconnected_nodes___jQuery_only() throws Exception {
         runTest("selector: disconnected nodes - jQuery only");
     }
@@ -3460,7 +3174,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 35, 35")
-    @NotYetImplemented(CHROME)
     public void selector__attributes___jQuery_attr() throws Exception {
         runTest("selector: attributes - jQuery.attr");
     }
@@ -3471,7 +3184,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 16, 16")
-    @NotYetImplemented(CHROME)
     public void selector__jQuery_contains() throws Exception {
         runTest("selector: jQuery.contains");
     }
@@ -3493,7 +3205,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void selector__Sizzle_cache_collides_with_multiple_Sizzles_on_a_page() throws Exception {
         runTest("selector: Sizzle cache collides with multiple Sizzles on a page");
     }
@@ -3504,7 +3215,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void selector__Iframe_dispatch_should_not_affect_jQuery___13936_() throws Exception {
         runTest("selector: Iframe dispatch should not affect jQuery (#13936)");
     }
@@ -3515,7 +3225,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void traversing__find_String_() throws Exception {
         runTest("traversing: find(String)");
     }
@@ -3526,7 +3235,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void traversing__find_String__under_non_elements() throws Exception {
         runTest("traversing: find(String) under non-elements");
     }
@@ -3537,7 +3245,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void traversing__find_leading_combinator_() throws Exception {
         runTest("traversing: find(leading combinator)");
     }
@@ -3548,7 +3255,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 13, 13")
-    @NotYetImplemented(CHROME)
     public void traversing__find_node_jQuery_object_() throws Exception {
         runTest("traversing: find(node|jQuery object)");
     }
@@ -3629,7 +3335,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void traversing__filter_Selector_undefined_() throws Exception {
         runTest("traversing: filter(Selector|undefined)");
     }
@@ -3640,7 +3345,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void traversing__filter_Function_() throws Exception {
         runTest("traversing: filter(Function)");
     }
@@ -3651,7 +3355,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void traversing__filter_Element_() throws Exception {
         runTest("traversing: filter(Element)");
     }
@@ -3662,7 +3365,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void traversing__filter_Array_() throws Exception {
         runTest("traversing: filter(Array)");
     }
@@ -3673,7 +3375,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void traversing__filter_jQuery_() throws Exception {
         runTest("traversing: filter(jQuery)");
     }
@@ -3684,7 +3385,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 19, 19")
-    @NotYetImplemented(CHROME)
     public void traversing__filter___with_positional_selectors() throws Exception {
         runTest("traversing: filter() with positional selectors");
     }
@@ -3695,7 +3395,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 13, 13")
-    @NotYetImplemented(CHROME)
     public void traversing__closest__() throws Exception {
         runTest("traversing: closest()");
     }
@@ -3706,7 +3405,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void traversing__closest___with_positional_selectors() throws Exception {
         runTest("traversing: closest() with positional selectors");
     }
@@ -3717,7 +3415,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void traversing__closest_jQuery_() throws Exception {
         runTest("traversing: closest(jQuery)");
     }
@@ -3808,7 +3505,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void traversing__addBack__() throws Exception {
         runTest("traversing: addBack()");
     }
@@ -3839,7 +3535,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void traversing__children__String__() throws Exception {
         runTest("traversing: children([String])");
     }
@@ -3850,7 +3545,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void traversing__children__String_____jQuery_only() throws Exception {
         runTest("traversing: children([String]) - jQuery only");
     }
@@ -3861,7 +3555,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(IE8)
     public void traversing__parent__String__() throws Exception {
         runTest("traversing: parent([String])");
     }
@@ -3952,7 +3645,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented(CHROME)
     public void traversing__contents__() throws Exception {
         runTest("traversing: contents()");
     }
@@ -3973,7 +3665,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void traversing__add_String_selector_() throws Exception {
         runTest("traversing: add(String selector)");
     }
@@ -3984,7 +3675,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void traversing__add_String_selector__String_context_() throws Exception {
         runTest("traversing: add(String selector, String context)");
     }
@@ -3995,7 +3685,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
     public void traversing__add_String_html_() throws Exception {
         runTest("traversing: add(String html)");
     }
@@ -4006,7 +3695,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void traversing__add_jQuery_() throws Exception {
         runTest("traversing: add(jQuery)");
     }
@@ -4017,7 +3705,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void traversing__add_Element_() throws Exception {
         runTest("traversing: add(Element)");
     }
@@ -4028,7 +3715,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void traversing__add_Array_elements_() throws Exception {
         runTest("traversing: add(Array elements)");
     }
@@ -4039,7 +3725,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void traversing__add_Window_() throws Exception {
         runTest("traversing: add(Window)");
     }
@@ -4050,7 +3735,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void traversing__add_NodeList_undefined_HTMLFormElement_HTMLSelectElement_() throws Exception {
         runTest("traversing: add(NodeList|undefined|HTMLFormElement|HTMLSelectElement)");
     }
@@ -4061,7 +3745,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void traversing__add_String__Context_() throws Exception {
         runTest("traversing: add(String, Context)");
     }
@@ -4072,7 +3755,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void traversing__eq___1____10616() throws Exception {
         runTest("traversing: eq('-1') #10616");
     }
@@ -4103,7 +3785,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void manipulation__text__() throws Exception {
         runTest("manipulation: text()");
     }
@@ -4114,7 +3795,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__text_undefined_() throws Exception {
         runTest("manipulation: text(undefined)");
     }
@@ -4125,7 +3805,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void manipulation__text_String_() throws Exception {
         runTest("manipulation: text(String)");
     }
@@ -4136,7 +3815,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void manipulation__text_Function_() throws Exception {
         runTest("manipulation: text(Function)");
     }
@@ -4147,7 +3825,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__text_Function__with_incoming_value() throws Exception {
         runTest("manipulation: text(Function) with incoming value");
     }
@@ -4180,7 +3857,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void manipulation__append_param__to_object__see__11280() throws Exception {
         runTest("manipulation: append(param) to object, see #11280");
     }
@@ -4191,7 +3867,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void manipulation__append_Function__returns_String() throws Exception {
         runTest("manipulation: append(Function) returns String");
     }
@@ -4202,7 +3877,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__append_Function__returns_Element() throws Exception {
         runTest("manipulation: append(Function) returns Element");
     }
@@ -4213,7 +3887,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE11)
     public void manipulation__append_Function__returns_Array_Element_() throws Exception {
         runTest("manipulation: append(Function) returns Array<Element>");
     }
@@ -4224,7 +3898,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__append_Function__returns_jQuery() throws Exception {
         runTest("manipulation: append(Function) returns jQuery");
     }
@@ -4235,7 +3908,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__append_Function__returns_Number() throws Exception {
         runTest("manipulation: append(Function) returns Number");
     }
@@ -4246,7 +3918,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void manipulation__XML_DOM_manipulation___9960_() throws Exception {
         runTest("manipulation: XML DOM manipulation (#9960)");
     }
@@ -4261,7 +3932,6 @@ public class JQuery1113Test extends WebDriverTestCase {
         FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
         IE8 = "0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
     public void manipulation__append_the_same_fragment_with_events__Bug__6997__5566_() throws Exception {
         runTest("manipulation: append the same fragment with events (Bug #6997, 5566)");
     }
@@ -4272,7 +3942,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__append_HTML5_sectioning_elements__Bug__6485_() throws Exception {
         runTest("manipulation: append HTML5 sectioning elements (Bug #6485)");
     }
@@ -4283,7 +3952,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__HTML5_Elements_inherit_styles_from_style_rules__Bug__10501_() throws Exception {
         runTest("manipulation: HTML5 Elements inherit styles from style rules (Bug #10501)");
     }
@@ -4294,7 +3962,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__html_String__with_HTML5__Bug__6485_() throws Exception {
         runTest("manipulation: html(String) with HTML5 (Bug #6485)");
     }
@@ -4305,7 +3972,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__IE8_serialization_bug() throws Exception {
         runTest("manipulation: IE8 serialization bug");
     }
@@ -4316,7 +3982,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__html___object_element__10324() throws Exception {
         runTest("manipulation: html() object element #10324");
     }
@@ -4327,7 +3992,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__append_xml_() throws Exception {
         runTest("manipulation: append(xml)");
     }
@@ -4338,7 +4002,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void manipulation__appendTo_String_() throws Exception {
         runTest("manipulation: appendTo(String)");
     }
@@ -4349,7 +4012,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__appendTo_Element_Array_Element__() throws Exception {
         runTest("manipulation: appendTo(Element|Array<Element>)");
     }
@@ -4360,7 +4022,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void manipulation__appendTo_jQuery_() throws Exception {
         runTest("manipulation: appendTo(jQuery)");
     }
@@ -4371,7 +4032,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__prepend_String_() throws Exception {
         runTest("manipulation: prepend(String)");
     }
@@ -4382,7 +4042,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__prepend_Element_() throws Exception {
         runTest("manipulation: prepend(Element)");
     }
@@ -4393,7 +4052,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE11)
     public void manipulation__prepend_Array_Element__() throws Exception {
         runTest("manipulation: prepend(Array<Element>)");
     }
@@ -4404,7 +4063,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__prepend_jQuery_() throws Exception {
         runTest("manipulation: prepend(jQuery)");
     }
@@ -4415,7 +4073,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__prepend_Array_jQuery__() throws Exception {
         runTest("manipulation: prepend(Array<jQuery>)");
     }
@@ -4426,7 +4083,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void manipulation__prepend_Function__with_incoming_value____String() throws Exception {
         runTest("manipulation: prepend(Function) with incoming value -- String");
     }
@@ -4437,7 +4093,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__prepend_Function__with_incoming_value____Element() throws Exception {
         runTest("manipulation: prepend(Function) with incoming value -- Element");
     }
@@ -4448,7 +4103,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE11)
     public void manipulation__prepend_Function__with_incoming_value____Array_Element_() throws Exception {
         runTest("manipulation: prepend(Function) with incoming value -- Array<Element>");
     }
@@ -4459,7 +4114,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void manipulation__prepend_Function__with_incoming_value____jQuery() throws Exception {
         runTest("manipulation: prepend(Function) with incoming value -- jQuery");
     }
@@ -4470,7 +4124,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__prependTo_String_() throws Exception {
         runTest("manipulation: prependTo(String)");
     }
@@ -4481,7 +4134,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__prependTo_Element_() throws Exception {
         runTest("manipulation: prependTo(Element)");
     }
@@ -4492,7 +4144,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__prependTo_Array_Element__() throws Exception {
         runTest("manipulation: prependTo(Array<Element>)");
     }
@@ -4503,7 +4154,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__prependTo_jQuery_() throws Exception {
         runTest("manipulation: prependTo(jQuery)");
     }
@@ -4514,7 +4164,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__prependTo_Array_jQuery__() throws Exception {
         runTest("manipulation: prependTo(Array<jQuery>)");
     }
@@ -4525,7 +4174,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_String_() throws Exception {
         runTest("manipulation: before(String)");
     }
@@ -4536,7 +4184,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_Element_() throws Exception {
         runTest("manipulation: before(Element)");
     }
@@ -4547,7 +4194,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE11)
     public void manipulation__before_Array_Element__() throws Exception {
         runTest("manipulation: before(Array<Element>)");
     }
@@ -4558,7 +4205,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_jQuery_() throws Exception {
         runTest("manipulation: before(jQuery)");
     }
@@ -4569,7 +4215,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_Array_jQuery__() throws Exception {
         runTest("manipulation: before(Array<jQuery>)");
     }
@@ -4580,7 +4225,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_Function_____Returns_String() throws Exception {
         runTest("manipulation: before(Function) -- Returns String");
     }
@@ -4591,7 +4235,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_Function_____Returns_Element() throws Exception {
         runTest("manipulation: before(Function) -- Returns Element");
     }
@@ -4602,7 +4245,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(IE11)
     public void manipulation__before_Function_____Returns_Array_Element_() throws Exception {
         runTest("manipulation: before(Function) -- Returns Array<Element>");
     }
@@ -4613,7 +4256,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_Function_____Returns_jQuery() throws Exception {
         runTest("manipulation: before(Function) -- Returns jQuery");
     }
@@ -4624,7 +4266,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_Function_____Returns_Array_jQuery_() throws Exception {
         runTest("manipulation: before(Function) -- Returns Array<jQuery>");
     }
@@ -4635,7 +4276,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_no_op_() throws Exception {
         runTest("manipulation: before(no-op)");
     }
@@ -4646,7 +4286,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__before_and_after_w__empty_object___10812_() throws Exception {
         runTest("manipulation: before and after w/ empty object (#10812)");
     }
@@ -4657,7 +4296,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation___before___and__after___disconnected_node() throws Exception {
         runTest("manipulation: .before() and .after() disconnected node");
     }
@@ -4668,7 +4306,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insert_with__before___on_disconnected_node_first() throws Exception {
         runTest("manipulation: insert with .before() on disconnected node first");
     }
@@ -4679,7 +4316,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insert_with__before___on_disconnected_node_last() throws Exception {
         runTest("manipulation: insert with .before() on disconnected node last");
     }
@@ -4690,7 +4326,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insertBefore_String_() throws Exception {
         runTest("manipulation: insertBefore(String)");
     }
@@ -4701,7 +4336,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insertBefore_Element_() throws Exception {
         runTest("manipulation: insertBefore(Element)");
     }
@@ -4712,7 +4346,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insertBefore_Array_Element__() throws Exception {
         runTest("manipulation: insertBefore(Array<Element>)");
     }
@@ -4723,7 +4356,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insertBefore_jQuery_() throws Exception {
         runTest("manipulation: insertBefore(jQuery)");
     }
@@ -4734,7 +4366,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation___after_String_() throws Exception {
         runTest("manipulation: .after(String)");
     }
@@ -4745,7 +4376,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation___after_Element_() throws Exception {
         runTest("manipulation: .after(Element)");
     }
@@ -4756,7 +4386,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE11)
     public void manipulation___after_Array_Element__() throws Exception {
         runTest("manipulation: .after(Array<Element>)");
     }
@@ -4767,7 +4397,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation___after_jQuery_() throws Exception {
         runTest("manipulation: .after(jQuery)");
     }
@@ -4778,7 +4407,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation___after_Function__returns_String() throws Exception {
         runTest("manipulation: .after(Function) returns String");
     }
@@ -4789,7 +4417,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation___after_Function__returns_Element() throws Exception {
         runTest("manipulation: .after(Function) returns Element");
     }
@@ -4800,7 +4427,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(IE11)
     public void manipulation___after_Function__returns_Array_Element_() throws Exception {
         runTest("manipulation: .after(Function) returns Array<Element>");
     }
@@ -4811,7 +4438,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation___after_Function__returns_jQuery() throws Exception {
         runTest("manipulation: .after(Function) returns jQuery");
     }
@@ -4822,7 +4448,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation___after_disconnected_node_() throws Exception {
         runTest("manipulation: .after(disconnected node)");
     }
@@ -4833,7 +4458,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insertAfter_String_() throws Exception {
         runTest("manipulation: insertAfter(String)");
     }
@@ -4844,7 +4468,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insertAfter_Element_() throws Exception {
         runTest("manipulation: insertAfter(Element)");
     }
@@ -4855,7 +4478,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insertAfter_Array_Element__() throws Exception {
         runTest("manipulation: insertAfter(Array<Element>)");
     }
@@ -4866,7 +4488,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__insertAfter_jQuery_() throws Exception {
         runTest("manipulation: insertAfter(jQuery)");
     }
@@ -4877,7 +4498,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 29, 29")
-    @NotYetImplemented(CHROME)
     public void manipulation__replaceWith_String_Element_Array_Element__jQuery_() throws Exception {
         runTest("manipulation: replaceWith(String|Element|Array<Element>|jQuery)");
     }
@@ -4888,7 +4508,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 30, 30")
-    @NotYetImplemented(CHROME)
     public void manipulation__replaceWith_Function_() throws Exception {
         runTest("manipulation: replaceWith(Function)");
     }
@@ -4899,7 +4518,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void manipulation__replaceWith_string__for_more_than_one_element() throws Exception {
         runTest("manipulation: replaceWith(string) for more than one element");
     }
@@ -4910,7 +4528,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void manipulation__Empty_replaceWith___13401___13596_() throws Exception {
         runTest("manipulation: Empty replaceWith (#13401; #13596)");
     }
@@ -4921,7 +4538,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__replaceAll_String_() throws Exception {
         runTest("manipulation: replaceAll(String)");
     }
@@ -4932,7 +4548,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__replaceAll_Element_() throws Exception {
         runTest("manipulation: replaceAll(Element)");
     }
@@ -4943,7 +4558,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void manipulation__replaceAll_Array_Element__() throws Exception {
         runTest("manipulation: replaceAll(Array<Element>)");
     }
@@ -4954,7 +4568,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void manipulation__replaceAll_jQuery_() throws Exception {
         runTest("manipulation: replaceAll(jQuery)");
     }
@@ -4965,7 +4578,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void manipulation__jQuery_clone_____8017_() throws Exception {
         runTest("manipulation: jQuery.clone() (#8017)");
     }
@@ -4976,7 +4588,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void manipulation__append_to_multiple_elements___8070_() throws Exception {
         runTest("manipulation: append to multiple elements (#8070)");
     }
@@ -4987,7 +4598,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void manipulation__table_manipulation() throws Exception {
         runTest("manipulation: table manipulation");
     }
@@ -4998,7 +4609,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 45, 45")
-    @NotYetImplemented({ IE8, CHROME })
     public void manipulation__clone__() throws Exception {
         runTest("manipulation: clone()");
     }
@@ -5009,7 +4619,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void manipulation__clone_script_type_non_javascript____11359_() throws Exception {
         runTest("manipulation: clone(script type=non-javascript) (#11359)");
     }
@@ -5020,7 +4629,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented({ IE8, CHROME })
     public void manipulation__clone_form_element___Bug__3879___6655_() throws Exception {
         runTest("manipulation: clone(form element) (Bug #3879, #6655)");
     }
@@ -5031,7 +4639,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE8, CHROME })
     public void manipulation__clone_multiple_selected_options___Bug__8129_() throws Exception {
         runTest("manipulation: clone(multiple selected options) (Bug #8129)");
     }
@@ -5042,7 +4649,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__clone___on_XML_nodes() throws Exception {
         runTest("manipulation: clone() on XML nodes");
     }
@@ -5053,7 +4659,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__clone___on_local_XML_nodes_with_html5_nodename() throws Exception {
         runTest("manipulation: clone() on local XML nodes with html5 nodename");
     }
@@ -5064,7 +4669,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__html_undefined_() throws Exception {
         runTest("manipulation: html(undefined)");
     }
@@ -5075,7 +4679,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__html___on_empty_set() throws Exception {
         runTest("manipulation: html() on empty set");
     }
@@ -5086,7 +4689,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 39, 39")
-    @NotYetImplemented(CHROME)
     public void manipulation__html_String_Number_() throws Exception {
         runTest("manipulation: html(String|Number)");
     }
@@ -5097,7 +4699,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 39, 39")
-    @NotYetImplemented(CHROME)
     public void manipulation__html_Function_() throws Exception {
         runTest("manipulation: html(Function)");
     }
@@ -5108,7 +4709,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE11, CHROME })
     public void manipulation__html____text____() throws Exception {
         runTest("manipulation: html( $.text() )");
     }
@@ -5119,7 +4719,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__html__fn___returns___text__() throws Exception {
         runTest("manipulation: html( fn ) returns $.text()");
     }
@@ -5130,7 +4729,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void manipulation__html_Function__with_incoming_value____direct_selection() throws Exception {
         runTest("manipulation: html(Function) with incoming value -- direct selection");
     }
@@ -5141,7 +4739,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 14, 14")
-    @NotYetImplemented(CHROME)
     public void manipulation__html_Function__with_incoming_value____jQuery_contents__() throws Exception {
         runTest("manipulation: html(Function) with incoming value -- jQuery.contents()");
     }
@@ -5152,7 +4749,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__clone___html___don_t_expose_jQuery_Sizzle_expandos___12858_() throws Exception {
         runTest("manipulation: clone()/html() don't expose jQuery/Sizzle expandos (#12858)");
     }
@@ -5163,7 +4759,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void manipulation__remove___no_filters() throws Exception {
         runTest("manipulation: remove() no filters");
     }
@@ -5174,7 +4769,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void manipulation__remove___with_filters() throws Exception {
         runTest("manipulation: remove() with filters");
     }
@@ -5185,7 +4779,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__remove___event_cleaning() throws Exception {
         runTest("manipulation: remove() event cleaning");
     }
@@ -5196,7 +4789,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__remove___in_document_order__13779() throws Exception {
         runTest("manipulation: remove() in document order #13779");
     }
@@ -5207,7 +4799,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void manipulation__detach___no_filters() throws Exception {
         runTest("manipulation: detach() no filters");
     }
@@ -5218,7 +4809,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void manipulation__detach___with_filters() throws Exception {
         runTest("manipulation: detach() with filters");
     }
@@ -5229,7 +4819,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__detach___event_cleaning() throws Exception {
         runTest("manipulation: detach() event cleaning");
     }
@@ -5240,7 +4829,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void manipulation__empty__() throws Exception {
         runTest("manipulation: empty()");
     }
@@ -5251,7 +4839,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 14, 14")
-    @NotYetImplemented(CHROME)
     public void manipulation__jQuery_cleanData() throws Exception {
         runTest("manipulation: jQuery.cleanData");
     }
@@ -5262,7 +4849,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__jQuery_buildFragment___no_plain_text_caching__Bug__6779_() throws Exception {
         runTest("manipulation: jQuery.buildFragment - no plain-text caching (Bug #6779)");
     }
@@ -5273,7 +4859,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void manipulation__jQuery_html___execute_scripts_escaped_with_html_comment_or_CDATA___9221_() throws Exception {
         runTest("manipulation: jQuery.html - execute scripts escaped with html comment or CDATA (#9221)");
     }
@@ -5284,7 +4869,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__jQuery_buildFragment___plain_objects_are_not_a_document__8950() throws Exception {
         runTest("manipulation: jQuery.buildFragment - plain objects are not a document #8950");
     }
@@ -5295,7 +4879,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__jQuery_clone___no_exceptions_for_object_elements__9587() throws Exception {
         runTest("manipulation: jQuery.clone - no exceptions for object elements #9587");
     }
@@ -5306,7 +4889,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void manipulation__Cloned__detached_HTML5_elems___10667_10670_() throws Exception {
         runTest("manipulation: Cloned, detached HTML5 elems (#10667,10670)");
     }
@@ -5317,7 +4899,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__Guard_against_exceptions_when_clearing_safeChildNodes() throws Exception {
         runTest("manipulation: Guard against exceptions when clearing safeChildNodes");
     }
@@ -5328,7 +4909,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void manipulation__Ensure_oldIE_creates_a_new_set_on_appendTo___8894_() throws Exception {
         runTest("manipulation: Ensure oldIE creates a new set on appendTo (#8894)");
     }
@@ -5339,7 +4919,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void manipulation__html_____script_exceptions_bubble___11743_() throws Exception {
         runTest("manipulation: html() - script exceptions bubble (#11743)");
     }
@@ -5350,7 +4929,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__checked_state_is_cloned_with_clone__() throws Exception {
         runTest("manipulation: checked state is cloned with clone()");
     }
@@ -5361,7 +4939,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__manipulate_mixed_jQuery_and_text___12384___12346_() throws Exception {
         runTest("manipulation: manipulate mixed jQuery and text (#12384, #12346)");
     }
@@ -5372,7 +4949,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ CHROME, IE11 })
     public void manipulation__buildFragment_works_even_if_document_0__is_iframe_s_window_object_in_IE9_10___12266_() throws Exception {
         runTest("manipulation: buildFragment works even if document[0] is iframe's window object in IE9/10 (#12266)");
     }
@@ -5383,7 +4959,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 13, 13")
-    @NotYetImplemented(CHROME)
     public void manipulation__script_evaluation___11795_() throws Exception {
         runTest("manipulation: script evaluation (#11795)");
     }
@@ -5394,7 +4969,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void manipulation__jQuery__evalUrl___12838_() throws Exception {
         runTest("manipulation: jQuery._evalUrl (#12838)");
     }
@@ -5405,7 +4979,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(IE8)
     public void manipulation__insertAfter__insertBefore__etc_do_not_work_when_destination_is_original_element__Element_is_removed___4087_() throws Exception {
         runTest("manipulation: insertAfter, insertBefore, etc do not work when destination is original element. Element is removed (#4087)");
     }
@@ -5416,7 +4989,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void manipulation__Index_for_function_argument_should_be_received___13094_() throws Exception {
         runTest("manipulation: Index for function argument should be received (#13094)");
     }
@@ -5427,7 +4999,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void manipulation__Make_sure_jQuery_fn_remove_can_work_on_elements_in_documentFragment() throws Exception {
         runTest("manipulation: Make sure jQuery.fn.remove can work on elements in documentFragment");
     }
@@ -5568,7 +5139,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 43, 43")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void css__css_String_Hash_() throws Exception {
         runTest("css: css(String|Hash)");
     }
@@ -5579,7 +5150,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 29, 29")
-    @NotYetImplemented(CHROME)
     public void css__css___explicit_and_relative_values() throws Exception {
         runTest("css: css() explicit and relative values");
     }
@@ -5590,7 +5160,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 20, 20")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void css__css_String__Object_() throws Exception {
         runTest("css: css(String, Object)");
     }
@@ -5601,7 +5171,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void css__css_Array_() throws Exception {
         runTest("css: css(Array)");
     }
@@ -5612,7 +5181,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void css__css_String__Function_() throws Exception {
         runTest("css: css(String, Function)");
     }
@@ -5623,7 +5191,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = "0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void css__css_String__Object__for_MSIE() throws Exception {
         runTest("css: css(String, Object) for MSIE");
     }
@@ -5634,7 +5201,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void css__css_String__Function__with_incoming_value() throws Exception {
         runTest("css: css(String, Function) with incoming value");
     }
@@ -5645,7 +5211,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = "0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void css__Setting_opacity_to_1_properly_removes_filter__style___6652_() throws Exception {
         runTest("css: Setting opacity to 1 properly removes filter: style (#6652)");
     }
@@ -5656,7 +5221,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void css__css_Object__where_values_are_Functions() throws Exception {
         runTest("css: css(Object) where values are Functions");
     }
@@ -5667,7 +5231,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void css__css_Object__where_values_are_Functions_with_incoming_values() throws Exception {
         runTest("css: css(Object) where values are Functions with incoming values");
     }
@@ -5678,7 +5241,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void css__show____hide__() throws Exception {
         runTest("css: show(); hide()");
     }
@@ -5689,7 +5251,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 18, 18")
-    @NotYetImplemented(CHROME)
     public void css__show___() throws Exception {
         runTest("css: show();");
     }
@@ -5711,7 +5272,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 13, 13")
-    @NotYetImplemented(CHROME)
     public void css__show___resolves_correct_default_display_for_detached_nodes() throws Exception {
         runTest("css: show() resolves correct default display for detached nodes");
     }
@@ -5722,7 +5282,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void css__show___resolves_correct_default_display__10227() throws Exception {
         runTest("css: show() resolves correct default display #10227");
     }
@@ -5744,7 +5304,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void css__toggle__() throws Exception {
         runTest("css: toggle()");
     }
@@ -5755,7 +5314,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void css__hide_hidden_elements__bug__7141_() throws Exception {
         runTest("css: hide hidden elements (bug #7141)");
     }
@@ -5766,7 +5324,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void css__jQuery_css_elem___height___doesn_t_clear_radio_buttons__bug__1095_() throws Exception {
         runTest("css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095)");
     }
@@ -5777,7 +5334,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void css__internal_ref_to_elem_runtimeStyle__bug__7608_() throws Exception {
         runTest("css: internal ref to elem.runtimeStyle (bug #7608)");
     }
@@ -5788,7 +5344,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE8, CHROME })
     public void css__marginRight_computed_style__bug__3333_() throws Exception {
         runTest("css: marginRight computed style (bug #3333)");
     }
@@ -5799,7 +5354,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void css__box_model_properties_incorrectly_returning___instead_of_px__see__10639_and__12088() throws Exception {
         runTest("css: box model properties incorrectly returning % instead of px, see #10639 and #12088");
     }
@@ -5810,7 +5365,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void css__jQuery_cssProps_behavior___bug__8402_() throws Exception {
         runTest("css: jQuery.cssProps behavior, (bug #8402)");
     }
@@ -5821,7 +5375,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
@@ -5832,7 +5385,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void css__can_t_get_css_for_disconnected_in_IE_9__see__10254_and__8388() throws Exception {
         runTest("css: can't get css for disconnected in IE<9, see #10254 and #8388");
     }
@@ -5843,7 +5395,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void css__can_t_get_background_position_in_IE_9__see__10796() throws Exception {
         runTest("css: can't get background-position in IE<9, see #10796");
     }
@@ -5854,7 +5405,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE8, CHROME })
     public void css__percentage_properties_for_bottom_and_right_in_IE_9_should_not_be_incorrectly_transformed_to_pixels__see__11311() throws Exception {
         runTest("css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed to pixels, see #11311");
     }
@@ -5865,7 +5415,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void css__percentage_properties_for_left_and_top_should_be_transformed_to_pixels__see__9505() throws Exception {
         runTest("css: percentage properties for left and top should be transformed to pixels, see #9505");
     }
@@ -5876,7 +5426,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented({ FF, IE11 })
     public void css__Do_not_append_px___9548___12990_() throws Exception {
         runTest("css: Do not append px (#9548, #12990)");
     }
@@ -5887,7 +5437,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void css__css__width___and_css__height___should_respect_box_sizing__see__11004() throws Exception {
         runTest("css: css('width') and css('height') should respect box-sizing, see #11004");
     }
@@ -5898,7 +5448,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void css__css__width___should_work_correctly_before_document_ready___14084_() throws Exception {
         runTest("css: css('width') should work correctly before document ready (#14084)");
     }
@@ -5909,7 +5459,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void css__certain_css_values_of__normal__should_be_convertable_to_a_number__see__8627() throws Exception {
         runTest("css: certain css values of 'normal' should be convertable to a number, see #8627");
     }
@@ -5920,7 +5469,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 15, 15")
-    @NotYetImplemented(CHROME)
     public void css__cssHooks___expand() throws Exception {
         runTest("css: cssHooks - expand");
     }
@@ -5931,7 +5479,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void css__css_opacity_consistency_across_browsers___12685_() throws Exception {
         runTest("css: css opacity consistency across browsers (#12685)");
     }
@@ -5942,7 +5489,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 13, 13")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void css___visible__hidden_selectors() throws Exception {
         runTest("css: :visible/:hidden selectors");
     }
@@ -5953,7 +5500,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void css__Keep_the_last_style_if_the_new_one_isn_t_recognized_by_the_browser___14836_() throws Exception {
         runTest("css: Keep the last style if the new one isn't recognized by the browser (#14836)");
     }
@@ -5964,7 +5511,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void css__Reset_the_style_if_set_to_an_empty_string() throws Exception {
         runTest("css: Reset the style if set to an empty string");
     }
@@ -5975,7 +5521,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented(CHROME)
     public void css__Clearing_a_Cloned_Element_s_Style_Shouldn_t_Clear_the_Original_Element_s_Style___8908_() throws Exception {
         runTest("css: Clearing a Cloned Element's Style Shouldn't Clear the Original Element's Style (#8908)");
     }
@@ -5986,7 +5531,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented({ IE8, CHROME })
     public void css__Make_sure_initialized_display_value_for_disconnected_nodes_is_correct___13310_() throws Exception {
         runTest("css: Make sure initialized display value for disconnected nodes is correct (#13310)");
     }
@@ -5997,7 +5541,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void css__show___after_hide___should_always_set_display_to_initial_value___14750_() throws Exception {
         runTest("css: show() after hide() should always set display to initial value (#14750)");
     }
@@ -6011,7 +5554,6 @@ public class JQuery1113Test extends WebDriverTestCase {
         FF31 = "0, 1, 1",
         FF38 = "0, 1, 1",
         IE11 = "0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void css__Don_t_append_px_to_CSS__order__value___14049_() throws Exception {
         runTest("css: Don't append px to CSS \"order\" value (#14049)");
     }
@@ -6022,7 +5564,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void css__Do_not_throw_on_frame_elements_from_css_method___15098_() throws Exception {
         runTest("css: Do not throw on frame elements from css method (#15098)");
     }
@@ -6033,7 +5574,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 22, 22")
-    @NotYetImplemented(CHROME)
     public void serialize__jQuery_param__() throws Exception {
         runTest("serialize: jQuery.param()");
     }
@@ -6044,7 +5584,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void serialize__jQuery_param___Constructed_prop_values() throws Exception {
         runTest("serialize: jQuery.param() Constructed prop values");
     }
@@ -6055,7 +5594,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void serialize__serialize__() throws Exception {
         runTest("serialize: serialize()");
     }
@@ -6066,7 +5604,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____success_callbacks() throws Exception {
         runTest("ajax: jQuery.ajax() - success callbacks");
     }
@@ -6077,7 +5614,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____success_callbacks____url__options__syntax() throws Exception {
         runTest("ajax: jQuery.ajax() - success callbacks - (url, options) syntax");
     }
@@ -6088,7 +5624,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____success_callbacks__late_binding_() throws Exception {
         runTest("ajax: jQuery.ajax() - success callbacks (late binding)");
     }
@@ -6099,7 +5634,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____success_callbacks__oncomplete_binding_() throws Exception {
         runTest("ajax: jQuery.ajax() - success callbacks (oncomplete binding)");
     }
@@ -6110,7 +5644,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____error_callbacks() throws Exception {
         runTest("ajax: jQuery.ajax() - error callbacks");
     }
@@ -6121,7 +5654,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____textStatus_and_errorThrown_values() throws Exception {
         runTest("ajax: jQuery.ajax() - textStatus and errorThrown values");
     }
@@ -6132,7 +5664,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____responseText_on_error() throws Exception {
         runTest("ajax: jQuery.ajax() - responseText on error");
     }
@@ -6143,7 +5674,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____retry_with_jQuery_ajax__this__() throws Exception {
         runTest("ajax: jQuery.ajax() - retry with jQuery.ajax( this )");
     }
@@ -6154,7 +5684,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____headers() throws Exception {
         runTest("ajax: jQuery.ajax() - headers");
     }
@@ -6165,7 +5694,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____Accept_header() throws Exception {
         runTest("ajax: jQuery.ajax() - Accept header");
     }
@@ -6176,7 +5704,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____contentType() throws Exception {
         runTest("ajax: jQuery.ajax() - contentType");
     }
@@ -6187,7 +5714,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____protocol_less_urls() throws Exception {
         runTest("ajax: jQuery.ajax() - protocol-less urls");
     }
@@ -6198,7 +5724,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____hash() throws Exception {
         runTest("ajax: jQuery.ajax() - hash");
     }
@@ -6209,7 +5734,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____cross_domain_detection() throws Exception {
         runTest("ajax: jQuery.ajax() - cross-domain detection");
     }
@@ -6220,7 +5744,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____abort() throws Exception {
         runTest("ajax: jQuery.ajax() - abort");
     }
@@ -6231,7 +5754,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented({ IE8, CHROME })
     public void ajax__jQuery_ajax_____events_with_context() throws Exception {
         runTest("ajax: jQuery.ajax() - events with context");
     }
@@ -6242,7 +5764,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____events_without_context() throws Exception {
         runTest("ajax: jQuery.ajax() - events without context");
     }
@@ -6253,7 +5774,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___15118___jQuery_ajax_____function_without_jQuery_event() throws Exception {
         runTest("ajax: #15118 - jQuery.ajax() - function without jQuery.event");
     }
@@ -6264,7 +5784,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE8, CHROME })
     public void ajax__jQuery_ajax_____context_modification() throws Exception {
         runTest("ajax: jQuery.ajax() - context modification");
     }
@@ -6275,7 +5794,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____context_modification_through_ajaxSetup() throws Exception {
         runTest("ajax: jQuery.ajax() - context modification through ajaxSetup");
     }
@@ -6286,7 +5804,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____disabled_globals() throws Exception {
         runTest("ajax: jQuery.ajax() - disabled globals");
     }
@@ -6297,7 +5814,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____xml__non_namespace_elements_inside_namespaced_elements() throws Exception {
         runTest("ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements");
     }
@@ -6308,7 +5824,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____xml__non_namespace_elements_inside_namespaced_elements__over_JSONP_() throws Exception {
         runTest("ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (over JSONP)");
     }
@@ -6319,7 +5834,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____HEAD_requests() throws Exception {
         runTest("ajax: jQuery.ajax() - HEAD requests");
     }
@@ -6330,7 +5844,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____beforeSend() throws Exception {
         runTest("ajax: jQuery.ajax() - beforeSend");
     }
@@ -6341,7 +5854,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void ajax__jQuery_ajax_____beforeSend__cancel_request_manually() throws Exception {
         runTest("ajax: jQuery.ajax() - beforeSend, cancel request manually");
     }
@@ -6352,7 +5864,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____dataType_html() throws Exception {
         runTest("ajax: jQuery.ajax() - dataType html");
     }
@@ -6363,7 +5874,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____synchronous_request() throws Exception {
         runTest("ajax: jQuery.ajax() - synchronous request");
     }
@@ -6374,7 +5884,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____synchronous_request_with_callbacks() throws Exception {
         runTest("ajax: jQuery.ajax() - synchronous request with callbacks");
     }
@@ -6385,7 +5894,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax____jQuery_get_Script_JSON_____jQuery_post____pass_through_request_object() throws Exception {
         runTest("ajax: jQuery.ajax(), jQuery.get[Script|JSON](), jQuery.post(), pass-through request object");
     }
@@ -6396,7 +5904,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____cache() throws Exception {
         runTest("ajax: jQuery.ajax() - cache");
     }
@@ -6407,7 +5914,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____JSONP___Query_String___n____Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain");
     }
@@ -6418,7 +5924,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____JSONP___Explicit_callback_param___Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Explicit callback param - Same Domain");
     }
@@ -6429,7 +5934,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____JSONP___Callback_in_data___Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Callback in data - Same Domain");
     }
@@ -6440,7 +5944,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____JSONP___POST___Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - POST - Same Domain");
     }
@@ -6451,7 +5954,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____JSONP___Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Same Domain");
     }
@@ -6462,7 +5964,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_ajax_____JSONP___Query_String___n____Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain");
     }
@@ -6473,7 +5975,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_ajax_____JSONP___Explicit_callback_param___Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Explicit callback param - Cross Domain");
     }
@@ -6484,7 +5986,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_ajax_____JSONP___Callback_in_data___Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Callback in data - Cross Domain");
     }
@@ -6495,7 +5997,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_ajax_____JSONP___POST___Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - POST - Cross Domain");
     }
@@ -6506,7 +6008,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_ajax_____JSONP___Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Cross Domain");
     }
@@ -6517,7 +6019,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____script__Remote() throws Exception {
         runTest("ajax: jQuery.ajax() - script, Remote");
     }
@@ -6528,7 +6029,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____script__Remote_with_POST() throws Exception {
         runTest("ajax: jQuery.ajax() - script, Remote with POST");
     }
@@ -6539,7 +6039,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____script__Remote_with_scheme_less_URL() throws Exception {
         runTest("ajax: jQuery.ajax() - script, Remote with scheme-less URL");
     }
@@ -6550,7 +6049,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____malformed_JSON() throws Exception {
         runTest("ajax: jQuery.ajax() - malformed JSON");
     }
@@ -6561,7 +6059,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____script_by_content_type() throws Exception {
         runTest("ajax: jQuery.ajax() - script by content-type");
     }
@@ -6572,7 +6069,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____JSON_by_content_type() throws Exception {
         runTest("ajax: jQuery.ajax() - JSON by content-type");
     }
@@ -6583,7 +6079,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____JSON_by_content_type_disabled_with_options() throws Exception {
         runTest("ajax: jQuery.ajax() - JSON by content-type disabled with options");
     }
@@ -6594,7 +6089,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____simple_get() throws Exception {
         runTest("ajax: jQuery.ajax() - simple get");
     }
@@ -6605,7 +6099,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____simple_post() throws Exception {
         runTest("ajax: jQuery.ajax() - simple post");
     }
@@ -6616,7 +6109,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____data_option___empty_bodies_for_non_GET_requests() throws Exception {
         runTest("ajax: jQuery.ajax() - data option - empty bodies for non-GET requests");
     }
@@ -6627,7 +6119,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____If_Modified_Since_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax() - If-Modified-Since support (cache)");
     }
@@ -6638,7 +6129,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____Etag_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax() - Etag support (cache)");
     }
@@ -6649,7 +6139,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____If_Modified_Since_support__no_cache_() throws Exception {
         runTest("ajax: jQuery.ajax() - If-Modified-Since support (no cache)");
     }
@@ -6660,7 +6149,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____Etag_support__no_cache_() throws Exception {
         runTest("ajax: jQuery.ajax() - Etag support (no cache)");
     }
@@ -6671,7 +6159,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____failing_cross_domain__non_existing_() throws Exception {
         runTest("ajax: jQuery.ajax() - failing cross-domain (non-existing)");
     }
@@ -6682,7 +6169,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____failing_cross_domain() throws Exception {
         runTest("ajax: jQuery.ajax() - failing cross-domain");
     }
@@ -6693,7 +6179,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____atom_xml() throws Exception {
         runTest("ajax: jQuery.ajax() - atom+xml");
     }
@@ -6704,7 +6189,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____statusText() throws Exception {
         runTest("ajax: jQuery.ajax() - statusText");
     }
@@ -6715,7 +6199,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 20, 20")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____statusCode() throws Exception {
         runTest("ajax: jQuery.ajax() - statusCode");
     }
@@ -6726,7 +6209,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____transitive_conversions() throws Exception {
         runTest("ajax: jQuery.ajax() - transitive conversions");
     }
@@ -6737,7 +6219,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____overrideMimeType() throws Exception {
         runTest("ajax: jQuery.ajax() - overrideMimeType");
     }
@@ -6748,7 +6229,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____empty_json_gets_to_error_callback_instead_of_success_callback_() throws Exception {
         runTest("ajax: jQuery.ajax() - empty json gets to error callback instead of success callback.");
     }
@@ -6759,7 +6239,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax___2688___jQuery_ajax_____beforeSend__cancel_request() throws Exception {
         runTest("ajax: #2688 - jQuery.ajax() - beforeSend, cancel request");
     }
@@ -6770,7 +6249,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___2806___jQuery_ajax_____data_option___evaluate_function_values() throws Exception {
         runTest("ajax: #2806 - jQuery.ajax() - data option - evaluate function values");
     }
@@ -6781,7 +6259,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___7531___jQuery_ajax_____Location_object_as_url() throws Exception {
         runTest("ajax: #7531 - jQuery.ajax() - Location object as url");
     }
@@ -6792,7 +6269,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___7578___jQuery_ajax_____JSONP___default_for_cache_option___Same_Domain() throws Exception {
         runTest("ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Same Domain");
     }
@@ -6803,7 +6279,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___7578___jQuery_ajax_____JSONP___default_for_cache_option___Cross_Domain() throws Exception {
         runTest("ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Cross Domain");
     }
@@ -6814,7 +6289,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void ajax___8107___jQuery_ajax_____multiple_method_signatures_introduced_in_1_5() throws Exception {
         runTest("ajax: #8107 - jQuery.ajax() - multiple method signatures introduced in 1.5");
     }
@@ -6825,7 +6299,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax___8205___jQuery_ajax_____JSONP___re_use_callbacks_name___Same_Domain() throws Exception {
         runTest("ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Same Domain");
     }
@@ -6836,7 +6309,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(IE11)
     public void ajax___8205___jQuery_ajax_____JSONP___re_use_callbacks_name___Cross_Domain() throws Exception {
         runTest("ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Cross Domain");
     }
@@ -6847,7 +6320,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax___9887___jQuery_ajax_____Context_with_circular_references___9887_() throws Exception {
         runTest("ajax: #9887 - jQuery.ajax() - Context with circular references (#9887)");
     }
@@ -6858,7 +6330,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void ajax___10093___jQuery_ajax_____falsy_url_as_argument() throws Exception {
         runTest("ajax: #10093 - jQuery.ajax() - falsy url as argument");
     }
@@ -6869,7 +6340,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void ajax___10093___jQuery_ajax_____falsy_url_in_settings_object() throws Exception {
         runTest("ajax: #10093 - jQuery.ajax() - falsy url in settings object");
     }
@@ -6880,7 +6350,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void ajax___11151___jQuery_ajax_____parse_error_body() throws Exception {
         runTest("ajax: #11151 - jQuery.ajax() - parse error body");
     }
@@ -6891,7 +6360,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___11426___jQuery_ajax_____loading_binary_data_shouldn_t_throw_an_exception_in_IE() throws Exception {
         runTest("ajax: #11426 - jQuery.ajax() - loading binary data shouldn't throw an exception in IE");
     }
@@ -6902,7 +6370,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE8, CHROME })
     public void ajax___11743___jQuery_ajax_____script__throws_exception() throws Exception {
         runTest("ajax: #11743 - jQuery.ajax() - script, throws exception");
     }
@@ -6913,7 +6380,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax___12004___jQuery_ajax_____method_is_an_alias_of_type___method_set_globally() throws Exception {
         runTest("ajax: #12004 - jQuery.ajax() - method is an alias of type - method set globally");
     }
@@ -6924,7 +6390,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax___12004___jQuery_ajax_____method_is_an_alias_of_type___type_set_globally() throws Exception {
         runTest("ajax: #12004 - jQuery.ajax() - method is an alias of type - type set globally");
     }
@@ -6935,7 +6400,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___13276___jQuery_ajax_____compatibility_between_XML_documents_from_ajax_requests_and_parsed_string() throws Exception {
         runTest("ajax: #13276 - jQuery.ajax() - compatibility between XML documents from ajax requests and parsed string");
     }
@@ -6946,7 +6410,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax___13292___jQuery_ajax_____converter_is_bypassed_for_204_requests() throws Exception {
         runTest("ajax: #13292 - jQuery.ajax() - converter is bypassed for 204 requests");
     }
@@ -6957,7 +6420,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax___13388___jQuery_ajax_____responseXML() throws Exception {
         runTest("ajax: #13388 - jQuery.ajax() - responseXML");
     }
@@ -6968,7 +6430,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax___13922___jQuery_ajax_____converter_is_bypassed_for_HEAD_requests() throws Exception {
         runTest("ajax: #13922 - jQuery.ajax() - converter is bypassed for HEAD requests");
     }
@@ -6979,7 +6440,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("1, 0, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___13240___jQuery_ajax_____support_non_RFC2616_methods() throws Exception {
         runTest("ajax: #13240 - jQuery.ajax() - support non-RFC2616 methods");
     }
@@ -6990,7 +6450,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
         runTest("ajax: #14379 - jQuery.ajax() on unload");
     }
@@ -7001,7 +6460,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajaxPrefilter_____abort() throws Exception {
         runTest("ajax: jQuery.ajaxPrefilter() - abort");
     }
@@ -7012,7 +6470,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajaxSetup__() throws Exception {
         runTest("ajax: jQuery.ajaxSetup()");
     }
@@ -7023,7 +6480,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void ajax__jQuery_ajaxSetup___timeout__Number______with_global_timeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout");
     }
@@ -7034,7 +6491,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajaxSetup___timeout__Number____with_localtimeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) with localtimeout");
     }
@@ -7045,7 +6501,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___11264___jQuery_domManip_____no_side_effect_because_of_ajaxSetup_or_global_events() throws Exception {
         runTest("ajax: #11264 - jQuery.domManip() - no side effect because of ajaxSetup or global events");
     }
@@ -7056,7 +6511,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax___11402___jQuery_domManip_____script_in_comments_are_properly_evaluated() throws Exception {
         runTest("ajax: #11402 - jQuery.domManip() - script in comments are properly evaluated");
     }
@@ -7067,7 +6521,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_get__String__Hash__Function_____parse_xml_and_use_text___on_nodes() throws Exception {
         runTest("ajax: jQuery.get( String, Hash, Function ) - parse xml and use text() on nodes");
     }
@@ -7078,7 +6531,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___8277___jQuery_get__String__Function_____data_in_ajaxSettings() throws Exception {
         runTest("ajax: #8277 - jQuery.get( String, Function ) - data in ajaxSettings");
     }
@@ -7089,7 +6541,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_getJSON__String__Hash__Function_____JSON_array() throws Exception {
         runTest("ajax: jQuery.getJSON( String, Hash, Function ) - JSON array");
     }
@@ -7100,7 +6551,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_getJSON__String__Function_____JSON_object() throws Exception {
         runTest("ajax: jQuery.getJSON( String, Function ) - JSON object");
     }
@@ -7111,7 +6561,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_getJSON_____Using_Native_JSON() throws Exception {
         runTest("ajax: jQuery.getJSON() - Using Native JSON");
     }
@@ -7122,7 +6571,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_getJSON__String__Function_____JSON_object_with_absolute_url_to_local_content() throws Exception {
         runTest("ajax: jQuery.getJSON( String, Function ) - JSON object with absolute url to local content");
     }
@@ -7133,7 +6581,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_getScript__String__Function_____with_callback() throws Exception {
         runTest("ajax: jQuery.getScript( String, Function ) - with callback");
     }
@@ -7144,7 +6591,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_getScript__String__Function_____no_callback() throws Exception {
         runTest("ajax: jQuery.getScript( String, Function ) - no callback");
     }
@@ -7155,7 +6601,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax___8082___jQuery_getScript__String__Function_____source_as_responseText() throws Exception {
         runTest("ajax: #8082 - jQuery.getScript( String, Function ) - source as responseText");
     }
@@ -7166,7 +6611,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__String__() throws Exception {
         runTest("ajax: jQuery.fn.load( String )");
     }
@@ -7177,7 +6621,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load_____404_error_callbacks() throws Exception {
         runTest("ajax: jQuery.fn.load() - 404 error callbacks");
     }
@@ -7188,7 +6631,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__String__null__() throws Exception {
         runTest("ajax: jQuery.fn.load( String, null )");
     }
@@ -7199,7 +6641,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__String__undefined__() throws Exception {
         runTest("ajax: jQuery.fn.load( String, undefined )");
     }
@@ -7210,7 +6651,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__URL_SELECTOR__() throws Exception {
         runTest("ajax: jQuery.fn.load( URL_SELECTOR )");
     }
@@ -7221,7 +6661,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__URL_SELECTOR_with_spaces__() throws Exception {
         runTest("ajax: jQuery.fn.load( URL_SELECTOR with spaces )");
     }
@@ -7232,7 +6671,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__String__Function_____simple__inject_text_into_DOM() throws Exception {
         runTest("ajax: jQuery.fn.load( String, Function ) - simple: inject text into DOM");
     }
@@ -7243,7 +6681,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void ajax__jQuery_fn_load__String__Function_____check_scripts() throws Exception {
         runTest("ajax: jQuery.fn.load( String, Function ) - check scripts");
     }
@@ -7254,7 +6692,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__String__Function_____check_file_with_only_a_script_tag() throws Exception {
         runTest("ajax: jQuery.fn.load( String, Function ) - check file with only a script tag");
     }
@@ -7265,7 +6702,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__String__Function_____dataFilter_in_ajaxSettings() throws Exception {
         runTest("ajax: jQuery.fn.load( String, Function ) - dataFilter in ajaxSettings");
     }
@@ -7276,7 +6712,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__String__Object__Function__() throws Exception {
         runTest("ajax: jQuery.fn.load( String, Object, Function )");
     }
@@ -7287,7 +6722,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load__String__String__Function__() throws Exception {
         runTest("ajax: jQuery.fn.load( String, String, Function )");
     }
@@ -7298,7 +6732,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_fn_load_____callbacks_get_the_correct_parameters() throws Exception {
         runTest("ajax: jQuery.fn.load() - callbacks get the correct parameters");
     }
@@ -7309,7 +6742,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___2046___jQuery_fn_load__String__Function___with_ajaxSetup_on_dataType_json() throws Exception {
         runTest("ajax: #2046 - jQuery.fn.load( String, Function ) with ajaxSetup on dataType json");
     }
@@ -7320,7 +6752,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax___10524___jQuery_fn_load_____data_specified_in_ajaxSettings_is_merged_in() throws Exception {
         runTest("ajax: #10524 - jQuery.fn.load() - data specified in ajaxSettings is merged in");
     }
@@ -7331,7 +6762,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
     public void ajax__jQuery_post_____data() throws Exception {
         runTest("ajax: jQuery.post() - data");
     }
@@ -7342,7 +6772,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_post__String__Hash__Function_____simple_with_xml() throws Exception {
         runTest("ajax: jQuery.post( String, Hash, Function ) - simple with xml");
     }
@@ -7353,7 +6782,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void ajax__jQuery_active() throws Exception {
         runTest("ajax: jQuery.active");
     }
@@ -7364,7 +6792,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__sanity_check() throws Exception {
         runTest("effects: sanity check");
     }
@@ -7375,7 +6802,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__show___basic() throws Exception {
         runTest("effects: show() basic");
     }
@@ -7386,7 +6812,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 27, 27")
-    @NotYetImplemented(CHROME)
     public void effects__show__() throws Exception {
         runTest("effects: show()");
     }
@@ -7397,7 +6822,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 15, 15")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__show_Number____other_displays() throws Exception {
         runTest("effects: show(Number) - other displays");
     }
@@ -7408,7 +6832,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void effects__Persist_correct_display_value() throws Exception {
         runTest("effects: Persist correct display value");
     }
@@ -7419,7 +6842,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__animate_Hash__Object__Function_() throws Exception {
         runTest("effects: animate(Hash, Object, Function)");
     }
@@ -7430,7 +6852,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void effects__animate_relative_values() throws Exception {
         runTest("effects: animate relative values");
     }
@@ -7441,7 +6863,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__animate_negative_height() throws Exception {
         runTest("effects: animate negative height");
     }
@@ -7452,7 +6873,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__animate_negative_margin() throws Exception {
         runTest("effects: animate negative margin");
     }
@@ -7463,7 +6883,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__animate_negative_margin_with_px() throws Exception {
         runTest("effects: animate negative margin with px");
     }
@@ -7474,7 +6893,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void effects__animate_negative_padding() throws Exception {
         runTest("effects: animate negative padding");
     }
@@ -7485,7 +6904,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__animate_block_as_inline_width_height() throws Exception {
         runTest("effects: animate block as inline width/height");
     }
@@ -7496,7 +6914,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__animate_native_inline_width_height() throws Exception {
         runTest("effects: animate native inline width/height");
     }
@@ -7507,7 +6924,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void effects__animate_block_width_height() throws Exception {
         runTest("effects: animate block width/height");
     }
@@ -7518,7 +6934,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__animate_table_width_height() throws Exception {
         runTest("effects: animate table width/height");
     }
@@ -7529,7 +6944,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void effects__animate_table_row_width_height() throws Exception {
         runTest("effects: animate table-row width/height");
     }
@@ -7540,7 +6955,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void effects__animate_table_cell_width_height() throws Exception {
         runTest("effects: animate table-cell width/height");
     }
@@ -7551,7 +6966,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__animate_percentage____on_width_height() throws Exception {
         runTest("effects: animate percentage(%) on width/height");
     }
@@ -7562,7 +6976,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__animate_resets_overflow_x_and_overflow_y_when_finished() throws Exception {
         runTest("effects: animate resets overflow-x and overflow-y when finished");
     }
@@ -7573,7 +6986,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__animate_option___queue__false__() throws Exception {
         runTest("effects: animate option { queue: false }");
     }
@@ -7584,7 +6996,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__animate_option___queue__true__() throws Exception {
         runTest("effects: animate option { queue: true }");
     }
@@ -7595,7 +7006,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__animate_option___queue___name___() throws Exception {
         runTest("effects: animate option { queue: 'name' }");
     }
@@ -7606,7 +7016,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__animate_with_no_properties() throws Exception {
         runTest("effects: animate with no properties");
     }
@@ -7617,7 +7026,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 11, 11")
-    @NotYetImplemented(CHROME)
     public void effects__animate_duration_0() throws Exception {
         runTest("effects: animate duration 0");
     }
@@ -7628,7 +7036,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__animate_hyphenated_properties() throws Exception {
         runTest("effects: animate hyphenated properties");
     }
@@ -7639,7 +7046,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__animate_non_element() throws Exception {
         runTest("effects: animate non-element");
     }
@@ -7650,7 +7056,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__stop__() throws Exception {
         runTest("effects: stop()");
     }
@@ -7661,7 +7066,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__stop_____several_in_queue() throws Exception {
         runTest("effects: stop() - several in queue");
     }
@@ -7672,7 +7076,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__stop_clearQueue_() throws Exception {
         runTest("effects: stop(clearQueue)");
     }
@@ -7683,7 +7086,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__stop_clearQueue__gotoEnd_() throws Exception {
         runTest("effects: stop(clearQueue, gotoEnd)");
     }
@@ -7694,7 +7096,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void effects__stop__queue_______________Stop_single_queues() throws Exception {
         runTest("effects: stop( queue, ..., ... ) - Stop single queues");
     }
@@ -7705,7 +7106,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__toggle__() throws Exception {
         runTest("effects: toggle()");
     }
@@ -7716,7 +7116,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented(CHROME)
     public void effects__jQuery_fx_prototype_cur______1_8_Back_Compat() throws Exception {
         runTest("effects: jQuery.fx.prototype.cur() - <1.8 Back Compat");
     }
@@ -7727,7 +7126,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__Overflow_and_Display() throws Exception {
         runTest("effects: Overflow and Display");
     }
@@ -7738,7 +7136,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_Auto_to_0() throws Exception {
         runTest("effects: CSS Auto to 0");
     }
@@ -7749,7 +7146,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_Auto_to_50() throws Exception {
         runTest("effects: CSS Auto to 50");
     }
@@ -7760,7 +7156,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_Auto_to_100() throws Exception {
         runTest("effects: CSS Auto to 100");
     }
@@ -7771,7 +7166,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void effects__CSS_Auto_to_show() throws Exception {
         runTest("effects: CSS Auto to show");
     }
@@ -7782,7 +7177,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__CSS_Auto_to_hide() throws Exception {
         runTest("effects: CSS Auto to hide");
     }
@@ -7793,7 +7187,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_Auto_to_0() throws Exception {
         runTest("effects: JS Auto to 0");
     }
@@ -7804,7 +7197,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_Auto_to_50() throws Exception {
         runTest("effects: JS Auto to 50");
     }
@@ -7815,7 +7207,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_Auto_to_100() throws Exception {
         runTest("effects: JS Auto to 100");
     }
@@ -7826,7 +7217,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void effects__JS_Auto_to_show() throws Exception {
         runTest("effects: JS Auto to show");
     }
@@ -7837,7 +7228,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__JS_Auto_to_hide() throws Exception {
         runTest("effects: JS Auto to hide");
     }
@@ -7848,7 +7238,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_100_to_0() throws Exception {
         runTest("effects: CSS 100 to 0");
     }
@@ -7859,7 +7248,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_100_to_50() throws Exception {
         runTest("effects: CSS 100 to 50");
     }
@@ -7870,7 +7258,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_100_to_100() throws Exception {
         runTest("effects: CSS 100 to 100");
     }
@@ -7881,7 +7268,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_100_to_show() throws Exception {
         runTest("effects: CSS 100 to show");
     }
@@ -7892,7 +7278,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_100_to_hide() throws Exception {
         runTest("effects: CSS 100 to hide");
     }
@@ -7903,7 +7288,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_100_to_0() throws Exception {
         runTest("effects: JS 100 to 0");
     }
@@ -7914,7 +7298,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_100_to_50() throws Exception {
         runTest("effects: JS 100 to 50");
     }
@@ -7925,7 +7308,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_100_to_100() throws Exception {
         runTest("effects: JS 100 to 100");
     }
@@ -7936,7 +7318,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__JS_100_to_show() throws Exception {
         runTest("effects: JS 100 to show");
     }
@@ -7947,7 +7328,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__JS_100_to_hide() throws Exception {
         runTest("effects: JS 100 to hide");
     }
@@ -7958,7 +7338,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_50_to_0() throws Exception {
         runTest("effects: CSS 50 to 0");
     }
@@ -7969,7 +7348,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_50_to_50() throws Exception {
         runTest("effects: CSS 50 to 50");
     }
@@ -7980,7 +7358,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_50_to_100() throws Exception {
         runTest("effects: CSS 50 to 100");
     }
@@ -7991,7 +7368,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_50_to_show() throws Exception {
         runTest("effects: CSS 50 to show");
     }
@@ -8002,7 +7378,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_50_to_hide() throws Exception {
         runTest("effects: CSS 50 to hide");
     }
@@ -8013,7 +7388,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_50_to_0() throws Exception {
         runTest("effects: JS 50 to 0");
     }
@@ -8024,7 +7398,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_50_to_50() throws Exception {
         runTest("effects: JS 50 to 50");
     }
@@ -8035,7 +7408,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_50_to_100() throws Exception {
         runTest("effects: JS 50 to 100");
     }
@@ -8046,7 +7418,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__JS_50_to_show() throws Exception {
         runTest("effects: JS 50 to show");
     }
@@ -8057,7 +7428,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__JS_50_to_hide() throws Exception {
         runTest("effects: JS 50 to hide");
     }
@@ -8068,7 +7438,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__CSS_0_to_0() throws Exception {
         runTest("effects: CSS 0 to 0");
     }
@@ -8079,7 +7448,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_0_to_50() throws Exception {
         runTest("effects: CSS 0 to 50");
     }
@@ -8090,7 +7458,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_0_to_100() throws Exception {
         runTest("effects: CSS 0 to 100");
     }
@@ -8101,7 +7468,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_0_to_show() throws Exception {
         runTest("effects: CSS 0 to show");
     }
@@ -8112,7 +7478,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__CSS_0_to_hide() throws Exception {
         runTest("effects: CSS 0 to hide");
     }
@@ -8123,7 +7488,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_0_to_0() throws Exception {
         runTest("effects: JS 0 to 0");
     }
@@ -8134,7 +7498,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__JS_0_to_50() throws Exception {
         runTest("effects: JS 0 to 50");
     }
@@ -8145,7 +7508,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__JS_0_to_100() throws Exception {
         runTest("effects: JS 0 to 100");
     }
@@ -8156,7 +7518,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__JS_0_to_show() throws Exception {
         runTest("effects: JS 0 to show");
     }
@@ -8167,7 +7528,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__JS_0_to_hide() throws Exception {
         runTest("effects: JS 0 to hide");
     }
@@ -8178,7 +7538,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 16, 16")
-    @NotYetImplemented(CHROME)
     public void effects__Effects_chaining() throws Exception {
         runTest("effects: Effects chaining");
     }
@@ -8189,7 +7548,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__jQuery_show__fast___doesn_t_clear_radio_buttons__bug__1095_() throws Exception {
         runTest("effects: jQuery.show('fast') doesn't clear radio buttons (bug #1095)");
     }
@@ -8200,7 +7558,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__interrupt_toggle() throws Exception {
         runTest("effects: interrupt toggle");
     }
@@ -8211,7 +7568,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__animate_with_per_property_easing() throws Exception {
         runTest("effects: animate with per-property easing");
     }
@@ -8222,7 +7578,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 11, 11")
-    @NotYetImplemented(CHROME)
     public void effects__animate_with_CSS_shorthand_properties() throws Exception {
         runTest("effects: animate with CSS shorthand properties");
     }
@@ -8233,7 +7588,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void effects__hide_hidden_elements__with_animation__bug__7141_() throws Exception {
         runTest("effects: hide hidden elements, with animation (bug #7141)");
     }
@@ -8244,7 +7598,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__animate_unit_less_properties___4966_() throws Exception {
         runTest("effects: animate unit-less properties (#4966)");
     }
@@ -8255,7 +7608,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects__animate_properties_missing_px_w__opacity_as_last___9074_() throws Exception {
         runTest("effects: animate properties missing px w/ opacity as last (#9074)");
     }
@@ -8266,7 +7618,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__callbacks_should_fire_in_correct_order___9100_() throws Exception {
         runTest("effects: callbacks should fire in correct order (#9100)");
     }
@@ -8277,7 +7628,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__callbacks_that_throw_exceptions_will_be_removed___5684_() throws Exception {
         runTest("effects: callbacks that throw exceptions will be removed (#5684)");
     }
@@ -8288,7 +7638,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE8, CHROME })
     public void effects__animate_will_scale_margin_properties_individually() throws Exception {
         runTest("effects: animate will scale margin properties individually");
     }
@@ -8299,7 +7648,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__Do_not_append_px_to__fill_opacity___9548() throws Exception {
         runTest("effects: Do not append px to 'fill-opacity' #9548");
     }
@@ -8310,7 +7658,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void effects__line_height_animates_correctly___13855_() throws Exception {
         runTest("effects: line-height animates correctly (#13855)");
     }
@@ -8321,7 +7669,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__jQuery_Animation__object__props__opts__() throws Exception {
         runTest("effects: jQuery.Animation( object, props, opts )");
     }
@@ -8332,7 +7679,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__Animate_Option__step__function__percent__tween__() throws Exception {
         runTest("effects: Animate Option: step: function( percent, tween )");
     }
@@ -8343,7 +7689,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__Animate_callbacks_have_correct_context() throws Exception {
         runTest("effects: Animate callbacks have correct context");
     }
@@ -8354,7 +7699,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__User_supplied_callback_called_after_show_when_fx_off___8892_() throws Exception {
         runTest("effects: User supplied callback called after show when fx off (#8892)");
     }
@@ -8365,7 +7709,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 18, 18")
-    @NotYetImplemented(CHROME)
     public void effects__animate_should_set_display_for_disconnected_nodes() throws Exception {
         runTest("effects: animate should set display for disconnected nodes");
     }
@@ -8376,7 +7719,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__Animation_callback_should_not_show_animated_element_as__animated___7157_() throws Exception {
         runTest("effects: Animation callback should not show animated element as :animated (#7157)");
     }
@@ -8387,7 +7729,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__Initial_step_callback_should_show_element_as__animated___14623_() throws Exception {
         runTest("effects: Initial step callback should show element as :animated (#14623)");
     }
@@ -8398,7 +7739,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void effects__hide_called_on_element_within_hidden_parent_should_set_display_to_none___10045_() throws Exception {
         runTest("effects: hide called on element within hidden parent should set display to none (#10045)");
     }
@@ -8409,7 +7749,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented(CHROME)
     public void effects__hide__fadeOut_and_slideUp_called_on_element_width_height_and_width___0_should_set_display_to_none() throws Exception {
         runTest("effects: hide, fadeOut and slideUp called on element width height and width = 0 should set display to none");
     }
@@ -8420,7 +7759,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__hide_should_not_leave_hidden_inline_elements_visible___14848_() throws Exception {
         runTest("effects: hide should not leave hidden inline elements visible (#14848)");
     }
@@ -8431,7 +7769,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void effects__Handle_queue_false_promises() throws Exception {
         runTest("effects: Handle queue:false promises");
     }
@@ -8442,7 +7779,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__multiple_unqueued_and_promise() throws Exception {
         runTest("effects: multiple unqueued and promise");
     }
@@ -8453,7 +7789,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void effects__animate_does_not_change_start_value_for_non_px_animation___7109_() throws Exception {
         runTest("effects: animate does not change start value for non-px animation (#7109)");
     }
@@ -8479,7 +7815,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 15, 15")
-    @NotYetImplemented(CHROME)
     public void effects__Animation_callbacks___11797_() throws Exception {
         runTest("effects: Animation callbacks (#11797)");
     }
@@ -8490,7 +7825,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void effects__Animate_properly_sets_overflow_hidden_when_animating_width_height___12117_() throws Exception {
         runTest("effects: Animate properly sets overflow hidden when animating width/height (#12117)");
     }
@@ -8501,7 +7835,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void effects__Each_tick_of_the_timer_loop_uses_a_fresh_time___12837_() throws Exception {
         runTest("effects: Each tick of the timer loop uses a fresh time (#12837)");
     }
@@ -8512,7 +7845,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void effects__Animations_with_0_duration_don_t_ease___12273_() throws Exception {
         runTest("effects: Animations with 0 duration don't ease (#12273)");
     }
@@ -8523,7 +7855,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__toggle_state_tests__toggle___8685_() throws Exception {
         runTest("effects: toggle state tests: toggle (#8685)");
     }
@@ -8534,7 +7865,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__toggle_state_tests__slideToggle___8685_() throws Exception {
         runTest("effects: toggle state tests: slideToggle (#8685)");
     }
@@ -8545,7 +7875,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void effects__toggle_state_tests__fadeToggle___8685_() throws Exception {
         runTest("effects: toggle state tests: fadeToggle (#8685)");
     }
@@ -8556,7 +7885,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void effects__jQuery_fx_start___jQuery_fx_stop_hook_points() throws Exception {
         runTest("effects: jQuery.fx.start & jQuery.fx.stop hook points");
     }
@@ -8567,7 +7895,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 11, 11")
-    @NotYetImplemented(CHROME)
     public void effects___finish___completes_all_queued_animations() throws Exception {
         runTest("effects: .finish() completes all queued animations");
     }
@@ -8578,7 +7905,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented(CHROME)
     public void effects___finish__false_____unqueued_animations() throws Exception {
         runTest("effects: .finish( false ) - unqueued animations");
     }
@@ -8589,7 +7915,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 11, 11")
-    @NotYetImplemented(CHROME)
     public void effects___finish___custom______custom_queue_animations() throws Exception {
         runTest("effects: .finish( \"custom\" ) - custom queue animations");
     }
@@ -8600,7 +7925,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void effects___finish___calls_finish_of_custom_queue_functions() throws Exception {
         runTest("effects: .finish() calls finish of custom queue functions");
     }
@@ -8611,7 +7935,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void effects___finish___is_applied_correctly_when_multiple_elements_were_animated___13937_() throws Exception {
         runTest("effects: .finish() is applied correctly when multiple elements were animated (#13937)");
     }
@@ -8622,7 +7945,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__slideDown___after_stop_____13483_() throws Exception {
         runTest("effects: slideDown() after stop() (#13483)");
     }
@@ -8633,7 +7955,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void effects__Respect_display_value_on_inline_elements___14824_() throws Exception {
         runTest("effects: Respect display value on inline elements (#14824)");
     }
@@ -8644,7 +7965,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void offset__empty_set() throws Exception {
         runTest("offset: empty set");
     }
@@ -8655,7 +7975,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void offset__object_without_getBoundingClientRect() throws Exception {
         runTest("offset: object without getBoundingClientRect");
     }
@@ -8666,7 +7985,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void offset__disconnected_node() throws Exception {
         runTest("offset: disconnected node");
     }
@@ -8677,7 +7995,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 178, 178")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void offset__absolute() throws Exception {
         runTest("offset: absolute");
     }
@@ -8688,7 +8006,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 60, 60")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void offset__relative() throws Exception {
         runTest("offset: relative");
     }
@@ -8699,7 +8017,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 80, 80")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE11)
     public void offset__static() throws Exception {
         runTest("offset: static");
     }
@@ -8710,7 +8028,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 34, 34")
-    @NotYetImplemented(CHROME)
     public void offset__fixed() throws Exception {
         runTest("offset: fixed");
     }
@@ -8721,7 +8038,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void offset__table() throws Exception {
         runTest("offset: table");
     }
@@ -8732,7 +8049,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void offset__scroll() throws Exception {
         runTest("offset: scroll");
     }
@@ -8743,7 +8060,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void offset__body() throws Exception {
         runTest("offset: body");
     }
@@ -8754,7 +8071,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(CHROME)
     public void offset__chaining() throws Exception {
         runTest("offset: chaining");
     }
@@ -8765,7 +8081,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 13, 13")
-    @NotYetImplemented(CHROME)
     public void offset__offsetParent() throws Exception {
         runTest("offset: offsetParent");
     }
@@ -8776,7 +8091,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");
     }
@@ -8787,7 +8101,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void dimensions__width__() throws Exception {
         runTest("dimensions: width()");
     }
@@ -8798,7 +8111,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void dimensions__width_Function_() throws Exception {
         runTest("dimensions: width(Function)");
     }
@@ -8809,7 +8121,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void dimensions__width_Function_args__() throws Exception {
         runTest("dimensions: width(Function(args))");
     }
@@ -8820,7 +8131,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(CHROME)
     public void dimensions__height__() throws Exception {
         runTest("dimensions: height()");
     }
@@ -8831,7 +8141,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented({ IE8, CHROME })
     public void dimensions__height_Function_() throws Exception {
         runTest("dimensions: height(Function)");
     }
@@ -8842,7 +8151,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void dimensions__height_Function_args__() throws Exception {
         runTest("dimensions: height(Function(args))");
     }
@@ -8853,7 +8161,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void dimensions__innerWidth__() throws Exception {
         runTest("dimensions: innerWidth()");
     }
@@ -8864,7 +8171,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(CHROME)
     public void dimensions__innerHeight__() throws Exception {
         runTest("dimensions: innerHeight()");
     }
@@ -8875,7 +8181,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 11, 11")
-    @NotYetImplemented(CHROME)
     public void dimensions__outerWidth__() throws Exception {
         runTest("dimensions: outerWidth()");
     }
@@ -8886,7 +8191,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 16, 16")
-    @NotYetImplemented(CHROME)
     public void dimensions__child_of_a_hidden_elem__or_unconnected_node__has_accurate_inner_outer_Width___Height___see__9441__9300() throws Exception {
         runTest("dimensions: child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #9441 #9300");
     }
@@ -8897,7 +8201,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void dimensions__getting_dimensions_shouldn_t_modify_runtimeStyle_see__9233() throws Exception {
         runTest("dimensions: getting dimensions shouldn't modify runtimeStyle see #9233");
     }
@@ -8908,7 +8211,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void dimensions__table_dimensions() throws Exception {
         runTest("dimensions: table dimensions");
     }
@@ -8919,7 +8221,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 16, 16")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void dimensions__box_sizing_border_box_child_of_a_hidden_elem__or_unconnected_node__has_accurate_inner_outer_Width___Height___see__10413() throws Exception {
         runTest("dimensions: box-sizing:border-box child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413");
     }
@@ -8930,7 +8232,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 11, 11")
-    @NotYetImplemented(CHROME)
     public void dimensions__outerHeight__() throws Exception {
         runTest("dimensions: outerHeight()");
     }
@@ -8941,7 +8242,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void dimensions__passing_undefined_is_a_setter__5571() throws Exception {
         runTest("dimensions: passing undefined is a setter #5571");
     }
@@ -8952,7 +8252,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void dimensions__getters_on_non_elements_should_return_null() throws Exception {
         runTest("dimensions: getters on non elements should return null");
     }
@@ -8963,7 +8262,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 20, 20")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void dimensions__setters_with_and_without_box_sizing_border_box() throws Exception {
         runTest("dimensions: setters with and without box-sizing:border-box");
     }
@@ -8974,7 +8273,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void dimensions__window_vs__small_document() throws Exception {
         runTest("dimensions: window vs. small document");
     }
@@ -8985,7 +8284,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(CHROME)
     public void dimensions__window_vs__large_document() throws Exception {
         runTest("dimensions: window vs. large document");
     }
