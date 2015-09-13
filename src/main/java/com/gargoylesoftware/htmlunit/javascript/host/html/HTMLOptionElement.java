@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_CONSTRUCTOR_IGNORES_LABEL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -37,8 +37,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object that represents an option.
@@ -101,8 +99,7 @@ public class HTMLOptionElement extends FormChild {
     @JsxGetter
     public String getValue() {
         String value = getDomNodeOrNull().getAttribute("value");
-        if (value == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED)) {
+        if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             value = ((HtmlOption) getDomNodeOrNull()).getText();
         }
         return value;

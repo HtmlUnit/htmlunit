@@ -1587,10 +1587,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION,
 
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED,
-
     /** element.outerHTML handles the body and head tag as readonly (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_OUTER_HTML_BODY_HEAD_READONLY,
