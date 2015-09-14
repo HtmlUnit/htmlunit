@@ -2206,7 +2206,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "two", "One" },
             IE = { "two", "" })
-    @NotYetImplemented(IE8)
     public void valueByText() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2236,7 +2235,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "two", "One" },
             IE = { "two", "" })
-    @NotYetImplemented(IE8)
     public void valueByTextTrim() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
