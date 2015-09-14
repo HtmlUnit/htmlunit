@@ -26,7 +26,6 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -122,7 +121,7 @@ public class AppletContextImpl implements AppletContext {
     public void showStatus(final String status) {
         // perhaps should we move status handling to WebWindow
         // on the other side this allows "orphaned" pages to be usable
-        final Window window = ((SimpleScriptable) htmlPage_.getScriptObject()).getWindow();
+        final Window window = (Window) htmlPage_.getEnclosingWindow().getScriptObject();
         window.setStatus(status);
     }
 }
