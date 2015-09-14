@@ -14,13 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_INDEX_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.List;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
@@ -32,10 +34,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * The JavaScript object for {@link HtmlSelect}.
@@ -102,15 +100,6 @@ public class HTMLSelectElement extends FormField {
      */
     @JsxFunction
     public void add(final HTMLOptionElement newOptionObject, final Object beforeOptionObject) {
-        if (getBrowserVersion().hasFeature(JS_SELECT_ADD_SECOND_PARAM_IS_INDEX_ONLY)) {
-            if (beforeOptionObject instanceof HTMLOptionElement) {
-                throw new EvaluatorException("Unsupported parameter.");
-            }
-            if (beforeOptionObject == null) {
-                throw new EvaluatorException("Null not supported as index.");
-            }
-        }
-
         getOptions().add(newOptionObject, beforeOptionObject);
     }
 

@@ -1707,12 +1707,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SELECTOR_TEXT_UPPERCASE,
 
-    /** Indicates if calling HTMLSelectElement.add the second parameter
-     * is only treated as index like IE does.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SELECT_ADD_SECOND_PARAM_IS_INDEX_ONLY,
-
     /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
