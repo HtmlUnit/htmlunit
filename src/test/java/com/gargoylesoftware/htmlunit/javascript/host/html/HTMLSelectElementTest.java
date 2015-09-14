@@ -92,6 +92,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "0", "3", "-1" })
+    @NotYetImplemented(IE8)
     public void getSelectedIndexNothingSelected() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1755,7 +1756,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
                         "0", "false", "false", "false", "-1" },
             IE8 = { "0", "true", "false", "false", "0",
                     "0", "true", "false", "false", "0" })
-    @NotYetImplemented(IE8)
     public void defaultSelectedValue_SizeNegativeOne() throws Exception {
         final String[] expected = getExpectedAlerts();
         defaultSelectedValue("-1", false, Arrays.copyOf(expected, 5));
@@ -1770,7 +1770,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
                          "0", "false", "false", "false", "-1" },
             IE8 = { "0", "true", "false", "false", "0",
                     "0", "true", "false", "false", "0" })
-    @NotYetImplemented(IE8)
     public void defaultSelectedValue_SizeZero() throws Exception {
         final String[] expected = getExpectedAlerts();
         defaultSelectedValue("0", false, Arrays.copyOf(expected, 5));
@@ -1785,7 +1784,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
                         "1", "false", "false", "false", "-1" },
             IE8 = { "1", "true", "false", "false", "0",
                     "1", "true", "false", "false", "0" })
-    @NotYetImplemented(IE8)
     public void defaultSelectedValue_SizeOne() throws Exception {
         final String[] expected = getExpectedAlerts();
         defaultSelectedValue("1", false, Arrays.copyOf(expected, 5));
@@ -1809,7 +1807,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
                         "0", "false", "false", "false", "-1" },
             IE8 = { "0", "true", "false", "false", "0",
                     "0", "true", "false", "false", "0" })
-    @NotYetImplemented(IE8)
     public void defaultSelectedValue_SizeInvalid() throws Exception {
         final String[] expected = getExpectedAlerts();
         defaultSelectedValue("x", false, Arrays.copyOf(expected, 5));
