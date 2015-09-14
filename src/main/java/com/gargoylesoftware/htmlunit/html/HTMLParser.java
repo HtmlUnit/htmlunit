@@ -393,7 +393,7 @@ public final class HTMLParser {
         private final HtmlPage page_;
 
         private Locator locator_;
-        private final Deque<DomNode> stack_ = new ArrayDeque<DomNode>();
+        private final Deque<DomNode> stack_ = new ArrayDeque<>();
 
         private DomNode currentNode_;
         private StringBuilder characters_;

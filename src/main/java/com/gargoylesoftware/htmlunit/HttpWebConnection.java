@@ -127,7 +127,7 @@ public class HttpWebConnection implements WebConnection {
     private static final String HACKED_COOKIE_POLICY = "mine";
 
     // have one per thread because this is (re)configured for every call (see configureHttpProcessor)
-    private ThreadLocal<HttpClientBuilder> httpClientBuilder_ = new ThreadLocal<HttpClientBuilder>();
+    private ThreadLocal<HttpClientBuilder> httpClientBuilder_ = new ThreadLocal<>();
     private final WebClient webClient_;
 
     /** Use single HttpContext, so there is no need to re-send authentication for each and every request. */

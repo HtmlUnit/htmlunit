@@ -62,7 +62,7 @@ public class History implements Serializable {
      * Initializes the transient fields.
      */
     private void initTransientFields() {
-        ignoreNewPages_ = new ThreadLocal<Boolean>();
+        ignoreNewPages_ = new ThreadLocal<>();
     }
 
     /**

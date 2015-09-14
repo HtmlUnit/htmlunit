@@ -1320,7 +1320,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * @return an Iterable over the children of this node
+     * @return an {@link Iterable} over the children of this node
      */
     public final Iterable<DomNode> getChildren() {
         return new Iterable<DomNode>() {

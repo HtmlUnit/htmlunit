@@ -81,7 +81,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
     private static class ChatWebSocketHandler extends WebSocketHandler {
 
-        private final Set<ChatWebSocket> webSockets_ = new CopyOnWriteArraySet<ChatWebSocket>();
+        private final Set<ChatWebSocket> webSockets_ = new CopyOnWriteArraySet<>();
 
         @Override
         public void configure(final WebSocketServletFactory factory) {

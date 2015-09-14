@@ -562,7 +562,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
         mockWebConnection.setResponse(URL_SECOND, html);
 
         client_.setWebConnection(mockWebConnection);
-        final List<ScriptException> scriptExceptions = new ArrayList<ScriptException>();
+        final List<ScriptException> scriptExceptions = new ArrayList<>();
         client_.setJavaScriptErrorListener(new JavaScriptErrorListener() {
 
             @Override

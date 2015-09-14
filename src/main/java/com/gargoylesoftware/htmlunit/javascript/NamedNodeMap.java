@@ -198,7 +198,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         }
         if (useRecursiveAttributeForIE()) {
             // we have to search only inside not yet defined items
-            final HashSet<String> tmpIds = new HashSet<String>();
+            final HashSet<String> tmpIds = new HashSet<>();
             for (int i = 0; i < attributes_.getLength(); i++) {
                 tmpIds.add(attributes_.item(i).getNodeName());
             }
@@ -237,7 +237,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         int length = attributes_.getLength();
         if (useRecursiveAttributeForIE()) {
             // we have to count only inside not yet defined items
-            final HashSet<String> tmpIds = new HashSet<String>();
+            final HashSet<String> tmpIds = new HashSet<>();
             for (int i = 0; i < length; i++) {
                 tmpIds.add(attributes_.item(i).getNodeName());
             }

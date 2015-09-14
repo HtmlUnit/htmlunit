@@ -143,7 +143,7 @@ public abstract class WebTestCase {
     /** To be documented. */
     protected static final BrowserVersion FLAG_ALL_BROWSERS = new BrowserVersion("", "", "", 0);
     /** To be documented. */
-    protected static final ThreadLocal<BrowserVersion> generateTest_browserVersion_ = new ThreadLocal<BrowserVersion>();
+    protected static final ThreadLocal<BrowserVersion> generateTest_browserVersion_ = new ThreadLocal<>();
     private String generateTest_content_;
     private List<String> generateTest_expectedAlerts_;
     private boolean generateTest_notYetImplemented_;

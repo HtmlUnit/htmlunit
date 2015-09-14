@@ -1072,8 +1072,8 @@ public class JavaScriptEngine {
     }
 
     private void initTransientFields() {
-        javaScriptRunning_ = new ThreadLocal<Boolean>();
-        postponedActions_ = new ThreadLocal<List<PostponedAction>>();
+        javaScriptRunning_ = new ThreadLocal<>();
+        postponedActions_ = new ThreadLocal<>();
         holdPostponedActions_ = false;
     }
 
