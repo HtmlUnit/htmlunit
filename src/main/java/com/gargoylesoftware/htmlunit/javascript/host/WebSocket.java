@@ -94,7 +94,7 @@ public class WebSocket extends EventTarget {
     private WebSocket(final String url, final Object protocols, final Window window) {
         try {
             containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
-            
+
             final WebSocketClient client;
             if (containingPage_.getWebClient().getOptions().isUseInsecureSSL()) {
                 client = new WebSocketClient(new SslContextFactory(true));
