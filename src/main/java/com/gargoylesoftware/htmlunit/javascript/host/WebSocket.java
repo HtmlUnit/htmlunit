@@ -23,6 +23,7 @@ import java.net.URI;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
@@ -92,10 +93,17 @@ public class WebSocket extends EventTarget {
      */
     private WebSocket(final String url, final Object protocols, final Window window) {
         try {
-            final WebSocketClient client = new WebSocketClient();
+            containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
+            
+            final WebSocketClient client;
+            if (containingPage_.getWebClient().getOptions().isUseInsecureSSL()) {
+                client = new WebSocketClient(new SslContextFactory(true));
+            }
+            else {
+                client = new WebSocketClient();
+            }
             client.start();
             incomingSession_ = client.connect(new WebSocketImpl(), new URI(url)).get();
-            containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
             readyState_ = OPEN;
         }
         catch (final Exception e) {

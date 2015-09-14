@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="1720">
+                JavaScript: WebSocket to handle insecure SSL.
+            </action>
             <action type="fix" dev="rbri">
                 Various fixes for our checkbox and radiobutton simulation. This also fixes
                 css selectors working with the checked attribute.
