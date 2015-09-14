@@ -1338,7 +1338,7 @@ public class JQuery1113Test extends WebDriverTestCase {
         FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
         IE8 = "1, 1, 2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
     }
