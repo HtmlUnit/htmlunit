@@ -184,6 +184,27 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         test("checked", "", "");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(FF = { "abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                        "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
+                        "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc" },
+            CHROME = { "abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                        "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
+                        "", "", "", "", "", "50", "abc", "abc", "abc", "abc" },
+            IE11 = { "abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                        "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
+                        "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc" },
+            IE8 = { "abc", "", "abc", "", "abc", "", "", "abc", "abc", "abc", "", "abc",
+                        "", "abc", "foo", "abc", "abc", "abc", "abc", "abc", "abc", "abc",
+                        "abc", "abc", "abc", "abc", "abc", "abc" })
+    @Test
+    @NotYetImplemented
+    public void setValueAttribute() throws Exception {
+        test("value", "", "abc");
+    }
+
     private void test(final String property) throws Exception {
         test(property, "", null);
     }
