@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECT_MULTIPLE_FIRST_IS_DEFAULT;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -92,10 +91,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         }
 
         // Set a default selected option if necessary.
-        if (getSelectedOptions().isEmpty()
-                && size <= 1
-                && (!isMultipleSelectEnabled()
-                        || hasFeature(SELECT_MULTIPLE_FIRST_IS_DEFAULT))) {
+        if (getSelectedOptions().isEmpty() && size <= 1 && !isMultipleSelectEnabled()) {
             final List<HtmlOption> options = getOptions();
             if (!options.isEmpty()) {
                 final HtmlOption first = options.get(0);

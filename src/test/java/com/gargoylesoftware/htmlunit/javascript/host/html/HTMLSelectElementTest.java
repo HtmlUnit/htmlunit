@@ -18,8 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.assertSame;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -92,7 +90,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "0", "3", "-1" })
-    @NotYetImplemented(IE8)
     public void getSelectedIndexNothingSelected() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1099,8 +1096,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "3", "1", "One", "Two*", "Three" },
-            IE11 = { "3", "exception" })
-    @NotYetImplemented(IE8)
+            IE = { "3", "exception" })
     public void removeOptionMethodIndexMinusOne() throws Exception {
         removeOptionMethod("-1", false, false);
     }
@@ -1752,65 +1748,90 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "true", "false", "false", "0",
-                        "0", "false", "false", "false", "-1" },
-            IE8 = { "0", "true", "false", "false", "0",
-                    "0", "true", "false", "false", "0" })
+    @Alerts({ "0", "true", "false", "false", "0"})
     public void defaultSelectedValue_SizeNegativeOne() throws Exception {
-        final String[] expected = getExpectedAlerts();
-        defaultSelectedValue("-1", false, Arrays.copyOf(expected, 5));
-        defaultSelectedValue("-1", true, Arrays.copyOfRange(expected, 5, 10));
+        defaultSelectedValue("-1", false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts (DEFAULT = { "0", "true", "false", "false", "0",
-                         "0", "false", "false", "false", "-1" },
-            IE8 = { "0", "true", "false", "false", "0",
-                    "0", "true", "false", "false", "0" })
+    @Alerts({ "0", "false", "false", "false", "-1" })
+    public void defaultSelectedValue_SizeNegativeOne_Multi() throws Exception {
+        defaultSelectedValue("-1", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts ({ "0", "true", "false", "false", "0" })
     public void defaultSelectedValue_SizeZero() throws Exception {
-        final String[] expected = getExpectedAlerts();
-        defaultSelectedValue("0", false, Arrays.copyOf(expected, 5));
-        defaultSelectedValue("0", true, Arrays.copyOfRange(expected, 5, 10));
+        defaultSelectedValue("0", false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "true", "false", "false", "0",
-                        "1", "false", "false", "false", "-1" },
-            IE8 = { "1", "true", "false", "false", "0",
-                    "1", "true", "false", "false", "0" })
+    @Alerts ({ "0", "false", "false", "false", "-1" })
+    public void defaultSelectedValue_SizeZero_Multi() throws Exception {
+        defaultSelectedValue("0", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "true", "false", "false", "0" })
     public void defaultSelectedValue_SizeOne() throws Exception {
-        final String[] expected = getExpectedAlerts();
-        defaultSelectedValue("1", false, Arrays.copyOf(expected, 5));
-        defaultSelectedValue("1", true, Arrays.copyOfRange(expected, 5, 10));
+        defaultSelectedValue("1", false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1", "false", "false", "false", "-1" })
+    public void defaultSelectedValue_SizeOne_Multi() throws Exception {
+        defaultSelectedValue("1", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "false", "false", "false", "-1" })
     public void defaultSelectedValue_SizeTwo() throws Exception {
-        defaultSelectedValue("2", false, "2", "false", "false", "false", "-1");
-        defaultSelectedValue("2", true, "2", "false", "false", "false", "-1");
+        defaultSelectedValue("2", false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "true", "false", "false", "0",
-                        "0", "false", "false", "false", "-1" },
-            IE8 = { "0", "true", "false", "false", "0",
-                    "0", "true", "false", "false", "0" })
+    @Alerts({ "2", "false", "false", "false", "-1" })
+    public void defaultSelectedValue_SizeTwo_Multi() throws Exception {
+        defaultSelectedValue("2", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "true", "false", "false", "0" })
     public void defaultSelectedValue_SizeInvalid() throws Exception {
-        final String[] expected = getExpectedAlerts();
-        defaultSelectedValue("x", false, Arrays.copyOf(expected, 5));
-        defaultSelectedValue("x", true, Arrays.copyOfRange(expected, 5, 10));
+        defaultSelectedValue("x", false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "false", "false", "false", "-1" })
+    public void defaultSelectedValue_SizeInvalid_Mulzi() throws Exception {
+        defaultSelectedValue("x", true);
     }
 
     /**
@@ -1821,10 +1842,9 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @param expected the expected alerts
      * @throws Exception if the test fails
      */
-    private void defaultSelectedValue(final String size, final boolean multiple, final String... expected)
+    private void defaultSelectedValue(final String size, final boolean multiple)
         throws Exception {
 
-        setExpectedAlerts(expected);
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"

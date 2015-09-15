@@ -2130,13 +2130,6 @@ public enum BrowserVersionFeatures {
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
 
     /**
-     * Indicates that all options of a select are deselected,
-     * if the select state is changed for an unknown option.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    SELECT_MULTIPLE_FIRST_IS_DEFAULT,
-
-    /**
      * Indicates that a read only JS property can potentially be set.
      * If supported, {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject}.isReadOnlySettable()
      * will be checked, if not supported, an exception will be thrown.
