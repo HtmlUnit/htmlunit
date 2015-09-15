@@ -29,6 +29,7 @@ import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -90,7 +91,16 @@ public class JQuery1113Test extends WebDriverTestCase {
             final String url = "http://localhost:" + PORT + "/jquery/test/index.html?dev&testNumber=" + testNumber;
             webdriver.get(url);
 
-            WebElement status = webdriver.findElement(By.id("qunit-testresult"));
+            WebElement status = null;
+            try {
+                status = webdriver.findElement(By.id("qunit-testresult"));
+            }
+            catch (final NoSuchElementException e) {
+                // give this a second try
+                Thread.sleep(DEFAULT_WAIT_TIME);
+                status = webdriver.findElement(By.id("qunit-testresult"));
+            }
+
             while (!status.getText().startsWith("Tests completed")) {
                 // strange
                 // starting with jQuery 1.11.3 the control seems to be replaced by
