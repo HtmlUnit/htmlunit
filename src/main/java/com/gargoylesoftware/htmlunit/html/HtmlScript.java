@@ -248,7 +248,8 @@ public class HtmlScript extends HtmlElement {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Script node added: " + asXml());
         }
-        final PostponedAction action = new PostponedAction(getPage()) {
+
+        final PostponedAction action = new PostponedAction(getPage(), "Execution of script " + this) {
             @Override
             public void execute() {
                 final HTMLDocument jsDoc = (HTMLDocument) ((Window) getPage().getEnclosingWindow().getScriptObject())
@@ -280,7 +281,12 @@ public class HtmlScript extends HtmlElement {
                 }
             }
         };
-        if (postponed && StringUtils.isBlank(getTextContent())) {
+
+        if (hasAttribute("async")) {
+            final HtmlPage owningPage = getHtmlPageOrNull();
+            owningPage.addAfterLoadAction(action);
+        }
+        else if (postponed && StringUtils.isBlank(getTextContent())) {
             final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }
@@ -471,11 +477,8 @@ public class HtmlScript extends HtmlElement {
 
         // If the script's root ancestor node is not the page, then the script is not a part of the page.
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
-        DomNode root = this;
-        while (root.getParentNode() != null) {
-            root = root.getParentNode();
-        }
-        if (root != getPage()) {
+
+        if (!getPage().isAncestorOf(this)) {
             return false;
         }
 

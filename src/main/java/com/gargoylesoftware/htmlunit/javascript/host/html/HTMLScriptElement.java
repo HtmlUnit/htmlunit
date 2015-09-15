@@ -233,4 +233,22 @@ public class HTMLScriptElement extends HTMLElement {
         }
         return super.insertBeforeImpl(args);
     }
+
+    /**
+     * Returns the <tt>async</tt> attribute.
+     * @return the <tt>async</tt> attribute
+     */
+    @JsxGetter
+    public String getAsync() {
+        return getDomNodeOrDie().getAttribute("async");
+    }
+
+    /**
+     * Sets the <tt>async</tt> attribute.
+     * @param type the <tt>async</tt> attribute
+     */
+    @JsxSetter
+    public void setAsync(final String type) {
+        getDomNodeOrDie().setAttribute("async", type);
+    }
 }

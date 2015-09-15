@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1007,6 +1009,69 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
             + "</body>\n"
             + "</html>\n";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "3", "2" })
+    public void async() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script src='js1.js'></script>\n"
+            + "<script src='js2.js' async></script>\n"
+            + "<script src='js3.js'></script>\n"
+            + "</body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "alert(1);");
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "alert(2);");
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js3.js"), "alert(3);");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "1" })
+    public void async2() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "var s1 = document.createElement('script');\n"
+            + "s1.src = 'js1.js';\n"
+            + "s1.async = true;\n"
+            + "document.body.appendChild(s1);\n"
+            + "</script>\n"
+            + "<script src='js2.js'></script>\n"
+            + "</body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "alert(1);");
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "alert(2);");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "1" })
+    public void asyncLoadsAsync() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script async>\n"
+            + "var s1 = document.createElement('script');\n"
+            + "s1.src = 'js1.js';\n"
+            + "s1.async = true;\n"
+            + "document.body.appendChild(s1);\n"
+            + "</script>\n"
+            + "<script src='js2.js'></script>\n"
+            + "</body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "alert(1);");
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "alert(2);");
 
         loadPageWithAlerts2(html);
     }

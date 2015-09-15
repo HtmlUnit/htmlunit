@@ -41,6 +41,11 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -81,11 +86,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -147,7 +147,7 @@ public class HtmlPage extends InteractivePage {
     private int inlineSnippetParserCount_;
     private Collection<HtmlAttributeChangeListener> attributeListeners_;
     private final Object lock_ = new String(); // used for synchronization
-    private List<PostponedAction> afterLoadActions_ = new ArrayList<>();
+    private List<PostponedAction> afterLoadActions_ = Collections.synchronizedList(new ArrayList<PostponedAction>());
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
@@ -273,10 +273,9 @@ public class HtmlPage extends InteractivePage {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         }
 
-        final List<PostponedAction> actions = new ArrayList<>(afterLoadActions_);
-        afterLoadActions_.clear();
         try {
-            for (final PostponedAction action : actions) {
+            while (!afterLoadActions_.isEmpty()) {
+                final PostponedAction action = afterLoadActions_.remove(0);
                 action.execute();
             }
         }
