@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
@@ -1019,6 +1022,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "3", "2" },
             IE8 = { "1", "2", "3" })
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void async() throws Exception {
         final String html = "<html><body>\n"
             + "<script src='js1.js'></script>\n"
@@ -1037,8 +1041,9 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT ={ "2", "1" },
+    @Alerts(DEFAULT = { "2", "1" },
             IE8 = { "1", "2" })
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void async2() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -1062,6 +1067,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "2", "1" },
             IE8 = { "1", "2" })
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void asyncLoadsAsync() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
