@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONREADY
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ASYNC_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE;
@@ -29,6 +30,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUP
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -50,8 +53,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 /**
  * Wrapper for the HTML element "script".<br>
@@ -282,11 +283,8 @@ public class HtmlScript extends HtmlElement {
             }
         };
 
-        if (hasAttribute("async")) {
-            final HtmlPage owningPage = getHtmlPageOrNull();
-            owningPage.addAfterLoadAction(action);
-        }
-        else if (postponed && StringUtils.isBlank(getTextContent())) {
+        if ((!hasFeature(JS_SCRIPT_ASYNC_NOT_SUPPORTED) && hasAttribute("async"))
+                || postponed && StringUtils.isBlank(getTextContent())) {
             final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }

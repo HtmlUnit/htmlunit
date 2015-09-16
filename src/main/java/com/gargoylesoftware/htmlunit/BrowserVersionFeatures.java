@@ -1663,6 +1663,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION,
 
+    /** Script async attribute is not supported. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_SCRIPT_ASYNC_NOT_SUPPORTED,
+
     /** Javascript script.insertBefore throws an error (IE6-IE8). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION,
