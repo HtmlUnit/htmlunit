@@ -1017,7 +1017,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "3", "2" })
+    @Alerts(DEFAULT = { "1", "3", "2" },
+            IE8 = { "1", "2", "3" })
     public void async() throws Exception {
         final String html = "<html><body>\n"
             + "<script src='js1.js'></script>\n"
@@ -1036,14 +1037,15 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "1" })
+    @Alerts(DEFAULT ={ "2", "1" },
+            IE8 = { "1", "2" })
     public void async2() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
-            + "var s1 = document.createElement('script');\n"
-            + "s1.src = 'js1.js';\n"
-            + "s1.async = true;\n"
-            + "document.body.appendChild(s1);\n"
+            + "  var s1 = document.createElement('script');\n"
+            + "  s1.src = 'js1.js';\n"
+            + "  s1.async = true;\n"
+            + "  document.body.appendChild(s1);\n"
             + "</script>\n"
             + "<script src='js2.js'></script>\n"
             + "</body></html>\n";
@@ -1058,14 +1060,15 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "1" })
+    @Alerts(DEFAULT = { "2", "1" },
+            IE8 = { "1", "2" })
     public void asyncLoadsAsync() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
-            + "var s1 = document.createElement('script');\n"
-            + "s1.src = 'js1.js';\n"
-            + "s1.async = true;\n"
-            + "document.body.appendChild(s1);\n"
+            + "  var s1 = document.createElement('script');\n"
+            + "  s1.src = 'js1.js';\n"
+            + "  s1.async = true;\n"
+            + "  document.body.appendChild(s1);\n"
             + "</script>\n"
             + "<script src='js2.js'></script>\n"
             + "</body></html>\n";
