@@ -238,7 +238,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the <tt>async</tt> attribute.
      * @return the <tt>async</tt> attribute
      */
-    @JsxGetter
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11)})
     public String getAsync() {
         return getDomNodeOrDie().getAttribute("async");
     }
@@ -247,7 +247,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the <tt>async</tt> attribute.
      * @param type the <tt>async</tt> attribute
      */
-    @JsxSetter
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11)})
     public void setAsync(final String type) {
         getDomNodeOrDie().setAttribute("async", type);
     }

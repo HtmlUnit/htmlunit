@@ -1084,4 +1084,89 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "null", "true", "", "true", "", "false", "null" },
+            IE8 = { "undefined", "null", "true", "true", "", "", "false", "false" })
+    @NotYetImplemented
+    public void asyncProperty() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script id='script1' src='js1.js'></script>\n"
+            + "<script id='script2' src='js2.js' async></script>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var script = document.getElementById('script1');\n"
+            + "  alert(script.async);\n"
+            + "  alert(script.getAttribute('async'));\n"
+
+            + "  script.async = true;\n"
+            + "  alert(script.async);\n"
+            + "  alert(script.getAttribute('async'));\n"
+
+            + "  script = document.getElementById('script2');\n"
+            + "  alert(script.async);\n"
+            + "  alert(script.getAttribute('async'));\n"
+
+            + "  script.async = false;\n"
+            + "  alert(script.async);\n"
+            + "  alert(script.getAttribute('async'));\n"
+
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "");
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "null", "true", "true", "true", "", "true", "true", "false", "null" },
+            IE8 = { "undefined", "null", "true", "true", "", "", "true", "true", "undefined", "null" })
+    @NotYetImplemented({ FF, CHROME, IE11 })
+    public void asyncAttribute() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script id='script1' src='js1.js'></script>\n"
+            + "<script id='script2' src='js2.js' async></script>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var script = document.getElementById('script1');\n"
+            + "  alert(script.async);\n"
+            + "  alert(script.getAttribute('async'));\n"
+
+            + "  script.setAttribute('async', true);\n"
+            + "  alert(script.async);\n"
+            + "  alert(script.getAttribute('async'));\n"
+
+            + "  script = document.getElementById('script2');\n"
+            + "  alert(script.async);\n"
+            + "  alert(script.getAttribute('async'));\n"
+
+            + "  script.setAttribute('async', true);\n"
+            + "  alert(script.async);\n"
+            + "  alert(script.getAttribute('async'));\n"
+
+            + "  script.removeAttribute('async');\n"
+            + "  alert(script.async);\n"
+            + "  alert(script.getAttribute('async'));\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "");
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "");
+
+        loadPageWithAlerts2(html);
+    }
 }
