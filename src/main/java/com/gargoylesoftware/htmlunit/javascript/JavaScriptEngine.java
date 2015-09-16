@@ -201,8 +201,8 @@ public class JavaScriptEngine {
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        final Map<Class<? extends SimpleScriptable>, Scriptable> prototypes = new HashMap<>();
-        final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
+        final Map<Class<? extends HtmlUnitScriptable>, HtmlUnitScriptable> prototypes = new HashMap<>();
+        final Map<String, HtmlUnitScriptable> prototypesPerJSName = new HashMap<>();
 
         final Window window = new Window();
         ((SimpleScriptable) window).setClassName("Window");
@@ -253,15 +253,15 @@ public class JavaScriptEngine {
             if (isWindow) {
                 configureConstantsPropertiesAndFunctions(config, window, browserVersion);
 
-                final ScriptableObject prototype = configureClass(config, window, browserVersion);
+                final HtmlUnitScriptable prototype = configureClass(config, window, browserVersion);
                 prototypesPerJSName.put(config.getClassName(), prototype);
             }
             else {
-                final ScriptableObject prototype = configureClass(config, window, browserVersion);
+                final HtmlUnitScriptable prototype = configureClass(config, window, browserVersion);
                 if (config.isJsObject()) {
                     // Place object with prototype property in Window scope
                     if (putPrototypeInWindowScope) {
-                        final SimpleScriptable obj = config.getHostClass().newInstance();
+                        final HtmlUnitScriptable obj = config.getHostClass().newInstance();
                         prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                         obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
                         obj.setParentScope(window);
@@ -274,7 +274,7 @@ public class JavaScriptEngine {
                             final Page page = webWindow.getEnclosedPage();
                             if (page != null && page.isHtmlPage()) {
                                 final DomNode domNode = new HtmlDivision("", (HtmlPage) page, null);
-                                obj.setDomNode(domNode);
+                                ((SimpleScriptable) obj).setDomNode(domNode);
                             }
                         }
                     }
@@ -412,24 +412,8 @@ public class JavaScriptEngine {
                     }
 
                     configureConstants(config, function);
-
-                    for (final Entry<String, Method> staticfunctionInfo : config.getStaticFunctionEntries()) {
-                        final String functionName = staticfunctionInfo.getKey();
-                        final Method method = staticfunctionInfo.getValue();
-                        final FunctionObject staticFunctionObject = new FunctionObject(functionName, method,
-                                function);
-                        function.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
-                    }
-
-                    for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry
-                            : config.getStaticPropertyEntries()) {
-                        final String propertyName = propertyEntry.getKey();
-                        final Method readMethod = propertyEntry.getValue().getReadMethod();
-                        final Method writeMethod = propertyEntry.getValue().getWriteMethod();
-                        final int flag = ScriptableObject.EMPTY;
-
-                        function.defineProperty(propertyName, null, readMethod, writeMethod, flag);
-                    }
+                    configureStaticFunctions(config, function);
+                    configureStaticProperties(config, browserVersion, function);
                 }
                 else {
                     if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
@@ -460,7 +444,7 @@ public class JavaScriptEngine {
 
         // once all prototypes have been build, it's possible to configure the chains
         final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
-        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
+        for (final Map.Entry<String, HtmlUnitScriptable> entry : prototypesPerJSName.entrySet()) {
             final String name = entry.getKey();
             final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
             Scriptable prototype = entry.getValue();
@@ -630,11 +614,11 @@ public class JavaScriptEngine {
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
      */
-    public static SimpleScriptable configureClass(final ClassConfiguration config, final Scriptable window,
+    public static HtmlUnitScriptable configureClass(final ClassConfiguration config, final Scriptable window,
             final BrowserVersion browserVersion)
         throws InstantiationException, IllegalAccessException {
 
-        final SimpleScriptable prototype = config.getHostClass().newInstance();
+        final HtmlUnitScriptable prototype = config.getHostClass().newInstance();
         prototype.setParentScope(window);
         prototype.setClassName(config.getClassName());
 
@@ -655,20 +639,15 @@ public class JavaScriptEngine {
         configureConstants(config, scriptable);
 
         // the properties
-        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getPropertyEntries()) {
-            final String propertyName = propertyEntry.getKey();
-            final Method readMethod = propertyEntry.getValue().getReadMethod();
-            final Method writeMethod = propertyEntry.getValue().getWriteMethod();
-            int flag = ScriptableObject.EMPTY;
+        configureProperties(config, browserVersion, scriptable);
 
-            // https://code.google.com/p/chromium/issues/detail?id=492999
-            if (browserVersion.isChrome() && "cssFloat".equals(propertyName)) {
-                flag = ScriptableObject.DONTENUM;
-            }
-            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, flag);
-        }
+        configureFunctions(config, browserVersion, scriptable);
+    }
 
-        int attributes;
+    private static void configureFunctions(final ClassConfiguration config,
+            final BrowserVersion browserVersion,
+            final ScriptableObject scriptable) {
+        final int attributes;
         if (browserVersion.hasFeature(JS_DONT_ENUM_FUNCTIONS)) {
             attributes = ScriptableObject.DONTENUM;
         }
@@ -701,6 +680,48 @@ public class JavaScriptEngine {
                 throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
                     + config.getHostClass().getName());
             }
+        }
+    }
+
+    private static void configureProperties(final ClassConfiguration config, final BrowserVersion browserVersion,
+            final ScriptableObject scriptable) {
+
+        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getPropertyEntries()) {
+            final String propertyName = propertyEntry.getKey();
+            final Method readMethod = propertyEntry.getValue().getReadMethod();
+            final Method writeMethod = propertyEntry.getValue().getWriteMethod();
+            int flag = ScriptableObject.EMPTY;
+
+            // https://code.google.com/p/chromium/issues/detail?id=492999
+            if (browserVersion.isChrome() && "cssFloat".equals(propertyName)) {
+                flag = ScriptableObject.DONTENUM;
+            }
+            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, flag);
+        }
+    }
+
+    private static void configureStaticProperties(final ClassConfiguration config,
+            final BrowserVersion browserVersion,
+            final ScriptableObject scriptable) {
+        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry
+                : config.getStaticPropertyEntries()) {
+            final String propertyName = propertyEntry.getKey();
+            final Method readMethod = propertyEntry.getValue().getReadMethod();
+            final Method writeMethod = propertyEntry.getValue().getWriteMethod();
+            final int flag = ScriptableObject.EMPTY;
+
+            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, flag);
+        }
+    }
+
+    private static void configureStaticFunctions(final ClassConfiguration config,
+            final ScriptableObject scriptable) {
+        for (final Entry<String, Method> staticfunctionInfo : config.getStaticFunctionEntries()) {
+            final String functionName = staticfunctionInfo.getKey();
+            final Method method = staticfunctionInfo.getValue();
+            final FunctionObject staticFunctionObject = new FunctionObject(functionName, method,
+                    scriptable);
+            scriptable.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
         }
     }
 
@@ -756,7 +777,22 @@ public class JavaScriptEngine {
      */
     public Script compile(final InteractivePage page, final String sourceCode,
                            final String sourceName, final int startLine) {
+        final Scriptable scope = getScope(page, null);
+        return compile(page, scope, sourceCode, sourceCode, startLine);
+    }
 
+    /**
+     * Compiles the specified JavaScript code in the context of a given scope.
+     *
+     * @param owningPage the page from which the code started
+     * @param scope the scope in which to execute the javascript code
+     * @param sourceCode the JavaScript code to execute
+     * @param sourceName the name that will be displayed on error conditions
+     * @param startLine the line at which the script source starts
+     * @return the result of executing the specified code
+     */
+    public Script compile(final InteractivePage owningPage, final Scriptable scope, final String sourceCode,
+            final String sourceName, final int startLine) {
         WebAssert.notNull("sourceCode", sourceCode);
 
         if (LOG.isTraceEnabled()) {
@@ -764,9 +800,8 @@ public class JavaScriptEngine {
             LOG.trace("Javascript compile " + sourceName + newline + sourceCode + newline);
         }
 
-        final Scriptable scope = getScope(page, null);
         final String source = sourceCode;
-        final ContextAction action = new HtmlUnitContextAction(scope, page) {
+        final ContextAction action = new HtmlUnitContextAction(scope, owningPage) {
             @Override
             public Object doRun(final Context cx) {
                 return cx.compileString(source, sourceName, startLine, null);
@@ -811,7 +846,18 @@ public class JavaScriptEngine {
      */
     public Object execute(final InteractivePage page, final Script script) {
         final Scriptable scope = getScope(page, null);
+        return execute(page, scope, script);
+    }
 
+    /**
+     * Executes the specified JavaScript code in the given scope.
+     *
+     * @param page the page that started the execution
+     * @param scope the scope in which to execute
+     * @param script the script to execute
+     * @return the result of executing the specified code
+     */
+    public Object execute(final InteractivePage page, final Scriptable scope, final Script script) {
         final ContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
@@ -1098,7 +1144,7 @@ public class JavaScriptEngine {
      * @param c the node class {@link DomNode} or some subclass.
      * @return {@code null} if none found
      */
-    public Class<? extends SimpleScriptable> getJavaScriptClass(final Class<?> c) {
+    public Class<? extends HtmlUnitScriptable> getJavaScriptClass(final Class<?> c) {
         return jsConfig_.getDomJavaScriptMapping().get(c);
     }
 

@@ -22,6 +22,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SET_READONLY_
 import java.lang.reflect.Method;
 import java.util.Stack;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,12 +45,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 /**
  * Base class for Rhino host objects in HtmlUnit.
  *
@@ -57,13 +56,12 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public class SimpleScriptable extends ScriptableObject implements Cloneable {
+public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
 
     private static final Log LOG = LogFactory.getLog(SimpleScriptable.class);
 
     private DomNode domNode_;
     private boolean caseSensitive_ = true;
-    private String className_;
 
     /**
      * Gets a named property from the object.
@@ -108,36 +106,6 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      */
     protected Object getWithPreemption(final String name) {
         return NOT_FOUND;
-    }
-
-    /**
-     * Returns the JavaScript class name.
-     * @return the JavaScript class name
-     */
-    @Override
-    public String getClassName() {
-        if (className_ != null) {
-            return className_;
-        }
-        if (getPrototype() != null) {
-            return getPrototype().getClassName();
-        }
-        String className = getClass().getSimpleName();
-        if (className.isEmpty()) {
-            // for anonymous class
-            className = getClass().getSuperclass().getSimpleName();
-        }
-        return className;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Sets the class name.
-     * @param className the class name.
-     */
-    public void setClassName(final String className) {
-        this.className_ = className;
     }
 
     /**
@@ -233,8 +201,9 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
             }
         }
         if (javaScriptClass == null) {
+            final JavaScriptEngine javaScriptEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
             for (Class<?> c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
-                javaScriptClass = getWindow().getWebWindow().getWebClient().getJavaScriptEngine().getJavaScriptClass(c);
+                javaScriptClass = (Class<? extends SimpleScriptable>) javaScriptEngine.getJavaScriptClass(c);
             }
         }
 
@@ -364,64 +333,6 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     }
 
     /**
-     * {@inheritDoc}
-     * Same as base implementation, but includes all methods inherited from super classes as well.
-     */
-    @Override
-    public void defineProperty(final String propertyName, final Class<?> clazz, int attributes) {
-        final int length = propertyName.length();
-        if (length == 0) {
-            throw new IllegalArgumentException();
-        }
-        final char[] buf = new char[3 + length];
-        propertyName.getChars(0, length, buf, 3);
-        buf[3] = Character.toUpperCase(buf[3]);
-        buf[0] = 'g';
-        buf[1] = 'e';
-        buf[2] = 't';
-        final String getterName = new String(buf);
-        buf[0] = 's';
-        final String setterName = new String(buf);
-
-        final Method[] methods = clazz.getMethods();
-        final Method getter = findMethod(methods, getterName);
-        final Method setter = findMethod(methods, setterName);
-        if (setter == null) {
-            attributes |= ScriptableObject.READONLY;
-        }
-        defineProperty(propertyName, null, getter, setter, attributes);
-    }
-
-    /**
-     * {@inheritDoc}
-     * Same as base implementation, but includes all methods inherited from super classes as well.
-     */
-    @Override
-    public void defineFunctionProperties(final String[] names, final Class<?> clazz, final int attributes) {
-        final Method[] methods = clazz.getMethods();
-        for (final String name : names) {
-            final Method method = findMethod(methods, name);
-            if (method == null) {
-                throw Context.reportRuntimeError("Method \"" + name + "\" not found in \"" + clazz.getName() + '"');
-            }
-            final FunctionObject f = new FunctionObject(name, method, this);
-            defineProperty(name, f, attributes);
-        }
-    }
-
-    /**
-     * Returns the method with the specified name.
-     */
-    private static Method findMethod(final Method[] methods, final String name) {
-        for (Method m : methods) {
-            if (m.getName().equals(name)) {
-                return m;
-            }
-        }
-        return null;
-    }
-
-    /**
      * Gets the browser version currently used.
      * @return the browser version
      */
@@ -524,16 +435,4 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         }
         return true;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setParentScope(final Scriptable m) {
-        if (m == this) {
-            throw new IllegalArgumentException("Object can't be its own parentScope");
-        }
-        super.setParentScope(m);
-    }
-
 }

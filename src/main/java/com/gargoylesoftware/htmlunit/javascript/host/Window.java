@@ -106,6 +106,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
@@ -199,8 +200,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     private Event currentEvent_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
-    private Map<Class<? extends SimpleScriptable>, Scriptable> prototypes_ = new HashMap<>();
-    private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
+    private Map<Class<? extends HtmlUnitScriptable>, HtmlUnitScriptable> prototypes_ = new HashMap<>();
+    private Map<String, HtmlUnitScriptable> prototypesPerJSName_ = new HashMap<>();
     private Object controllers_;
     private Object opener_;
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
@@ -257,8 +258,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param map a Map of ({@link Class}, {@link Scriptable})
      * @param prototypesPerJSName map of {@link String} and {@link Scriptable}
      */
-    public void setPrototypes(final Map<Class<? extends SimpleScriptable>, Scriptable> map,
-            final Map<String, Scriptable> prototypesPerJSName) {
+    public void setPrototypes(final Map<Class<? extends HtmlUnitScriptable>, HtmlUnitScriptable> map,
+            final Map<String, HtmlUnitScriptable> prototypesPerJSName) {
         prototypes_ = map;
         prototypesPerJSName_ = prototypesPerJSName;
     }
