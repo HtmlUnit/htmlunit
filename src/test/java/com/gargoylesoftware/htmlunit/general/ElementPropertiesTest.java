@@ -553,7 +553,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "AT_TARGET,BLUR,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CHANGE,CLICK,"
+    @Alerts(CHROME = "AT_TARGET,BLUR,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CHANGE,CLICK,"
                 + "currentTarget,DBLCLICK,defaultPrevented,DRAGDROP,eventPhase,FOCUS,initEvent(),KEYDOWN,KEYPRESS,"
                 + "KEYUP,MOUSEDOWN,MOUSEDRAG,MOUSEMOVE,MOUSEOUT,MOUSEOVER,MOUSEUP,NONE,path,preventDefault(),"
                 + "returnValue,SELECT,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,"

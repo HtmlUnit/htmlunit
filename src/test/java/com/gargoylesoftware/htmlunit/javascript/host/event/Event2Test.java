@@ -678,7 +678,6 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2" },
             IE8 = { })
-    @NotYetImplemented(CHROME)
     public void stopPropagation_WithMultipleEventHandlers() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

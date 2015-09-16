@@ -621,7 +621,7 @@ public class Event extends SimpleScriptable {
     /**
      * Stops the event from propagating.
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void stopPropagation() {
         stopPropagation_ = true;
     }
