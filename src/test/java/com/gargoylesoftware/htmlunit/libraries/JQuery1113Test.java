@@ -2663,7 +2663,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(CHROME)
     public void event__Submit_event_can_be_stopped___11049_() throws Exception {
         runTest("event: Submit event can be stopped (#11049)");
     }
