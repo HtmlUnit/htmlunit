@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Upgrade Apache HttpComponents to 4.5.1.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: Event.stopPropagation() is available in Chrome too.
             </action>
