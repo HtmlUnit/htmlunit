@@ -778,7 +778,7 @@ public class JavaScriptEngine {
     public Script compile(final InteractivePage page, final String sourceCode,
                            final String sourceName, final int startLine) {
         final Scriptable scope = getScope(page, null);
-        return compile(page, scope, sourceCode, sourceCode, startLine);
+        return compile(page, scope, sourceCode, sourceName, startLine);
     }
 
     /**
