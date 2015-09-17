@@ -91,15 +91,7 @@ public class JQuery1113Test extends WebDriverTestCase {
             final String url = "http://localhost:" + PORT + "/jquery/test/index.html?dev&testNumber=" + testNumber;
             webdriver.get(url);
 
-            WebElement status = null;
-            try {
-                status = webdriver.findElement(By.id("qunit-testresult"));
-            }
-            catch (final NoSuchElementException e) {
-                // give this a second try
-                Thread.sleep(DEFAULT_WAIT_TIME);
-                status = webdriver.findElement(By.id("qunit-testresult"));
-            }
+            WebElement status = getResultElement(webdriver);
 
             while (!status.getText().startsWith("Tests completed")) {
                 // strange
@@ -107,7 +99,8 @@ public class JQuery1113Test extends WebDriverTestCase {
                 // a new one if the test is finished (when using HtmlUnit;
                 // i guess this is an error
                 // but i like to focus on the new jQuery problems first)
-                status = webdriver.findElement(By.id("qunit-testresult"));
+                status = getResultElement(webdriver);
+
                 Thread.sleep(100);
 
                 if (System.currentTimeMillis() > endTime) {
@@ -142,6 +135,17 @@ public class JQuery1113Test extends WebDriverTestCase {
                 t.printStackTrace();
             }
             throw e;
+        }
+    }
+
+    private WebElement getResultElement(final WebDriver webdriver) throws InterruptedException {
+        try {
+            return webdriver.findElement(By.id("qunit-testresult"));
+        }
+        catch (final NoSuchElementException e) {
+            // give this a second try
+            Thread.sleep(DEFAULT_WAIT_TIME / 10);
+            return webdriver.findElement(By.id("qunit-testresult"));
         }
     }
 
