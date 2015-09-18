@@ -651,18 +651,19 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "false" },
-            IE = { "true", "exception" })
+            IE8 = "not supported")
     public void overrideMimeType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
+            + "  if (!request.overrideMimeType) { alert('not supported'); return };\n"
             + "  request.open('GET', 'foo.xml.txt', false);\n"
             + "  request.send('');\n"
             + "  alert(request.responseXML == null);\n"
-            + "  request.overrideMimeType('text/xml');\n"
             + "  request.open('GET', 'foo.xml.txt', false);\n"
+            + "  request.overrideMimeType('text/xml');\n"
             + "  request.send('');\n"
             + "  alert(request.responseXML == null);\n"
             + "} catch (e) { alert('exception'); }\n"
@@ -682,16 +683,48 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "true", "overwritten" },
+            CHROME = { "true", "exception" },
+            IE11 = { "true", "exception" },
+            IE8 = "not supported")
+    public void overrideMimeTypeAfterSend() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var request = new XMLHttpRequest();\n"
+            + "  if (!request.overrideMimeType) { alert('not supported'); return };\n"
+            + "  request.open('GET', 'foo.xml.txt', false);\n"
+            + "  request.send('');\n"
+            + "  alert(request.responseXML == null);\n"
+            + "  try {\n"
+            + "    request.overrideMimeType('text/xml');\n"
+            + "    alert('overwritten');\n"
+            + "  } catch (e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(getDefaultUrl() + "foo.xml.txt");
+        getMockWebConnection().setResponse(urlPage2,
+            "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
+            "text/plain");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "27035",
-            IE8 = "exception",
-            IE11 = "111")
-    @NotYetImplemented(IE11)
+            IE8 = "not supported")
     public void overrideMimeType_charset() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
+            + "  if (!request.overrideMimeType) { alert('not supported'); return };\n"
             + "  request.open('GET', '" + URL_SECOND + "', false);\n"
             + "  request.overrideMimeType('text/plain; charset=GBK');\n"
             + "  request.send('');\n"
@@ -711,15 +744,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "27035",
-            IE8 = "exception",
-            IE11 = "111")
-    @NotYetImplemented(IE11)
+            IE8 = "not supported")
     public void overrideMimeType_charset_upper_case() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
+            + "  if (!request.overrideMimeType) { alert('not supported'); return };\n"
             + "  request.open('GET', '" + URL_SECOND + "', false);\n"
             + "  request.overrideMimeType('text/plain; chaRSet=GBK');\n"
             + "  request.send('');\n"
@@ -739,15 +771,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "40644",
-            IE8 = "exception",
-            IE11 = "111")
-    @NotYetImplemented(IE11)
+            IE8 = "not supported")
     public void overrideMimeType_charset_empty() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
+            + "  if (!request.overrideMimeType) { alert('not supported'); return };\n"
             + "  request.open('GET', '" + URL_SECOND + "', false);\n"
             + "  request.overrideMimeType('text/plain; charset=');\n"
             + "  request.send('');\n"
@@ -768,7 +799,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "40644",
             CHROME = "233",
-            IE8 = "exception",
+            IE8 = "not supported",
             IE11 = "NaN")
     @NotYetImplemented({ IE11, CHROME })
     public void overrideMimeType_charset_wrong() throws Exception {
@@ -777,6 +808,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
+            + "  if (!request.overrideMimeType) { alert('not supported'); return };\n"
             + "  request.open('GET', '" + URL_SECOND + "', false);\n"
             + "  request.overrideMimeType('text/plain; charset=abcdefg');\n"
             + "  request.send('');\n"
@@ -1264,7 +1296,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "39", "27035", "65533", "39" },
-            IE8 = "exception",
+            IE8 = "not supported",
             IE11 = { "39", "27035", "63" })
     @NotYetImplemented(IE11)
     public void overrideMimeType_charset_all() throws Exception {
@@ -1273,6 +1305,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
+            + "  if (!request.overrideMimeType) { alert('not supported'); return };\n"
             + "  request.open('GET', '" + URL_SECOND + "', false);\n"
             + "  request.overrideMimeType('text/plain; charset=GBK');\n"
             + "  request.send('');\n"

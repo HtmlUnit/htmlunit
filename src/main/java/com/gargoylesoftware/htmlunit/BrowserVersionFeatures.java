@@ -2286,6 +2286,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
 
+    /** Indicates that method overrideMimeType throws if msg was already sent. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
+
     /**
      * Indicates that the property <code>withCredentials</code> is not writable for sync requests.
      * Setting the property throws an exception.

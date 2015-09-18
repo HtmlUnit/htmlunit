@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: XMLHttpRequest.overrideMimeType() is available in IE11 too.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: XMLHttpRequest.overrideMimeType() does some state checking for IE11 and CHROME.
+            </action>
             <action type="update" dev="asashour">
                 Upgrade Apache HttpComponents to 4.5.1.
             </action>
