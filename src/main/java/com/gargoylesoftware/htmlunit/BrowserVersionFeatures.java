@@ -2269,6 +2269,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     XHR_ORIGIN_HEADER,
 
+    /** Indicates that method overrideMimeType throws if msg was already sent. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
+
     /** Indicates that <code>responseXML</code> returns an MXSML ActiveX object. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     XHR_RESPONSE_XML_IS_ACTIVEXOBJECT,
@@ -2285,10 +2289,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
     @BrowserFeature(@WebBrowser(IE))
     XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
-
-    /** Indicates that method overrideMimeType throws if msg was already sent. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
-    XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
 
     /**
      * Indicates that the property <code>withCredentials</code> is not writable for sync requests.
