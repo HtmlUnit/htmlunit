@@ -265,15 +265,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * The JavaScript function "alert()".
-     * @param message the message
-     */
-    @JsxFunction
-    public void ulert(final Object message) {
-        System.out.println(message);
-    }
-
-    /**
      * The JavaScript function {@code alert()}.
      * @param message the message
      */
