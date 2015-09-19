@@ -99,7 +99,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   (see <a href="http://go.microsoft.com/fwlink/?LinkId=619687">MicrosoftWebDriver downloads</a>)</li>
  *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
  *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
- *   
+ *
  *   <li>ff38.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
@@ -296,7 +296,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected WebDriver buildWebDriver() throws IOException {
         if (useRealBrowser_) {
             if (getBrowserVersion().isIE()) {
-                if (IE_BIN_!= null) {
+                if (IE_BIN_ != null) {
                     System.setProperty("webdriver.ie.driver", IE_BIN_);
                 }
                 return new InternetExplorerDriver();
@@ -316,7 +316,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 return new ChromeDriver(CHROME_SERVICE_);
             }
             if (BrowserVersion.EDGE == getBrowserVersion()) {
-                if (EDGE_BIN_!= null) {
+                if (EDGE_BIN_ != null) {
                     System.setProperty("webdriver.edge.driver", EDGE_BIN_);
                 }
                 return new EdgeDriver();
