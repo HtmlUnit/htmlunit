@@ -74,7 +74,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     public void appVersion() throws Exception {
         attribute("appVersion", getBrowserVersion().getApplicationVersion(),
-                "WOW64; ", "; WOW64", "SLCC2; ",
+                "WOW64; ", "; WOW64", "; Win64", "; x64", "SLCC2; ",
                 ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
                 "Media Center PC 6.0; ", ".NET4.0C; ", ".NET4.0E; ");
     }
@@ -156,7 +156,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     public void userAgent() throws Exception {
         attribute("userAgent", getBrowserVersion().getUserAgent(),
-                "WOW64; ", "; WOW64", "SLCC2; ",
+                "WOW64; ", "; WOW64", "; Win64", "; x64", "SLCC2; ",
                 ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
                 "Media Center PC 6.0; ", ".NET4.0C; ", ".NET4.0E; ");
     }
@@ -208,7 +208,8 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.209", "NPSWF32_18_0_0_209.dll"},
             CHROME = { "Shockwave Flash", "Shockwave Flash 18.0 r0", "undefined", "pepflashplayer.dll"},
-            IE11 = {"Shockwave Flash, Shockwave Flash 18.0 r0", "18.0.0.209", "Flash32_18_0_0_209.ocx"})
+            IE11 = {"Shockwave Flash, Shockwave Flash 18.0 r0", "18.0.0.209", "Flash32_18_0_0_209.ocx"},
+            EDGE = {"Shockwave Flash, Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -240,7 +241,8 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "exception")
+            CHROME = "exception",
+            EDGE = "exception")
     public void taintEnabled() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -269,12 +271,12 @@ public class NavigatorTest extends WebDriverTestCase {
     void attribute(final String name, final String value, final String... ignore) throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "    <title>test</title>\n"
-                + "    <script>\n"
+                + "  <title>test</title>\n"
+                + "  <script>\n"
                 + "    function doTest(){\n"
                 + "      alert(window.navigator." + name + ");\n"
                 + "    }\n"
-                + "    </script>\n"
+                + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
                 + "</body>\n"
@@ -395,7 +397,8 @@ public class NavigatorTest extends WebDriverTestCase {
     @Alerts(CHROME = { "Google Inc.", "" },
             FF = { "", "" },
             IE = { "undefined", "undefined" },
-            IE11 = { "", "undefined" })
+            IE11 = { "", "undefined" },
+            EDGE = { "", "" })
     public void vendor() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -102,10 +103,11 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the language of the browser (for Mozilla).
+     * Returns the language of the browser.
      * @return the language
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @WebBrowser(EDGE) })
     public String getLanguage() {
         return getBrowserVersion().getBrowserLanguage();
     }
@@ -147,10 +149,10 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "product".
-     * @return the property "product"
+     * Returns the {@code product} property.
+     * @return the {@code product} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
     public String getProduct() {
         return "Gecko";
     }
@@ -160,7 +162,7 @@ public class Navigator extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en/navigator.productSub">Mozilla Doc</a>
      * @return false
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public String getProductSub() {
         return "20100215";
     }
@@ -261,10 +263,11 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the geolocation.
-     * @return the geolocation
+     * Returns the {@code geolocation} property.
+     * @return the {@code geolocation} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+        @WebBrowser(EDGE) })
     public Geolocation getGeolocation() {
         final Geolocation geolocation = new Geolocation();
         geolocation.setPrototype(getPrototype(geolocation.getClass()));
@@ -285,7 +288,8 @@ public class Navigator extends SimpleScriptable {
      * Returns the vendor.
      * @return the vendor
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+        @WebBrowser(EDGE)})
     public String getVendor() {
         return getBrowserVersion().getVendor();
     }
@@ -294,7 +298,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the vendorSub.
      * @return the vendorSub
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
     public String getVendorSub() {
         return "";
     }

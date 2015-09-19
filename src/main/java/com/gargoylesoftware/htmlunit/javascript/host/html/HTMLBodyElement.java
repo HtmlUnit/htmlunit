@@ -18,10 +18,13 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_IE8;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_BODY_HEAD_READONLY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Locale;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -34,8 +37,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 /**
  * The JavaScript object {@code HTMLBodyElement}.
  *
@@ -45,7 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlBody.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
-            @WebBrowser(value = IE, minVersion = 11) }),
+            @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) }),
         @JsxClass(isJSObject = false, domClass = HtmlBody.class,
             browsers = { @WebBrowser(value = IE, maxVersion = 8) })
     })

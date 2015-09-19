@@ -60,6 +60,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -118,10 +119,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
     private static Set<String> BROWSERS_PROPERTIES_;
+    private static String CHROME_BIN_;
+    private static String EDGE_BIN_;
     private static String IE_BIN_;
     private static String FF31_BIN_;
     private static String FF38_BIN_;
-    private static String CHROME_BIN_;
 
     /** The driver cache. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<>();
@@ -167,6 +169,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     FF31_BIN_ = properties.getProperty("ff31.bin");
                     FF38_BIN_ = properties.getProperty("ff38.bin");
+                    EDGE_BIN_ = properties.getProperty("edge.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
@@ -289,7 +292,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected WebDriver buildWebDriver() throws IOException {
         if (useRealBrowser_) {
             if (getBrowserVersion().isIE()) {
-                if (null != IE_BIN_) {
+                if (IE_BIN_!= null) {
                     System.setProperty("webdriver.ie.driver", IE_BIN_);
                 }
                 return new InternetExplorerDriver();
@@ -307,6 +310,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     CHROME_SERVICE_.start();
                 }
                 return new ChromeDriver(CHROME_SERVICE_);
+            }
+            if (BrowserVersion.EDGE == getBrowserVersion()) {
+                if (EDGE_BIN_!= null) {
+                    System.setProperty("webdriver.edge.driver", EDGE_BIN_);
+                }
+                return new EdgeDriver();
             }
             if (!getBrowserVersion().isFirefox()) {
                 throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
@@ -846,8 +855,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (driver instanceof HtmlUnitDriver) {
                 return (List<String>) result;
             }
-            for (final Object alert : (List<Object>) result) {
-                collectedAlerts.add(Context.toString(alert));
+            if (result instanceof List) {
+                for (final Object alert : (List<Object>) result) {
+                    collectedAlerts.add(Context.toString(alert));
+                }
+            }
+            else {
+                final Map<?, ?> map  = (Map<?, ?>) result;
+                for (final Object key : map.keySet()) {
+                    final int index = Integer.parseInt(key.toString());
+                    collectedAlerts.add(index, map.get(key).toString());
+                }
             }
         }
         return collectedAlerts;
@@ -909,8 +927,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     driver.switchTo().window(handle).close();
                 }
             }
-
-            driver.switchTo().window(currentWindow);
 
             driver.manage().deleteAllCookies();
 

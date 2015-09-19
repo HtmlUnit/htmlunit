@@ -521,7 +521,7 @@ public abstract class WebTestCase {
 
     /**
      * Expand "§§URL§§" to the provided URL in the expected alerts.
-     * @param url the url to expand
+     * @param url the URL to expand
      */
     protected void expandExpectedAlertsVariables(final URL url) {
         if (expectedAlerts_ == null) {

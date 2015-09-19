@@ -22,13 +22,17 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 public enum BrowserName {
 //    Could be renamed 'Browser', but it is used by the test cases in BrowserRunner, which is heavily used
 
-    /** Firefox. */
-    FF,
+    /** Chrome. */
+    CHROME,
 
     /** Internet Explorer. */
     IE,
 
-    /** Chrome. */
-    CHROME
+    /** Edge. */
+    EDGE,
+
+    /** Firefox. */
+    FF
+
 }
 

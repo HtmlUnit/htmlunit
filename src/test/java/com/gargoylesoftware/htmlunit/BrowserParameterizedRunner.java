@@ -151,6 +151,10 @@ public class BrowserParameterizedRunner extends Suite {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.INTERNET_EXPLORER_11, true, tests));
                 }
+                if (browsers.contains("edge")) {
+                    runners_.add(new BrowserVersionClassRunnerWithParameters(
+                            klass, BrowserVersion.EDGE, true, tests));
+                }
             }
 
             if (browsers.contains("hu-chrome")) {
@@ -172,6 +176,10 @@ public class BrowserParameterizedRunner extends Suite {
             if (browsers.contains("hu-ie11")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.INTERNET_EXPLORER_11, false, tests));
+            }
+            if (browsers.contains("hu-edge")) {
+                runners_.add(new BrowserVersionClassRunnerWithParameters(
+                        klass, BrowserVersion.EDGE, false, tests));
             }
         }
     }

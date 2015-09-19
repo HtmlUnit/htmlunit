@@ -101,6 +101,9 @@ public abstract class AbstractJavaScriptConfiguration {
             else if (browser.isFirefox()) {
                 expectedBrowserName = "FF";
             }
+            else if (browser.isEdge()) {
+                expectedBrowserName = "EDGE";
+            }
             else {
                 expectedBrowserName = "CHROME";
             }

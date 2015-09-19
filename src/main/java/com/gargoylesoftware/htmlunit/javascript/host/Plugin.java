@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -31,7 +32,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @WebBrowser(EDGE) })
 public class Plugin extends SimpleArray {
     private String description_;
     private String filename_;
@@ -100,7 +102,7 @@ public class Plugin extends SimpleArray {
      * Gets the plugin's version.
      * @return the name
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(EDGE) })
     public String getVersion() {
         return version_;
     }

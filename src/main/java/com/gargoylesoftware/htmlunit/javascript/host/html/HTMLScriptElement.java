@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_INS
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SCR_NOT_EXPANDED;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -41,7 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object that represents an "HTMLScriptElement".
+ * The JavaScript object that represents an {@code HTMLScriptElement}.
  *
  * @author Daniel Gredler
  * @author Marc Guillemot
@@ -51,7 +52,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlScript.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+            @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlScript.class,
             isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
     })

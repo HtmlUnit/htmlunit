@@ -274,7 +274,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * The JavaScript function "alert()".
+     * The JavaScript function {@code alert()}.
      * @param message the message
      */
     @JsxFunction

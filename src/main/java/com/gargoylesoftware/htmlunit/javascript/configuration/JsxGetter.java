@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -34,9 +35,10 @@ public @interface JsxGetter {
 
     /** The {@link WebBrowser}s supported by this getter. */
     WebBrowser[] value() default {
-        @WebBrowser(IE),
+        @WebBrowser(CHROME),
         @WebBrowser(FF),
-        @WebBrowser(CHROME)
+        @WebBrowser(IE),
+        @WebBrowser(EDGE)
     };
 
     /** The JavaScript getter property name. */

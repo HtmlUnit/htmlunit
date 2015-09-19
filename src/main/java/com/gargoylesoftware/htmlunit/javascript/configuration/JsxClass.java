@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -46,8 +47,9 @@ public @interface JsxClass {
 
     /** The {@link WebBrowser}s supported by this constant. */
     WebBrowser[] browsers() default {
-        @WebBrowser(IE),
+        @WebBrowser(CHROME),
         @WebBrowser(FF),
-        @WebBrowser(CHROME)
+        @WebBrowser(IE),
+        @WebBrowser(EDGE)
     };
 }

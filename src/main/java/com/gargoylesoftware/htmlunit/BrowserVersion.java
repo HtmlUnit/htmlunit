@@ -141,13 +141,21 @@ public class BrowserVersion implements Serializable, Cloneable {
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
         "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE11", null);
 
-    /** Latest Chrome. Work In Progress!!! */
+    /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
         + " (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
         + " (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36",
         45, "Chrome", null);
+
+    /** Microsoft Edge. Work In Progress!!! */
+    public static final BrowserVersion EDGE = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows NT 10.0) AppleWebKit/537.36"
+        + " (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240",
+        "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36"
+        + " (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240",
+        12, "Edge", null);
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_8;
@@ -192,6 +200,9 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
         INTERNET_EXPLORER_11.setScriptAcceptHeader("application/javascript, */*;q=0.8");
 
+        EDGE.setBrowserLanguage("en-US");
+        EDGE.setVendor("");
+
         CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
         CHROME.setVendor("Google Inc.");
@@ -225,6 +236,12 @@ public class BrowserVersion implements Serializable, Cloneable {
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER_11.getPlugins().add(flash);
+
+        flash = new PluginConfiguration("Shockwave Flash",
+                "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx");
+        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+                "Shockwave Flash", "swf"));
+        EDGE.getPlugins().add(flash);
     }
 
     private String applicationCodeName_ = "Mozilla";
@@ -378,10 +395,19 @@ public class BrowserVersion implements Serializable, Cloneable {
      * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Google Chrome. Note that Google Chrome does not return 'Chrome'
      * in the application name, we have to look in the nickname.
-     * @return whether or not this version is a version of a Chrome browser.
+     * @return whether or not this version is a version of a Chrome browser
      */
     public final boolean isChrome() {
         return getNickname().startsWith("Chrome");
+    }
+
+    /**
+     * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
+     * version of Microsoft Edge.
+     * @return whether or not this version is a version of an Edge browser
+     */
+    public final boolean isEdge() {
+        return getNickname().startsWith("Edge");
     }
 
     /**
