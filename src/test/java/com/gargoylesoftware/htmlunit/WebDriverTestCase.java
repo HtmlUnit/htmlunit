@@ -82,6 +82,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * Sample:
  * <pre>
    browsers=hu,ff38,ie11
+   edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
    ff38.bin=/usr/bin/firefox                            [Unix-like]
    chrome.bin=/path/to/chromedriver                     [Unix-like]
@@ -94,8 +95,11 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   "ff31", "ff38", "ie8", "ie11", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
+ *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
+ *   (see <a href="http://go.microsoft.com/fwlink/?LinkId=619687">MicrosoftWebDriver downloads</a>)</li>
  *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
  *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
+ *   
  *   <li>ff38.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
@@ -167,10 +171,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "")
                                 .toLowerCase(Locale.ROOT).split(",")));
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
-                    FF31_BIN_ = properties.getProperty("ff31.bin");
-                    FF38_BIN_ = properties.getProperty("ff38.bin");
                     EDGE_BIN_ = properties.getProperty("edge.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
+                    FF31_BIN_ = properties.getProperty("ff31.bin");
+                    FF38_BIN_ = properties.getProperty("ff38.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
                     System.setProperty(AUTOFIX_, Boolean.toString(autofix));
