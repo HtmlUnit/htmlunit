@@ -864,7 +864,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     collectedAlerts.add(Context.toString(alert));
                 }
             }
-            else if (result instanceof String){
+            else if (result instanceof String) {
                 collectedAlerts.add(result.toString());
             }
             else {
