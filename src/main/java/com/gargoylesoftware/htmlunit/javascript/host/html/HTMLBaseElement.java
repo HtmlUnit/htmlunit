@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASE_HREF_DEFAULT_EMPTY;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -30,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * The JavaScript object {@code HTMLBaseElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlBase.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
@@ -52,7 +55,14 @@ public class HTMLBaseElement extends HTMLElement {
      */
     @JsxGetter
     public String getHref() {
-        return getDomNodeOrDie().getAttribute("href");
+        final String href = getDomNodeOrDie().getAttribute("href");
+        if (ATTRIBUTE_NOT_DEFINED == href) {
+            if (getBrowserVersion().hasFeature(HTMLBASE_HREF_DEFAULT_EMPTY)) {
+                return href;
+            }
+            return getWindow().getLocation().getHref();
+        }
+        return href;
     }
 
     /**

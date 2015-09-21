@@ -430,6 +430,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     HTMLBASEFONT_END_TAG_FORBIDDEN,
 
+    /** Base tag href attribute is empty if not defined. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLBASE_HREF_DEFAULT_EMPTY,
+
     /** Set this checked state to false when added to page (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
