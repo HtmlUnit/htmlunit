@@ -864,6 +864,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     collectedAlerts.add(Context.toString(alert));
                 }
             }
+            else if (result instanceof String){
+                collectedAlerts.add(result.toString());
+            }
             else {
                 final Map<?, ?> map  = (Map<?, ?>) result;
                 for (final Object key : map.keySet()) {
