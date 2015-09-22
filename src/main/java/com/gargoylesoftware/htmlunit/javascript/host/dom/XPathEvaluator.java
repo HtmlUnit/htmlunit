@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import org.apache.xml.utils.PrefixResolver;
@@ -36,7 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class XPathEvaluator extends SimpleScriptable {
 
     /**
@@ -44,7 +45,6 @@ public class XPathEvaluator extends SimpleScriptable {
      */
     @JsxConstructor
     public XPathEvaluator() {
-        // Empty
     }
 
     /**

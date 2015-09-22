@@ -2301,7 +2301,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MouseEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -3627,7 +3627,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             IE11 = "[object UIEvent]",
             FF = "function UIEvent() {\n    [native code]\n}",
             IE8 = "exception")
-    public void uIEvent() throws Exception {
+    public void uiEvent() throws Exception {
         test("UIEvent");
     }
 
@@ -9695,7 +9695,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function XMLHttpRequestUpload() { [native code] }",
             IE = "exception",
             FF = "function XMLHttpRequestUpload() {\n    [native code]\n}")
-    public void xMLHttpRequestUpload() throws Exception {
+    public void xmlHttpRequestUpload() throws Exception {
         test("XMLHttpRequestUpload");
     }
 

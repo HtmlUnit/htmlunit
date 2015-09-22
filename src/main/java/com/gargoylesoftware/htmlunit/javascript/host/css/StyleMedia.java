@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import org.w3c.css.sac.ErrorHandler;
@@ -23,6 +24,7 @@ import org.w3c.css.sac.SACMediaList;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -34,10 +36,17 @@ import com.steadystate.css.dom.MediaListImpl;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = { @WebBrowser(CHROME) }),
-        @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) })
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(CHROME)),
+        @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
     })
 public class StyleMedia extends SimpleScriptable {
+
+    /**
+     * Default constructor.
+     */
+    @JsxConstructor(@WebBrowser(EDGE))
+    public StyleMedia() {
+    }
 
     /**
      * Returns the {@code type} property.

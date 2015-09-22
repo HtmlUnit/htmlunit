@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -26,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(value = IE, minVersion = 11))
+@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
 public class Position extends SimpleScriptable {
 
     private Coordinates coordinates_;
@@ -34,6 +36,7 @@ public class Position extends SimpleScriptable {
     /**
      * Creates an instance.
      */
+    @JsxConstructor(@WebBrowser(EDGE))
     public Position() {
     }
 

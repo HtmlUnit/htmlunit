@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTRIBUTES_BY_NAME_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -53,7 +54,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
-            @WebBrowser(value = FF, minVersion = 38) }),
+            @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) }),
         @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
             browsers = @WebBrowser(value = FF, maxVersion = 31)),
         @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
@@ -65,7 +66,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     /**
      * We need default constructors to build the prototype instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
     public NamedNodeMap() {
         attributes_ = null;
     }
