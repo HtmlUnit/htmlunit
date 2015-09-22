@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -38,7 +39,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
     @JsxClass(domClass = HtmlDirectory.class, isJSObject = false,
         browsers = { @WebBrowser(value = IE, maxVersion = 8) }),
     @JsxClass(domClass = HtmlUnorderedList.class,
-        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                @WebBrowser(EDGE) }),
     @JsxClass(domClass = HtmlUnorderedList.class,
         isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
     @JsxClass(domClass = HtmlMenu.class, isJSObject = false,
@@ -48,7 +50,7 @@ public class HTMLUListElement extends HTMLListElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public HTMLUListElement() {
     }
 

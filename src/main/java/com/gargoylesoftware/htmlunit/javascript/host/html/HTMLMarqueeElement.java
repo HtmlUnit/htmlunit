@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
@@ -35,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlMarquee.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlMarquee.class, isJSObject = false,
             browsers = @WebBrowser(value = IE, maxVersion = 8))
     })
@@ -44,7 +45,7 @@ public class HTMLMarqueeElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
     public HTMLMarqueeElement() {
     }
 
