@@ -34,12 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 public class XMLDOMDocumentFragment extends XMLDOMNode {
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XMLDOMDocumentFragment() {
-    }
-
-    /**
      * Attempting to set the value of document fragments generates an error.
      * @param newValue the new value to set
      */

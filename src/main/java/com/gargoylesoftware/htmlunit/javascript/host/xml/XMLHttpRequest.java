@@ -155,7 +155,7 @@ public class XMLHttpRequest extends EventTarget {
     private boolean withCredentials_;
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
+     * Creates a new instance.
      */
     @JsxConstructor
     public XMLHttpRequest() {

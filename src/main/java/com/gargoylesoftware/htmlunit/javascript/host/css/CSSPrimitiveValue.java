@@ -217,11 +217,10 @@ public class CSSPrimitiveValue extends CSSValue {
     private org.w3c.dom.css.CSSPrimitiveValue wrappedCssPrimitiveValue_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor to instantiate prototype.
+     * Creates an instance.
      */
     @JsxConstructor
     public CSSPrimitiveValue() {
-        // Empty.
     }
 
     /**

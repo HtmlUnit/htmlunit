@@ -63,12 +63,6 @@ public class XSLProcessor extends MSXMLScriptable {
     private Map<String, Object> parameters_ = new HashMap<>();
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XSLProcessor() {
-    }
-
-    /**
      * Specifies which XML input tree to transform.
      * @param input the input tree
      */

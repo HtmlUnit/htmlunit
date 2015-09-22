@@ -43,7 +43,7 @@ public class XMLDOMAttribute extends XMLDOMNode {
     private XMLDOMText textNode_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
     public XMLDOMAttribute() { }
 

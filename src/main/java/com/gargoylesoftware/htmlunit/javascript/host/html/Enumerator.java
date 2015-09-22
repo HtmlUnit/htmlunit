@@ -40,10 +40,9 @@ public class Enumerator extends SimpleScriptable {
     private HTMLCollection collection_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
     public Enumerator() {
-        // Empty.
     }
 
     /**

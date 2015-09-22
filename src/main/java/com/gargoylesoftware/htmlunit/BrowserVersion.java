@@ -200,6 +200,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
         INTERNET_EXPLORER_11.setScriptAcceptHeader("application/javascript, */*;q=0.8");
 
+        EDGE.initDefaultFeatures();
         EDGE.setBrowserLanguage("en-US");
         EDGE.setVendor("");
 
@@ -338,6 +339,9 @@ public class BrowserVersion implements Serializable, Cloneable {
         }
         else if (isFirefox()) {
             expectedBrowserName = "FF";
+        }
+        else if (isEdge()) {
+            expectedBrowserName = "EDGE";
         }
         else {
             expectedBrowserName = "CHROME";

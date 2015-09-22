@@ -110,7 +110,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         "connection", "content-length", "cookie", "cookie2", "content-transfer-encoding", "date", "expect",
         "host", "keep-alive", "referer", "te", "trailer", "transfer-encoding", "upgrade", "user-agent", "via");
 
-    private int state_;
+    private int state_ = STATE_UNSENT;
     private Function stateChangeHandler_;
     private WebRequest webRequest_;
     private boolean async_;
@@ -121,11 +121,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     private boolean sent_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
     @JsxConstructor
     public XMLHTTPRequest() {
-        state_ = STATE_UNSENT;
     }
 
     /**

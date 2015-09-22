@@ -41,12 +41,6 @@ public class XMLDOMParseError extends MSXMLScriptable {
     private String url_ = "";
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XMLDOMParseError() {
-    }
-
-    /**
      * Returns the error code of the last parse error.
      * @return the error code of the last parse error
      */

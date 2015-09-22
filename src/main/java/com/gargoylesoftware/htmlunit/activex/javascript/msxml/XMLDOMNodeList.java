@@ -81,7 +81,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     private int currentIndex_ = 0;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
     public XMLDOMNodeList() {
     }

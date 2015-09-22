@@ -69,11 +69,10 @@ public class CSSValue extends SimpleScriptable {
     private org.w3c.dom.css.CSSValue wrappedCssValue_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor to instantiate prototype.
+     * Creates an instance.
      */
     @JsxConstructor
     public CSSValue() {
-        // Empty.
     }
 
     /**

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -38,27 +39,33 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlHeading1.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                        @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlHeading1.class,
                 isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlHeading2.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                        @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlHeading2.class,
                 isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlHeading3.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                        @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlHeading3.class,
                 isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlHeading4.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                        @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlHeading4.class,
                 isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlHeading5.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                        @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlHeading5.class,
                 isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlHeading6.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                        @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlHeading6.class,
                 isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
     })

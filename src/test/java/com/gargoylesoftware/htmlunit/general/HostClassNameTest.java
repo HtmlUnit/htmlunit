@@ -632,7 +632,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Event}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.Event}.
      *
      * @throws Exception if an error occurs
      */
@@ -4765,6 +4765,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.idb.IDBFactory}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -4805,6 +4807,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.AnimationEvent}.
+     *
      * @throws Exception if the test fails
      */
     @Test

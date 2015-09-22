@@ -36,12 +36,6 @@ public class XSLTemplate extends MSXMLScriptable {
     private XMLDOMNode stylesheet_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XSLTemplate() {
-    }
-
-    /**
      * Sets the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      * @param node the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template
      */

@@ -48,7 +48,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
     private int currentIndex_ = 0;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
     public XMLDOMNamedNodeMap() {
         attributes_ = null;

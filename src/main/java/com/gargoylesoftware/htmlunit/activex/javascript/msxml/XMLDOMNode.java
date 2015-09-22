@@ -62,12 +62,6 @@ public class XMLDOMNode extends MSXMLScriptable {
     private XMLDOMNodeList childNodes_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XMLDOMNode() {
-    }
-
-    /**
      * Returns the list of attributes for this node.
      * @return the list of attributes for this node
      */

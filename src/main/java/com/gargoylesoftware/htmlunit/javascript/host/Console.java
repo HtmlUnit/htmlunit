@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -30,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -50,7 +52,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 @JsxClasses({
         @JsxClass(isJSObject = false, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
-        @JsxClass(browsers = @WebBrowser(value = IE, minVersion = 11))
+        @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
     })
 public class Console extends SimpleScriptable {
 
@@ -58,6 +60,13 @@ public class Console extends SimpleScriptable {
     private static Formatter FORMATTER_ = new ConsoleFormatter();
 
     private WebWindow webWindow_;
+
+    /**
+     * Default constructor.
+     */
+    @JsxConstructor
+    public Console() {
+    }
 
     /**
      * Sets the Window JavaScript object this console belongs to.

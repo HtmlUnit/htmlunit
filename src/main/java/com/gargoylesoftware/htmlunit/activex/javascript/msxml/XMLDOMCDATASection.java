@@ -30,11 +30,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(domClass = DomCDataSection.class, browsers = @WebBrowser(IE))
 public final class XMLDOMCDATASection extends XMLDOMText {
-
-    /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XMLDOMCDATASection() {
-    }
-
 }

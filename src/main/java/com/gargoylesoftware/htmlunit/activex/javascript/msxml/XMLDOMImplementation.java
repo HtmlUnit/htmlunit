@@ -33,12 +33,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 public class XMLDOMImplementation extends MSXMLScriptable {
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XMLDOMImplementation() {
-    }
-
-    /**
      * Indicates support for the specified feature.
      * @param feature a string that specifies the feature to test
      * @param version a string that specifies the version number to test

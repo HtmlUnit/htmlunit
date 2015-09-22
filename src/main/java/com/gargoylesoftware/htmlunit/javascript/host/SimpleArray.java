@@ -38,13 +38,6 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
     private final List<Object> elements_ = new ArrayList<>();
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public SimpleArray() {
-        // nothing
-    }
-
-    /**
      * Returns the item at the given index.
      * @param index the index
      * @return the item at the given position

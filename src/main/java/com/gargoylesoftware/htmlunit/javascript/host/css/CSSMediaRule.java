@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -30,7 +31,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @WebBrowser(EDGE) })
 public class CSSMediaRule extends CSSConditionRule {
 
     private MediaList media_;
@@ -38,7 +40,7 @@ public class CSSMediaRule extends CSSConditionRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
     public CSSMediaRule() {
     }
 

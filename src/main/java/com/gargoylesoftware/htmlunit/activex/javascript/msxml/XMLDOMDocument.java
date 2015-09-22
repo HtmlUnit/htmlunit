@@ -79,7 +79,7 @@ public class XMLDOMDocument extends XMLDOMNode {
     private String url_ = "";
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
+     * Creates a new instance.
      */
     public XMLDOMDocument() {
         this(null);

@@ -164,10 +164,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private Integer top_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
     public ComputedCSSStyleDeclaration() {
-        // Empty.
     }
 
     /**

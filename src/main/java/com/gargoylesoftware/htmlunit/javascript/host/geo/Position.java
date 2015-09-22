@@ -32,10 +32,9 @@ public class Position extends SimpleScriptable {
     private Coordinates coordinates_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
     public Position() {
-        // Empty.
     }
 
     Position(final Coordinates coordinates) {

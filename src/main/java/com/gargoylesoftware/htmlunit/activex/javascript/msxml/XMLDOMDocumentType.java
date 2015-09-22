@@ -39,12 +39,6 @@ public class XMLDOMDocumentType extends XMLDOMNode {
     private XMLDOMNamedNodeMap attributes_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XMLDOMDocumentType() {
-    }
-
-    /**
      * Returns the list of attributes for this element.
      * @return the list of attributes for this element
      */

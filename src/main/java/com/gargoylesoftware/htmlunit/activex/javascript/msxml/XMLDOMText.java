@@ -39,12 +39,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 public class XMLDOMText extends XMLDOMCharacterData {
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XMLDOMText() {
-    }
-
-    /**
      * Returns the text contained in the node.
      * @return the text contained in the node
      */

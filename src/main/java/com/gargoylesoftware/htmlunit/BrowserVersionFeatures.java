@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -1503,7 +1504,7 @@ public enum BrowserVersionFeatures {
     /**
      * Indicates if the String representation of a native function is without newline.
      */
-    @BrowserFeature(@WebBrowser(CHROME))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
 
     /**

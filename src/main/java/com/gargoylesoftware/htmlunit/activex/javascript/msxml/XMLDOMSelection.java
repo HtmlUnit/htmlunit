@@ -31,12 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class XMLDOMSelection extends XMLDOMNodeList {
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XMLDOMSelection() {
-    }
-
-    /**
      * Creates an instance.
      * @param parentScope parent scope
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute

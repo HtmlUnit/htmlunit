@@ -53,12 +53,6 @@ public class XMLDOMElement extends XMLDOMNode {
     private Map<String, XMLDOMNodeList> elementsByTagName_; // for performance and for equality (==)
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public XMLDOMElement() {
-    }
-
-    /**
      * Returns the list of attributes for this element.
      * @return the list of attributes for this element
      */

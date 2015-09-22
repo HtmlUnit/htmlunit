@@ -48,13 +48,6 @@ public class Popup extends SimpleScriptable {
     private boolean opened_;
     private HTMLDocument document_;
 
-    /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
-     */
-    public Popup() {
-        opened_ = false;
-    }
-
     void init(final Window openerJSWindow) {
         // build document
 
