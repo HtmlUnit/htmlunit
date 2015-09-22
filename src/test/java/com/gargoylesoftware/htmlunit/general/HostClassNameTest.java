@@ -1544,8 +1544,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMediaElement]",
-            CHROME = "function HTMLMediaElement() { [native code] }",
+    @Alerts(DEFAULT = "function HTMLMediaElement() { [native code] }",
+            IE11 = "[object HTMLMediaElement]",
             FF = "function HTMLMediaElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlMediaElement() throws Exception {
@@ -1558,8 +1558,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMenuElement]",
-            CHROME = "function HTMLMenuElement() { [native code] }",
+    @Alerts(DEFAULT = "function HTMLMenuElement() { [native code] }",
+            IE11 = "[object HTMLMenuElement]",
             FF = "function HTMLMenuElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlMenuElement() throws Exception {
@@ -1602,8 +1602,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLModElement]",
-            CHROME = "function HTMLModElement() { [native code] }",
+    @Alerts(DEFAULT = "function HTMLModElement() { [native code] }",
+            IE11 = "[object HTMLModElement]",
             FF = "function HTMLModElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlModElement() throws Exception {
@@ -1677,8 +1677,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOptGroupElement]",
-            CHROME = "function HTMLOptGroupElement() { [native code] }",
+    @Alerts(DEFAULT = "function HTMLOptGroupElement() { [native code] }",
+            IE11 = "[object HTMLOptGroupElement]",
             FF = "function HTMLOptGroupElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlOptGroupElement() throws Exception {
@@ -1796,8 +1796,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLPreElement]",
-            CHROME = "function HTMLPreElement() { [native code] }",
+    @Alerts(DEFAULT = "function HTMLPreElement() { [native code] }",
+            IE11 = "[object HTMLPreElement]",
             FF = "function HTMLPreElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlPreElement() throws Exception {
@@ -1810,8 +1810,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLProgressElement]",
-            CHROME = "function HTMLProgressElement() { [native code] }",
+    @Alerts(DEFAULT = "function HTMLProgressElement() { [native code] }",
+            IE11 = "[object HTMLProgressElement]",
             FF = "function HTMLProgressElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlProgressElement() throws Exception {
@@ -1858,8 +1858,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSourceElement]",
-            CHROME = "function HTMLSourceElement() { [native code] }",
+    @Alerts(DEFAULT = "function HTMLSourceElement() { [native code] }",
+            IE11 = "[object HTMLSourceElement]",
             FF = "function HTMLSourceElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlSourceElement() throws Exception {
@@ -2119,8 +2119,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "function HTMLUnknownElement() { [native code] }",
+    @Alerts(DEFAULT = "function HTMLUnknownElement() { [native code] }",
+            IE11 = "[object HTMLUnknownElement]",
             FF = "function HTMLUnknownElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlUnknownElement() throws Exception {
@@ -2157,8 +2157,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLVideoElement]",
-            CHROME = "function HTMLVideoElement() { [native code] }",
+    @Alerts(DEFAULT = "function HTMLVideoElement() { [native code] }",
+            IE11 = "[object HTMLVideoElement]",
             FF = "function HTMLVideoElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlVideoElement() throws Exception {
@@ -2213,8 +2213,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object KeyboardEvent]",
-            CHROME = "function KeyboardEvent() { [native code] }",
+    @Alerts(DEFAULT = "function KeyboardEvent() { [native code] }",
+            IE11 = "[object KeyboardEvent]",
             FF = "function KeyboardEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void keyboardEvent() throws Exception {
@@ -2244,8 +2244,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MediaList]",
-            CHROME = "function MediaList() { [native code] }",
+    @Alerts(DEFAULT = "function MediaList() { [native code] }",
+            IE11 = "[object MediaList]",
             FF = "function MediaList() {\n    [native code]\n}",
             IE8 = "exception")
     public void mediaList() throws Exception {
@@ -2258,8 +2258,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MessageEvent]",
-            CHROME = "function MessageEvent() { [native code] }",
+    @Alerts(DEFAULT = "function MessageEvent() { [native code] }",
+            IE11 = "[object MessageEvent]",
             FF = "function MessageEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void messageEvent() throws Exception {
@@ -2272,8 +2272,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MimeType]",
-            CHROME = "function MimeType() { [native code] }",
+    @Alerts(DEFAULT = "function MimeType() { [native code] }",
+            IE11 = "[object MimeType]",
             FF = "function MimeType() {\n    [native code]\n}",
             IE8 = "exception")
     public void mimeType() throws Exception {
@@ -2286,8 +2286,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MimeTypeArray]",
-            CHROME = "function MimeTypeArray() { [native code] }",
+    @Alerts(DEFAULT = "function MimeTypeArray() { [native code] }",
+            IE11 = "[object MimeTypeArray]",
             FF = "function MimeTypeArray() {\n    [native code]\n}",
             IE8 = "exception")
     public void mimeTypeArray() throws Exception {
@@ -2300,8 +2300,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MouseEvent]",
-            CHROME = "function MouseEvent() { [native code] }",
+    @Alerts(DEFAULT = "function MouseEvent() { [native code] }",
+            IE11 = "[object MouseEvent]",
             FF = "function MouseEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void mouseEvent() throws Exception {
@@ -2314,8 +2314,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MutationEvent]",
-            CHROME = "function MutationEvent() { [native code] }",
+    @Alerts(DEFAULT = "function MutationEvent() { [native code] }",
+            IE11 = "[object MutationEvent]",
             FF = "function MutationEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void mutationEvent() throws Exception {
@@ -2386,8 +2386,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Node]",
-            CHROME = "function Node() { [native code] }",
+    @Alerts(DEFAULT = "function Node() { [native code] }",
+            IE11 = "[object Node]",
             FF = "function Node() {\n    [native code]\n}",
             IE8 = "exception")
     public void node() throws Exception {
@@ -2400,8 +2400,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object NodeFilter]",
-            CHROME = "function NodeFilter() { [native code] }",
+    @Alerts(DEFAULT = "function NodeFilter() { [native code] }",
+            IE11 = "[object NodeFilter]",
             FF = "function NodeFilter() {\n    [native code]\n}",
             IE8 = "exception")
     public void nodeFilter() throws Exception {
@@ -2431,8 +2431,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Plugin]",
-            CHROME = "function Plugin() { [native code] }",
+    @Alerts(DEFAULT = "function Plugin() { [native code] }",
+            IE11 = "[object Plugin]",
             FF = "function Plugin() {\n    [native code]\n}",
             IE8 = "exception")
     public void plugin() throws Exception {
@@ -2445,8 +2445,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object PluginArray]",
-            CHROME = "function PluginArray() { [native code] }",
+    @Alerts(DEFAULT = "function PluginArray() { [native code] }",
+            IE11 = "[object PluginArray]",
             FF = "function PluginArray() {\n    [native code]\n}",
             IE8 = "exception")
     public void pluginArray() throws Exception {
@@ -2494,8 +2494,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object ProcessingInstruction]",
-            CHROME = "function ProcessingInstruction() { [native code] }",
+    @Alerts(DEFAULT = "function ProcessingInstruction() { [native code] }",
+            IE11 = "[object ProcessingInstruction]",
             FF = "function ProcessingInstruction() {\n    [native code]\n}",
             IE8 = "exception")
     public void processingInstruction() throws Exception {
@@ -2533,8 +2533,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGAElement]",
-            CHROME = "function SVGAElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGAElement() { [native code] }",
+            IE11 = "[object SVGAElement]",
             FF = "function SVGAElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgAElement() throws Exception {
@@ -2559,8 +2559,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGAngle]",
-            CHROME = "function SVGAngle() { [native code] }",
+    @Alerts(DEFAULT = "function SVGAngle() { [native code] }",
+            IE11 = "[object SVGAngle]",
             FF = "function SVGAngle() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgAngle() throws Exception {
@@ -2612,8 +2612,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGCircleElement]",
-            CHROME = "function SVGCircleElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGCircleElement() { [native code] }",
+            IE11 = "[object SVGCircleElement]",
             FF = "function SVGCircleElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgCircleElement() throws Exception {
@@ -2626,8 +2626,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGClipPathElement]",
-            CHROME = "function SVGClipPathElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGClipPathElement() { [native code] }",
+            IE11 = "[object SVGClipPathElement]",
             FF = "function SVGClipPathElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgClipPathElement() throws Exception {
@@ -2652,8 +2652,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGDefsElement]",
-            CHROME = "function SVGDefsElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGDefsElement() { [native code] }",
+            IE11 = "[object SVGDefsElement]",
             FF = "function SVGDefsElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgDefsElement() throws Exception {
@@ -2666,8 +2666,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGDescElement]",
-            CHROME = "function SVGDescElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGDescElement() { [native code] }",
+            IE11 = "[object SVGDescElement]",
             FF = "function SVGDescElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgDescElement() throws Exception {
@@ -2680,8 +2680,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGElement]",
-            CHROME = "function SVGElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGElement() { [native code] }",
+            IE11 = "[object SVGElement]",
             FF = "function SVGElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgElement() throws Exception {
@@ -2694,8 +2694,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGEllipseElement]",
-            CHROME = "function SVGEllipseElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGEllipseElement() { [native code] }",
+            IE11 = "[object SVGEllipseElement]",
             FF = "function SVGEllipseElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgEllipseElement() throws Exception {
@@ -2708,8 +2708,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEBlendElement]",
-            CHROME = "function SVGFEBlendElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEBlendElement() { [native code] }",
+            IE11 = "[object SVGFEBlendElement]",
             FF = "function SVGFEBlendElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEBlendElement() throws Exception {
@@ -2722,8 +2722,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEColorMatrixElement]",
-            CHROME = "function SVGFEColorMatrixElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEColorMatrixElement() { [native code] }",
+            IE11 = "[object SVGFEColorMatrixElement]",
             FF = "function SVGFEColorMatrixElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEColorMatrixElement() throws Exception {
@@ -2736,8 +2736,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEComponentTransferElement]",
-            CHROME = "function SVGFEComponentTransferElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEComponentTransferElement() { [native code] }",
+            IE11 = "[object SVGFEComponentTransferElement]",
             FF = "function SVGFEComponentTransferElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEComponentTransferElement() throws Exception {
@@ -2750,8 +2750,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFECompositeElement]",
-            CHROME = "function SVGFECompositeElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFECompositeElement() { [native code] }",
+            IE11 = "[object SVGFECompositeElement]",
             FF = "function SVGFECompositeElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFECompositeElement() throws Exception {
@@ -2764,8 +2764,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEConvolveMatrixElement]",
-            CHROME = "function SVGFEConvolveMatrixElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEConvolveMatrixElement() { [native code] }",
+            IE11 = "[object SVGFEConvolveMatrixElement]",
             FF = "function SVGFEConvolveMatrixElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEConvolveMatrixElement() throws Exception {
@@ -2778,8 +2778,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEDiffuseLightingElement]",
-            CHROME = "function SVGFEDiffuseLightingElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEDiffuseLightingElement() { [native code] }",
+            IE11 = "[object SVGFEDiffuseLightingElement]",
             FF = "function SVGFEDiffuseLightingElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEDiffuseLightingElement() throws Exception {
@@ -2792,8 +2792,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEDisplacementMapElement]",
-            CHROME = "function SVGFEDisplacementMapElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEDisplacementMapElement() { [native code] }",
+            IE11 = "[object SVGFEDisplacementMapElement]",
             FF = "function SVGFEDisplacementMapElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEDisplacementMapElement() throws Exception {
@@ -2806,8 +2806,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEDistantLightElement]",
-            CHROME = "function SVGFEDistantLightElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEDistantLightElement() { [native code] }",
+            IE11 = "[object SVGFEDistantLightElement]",
             FF = "function SVGFEDistantLightElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEDistantLightElement() throws Exception {
@@ -2820,8 +2820,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFloodElement]",
-            CHROME = "function SVGFEFloodElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEFloodElement() { [native code] }",
+            IE11 = "[object SVGFEFloodElement]",
             FF = "function SVGFEFloodElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFloodElement() throws Exception {
@@ -2834,8 +2834,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFuncAElement]",
-            CHROME = "function SVGFEFuncAElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEFuncAElement() { [native code] }",
+            IE11 = "[object SVGFEFuncAElement]",
             FF = "function SVGFEFuncAElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFuncAElement() throws Exception {
@@ -2848,8 +2848,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFuncBElement]",
-            CHROME = "function SVGFEFuncBElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEFuncBElement() { [native code] }",
+            IE11 = "[object SVGFEFuncBElement]",
             FF = "function SVGFEFuncBElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFuncBElement() throws Exception {
@@ -2862,8 +2862,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFuncGElement]",
-            CHROME = "function SVGFEFuncGElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEFuncGElement() { [native code] }",
+            IE11 = "[object SVGFEFuncGElement]",
             FF = "function SVGFEFuncGElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFuncGElement() throws Exception {
@@ -2876,8 +2876,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFuncRElement]",
-            CHROME = "function SVGFEFuncRElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEFuncRElement() { [native code] }",
+            IE11 = "[object SVGFEFuncRElement]",
             FF = "function SVGFEFuncRElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFuncRElement() throws Exception {
@@ -2890,8 +2890,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEGaussianBlurElement]",
-            CHROME = "function SVGFEGaussianBlurElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEGaussianBlurElement() { [native code] }",
+            IE11 = "[object SVGFEGaussianBlurElement]",
             FF = "function SVGFEGaussianBlurElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEGaussianBlurElement() throws Exception {
@@ -2904,8 +2904,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEImageElement]",
-            CHROME = "function SVGFEImageElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEImageElement() { [native code] }",
+            IE11 = "[object SVGFEImageElement]",
             FF = "function SVGFEImageElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEImageElement() throws Exception {
@@ -2918,8 +2918,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEMergeElement]",
-            CHROME = "function SVGFEMergeElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEMergeElement() { [native code] }",
+            IE11 = "[object SVGFEMergeElement]",
             FF = "function SVGFEMergeElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEMergeElement() throws Exception {
@@ -2932,8 +2932,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEMergeNodeElement]",
-            CHROME = "function SVGFEMergeNodeElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEMergeNodeElement() { [native code] }",
+            IE11 = "[object SVGFEMergeNodeElement]",
             FF = "function SVGFEMergeNodeElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEMergeNodeElement() throws Exception {
@@ -2946,8 +2946,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEMorphologyElement]",
-            CHROME = "function SVGFEMorphologyElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEMorphologyElement() { [native code] }",
+            IE11 = "[object SVGFEMorphologyElement]",
             FF = "function SVGFEMorphologyElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEMorphologyElement() throws Exception {
@@ -2960,8 +2960,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEOffsetElement]",
-            CHROME = "function SVGFEOffsetElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEOffsetElement() { [native code] }",
+            IE11 = "[object SVGFEOffsetElement]",
             FF = "function SVGFEOffsetElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEOffsetElement() throws Exception {
@@ -2974,8 +2974,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEPointLightElement]",
-            CHROME = "function SVGFEPointLightElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFEPointLightElement() { [native code] }",
+            IE11 = "[object SVGFEPointLightElement]",
             FF = "function SVGFEPointLightElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEPointLightElement() throws Exception {
@@ -2988,8 +2988,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFESpecularLightingElement]",
-            CHROME = "function SVGFESpecularLightingElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFESpecularLightingElement() { [native code] }",
+            IE11 = "[object SVGFESpecularLightingElement]",
             FF = "function SVGFESpecularLightingElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFESpecularLightingElement() throws Exception {
@@ -3002,8 +3002,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFESpotLightElement]",
-            CHROME = "function SVGFESpotLightElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFESpotLightElement() { [native code] }",
+            IE11 = "[object SVGFESpotLightElement]",
             FF = "function SVGFESpotLightElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFESpotLightElement() throws Exception {
@@ -3016,8 +3016,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFETileElement]",
-            CHROME = "function SVGFETileElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFETileElement() { [native code] }",
+            IE11 = "[object SVGFETileElement]",
             FF = "function SVGFETileElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFETileElement() throws Exception {
@@ -3030,8 +3030,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFETurbulenceElement]",
-            CHROME = "function SVGFETurbulenceElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFETurbulenceElement() { [native code] }",
+            IE11 = "[object SVGFETurbulenceElement]",
             FF = "function SVGFETurbulenceElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFETurbulenceElement() throws Exception {
@@ -3044,8 +3044,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFilterElement]",
-            CHROME = "function SVGFilterElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGFilterElement() { [native code] }",
+            IE11 = "[object SVGFilterElement]",
             FF = "function SVGFilterElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFilterElement() throws Exception {
@@ -3071,8 +3071,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGGElement]",
-            CHROME = "function SVGGElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGGElement() { [native code] }",
+            IE11 = "[object SVGGElement]",
             FF = "function SVGGElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgGElement() throws Exception {
@@ -3085,8 +3085,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGImageElement]",
-            CHROME = "function SVGImageElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGImageElement() { [native code] }",
+            IE11 = "[object SVGImageElement]",
             FF = "function SVGImageElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgImageElement() throws Exception {
@@ -3099,8 +3099,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGLineElement]",
-            CHROME = "function SVGLineElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGLineElement() { [native code] }",
+            IE11 = "[object SVGLineElement]",
             FF = "function SVGLineElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgLineElement() throws Exception {
@@ -3113,8 +3113,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGLinearGradientElement]",
-            CHROME = "function SVGLinearGradientElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGLinearGradientElement() { [native code] }",
+            IE11 = "[object SVGLinearGradientElement]",
             FF = "function SVGLinearGradientElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgLinearGradientElement() throws Exception {
@@ -3127,8 +3127,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGMarkerElement]",
-            CHROME = "function SVGMarkerElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGMarkerElement() { [native code] }",
+            IE11 = "[object SVGMarkerElement]",
             FF = "function SVGMarkerElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgMarkerElement() throws Exception {
@@ -3141,8 +3141,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGMaskElement]",
-            CHROME = "function SVGMaskElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGMaskElement() { [native code] }",
+            IE11 = "[object SVGMaskElement]",
             FF = "function SVGMaskElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgMaskElement() throws Exception {
@@ -3155,8 +3155,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGMatrix]",
-            CHROME = "function SVGMatrix() { [native code] }",
+    @Alerts(DEFAULT = "function SVGMatrix() { [native code] }",
+            IE11 = "[object SVGMatrix]",
             FF = "function SVGMatrix() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgMatrix() throws Exception {
@@ -3169,8 +3169,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGMetadataElement]",
-            CHROME = "function SVGMetadataElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGMetadataElement() { [native code] }",
+            IE11 = "[object SVGMetadataElement]",
             FF = "function SVGMetadataElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgMetadataElement() throws Exception {
@@ -3196,8 +3196,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGPathElement]",
-            CHROME = "function SVGPathElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGPathElement() { [native code] }",
+            IE11 = "[object SVGPathElement]",
             FF = "function SVGPathElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgPathElement() throws Exception {
@@ -3210,8 +3210,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGPatternElement]",
-            CHROME = "function SVGPatternElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGPatternElement() { [native code] }",
+            IE11 = "[object SVGPatternElement]",
             FF = "function SVGPatternElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgPatternElement() throws Exception {
@@ -3224,8 +3224,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGPolygonElement]",
-            CHROME = "function SVGPolygonElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGPolygonElement() { [native code] }",
+            IE11 = "[object SVGPolygonElement]",
             FF = "function SVGPolygonElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgPolygonElement() throws Exception {
@@ -3238,8 +3238,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGPolylineElement]",
-            CHROME = "function SVGPolylineElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGPolylineElement() { [native code] }",
+            IE11 = "[object SVGPolylineElement]",
             FF = "function SVGPolylineElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgPolylineElement() throws Exception {
@@ -3252,8 +3252,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGRadialGradientElement]",
-            CHROME = "function SVGRadialGradientElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGRadialGradientElement() { [native code] }",
+            IE11 = "[object SVGRadialGradientElement]",
             FF = "function SVGRadialGradientElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgRadialGradientElement() throws Exception {
@@ -3266,8 +3266,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGRect]",
-            CHROME = "function SVGRect() { [native code] }",
+    @Alerts(DEFAULT = "function SVGRect() { [native code] }",
+            IE11 = "[object SVGRect]",
             FF = "function SVGRect() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgRect() throws Exception {
@@ -3280,8 +3280,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGRectElement]",
-            CHROME = "function SVGRectElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGRectElement() { [native code] }",
+            IE11 = "[object SVGRectElement]",
             FF = "function SVGRectElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgRectElement() throws Exception {
@@ -3294,8 +3294,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGSVGElement]",
-            CHROME = "function SVGSVGElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGSVGElement() { [native code] }",
+            IE11 = "[object SVGSVGElement]",
             FF = "function SVGSVGElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgSVGElement() throws Exception {
@@ -3308,8 +3308,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGScriptElement]",
-            CHROME = "function SVGScriptElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGScriptElement() { [native code] }",
+            IE11 = "[object SVGScriptElement]",
             FF = "function SVGScriptElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgScriptElement() throws Exception {
@@ -3335,8 +3335,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGStopElement]",
-            CHROME = "function SVGStopElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGStopElement() { [native code] }",
+            IE11 = "[object SVGStopElement]",
             FF = "function SVGStopElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgStopElement() throws Exception {
@@ -3349,8 +3349,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGStyleElement]",
-            CHROME = "function SVGStyleElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGStyleElement() { [native code] }",
+            IE11 = "[object SVGStyleElement]",
             FF = "function SVGStyleElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgStyleElement() throws Exception {
@@ -3363,8 +3363,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGSwitchElement]",
-            CHROME = "function SVGSwitchElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGSwitchElement() { [native code] }",
+            IE11 = "[object SVGSwitchElement]",
             FF = "function SVGSwitchElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgSwitchElement() throws Exception {
@@ -3377,8 +3377,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGSymbolElement]",
-            CHROME = "function SVGSymbolElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGSymbolElement() { [native code] }",
+            IE11 = "[object SVGSymbolElement]",
             FF = "function SVGSymbolElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgSymbolElement() throws Exception {
@@ -3391,8 +3391,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTSpanElement]",
-            CHROME = "function SVGTSpanElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGTSpanElement() { [native code] }",
+            IE11 = "[object SVGTSpanElement]",
             FF = "function SVGTSpanElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgTSpanElement() throws Exception {
@@ -3405,8 +3405,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTextElement]",
-            CHROME = "function SVGTextElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGTextElement() { [native code] }",
+            IE11 = "[object SVGTextElement]",
             FF = "function SVGTextElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgTextElement() throws Exception {
@@ -3419,8 +3419,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTextPathElement]",
-            CHROME = "function SVGTextPathElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGTextPathElement() { [native code] }",
+            IE11 = "[object SVGTextPathElement]",
             FF = "function SVGTextPathElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgTextPathElement() throws Exception {
@@ -3433,8 +3433,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTitleElement]",
-            CHROME = "function SVGTitleElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGTitleElement() { [native code] }",
+            IE11 = "[object SVGTitleElement]",
             FF = "function SVGTitleElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgTitleElement() throws Exception {
@@ -3447,8 +3447,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGUseElement]",
-            CHROME = "function SVGUseElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGUseElement() { [native code] }",
+            IE11 = "[object SVGUseElement]",
             FF = "function SVGUseElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgUseElement() throws Exception {
@@ -3461,8 +3461,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGViewElement]",
-            CHROME = "function SVGViewElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGViewElement() { [native code] }",
+            IE11 = "[object SVGViewElement]",
             FF = "function SVGViewElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgViewElement() throws Exception {
@@ -3599,8 +3599,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object TreeWalker]",
-            CHROME = "function TreeWalker() { [native code] }",
+    @Alerts(DEFAULT = "function TreeWalker() { [native code] }",
+            IE11 = "[object TreeWalker]",
             FF = "function TreeWalker() {\n    [native code]\n}",
             IE8 = "exception")
     public void treeWalker() throws Exception {
@@ -3613,8 +3613,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object UIEvent]",
-            CHROME = "function UIEvent() { [native code] }",
+    @Alerts(DEFAULT = "function UIEvent() { [native code] }",
+            IE11 = "[object UIEvent]",
             FF = "function UIEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void uIEvent() throws Exception {
@@ -3714,8 +3714,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            CHROME = "function XMLDocument() { [native code] }",
+    @Alerts(DEFAULT = "function XMLDocument() { [native code] }",
+            IE11 = "[object XMLDocument]",
             FF = "function XMLDocument() {\n    [native code]\n}",
             IE8 = "exception")
     public void xmlDocument() throws Exception {
