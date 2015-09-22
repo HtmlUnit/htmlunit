@@ -28,14 +28,13 @@ import com.gargoylesoftware.htmlunit.svg.SvgMPath;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgMPath.class,
-    browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(domClass = SvgMPath.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGMPathElement extends SVGElement {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstructor
     public SVGMPathElement() {
     }
 }

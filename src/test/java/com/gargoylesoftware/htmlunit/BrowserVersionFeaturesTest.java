@@ -69,6 +69,7 @@ public class BrowserVersionFeaturesTest  {
         browsers.add(BrowserVersion.INTERNET_EXPLORER_8);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_11);
         browsers.add(BrowserVersion.CHROME);
+        browsers.add(BrowserVersion.EDGE);
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             int useCount = 0;
@@ -111,6 +112,9 @@ public class BrowserVersionFeaturesTest  {
         }
         if (browser.isFirefox()) {
             return "FF";
+        }
+        if (browser.isEdge()) {
+            return "EDGE";
         }
 
         return "CHROME";

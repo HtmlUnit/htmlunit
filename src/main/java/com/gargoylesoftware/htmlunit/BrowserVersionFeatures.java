@@ -1434,8 +1434,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START,
 
-    /** Indicates that Intl is supported. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    /** Indicates that {@code Intl} is supported. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @WebBrowser(EDGE) })
     JS_INTL,
 
     /** Indicates that Intl.v8BreakIterator is supported. */

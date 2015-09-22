@@ -64,7 +64,7 @@ public class Console extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
+    @JsxConstructor(@WebBrowser(EDGE))
     public Console() {
     }
 
@@ -77,7 +77,7 @@ public class Console extends SimpleScriptable {
     }
 
     /**
-     * This method performs logging to the console at "log" level.
+     * This method performs logging to the console at {@code log} level.
      * @param cx the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
@@ -94,7 +94,7 @@ public class Console extends SimpleScriptable {
     }
 
     /**
-     * This method performs logging to the console at "info" level.
+     * This method performs logging to the console at {@code info} level.
      * @param cx the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
@@ -111,7 +111,7 @@ public class Console extends SimpleScriptable {
     }
 
     /**
-     * This method performs logging to the console at "warn" level.
+     * This method performs logging to the console at {@code warn} level.
      * @param cx the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
@@ -128,7 +128,7 @@ public class Console extends SimpleScriptable {
     }
 
     /**
-     * This method performs logging to the console at "error" level.
+     * This method performs logging to the console at {@code error} level.
      * @param cx the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
@@ -145,7 +145,7 @@ public class Console extends SimpleScriptable {
     }
 
     /**
-     * This method performs logging to the console at "debug" level.
+     * This method performs logging to the console at {@code debug} level.
      * @param cx the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
@@ -162,7 +162,7 @@ public class Console extends SimpleScriptable {
     }
 
     /**
-     * This method performs logging to the console at "trace" level.
+     * This method performs logging to the console at {@code trace} level.
      * @param cx the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
@@ -183,7 +183,7 @@ public class Console extends SimpleScriptable {
     }
 
     /**
-     * Implementation of console dir function. This method does not enter recursively
+     * Implementation of console {@code dir} function. This method does not enter recursively
      * in the passed object, nor prints the details of objects or functions.
      * @param o the object to be printed
      */

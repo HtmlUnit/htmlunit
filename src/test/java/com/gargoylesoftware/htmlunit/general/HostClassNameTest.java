@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -2210,7 +2211,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -7463,7 +7464,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function InternalError() {\n    [native code]\n}")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ CHROME, IE, EDGE })
     public void internalError() throws Exception {
         test("InternalError");
     }

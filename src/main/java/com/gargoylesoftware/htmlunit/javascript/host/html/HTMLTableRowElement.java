@@ -43,7 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * A JavaScript object representing a TR.
+ * The JavaScript object {@code HTMLTableRowElement}.
  *
  * @author Marc Guillemot
  * @author Chris Erskine
