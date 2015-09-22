@@ -5930,7 +5930,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT= "function OfflineAudioCompletionEvent() { [native code] }",
+    @Alerts(DEFAULT = "function OfflineAudioCompletionEvent() { [native code] }",
             IE = "exception",
             FF = "function OfflineAudioCompletionEvent() {\n    [native code]\n}")
     public void offlineAudioCompletionEvent() throws Exception {
