@@ -3064,8 +3064,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGForeignObjectElement() { [native code] }",
+    @Alerts(DEFAULT = "function SVGForeignObjectElement() { [native code] }",
+            IE = "exception",
             FF = "function SVGForeignObjectElement() {\n    [native code]\n}")
     public void svgForeignObjectElement() throws Exception {
         test("SVGForeignObjectElement");
@@ -3703,8 +3703,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Window]",
-            CHROME = "function Window() { [native code] }",
+    @Alerts(DEFAULT = "function Window() { [native code] }",
+            IE11 = "[object Window]",
+            FF31 = "[object Window]",
             FF38 = "function Window() {\n    [native code]\n}",
             IE8 = "exception")
     @AlertsStandards(DEFAULT = "[object Window]",
@@ -3734,8 +3735,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function XMLHttpRequest() {\n    [native code]\n}",
-            CHROME = "function XMLHttpRequest() { [native code] }",
+    @Alerts(DEFAULT = "function XMLHttpRequest() { [native code] }",
+            FF = "function XMLHttpRequest() {\n    [native code]\n}",
             IE11 = "\nfunction XMLHttpRequest() {\n    [native code]\n}\n",
             IE8 = "[object XMLHttpRequest]")
     public void xmlHttpRequest() throws Exception {
@@ -3748,8 +3749,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function XMLSerializer() {\n    [native code]\n}",
-            CHROME = "function XMLSerializer() { [native code] }",
+    @Alerts(DEFAULT = "function XMLSerializer() { [native code] }",
+            FF = "function XMLSerializer() {\n    [native code]\n}",
             IE11 = "\nfunction XMLSerializer() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void xmlSerializer() throws Exception {
@@ -3787,8 +3788,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object XPathResult]",
-            CHROME = "function XPathResult() { [native code] }",
+    @Alerts(DEFAULT = "function XPathResult() { [native code] }",
+            FF31 = "[object XPathResult]",
             FF38 = "function XPathResult() {\n    [native code]\n}",
             IE = "exception")
     public void xPathResult() throws Exception {
@@ -3801,8 +3802,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object XSLTProcessor]",
-            CHROME = "function XSLTProcessor() { [native code] }",
+    @Alerts(DEFAULT = "function XSLTProcessor() { [native code] }",
+            FF31 = "[object XSLTProcessor]",
             FF38 = "function XSLTProcessor() {\n    [native code]\n}",
             IE = "exception")
     public void xsltProcessor() throws Exception {
@@ -4076,7 +4077,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "function Worker() { [native code] }",
+    @Alerts(DEFAULT = "function Worker() { [native code] }",
             FF = "function Worker() {\n    [native code]\n}",
             IE11 = "\nfunction Worker() {\n    [native code]\n}\n",
             IE8 = "exception")
@@ -6359,8 +6360,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SubtleCrypto() { [native code] }",
+    @Alerts(DEFAULT = "function SubtleCrypto() { [native code] }",
+            IE8 = "exception",
+            FF31 = "exception",
             FF38 = "function SubtleCrypto() {\n    [native code]\n}",
             IE11 = "[object SubtleCrypto]")
     public void subtleCrypto() throws Exception {
@@ -7171,9 +7173,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGNumber]",
+    @Alerts(DEFAULT = "function SVGNumber() { [native code] }",
+            FF31 = "[object SVGNumber]",
+            IE11 = "[object SVGNumber]",
             IE8 = "exception",
-            CHROME = "function SVGNumber() { [native code] }",
             FF38 = "function SVGNumber() {\n    [native code]\n}")
     public void svgNumber() throws Exception {
         test("SVGNumber");
@@ -8170,8 +8173,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function Symbol() { [native code] }",
+    @Alerts(DEFAULT = "function Symbol() { [native code] }",
+            IE = "exception",
             FF38 = "function Symbol() {\n    [native code]\n}")
     public void symbol() throws Exception {
         test("Symbol");
@@ -9675,8 +9678,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function XMLHttpRequestUpload() { [native code] }",
+    @Alerts(DEFAULT = "function XMLHttpRequestUpload() { [native code] }",
+            IE = "exception",
             FF = "function XMLHttpRequestUpload() {\n    [native code]\n}")
     public void xMLHttpRequestUpload() throws Exception {
         test("XMLHttpRequestUpload");
