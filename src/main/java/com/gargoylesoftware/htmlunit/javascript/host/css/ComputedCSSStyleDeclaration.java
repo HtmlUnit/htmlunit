@@ -2336,41 +2336,39 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (null == top_) {
             final String p = getPositionWithInheritance();
             if ("absolute".equals(p)) {
-                final String t = getTopWithInheritance();
-
-                if (!"auto".equals(t)) {
-                    // No need to calculate displacement caused by sibling nodes.
-                    top = pixelValue(t);
-                }
-                else {
-                    final String b = getBottomWithInheritance();
-
-                    if (!"auto".equals(b)) {
-                        // Estimate the vertical displacement caused by *all* siblings.
-                        // This is very rough, and doesn't even take position or display types into account.
-                        // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
-                        top = 0;
-                        DomNode child = getElement().getDomNodeOrDie().getParentNode().getFirstChild();
-                        while (child != null) {
-                            if (child instanceof HtmlElement && child.mayBeDisplayed()) {
-                                top += 20;
-                            }
-                            child = child.getNextSibling();
-                        }
-                        top -= pixelValue(b);
-                    }
-                }
+                top = getTopForAbsolutePositionWithInheritance();
             }
             else {
                 // Calculate the vertical displacement caused by *previous* siblings.
                 DomNode prev = getElement().getDomNodeOrDie().getPreviousSibling();
-                while (prev != null && !(prev instanceof HtmlElement)) {
+                boolean prevHadComputedTop = false;
+                while (prev != null && !prevHadComputedTop) {
+                    if (prev instanceof HtmlElement) {
+                        final HTMLElement e = (HTMLElement) ((HtmlElement) prev).getScriptObject();
+                        final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
+                        int prevTop = 0;
+                        if (style.top_ == null) {
+                            final String prevPosition = style.getPositionWithInheritance();
+                            if ("absolute".equals(prevPosition)) {
+                                prevTop += style.getTopForAbsolutePositionWithInheritance();
+                            }
+                            else {
+                                if ("relative".equals(prevPosition)) {
+                                    final String t = style.getTopWithInheritance();
+                                    prevTop += pixelValue(t);
+                                }
+                            }
+                        }
+                        else {
+                            prevHadComputedTop = true;
+                            prevTop += style.top_;
+                        }
+                        prevTop += style.getCalculatedHeight(true, true);
+                        final int margin = pixelValue(style.getMarginTop());
+                        prevTop += margin;
+                        top += prevTop;
+                    }
                     prev = prev.getPreviousSibling();
-                }
-                if (prev != null) {
-                    final HTMLElement e = (HTMLElement) ((HtmlElement) prev).getScriptObject();
-                    final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
-                    top = style.getTop(true, false, false) + style.getCalculatedHeight(true, true);
                 }
                 // If the position is relative, we also need to add the specified "top" displacement.
                 if ("relative".equals(p)) {
@@ -2399,6 +2397,35 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             top += padding;
         }
 
+        return top;
+    }
+
+    private int getTopForAbsolutePositionWithInheritance() {
+        int top = 0;
+        final String t = getTopWithInheritance();
+
+        if (!"auto".equals(t)) {
+            // No need to calculate displacement caused by sibling nodes.
+            top = pixelValue(t);
+        }
+        else {
+            final String b = getBottomWithInheritance();
+
+            if (!"auto".equals(b)) {
+                // Estimate the vertical displacement caused by *all* siblings.
+                // This is very rough, and doesn't even take position or display types into account.
+                // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
+                top = 0;
+                DomNode child = getElement().getDomNodeOrDie().getParentNode().getFirstChild();
+                while (child != null) {
+                    if (child instanceof HtmlElement && child.mayBeDisplayed()) {
+                        top += 20;
+                    }
+                    child = child.getNextSibling();
+                }
+                top -= pixelValue(b);
+            }
+        }
         return top;
     }
 

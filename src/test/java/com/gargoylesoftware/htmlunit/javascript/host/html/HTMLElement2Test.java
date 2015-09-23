@@ -385,21 +385,29 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "true" })
+    @Alerts({ "true", "true", "true", "true", "true" })
     public void offsetTopWithPreviousSiblings() throws Exception {
-        final String html = "<html>\n"
-            + "  <head>\n"
-            + "    <script>\n"
-            + "      function test() {\n"
-            + "        alert(document.getElementById('d1').offsetTop > 0);\n"
-            + "        alert(document.getElementById('d2').offsetTop > 0);\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body style='padding: 0px; margin: 0px;' onload='test()'>\n"
-            + "    <div id='d1'>foo</div>\n"
-            + "    <div id='d2'>bar</div>\n"
-            + "  </body>\n"
+        String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('d1').offsetTop == 0);\n"
+            + "    alert(document.getElementById('d2').offsetTop > 0);\n"
+            + "    alert(document.getElementById('d3').offsetTop == document.getElementById('d2').offsetTop * 2);\n"
+            + "    alert(document.getElementById('d4').offsetTop == document.getElementById('d2').offsetTop * 3);\n"
+            + "    alert(document.getElementById('d5').offsetTop == document.getElementById('d2').offsetTop * 6004);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body style='padding: 0px; margin: 0px;' onload='test()'>\n"
+            + "  <div id='d1'>foo</div>\n"
+            + "  <div id='d2'>foo</div>\n"
+            + "  <div id='d3'>foo</div>\n"
+            + "  <div id='d4'>foo</div>\n";
+        for (int i = 0; i < 6000; i++) {
+            html += "  <div>foo</div>\n";
+        }
+        html += "  <div id='d5'>bar</div>\n"
+            + "</body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
     }
