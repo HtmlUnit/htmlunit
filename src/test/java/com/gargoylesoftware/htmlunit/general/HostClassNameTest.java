@@ -10253,4 +10253,31 @@ public class HostClassNameTest extends WebDriverTestCase {
     public void webGL() throws Exception {
         test("WebGL");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbLocaleAwareKeyRange() throws Exception {
+        test("IDBLocaleAwareKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL_lose_context() throws Exception {
+        test("WEBGL_lose_context");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaDeviceInfo() throws Exception {
+        test("MediaDeviceInfo");
+    }
 }

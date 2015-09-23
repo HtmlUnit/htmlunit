@@ -46,7 +46,7 @@ public class XPathNSResolver extends SimpleScriptable implements PrefixResolver 
     /**
      * Default constructor.
      */
-    @JsxConstructor
+    @JsxConstructor(@WebBrowser(EDGE))
     public XPathNSResolver() {
     }
 
