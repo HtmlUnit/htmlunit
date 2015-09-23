@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -37,7 +38,11 @@ public class SetTest extends WebDriverTestCase {
             IE8 = { },
             IE11 = { "1", "false" })
     public void has() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    if (window.Set) {\n"
             + "      var myArray = ['value1', 'value2', 'value3'];\n"
@@ -47,7 +52,9 @@ public class SetTest extends WebDriverTestCase {
             + "      alert(mySet.has('value2'));\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -63,7 +70,11 @@ public class SetTest extends WebDriverTestCase {
             FF31 = { },
             IE = { })
     public void iterator() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var set = new Set();\n"
@@ -78,7 +89,9 @@ public class SetTest extends WebDriverTestCase {
             + "      alert(iter.next().value);\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -94,7 +107,11 @@ public class SetTest extends WebDriverTestCase {
             FF31 = { },
             IE = { })
     public void values() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var set = new Set();\n"
@@ -109,7 +126,9 @@ public class SetTest extends WebDriverTestCase {
             + "      alert(iter.next().value);\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

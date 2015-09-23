@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link Symbol}.
@@ -152,13 +153,19 @@ public class SymbolTest extends WebDriverTestCase {
     }
 
     private void name(final String name) throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      alert(typeof Symbol." + name + ");\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -171,13 +178,19 @@ public class SymbolTest extends WebDriverTestCase {
             FF31 = {},
             IE = {})
     public void string() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      alert(Symbol.iterator.toString());\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -192,7 +205,11 @@ public class SymbolTest extends WebDriverTestCase {
     // The current WebTestCase alert handling is incorrect, as it uses 'String(alertValue)'
     // In real browsers, the exception is thrown 
     public void defaultValue() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      try {"
@@ -200,7 +217,9 @@ public class SymbolTest extends WebDriverTestCase {
             + "      } catch(e) {alert('exception')}\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
