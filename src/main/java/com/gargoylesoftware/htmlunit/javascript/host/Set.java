@@ -33,6 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -123,6 +124,18 @@ public class Set extends SimpleScriptable {
     @JsxFunction
     public boolean has(final Object value) {
         return set_.contains(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        // A hack to handle Rhino not supporting "get(Object object, Scriptable start)"
+        if (name.equals(Symbol.INTERNAL_PREFIX + "Symbol(Symbol.iterator)")) {
+            return super.get("values", start);
+        }
+        return super.get(name, start);
     }
 
     /**

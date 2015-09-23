@@ -25,6 +25,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
@@ -34,6 +36,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
 public class Symbol extends SimpleScriptable {
+
+    static final String INTERNAL_PREFIX = "~~Internal~~";
 
     private String name_;
 
@@ -95,5 +99,19 @@ public class Symbol extends SimpleScriptable {
     @JsxFunction
     public String toString() {
         return "Symbol(Symbol." + name_ + ')';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        final StackTraceElement stackElement = new Throwable().getStackTrace()[3];
+        if (("getObjectElem".equals(stackElement.getMethodName())
+                || "getElemFunctionAndThis".equals(stackElement.getMethodName()))
+                    && ScriptRuntime.class.getName().equals(stackElement.getClassName())) {
+            return INTERNAL_PREFIX + toString();
+        }
+        throw Context.reportRuntimeError("TypeError: Cannot convert a Symbol value to a string");
     }
 }

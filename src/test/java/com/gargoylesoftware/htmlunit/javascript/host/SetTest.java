@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -66,7 +62,6 @@ public class SetTest extends WebDriverTestCase {
                     "[object Set Iterator]", "0", "1", "[object Object]" },
             FF31 = { },
             IE = { })
-    @NotYetImplemented({ CHROME, FF38 })
     public void iterator() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

@@ -181,4 +181,27 @@ public class SymbolTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = {},
+            IE = {})
+    // The current WebTestCase alert handling is incorrect, as it uses 'String(alertValue)'
+    // In real browsers, the exception is thrown 
+    public void defaultValue() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    if (window.Symbol) {\n"
+            + "      try {"
+            + "        alert(Symbol.iterator);\n"
+            + "      } catch(e) {alert('exception')}\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
