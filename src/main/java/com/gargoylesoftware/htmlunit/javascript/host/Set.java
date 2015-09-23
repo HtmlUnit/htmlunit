@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -44,7 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
         @WebBrowser(EDGE) })
 public class Set extends SimpleScriptable {
 
-    private java.util.Set<Object> set_ = new HashSet<>();
+    private java.util.Set<Object> set_ = new LinkedHashSet<>();
 
     /**
      * Creates an instance.
@@ -125,4 +125,15 @@ public class Set extends SimpleScriptable {
         return set_.contains(value);
     }
 
+    /**
+     * Returns a new {@code Iterator} object that contains the values for each element in the Set object
+     * in insertion order.
+     * @return a new {@code Iterator} object
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    public Object values() {
+        final SimpleScriptable object = new Iterator("Set Iterator", set_.iterator());
+        object.setParentScope(getParentScope());
+        return object;
+    }
 }

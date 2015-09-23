@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -45,6 +49,69 @@ public class SetTest extends WebDriverTestCase {
             + "      mySet.add('value1');\n"
             + "      alert(mySet.size);\n"
             + "      alert(mySet.has('value2'));\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function values() { [native code] }",
+                "[object Set Iterator]", "0", "1", "[object Object]" },
+            FF38 = { "function values() {\n    [native code]\n}",
+                    "[object Set Iterator]", "0", "1", "[object Object]" },
+            FF31 = { },
+            IE = { })
+    @NotYetImplemented({ CHROME, FF38 })
+    public void iterator() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    if (window.Symbol) {\n"
+            + "      var set = new Set();\n"
+            + "      set.add('0');\n"
+            + "      set.add(1);\n"
+            + "      set.add({});\n"
+            + "      alert(set[Symbol.iterator]);\n"
+            + "      var iter = set[Symbol.iterator]();\n"
+            + "      alert(iter);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function values() { [native code] }",
+                "[object Set Iterator]", "0", "1", "[object Object]" },
+            FF38 = { "function values() {\n    [native code]\n}",
+                "[object Set Iterator]", "0", "1", "[object Object]" },
+            FF31 = { },
+            IE = { })
+    public void values() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    if (window.Symbol) {\n"
+            + "      var set = new Set();\n"
+            + "      set.add('0');\n"
+            + "      set.add(1);\n"
+            + "      set.add({});\n"
+            + "      alert(set.values);\n"
+            + "      var iter = set.values();\n"
+            + "      alert(iter);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
