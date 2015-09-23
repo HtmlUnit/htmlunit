@@ -301,7 +301,7 @@ public class DOMImplementation extends SimpleScriptable {
      * @param doctype the document types of the document
      * @return the newly created {@link XMLDocument}
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
     public XMLDocument createDocument(final String namespaceURI, final String qualifiedName,
             final DocumentType doctype) {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());

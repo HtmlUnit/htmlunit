@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -412,7 +413,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "appendData(),data,deleteData(),insertData(),length,replaceData(),replaceWholeText(),splitText(),"
                 + "substringData(),"
                 + "wholeText")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void text() throws Exception {
         testString("document.createTextNode('some text'), unknown");
     }
@@ -423,7 +424,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "name,ownerElement,specified,value",
             IE = "expando,name,ownerElement,specified,value")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, EDGE })
     public void attr() throws Exception {
         testString("document.createAttribute('some_attrib'), unknown");
     }
@@ -436,7 +437,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "appendData(),data,deleteData(),insertData(),length,replaceData(),substringData(),text",
             IE8 = "appendData(),atomic,data,deleteData(),insertData(),length,replaceData(),substringData(),text",
             EDGE = "appendData(),data,deleteData(),insertData(),length,replaceData(),substringData(),text")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, EDGE })
     public void comment() throws Exception {
         testString("document.createComment('come_comment'), unknown");
     }
@@ -802,6 +803,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
                 + "urn")
+    @NotYetImplemented(EDGE)
     public void a() throws Exception {
         test("a");
     }
@@ -916,7 +918,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onmsneedkey,pause(),paused,play(),"
                 + "playbackRate,played,preload,readyState,seekable,seeking,src,srcObject,textTracks,videoTracks,"
                 + "volume")
-    @NotYetImplemented({ CHROME, IE11, FF })
+    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void audio() throws Exception {
         test("audio");
     }
@@ -1108,7 +1110,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "getContext(),height,msToBlob(),toDataURL(),width",
             IE8 = "",
             EDGE = "getContext(),height,msToBlob(),toDataURL(),width")
-    @NotYetImplemented({ IE11, FF })
+    @NotYetImplemented({ IE11, FF, EDGE })
     public void canvas() throws Exception {
         test("canvas");
     }
@@ -1122,6 +1124,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align",
             IE = "align,vAlign",
             EDGE = "align,vAlign")
+    @NotYetImplemented(EDGE)
     public void caption() throws Exception {
         test("caption");
     }
@@ -1179,6 +1182,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "options",
             IE8 = "")
+    @NotYetImplemented(EDGE)
     public void datalist() throws Exception {
         test("datalist");
     }
@@ -1267,7 +1271,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "align,noWrap",
             IE8 = "align,dataFld,dataFormatAs,dataSrc,noWrap",
             EDGE = "align,noWrap")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void div() throws Exception {
         test("div");
     }
@@ -1339,7 +1343,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate",
             IE8 = "align,form",
             EDGE = "align,checkValidity(),disabled,form,setCustomValidity(),validationMessage,validity,willValidate")
-    @NotYetImplemented({ CHROME, IE11, FF })
+    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -1476,7 +1480,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = "profile",
             EDGE = "profile")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void head() throws Exception {
         test("head");
     }
@@ -1685,7 +1689,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,naturalHeight,naturalWidth,src,srcset,useMap,"
                 + "vspace,width,x,"
                 + "y")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void image() throws Exception {
         test("image");
     }
@@ -1802,7 +1806,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "cite,clear,width",
             IE8 = "cite,clear,clear(),width",
             EDGE = "width")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void listing() throws Exception {
         test("listing");
     }
@@ -1884,7 +1888,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,"
                 + "start(),stop(),trueSpeed,vspace,"
                 + "width")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented({ IE, CHROME, EDGE })
     public void marquee() throws Exception {
         test("marquee");
     }
@@ -1899,6 +1903,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "compact,label,type",
             IE = "compact,type",
             EDGE = "compact,type")
+    @NotYetImplemented(EDGE)
     public void menu() throws Exception {
         test("menu");
     }
@@ -1924,6 +1929,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "content,httpEquiv,name,scheme",
             IE = "charset,content,httpEquiv,name,scheme,url",
             EDGE = "charset,content,httpEquiv,name,scheme,url")
+    @NotYetImplemented(EDGE)
     public void meta() throws Exception {
         test("meta");
     }
@@ -2082,7 +2088,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "defaultSelected,form,index,label,selected,text,value",
             IE8 = "dataFld,dataFormatAs,dataSrc,defaultSelected,form,index,label,selected,text,value",
             EDGE = "defaultSelected,disabled,form,index,label,selected,text,value")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void optgroup() throws Exception {
         test("optgroup");
     }
@@ -2129,7 +2135,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "align,clear",
             IE8 = "align,clear,clear()",
             EDGE = "align,clear")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void p() throws Exception {
         test("p");
     }
@@ -2184,7 +2190,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "form,max,position,value",
             IE8 = "",
             EDGE = "form,max,position,value")
-    @NotYetImplemented({ CHROME, IE11, FF })
+    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void progress() throws Exception {
         test("progress");
     }
@@ -2328,7 +2334,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "media,src,type",
             IE8 = "",
             EDGE = "media,msKeySystem,src,type")
-    @NotYetImplemented({ CHROME, IE11, FF })
+    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void source() throws Exception {
         test("source");
     }
@@ -2377,7 +2383,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "media,sheet,type",
             IE8 = "media,onerror,onload,styleSheet,type",
             EDGE = "media,sheet,type")
-    @NotYetImplemented({ FF, IE8, CHROME })
+    @NotYetImplemented({ FF, IE8, CHROME, EDGE })
     public void style() throws Exception {
         test("style");
     }
@@ -2521,7 +2527,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "insertCell(),rowIndex,sectionRowIndex,"
                 + "vAlign",
             EDGE = "align,bgColor,cells,ch,chOff,deleteCell(),height,insertCell(),rowIndex,sectionRowIndex,vAlign")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void tr() throws Exception {
         test("tr");
     }
@@ -2629,7 +2635,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF })
+    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void track() throws Exception {
         test("track");
     }
@@ -2720,7 +2726,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitDisplayingFullscreen,webkitEnterFullscreen(),webkitEnterFullScreen(),"
                 + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,"
                 + "width")
-    @NotYetImplemented({ CHROME, IE11, FF })
+    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void video() throws Exception {
         test("video");
     }
@@ -2745,7 +2751,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "",
             IE11 = "cite,clear,width",
             IE8 = "cite,clear,clear(),width")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void xmp() throws Exception {
         test("xmp");
     }
@@ -2899,7 +2905,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
                 + "getModifierState(),initKeyboardEvent(),key,keyCode,locale,location,metaKey,repeat,shiftKey,"
                 + "which")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE11, EDGE })
     public void keyboardEvent() throws Exception {
         testString("document.createEvent ? document.createEvent('KeyboardEvent') : '',"
                 + " document.createEvent ? document.createEvent('UIEvent') : ''");
