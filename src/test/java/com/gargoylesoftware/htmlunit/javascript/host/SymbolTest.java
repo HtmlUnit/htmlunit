@@ -203,7 +203,7 @@ public class SymbolTest extends WebDriverTestCase {
             FF31 = {},
             IE = {})
     // The current WebTestCase alert handling is incorrect, as it uses 'String(alertValue)'
-    // In real browsers, the exception is thrown 
+    // In real browsers, the exception is thrown
     public void defaultValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
