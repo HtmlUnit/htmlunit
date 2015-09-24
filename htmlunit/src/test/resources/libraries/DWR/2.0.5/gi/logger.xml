@@ -1,0 +1,66 @@
+<configuration>
+
+  <!-- Caches the most recent logging messages in memory.
+       Note that Builder assumes that there is a MemoryHandler instance registered as 'memory',
+       although it will fail quietly if a dependent operation is attempted. -->
+  <handler name="memory" class="jsx3.util.Logger.MemoryHandler">
+    <property name="bufferSize" eval="true" value="1000"/>
+  </handler>
+
+  <!-- Prints logging messages to Builder's system out panel.
+       For logging in Builder to work there should be exactly one handler of type SystemLogHandler
+       defined here. -->
+  <handler name="ide" class="jsx3.ide.SystemLogHandler" lazy="true">
+    <property name="bufferSize" eval="true" value="0"/>
+    <property name="format" value="%t %n (%l) - %M"/>
+    <property name="beepLevel" eval="true" value="jsx3.util.Logger.OFF"/>
+  </handler>
+
+  <!-- Sends a formatted logging message to a JavaScript alert. -->
+  <handler name="alerter" class="jsx3.util.Logger.AlertHandler" level="ERROR">
+    <property name="format" value="%t %n (%l) - %M"/>
+  </handler>
+  <!-- Ensures that any fatal error is displayed in a JavaScript alert. Fatal messages usually relate to failure to
+       inialize the system or load an application and so may indicate that other handlers are not visible. -->
+  <handler name="fatal" class="jsx3.util.Logger.AlertHandler" level="FATAL">
+    <property name="format" value="%t %n (%l) - %M"/>
+  </handler>
+
+  <!-- Register an application monitor handler. When the application with namespace "myApp" is running outside
+       of GI Builder, a separate browser window will open and receive logger messages. The require="true"
+       attribute is required when running under as-needed class loading (jsxlt) because jsx3.app.Monitor is an
+       optional class.
+
+       serverNamespace - must match the namespace of the application to attach to. If this attribute is omitted
+          completely, the monitor window is not associated with a particular application and the disableInIDE and
+          activateOnHotKey attributes have no meaning.
+       disableInIDE (default:true) - disables the application monitor while the IDE is running.
+       activateOnHotKey (default:false) - disables the application monitor until the hot key ctrl+alt+m is pressed
+          in the application.
+
+  <handler name="appMonitor1" class="jsx3.app.Monitor" require="true">
+    <property name="serverNamespace" value="myApp"/>
+    <property name="disableInIDE" eval="true" value="true"/>
+    <property name="activateOnHotKey" eval="true" value="false"/>
+    <property name="format" value="%t %n (%l) - %M"/>
+  </handler>
+  -->
+
+  <!-- The global logger. -->
+  <logger name="global" level="INFO">
+    <handler-ref name="memory"/>
+    <handler-ref name="ide"/>
+    <handler-ref name="fatal"/>
+    <!--<handler-ref name="appMonitor1"/>-->
+  </logger>
+
+  <logger name="jsx3" level="WARN"/>
+  <logger name="jsx3.ide" level="WARN"/>
+
+  <!-- Since an error in the logging system may mean that other handlers are not working, we'll send any error to
+       a JavaScript alert with the alerter handler. -->
+  <logger name="jsx3.util.Logger" level="WARN" useParent="false">
+    <handler-ref name="alerter"/>
+  </logger>
+
+</configuration>

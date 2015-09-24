@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Frames Tutorial</title>
+        <author>Ahmed Ashour</author>
+    </properties>
+
+    <body>
+        <section name="Example I">
+            <p>
+                Getting the page inside &lt;frame&gt; element or &lt;iframe&gt; element can be done by using
+                HtmlPage.getFrames().<br/>
+                Suppose you have the following page:
+            </p>
+            <source><![CDATA[
+<html>
+  <body>
+    <iframe src="two.html">
+  </body>
+</html>]]></source>
+            <p>
+                You can use the following code to get the content of <tt>two.html</tt>:
+            </p>
+            <source><![CDATA[
+final List<FrameWindow> window = page.getFrames();
+final HtmlPage pageTwo = (HtmlPage) window.get(0).getEnclosedPage();]]></source>
+        </section>
+
+        <section name="Example II">
+            <p>
+                Another example that navigates API docs to get a desired page of a class:
+            </p>
+            <source><![CDATA[
+final WebClient client = new WebClient();
+final HtmlPage mainPage = client.getPage("http://htmlunit.sourceforge.net/apidocs/index.html");]]></source>
+
+            <p>
+                To get the page of the first frame (at upper left) and click the sixth link:
+            </p>
+            <source><![CDATA[
+final HtmlPage packageListPage = (HtmlPage) mainPage.getFrames().get(0).getEnclosedPage();
+packageListPage.getAnchors().get(5).click();]]></source>
+
+            <p>
+                To get the page of the frame named 'packageFrame' (at lower left) and click the second link:
+            </p>
+            <source><![CDATA[
+final HtmlPage pakcagePage = (HtmlPage) mainPage.getFrameByName("packageFrame").getEnclosedPage();
+pakcagePage.getAnchors().get(1).click();]]></source>
+        
+            <p>
+                To get the page of the frame named 'classFrame' (at right):
+            </p>
+            <source><![CDATA[
+final HtmlPage classPage = (HtmlPage) mainPage.getFrameByName("classFrame").getEnclosedPage();]]></source>
+        </section>
+    </body>
+</document>
+

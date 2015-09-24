@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Submitting Patches</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                Contributions are always welcome.  The preferred way to submit a patch is to attach it to
+                a bug or feature request in the SourceForge database.  Remember that patches for documentation
+                or additional test cases are just as valuable as code patches.
+            </p>
+            <p>
+                In order to be successfully merged, patches must be generated from the most recent code in svn.
+                Refer to <a href="gettingLatestCode.html">"Getting Latest Code"</a> for information on retrieving
+                and building the latest code.
+            </p>
+        </section>
+        <section name="Rules for submitting patches">
+            <p>
+                These rules are intended to reduce the effort that the maintainers need to do when accepting
+                a patch.  If the patch requires too much effort to "clean up" before being merged then it will
+                likely be rejected.  Remember that everyone working on this project is volunteering their time
+                so lets be considerate.
+                <ul>
+                    <li>
+                        Make sure the code follows the <a href="codingConventions.html">coding conventions</a>
+                        already in use.  Refer to the link above to
+                        see the coding conventions that we are using here.  We use checkstyle to enforce
+                        many of the coding standards (some things like good naming can't be easily checked
+                        with a tool but we check as much as we can automatically).  The maven build should
+                        perform these checks for you.
+                    </li>
+                    <li>
+                        Make sure the new code has automated unit tests written for
+                        <a href="http://www.junit.org">JUnit</a>.  No code will get merged without tests.
+                        Whenever possible, tests classes should extend WebDriverTestCase.
+                    </li>
+                    <li>
+                        If you are fixing a bug but not adding new functionality then we still require
+                        tests that would fail with the old behavior.
+                    </li>
+                    <li>
+                        All existing unit tests must pass.
+                    </li>
+                    <li>
+                        All files must be copyright <a href="http://www.GargoyleSoftware.com">Gargoyle Software Inc.</a>
+                        and must be licensed under the same
+                        license as the rest of the project - currently an <a href="license.html">Apache
+                        style</a> one.  This is required so that we can make sweeping changes such as the license
+                        change that we already did (from LGPL to Apache style).
+                    </li>
+                    <li>
+                        All non-private methods must have full javadoc before we put out a release.  Putting
+                        javadoc on private methods is a good practice as well but isn't required.  If you
+                        make changes to a given file then you are expected to add an author tag at the top
+                        of the file.  @author tags are written in chronological order with the original
+                        author at the top.  Refer to <a href="http://java.sun.com/j2se/javadoc/writingdoccomments/">
+                        How to Write JavaDoc</a> for more specific information on javadoc.
+                    </li>
+                    <li>
+                        Patches should be in "unified diff" format.
+                    </li>
+                    <li>
+                        Please provide only one patch that contains all the files.  Some people
+                        will submit separate patches for each file in the diff and this just
+                        makes more work for the committer.  Please also submit it as one single diff, 
+                        not zipped up - again because it's easier for the committers.
+                    </li>
+                </ul>
+            </p>
+            <p>
+                <b>IMPORTANT: Patches without tests will be rejected</b>.  Occasionally
+                one of the committers will have the time to write the tests for you but this
+                is rare.  If you are not sure how to write a test for a given situation then
+                ask on the developer mailing list.
+            </p>
+            <p>
+                Additional documentation or code samples are always appreciated.  We're focused on writing
+                code and documentation often gets neglected.
+            </p>
+        </section>
+    </body>
+</document>
+

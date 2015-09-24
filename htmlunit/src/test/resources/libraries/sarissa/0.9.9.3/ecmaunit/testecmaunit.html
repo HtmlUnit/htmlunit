@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>EcmaTest test page</title>
+<style type="text/css" rel="stylesheet">
+
+body {font-family: Arial}
+
+</style>
+<script type="text/javascript" src="ecmaunit.js"> </script>
+<script type="text/javascript" src="testecmaunit.js"> </script>
+<script type="text/javascript">
+//<![CDATA[
+    function runTests() {
+        placeholder = document.getElementById('placeholder');
+        var testsuite = new TestSuite(new HTMLReporter(placeholder));
+        testsuite.registerTest(TestTestCase);
+        testsuite.registerTest(TestTestCase2);
+        testsuite.runSuite();
+    };
+//]]>
+</script>
+</head>
+<body onload="runTests()">
+<h3>EcmaUnit tests for EcmaUnit</h3>
+<div id="placeholder"> </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+ * Sarissa is free software distributed under the GNU GPL version 2 (see <a href="gpl.txt">gpl.txt</a>) or higher, 
+ * GNU LGPL version 2.1 (see <a href="lgpl.txt">lgpl.txt</a>) or higher and Apache Software License 2.0 or higher 
+ * (see <a href="asl.txt">asl.txt</a>). This means you can choose one of the three and use that if you like. If 
+ * you make modifications under the ASL, i would appreciate it if you submitted those.
+ * In case your copy of Sarissa does not include the license texts, you may find
+ * them online in various formats at <a href="http://www.gnu.org">http://www.gnu.org</a> and 
+ * <a href="http://www.apache.org">http://www.apache.org</a>.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<title>Sarissa test page</title>
+	<link rel="stylesheet" type="text/css" href="../css/sarissa.css" />
+	<style type="text/css">
+	div.placeholder{border:1px solid #a7a7a7;}
+	</style>
+	<script type="text/javascript" src="../ecmaunit/ecmaunit.js"> </script>
+	<script type="text/javascript" src="../gr/abiss/js/sarissa/sarissa-compressed.js"> </script>
+    <script type="text/javascript" src="../gr/abiss/js/sarissa/sarissa_ieemu_xpath-compressed.js"> </script>
+	<script type="text/javascript" src="testsarissa.js"> </script>
+	<script type="text/javascript">
+//<![CDATA[
+	function getLink(link, desc, bName){
+		var a = document.createElement("a");
+    	a.setAttribute((bName?"name":"href"), link);
+    	if(desc) 
+    		a.appendChild(document.createTextNode(desc));
+    	return a;
+	};
+	
+    function runTestCase(testCase) {
+    	// append TOC entry
+    	var name = testCase.name;
+    	var toc = document.getElementById("toc");
+    	toc.appendChild(document.createElement("br"));
+    	toc.appendChild(getLink("#"+name, name+" Results", false));
+	    
+	    // append testcase section
+	    var placeHolder = document.createElement("div");
+	    placeHolder.className = "placeholder";
+		placeHolder.appendChild(getLink("#"+name, null, true));
+        var header = document.createElement("h3");
+        header.appendChild(document.createTextNode(name+" Results"));
+        placeHolder.appendChild(header);
+        document.body.appendChild(placeHolder);
+        document.body.appendChild(document.createElement("br"));
+        testCase.initialize(new HTMLReporter(placeHolder));
+        testCase.runTests();
+    };
+    
+    function runTestCases(){
+    	runTestCase(new SarissaTestCase());
+        runTestCase(new XMLHttpRequestTestCase());
+        runTestCase(new XMLSerializerTestCase());
+        runTestCase(new DOMParserTestCase());
+        runTestCase(new XMLDocumentTestCase());
+        runTestCase(new XMLElementTestCase());
+        runTestCase(new XSLTProcessorTestCase());
+        document.getElementById("reportForm").style.display = "block";
+        document.getElementById("report").value = "Sarissa " + Sarissa.VERSION + " tests for " + navigator.userAgent + "\n" + document.body.innerHTML;
+        alert("You can now send us the results using the 'Send Report!' button.");
+    };
+    
+//]]>
+</script>
+</head>
+	<body>
+		<h1>Sarissa Unit Tests</h1>
+	    <p><button onclick="runTestCases()">Run Testcases</button> </p>
+	    <form id="reportForm" style="display:none" action="mailto:mbatsis@users.sf.net?subject=Sarissa_Test_Results" enctype="text/plain" method="post">
+	        <fieldset>
+	            <legend>Unit Test Report:</legend>
+	            <br />
+	            <textarea id="parseError" name="parseError" cols="80" rows="10"></textarea>
+	            <br />
+	            <legend>XMLized ECMAScript object:</legend>
+	            <br />
+	            <textarea id="xmlization" name="xmlization" cols="80" rows="10"></textarea>
+	            <br />
+	            <legend>Report:</legend>
+	            <br />
+	            <textarea id="report" name="report" cols="80" rows="10"></textarea>
+	            <br />
+	            <button type="submit">Send Report!</button>
+	        </fieldset>
+	    </form>
+		<div id="toc"> </div>
+        <hr />
+	</body>
+</html>

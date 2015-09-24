@@ -1,0 +1,29 @@
+18 tests, 38 assertions, 0 failures, 0 errors
+Status Test Message
+testSynchronousRequest passed 4 assertions, 0 failures, 0 errors
+testAsynchronousRequest passed 2 assertions, 0 failures, 0 errors
+testUpdater passed 5 assertions, 0 failures, 0 errors
+testUpdaterWithInsertion passed 3 assertions, 0 failures, 0 errors
+testUpdaterOptions passed 1 assertions, 0 failures, 0 errors
+testResponders passed 10 assertions, 0 failures, 0 errors
+testEvalResponseShouldBeCalledBeforeOnComplete passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testContentTypeSetForSimulatedVerbs passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testOnCreateCallback passed 2 assertions, 0 failures, 0 errors
+testEvalJS passed 1 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testCallbacks passed 4 assertions, 0 failures, 0 errors
+testResponseText passed 2 assertions, 0 failures, 0 errors
+testResponseXML passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testResponseJSON passed 1 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testHeaderJSON passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testGetHeader passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testParametersCanBeHash passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testIsSameOriginMethod passed 3 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --

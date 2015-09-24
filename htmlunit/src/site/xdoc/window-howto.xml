@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Window Tutorial</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                All pages are contained within WebWindow objects.  This could be a
+                TopLevelWindow representing an actual browser window, an
+                HtmlFrame representing a &lt;frame&gt; element or an
+                HtmlInlineFrame representing an &lt;iframe&gt; element.
+            </p>
+            <p>
+                When a WebClient is first instantiated, a TopLevelWindow is automatically created.
+                You could think of this as being the first window displayed by a web browser.  Calling
+                WebClient.getPage(WebWindow, WebRequest)
+                will load the new page into this window.
+            </p>
+            <p>
+                The JavaScript open() function can be used to load pages into other windows.  New WebWindow
+                objects will be created automatically by this function.
+            </p>
+        </section>
+
+        <section name="WebWindowEvents">
+            <p>
+                If you wish to be notified when windows are created or pages are loaded, you need to register a
+                WebWindowListener with the WebClient via the
+                method WebClient.addWebWindowListener(WebWindowListener)
+            </p>
+            <p>
+                When a window is opened either by JavaScript or through the WebClient, a WebWindowEvent will be
+                fired and passed into the
+                WebWindowListener.webWindowOpened(WebWindowEvent)
+                method.  Note that both the new and old pages in the event will be null as the window does not
+                have any content loaded at this point.  If a URL was specified during creation of the window then the page
+                will be loaded and another event will be fired as described below.
+            </p>
+            <p>
+                When a new page is loaded into a specific window, a WebWindowEvent will be fired and passed into the
+                WebWindowListener.webWindowContentChanged(WebWindowEvent) method.
+            </p>
+        </section>
+    </body>
+</document>
+

@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+
+    <!-- Suppresses certain checks. -->
+    <module name="SuppressionFilter">
+        <property name="file" value="${checkstyle.suppressions.file}"/>
+    </module>
+
+    <!-- Checks that a package.html file exists for each package.     -->
+    <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage -->
+    <module name="JavadocPackage">
+        <property name="allowLegacy" value="true"/>
+    </module>
+
+    <!-- Checks whether files end with a new line.                        -->
+    <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
+    <module name="NewlineAtEndOfFile"/>
+
+    <!-- Checks that property files contain the same keys.         -->
+    <!-- See http://checkstyle.sf.net/config_misc.html#Translation -->
+    <module name="Translation"/>
+
+    <module name="Header">
+        <property name="headerFile" value="${checkstyle.header.file}"/>
+    </module>
+
+    <module name="FileLength"/>
+
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+    <!-- Prevent two spaces after @xxxx -->
+    <module name="RegexpSingleline">
+        <property name="format" value="\* *@\w*  "/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\*\*/"/>
+        <property name="message" value="Trailing two asterisks."/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\s$"/>
+        <property name="message" value="Trailing whitespace found."/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\(value = (\w|\d)+\)"/>
+        <property name="message" value="Unneeded 'value' literal."/>
+    </module>
+
+    <module name="RegexpMultiline">
+        <property name="format" value="(?&lt;=\r?\n)\r?\n\r?\n"/>
+        <property name="message" value="Two empty contiguous lines"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@JsxFunction\(\)|@JsxGetter\(\)|@JsxSetter\(\)|@JsxConstructor\(\)|@Alerts\(\)$"/>
+        <property name="message" value="No need to specify parentheses"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@Alerts$"/>
+        <property name="message" value="No need to specify empty @Alerts"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="serialVersionUID"/>
+        <property name="message" value="No need to specify serialVersionUID"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\{ &quot;&quot; \}"/>
+        <property name="message" value="No need for the curly brackets"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@version"/>
+    </module>
+
+    <!--
+        at the moment there is a problem with disabling this check for some files
+        without disabling all RegexpMultiline checks; for this reason this is not active
+    <module name="RegexpMultiline">
+        <property name="id" value="sysout"/>
+        <property name="format" value="System\s*\.\s*(out)|(err)\s*\.\s*print(ln)?\("/>
+        <property name="message" value="System.out.print/ln found"/>
+    </module>
+    -->
+
+    <module name="TreeWalker">
+        <property name="tabWidth" value="4"/>
+
+        <module name="LeftCurly">
+            <property name="option" value="eol"/>
+        </module>
+        <module name="RightCurly">
+            <property name="option" value="alone"/>
+            <property name="tokens" value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT"/>
+        </module>
+
+        <module name="LineLength">
+            <property name="max" value="120"/>
+        </module>
+        <module name="MethodLength">
+            <property name="max" value="175"/>
+        </module>
+
+        <module name="ConstantName">
+            <property name="format" value="log|^[a-zA-Z][a-zA-Z0-9_]*$"/>
+        </module>
+
+        <!-- Checks for Javadoc comments.                     -->
+        <!-- See http://checkstyle.sf.net/config_javadoc.html -->
+        <module name="JavadocMethod">
+            <property name="scope" value="protected"/>
+            <property name="logLoadErrors" value="true"/>
+            <property name="suppressLoadErrors" value="true"/>
+        </module>
+        <module name="JavadocType">
+            <property name="scope" value="protected"/>
+            <property name="authorFormat" value="\S \S"/>
+        </module>
+        <module name="JavadocVariable">
+            <property name="scope" value="protected"/>
+        </module>
+        <module name="JavadocStyle">
+            <property name="scope" value="protected"/>
+            <property name="checkFirstSentence" value="true"/>
+            <property name="checkEmptyJavadoc" value="false"/>
+            <property name="checkHtml" value="true"/>
+        </module>
+
+        <!-- Checks for Naming Conventions.                  -->
+        <!-- See http://checkstyle.sf.net/config_naming.html -->
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MethodName">
+            <property name="format" value="^[a-zA-Z0-9]+|test[A-Z][a-zA-Z0-9_]+$"/>
+        </module>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9_]+_$"/>
+        </module>
+        <module name="TypeName"/>
+        <module name="MemberName">
+            <property name="format" value="^[a-z][a-zA-Z0-9_]+_$"/>
+        </module>
+
+        <!-- Checks for imports                               -->
+        <!-- See http://checkstyle.sf.net/config_imports.html -->
+        <module name="AvoidStarImport"/>
+        <module name="IllegalImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <!-- Checks for Size Violations.                    -->
+        <!-- See http://checkstyle.sf.net/config_sizes.html -->
+        <module name="ParameterNumber"/>
+
+        <!-- Checks for whitespace                               -->
+        <!-- See http://checkstyle.sf.net/config_whitespace.html -->
+        <module name="EmptyForInitializerPad">
+            <property name="option" value="space"/>
+        </module>
+        <module name="EmptyForIteratorPad"/>
+        <module name="MethodParamPad"/>
+        <module name="NoWhitespaceAfter"/>
+        <module name="NoWhitespaceBefore"/>
+        <module name="OperatorWrap"/>
+        <module name="ParenPad"/>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+        <module name="GenericWhitespace"/>
+        <module name="ArrayTypeStyle"/>
+
+        <!-- Checks for correct basic indentation                -->
+        <!-- See http://checkstyle.sf.net/config_misc.html       -->
+        <module name="Indentation"/>
+
+        <!-- Modifier Checks                                    -->
+        <!-- See http://checkstyle.sf.net/config_modifiers.html -->
+        <module name="ModifierOrder"/>
+        <module name="RedundantModifier"/>
+
+        <!-- Checks for blocks. You know, those {}'s         -->
+        <!-- See http://checkstyle.sf.net/config_blocks.html -->
+        <module name="AvoidNestedBlocks"/>
+        <module name="EmptyBlock">
+            <property name="option" value="text"/>
+        </module>
+
+        <module name="NeedBraces"/>
+        <module name="AnnotationUseStyle">
+            <property name="elementStyle" value="compact"/>
+        </module>
+
+        <!-- Checks for common coding problems               -->
+        <!-- See http://checkstyle.sf.net/config_coding.html -->
+        <module name="EmptyStatement"/>
+        <module name="EqualsHashCode"/>
+        <module name="HiddenField"/>
+        <module name="IllegalInstantiation"/>
+        <module name="InnerAssignment"/>
+        <module name="MissingSwitchDefault"/>
+        <module name="EqualsAvoidNull"/>
+
+        <module name="SimplifyBooleanReturn"/>
+        <module name="SimplifyBooleanExpression"/>
+
+        <module name="UnnecessaryParentheses"/>
+
+        <!-- Checks for class design                         -->
+        <!-- See http://checkstyle.sf.net/config_design.html -->
+        <module name="FinalClass"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="InterfaceIsType"/>
+        <module name="VisibilityModifier"/>
+
+        <!-- Miscellaneous other checks.                   -->
+        <!-- See http://checkstyle.sf.net/config_misc.html -->
+
+        <module name="UpperEll"/>
+        <module name="OneStatementPerLine"/>
+
+        <module name="FinalLocalVariable">
+            <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF"/>
+        </module>
+    </module>
+</module>

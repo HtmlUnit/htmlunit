@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>YUI DataSource Tests</title>
+<link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css" />
+<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css" />
+
+<script type="text/javascript" src="../build/yahoo/yahoo-min.js"></script>
+<script type="text/javascript" src="../build/dom/dom-min.js"></script>
+<script type="text/javascript" src="../build/event/event-min.js"></script>
+<script type="text/javascript" src="../build/logger/logger-min.js"></script>
+<script type="text/javascript" src="../build/yuitest/yuitest-beta.js"></script>
+<script type="text/javascript" src="../build/datasource/datasource-beta-min.js"></script>
+</head>
+<body>
+<h1>DataSource Tests</h1>
+<p><input type="button" value="Run Tests" id="btnRun" disabled="true" /></p>
+
+<script type="text/javascript">
+
+(function() {
+
+    var    Dom=YAHOO.util.Dom,
+        Assert=YAHOO.util.Assert,
+        ObjectAssert=YAHOO.util.ObjectAssert,
+        ArrayAssert=YAHOO.util.ArrayAssert,
+        DateAssert=YAHOO.util.DateAssert,
+        UserAction=YAHOO.util.UserAction,
+        TestCase = YAHOO.tool.TestCase,
+        TestLogger = YAHOO.tool.TestLogger,
+        TestRunner = YAHOO.tool.TestRunner,
+        TestSuite = YAHOO.tool.TestSuite,
+
+        DataSource = YAHOO.util.DataSource;
+
+    function DataSourceTestCase(template) {
+        DataSourceTestCase.superclass.constructor.call(this, template);
+        this.data = ["a","b","c"];
+    };
+    YAHOO.lang.extend(DataSourceTestCase, TestCase);
+
+    DataSourceTestCase.prototype.setUp = function() {
+    };
+
+    DataSourceTestCase.prototype.tearDown = function() {
+    };
+
+    DataSourceTestCase.prototype.createInstance = function(oConfigs) {
+        return new DataSource(this.data, oConfigs);
+    };
+
+    var datasourceTemplate = {
+        name: "DataSource Test",
+        
+        testConstruction: function() {
+            var ds = this.createInstance();
+            Assert.isObject(ds, "Failed to create instance");
+            Assert.isInstanceOf(DataSource, ds, "Failed to create instance");
+            ds = null;
+        }
+    };
+    var datasourceTest = new DataSourceTestCase(datasourceTemplate);
+
+    var dsComplexArrayTemplate = YAHOO.lang.merge(datasourceTemplate, {
+        name:"Complex Array Test",
+        data:[{a:"1a",b:"1b",c:"1c"}, {a:"2a",b:"2b",c:"2c"}, {a:"3a",b:"3b",c:"3c"}]
+    });
+    var dsComplexArrayTest = new DataSourceTestCase(dsComplexArrayTemplate);
+
+    var dsStaticMethodsTemplate = {
+        name:"Static Methods Test",
+        data:["a","b","c"],
+        
+        testParseNumbers: function() {
+            var number;
+            var ds = this.createInstance();
+            var myNumber = 1;
+
+            number = YAHOO.util.DataSource.parseNumber("1");
+            Assert.areSame(number, myNumber, "Incorrect number from String.");
+
+            number = YAHOO.util.DataSource.parseNumber(1);
+            Assert.areSame(number, myNumber, "Incorrect number from Number.");
+
+            ds = null;
+        },
+        
+        testParseDates: function() {
+            var date;
+            var ds = this.createInstance();
+            var myDate = new Date(2001,0,14); // January 14, 2001
+
+            date = YAHOO.util.DataSource.parseDate("1/14/2001");
+            DateAssert.datesAreEqual(date, myDate, "Incorrect date from String.");
+
+            date = YAHOO.util.DataSource.parseDate(myDate);
+            DateAssert.datesAreEqual(date, myDate, "Incorrect date from Date");
+            
+            date = YAHOO.util.DataSource.parseDate(979459200000);
+            DateAssert.datesAreEqual(date, myDate, "Incorrect date from Number.");
+            
+            ds = null;
+        }
+    };
+    var dsStaticMethodsTest = new DataSourceTestCase(dsStaticMethodsTemplate);
+
+    function runTests(){
+        TestRunner.run();
+    }
+
+    YAHOO.util.Event.addListener(window, "load", function() {
+        var logger = new TestLogger();
+
+        var datasourcesuite = new TestSuite("DataSource Test Suite");
+        datasourcesuite.add(datasourceTest);
+        datasourcesuite.add(dsComplexArrayTest);
+        datasourcesuite.add(dsStaticMethodsTest);
+
+        TestRunner.add(datasourcesuite);
+
+        YAHOO.util.Event.addListener("btnRun", "click", runTests);
+        YAHOO.util.Dom.get("btnRun").disabled = false;
+
+        if (parent && parent != window) {
+            YAHOO.tool.TestManager.load();
+        }
+    });
+})();
+</script>
+</body>
+</html>

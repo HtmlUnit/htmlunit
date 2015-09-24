@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Getting latest HtmlUnit build</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
+        <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
+        <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+                At any time, all the code in SVN should be compilable and should pass all the unit tests.  There
+                is no guarantee that it will be full featured - this is a work in progress.
+            </p>
+        </section>
+
+        <section name="Latest build">
+            <p>
+            You can download the latest build from our <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">Build server</a> 
+            kindly hosted by <a href="http://www.canoo.com">Canoo AG</a>.
+            </p>
+        </section>
+
+        <section name="Maven snapshot">
+            <p>
+            Sonatype OSS repository hosts HtmlUnit snapshot, which is manually updated by the team once in a while.
+            To use that, you can include the below in your POM:
+            <source><![CDATA[<project>
+    ...
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+</project>]]></source>
+            </p>
+        </section>
+
+        <section name="Checking out SVN repository">
+            <p>
+            Another way to get the latest code is through SVN.
+            Create a directory for HtmlUnit (for instance c:\htmlunit or ~/htmlunit).  Change to that directory and execute the
+            following commands.
+            </p>
+            <source><![CDATA[
+svn co http://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit/ .]]></source>
+        </section>
+
+        <section name="Compiling the code">
+            <p>
+                The preferred way to build HtmlUnit is with <a href="http://maven.apache.org">maven 3</a>.
+                <br/>At least for running the complete test suite a 64 bit JDK is required.
+            </p>
+            <source>mvn compile</source>
+            <p>
+                This will do an incremental compile of all the code.
+            </p>
+            <source>mvn clean compile</source>
+            <p>
+                This will do a clean compile of all the code.
+            </p>
+        </section>
+
+        <section name="Dependencies for IDE">
+            <p>
+                Usually, you need to get the JARs for your IDE. You can do that by something like:
+            </p>
+            <source>Eclipse: right click on the project -> Configure -> Convert to Maven Project</source>
+            <p>
+                , alternatively:
+            </p>
+            <source>mvn eclipse:eclipse</source>
+            <p>
+                or
+            </p>
+            <source>mvn idea:idea</source>
+            <p>
+                This will create appropriate IDE project.
+                Note that HtmlUnit is mostly at the bleeding edge, to the extent that an HtmlUnit-local repository
+                has been created to store snapshots of various dependencies. 
+            </p>
+        </section>
+
+        <section name="Running the tests">
+            <p>
+                All the tests are based on <a href="http://www.junit.org/">JUnit</a>.
+            </p>
+            <source>mvn test</source>
+            <p>
+                This will force a recompile of the java classes if needed.
+            </p>
+            <source>mvn test -Dtest=DomNodeTest</source>
+            <p>
+                This will run only the specified test class.
+            </p>
+            <p>
+                Tests currently assume that port 12345 is free on the machine, 
+                if you have <tt>java.net.BindException: Address already in use: JVM_Bind</tt>,
+                then set the system property <code>htmlunit.test.port</code> e.g. <code>-Dhtmlunit.test.port=10101</code>.
+                <br/>
+                Additionally class SocksProxyTest requires a SOCKS Proxy running at port 55555.
+            </p>
+        </section>
+
+        <section name="Packaging">
+            <source>mvn package</source>
+            <p>
+                In the project's target directory you'll able to see the generated jar file with the
+                name "htmlunit-" followed by the version number.
+            </p>
+            <source>mvn source:jar</source>
+            <p>
+                This generates a source jar file.
+            </p>
+            <source>mvn source:test-jar</source>
+            <p>
+                This will generate a jar file of the test sources.
+            </p>
+            <source>mvn org.apache.felix:maven-bundle-plugin:bundle</source>
+            <p>
+                This will generate an OSGi bundle.
+            </p>
+        </section>
+
+        <section name="Forked Rhino (core-js)">
+            <p>
+            You can get the source code from
+            <a href="http://search.maven.org/#browse|1126356811">Maven central repository</a>,
+            while the repository resides in
+            <a href="https://github.com/htmlunit">github</a>.
+            </p>
+        </section>
+
+    </body>
+</document>

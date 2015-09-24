@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Submitting Bugs</title>
+        <author>Chris Erskine</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                For JavaScript Bugs, please read <a href="submittingJSBugs.html">this</a>.
+            </p>
+            <p>
+                Bugs are a constant problem with software development.  In HtmlUnit, there are several factors
+                for the cause of bugs.  These include: bugs in third-party code, functionality that still is not
+                supported by HtmlUnit, bugs in your code, or true bugs in HtmlUnit.  To track these bugs, we are
+                using the SourceForge issue tracking system located at 
+                <a href="http://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">
+                http://sourceforge.net/tracker/?group_id=47038&amp;atid=448266</a>
+            </p>
+            <p>
+                Before reporting an error, make sure that you are up to the latest version of the software.  If
+                you can, get the <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">latest snapshot</a>,
+                or build it from Subversion to see if the error still occurs.  Check the 
+                <a href="dependencies.html">dependencies</a> to be sure that you have all the required jar files.
+                Also, review the list of bugs and recently closed bugs to see if someone else has already reported
+                the bug.  If they have, you may want to just add more detail to it. 
+            </p>
+        </section>
+        <section name="How to submit reports that get responses">
+            <p>
+                Development of HtmlUnit is done as a volunteer effort.  As such, the developers respond when they
+                get a chance.  There are a number of things that you can do to help get a quicker response
+                <ul>
+                    <li>
+                        Describe the bug in as much detail as possible.  To be able to fix a bug, the developer
+                        has to be able to reproduce it. The more detail provided, the easier this is to do. Include
+                        the source code that you have to produce the bug and the HTML page.  Reduce this down to the
+                        least amount of code required to produce the error on both the executing code and the HTML.
+                        If the developer has to look through 2 pages 
+                        of HTML and JavaScript to see what is happening, it may not happen.
+                    </li>
+                    <li>
+                        If you can, write a <a href="http://www.junit.org">JUnit</a> test that reproduces the error.
+                        This makes it much easier to find the bug since the developer has to just run the unit test to
+                        reproduce the error.
+                   </li>
+                   <li>
+                        Best is to review the code and find what is causing the bug and not only write a unit test that
+                        produces the bug, but also a patch that fixes the bug.  Include these files in the bug report
+                        following the rules for <a href="submittingPatches.html">submitting patches.</a>
+                   </li>
+               </ul>
+            </p>
+        </section>
+    </body>
+</document>
+

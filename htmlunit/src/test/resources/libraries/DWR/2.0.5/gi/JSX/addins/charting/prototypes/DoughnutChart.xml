@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Pie - Doughnut]]></name>
+ <icon><![CDATA[icons/doughnut.gif]]></icon>
+ <description><![CDATA[a sample doughnut (multi-series pie) chart]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.PieChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" colors="['#999999','#333333','#CC6666','#663333','#6666FF','#333366']" innerRadius="0.5" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1" seriesPadding="0.3" startAngle="0" totalAngle="360"/>
+   <strings borderColor="#999999" categoryField="name" colorFunction="jsx3.chart.PieChart.defaultColoring" dataPadding="14" jsxbgcolor="#FFFFFF" jsxname="doughnutChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record name=&quot;Africa&quot; y2004=&quot;884966000&quot; y2025=&quot;1322913000&quot; y2050=&quot;1941196000&quot;/&gt; &lt;record name=&quot;Europe&quot; y2004=&quot;728392000&quot; y2025=&quot;721619000&quot; y2050=&quot;668050000&quot;/&gt; &lt;record name=&quot;Oceania&quot; y2004=&quot;32822000&quot; y2025=&quot;41069000&quot; y2050=&quot;46840000&quot;/&gt; &lt;record name=&quot;N America&quot; y2004=&quot;325653000&quot; y2025=&quot;385580000&quot; y2050=&quot;456855000&quot;/&gt; &lt;record name=&quot;S America&quot; y2004=&quot;364992000&quot; y2025=&quot;449705000&quot; y2050=&quot;502104000&quot;/&gt; &lt;record name=&quot;Asia&quot; y2004=&quot;3874984000&quot; y2025=&quot;4777519000&quot; y2050=&quot;5384847000&quot;/&gt; &lt;/data&gt;" legendPlacement="right" titlePlacement="top"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Doughnut Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.PieSeries">
+     <dynamics/>
+     <variants index="0" labelOffset="-16" usePrimaryX="1" usePrimaryY="1"/>
+     <strings field="y2004" jsxname="series1" seriesName="2004" tooltipFunction="jsx3.chart.PieSeries.tooltip"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0"/>
+       <strings jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="chartLabel" jsxtext="2004" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.Legend">
+     <dynamics/>
+     <variants boxHeight="10" boxSpace="6" lineHeight="22" preferredWidth="110" titleSpace="8"/>
+     <strings backgroundStroke="#BBBBBB" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="10 4 0 4" labelStyle="font-size: 10px; font-weight: bold;"/>
+    </object>
+    <object type="jsx3.chart.PieSeries">
+     <dynamics/>
+     <variants index="1" labelOffset="-16" usePrimaryX="1" usePrimaryY="1"/>
+     <strings field="y2025" jsxname="series2" seriesName="2025" tooltipFunction="jsx3.chart.PieSeries.tooltip"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants alpha="1" jsxfontsize="12" labelRotation="0"/>
+       <strings jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="chartLabel" jsxtext="2025" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.PieSeries">
+     <dynamics/>
+     <variants index="2" labelOffset="-16" usePrimaryX="1" usePrimaryY="1"/>
+     <strings field="y2050" jsxname="series3" seriesName="2050" tooltipFunction="jsx3.chart.PieSeries.tooltip"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0" preferredWidth="50"/>
+       <strings jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="chartLabel" jsxtext="2050" jsxtextalign="center"/>
+      </object>
+    </object>
+  </object>
+</serialization>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	
+	<record group="series" include="master.xml">
+		<record docdefault="segment (&lt;code&gt;jsx3.chart.AreaSeries.FORM_SEGMENT&lt;/code&gt;)" docgetter="getForm" docsetter="setForm" eval="0" jsxid="form" jsxmask="jsxselect" jsxtext="Type" jsxtip="Sets the method for connecting the edges of series between data points." nullable="0">
+			<enum jsxid="jsx3.chart.AreaSeries.FORM_SEGMENT" jsxtext="segment"/>
+			<enum jsxid="jsx3.chart.AreaSeries.FORM_STEP" jsxtext="step"/>
+			<enum jsxid="jsx3.chart.AreaSeries.FORM_REVSTEP" jsxtext="reverseStep"/>
+		</record>
+	</record>
+	
+	<record group="seriesfill" include="master.xml"/>
+  
+  <record group="point" include="master.xml">
+    <record children="1" group="colorFunction" include="master.xml"/>
+  </record>
+  
+  <record group="component" include="master.xml"/>
+	<record group="interaction" include="master.xml"/>
+</data>

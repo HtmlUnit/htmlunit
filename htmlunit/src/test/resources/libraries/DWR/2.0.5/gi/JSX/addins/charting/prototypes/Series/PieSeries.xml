@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Pie]]></name>
+ <icon><![CDATA[icons/pieSeries.gif]]></icon>
+ <description><![CDATA[the series type for a pie chart]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.PieSeries">
+   <dynamics/>
+   <variants usePrimaryX="1" usePrimaryY="1"/>
+   <strings jsxname="pieSeries" seriesName="Pie Series" tooltipFunction="jsx3.chart.PieSeries.tooltip"/>
+  </object>
+</serialization>

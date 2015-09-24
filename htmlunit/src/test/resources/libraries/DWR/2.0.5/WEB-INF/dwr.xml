@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.org/dwr/dwr20.dtd">
+
+<dwr>
+
+  <allow>
+
+    <!--
+    <filter class="org.getahead.dwrdemo.monitor.MonitoringAjaxFilter"/>
+    <filter class="org.directwebremoting.filter.ExtraLatencyAjaxFilter">
+      <param name="delay" value="200"/>
+    </filter>
+    -->
+
+    <!-- intro - for the test on index.html -->
+    <create creator="new" javascript="Intro">
+      <param name="class" value="org.getahead.dwrdemo.intro.Intro"/>
+    </create>
+
+    <!-- address -->
+    <create creator="new" javascript="AddressLookup">
+      <param name="class" value="org.getahead.dwrdemo.address.AddressLookup"/>
+    </create>
+
+    <!-- anti-spam mailto generator -->
+    <create creator="new" javascript="Generator" scope="application">
+      <param name="class" value="org.getahead.dwrdemo.asmg.Generator"/>
+    </create>
+
+    <!-- chat -->
+    <create creator="new" javascript="JavascriptChat" scope="application">
+      <param name="class" value="org.getahead.dwrdemo.chat.JavascriptChat"/>
+    </create>
+    <create creator="new" javascript="JavaChat" scope="application">
+      <param name="class" value="org.getahead.dwrdemo.chat.JavaChat"/>
+    </create>
+    <convert converter="bean" match="org.getahead.dwrdemo.chat.Message"/>
+
+    <!-- clock -->
+    <create creator="new" javascript="Clock" scope="application">
+      <param name="class" value="org.getahead.dwrdemo.clock.Clock"/>
+    </create>
+
+    <!-- livehelp -->
+    <create creator="new" javascript="LiveHelp" scope="application">
+      <param name="class" value="org.getahead.dwrdemo.livehelp.LiveHelp"/>
+    </create>
+
+    <!-- people -->
+    <create creator="new" javascript="People" scope="script">
+      <param name="class" value="org.getahead.dwrdemo.people.People"/>
+    </create>
+    <convert match="org.getahead.dwrdemo.people.Person" javascript="Person" converter="bean"/>
+
+    <!-- simpletext -->
+    <create creator="new" javascript="Demo">
+      <param name="class" value="org.getahead.dwrdemo.simpletext.Demo"/>
+    </create>
+
+    <!-- resources not in this war file: java.util.Date -->
+    <create creator="new" javascript="JDate" scope="session">
+      <param name="class" value="java.util.Date"/>
+      <exclude method="getHours"/>
+      <auth method="getMinutes" role="admin"/>
+      <auth method="getMinutes" role="devel"/>
+      <filter class="org.getahead.dwrdemo.filter.LoggingAjaxFilter"/>
+    </create>
+
+    <!-- resources in jars in this war file: Commons EmailValidator -->
+    <create creator="script" javascript="EmailValidator" scope="application">
+      <param name="language" value="beanshell"/>
+      <param name="script">
+        import org.apache.commons.validator.EmailValidator;
+        return EmailValidator.getInstance();
+      </param>
+    </create>
+
+    <!-- The TIBCO GI Demo -->
+    <create creator="new" javascript="Publisher" scope="application">
+      <param name="class" value="org.getahead.dwrdemo.gidemo.Publisher"/>
+    </create>
+    <convert converter="bean" match="org.getahead.dwrdemo.gidemo.Corporation"/>
+
+    <!-- this is a bad idea for live, but can be useful in testing -->
+    <convert converter="exception" match="java.lang.Exception"/>
+    <convert converter="bean" match="java.lang.StackTraceElement"/>
+
+  </allow>
+
+</dwr>

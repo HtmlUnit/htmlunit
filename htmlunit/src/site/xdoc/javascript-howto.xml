@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>JavaScript Tutorial</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+                A frequent question we get is "how do I test my JavaScript?".
+                There is nothing really specific for using JavaScript, it is automatically processed.
+                So, you just need to .getPage(), find the element to click(), and then check the result.
+                Tests for complex JavaScript libraries are included in HtmlUnit test base, you can find it
+                <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/">here</a>
+                which is useful to get an idea.
+            </p>
+            <p>
+                Usually, you should wait() or sleep() a little, as HtmlUnit can finish before the AJAX response is
+                retrieved from the server, please read <a href="http://htmlunit.sourceforge.net/faq.html#AJAXDoesNotWork">this FAQ</a>.
+            </p>
+            <p>
+                Below are some examples:
+            </p>
+        </section>
+
+        <section name="Example: using Document.write()">
+            <p>
+                Lets say that we have a page containing JavaScript that will dynamically
+                write content to the page.  The following html will dynamically generate
+                five textfields and place them inside a table.  Each textfield will have
+                a unique name created by appending the index to the string "textfield".
+            </p>
+            <source><![CDATA[
+<html><head><title>Table sample</title></head><body>
+    <form action='/foo' name='form1'>
+    <table id="table1">
+        <script type="text/javascript">
+            for (i = 1; i <= 5; i++) {
+                document.write("<tr><td>" + i
+                    + "</td><td><input name='textfield" + i
+                    + "' type='text'></td></tr>");
+            }
+        </script>
+    </table></form>
+</body></html>]]></source>
+            
+            <p>
+                We would likely want to test that the five text fields were created so
+                we could start with this.
+            </p>
+            <source><![CDATA[
+@Test
+public void documentWrite() throws Exception {
+    final WebClient webClient = new WebClient();
+
+    final HtmlPage page = webClient.getPage("http://myserver/test.html");
+    final HtmlForm form = page.getFormByName("form1");
+    for (int i = 1; i <= 5; i++) {
+        final String expectedName = "textfield" + i;
+        Assert.assertEquals(
+            "text", 
+            form.<HtmlInput>getInputByName(expectedName).getTypeAttribute());
+    }
+}]]></source>
+            <p>
+                We might also want to check off-by-one errors by ensuring that 
+                it didn't create "textfield0" or "textfield6".  Trying to get an 
+                element that doesn't exist will cause an exception to be thrown
+                so we could add this to the end of the previous test.
+            </p>
+            <source><![CDATA[
+try {
+    form.getInputByName("textfield0");
+    fail("Expected an ElementNotFoundException");
+}
+catch (final ElementNotFoundException e) {
+    // Expected path
+}
+
+try {
+    form.getInputByName("textfield6");
+    fail("Expected an ElementNotFoundException");
+}
+catch (final ElementNotFoundException e) {
+    // Expected path
+}]]></source>
+        </section>
+        
+        <section name="Example: Watching for 'alerts'">
+            <p>
+                Often you want to watch alerts triggered by JavaScript.
+            </p>
+            <source><![CDATA[
+<html><head><title>Alert sample</title></head>
+<body onload='alert("foo");'>
+</body></html>]]></source>
+            <p>
+               Alerts are tracked by an AlertHandler which will be called whenever
+               the JavaScript alert() function is called.  In the following test, 
+               we register an alert handler which just saves all messages into a 
+               list.  When the page load is complete, we compare that list of
+               collected alerts with another list of expected alerts to ensure
+               they are the same.
+            </p>
+
+            <source><![CDATA[
+@Test
+public void alerts() throws Exception {
+    final WebClient webClient = new WebClient();
+
+    final List collectedAlerts = new ArrayList();
+    webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+    // Since we aren't actually manipulating the page, we don't assign
+    // it to a variable - it's enough to know that it loaded.
+    webClient.getPage("http://tciludev01/test.html");
+
+    final List expectedAlerts = Collections.singletonList("foo");
+    Assert.assertEquals(expectedAlerts, collectedAlerts);
+}]]></source>
+        </section>
+        
+        <section name="Prompts, Confirms and Status line messages">
+            <p>
+                Handling prompt dialogs, confirm dialogs and status line messages
+                work in the same way as alerts.  You register a handler of the 
+                appropriate type and it will get notified when that method is called.
+                See WebClient.setPromptHandler(), WebClient.setConfirmHandler() and
+                WebClient.setStatusHandler() for details on these.
+            </p>
+        </section>
+
+        <section name="Event handlers">
+            <p>
+                Most event handlers are already implemented: onload, onclick, ondblclick, onmouseup, onsubmit, onreadystatechange, ... 
+                They will be triggered at the appropriate time just like in a "real browser".  
+            </p>
+            <p>
+                If the event that you wish to test is not yet supported then you can 
+                directly invoke it through the ScriptEngine.  Note that while the script 
+                engine is publicly 
+                accessible, we do not recommend using it directly unless you have no
+                other choice.  It is much better to manipulate the page as a user would
+                by clicking on elements and shifting the focus around.
+            </p>
+        </section>
+    </body>
+
+</document>
