@@ -67,6 +67,15 @@ public class ExternalTest {
                     }
                 }
             }
+            assertVersion("org.sonatype.oss", "oss-parent", "9");
+            assertChromeDriver("2.19");
+        }
+    }
+
+    private void assertChromeDriver(final String version) throws Exception {
+        try (final WebClient webClient = getWebClient()) {
+            final TextPage page = webClient.getPage("http://chromedriver.storage.googleapis.com/LATEST_RELEASE");
+            assertEquals("Chrome Driver", page.getContent(), version);
         }
     }
 
