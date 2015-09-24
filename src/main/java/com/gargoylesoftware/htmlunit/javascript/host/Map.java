@@ -166,7 +166,7 @@ public class Map extends SimpleScriptable {
     }
 
     /**
-     * returns a new {@code Iterator} object that contains the {@code [key, value]} pairs for each element in the
+     * Returns a new {@code Iterator} object that contains the {@code [key, value]} pairs for each element in the
      * Map object in insertion order.
      * @return a new {@code Iterator} object
      */
