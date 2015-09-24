@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -48,6 +49,158 @@ public class MapTest extends WebDriverTestCase {
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function entries() { [native code] }",
+                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined" },
+            FF38 = { "function entries() {\n    [native code]\n}",
+                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined" },
+            FF31 = { },
+            IE = { })
+    public void iterator() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (window.Symbol) {\n"
+            + "      var myMap = new Map();\n"
+            + "      myMap.set('0', 'foo');\n"
+            + "      myMap.set(1, 'bar');\n"
+            + "      myMap.set({}, 'baz');\n"
+            + "      alert(myMap[Symbol.iterator]);\n"
+            + "      var iter = myMap[Symbol.iterator]();\n"
+            + "      alert(iter);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function entries() { [native code] }",
+                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined" },
+            FF38 = { "function entries() {\n    [native code]\n}",
+                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined" },
+            FF31 = { },
+            IE = { })
+    public void entries() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (window.Symbol) {\n"
+            + "      var myMap = new Map();\n"
+            + "      myMap.set('0', 'foo');\n"
+            + "      myMap.set(1, 'bar');\n"
+            + "      myMap.set({}, 'baz');\n"
+            + "      alert(myMap.entries);\n"
+            + "      var iter = myMap.entries();\n"
+            + "      alert(iter);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function values() { [native code] }",
+                "[object Map Iterator]", "foo", "bar", "baz", "undefined" },
+            FF38 = { "function values() {\n    [native code]\n}",
+                "[object Map Iterator]", "foo", "bar", "baz", "undefined" },
+            FF31 = { },
+            IE = { })
+    public void values() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (window.Symbol) {\n"
+            + "      var myMap = new Map();\n"
+            + "      myMap.set('0', 'foo');\n"
+            + "      myMap.set(1, 'bar');\n"
+            + "      myMap.set({}, 'baz');\n"
+            + "      alert(myMap.values);\n"
+            + "      var iter = myMap.values();\n"
+            + "      alert(iter);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function keys() { [native code] }",
+                "[object Map Iterator]", "0", "1", "[object Object]", "undefined" },
+            FF38 = { "function keys() {\n    [native code]\n}",
+                "[object Map Iterator]", "0", "1", "[object Object]", "undefined" },
+            FF31 = { },
+            IE = { })
+    public void keys() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (window.Symbol) {\n"
+            + "      var myMap = new Map();\n"
+            + "      myMap.set('0', 'foo');\n"
+            + "      myMap.set(1, 'bar');\n"
+            + "      myMap.set({}, 'baz');\n"
+            + "      alert(myMap.keys);\n"
+            + "      var iter = myMap.keys();\n"
+            + "      alert(iter);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "      alert(iter.next().value);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

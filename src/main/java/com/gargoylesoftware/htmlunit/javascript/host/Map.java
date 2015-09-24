@@ -33,6 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -152,4 +153,51 @@ public class Map extends SimpleScriptable {
         return map_.remove(key) != null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        // A hack to handle Rhino not supporting "get(Object object, Scriptable start)"
+        if (name.equals(Symbol.ITERATOR_STRING)) {
+            return super.get("entries", start);
+        }
+        return super.get(name, start);
+    }
+
+    /**
+     * returns a new {@code Iterator} object that contains the {@code [key, value]} pairs for each element in the
+     * Map object in insertion order.
+     * @return a new {@code Iterator} object
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    public Object entries() {
+        final SimpleScriptable object = new Iterator("Map Iterator", map_.entrySet().iterator());
+        object.setParentScope(getParentScope());
+        return object;
+    }
+
+    /**
+     * Returns a new {@code Iterator} object that contains the keys for each element in the Map object
+     * in insertion order.
+     * @return a new {@code Iterator} object
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    public Object keys() {
+        final SimpleScriptable object = new Iterator("Map Iterator", map_.keySet().iterator());
+        object.setParentScope(getParentScope());
+        return object;
+    }
+
+    /**
+     * Returns a new {@code Iterator} object that contains the values for each element in the Map object
+     * in insertion order.
+     * @return a new {@code Iterator} object
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    public Object values() {
+        final SimpleScriptable object = new Iterator("Map Iterator", map_.values().iterator());
+        object.setParentScope(getParentScope());
+        return object;
+    }
 }

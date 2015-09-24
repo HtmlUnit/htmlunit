@@ -18,6 +18,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -62,13 +63,31 @@ public class Iterator extends SimpleScriptable {
      * @return the next object
      */
     public Object next() {
-        if (iterator_.hasNext()) {
-            final SimpleScriptable object = new SimpleScriptable();
-            object.setParentScope(getParentScope());
-            object.defineProperty("value", iterator_.next(), ScriptableObject.DONTENUM);
-            return object;
+        final SimpleScriptable object = new SimpleScriptable();
+        object.setParentScope(getParentScope());
+        final Object value;
+        if (iterator_ != null && iterator_.hasNext()) {
+            final Object next = iterator_.next();
+            if (next instanceof java.util.Map.Entry) {
+                final java.util.Map.Entry<?, ?> entry = (java.util.Map.Entry<?, ?>) next;
+                final NativeArray array = new NativeArray(new Object[] {entry.getKey(), entry.getValue()}) {
+
+                    @Override
+                    public Object getDefaultValue(final Class<?> hint) {
+                        return Context.toString(entry.getKey()) + ',' + Context.toString(entry.getValue());
+                    }
+                };
+                value = array;
+            }
+            else {
+                value = next;
+            }
         }
-        return Undefined.instance;
+        else {
+            value = Undefined.instance;
+        }
+        object.defineProperty("value", value, ScriptableObject.DONTENUM);
+        return object;
     }
 
 }
