@@ -97,7 +97,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             )
     @NotYetImplemented
     public void type() throws Exception {
-        test("type");
+        test("type", "", null);
     }
 
     /**
@@ -116,7 +116,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 + " undefined, undefined, undefined, undefined")
     @Test
     public void files() throws Exception {
-        test("files");
+        test("files", "", null);
     }
 
     /**
@@ -128,7 +128,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 "false", "false", "false", "false", "false", "false", "false" })
     @Test
     public void checked() throws Exception {
-        test("checked");
+        test("checked", "", null);
     }
 
     /**
@@ -149,7 +149,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @NotYetImplemented(IE)
     public void checkedWithAttribute() throws Exception {
-        test("checked", "checked");
+        test("checked", "checked", null);
     }
 
     /**
@@ -203,14 +203,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @NotYetImplemented
     public void setValueAttribute() throws Exception {
         test("value", "", "abc");
-    }
-
-    private void test(final String property) throws Exception {
-        test(property, "", null);
-    }
-
-    private void test(final String property, final String attrib) throws Exception {
-        test(property, attrib, null);
     }
 
     private void test(final String property, final String attrib, final String value) throws Exception {
@@ -284,8 +276,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + "    <input type='button' name='button1'" + attrib + "></button>\n"
-            + "    <button type='button' name='button2'" + attrib + "></button>\n"
+            + "    <input type='button' name='button1' " + attrib + "></button>\n"
+            + "    <button type='button' name='button2' " + attrib + "></button>\n"
             + "    <input type='checkbox' name='checkbox1' " + attrib + "/>\n"
             + "    <input type='file' name='fileupload1' " + attrib + "/>\n"
             + "    <input type='hidden' name='hidden1' " + attrib + "/>\n"
