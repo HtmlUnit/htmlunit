@@ -61,4 +61,85 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"//:\");\n}",
+            CHROME = "@font-face { font-family: Delicious; src: url(http:///); }",
+            IE8 = { "exception" },
+            IE11 = "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(//:);\r\n}\r\n")
+    public void urlSlashSlashColon() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<style>"
+            + "  @font-face { font-family: Delicious; src: url(//:); }\n"
+            + "  h3 { font-family: Delicious;  }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.cssText);\n"
+            + "}\n"
+            + "catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"/:\");\n}",
+            CHROME = "@font-face { font-family: Delicious; src: url(§§URL§§:); }",
+            IE8 = { "exception" },
+            IE11 = "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(/:);\r\n}\r\n")
+    public void urlSlashColon() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<style>"
+            + "  @font-face { font-family: Delicious; src: url(/:); }\n"
+            + "  h3 { font-family: Delicious;  }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.cssText);\n"
+            + "}\n"
+            + "catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"//\");\n}",
+            CHROME = "@font-face { font-family: Delicious; src: url(http:); }",
+            IE8 = { "exception" },
+            IE11 = "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(//);\r\n}\r\n")
+    public void urlSlashSlash() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<style>"
+            + "  @font-face { font-family: Delicious; src: url(//); }\n"
+            + "  h3 { font-family: Delicious;  }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.cssText);\n"
+            + "}\n"
+            + "catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

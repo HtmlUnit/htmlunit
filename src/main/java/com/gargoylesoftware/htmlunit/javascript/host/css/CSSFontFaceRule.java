@@ -32,8 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 /**
  * A JavaScript object for a {@link org.w3c.dom.css.CSSFontFaceRule}.
  *
@@ -98,7 +96,15 @@ public class CSSFontFaceRule extends CSSRule {
                 cssText = matcher.replaceFirst("src: url(" + page.getFullyQualifiedUrl(url) + ");");
             }
             catch (final Exception e) {
-                throw Context.throwAsScriptRuntimeEx(e);
+                switch (url) {
+                    case "//:":
+                        cssText = matcher.replaceFirst("src: url(" + "http:///" + ");");
+                        break;
+
+                    case "//":
+                        cssText = matcher.replaceFirst("src: url(" + "http:" + ");");
+                        break;
+                }
             }
         }
         else {
