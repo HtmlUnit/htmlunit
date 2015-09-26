@@ -104,6 +104,8 @@ public class CSSFontFaceRule extends CSSRule {
                     case "//":
                         cssText = matcher.replaceFirst("src: url(" + "http:" + ");");
                         break;
+
+                    default:
                 }
             }
         }
