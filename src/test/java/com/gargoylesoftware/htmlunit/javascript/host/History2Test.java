@@ -58,30 +58,35 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null" },
-            IE8 = { })
+            IE8 = "no pushState")
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void pushState() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<title></title>\n"
+                + "<script>\n"
                 + "  function test() {\n"
-                + "    if (window.history.pushState) {\n"
-                + "      var stateObj = { hi: 'there' };\n"
-                + "      window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
-                + "    }\n"
+                + "    if (!window.history.pushState) { alert('no pushState'); return }\n"
+                + "    var stateObj = { hi: 'there' };\n"
+                + "    window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
                 + "  }\n"
-                + "\n"
+
                 + "  function popMe(event) {\n"
                 + "    var e = event ? event : window.event;\n"
                 + "    alert(e);\n"
                 + "    alert(e.state);\n"
                 + "  }\n"
-                + "</script></head><body onpopstate='popMe(event)'>\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onpopstate='popMe(event)'>\n"
                 + "  <button id=myId onclick='test()'>Click me</button>\n"
                 + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html);
-        if (expectedAlerts.length != 0) {
-            driver.findElement(By.id("myId")).click();
+        driver.findElement(By.id("myId")).click();
+
+        if (expectedAlerts.length > 1) {
             assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
             driver.navigate().back();
         }
