@@ -2248,6 +2248,15 @@ public class HtmlPage extends InteractivePage {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    //TODO: to be removed, once WebDriver is released
+    public HtmlElement getFocusedElement() {
+        return (HtmlElement) super.getFocusedElement();
+    }
+
+    /**
      * The base URL used to resolve relative URLs.
      * @return the base URL
      */
