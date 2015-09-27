@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_EV
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POPSTATEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
@@ -135,6 +136,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
@@ -259,6 +261,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         additionalEventMap.put("HashChangeEvent", HashChangeEvent.class);
         additionalEventMap.put("KeyEvents", KeyboardEvent.class);
         additionalEventMap.put("PointerEvent", PointerEvent.class);
+        additionalEventMap.put("PopStateEvent", PopStateEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
 
         // commands
@@ -1812,7 +1815,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 || "BeforeUnloadEvent".equals(eventType)
                     && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
                 || "PointerEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)) {
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
+                || "PopStateEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_POPSTATEEVENT)) {
                 clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
             }
         }

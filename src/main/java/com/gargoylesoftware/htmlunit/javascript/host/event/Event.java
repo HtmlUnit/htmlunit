@@ -91,6 +91,9 @@ public class Event extends SimpleScriptable {
     /** The unload event type, triggered by "onunload" event handlers. */
     public static final String TYPE_UNLOAD = "unload";
 
+    /** The popstate event type, triggered by "onpopstate" event handlers. */
+    public static final String TYPE_POPSTATE = "popstate";
+
     /** The focus event type, triggered by "onfocus" event handlers. */
     public static final String TYPE_FOCUS = "focus";
 

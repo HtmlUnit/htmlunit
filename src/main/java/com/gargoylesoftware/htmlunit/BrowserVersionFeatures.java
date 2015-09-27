@@ -358,6 +358,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     EVENT_TYPE_POINTEREVENT,
 
+    /** Supports event type 'PopStateEvent'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    EVENT_TYPE_POPSTATEEVENT,
+
     /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
