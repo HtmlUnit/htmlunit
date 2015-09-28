@@ -2251,7 +2251,7 @@ public class HtmlPage extends InteractivePage {
      * {@inheritDoc}
      */
     @Override
-    //TODO: to be removed, once WebDriver 2.47.0 is released
+    //TODO: to be removed, once WebDriver is released
     public HtmlElement getFocusedElement() {
         return (HtmlElement) super.getFocusedElement();
     }

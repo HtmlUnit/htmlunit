@@ -18,24 +18,66 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code PopStateEvent}.
  *
  * @author Ahmed Ashour
+ * @author Adam Afeltowicz
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
         @WebBrowser(EDGE) })
 public class PopStateEvent extends Event {
 
+    private Object state_;
+
     /**
      * Default constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public PopStateEvent() {
+        setEventType("");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
+
+        if (details != null && !Context.getUndefinedValue().equals(details)) {
+            state_ = details.get("state");
+        }
+    }
+
+    /**
+     * Creates a new event instance.
+     *
+     * @param scriptable the SimpleScriptable that triggered the event
+     * @param type the event type
+     * @param state the state object
+     */
+    public PopStateEvent(final SimpleScriptable scriptable, final String type, final Object state) {
+        super(scriptable, type);
+        state_ = state;
+    }
+
+    /**
+     * Return the state object.
+     * @return the state object
+     */
+    @JsxGetter
+    public Object getState() {
+        return state_;
     }
 }

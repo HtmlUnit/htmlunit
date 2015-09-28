@@ -73,6 +73,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
+import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
@@ -139,7 +140,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private transient WebConnection webConnection_;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
-    private transient JavaScriptEngine scriptEngine_;
+    private transient AbstractJavaScriptEngine scriptEngine_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
@@ -582,8 +583,18 @@ public class WebClient implements Serializable, AutoCloseable {
     /**
      * This method is intended for testing only - use at your own risk.
      * @return the current JavaScript engine (never {@code null})
+     * @deprecated as of 2.19, please use {@link #getAbstractJavaScriptEngine()} instead
      */
+    @Deprecated
     public JavaScriptEngine getJavaScriptEngine() {
+        return (JavaScriptEngine) scriptEngine_;
+    }
+
+    /**
+     * This method is intended for testing only - use at your own risk.
+     * @return the current JavaScript engine (never {@code null})
+     */
+    public AbstractJavaScriptEngine getAbstractJavaScriptEngine() {
         return scriptEngine_;
     }
 
@@ -592,9 +603,9 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param engine the new script engine to use
      */
-    public void setJavaScriptEngine(final JavaScriptEngine engine) {
+    public void setJavaScriptEngine(final AbstractJavaScriptEngine engine) {
         if (engine == null) {
-            throw new NullPointerException("Can't set JavaScriptEngine to null");
+            throw new IllegalArgumentException("Can't set JavaScriptEngine to null");
         }
         scriptEngine_ = engine;
     }
@@ -1546,7 +1557,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param timeout the timeout value, in milliseconds
      */
     public void setJavaScriptTimeout(final long timeout) {
-        scriptEngine_.getContextFactory().setTimeout(timeout);
+        scriptEngine_.setJavaScriptTimeout(timeout);
     }
 
     /**
@@ -1556,7 +1567,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @return the timeout value, in milliseconds
      */
     public long getJavaScriptTimeout() {
-        return scriptEngine_.getContextFactory().getTimeout();
+        return scriptEngine_.getJavaScriptTimeout();
     }
 
     /**

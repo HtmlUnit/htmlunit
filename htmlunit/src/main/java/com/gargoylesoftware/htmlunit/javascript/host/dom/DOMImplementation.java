@@ -41,7 +41,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEME
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_RANGE_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2;
@@ -278,6 +280,10 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("1.1".equals(version)) {
                     return true;
                 }
+                if ("1.2".equals(version)
+                        && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_2)) {
+                    return true;
+                }
             }
             else if ("http://www.w3.org/TR/SVG11/feature#Shape".equals(feature)) {
                 if ("1.0".equals(version)
@@ -285,6 +291,10 @@ public class DOMImplementation extends SimpleScriptable {
                     return true;
                 }
                 if ("1.1".equals(version)) {
+                    return true;
+                }
+                if ("1.2".equals(version)
+                        && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_2)) {
                     return true;
                 }
             }
