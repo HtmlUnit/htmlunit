@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -50,7 +51,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "red", "none", "repeat", "0% 0%", "scroll" },
-            CHROME = { "red", "initial", "initial", "" , "initial" })
+            CHROME = { "red", "initial", "initial", "initial" , "initial" })
+    @NotYetImplemented(CHROME)
     public void backgroundColorRed() throws Exception {
         background("red");
     }
@@ -60,9 +62,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "rgb(20, 40, 60)", "none", "repeat", "0% 0%", "scroll" },
-            CHROME = { "rgb(20, 40, 60)", "initial", "initial", "", "initial" },
+            CHROME = { "rgb(20, 40, 60)", "initial", "initial", "initial", "initial" },
             IE8 = { "rgb(20,40,60)", "none", "repeat", "0% 0%", "scroll" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ CHROME, IE8 })
     public void backgroundColorRgb() throws Exception {
         background("rgb(20, 40, 60)");
     }
@@ -72,8 +74,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
-            CHROME = { "initial", "url(http://localhost:12345/myImage.png)", "initial", "", "initial" },
+            CHROME = { "initial", "url(http://localhost:12345/myImage.png)", "initial", "initial", "initial" },
             IE8 = { "transparent", "url(myImage.png)", "repeat", "0% 0%", "scroll" })
+    @NotYetImplemented(CHROME)
     public void backgroundImage() throws Exception {
         background("url(myImage.png)");
     }
@@ -83,7 +86,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat-x", "0% 0%", "scroll" },
-            CHROME = { "initial", "initial", "repeat-x", "", "initial" })
+            CHROME = { "initial", "initial", "repeat-x", "initial", "initial" })
+    @NotYetImplemented(CHROME)
     public void backgroundRepeat() throws Exception {
         background("repeat-x");
     }
@@ -134,7 +138,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "0% 0%", "fixed" },
-            CHROME = { "initial", "initial", "initial", "", "fixed" })
+            CHROME = { "initial", "initial", "initial", "initial", "fixed" })
+    @NotYetImplemented(CHROME)
     public void backgroundAttachment() throws Exception {
         background("fixed");
     }
@@ -144,8 +149,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" },
-            CHROME = { "rgb(255, 204, 221)", "initial", "initial", "", "initial" },
+            CHROME = { "rgb(255, 204, 221)", "initial", "initial", "initial", "initial" },
             IE8 = { "#ffccdd", "none", "repeat", "0% 0%", "scroll" })
+    @NotYetImplemented(CHROME)
     public void backgroundColorHex() throws Exception {
         background("#ffccdd");
     }
@@ -155,8 +161,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "red", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
-            CHROME = { "red", "url(http://localhost:12345/myImage.png)", "initial", "", "initial" },
+            CHROME = { "red", "url(http://localhost:12345/myImage.png)", "initial", "initial", "initial" },
             IE8 = { "red", "url(myImage.png)", "repeat", "0% 0%", "scroll" })
+    @NotYetImplemented(CHROME)
     public void backgroundMixed() throws Exception {
         background("red url(\"myImage.png\")");
     }
