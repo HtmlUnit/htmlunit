@@ -843,7 +843,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text1", "New Text" })
+    @Alerts(DEFAULT = {"text1", "New Text" },
+            CHROME = {"label1", "label1" })
+    @NotYetImplemented(CHROME)
     public void text() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1096,7 +1098,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "text2", "label2" })
+    @Alerts(DEFAULT = { "", "", "", "", "text2", "text2", "text2", "label2" },
+            CHROME = { "", "", "", "", "text2", "text2", "label2", "label2" })
+    @NotYetImplemented
     public void setLabel() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1105,8 +1109,17 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "  var s = document.getElementById('testSelect');\n"
             + "  var lastIndex = s.length;\n"
             + "  s.length += 1;\n"
+            + "  alert(s[1].text);\n"
+            + "  alert(s[1].label);\n"
+
             + "  s[lastIndex].value = 'value2';\n"
+            + "  alert(s[1].text);\n"
+            + "  alert(s[1].label);\n"
+
             + "  s[lastIndex].text  = 'text2';\n"
+            + "  alert(s[1].text);\n"
+            + "  alert(s[1].label);\n"
+
             + "  s[lastIndex].label = 'label2';\n"
             + "  alert(s[1].text);\n"
             + "  alert(s[1].label);\n"
