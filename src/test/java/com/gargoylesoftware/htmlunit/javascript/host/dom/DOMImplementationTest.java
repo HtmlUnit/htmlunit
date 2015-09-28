@@ -284,9 +284,9 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" },
-            CHROME = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
+            CHROME = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
-                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" },
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: true" },
             IE8 = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" })
@@ -301,9 +301,9 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" },
-            CHROME = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
+            CHROME = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
-                "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" },
+                "http://www.w3.org/TR/SVG11/feature#Shape 1.2: true" },
             IE8 = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" })
