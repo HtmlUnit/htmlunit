@@ -953,7 +953,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "§§URL§§", "§§URL§§" },
-            CHROME = { "", "§§URL§§" },
+            CHROME = { "null", "§§URL§§" },
             IE = { "undefined", "undefined" })
     @NotYetImplemented(CHROME)
     public void baseURI() throws Exception {
