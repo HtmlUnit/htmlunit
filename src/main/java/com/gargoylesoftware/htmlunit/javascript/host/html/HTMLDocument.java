@@ -685,7 +685,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             closePostponedAction_ = true;
             final HtmlPage page = (HtmlPage) getDomNodeOrDie();
             final WebWindow enclosingWindow = page.getEnclosingWindow();
-            page.getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(page) {
+            page.getWebClient().getAbstractJavaScriptEngine().addPostponedAction(new PostponedAction(page) {
                 @Override
                 public void execute() throws Exception {
                     if (writeBuffer_.length() != 0) {

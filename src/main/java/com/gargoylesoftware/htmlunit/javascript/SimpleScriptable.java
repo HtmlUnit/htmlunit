@@ -201,9 +201,10 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
             }
         }
         if (javaScriptClass == null) {
-            final JavaScriptEngine javaScriptEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine javaScriptEngine = (JavaScriptEngine)
+                    getWindow().getWebWindow().getWebClient().getAbstractJavaScriptEngine();
             for (Class<?> c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
-                javaScriptClass = (Class<? extends SimpleScriptable>) javaScriptEngine.getJavaScriptClass(c);
+                javaScriptClass = javaScriptEngine.getJavaScriptClass(c);
             }
         }
 

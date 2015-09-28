@@ -603,9 +603,9 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param engine the new script engine to use
      */
-    public void setJavaScriptEngine(final JavaScriptEngine engine) {
+    public void setJavaScriptEngine(final AbstractJavaScriptEngine engine) {
         if (engine == null) {
-            throw new NullPointerException("Can't set JavaScriptEngine to null");
+            throw new IllegalArgumentException("Can't set JavaScriptEngine to null");
         }
         scriptEngine_ = engine;
     }

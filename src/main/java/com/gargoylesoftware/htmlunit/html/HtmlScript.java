@@ -31,8 +31,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,7 +41,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
@@ -53,6 +51,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 /**
  * Wrapper for the HTML element "script".<br>
@@ -219,7 +219,7 @@ public class HtmlScript extends HtmlElement {
                         executeScriptIfNeeded();
                     }
                 };
-                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+                final AbstractJavaScriptEngine engine = getPage().getWebClient().getAbstractJavaScriptEngine();
                 engine.addPostponedAction(action);
             }
             // if FF, only execute if the "src" attribute
@@ -231,7 +231,7 @@ public class HtmlScript extends HtmlElement {
                         executeScriptIfNeeded();
                     }
                 };
-                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+                final AbstractJavaScriptEngine engine = getPage().getWebClient().getAbstractJavaScriptEngine();
                 engine.addPostponedAction(action);
             }
         }
@@ -285,7 +285,7 @@ public class HtmlScript extends HtmlElement {
 
         if ((!hasFeature(JS_SCRIPT_ASYNC_NOT_SUPPORTED) && hasAttribute("async"))
                 || postponed && StringUtils.isBlank(getTextContent())) {
-            final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine engine = getPage().getWebClient().getAbstractJavaScriptEngine();
             engine.addPostponedAction(action);
         }
         else {
