@@ -16,12 +16,45 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 public class Window2 extends ScriptObject {
+
+    private WebWindow webWindow_;
+
+    /**
+     * Initializes this window.
+     * @param webWindow the web window corresponding to this window
+     */
+    public void initialize(final WebWindow webWindow) {
+        webWindow_ = webWindow;
+        webWindow_.setScriptObject(this);
+    }
+
+    /**
+     * Initialize the object.
+     * @param enclosedPage the page containing the JavaScript
+     */
+    public void initialize(final Page enclosedPage) {
+        if (enclosedPage != null && enclosedPage.isHtmlPage()) {
+            final HtmlPage htmlPage = (HtmlPage) enclosedPage;
+
+            // Windows don't have corresponding DomNodes so set the domNode
+            // variable to be the page. If this isn't set then SimpleScriptable.get()
+            // won't work properly
+//            setDomNode(htmlPage);
+//            clearEventListenersContainer();
+
+//            document_.setDomNode(htmlPage);
+        }
+    }
 
     public static Window2 constructor(final boolean newObj, final Object self) {
         final Window2 host = new Window2();
