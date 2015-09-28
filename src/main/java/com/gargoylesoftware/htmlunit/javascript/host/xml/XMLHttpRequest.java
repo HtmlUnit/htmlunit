@@ -45,6 +45,14 @@ import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Stack;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,7 +69,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.XMLDOMDocument;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -77,14 +85,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.XMLHttpRequestProgres
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for an {@code XMLHttpRequest}.
@@ -206,8 +206,7 @@ public class XMLHttpRequest extends EventTarget {
         final boolean noTriggerForSync = browser.hasFeature(XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED);
         if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || state == DONE)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
-            final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
-                    containingPage_.getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
@@ -230,8 +229,7 @@ public class XMLHttpRequest extends EventTarget {
         // Firefox has a separate onload handler, too.
         final boolean triggerOnload = browser.hasFeature(XHR_TRIGGER_ONLOAD_ON_COMPLETED);
         if (triggerOnload && state == DONE) {
-            final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
-                    containingPage_.getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
             final Object[] params = new Event[] {new XMLHttpRequestProgressEvent(this, Event.TYPE_LOAD)};
 
             if (loadHandler_ != null) {
@@ -304,8 +302,7 @@ public class XMLHttpRequest extends EventTarget {
     private void processError(Context context) {
         if (errorHandler_ != null && !getBrowserVersion().hasFeature(XHR_ERRORHANDLER_NOT_SUPPORTED)) {
             final Scriptable scope = errorHandler_.getParentScope();
-            final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
-                    containingPage_.getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onerror handler");
@@ -633,17 +630,17 @@ public class XMLHttpRequest extends EventTarget {
 
             // Create and start a thread in which to execute the request.
             final Scriptable startingScope = getWindow();
-            final ContextFactory cf = ((RhinoJavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+            final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
             final ContextAction action = new ContextAction() {
                 @Override
                 public Object run(final Context cx) {
                     // KEY_STARTING_SCOPE maintains a stack of scopes
                     @SuppressWarnings("unchecked")
                     Stack<Scriptable> stack =
-                            (Stack<Scriptable>) cx.getThreadLocal(RhinoJavaScriptEngine.KEY_STARTING_SCOPE);
+                            (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                     if (null == stack) {
                         stack = new Stack<>();
-                        cx.putThreadLocal(RhinoJavaScriptEngine.KEY_STARTING_SCOPE, stack);
+                        cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
                     }
                     stack.push(startingScope);
 

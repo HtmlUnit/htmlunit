@@ -18,8 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BR
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.RecursiveFunctionObject;
-import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
@@ -51,7 +51,7 @@ public class Intl extends SimpleScriptable {
     private void define(final Class<? extends SimpleScriptable> c, final BrowserVersion browserVersion) {
         try {
             final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
-            final HtmlUnitScriptable prototype = RhinoJavaScriptEngine.configureClass(config, this, browserVersion);
+            final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
             final FunctionObject functionObject =
                     new RecursiveFunctionObject(c.getSimpleName(), config.getJsConstructor(), this);
             if (c == V8BreakIterator.class) {

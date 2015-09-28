@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -105,7 +104,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     @Test
     public void needCustomFix() {
         final WebClient client = getWebClient();
-        final ContextFactory cf = ((RhinoJavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final Context ctx = cf.enterContext();
         try {
             final ScriptableObject topScope = ctx.initStandardObjects();
@@ -134,7 +133,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     @Test
     public void matchFixNeeded() throws Exception {
         final WebClient client = getWebClient();
-        final ContextFactory cf = ((RhinoJavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final Context cx = cf.enterContext();
         try {
             final ScriptableObject topScope = cx.initStandardObjects();

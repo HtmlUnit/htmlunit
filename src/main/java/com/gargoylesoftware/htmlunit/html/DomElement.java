@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
@@ -774,7 +774,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             stateUpdated = true;
         }
 
-        final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine) page.getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
         jsEngine.holdPosponedActions();
         try {
             final ScriptResult scriptResult = doClickFireClickEvent(event);
@@ -1161,7 +1161,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             }
         };
 
-        final ContextFactory cf = ((RhinoJavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final ScriptResult result = (ScriptResult) cf.call(action);
         if (event.isAborted(result)) {
             preventDefault();

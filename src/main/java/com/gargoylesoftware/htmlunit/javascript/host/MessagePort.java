@@ -22,8 +22,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.net.URL;
 
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -115,8 +115,7 @@ public class MessagePort extends EventTarget {
                 return;
             }
 
-            final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
-                    getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
             final PostponedAction action = new PostponedAction(getWindow().getWebWindow().getEnclosedPage()) {
                 @Override
                 public void execute() throws Exception {

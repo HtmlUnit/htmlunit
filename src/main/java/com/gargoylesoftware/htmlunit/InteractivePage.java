@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
-import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
@@ -196,7 +196,7 @@ public abstract class InteractivePage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        final RhinoJavaScriptEngine engine = (RhinoJavaScriptEngine) getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());

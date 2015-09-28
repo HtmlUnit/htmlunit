@@ -184,7 +184,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
             // Pre process the source code
             final HtmlPage page = (HtmlPage) Context.getCurrentContext()
-                .getThreadLocal(RhinoJavaScriptEngine.KEY_STARTING_PAGE);
+                .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
             source = preProcess(page, source, sourceName, lineno, null);
 
             //source = new StringScriptPreProcessor(HtmlUnitContextFactory.this)
@@ -337,7 +337,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(JS_ERROR_STACK);
             case Context.FEATURE_HTMLUNIT_CONSTRUCTOR:
                 final HtmlPage htmlPage = (HtmlPage) Context.getCurrentContext()
-                    .getThreadLocal(RhinoJavaScriptEngine.KEY_STARTING_PAGE);
+                    .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_CONSTRUCTOR)
                         || htmlPage == null || !htmlPage.isQuirksMode();
             case Context.FEATURE_HTMLUNIT_FUNCTION_OBJECT_METHOD:

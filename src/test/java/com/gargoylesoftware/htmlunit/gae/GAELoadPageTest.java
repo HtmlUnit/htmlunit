@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.UrlFetchWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 
 /**
@@ -111,7 +110,7 @@ public class GAELoadPageTest {
 
             client.getPage(FIRST_URL);
 
-            final int executedJobs = ((RhinoJavaScriptEngine) client.getJavaScriptEngine()).pumpEventLoop(1000);
+            final int executedJobs = client.getJavaScriptEngine().pumpEventLoop(1000);
             final String[] alerts = {String.valueOf(XMLHttpRequest.UNSENT),
                 String.valueOf(XMLHttpRequest.OPENED),
                 String.valueOf(XMLHttpRequest.OPENED),
@@ -151,20 +150,19 @@ public class GAELoadPageTest {
 
             assertEquals(0, collectedAlerts.size());
 
-            final RhinoJavaScriptEngine javaScriptEngine = (RhinoJavaScriptEngine) client.getJavaScriptEngine();
             // pump but not long enough
-            int executedJobs = javaScriptEngine.pumpEventLoop(timeout / 2);
+            int executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 2);
             assertEquals(0, collectedAlerts.size());
 
             // pump a bit more
-            executedJobs = javaScriptEngine.pumpEventLoop(timeout + 1);
+            executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
             long count = (System.currentTimeMillis() - startTime) / timeout;
             count = Math.max(1, count);
             assertEquals(count, collectedAlerts.size());
             assertEquals(count, executedJobs);
 
             // pump even more
-            executedJobs += javaScriptEngine.pumpEventLoop(timeout + 1);
+            executedJobs += client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
             count = (System.currentTimeMillis() - startTime) / timeout;
             count = Math.max(2, count);
             assertEquals(count , collectedAlerts.size());
@@ -196,18 +194,17 @@ public class GAELoadPageTest {
             client.setWebConnection(conn);
             client.getPage(FIRST_URL);
 
-            final RhinoJavaScriptEngine javaScriptEngine = (RhinoJavaScriptEngine) client.getJavaScriptEngine();
-            int executedJobs = javaScriptEngine.pumpEventLoop(20);
+            int executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
             assertEquals(Arrays.asList("hello"), collectedAlerts);
             assertEquals(1, executedJobs);
 
-            executedJobs = javaScriptEngine.pumpEventLoop(20);
+            executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
             assertEquals(Arrays.asList("hello"), collectedAlerts);
             assertEquals(0, executedJobs);
 
             while (executedJobs < 1) {
                 assertEquals(Arrays.asList("hello"), collectedAlerts);
-                executedJobs = javaScriptEngine.pumpEventLoop(timeout / 10);
+                executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 10);
             }
 
             assertEquals(Arrays.asList("hello", "hello again"), collectedAlerts);

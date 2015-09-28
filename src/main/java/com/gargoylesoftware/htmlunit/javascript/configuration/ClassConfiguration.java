@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -40,7 +41,7 @@ public final class ClassConfiguration {
     private Map<String, Method> staticFunctionMap_ = new HashMap<>();
     private List<String> constants_ = new ArrayList<>();
     private String extendedClassName_;
-    private final Class<? extends SimpleScriptable> hostClass_;
+    private final Class<? extends HtmlUnitScriptable> hostClass_;
 
     /**
      * The constructor method in the {@link #hostClass_}
@@ -60,7 +61,7 @@ public final class ClassConfiguration {
      * @param definedInStandardsMode should be defined in only Standards Mode
      * @param className the class name, can be null
      */
-    public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final Class<?>[] domClasses,
+    public ClassConfiguration(final Class<? extends HtmlUnitScriptable> hostClass, final Class<?>[] domClasses,
             final boolean jsObject, final boolean definedInStandardsMode, final String className) {
         final Class<?> superClass = hostClass.getSuperclass();
         if (superClass != SimpleScriptable.class) {
@@ -189,7 +190,7 @@ public final class ClassConfiguration {
      * Gets the class of the JavaScript host object.
      * @return the class of the JavaScript host object
      */
-    public Class<? extends SimpleScriptable> getHostClass() {
+    public Class<? extends HtmlUnitScriptable> getHostClass() {
         return hostClass_;
     }
 
