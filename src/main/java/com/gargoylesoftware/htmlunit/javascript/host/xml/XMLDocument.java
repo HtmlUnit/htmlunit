@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
+import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -212,8 +213,9 @@ public class XMLDocument extends Document {
         // TODO: cleanup, getScriptObject() should be used!!!
         if (domNode instanceof DomElement && !(domNode instanceof HtmlElement)) {
             if (domNode instanceof SvgElement) {
-                final Class<? extends HtmlUnitScriptable> javaScriptClass = getWindow().getWebWindow().getWebClient()
-                        .getJavaScriptEngine().getJavaScriptClass(domNode.getClass());
+                final Class<? extends HtmlUnitScriptable> javaScriptClass = ((RhinoJavaScriptEngine)
+                        getWindow().getWebWindow().getWebClient().getJavaScriptEngine())
+                        .getJavaScriptClass(domNode.getClass());
                 try {
                     scriptable = (SimpleScriptable) javaScriptClass.newInstance();
                 }

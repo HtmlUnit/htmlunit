@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -162,7 +162,8 @@ public class XMLHTTPRequest extends MSXMLScriptable {
 
         if (stateChangeHandler_ != null && !openedMultipleTimes_) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
+                    containingPage_.getWebClient().getJavaScriptEngine();
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
@@ -459,17 +460,17 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         else {
             // Create and start a thread in which to execute the request.
             final Scriptable startingScope = getWindow();
-            final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+            final ContextFactory cf = ((RhinoJavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction action = new ContextAction() {
                 @Override
                 public Object run(final Context cx) {
                     // KEY_STARTING_SCOPE maintains a stack of scopes
                     @SuppressWarnings("unchecked")
                     Stack<Scriptable> stack =
-                            (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                            (Stack<Scriptable>) cx.getThreadLocal(RhinoJavaScriptEngine.KEY_STARTING_SCOPE);
                     if (null == stack) {
                         stack = new Stack<>();
-                        cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
+                        cx.putThreadLocal(RhinoJavaScriptEngine.KEY_STARTING_SCOPE, stack);
                     }
                     stack.push(startingScope);
 

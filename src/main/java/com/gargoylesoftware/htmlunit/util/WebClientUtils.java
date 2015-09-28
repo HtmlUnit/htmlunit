@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
+import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 
 import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
 import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.Main;
@@ -49,7 +50,7 @@ public final class WebClientUtils {
      */
     public static void attachVisualDebugger(final WebClient client) {
         final ScopeProvider sp = null;
-        final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final HtmlUnitContextFactory cf = ((RhinoJavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
         final Main main = Main.mainEmbedded(cf, sp, "HtmlUnit JavaScript Debugger");
         main.getDebugFrame().setExtendedState(Frame.MAXIMIZED_BOTH);
 

@@ -51,7 +51,7 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
      */
     public DebugFrameImplTest() throws Exception {
         client_ = new WebClient(BrowserVersion.FIREFOX_38);
-        client_.getJavaScriptEngine().getContextFactory().setDebugger(new DebuggerImpl());
+        ((RhinoJavaScriptEngine) client_.getJavaScriptEngine()).getContextFactory().setDebugger(new DebuggerImpl());
         originalLogLevel_ = loggerDebugFrameImpl_.getLevel();
         loggerDebugFrameImpl_.setLevel(Level.TRACE);
     }
@@ -62,7 +62,7 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
      */
     @After
     public void tearDown() throws Exception {
-        client_.getJavaScriptEngine().getContextFactory().setDebugger(null);
+        ((RhinoJavaScriptEngine) client_.getJavaScriptEngine()).getContextFactory().setDebugger(null);
         client_.close();
         loggerDebugFrameImpl_.setLevel(originalLogLevel_);
     }

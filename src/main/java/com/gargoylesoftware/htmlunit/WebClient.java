@@ -75,6 +75,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
+import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -234,7 +235,7 @@ public class WebClient implements Serializable, AutoCloseable {
         getOptions().setProxyConfig(proxyConfig);
 
         webConnection_ = createWebConnection(); // this has to be done after the browser version was set
-        scriptEngine_ = new JavaScriptEngine(this);
+        scriptEngine_ = new RhinoJavaScriptEngine(this);
         // The window must be constructed AFTER the script engine.
         addWebWindowListener(new CurrentWindowTracker(this));
         currentWindow_ = new TopLevelWindow("", this);
@@ -1546,7 +1547,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param timeout the timeout value, in milliseconds
      */
     public void setJavaScriptTimeout(final long timeout) {
-        scriptEngine_.getContextFactory().setTimeout(timeout);
+        scriptEngine_.setJavaScriptTimeout(timeout);
     }
 
     /**
@@ -1556,7 +1557,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @return the timeout value, in milliseconds
      */
     public long getJavaScriptTimeout() {
-        return scriptEngine_.getContextFactory().getTimeout();
+        return scriptEngine_.getJavaScriptTimeout();
     }
 
     /**
@@ -1942,7 +1943,7 @@ public class WebClient implements Serializable, AutoCloseable {
         in.defaultReadObject();
 
         webConnection_ = createWebConnection();
-        scriptEngine_ = new JavaScriptEngine(this);
+        scriptEngine_ = new RhinoJavaScriptEngine(this);
         jobManagers_ = Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());
 
         if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {

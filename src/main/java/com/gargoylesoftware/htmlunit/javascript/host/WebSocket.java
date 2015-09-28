@@ -30,7 +30,7 @@ import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -265,7 +265,8 @@ public class WebSocket extends EventTarget {
             return;
         }
         final Scriptable scope = openHandler_.getParentScope();
-        final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+        final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
+                containingPage_.getWebClient().getJavaScriptEngine();
         jsEngine.callFunction(containingPage_, openHandler_, scope, WebSocket.this,
                 ArrayUtils.EMPTY_OBJECT_ARRAY);
     }
@@ -282,7 +283,8 @@ public class WebSocket extends EventTarget {
                 return;
             }
             final Scriptable scope = closeHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
+                    containingPage_.getWebClient().getJavaScriptEngine();
             jsEngine.callFunction(containingPage_, closeHandler_, scope, WebSocket.this,
                     new Object[] {closeCode, message});
         }
@@ -293,7 +295,8 @@ public class WebSocket extends EventTarget {
                 return;
             }
             final Scriptable scope = messageHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
+                    containingPage_.getWebClient().getJavaScriptEngine();
             final MessageEvent event = new MessageEvent(data);
             event.setParentScope(getParentScope());
             event.setPrototype(getPrototype(event.getClass()));
@@ -306,7 +309,8 @@ public class WebSocket extends EventTarget {
                 return;
             }
             final Scriptable scope = messageHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
+                    containingPage_.getWebClient().getJavaScriptEngine();
             jsEngine.callFunction(containingPage_, messageHandler_, scope, WebSocket.this,
                     new Object[] {data, offset, length});
         }

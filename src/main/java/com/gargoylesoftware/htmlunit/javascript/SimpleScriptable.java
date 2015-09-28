@@ -201,7 +201,8 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
             }
         }
         if (javaScriptClass == null) {
-            final JavaScriptEngine javaScriptEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
+            final RhinoJavaScriptEngine javaScriptEngine = (RhinoJavaScriptEngine)
+                    getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
             for (Class<?> c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
                 javaScriptClass = (Class<? extends SimpleScriptable>) javaScriptEngine.getJavaScriptClass(c);
             }
@@ -324,8 +325,8 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
      */
     protected Scriptable getStartingScope() {
         @SuppressWarnings("unchecked")
-        final Stack<Scriptable> stack =
-                (Stack<Scriptable>) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+        final Stack<Scriptable> stack = (Stack<Scriptable>)
+            Context.getCurrentContext().getThreadLocal(RhinoJavaScriptEngine.KEY_STARTING_SCOPE);
         if (null == stack) {
             return null;
         }

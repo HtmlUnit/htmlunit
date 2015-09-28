@@ -1010,7 +1010,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         }
     }
 
-    private static final class CountingJavaScriptEngine extends JavaScriptEngine {
+    private static final class CountingJavaScriptEngine extends RhinoJavaScriptEngine {
         private int scriptExecutionCount_ = 0;
         private int scriptCallCount_ = 0;
         private int scriptCompileCount_ = 0;
@@ -1185,7 +1185,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         throws Exception {
 
         final WebClient client = getWebClient();
-        client.setJavaScriptEngine(new JavaScriptEngine(client) {
+        client.setJavaScriptEngine(new RhinoJavaScriptEngine(client) {
             @Override
             public Object execute(final InteractivePage htmlPage, final String sourceCode,
                     final String sourceName, final int startLine) {
@@ -1223,8 +1223,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client1 = getWebClient();
         final WebClient client2 = createNewWebClient();
 
-        final ContextFactory cf1 = client1.getJavaScriptEngine().getContextFactory();
-        final ContextFactory cf2 = client2.getJavaScriptEngine().getContextFactory();
+        final ContextFactory cf1 = ((RhinoJavaScriptEngine) client1.getJavaScriptEngine()).getContextFactory();
+        final ContextFactory cf2 = ((RhinoJavaScriptEngine) client2.getJavaScriptEngine()).getContextFactory();
 
         assertFalse(cf1 == cf2);
         assertFalse(cf1 == ContextFactory.getGlobal());
@@ -1239,7 +1239,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void catchBackgroundJSErrors() throws Exception {
         final WebClient webClient = getWebClient();
         final List<ScriptException> jsExceptions = new ArrayList<>();
-        final JavaScriptEngine myEngine = new JavaScriptEngine(webClient) {
+        final JavaScriptEngine myEngine = new RhinoJavaScriptEngine(webClient) {
             @Override
             protected void handleJavaScriptException(final ScriptException scriptException,
                     final boolean triggerOnError) {

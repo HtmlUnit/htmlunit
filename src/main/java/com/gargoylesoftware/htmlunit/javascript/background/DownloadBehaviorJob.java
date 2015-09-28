@@ -24,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -79,7 +80,7 @@ final class DownloadBehaviorJob extends BasicJavaScriptJob {
                     return null;
                 }
             };
-            final ContextFactory cf = client_.getJavaScriptEngine().getContextFactory();
+            final ContextFactory cf = ((RhinoJavaScriptEngine) client_.getJavaScriptEngine()).getContextFactory();
             cf.call(action);
         }
         catch (final IOException e) {

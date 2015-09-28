@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.RhinoJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
@@ -166,7 +166,8 @@ public class Geolocation extends SimpleScriptable {
                 final Position position = new Position(coordinates);
                 position.setPrototype(getPrototype(position.getClass()));
 
-                final JavaScriptEngine jsEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
+                final RhinoJavaScriptEngine jsEngine = (RhinoJavaScriptEngine)
+                        getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
                 jsEngine.callFunction((HtmlPage) getWindow().getWebWindow().getEnclosedPage(), successHandler_, this,
                         getParentScope(), new Object[] {position});
             }
