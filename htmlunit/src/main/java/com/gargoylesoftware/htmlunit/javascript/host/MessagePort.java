@@ -115,7 +115,8 @@ public class MessagePort extends EventTarget {
                 return;
             }
 
-            final JavaScriptEngine jsEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = (JavaScriptEngine)
+                    getWindow().getWebWindow().getWebClient().getAbstractJavaScriptEngine();
             final PostponedAction action = new PostponedAction(getWindow().getWebWindow().getEnclosedPage()) {
                 @Override
                 public void execute() throws Exception {

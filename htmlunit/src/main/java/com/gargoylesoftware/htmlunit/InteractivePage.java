@@ -196,7 +196,7 @@ public abstract class InteractivePage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine engine = (JavaScriptEngine) getWebClient().getAbstractJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());

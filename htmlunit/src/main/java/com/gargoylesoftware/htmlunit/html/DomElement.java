@@ -774,7 +774,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             stateUpdated = true;
         }
 
-        final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine jsEngine = (JavaScriptEngine) page.getWebClient().getAbstractJavaScriptEngine();
         jsEngine.holdPosponedActions();
         try {
             final ScriptResult scriptResult = doClickFireClickEvent(event);
@@ -1161,7 +1161,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             }
         };
 
-        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final ContextFactory cf = ((JavaScriptEngine) client.getAbstractJavaScriptEngine()).getContextFactory();
         final ScriptResult result = (ScriptResult) cf.call(action);
         if (event.isAborted(result)) {
             preventDefault();

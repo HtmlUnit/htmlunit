@@ -1144,7 +1144,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
      * @param c the node class {@link DomNode} or some subclass.
      * @return {@code null} if none found
      */
-    public Class<? extends HtmlUnitScriptable> getJavaScriptClass(final Class<?> c) {
+    public Class<? extends SimpleScriptable> getJavaScriptClass(final Class<?> c) {
         return jsConfig_.getDomJavaScriptMapping().get(c);
     }
 

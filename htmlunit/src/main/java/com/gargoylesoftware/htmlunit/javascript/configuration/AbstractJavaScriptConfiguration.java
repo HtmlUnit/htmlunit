@@ -29,7 +29,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -47,7 +46,7 @@ public abstract class AbstractJavaScriptConfiguration {
 
     private static final Map<String, String> CLASS_NAME_MAP_ = new HashMap<>();
 
-    private Map<Class<?>, Class<? extends HtmlUnitScriptable>> domJavaScriptMap_;
+    private Map<Class<?>, Class<? extends SimpleScriptable>> domJavaScriptMap_;
 
     private final Map<String, ClassConfiguration> configuration_;
 
@@ -91,7 +90,7 @@ public abstract class AbstractJavaScriptConfiguration {
      * @param browser the browser version
      * @return the class configuration
      */
-    public static ClassConfiguration getClassConfiguration(final Class<? extends HtmlUnitScriptable> klass,
+    public static ClassConfiguration getClassConfiguration(final Class<? extends SimpleScriptable> klass,
         final BrowserVersion browser) {
         if (browser != null) {
             final String expectedBrowserName;
@@ -311,12 +310,12 @@ public abstract class AbstractJavaScriptConfiguration {
      * are the JavaScript class names (e.g. "HTMLAnchorElement").
      * @return the mappings
      */
-    public Map<Class<?>, Class<? extends HtmlUnitScriptable>> getDomJavaScriptMapping() {
+    public Map<Class<?>, Class<? extends SimpleScriptable>> getDomJavaScriptMapping() {
         if (domJavaScriptMap_ != null) {
             return domJavaScriptMap_;
         }
 
-        final Map<Class<?>, Class<? extends HtmlUnitScriptable>> map = new HashMap<>(configuration_.size());
+        final Map<Class<?>, Class<? extends SimpleScriptable>> map = new HashMap<>(configuration_.size());
 
         final boolean debug = LOG.isDebugEnabled();
         for (final String hostClassName : configuration_.keySet()) {
