@@ -943,13 +943,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 msg.append(page.getClass().getName());
                 msg.append("'");
                 try {
-                    msg.append(" url: '" + page.getUrl() + "'");
+                    msg.append(" url: '").append(page.getUrl()).append('\'');
                     msg.append(" content: ");
                     msg.append(page.getWebResponse().getContentAsString());
                 }
                 catch (final Exception e) {
                     // ok bad luck with detail
-                    msg.append(" no details: '" + e.toString() + "'");
+                    msg.append(" no details: '").append(e).append('\'');
                 }
                 throw new IllegalStateException(msg.toString());
             }
