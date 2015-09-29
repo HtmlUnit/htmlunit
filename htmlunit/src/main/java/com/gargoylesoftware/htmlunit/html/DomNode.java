@@ -36,10 +36,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.apache.xml.utils.PrefixResolver;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
@@ -62,6 +58,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
@@ -70,6 +67,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the
@@ -970,7 +971,28 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     //TODO: rename to getScriptObject(), currently WebDriver depends on the other signature
     public Object getScriptObject2() {
-        return getScriptableObject();
+        if (scriptObject_ == null) {
+            final SgmlPage page = getPage();
+            if (this == page) {
+                final StringBuilder msg = new StringBuilder("No script object associated with the Page.");
+                // because this is a strange case we like to provide as many info as possible
+                msg.append(" class: '");
+                msg.append(page.getClass().getName());
+                msg.append("'");
+                try {
+                    msg.append(" url: '" + page.getUrl() + "'");
+                    msg.append(" content: ");
+                    msg.append(page.getWebResponse().getContentAsString());
+                }
+                catch (final Exception e) {
+                    // ok bad luck with detail
+                    msg.append(" no details: '" + e.toString() + "'");
+                }
+                throw new IllegalStateException(msg.toString());
+            }
+            scriptObject_ = ((SimpleScriptObject) page.getScriptObject2()).makeScriptableFor(this);
+        }
+        return scriptObject_;
     }
 
     /**

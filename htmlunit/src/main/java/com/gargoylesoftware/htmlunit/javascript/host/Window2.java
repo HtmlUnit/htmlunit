@@ -17,15 +17,14 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
-public class Window2 extends ScriptObject {
+public class Window2 extends SimpleScriptObject {
 
     private WebWindow webWindow_;
 
@@ -49,7 +48,7 @@ public class Window2 extends ScriptObject {
             // Windows don't have corresponding DomNodes so set the domNode
             // variable to be the page. If this isn't set then SimpleScriptable.get()
             // won't work properly
-//            setDomNode(htmlPage);
+            setDomNode(htmlPage);
 //            clearEventListenersContainer();
 
 //            document_.setDomNode(htmlPage);

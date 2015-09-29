@@ -120,7 +120,7 @@ public class SimpleScriptObject extends ScriptObject {
         WebAssert.notNull("domNode", domNode);
         domNode_ = domNode;
         if (assignScriptObject) {
-//            domNode_.setScriptObject(this);
+            domNode_.setScriptableObject(this);
         }
     }
 
