@@ -145,7 +145,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * This is the JavaScript object corresponding to this DOM node. It may
      * be null if there isn't a corresponding JavaScript object.
      */
-    private ScriptableObject scriptObject_;
+    private Object scriptObject_;
 
     /** The ready state is is an IE-only value that is available to a large number of elements. */
     private String readyState_;
@@ -278,7 +278,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param scriptObject the JavaScript object
      */
-    public void setScriptableObject(final ScriptableObject scriptObject) {
+    public void setScriptableObject(final Object scriptObject) {
         scriptObject_ = scriptObject;
     }
 
@@ -955,7 +955,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             scriptObject_ = ((SimpleScriptable) page.getScriptObject2()).makeScriptableFor(this);
         }
-        return scriptObject_;
+        return (ScriptableObject) scriptObject_;
     }
 
     /**
