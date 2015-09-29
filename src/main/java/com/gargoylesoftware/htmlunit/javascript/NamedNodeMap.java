@@ -138,7 +138,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (attributes_ != null) {
             final DomNode attr = (DomNode) attributes_.getNamedItem(name);
             if (attr != null) {
-                return attr.getScriptableObject();
+                return attr.getScriptObject2();
             }
             if (!"className".equals(name) && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
                 return getUnspecifiedAttributeNode(name);
@@ -195,7 +195,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     public Object item(final int index) {
         final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
-            return attr.getScriptableObject();
+            return attr.getScriptObject2();
         }
         if (useRecursiveAttributeForIE()) {
             // we have to search only inside not yet defined items
@@ -226,7 +226,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
         final DomAttr attr = domNode.getPage().createAttribute(attrName);
         domNode.setAttributeNode(attr);
-        return (Attr) attr.getScriptableObject();
+        return (Attr) attr.getScriptObject2();
     }
 
     /**

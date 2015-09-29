@@ -124,7 +124,7 @@ public class XMLDOMDocumentType extends XMLDOMNode {
     @Override
     public Object getParentNode() {
         final DomDocumentType domDocumentType = getDomNodeOrDie();
-        return domDocumentType.getPage().getScriptableObject();
+        return domDocumentType.getPage().getScriptObject2();
     }
 
     /**

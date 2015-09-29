@@ -123,7 +123,7 @@ public class Attr extends Node {
     public Object getOwnerElement() {
         final DomElement parent = getDomNodeOrDie().getOwnerElement();
         if (parent != null) {
-            return parent.getScriptableObject();
+            return parent.getScriptObject2();
         }
         return null;
     }
@@ -182,7 +182,7 @@ public class Attr extends Node {
         }
 
         final DomText text = new DomText(getDomNodeOrDie().getPage(), getNodeValue());
-        return (Node) text.getScriptableObject();
+        return (Node) text.getScriptObject2();
     }
 
     /**

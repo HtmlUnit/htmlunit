@@ -285,7 +285,7 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      */
     public Event(final DomNode domNode, final String type) {
-        this((SimpleScriptable) domNode.getScriptableObject(), type);
+        this((SimpleScriptable) domNode.getScriptObject2(), type);
         setDomNode(domNode, false);
     }
 

@@ -2039,7 +2039,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
             else if ("block".equals(display)) {
                 // Block elements take up 100% of the parent's width.
-                final HTMLElement parentJS = (HTMLElement) parent.getScriptableObject();
+                final HTMLElement parentJS = (HTMLElement) parent.getScriptObject2();
                 final String parentWidth = getWindow().getComputedStyle(parentJS, null).getWidth();
                 if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)
                         && "auto".equals(parentWidth)) {
@@ -2106,13 +2106,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
         for (final DomNode child : childs) {
-            if (child.getScriptableObject() instanceof HTMLElement) {
-                final HTMLElement e = (HTMLElement) child.getScriptableObject();
+            if (child.getScriptObject2() instanceof HTMLElement) {
+                final HTMLElement e = (HTMLElement) child.getScriptObject2();
                 final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                 final int w = style.getCalculatedWidth(true, true);
                 width += w;
             }
-            else if (child.getScriptableObject() instanceof Text) {
+            else if (child.getScriptObject2() instanceof Text) {
                 width += child.getTextContent().length() * PIXELS_PER_CHAR;
             }
         }
@@ -2272,7 +2272,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final Set<ComputedCSSStyleDeclaration> styles = new HashSet<>();
         for (final DomNode child : node.getChildren()) {
             if (child.mayBeDisplayed()) {
-                final ScriptableObject scriptObj = child.getScriptableObject();
+                final Object scriptObj = child.getScriptObject2();
                 if (scriptObj instanceof HTMLElement) {
                     final HTMLElement e = (HTMLElement) scriptObj;
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
@@ -2344,7 +2344,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 boolean prevHadComputedTop = false;
                 while (prev != null && !prevHadComputedTop) {
                     if (prev instanceof HtmlElement) {
-                        final HTMLElement e = (HTMLElement) ((HtmlElement) prev).getScriptableObject();
+                        final HTMLElement e = (HTMLElement) ((HtmlElement) prev).getScriptObject2();
                         final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                         int prevTop = 0;
                         if (style.top_ == null) {
@@ -2467,8 +2467,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // We need to calculate the horizontal displacement caused by *previous* siblings.
             left = 0;
             for (DomNode n = getDomNodeOrDie(); n != null; n = n.getPreviousSibling()) {
-                if (n.getScriptableObject() instanceof HTMLElement) {
-                    final HTMLElement e = (HTMLElement) n.getScriptableObject();
+                if (n.getScriptObject2() instanceof HTMLElement) {
+                    final HTMLElement e = (HTMLElement) n.getScriptObject2();
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final String d = style.getDisplay();
                     if ("block".equals(d)) {
@@ -2478,7 +2478,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         left += style.getCalculatedWidth(true, true);
                     }
                 }
-                else if (n.getScriptableObject() instanceof Text) {
+                else if (n.getScriptObject2() instanceof Text) {
                     left += n.getTextContent().length() * PIXELS_PER_CHAR;
                 }
                 if (n instanceof HtmlTableRow) {

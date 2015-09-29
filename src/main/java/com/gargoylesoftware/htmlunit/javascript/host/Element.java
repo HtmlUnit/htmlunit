@@ -304,7 +304,7 @@ public class Element extends EventNode {
         final Map<String, DomAttr> attributes = getDomNodeOrDie().getAttributesMap();
         for (final DomAttr attr : attributes.values()) {
             if (attr.getName().equals(name)) {
-                return attr.getScriptableObject();
+                return attr.getScriptObject2();
             }
         }
         return null;
@@ -390,7 +390,7 @@ public class Element extends EventNode {
     public Element getFirstElementChild() {
         final DomElement child = getDomNodeOrDie().getFirstElementChild();
         if (child != null) {
-            return (Element) child.getScriptableObject();
+            return (Element) child.getScriptObject2();
         }
         return null;
     }
@@ -403,7 +403,7 @@ public class Element extends EventNode {
     public Element getLastElementChild() {
         final DomElement child = getDomNodeOrDie().getLastElementChild();
         if (child != null) {
-            return (Element) child.getScriptableObject();
+            return (Element) child.getScriptObject2();
         }
         return null;
     }
@@ -416,7 +416,7 @@ public class Element extends EventNode {
     public Element getNextElementSibling() {
         final DomElement child = getDomNodeOrDie().getNextElementSibling();
         if (child != null) {
-            return (Element) child.getScriptableObject();
+            return (Element) child.getScriptObject2();
         }
         return null;
     }
@@ -429,7 +429,7 @@ public class Element extends EventNode {
     public Element getPreviousElementSibling() {
         final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
         if (child != null) {
-            return (Element) child.getScriptableObject();
+            return (Element) child.getScriptObject2();
         }
         return null;
     }

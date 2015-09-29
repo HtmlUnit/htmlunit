@@ -878,7 +878,7 @@ public abstract class HtmlElement extends DomElement {
      */
     private DomNode getDoTypeNode() {
         DomNode node = null;
-        final HTMLElement scriptElement = (HTMLElement) getScriptableObject();
+        final HTMLElement scriptElement = (HTMLElement) getScriptObject2();
         if (scriptElement.getIsContentEditable()) {
             final DomNodeList<DomNode> children = getChildNodes();
             if (!children.isEmpty()) {
@@ -1030,7 +1030,7 @@ public abstract class HtmlElement extends DomElement {
      * @return true if an event handler has been defined otherwise false
      */
     public final boolean hasEventHandlers(final String eventName) {
-        final HTMLElement jsObj = (HTMLElement) getScriptableObject();
+        final HTMLElement jsObj = (HTMLElement) getScriptObject2();
         return jsObj.hasEventHandlers(eventName);
     }
 
@@ -1041,7 +1041,7 @@ public abstract class HtmlElement extends DomElement {
      * @param eventHandler a Rhino JavaScript function
      */
     public final void setEventHandler(final String eventName, final Function eventHandler) {
-        final HTMLElement jsObj = (HTMLElement) getScriptableObject();
+        final HTMLElement jsObj = (HTMLElement) getScriptObject2();
         jsObj.setEventHandler(eventName, eventHandler);
     }
 

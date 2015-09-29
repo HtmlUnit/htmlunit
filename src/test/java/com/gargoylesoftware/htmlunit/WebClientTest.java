@@ -1951,15 +1951,15 @@ public class WebClientTest extends SimpleWebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page1 = client.getPage(URL_FIRST);
-        ((HTMLStyleElement) page1.getBody().getFirstChild().getScriptableObject()).getSheet();
+        ((HTMLStyleElement) page1.getBody().getFirstChild().getScriptObject2()).getSheet();
         assertEquals(0, errors.intValue());
 
         final HtmlPage page2 = client.getPage(URL_SECOND);
-        ((HTMLStyleElement) page2.getBody().getFirstChild().getScriptableObject()).getSheet();
+        ((HTMLStyleElement) page2.getBody().getFirstChild().getScriptObject2()).getSheet();
         assertEquals(0, errors.intValue());
 
         final HtmlPage page3 = client.getPage(URL_THIRD);
-        ((HTMLStyleElement) page3.getBody().getFirstChild().getScriptableObject()).getSheet();
+        ((HTMLStyleElement) page3.getBody().getFirstChild().getScriptObject2()).getSheet();
         assertEquals(2, errors.intValue());
         assertEquals("http://127.0.0.1:" + PORT + "/third/http://127.0.0.1:" + PORT + "/third/", errorUri.toString());
     }

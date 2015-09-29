@@ -279,7 +279,7 @@ public class XMLDocument extends Document {
         if (domElement != null) {
             if (!(domNode instanceof XmlPage) || domElement instanceof HtmlElement
                     || getBrowserVersion().hasFeature(JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT)) {
-                return ((DomElement) domElement).getScriptableObject();
+                return ((DomElement) domElement).getScriptObject2();
             }
             if (LOG.isDebugEnabled()) {
                 LOG.debug("getElementById(" + id + "): no HTML DOM node found with this ID");

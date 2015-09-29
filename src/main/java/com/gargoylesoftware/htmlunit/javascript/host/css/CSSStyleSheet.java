@@ -645,7 +645,7 @@ public class CSSStyleSheet extends StyleSheet {
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
             final AttributeCondition condition, final DomElement element) {
         if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-            final ScriptableObject sobj = element.getPage().getScriptableObject();
+            final Object sobj = element.getPage().getScriptObject2();
             if (sobj instanceof HTMLDocument && ((HTMLDocument) sobj).getDocumentMode() < 8) {
                 return false;
             }

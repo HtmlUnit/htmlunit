@@ -46,7 +46,7 @@ public class HtmlFrameSet extends HtmlElement {
         super(qualifiedName, page, attributes);
 
         // force script object creation now to forward onXXX handlers to window
-        getScriptableObject();
+        getScriptObject2();
     }
 
     /**

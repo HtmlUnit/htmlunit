@@ -154,7 +154,7 @@ public class HtmlPage4Test extends WebServerTestCase {
             final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
             client.setAlertHandler(alertHandler);
             final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");
-            ((HTMLBodyElement) page.getBody().getScriptableObject()).getCurrentStyle();
+            ((HTMLBodyElement) page.getBody().getScriptObject2()).getCurrentStyle();
 
             assertEquals(getExpectedAlerts(), alertHandler.getCollectedAlerts());
             assertEquals(initialTempFiles + 1, getTempFiles());

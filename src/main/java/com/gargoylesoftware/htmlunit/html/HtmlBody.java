@@ -53,7 +53,7 @@ public class HtmlBody extends HtmlElement {
 
         // Force script object creation now to forward onXXX handlers to window.
         if (getOwnerDocument() instanceof HtmlPage) {
-            getScriptableObject();
+            getScriptObject2();
         }
     }
 

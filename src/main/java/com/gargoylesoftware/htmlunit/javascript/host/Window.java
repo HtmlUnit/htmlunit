@@ -900,7 +900,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     public Object getFrameElement() {
         final WebWindow window = getWebWindow();
         if (window instanceof FrameWindow) {
-            return ((FrameWindow) window).getFrameElement().getScriptableObject();
+            return ((FrameWindow) window).getFrameElement().getScriptObject2();
         }
         return null;
     }
@@ -1120,7 +1120,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
             final HtmlElement body = page.getBody();
             if (body != null) {
-                final HTMLBodyElement b = (HTMLBodyElement) body.getScriptableObject();
+                final HTMLBodyElement b = (HTMLBodyElement) body.getScriptObject2();
                 return b.getEventHandler("onload");
             }
             return null;

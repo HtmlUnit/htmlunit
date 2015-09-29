@@ -143,7 +143,7 @@ public class XSLProcessor extends MSXMLScriptable {
             node.setParentScope(getParentScope());
             node.setPrototype(getPrototype(node.getClass()));
             node.setDomNode(fragment);
-            output_ = fragment.getScriptableObject();
+            output_ = fragment.getScriptObject2();
         }
 
         transform(input_, ((XMLDOMNode) output_).getDomNodeOrDie());
