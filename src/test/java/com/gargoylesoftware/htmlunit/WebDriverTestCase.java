@@ -935,6 +935,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
 
+            // we have to force webdriver to treat the remaining window
+            // as the one we like to work with from now on
+            // looks like a web driver issue to me (version 2.47.2)
+            driver.switchTo().window(currentWindow);
+
             driver.manage().deleteAllCookies();
 
             // in the remaining window, load a blank page
