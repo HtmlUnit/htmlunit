@@ -30,6 +30,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -91,16 +92,7 @@ public class JQuery1113Test extends WebDriverTestCase {
             final String url = "http://localhost:" + PORT + "/jquery/test/index.html?dev&testNumber=" + testNumber;
             webdriver.get(url);
 
-            WebElement status = getResultElement(webdriver);
-
-            while (!status.getText().startsWith("Tests completed")) {
-                // strange
-                // starting with jQuery 1.11.3 the control seems to be replaced by
-                // a new one if the test is finished (when using HtmlUnit;
-                // i guess this is an error
-                // but i like to focus on the new jQuery problems first)
-                status = getResultElement(webdriver);
-
+            while (!getResultElementText(webdriver).startsWith("Tests completed")) {
                 Thread.sleep(100);
 
                 if (System.currentTimeMillis() > endTime) {
@@ -138,14 +130,20 @@ public class JQuery1113Test extends WebDriverTestCase {
         }
     }
 
-    private WebElement getResultElement(final WebDriver webdriver) throws InterruptedException {
+    private String getResultElementText(final WebDriver webdriver) throws InterruptedException {
+        // if the elem is not available or stale we return an empty string
+        // this will force a second try
         try {
-            return webdriver.findElement(By.id("qunit-testresult"));
+            final WebElement elem = webdriver.findElement(By.id("qunit-testresult"));
+            try {
+                return elem.getText();
+            }
+            catch (final StaleElementReferenceException e) {
+                return "";
+            }
         }
         catch (final NoSuchElementException e) {
-            // give this a second try
-            Thread.sleep(DEFAULT_WAIT_TIME / 10);
-            return webdriver.findElement(By.id("qunit-testresult"));
+            return "";
         }
     }
 
