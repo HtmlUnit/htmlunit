@@ -41,9 +41,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -117,6 +114,8 @@ import com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
 import com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for {@code CSSStyleSheet}.
