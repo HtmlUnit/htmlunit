@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="update" dev="asashour">
+                DomNode: deprecate .getScriptObject().
+            </action>
             <action type="add" dev="asashour">
                 Introduce AbstractJavaScriptEngine.
             </action>

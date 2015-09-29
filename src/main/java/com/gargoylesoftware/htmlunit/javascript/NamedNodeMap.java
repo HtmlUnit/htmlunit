@@ -77,7 +77,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param element the owning element
      */
     public NamedNodeMap(final DomElement element) {
-        setParentScope(element.getScriptObject());
+        setParentScope(element.getScriptableObject());
         setPrototype(getPrototype(getClass()));
 
         attributes_ = element.getAttributes();
@@ -138,7 +138,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (attributes_ != null) {
             final DomNode attr = (DomNode) attributes_.getNamedItem(name);
             if (attr != null) {
-                return attr.getScriptObject();
+                return attr.getScriptableObject();
             }
             if (!"className".equals(name) && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
                 return getUnspecifiedAttributeNode(name);
@@ -195,7 +195,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     public Object item(final int index) {
         final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
-            return attr.getScriptObject();
+            return attr.getScriptableObject();
         }
         if (useRecursiveAttributeForIE()) {
             // we have to search only inside not yet defined items
@@ -226,7 +226,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
         final DomAttr attr = domNode.getPage().createAttribute(attrName);
         domNode.setAttributeNode(attr);
-        return (Attr) attr.getScriptObject();
+        return (Attr) attr.getScriptableObject();
     }
 
     /**
@@ -249,7 +249,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     private boolean isRecursiveAttribute(final String name) {
-        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null;
+        for (Scriptable object = getDomNodeOrDie().getScriptableObject(); object != null;
             object = object.getPrototype()) {
             for (final Object id : object.getIds()) {
                 if (name.equals(Context.toString(id))) {
@@ -261,7 +261,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     private void collectRecursiveAttributes(final HashSet<String> ids) {
-        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null;
+        for (Scriptable object = getDomNodeOrDie().getScriptableObject(); object != null;
             object = object.getPrototype()) {
             for (final Object id : object.getIds()) {
                 ids.add(Context.toString(id));
@@ -270,7 +270,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     private String getRecusiveAttributeNameAt(final int index, final HashSet<String> ids) {
-        for (Scriptable object = getDomNodeOrDie().getScriptObject(); object != null;
+        for (Scriptable object = getDomNodeOrDie().getScriptableObject(); object != null;
             object = object.getPrototype()) {
             for (final Object id : object.getIds()) {
                 final String name = Context.toString(id);

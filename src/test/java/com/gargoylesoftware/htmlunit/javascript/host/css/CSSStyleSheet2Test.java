@@ -67,7 +67,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final DomElement button2 = page.getElementsByName("b2").get(0);
 
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
 
         Selector selector = parseSelector(sheet, "*.yui-log input");
@@ -149,7 +149,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
               + "</body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
 
         Selector selector = sheet.parseSelectors(new InputSource(new StringReader("#d\\:e"))).item(0);
@@ -215,7 +215,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
             + "</html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
         final Selector selector = sheet.parseSelectors(new InputSource(new StringReader(css))).item(0);
         assertEquals(selectBody, sheet.selects(selector, page.getHtmlElementById("b")));
@@ -237,7 +237,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
         final NodeList list = htmlPage.getElementsByTagName("body");
         final HtmlElement element = (HtmlElement) list.item(0);
-        final ComputedCSSStyleDeclaration style = ((HTMLElement) element.getScriptObject()).getCurrentStyle();
+        final ComputedCSSStyleDeclaration style = ((HTMLElement) element.getScriptableObject()).getCurrentStyle();
         assertEquals("CSSStyleDeclaration for ''", style.toString());
     }
 

@@ -148,7 +148,7 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
         WebAssert.notNull("domNode", domNode);
         domNode_ = domNode;
         if (assignScriptObject) {
-            domNode_.setScriptObject(this);
+            domNode_.setScriptableObject(this);
         }
     }
 
@@ -175,7 +175,7 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
 
         final DomNode domNode = (DomNode) object;
 
-        final Object scriptObject = domNode.getScriptObject();
+        final Object scriptObject = domNode.getScriptableObject();
         if (scriptObject != null) {
             return (SimpleScriptable) scriptObject;
         }
@@ -243,7 +243,7 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
             scriptable.setParentScope((Scriptable) enclosingWindow.getScriptObject());
         }
         else {
-            scriptable.setParentScope(ScriptableObject.getTopLevelScope(domNode.getPage().getScriptObject()));
+            scriptable.setParentScope(ScriptableObject.getTopLevelScope(domNode.getPage().getScriptableObject()));
         }
     }
 

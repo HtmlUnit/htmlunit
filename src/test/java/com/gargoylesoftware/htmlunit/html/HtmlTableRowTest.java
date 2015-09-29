@@ -218,7 +218,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
         final String cmd = "document.getElementById('cell')";
         final HTMLElement jselement = (HTMLElement) page_.executeJavaScript(cmd).getJavaScriptResult();
 
-        assertSame(jselement, cell_.getScriptObject());
+        assertSame(jselement, cell_.getScriptableObject());
     }
 
     /**
@@ -233,7 +233,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
         final HTMLElement jselement = (HTMLElement) object;
         assertEquals("original", ScriptableObject.getProperty(jselement, "a"));
 
-        assertSame(jselement, cell_.getScriptObject());
+        assertSame(jselement, cell_.getScriptableObject());
     }
 
     /**
@@ -297,7 +297,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
         // scriptable object
         page_.executeJavaScript(cmd);
 
-        assertNotSame(cell_.getScriptObject(), cellClone_.getScriptObject());
+        assertNotSame(cell_.getScriptableObject(), cellClone_.getScriptableObject());
     }
 
     /**

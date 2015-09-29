@@ -70,7 +70,7 @@ public class HTMLSelectElement extends FormField {
      */
     public void initialize() {
         final HtmlSelect htmlSelect = getHtmlSelect();
-        htmlSelect.setScriptObject(this);
+        htmlSelect.setScriptableObject(this);
         if (optionsArray_ == null) {
             optionsArray_ = new HTMLOptionsCollection(this);
             optionsArray_.initialize(htmlSelect);
@@ -196,7 +196,7 @@ public class HTMLSelectElement extends FormField {
         if (selectedOptions.isEmpty()) {
             return "";
         }
-        return ((HTMLOptionElement) selectedOptions.get(0).getScriptObject()).getValue();
+        return ((HTMLOptionElement) selectedOptions.get(0).getScriptableObject()).getValue();
     }
 
     /**

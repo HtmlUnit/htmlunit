@@ -492,7 +492,7 @@ public class WebClient implements Serializable, AutoCloseable {
                                 LOG.debug("Executing onload handler for " + frame);
                             }
                             final Event event = new Event(frame, Event.TYPE_LOAD);
-                            ((Node) frame.getScriptObject()).executeEvent(event);
+                            ((Node) frame.getScriptableObject()).executeEvent(event);
                         }
                     }
                 }
@@ -1748,7 +1748,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 // now looks at the visibility of the frame window
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (frameElement.isDisplayed()) {
-                    final HTMLElement htmlElement = (HTMLElement) frameElement.getScriptObject();
+                    final HTMLElement htmlElement = (HTMLElement) frameElement.getScriptableObject();
                     final ComputedCSSStyleDeclaration style =
                             htmlElement.getWindow().getComputedStyle(htmlElement, null);
                     use = (style.getCalculatedWidth(false, false) != 0)

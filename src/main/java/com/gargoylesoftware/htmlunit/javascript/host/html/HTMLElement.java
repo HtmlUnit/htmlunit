@@ -733,7 +733,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Object getAttributeNodeNS(final String namespaceURI, final String localName) {
-        return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptObject();
+        return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptableObject();
     }
 
     /**
@@ -989,7 +989,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         else if (html) {
             final DomElement element = (DomElement) node;
-            final Element scriptObject = (Element) node.getScriptObject();
+            final Element scriptObject = (Element) node.getScriptableObject();
             final boolean isUpperCase = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_HTML_UPPER_CASE);
             String tag = element.getTagName();
 
@@ -2106,7 +2106,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         try {
             final List<Node> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add((Node) domNode.getScriptObject());
+                nodes.add((Node) domNode.getScriptableObject());
             }
             return new StaticNodeList(nodes, this);
         }
@@ -2126,7 +2126,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);
             if (node != null) {
-                return (Node) node.getScriptObject();
+                return (Node) node.getScriptableObject();
             }
             return null;
         }
@@ -2622,7 +2622,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
-        HTMLElement element = (HTMLElement) node.getScriptObject();
+        HTMLElement element = (HTMLElement) node.getScriptableObject();
         ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
         left += style.getLeft(true, false, false);
 
@@ -2634,9 +2634,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // Add the offset for the ancestor nodes.
         node = node.getParentNode();
-        while (node != null && node.getScriptObject() != offsetParent) {
-            if (node.getScriptObject() instanceof HTMLElement) {
-                element = (HTMLElement) node.getScriptObject();
+        while (node != null && node.getScriptableObject() != offsetParent) {
+            if (node.getScriptableObject() instanceof HTMLElement) {
+                element = (HTMLElement) node.getScriptableObject();
                 style = element.getWindow().getComputedStyle(element, null);
                 left += style.getLeft(true, true, true);
             }
@@ -2746,7 +2746,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
-        HTMLElement element = (HTMLElement) node.getScriptObject();
+        HTMLElement element = (HTMLElement) node.getScriptableObject();
         ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
         top += style.getTop(true, false, false);
 
@@ -2758,9 +2758,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // Add the offset for the ancestor nodes.
         node = node.getParentNode();
-        while (node != null && node.getScriptObject() != offsetParent) {
-            if (node.getScriptObject() instanceof HTMLElement) {
-                element = (HTMLElement) node.getScriptObject();
+        while (node != null && node.getScriptableObject() != offsetParent) {
+            if (node.getScriptableObject() instanceof HTMLElement) {
+                element = (HTMLElement) node.getScriptableObject();
                 style = element.getWindow().getComputedStyle(element, null);
                 top += style.getTop(false, true, true);
             }
@@ -2768,7 +2768,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         if (offsetParent != null) {
-            final HTMLElement thiz = (HTMLElement) getDomNodeOrDie().getScriptObject();
+            final HTMLElement thiz = (HTMLElement) getDomNodeOrDie().getScriptableObject();
             style = thiz.getWindow().getComputedStyle(thiz, null);
             final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
 
@@ -2810,7 +2810,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         Object offsetParent = null;
-        final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
+        final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptableObject();
         if (returnNullIfFixed && "fixed".equals(htmlElement.getStyle().getPosition())) {
             return null;
         }
@@ -2829,19 +2829,19 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (parentNode instanceof HtmlBody
                 || (useTables && parentNode instanceof HtmlTableDataCell)
                 || (useTables && parentNode instanceof HtmlTable)) {
-                offsetParent = parentNode.getScriptObject();
+                offsetParent = parentNode.getScriptableObject();
                 break;
             }
 
-            if (parentNode != null && parentNode.getScriptObject() instanceof HTMLElement) {
-                final HTMLElement parentElement = (HTMLElement) parentNode.getScriptObject();
+            if (parentNode != null && parentNode.getScriptableObject() instanceof HTMLElement) {
+                final HTMLElement parentElement = (HTMLElement) parentNode.getScriptableObject();
                 final ComputedCSSStyleDeclaration parentStyle =
                             parentElement.getWindow().getComputedStyle(parentElement, null);
                 final String parentPosition = parentStyle.getPositionWithInheritance();
                 final boolean parentIsStatic = "static".equals(parentPosition);
                 final boolean parentIsFixed = "fixed".equals(parentPosition);
                 if ((useTablesIfFixed && !parentIsStatic && !parentIsFixed) || (!useTablesIfFixed && !parentIsStatic)) {
-                    offsetParent = parentNode.getScriptObject();
+                    offsetParent = parentNode.getScriptableObject();
                     break;
                 }
             }
@@ -3053,7 +3053,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else if ("inherit".equals(attribute)) {
             final DomNode parent = getDomNodeOrDie().getParentNode();
             if (parent != null) {
-                final Scriptable parentScriptable = parent.getScriptObject();
+                final Scriptable parentScriptable = parent.getScriptableObject();
                 if (parentScriptable instanceof HTMLElement) {
                     return ((HTMLElement) parentScriptable).getIsContentEditable();
                 }

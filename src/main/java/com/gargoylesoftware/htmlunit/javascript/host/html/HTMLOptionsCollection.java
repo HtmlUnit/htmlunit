@@ -150,7 +150,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
             return;
         }
 
-        final HTMLSelectElement parent = (HTMLSelectElement) htmlSelect_.getScriptObject();
+        final HTMLSelectElement parent = (HTMLSelectElement) htmlSelect_.getScriptableObject();
 
         if (!has(name, start) && ScriptableObject.hasProperty(parent, name)) {
             ScriptableObject.putProperty(parent, name, value);
@@ -179,7 +179,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         }
         // If the name was NOT_FOUND on the prototype, then just drop through
         // to search on the select element for IE only AND FF.
-        final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptObject();
+        final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptableObject();
         return ScriptableObject.getProperty(select, name);
     }
 

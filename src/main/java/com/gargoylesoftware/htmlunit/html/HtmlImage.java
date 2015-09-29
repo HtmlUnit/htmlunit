@@ -185,7 +185,7 @@ public class HtmlImage extends HtmlElement {
             // If the download was a success, trigger the onload handler.
             if (ok) {
                 final Event event = new Event(this, Event.TYPE_LOAD);
-                final Node scriptObject = (Node) getScriptObject();
+                final Node scriptObject = (Node) getScriptableObject();
 
                 final String readyState = htmlPage.getReadyState();
                 if (READY_STATE_LOADING.equals(readyState)) {

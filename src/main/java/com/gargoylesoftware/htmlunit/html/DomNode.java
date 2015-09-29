@@ -278,7 +278,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param scriptObject the JavaScript object
      */
-    public void setScriptObject(final ScriptableObject scriptObject) {
+    public void setScriptableObject(final ScriptableObject scriptObject) {
         scriptObject_ = scriptObject;
     }
 
@@ -741,7 +741,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             for (final Node node : getAncestors(true)) {
-                final ScriptableObject scriptableObject = ((DomNode) node).getScriptObject();
+                final ScriptableObject scriptableObject = ((DomNode) node).getScriptableObject();
                 if (scriptableObject instanceof HTMLElement) {
                     final HTMLElement elem = (HTMLElement) scriptableObject;
                     final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
@@ -899,10 +899,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         if (hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)
                 && !(this instanceof Document) && !(this instanceof DomDocumentFragment)) {
-            final Scriptable prototype = newnode.getScriptObject().getPrototype();
+            final Scriptable prototype = newnode.getScriptableObject().getPrototype();
             final DomNode documentFragment = getPage().createDocumentFragment();
             documentFragment.basicAppend(newnode);
-            newnode.getScriptObject().setPrototype(prototype);
+            newnode.getScriptableObject().setPrototype(prototype);
         }
         return newnode;
     }
@@ -916,8 +916,24 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * a DOM node's JavaScript object should not have to check if they should create it first.
      *
      * @return the JavaScript object that corresponds to this node
+     * @deprecated as of 2.19, please use {@link #getScriptableObject()} instead
      */
+    @Deprecated
     public ScriptableObject getScriptObject() {
+        return getScriptableObject();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.
+     *
+     * The logic of when and where the JavaScript object is created needs a clean up: functions using
+     * a DOM node's JavaScript object should not have to check if they should create it first.
+     *
+     * @return the JavaScript object that corresponds to this node
+     */
+    public ScriptableObject getScriptableObject() {
         if (scriptObject_ == null) {
             final SgmlPage page = getPage();
             if (this == page) {
@@ -937,7 +953,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
                 throw new IllegalStateException(msg.toString());
             }
-            scriptObject_ = ((SimpleScriptable) page.getScriptObject()).makeScriptableFor(this);
+            scriptObject_ = ((SimpleScriptable) page.getScriptableObject()).makeScriptableFor(this);
         }
         return scriptObject_;
     }
@@ -1578,7 +1594,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
              */
             final Document doc = getOwnerDocument();
             if (doc instanceof XmlPage) {
-                final ScriptableObject scriptable = ((XmlPage) doc).getScriptObject();
+                final ScriptableObject scriptable = ((XmlPage) doc).getScriptableObject();
                 if (ScriptableObject.hasProperty(scriptable, "getProperty")) {
                     final Object selectionNS =
                             ScriptableObject.callMethod(scriptable, "getProperty", new Object[]{"SelectionNamespaces"});
@@ -1859,7 +1875,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
                 int documentMode = 9;
                 if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-                    final ScriptableObject sobj = getPage().getScriptObject();
+                    final ScriptableObject sobj = getPage().getScriptableObject();
                     if (sobj instanceof HTMLDocument) {
                         documentMode = ((HTMLDocument) sobj).getDocumentMode();
                     }

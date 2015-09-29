@@ -71,7 +71,7 @@ public class EventHandler extends BaseFunction {
         throws JavaScriptException {
 
         // the js object to which this event is attached has to be the scope
-        final SimpleScriptable jsObj = (SimpleScriptable) node_.getScriptObject();
+        final SimpleScriptable jsObj = (SimpleScriptable) node_.getScriptableObject();
         // compile "just in time"
         if (realFunction_ == null) {
             realFunction_ = cx.compileFunction(jsObj, jsSnippet_, eventName_ + " event for " + node_

@@ -110,7 +110,7 @@ public class AbstractList extends SimpleScriptable implements Function {
      * @param description a text useful for debugging
      */
     public AbstractList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        this(parentScope == null ? null : parentScope.getScriptObject());
+        this(parentScope == null ? null : parentScope.getScriptableObject());
         if (parentScope != null) {
             setDomNode(parentScope, false);
         }
@@ -124,7 +124,7 @@ public class AbstractList extends SimpleScriptable implements Function {
      * @param initialElements the initial content for the cache
      */
     protected AbstractList(final DomNode parentScope, final List<?> initialElements) {
-        this(parentScope.getScriptObject());
+        this(parentScope.getScriptableObject());
         cachedElements_ = new ArrayList<>(initialElements);
     }
 

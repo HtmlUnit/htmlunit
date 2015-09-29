@@ -106,7 +106,7 @@ public class DocumentFragment extends Node {
      * @return HTML document
      */
     protected HTMLDocument getDocument() {
-        return (HTMLDocument) getDomNodeOrDie().getPage().getScriptObject();
+        return (HTMLDocument) getDomNodeOrDie().getPage().getScriptableObject();
     }
 
     /**
@@ -151,7 +151,7 @@ public class DocumentFragment extends Node {
         try {
             final List<Node> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add((Node) domNode.getScriptObject());
+                nodes.add((Node) domNode.getScriptableObject());
             }
             return new StaticNodeList(nodes, this);
         }
@@ -171,7 +171,7 @@ public class DocumentFragment extends Node {
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);
             if (node != null) {
-                return (Node) node.getScriptObject();
+                return (Node) node.getScriptableObject();
             }
             return null;
         }

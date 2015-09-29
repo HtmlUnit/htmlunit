@@ -272,7 +272,7 @@ public class HtmlObject extends HtmlElement {
 
         final String clsId = getClassIdAttribute();
         if (ATTRIBUTE_NOT_DEFINED != clsId) {
-            ((HTMLObjectElement) getScriptObject()).setClassid(clsId);
+            ((HTMLObjectElement) getScriptableObject()).setClassid(clsId);
         }
     }
 

@@ -1153,7 +1153,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing " + event);
         }
-        final EventTarget jsElt = (EventTarget) getScriptObject();
+        final EventTarget jsElt = (EventTarget) getScriptableObject();
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
@@ -1185,7 +1185,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     public void focus() {
         final InteractivePage page = (InteractivePage) getPage();
         page.setFocusedElement(this);
-        final HTMLElement jsElt = (HTMLElement) getScriptObject();
+        final HTMLElement jsElt = (HTMLElement) getScriptableObject();
         jsElt.setActive();
     }
 

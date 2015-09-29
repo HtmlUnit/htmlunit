@@ -143,7 +143,7 @@ public class XSLProcessor extends MSXMLScriptable {
             node.setParentScope(getParentScope());
             node.setPrototype(getPrototype(node.getClass()));
             node.setDomNode(fragment);
-            output_ = fragment.getScriptObject();
+            output_ = fragment.getScriptableObject();
         }
 
         transform(input_, ((XMLDOMNode) output_).getDomNodeOrDie());
@@ -161,7 +161,7 @@ public class XSLProcessor extends MSXMLScriptable {
             else {
                 //remove trailing "\r\n"
                 final String serializedString =
-                    serializer.serializeToString((XMLDOMNode) child.getScriptObject());
+                    serializer.serializeToString((XMLDOMNode) child.getScriptableObject());
                 output.append(serializedString, 0, serializedString.length() - 2);
             }
         }

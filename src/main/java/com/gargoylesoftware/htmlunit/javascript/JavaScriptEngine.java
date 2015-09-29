@@ -569,7 +569,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
      * @param page the page
      */
     public void definePropertiesInStandardsMode(final HtmlPage page) {
-        final Window window = ((HTMLDocument) page.getScriptObject()).getWindow();
+        final Window window = ((HTMLDocument) page.getScriptableObject()).getWindow();
         final BrowserVersion browserVersion = window.getBrowserVersion();
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final String jsClassName = config.getClassName();
@@ -924,7 +924,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
 
     private Scriptable getScope(final InteractivePage page, final DomNode node) {
         if (node != null) {
-            return node.getScriptObject();
+            return node.getScriptableObject();
         }
         return (Window) page.getEnclosingWindow().getScriptObject();
     }

@@ -200,7 +200,7 @@ public class XMLDOMElement extends XMLDOMNode {
         final Map<String, DomAttr> attributes = getDomNodeOrDie().getAttributesMap();
         for (final DomAttr attr : attributes.values()) {
             if (attr.getName().equals(name)) {
-                return attr.getScriptObject();
+                return attr.getScriptableObject();
             }
         }
         return null;

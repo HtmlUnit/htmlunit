@@ -120,7 +120,7 @@ public class HTMLInputElement extends FormField {
                     input.getParentNode().replaceChild(newInput, input);
                 }
 
-                input.setScriptObject(null);
+                input.setScriptableObject(null);
                 setDomNode(newInput, true);
             }
             else {

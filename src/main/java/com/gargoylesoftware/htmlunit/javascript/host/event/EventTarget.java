@@ -154,7 +154,7 @@ public class EventTarget extends SimpleScriptable {
                 final DomNode domNode = eventTarget.getDomNodeOrNull();
                 eventTarget = null;
                 if (domNode != null && domNode.getParentNode() != null) {
-                    eventTarget = (EventTarget) domNode.getParentNode().getScriptObject();
+                    eventTarget = (EventTarget) domNode.getParentNode().getScriptableObject();
                 }
             }
 
@@ -196,7 +196,7 @@ public class EventTarget extends SimpleScriptable {
                 final DomNode domNode = eventTarget.getDomNodeOrNull();
                 eventTarget = null;
                 if (domNode != null && domNode.getParentNode() != null) {
-                    eventTarget = (EventTarget) domNode.getParentNode().getScriptObject();
+                    eventTarget = (EventTarget) domNode.getParentNode().getScriptableObject();
                 }
                 event.setEventPhase(Event.BUBBLING_PHASE);
             }

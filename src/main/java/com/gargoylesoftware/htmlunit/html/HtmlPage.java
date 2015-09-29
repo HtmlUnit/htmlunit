@@ -1242,7 +1242,7 @@ public class HtmlPage extends InteractivePage {
                 else {
                     event = new Event(frame, eventType);
                 }
-                ((Node) frame.getScriptObject()).executeEvent(event);
+                ((Node) frame.getScriptableObject()).executeEvent(event);
                 if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event)) {
                     return false;
                 }
@@ -1755,7 +1755,7 @@ public class HtmlPage extends InteractivePage {
         if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
             // second try are JavaScript attributes
             // ...but applets are a bit special so ignore them
-            final ScriptableObject scriptObject = element.getScriptObject();
+            final ScriptableObject scriptObject = element.getScriptableObject();
             // we have to make sure the scriptObject has a slot for the given attribute.
             // just using get() may use e.g. getWithPreemption().
             if (scriptObject.has(attribute, scriptObject)) {
@@ -1813,7 +1813,7 @@ public class HtmlPage extends InteractivePage {
         if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
             // second try are JavaScript attributes
             // ...but applets are a bit special so ignore them
-            final ScriptableObject scriptObject = element.getScriptObject();
+            final ScriptableObject scriptObject = element.getScriptableObject();
             // we have to make sure the scriptObject has a slot for the given attribute.
             // just using get() may use e.g. getWithPreemption().
             if (scriptObject.has(attribute, scriptObject)) {
@@ -2228,7 +2228,7 @@ public class HtmlPage extends InteractivePage {
      * @return true for {@code quirks mode}, false for {@code standards mode}
      */
     public boolean isQuirksMode() {
-        return "BackCompat".equals(((HTMLDocument) getScriptObject()).getCompatMode());
+        return "BackCompat".equals(((HTMLDocument) getScriptableObject()).getCompatMode());
     }
 
     /**
