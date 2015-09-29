@@ -610,7 +610,7 @@ public final class HTMLParser {
                             final int version = (int) page_.getWebClient().getBrowserVersion().
                                                                 getBrowserVersionNumeric();
                             if ("edge".equals(mode)) {
-                                ((HTMLDocument) page_.getScriptObject()).forceDocumentMode(version);
+                                ((HTMLDocument) page_.getScriptObject2()).forceDocumentMode(version);
                             }
                             else {
                                 try {
@@ -618,7 +618,7 @@ public final class HTMLParser {
                                     if (value > version) {
                                         value = version;
                                     }
-                                    ((HTMLDocument) page_.getScriptObject()).forceDocumentMode(value);
+                                    ((HTMLDocument) page_.getScriptObject2()).forceDocumentMode(value);
                                 }
                                 catch (final Exception e) {
                                     // ignore
@@ -1015,8 +1015,8 @@ public final class HTMLParser {
                     final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
                     if (body_.getAttributes().getNamedItem(attrName) == null) {
                         body_.setAttribute(attrName, attrs.getValue(i));
-                        if (attrName.startsWith("on") && body_.getScriptObject() != null) {
-                            final HTMLBodyElement jsBody = (HTMLBodyElement) body_.getScriptObject();
+                        if (attrName.startsWith("on") && body_.getScriptObject2() != null) {
+                            final HTMLBodyElement jsBody = (HTMLBodyElement) body_.getScriptObject2();
                             jsBody.createEventHandlerFromAttribute(attrName, attrs.getValue(i));
                         }
                     }

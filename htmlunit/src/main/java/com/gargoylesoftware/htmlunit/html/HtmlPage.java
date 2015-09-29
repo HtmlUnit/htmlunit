@@ -1190,8 +1190,7 @@ public class HtmlPage extends InteractivePage {
 
         // Execute the specified event on the document element.
         final WebWindow window = getEnclosingWindow();
-        final Window jsWindow = (Window) window.getScriptObject();
-        if (jsWindow != null) {
+        if (window.getScriptObject() != null) {
             final HtmlElement element = getDocumentElement();
             if (element == null) { // happens for instance if document.documentElement has been removed from parent
                 return true;
@@ -1242,7 +1241,7 @@ public class HtmlPage extends InteractivePage {
                 else {
                     event = new Event(frame, eventType);
                 }
-                ((Node) frame.getScriptObject()).executeEvent(event);
+                ((Node) frame.getScriptObject2()).executeEvent(event);
                 if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event)) {
                     return false;
                 }
@@ -1755,7 +1754,7 @@ public class HtmlPage extends InteractivePage {
         if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
             // second try are JavaScript attributes
             // ...but applets are a bit special so ignore them
-            final ScriptableObject scriptObject = element.getScriptObject();
+            final ScriptableObject scriptObject = element.getScriptableObject();
             // we have to make sure the scriptObject has a slot for the given attribute.
             // just using get() may use e.g. getWithPreemption().
             if (scriptObject.has(attribute, scriptObject)) {
@@ -1813,7 +1812,7 @@ public class HtmlPage extends InteractivePage {
         if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
             // second try are JavaScript attributes
             // ...but applets are a bit special so ignore them
-            final ScriptableObject scriptObject = element.getScriptObject();
+            final ScriptableObject scriptObject = element.getScriptableObject();
             // we have to make sure the scriptObject has a slot for the given attribute.
             // just using get() may use e.g. getWithPreemption().
             if (scriptObject.has(attribute, scriptObject)) {
@@ -2228,7 +2227,7 @@ public class HtmlPage extends InteractivePage {
      * @return true for {@code quirks mode}, false for {@code standards mode}
      */
     public boolean isQuirksMode() {
-        return "BackCompat".equals(((HTMLDocument) getScriptObject()).getCompatMode());
+        return "BackCompat".equals(((HTMLDocument) getScriptObject2()).getCompatMode());
     }
 
     /**

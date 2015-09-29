@@ -114,7 +114,7 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
      */
     @Override
     public void characterDataChanged(final CharacterDataChangeEvent event) {
-        final ScriptableObject target = event.getCharacterData().getScriptObject();
+        final ScriptableObject target = event.getCharacterData().getScriptableObject();
         if (subtree_ || target == node_) {
             final MutationRecord mutationRecord = new MutationRecord();
             final Scriptable scope = getParentScope();
@@ -162,7 +162,7 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
                 mutationRecord.setPrototype(getPrototype(mutationRecord.getClass()));
 
                 mutationRecord.setType("attributes");
-                mutationRecord.setTarget(target.getScriptObject());
+                mutationRecord.setTarget(target.getScriptableObject());
                 if (attributeOldValue_) {
                     mutationRecord.setOldValue(event.getValue());
                 }

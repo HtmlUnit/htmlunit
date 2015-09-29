@@ -104,7 +104,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     public void setHtmlElement(final HtmlElement htmlElement) {
         super.setHtmlElement(htmlElement);
         final HtmlForm htmlForm = getHtmlForm();
-        htmlForm.setScriptObject(this);
+        htmlForm.setScriptableObject(this);
     }
 
     /**
