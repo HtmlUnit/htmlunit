@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 
+import java.lang.reflect.Field;
+
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.SimpleScriptContext;
@@ -64,7 +66,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     private void initGlobal(final ScriptEngine engine, final Browser browser) {
         Browser.setCurrent(browser);
         final SimpleScriptContext context = (SimpleScriptContext) engine.getContext();
-        final Global global = (Global) ((ScriptObjectMirror) context.getBindings(ScriptContext.ENGINE_SCOPE)).getScriptObject();
+        final Global global = get(context.getBindings(ScriptContext.ENGINE_SCOPE), "sobj");
         final Global oldGlobal = Context.getGlobal();
         try {
             Context.setGlobal(global);
@@ -91,6 +93,18 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         }
         finally {
             Context.setGlobal(oldGlobal);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T get(final Object o, final String fieldName) {
+        try {
+            final Field field = o.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return (T) field.get(o);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -141,7 +155,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     @Override
     public void initialize(final WebWindow webWindow) {
         final SimpleScriptContext context = (SimpleScriptContext) engine.getContext();
-        final Global global = (Global) ((ScriptObjectMirror) context.getBindings(ScriptContext.ENGINE_SCOPE)).getScriptObject();
+        final Global global = get(context.getBindings(ScriptContext.ENGINE_SCOPE), "sobj");
         Window2 window2 = (Window2) global.get("window");
         window2.initialize(webWindow);
     }
