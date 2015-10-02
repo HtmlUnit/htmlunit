@@ -115,7 +115,9 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
         event.setParentScope(owningWindow_);
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
-        LOG.debug("[DedicatedWorker] postMessage: " + message);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[DedicatedWorker] postMessage: {}" + message);
+        }
         final JavaScriptEngine jsEngine = owningWindow_.getWebWindow().getWebClient().getJavaScriptEngine();
         final ContextAction action = new ContextAction() {
             @Override
