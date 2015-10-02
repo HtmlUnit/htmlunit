@@ -307,7 +307,7 @@ public class Document extends EventNode {
      */
     @JsxFunction
     public Attr createAttribute(final String attributeName) {
-        return (Attr) getPage().createAttribute(attributeName).getScriptObject2();
+        return (Attr) getPage().createAttribute(attributeName).getScriptableObject();
     }
 
     /**
@@ -327,7 +327,7 @@ public class Document extends EventNode {
         for (final DomNode childNode : domNode.getDescendants()) {
             childNode.processImportNode(this);
         }
-        return domNode.getScriptObject2();
+        return domNode.getScriptableObject();
     }
 
     /**

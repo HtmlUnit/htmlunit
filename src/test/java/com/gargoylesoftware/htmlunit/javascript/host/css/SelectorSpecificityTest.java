@@ -85,7 +85,7 @@ public class SelectorSpecificityTest extends SimpleWebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject2();
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
 
         final Selector selectorObject = parseSelector(sheet, selector);

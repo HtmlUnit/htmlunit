@@ -569,7 +569,7 @@ public class JavaScriptEngine {
      * @param page the page
      */
     public void definePropertiesInStandardsMode(final HtmlPage page) {
-        final Window window = ((HTMLDocument) page.getScriptObject2()).getWindow();
+        final Window window = ((HTMLDocument) page.getScriptableObject()).getWindow();
         final BrowserVersion browserVersion = window.getBrowserVersion();
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final String jsClassName = config.getClassName();

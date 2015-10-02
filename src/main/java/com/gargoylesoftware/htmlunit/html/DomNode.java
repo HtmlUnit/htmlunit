@@ -741,7 +741,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             for (final Node node : getAncestors(true)) {
-                final Object scriptableObject = ((DomNode) node).getScriptObject2();
+                final Object scriptableObject = ((DomNode) node).getScriptableObject();
                 if (scriptableObject instanceof HTMLElement) {
                     final HTMLElement elem = (HTMLElement) scriptableObject;
                     final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
@@ -953,24 +953,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
                 throw new IllegalStateException(msg.toString());
             }
-            scriptObject_ = ((SimpleScriptable) page.getScriptObject2()).makeScriptableFor(this);
+            scriptObject_ = ((SimpleScriptable) page.getScriptableObject()).makeScriptableFor(this);
         }
         return (ScriptableObject) scriptObject_;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.
-     *
-     * The logic of when and where the JavaScript object is created needs a clean up: functions using
-     * a DOM node's JavaScript object should not have to check if they should create it first.
-     *
-     * @return the JavaScript object that corresponds to this node
-     */
-    //TODO: rename to getScriptObject(), currently WebDriver depends on the other signature
-    public Object getScriptObject2() {
-        return getScriptableObject();
     }
 
     /**
@@ -1890,7 +1875,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
                 int documentMode = 9;
                 if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-                    final Object sobj = getPage().getScriptObject2();
+                    final Object sobj = getPage().getScriptableObject();
                     if (sobj instanceof HTMLDocument) {
                         documentMode = ((HTMLDocument) sobj).getDocumentMode();
                     }

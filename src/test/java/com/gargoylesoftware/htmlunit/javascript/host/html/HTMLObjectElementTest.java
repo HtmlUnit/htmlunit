@@ -113,7 +113,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
         page.getHtmlElementById("myButton").click();
 
         final HtmlElement elem = page.getHtmlElementById("id1");
-        final HTMLObjectElement jsElem = (HTMLObjectElement) elem.getScriptObject2();
+        final HTMLObjectElement jsElem = (HTMLObjectElement) elem.getScriptableObject();
         final MockActiveXObject activeX = (MockActiveXObject) jsElem.unwrap();
         if (null != activeX) {
             activeX.setMessage("ActiveX is still alive");

@@ -1459,7 +1459,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         final HtmlElement body = page.getBody();
         if (body != null) {
-            return (HTMLElement) body.getScriptObject2();
+            return (HTMLElement) body.getScriptableObject();
         }
         return null;
     }
@@ -1472,7 +1472,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public HTMLElement getHead() {
         final HtmlElement head = getPage().getHead();
         if (head != null) {
-            return (HTMLElement) head.getScriptObject2();
+            return (HTMLElement) head.getScriptableObject();
         }
         return null;
     }
@@ -1519,7 +1519,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setBgColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject2();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setBgColor(color);
     }
 
@@ -1545,7 +1545,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setAlinkColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject2();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setALink(color);
     }
 
@@ -1571,7 +1571,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setLinkColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject2();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setLink(color);
     }
 
@@ -1597,7 +1597,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setVlinkColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject2();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setVLink(color);
     }
 
@@ -1623,7 +1623,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setFgColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptObject2();
+        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setText(color);
     }
 
@@ -2082,7 +2082,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         try {
             final List<Node> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add((Node) domNode.getScriptObject2());
+                nodes.add((Node) domNode.getScriptableObject());
             }
             return new StaticNodeList(nodes, this);
         }
@@ -2102,7 +2102,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);
             if (node != null) {
-                return (Node) node.getScriptObject2();
+                return (Node) node.getScriptableObject();
             }
             return null;
         }
@@ -2132,7 +2132,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             else {
                 final DomNode page = ((HTMLDocument) start).getDomNodeOrNull();
                 if (page != null) {
-                    document = (Document) page.getScriptObject2();
+                    document = (Document) page.getScriptableObject();
                 }
             }
             if (document != null && document instanceof HTMLDocument

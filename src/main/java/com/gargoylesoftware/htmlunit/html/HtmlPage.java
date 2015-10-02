@@ -1240,7 +1240,7 @@ public class HtmlPage extends InteractivePage {
                 else {
                     event = new Event(frame, eventType);
                 }
-                ((Node) frame.getScriptObject2()).executeEvent(event);
+                ((Node) frame.getScriptableObject()).executeEvent(event);
                 if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event)) {
                     return false;
                 }
@@ -2226,7 +2226,7 @@ public class HtmlPage extends InteractivePage {
      * @return true for {@code quirks mode}, false for {@code standards mode}
      */
     public boolean isQuirksMode() {
-        return "BackCompat".equals(((HTMLDocument) getScriptObject2()).getCompatMode());
+        return "BackCompat".equals(((HTMLDocument) getScriptableObject()).getCompatMode());
     }
 
     /**

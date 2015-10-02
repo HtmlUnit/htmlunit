@@ -60,7 +60,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
      * @param node the owning node
      */
     public XMLDOMNamedNodeMap(final DomNode node) {
-        setParentScope((Scriptable) node.getScriptObject2());
+        setParentScope((Scriptable) node.getScriptableObject());
         setPrototype(getPrototype(getClass()));
 
         attributes_ = node.getAttributes();
@@ -117,7 +117,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
     public Object getNamedItemWithoutSyntheticClassAttr(final String name) {
         final DomNode attr = (DomNode) attributes_.getNamedItem(name);
         if (attr != null) {
-            return attr.getScriptObject2();
+            return attr.getScriptableObject();
         }
         return null;
     }
@@ -149,7 +149,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
     public Object item(final int index) {
         final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
-            return attr.getScriptObject2();
+            return attr.getScriptableObject();
         }
         return null;
     }
@@ -176,7 +176,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
 
         final DomNode attr = (DomNode) attributes_.removeNamedItem(name);
         if (attr != null) {
-            return attr.getScriptObject2();
+            return attr.getScriptableObject();
         }
         return null;
     }

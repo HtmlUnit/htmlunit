@@ -420,7 +420,7 @@ public class HtmlScript extends HtmlElement {
 
     private void executeEventIfBrowserHasFeature(final String type, final BrowserVersionFeatures feature) {
         if (hasFeature(feature)) {
-            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject2();
+            final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
             final Event event = new Event(HtmlScript.this, type);
             script.executeEvent(event);
         }
@@ -530,7 +530,7 @@ public class HtmlScript extends HtmlElement {
     protected void setAndExecuteReadyState(final String state) {
         if (hasFeature(EVENT_ONREADY_STATE_CHANGE)) {
             setReadyState(state);
-            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject2();
+            final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
             final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
             script.executeEvent(event);
         }
