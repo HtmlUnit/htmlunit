@@ -2073,6 +2073,20 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
+     * {@inheritDoc}
+     * Used to allow re-declaration of constants (eg: "var undefined;").
+     * @see com.gargoylesoftware.htmlunit.javascript.NativeGlobalTest
+     */
+    @Override
+    public boolean isConst(final String name) {
+        if ("undefined".equals(name) || "Infinity".equals(name) || "NaN".equals(name)) {
+            return false;
+        }
+
+        return super.isConst(name);
+    }
+
+    /**
      * Dispatches an event into the event system (standards-conformant browsers only). See
      * <a href="https://developer.mozilla.org/en-US/docs/DOM/window.dispatchEvent">the Gecko
      * DOM reference</a> for more information.
@@ -2290,14 +2304,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             crypto_ = new Crypto(this);
         }
         return crypto_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Window getWindow() throws RuntimeException {
-        return this;
     }
 }
 
