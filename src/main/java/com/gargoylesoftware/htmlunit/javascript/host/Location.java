@@ -348,7 +348,7 @@ public class Location extends SimpleScriptable {
                 event = new Event(getWindow(), Event.TYPE_HASH_CHANGE);
                 event.initEvent(Event.TYPE_HASH_CHANGE, false, false);
             }
-            getWindow().executeEvent(event);
+            getWindow().executeEventLocally(event);
         }
     }
 

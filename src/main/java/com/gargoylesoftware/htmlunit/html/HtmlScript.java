@@ -422,7 +422,7 @@ public class HtmlScript extends HtmlElement {
         if (hasFeature(feature)) {
             final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
             final Event event = new Event(HtmlScript.this, type);
-            script.executeEvent(event);
+            script.executeEventLocally(event);
         }
     }
 
@@ -532,7 +532,7 @@ public class HtmlScript extends HtmlElement {
             setReadyState(state);
             final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
             final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
-            script.executeEvent(event);
+            script.executeEventLocally(event);
         }
     }
 

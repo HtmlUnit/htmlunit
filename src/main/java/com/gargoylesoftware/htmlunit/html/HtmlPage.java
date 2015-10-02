@@ -1240,7 +1240,7 @@ public class HtmlPage extends InteractivePage {
                 else {
                     event = new Event(frame, eventType);
                 }
-                ((Node) frame.getScriptableObject()).executeEvent(event);
+                ((Node) frame.getScriptableObject()).executeEventLocally(event);
                 if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event)) {
                     return false;
                 }

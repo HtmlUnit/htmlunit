@@ -192,13 +192,13 @@ public class HtmlImage extends HtmlElement {
                     final PostponedAction action = new PostponedAction(getPage()) {
                         @Override
                         public void execute() throws Exception {
-                            scriptObject.executeEvent(event);
+                            scriptObject.executeEventLocally(event);
                         }
                     };
                     htmlPage.addAfterLoadAction(action);
                 }
                 else {
-                    scriptObject.executeEvent(event);
+                    scriptObject.executeEventLocally(event);
                 }
             }
             else {

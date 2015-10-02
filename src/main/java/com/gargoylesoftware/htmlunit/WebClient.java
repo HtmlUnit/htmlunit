@@ -491,7 +491,7 @@ public class WebClient implements Serializable, AutoCloseable {
                                 LOG.debug("Executing onload handler for " + frame);
                             }
                             final Event event = new Event(frame, Event.TYPE_LOAD);
-                            ((Node) frame.getScriptableObject()).executeEvent(event);
+                            ((Node) frame.getScriptableObject()).executeEventLocally(event);
                         }
                     }
                 }

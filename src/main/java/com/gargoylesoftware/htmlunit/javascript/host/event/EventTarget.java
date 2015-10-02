@@ -97,8 +97,9 @@ public class EventTarget extends SimpleScriptable {
      * Executes the event on this object only (needed for instance for onload on (i)frame tags).
      * @param event the event
      * @return the result
+     * @see #fireEvent(Event)
      */
-    public ScriptResult executeEvent(final Event event) {
+    public ScriptResult executeEventLocally(final Event event) {
         final EventListenersContainer eventListenersContainer = getEventListenersContainer();
         if (eventListenersContainer != null) {
             final Window window = getWindow();
