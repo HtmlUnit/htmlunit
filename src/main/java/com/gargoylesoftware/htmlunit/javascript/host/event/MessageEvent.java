@@ -85,7 +85,7 @@ public class MessageEvent extends Event {
             final String type,
             final boolean canBubble,
             final boolean cancelable,
-            final String data,
+            final Object data,
             final String origin,
             final String lastEventId,
             final Window source,

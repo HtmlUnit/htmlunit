@@ -39,6 +39,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.
@@ -133,6 +134,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 }
             }
         }
+        foundJsxClasses.remove(DedicatedWorkerGlobalScope.class.getName());
         final List<String> definedClasses = new ArrayList<>();
         for (final Class<?> klass : JavaScriptConfiguration.CLASSES_) {
             definedClasses.add(klass.getName());

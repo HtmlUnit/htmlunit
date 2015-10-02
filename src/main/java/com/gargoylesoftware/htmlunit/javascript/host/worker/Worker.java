@@ -18,25 +18,97 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * A JavaScript object for {@code Worker}.
  *
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
         @WebBrowser(EDGE) })
 public class Worker extends EventTarget {
 
+    private final DedicatedWorkerGlobalScope workerScope_;
+
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public Worker() {
+        // prototype constructor
+        workerScope_ = null;
+    }
+
+    private Worker(final Context cx, final Window owningWindow, final String url) throws Exception {
+        setParentScope(owningWindow);
+        setPrototype(getPrototype(getClass()));
+
+        final WebClient webClient = getWindow().getWebWindow().getWebClient();
+        workerScope_ = new DedicatedWorkerGlobalScope(owningWindow, cx, webClient.getBrowserVersion(), this);
+
+        workerScope_.loadAndExecute(url, null);
+    }
+
+    /**
+     * For instantiation in JavaScript.
+     * @param cx the current context
+     * @param args the URIs
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
+     * @throws Exception in case of problem
+     */
+    @JsxConstructor
+    public static Scriptable jsConstructor(
+            final Context cx, final Object[] args, final Function ctorObj,
+            final boolean inNewExpr) throws Exception {
+        if (args.length < 1 || args.length > 2) {
+            throw Context.reportRuntimeError(
+                    "Worker Error: constructor must have one or two String parameters.");
+        }
+
+        final String url = Context.toString(args[0]);
+
+        return new Worker(cx, getWindow(ctorObj), url);
+    }
+
+    /**
+     * Post the provided message to the WebWorker execution.
+     * @param message the message
+     */
+    @JsxFunction
+    public void postMessage(final Object message) {
+        workerScope_.messagePosted(message);
+    }
+
+    /**
+     * Sets the value of the onmessage event handler.
+     * @param onmessage the new handler
+     */
+    @JsxSetter
+    public void setOnmessage(final Object onmessage) {
+        getEventListenersContainer().setEventHandlerProp("message", onmessage);
+    }
+
+    /**
+     * Gets the value of the onmessage event handler.
+     * @return the handler
+     */
+    @JsxGetter
+    public Object getOnmessage() {
+        return getEventListenersContainer().getEventHandlerProp("message");
     }
 }

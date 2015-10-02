@@ -47,8 +47,8 @@ public class HostTestsTest {
     @Test
     public void test() throws Exception {
         final Set<String> set = new HashSet<>();
-        final String testRoot = "src/test/java/";
-        collectionObjectNames(new File(testRoot), set);
+        final File testRoot = new File("src/test/java");
+        collectionObjectNames(testRoot, set);
 
         // Remove all Prototypes, as we plan to have test cases separate for them soon
         // TODO: add Prototype tests (e.g. alert(Element.prototype)
@@ -61,9 +61,10 @@ public class HostTestsTest {
             set.remove("Arguments");
             set.add("arguments");
         }
+        set.remove("DedicatedWorkerGlobalScope");
 
-        ensure(new File(testRoot + HostClassNameTest.class.getName().replace('.', '/') + ".java"), set);
-        ensure(new File(testRoot + HostTypeOfTest.class.getName().replace('.', '/') + ".java"), set);
+        ensure(new File(testRoot, HostClassNameTest.class.getName().replace('.', '/') + ".java"), set);
+        ensure(new File(testRoot, HostTypeOfTest.class.getName().replace('.', '/') + ".java"), set);
     }
 
     private void collectionObjectNames(final File dir, final Set<String> set) throws IOException {
