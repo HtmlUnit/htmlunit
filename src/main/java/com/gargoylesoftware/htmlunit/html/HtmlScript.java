@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
-import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
@@ -219,7 +219,7 @@ public class HtmlScript extends HtmlElement {
                         executeScriptIfNeeded();
                     }
                 };
-                final AbstractJavaScriptEngine engine = getPage().getWebClient().getAbstractJavaScriptEngine();
+                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
                 engine.addPostponedAction(action);
             }
             // if FF, only execute if the "src" attribute
@@ -231,7 +231,7 @@ public class HtmlScript extends HtmlElement {
                         executeScriptIfNeeded();
                     }
                 };
-                final AbstractJavaScriptEngine engine = getPage().getWebClient().getAbstractJavaScriptEngine();
+                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
                 engine.addPostponedAction(action);
             }
         }
@@ -285,7 +285,7 @@ public class HtmlScript extends HtmlElement {
 
         if ((!hasFeature(JS_SCRIPT_ASYNC_NOT_SUPPORTED) && hasAttribute("async"))
                 || postponed && StringUtils.isBlank(getTextContent())) {
-            final AbstractJavaScriptEngine engine = getPage().getWebClient().getAbstractJavaScriptEngine();
+            final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }
         else {

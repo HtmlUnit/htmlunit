@@ -1308,7 +1308,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final WebClient webClient = getWebClient();
-        final JavaScriptEngine engine = (JavaScriptEngine) webClient.getAbstractJavaScriptEngine();
+        final JavaScriptEngine engine = webClient.getJavaScriptEngine();
 
         engine.addPostponedAction(new PostponedAction(page) {
             @Override

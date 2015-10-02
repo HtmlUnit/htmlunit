@@ -102,7 +102,7 @@ import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
-public class JavaScriptEngine implements AbstractJavaScriptEngine {
+public class JavaScriptEngine {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
@@ -1159,7 +1159,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
     /**
      * {@inheritDoc}
      */
-    @Override
     public long getJavaScriptTimeout() {
         return getContextFactory().getTimeout();
     }
@@ -1167,7 +1166,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
     /**
      * {@inheritDoc}
      */
-    @Override
     public void setJavaScriptTimeout(final long timeout) {
         getContextFactory().setTimeout(timeout);
     }

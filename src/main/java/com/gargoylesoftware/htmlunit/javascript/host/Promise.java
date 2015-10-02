@@ -18,8 +18,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.FunctionWrapper;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -139,7 +139,7 @@ public class Promise extends SimpleScriptable {
             }
         };
 
-        final AbstractJavaScriptEngine jsEngine = window.getWebWindow().getWebClient().getAbstractJavaScriptEngine();
+        final JavaScriptEngine jsEngine = window.getWebWindow().getWebClient().getJavaScriptEngine();
         jsEngine.addPostponedAction(thenAction);
 
         return promise;

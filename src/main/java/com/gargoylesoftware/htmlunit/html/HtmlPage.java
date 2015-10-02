@@ -896,8 +896,7 @@ public class HtmlPage extends InteractivePage {
             sourceCode = sourceCode.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length());
         }
 
-        final Object result =
-                getWebClient().getAbstractJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);
+        final Object result = getWebClient().getJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
@@ -984,7 +983,7 @@ public class HtmlPage extends InteractivePage {
             return JavaScriptLoadResult.COMPILATION_ERROR;
         }
 
-        ((JavaScriptEngine) client.getAbstractJavaScriptEngine()).execute(this, script);
+        client.getJavaScriptEngine().execute(this, script);
         return JavaScriptLoadResult.SUCCESS;
     }
 
@@ -1072,7 +1071,7 @@ public class HtmlPage extends InteractivePage {
         final String scriptCode = response.getContentAsString(scriptEncoding);
         response.cleanUp();
         if (null != scriptCode) {
-            final JavaScriptEngine javaScriptEngine = (JavaScriptEngine) client.getAbstractJavaScriptEngine();
+            final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
             final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
             if (script != null) {
                 // cache the script
@@ -2206,7 +2205,7 @@ public class HtmlPage extends InteractivePage {
         super.setDocumentType(type);
 
         if (hasFeature(JS_WINDOW_IN_STANDARDS_MODE) && !isQuirksMode()) {
-            final JavaScriptEngine jsEngine = (JavaScriptEngine) getWebClient().getAbstractJavaScriptEngine();
+            final JavaScriptEngine jsEngine = getWebClient().getJavaScriptEngine();
             jsEngine.definePropertiesInStandardsMode(this);
         }
     }

@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
@@ -123,7 +123,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         final Page enclosedPage = getEnclosedPage();
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
-            final AbstractJavaScriptEngine jsEngine = getPage().getWebClient().getAbstractJavaScriptEngine();
+            final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
             if (jsEngine.isScriptRunning()) {
                 final PostponedAction action = new PostponedAction(getPage()) {
                     @Override
@@ -394,7 +394,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         loadSrcWhenAddedToPage_ = false;
         final String src = getSrcAttribute();
 
-        final AbstractJavaScriptEngine jsEngine = getPage().getWebClient().getAbstractJavaScriptEngine();
+        final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
         // When src is set from a script, loading is postponed until script finishes
         // in fact this implementation is probably wrong: JavaScript URL should be
         // first evaluated and only loading, when any, should be postponed.

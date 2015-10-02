@@ -2236,8 +2236,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             return;
         }
 
-        final JavaScriptEngine jsEngine = (JavaScriptEngine)
-                getWebWindow().getWebClient().getAbstractJavaScriptEngine();
+        final JavaScriptEngine jsEngine = getWebWindow().getWebClient().getJavaScriptEngine();
         final PostponedAction action = new PostponedAction(getDomNodeOrDie().getPage()) {
             @Override
             public void execute() throws Exception {

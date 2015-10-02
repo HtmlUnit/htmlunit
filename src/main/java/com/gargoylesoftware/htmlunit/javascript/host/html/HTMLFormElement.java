@@ -348,7 +348,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         final String action = getHtmlForm().getActionAttribute().trim();
         if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String js = action.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length());
-            webClient.getAbstractJavaScriptEngine().execute(page, js, "Form action", 0);
+            webClient.getJavaScriptEngine().execute(page, js, "Form action", 0);
         }
         else {
             // download should be done ASAP, response will be loaded into a window later

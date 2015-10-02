@@ -22,11 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SET_READONLY_
 import java.lang.reflect.Method;
 import java.util.Stack;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,6 +39,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Base class for Rhino host objects in HtmlUnit.
@@ -187,6 +187,7 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
      * @param domNode the DOM node for which a JS object should be created
      * @return the JavaScript object
      */
+    @SuppressWarnings("unchecked")
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
@@ -201,8 +202,7 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
             }
         }
         if (javaScriptClass == null) {
-            final JavaScriptEngine javaScriptEngine = (JavaScriptEngine)
-                    getWindow().getWebWindow().getWebClient().getAbstractJavaScriptEngine();
+            final JavaScriptEngine javaScriptEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
             for (Class<?> c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
                 javaScriptClass = (Class<? extends SimpleScriptable>) javaScriptEngine.getJavaScriptClass(c);
             }

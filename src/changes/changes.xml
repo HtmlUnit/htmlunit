@@ -14,9 +14,6 @@
             <action type="update" dev="asashour">
                 DomNode: deprecate .getScriptObject().
             </action>
-            <action type="add" dev="asashour">
-                Introduce AbstractJavaScriptEngine.
-            </action>
             <action type="fix" dev="asashour" issue="1699">
                 JavaScript: collections to be iterated using the default Symbol.iterator.
             </action>

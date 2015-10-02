@@ -787,8 +787,7 @@ class DefaultElementFactory implements ElementFactory {
                 throw new IllegalStateException("Cannot find HtmlElement for " + qualifiedName);
         }
 
-        final JavaScriptConfiguration config =
-                page.getWebClient().getAbstractJavaScriptEngine().getJavaScriptConfiguration();
+        final JavaScriptConfiguration config = page.getWebClient().getJavaScriptEngine().getJavaScriptConfiguration();
         if (!"td".equals(tagName) && !"th".equals(tagName)
                 && checkBrowserCompatibility && config.getDomJavaScriptMapping().get(element.getClass()) == null) {
             return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
