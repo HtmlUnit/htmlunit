@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_UNDEFINED_THROWS_ERROR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
@@ -48,20 +47,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -134,7 +122,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
@@ -148,6 +135,16 @@ import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code Window}.
@@ -2076,66 +2073,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Executes the event on this object only (needed for instance for onload on (i)frame tags).
-     * @param event the event
-     * @return the result
-     */
-    @Override
-    public ScriptResult executeEvent(final Event event) {
-        return executeEvent(event, this);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Executes the event on this window only. Internal helper to share the impl with Node.java.
-     *
-     * @param event the event
-     * @param eventTarget the event target
-     * @return the result
-     */
-    public ScriptResult executeEvent(final Event event, final EventTarget eventTarget) {
-        final EventListenersContainer eventListenersContainer = eventTarget.getEventListenersContainer();
-        if (eventListenersContainer != null) {
-            final boolean eventParam = getBrowserVersion().hasFeature(
-                    JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT);
-            final Object[] args = new Object[] {event};
-
-            // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs;
-            if (eventParam) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            }
-            else {
-                propHandlerArgs = args;
-            }
-
-            setCurrentEvent(event);
-            try {
-                return eventListenersContainer.executeListeners(event, args, propHandlerArgs);
-            }
-            finally {
-                setCurrentEvent(null); // reset event
-            }
-        }
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     * Used to allow re-declaration of constants (eg: "var undefined;").
-     * @see com.gargoylesoftware.htmlunit.javascript.NativeGlobalTest
-     */
-    @Override
-    public boolean isConst(final String name) {
-        if ("undefined".equals(name) || "Infinity".equals(name) || "NaN".equals(name)) {
-            return false;
-        }
-
-        return super.isConst(name);
-    }
-
-    /**
      * Dispatches an event into the event system (standards-conformant browsers only). See
      * <a href="https://developer.mozilla.org/en-US/docs/DOM/window.dispatchEvent">the Gecko
      * DOM reference</a> for more information.
@@ -2353,6 +2290,14 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             crypto_ = new Crypto(this);
         }
         return crypto_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Window getWindow() throws RuntimeException {
+        return this;
     }
 }
 

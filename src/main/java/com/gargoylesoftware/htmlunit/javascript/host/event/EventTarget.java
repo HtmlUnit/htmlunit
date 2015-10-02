@@ -27,10 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
@@ -39,7 +35,6 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -48,6 +43,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code EventTarget}.
@@ -100,12 +99,28 @@ public class EventTarget extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult executeEvent(final Event event) {
-        if (eventListenersContainer_ != null) {
-            final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
-            final Window window = (Window) page.getEnclosingWindow().getScriptObject();
-            return window.executeEvent(event, this);
-        }
+        final EventListenersContainer eventListenersContainer = getEventListenersContainer();
+        if (eventListenersContainer != null) {
+            final Window window = getWindow();
+            final Object[] args = new Object[] {event};
 
+            // handlers declared as property on a node don't receive the event as argument for IE
+            final Object[] propHandlerArgs;
+            if (getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
+                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
+            }
+            else {
+                propHandlerArgs = args;
+            }
+
+            window.setCurrentEvent(event);
+            try {
+                return eventListenersContainer.executeListeners(event, args, propHandlerArgs);
+            }
+            finally {
+                window.setCurrentEvent(null); // reset event
+            }
+        }
         return null;
     }
 
