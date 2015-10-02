@@ -121,7 +121,7 @@ public class AppletContextImpl implements AppletContext {
     public void showStatus(final String status) {
         // perhaps should we move status handling to WebWindow
         // on the other side this allows "orphaned" pages to be usable
-        final Window window = (Window) htmlPage_.getEnclosingWindow().getScriptObject();
+        final Window window = (Window) htmlPage_.getEnclosingWindow().getScriptableObject();
         window.setStatus(status);
     }
 }

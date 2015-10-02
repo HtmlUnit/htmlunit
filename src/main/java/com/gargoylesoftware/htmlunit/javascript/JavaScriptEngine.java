@@ -926,7 +926,7 @@ public class JavaScriptEngine {
         if (node != null) {
             return node.getScriptableObject();
         }
-        return (Window) page.getEnclosingWindow().getScriptObject();
+        return (Window) page.getEnclosingWindow().getScriptableObject();
     }
 
     /**
@@ -1070,7 +1070,7 @@ public class JavaScriptEngine {
         if (triggerOnError && page != null) {
             final WebWindow window = page.getEnclosingWindow();
             if (window != null) {
-                final Window w = (Window) window.getScriptObject();
+                final Window w = (Window) window.getScriptableObject();
                 if (w != null) {
                     try {
                         w.triggerOnError(scriptException);

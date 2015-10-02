@@ -1410,7 +1410,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             @Override
             protected SimpleScriptable getScriptableFor(final Object object) {
                 if (alsoFrames && object instanceof BaseFrameElement) {
-                    return (SimpleScriptable) ((BaseFrameElement) object).getEnclosedWindow().getScriptObject();
+                    return (SimpleScriptable) ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
                 }
                 return super.getScriptableFor(object);
             }

@@ -594,7 +594,7 @@ public final class HTMLParser {
                 if (!page_.hasFeature(JS_DEFINE_GETTER) && page_.isQuirksMode()) {
                     // this is not really correct; a following meta tag may disable the quirks
                     // mode; but at the moment i have no idea for a better place for this
-                    removePrototypeProperties((Scriptable) page_.getEnclosingWindow().getScriptObject(), "Array",
+                    removePrototypeProperties(page_.getEnclosingWindow().getScriptableObject(), "Array",
                         "every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
                         "reduceRight", "some");
                 }

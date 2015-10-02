@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -91,7 +90,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     public void fixedInHtmlUnit() throws Exception {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
-        final Window topScope = (Window) page.getEnclosingWindow().getScriptObject();
+        final ScriptableObject topScope = page.getEnclosingWindow().getScriptableObject();
         topScope.put("str", topScope, str_);
         topScope.put("text", topScope, text_);
         topScope.put("expected", topScope, expected_);

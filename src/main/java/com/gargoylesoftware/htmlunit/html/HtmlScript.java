@@ -253,8 +253,8 @@ public class HtmlScript extends HtmlElement {
         final PostponedAction action = new PostponedAction(getPage(), "Execution of script " + this) {
             @Override
             public void execute() {
-                final HTMLDocument jsDoc = (HTMLDocument) ((Window) getPage().getEnclosingWindow().getScriptObject())
-                        .getDocument();
+                final HTMLDocument jsDoc = (HTMLDocument)
+                        ((Window) getPage().getEnclosingWindow().getScriptableObject()).getDocument();
                 jsDoc.setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
                         && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
 
@@ -324,7 +324,7 @@ public class HtmlScript extends HtmlElement {
         final String scriptCode = getScriptCode();
         if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
             if (hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
-                final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
+                final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
                 final BaseFunction function = new EventHandler(this, event, scriptCode);
                 window.attachEvent(event, function);
                 return;

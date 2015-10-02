@@ -18,6 +18,8 @@ import java.io.Serializable;
 
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * An interface that represents one window in a browser. It could be a top level window or a frame.
  *
@@ -94,7 +96,18 @@ public interface WebWindow extends Serializable {
      *
      * @param scriptObject the JavaScript object
      */
-    void setScriptObject(final Object scriptObject);
+    void setScriptableObject(final ScriptableObject scriptObject);
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the JavaScript object that corresponds to this element.
+     *
+     * @return the JavaScript object that corresponds to this element
+     * @deprecated as of 2.19, please use {@link #getScriptableObject()} instead
+     */
+    @Deprecated
+    Object getScriptObject();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -103,7 +116,7 @@ public interface WebWindow extends Serializable {
      *
      * @return the JavaScript object that corresponds to this element
      */
-    Object getScriptObject();
+    ScriptableObject getScriptableObject();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

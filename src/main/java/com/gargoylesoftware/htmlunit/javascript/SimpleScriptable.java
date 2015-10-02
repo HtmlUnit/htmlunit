@@ -170,7 +170,7 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
      */
     protected SimpleScriptable getScriptableFor(final Object object) {
         if (object instanceof WebWindow) {
-            return (SimpleScriptable) ((WebWindow) object).getScriptObject();
+            return (SimpleScriptable) ((WebWindow) object).getScriptableObject();
         }
 
         final DomNode domNode = (DomNode) object;
@@ -240,7 +240,7 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
     protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
         final WebWindow enclosingWindow = domNode.getPage().getEnclosingWindow();
         if (enclosingWindow.getEnclosedPage() == domNode.getPage()) {
-            scriptable.setParentScope((Scriptable) enclosingWindow.getScriptObject());
+            scriptable.setParentScope(enclosingWindow.getScriptableObject());
         }
         else {
             scriptable.setParentScope(ScriptableObject.getTopLevelScope(domNode.getPage().getScriptableObject()));

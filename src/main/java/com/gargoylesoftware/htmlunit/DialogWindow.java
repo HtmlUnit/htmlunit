@@ -65,12 +65,11 @@ public class DialogWindow extends WebWindowImpl {
      * {@inheritDoc}
      */
     @Override
-    public void setScriptObject(final Object scriptObject) {
-        final ScriptableObject so = (ScriptableObject) scriptObject;
-        if (so != null) {
-            so.put("dialogArguments", so, arguments_);
+    public void setScriptableObject(final ScriptableObject scriptObject) {
+        if (scriptObject != null) {
+            scriptObject.put("dialogArguments", scriptObject, arguments_);
         }
-        super.setScriptObject(scriptObject);
+        super.setScriptableObject(scriptObject);
     }
 
     /**

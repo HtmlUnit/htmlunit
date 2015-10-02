@@ -364,7 +364,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
                 return null;
             }
         };
-        final Window window = (Window) page.getEnclosingWindow().getScriptObject();
+        final ScriptableObject window = page.getEnclosingWindow().getScriptableObject();
         ScriptableObject.putProperty(window, "mySpecialFunction", mySpecialFunction);
         page.getHtmlElementById("clickMe").click();
         client_.waitForBackgroundJavaScript(5000);

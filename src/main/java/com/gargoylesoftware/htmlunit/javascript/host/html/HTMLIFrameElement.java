@@ -81,7 +81,7 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @JsxGetter
     public DocumentProxy getContentDocument() {
-        return ((Window) getFrame().getEnclosedWindow().getScriptObject()).getDocument_js();
+        return ((Window) getFrame().getEnclosedWindow().getScriptableObject()).getDocument_js();
     }
 
     /**

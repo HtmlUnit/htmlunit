@@ -735,7 +735,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     public void initialize(final WebWindow webWindow) {
         webWindow_ = webWindow;
-        webWindow_.setScriptObject(this);
+        webWindow_.setScriptableObject(this);
 
         windowProxy_ = new WindowProxy(webWindow_);
 
@@ -797,7 +797,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         if (webWindow_ instanceof TopLevelWindow) {
             final WebWindow opener = ((TopLevelWindow) webWindow_).getOpener();
             if (opener != null) {
-                opener_ = opener.getScriptObject();
+                opener_ = opener.getScriptableObject();
             }
         }
     }
@@ -1506,7 +1506,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return the proxy for the specified window
      */
     public static WindowProxy getProxy(final WebWindow w) {
-        return ((Window) w.getScriptObject()).windowProxy_;
+        return ((Window) w.getScriptableObject()).windowProxy_;
     }
 
     /**
