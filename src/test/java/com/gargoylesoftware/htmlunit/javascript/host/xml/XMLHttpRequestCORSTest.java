@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -57,7 +58,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             CHROME = { "error [object XMLHttpRequestProgressEvent]", "false", "0" /* "0" */ },
             IE11 = { "error [object ProgressEvent]", "true", "0" /* "4479" */ },
             IE8 = { })
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void noCorsHeaderCallsErrorHandler() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
