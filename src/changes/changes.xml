@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: support for ProgressEvent properties lengthComputable, loaded, and total added.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: add minimal WebWorker support.
             </action>
