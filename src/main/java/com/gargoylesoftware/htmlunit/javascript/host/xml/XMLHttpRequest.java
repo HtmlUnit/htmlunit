@@ -81,6 +81,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.XMLHttpRequestProgressEvent;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
@@ -280,7 +281,7 @@ public class XMLHttpRequest extends EventTarget {
      * Returns the event handler that fires on error.
      * @return the event handler that fires on error
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     public Function getOnerror() {
         return errorHandler_;
     }
@@ -289,7 +290,7 @@ public class XMLHttpRequest extends EventTarget {
      * Sets the event handler that fires on error.
      * @param errorHandler the event handler that fires on error
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setOnerror(final Function errorHandler) {
         errorHandler_ = errorHandler;
     }
@@ -303,11 +304,12 @@ public class XMLHttpRequest extends EventTarget {
         if (errorHandler_ != null && !getBrowserVersion().hasFeature(XHR_ERRORHANDLER_NOT_SUPPORTED)) {
             final Scriptable scope = errorHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final Object[] params = new Event[] {new ProgressEvent(this, Event.TYPE_PROGRESSEVENT)};
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onerror handler");
             }
-            jsEngine.callFunction(containingPage_, errorHandler_, this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
+            jsEngine.callFunction(containingPage_, errorHandler_, this, scope, params);
             if (LOG.isDebugEnabled()) {
                 if (context == null) {
                     context = Context.getCurrentContext();

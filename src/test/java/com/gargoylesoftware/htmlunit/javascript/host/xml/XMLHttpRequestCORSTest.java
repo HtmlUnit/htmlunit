@@ -53,7 +53,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = "error",
+    @Alerts(DEFAULT = { "error [object ProgressEvent]", "false", "0" /* "0" */ },
+            CHROME = { "error [object XMLHttpRequestProgressEvent]", "false", "0" /* "0" */ },
+            IE11 = { "error [object ProgressEvent]", "true", "0" /* "4479" */ },
             IE8 = { })
     @NotYetImplemented(CHROME)
     public void noCorsHeaderCallsErrorHandler() throws Exception {
@@ -64,7 +66,12 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "  try {\n"
                 + "    var url = '" + URL_THIRD + "';\n"
                 + "    xhr.open('GET', url, true);\n"
-                + "    xhr.onerror = function() { alert('error'); };\n"
+                + "    xhr.onerror = function(event) {\n"
+                + "                    alert('error ' + event);\n"
+                + "                    alert(event.lengthComputable);\n"
+                + "                    alert(event.loaded);\n"
+                // + "                    alert(event.total);\n"
+                + "                  };\n"
                 + "    xhr.send();\n"
                 + "  } catch(e) { alert('exception'); }\n"
                 + "}\n"
