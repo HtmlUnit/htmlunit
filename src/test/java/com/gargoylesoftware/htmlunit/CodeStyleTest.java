@@ -92,6 +92,7 @@ public class CodeStyleTest {
         process(new File("src/test"));
         licenseYear();
         versionYear();
+        parentInPom();
     }
 
     private void process(final File dir) throws IOException {
@@ -367,6 +368,19 @@ public class CodeStyleTest {
             }
         }
         addFailure("Incorrect year in Version.getCopyright()");
+    }
+
+    /**
+     * Verifies no &lt;parent&gt; tag in {@code pom.xml}.
+     */
+    private void parentInPom() throws IOException {
+        final List<String> lines = FileUtils.readLines(new File("pom.xml"));
+        for (int i = 0; i < lines.size(); i++) {
+            if (lines.get(i).contains("<parent>")) {
+                addFailure("'pom.xml' should not have <parent> tag in line: " + (i + 1));
+                break;
+            }
+        }
     }
 
     /**
