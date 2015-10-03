@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
 
@@ -146,7 +147,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * This is the JavaScript object corresponding to this DOM node. It may
      * be null if there isn't a corresponding JavaScript object.
      */
-    private Object scriptObject_;
+    private Object scriptableObject_;
+
 
     /** The ready state is is an IE-only value that is available to a large number of elements. */
     private String readyState_;
@@ -280,7 +282,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param scriptObject the JavaScript object
      */
     public void setScriptableObject(final Object scriptObject) {
-        scriptObject_ = scriptObject;
+        scriptableObject_ = scriptObject;
     }
 
     /**
@@ -742,7 +744,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             for (final Node node : getAncestors(true)) {
-                final Object scriptableObject = ((DomNode) node).getScriptObject2();
+                final Object scriptableObject = ((DomNode) node).getScriptableObject();
                 if (scriptableObject instanceof HTMLElement) {
                     final HTMLElement elem = (HTMLElement) scriptableObject;
                     final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
@@ -888,7 +890,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newnode.nextSibling_ = null;
         newnode.previousSibling_ = null;
         newnode.firstChild_ = null;
-        newnode.scriptObject_ = null;
+        newnode.scriptableObject_ = null;
         newnode.directlyAttachedToPage_ = false;
 
         // if deep, clone the children too.
@@ -935,7 +937,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return the JavaScript object that corresponds to this node
      */
     public ScriptableObject getScriptableObject() {
-        if (scriptObject_ == null) {
+        if (scriptableObject_ == null) {
             final SgmlPage page = getPage();
             if (this == page) {
                 final StringBuilder msg = new StringBuilder("No script object associated with the Page.");
@@ -944,19 +946,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 msg.append(page.getClass().getName());
                 msg.append("'");
                 try {
-                    msg.append(" url: '" + page.getUrl() + "'");
+                    msg.append(" url: '").append(page.getUrl()).append('\'');
                     msg.append(" content: ");
                     msg.append(page.getWebResponse().getContentAsString());
                 }
                 catch (final Exception e) {
                     // ok bad luck with detail
-                    msg.append(" no details: '" + e.toString() + "'");
+                    msg.append(" no details: '").append(e).append('\'');
                 }
                 throw new IllegalStateException(msg.toString());
             }
-            scriptObject_ = ((SimpleScriptable) page.getScriptObject2()).makeScriptableFor(this);
+            scriptableObject_ = ((SimpleScriptable) page.getScriptableObject()).makeScriptableFor(this);
         }
-        return (ScriptableObject) scriptObject_;
+        return (ScriptableObject) scriptableObject_;
     }
 
     /**
@@ -969,9 +971,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @return the JavaScript object that corresponds to this node
      */
-    //TODO: rename to getScriptObject(), currently WebDriver depends on the other signature
-    public Object getScriptObject2() {
-        if (scriptObject_ == null) {
+    public ScriptObject getScriptObject2() {
+        if (scriptableObject_ == null) {
             final SgmlPage page = getPage();
             if (this == page) {
                 final StringBuilder msg = new StringBuilder("No script object associated with the Page.");
@@ -980,19 +981,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 msg.append(page.getClass().getName());
                 msg.append("'");
                 try {
-                    msg.append(" url: '" + page.getUrl() + "'");
+                    msg.append(" url: '").append(page.getUrl()).append('\'');
                     msg.append(" content: ");
                     msg.append(page.getWebResponse().getContentAsString());
                 }
                 catch (final Exception e) {
                     // ok bad luck with detail
-                    msg.append(" no details: '" + e.toString() + "'");
+                    msg.append(" no details: '").append(e).append('\'');
                 }
                 throw new IllegalStateException(msg.toString());
             }
-            scriptObject_ = ((SimpleScriptObject) page.getScriptObject2()).makeScriptableFor(this);
+            scriptableObject_ = ((SimpleScriptObject) page.getScriptObject2()).makeScriptableFor(this);
         }
-        return scriptObject_;
+        return (ScriptObject) scriptableObject_;
     }
 
     /**
@@ -1912,7 +1913,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
                 int documentMode = 9;
                 if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-                    final Object sobj = getPage().getScriptObject2();
+                    final Object sobj = getPage().getScriptableObject();
                     if (sobj instanceof HTMLDocument) {
                         documentMode = ((HTMLDocument) sobj).getDocumentMode();
                     }

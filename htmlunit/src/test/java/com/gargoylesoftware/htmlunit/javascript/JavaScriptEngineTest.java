@@ -718,7 +718,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
         final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client);
-        client.setJavaScriptEngine(countingJavaScriptEngine);
+//        client.setJavaScriptEngine(countingJavaScriptEngine);
 
         final HtmlPage page = client.getPage(getDefaultUrl());
 
@@ -1137,7 +1137,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 200, "ok", "text/javascript", headersAllowingCache);
 
         final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client);
-        client.setJavaScriptEngine(countingJavaScriptEngine);
+//        client.setJavaScriptEngine(countingJavaScriptEngine);
 
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1185,25 +1185,25 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         throws Exception {
 
         final WebClient client = getWebClient();
-        client.setJavaScriptEngine(new JavaScriptEngine(client) {
-            @Override
-            public Object execute(final InteractivePage htmlPage, final String sourceCode,
-                    final String sourceName, final int startLine) {
-                collectedScripts.add(sourceCode);
-                return null;
-            }
-            @Override
-            public Object callFunction(
-                    final InteractivePage htmlPage, final Function javaScriptFunction,
-                    final Scriptable thisObject, final Object[] args,
-                    final DomNode htmlElement) {
-                return null;
-            }
-            @Override
-            public boolean isScriptRunning() {
-                return false;
-            }
-        });
+//        client.setJavaScriptEngine(new JavaScriptEngine(client) {
+//            @Override
+//            public Object execute(final InteractivePage htmlPage, final String sourceCode,
+//                    final String sourceName, final int startLine) {
+//                collectedScripts.add(sourceCode);
+//                return null;
+//            }
+//            @Override
+//            public Object callFunction(
+//                    final InteractivePage htmlPage, final Function javaScriptFunction,
+//                    final Scriptable thisObject, final Object[] args,
+//                    final DomNode htmlElement) {
+//                return null;
+//            }
+//            @Override
+//            public boolean isScriptRunning() {
+//                return false;
+//            }
+//        });
 
         final MockWebConnection webConnection = new MockWebConnection();
 
@@ -1247,7 +1247,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 super.handleJavaScriptException(scriptException, triggerOnError);
             }
         };
-        webClient.setJavaScriptEngine(myEngine);
+//        webClient.setJavaScriptEngine(myEngine);
 
         final String html = "<html>\n"
             + "<head><title>Test page</title><\n"

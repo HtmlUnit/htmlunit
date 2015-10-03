@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -65,12 +67,11 @@ public class DialogWindow extends WebWindowImpl {
      * {@inheritDoc}
      */
     @Override
-    public void setScriptObject(final Object scriptObject) {
-        final ScriptableObject so = (ScriptableObject) scriptObject;
-        if (so != null) {
-            so.put("dialogArguments", so, arguments_);
+    public void setScriptableObject(final ScriptableObject scriptObject) {
+        if (scriptObject != null) {
+            scriptObject.put("dialogArguments", scriptObject, arguments_);
         }
-        super.setScriptObject(scriptObject);
+        super.setScriptableObject(scriptObject);
     }
 
     /**
@@ -89,5 +90,17 @@ public class DialogWindow extends WebWindowImpl {
     @Override
     public String toString() {
         return "DialogWindow[name=\"" + getName() + "\"]";
+    }
+
+    @Override
+    public void setScriptObject(ScriptObject scriptObject) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public ScriptObject getScriptObject2() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

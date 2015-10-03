@@ -73,7 +73,6 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
-import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
@@ -142,7 +141,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private transient WebConnection webConnection_;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
-    private transient AbstractJavaScriptEngine scriptEngine_;
+    private transient NashornJavaScriptEngine scriptEngine_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
@@ -314,7 +313,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 // We're just navigating to an anchor within the current page.
                 page.getWebResponse().getWebRequest().setUrl(current);
                 webWindow.getHistory().addPage(page);
-                final Window window = (Window) webWindow.getScriptObject();
+                final Window window = (Window) webWindow.getScriptableObject();
                 if (window != null) { // js enabled
                     window.getLocation().setHash(current.getRef());
                 }
@@ -494,7 +493,7 @@ public class WebClient implements Serializable, AutoCloseable {
                                 LOG.debug("Executing onload handler for " + frame);
                             }
                             final Event event = new Event(frame, Event.TYPE_LOAD);
-                            ((Node) frame.getScriptObject2()).executeEvent(event);
+                            ((Node) frame.getScriptableObject()).executeEventLocally(event);
                         }
                     }
                 }
@@ -585,18 +584,16 @@ public class WebClient implements Serializable, AutoCloseable {
     /**
      * This method is intended for testing only - use at your own risk.
      * @return the current JavaScript engine (never {@code null})
-     * @deprecated as of 2.19, please use {@link #getAbstractJavaScriptEngine()} instead
      */
-    @Deprecated
     public JavaScriptEngine getJavaScriptEngine() {
-        return (JavaScriptEngine) scriptEngine_;
+        return null;
     }
 
     /**
      * This method is intended for testing only - use at your own risk.
      * @return the current JavaScript engine (never {@code null})
      */
-    public AbstractJavaScriptEngine getAbstractJavaScriptEngine() {
+    public NashornJavaScriptEngine getJavaScriptEngine2() {
         return scriptEngine_;
     }
 
@@ -605,7 +602,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param engine the new script engine to use
      */
-    public void setJavaScriptEngine(final AbstractJavaScriptEngine engine) {
+    public void setJavaScriptEngine(final NashornJavaScriptEngine engine) {
         if (engine == null) {
             throw new IllegalArgumentException("Can't set JavaScriptEngine to null");
         }
@@ -756,7 +753,7 @@ public class WebClient implements Serializable, AutoCloseable {
             //2. onFocus event is triggered for focusedElement of new current window
             final Page enclosedPage = currentWindow_.getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-                final Window jsWindow = (Window) currentWindow_.getScriptObject();
+                final Window jsWindow = (Window) currentWindow_.getScriptableObject();
                 if (jsWindow != null) {
                     final HTMLElement activeElement =
                             (HTMLElement) ((HTMLDocument) jsWindow.getDocument()).getActiveElement();
@@ -1029,7 +1026,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void initialize(final Page newPage) {
         WebAssert.notNull("newPage", newPage);
-        ((Window2) newPage.getEnclosingWindow().getScriptObject()).initialize(newPage);
+        ((Window2) newPage.getEnclosingWindow().getScriptObject2()).initialize(newPage);
     }
 
     /**
@@ -1042,7 +1039,7 @@ public class WebClient implements Serializable, AutoCloseable {
     public void initializeEmptyWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
         initialize(webWindow);
-        ((Window) webWindow.getScriptObject()).initialize();
+        ((Window) webWindow.getScriptableObject()).initialize();
     }
 
     /**
@@ -1750,7 +1747,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 // now looks at the visibility of the frame window
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (frameElement.isDisplayed()) {
-                    final HTMLElement htmlElement = (HTMLElement) frameElement.getScriptObject2();
+                    final HTMLElement htmlElement = (HTMLElement) frameElement.getScriptableObject();
                     final ComputedCSSStyleDeclaration style =
                             htmlElement.getWindow().getComputedStyle(htmlElement, null);
                     use = (style.getCalculatedWidth(false, false) != 0)
@@ -1955,7 +1952,7 @@ public class WebClient implements Serializable, AutoCloseable {
         in.defaultReadObject();
 
         webConnection_ = createWebConnection();
-        scriptEngine_ = new JavaScriptEngine(this);
+        scriptEngine_ = new NashornJavaScriptEngine(this);
         jobManagers_ = Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());
 
         if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
@@ -2127,7 +2124,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     win.getHistory().addPage(page);
 
                     // update location.hash
-                    final Window jsWindow = (Window) win.getScriptObject();
+                    final Window jsWindow = (Window) win.getScriptableObject();
                     if (null != jsWindow) {
                         final Location location = jsWindow.getLocation();
                         location.setHash(oldURL, downloadedResponse.urlWithOnlyHashChange_.getRef());

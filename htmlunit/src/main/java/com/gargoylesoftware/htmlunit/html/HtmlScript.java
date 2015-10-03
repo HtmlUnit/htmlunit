@@ -41,9 +41,10 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
-import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
@@ -219,7 +220,7 @@ public class HtmlScript extends HtmlElement {
                         executeScriptIfNeeded();
                     }
                 };
-                final AbstractJavaScriptEngine engine = getPage().getWebClient().getAbstractJavaScriptEngine();
+                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
                 engine.addPostponedAction(action);
             }
             // if FF, only execute if the "src" attribute
@@ -231,7 +232,7 @@ public class HtmlScript extends HtmlElement {
                         executeScriptIfNeeded();
                     }
                 };
-                final AbstractJavaScriptEngine engine = getPage().getWebClient().getAbstractJavaScriptEngine();
+                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
                 engine.addPostponedAction(action);
             }
         }
@@ -253,10 +254,10 @@ public class HtmlScript extends HtmlElement {
         final PostponedAction action = new PostponedAction(getPage(), "Execution of script " + this) {
             @Override
             public void execute() {
-                final HTMLDocument jsDoc = (HTMLDocument) ((Window) getPage().getEnclosingWindow().getScriptObject())
-                        .getDocument();
-                jsDoc.setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
-                        && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+//                final HTMLDocument jsDoc = (HTMLDocument)
+//                        ((Window2) getPage().getEnclosingWindow().getScriptObject2()).getDocument();
+//                jsDoc.setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
+//                        && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
 
                 try {
                     final boolean onReady = hasFeature(JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
@@ -278,14 +279,14 @@ public class HtmlScript extends HtmlElement {
                     }
                 }
                 finally {
-                    jsDoc.setExecutingDynamicExternalPosponed(false);
+//                    jsDoc.setExecutingDynamicExternalPosponed(false);
                 }
             }
         };
 
         if ((!hasFeature(JS_SCRIPT_ASYNC_NOT_SUPPORTED) && hasAttribute("async"))
                 || postponed && StringUtils.isBlank(getTextContent())) {
-            final AbstractJavaScriptEngine engine = getPage().getWebClient().getAbstractJavaScriptEngine();
+            final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }
         else {
@@ -324,7 +325,7 @@ public class HtmlScript extends HtmlElement {
         final String scriptCode = getScriptCode();
         if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
             if (hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
-                final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
+                final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
                 final BaseFunction function = new EventHandler(this, event, scriptCode);
                 window.attachEvent(event, function);
                 return;
@@ -420,9 +421,9 @@ public class HtmlScript extends HtmlElement {
 
     private void executeEventIfBrowserHasFeature(final String type, final BrowserVersionFeatures feature) {
         if (hasFeature(feature)) {
-            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject2();
-            final Event event = new Event(HtmlScript.this, type);
-            script.executeEvent(event);
+//            final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
+//            final Event event = new Event(HtmlScript.this, type);
+//            script.executeEventLocally(event);
         }
     }
 
@@ -530,9 +531,9 @@ public class HtmlScript extends HtmlElement {
     protected void setAndExecuteReadyState(final String state) {
         if (hasFeature(EVENT_ONREADY_STATE_CHANGE)) {
             setReadyState(state);
-            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject2();
-            final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
-            script.executeEvent(event);
+//            final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
+//            final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
+//            script.executeEventLocally(event);
         }
     }
 

@@ -19,6 +19,7 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowImpl;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 /**
  * The web window for a frame or iframe.
@@ -140,5 +141,17 @@ public class FrameWindow extends WebWindowImpl {
         final WebWindowImpl parent = (WebWindowImpl) getParentWindow();
         parent.removeChildWindow(this);
         getWebClient().deregisterWebWindow(this);
+    }
+
+    @Override
+    public void setScriptObject(ScriptObject scriptObject) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public ScriptObject getScriptObject2() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

@@ -774,7 +774,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             stateUpdated = true;
         }
 
-        final JavaScriptEngine jsEngine = (JavaScriptEngine) page.getWebClient().getAbstractJavaScriptEngine();
+        final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
         jsEngine.holdPosponedActions();
         try {
             final ScriptResult scriptResult = doClickFireClickEvent(event);
@@ -1153,7 +1153,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing " + event);
         }
-        final EventTarget jsElt = (EventTarget) getScriptObject2();
+        final EventTarget jsElt = (EventTarget) getScriptableObject();
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
@@ -1161,7 +1161,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             }
         };
 
-        final ContextFactory cf = ((JavaScriptEngine) client.getAbstractJavaScriptEngine()).getContextFactory();
+        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final ScriptResult result = (ScriptResult) cf.call(action);
         if (event.isAborted(result)) {
             preventDefault();
@@ -1185,7 +1185,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     public void focus() {
         final InteractivePage page = (InteractivePage) getPage();
         page.setFocusedElement(this);
-        final HTMLElement jsElt = (HTMLElement) getScriptObject2();
+        final HTMLElement jsElt = (HTMLElement) getScriptableObject();
         jsElt.setActive();
     }
 

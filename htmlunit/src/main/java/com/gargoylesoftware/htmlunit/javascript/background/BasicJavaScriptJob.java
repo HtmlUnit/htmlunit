@@ -20,7 +20,7 @@ package com.gargoylesoftware.htmlunit.javascript.background;
  * @author Daniel Gredler
  * @author Amit Manjhi
  */
-abstract class BasicJavaScriptJob implements JavaScriptJob {
+public abstract class BasicJavaScriptJob implements JavaScriptJob {
 
     /** The job ID. */
     private Integer id_;
@@ -43,7 +43,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
     private long targetExecutionTime_;
 
     /** Creates a new job instance that executes once, immediately. */
-    BasicJavaScriptJob() {
+    public BasicJavaScriptJob() {
         this(0, null);
     }
 

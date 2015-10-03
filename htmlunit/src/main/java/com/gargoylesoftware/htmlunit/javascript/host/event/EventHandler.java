@@ -18,13 +18,13 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_NO_P
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Allows to wrap event handler code as Function object.
@@ -57,7 +57,7 @@ public class EventHandler extends BaseFunction {
         }
         jsSnippet_ = functionSignature + " {" + jsSnippet + "\n}";
 
-        final Window w = (Window) node.getPage().getEnclosingWindow().getScriptObject();
+        final ScriptableObject w = node.getPage().getEnclosingWindow().getScriptableObject();
         final Scriptable function = (Scriptable) w.get("Function", w);
         setPrototype(function.getPrototype());
     }
@@ -71,7 +71,7 @@ public class EventHandler extends BaseFunction {
         throws JavaScriptException {
 
         // the js object to which this event is attached has to be the scope
-        final SimpleScriptable jsObj = (SimpleScriptable) node_.getScriptObject2();
+        final SimpleScriptable jsObj = (SimpleScriptable) node_.getScriptableObject();
         // compile "just in time"
         if (realFunction_ == null) {
             realFunction_ = cx.compileFunction(jsObj, jsSnippet_, eventName_ + " event for " + node_

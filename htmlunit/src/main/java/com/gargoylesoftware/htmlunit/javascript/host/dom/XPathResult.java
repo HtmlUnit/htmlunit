@@ -188,7 +188,7 @@ public class XPathResult extends SimpleScriptable {
             throw Context.reportRuntimeError("Cannot get singleNodeValue for type: " + resultType_);
         }
         if (!result_.isEmpty()) {
-            return (Node) ((DomNode) result_.get(0)).getScriptObject2();
+            return (Node) ((DomNode) result_.get(0)).getScriptableObject();
         }
         return null;
     }
@@ -203,7 +203,7 @@ public class XPathResult extends SimpleScriptable {
             throw Context.reportRuntimeError("Cannot get iterateNext for type: " + resultType_);
         }
         if (iteratorIndex_ < result_.size()) {
-            return (Node) ((DomNode) result_.get(iteratorIndex_++)).getScriptObject2();
+            return (Node) ((DomNode) result_.get(iteratorIndex_++)).getScriptableObject();
         }
         return null;
     }
@@ -220,7 +220,7 @@ public class XPathResult extends SimpleScriptable {
             throw Context.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
         }
         if (index >= 0 && index < result_.size()) {
-            return (Node) ((DomNode) result_.get(index)).getScriptObject2();
+            return (Node) ((DomNode) result_.get(index)).getScriptableObject();
         }
         return null;
     }

@@ -102,7 +102,7 @@ import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
-public class JavaScriptEngine implements AbstractJavaScriptEngine {
+public class JavaScriptEngine {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
@@ -569,7 +569,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
      * @param page the page
      */
     public void definePropertiesInStandardsMode(final HtmlPage page) {
-        final Window window = ((HTMLDocument) page.getScriptObject2()).getWindow();
+        final Window window = ((HTMLDocument) page.getScriptableObject()).getWindow();
         final BrowserVersion browserVersion = window.getBrowserVersion();
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final String jsClassName = config.getClassName();
@@ -926,7 +926,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
         if (node != null) {
             return node.getScriptableObject();
         }
-        return (Window) page.getEnclosingWindow().getScriptObject();
+        return (Window) page.getEnclosingWindow().getScriptableObject();
     }
 
     /**
@@ -1070,7 +1070,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
         if (triggerOnError && page != null) {
             final WebWindow window = page.getEnclosingWindow();
             if (window != null) {
-                final Window w = (Window) window.getScriptObject();
+                final Window w = (Window) window.getScriptableObject();
                 if (w != null) {
                     try {
                         w.triggerOnError(scriptException);
@@ -1144,7 +1144,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
      * @param c the node class {@link DomNode} or some subclass.
      * @return {@code null} if none found
      */
-    public Class<? extends SimpleScriptable> getJavaScriptClass(final Class<?> c) {
+    public Class<? extends HtmlUnitScriptable> getJavaScriptClass(final Class<?> c) {
         return jsConfig_.getDomJavaScriptMapping().get(c);
     }
 
@@ -1159,7 +1159,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
     /**
      * {@inheritDoc}
      */
-    @Override
     public long getJavaScriptTimeout() {
         return getContextFactory().getTimeout();
     }
@@ -1167,7 +1166,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
     /**
      * {@inheritDoc}
      */
-    @Override
     public void setJavaScriptTimeout(final long timeout) {
         getContextFactory().setTimeout(timeout);
     }

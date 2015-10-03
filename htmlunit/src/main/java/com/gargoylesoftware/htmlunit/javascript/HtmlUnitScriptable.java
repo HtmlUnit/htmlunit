@@ -133,4 +133,12 @@ public class HtmlUnitScriptable extends ScriptableObject {
         }
         super.setParentScope(m);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> typeHint) {
+        return "[object " + getClassName() + "]";
+    }
 }

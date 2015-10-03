@@ -27,6 +27,9 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -46,7 +49,8 @@ public abstract class WebWindowImpl implements WebWindow {
 
     private WebClient webClient_;
     private Page enclosedPage_;
-    private Object scriptObject_;
+    private ScriptableObject scriptObject_;
+    private ScriptObject scriptObject2_;
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
     private String name_ = "";
@@ -146,8 +150,13 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
-    public void setScriptObject(final Object scriptObject) {
+    public void setScriptableObject(final ScriptableObject scriptObject) {
         scriptObject_ = scriptObject;
+    }
+
+    @Override
+    public void setScriptObject(ScriptObject scriptObject) {
+        this.scriptObject2_ = scriptObject;
     }
 
     /**
@@ -155,9 +164,21 @@ public abstract class WebWindowImpl implements WebWindow {
      */
     @Override
     public Object getScriptObject() {
+        return getScriptableObject();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ScriptableObject getScriptableObject() {
         return scriptObject_;
     }
 
+    @Override
+    public ScriptObject getScriptObject2() {
+        return scriptObject2_;
+    }
     /**
      * {@inheritDoc}
      */

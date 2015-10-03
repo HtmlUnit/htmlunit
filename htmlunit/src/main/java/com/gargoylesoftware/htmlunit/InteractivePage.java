@@ -164,7 +164,7 @@ public abstract class InteractivePage extends SgmlPage {
     public InteractivePage cloneNode(final boolean deep) {
         // we need the ScriptObject clone before cloning the kids.
         final InteractivePage result = (InteractivePage) super.cloneNode(false);
-        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptObject2()).clone();
+        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptableObject()).clone();
         jsObjClone.setDomNode(result);
 
         // if deep, clone the kids too, and re initialize parts of the clone
@@ -196,7 +196,7 @@ public abstract class InteractivePage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        final JavaScriptEngine engine = (JavaScriptEngine) getWebClient().getAbstractJavaScriptEngine();
+        final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());

@@ -347,7 +347,7 @@ public class Node extends EventTarget {
             if (newChildNode instanceof DomDocumentFragment) {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
-                    if (!isNodeInsertable((Node) child.getScriptObject2())) {
+                    if (!isNodeInsertable((Node) child.getScriptableObject())) {
                         if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
                             return newChild;
                         }
@@ -454,8 +454,8 @@ public class Node extends EventTarget {
             final Node refChildObject = ((Node) oldChildObject).getNextSibling();
             for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
                 if (firstNode == null) {
-                    replaceChild(node.getScriptObject2(), oldChildObject);
-                    firstNode = (Node) node.getScriptObject2();
+                    replaceChild(node.getScriptableObject(), oldChildObject);
+                    firstNode = (Node) node.getScriptableObject();
                 }
                 else {
                     insertBeforeImpl(new Object[] {node.getScriptableObject(), refChildObject});
@@ -506,7 +506,7 @@ public class Node extends EventTarget {
     }
 
     private void copyEventListenersWhenNeeded(final DomNode domNode, final DomNode clonedNode) {
-        final Node jsNode = (Node) domNode.getScriptObject2();
+        final Node jsNode = (Node) domNode.getScriptableObject();
         if (jsNode != null) {
             final Node jsClonedNode = getJavaScriptNode(clonedNode);
             jsClonedNode.getEventListenersContainer().copyFrom(jsNode.getEventListenersContainer());
@@ -705,7 +705,7 @@ public class Node extends EventTarget {
         if (document == null) {
             return null;
         }
-        return ((SgmlPage) document).getScriptObject2();
+        return ((SgmlPage) document).getScriptableObject();
     }
 
     /**

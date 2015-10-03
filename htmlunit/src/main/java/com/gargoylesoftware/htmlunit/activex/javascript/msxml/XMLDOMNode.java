@@ -251,7 +251,7 @@ public class XMLDOMNode extends MSXMLScriptable {
         if (document == null) {
             return null;
         }
-        return ((SgmlPage) document).getScriptObject2();
+        return ((SgmlPage) document).getScriptableObject();
     }
 
     /**
@@ -438,7 +438,7 @@ public class XMLDOMNode extends MSXMLScriptable {
             if (newChildNode instanceof DomDocumentFragment) {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
-                    insertBeforeImpl(new Object[] {child.getScriptObject2(), refChildObject});
+                    insertBeforeImpl(new Object[] {child.getScriptableObject(), refChildObject});
                 }
                 return newChildObject;
             }
@@ -514,7 +514,7 @@ public class XMLDOMNode extends MSXMLScriptable {
             final XMLDOMNode refChildObject = ((XMLDOMNode) oldChild).getNextSibling();
             for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
                 if (firstNode == null) {
-                    replaceChild(node.getScriptObject2(), oldChild);
+                    replaceChild(node.getScriptableObject(), oldChild);
                     firstNode = (XMLDOMNode) node.getScriptableObject();
                 }
                 else {

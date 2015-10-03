@@ -185,20 +185,20 @@ public class HtmlImage extends HtmlElement {
             // If the download was a success, trigger the onload handler.
             if (ok) {
                 final Event event = new Event(this, Event.TYPE_LOAD);
-                final Node scriptObject = (Node) getScriptObject2();
+                final Node scriptObject = (Node) getScriptableObject();
 
                 final String readyState = htmlPage.getReadyState();
                 if (READY_STATE_LOADING.equals(readyState)) {
                     final PostponedAction action = new PostponedAction(getPage()) {
                         @Override
                         public void execute() throws Exception {
-                            scriptObject.executeEvent(event);
+                            scriptObject.executeEventLocally(event);
                         }
                     };
                     htmlPage.addAfterLoadAction(action);
                 }
                 else {
-                    scriptObject.executeEvent(event);
+                    scriptObject.executeEventLocally(event);
                 }
             }
             else {

@@ -25,14 +25,16 @@ import javax.script.SimpleScriptContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngineFactory;
-import com.gargoylesoftware.js.nashorn.api.scripting.ScriptObjectMirror;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
@@ -60,7 +62,25 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
      */
     public NashornJavaScriptEngine(final WebClient webClient) {
         webClient_ = webClient;
-        initGlobal(engine, new Browser(BrowserFamily.CHROME, 45));
+        
+        initGlobal(engine, getBrowser(webClient.getBrowserVersion()));
+    }
+
+    private static Browser getBrowser(final BrowserVersion version) {
+        BrowserFamily family;
+        if (version.isFirefox()) {
+            family = BrowserFamily.FF;
+        }
+        else if (version.isIE()) {
+            family = BrowserFamily.IE;
+        }
+        else if (version.isEdge()) {
+            family = BrowserFamily.EDGE;
+        }
+        else {
+            family = BrowserFamily.CHROME;
+        }
+        return new Browser(family, (int) version.getBrowserVersionNumeric());
     }
 
     private void initGlobal(final ScriptEngine engine, final Browser browser) {
@@ -75,11 +95,15 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             if (browserFamily == CHROME) {
                 global.put("EventTarget", new EventTarget2.FunctionConstructor(), true);
                 global.put("Window", new Window2.FunctionConstructor(), true);
+                global.put("Event", new Event2.FunctionConstructor(), true);
                 setProto(global, "Window", "EventTarget");
             }
             else {
-                global.put("Window", new Window2(), true);
+                global.put("Window", new Window2.ObjectConstructor(), true);
+                global.put("Event", new Event2(), true);
+                global.put("BeforeUnloadEvent", new BeforeUnloadEvent2(), true);
                 setProto(global, "Window", new EventTarget2.ObjectConstructor());
+                setProto(global, "BeforeUnloadEvent", "Event");
             }
 
             final Window2 window = new Window2();
@@ -90,6 +114,16 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             window.setProto(windowProto);
 
             global.put("window", window, true);
+
+            try {
+                
+              global.put("alert", window.get("alert"), true);
+//                engine.eval("var alert = function() { return window.alert.apply(window, arguments) }");
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+
         }
         finally {
             Context.setGlobal(oldGlobal);
@@ -145,6 +179,12 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 
     @Override
     public Object execute(InteractivePage page, String sourceCode, String sourceName, int startLine) {
+        try {
+            engine.eval(sourceCode);
+        }
+        catch(Exception e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 

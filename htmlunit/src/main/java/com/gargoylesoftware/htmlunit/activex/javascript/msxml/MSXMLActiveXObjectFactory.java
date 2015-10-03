@@ -127,7 +127,7 @@ public class MSXMLActiveXObjectFactory {
         initObject(document);
 
         try {
-            document.setParentScope((Scriptable) enclosingWindow.getScriptObject());
+            document.setParentScope(enclosingWindow.getScriptableObject());
         }
         catch (final Exception e) {
             LOG.error("Exception while initializing JavaScript for the page", e);

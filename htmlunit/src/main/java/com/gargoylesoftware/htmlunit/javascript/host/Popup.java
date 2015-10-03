@@ -32,6 +32,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code Popup}.
@@ -115,7 +118,7 @@ public class Popup extends SimpleScriptable {
 class PopupPseudoWebWindow implements WebWindow {
 
     private final WebClient webClient_;
-    private Object scriptObject_;
+    private ScriptableObject scriptObject_;
     private Page enclosedPage_;
 
     private int innerHeight_ = 605;
@@ -153,10 +156,18 @@ class PopupPseudoWebWindow implements WebWindow {
     }
 
     /**
-     * @see com.gargoylesoftware.htmlunit.WebWindow#getScriptObject()
+     * {@inheritDoc}
      */
     @Override
     public Object getScriptObject() {
+        return getScriptableObject();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ScriptableObject getScriptableObject() {
         return scriptObject_;
     }
 
@@ -210,10 +221,10 @@ class PopupPseudoWebWindow implements WebWindow {
     }
 
     /**
-     * @see com.gargoylesoftware.htmlunit.WebWindow#setScriptObject(java.lang.Object)
+     * {@inheritDoc}
      */
     @Override
-    public void setScriptObject(final Object scriptObject) {
+    public void setScriptableObject(final ScriptableObject scriptObject) {
         scriptObject_ = scriptObject;
     }
 
@@ -287,6 +298,18 @@ class PopupPseudoWebWindow implements WebWindow {
     @Override
     public void setOuterHeight(final int outerHeight) {
         outerHeight_ = outerHeight;
+    }
+
+    @Override
+    public void setScriptObject(ScriptObject scriptObject) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public ScriptObject getScriptObject2() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

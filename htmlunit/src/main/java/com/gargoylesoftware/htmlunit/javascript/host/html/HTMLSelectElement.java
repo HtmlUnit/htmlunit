@@ -196,7 +196,7 @@ public class HTMLSelectElement extends FormField {
         if (selectedOptions.isEmpty()) {
             return "";
         }
-        return ((HTMLOptionElement) selectedOptions.get(0).getScriptObject2()).getValue();
+        return ((HTMLOptionElement) selectedOptions.get(0).getScriptableObject()).getValue();
     }
 
     /**
