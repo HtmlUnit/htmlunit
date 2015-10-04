@@ -18,13 +18,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code XMLHttpRequestProgressEvent}.
  *
  * @author Ahmed Ashour
- * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
 public class XMLHttpRequestProgressEvent extends ProgressEvent {
@@ -32,6 +32,7 @@ public class XMLHttpRequestProgressEvent extends ProgressEvent {
     /**
      * Creates an instance.
      */
+    @JsxConstructor
     public XMLHttpRequestProgressEvent() {
     }
 
