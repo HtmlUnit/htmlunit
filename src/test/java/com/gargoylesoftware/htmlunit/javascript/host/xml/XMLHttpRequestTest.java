@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.assertNotNull;
@@ -1382,15 +1383,93 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            CHROME = "function")
-    @NotYetImplemented
+    @Alerts(DEFAULT = { "someLoad [object ProgressEvent]", "load", "true" },
+            CHROME = { "someLoad [object XMLHttpRequestProgressEvent]", "load", "false" },
+            IE8 = "exception")
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function someLoad(e) {\n"
+            + "      function someLoad(event) {\n"
+            + "        alert('someLoad ' + event);\n"
+            + "        alert(event.type);\n"
+            + "        alert(event.lengthComputable);\n"
+            + "      }\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var request = " + XHR_INSTANTIATION + ";\n"
+            + "          request.addEventListener('load', someLoad, false);"
+            + "          request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "          request.send('');\n"
+            + "        } catch (e) { alert('exception'); }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml = "<abc></abc>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "someLoad [object ProgressEvent]", "load", "true", "11", "11" },
+            CHROME = { "someLoad [object XMLHttpRequestProgressEvent]", "load", "false", "11", "0" },
+            IE8 = "exception")
+    @NotYetImplemented({ FF, CHROME, IE11 })
+    public void addEventListenerDetails() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function someLoad(event) {\n"
+            + "        alert('someLoad ' + event);\n"
+            + "        alert(event.type);\n"
+            + "        alert(event.lengthComputable);\n"
+            + "        alert(event.loaded);\n"
+            + "        alert(event.total);\n"
+            + "      }\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var request = " + XHR_INSTANTIATION + ";\n"
+            + "          request.addEventListener('load', someLoad, false);"
+            + "          request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "          request.send('');\n"
+            + "        } catch (e) { alert('exception'); }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml = "<abc></abc>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            CHROME = "function",
+            IE8 = "exception")
+    @NotYetImplemented({ FF, CHROME, IE11 })
+    public void addEventListenerCaller() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function someLoad(event) {\n"
             + "        var caller = arguments.callee.caller;\n"
             + "        alert(typeof caller == 'function' ? 'function' : caller);\n"
             + "      }\n"
@@ -1413,5 +1492,4 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
         loadPageWithAlerts2(html);
     }
-
 }

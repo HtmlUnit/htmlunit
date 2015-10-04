@@ -117,6 +117,15 @@ public class ProgressEvent extends Event {
     }
 
     /**
+     * Sets the lengthComputable information for this event.
+     *
+     * @param lengthComputable the lengthComputable information for this event
+     */
+    public void setLengthComputable(final boolean lengthComputable) {
+        lengthComputable_ = lengthComputable;
+    }
+
+    /**
      * Returns the loaded property from the event.
      * @return the loaded property from the event.
      */
@@ -126,11 +135,29 @@ public class ProgressEvent extends Event {
     }
 
     /**
+     * Sets the loaded information for this event.
+     *
+     * @param loaded the loaded information for this event
+     */
+    public void setLoaded(final long loaded) {
+        loaded_ = loaded;
+    }
+
+    /**
      * Returns the total property from the event.
      * @return the total property from the event.
      */
     @JsxGetter
     public long getTotal() {
         return total_;
+    }
+
+    /**
+     * Sets the total information for this event.
+     *
+     * @param total the total information for this event
+     */
+    public void setTotal(final long total) {
+        total_ = total;
     }
 }

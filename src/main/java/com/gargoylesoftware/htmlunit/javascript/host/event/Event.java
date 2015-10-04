@@ -136,9 +136,6 @@ public class Event extends SimpleScriptable {
     /** The event type triggered by "onreadystatechange" event handlers. */
     public static final String TYPE_READY_STATE_CHANGE = "readystatechange";
 
-    /** The progressevent event type, triggered by "onprogressevent" event handlers. */
-    public static final String TYPE_PROGRESSEVENT = "progressevent";
-
     /** The event type triggered by "onerror" event handlers. */
     public static final String TYPE_ERROR = "error";
 

@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POPSTATEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
@@ -149,6 +150,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.XMLHttpRequestProgressEvent;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 
@@ -265,6 +267,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         additionalEventMap.put("PointerEvent", PointerEvent.class);
         additionalEventMap.put("PopStateEvent", PopStateEvent.class);
         additionalEventMap.put("ProgressEvent", ProgressEvent.class);
+        additionalEventMap.put("XMLHttpRequestProgressEvent", XMLHttpRequestProgressEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
 
         // commands
@@ -1822,7 +1825,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 || "PopStateEvent".equals(eventType)
                     && getBrowserVersion().hasFeature(EVENT_TYPE_POPSTATEEVENT)
                 || "ProgressEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)) {
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)
+                || "XMLHttpRequestProgressEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT)) {
                 clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
             }
         }

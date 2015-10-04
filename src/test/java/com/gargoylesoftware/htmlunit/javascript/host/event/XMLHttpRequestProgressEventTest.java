@@ -23,12 +23,12 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests for {@link ProgressEvent}.
+ * Tests for {@link XMLHttpRequestProgressEvent}.
  *
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class ProgressEventTest extends WebDriverTestCase {
+public class XMLHttpRequestProgressEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
         + "    if (event) {\n"
@@ -48,14 +48,14 @@ public class ProgressEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object ProgressEvent]", "progress", "false", "false", "false", "0", "0" },
-            IE = "exception")
+    @Alerts("exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new ProgressEvent('progress');\n"
+            + "      if(!XMLHttpRequestProgressEvent) { alert('not defined'); return; };\n"
+            + "      var event = new XMLHttpRequestProgressEvent('test');\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
@@ -70,14 +70,13 @@ public class ProgressEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object ProgressEvent]", "test", "true", "false", "true", "234", "666" },
-            IE = "exception")
+    @Alerts("exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new ProgressEvent('test', {\n"
+            + "      var event = new XMLHttpRequestProgressEvent('test', {\n"
             + "        'bubbles': true,\n"
             + "        'lengthComputable': true,\n"
             + "        'loaded': 234,\n"
@@ -97,15 +96,14 @@ public class ProgressEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object ProgressEvent]", "", "false", "false", "false", "0", "0" },
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = { "[object XMLHttpRequestProgressEvent]", "", "false", "false", "false", "0", "0" })
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = document.createEvent('ProgressEvent');\n"
+            + "      var event = document.createEvent('XMLHttpRequestProgressEvent');\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"

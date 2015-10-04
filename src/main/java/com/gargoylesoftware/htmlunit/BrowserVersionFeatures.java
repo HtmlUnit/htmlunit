@@ -366,6 +366,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_TYPE_PROGRESSEVENT,
 
+    /** Supports event type 'XMLHttpRequestProgressEvent'. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT,
+
     /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,

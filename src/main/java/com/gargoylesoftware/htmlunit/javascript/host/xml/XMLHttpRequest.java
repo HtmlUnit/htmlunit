@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ERRORHANDLER_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
@@ -231,7 +232,12 @@ public class XMLHttpRequest extends EventTarget {
         final boolean triggerOnload = browser.hasFeature(XHR_TRIGGER_ONLOAD_ON_COMPLETED);
         if (triggerOnload && state == DONE) {
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            final Object[] params = new Event[] {new XMLHttpRequestProgressEvent(this, Event.TYPE_LOAD)};
+
+            final XMLHttpRequestProgressEvent event = new XMLHttpRequestProgressEvent(this, Event.TYPE_LOAD);
+            final Object[] params = new Event[] {event};
+            if (!browser.hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT)) {
+                event.setLengthComputable(true);
+            }
 
             if (loadHandler_ != null) {
                 jsEngine.callFunction(containingPage_, loadHandler_, loadHandler_.getParentScope(), this, params);
@@ -301,10 +307,18 @@ public class XMLHttpRequest extends EventTarget {
      *                if {@code null}, the current thread's context is used.
      */
     private void processError(Context context) {
-        if (errorHandler_ != null && !getBrowserVersion().hasFeature(XHR_ERRORHANDLER_NOT_SUPPORTED)) {
+        final BrowserVersion browser = getBrowserVersion();
+        if (errorHandler_ != null && !browser.hasFeature(XHR_ERRORHANDLER_NOT_SUPPORTED)) {
             final Scriptable scope = errorHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            final Object[] params = new Event[] {new ProgressEvent(this, Event.TYPE_PROGRESSEVENT)};
+
+            final Object[] params;
+            if (browser.hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT)) {
+                params = new Event[] {new XMLHttpRequestProgressEvent(this, Event.TYPE_ERROR)};
+            }
+            else {
+                params = new Event[] {new ProgressEvent(this, Event.TYPE_ERROR)};
+            }
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onerror handler");
