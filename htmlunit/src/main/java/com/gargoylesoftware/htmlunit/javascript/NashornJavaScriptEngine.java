@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
@@ -38,6 +39,7 @@ import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngineFactory;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Constructor;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -92,6 +94,18 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             Context.setGlobal(global);
 
             final BrowserFamily browserFamily = browser.getFamily();
+//            boolean isConstructor = false;
+//            for (final Method m : enclosingClass.getDeclaredMethods()) {
+//                for (final Constructor constructor : m.getAnnotationsByType(Constructor.class)) {
+//                    if (isSupported(constructor.browsers(), browserFamily, browserVersion)) {
+//                        isConstructor = true;
+//                    }
+//                }
+//            }
+//            if ((isConstructor && PrototypeObject.class.isAssignableFrom(scriptObject.getClass()))
+//                    || (!isConstructor && !PrototypeObject.class.isAssignableFrom(scriptObject.getClass()))) {
+//            
+//            }
             if (browserFamily == CHROME) {
                 global.put("EventTarget", new EventTarget2.FunctionConstructor(), true);
                 global.put("Window", new Window2.FunctionConstructor(), true);

@@ -15,14 +15,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
-import java.util.ArrayList;
-import java.util.List;
 
+import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
-import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
@@ -60,8 +56,8 @@ public class EventTarget2 extends ScriptObject {
         }
     }
 
-    static final class Prototype extends PrototypeObject {
-        private ScriptFunction addEventListener;
+    public static final class Prototype extends PrototypeObject {
+        public ScriptFunction addEventListener;
 
         public ScriptFunction G$addEventListener() {
             return this.addEventListener;
@@ -71,36 +67,17 @@ public class EventTarget2 extends ScriptObject {
             this.addEventListener = function;
         }
 
-        {
-            final List<Property> list = new ArrayList<>(1);
-            list.add(AccessorProperty.create("addEventListener", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                    virtualHandle("G$addEventListener", ScriptFunction.class),
-                    virtualHandle("S$addEventListener", void.class, ScriptFunction.class)));
-            setMap(PropertyMap.newMap(list));
-        }
-
         Prototype() {
-            addEventListener = ScriptFunction.createBuiltin("addEventListener",
-                    staticHandle("addEventListener", String.class, Object.class));
+            ScriptUtils.initialize(this);
         }
 
         public String getClassName() {
             return "EventTarget";
-        }
-
-        private static MethodHandle virtualHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
-            try {
-                return MethodHandles.lookup().findVirtual(Prototype.class, name,
-                        MethodType.methodType(rtype, ptypes));
-            }
-            catch (final ReflectiveOperationException e) {
-                throw new IllegalStateException(e);
-            }
         }
     }
 
     public static final class ObjectConstructor extends ScriptObject {
-        private ScriptFunction addEventListener;
+        public ScriptFunction addEventListener;
 
         public ScriptFunction G$addEventListener() {
             return this.addEventListener;
@@ -110,31 +87,12 @@ public class EventTarget2 extends ScriptObject {
             this.addEventListener = function;
         }
 
-        {
-            final List<Property> list = new ArrayList<>(1);
-            list.add(AccessorProperty.create("addEventListener", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                    virtualHandle("G$addEventListener", ScriptFunction.class),
-                    virtualHandle("S$addEventListener", void.class, ScriptFunction.class)));
-            setMap(PropertyMap.newMap(list));
-        }
-
         public ObjectConstructor() {
-            addEventListener = ScriptFunction.createBuiltin("addEventListener",
-                    staticHandle("addEventListener", String.class, Object.class));
+            ScriptUtils.initialize(this);
         }
 
         public String getClassName() {
             return "EventTarget";
-        }
-
-        private static MethodHandle virtualHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
-            try {
-                return MethodHandles.lookup().findVirtual(ObjectConstructor.class, name,
-                        MethodType.methodType(rtype, ptypes));
-            }
-            catch (final ReflectiveOperationException e) {
-                throw new IllegalStateException(e);
-            }
         }
     }
 

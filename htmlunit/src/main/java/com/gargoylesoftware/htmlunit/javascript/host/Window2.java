@@ -30,9 +30,13 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
@@ -88,6 +92,7 @@ public class Window2 extends SimpleScriptObject {
         return host;
     }
 
+    @Function
     public static void alert(final Object self, final Object o) {
         final Window2 window = (Window2) Global.instance().get("window");
         final AlertHandler handler = window.webWindow_.getWebClient().getAlertHandler();
@@ -100,22 +105,26 @@ public class Window2 extends SimpleScriptObject {
         }
     }
 
-    public static int innerHeight(final Object self) {
+    @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public static int getInnerHeight(final Object self) {
         final Window2 window = (Window2) Global.instance().get("window");
         return window.getWebWindow().getInnerHeight();
     }
 
-    public static int innerWidth(final Object self) {
+    @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public static int getInnerWidth(final Object self) {
         final Window2 window = (Window2) Global.instance().get("window");
         return window.getWebWindow().getInnerWidth();
     }
 
-    public static int outerHeight(final Object self) {
+    @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public static int getOuterHeight(final Object self) {
         final Window2 window = (Window2) Global.instance().get("window");
         return window.getWebWindow().getOuterHeight();
     }
 
-    public static int outerWidth(final Object self) {
+    @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public static int getOuterWidth(final Object self) {
         final Window2 window = (Window2) Global.instance().get("window");
         return window.getWebWindow().getOuterWidth();
     }
@@ -146,9 +155,8 @@ public class Window2 extends SimpleScriptObject {
         }
     }
 
-    static final class Prototype extends PrototypeObject {
-        private ScriptFunction alert = ScriptFunction.createBuiltin("alert",
-                staticHandle("alert", void.class, Object.class, Object.class));
+    public static final class Prototype extends PrototypeObject {
+        public ScriptFunction alert;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -158,47 +166,17 @@ public class Window2 extends SimpleScriptObject {
             this.alert = function;
         }
 
-        {
-            final List<Property> list = new ArrayList<>(1);
-            list.add(AccessorProperty.create("alert", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                    virtualHandle("G$alert", ScriptFunction.class),
-                    virtualHandle("S$alert", void.class, ScriptFunction.class)));
-            final BrowserFamily browserFamily = Browser.getCurrent().getFamily();
-            if (browserFamily == CHROME) {
-                list.add(AccessorProperty.create("innerWidth", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                        staticHandle("innerWidth", int.class, Object.class),
-                        null));
-                list.add(AccessorProperty.create("innerHeight", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                        staticHandle("innerHeight", int.class, Object.class),
-                        null));
-                list.add(AccessorProperty.create("outerWidth", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                        staticHandle("outerWidth", int.class, Object.class),
-                        null));
-                list.add(AccessorProperty.create("outerHeight", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                        staticHandle("outerHeight", int.class, Object.class),
-                        null));
-            }
-            setMap(PropertyMap.newMap(list));
+        Prototype() {
+            ScriptUtils.initialize(this);
         }
 
         public String getClassName() {
             return "Window";
         }
-
-        private static MethodHandle virtualHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
-            try {
-                return MethodHandles.lookup().findVirtual(Prototype.class, name,
-                        MethodType.methodType(rtype, ptypes));
-            }
-            catch (final ReflectiveOperationException e) {
-                throw new IllegalStateException(e);
-            }
-        }
     }
 
     public static final class ObjectConstructor extends ScriptObject {
-        private ScriptFunction alert = ScriptFunction.createBuiltin("alert",
-                staticHandle("alert", void.class, Object.class, Object.class));
+        public ScriptFunction alert;
 
         public ScriptFunction G$alert() {
             return this.alert;
@@ -208,42 +186,12 @@ public class Window2 extends SimpleScriptObject {
             this.alert = function;
         }
 
-        {
-            final List<Property> list = new ArrayList<>(1);
-            list.add(AccessorProperty.create("alert", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                    virtualHandle("G$alert", ScriptFunction.class),
-                    virtualHandle("S$alert", void.class, ScriptFunction.class)));
-            final BrowserFamily browserFamily = Browser.getCurrent().getFamily();
-            final int browserVersion = Browser.getCurrent().getVersion();
-            if ((browserFamily == IE && browserVersion >= 11) || browserFamily == FF) {
-                  list.add(AccessorProperty.create("innerWidth", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                          staticHandle("innerWidth", int.class, Object.class),
-                          null));
-                  list.add(AccessorProperty.create("innerHeight", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                          staticHandle("innerHeight", int.class, Object.class),
-                          null));
-                  list.add(AccessorProperty.create("outerWidth", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                          staticHandle("outerWidth", int.class, Object.class),
-                          null));
-                  list.add(AccessorProperty.create("outerHeight", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, 
-                          staticHandle("outerHeight", int.class, Object.class),
-                          null));
-              }
-            setMap(PropertyMap.newMap(list));
+        public ObjectConstructor() {
+            ScriptUtils.initialize(this);
         }
 
         public String getClassName() {
             return "Window";
-        }
-
-        private static MethodHandle virtualHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
-            try {
-                return MethodHandles.lookup().findVirtual(ObjectConstructor.class, name,
-                        MethodType.methodType(rtype, ptypes));
-            }
-            catch (final ReflectiveOperationException e) {
-                throw new IllegalStateException(e);
-            }
         }
     }
 }
