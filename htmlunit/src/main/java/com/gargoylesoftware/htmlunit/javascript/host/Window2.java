@@ -32,12 +32,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
@@ -127,6 +124,13 @@ public class Window2 extends SimpleScriptObject {
     public static int getOuterWidth(final Object self) {
         final Window2 window = (Window2) Global.instance().get("window");
         return window.getWebWindow().getOuterWidth();
+    }
+
+    @Getter
+    public static Object getTop(final Object self) {
+        final Window2 window = (Window2) Global.instance().get("window");
+        final WebWindow top = window.getWebWindow().getTopWindow();
+        return top.getScriptObject2();
     }
 
     {

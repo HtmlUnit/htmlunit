@@ -133,6 +133,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 
               global.put("alert", window.get("alert"), true);
 //                engine.eval("var alert = function() { return window.alert.apply(window, arguments) }");
+              global.put("top", window.get("top"), true);
             }
             catch(Exception e) {
                 e.printStackTrace();
