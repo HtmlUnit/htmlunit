@@ -28,9 +28,8 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.api.scripting.JSObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -210,7 +209,7 @@ public abstract class InteractivePage extends SgmlPage {
      *
      * Execute a Function in the given context.
      *
-     * @param function the JavaScript Function to call
+     * @param jsObject the JavaScript Function to call
      * @param thisObject the "this" object to be used during invocation
      * @param args the arguments to pass into the call
      * @param htmlElementScope the HTML element for which this script is being executed
@@ -219,14 +218,14 @@ public abstract class InteractivePage extends SgmlPage {
      * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page and a JavaScript result object.
      */
-    public ScriptResult executeJavaScriptFunctionIfPossible(final ScriptFunction function, final ScriptObject thisObject,
+    public ScriptResult executeJavaScriptFunctionIfPossible(final JSObject jsObject, final ScriptObject thisObject,
             final Object[] args) {
 
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
         }
 
-        final Object result = ScriptRuntime.apply(function, thisObject, args);
+        final Object result = jsObject.call(thisObject, args);
 
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
