@@ -195,12 +195,11 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     @Override
     public Object execute(InteractivePage page, String sourceCode, String sourceName, int startLine) {
         try {
-            engine.eval(sourceCode);
+            return engine.eval(sourceCode);
         }
         catch(Exception e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
     @Override
