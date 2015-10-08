@@ -46,17 +46,6 @@ public class Window2 extends SimpleScriptObject {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
 
-    private WebWindow webWindow_;
-
-    /**
-     * Initializes this window.
-     * @param webWindow the web window corresponding to this window
-     */
-    public void initialize(final WebWindow webWindow) {
-        webWindow_ = webWindow;
-        webWindow_.setScriptObject(this);
-    }
-
     /**
      * Initialize the object.
      * @param enclosedPage the page containing the JavaScript
@@ -75,14 +64,6 @@ public class Window2 extends SimpleScriptObject {
         }
     }
 
-    /**
-     * Returns the WebWindow associated with this Window.
-     * @return the WebWindow
-     */
-    public WebWindow getWebWindow() {
-        return webWindow_;
-    }
-
     public static Window2 constructor(final boolean newObj, final Object self) {
         final Window2 host = new Window2();
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
@@ -91,8 +72,7 @@ public class Window2 extends SimpleScriptObject {
 
     @Function
     public static void alert(final Object self, final Object o) {
-        final Window2 window = (Window2) Global.instance().get("window");
-        final AlertHandler handler = window.webWindow_.getWebClient().getAlertHandler();
+        final AlertHandler handler = ((WebWindow) Global.instance().getDomObject()).getWebClient().getAlertHandler();
         if (handler == null) {
             LOG.warn("window.alert(\"" + o + "\") no alert handler installed");
         }
@@ -104,32 +84,32 @@ public class Window2 extends SimpleScriptObject {
 
     @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getInnerHeight(final Object self) {
-        final Window2 window = (Window2) Global.instance().get("window");
-        return window.getWebWindow().getInnerHeight();
+        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        return webWindow.getInnerHeight();
     }
 
     @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getInnerWidth(final Object self) {
-        final Window2 window = (Window2) Global.instance().get("window");
-        return window.getWebWindow().getInnerWidth();
+        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        return webWindow.getInnerWidth();
     }
 
     @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getOuterHeight(final Object self) {
-        final Window2 window = (Window2) Global.instance().get("window");
-        return window.getWebWindow().getOuterHeight();
+        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        return webWindow.getOuterHeight();
     }
 
     @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getOuterWidth(final Object self) {
-        final Window2 window = (Window2) Global.instance().get("window");
-        return window.getWebWindow().getOuterWidth();
+        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        return webWindow.getOuterWidth();
     }
 
     @Getter
     public static Object getTop(final Object self) {
-        final Window2 window = (Window2) Global.instance().get("window");
-        final WebWindow top = window.getWebWindow().getTopWindow();
+        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        final WebWindow top = webWindow.getTopWindow();
         return top.getScriptObject2();
     }
 

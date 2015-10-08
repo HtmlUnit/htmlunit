@@ -137,7 +137,6 @@ public abstract class WebWindowImpl implements WebWindow {
         if (isJavaScriptInitializationNeeded()) {
             webClient_.initialize(this);
         }
-        webClient_.initialize(page);
     }
 
     /**

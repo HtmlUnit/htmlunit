@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 
 import java.lang.reflect.Field;
-import java.util.Iterator;
 
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
@@ -39,9 +38,7 @@ import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngineFactory;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
-import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
@@ -205,12 +202,16 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     public void registerWindowAndMaybeStartEventLoop(WebWindow webWindow) {
     }
 
+    public Global getGlobal() {
+        final SimpleScriptContext context = (SimpleScriptContext) engine.getContext();
+        return get(context.getBindings(ScriptContext.ENGINE_SCOPE), "sobj");
+    }
+
     @Override
     public void initialize(final WebWindow webWindow) {
-        final SimpleScriptContext context = (SimpleScriptContext) engine.getContext();
-        final Global global = get(context.getBindings(ScriptContext.ENGINE_SCOPE), "sobj");
-        Window2 window2 = (Window2) global.get("window");
-        window2.initialize(webWindow);
+        final Global global = getGlobal();
+        global.setDomObject(webWindow);
+        webWindow.setScriptObject(global);
     }
 
     @Override

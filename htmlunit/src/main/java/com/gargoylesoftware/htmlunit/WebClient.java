@@ -79,7 +79,6 @@ import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -1016,17 +1015,6 @@ public class WebClient implements Serializable, AutoCloseable {
     public void initialize(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
         scriptEngine_.initialize(webWindow);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Initializes a new page for JavaScript.
-     * @param newPage the new page
-     */
-    public void initialize(final Page newPage) {
-        WebAssert.notNull("newPage", newPage);
-        ((Window2) newPage.getEnclosingWindow().getScriptObject2()).initialize(newPage);
     }
 
     /**
