@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
@@ -39,6 +41,8 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
+import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
@@ -126,10 +130,19 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             window.setProto(windowProto);
 
             global.put("window", window, true);
+            global.setWindow(window);
 
             try {
               global.put("alert", window.get("alert"), true);
-              global.setMap(global.getMap().addProperty(window.getProto().getMap().findProperty("top")));
+
+              final List<Property> list = new ArrayList<>();
+              list.add(window.getProto().getMap().findProperty("top"));
+              final Property property = window.getProto().getMap().findProperty("controllers");
+              if (property != null) {
+                  list.add(property);
+              }
+
+              global.setMap(global.getMap().addAll(PropertyMap.newMap(list)));
             }
             catch(Exception e) {
                 e.printStackTrace();

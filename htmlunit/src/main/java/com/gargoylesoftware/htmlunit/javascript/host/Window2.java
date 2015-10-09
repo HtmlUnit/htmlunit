@@ -19,8 +19,6 @@ import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.Brows
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,10 +32,9 @@ import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
-import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
@@ -45,6 +42,8 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 public class Window2 extends SimpleScriptObject {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
+
+    private Object controllers_ = new SimpleScriptObject();
 
     /**
      * Initialize the object.
@@ -113,9 +112,14 @@ public class Window2 extends SimpleScriptObject {
         return top.getScriptObject2();
     }
 
-    {
-        final List<Property> list = new ArrayList<>(1);
-        setMap(PropertyMap.newMap(list));
+    @Getter(browsers = @WebBrowser(FF))
+    public static Object getControllers(final Object self) {
+        return Global.instance().<Window2>getWindow().controllers_;
+    }
+
+    @Setter(browsers = @WebBrowser(FF))
+    public static void setControllers(final Object self, final Object value) {
+        Global.instance().<Window2>getWindow().controllers_ = value;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
