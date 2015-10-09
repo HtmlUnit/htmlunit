@@ -47,6 +47,25 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class Window2Test extends WebDriverTestCase {
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object Window]", "undefined", "hello" },
+            IE8 = { "[object]", "undefined", "hello" })
+    public void thisIsWindow() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  alert(this);\n"
+            + "  alert(this.abc);\n"
+            + "  this.abc = 'hello';\n"
+            + "  alert(this.abc);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * "window.controllers" is used by some JavaScript libraries to determine if the
      * browser is Gecko based or not.
      * @throws Exception if the test fails
