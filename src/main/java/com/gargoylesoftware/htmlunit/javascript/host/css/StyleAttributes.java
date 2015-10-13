@@ -640,7 +640,7 @@ final class StyleAttributes {
         EMPTY_CELLS_("empty-cells", "empty-cells", ff38up("show")),
 
         /** The style property {@code enableBackground}. */
-        ENABLE_BACKGROUND("enableBackground", "enable-background", ie11up("accumulate"), chrome("")),
+        ENABLE_BACKGROUND("enableBackground", "enable-background", ie11up("accumulate")),
 
         /** The style property {@code fill}. */
         FILL("fill", "fill", ff("rgb(0, 0, 0)"), ie11up("black"), chrome("rgb(0, 0, 0)")),
@@ -1020,6 +1020,18 @@ final class StyleAttributes {
 
         /** The style property {@code mix-blend-mode}. */
         MIX_BLEND_MODE_("mix-blend-mode", "mix-blend-mode", ff38up("normal")),
+
+        /** The style property {@code motion}. */
+        MOTION("motion", "motion", chrome("none 0px auto 0deg")),
+
+        /** The style property {@code motionOffset}. */
+        MOTION_OFFSET("motionOffset", "motion-offset", chrome("0px")),
+
+        /** The style property {@code motionPath}. */
+        MOTION_PATH("motionPath", "motion-path", chrome("none")),
+
+        /** The style property {@code motionRotation}. */
+        MOTION_ROTATION("motionRotation", "motion-rotation", chrome("auto 0deg")),
 
         /** The style property {@code MozAnimation}. */
         MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("")),

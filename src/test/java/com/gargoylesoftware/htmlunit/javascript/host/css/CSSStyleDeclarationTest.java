@@ -49,9 +49,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "black", "pink", "color: pink;", "color: pink;" },
-            CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);", "color: rgb(255, 192, 203);" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "black", "pink", "color: pink;", "color: pink;" })
     public void style_OneCssAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -80,7 +78,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(IE8 = { "black", "pink", "color: pink; background: blue; foo: bar;" },
             FF31 = { "black", "pink", "color: pink; background: none repeat scroll 0% 0% blue;" },
             FF38 = { "black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
-            CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203); background: blue;" },
+            CHROME = { "black", "pink", "color: pink; background: blue;" },
             IE11 = { "black", "pink", "background: blue; color: pink; foo: bar;" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void style_MultipleCssAttributes() throws Exception {
@@ -107,9 +105,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "", "pink", "color: pink;" },
-            CHROME = { "null", "", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "null", "", "pink", "color: pink;" })
     public void style_OneUndefinedCssAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -301,7 +297,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "** string", "blue" },
-            CHROME = { "*null* object", "blue" },
             IE8 = "removeProperty not available")
     public void removePropertyUndefined() throws Exception {
         final String html = "<html>\n"
@@ -328,9 +323,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "30px", "", "30px", "arial", "", "arial" },
-            CHROME = { "30px", "null", "30px", "arial", "null", "arial" },
             IE8 = { "30px", "exception", "exception", "arial", "exception", "exception" })
-    @NotYetImplemented(CHROME)
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
             "<html><body onload='test()'><script>\n"
@@ -1414,7 +1407,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;", "color: pink;" },
-            CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);", "color: rgb(255, 192, 203);" },
+            CHROME = { "black", "pink", "color: pink;", "color: pink;" },
             IE11 = { "black", "pink", "color: pink;", "color: pink;" })
     @NotYetImplemented({ IE11, CHROME })
     public void caseInsensitive() throws Exception {
