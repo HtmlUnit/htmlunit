@@ -91,7 +91,7 @@ final class StyleAttributes {
      * Holds information about a style attribute (CSS name, property name, browser availability, default computed value.
      * TODO: move all (?) style attribute definitions here.
      */
-    public static enum Definition {
+    public enum Definition {
         /** The style property {@code accelerator}. */
         ACCELERATOR("accelerator", "accelerator", ie11up("undefined")),
 

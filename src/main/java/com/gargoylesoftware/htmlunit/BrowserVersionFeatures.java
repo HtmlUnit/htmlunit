@@ -432,7 +432,7 @@ public enum BrowserVersionFeatures {
 
     /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8),
-        @WebBrowser(value = FF, minVersion = 38) , @WebBrowser(CHROME) })
+        @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */

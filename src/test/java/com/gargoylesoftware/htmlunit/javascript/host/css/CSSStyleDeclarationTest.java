@@ -650,9 +650,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "string", "", "string", "", "string", "4", "string", "", "string", "" , "string", "" },
+    @Alerts(DEFAULT = { "string", "", "string", "", "string", "4", "string", "", "string", "", "string", "" },
             IE8 = { "number", "0", "number", "0", "number", "4", "number", "4", "number", "4", "number", "0" },
-            IE11 = { "string", "", "string", "", "number", "4", "string", "", "string", "" , "string", "" })
+            IE11 = { "string", "", "string", "", "number", "4", "string", "", "string", "", "string", "" })
     public void zIndexDefault() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

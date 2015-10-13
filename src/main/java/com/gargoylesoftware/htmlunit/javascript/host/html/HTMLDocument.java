@@ -216,7 +216,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     private static int UniqueID_Counter_ = 1;
 
-    private static enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
+    private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
 
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private HTMLCollection forms_; // has to be a member to have equality (==) working

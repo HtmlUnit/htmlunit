@@ -128,7 +128,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
                 + "  <script id='my2' src=''></script>\n"
                 + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse("" , "text/javascript");
+        getMockWebConnection().setDefaultResponse("", "text/javascript");
 
         loadPageWithAlerts2(html);
     }
@@ -160,7 +160,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
                 + "  <script id='my'></script>\n"
                 + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse("" , "text/javascript");
+        getMockWebConnection().setDefaultResponse("", "text/javascript");
 
         loadPageWithAlerts2(html);
     }
