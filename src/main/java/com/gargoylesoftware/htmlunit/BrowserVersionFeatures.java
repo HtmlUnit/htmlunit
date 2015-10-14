@@ -1751,8 +1751,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
 
-    /** Ignore negative value when setting the length (FF). */
-    @BrowserFeature(@WebBrowser(FF))
+    /** Ignore negative value when setting the length. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
     /** Indicates that select.options returns null if requested index is outside (IE). */
