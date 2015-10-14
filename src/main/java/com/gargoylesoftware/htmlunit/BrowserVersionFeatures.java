@@ -1516,7 +1516,7 @@ public enum BrowserVersionFeatures {
     JS_MERGE_ATTRIBUTES_ALL,
 
     /** Javascript event.keyCode returns 0 instead of undefined for mouse events. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_MOUSE_EVENT_KEY_CODE_ZERO,
 
     /**
