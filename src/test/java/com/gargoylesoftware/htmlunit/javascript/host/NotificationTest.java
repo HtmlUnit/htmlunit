@@ -53,7 +53,6 @@ public class NotificationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "default",
-            CHROME = "granted",
             IE = "exception")
     public void permission() throws Exception {
         final String html = "<html><body><script>\n"
