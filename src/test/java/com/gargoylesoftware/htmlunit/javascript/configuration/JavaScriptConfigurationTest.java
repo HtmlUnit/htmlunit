@@ -63,7 +63,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         // get a reference to the leaky map
         final Field field = JavaScriptConfiguration.class.getDeclaredField("CONFIGURATION_MAP_");
         field.setAccessible(true);
-        final Map<?, ?> leakyMap = (Map<? , ?>) field.get(null);
+        final Map<?, ?> leakyMap = (Map<?, ?>) field.get(null);
 
         // maybe some BrowserVersions are already known
         final int knownBrowsers = leakyMap.size();

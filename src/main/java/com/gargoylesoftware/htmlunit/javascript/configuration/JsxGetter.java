@@ -33,7 +33,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface JsxGetter {
 
-    /** The {@link WebBrowser}s supported by this getter. */
+    /**
+     * The {@link WebBrowser}s supported by this getter.
+     * @return the {@link WebBrowser}s
+     */
     WebBrowser[] value() default {
         @WebBrowser(CHROME),
         @WebBrowser(FF),
@@ -41,7 +44,10 @@ public @interface JsxGetter {
         @WebBrowser(EDGE)
     };
 
-    /** The JavaScript getter property name. */
+    /**
+     * The JavaScript getter property name.
+     * @return the getter property name
+     */
     String propertyName() default "";
 }
 

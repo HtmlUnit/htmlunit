@@ -56,7 +56,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     private static final Pattern IF4_PATTERN = Pattern.compile("(/\\*)?@end");
 
     private static final String CC_VARIABLE_PREFIX = "htmlunit_cc_variable_";
-    private static enum ParsingStatus { NORMAL, IN_MULTI_LINE_COMMENT, IN_SINGLE_LINE_COMMENT, IN_STRING, IN_REG_EXP }
+    private enum ParsingStatus { NORMAL, IN_MULTI_LINE_COMMENT, IN_SINGLE_LINE_COMMENT, IN_STRING, IN_REG_EXP }
 
     private final Set<String> setVariables_ = new HashSet<>();
 

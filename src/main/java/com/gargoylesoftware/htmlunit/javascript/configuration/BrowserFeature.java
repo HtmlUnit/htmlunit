@@ -32,7 +32,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface BrowserFeature {
 
-    /** The {@link WebBrowser}s supported by this feature. */
+    /**
+     * The {@link WebBrowser}s supported by this feature.
+     * @return the {@link WebBrowser}s
+     */
     WebBrowser[] value() default {
         @WebBrowser(IE),
         @WebBrowser(FF),

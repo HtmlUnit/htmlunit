@@ -33,7 +33,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface JsxStaticGetter {
 
-    /** The {@link WebBrowser}s supported by this getter. */
+    /**
+     * The {@link WebBrowser}s supported by this getter.
+     * @return the {@link WebBrowser}s
+     */
     WebBrowser[] value() default {
         @WebBrowser(CHROME),
         @WebBrowser(FF),

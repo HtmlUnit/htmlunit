@@ -290,8 +290,8 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "" , "null-0" , "", "null-0" , "", "null-0" , "", "null-0" },
-            FF = { "", "null-0" , "", "null-0" , "null", "null" },
+    @Alerts(DEFAULT = { "", "null-0", "", "null-0", "", "null-0", "", "null-0" },
+            FF = { "", "null-0", "", "null-0", "null", "null" },
             IE8 = { })
     public void getSelection_display() throws Exception {
         final String html = "<html>\n"

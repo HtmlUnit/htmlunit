@@ -28,13 +28,22 @@ import java.lang.annotation.Target;
 @Target(ElementType.ANNOTATION_TYPE)
 public @interface WebBrowser {
 
-    /** The browser name. */
+    /**
+     * The browser name.
+     * @return the browser name
+     */
     BrowserName value();
 
-    /** The minimum version which supports this feature. */
+    /**
+     * The minimum version which supports this feature.
+     * @return the minimum version
+     */
     float minVersion() default 0;
 
-    /** The maximum version which supports this feature. */
+    /**
+     * The maximum version which supports this feature.
+     * @return the maximum version
+     */
     float maxVersion() default Float.MAX_VALUE;
 }
 

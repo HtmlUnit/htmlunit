@@ -33,7 +33,7 @@ public class StorageHolder implements Serializable {
     /**
      * Type for Storage.
      */
-    public static enum Type {
+    public enum Type {
         /** Old Firefox's global storage. */
         GLOBAL_STORAGE,
         /** The type for window.localStorage. */

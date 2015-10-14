@@ -33,19 +33,34 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface JsxClass {
 
-    /** The DOM class (if any). */
+    /**
+     * The DOM class (if any).
+     * @return the DOM class
+     */
     Class<?> domClass() default Object.class;
 
-    /** Is JavaScript Object. */
+    /**
+     * Is JavaScript Object.
+     * @return is JavaScript Object
+     */
     boolean isJSObject() default true;
 
-    /** Should be defined in only Standards Mode. */
+    /**
+     * Should be defined in only Standards Mode.
+     * @return whether is defined in Standards Mode only
+     */
     boolean isDefinedInStandardsMode() default true;
 
-    /** The class name. */
+    /**
+     * The class name.
+     * @return the class name
+     */
     String className() default "";
 
-    /** The {@link WebBrowser}s supported by this constant. */
+    /**
+     * The {@link WebBrowser}s supported by this constant.
+     * @return the {@link WebBrowser}s
+     */
     WebBrowser[] browsers() default {
         @WebBrowser(CHROME),
         @WebBrowser(FF),

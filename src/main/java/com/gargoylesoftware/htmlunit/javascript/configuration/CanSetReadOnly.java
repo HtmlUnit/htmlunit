@@ -28,7 +28,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface CanSetReadOnly {
-    /** The status. */
+
+    /**
+     * The status.
+     * @return the status
+     */
     CanSetReadOnlyStatus value() default CanSetReadOnlyStatus.YES;
 }
 

@@ -33,7 +33,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface JsxConstant {
 
-    /** The {@link WebBrowser}s supported by this constant. */
+    /**
+     * The {@link WebBrowser}s supported by this constant.
+     * @return the {@link WebBrowser}s
+     */
     WebBrowser[] value() default {
         @WebBrowser(CHROME),
         @WebBrowser(FF),

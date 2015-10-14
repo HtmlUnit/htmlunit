@@ -33,7 +33,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface JsxSetter {
 
-    /** The {@link WebBrowser}s supported by this setter. */
+    /**
+     * The {@link WebBrowser}s supported by this setter.
+     * @return the {@link WebBrowser}s
+     */
     WebBrowser[] value() default {
         @WebBrowser(CHROME),
         @WebBrowser(FF),
@@ -41,7 +44,10 @@ public @interface JsxSetter {
         @WebBrowser(EDGE)
     };
 
-    /** The JavaScript setter property name. */
+    /**
+     * The JavaScript setter property name.
+     * @return the setter property name
+     */
     String propertyName() default "";
 }
 

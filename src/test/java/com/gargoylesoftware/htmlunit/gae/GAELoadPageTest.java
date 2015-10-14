@@ -165,7 +165,7 @@ public class GAELoadPageTest {
             executedJobs += client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
             count = (System.currentTimeMillis() - startTime) / timeout;
             count = Math.max(2, count);
-            assertEquals(count , collectedAlerts.size());
+            assertEquals(count, collectedAlerts.size());
             assertEquals(count, executedJobs);
         }
     }

@@ -51,7 +51,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "red", "none", "repeat", "0% 0%", "scroll" },
-            CHROME = { "red", "initial", "initial", "initial" , "initial" })
+            CHROME = { "red", "initial", "initial", "initial", "initial" })
     @NotYetImplemented(CHROME)
     public void backgroundColorRed() throws Exception {
         background("red");

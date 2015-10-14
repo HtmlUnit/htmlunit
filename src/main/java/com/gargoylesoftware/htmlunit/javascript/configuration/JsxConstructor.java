@@ -34,7 +34,10 @@ import java.lang.annotation.Target;
 @Target({ ElementType.CONSTRUCTOR, ElementType.METHOD })
 public @interface JsxConstructor {
 
-    /** The {@link WebBrowser}s supported by this constructor. */
+    /**
+     * The {@link WebBrowser}s supported by this constructor.
+     * @return the {@link WebBrowser}s
+     */
     WebBrowser[] value() default {
         @WebBrowser(CHROME),
         @WebBrowser(FF),

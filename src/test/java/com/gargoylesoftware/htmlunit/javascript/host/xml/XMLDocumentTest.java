@@ -1046,7 +1046,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object XMLDocument]", "OK" } ,
+    @Alerts(DEFAULT = { "[object XMLDocument]", "OK" },
             IE = "[object XMLDocument]",
             IE11 = { "[object Document]", "OK" })
     //TODO: in my real IE8 (without WebDriver), I got [object HTMLDocument]

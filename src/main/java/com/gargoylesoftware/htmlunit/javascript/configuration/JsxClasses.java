@@ -29,6 +29,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface JsxClasses {
 
-    /** The different classes. */
+    /**
+     * The different classes.
+     * @return the classes
+     */
     JsxClass[] value() default { };
 }
