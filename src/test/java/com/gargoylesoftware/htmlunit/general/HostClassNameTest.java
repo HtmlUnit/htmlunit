@@ -8449,6 +8449,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function DragEvent() { [native code] }",
             FF = "function DragEvent() {\n    [native code]\n}",
             IE11 = "[object DragEvent]",
             EDGE = "function DragEvent() { [native code] }")

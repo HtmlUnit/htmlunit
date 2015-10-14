@@ -4845,8 +4845,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function",
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined",
             IE11 = "object")
     public void dragEvent() throws Exception {
         test("DragEvent");
