@@ -268,34 +268,64 @@ public class BrowserRunner extends Suite {
     @Target(ElementType.METHOD)
     public static @interface AlertsStandards {
 
-        /** Alerts that is used for all browsers (if defined, the other values are ignored). */
+        /**
+         * Alerts that is used for all browsers (if defined, the other values are ignored).
+         * @return the alerts
+         */
         String[] value() default { EMPTY_DEFAULT };
 
-        /** Alerts for any Internet Explorer, it can be overridden by specific IE version. */
+        /**
+         * Alerts for any Internet Explorer, it can be overridden by specific IE version.
+         * @return the alerts
+         */
         String[] IE() default { EMPTY_DEFAULT };
 
-        /** Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used. */
+        /**
+         * Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used.
+         * @return the alerts
+         */
         String[] IE8() default { EMPTY_DEFAULT };
 
-        /** Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used. */
+        /**
+         * Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used.
+         * @return the alerts
+         */
         String[] IE11() default { EMPTY_DEFAULT };
 
-        /** Alerts for Edge. */
+        /**
+         * Alerts for Edge.
+         * @return the alerts
+         */
         String[] EDGE() default { EMPTY_DEFAULT };
 
-        /** Alerts for any Firefox, it can be overridden by specific FF version. */
+        /**
+         * Alerts for any Firefox, it can be overridden by specific FF version.
+         * @return the alerts
+         */
         String[] FF() default { EMPTY_DEFAULT };
 
-        /** Alerts for Firefox 31. If not defined, {@link #FF()} is used. */
+        /**
+         * Alerts for Firefox 31. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
         String[] FF31() default { EMPTY_DEFAULT };
 
-        /** Alerts for Firefox 38. If not defined, {@link #FF()} is used. */
+        /**
+         * Alerts for Firefox 38. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
         String[] FF38() default { EMPTY_DEFAULT };
 
-        /** Alerts for latest Chrome. */
+        /**
+         * Alerts for latest Chrome.
+         * @return the alerts
+         */
         String[] CHROME() default { EMPTY_DEFAULT };
 
-        /** The default alerts, if nothing more specific is defined. */
+        /**
+         * The default alerts, if nothing more specific is defined.
+         * @return the alerts
+         */
         String[] DEFAULT() default { EMPTY_DEFAULT };
     }
 
@@ -311,6 +341,7 @@ public class BrowserRunner extends Suite {
 
         /**
          * The browsers with which the case is not yet implemented.
+         * @return the browsers
          */
         Browser[] value() default {
             IE, FF, CHROME, EDGE
@@ -327,6 +358,7 @@ public class BrowserRunner extends Suite {
 
         /**
          * The browsers with which the case is failing.
+         * @return the browsers
          */
         Browser[] value() default {
             IE, FF, CHROME, EDGE
@@ -343,6 +375,7 @@ public class BrowserRunner extends Suite {
 
         /**
          * The value.
+         * @return the value
          */
         int value() default 1;
     }
