@@ -4925,9 +4925,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            IE11 = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _DragEvent_DragEvent() throws Exception {
         test("DragEvent", "DragEvent");
     }
@@ -4966,9 +4965,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            IE11 = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _Event_DragEvent() throws Exception {
         test("Event", "DragEvent");
     }

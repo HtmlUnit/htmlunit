@@ -2181,9 +2181,8 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            IE11 = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _MouseEvent_DragEvent() throws Exception {
         test("MouseEvent", "DragEvent");
     }
