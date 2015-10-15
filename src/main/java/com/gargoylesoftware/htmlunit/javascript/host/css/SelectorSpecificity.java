@@ -26,6 +26,7 @@ import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.ElementSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SiblingSelector;
+import org.w3c.css.sac.SimpleSelector;
 
 /**
  * Calculates a selector's specificity.
@@ -72,9 +73,11 @@ class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializab
                 return;
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
-                final Condition condition = conditional.getCondition();
-                readSelectorSpecificity(conditional.getSimpleSelector());
-                readSelectorSpecificity(condition);
+                final SimpleSelector simpleSel = conditional.getSimpleSelector();
+                if (simpleSel != null) {
+                    readSelectorSpecificity(simpleSel);
+                }
+                readSelectorSpecificity(conditional.getCondition());
                 return;
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;

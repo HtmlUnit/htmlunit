@@ -432,9 +432,9 @@ public class CSSStyleSheet extends StyleSheet {
                 return false;
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
-                final Condition condition = conditional.getCondition();
-                return selects(browserVersion, conditional.getSimpleSelector(), element)
-                    && selects(browserVersion, condition, element);
+                final SimpleSelector simpleSel = conditional.getSimpleSelector();
+                return (simpleSel == null || selects(browserVersion, simpleSel, element))
+                    && selects(browserVersion, conditional.getCondition(), element);
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
@@ -1198,7 +1198,8 @@ public class CSSStyleSheet extends StyleSheet {
                 return true;
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
-                return isValidSelector(conditional.getSimpleSelector(), documentMode, domNode)
+                final SimpleSelector simpleSel = conditional.getSimpleSelector();
+                return (simpleSel == null || isValidSelector(simpleSel, documentMode, domNode))
                         && isValidSelector(conditional.getCondition(), documentMode, domNode);
             case Selector.SAC_DESCENDANT_SELECTOR:
             case Selector.SAC_CHILD_SELECTOR:
