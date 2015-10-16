@@ -147,46 +147,53 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * In {@link net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime}, Rhino defines a bunch of properties
-     * in the top scope (see lazilyNames). Not all make sense for HtmlUnit.
+     * Rhino and Nashorn define some properties in the top scope (see ScriptRuntime and lazilyNames in Rhino),
+     * and we don't need them.
+     *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "RegExp: function", "javax: undefined", "org: undefined", "com: undefined", "edu: undefined",
-        "net: undefined", "JavaAdapter: undefined", "JavaImporter: undefined", "Continuation: undefined" })
-    public void rhino_lazilyNames() throws Exception {
-        final String[] properties = {"RegExp", "javax", "org", "com", "edu", "net",
-            "JavaAdapter", "JavaImporter", "Continuation"};
-        doTestRhinoLazilyNames(properties);
-    }
+    @Alerts(DEFAULT = { "getClass: undefined,undefined", "java: undefined,undefined", "javax: undefined,undefined",
+            "javafx: undefined,undefined", "org: undefined,undefined", "com: undefined,undefined",
+            "edu: undefined,undefined", "net: undefined,undefined", "JavaAdapter: undefined,undefined",
+            "JavaImporter: undefined,undefined", "Continuation: undefined,undefined", "Packages: undefined,undefined",
+            "XML: undefined,undefined", "XMLList: undefined,undefined", "Namespace: undefined,undefined",
+            "QName: undefined,undefined", "arguments: undefined,undefined", "load: undefined,undefined",
+            "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
+            "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
+            "context: undefined,undefined", "engine: undefined,undefined",
+            "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: function,function",
+            "parseInt: function,function", "parseFloat: function,function",
+            "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
+            "encodeURIComponent: function,function", "decodeURI: function,function",
+            "decodeURIComponent: function,function", "escape: function,function", "unescape: function,function" },
+        IE8 = { "getClass: undefined,undefined", "java: undefined,undefined", "javax: undefined,undefined",
+            "javafx: undefined,undefined", "org: undefined,undefined", "com: undefined,undefined",
+            "edu: undefined,undefined", "net: undefined,undefined", "JavaAdapter: undefined,undefined",
+            "JavaImporter: undefined,undefined", "Continuation: undefined,undefined", "Packages: undefined,undefined",
+            "XML: undefined,undefined", "XMLList: undefined,undefined", "Namespace: undefined,undefined",
+            "QName: undefined,undefined", "arguments: undefined,undefined", "load: undefined,undefined",
+            "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
+            "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
+            "context: undefined,undefined", "engine: undefined,undefined",
+            "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: object,object",
+            "parseInt: function,function", "parseFloat: function,function",
+            "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
+            "encodeURIComponent: function,function", "decodeURI: function,function",
+            "decodeURIComponent: function,function", "escape: function,function", "unescape: function,function" })
+    @NotYetImplemented(IE8)
+    public void topLevelProperties() throws Exception {
+        final String[] properties = {"getClass", "java", "javax", "javafx", "org", "com", "edu", "net", "JavaAdapter",
+            "JavaImporter", "Continuation", "Packages", "XML", "XMLList", "Namespace", "QName", "arguments", "load",
+            "loadWithNewGlobal", "exit", "quit", "__FILE__", "__DIR__", "__LINE__", "context", "engine",
+            "NaN", "Infinity", "eval", "print", "parseInt", "parseFloat", "isNaN", "isFinite", "encodeURI",
+            "encodeURIComponent", "decodeURI", "decodeURIComponent", "escape", "unescape"};
 
-    /**
-     * The same as in {@link #rhino_lazilyNames()} but for properties with different expectations for IE and FF.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "java: undefined", "getClass: undefined" })
-    public void rhino_lazilyNames2() throws Exception {
-        doTestRhinoLazilyNames("java", "getClass");
-    }
-
-    /**
-     * The same as in {@link #rhino_lazilyNames()} but for properties where it doesn't work yet.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "Packages: undefined", "XML: undefined", "XMLList: undefined",
-        "Namespace: undefined", "QName: undefined" })
-    public void rhino_lazilyNames3() throws Exception {
-        doTestRhinoLazilyNames("Packages", "XML", "XMLList", "Namespace", "QName");
-    }
-
-    private void doTestRhinoLazilyNames(final String... properties) throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
             + "  var props = ['" + StringUtils.join(properties, "', '") + "'];\n"
             + "  for (var i = 0; i < props.length; i++)\n"
-            + "    alert(props[i] + ': ' + typeof(window[props[i]]));\n"
+            + "    alert(props[i] + ': ' + typeof(window[props[i]]) + ',' + typeof(eval('this.' + props[i])));\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
