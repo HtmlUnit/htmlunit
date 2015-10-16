@@ -36,6 +36,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngineFactory;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
@@ -108,10 +110,13 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 //                    || (!isConstructor && !PrototypeObject.class.isAssignableFrom(scriptObject.getClass()))) {
 //            
 //            }
+
             if (browserFamily == CHROME) {
                 global.put("EventTarget", new EventTarget2.FunctionConstructor(), true);
                 global.put("Window", new Window2.FunctionConstructor(), true);
                 global.put("Event", new Event2.FunctionConstructor(), true);
+                global.put("HTMLBodyElement", new HTMLBodyElement2.FunctionConstructor(), true);
+                global.put("HTMLHtmlElement", new HTMLHtmlElement2.FunctionConstructor(), true);
                 setProto(global, "Window", "EventTarget");
             }
             else {
@@ -147,10 +152,9 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             catch(Exception e) {
                 e.printStackTrace();
             }
-
         }
         finally {
-            Context.setGlobal(oldGlobal);
+//            Context.setGlobal(oldGlobal);
         }
     }
 

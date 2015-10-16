@@ -78,8 +78,9 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -1189,23 +1190,23 @@ public class HtmlPage extends InteractivePage {
 
         // Execute the specified event on the document element.
         final WebWindow window = getEnclosingWindow();
-        if (window.getScriptableObject() != null) {
+        if (window.getScriptObject2() != null) {
             final HtmlElement element = getDocumentElement();
             if (element == null) { // happens for instance if document.documentElement has been removed from parent
                 return true;
             }
-            final Event event;
+            final Event2 event;
             if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)
                 && !hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
-                event = new BeforeUnloadEvent(element, eventType);
+                event = new BeforeUnloadEvent2(element, eventType);
             }
             else {
-                event = new Event(element, eventType);
+                event = new Event2(element, eventType);
             }
             element.fireEvent(event);
-            if (!isOnbeforeunloadAccepted(this, event)) {
-                return false;
-            }
+//            if (!isOnbeforeunloadAccepted(this, event)) {
+//                return false;
+//            }
         }
 
         // If this page was loaded in a frame, execute the version of the event specified on the frame tag.

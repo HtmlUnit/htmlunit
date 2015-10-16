@@ -26,8 +26,11 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
@@ -39,7 +42,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
-public class Window2 extends SimpleScriptObject {
+public class Window2 extends EventTarget2 {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
 
@@ -81,33 +84,41 @@ public class Window2 extends SimpleScriptObject {
         }
     }
 
+    /**
+     * Returns the WebWindow associated with this Window.
+     * @return the WebWindow
+     */
+    public WebWindow getWebWindow() {
+        return Global.instance().getDomObject();
+    }
+
     @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getInnerHeight(final Object self) {
-        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getInnerHeight();
     }
 
     @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getInnerWidth(final Object self) {
-        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getInnerWidth();
     }
 
     @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getOuterHeight(final Object self) {
-        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getOuterHeight();
     }
 
     @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getOuterWidth(final Object self) {
-        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getOuterWidth();
     }
 
     @Getter
     public static Object getTop(final Object self) {
-        final WebWindow webWindow = (WebWindow) Global.instance().getDomObject();
+        final WebWindow webWindow = Global.instance().getDomObject();
         final WebWindow top = webWindow.getTopWindow();
         return top.getScriptObject2();
     }
@@ -120,6 +131,38 @@ public class Window2 extends SimpleScriptObject {
     @Setter(browsers = @WebBrowser(FF))
     public static void setControllers(final Object self, final Object value) {
         Global.instance().<Window2>getWindow().controllers_ = value;
+    }
+
+    private Object getHandlerForJavaScript(final String eventName) {
+        return getEventListenersContainer().getEventHandlerProp(eventName);
+    }
+
+    @Getter
+    public static Object getOnload(final Object self) {
+        final Window2 window = Global.instance().getWindow();
+        final Object onload = window.getHandlerForJavaScript("load");
+        if (onload == null) {
+            // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
+            final HtmlPage page = (HtmlPage) window.getWebWindow().getEnclosedPage();
+            final HtmlElement body = page.getBody();
+            if (body != null) {
+                final HTMLBodyElement2 b = (HTMLBodyElement2) body.getScriptObject2();
+                return b.getEventHandler("onload");
+            }
+            return null;
+        }
+        return onload;
+
+    }
+
+    @Setter
+    public static void setOnload(final Object self, final Object newOnload) {
+        final Window2 window = Global.instance().getWindow();
+//        if (window.getBrowserVersion().hasFeature(EVENT_ONLOAD_UNDEFINED_THROWS_ERROR)
+//                && Context.getUndefinedValue().equals(newOnload)) {
+//                throw Context.reportRuntimeError("Invalid onload value: undefined.");
+//            }
+        window.getEventListenersContainer().setEventHandlerProp("load", newOnload);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

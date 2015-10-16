@@ -14,37 +14,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_IN_QUIRKS_MODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SET_READONLY_PROPERTIES;
-
-import java.lang.reflect.Method;
-import java.util.Stack;
-
-import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlImage;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
+import com.gargoylesoftware.htmlunit.html.HtmlHtml;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Base class for Nashorn host objects in HtmlUnit.
@@ -78,6 +63,22 @@ public class SimpleScriptObject extends ScriptObject {
             className = getClass().getSuperclass().getSimpleName();
         }
         return className;
+    }
+
+    public Window2 getWindow() {
+        return Global.instance().getWindow();
+    }
+
+    /**
+     * Gets the browser version currently used.
+     * @return the browser version
+     */
+    public BrowserVersion getBrowserVersion() {
+        final DomNode node = getDomNodeOrNull();
+        if (node != null) {
+            return node.getPage().getWebClient().getBrowserVersion();
+        }
+        return getWindow().getWebWindow().getWebClient().getBrowserVersion();
     }
 
     /**
@@ -160,6 +161,24 @@ public class SimpleScriptObject extends ScriptObject {
      * @return the JavaScript object
      */
     public SimpleScriptObject makeScriptableFor(final DomNode domNode) {
+        SimpleScriptObject host = null;
+        if (domNode instanceof HtmlBody) {
+            host = new HTMLBodyElement2();
+            final Global global = Context.getGlobal();
+            if (global != null) {
+                host.setProto(global.getPrototype(host.getClass()));
+            }
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlHtml) {
+            host = new HTMLHtmlElement2();
+            final Global global = Context.getGlobal();
+            if (global != null) {
+                host.setProto(global.getPrototype(host.getClass()));
+            }
+            host.setDomNode(domNode);
+        }
+        return host;
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
 //        Class<? extends SimpleScriptObject> javaScriptClass = null;
@@ -202,7 +221,6 @@ public class SimpleScriptObject extends ScriptObject {
 //        scriptable.setDomNode(domNode);
 
 //        return scriptable;
-        return null;
     }
 
 //    /**

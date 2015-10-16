@@ -49,7 +49,8 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -851,6 +852,16 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
+     * This method implements the control onclick handler call during the click action.
+     * @param event the click event used
+     * @return the script result
+     * @throws IOException if an IO error occurs
+     */
+    protected ScriptResult doClickFireClickEvent(final Event2 event) throws IOException {
+        return fireEvent(event);
+    }
+
+    /**
      * Simulates double-clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
@@ -1130,7 +1141,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final String eventType) {
-        return fireEvent(new Event(this, eventType));
+        return fireEvent(new Event2(this, eventType));
     }
 
     /**
@@ -1141,31 +1152,44 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final Event event) {
+        System.out.println("Fire Event is empty");
+        return null;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Fires the event on the element. Nothing is done if JavaScript is disabled.
+     * @param event the event to fire
+     * @return the execution result, or {@code null} if nothing is executed
+     */
+    public ScriptResult fireEvent(final Event2 event) {
         final WebClient client = getPage().getWebClient();
         if (!client.getOptions().isJavaScriptEnabled()) {
             return null;
         }
 
-        if (!event.applies(this)) {
-            return null;
-        }
+//        if (!event.applies(this)) {
+//            return null;
+//        }
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing " + event);
         }
-        final EventTarget jsElt = (EventTarget) getScriptableObject();
-        final ContextAction action = new ContextAction() {
-            @Override
-            public Object run(final Context cx) {
-                return jsElt.fireEvent(event);
-            }
-        };
-
-        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
-        final ScriptResult result = (ScriptResult) cf.call(action);
-        if (event.isAborted(result)) {
-            preventDefault();
-        }
+        final EventTarget2 jsElt = (EventTarget2) getScriptObject2();
+        final ScriptResult result = jsElt.fireEvent(event);
+//        final ContextAction action = new ContextAction() {
+//            @Override
+//            public Object run(final Context cx) {
+//                return jsElt.fireEvent(event);
+//            }
+//        };
+//
+//        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+//        final ScriptResult result = (ScriptResult) cf.call(action);
+//        if (event.isAborted(result)) {
+//            preventDefault();
+//        }
         return result;
     }
 
