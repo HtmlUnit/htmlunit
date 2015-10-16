@@ -93,25 +93,25 @@ public class Window2 extends EventTarget2 {
         return Global.instance().getDomObject();
     }
 
-    @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @Getter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getInnerHeight(final Object self) {
         final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getInnerHeight();
     }
 
-    @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @Getter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getInnerWidth(final Object self) {
         final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getInnerWidth();
     }
 
-    @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @Getter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getOuterHeight(final Object self) {
         final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getOuterHeight();
     }
 
-    @Getter(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @Getter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static int getOuterWidth(final Object self) {
         final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getOuterWidth();
@@ -124,12 +124,12 @@ public class Window2 extends EventTarget2 {
         return top.getScriptObject2();
     }
 
-    @Getter(browsers = @WebBrowser(FF))
+    @Getter(@WebBrowser(FF))
     public static Object getControllers(final Object self) {
         return Global.instance().<Window2>getWindow().controllers_;
     }
 
-    @Setter(browsers = @WebBrowser(FF))
+    @Setter(@WebBrowser(FF))
     public static void setControllers(final Object self, final Object value) {
         Global.instance().<Window2>getWindow().controllers_ = value;
     }
@@ -171,7 +171,7 @@ public class Window2 extends EventTarget2 {
      * @param stringToEncode string to encode
      * @return the encoded string
      */
-    @Function(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @Function({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public static String btoa(final Object self, final String stringToEncode) {
         return new String(Base64.encodeBase64(stringToEncode.getBytes()));
     }
@@ -181,7 +181,7 @@ public class Window2 extends EventTarget2 {
      * @param encodedData the encoded string
      * @return the decoded value
      */
-    @Function(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @Function({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public static String atob(final Object self, final String encodedData) {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
     }
