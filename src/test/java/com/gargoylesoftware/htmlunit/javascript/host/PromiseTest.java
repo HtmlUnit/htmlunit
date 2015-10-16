@@ -90,6 +90,34 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "")
+    public void resolveEmpty() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        Promise.resolve().then(function(value) {\n"
+            + "            alert(value);\n"
+            + "        }, function(value) {\n"
+            + "            alert('failure');\n"
+            + "        });\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = "1",
             IE = "")
     public void resolveArray() throws Exception {

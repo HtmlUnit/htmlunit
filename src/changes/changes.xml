@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: fix Promise.resolve() with empty parameters.
+            </action>
             <action type="update" dev="rbri">
                 JavaScript: XMLHttpRequest.onerror is available in CHROME too.
             </action>

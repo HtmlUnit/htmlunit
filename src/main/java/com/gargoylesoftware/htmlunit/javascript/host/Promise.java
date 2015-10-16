@@ -33,6 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code Promise}.
@@ -91,7 +92,7 @@ public class Promise extends SimpleScriptable {
     @JsxStaticFunction
     public static Promise resolve(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        final Promise promise = new Promise(args[0]);
+        final Promise promise = new Promise(args.length != 0 ? args[0] : Undefined.instance);
         promise.setParentScope(thisObj.getParentScope());
         promise.setPrototype(getWindow(thisObj).getPrototype(promise.getClass()));
         return promise;
