@@ -20,6 +20,7 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -165,6 +166,26 @@ public class Window2 extends EventTarget2 {
         window.getEventListenersContainer().setEventHandlerProp("load", newOnload);
     }
 
+    /**
+     * Creates a base-64 encoded ASCII string from a string of binary data.
+     * @param stringToEncode string to encode
+     * @return the encoded string
+     */
+    @Function(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    public static String btoa(final Object self, final String stringToEncode) {
+        return new String(Base64.encodeBase64(stringToEncode.getBytes()));
+    }
+
+    /**
+     * Decodes a string of data which has been encoded using base-64 encoding..
+     * @param encodedData the encoded string
+     * @return the decoded value
+     */
+    @Function(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    public static String atob(final Object self, final String encodedData) {
+        return new String(Base64.decodeBase64(encodedData.getBytes()));
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -188,6 +209,8 @@ public class Window2 extends EventTarget2 {
 
     public static final class Prototype extends PrototypeObject {
         public ScriptFunction alert;
+        public ScriptFunction atob;
+        public ScriptFunction btoa;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -195,6 +218,22 @@ public class Window2 extends EventTarget2 {
 
         public void S$alert(final ScriptFunction function) {
             this.alert = function;
+        }
+
+        public ScriptFunction G$atob() {
+            return atob;
+        }
+
+        public void S$atob(final ScriptFunction function) {
+            this.atob = function;
+        }
+
+        public ScriptFunction G$btoa() {
+            return btoa;
+        }
+
+        public void S$btoa(final ScriptFunction function) {
+            this.btoa = function;
         }
 
         Prototype() {
@@ -208,6 +247,8 @@ public class Window2 extends EventTarget2 {
 
     public static final class ObjectConstructor extends ScriptObject {
         public ScriptFunction alert;
+        public ScriptFunction atob;
+        public ScriptFunction btoa;
 
         public ScriptFunction G$alert() {
             return this.alert;
@@ -215,6 +256,22 @@ public class Window2 extends EventTarget2 {
 
         public void S$alert(final ScriptFunction function) {
             this.alert = function;
+        }
+
+        public ScriptFunction G$atob() {
+            return atob;
+        }
+
+        public void S$atob(final ScriptFunction function) {
+            this.atob = function;
+        }
+
+        public ScriptFunction G$btoa() {
+            return btoa;
+        }
+
+        public void S$btoa(final ScriptFunction function) {
+            this.btoa = function;
         }
 
         public ObjectConstructor() {
