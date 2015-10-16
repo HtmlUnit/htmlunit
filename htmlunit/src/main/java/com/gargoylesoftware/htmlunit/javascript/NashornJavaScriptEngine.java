@@ -142,6 +142,8 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 global.put("alert", window.get("alert"), true);
                 global.put("atob", window.get("atob"), true);
                 global.put("btoa", window.get("btoa"), true);
+                window.put("RegExp", global.get("RegExp"), true);
+                
 
                 final List<Property> list = new ArrayList<>();
                 list.add(window.getProto().getMap().findProperty("top"));
