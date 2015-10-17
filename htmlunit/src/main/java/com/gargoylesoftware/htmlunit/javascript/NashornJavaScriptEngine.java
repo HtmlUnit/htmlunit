@@ -128,6 +128,12 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 setProto(global, "BeforeUnloadEvent", "Event");
             }
 
+            final String[] toBeRemoved = {"java", "javax", "javafx", "org", "com", "net", "edu", "JavaAdapter",
+                    "JavaImporter", "Packages", "arguments", "load", "loadWithNewGlobal", "exit", "quit"};
+            for (final String key : toBeRemoved) {
+                global.remove(key, true);
+            }
+
             final Window2 window = new Window2();
             ScriptObject windowProto = Context.getGlobal().getPrototype(window.getClass());
             if (windowProto == null) {
@@ -139,11 +145,17 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             global.setWindow(window);
 
             try {
-                global.put("alert", window.get("alert"), true);
-                global.put("atob", window.get("atob"), true);
-                global.put("btoa", window.get("btoa"), true);
-                window.put("RegExp", global.get("RegExp"), true);
-                
+                final String[] fromWindowToGlobal = {"alert", "atob", "btoa"};
+                for (final String key : fromWindowToGlobal) {
+                    global.put(key, window.get(key), true);
+                }
+
+                final String[] fromGlobalToWindow = {"RegExp", "NaN", "isNaN", "Infinity", "isFinite", "eval", "print",
+                        "parseInt", "parseFloat", "encodeURI", "encodeURIComponent", "decodeURI", "decodeURIComponent",
+                        "escape", "unescape"};
+                for (final String key : fromGlobalToWindow) {
+                    window.put(key, global.get(key), true);
+                }
 
                 final List<Property> list = new ArrayList<>();
                 list.add(window.getProto().getMap().findProperty("top"));
