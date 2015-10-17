@@ -145,7 +145,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             global.setWindow(window);
 
             try {
-                final String[] fromWindowToGlobal = {"alert", "atob", "btoa"};
+                final String[] fromWindowToGlobal = {"alert", "atob", "btoa", "execScript", "CollectGarbage"};
                 for (final String key : fromWindowToGlobal) {
                     global.put(key, window.get(key), true);
                 }

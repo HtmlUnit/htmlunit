@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -39,9 +40,12 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 public class Window2 extends EventTarget2 {
 
@@ -186,6 +190,36 @@ public class Window2 extends EventTarget2 {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
     }
 
+    /**
+     * Executes the specified script code as long as the language is {@code JavaScript} or {@code JScript}.
+     * @param script the script code to execute
+     * @param language the language of the specified code ({@code JavaScript} or {@code JScript})
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
+     */
+    @Function(@WebBrowser(value = IE, maxVersion = 8))
+    public void execScript(final String script, final Object language) {
+        final String languageStr = ScriptRuntime.safeToString(language);
+        if (language == Undefined.getUndefined()
+            || "javascript".equalsIgnoreCase(languageStr) || "jscript".equalsIgnoreCase(languageStr)) {
+            final Global global = Context.getGlobal();
+            Context.getContext().eval(global, script, global, null);
+        }
+        else if ("vbscript".equalsIgnoreCase(languageStr)) {
+            throw ECMAErrors.typeError("VBScript not supported in Window.execScript().");
+        }
+        else {
+            throw ECMAErrors.typeError("Invalid class string");
+        }
+    }
+
+    /**
+     * An undocumented IE function.
+     */
+    @Function(@WebBrowser(IE))
+    public void CollectGarbage() {
+        // Empty.
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -211,6 +245,7 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction alert;
         public ScriptFunction atob;
         public ScriptFunction btoa;
+        public ScriptFunction CollectGarbage;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -236,6 +271,14 @@ public class Window2 extends EventTarget2 {
             this.btoa = function;
         }
 
+        public ScriptFunction G$CollectGarbage() {
+            return CollectGarbage;
+        }
+
+        public void S$CollectGarbage(final ScriptFunction function) {
+            this.CollectGarbage = function;
+        }
+
         Prototype() {
             ScriptUtils.initialize(this);
         }
@@ -249,6 +292,9 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction alert;
         public ScriptFunction atob;
         public ScriptFunction btoa;
+        public ScriptFunction execScript;
+        public ScriptFunction CollectGarbage;
+        
 
         public ScriptFunction G$alert() {
             return this.alert;
@@ -272,6 +318,22 @@ public class Window2 extends EventTarget2 {
 
         public void S$btoa(final ScriptFunction function) {
             this.btoa = function;
+        }
+
+        public ScriptFunction G$execScript() {
+            return execScript;
+        }
+
+        public void S$execScript(final ScriptFunction function) {
+            this.execScript = function;
+        }
+
+        public ScriptFunction G$CollectGarbage() {
+            return CollectGarbage;
+        }
+
+        public void S$CollectGarbage(final ScriptFunction function) {
+            this.CollectGarbage = function;
         }
 
         public ObjectConstructor() {
