@@ -106,7 +106,7 @@ public class StyleSheetList extends SimpleScriptable {
                 }
                 final WebClient webClient = getWindow().getWebWindow().getWebClient();
                 final SACMediaList mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
-                return CSSStyleSheet.isActive(new MediaListImpl(mediaList));
+                return CSSStyleSheet.isActive(this, new MediaListImpl(mediaList));
             }
         }
         return false;

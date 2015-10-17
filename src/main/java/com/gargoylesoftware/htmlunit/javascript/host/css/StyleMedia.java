@@ -66,7 +66,7 @@ public class StyleMedia extends SimpleScriptable {
     public boolean matchMedium(final String media) {
         final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
         final SACMediaList mediaList = CSSStyleSheet.parseMedia(errorHandler, media);
-        return CSSStyleSheet.isActive(new MediaListImpl(mediaList));
+        return CSSStyleSheet.isActive(this, new MediaListImpl(mediaList));
     }
 
 }

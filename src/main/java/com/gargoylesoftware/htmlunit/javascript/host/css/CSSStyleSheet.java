@@ -89,6 +89,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -105,10 +106,12 @@ import com.steadystate.css.dom.CSSMediaRuleImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.dom.MediaListImpl;
+import com.steadystate.css.dom.Property;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACMediaListImpl;
 import com.steadystate.css.parser.SACParserCSS3;
 import com.steadystate.css.parser.SelectorListImpl;
+import com.steadystate.css.parser.media.MediaQuery;
 import com.steadystate.css.parser.selectors.GeneralAdjacentSelectorImpl;
 import com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
@@ -257,7 +260,7 @@ public class CSSStyleSheet extends StyleSheet {
             else if (CSSRule.IMPORT_RULE == ruleType) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
                 final MediaList mediaList = importRule.getMedia();
-                if (isActive(mediaList)) {
+                if (isActive(this, mediaList)) {
                     CSSStyleSheet sheet = imports_.get(importRule);
                     if (sheet == null) {
                         // TODO: surely wrong: in which case is it null and why?
@@ -278,7 +281,7 @@ public class CSSStyleSheet extends StyleSheet {
             else if (CSSRule.MEDIA_RULE == ruleType) {
                 final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
                 final MediaList mediaList = mediaRule.getMedia();
-                if (isActive(mediaList)) {
+                if (isActive(this, mediaList)) {
                     final CSSRuleList internalRules = mediaRule.getCssRules();
                     modifyIfNecessary(style, element, internalRules, alreadyProcessing);
                 }
@@ -1150,22 +1153,46 @@ public class CSSStyleSheet extends StyleSheet {
 
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
         final SACMediaList mediaList = parseMedia(webClient.getCssErrorHandler(), media);
-        return isActive(new MediaListImpl(mediaList));
+        return isActive(this, new MediaListImpl(mediaList));
     }
 
     /**
      * Returns whether the specified {@link MediaList} is active or not.
+     * @param scriptable the scriptable
      * @param mediaList the media list
      * @return whether the specified {@link MediaList} is active or not
      */
-    static boolean isActive(final MediaList mediaList) {
+    static boolean isActive(final SimpleScriptable scriptable, final MediaList mediaList) {
         if (mediaList.getLength() == 0) {
             return true;
         }
 
         for (int i = 0; i < mediaList.getLength(); i++) {
-            final String mediaType = mediaList.item(i);
+            final MediaQuery mediaQuery = ((MediaListImpl) mediaList).mediaQuery(i);
+            final String mediaType = mediaQuery.getMedia();
             if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
+                for (final Property property : mediaQuery.getProperties()) {
+                    final String valueCssText = property.getValue().getCssText();
+                    int value = -1;
+                    if (valueCssText.endsWith("px")) {
+                        value = Integer.parseInt(valueCssText.substring(0,  valueCssText.length() - 2));
+                    }
+                    switch (property.getName()) {
+                        case "max-width":
+                            if (value < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                                return false;
+                            }
+                            break;
+
+                        case "min-width":
+                            if (value > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                                return false;
+                            }
+                            break;
+
+                        default:
+                    }
+                }
                 return true;
             }
         }
