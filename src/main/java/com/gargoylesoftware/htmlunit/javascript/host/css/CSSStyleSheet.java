@@ -105,6 +105,7 @@ import com.steadystate.css.dom.CSSImportRuleImpl;
 import com.steadystate.css.dom.CSSMediaRuleImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
+import com.steadystate.css.dom.CSSValueImpl;
 import com.steadystate.css.dom.MediaListImpl;
 import com.steadystate.css.dom.Property;
 import com.steadystate.css.parser.CSSOMParser;
@@ -1172,20 +1173,17 @@ public class CSSStyleSheet extends StyleSheet {
             final String mediaType = mediaQuery.getMedia();
             if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
                 for (final Property property : mediaQuery.getProperties()) {
-                    final String valueCssText = property.getValue().getCssText();
-                    int value = -1;
-                    if (valueCssText.endsWith("px")) {
-                        value = Integer.parseInt(valueCssText.substring(0,  valueCssText.length() - 2));
-                    }
                     switch (property.getName()) {
                         case "max-width":
-                            if (value < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            final float maxWidth = pixelValue((CSSValueImpl) property.getValue());
+                            if (maxWidth < scriptable.getWindow().getWebWindow().getInnerWidth()) {
                                 return false;
                             }
                             break;
 
                         case "min-width":
-                            if (value > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            final float minWidth = pixelValue((CSSValueImpl) property.getValue());
+                            if (minWidth > scriptable.getWindow().getWebWindow().getInnerWidth()) {
                                 return false;
                             }
                             break;
@@ -1199,6 +1197,14 @@ public class CSSStyleSheet extends StyleSheet {
         return false;
     }
 
+    private static float pixelValue(final CSSValueImpl cssValue) {
+        if (cssValue.getPrimitiveType() == CSSPrimitiveValue.CSS_PX) {
+            return cssValue.getFloatValue(CSSPrimitiveValue.CSS_PX);
+        }
+
+        LOG.warn("Unsupported CSSPrimitiveValue type '" + cssValue.getPrimitiveType() + "'");
+        return -1;
+    }
     /**
      * Validates the list of selectors.
      * @param selectorList the selectors

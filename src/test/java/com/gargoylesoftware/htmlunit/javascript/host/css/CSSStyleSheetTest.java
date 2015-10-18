@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 
@@ -34,6 +37,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CSSStyleSheetTest extends WebDriverTestCase {
@@ -712,6 +716,48 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "block", "1" },
+            IE11 = { "none", "1" })
+    @NotYetImplemented(IE11)
+    public void mediaRule_max_width() throws Exception {
+        mediaRule("screen and (max-width: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "none", "1" },
+            IE8 = { "block", "1" })
+    @NotYetImplemented(IE8)
+    public void mediaRule_max_width_match() throws Exception {
+        mediaRule("screen and (max-width: 10000px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaRule_min_width() throws Exception {
+        mediaRule("screen and (min-width: 10000px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "none", "1" },
+            IE = { "block", "1" })
+    @NotYetImplemented(IE)
+    public void mediaRule_min_width_match() throws Exception {
+        mediaRule("screen and (min-width: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({ "block", "1" })
     public void mediaRule_notScreen() throws Exception {
         mediaRule("print");
@@ -737,17 +783,21 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
 
     private void mediaRule(final String media) throws Exception {
         final String html
-            = "<html><head>\n"
-            + "<style> @media " + media + " { div { display: none } }</style>\n"
-            + "</head><body>\n"
-            + "<div id='d'>hello</div>\n"
-            + "<script>\n"
-            + "  var getStyle = function(e) {\n"
-            + "    return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle;\n"
-            + "  };\n"
-            + "  alert(getStyle(document.getElementById('d')).display);\n"
-            + "  alert(document.styleSheets.length);\n"
-            + "</script></body></html>";
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <style> @media " + media + " { div { display: none } }</style>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <div id='d'>hello</div>\n"
+            + "  <script>\n"
+            + "    var getStyle = function(e) {\n"
+            + "      return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle;\n"
+            + "    };\n"
+            + "    alert(getStyle(document.getElementById('d')).display);\n"
+            + "    alert(document.styleSheets.length);\n"
+            + "  </script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
