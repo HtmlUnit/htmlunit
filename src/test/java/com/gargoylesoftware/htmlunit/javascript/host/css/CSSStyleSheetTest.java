@@ -716,6 +716,33 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "block", "1" })
+    public void mediaRule_notScreen() throws Exception {
+        mediaRule("print");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaRule_multipleWithScreen() throws Exception {
+        mediaRule("print, screen, tv");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaRule_multipleWithoutScreen() throws Exception {
+        mediaRule("print, projection, tv");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = { "block", "1" },
             IE11 = { "none", "1" })
     @NotYetImplemented(IE11)
@@ -758,18 +785,22 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
-    public void mediaRule_notScreen() throws Exception {
-        mediaRule("print");
+    @Alerts(DEFAULT = { "block", "1" },
+            IE11 = { "none", "1" })
+    @NotYetImplemented(IE11)
+    public void mediaRule_portrait() throws Exception {
+        mediaRule("screen and (orientation: portrait)");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
-    public void mediaRule_multipleWithScreen() throws Exception {
-        mediaRule("print, screen, tv");
+    @Alerts(DEFAULT = { "none", "1" },
+            IE = { "block", "1" })
+    @NotYetImplemented(IE)
+    public void mediaRule_landscape() throws Exception {
+        mediaRule("screen and (orientation: landscape)");
     }
 
     /**
@@ -777,8 +808,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "block", "1" })
-    public void mediaRule_multipleWithoutScreen() throws Exception {
-        mediaRule("print, projection, tv");
+    public void mediaRule_invalidOrientation() throws Exception {
+        mediaRule("screen and (orientation: unknown)");
     }
 
     private void mediaRule(final String media) throws Exception {

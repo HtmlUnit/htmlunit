@@ -77,6 +77,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DisabledElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -1188,6 +1189,26 @@ public class CSSStyleSheet extends StyleSheet {
                             }
                             break;
 
+                        case "orientation":
+                            final String orient = property.getValue().getCssText();
+                            final WebWindow window = scriptable.getWindow().getWebWindow();
+                            if ("portrait".equals(orient)) {
+                                if (window.getInnerWidth() > window.getInnerHeight()) {
+                                    return false;
+                                }
+                            }
+                            else if ("landscape".equals(orient)) {
+                                if (window.getInnerWidth() < window.getInnerHeight()) {
+                                    return false;
+                                }
+                            }
+                            else {
+                                LOG.warn("CSSValue '" + property.getValue().getCssText()
+                                        + "' not supported for feature 'orientation'.");
+                                return false;
+                            }
+                            break;
+
                         default:
                     }
                 }
@@ -1202,9 +1223,10 @@ public class CSSStyleSheet extends StyleSheet {
             return cssValue.getFloatValue(CSSPrimitiveValue.CSS_PX);
         }
 
-        LOG.warn("Unsupported CSSPrimitiveValue type '" + cssValue.getPrimitiveType() + "'");
+        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'px' value.");
         return -1;
     }
+
     /**
      * Validates the list of selectors.
      * @param selectorList the selectors
