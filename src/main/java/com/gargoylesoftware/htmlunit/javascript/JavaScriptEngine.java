@@ -920,7 +920,7 @@ public class JavaScriptEngine {
         if (node != null) {
             return node.getScriptableObject();
         }
-        return (Window) page.getEnclosingWindow().getScriptableObject();
+        return page.getEnclosingWindow().getScriptableObject();
     }
 
     /**
