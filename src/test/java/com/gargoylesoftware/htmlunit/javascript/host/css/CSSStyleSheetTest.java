@@ -582,8 +582,17 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "block", "1" })
-    public void mediaOnStyleTag_notScreen() throws Exception {
+    public void mediaOnStyleTag_print() throws Exception {
         mediaOnStyleTag("print");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnStyleTag_print_not() throws Exception {
+        mediaOnStyleTag("not print");
     }
 
     /**
@@ -799,8 +808,30 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "none", "1" },
             IE = { "block", "1" })
     @NotYetImplemented(IE)
+    public void mediaRule_portrait_not() throws Exception {
+        mediaRule("not screen and (orientation: portrait)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "none", "1" },
+            IE = { "block", "1" })
+    @NotYetImplemented(IE)
     public void mediaRule_landscape() throws Exception {
         mediaRule("screen and (orientation: landscape)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "block", "1" },
+            IE11 = { "none", "1" })
+    @NotYetImplemented(IE11)
+    public void mediaRule_landscape_not() throws Exception {
+        mediaRule("not screen and (orientation: landscape)");
     }
 
     /**

@@ -1171,49 +1171,60 @@ public class CSSStyleSheet extends StyleSheet {
 
         for (int i = 0; i < mediaList.getLength(); i++) {
             final MediaQuery mediaQuery = ((MediaListImpl) mediaList).mediaQuery(i);
-            final String mediaType = mediaQuery.getMedia();
-            if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
-                for (final Property property : mediaQuery.getProperties()) {
-                    switch (property.getName()) {
-                        case "max-width":
-                            final float maxWidth = pixelValue((CSSValueImpl) property.getValue());
-                            if (maxWidth < scriptable.getWindow().getWebWindow().getInnerWidth()) {
-                                return false;
-                            }
-                            break;
-
-                        case "min-width":
-                            final float minWidth = pixelValue((CSSValueImpl) property.getValue());
-                            if (minWidth > scriptable.getWindow().getWebWindow().getInnerWidth()) {
-                                return false;
-                            }
-                            break;
-
-                        case "orientation":
-                            final String orient = property.getValue().getCssText();
-                            final WebWindow window = scriptable.getWindow().getWebWindow();
-                            if ("portrait".equals(orient)) {
-                                if (window.getInnerWidth() > window.getInnerHeight()) {
-                                    return false;
-                                }
-                            }
-                            else if ("landscape".equals(orient)) {
-                                if (window.getInnerWidth() < window.getInnerHeight()) {
-                                    return false;
-                                }
-                            }
-                            else {
-                                LOG.warn("CSSValue '" + property.getValue().getCssText()
-                                        + "' not supported for feature 'orientation'.");
-                                return false;
-                            }
-                            break;
-
-                        default:
-                    }
-                }
+            boolean isActive = isActive(scriptable, mediaQuery);
+            if (mediaQuery.isNot()) {
+                isActive = !isActive;
+            }
+            if (isActive) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    private static boolean isActive(final SimpleScriptable scriptable, final MediaQuery mediaQuery) {
+        final String mediaType = mediaQuery.getMedia();
+        if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
+            for (final Property property : mediaQuery.getProperties()) {
+                switch (property.getName()) {
+                    case "max-width":
+                        final float maxWidth = pixelValue((CSSValueImpl) property.getValue());
+                        if (maxWidth < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-width":
+                        final float minWidth = pixelValue((CSSValueImpl) property.getValue());
+                        if (minWidth > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "orientation":
+                        final String orient = property.getValue().getCssText();
+                        final WebWindow window = scriptable.getWindow().getWebWindow();
+                        if ("portrait".equals(orient)) {
+                            if (window.getInnerWidth() > window.getInnerHeight()) {
+                                return false;
+                            }
+                        }
+                        else if ("landscape".equals(orient)) {
+                            if (window.getInnerWidth() < window.getInnerHeight()) {
+                                return false;
+                            }
+                        }
+                        else {
+                            LOG.warn("CSSValue '" + property.getValue().getCssText()
+                                        + "' not supported for feature 'orientation'.");
+                            return false;
+                        }
+                        break;
+
+                    default:
+                }
+            }
+            return true;
         }
         return false;
     }
