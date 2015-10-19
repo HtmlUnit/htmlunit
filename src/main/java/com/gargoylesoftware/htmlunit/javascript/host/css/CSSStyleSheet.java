@@ -1186,17 +1186,60 @@ public class CSSStyleSheet extends StyleSheet {
         final String mediaType = mediaQuery.getMedia();
         if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
             for (final Property property : mediaQuery.getProperties()) {
+                float pxValue;
                 switch (property.getName()) {
                     case "max-width":
-                        final float maxWidth = pixelValue((CSSValueImpl) property.getValue());
-                        if (maxWidth < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        pxValue = pixelValue((CSSValueImpl) property.getValue());
+                        if (pxValue < scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-width":
-                        final float minWidth = pixelValue((CSSValueImpl) property.getValue());
-                        if (minWidth > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        pxValue = pixelValue((CSSValueImpl) property.getValue());
+                        if (pxValue > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-device-width":
+                        pxValue = pixelValue((CSSValueImpl) property.getValue());
+                        if (pxValue < scriptable.getWindow().getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-device-width":
+                        pxValue = pixelValue((CSSValueImpl) property.getValue());
+                        if (pxValue > scriptable.getWindow().getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-height":
+                        pxValue = pixelValue((CSSValueImpl) property.getValue());
+                        if (pxValue < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-height":
+                        pxValue = pixelValue((CSSValueImpl) property.getValue());
+                        if (pxValue > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-device-height":
+                        pxValue = pixelValue((CSSValueImpl) property.getValue());
+                        if (pxValue < scriptable.getWindow().getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-device-height":
+                        pxValue = pixelValue((CSSValueImpl) property.getValue());
+                        if (pxValue > scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
