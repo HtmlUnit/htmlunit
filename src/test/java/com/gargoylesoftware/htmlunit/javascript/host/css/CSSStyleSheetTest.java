@@ -823,7 +823,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts(DEFAULT = { "none", "1" },
+            IE8 = { "block", "1" })
+    @NotYetImplemented(IE8)
     public void mediaRule_min_device_width_match() throws Exception {
         mediaRule("screen and (min-device-width: 123px)");
     }
@@ -903,9 +905,73 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts(DEFAULT = { "none", "1" },
+            IE8 = { "block", "1" })
+    @NotYetImplemented(IE8)
     public void mediaRule_min_device_height_match() throws Exception {
         mediaRule("screen and (min-device-height: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaRule_resolution() throws Exception {
+        mediaRule("screen and (resolution: 4dpi)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "none", "1" },
+            IE = { "block", "1" })
+    @NotYetImplemented(IE)
+    public void mediaRule_resolution_match() throws Exception {
+        mediaRule("screen and (resolution: 96dpi)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "block", "1" },
+            IE11 = { "none", "1" })
+    @NotYetImplemented(IE11)
+    public void mediaRule_max_resolution() throws Exception {
+        mediaRule("screen and (max-resolution: 90dpi)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "none", "1" },
+            IE8 = { "block", "1" })
+    @NotYetImplemented(IE8)
+    public void mediaRule_max_resolution_match() throws Exception {
+        mediaRule("screen and (max-resolution: 10000dpi)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "1" })
+    public void mediaRule_min_resolution() throws Exception {
+        mediaRule("screen and (min-resolution: 10000dpi)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "none", "1" },
+            IE = { "block", "1" })
+    @NotYetImplemented(IE)
+    public void mediaRule_min_resolution_match() throws Exception {
+        mediaRule("screen and (min-resolution: 10dpi)");
     }
 
     /**

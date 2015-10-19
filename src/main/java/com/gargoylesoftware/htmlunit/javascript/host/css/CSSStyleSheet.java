@@ -1186,60 +1186,81 @@ public class CSSStyleSheet extends StyleSheet {
         final String mediaType = mediaQuery.getMedia();
         if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
             for (final Property property : mediaQuery.getProperties()) {
-                float pxValue;
+                float val;
                 switch (property.getName()) {
                     case "max-width":
-                        pxValue = pixelValue((CSSValueImpl) property.getValue());
-                        if (pxValue < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-width":
-                        pxValue = pixelValue((CSSValueImpl) property.getValue());
-                        if (pxValue > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-device-width":
-                        pxValue = pixelValue((CSSValueImpl) property.getValue());
-                        if (pxValue < scriptable.getWindow().getScreen().getWidth()) {
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-width":
-                        pxValue = pixelValue((CSSValueImpl) property.getValue());
-                        if (pxValue > scriptable.getWindow().getScreen().getWidth()) {
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-height":
-                        pxValue = pixelValue((CSSValueImpl) property.getValue());
-                        if (pxValue < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-height":
-                        pxValue = pixelValue((CSSValueImpl) property.getValue());
-                        if (pxValue > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-device-height":
-                        pxValue = pixelValue((CSSValueImpl) property.getValue());
-                        if (pxValue < scriptable.getWindow().getScreen().getWidth()) {
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-height":
-                        pxValue = pixelValue((CSSValueImpl) property.getValue());
-                        if (pxValue > scriptable.getWindow().getScreen().getWidth()) {
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "resolution":
+                        val = resolutionValue((CSSValueImpl) property.getValue());
+                        if (Math.round(val) != scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-resolution":
+                        val = resolutionValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-resolution":
+                        val = resolutionValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getScreen().getDeviceXDPI()) {
                             return false;
                         }
                         break;
@@ -1275,6 +1296,24 @@ public class CSSStyleSheet extends StyleSheet {
     private static float pixelValue(final CSSValueImpl cssValue) {
         if (cssValue.getPrimitiveType() == CSSPrimitiveValue.CSS_PX) {
             return cssValue.getFloatValue(CSSPrimitiveValue.CSS_PX);
+        }
+
+        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'px' value.");
+        return -1;
+    }
+
+    private static float resolutionValue(final CSSValueImpl cssValue) {
+        if (cssValue.getPrimitiveType() == CSSPrimitiveValue.CSS_DIMENSION) {
+            final String text = cssValue.getCssText();
+            if (text.endsWith("dpi")) {
+                return cssValue.getFloatValue(CSSPrimitiveValue.CSS_DIMENSION);
+            }
+            if (text.endsWith("dpcm")) {
+                return 2.54f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_DIMENSION);
+            }
+            if (text.endsWith("dppx")) {
+                return 96 * cssValue.getFloatValue(CSSPrimitiveValue.CSS_DIMENSION);
+            }
         }
 
         LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'px' value.");

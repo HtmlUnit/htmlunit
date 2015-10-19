@@ -9,6 +9,9 @@
     <body>
         <release version="2.19" date="" description="Bugfixes">
             <action type="add" dev="rbri">
+                CSS: support for Media Query feature 'max-resolution', 'min-resolution', and 'resolution' added.
+            </action>
+            <action type="add" dev="rbri">
                 CSS: support for Media Query feature 'max-device-width', 'min-device-width', 'max-height',
                 'min-height', 'max-device-height' and 'min-device-height' added.
             </action>
