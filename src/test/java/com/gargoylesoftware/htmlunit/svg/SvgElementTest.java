@@ -71,4 +71,32 @@ public class SvgElementTest extends WebDriverTestCase {
             }
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void oninput() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var testNode = document.getElementById('myId');\n"
+            + "      alert('oninput' in document);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
+            + "    <invalid id='myId'/>\n"
+            + "  </svg>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

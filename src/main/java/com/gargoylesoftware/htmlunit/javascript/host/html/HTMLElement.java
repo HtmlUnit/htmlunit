@@ -2987,24 +2987,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the <tt>oninput</tt> event handler for this element.
-     * @param onchange the <tt>oninput</tt> event handler for this element
-     */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    public void setOninput(final Object onchange) {
-        setEventHandlerProp("oninput", onchange);
-    }
-
-    /**
-     * Returns the <tt>oninput</tt> event handler for this element.
-     * @return the <tt>oninput</tt> event handler for this element
-     */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    public Function getOninput() {
-        return getEventHandler("oninput");
-    }
-
-    /**
      * Returns the default display style.
      *
      * @return the default display style
