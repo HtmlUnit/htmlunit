@@ -670,13 +670,17 @@ public class HttpWebConnection implements WebConnection {
      */
     protected DownloadedContent downloadResponseBody(final HttpResponse httpResponse) throws IOException {
         final HttpEntity httpEntity = httpResponse.getEntity();
-        final int status = httpResponse.getStatusLine().getStatusCode();
-        if (httpEntity == null || ((status <= HttpStatus.SC_SEE_OTHER || status == HttpStatus.SC_TEMPORARY_REDIRECT)
-                && webClient_.getOptions().isRedirectEnabled())) {
+        if (httpEntity == null || isRedirect(httpResponse.getStatusLine().getStatusCode())) {
             return new DownloadedContent.InMemory(new byte[] {});
         }
 
         return downloadContent(httpEntity.getContent(), webClient_.getOptions().getMaxInMemory());
+    }
+
+    private boolean isRedirect(final int status) {
+        return ((status >= HttpStatus.SC_MOVED_PERMANENTLY && status <= HttpStatus.SC_SEE_OTHER)
+                || status == HttpStatus.SC_TEMPORARY_REDIRECT)
+                && webClient_.getOptions().isRedirectEnabled();
     }
 
     /**
