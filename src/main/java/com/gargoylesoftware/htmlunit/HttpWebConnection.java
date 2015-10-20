@@ -53,6 +53,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.client.CredentialsProvider;
@@ -669,7 +670,9 @@ public class HttpWebConnection implements WebConnection {
      */
     protected DownloadedContent downloadResponseBody(final HttpResponse httpResponse) throws IOException {
         final HttpEntity httpEntity = httpResponse.getEntity();
-        if (httpEntity == null) {
+        final int status = httpResponse.getStatusLine().getStatusCode();
+        if (httpEntity == null || ((status <= HttpStatus.SC_SEE_OTHER || status == HttpStatus.SC_TEMPORARY_REDIRECT)
+                && webClient_.getOptions().isRedirectEnabled())) {
             return new DownloadedContent.InMemory(new byte[] {});
         }
 

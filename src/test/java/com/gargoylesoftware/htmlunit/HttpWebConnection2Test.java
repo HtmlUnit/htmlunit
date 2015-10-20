@@ -136,4 +136,22 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         // only check that no exception is thrown
         loadPageWithAlerts2(URL_FIRST);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void redirectBrokenGzip() throws Exception {
+        final String html = "<html></html>";
+
+        final List<NameValuePair> headers = Arrays.asList(new NameValuePair("Location", URL_SECOND.toString()),
+                new NameValuePair("Content-Encoding", "gzip"));
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(URL_FIRST, "12", 302, "Some error", "text/html", headers);
+        conn.setResponse(URL_SECOND, html);
+
+        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
+    }
+
 }
