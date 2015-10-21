@@ -151,6 +151,7 @@ public class HtmlPage extends InteractivePage {
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
+    private List<AutoCloseable> autoCloseableList;
 
     static class DocumentPositionComparator implements Comparator<DomElement>, Serializable {
         @Override
@@ -310,6 +311,16 @@ public class HtmlPage extends InteractivePage {
         executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
         deregisterFramesIfNeeded();
         cleaning_ = false;
+        if (autoCloseableList != null) {
+            for (final AutoCloseable closeable : autoCloseableList) {
+                try {
+                    closeable.close();
+                }
+                catch(final Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     /**
@@ -2301,5 +2312,18 @@ public class HtmlPage extends InteractivePage {
         }
 
         return baseUrl;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Adds an {@link AutoCloseable}, which would be closed during the {@link #cleanUp()}.
+     * @param autoCloseable the autoclosable
+     */
+    public void addAutoCloseable(final AutoCloseable autoCloseable) {
+        if (autoCloseableList == null) {
+            autoCloseableList = new ArrayList<>();
+        }
+        autoCloseableList.add(autoCloseable);
     }
 }

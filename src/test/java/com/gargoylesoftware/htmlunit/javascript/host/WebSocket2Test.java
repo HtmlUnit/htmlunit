@@ -25,7 +25,6 @@ import org.eclipse.jetty.websocket.servlet.ServletUpgradeRequest;
 import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
 import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -41,7 +40,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class WebSocketTest extends WebDriverTestCase {
+public class WebSocket2Test extends WebDriverTestCase {
 
     /**
      * Test case taken from <a href="http://angelozerr.wordpress.com/2011/07/23/websockets_jetty_step1/">here</a>.
@@ -123,17 +122,4 @@ public class WebSocketTest extends WebDriverTestCase {
             }
         }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @After
-    @Override
-    public void releaseResources() {
-        super.releaseResources();
-        for (final Thread thread : Thread.getAllStackTraces().keySet()) {
-            assertFalse("WebSocket threads still running", thread.getName().contains("WebSocket"));
-        }
-    }
-
 }

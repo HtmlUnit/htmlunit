@@ -54,7 +54,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
         @WebBrowser(EDGE) })
-public class WebSocket extends EventTarget {
+public class WebSocket extends EventTarget implements AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(WebSocket.class);
 
@@ -78,6 +78,7 @@ public class WebSocket extends EventTarget {
     private int readyState_ = CLOSED;
 
     private HtmlPage containingPage_;
+    private WebSocketClient client_;
     private Session incomingSession_;
     private Session outgoingSession_;
 
@@ -97,16 +98,16 @@ public class WebSocket extends EventTarget {
         try {
             containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
 
-            final WebSocketClient client;
             if (containingPage_.getWebClient().getOptions().isUseInsecureSSL()) {
-                client = new WebSocketClient(new SslContextFactory(true));
+                client_ = new WebSocketClient(new SslContextFactory(true));
             }
             else {
-                client = new WebSocketClient();
+                client_ = new WebSocketClient();
             }
-            client.start();
-            incomingSession_ = client.connect(new WebSocketImpl(), new URI(url)).get();
+            client_.start();
+            incomingSession_ = client_.connect(new WebSocketImpl(), new URI(url)).get();
             readyState_ = OPEN;
+            containingPage_.addAutoCloseable(this);
         }
         catch (final Exception e) {
             LOG.error(e);
@@ -222,6 +223,14 @@ public class WebSocket extends EventTarget {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws Exception {
+        close(null, null);
+    }
+
+    /**
      * Closes the WebSocket connection or connection attempt, if any.
      * If the connection is already {@link #CLOSED}, this method does nothing.
      * @param code A numeric value indicating the status code explaining why the connection is being closed
@@ -235,6 +244,12 @@ public class WebSocket extends EventTarget {
             }
             if (outgoingSession_ != null) {
                 outgoingSession_.close();
+            }
+            try {
+                client_.stop();
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(e);
             }
             readyState_ = CLOSED;
         }
