@@ -151,7 +151,7 @@ public class HtmlPage extends InteractivePage {
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
-    private List<AutoCloseable> autoCloseableList;
+    private List<AutoCloseable> autoCloseableList_;
 
     static class DocumentPositionComparator implements Comparator<DomElement>, Serializable {
         @Override
@@ -311,12 +311,12 @@ public class HtmlPage extends InteractivePage {
         executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
         deregisterFramesIfNeeded();
         cleaning_ = false;
-        if (autoCloseableList != null) {
-            for (final AutoCloseable closeable : autoCloseableList) {
+        if (autoCloseableList_ != null) {
+            for (final AutoCloseable closeable : autoCloseableList_) {
                 try {
                     closeable.close();
                 }
-                catch(final Exception e) {
+                catch (final Exception e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -2321,9 +2321,9 @@ public class HtmlPage extends InteractivePage {
      * @param autoCloseable the autoclosable
      */
     public void addAutoCloseable(final AutoCloseable autoCloseable) {
-        if (autoCloseableList == null) {
-            autoCloseableList = new ArrayList<>();
+        if (autoCloseableList_ == null) {
+            autoCloseableList_ = new ArrayList<>();
         }
-        autoCloseableList.add(autoCloseable);
+        autoCloseableList_.add(autoCloseable);
     }
 }
