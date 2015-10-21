@@ -367,6 +367,7 @@ public class EventNode extends Node {
     public Object getOnerror() {
         return getEventHandlerProp("onerror");
     }
+
     /**
      * Returns the <tt>oninput</tt> event handler for this element.
      * @return the <tt>oninput</tt> event handler for this element
