@@ -75,6 +75,9 @@ public class HtmlSerializerTest {
         assertEquals("a   x", serializer.cleanUp("a" + HtmlSerializer.AS_TEXT_BLANK
                         + " " + HtmlSerializer.AS_TEXT_BLANK + "x"));
 
+        assertEquals("a\t \tx", serializer.cleanUp("a" + HtmlSerializer.AS_TEXT_TAB
+                        + " " + HtmlSerializer.AS_TEXT_TAB + "x"));
+
         assertEquals("abc", serializer.cleanUp("abc"));
         assertEquals("abc x", serializer.cleanUp("abc" + (char) 160 + "x"));
         assertEquals("a b c o", serializer.cleanUp("a     b \t\t\t c \r \r o \n\n\n"));
