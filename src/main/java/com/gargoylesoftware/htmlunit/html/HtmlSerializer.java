@@ -46,7 +46,6 @@ class HtmlSerializer {
     /** Indicates a tab. */
     protected static final String AS_TEXT_TAB = "§tab§";
 
-    private static final Pattern CLEAN_UP_PATTERN = Pattern.compile("(?:" + AS_TEXT_BLOCK_SEPARATOR + ")+");
     private static final Pattern TEXT_AREA_PATTERN = Pattern.compile("\r?\n");
 
     private boolean appletEnabled_;
@@ -72,7 +71,8 @@ class HtmlSerializer {
         text = StringUtils.replace(text, AS_TEXT_BLANK, " ");
         final String ls = System.getProperty("line.separator");
         text = StringUtils.replace(text, AS_TEXT_NEW_LINE, ls);
-        text = CLEAN_UP_PATTERN.matcher(text).replaceAll(ls); // many block sep => 1 new line
+        // text = CLEAN_UP_PATTERN.matcher(text).replaceAll(ls); // many block sep => 1 new line
+        text = StringUtils.replace(text, AS_TEXT_BLOCK_SEPARATOR, ls);
         text = StringUtils.replace(text, AS_TEXT_TAB, "\t");
 
         return text;
@@ -153,7 +153,13 @@ class HtmlSerializer {
                 p1++;
             }
             start = p1;
+
+            // ignore duplicates
             p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
+            while (p0 != -1 && p0 == start) {
+                start += AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+                p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
+            }
         }
         if (start < length) {
             result.append(text.substring(start));
