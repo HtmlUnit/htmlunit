@@ -98,8 +98,7 @@ public class HtmlSerializerTest {
         serializer.cleanUp(text);
 
         final long runTime = System.currentTimeMillis() - time;
-        // System.out.println(runTime);
-        assertTrue("reduceWhitespace() took too much time", runTime < 1_000);
+        assertTrue("cleanUp() took too much time", runTime < 1_000);
     }
 
     /**
@@ -115,7 +114,6 @@ public class HtmlSerializerTest {
         serializer.cleanUp(text);
 
         final long runTime = System.currentTimeMillis() - time;
-        // System.out.println(runTime);
-        assertTrue("reduceWhitespace() took too much time", runTime < 1_000);
+        assertTrue("cleanUp() took too much time", runTime < 1_000);
     }
 }
