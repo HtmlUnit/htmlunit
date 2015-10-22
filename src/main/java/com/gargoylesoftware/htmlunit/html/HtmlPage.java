@@ -312,7 +312,7 @@ public class HtmlPage extends InteractivePage {
         deregisterFramesIfNeeded();
         cleaning_ = false;
         if (autoCloseableList_ != null) {
-            for (final AutoCloseable closeable : autoCloseableList_) {
+            for (final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
                 try {
                     closeable.close();
                 }

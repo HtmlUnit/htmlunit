@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
+import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -1845,4 +1846,21 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertEquals(1, page.getFrames().size());
         assertEquals(1, clonedPage.getFrames().size());
     }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void addAutoCloseable() throws Exception {
+        final String html = "";
+        final HtmlPage page = loadPage(html);
+        page.addAutoCloseable(new AutoCloseable() {
+            
+            @Override
+            public void close() throws Exception {
+                page.addAutoCloseable(new WebSocket());
+            }
+        });
+    }
+
 }
