@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -24,14 +25,53 @@ import org.junit.Test;
  * Tests for {@link HtmlSerializer}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlSerializerTest {
 
     /**
-     * Test {@link HtmlSerializer#reduceWhitespace(String)}.
+     * Test {@link HtmlSerializer#cleanup(String)}.
      */
     @Test
-    public void reduceWhitespace() {
+    public void cleanUp() {
+        final String ls = System.getProperty("line.separator");
+        final HtmlSerializer serializer = new HtmlSerializer();
+
+        assertEquals("", serializer.cleanUp(""));
+        assertEquals("", serializer.cleanUp(" \t\r\n "));
+
+        assertEquals("", serializer.cleanUp(HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR  + " "));
+        assertEquals("", serializer.cleanUp(" " + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR));
+        assertEquals("", serializer.cleanUp(" " + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR  + " "));
+        assertEquals("a", serializer.cleanUp(" a  " + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR));
+        assertEquals("a" + ls + "x", serializer.cleanUp(" a  " + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR  + "  x "));
+
+        assertEquals(ls, serializer.cleanUp(HtmlSerializer.AS_TEXT_NEW_LINE  + " "));
+        assertEquals(ls, serializer.cleanUp(" " + HtmlSerializer.AS_TEXT_NEW_LINE));
+        assertEquals(ls, serializer.cleanUp(" " + HtmlSerializer.AS_TEXT_NEW_LINE + " "));
+
+        assertEquals("a" + ls + "x", serializer.cleanUp("a"
+                        + HtmlSerializer.AS_TEXT_NEW_LINE
+                        + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR + "x"));
+
+        assertEquals("a" + ls + "x", serializer.cleanUp("a"
+                        + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR
+                        + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR
+                        + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR + "x"));
+
+        assertEquals("a   x", serializer.cleanUp("a" + HtmlSerializer.AS_TEXT_BLANK
+                        + " " + HtmlSerializer.AS_TEXT_BLANK + "x"));
+
+        assertEquals("abc", serializer.cleanUp("abc"));
+        assertEquals("abc x", serializer.cleanUp("abc" + (char) 160 + "x"));
+        assertEquals("a b c o", serializer.cleanUp("a     b \t\t\t c \r \r o \n\n\n"));
+    }
+
+    /**
+     * Test {@link HtmlSerializer#cleanup(String)}.
+     */
+    @Test
+    public void cleanUpPerformance() {
         final HtmlSerializer serializer = new HtmlSerializer();
 
         final int length = 80_000;
@@ -42,7 +82,7 @@ public class HtmlSerializerTest {
         final String text = new String(charArray);
 
         final long time = System.currentTimeMillis();
-        serializer.reduceWhitespace(text);
+        serializer.cleanUp(text);
         assertTrue("reduceWhitespace() took too much time", System.currentTimeMillis() - time < 3_000);
     }
 }

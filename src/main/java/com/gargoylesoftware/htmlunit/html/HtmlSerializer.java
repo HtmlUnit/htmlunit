@@ -62,7 +62,7 @@ class HtmlSerializer {
         return cleanUp(response);
     }
 
-    private String cleanUp(String text) {
+    protected String cleanUp(String text) {
         // ignore <br/> at the end of a block
         text = StringUtils.replace(text, AS_TEXT_NEW_LINE + AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_BLOCK_SEPARATOR);
         text = reduceWhitespace(text);
@@ -75,7 +75,7 @@ class HtmlSerializer {
         return text;
     }
 
-    protected String reduceWhitespace(String text) {
+    private String reduceWhitespace(String text) {
         text = text.trim();
 
         // remove white spaces before or after block separators
