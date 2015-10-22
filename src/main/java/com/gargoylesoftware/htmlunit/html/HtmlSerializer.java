@@ -134,8 +134,8 @@ class HtmlSerializer {
             while (p1 < length && Character.isWhitespace(text.charAt(p1))) {
                 p1++;
             }
-            text = text.substring(0, p0) + text.substring(p1);
-            p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR);
+            text = text.substring(0, p0) + AS_TEXT_BLOCK_SEPARATOR + text.substring(p1);
+            p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, p1);
         }
         return text;
     }
