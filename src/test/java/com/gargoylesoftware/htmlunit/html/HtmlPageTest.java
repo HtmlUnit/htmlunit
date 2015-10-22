@@ -1855,7 +1855,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String html = "";
         final HtmlPage page = loadPage(html);
         page.addAutoCloseable(new AutoCloseable() {
-            
             @Override
             public void close() throws Exception {
                 page.addAutoCloseable(new WebSocket());
