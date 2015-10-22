@@ -43,7 +43,6 @@ class HtmlSerializer {
     protected static final String AS_TEXT_TAB = "§tab§";
 
     private static final Pattern CLEAN_UP_PATTERN = Pattern.compile("(?:" + AS_TEXT_BLOCK_SEPARATOR + ")+");
-    private static final Pattern REDUCE_WHITESPACE_PATTERN = Pattern.compile("\\s*" + AS_TEXT_BLOCK_SEPARATOR + "\\s*");
     private static final Pattern TEXT_AREA_PATTERN = Pattern.compile("\r?\n");
 
     private boolean appletEnabled_;
@@ -80,7 +79,7 @@ class HtmlSerializer {
         text = text.trim();
 
         // remove white spaces before or after block separators
-        text = REDUCE_WHITESPACE_PATTERN.matcher(text).replaceAll(AS_TEXT_BLOCK_SEPARATOR);
+        text = reduceWhiteSpaceAroundBlockSeparator(text);
 
         // remove leading block separators
         while (text.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
@@ -122,6 +121,23 @@ class HtmlSerializer {
             }
         }
         return buffer.toString();
+    }
+
+    private static String reduceWhiteSpaceAroundBlockSeparator(String text) {
+        int p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR);
+        while (p0 != -1) {
+            int p1 = p0 + AS_TEXT_BLOCK_SEPARATOR.length();
+            while (p0 != 0 && Character.isWhitespace(text.charAt(p0 - 1))) {
+                p0--;
+            }
+            final int length = text.length();
+            while (p1 < length && Character.isWhitespace(text.charAt(p1))) {
+                p1++;
+            }
+            text = text.substring(0, p0) + text.substring(p1);
+            p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR);
+        }
+        return text;
     }
 
     protected void appendNode(final DomNode node) {
