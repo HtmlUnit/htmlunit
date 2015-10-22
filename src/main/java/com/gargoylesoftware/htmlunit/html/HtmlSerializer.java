@@ -35,8 +35,12 @@ class HtmlSerializer {
     private final StringBuilder buffer_ = new StringBuilder();
     /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
     protected static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
+    private static final int AS_TEXT_BLOCK_SEPARATOR_LENGTH = AS_TEXT_BLOCK_SEPARATOR.length();
+
     /** Indicates a new line. Will be rendered as line separator. */
     protected static final String AS_TEXT_NEW_LINE = "§nl§";
+    private static final int AS_TEXT_NEW_LINE_LENGTH = AS_TEXT_NEW_LINE.length();
+
     /** Indicates a non blank that can't be trimmed or reduced. */
     protected static final String AS_TEXT_BLANK = "§blank§";
     /** Indicates a tab. */
@@ -82,12 +86,12 @@ class HtmlSerializer {
 
         // remove leading block separators
         while (text.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(AS_TEXT_BLOCK_SEPARATOR.length());
+            text = text.substring(AS_TEXT_BLOCK_SEPARATOR_LENGTH);
         }
 
         // remove trailing block separators
         while (text.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(0, text.length() - AS_TEXT_BLOCK_SEPARATOR.length());
+            text = text.substring(0, text.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH);
         }
         text = text.trim();
 
@@ -128,22 +132,20 @@ class HtmlSerializer {
             return text;
         }
 
-        final int nlLength = AS_TEXT_NEW_LINE.length();
-        final int blockSepLength = AS_TEXT_BLOCK_SEPARATOR.length();
         final int length = text.length();
-        if (length <= blockSepLength) {
+        if (length <= AS_TEXT_BLOCK_SEPARATOR_LENGTH) {
             return text;
         }
 
         final StringBuilder result = new StringBuilder(length);
         int start = 0;
         while (p0 != -1) {
-            int p1 = p0 + blockSepLength;
+            int p1 = p0 + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
             while (p0 != start && Character.isWhitespace(text.charAt(p0 - 1))) {
                 p0--;
             }
-            if (p0 >= nlLength && text.startsWith(AS_TEXT_NEW_LINE, p0 - nlLength)) {
-                p0 = p0 - nlLength;
+            if (p0 >= AS_TEXT_NEW_LINE_LENGTH && text.startsWith(AS_TEXT_NEW_LINE, p0 - AS_TEXT_NEW_LINE_LENGTH)) {
+                p0 = p0 - AS_TEXT_NEW_LINE_LENGTH;
             }
             result.append(text.substring(start, p0)).append(AS_TEXT_BLOCK_SEPARATOR);
 
