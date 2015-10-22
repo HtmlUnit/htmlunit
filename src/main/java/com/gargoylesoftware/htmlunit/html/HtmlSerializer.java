@@ -64,7 +64,6 @@ class HtmlSerializer {
 
     protected String cleanUp(String text) {
         // ignore <br/> at the end of a block
-        text = StringUtils.replace(text, AS_TEXT_NEW_LINE + AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_BLOCK_SEPARATOR);
         text = reduceWhitespace(text);
         text = StringUtils.replace(text, AS_TEXT_BLANK, " ");
         final String ls = System.getProperty("line.separator");
@@ -123,21 +122,41 @@ class HtmlSerializer {
         return buffer.toString();
     }
 
-    private static String reduceWhiteSpaceAroundBlockSeparator(String text) {
+    private static String reduceWhiteSpaceAroundBlockSeparator(final String text) {
         int p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR);
+        if (p0 == -1) {
+            return text;
+        }
+
+        final int nlLength = AS_TEXT_NEW_LINE.length();
+        final int blockSepLength = AS_TEXT_BLOCK_SEPARATOR.length();
+        final int length = text.length();
+        if (length <= blockSepLength) {
+            return text;
+        }
+
+        final StringBuilder result = new StringBuilder(length);
+        int start = 0;
         while (p0 != -1) {
-            int p1 = p0 + AS_TEXT_BLOCK_SEPARATOR.length();
-            while (p0 != 0 && Character.isWhitespace(text.charAt(p0 - 1))) {
+            int p1 = p0 + blockSepLength;
+            while (p0 != start && Character.isWhitespace(text.charAt(p0 - 1))) {
                 p0--;
             }
-            final int length = text.length();
+            if (p0 >= nlLength && text.startsWith(AS_TEXT_NEW_LINE, p0 - nlLength)) {
+                p0 = p0 - nlLength;
+            }
+            result.append(text.substring(start, p0)).append(AS_TEXT_BLOCK_SEPARATOR);
+
             while (p1 < length && Character.isWhitespace(text.charAt(p1))) {
                 p1++;
             }
-            text = text.substring(0, p0) + AS_TEXT_BLOCK_SEPARATOR + text.substring(p1);
-            p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, p1);
+            start = p1;
+            p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
         }
-        return text;
+        if (start < length) {
+            result.append(text.substring(start));
+        }
+        return result.toString();
     }
 
     protected void appendNode(final DomNode node) {
