@@ -92,8 +92,7 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * Very strange: in FF3 it seems that you can set window.controllers if you haven't
-     * accessed it before.
+     * Very strange: in FF3 it seems that you can set window.controllers if you haven't accessed it before.
      * @throws Exception if the test fails
      */
     @Test
@@ -679,8 +678,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "679", "1256", "662", "1239" },
-            FF31 = { "674", "1258", "657", "1241" },
-            FF38 = { "674", "1258", "657", "1241" },
+            FF = { "674", "1258", "657", "1241" },
             IE11 = { "705", "1256", "688", "1239" },
             IE8 = { "605", "1256", "705", "1256" })
     @NotYetImplemented({ FF, IE11, CHROME })

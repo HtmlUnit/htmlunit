@@ -501,8 +501,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         // content frame
         driver.switchTo().defaultContent();
         driver.switchTo().frame("content");
-        assertEquals(getExpectedAlerts()[2],
-                driver.findElement(By.tagName("body")).getText());
+        assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         driver.findElement(By.name("onloadFrameAnchor")).click();
         driver.switchTo().defaultContent();
@@ -578,8 +577,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         // content frame
         driver.switchTo().defaultContent();
         driver.switchTo().frame("content");
-        assertEquals(getExpectedAlerts()[2],
-                driver.findElement(By.tagName("body")).getText());
+        assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         if (StringUtils.isNotEmpty(getExpectedAlerts()[2])) {
             driver.findElement(By.name("onloadFrameAnchor")).click();
@@ -656,8 +654,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         // content frame
         driver.switchTo().defaultContent();
         driver.switchTo().frame("content");
-        assertEquals(getExpectedAlerts()[2],
-                driver.findElement(By.tagName("body")).getText());
+        assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         if (StringUtils.isNotEmpty(getExpectedAlerts()[2])) {
             driver.findElement(By.name("onloadFrameAnchor")).click();

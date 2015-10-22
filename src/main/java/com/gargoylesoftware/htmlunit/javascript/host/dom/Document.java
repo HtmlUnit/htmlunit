@@ -175,7 +175,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Gets the JavaScript property "documentElement" for the document.
+     * Gets the JavaScript property {@code documentElement} for the document.
      * @return the root node for the document
      */
     @JsxGetter
@@ -189,7 +189,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Gets the JavaScript property "doctype" for the document.
+     * Gets the JavaScript property {@code doctype} for the document.
      * @return the DocumentType of the document
      */
     @JsxGetter

@@ -60,7 +60,7 @@ public class HTMLUnknownElement extends HTMLElement {
     }
 
     /**
-     * Gets the JavaScript property "nodeName" for the current node.
+     * Gets the JavaScript property {@code nodeName} for the current node.
      * @return the node name
      */
     @Override

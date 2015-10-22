@@ -332,7 +332,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the JavaScript property "document".
+     * Returns the JavaScript property {@code document}.
      * @return the document
      */
     @JsxGetter(propertyName = "document")
@@ -546,7 +546,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the JavaScript property "navigator".
+     * Returns the JavaScript property {@code navigator}.
      * @return the navigator
      */
     @JsxGetter
@@ -555,7 +555,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the JavaScript property "clientInformation".
+     * Returns the JavaScript property {@code clientInformation}.
      * @return the client information
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
@@ -564,7 +564,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the JavaScript property "clipboardData".
+     * Returns the JavaScript property {@code clipboardData}.
      * @return the ClipboardData
      */
     @JsxGetter(@WebBrowser(IE))

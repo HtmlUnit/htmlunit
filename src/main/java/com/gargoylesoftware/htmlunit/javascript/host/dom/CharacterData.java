@@ -53,7 +53,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Gets the JavaScript property "data" for this character data.
+     * Gets the JavaScript property {@code data} for this character data.
      * @return the String of data
      */
     @JsxGetter
@@ -63,7 +63,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Sets the JavaScript property "data" for this character data.
+     * Sets the JavaScript property {@code data} for this character data.
      * @param newValue the new String of data
      */
     @JsxSetter

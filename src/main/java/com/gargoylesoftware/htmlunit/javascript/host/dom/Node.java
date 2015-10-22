@@ -169,7 +169,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "nodeType" for the current node.
+     * Gets the JavaScript property {@code nodeType} for the current node.
      * @return the node type
      */
     @JsxGetter
@@ -178,7 +178,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "nodeName" for the current node.
+     * Gets the JavaScript property {@code nodeName} for the current node.
      * @return the node name
      */
     @JsxGetter
@@ -187,7 +187,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "nodeValue" for the current node.
+     * Gets the JavaScript property {@code nodeValue} for the current node.
      * @return the node value
      */
     @JsxGetter
@@ -196,7 +196,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Sets the JavaScript property "nodeValue" for the current node.
+     * Sets the JavaScript property {@code nodeValue} for the current node.
      * @param newValue the new node value
      */
     @JsxSetter
@@ -606,7 +606,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "parentNode" for the node that
+     * Gets the JavaScript property {@code parentNode} for the node that
      * contains the current node.
      * @return the parent node
      */
@@ -616,7 +616,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "nextSibling" for the node that
+     * Gets the JavaScript property {@code nextSibling} for the node that
      * contains the current node.
      * @return the next sibling node or null if the current node has
      * no next sibling.
@@ -627,7 +627,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "previousSibling" for the node that
+     * Gets the JavaScript property {@code previousSibling} for the node that
      * contains the current node.
      * @return the previous sibling node or null if the current node has
      * no previous sibling.
@@ -638,7 +638,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "firstChild" for the node that
+     * Gets the JavaScript property {@code firstChild} for the node that
      * contains the current node.
      * @return the first child node or null if the current node has
      * no children.
@@ -649,7 +649,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "lastChild" for the node that
+     * Gets the JavaScript property {@code lastChild} for the node that
      * contains the current node.
      * @return the last child node or null if the current node has
      * no children.
@@ -821,7 +821,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "parentElement".
+     * Gets the JavaScript property {@code parentElement}.
      * @return the parent element
      * @see #getParentNode()
      */
