@@ -160,7 +160,7 @@ public class Window2Test extends WebDriverTestCase {
             "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
             "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
             "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
-            "Java: undefined,undefined",
+            "Java: undefined,undefined", "JSAdapter: undefined,undefined",
             "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: function,function",
             "parseInt: function,function", "parseFloat: function,function",
             "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
@@ -175,7 +175,7 @@ public class Window2Test extends WebDriverTestCase {
             "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
             "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
             "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
-            "Java: undefined,undefined",
+            "Java: undefined,undefined", "JSAdapter: undefined,undefined",
             "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: object,object",
             "parseInt: function,function", "parseFloat: function,function",
             "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
@@ -186,7 +186,7 @@ public class Window2Test extends WebDriverTestCase {
         final String[] properties = {"getClass", "java", "javax", "javafx", "org", "com", "edu", "net", "JavaAdapter",
             "JavaImporter", "Continuation", "Packages", "XML", "XMLList", "Namespace", "QName", "arguments", "load",
             "loadWithNewGlobal", "exit", "quit", "__FILE__", "__DIR__", "__LINE__", "context", "engine",
-            "__noSuchProperty__", "Java",
+            "__noSuchProperty__", "Java", "JSAdapter",
             "NaN", "Infinity", "eval", "print", "parseInt", "parseFloat", "isNaN", "isFinite", "encodeURI",
             "encodeURIComponent", "decodeURI", "decodeURIComponent", "escape", "unescape"};
 
