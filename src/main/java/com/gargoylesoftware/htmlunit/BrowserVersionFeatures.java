@@ -253,6 +253,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_FOCUS_DOCUMENT_DESCENDANTS,
 
+    /** Triggers the onfocusin onfocus onfocusout blur events in this order. */
+    @BrowserFeature(@WebBrowser(IE))
+    EVENT_FOCUS_IN_FOCUS_OUT_BLUR,
+
+    /** Triggers the onfocus onfocusin blur onfocusout events in this order. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    EVENT_FOCUS_FOCUS_IN_BLUR_OUT,
+
     /** Triggers "input" event. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_INPUT,
@@ -561,6 +569,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES,
+
+    /** Removing the active element from the dom tree triggers the onblur event. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
 
     /**
      * Indicates if a self-closing &lt;iframe/&gt; tag should be considered as an opening tag.

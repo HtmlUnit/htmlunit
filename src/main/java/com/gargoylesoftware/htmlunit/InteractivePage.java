@@ -14,10 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_IN_FOCUS_OUT_BLUR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.w3c.dom.ranges.Range;
 
@@ -28,9 +33,6 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * An interactive SGML page, which is able to handle JavaScript events.
@@ -83,12 +85,14 @@ public abstract class InteractivePage extends SgmlPage {
         elementWithFocus_ = null;
 
         if (!windowActivated) {
-            if (oldFocusedElement != null) {
-                oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
-            }
+            if (hasFeature(EVENT_FOCUS_IN_FOCUS_OUT_BLUR)) {
+                if (oldFocusedElement != null) {
+                    oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
+                }
 
-            if (newElement != null) {
-                newElement.fireEvent(Event.TYPE_FOCUS_IN);
+                if (newElement != null) {
+                    newElement.fireEvent(Event.TYPE_FOCUS_IN);
+                }
             }
 
             if (oldFocusedElement != null) {
@@ -108,6 +112,16 @@ public abstract class InteractivePage extends SgmlPage {
         if (elementWithFocus_ != null) {
             elementWithFocus_.focus();
             elementWithFocus_.fireEvent(Event.TYPE_FOCUS);
+        }
+
+        if (hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
+            if (oldFocusedElement != null) {
+                oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
+            }
+
+            if (newElement != null) {
+                newElement.fireEvent(Event.TYPE_FOCUS_IN);
+            }
         }
 
         // If a page reload happened as a result of the focus change then obviously this
