@@ -66,8 +66,7 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * "window.controllers" is used by some JavaScript libraries to determine if the
-     * browser is Gecko based or not.
+     * "window.controllers" is used by some JavaScript libraries to determine if the browser is Gecko based or not.
      * @throws Exception if the test fails
      */
     @Test
@@ -92,8 +91,7 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * Very strange: in FF3 it seems that you can set window.controllers if you haven't
-     * accessed it before.
+     * Very strange: in FF3 it seems that you can set window.controllers if you haven't accessed it before.
      * @throws Exception if the test fails
      */
     @Test
@@ -161,7 +159,8 @@ public class Window2Test extends WebDriverTestCase {
             "QName: undefined,undefined", "arguments: undefined,undefined", "load: undefined,undefined",
             "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
             "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
-            "context: undefined,undefined", "engine: undefined,undefined",
+            "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
+            "Java: undefined,undefined",
             "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: function,function",
             "parseInt: function,function", "parseFloat: function,function",
             "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
@@ -175,7 +174,8 @@ public class Window2Test extends WebDriverTestCase {
             "QName: undefined,undefined", "arguments: undefined,undefined", "load: undefined,undefined",
             "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
             "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
-            "context: undefined,undefined", "engine: undefined,undefined",
+            "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
+            "Java: undefined,undefined",
             "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: object,object",
             "parseInt: function,function", "parseFloat: function,function",
             "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
@@ -186,6 +186,7 @@ public class Window2Test extends WebDriverTestCase {
         final String[] properties = {"getClass", "java", "javax", "javafx", "org", "com", "edu", "net", "JavaAdapter",
             "JavaImporter", "Continuation", "Packages", "XML", "XMLList", "Namespace", "QName", "arguments", "load",
             "loadWithNewGlobal", "exit", "quit", "__FILE__", "__DIR__", "__LINE__", "context", "engine",
+            "__noSuchProperty__", "Java",
             "NaN", "Infinity", "eval", "print", "parseInt", "parseFloat", "isNaN", "isFinite", "encodeURI",
             "encodeURIComponent", "decodeURI", "decodeURIComponent", "escape", "unescape"};
 
@@ -194,6 +195,24 @@ public class Window2Test extends WebDriverTestCase {
             + "  var props = ['" + StringUtils.join(properties, "', '") + "'];\n"
             + "  for (var i = 0; i < props.length; i++)\n"
             + "    alert(props[i] + ': ' + typeof(window[props[i]]) + ',' + typeof(eval('this.' + props[i])));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "javax.script.filename: undefined" })
+    public void topLevelPropertiesWithDot() throws Exception {
+        final String[] properties = {"javax.script.filename"};
+
+        final String html = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var props = ['" + StringUtils.join(properties, "', '") + "'];\n"
+            + "  for (var i = 0; i < props.length; i++)\n"
+            + "    alert(props[i] + ': ' + typeof(window[props[i]]));\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -679,8 +698,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "679", "1256", "662", "1239" },
-            FF31 = { "674", "1258", "657", "1241" },
-            FF38 = { "674", "1258", "657", "1241" },
+            FF = { "674", "1258", "657", "1241" },
             IE11 = { "705", "1256", "688", "1239" },
             IE8 = { "605", "1256", "705", "1256" })
     @NotYetImplemented({ FF, IE11, CHROME })

@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
@@ -124,6 +125,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 global.put("HTMLHtmlElement", new HTMLHtmlElement2.FunctionConstructor(), true);
                 global.put("HTMLDocument", new HTMLDocument2.FunctionConstructor(), true);
                 global.put("Document", new Document2.FunctionConstructor(), true);
+                global.put("Element", new Element2.FunctionConstructor(), true);
                 global.put("Node", new Node2.FunctionConstructor(), true);
                 global.put("HTMLInputElement", new HTMLInputElement2.FunctionConstructor(), true);
                 setProto(global, "Window", "EventTarget");
@@ -137,7 +139,8 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             }
 
             final String[] toBeRemoved = {"java", "javax", "javafx", "org", "com", "net", "edu", "JavaAdapter",
-                    "JavaImporter", "Packages", "arguments", "load", "loadWithNewGlobal", "exit", "quit"};
+                    "JavaImporter", "Packages", "arguments", "load", "loadWithNewGlobal", "exit", "quit",
+                    "Java", "__noSuchProperty__", "javax.script.filename"};
             for (final String key : toBeRemoved) {
                 global.remove(key, true);
             }
@@ -149,6 +152,12 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             }
             window.setProto(windowProto);
             ScriptUtils.initialize(window);
+
+            for (final Property p : global.getMap().getProperties()) {
+                //TODO: check "JSAdapter"
+                final String key = p.getKey();
+                window.put(key, global.get(key), true);
+            }
 
             global.put("window", window, true);
             global.setWindow(window);
