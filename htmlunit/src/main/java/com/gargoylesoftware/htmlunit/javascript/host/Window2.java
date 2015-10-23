@@ -30,9 +30,12 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
+import com.gargoylesoftware.htmlunit.svg.SvgPage;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
@@ -52,12 +55,21 @@ public class Window2 extends EventTarget2 {
     private static final Log LOG = LogFactory.getLog(Window2.class);
 
     private Object controllers_ = new SimpleScriptObject();
+    private Document2 document_;
 
     /**
      * Initialize the object.
      * @param enclosedPage the page containing the JavaScript
      */
     public void initialize(final Page enclosedPage) {
+        if (enclosedPage instanceof XmlPage || enclosedPage instanceof SvgPage) {
+//            document_ = new XMLDocument2();
+        }
+        else {
+            document_ = HTMLDocument2.constructor(true, null);
+        }
+        document_.setWindow(this);
+
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
@@ -67,7 +79,7 @@ public class Window2 extends EventTarget2 {
             setDomNode(htmlPage);
 //            clearEventListenersContainer();
 
-//            document_.setDomNode(htmlPage);
+            document_.setDomNode(htmlPage);
         }
     }
 
@@ -218,6 +230,16 @@ public class Window2 extends EventTarget2 {
     @Function(@WebBrowser(IE))
     public void CollectGarbage() {
         // Empty.
+    }
+
+    /**
+     * Returns the JavaScript property {@code document}.
+     * @return the document
+     */
+    @Getter
+    public static Document2 getDocument(final Object self) {
+        final Window2 window = Global.instance().getWindow();
+        return window.document_;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

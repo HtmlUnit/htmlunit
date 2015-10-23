@@ -33,16 +33,20 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
+import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngineFactory;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
-import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
@@ -118,6 +122,10 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 global.put("Event", new Event2.FunctionConstructor(), true);
                 global.put("HTMLBodyElement", new HTMLBodyElement2.FunctionConstructor(), true);
                 global.put("HTMLHtmlElement", new HTMLHtmlElement2.FunctionConstructor(), true);
+                global.put("HTMLDocument", new HTMLDocument2.FunctionConstructor(), true);
+                global.put("Document", new Document2.FunctionConstructor(), true);
+                global.put("Node", new Node2.FunctionConstructor(), true);
+                global.put("HTMLInputElement", new HTMLInputElement2.FunctionConstructor(), true);
                 setProto(global, "Window", "EventTarget");
             }
             else {
@@ -140,6 +148,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 windowProto = (ScriptObject) global.get("Window");
             }
             window.setProto(windowProto);
+            ScriptUtils.initialize(window);
 
             global.put("window", window, true);
             global.setWindow(window);
@@ -157,11 +166,14 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                     window.put(key, global.get(key), true);
                 }
 
+                final String[] windowProperties = {"top", "controllers", "document"};
+                final PropertyMap propertyMap = window.getMap();
                 final List<Property> list = new ArrayList<>();
-                list.add(window.getProto().getMap().findProperty("top"));
-                final Property property = window.getProto().getMap().findProperty("controllers");
-                if (property != null) {
-                    list.add(property);
+                for (final String key : windowProperties) {
+                    final Property property = propertyMap.findProperty(key);
+                    if (property != null) {
+                        list.add(property);
+                    }
                 }
 
                 global.setMap(global.getMap().addAll(PropertyMap.newMap(list)));

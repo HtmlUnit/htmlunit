@@ -23,10 +23,14 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
@@ -143,12 +147,12 @@ public class SimpleScriptObject extends ScriptObject {
      */
     protected SimpleScriptObject getScriptableFor(final Object object) {
         if (object instanceof WebWindow) {
-            return (SimpleScriptObject) ((WebWindow) object).getScriptObject();
+            return (SimpleScriptObject) ((WebWindow) object).getScriptObject2();
         }
 
         final DomNode domNode = (DomNode) object;
 
-        final Object scriptObject = domNode.getScriptObject();
+        final Object scriptObject = domNode.getScriptObject2();
         if (scriptObject != null) {
             return (SimpleScriptObject) scriptObject;
         }
@@ -177,6 +181,17 @@ public class SimpleScriptObject extends ScriptObject {
                 host.setProto(global.getPrototype(host.getClass()));
             }
             host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlForm) {
+            host = HTMLFormElement2.constructor(true, null);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlTextInput) {
+            host = HTMLInputElement2.constructor(true, null);
+            host.setDomNode(domNode);
+        }
+        else {
+            throw new RuntimeException("No ScriptObject found for " + domNode);
         }
         return host;
         // Get the JS class name for the specified DOM node.
