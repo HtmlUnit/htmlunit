@@ -204,7 +204,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "javax.script.filename: undefined" })
+    @Alerts("javax.script.filename: undefined")
     public void topLevelPropertiesWithDot() throws Exception {
         final String[] properties = {"javax.script.filename"};
 
