@@ -421,21 +421,20 @@ public class Node extends EventTarget {
      */
     @JsxFunction
     public Object removeChild(final Object childObject) {
-        Object removedChild = null;
-
-        if (childObject instanceof Node) {
-            // Get XML node for the DOM node passed in
-            final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
-
-            if (!getDomNodeOrDie().isAncestorOf(childNode)) {
-                Context.throwAsScriptRuntimeEx(new Exception("NotFoundError: Failed to execute 'removeChild' on '"
-                            + this + "': The node to be removed is not a child of this node."));
-            }
-            // Remove the child from the parent node
-            childNode.remove();
-            removedChild = childObject;
+        if (!(childObject instanceof Node)) {
+            return null;
         }
-        return removedChild;
+
+        // Get XML node for the DOM node passed in
+        final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
+
+        if (!getDomNodeOrDie().isAncestorOf(childNode)) {
+            Context.throwAsScriptRuntimeEx(new Exception("NotFoundError: Failed to execute 'removeChild' on '"
+                        + this + "': The node to be removed is not a child of this node."));
+        }
+        // Remove the child from the parent node
+        childNode.remove();
+        return childObject;
     }
 
     /**
