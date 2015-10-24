@@ -111,6 +111,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
@@ -2050,6 +2051,17 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public void setActiveElement(final HTMLElement element) {
         activeElement_ = element;
+
+        // if this is part of an iFrame, make the iFrame tag the
+        // active element of his doc
+        final WebWindow window = element.getDomNodeOrDie().getPage().getEnclosingWindow();
+        if (window instanceof FrameWindow) {
+            final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
+            if (frame instanceof HtmlInlineFrame) {
+                final Window winWithFrame = (Window) frame.getPage().getEnclosingWindow().getScriptableObject();
+                ((HTMLDocument) winWithFrame.getDocument()).setActiveElement((HTMLElement) frame.getScriptableObject());
+            }
+        }
     }
 
     /**
