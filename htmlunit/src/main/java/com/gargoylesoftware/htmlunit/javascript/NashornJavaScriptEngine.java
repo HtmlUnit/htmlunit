@@ -139,7 +139,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             }
 
             final String[] toBeRemoved = {"java", "javax", "javafx", "org", "com", "net", "edu", "JavaAdapter",
-                    "JavaImporter", "Packages", "arguments", "load", "loadWithNewGlobal", "exit", "quit",
+                    "JSAdapter", "JavaImporter", "Packages", "arguments", "load", "loadWithNewGlobal", "exit", "quit",
                     "Java", "__noSuchProperty__", "javax.script.filename"};
             for (final String key : toBeRemoved) {
                 global.remove(key, true);
@@ -175,7 +175,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                     window.put(key, global.get(key), true);
                 }
 
-                final String[] windowProperties = {"top", "controllers", "document"};
+                final String[] windowProperties = {"top", "controllers", "document", "length"};
                 final PropertyMap propertyMap = window.getMap();
                 final List<Property> list = new ArrayList<>();
                 for (final String key : windowProperties) {

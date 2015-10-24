@@ -12,6 +12,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -19,6 +20,7 @@ import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.Brows
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
@@ -27,12 +29,17 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -50,12 +57,15 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 public class Window2 extends EventTarget2 {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
 
     private Object controllers_ = new SimpleScriptObject();
     private Document2 document_;
+    private HTMLCollection2 frames_; // has to be a member to have equality (==) working
 
     /**
      * Initialize the object.
@@ -242,6 +252,33 @@ public class Window2 extends EventTarget2 {
         return window.document_;
     }
 
+    /**
+     * Returns the number of frames contained by this window.
+     * @return the number of frames contained by this window
+     */
+    @Getter
+    public static int getLength(final Object self) {
+        final Window2 window = Global.instance().getWindow();
+        return (int) window.getFrames2().getLength();
+    }
+
+    @Getter
+    public Window2 getFrames() {
+        return this;
+    }
+
+    /**
+     * Returns the live collection of frames contained by this window.
+     * @return the live collection of frames contained by this window
+     */
+    private HTMLCollection2 getFrames2() {
+        if (frames_ == null) {
+            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
+            frames_ = new HTMLCollectionFrames2(page);
+        }
+        return frames_;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -366,4 +403,67 @@ public class Window2 extends EventTarget2 {
             return "Window";
         }
     }
+}
+
+class HTMLCollectionFrames2 extends HTMLCollection2 {
+    private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames2.class);
+
+    HTMLCollectionFrames2(final HtmlPage page) {
+        super(page, false, "Window.frames");
+    }
+
+    @Override
+    protected boolean isMatching(final DomNode node) {
+        return node instanceof BaseFrameElement;
+    }
+
+//    @Override
+//    protected Scriptable getScriptableForElement(final Object obj) {
+//        final WebWindow window;
+//        if (obj instanceof BaseFrameElement) {
+//            window = ((BaseFrameElement) obj).getEnclosedWindow();
+//        }
+//        else {
+//            window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
+//        }
+//
+//        return Window.getProxy(window);
+//    }
+
+//    @Override
+//    protected Object getWithPreemption(final String name) {
+//        final List<Object> elements = getElements();
+//
+//        for (final Object next : elements) {
+//            final BaseFrameElement frameElt = (BaseFrameElement) next;
+//            final WebWindow window = frameElt.getEnclosedWindow();
+//            if (name.equals(window.getName())) {
+//                if (LOG.isDebugEnabled()) {
+//                    LOG.debug("Property \"" + name + "\" evaluated (by name) to " + window);
+//                }
+//                return getScriptableForElement(window);
+//            }
+//            if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)
+//                    && frameElt.getAttribute("id").equals(name)) {
+//                if (LOG.isDebugEnabled()) {
+//                    LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
+//                }
+//                return getScriptableForElement(window);
+//            }
+//        }
+//
+//        return NOT_FOUND;
+//    }
+
+//    @Override
+//    protected void addElementIds(final List<String> idList, final List<Object> elements) {
+//        for (final Object next : elements) {
+//            final BaseFrameElement frameElt = (BaseFrameElement) next;
+//            final WebWindow window = frameElt.getEnclosedWindow();
+//            final String windowName = window.getName();
+//            if (windowName != null) {
+//                idList.add(windowName);
+//            }
+//        }
+//    }
 }
