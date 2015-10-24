@@ -298,7 +298,7 @@ public class Document2Test extends WebDriverTestCase {
             + "  }\n"
             + "</script></head>\n"
             + "<body>\n"
-            + "<input id='text1' onclick='test()'>\n"
+            + "  <input id='text1' onclick='test()'>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
