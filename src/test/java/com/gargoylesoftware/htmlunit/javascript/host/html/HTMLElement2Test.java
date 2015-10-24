@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -29,8 +30,10 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLElement}.
@@ -1299,5 +1302,66 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</script></body></html>";
         final WebDriver driver = loadPage2(html);
         assertEquals(getExpectedAlerts()[0], driver.findElement(By.tagName("body")).getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "body1", "setActive not available" },
+            IE = {"body1", "text1", "[object HTMLButtonElement]", "text2", "[object Window]", "onfocus text2" })
+    @BuggyWebDriver(IE11)
+    @NotYetImplemented(IE)
+    public void setActiveAndFocus() throws Exception {
+        final String firstHtml =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>First</title>\n"
+            + "  <script>var win2;</script>\n"
+            + "</head>\n"
+            + "<body id='body1' onload='alert(document.activeElement.id)'>\n"
+            + "<form name='form1'>\n"
+            + "  <input id='text1' onfocus='alert(\"onfocus text1\"); win2.focus();'>\n"
+            + "  <button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\", \"second\");'>Click me</a>\n"
+            + "</form>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(URL_FIRST, firstHtml);
+
+        final String secondHtml =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Second</title>\n"
+            + "</head>\n"
+            + "<body id='body2'>\n"
+            + "  <input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
+            + "  <button id='button2' onClick='doTest();'>Click me</a>\n"
+            + "  <script>\n"
+            + "     function doTest() {\n"
+            + "         var elem = opener.document.getElementById('text1');\n"
+            + "         alert(opener.document.activeElement.id);\n"
+            + "         if (!elem.setActive) { alert('setActive not available'); return; }\n"
+            + "         elem.setActive();\n"
+            + "         alert(opener.document.activeElement.id);\n"
+            + "         alert(document.activeElement);\n"
+            + "         document.getElementById('text2').setActive();\n"
+            + "         alert(document.activeElement.id);\n"
+            + "         alert(opener);\n"
+            + "         opener.focus();\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+
+        final WebDriver driver = loadPage2(firstHtml);
+        assertEquals("First", driver.getTitle());
+
+        driver.findElement(By.id("button1")).click();
+        driver.switchTo().window("second");
+        assertEquals("Second", driver.getTitle());
+
+        driver.findElement(By.id("button2")).click();
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

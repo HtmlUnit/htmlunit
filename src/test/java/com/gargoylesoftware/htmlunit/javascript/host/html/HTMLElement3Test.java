@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -339,66 +336,6 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         clientHashAnchor.click();
 
         assertEquals(expectedAlerts, clientCollectedAlertsHandler.getCollectedAlerts());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "body1", "body1", "body1", "setActive not available" },
-            IE = {"body1", "button1", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
-    @NotYetImplemented(IE11)
-    public void setActiveAndFocus() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<>();
-
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final String firstHtml = "<html>\n"
-            + "<head>\n"
-            + "  <title>First</title>\n"
-            + "  <script>var win2;</script>\n"
-            + "</head>\n"
-            + "<body id='body1' onload='alert(document.activeElement.id)'><form name='form1'>\n"
-            + "  <input id='text1' onfocus='alert(\"onfocus text1\"); win2.focus();'>\n"
-            + "  <button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
-            + "</form></body></html>";
-        webConnection.setResponse(URL_FIRST, firstHtml);
-
-        final String secondHtml = "<html>\n"
-            + "<head>\n"
-            + "  <title>Second</title>\n"
-            + "</head>\n"
-            + "<body id='body2'>\n"
-            + "  <input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
-            + "  <button id='button2' onClick='doTest();'>Click me</a>\n"
-            + "  <script>\n"
-            + "     function doTest() {\n"
-            + "         var elem = opener.document.getElementById('text1');\n"
-            + "         alert(opener.document.activeElement.id);\n"
-            + "         if (!elem.setActive) { alert('setActive not available'); return }\n"
-            + "         elem.setActive();\n"
-            + "         alert(opener.document.activeElement.id);\n"
-            + "         alert(document.activeElement);\n"
-            + "         document.getElementById('text2').setActive();\n"
-            + "         alert(document.activeElement.id);\n"
-            + "         opener.focus();\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</body></html>";
-        webConnection.setResponse(URL_SECOND, secondHtml);
-
-        webClient.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
-        assertEquals("First", firstPage.getTitleText());
-
-        final HtmlButton button1 = firstPage.getHtmlElementById("button1");
-        final HtmlPage secondPage = button1.click();
-        assertEquals("Second", secondPage.getTitleText());
-        secondPage.getHtmlElementById("button2").click();
-        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
