@@ -793,7 +793,7 @@ public class EventTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "<textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
