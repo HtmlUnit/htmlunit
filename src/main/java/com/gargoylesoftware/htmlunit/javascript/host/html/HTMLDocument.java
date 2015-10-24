@@ -2052,14 +2052,17 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public void setActiveElement(final HTMLElement element) {
         activeElement_ = element;
 
-        // if this is part of an iFrame, make the iFrame tag the
-        // active element of his doc
-        final WebWindow window = element.getDomNodeOrDie().getPage().getEnclosingWindow();
-        if (window instanceof FrameWindow) {
-            final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
-            if (frame instanceof HtmlInlineFrame) {
-                final Window winWithFrame = (Window) frame.getPage().getEnclosingWindow().getScriptableObject();
-                ((HTMLDocument) winWithFrame.getDocument()).setActiveElement((HTMLElement) frame.getScriptableObject());
+        if (element != null) {
+            // if this is part of an iFrame, make the iFrame tag the
+            // active element of his doc
+            final WebWindow window = element.getDomNodeOrDie().getPage().getEnclosingWindow();
+            if (window instanceof FrameWindow) {
+                final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
+                if (frame instanceof HtmlInlineFrame) {
+                    final Window winWithFrame = (Window) frame.getPage().getEnclosingWindow().getScriptableObject();
+                    ((HTMLDocument) winWithFrame.getDocument()).setActiveElement(
+                                (HTMLElement) frame.getScriptableObject());
+                }
             }
         }
     }
