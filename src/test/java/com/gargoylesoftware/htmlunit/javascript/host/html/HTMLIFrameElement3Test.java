@@ -230,8 +230,10 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     public void iFrameReinitialized() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><body><a id='test' href='2.html' target='theFrame'>page 2 in frame</a>\n"
-            + "<iframe name='theFrame' src='1.html'></iframe>\n"
+            + "<html>\n"
+            + "<body>\n"
+            + "  <a id='test' href='2.html' target='theFrame'>page 2 in frame</a>\n"
+            + "  <iframe name='theFrame' src='1.html'></iframe>\n"
             + "</body></html>";
 
         final String frame1 = "<html><head><script>window.foo = 123; alert(window.foo);</script></head></html>";
