@@ -48,6 +48,7 @@ import org.w3c.dom.Text;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -1359,11 +1360,14 @@ public abstract class HtmlElement extends DomElement {
     protected void detach() {
         final HTMLDocument doc = (HTMLDocument) getPage().getScriptableObject();
         final Object activeElement = doc.getActiveElement();
+
         if (activeElement == getScriptableObject()) {
             if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
                 blur();
             }
             doc.setActiveElement(null);
+            ((InteractivePage) getPage()).setFocusedElement(null);
+
             super.detach();
             return;
         }
@@ -1374,10 +1378,13 @@ public abstract class HtmlElement extends DomElement {
                     ((DomElement) child).blur();
                 }
                 doc.setActiveElement(null);
+                ((InteractivePage) getPage()).setFocusedElement(null);
+
                 super.detach();
                 return;
             }
         }
+
         super.detach();
     }
 }
