@@ -139,10 +139,12 @@ public abstract class InteractivePage extends SgmlPage {
     }
 
     /**
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
      * Sets the element with focus.
      * @param elementWithFocus the element with focus
      */
-    protected void setElementWithFocus(final DomElement elementWithFocus) {
+    public void setElementWithFocus(final DomElement elementWithFocus) {
         elementWithFocus_ = elementWithFocus;
     }
 

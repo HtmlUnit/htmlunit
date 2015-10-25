@@ -1362,11 +1362,13 @@ public abstract class HtmlElement extends DomElement {
         final Object activeElement = doc.getActiveElement();
 
         if (activeElement == getScriptableObject()) {
-            if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
-                blur();
-            }
             doc.setActiveElement(null);
-            ((InteractivePage) getPage()).setFocusedElement(null);
+            if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
+                ((InteractivePage) getPage()).setFocusedElement(null);
+            }
+            else {
+                ((InteractivePage) getPage()).setElementWithFocus(null);
+            }
 
             super.detach();
             return;
@@ -1374,11 +1376,13 @@ public abstract class HtmlElement extends DomElement {
 
         for (DomNode child : getChildNodes()) {
             if (activeElement == child.getScriptableObject()) {
-                if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
-                    ((DomElement) child).blur();
-                }
                 doc.setActiveElement(null);
-                ((InteractivePage) getPage()).setFocusedElement(null);
+                if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
+                    ((InteractivePage) getPage()).setFocusedElement(null);
+                }
+                else {
+                    ((InteractivePage) getPage()).setElementWithFocus(null);
+                }
 
                 super.detach();
                 return;

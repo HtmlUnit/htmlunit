@@ -22,7 +22,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -242,11 +241,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
                 + "</form>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            System.out.println(page.getFocusedElement());
-        }
+        loadPageWithAlerts2(html);
     }
 
     /**
