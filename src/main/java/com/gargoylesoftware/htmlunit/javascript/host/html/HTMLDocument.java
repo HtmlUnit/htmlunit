@@ -38,6 +38,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_METHOD_AS_VARIABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_ACTIVE_ELEMENT_RETURNS_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL;
@@ -2034,13 +2035,18 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the {@code activeElement} property
      */
     @JsxGetter
-    public Object getActiveElement() {
+    public HTMLElement getActiveElement() {
         if (activeElement_ == null) {
+            if (getBrowserVersion().hasFeature(JS_DOCUMENT_ACTIVE_ELEMENT_RETURNS_NULL)) {
+                return null;
+            }
+
             final HtmlElement body = getPage().getBody();
             if (body != null) {
                 activeElement_ = (HTMLElement) getScriptableFor(body);
             }
         }
+
         return activeElement_;
     }
 
@@ -2050,6 +2056,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param element the new active element for this document
      */
     public void setActiveElement(final HTMLElement element) {
+        // TODO update page focus element also
+
         activeElement_ = element;
 
         if (element != null) {

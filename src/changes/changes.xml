@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: Removing the active element from the dom tree should reset the
+                activeElement property.
+            </action>
             <action type="fix" dev="asashour" issue="1726">
                 JavaScript: fix HTMLFormElement.action when the attribute is not defined.
             </action>

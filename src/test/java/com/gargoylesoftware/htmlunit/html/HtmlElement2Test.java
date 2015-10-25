@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -210,4 +211,76 @@ public class HtmlElement2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], result.getText());
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object HTMLInputElement]", "[object HTMLBodyElement]" },
+            CHROME = { "[object HTMLInputElement]", "onblur", "onfocusout", "[object HTMLBodyElement]" },
+            IE = { "[object HTMLInputElement]", "null" })
+    public void removeActiveElement() throws Exception {
+        final String html =
+               HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "<title>foo</title>\n"
+                + "<script>\n"
+                + "function test(){\n"
+                + "  var elem = document.getElementById('text1');\n"
+                + "  elem.focus();\n"
+                + "  alert(document.activeElement);\n"
+                + "  elem.parentNode.removeChild(elem);\n"
+                + "  alert(document.activeElement);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<form name='form1'>\n"
+                + "  <input id='text1' onblur='alert(\"onblur\")' onfocusout='alert(\"onfocusout\")'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            System.out.println(page.getFocusedElement());
+        }
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object HTMLInputElement]", "[object HTMLBodyElement]" },
+            CHROME = { "[object HTMLInputElement]", "onblur1", "onfocusout1", "[object HTMLBodyElement]" },
+            IE = { "[object HTMLInputElement]", "null" })
+    public void removeParentOfActiveElement() throws Exception {
+        final String html =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "<title>foo</title>\n"
+                + "<script>\n"
+                + "function test(){\n"
+                + "  var elem = document.getElementById('text1');\n"
+                + "  elem.focus();\n"
+                + "  alert(document.activeElement);\n"
+
+                + "  var elem = document.getElementById('parent');\n"
+                + "  elem.parentNode.removeChild(elem);\n"
+                + "  alert(document.activeElement);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<form name='form1'>\n"
+                + "  <div id='parent'>\n"
+                + "    <input id='text1' onblur='alert(\"onblur1\")' onfocusout='alert(\"onfocusout1\")'>\n"
+                + "    <input id='text2' onblur='alert(\"onblur2\")' onfocusout='alert(\"onfocusout2\")'>\n"
+                + "  </div>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

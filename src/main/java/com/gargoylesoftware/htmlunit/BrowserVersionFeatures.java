@@ -570,6 +570,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES,
 
+    /** Removing the active element from the dom tree triggers the onblur event. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
+
     /**
      * Indicates if a self-closing &lt;iframe/&gt; tag should be considered as an opening tag.
      */
@@ -949,6 +953,10 @@ public enum BrowserVersionFeatures {
     /** Javascript doctyp.notations returns null (FF10). */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_DOCTYPE_NOTATIONS_NULL,
+
+    /** Document.activeElement returns null instead of the body if nothing is active. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DOCUMENT_ACTIVE_ELEMENT_RETURNS_NULL,
 
     /** Javascript document.appendChild is allowed (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

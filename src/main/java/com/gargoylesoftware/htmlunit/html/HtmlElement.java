@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_PROPERTY_CHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 
 import java.io.IOException;
@@ -28,6 +29,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -52,10 +56,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * An abstract wrapper for HTML elements.
@@ -1345,5 +1347,34 @@ public abstract class HtmlElement extends DomElement {
         }
 
         return StringUtils.replaceChars(attrib, "\r\n", "");
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Detach this node from all relationships with other nodes.
+     * This is the first step of an move.
+     */
+    @Override
+    protected void detach() {
+        final HTMLDocument doc = (HTMLDocument) getPage().getScriptableObject();
+        final Object activeElement = doc.getActiveElement();
+        if (activeElement == getScriptableObject()) {
+            if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
+                blur();
+            }
+            doc.setActiveElement(null);
+            return;
+        }
+
+        for (DomNode child : getChildNodes()) {
+            if (activeElement == child.getScriptableObject()) {
+                if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
+                    ((DomElement) child).blur();
+                }
+                doc.setActiveElement(null);
+            }
+        }
+        super.detach();
     }
 }
