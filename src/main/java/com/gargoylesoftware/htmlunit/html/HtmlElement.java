@@ -1364,6 +1364,7 @@ public abstract class HtmlElement extends DomElement {
                 blur();
             }
             doc.setActiveElement(null);
+            super.detach();
             return;
         }
 
@@ -1373,6 +1374,8 @@ public abstract class HtmlElement extends DomElement {
                     ((DomElement) child).blur();
                 }
                 doc.setActiveElement(null);
+                super.detach();
+                return;
             }
         }
         super.detach();
