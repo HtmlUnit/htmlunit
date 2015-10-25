@@ -38,7 +38,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_METHOD_AS_VARIABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_ACTIVE_ELEMENT_RETURNS_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL;
@@ -2037,10 +2036,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public HTMLElement getActiveElement() {
         if (activeElement_ == null) {
-            if (getBrowserVersion().hasFeature(JS_DOCUMENT_ACTIVE_ELEMENT_RETURNS_NULL)) {
-                return null;
-            }
-
             final HtmlElement body = getPage().getBody();
             if (body != null) {
                 activeElement_ = (HTMLElement) getScriptableFor(body);

@@ -954,10 +954,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_DOCTYPE_NOTATIONS_NULL,
 
-    /** Document.activeElement returns null instead of the body if nothing is active. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_DOCUMENT_ACTIVE_ELEMENT_RETURNS_NULL,
-
     /** Javascript document.appendChild is allowed (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
