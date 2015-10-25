@@ -401,8 +401,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute "forms".
-     * @return the value of the JavaScript attribute "forms"
+     * Returns the value of the JavaScript attribute {@code forms}.
+     * @return the value of the JavaScript attribute {@code forms}
      */
     @JsxGetter
     public Object getForms() {
@@ -429,7 +429,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute "links". Refer also to the
+     * Returns the value of the JavaScript attribute {@code links}. Refer also to the
      * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
      * @return the value of this attribute
      */
@@ -484,8 +484,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute "namespaces".
-     * @return the value of the JavaScript attribute "namespaces"
+     * Returns the value of the JavaScript attribute {@code namespaces}.
+     * @return the value of the JavaScript attribute {@code namespaces}
      */
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getNamespaces() {
@@ -496,7 +496,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute "anchors".
+     * Returns the value of the JavaScript attribute {@code anchors}.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537435.aspx">MSDN documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
      * Gecko DOM reference</a>
@@ -537,7 +537,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute "applets".
+     * Returns the value of the JavaScript attribute {@code applets}.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537436.aspx">
      * MSDN documentation</a>
      * @see <a href="https://developer.mozilla.org/En/DOM:document.applets">

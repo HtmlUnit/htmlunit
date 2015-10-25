@@ -56,7 +56,7 @@ public class HTMLMapElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "areas".
+     * Returns the value of the JavaScript attribute {@code areas}.
      * @return the value of this attribute
      */
     @JsxGetter

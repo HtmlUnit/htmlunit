@@ -54,7 +54,7 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "value".
+     * Returns the value of the JavaScript attribute {@code value}.
      *
      * @return the value of this attribute
      */
@@ -64,7 +64,7 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "value".
+     * Sets the value of the JavaScript attribute {@code value}.
      *
      * @param newValue the new value
      */
@@ -74,7 +74,7 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "name".
+     * Returns the value of the JavaScript attribute {@code name}.
      *
      * @return the value of this attribute
      */
@@ -84,7 +84,7 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "name".
+     * Sets the value of the JavaScript attribute {@code name}.
      *
      * @param newName the new name
      */

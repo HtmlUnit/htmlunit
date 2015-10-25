@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -108,7 +109,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "name".
+     * Returns the value of the JavaScript attribute {@code name}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -117,7 +118,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "name".
+     * Sets the value of the JavaScript attribute {@code name}.
      * @param name the new value
      */
     @JsxSetter
@@ -127,7 +128,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "elements".
+     * Returns the value of the JavaScript attribute {@code elements}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -185,9 +186,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "length".
-     * Does not count input type=image elements as browsers (IE6, Firfox 1.7) do
-     * (cf <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>)
+     * Returns the value of the JavaScript attribute {@code length}.
+     * Does not count input {@code type=image} elements
+     * (<a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>)
      * @return the value of this attribute
      */
     @JsxGetter
@@ -198,13 +199,14 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "action".
+     * Returns the value of the JavaScript attribute {@code action}.
      * @return the value of this attribute
      */
     @JsxGetter
     public String getAction() {
         String action = getHtmlForm().getActionAttribute();
-        if (getBrowserVersion().hasFeature(JS_FORM_ACTION_EXPANDURL)) {
+        if (getBrowserVersion().hasFeature(JS_FORM_ACTION_EXPANDURL)
+                && action != DomElement.ATTRIBUTE_NOT_DEFINED) {
             try {
                 action = ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();
             }
@@ -216,7 +218,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "action".
+     * Sets the value of the JavaScript attribute {@code action}.
      * @param action the new value
      */
     @JsxSetter
@@ -226,7 +228,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "method".
+     * Returns the value of the JavaScript attribute {@code method}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -235,7 +237,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "method".
+     * Sets the value of the JavaScript attribute {@code method}.
      * @param method the new value
      */
     @JsxSetter
@@ -245,7 +247,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "target".
+     * Returns the value of the JavaScript attribute {@code target}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -274,7 +276,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "target".
+     * Sets the value of the JavaScript attribute {@code target}.
      * @param target the new value
      */
     @JsxSetter
@@ -284,7 +286,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "enctype".
+     * Returns the value of the JavaScript attribute {@code enctype}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -299,7 +301,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "enctype".
+     * Sets the value of the JavaScript attribute {@code enctype}.
      * @param enctype the new value
      */
     @JsxSetter
@@ -316,7 +318,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "encoding".
+     * Returns the value of the JavaScript attribute {@code encoding}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -325,7 +327,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "encoding".
+     * Sets the value of the JavaScript attribute {@code encoding}.
      * @param encoding the new value
      */
     @JsxSetter
