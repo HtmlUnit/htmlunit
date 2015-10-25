@@ -256,6 +256,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object HTMLInputElement]", "[object HTMLBodyElement]" },
             CHROME = { "[object HTMLInputElement]", "onblur1", "onfocusout1", "[object HTMLBodyElement]" },
             IE = { "[object HTMLInputElement]", "null" })
+    @NotYetImplemented(IE)
     public void removeParentOfActiveElement() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
