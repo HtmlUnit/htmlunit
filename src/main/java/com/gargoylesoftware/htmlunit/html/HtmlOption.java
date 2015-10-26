@@ -141,11 +141,11 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Returns the value of the attribute "selected". Refer to the
+     * Returns the value of the attribute {@code selected}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "selected"
+     * @return the value of the attribute {@code selected}
      * or an empty string if that attribute isn't defined.
      */
     public final String getSelectedAttribute() {
@@ -188,34 +188,34 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Returns the value of the attribute "label". Refer to the
+     * Returns the value of the attribute {@code label}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "label" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code label} or an empty string if that attribute isn't defined
      */
     public final String getLabelAttribute() {
         return getAttribute("label");
     }
 
     /**
-     * Sets the value of the attribute "label". Refer to the
+     * Sets the value of the attribute {@code label}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @param newLabel the value of the attribute "label"
+     * @param newLabel the value of the attribute {@code label}
      */
     public final void setLabelAttribute(final String newLabel) {
         setAttribute("label", newLabel);
     }
 
     /**
-     * Returns the value of the attribute "value". Refer to the
+     * Returns the value of the attribute {@code value}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION">
      * initial value if value attribute is not set</a>
-     * @return the value of the attribute "value"
+     * @return the value of the attribute {@code value}
      */
     public final String getValueAttribute() {
         String value = getAttribute("value");
@@ -226,11 +226,11 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Sets the value of the attribute "value". Refer to the
+     * Sets the value of the attribute {@code value}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @param newValue the value of the attribute "value"
+     * @param newValue the value of the attribute {@code value}
      */
     public final void setValueAttribute(final String newValue) {
         setAttribute("value", newValue);

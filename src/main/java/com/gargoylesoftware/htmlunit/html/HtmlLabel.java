@@ -50,11 +50,11 @@ public class HtmlLabel extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "for". Refer to the
+     * Returns the value of the attribute {@code for}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "for"
+     * @return the value of the attribute {@code for}
      * or an empty string if that attribute isn't defined.
      */
     public final String getForAttribute() {
@@ -62,11 +62,11 @@ public class HtmlLabel extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "accesskey". Refer to the
+     * Returns the value of the attribute {@code accesskey}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "accesskey"
+     * @return the value of the attribute {@code accesskey}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
@@ -74,11 +74,11 @@ public class HtmlLabel extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "onfocus". Refer to the
+     * Returns the value of the attribute {@code onfocus}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onfocus"
+     * @return the value of the attribute {@code onfocus}
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
@@ -86,11 +86,11 @@ public class HtmlLabel extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "onblur". Refer to the
+     * Returns the value of the attribute {@code onblur}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onblur"
+     * @return the value of the attribute {@code onblur}
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {

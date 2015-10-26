@@ -138,8 +138,8 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>onload</tt> event handler for this element.
-     * @param onloadHandler the <tt>onload</tt> event handler for this element
+     * Sets the {@code onload} event handler for this element.
+     * @param onloadHandler the {@code onload} event handler for this element
      */
     @JsxSetter
     public void setOnload(final Object onloadHandler) {
@@ -151,8 +151,8 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the <tt>onload</tt> event handler for this element.
-     * @return the <tt>onload</tt> event handler for this element
+     * Returns the {@code onload} event handler for this element.
+     * @return the {@code onload} event handler for this element
      */
     @JsxGetter
     public Object getOnload() {

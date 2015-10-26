@@ -94,8 +94,8 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Sets the <tt>onchange</tt> event handler for this element.
-     * @param onchange the <tt>onchange</tt> event handler for this element
+     * Sets the {@code onchange} event handler for this element.
+     * @param onchange the {@code onchange} event handler for this element
      */
     @Override
     @JsxSetter(@WebBrowser(IE))
@@ -104,8 +104,8 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Returns the <tt>onchange</tt> event handler for this element.
-     * @return the <tt>onchange</tt> event handler for this element
+     * Returns the {@code onchange} event handler for this element.
+     * @return the {@code onchange} event handler for this element
      */
     @Override
     @JsxGetter(@WebBrowser(IE))

@@ -45,8 +45,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 public class EventNode extends Node {
 
     /**
-     * Sets the <tt>onclick</tt> event handler for this element.
-     * @param handler the <tt>onclick</tt> event handler for this element
+     * Sets the {@code onclick} event handler for this element.
+     * @param handler the {@code onclick} event handler for this element
      */
     @JsxSetter
     public void setOnclick(final Object handler) {
@@ -54,8 +54,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onclick</tt> event handler for this element.
-     * @return the <tt>onclick</tt> event handler for this element
+     * Returns the {@code onclick} event handler for this element.
+     * @return the {@code onclick} event handler for this element
      */
     @JsxGetter
     public Object getOnclick() {
@@ -63,8 +63,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>ondblclick</tt> event handler for this element.
-     * @param handler the <tt>ondblclick</tt> event handler for this element
+     * Sets the {@code ondblclick} event handler for this element.
+     * @param handler the {@code ondblclick} event handler for this element
      */
     @JsxSetter
     public void setOndblclick(final Object handler) {
@@ -72,8 +72,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>ondblclick</tt> event handler for this element.
-     * @return the <tt>ondblclick</tt> event handler for this element
+     * Returns the {@code ondblclick} event handler for this element.
+     * @return the {@code ondblclick} event handler for this element
      */
     @JsxGetter
     public Object getOndblclick() {
@@ -81,8 +81,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onblur</tt> event handler for this element.
-     * @param handler the <tt>onblur</tt> event handler for this element
+     * Sets the {@code onblur} event handler for this element.
+     * @param handler the {@code onblur} event handler for this element
      */
     @JsxSetter
     public void setOnblur(final Object handler) {
@@ -90,8 +90,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onblur</tt> event handler for this element.
-     * @return the <tt>onblur</tt> event handler for this element
+     * Returns the {@code onblur} event handler for this element.
+     * @return the {@code onblur} event handler for this element
      */
     @JsxGetter
     public Object getOnblur() {
@@ -99,8 +99,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onfocus</tt> event handler for this element.
-     * @param handler the <tt>onfocus</tt> event handler for this element
+     * Sets the {@code onfocus} event handler for this element.
+     * @param handler the {@code onfocus} event handler for this element
      */
     @JsxSetter
     public void setOnfocus(final Object handler) {
@@ -108,8 +108,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onfocus</tt> event handler for this element.
-     * @return the <tt>onfocus</tt> event handler for this element
+     * Returns the {@code onfocus} event handler for this element.
+     * @return the {@code onfocus} event handler for this element
      */
     @JsxGetter
     public Object getOnfocus() {
@@ -117,8 +117,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onfocusin</tt> event handler for this element.
-     * @param handler the <tt>onfocusin</tt> event handler for this element
+     * Sets the {@code onfocusin} event handler for this element.
+     * @param handler the {@code onfocusin} event handler for this element
      */
     @JsxSetter(@WebBrowser(IE))
     public void setOnfocusin(final Object handler) {
@@ -126,8 +126,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onfocusin</tt> event handler for this element.
-     * @return the <tt>onfocusin</tt> event handler for this element
+     * Returns the {@code onfocusin} event handler for this element.
+     * @return the {@code onfocusin} event handler for this element
      */
     @JsxGetter(@WebBrowser(IE))
     public Object getOnfocusin() {
@@ -135,8 +135,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onfocusout</tt> event handler for this element.
-     * @param handler the <tt>onfocusout</tt> event handler for this element
+     * Sets the {@code onfocusout} event handler for this element.
+     * @param handler the {@code onfocusout} event handler for this element
      */
     @JsxSetter(@WebBrowser(IE))
     public void setOnfocusout(final Object handler) {
@@ -144,8 +144,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onfocusout</tt> event handler for this element.
-     * @return the <tt>onfocusout</tt> event handler for this element
+     * Returns the {@code onfocusout} event handler for this element.
+     * @return the {@code onfocusout} event handler for this element
      */
     @JsxGetter(@WebBrowser(IE))
     public Object getOnfocusout() {
@@ -153,8 +153,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onkeydown</tt> event handler for this element.
-     * @param handler the <tt>onkeydown</tt> event handler for this element
+     * Sets the {@code onkeydown} event handler for this element.
+     * @param handler the {@code onkeydown} event handler for this element
      */
     @JsxSetter
     public void setOnkeydown(final Object handler) {
@@ -162,8 +162,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onkeydown</tt> event handler for this element.
-     * @return the <tt>onkeydown</tt> event handler for this element
+     * Returns the {@code onkeydown} event handler for this element.
+     * @return the {@code onkeydown} event handler for this element
      */
     @JsxGetter
     public Object getOnkeydown() {
@@ -171,8 +171,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onkeypress</tt> event handler for this element.
-     * @param handler the <tt>onkeypress</tt> event handler for this element
+     * Sets the {@code onkeypress} event handler for this element.
+     * @param handler the {@code onkeypress} event handler for this element
      */
     @JsxSetter
     public void setOnkeypress(final Object handler) {
@@ -180,8 +180,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onkeypress</tt> event handler for this element.
-     * @return the <tt>onkeypress</tt> event handler for this element
+     * Returns the {@code onkeypress} event handler for this element.
+     * @return the {@code onkeypress} event handler for this element
      */
     @JsxGetter
     public Object getOnkeypress() {
@@ -189,8 +189,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onkeyup</tt> event handler for this element.
-     * @param handler the <tt>onkeyup</tt> event handler for this element
+     * Sets the {@code onkeyup} event handler for this element.
+     * @param handler the {@code onkeyup} event handler for this element
      */
     @JsxSetter
     public void setOnkeyup(final Object handler) {
@@ -198,8 +198,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onkeyup</tt> event handler for this element.
-     * @return the <tt>onkeyup</tt> event handler for this element
+     * Returns the {@code onkeyup} event handler for this element.
+     * @return the {@code onkeyup} event handler for this element
      */
     @JsxGetter
     public Object getOnkeyup() {
@@ -207,8 +207,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onmousedown</tt> event handler for this element.
-     * @param handler the <tt>onmousedown</tt> event handler for this element
+     * Sets the {@code onmousedown} event handler for this element.
+     * @param handler the {@code onmousedown} event handler for this element
      */
     @JsxSetter
     public void setOnmousedown(final Object handler) {
@@ -216,8 +216,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onmousedown</tt> event handler for this element.
-     * @return the <tt>onmousedown</tt> event handler for this element
+     * Returns the {@code onmousedown} event handler for this element.
+     * @return the {@code onmousedown} event handler for this element
      */
     @JsxGetter
     public Object getOnmousedown() {
@@ -225,8 +225,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onmousemove</tt> event handler for this element.
-     * @param handler the <tt>onmousemove</tt> event handler for this element
+     * Sets the {@code onmousemove} event handler for this element.
+     * @param handler the {@code onmousemove} event handler for this element
      */
     @JsxSetter
     public void setOnmousemove(final Object handler) {
@@ -234,8 +234,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onmousemove</tt> event handler for this element.
-     * @return the <tt>onmousemove</tt> event handler for this element
+     * Returns the {@code onmousemove} event handler for this element.
+     * @return the {@code onmousemove} event handler for this element
      */
     @JsxGetter
     public Object getOnmousemove() {
@@ -243,8 +243,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onmouseout</tt> event handler for this element.
-     * @param handler the <tt>onmouseout</tt> event handler for this element
+     * Sets the {@code onmouseout} event handler for this element.
+     * @param handler the {@code onmouseout} event handler for this element
      */
     @JsxSetter
     public void setOnmouseout(final Object handler) {
@@ -252,8 +252,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onmouseout</tt> event handler for this element.
-     * @return the <tt>onmouseout</tt> event handler for this element
+     * Returns the {@code onmouseout} event handler for this element.
+     * @return the {@code onmouseout} event handler for this element
      */
     @JsxGetter
     public Object getOnmouseout() {
@@ -261,8 +261,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onmouseover</tt> event handler for this element.
-     * @param handler the <tt>onmouseover</tt> event handler for this element
+     * Sets the {@code onmouseover} event handler for this element.
+     * @param handler the {@code onmouseover} event handler for this element
      */
     @JsxSetter
     public void setOnmouseover(final Object handler) {
@@ -270,8 +270,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onmouseover</tt> event handler for this element.
-     * @return the <tt>onmouseover</tt> event handler for this element
+     * Returns the {@code onmouseover} event handler for this element.
+     * @return the {@code onmouseover} event handler for this element
      */
     @JsxGetter
     public Object getOnmouseover() {
@@ -279,8 +279,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onmouseup</tt> event handler for this element.
-     * @param handler the <tt>onmouseup</tt> event handler for this element
+     * Sets the {@code onmouseup} event handler for this element.
+     * @param handler the {@code onmouseup} event handler for this element
      */
     @JsxSetter
     public void setOnmouseup(final Object handler) {
@@ -288,8 +288,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onmouseup</tt> event handler for this element.
-     * @return the <tt>onmouseup</tt> event handler for this element
+     * Returns the {@code onmouseup} event handler for this element.
+     * @return the {@code onmouseup} event handler for this element
      */
     @JsxGetter
     public Object getOnmouseup() {
@@ -297,8 +297,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>oncontextmenu</tt> event handler for this element.
-     * @param handler the <tt>oncontextmenu</tt> event handler for this element
+     * Sets the {@code oncontextmenu} event handler for this element.
+     * @param handler the {@code oncontextmenu} event handler for this element
      */
     @JsxSetter
     public void setOncontextmenu(final Object handler) {
@@ -306,8 +306,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>oncontextmenu</tt> event handler for this element.
-     * @return the <tt>oncontextmenu</tt> event handler for this element
+     * Returns the {@code oncontextmenu} event handler for this element.
+     * @return the {@code oncontextmenu} event handler for this element
      */
     @JsxGetter
     public Object getOncontextmenu() {
@@ -315,8 +315,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onresize</tt> event handler for this element.
-     * @param handler the <tt>onresize</tt> event handler for this element
+     * Sets the {@code onresize} event handler for this element.
+     * @param handler the {@code onresize} event handler for this element
      */
     @JsxSetter
     public void setOnresize(final Object handler) {
@@ -324,8 +324,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onresize</tt> event handler for this element.
-     * @return the <tt>onresize</tt> event handler for this element
+     * Returns the {@code onresize} event handler for this element.
+     * @return the {@code onresize} event handler for this element
      */
     @JsxGetter
     public Object getOnresize() {
@@ -333,8 +333,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onpropertychange</tt> event handler for this element.
-     * @param handler the <tt>onpropertychange</tt> event handler for this element
+     * Sets the {@code onpropertychange} event handler for this element.
+     * @param handler the {@code onpropertychange} event handler for this element
      */
     @JsxSetter(@WebBrowser(IE))
     public void setOnpropertychange(final Object handler) {
@@ -342,8 +342,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onpropertychange</tt> event handler for this element.
-     * @return the <tt>onpropertychange</tt> event handler for this element
+     * Returns the {@code onpropertychange} event handler for this element.
+     * @return the {@code onpropertychange} event handler for this element
      */
     @JsxGetter(@WebBrowser(IE))
     public Object getOnpropertychange() {
@@ -351,8 +351,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>onerror</tt> event handler for this element.
-     * @param handler the <tt>onerror</tt> event handler for this element
+     * Sets the {@code onerror} event handler for this element.
+     * @param handler the {@code onerror} event handler for this element
      */
     @JsxSetter
     public void setOnerror(final Object handler) {
@@ -360,8 +360,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>onerror</tt> event handler for this element.
-     * @return the <tt>onerror</tt> event handler for this element
+     * Returns the {@code onerror} event handler for this element.
+     * @return the {@code onerror} event handler for this element
      */
     @JsxGetter
     public Object getOnerror() {
@@ -369,8 +369,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Returns the <tt>oninput</tt> event handler for this element.
-     * @return the <tt>oninput</tt> event handler for this element
+     * Returns the {@code oninput} event handler for this element.
+     * @return the {@code oninput} event handler for this element
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Function getOninput() {
@@ -378,8 +378,8 @@ public class EventNode extends Node {
     }
 
     /**
-     * Sets the <tt>oninput</tt> event handler for this element.
-     * @param onchange the <tt>oninput</tt> event handler for this element
+     * Sets the {@code oninput} event handler for this element.
+     * @param onchange the {@code oninput} event handler for this element
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void setOninput(final Object onchange) {

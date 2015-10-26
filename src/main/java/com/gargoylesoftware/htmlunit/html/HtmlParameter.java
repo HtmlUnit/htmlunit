@@ -47,11 +47,11 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "id". Refer to the
+     * Returns the value of the attribute {@code id}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "id"
+     * @return the value of the attribute {@code id}
      * or an empty string if that attribute isn't defined.
      */
     public final String getIdAttribute() {
@@ -59,11 +59,11 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name"
+     * @return the value of the attribute {@code name}
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
@@ -71,11 +71,11 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "value". Refer to the
+     * Returns the value of the attribute {@code value}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "value"
+     * @return the value of the attribute {@code value}
      * or an empty string if that attribute isn't defined.
      */
     public final String getValueAttribute() {
@@ -83,11 +83,11 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "valuetype". Refer to the
+     * Returns the value of the attribute {@code valuetype}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "valuetype"
+     * @return the value of the attribute {@code valuetype}
      * or an empty string if that attribute isn't defined.
      */
     public final String getValueTypeAttribute() {
@@ -95,11 +95,11 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type"
+     * @return the value of the attribute {@code type}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {

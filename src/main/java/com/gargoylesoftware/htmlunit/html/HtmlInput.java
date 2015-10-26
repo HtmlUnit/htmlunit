@@ -108,11 +108,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
         final String type = getAttribute("type");
@@ -123,11 +123,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
@@ -138,18 +138,18 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.</p>
      *
-     * @return the value of the attribute "value" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code value} or an empty string if that attribute isn't defined
      */
     public final String getValueAttribute() {
         return getAttribute("value");
     }
 
     /**
-     * Returns the value of the attribute "checked". Refer to the
+     * Returns the value of the attribute {@code checked}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "checked" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code checked} or an empty string if that attribute isn't defined
      */
     public final String getCheckedAttribute() {
         return getAttribute("checked");
@@ -172,11 +172,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "readonly". Refer to the
+     * Returns the value of the attribute {@code readonly}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "readonly"
+     * @return the value of the attribute {@code readonly}
      * or an empty string if that attribute isn't defined.
      */
     public final String getReadOnlyAttribute() {
@@ -184,11 +184,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "size". Refer to the
+     * Returns the value of the attribute {@code size}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "size"
+     * @return the value of the attribute {@code size}
      * or an empty string if that attribute isn't defined.
      */
     public final String getSizeAttribute() {
@@ -196,11 +196,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "maxlength". Refer to the
+     * Returns the value of the attribute {@code maxlength}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "maxlength"
+     * @return the value of the attribute {@code maxlength}
      * or an empty string if that attribute isn't defined.
      */
     public final String getMaxLengthAttribute() {
@@ -226,11 +226,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "src". Refer to the
+     * Returns the value of the attribute {@code src}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "src"
+     * @return the value of the attribute {@code src}
      * or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
@@ -238,11 +238,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "alt". Refer to the
+     * Returns the value of the attribute {@code alt}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "alt"
+     * @return the value of the attribute {@code alt}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAltAttribute() {
@@ -250,11 +250,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "usemap". Refer to the
+     * Returns the value of the attribute {@code usemap}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "usemap"
+     * @return the value of the attribute {@code usemap}
      * or an empty string if that attribute isn't defined.
      */
     public final String getUseMapAttribute() {
@@ -262,11 +262,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "tabindex". Refer to the
+     * Returns the value of the attribute {@code tabindex}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "tabindex"
+     * @return the value of the attribute {@code tabindex}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
@@ -274,11 +274,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "accesskey". Refer to the
+     * Returns the value of the attribute {@code accesskey}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "accesskey"
+     * @return the value of the attribute {@code accesskey}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
@@ -286,11 +286,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "onfocus". Refer to the
+     * Returns the value of the attribute {@code onfocus}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onfocus"
+     * @return the value of the attribute {@code onfocus}
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
@@ -298,11 +298,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "onblur". Refer to the
+     * Returns the value of the attribute {@code onblur}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onblur"
+     * @return the value of the attribute {@code onblur}
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {
@@ -310,11 +310,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "onselect". Refer to the
+     * Returns the value of the attribute {@code onselect}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onselect"
+     * @return the value of the attribute {@code onselect}
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnSelectAttribute() {
@@ -322,11 +322,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "onchange". Refer to the
+     * Returns the value of the attribute {@code onchange}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onchange"
+     * @return the value of the attribute {@code onchange}
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnChangeAttribute() {
@@ -334,11 +334,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "accept". Refer to the
+     * Returns the value of the attribute {@code accept}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "accept"
+     * @return the value of the attribute {@code accept}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAcceptAttribute() {
@@ -346,11 +346,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the value of the attribute "align". Refer to the
+     * Returns the value of the attribute {@code align}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "align"
+     * @return the value of the attribute {@code align}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {

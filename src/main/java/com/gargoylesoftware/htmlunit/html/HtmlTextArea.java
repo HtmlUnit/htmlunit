@@ -256,33 +256,33 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
     }
 
     /**
-     * Returns the value of the attribute "rows". Refer to the
+     * Returns the value of the attribute {@code rows}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rows" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code rows} or an empty string if that attribute isn't defined
      */
     public final String getRowsAttribute() {
         return getAttribute("rows");
     }
 
     /**
-     * Returns the value of the attribute "cols". Refer to the
+     * Returns the value of the attribute {@code cols}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "cols" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code cols} or an empty string if that attribute isn't defined
      */
     public final String getColumnsAttribute() {
         return getAttribute("cols");
@@ -305,77 +305,77 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     /**
-     * Returns the value of the attribute "readonly". Refer to the
+     * Returns the value of the attribute {@code readonly}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "readonly" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code readonly} or an empty string if that attribute isn't defined
      */
     public final String getReadOnlyAttribute() {
         return getAttribute("readonly");
     }
 
     /**
-     * Returns the value of the attribute "tabindex". Refer to the
+     * Returns the value of the attribute {@code tabindex}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttribute("tabindex");
     }
 
     /**
-     * Returns the value of the attribute "accesskey". Refer to the
+     * Returns the value of the attribute {@code accesskey}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
         return getAttribute("accesskey");
     }
 
     /**
-     * Returns the value of the attribute "onfocus". Refer to the
+     * Returns the value of the attribute {@code onfocus}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttribute("onfocus");
     }
 
     /**
-     * Returns the value of the attribute "onblur". Refer to the
+     * Returns the value of the attribute {@code onblur}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttribute("onblur");
     }
 
     /**
-     * Returns the value of the attribute "onselect". Refer to the
+     * Returns the value of the attribute {@code onselect}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onselect" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onselect} or an empty string if that attribute isn't defined
      */
     public final String getOnSelectAttribute() {
         return getAttribute("onselect");
     }
 
     /**
-     * Returns the value of the attribute "onchange". Refer to the
+     * Returns the value of the attribute {@code onchange}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onchange" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onchange} or an empty string if that attribute isn't defined
      */
     public final String getOnChangeAttribute() {
         return getAttribute("onchange");

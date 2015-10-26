@@ -45,11 +45,11 @@ public class HtmlUnorderedList extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type"
+     * @return the value of the attribute {@code type}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
@@ -57,11 +57,11 @@ public class HtmlUnorderedList extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "compact". Refer to the
+     * Returns the value of the attribute {@code compact}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "compact"
+     * @return the value of the attribute {@code compact}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCompactAttribute() {

@@ -57,11 +57,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "charset". Refer to the
+     * Returns the value of the attribute {@code charset}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "charset"
+     * @return the value of the attribute {@code charset}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
@@ -69,11 +69,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "href". Refer to the
+     * Returns the value of the attribute {@code href}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "href"
+     * @return the value of the attribute {@code href}
      * or an empty string if that attribute isn't defined.
      */
     public final String getHrefAttribute() {
@@ -81,11 +81,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "hreflang". Refer to the
+     * Returns the value of the attribute {@code hreflang}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "hreflang"
+     * @return the value of the attribute {@code hreflang}
      * or an empty string if that attribute isn't defined.
      */
     public final String getHrefLangAttribute() {
@@ -93,11 +93,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type"
+     * @return the value of the attribute {@code type}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
@@ -105,11 +105,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "rel". Refer to the
+     * Returns the value of the attribute {@code rel}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rel"
+     * @return the value of the attribute {@code rel}
      * or an empty string if that attribute isn't defined.
      */
     public final String getRelAttribute() {
@@ -117,11 +117,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "rev". Refer to the
+     * Returns the value of the attribute {@code rev}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rev"
+     * @return the value of the attribute {@code rev}
      * or an empty string if that attribute isn't defined.
      */
     public final String getRevAttribute() {
@@ -129,11 +129,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "media". Refer to the
+     * Returns the value of the attribute {@code media}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "media"
+     * @return the value of the attribute {@code media}
      * or an empty string if that attribute isn't defined.
      */
     public final String getMediaAttribute() {
@@ -141,11 +141,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "target". Refer to the
+     * Returns the value of the attribute {@code target}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "target"
+     * @return the value of the attribute {@code target}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTargetAttribute() {

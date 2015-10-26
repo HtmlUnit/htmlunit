@@ -621,156 +621,156 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "action". Refer to the <a
+     * Returns the value of the attribute {@code action}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "action" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code action} or an empty string if that attribute isn't defined
      */
     public final String getActionAttribute() {
         return getAttribute("action");
     }
 
     /**
-     * Sets the value of the attribute "action". Refer to the <a
+     * Sets the value of the attribute {@code action}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @param action the value of the attribute "action"
+     * @param action the value of the attribute {@code action}
      */
     public final void setActionAttribute(final String action) {
         setAttribute("action", action);
     }
 
     /**
-     * Returns the value of the attribute "method". Refer to the <a
+     * Returns the value of the attribute {@code method}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "method" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code method} or an empty string if that attribute isn't defined
      */
     public final String getMethodAttribute() {
         return getAttribute("method");
     }
 
     /**
-     * Sets the value of the attribute "method". Refer to the <a
+     * Sets the value of the attribute {@code method}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @param method the value of the attribute "method"
+     * @param method the value of the attribute {@code method}
      */
     public final void setMethodAttribute(final String method) {
         setAttribute("method", method);
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the <a
+     * Returns the value of the attribute {@code name}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
     }
 
     /**
-     * Sets the value of the attribute "name". Refer to the <a
+     * Sets the value of the attribute {@code name}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @param name the value of the attribute "name"
+     * @param name the value of the attribute {@code name}
      */
     public final void setNameAttribute(final String name) {
         setAttribute("name", name);
     }
 
     /**
-     * Returns the value of the attribute "enctype". Refer to the <a
+     * Returns the value of the attribute {@code enctype}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute. "Enctype" is the encoding type
      * used when submitting a form back to the server.
      *
-     * @return the value of the attribute "enctype" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code enctype} or an empty string if that attribute isn't defined
      */
     public final String getEnctypeAttribute() {
         return getAttribute("enctype");
     }
 
     /**
-     * Sets the value of the attribute "enctype". Refer to the <a
+     * Sets the value of the attribute {@code enctype}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute. "Enctype" is the encoding type
      * used when submitting a form back to the server.
      *
-     * @param encoding the value of the attribute "enctype"
+     * @param encoding the value of the attribute {@code enctype}
      */
     public final void setEnctypeAttribute(final String encoding) {
         setAttribute("enctype", encoding);
     }
 
     /**
-     * Returns the value of the attribute "onsubmit". Refer to the <a
+     * Returns the value of the attribute {@code onsubmit}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "onsubmit" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onsubmit} or an empty string if that attribute isn't defined
      */
     public final String getOnSubmitAttribute() {
         return getAttribute("onsubmit");
     }
 
     /**
-     * Returns the value of the attribute "onreset". Refer to the <a
+     * Returns the value of the attribute {@code onreset}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "onreset" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onreset} or an empty string if that attribute isn't defined
      */
     public final String getOnResetAttribute() {
         return getAttribute("onreset");
     }
 
     /**
-     * Returns the value of the attribute "accept". Refer to the <a
+     * Returns the value of the attribute {@code accept}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "accept" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code accept} or an empty string if that attribute isn't defined
      */
     public final String getAcceptAttribute() {
         return getAttribute("accept");
     }
 
     /**
-     * Returns the value of the attribute "accept-charset". Refer to the <a
+     * Returns the value of the attribute {@code accept-charset}. Refer to the <a
      * href='http://www.w3.org/TR/html401/interact/forms.html#adef-accept-charset'>
      * HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "accept-charset" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code accept-charset} or an empty string if that attribute isn't defined
      */
     public final String getAcceptCharsetAttribute() {
         return getAttribute("accept-charset");
     }
 
     /**
-     * Returns the value of the attribute "target". Refer to the <a
+     * Returns the value of the attribute {@code target}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "target" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code target} or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
         return getAttribute("target");
     }
 
     /**
-     * Sets the value of the attribute "target". Refer to the <a
+     * Sets the value of the attribute {@code target}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @param target the value of the attribute "target"
+     * @param target the value of the attribute {@code target}
      */
     public final void setTargetAttribute(final String target) {
         setAttribute("target", target);

@@ -102,11 +102,11 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "charset". Refer to the
+     * Returns the value of the attribute {@code charset}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "charset"
+     * @return the value of the attribute {@code charset}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
@@ -114,11 +114,11 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type"
+     * @return the value of the attribute {@code type}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
@@ -126,11 +126,11 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "language". Refer to the
+     * Returns the value of the attribute {@code language}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "language"
+     * @return the value of the attribute {@code language}
      * or an empty string if that attribute isn't defined.
      */
     public final String getLanguageAttribute() {
@@ -138,11 +138,11 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "src". Refer to the
+     * Returns the value of the attribute {@code src}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "src"
+     * @return the value of the attribute {@code src}
      * or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
@@ -150,27 +150,27 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "event".
-     * @return the value of the attribute "event"
+     * Returns the value of the attribute {@code event}.
+     * @return the value of the attribute {@code event}
      */
     public final String getEventAttribute() {
         return getAttribute("event");
     }
 
     /**
-     * Returns the value of the attribute "for".
-     * @return the value of the attribute "for"
+     * Returns the value of the attribute {@code for}.
+     * @return the value of the attribute {@code for}
      */
     public final String getHtmlForAttribute() {
         return getAttribute("for");
     }
 
     /**
-     * Returns the value of the attribute "defer". Refer to the
+     * Returns the value of the attribute {@code defer}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "defer"
+     * @return the value of the attribute {@code defer}
      * or an empty string if that attribute isn't defined.
      */
     public final String getDeferAttribute() {

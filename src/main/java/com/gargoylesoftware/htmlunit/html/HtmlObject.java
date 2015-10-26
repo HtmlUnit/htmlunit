@@ -53,11 +53,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "declare". Refer to the
+     * Returns the value of the attribute {@code declare}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "declare"
+     * @return the value of the attribute {@code declare}
      * or an empty string if that attribute isn't defined.
      */
     public final String getDeclareAttribute() {
@@ -65,11 +65,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "classid". Refer to the
+     * Returns the value of the attribute {@code classid}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "classid"
+     * @return the value of the attribute {@code classid}
      * or an empty string if that attribute isn't defined.
      */
     public final String getClassIdAttribute() {
@@ -89,11 +89,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "data". Refer to the
+     * Returns the value of the attribute {@code data}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "data"
+     * @return the value of the attribute {@code data}
      * or an empty string if that attribute isn't defined.
      */
     public final String getDataAttribute() {
@@ -101,11 +101,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type"
+     * @return the value of the attribute {@code type}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
@@ -125,11 +125,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "archive". Refer to the
+     * Returns the value of the attribute {@code archive}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "archive"
+     * @return the value of the attribute {@code archive}
      * or an empty string if that attribute isn't defined.
      */
     public final String getArchiveAttribute() {
@@ -137,11 +137,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "standby". Refer to the
+     * Returns the value of the attribute {@code standby}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "standby"
+     * @return the value of the attribute {@code standby}
      * or an empty string if that attribute isn't defined.
      */
     public final String getStandbyAttribute() {
@@ -149,11 +149,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "height". Refer to the
+     * Returns the value of the attribute {@code height}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "height"
+     * @return the value of the attribute {@code height}
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeightAttribute() {
@@ -161,11 +161,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "width". Refer to the
+     * Returns the value of the attribute {@code width}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "width"
+     * @return the value of the attribute {@code width}
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
@@ -173,11 +173,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "usemap". Refer to the
+     * Returns the value of the attribute {@code usemap}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "usemap"
+     * @return the value of the attribute {@code usemap}
      * or an empty string if that attribute isn't defined.
      */
     public final String getUseMapAttribute() {
@@ -185,11 +185,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name"
+     * @return the value of the attribute {@code name}
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
@@ -197,11 +197,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "tabindex". Refer to the
+     * Returns the value of the attribute {@code tabindex}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "tabindex"
+     * @return the value of the attribute {@code tabindex}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
@@ -209,11 +209,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "align". Refer to the
+     * Returns the value of the attribute {@code align}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "align"
+     * @return the value of the attribute {@code align}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -221,11 +221,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "border". Refer to the
+     * Returns the value of the attribute {@code border}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "border"
+     * @return the value of the attribute {@code border}
      * or an empty string if that attribute isn't defined.
      */
     public final String getBorderAttribute() {
@@ -233,11 +233,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "hspace". Refer to the
+     * Returns the value of the attribute {@code hspace}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "hspace"
+     * @return the value of the attribute {@code hspace}
      * or an empty string if that attribute isn't defined.
      */
     public final String getHspaceAttribute() {
@@ -245,11 +245,11 @@ public class HtmlObject extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "vspace". Refer to the
+     * Returns the value of the attribute {@code vspace}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "vspace"
+     * @return the value of the attribute {@code vspace}
      * or an empty string if that attribute isn't defined.
      */
     public final String getVspaceAttribute() {

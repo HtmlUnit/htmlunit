@@ -163,154 +163,154 @@ public class HtmlAnchor extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "charset". Refer to the
+     * Returns the value of the attribute {@code charset}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "charset" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code charset} or an empty string if that attribute isn't defined
      */
     public final String getCharsetAttribute() {
         return getAttribute("charset");
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
         return getAttribute("type");
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
     }
 
     /**
-     * Returns the value of the attribute "href". Refer to the
+     * Returns the value of the attribute {@code href}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "href" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code href} or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
         return getAttribute("href").trim();
     }
 
     /**
-     * Returns the value of the attribute "hreflang". Refer to the
+     * Returns the value of the attribute {@code hreflang}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "hreflang" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code hreflang} or an empty string if that attribute isn't defined
      */
     public final String getHrefLangAttribute() {
         return getAttribute("hreflang");
     }
 
     /**
-     * Returns the value of the attribute "rel". Refer to the
+     * Returns the value of the attribute {@code rel}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rel" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code rel} or an empty string if that attribute isn't defined
      */
     public final String getRelAttribute() {
         return getAttribute("rel");
     }
 
     /**
-     * Returns the value of the attribute "rev". Refer to the
+     * Returns the value of the attribute {@code rev}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rev" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code rev} or an empty string if that attribute isn't defined
      */
     public final String getRevAttribute() {
         return getAttribute("rev");
     }
 
     /**
-     * Returns the value of the attribute "accesskey". Refer to the
+     * Returns the value of the attribute {@code accesskey}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
         return getAttribute("accesskey");
     }
 
     /**
-     * Returns the value of the attribute "shape". Refer to the
+     * Returns the value of the attribute {@code shape}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "shape" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code shape} or an empty string if that attribute isn't defined
      */
     public final String getShapeAttribute() {
         return getAttribute("shape");
     }
 
     /**
-     * Returns the value of the attribute "coords". Refer to the
+     * Returns the value of the attribute {@code coords}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "coords" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code coords} or an empty string if that attribute isn't defined
      */
     public final String getCoordsAttribute() {
         return getAttribute("coords");
     }
 
     /**
-     * Returns the value of the attribute "tabindex". Refer to the
+     * Returns the value of the attribute {@code tabindex}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttribute("tabindex");
     }
 
     /**
-     * Returns the value of the attribute "onfocus". Refer to the
+     * Returns the value of the attribute {@code onfocus}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttribute("onfocus");
     }
 
     /**
-     * Returns the value of the attribute "onblur". Refer to the
+     * Returns the value of the attribute {@code onblur}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttribute("onblur");
     }
 
     /**
-     * Returns the value of the attribute "target". Refer to the
+     * Returns the value of the attribute {@code target}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "target" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code target} or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
         return getAttribute("target");

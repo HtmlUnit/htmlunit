@@ -58,88 +58,88 @@ public class HtmlBody extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "onload". Refer to the
+     * Returns the value of the attribute {@code onload}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onload" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onload} or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
         return getAttribute("onload");
     }
 
     /**
-     * Returns the value of the attribute "onunload". Refer to the
+     * Returns the value of the attribute {@code onunload}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onunload" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onunload} or an empty string if that attribute isn't defined
      */
     public final String getOnUnloadAttribute() {
         return getAttribute("onunload");
     }
 
     /**
-     * Returns the value of the attribute "background". Refer to the
+     * Returns the value of the attribute {@code background}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "background" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code background} or an empty string if that attribute isn't defined
      */
     public final String getBackgroundAttribute() {
         return getAttribute("background");
     }
 
     /**
-     * Returns the value of the attribute "bgcolor". Refer to the
+     * Returns the value of the attribute {@code bgcolor}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "bgcolor" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code bgcolor} or an empty string if that attribute isn't defined
      */
     public final String getBgcolorAttribute() {
         return getAttribute("bgcolor");
     }
 
     /**
-     * Returns the value of the attribute "text". Refer to the
+     * Returns the value of the attribute {@code text}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "text" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code text} or an empty string if that attribute isn't defined
      */
     public final String getTextAttribute() {
         return getAttribute("text");
     }
 
     /**
-     * Returns the value of the attribute "link". Refer to the
+     * Returns the value of the attribute {@code link}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "link" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code link} or an empty string if that attribute isn't defined
      */
     public final String getLinkAttribute() {
         return getAttribute("link");
     }
 
     /**
-     * Returns the value of the attribute "vlink". Refer to the
+     * Returns the value of the attribute {@code vlink}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "vlink" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code vlink} or an empty string if that attribute isn't defined
      */
     public final String getVlinkAttribute() {
         return getAttribute("vlink");
     }
 
     /**
-     * Returns the value of the attribute "alink". Refer to the
+     * Returns the value of the attribute {@code alink}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "alink" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code alink} or an empty string if that attribute isn't defined
      */
     public final String getAlinkAttribute() {
         return getAttribute("alink");

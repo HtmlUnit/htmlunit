@@ -256,8 +256,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the <tt>onsubmit</tt> event handler for this element.
-     * @return the <tt>onsubmit</tt> event handler for this element
+     * Returns the {@code onsubmit} event handler for this element.
+     * @return the {@code onsubmit} event handler for this element
      */
     @Override
     @JsxGetter(@WebBrowser(IE))
@@ -266,8 +266,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the <tt>onsubmit</tt> event handler for this element.
-     * @param onsubmit the <tt>onsubmit</tt> event handler for this element
+     * Sets the {@code onsubmit} event handler for this element.
+     * @param onsubmit the {@code onsubmit} event handler for this element
      */
     @Override
     @JsxSetter(@WebBrowser(IE))

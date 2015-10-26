@@ -105,7 +105,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Called after the node for the &lt;frame&gt; or &lt;iframe&gt; has been added to the containing page.
+     * Called after the node for the {@code frame} or {@code ifram} has been added to the containing page.
      * The node needs to be added first to allow JavaScript in the frame to see the frame in the parent.
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *      {@link com.gargoylesoftware.htmlunit.WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is
@@ -140,9 +140,9 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * Indicates if the content specified by the src attribute has been loaded or not.
+     * Indicates if the content specified by the {@code src} attribute has been loaded or not.
      * The initial state of a frame contains an "about:blank" that is not loaded like
-     * something specified in src attribute.
+     * something specified in {@code src} attribute.
      * @return {@code false} if the frame is still in its initial state.
      */
     boolean isContentLoaded() {
@@ -150,7 +150,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * Changes the state of the contentLoaded_ attribute to true.
+     * Changes the state of the {@code contentLoaded_} attribute to true.
      * This is needed, if the content is set from javascript to avoid
      * later overwriting from method com.gargoylesoftware.htmlunit.html.HtmlPage.loadFrames().
      */
@@ -211,22 +211,22 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "longdesc". Refer to the
+     * Returns the value of the attribute {@code longdesc}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "longdesc" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code longdesc} or an empty string if that attribute isn't defined
      */
     public final String getLongDescAttribute() {
         return getAttribute("longdesc");
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
@@ -242,77 +242,77 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "src". Refer to the
+     * Returns the value of the attribute {@code src}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "src" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code src} or an empty string if that attribute isn't defined
      */
     public final String getSrcAttribute() {
         return getSrcAttributeNormalized();
     }
 
     /**
-     * Returns the value of the attribute "frameborder". Refer to the
+     * Returns the value of the attribute {@code frameborder}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "frameborder" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code frameborder} or an empty string if that attribute isn't defined
      */
     public final String getFrameBorderAttribute() {
         return getAttribute("frameborder");
     }
 
     /**
-     * Returns the value of the attribute "marginwidth". Refer to the
+     * Returns the value of the attribute {@code marginwidth}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "marginwidth" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code marginwidth} or an empty string if that attribute isn't defined
      */
     public final String getMarginWidthAttribute() {
         return getAttribute("marginwidth");
     }
 
     /**
-     * Returns the value of the attribute "marginheight". Refer to the
+     * Returns the value of the attribute {@code marginheight}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "marginheight" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code marginheight} or an empty string if that attribute isn't defined
      */
     public final String getMarginHeightAttribute() {
         return getAttribute("marginheight");
     }
 
     /**
-     * Returns the value of the attribute "noresize". Refer to the
+     * Returns the value of the attribute {@code noresize}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "noresize" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code noresize} or an empty string if that attribute isn't defined
      */
     public final String getNoResizeAttribute() {
         return getAttribute("noresize");
     }
 
     /**
-     * Returns the value of the attribute "scrolling". Refer to the
+     * Returns the value of the attribute {@code scrolling}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "scrolling" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code scrolling} or an empty string if that attribute isn't defined
      */
     public final String getScrollingAttribute() {
         return getAttribute("scrolling");
     }
 
     /**
-     * Returns the value of the attribute "onload". This attribute is not
+     * Returns the value of the attribute {@code onload}. This attribute is not
      * actually supported by the HTML specification however it is supported
      * by the popular browsers.
      *
-     * @return the value of the attribute "onload" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onload} or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
         return getAttribute("onload");

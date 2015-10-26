@@ -46,11 +46,11 @@ public class HtmlTableColumnGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "span". Refer to the
+     * Returns the value of the attribute {@code span}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "span"
+     * @return the value of the attribute {@code span}
      * or an empty string if that attribute isn't defined.
      */
     public final String getSpanAttribute() {
@@ -58,11 +58,11 @@ public class HtmlTableColumnGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "width". Refer to the
+     * Returns the value of the attribute {@code width}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "width"
+     * @return the value of the attribute {@code width}
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
@@ -70,11 +70,11 @@ public class HtmlTableColumnGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "align". Refer to the
+     * Returns the value of the attribute {@code align}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "align"
+     * @return the value of the attribute {@code align}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -82,11 +82,11 @@ public class HtmlTableColumnGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "char". Refer to the
+     * Returns the value of the attribute {@code char}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "char"
+     * @return the value of the attribute {@code char}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
@@ -94,11 +94,11 @@ public class HtmlTableColumnGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "charoff". Refer to the
+     * Returns the value of the attribute {@code charoff}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "charoff"
+     * @return the value of the attribute {@code charoff}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
@@ -106,11 +106,11 @@ public class HtmlTableColumnGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "valign". Refer to the
+     * Returns the value of the attribute {@code valign}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "valign"
+     * @return the value of the attribute {@code valign}
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {

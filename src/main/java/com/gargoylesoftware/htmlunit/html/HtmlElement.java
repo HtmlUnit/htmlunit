@@ -1132,143 +1132,143 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns the value of the attribute "lang". Refer to the
+     * Returns the value of the attribute {@code lang}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code lang} or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
         return getAttribute("lang");
     }
 
     /**
-     * Returns the value of the attribute "xml:lang". Refer to the
+     * Returns the value of the attribute {@code xml:lang}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code xml:lang} or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
         return getAttribute("xml:lang");
     }
 
     /**
-     * Returns the value of the attribute "dir". Refer to the
+     * Returns the value of the attribute {@code dir}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code dir} or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
         return getAttribute("dir");
     }
 
     /**
-     * Returns the value of the attribute "onclick". Refer to the
+     * Returns the value of the attribute {@code onclick}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onclick" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onclick} or an empty string if that attribute isn't defined
      */
     public final String getOnClickAttribute() {
         return getAttribute("onclick");
     }
 
     /**
-     * Returns the value of the attribute "ondblclick". Refer to the
+     * Returns the value of the attribute {@code ondblclick}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "ondblclick" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code ondblclick} or an empty string if that attribute isn't defined
      */
     public final String getOnDblClickAttribute() {
         return getAttribute("ondblclick");
     }
 
     /**
-     * Returns the value of the attribute "onmousedown". Refer to the
+     * Returns the value of the attribute {@code onmousedown}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmousedown" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmousedown} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseDownAttribute() {
         return getAttribute("onmousedown");
     }
 
     /**
-     * Returns the value of the attribute "onmouseup". Refer to the
+     * Returns the value of the attribute {@code onmouseup}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmouseup" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmouseup} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseUpAttribute() {
         return getAttribute("onmouseup");
     }
 
     /**
-     * Returns the value of the attribute "onmouseover". Refer to the
+     * Returns the value of the attribute {@code onmouseover}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmouseover" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmouseover} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOverAttribute() {
         return getAttribute("onmouseover");
     }
 
     /**
-     * Returns the value of the attribute "onmousemove". Refer to the
+     * Returns the value of the attribute {@code onmousemove}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmousemove" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmousemove} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseMoveAttribute() {
         return getAttribute("onmousemove");
     }
 
     /**
-     * Returns the value of the attribute "onmouseout". Refer to the
+     * Returns the value of the attribute {@code onmouseout}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmouseout" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmouseout} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOutAttribute() {
         return getAttribute("onmouseout");
     }
 
     /**
-     * Returns the value of the attribute "onkeypress". Refer to the
+     * Returns the value of the attribute {@code onkeypress}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onkeypress" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onkeypress} or an empty string if that attribute isn't defined
      */
     public final String getOnKeyPressAttribute() {
         return getAttribute("onkeypress");
     }
 
     /**
-     * Returns the value of the attribute "onkeydown". Refer to the
+     * Returns the value of the attribute {@code onkeydown}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onkeydown" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onkeydown} or an empty string if that attribute isn't defined
      */
     public final String getOnKeyDownAttribute() {
         return getAttribute("onkeydown");
     }
 
     /**
-     * Returns the value of the attribute "onkeyup". Refer to the
+     * Returns the value of the attribute {@code onkeyup}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onkeyup" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onkeyup} or an empty string if that attribute isn't defined
      */
     public final String getOnKeyUpAttribute() {
         return getAttribute("onkeyup");
@@ -1335,7 +1335,7 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Helper for src retrieval and normalization.
      *
-     * @return the value of the attribute "src" with all line breaks removed
+     * @return the value of the attribute {@code src} with all line breaks removed
      * or an empty string if that attribute isn't defined.
      */
     protected final String getSrcAttributeNormalized() {

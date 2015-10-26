@@ -210,132 +210,132 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "src". Refer to the
+     * Returns the value of the attribute {@code src}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "src" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code src} or an empty string if that attribute isn't defined
      */
     public final String getSrcAttribute() {
         return getSrcAttributeNormalized();
     }
 
     /**
-     * Returns the value of the attribute "alt". Refer to the
+     * Returns the value of the attribute {@code alt}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "alt" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code alt} or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
         return getAttribute("alt");
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
     }
 
     /**
-     * Returns the value of the attribute "longdesc". Refer to the
+     * Returns the value of the attribute {@code longdesc}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "longdesc" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code longdesc} or an empty string if that attribute isn't defined
      */
     public final String getLongDescAttribute() {
         return getAttribute("longdesc");
     }
 
     /**
-     * Returns the value of the attribute "height". Refer to the
+     * Returns the value of the attribute {@code height}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "height" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code height} or an empty string if that attribute isn't defined
      */
     public final String getHeightAttribute() {
         return getAttribute("height");
     }
 
     /**
-     * Returns the value of the attribute "width". Refer to the
+     * Returns the value of the attribute {@code width}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "width" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code width} or an empty string if that attribute isn't defined
      */
     public final String getWidthAttribute() {
         return getAttribute("width");
     }
 
     /**
-     * Returns the value of the attribute "usemap". Refer to the
+     * Returns the value of the attribute {@code usemap}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "usemap" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code usemap} or an empty string if that attribute isn't defined
      */
     public final String getUseMapAttribute() {
         return getAttribute("usemap");
     }
 
     /**
-     * Returns the value of the attribute "ismap". Refer to the
+     * Returns the value of the attribute {@code ismap}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "ismap" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code ismap} or an empty string if that attribute isn't defined
      */
     public final String getIsmapAttribute() {
         return getAttribute("ismap");
     }
 
     /**
-     * Returns the value of the attribute "align". Refer to the
+     * Returns the value of the attribute {@code align}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "align" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code align} or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
         return getAttribute("align");
     }
 
     /**
-     * Returns the value of the attribute "border". Refer to the
+     * Returns the value of the attribute {@code border}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "border" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code border} or an empty string if that attribute isn't defined
      */
     public final String getBorderAttribute() {
         return getAttribute("border");
     }
 
     /**
-     * Returns the value of the attribute "hspace". Refer to the
+     * Returns the value of the attribute {@code hspace}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "hspace" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code hspace} or an empty string if that attribute isn't defined
      */
     public final String getHspaceAttribute() {
         return getAttribute("hspace");
     }
 
     /**
-     * Returns the value of the attribute "vspace". Refer to the
+     * Returns the value of the attribute {@code vspace}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "vspace" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code vspace} or an empty string if that attribute isn't defined
      */
     public final String getVspaceAttribute() {
         return getAttribute("vspace");

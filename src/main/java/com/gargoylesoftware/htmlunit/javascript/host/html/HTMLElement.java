@@ -2951,8 +2951,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the <tt>onchange</tt> event handler for this element.
-     * @param onchange the <tt>onchange</tt> event handler for this element
+     * Sets the {@code onchange} event handler for this element.
+     * @param onchange the {@code onchange} event handler for this element
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void setOnchange(final Object onchange) {
@@ -2960,8 +2960,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the <tt>onchange</tt> event handler for this element.
-     * @return the <tt>onchange</tt> event handler for this element
+     * Returns the {@code onchange} event handler for this element.
+     * @return the {@code onchange} event handler for this element
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Function getOnchange() {
@@ -2969,8 +2969,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the <tt>onsubmit</tt> event handler for this element.
-     * @return the <tt>onsubmit</tt> event handler for this element
+     * Returns the {@code onsubmit} event handler for this element.
+     * @return the {@code onsubmit} event handler for this element
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Object getOnsubmit() {
@@ -2978,8 +2978,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Sets the <tt>onsubmit</tt> event handler for this element.
-     * @param onsubmit the <tt>onsubmit</tt> event handler for this element
+     * Sets the {@code onsubmit} event handler for this element.
+     * @param onsubmit the {@code onsubmit} event handler for this element
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void setOnsubmit(final Object onsubmit) {
