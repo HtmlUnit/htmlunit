@@ -36,7 +36,7 @@ public class HTMLBodyElement2 extends Element2 {
      *
      * {@inheritDoc}
      *
-     * @see HTMLFrameSetElement#getEventListenersContainer()
+     * @see HTMLFrameSetElement2#getEventListenersContainer()
      */
     public EventListenersContainer2 getEventListenersContainer() {
         return getWindow().getEventListenersContainer();

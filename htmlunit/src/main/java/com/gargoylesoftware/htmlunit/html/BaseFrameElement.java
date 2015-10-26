@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
@@ -123,7 +124,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         final Page enclosedPage = getEnclosedPage();
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
-            final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
+            final NashornJavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine2();
             if (jsEngine.isScriptRunning()) {
                 final PostponedAction action = new PostponedAction(getPage()) {
                     @Override

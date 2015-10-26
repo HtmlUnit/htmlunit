@@ -12,6 +12,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -19,9 +21,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.List;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -29,6 +35,9 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 public class HTMLCollection2 extends AbstractList2 {
 
@@ -62,6 +71,76 @@ public class HTMLCollection2 extends AbstractList2 {
     @Getter
     public final Object getLength() {
         return getElements().size();
+    }
+
+    /**
+     * Returns the item or items corresponding to the specified index or key.
+     * @param index the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     */
+    @JsxFunction
+    public Object item(final Object index) {
+        if (index instanceof String && getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO)) {
+            final String name = (String) index;
+            final Object result = namedItem(name);
+            return result;
+        }
+
+        int idx = 0;
+        final Double doubleValue = (double) index;
+        if (ScriptRuntime.NaN != doubleValue && !doubleValue.isNaN()) {
+            idx = doubleValue.intValue();
+        }
+
+        if (idx < 0 && getBrowserVersion().hasFeature(HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX)) {
+//            throw Context.reportRuntimeError("Invalid index.");
+        }
+
+        final Object object = get(idx);
+//        if (object == NOT_FOUND) {
+//            return null;
+//        }
+        return object;
+    }
+
+    /**
+     * Retrieves the item or items corresponding to the specified name (checks ids, and if
+     * that does not work, then names).
+     * @param name the name or id the element or elements to return
+     * @return the element or elements corresponding to the specified name or id
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
+     */
+    @JsxFunction
+    public Object namedItem(final String name) {
+        final List<Object> elements = getElements();
+        for (final Object next : elements) {
+            if (next instanceof DomElement) {
+                final DomElement elem = (DomElement) next;
+                final String nodeName = elem.getAttribute("name");
+                if (name.equals(nodeName)) {
+                    return getScriptObjectForElement(elem);
+                }
+
+                final String id = elem.getAttribute("id");
+                if (name.equals(id)) {
+                    return getScriptObjectForElement(elem);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the scriptable for the provided element that may already be the right scriptable.
+     * @param object the object for which to get the scriptable
+     * @return the scriptable
+     */
+    protected SimpleScriptObject getScriptObjectForElement(final Object object) {
+        if (object instanceof SimpleScriptObject) {
+            return (SimpleScriptObject) object;
+        }
+        return getScriptableFor(object);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

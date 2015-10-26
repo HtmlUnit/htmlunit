@@ -142,16 +142,4 @@ public class FrameWindow extends WebWindowImpl {
         parent.removeChildWindow(this);
         getWebClient().deregisterWebWindow(this);
     }
-
-    @Override
-    public void setScriptObject(ScriptObject scriptObject) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public ScriptObject getScriptObject2() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

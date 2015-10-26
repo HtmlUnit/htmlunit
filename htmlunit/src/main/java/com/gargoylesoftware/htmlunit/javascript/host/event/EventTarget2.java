@@ -201,6 +201,18 @@ public class EventTarget2 extends SimpleScriptObject {
         return result;
     }
 
+    /**
+     * Returns {@code true} if there are any event handlers for the specified event.
+     * @param eventName the event name (e.g. "onclick")
+     * @return {@code true} if there are any event handlers for the specified event, {@code false} otherwise
+     */
+    public boolean hasEventHandlers(final String eventName) {
+        if (eventListenersContainer_ == null) {
+            return false;
+        }
+        return eventListenersContainer_.hasEventHandlers(StringUtils.substring(eventName, 2));
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(EventTarget2.class,

@@ -262,6 +262,15 @@ public class Window2 extends EventTarget2 {
         return (int) window.getFrames2().getLength();
     }
 
+    @Override
+    public Object get(int key) {
+        final HTMLCollection2 frames = getFrames2();
+        if (key >= (int) frames.getLength()) {
+            return null;
+        }
+        return frames.item(Integer.valueOf(key));
+    }
+
     @Getter
     public Window2 getFrames() {
         return this;
