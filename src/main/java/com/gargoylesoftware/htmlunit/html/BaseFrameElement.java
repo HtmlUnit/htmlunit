@@ -105,7 +105,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Called after the node for the {@code frame} or {@code ifram} has been added to the containing page.
+     * Called after the node for the {@code frame} or {@code iframe} has been added to the containing page.
      * The node needs to be added first to allow JavaScript in the frame to see the frame in the parent.
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *      {@link com.gargoylesoftware.htmlunit.WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is
