@@ -149,17 +149,6 @@ public class HTMLCollection extends AbstractList {
     }
 
     /**
-     * Gets the DOM node that have to be examined to see if they are matching.
-     * Default implementation looks at all descendants of reference node.
-     * @return the nodes
-     */
-    @Override
-    protected Iterable<DomNode> getCandidates() {
-        final DomNode domNode = getDomNodeOrNull();
-        return domNode.getDescendants();
-    }
-
-    /**
      * Indicates if the node should belong to the collection.
      * Belongs to the refactoring effort to improve HTMLCollection's performance.
      * @param node the node to test. Will be a child node of the reference node.
