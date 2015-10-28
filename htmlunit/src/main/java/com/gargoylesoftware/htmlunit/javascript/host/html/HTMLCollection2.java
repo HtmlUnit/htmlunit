@@ -12,6 +12,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -21,8 +22,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
@@ -63,6 +66,27 @@ public class HTMLCollection2 extends AbstractList2 {
         final HTMLCollection2 host = new HTMLCollection2();
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
         return host;
+    }
+
+    /**
+     * Returns the elements whose associated host objects are available through this collection.
+     * @return the elements whose associated host objects are available through this collection
+     */
+    @Override
+    protected List<Object> computeElements() {
+        final List<Object> response = new ArrayList<>();
+        final DomNode domNode = getDomNodeOrNull();
+        if (domNode == null) {
+            return response;
+        }
+        final boolean commentIsElement = getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT);
+        for (final DomNode node : getCandidates()) {
+            if ((node instanceof DomElement
+                    || (commentIsElement && node instanceof DomComment)) && isMatching(node)) {
+                response.add(node);
+            }
+        }
+        return response;
     }
 
     /**

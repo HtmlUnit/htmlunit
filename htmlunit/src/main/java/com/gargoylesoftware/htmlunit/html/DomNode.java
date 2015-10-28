@@ -744,7 +744,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             for (final Node node : getAncestors(true)) {
-                final Object scriptableObject = ((DomNode) node).getScriptableObject();
+                final Object scriptableObject = ((DomNode) node).getScriptObject2();
                 if (scriptableObject instanceof HTMLElement) {
                     final HTMLElement elem = (HTMLElement) scriptableObject;
                     final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);

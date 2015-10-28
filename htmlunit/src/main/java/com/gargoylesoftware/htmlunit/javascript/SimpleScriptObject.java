@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
+import com.gargoylesoftware.htmlunit.html.HtmlHead;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
@@ -200,6 +202,10 @@ public class SimpleScriptObject extends ScriptObject {
         }
         else if (domNode instanceof HtmlFrameSet) {
             host = HTMLFrameSetElement2.constructor(true, null);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlHead) {
+            host = HTMLHeadElement2.constructor(true, null);
             host.setDomNode(domNode);
         }
         else {
