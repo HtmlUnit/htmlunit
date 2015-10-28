@@ -260,7 +260,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void reinitialiseAfterShutdown() throws Exception {
+    public void reinitialiseAfterClosing() throws Exception {
         startWebServer("./");
 
         final WebClient webClient = getWebClient();
@@ -268,7 +268,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         webClient.setWebConnection(webConnection);
         webClient.getPage("http://localhost:" + PORT + "/LICENSE.txt");
-        webConnection.shutdown();
+        webConnection.close();
         webClient.getPage("http://localhost:" + PORT + "/pom.xml");
     }
 
@@ -281,7 +281,9 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final String encoding = "ISO8859-1";
         final KeyDataPair pair = new KeyDataPair("myFile", new File("this/doesnt_exist.txt"), "text/plain", encoding);
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();
-        new HttpWebConnection(getWebClient()).buildFilePart(pair, builder);
+        try (final HttpWebConnection webConnection = new HttpWebConnection(getWebClient())) {
+            webConnection.buildFilePart(pair, builder);
+        }
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         builder.build().writeTo(baos);
         final String part = baos.toString(encoding);

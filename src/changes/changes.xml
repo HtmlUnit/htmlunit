@@ -8,8 +8,14 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes">
+            <action type="update" dev="asashour">
+                HttpWebConnection: deprecate .shutdown().
+            </action>
+            <action type="update" dev="asashour" issue="1727">
+                INCOMPATIBLE CHANGE: WebConnection to extend AutoCloseable.
+            </action>
             <action type="fix" dev="rbri">
-                JavaScript: Removing the active element from the dom tree should reset the
+                JavaScript: Removing the active element from the DOM tree should reset the
                 activeElement property.
             </action>
             <action type="fix" dev="asashour" issue="1726">

@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * web connection object.</p>
  *
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class WebConnectionWrapper implements WebConnection {
     private final WebConnection wrappedWebConnection_;
@@ -61,7 +62,8 @@ public class WebConnectionWrapper implements WebConnection {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getResponse() on the wrapped connection object.
+     * The default behavior of this method is to return {@link WebConnection#getResponse(WebRequest)}
+     * on the wrapped connection object.
      */
     @Override
     public WebResponse getResponse(final WebRequest request) throws IOException {
@@ -74,5 +76,14 @@ public class WebConnectionWrapper implements WebConnection {
      */
     public WebConnection getWrappedWebConnection() {
         return wrappedWebConnection_;
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to return {@link WebConnection#close()} on the wrapped connection object.
+     */
+    @Override
+    public void close() throws Exception {
+        wrappedWebConnection_.close();
     }
 }

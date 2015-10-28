@@ -227,4 +227,11 @@ public class UrlFetchWebConnection implements WebConnection {
         }
         return cookies;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws Exception {
+    }
 }

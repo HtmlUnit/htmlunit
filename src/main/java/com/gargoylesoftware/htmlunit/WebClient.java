@@ -1793,10 +1793,13 @@ public class WebClient implements Serializable, AutoCloseable {
             scriptEngine_.shutdown();
         }
 
-        //FIXME Depends on the implementation
-        if (webConnection_ instanceof HttpWebConnection) {
-            ((HttpWebConnection) webConnection_).shutdown();
+        try {
+            webConnection_.close();
         }
+        catch (final Exception e) {
+            LOG.error("Exception while closing the connection", e);
+        }
+
         cache_.clear();
     }
 

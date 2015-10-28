@@ -481,4 +481,11 @@ public class MockWebConnection implements WebConnection {
     public boolean hasResponse(final URL url) {
         return responseMap_.containsKey(url.toExternalForm());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() {
+    }
 }
