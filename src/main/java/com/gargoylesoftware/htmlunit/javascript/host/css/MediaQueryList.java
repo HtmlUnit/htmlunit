@@ -24,6 +24,7 @@ import org.w3c.css.sac.SACMediaList;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -74,5 +75,23 @@ public class MediaQueryList extends EventTarget {
         final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
         final SACMediaList mediaList = CSSStyleSheet.parseMedia(errorHandler, media_);
         return CSSStyleSheet.isActive(this, new MediaListImpl(mediaList));
+    }
+
+    /**
+     * Adds the {@code listener} event handler for this element.
+     * @param listener the {@code listener} event handler for this element
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    public void addListener(final Object listener) {
+        // dummy impl for the moment
+    }
+
+    /**
+     * Removes the {@code listener} event handler for this element.
+     * @param listener the {@code listener} event handler to be removed
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    public void removeListener(final Object listener) {
+        // dummy impl for the moment
     }
 }
