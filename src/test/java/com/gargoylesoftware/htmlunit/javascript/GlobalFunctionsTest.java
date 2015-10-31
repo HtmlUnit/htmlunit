@@ -151,7 +151,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "%E6%B5%8B%E8%A9%A6" })
+    @Alerts("%E6%B5%8B%E8%A9%A6")
     public void encodeURIComponentUtf8() throws Exception {
         final String html
             = "<html>\n"
