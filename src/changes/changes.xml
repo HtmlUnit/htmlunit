@@ -9,7 +9,7 @@
     <body>
         <release version="2.19" date="" description="Bugfixes, Media query support">
             <action type="add" dev="rbri">
-                JavaScript: Empty dummy implementations for for MediaQueryList#addListener and
+                JavaScript: Empty dummy implementations for MediaQueryList#addListener and
                 MediaQueryList#removeListener added.
             </action>
             <action type="update" dev="asashour">
