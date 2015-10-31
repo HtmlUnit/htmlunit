@@ -369,7 +369,6 @@ public class JavaScriptEngine {
                             || "webkitIDBRequest".equals(hostClassSimpleName)
                             || "webkitIDBTransaction".equals(hostClassSimpleName)
                             || "webkitOfflineAudioContext".equals(hostClassSimpleName)
-                            || "webkitOfflineAudioContext".equals(hostClassSimpleName)
                             || "webkitURL".equals(hostClassSimpleName)
                             || "Image".equals(hostClassSimpleName)
                             || "Option".equals(hostClassSimpleName)) {

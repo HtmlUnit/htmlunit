@@ -1472,7 +1472,7 @@ public class HtmlPage extends InteractivePage {
             final Page newPage;
             if (element instanceof HtmlAnchor || element instanceof HtmlArea || element instanceof HtmlButton
                     || element instanceof HtmlInput || element instanceof HtmlLabel || element instanceof HtmlLegend
-                    || element instanceof HtmlTextArea || element instanceof HtmlArea || element instanceof HtmlArea) {
+                    || element instanceof HtmlTextArea || element instanceof HtmlArea) {
                 newPage = element.click();
             }
             else {
