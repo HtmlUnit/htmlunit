@@ -341,10 +341,10 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     public void clickBlankTargetHashOnly() throws Exception {
         final String html =
                 "<html>\n"
-                        + "<head><title>foo</title></head>\n"
-                        + "<body>\n"
-                        + "<a id='a' target='_blank' href='#'>Foo</a>\n"
-                        + "</body></html>\n";
+                + "<head><title>foo</title></head>\n"
+                + "<body>\n"
+                + "<a id='a' target='_blank' href='#'>Foo</a>\n"
+                + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);
         assertEquals(1, driver.getWindowHandles().size());
@@ -435,7 +435,9 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     public void click() throws Exception {
         final String html
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
             + "</body></html>";
@@ -465,8 +467,10 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     public void clickAnchorName() throws Exception {
         final String html
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<a href='#clickedAnchor' id='a1'>link to foo1</a>\n"
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <a href='#clickedAnchor' id='a1'>link to foo1</a>\n"
             + "</body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -476,5 +480,81 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("a1")).click();
         assertEquals(1, webConnection.getRequestCount()); // no second server hit
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "", "#anchor", "#!bang" })
+    public void dontReloadHashBang() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_FIRST + "test' id='a1'>link1</a>\n"
+            + "  <a href='" + URL_FIRST + "test#anchor' id='a2'>link2</a>\n"
+            + "  <a href='" + URL_FIRST + "test#!bang' id='a3'>link3</a>\n"
+            + "  <script>\n"
+            + "    alert(document.getElementById('a1').hash);\n"
+            + "    alert(document.getElementById('a2').hash);\n"
+            + "    alert(document.getElementById('a3').hash);\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setDefaultResponse(html);
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        assertEquals(1, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a1")).click();
+        assertEquals(2, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a2")).click();
+        assertEquals(2, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a3")).click();
+        assertEquals(2, webConnection.getRequestCount());
+    }
+
+    /**
+     * Testcase for issue #1492.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "#!board/WebDev", "#!article/WebDev/35", "#!article/WebDev/35" })
+    public void dontReloadHashBang2() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_FIRST + "test/#!board/WebDev' id='a1'>link1</a>\n"
+            + "  <a href='" + URL_FIRST + "test/#!article/WebDev/35' id='a2'>link2</a>\n"
+            + "  <a href='" + URL_FIRST + "test#!article/WebDev/35' id='a3'>link2</a>\n"
+            + "  <script>\n"
+            + "    alert(document.getElementById('a1').hash);\n"
+            + "    alert(document.getElementById('a2').hash);\n"
+            + "    alert(document.getElementById('a3').hash);\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setDefaultResponse(html);
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        assertEquals(1, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a1")).click();
+        assertEquals(2, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a2")).click();
+        assertEquals(2, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a3")).click();
+        assertEquals(3, webConnection.getRequestCount());
     }
 }
