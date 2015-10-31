@@ -56,7 +56,6 @@ import org.junit.Before;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -644,13 +643,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final WebDriver driver = getWebDriver();
         if (!(driver instanceof HtmlUnitDriver)) {
-            try {
-                driver.manage().window().setSize(new Dimension(1272, 768));
-            }
-            catch (final WebDriverException e) {
-                // ChromeDriver version 0.5 (Mar 26, 2013) does not support the setSize command
-                LOG.warn(e.getMessage(), e);
-            }
+            driver.manage().window().setSize(new Dimension(1272, 768));
         }
         driver.get(url.toExternalForm());
 

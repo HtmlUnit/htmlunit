@@ -38,11 +38,11 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Crypto]", "public", "true", "verify",
-            "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
-            "publicExponent [object Uint8Array]",
-            "private", "false", "sign",
-            "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
-            "publicExponent [object Uint8Array]" },
+                        "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+                        "publicExponent [object Uint8Array]",
+                        "private", "false", "sign",
+                        "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+                        "publicExponent [object Uint8Array]" },
             IE = "undefined")
     @NotYetImplemented({ CHROME, FF })
     public void rsassa() throws Exception {
