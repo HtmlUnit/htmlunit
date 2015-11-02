@@ -415,9 +415,9 @@ public final class ProxyAutoConfig {
             }
         }
 
-        int hour1, hour2, min1, min2, second1, second2;
-        Calendar cal1;
-        Calendar cal2;
+        final int hour1, hour2, min1, min2, second1, second2;
+        final Calendar cal1;
+        final Calendar cal2;
         switch (length) {
             case 1:
                 hour1 = getSmallInt(value1);

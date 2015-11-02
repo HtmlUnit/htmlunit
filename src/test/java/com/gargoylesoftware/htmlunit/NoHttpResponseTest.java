@@ -219,9 +219,8 @@ class MiniServer extends Thread {
             }
             return null;
         }
-        URL url;
         try {
-            url = new URL("http://localhost:" + port_ + requestedPath);
+            final URL url = new URL("http://localhost:" + port_ + requestedPath);
             return new WebRequest(url);
         }
         catch (final MalformedURLException e) {

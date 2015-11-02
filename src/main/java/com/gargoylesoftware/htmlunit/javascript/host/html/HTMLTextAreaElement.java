@@ -124,7 +124,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxSetter
     public void setCols(final String cols) {
-        int i;
+        final int i;
         try {
             i = Float.valueOf(cols).intValue();
             if (i < 0) {
@@ -165,7 +165,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxSetter
     public void setRows(final String rows) {
-        int i;
+        final int i;
         try {
             i = new Float(rows).intValue();
             if (i < 0) {
