@@ -1079,7 +1079,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private WebResponse makeWebResponseForDataUrl(final WebRequest webRequest) throws IOException {
         final URL url = webRequest.getUrl();
         final List<NameValuePair> responseHeaders = new ArrayList<>();
-        DataUrlDecoder decoder;
+        final DataUrlDecoder decoder;
         try {
             decoder = DataUrlDecoder.decode(url);
         }
