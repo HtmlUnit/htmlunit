@@ -437,7 +437,7 @@ public final class HTMLParser {
             page_ = (HtmlPage) node.getPage();
 
             currentNode_ = node;
-            for (final Node ancestor : currentNode_.getAncestors(true)) {
+            for (final Node ancestor : currentNode_.getAncestors()) {
                 stack_.push((DomNode) ancestor);
             }
 

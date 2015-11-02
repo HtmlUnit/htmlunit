@@ -516,8 +516,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         // get ancestors of both
-        final List<Node> myAncestors = getAncestors(true);
-        final List<Node> otherAncestors = ((DomNode) other).getAncestors(true);
+        final List<Node> myAncestors = getAncestors();
+        final List<Node> otherAncestors = ((DomNode) other).getAncestors();
 
         final int max = Math.min(myAncestors.size(), otherAncestors.size());
 
@@ -558,14 +558,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Gets the ancestors of the node.
-     * @param includeSelf should this node be returned too
      * @return a list of the ancestors with the root at the first position
      */
-    protected List<Node> getAncestors(final boolean includeSelf) {
+    protected List<Node> getAncestors() {
         final List<Node> list = new ArrayList<>();
-        if (includeSelf) {
-            list.add(this);
-        }
+        list.add(this);
+
         Node node = getParentNode();
         while (node != null) {
             list.add(0, node);
@@ -738,7 +736,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (htmlPage != null && htmlPage.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
-            final List<Node> ancestors = getAncestors(true);
+            final List<Node> ancestors = getAncestors();
             final ArrayList<CSSStyleDeclaration> styles = new ArrayList<>(ancestors.size());
 
             for (final Node node : ancestors) {
