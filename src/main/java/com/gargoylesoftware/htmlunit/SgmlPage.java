@@ -295,8 +295,10 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
             @Override
             protected List<DomElement> provideElements() {
                 final List<DomElement> res = new LinkedList<>();
+                final boolean caseSensitive = hasCaseSensitiveTagNames();
                 for (final DomElement elem : getDomElementDescendants()) {
-                    if (elem.getLocalName().equals(tagName)) {
+                    final String localName = elem.getLocalName();
+                    if ((!caseSensitive && localName.equalsIgnoreCase(tagName)) || localName.equals(tagName)) {
                         res.add(elem);
                     }
                 }
