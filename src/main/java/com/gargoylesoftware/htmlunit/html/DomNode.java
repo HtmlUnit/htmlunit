@@ -739,7 +739,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             final List<Node> ancestors = getAncestors(true);
-            final ArrayList<CSSStyleDeclaration> styles = new ArrayList<CSSStyleDeclaration>(ancestors.size());
+            final ArrayList<CSSStyleDeclaration> styles = new ArrayList<>(ancestors.size());
 
             for (final Node node : ancestors) {
                 final Object scriptableObject = ((DomNode) node).getScriptableObject();
