@@ -31,7 +31,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -734,29 +733,31 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (!mayBeDisplayed()) {
             return false;
         }
+
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage != null && htmlPage.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
-            final LinkedList<CSSStyleDeclaration> styles = new LinkedList<>();
-
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
-            for (final Node node : getAncestors(true)) {
+            final List<Node> ancestors = getAncestors(true);
+            final ArrayList<CSSStyleDeclaration> styles = new ArrayList<CSSStyleDeclaration>(ancestors.size());
+
+            for (final Node node : ancestors) {
                 final Object scriptableObject = ((DomNode) node).getScriptableObject();
                 if (scriptableObject instanceof HTMLElement) {
                     final HTMLElement elem = (HTMLElement) scriptableObject;
                     final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
-                    final String display = style.getDisplay();
-                    if (DisplayStyle.NONE.value().equals(display)) {
+                    if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
                         return false;
                     }
-                    styles.addFirst(style);
+                    styles.add(style);
                 }
             }
 
             final boolean collapseInvisible = hasFeature(DISPLAYED_COLLAPSE);
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
-            for (final CSSStyleDeclaration style : styles) {
+            for (int i = styles.size() - 1; i >= 0; i--) {
+                final CSSStyleDeclaration style = styles.get(i);
                 final String visibility = style.getVisibility();
                 if (visibility.length() > 5) {
                     if ("visible".equals(visibility)) {
