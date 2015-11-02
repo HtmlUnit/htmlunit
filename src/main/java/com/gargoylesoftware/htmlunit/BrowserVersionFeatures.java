@@ -840,13 +840,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_BGSOUND_AS_UNKNOWN,
 
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
-    JS_BODY_MARGINS_IE11,
-
-    /** Was originally .isIE(). */
+    /** Body {@code margin} is 15px. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_BODY_MARGINS_IE8,
+    JS_BODY_MARGINS_15,
+
+    /** Body {@code margin} is 8px. */
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    JS_BODY_MARGINS_8,
 
     /** Indicates that the getBoundingClientRect adds an offset of 2. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
