@@ -1050,7 +1050,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         // case sensitive
         inputs = page.getElementsByTagName("inPUT");
-        assertEquals(0, inputs.getLength());
+        assertEquals(1, inputs.getLength());
 
         // empty
         inputs = page.getElementsByTagName("");
