@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
@@ -61,8 +60,7 @@ public class History2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null" },
             IE8 = "no pushState")
-    @NotYetImplemented({ CHROME, FF, IE11 })
-    public void pushState() throws Exception {
+    public void pushStateSimple() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<title></title>\n"
@@ -99,6 +97,99 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "[object PopStateEvent]", "{\"hi\":\"there\"}",
+                        "[object PopStateEvent]", "{\"hi\":\"there\"}",
+                        "[object PopStateEvent]", "null",
+                        "[object PopStateEvent]", "null",
+                        "[object PopStateEvent]", "{\"hi\":\"there\"}",
+                        "[object PopStateEvent]", "{\"hi\":\"there\"}",
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}" },
+           IE8 = {})
+    public void pushState() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    if (window.history.pushState) {\n"
+                + "      var stateObj = { hi: 'there' };\n"
+                + "      window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function test2() {\n" + "    if (window.history.pushState) {\n"
+                + "      var stateObj = { hi2: 'there2' };\n"
+                + "      window.history.pushState(stateObj, 'page 3', 'bar2.html');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function popMe(event) {\n"
+                + "    var e = event ? event : window.event;\n"
+                + "    alert(e);\n"
+                + "    alert(JSON.stringify(e.state));\n"
+                + "  }\n"
+
+                + "  function setWindowName() {\n"
+                + "    window.name = window.name + 'a';\n"
+                + "  }\n"
+
+                + "  if (window.addEventListener) {\n"
+                + "     window.addEventListener('popstate', popMe);\n"
+                + "  } else {\n"
+                + "     window.attachEvent('onpopstate', popMe);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onpopstate='popMe(event)' onload='setWindowName()' onbeforeunload='setWindowName()' "
+                                                                + "onunload='setWindowName()'>\n"
+                + "  <button id=myId onclick='test()'>Click me</button>\n"
+                + "  <button id=myId2 onclick='test2()'>Click me</button>\n"
+                + "</body></html>";
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final WebDriver driver = loadPage2(html);
+        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+
+        final long start = (Long) ((JavascriptExecutor) driver).executeScript("return window.history.length");
+
+        if (expectedAlerts.length != 0) {
+            driver.findElement(By.id("myId")).click();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+            driver.findElement(By.id("myId2")).click();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
+            driver.navigate().back();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+            driver.navigate().back();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
+            driver.navigate().forward();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+            driver.navigate().forward();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
+        }
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
+        verifyAlerts(driver, expectedAlerts);
+
+        // because we have changed the window name
+        shutDownAll();
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                         "[object PopStateEvent]", "null", "true",
@@ -124,8 +215,8 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" },
             IE8 = {})
-    @NotYetImplemented({CHROME, FF, IE11})
-    public void pushState2() throws Exception {
+    @NotYetImplemented({CHROME, IE11})
+    public void pushStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -210,6 +301,88 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "[object PopStateEvent]", "null",
+                        "[object PopStateEvent]", "null",
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}" },
+            IE8 = {})
+    public void replaceState() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    if (window.history.pushState) {\n"
+                + "      var stateObj = { hi: 'there' };\n"
+                + "      window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function test2() {\n"
+                + "    if (window.history.replaceState) {\n"
+                + "      var stateObj = { hi2: 'there2' };\n"
+                + "      window.history.replaceState(stateObj, 'page 3', 'bar2.html');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function popMe(event) {\n"
+                + "    var e = event ? event : window.event;\n"
+                + "    alert(e);\n"
+                + "    alert(JSON.stringify(e.state));\n"
+                + "  }\n"
+
+                + "  function setWindowName() {\n"
+                + "    window.name = window.name + 'a';\n"
+                + "  }\n"
+
+                + "  if (window.addEventListener) {\n"
+                + "     window.addEventListener('popstate', popMe);\n"
+                + "  } else {\n"
+                + "     window.attachEvent('onpopstate', popMe);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onpopstate='popMe(event)' onload='setWindowName()' onbeforeunload='setWindowName()' "
+                                                        + "onunload='setWindowName()'>\n"
+                + "  <button id=myId onclick='test()'>Click me</button>\n"
+                + "  <button id=myId2 onclick='test2()'>Click me</button>\n"
+                + "</body></html>";
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final WebDriver driver = loadPage2(html);
+
+        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        final long start = (Long) ((JavascriptExecutor) driver).executeScript("return window.history.length");
+
+        if (expectedAlerts.length != 0) {
+            driver.findElement(By.id("myId")).click();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+            driver.findElement(By.id("myId2")).click();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
+            driver.navigate().back();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
+            driver.navigate().forward();
+            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+            assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
+        }
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
+        verifyAlerts(driver, expectedAlerts);
+
+        // because we have changed the window name
+        shutDownAll();
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
@@ -223,8 +396,8 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" },
             IE8 = {})
-    @NotYetImplemented({CHROME, FF, IE11})
-    public void replaceState() throws Exception {
+    @NotYetImplemented({CHROME, IE11})
+    public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"

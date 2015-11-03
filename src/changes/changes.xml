@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes, Media query support">
+            <action type="add" dev="rbri" issue="1681" due-to="Adam Afeltowicz">
+                JavaScript: Support for History.pushState() and History.replaceState().
+            </action>
             <action type="fix" dev="asashour" issue="1723">
                 SgmlPage: fix .getElementsByTagName().
             </action>

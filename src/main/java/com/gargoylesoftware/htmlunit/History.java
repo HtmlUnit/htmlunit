@@ -21,6 +21,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -28,6 +31,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Adam Afeltowicz
  */
 public class History implements Serializable {
 
@@ -170,6 +174,8 @@ public class History implements Serializable {
         }
         final WebRequest request = page.getWebResponse().getWebRequest();
         final WebRequest newRequest = new WebRequest(request.getUrl(), request.getHttpMethod());
+        newRequest.setCloneForHistoryAPI(request.isCloneForHistoryAPI());
+        newRequest.setState(request.getState());
         newRequest.setRequestParameters(request.getRequestParameters());
         webRequests_.add(newRequest);
     }
@@ -185,10 +191,38 @@ public class History implements Serializable {
         try {
             ignoreNewPages_.set(Boolean.TRUE);
             window_.getWebClient().getPage(window_, request);
+            final Window jsWindow = (Window) window_.getScriptableObject();
+            if (jsWindow.hasEventHandlers("onpopstate")) {
+                final Event event = new PopStateEvent(jsWindow, Event.TYPE_POPSTATE, request.getState());
+                jsWindow.executeEventLocally(event);
+            }
         }
         finally {
             ignoreNewPages_.set(old);
         }
+    }
+
+    /**
+     * Allows to change history state and url if provided.
+     *
+     * @param state the new state to use
+     * @param url the new url to use
+     */
+    public void replaceState(final Object state, final URL url) {
+        final WebRequest webRequest = webRequests_.get(index_);
+        webRequest.setState(state);
+        if (url != null) {
+            webRequest.setUrl(url);
+        }
+    }
+
+    /**
+     * Returns current state object.
+     *
+     * @return the current state object
+     */
+    public Object getCurrentState() {
+        return webRequests_.get(index_).getState();
     }
 
     /**

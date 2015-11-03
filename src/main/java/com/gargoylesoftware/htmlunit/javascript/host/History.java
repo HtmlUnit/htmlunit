@@ -20,10 +20,15 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.commons.lang3.StringUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -40,6 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Adam Afeltowicz
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
@@ -71,8 +77,8 @@ public class History extends SimpleScriptable {
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object getState() {
-        // empty default impl
-        return null;
+        final WebWindow w = getWindow().getWebWindow();
+        return w.getHistory().getCurrentState();
     }
 
     /**
@@ -126,6 +132,21 @@ public class History extends SimpleScriptable {
      */
     @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void replaceState(final Object object, final String title, final String url) {
+        final WebWindow w = getWindow().getWebWindow();
+        final HtmlPage page = (HtmlPage) w.getEnclosedPage();
+        try {
+            URL newStateUrl = null;
+            if (StringUtils.isNotBlank(url)) {
+                newStateUrl = page.getFullyQualifiedUrl(url);
+            }
+            w.getHistory().replaceState(object, newStateUrl);
+            if (newStateUrl != null) {
+                page.getWebResponse().getWebRequest().setUrl(newStateUrl);
+            }
+        }
+        catch (final MalformedURLException e) {
+            Context.throwAsScriptRuntimeEx(e);
+        }
     }
 
     /**
@@ -136,5 +157,11 @@ public class History extends SimpleScriptable {
      */
     @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void pushState(final Object object, final String title, final String url) {
+        try {
+            getWindow().getLocation().setHref(url, true, object);
+        }
+        catch (final IOException e) {
+            Context.throwAsScriptRuntimeEx(e);
+        }
     }
 }

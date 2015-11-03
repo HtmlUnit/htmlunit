@@ -64,6 +64,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Adam Afeltowicz
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN Documentation</a>
  */
@@ -212,6 +213,20 @@ public class Location extends SimpleScriptable {
      */
     @JsxSetter
     public void setHref(final String newLocation) throws IOException {
+        setHref(newLocation, false, null);
+    }
+
+    /**
+     * Sets the location URL to an entirely new value.
+     *
+     * @param newLocation the new location URL
+     * @param justHistoryAPIPushState indicates if change is caused by using HTML5 HistoryAPI
+     * @param state the state object passed down if justHistoryAPIPushState is true
+     * @throws IOException if loading the specified location fails
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
+     */
+    void setHref(final String newLocation, final boolean justHistoryAPIPushState, final Object state)
+            throws IOException {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
@@ -236,6 +251,10 @@ public class Location extends SimpleScriptable {
             }
 
             final WebRequest request = new WebRequest(url);
+            request.setCloneForHistoryAPI(justHistoryAPIPushState);
+            if (justHistoryAPIPushState) {
+                request.setState(state);
+            }
             request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
 
             final WebWindow webWindow = getWindow().getWebWindow();
