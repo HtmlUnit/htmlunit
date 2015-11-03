@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -43,6 +46,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,," },
             FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,," },
             IE8 = {"0px,0px,0px,0px,0px", ",,,,", "15px 10px,10px,10px,15px,15px", ",,,," })
+    @NotYetImplemented(CHROME)
     public void defaultPaddingAndMargins() throws Exception {
         final String html =
             "<html>\n"
@@ -353,6 +357,30 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("target")).sendKeys("a");
         verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "0", "8" },
+            IE8 = { "0", "0" })
+    @NotYetImplemented
+    public void top() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(b.offsetTop);\n"
+            + "        alert(b.getBoundingClientRect().top);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
     }
 
 }
