@@ -94,6 +94,7 @@ public class History2Test extends WebDriverTestCase {
         }
         verifyAlerts(driver, expectedAlerts);
     }
+
     /**
      * @throws Exception if an error occurs
      */
