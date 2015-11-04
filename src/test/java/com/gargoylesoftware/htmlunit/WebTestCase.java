@@ -266,7 +266,6 @@ public abstract class WebTestCase {
         Assert.assertEquals(expected, actual);
     }
 
-
     /**
      * Asserts the two objects are equal.
      * @param message the message
