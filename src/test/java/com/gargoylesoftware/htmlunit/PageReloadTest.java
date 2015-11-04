@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 
 import java.net.URL;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1786,19 +1785,19 @@ public class PageReloadTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(RELOAD2_URL), html);
 
         final WebDriver driver = loadPage2(html, new URL(url));
-        Assert.assertEquals(getMockWebConnection().getRequestCount(), 1);
+        assertEquals(getMockWebConnection().getRequestCount(), 1);
 
         // click
         driver.findElement(By.id(id)).click();
-        Assert.assertEquals(counterChange, getMockWebConnection().getRequestCount() - 1);
+        assertEquals(counterChange, getMockWebConnection().getRequestCount() - 1);
 
         // check location visible to javascript
         driver.findElement(By.id("updateLocationInfo")).click();
         final String hash = driver.findElement(By.id("locationHash")).getText();
         final String pathname = driver.findElement(By.id("locationPathname")).getText();
 
-        Assert.assertEquals(expectedPathname, pathname);
-        Assert.assertEquals(expectedHash, hash);
+        assertEquals(expectedPathname, pathname);
+        assertEquals(expectedHash, hash);
     }
 
     private String testPage() {

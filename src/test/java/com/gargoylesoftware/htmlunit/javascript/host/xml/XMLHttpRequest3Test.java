@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static org.junit.Assert.assertSame;
 
 import java.io.IOException;
 import java.io.Writer;

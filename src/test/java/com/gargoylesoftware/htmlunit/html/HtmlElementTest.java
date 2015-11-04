@@ -15,13 +15,11 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
@@ -55,7 +53,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertTrue("Element should have attribute", node.hasAttribute("id"));
+        assertTrue("Element should have attribute", node.hasAttribute("id"));
     }
 
     /**
@@ -68,7 +66,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertFalse("Element should not have attribute", node.hasAttribute("foo"));
+        assertFalse("Element should not have attribute", node.hasAttribute("foo"));
     }
 
     /**
@@ -82,7 +80,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertTrue("Element should have attribute", node.hasAttributeNS("http://foobar", "foo"));
+        assertTrue("Element should have attribute", node.hasAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -95,7 +93,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertFalse("Element should not have attribute", node.hasAttributeNS("http://foobar", "foo"));
+        assertFalse("Element should not have attribute", node.hasAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -108,7 +106,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
+        assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
     }
 
     /**
@@ -121,7 +119,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
+        assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
 
     /**
@@ -135,7 +133,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertEquals("Element should have attribute", "bar", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should have attribute", "bar", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -148,7 +146,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -164,7 +162,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("ns:foo".equals(attr.getName())) {
-                Assert.assertEquals("Element should have a namespace URI", "http://foobar", attr.getNamespaceURI());
+                assertEquals("Element should have a namespace URI", "http://foobar", attr.getNamespaceURI());
                 return;
             }
         }
@@ -184,7 +182,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("id".equals(attr.getName())) {
-                Assert.assertEquals("Element should not have a namespace URI", null, attr.getNamespaceURI());
+                assertEquals("Element should not have a namespace URI", null, attr.getNamespaceURI());
                 return;
             }
         }
@@ -204,7 +202,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("ns:foo".equals(attr.getName())) {
-                Assert.assertEquals("Element should have a local name", "foo", attr.getLocalName());
+                assertEquals("Element should have a local name", "foo", attr.getLocalName());
                 return;
             }
         }
@@ -225,7 +223,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("id".equals(attr.getName())) {
                 // This is not standard, but to change it now would break backwards compatibility.
-                Assert.assertEquals("Element should not have a local name", "id", attr.getLocalName());
+                assertEquals("Element should not have a local name", "id", attr.getLocalName());
                 return;
             }
         }
@@ -245,7 +243,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("ns:foo".equals(attr.getName())) {
-                Assert.assertEquals("Element should have a prefix", "ns", attr.getPrefix());
+                assertEquals("Element should have a prefix", "ns", attr.getPrefix());
                 return;
             }
         }
@@ -265,7 +263,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("id".equals(attr.getName())) {
-                Assert.assertEquals("Element should not have a prefix", null, attr.getPrefix());
+                assertEquals("Element should not have a prefix", null, attr.getPrefix());
                 return;
             }
         }
@@ -286,8 +284,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("ns:foo".equals(attr.getName())) {
                 attr.setPrefix("other");
-                Assert.assertEquals("Element should have a changed prefix", "other", attr.getPrefix());
-                Assert.assertEquals("setPrefix should change qualified name", "other:foo", attr.getName());
+                assertEquals("Element should have a changed prefix", "other", attr.getPrefix());
+                assertEquals("setPrefix should change qualified name", "other:foo", attr.getName());
                 return;
             }
         }
@@ -306,7 +304,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.setAttribute("id", "other");
-        Assert.assertEquals("Element should have attribute", "other", node.getAttribute("id"));
+        assertEquals("Element should have attribute", "other", node.getAttribute("id"));
     }
 
     /**
@@ -321,7 +319,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.setAttribute("foo", "other");
-        Assert.assertEquals("Element should have attribute", "other", node.getAttribute("foo"));
+        assertEquals("Element should have attribute", "other", node.getAttribute("foo"));
     }
 
     /**
@@ -336,7 +334,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
-        Assert.assertEquals("Element should have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -351,7 +349,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
-        Assert.assertEquals("Element should not have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should not have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -366,7 +364,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.removeAttribute("id");
-        Assert.assertEquals("Element should not have removed attribute", "", node.getAttribute("id"));
+        assertEquals("Element should not have removed attribute", "", node.getAttribute("id"));
     }
 
     /**
@@ -381,7 +379,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.removeAttribute("foo");
-        Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
+        assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
 
     /**
@@ -396,7 +394,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
-        Assert.assertEquals("Element should not have removed attribute", "",
+        assertEquals("Element should not have removed attribute", "",
             node.getAttributeNS("http://foobar", "foo"));
     }
 
@@ -412,7 +410,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
-        Assert.assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**

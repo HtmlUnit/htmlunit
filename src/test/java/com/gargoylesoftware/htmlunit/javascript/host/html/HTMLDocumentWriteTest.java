@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
 import java.util.ArrayList;

@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import java.net.URL;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -191,16 +190,16 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         final List<String> actualAlerts = getCollectedAlerts(driver);
 
         // tested with real ff17 and ie6; running in selenium returns different results
-        Assert.assertEquals(4, actualAlerts.size());
+        assertEquals(4, actualAlerts.size());
 
         // ignore order of frame windows
         if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
             // returns 'first' 'third' 'fourth' 'second'
-            Assert.assertEquals("first", actualAlerts.get(0));
+            assertEquals("first", actualAlerts.get(0));
         }
         else {
             // returns 'first' at last
-            Assert.assertEquals("first", actualAlerts.get(3));
+            assertEquals("first", actualAlerts.get(3));
         }
     }
 

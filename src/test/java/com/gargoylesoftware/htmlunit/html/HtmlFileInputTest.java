@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +50,6 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -166,8 +163,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         httpEntity.writeTo(out);
         out.close();
 
-        Assert.assertTrue(
-                out.toString().contains("Content-Disposition: form-data; name=\"image\"; filename=\"dummy.txt\""));
+        assertTrue(out.toString().contains("Content-Disposition: form-data; name=\"image\"; filename=\"dummy.txt\""));
     }
 
     /**
@@ -346,7 +342,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         f.getInputByName("mysubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
-        Assert.assertFalse("Content type: " + pair.getMimeType(), "text/webtest".equals(pair.getMimeType()));
+        assertFalse("Content type: " + pair.getMimeType(), "text/webtest".equals(pair.getMimeType()));
 
         fileInput.setContentType("text/webtest");
         f.getInputByName("mysubmit").click();

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

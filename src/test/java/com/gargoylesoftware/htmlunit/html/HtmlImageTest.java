@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -64,13 +63,13 @@ public class HtmlImageTest extends SimpleWebTestCase {
         final HtmlImage img = page.getHtmlElementById(imgId);
 
         final Page page2 = img.click();
-        Assert.assertEquals("same page after click", samePage, Boolean.valueOf(page == page2));
+        assertEquals("same page after click", samePage, Boolean.valueOf(page == page2));
         if (!samePage.booleanValue()) {
             assertEquals("http://server/foo" + urlSuffixClick, page2.getUrl());
         }
 
         final Page page3 = img.click(25, 30);
-        Assert.assertEquals("same page after click(25, 30)", samePage, Boolean.valueOf(page == page3));
+        assertEquals("same page after click(25, 30)", samePage, Boolean.valueOf(page == page3));
         if (!samePage.booleanValue()) {
             assertEquals("http://server/foo" + urlSuffixClickXY, page3.getUrl());
         }

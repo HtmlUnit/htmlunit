@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -29,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -839,7 +837,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             // Success
         }
 
-        Assert.assertEquals("should no alerts yet", Collections.EMPTY_LIST, collectedAlerts);
+        assertEquals("should no alerts yet", Collections.EMPTY_LIST, collectedAlerts);
 
         // Try a valid object in the map
         webConnection.setDefaultResponse(getJavaScriptContent(

@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.http.auth.AuthScope;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -44,15 +44,15 @@ public class DefaultCredentialsProvider3Test {
         provider.addCredentials(username, password, host, port, realm);
 
         assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        Assert.assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
+        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
         assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        Assert.assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
+        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
 
         provider = SerializationUtils.clone(provider);
 
         assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        Assert.assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
+        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
         assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        Assert.assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
+        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
     }
 }

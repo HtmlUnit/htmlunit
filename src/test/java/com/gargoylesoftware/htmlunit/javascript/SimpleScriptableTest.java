@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -61,7 +60,7 @@ public class SimpleScriptableTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("foo", page.getTitleText());
-        Assert.assertSame("focus not changed to textfield1",
+        assertSame("focus not changed to textfield1",
                      page.getFormByName("form1").getInputByName("textfield1"),
                      page.getFocusedElement());
     }

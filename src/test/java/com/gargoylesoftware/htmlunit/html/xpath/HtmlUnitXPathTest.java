@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -243,8 +242,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
 
         final HtmlAnchor anchor = page.getHtmlElementById("test");
-        Assert.assertSame(anchor, page.getFirstByXPath("//a[@id='test']"));
-        Assert.assertSame(anchor, page.getFirstByXPath("//*[@id='test']"));
+        assertSame(anchor, page.getFirstByXPath("//a[@id='test']"));
+        assertSame(anchor, page.getFirstByXPath("//*[@id='test']"));
 
         assertNull(page.getFirstByXPath("//div[@id='doesNotExist']"));
         assertNull(page.getFirstByXPath("id('doesNotExist')"));
@@ -263,10 +262,10 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlDivision div = page.getHtmlElementById("testDiv");
 
-        Assert.assertSame(div, page.getFirstByXPath("//*[@title = 'foo']"));
+        assertSame(div, page.getFirstByXPath("//*[@title = 'foo']"));
         assertNull(page.getFirstByXPath("//*[@class = 'design']"));
 
         div.setAttribute("class", "design");
-        Assert.assertSame(div, page.getFirstByXPath("//*[@class = 'design']"));
+        assertSame(div, page.getFirstByXPath("//*[@class = 'design']"));
     }
 }

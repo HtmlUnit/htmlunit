@@ -14,14 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -92,11 +88,11 @@ public final class HtmlInputTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlCheckBoxInput checkbox = form.getInputByName("foo");
-        Assert.assertFalse("Initial state", checkbox.isChecked());
+        assertFalse("Initial state", checkbox.isChecked());
         checkbox.setChecked(true);
         assertTrue("After setSelected(true)", checkbox.isChecked());
         checkbox.setChecked(false);
-        Assert.assertFalse("After setSelected(false)", checkbox.isChecked());
+        assertFalse("After setSelected(false)", checkbox.isChecked());
     }
 
     /**
@@ -181,7 +177,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
         final HtmlRadioButtonInput radioButton = form.getFirstByXPath(
                 "//input[@type='radio' and @name='foo' and @value='2']");
 
-        Assert.assertFalse("Should not be checked before click", radioButton.isChecked());
+        assertFalse("Should not be checked before click", radioButton.isChecked());
         radioButton.click();
         assertTrue("Should be checked after click", radioButton.isChecked());
     }

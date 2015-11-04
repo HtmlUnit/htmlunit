@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;

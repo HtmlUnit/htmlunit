@@ -23,7 +23,6 @@ import javax.imageio.ImageReader;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -58,7 +57,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     @Test
     public void imageHeight() throws Exception {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
-        Assert.assertEquals("Image height", 612, htmlimage.getHeight());
+        assertEquals("Image height", 612, htmlimage.getHeight());
     }
 
     /**
@@ -67,7 +66,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     @Test
     public void imageWidth() throws Exception {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
-        Assert.assertEquals("Image width", 879, htmlimage.getWidth());
+        assertEquals("Image width", 879, htmlimage.getWidth());
     }
 
     /**
@@ -76,7 +75,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     @Test
     public void imageFileSize() throws Exception {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
-        Assert.assertEquals("Image filesize", 140144,
+        assertEquals("Image filesize", 140144,
                 IOUtils.toByteArray(htmlimage.getWebResponse(true).getContentAsStream()).length);
     }
 
@@ -86,7 +85,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     @Test
     public void getImageReader() throws Exception {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
-        Assert.assertNotNull("ImageReader should not be null", htmlimage.getImageReader());
+        assertNotNull("ImageReader should not be null", htmlimage.getImageReader());
     }
 
     /**
@@ -113,9 +112,9 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     public void getWebResponse() throws Exception {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
         final URL url = htmlimage.getPage().getUrl();
-        Assert.assertNull(htmlimage.getWebResponse(false));
+        assertNull(htmlimage.getWebResponse(false));
         final WebResponse resp = htmlimage.getWebResponse(true);
-        Assert.assertNotNull(resp);
+        assertNotNull(resp);
         assertEquals(url.toExternalForm(), resp.getWebRequest().getAdditionalHeaders().get("Referer"));
     }
 
@@ -128,7 +127,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
         final ImageReader imagereader = htmlimage.getImageReader();
         htmlimage.setAttribute("src", htmlimage.getAttribute("src") + "#changed");
-        Assert.assertFalse("Src attribute changed but ImageReader was not reloaded",
+        assertFalse("Src attribute changed but ImageReader was not reloaded",
                 imagereader.equals(htmlimage.getImageReader()));
     }
 

@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -82,20 +81,20 @@ public class HtmlPage3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final List<WebElement> elements = driver.findElements(By.xpath("//*"));
-        Assert.assertEquals(7, elements.size());
+        assertEquals(7, elements.size());
 
-        Assert.assertEquals("html", elements.get(0).getTagName());
-        Assert.assertEquals("head", elements.get(1).getTagName());
-        Assert.assertEquals("script", elements.get(2).getTagName());
-        Assert.assertEquals("body", elements.get(3).getTagName());
-        Assert.assertEquals("form", elements.get(4).getTagName());
-        Assert.assertEquals("input", elements.get(5).getTagName());
+        assertEquals("html", elements.get(0).getTagName());
+        assertEquals("head", elements.get(1).getTagName());
+        assertEquals("script", elements.get(2).getTagName());
+        assertEquals("body", elements.get(3).getTagName());
+        assertEquals("form", elements.get(4).getTagName());
+        assertEquals("input", elements.get(5).getTagName());
 
         final WebElement input = elements.get(6);
-        Assert.assertEquals("input", input.getTagName());
-        Assert.assertEquals("myHiddenField", input.getAttribute("name"));
-        Assert.assertEquals("js", input.getAttribute("addedBy"));
-        Assert.assertEquals("js", input.getAttribute("addedby"));
+        assertEquals("input", input.getTagName());
+        assertEquals("myHiddenField", input.getAttribute("name"));
+        assertEquals("js", input.getAttribute("addedBy"));
+        assertEquals("js", input.getAttribute("addedby"));
     }
 
     /**
@@ -190,10 +189,10 @@ public class HtmlPage3Test extends WebDriverTestCase {
 
         final WebElement form = driver.findElement(By.id("form1"));
         final WebElement input = form.findElement(By.name("textInput1"));
-        Assert.assertEquals("name", "textInput1", input.getAttribute("name"));
+        assertEquals("name", "textInput1", input.getAttribute("name"));
 
-        Assert.assertEquals("value", "textInput1", input.getAttribute("value"));
-        Assert.assertEquals("type", "text", input.getAttribute("type"));
+        assertEquals("value", "textInput1", input.getAttribute("value"));
+        assertEquals("type", "text", input.getAttribute("type"));
     }
 
     /**

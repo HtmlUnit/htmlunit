@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.net.URL;
 
 import org.junit.Test;

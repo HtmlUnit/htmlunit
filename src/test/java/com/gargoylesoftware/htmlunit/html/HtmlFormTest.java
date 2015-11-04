@@ -16,8 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -29,7 +27,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -92,7 +89,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage secondPage = (HtmlPage) pushButton.click();
 
         assertEquals("url", getDefaultUrl() + "?foo=2&button=foo", secondPage.getUrl());
-        Assert.assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
     /**
@@ -790,7 +787,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         assertEquals("Get all", expectedInputs, actualInputs);
         assertEquals(Collections.EMPTY_LIST, form.getInputsByValue("none-matching"));
 
-        Assert.assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());
+        assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());
         try {
             form.getInputByValue("none-matching");
             fail("Expected ElementNotFoundException");
@@ -819,9 +816,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        Assert.assertEquals("First textarea with name 'ta1'", page.getElementById("ta1_1"),
+        assertEquals("First textarea with name 'ta1'", page.getElementById("ta1_1"),
             form.getTextAreaByName("ta1"));
-        Assert.assertEquals("First textarea with name 'ta2'", page.getElementById("ta2_1"),
+        assertEquals("First textarea with name 'ta2'", page.getElementById("ta2_1"),
             form.getTextAreaByName("ta2"));
 
         try {
@@ -852,9 +849,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        Assert.assertEquals("First button with name 'b1'", page.getElementById("b1_1"),
+        assertEquals("First button with name 'b1'", page.getElementById("b1_1"),
             form.getButtonByName("b1"));
-        Assert.assertEquals("First button with name 'b2'", page.getElementById("b2_1"),
+        assertEquals("First button with name 'b2'", page.getElementById("b2_1"),
             form.getButtonByName("b2"));
 
         try {
@@ -885,7 +882,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final WebWindow firstWindow = client.getCurrentWindow();
-        Assert.assertEquals("first window name", "", firstWindow.getName());
+        assertEquals("first window name", "", firstWindow.getName());
         assertSame(page, firstWindow.getEnclosedPage());
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -913,7 +910,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage secondPage = page.getHtmlElementById("clickMe").click();
 
         assertNotNull(secondPage);
-        Assert.assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
+        assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
     }
 
     /**

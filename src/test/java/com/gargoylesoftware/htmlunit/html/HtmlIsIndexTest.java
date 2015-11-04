@@ -14,12 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertSame;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -68,7 +65,7 @@ public class HtmlIsIndexTest extends SimpleWebTestCase {
 
             assertEquals("url", getDefaultUrl(), secondPage.getUrl());
             assertSame("method", HttpMethod.POST, webConnection.getLastMethod());
-            Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+            assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         }
     }
 }

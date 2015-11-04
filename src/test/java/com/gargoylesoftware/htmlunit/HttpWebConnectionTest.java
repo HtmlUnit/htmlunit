@@ -50,7 +50,6 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -100,7 +99,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             fail(message);
         }
         for (int i = 0; i < length; i++) {
-            Assert.assertEquals(message, expected[i], actual[i]);
+            assertEquals(message, expected[i], actual[i]);
         }
     }
 
@@ -159,7 +158,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             while (true) {
 
                 final int actualLength = actualBuf.read(actualArray);
-                Assert.assertEquals(message, expectedLength, actualLength);
+                assertEquals(message, expectedLength, actualLength);
 
                 if (expectedLength == -1) {
                     break;
@@ -209,10 +208,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final WebResponse response = (WebResponse) method.invoke(connection,
                 httpResponse, new WebRequest(url), downloadedContent, new Long(loadTime));
 
-        Assert.assertEquals(httpStatus, response.getStatusCode());
-        Assert.assertEquals(url, response.getWebRequest().getUrl());
-        Assert.assertEquals(loadTime, response.getLoadTime());
-        Assert.assertEquals(content, response.getContentAsString());
+        assertEquals(httpStatus, response.getStatusCode());
+        assertEquals(url, response.getWebRequest().getUrl());
+        assertEquals(loadTime, response.getLoadTime());
+        assertEquals(content, response.getContentAsString());
         assertEquals(content.getBytes(), IOUtils.toByteArray(response.getContentAsStream()));
         assertEquals(new ByteArrayInputStream(content.getBytes()), response.getContentAsStream());
     }
@@ -228,10 +227,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final WebClient client = getWebClient();
         final Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
         final WebConnection defaultConnection = client.getWebConnection();
-        Assert.assertTrue(
+        assertTrue(
                 "HttpWebConnection should be the default",
                 HttpWebConnection.class.isInstance(defaultConnection));
-        Assert.assertTrue("Response should be valid HTML", HtmlPage.class.isInstance(page));
+        assertTrue("Response should be valid HTML", HtmlPage.class.isInstance(page));
     }
 
     /**
@@ -254,7 +253,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         webClient.setWebConnection(myWebConnection);
         webClient.getPage("http://localhost:" + PORT + "/LICENSE.txt");
-        Assert.assertTrue("createHttpClient has not been called", tabCalled[0]);
+        assertTrue("createHttpClient has not been called", tabCalled[0]);
     }
 
     /**
@@ -296,7 +295,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 + "\r\n"
                 + "\r\n"
                 + "--\\1--\r\n";
-        Assert.assertTrue(part, part.matches(expected));
+        assertTrue(part, part.matches(expected));
     }
 
     /**

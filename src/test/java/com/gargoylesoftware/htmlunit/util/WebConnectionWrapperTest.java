@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import static org.junit.Assert.assertSame;
-
 import java.util.Collections;
 import java.util.List;
 

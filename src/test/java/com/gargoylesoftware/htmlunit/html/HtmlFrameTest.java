@@ -20,7 +20,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -54,10 +53,10 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlFrame frame1 = page.getHtmlElementById("frame1");
-        Assert.assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
+        assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
         final HtmlFrame frame2 = page.getHtmlElementById("frame2");
-        Assert.assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
+        assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -84,10 +83,10 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         assertEquals("first", page.getTitleText());
 
         final HtmlFrame frame1 = page.getHtmlElementById("frame1");
-        Assert.assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
+        assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
         final HtmlFrame frame2 = page.getHtmlElementById("frame2");
-        Assert.assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
+        assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -110,10 +109,10 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         assertEquals("first", page.getTitleText());
 
         final HtmlFrame frame1 = page.getHtmlElementById("frame1");
-        Assert.assertEquals("frame1", "generated", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
+        assertEquals("frame1", "generated", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
         final HtmlFrame frame2 = page.getHtmlElementById("frame2");
-        Assert.assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
+        assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
     }
 
     /**

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static org.junit.Assert.assertSame;
-
 import java.util.ArrayList;
 import java.util.List;
 

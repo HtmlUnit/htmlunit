@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 /**
@@ -41,6 +42,6 @@ public class Event4Test {
         catch (final IllegalArgumentException e) {
             thrown = true;
         }
-        Assert.assertTrue(thrown);
+        assertTrue(thrown);
     }
 }

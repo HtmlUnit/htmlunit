@@ -14,13 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xml.sax.helpers.AttributesImpl;
@@ -52,7 +50,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getElementById("tag");
-        Assert.assertTrue("Element should have attribute", node.hasAttributes());
+        assertTrue("Element should have attribute", node.hasAttributes());
     }
 
     /**
@@ -66,7 +64,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode parent = node.getParentNode();
-        Assert.assertFalse("Element should not have attribute", parent.hasAttributes());
+        assertFalse("Element should not have attribute", parent.hasAttributes());
     }
 
     /**
@@ -80,7 +78,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
-        Assert.assertFalse("Text should not have attribute", child.hasAttributes());
+        assertFalse("Text should not have attribute", child.hasAttributes());
     }
 
     /**
@@ -94,7 +92,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
-        Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
+        assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
 
     /**
@@ -108,7 +106,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
-        Assert.assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
+        assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
     }
 
     /**
@@ -122,7 +120,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
-        Assert.assertEquals("Text should not have a prefix", null, child.getLocalName());
+        assertEquals("Text should not have a prefix", null, child.getLocalName());
     }
 
     /**
@@ -137,7 +135,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
         child.setPrefix("bar"); // This does nothing.
-        Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
+        assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
 
     /**
@@ -155,7 +153,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         node.removeAllChildren();
-        Assert.assertEquals("Did not remove all nodes", null, node.getFirstChild());
+        assertEquals("Did not remove all nodes", null, node.getFirstChild());
     }
 
     /**

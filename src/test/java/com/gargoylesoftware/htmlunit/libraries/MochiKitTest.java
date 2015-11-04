@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;

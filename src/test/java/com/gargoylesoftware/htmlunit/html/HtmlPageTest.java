@@ -15,9 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -35,7 +32,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
@@ -122,8 +118,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final URL expectedUrl = new URL(getDefaultUrl() + "formSubmit");
         final URL actualUrl = secondPage.getUrl();
         assertEquals("url", expectedUrl, actualUrl);
-        Assert.assertSame("method", HttpMethod.POST, webConnection.getLastMethod());
-        Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+        assertSame("method", HttpMethod.POST, webConnection.getLastMethod());
+        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }
 

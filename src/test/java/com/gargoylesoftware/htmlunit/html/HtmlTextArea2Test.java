@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -294,7 +293,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement textArea = driver.findElement(By.id("textArea1"));
-        Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
 
     /**
@@ -311,7 +310,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement textArea = driver.findElement(By.id("textArea1"));
-        Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
 
     /**
@@ -331,7 +330,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final WebElement textArea = driver.findElement(By.id("form1"));
-        Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
 
     /**

@@ -20,9 +20,6 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -43,7 +40,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.http.HttpStatus;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.css.sac.CSSException;
@@ -885,18 +881,18 @@ public class WebClientTest extends SimpleWebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         DomElement focus = page.getFocusedElement();
-        Assert.assertTrue("original", (focus == null)
+        assertTrue("original", (focus == null)
                 || (focus == page.getDocumentElement())
                 || (focus == page.getBody()));
 
         focus = page.tabToPreviousElement();
-        Assert.assertNull("previous", focus);
+        assertNull("previous", focus);
 
         focus = page.tabToNextElement();
-        Assert.assertNull("next", focus);
+        assertNull("next", focus);
 
         focus = page.pressAccessKey('a');
-        Assert.assertNull("accesskey", focus);
+        assertNull("accesskey", focus);
 
         final String[] expectedAlerts = {};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -916,23 +912,23 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlElement element = page.getHtmlElementById("submit0");
 
         final DomElement focus = page.getFocusedElement();
-        Assert.assertTrue("original", (focus == null)
+        assertTrue("original", (focus == null)
                 || (focus == page.getDocumentElement())
                 || (focus == page.getBody()));
 
         final DomElement accessKey = page.pressAccessKey('x');
-        Assert.assertEquals("accesskey", focus, accessKey);
+        assertEquals("accesskey", focus, accessKey);
 
-        Assert.assertEquals("next", element, page.tabToNextElement());
-        Assert.assertEquals("nextAgain", element, page.tabToNextElement());
+        assertEquals("next", element, page.tabToNextElement());
+        assertEquals("nextAgain", element, page.tabToNextElement());
 
         page.getFocusedElement().blur();
-        Assert.assertNull("original", page.getFocusedElement());
+        assertNull("original", page.getFocusedElement());
 
-        Assert.assertEquals("previous", element, page.tabToPreviousElement());
-        Assert.assertEquals("previousAgain", element, page.tabToPreviousElement());
+        assertEquals("previous", element, page.tabToPreviousElement());
+        assertEquals("previousAgain", element, page.tabToPreviousElement());
 
-        Assert.assertEquals("accesskey", element, page.pressAccessKey('z'));
+        assertEquals("accesskey", element, page.pressAccessKey('z'));
 
         final String[] expectedAlerts = {"focus-0", "blur-0", "focus-0"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1380,22 +1376,22 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient c = getWebClient();
 
         // tests empty files, type should be determined from file suffix
-        Assert.assertEquals("empty.png", "image/png", c.guessContentType(getTestFile("empty.png")));
-        Assert.assertEquals("empty.jpg", "image/jpeg", c.guessContentType(getTestFile("empty.jpg")));
-        Assert.assertEquals("empty.gif", "image/gif", c.guessContentType(getTestFile("empty.gif")));
-        Assert.assertEquals("empty.js", "text/javascript", c.guessContentType(getTestFile("empty.js")));
+        assertEquals("empty.png", "image/png", c.guessContentType(getTestFile("empty.png")));
+        assertEquals("empty.jpg", "image/jpeg", c.guessContentType(getTestFile("empty.jpg")));
+        assertEquals("empty.gif", "image/gif", c.guessContentType(getTestFile("empty.gif")));
+        assertEquals("empty.js", "text/javascript", c.guessContentType(getTestFile("empty.js")));
 
         // test real files with bad file suffix
-        Assert.assertEquals("tiny-png.img", "image/png", c.guessContentType(getTestFile("tiny-png.img")));
-        Assert.assertEquals("tiny-jpg.img", "image/jpeg", c.guessContentType(getTestFile("tiny-jpg.img")));
-        Assert.assertEquals("tiny-gif.img", "image/gif", c.guessContentType(getTestFile("tiny-gif.img")));
+        assertEquals("tiny-png.img", "image/png", c.guessContentType(getTestFile("tiny-png.img")));
+        assertEquals("tiny-jpg.img", "image/jpeg", c.guessContentType(getTestFile("tiny-jpg.img")));
+        assertEquals("tiny-gif.img", "image/gif", c.guessContentType(getTestFile("tiny-gif.img")));
 
         // tests XHTML files, types will be determined based on a mixture of file suffixes and contents
         // note that "xhtml.php" returns content type "text/xml" in Firefox, but "application/xml" is good enough...
-        Assert.assertEquals("xhtml.php", "application/xml", c.guessContentType(getTestFile("xhtml.php")));
-        Assert.assertEquals("xhtml.htm", "text/html", c.guessContentType(getTestFile("xhtml.htm")));
-        Assert.assertEquals("xhtml.html", "text/html", c.guessContentType(getTestFile("xhtml.html")));
-        Assert.assertEquals("xhtml.xhtml", "application/xhtml+xml", c.guessContentType(getTestFile("xhtml.xhtml")));
+        assertEquals("xhtml.php", "application/xml", c.guessContentType(getTestFile("xhtml.php")));
+        assertEquals("xhtml.htm", "text/html", c.guessContentType(getTestFile("xhtml.htm")));
+        assertEquals("xhtml.html", "text/html", c.guessContentType(getTestFile("xhtml.html")));
+        assertEquals("xhtml.xhtml", "application/xhtml+xml", c.guessContentType(getTestFile("xhtml.xhtml")));
     }
 
     /**
@@ -1716,7 +1712,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void testOpenWindowWithNullUrl() throws Exception {
         final WebClient client = getWebClient();
         final WebWindow window = client.openWindow(null, "TestingWindow");
-        Assert.assertNotNull(window);
+        assertNotNull(window);
     }
 
     /**
@@ -1798,7 +1794,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         buttonA.click();
-        Assert.assertNotNull(webClient.getCurrentWindow().getEnclosedPage());
+        assertNotNull(webClient.getCurrentWindow().getEnclosedPage());
         assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
     }
 
@@ -1827,7 +1823,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         buttonA.click();
-        Assert.assertNotNull(webClient.getCurrentWindow().getEnclosedPage());
+        assertNotNull(webClient.getCurrentWindow().getEnclosedPage());
         assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
     }
 
@@ -1913,7 +1909,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void testOpenWindowWithAboutBlank() throws Exception {
         final WebClient client = getWebClient();
         final WebWindow window = client.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
-        Assert.assertNotNull(window);
+        assertNotNull(window);
     }
 
     /**
@@ -2225,14 +2221,14 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
 
         final WebWindow firstWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 1");
-        Assert.assertNotNull(firstWindow);
+        assertNotNull(firstWindow);
 
         final WebRequest firstRequest1 = firstWindow.getEnclosedPage().getWebResponse().getWebRequest();
         assertEquals("about:blank", firstRequest1.getUrl().toExternalForm());
         firstRequest1.setUrl(UrlUtils.toUrlSafe(WebClient.ABOUT_BLANK + "#anchor"));
 
         final WebWindow secondWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 2");
-        Assert.assertNotNull(secondWindow);
+        assertNotNull(secondWindow);
         final WebRequest secondRequest = secondWindow.getEnclosedPage().getWebResponse().getWebRequest();
         assertEquals("about:blank", secondRequest.getUrl().toExternalForm());
     }

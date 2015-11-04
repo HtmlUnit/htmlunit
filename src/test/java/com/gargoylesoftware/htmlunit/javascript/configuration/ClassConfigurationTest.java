@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -43,7 +42,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void testForJSFlagFalse() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, false, true, null);
-        Assert.assertFalse("JSObject Flag should not have been set", config1.isJsObject());
+        assertFalse("JSObject Flag should not have been set", config1.isJsObject());
     }
 
     /**

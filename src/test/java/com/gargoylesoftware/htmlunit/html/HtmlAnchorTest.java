@@ -16,9 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static org.apache.commons.lang3.StringUtils.right;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,7 +23,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -155,7 +151,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
 
         assertEquals("url", "http://www.foo2.com/", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
-        Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }
 
@@ -311,8 +307,8 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlAnchor a = firstPage.getHtmlElementById("link");
         final HtmlPage secondPage = a.click();
-        Assert.assertEquals("url", URL_SECOND, secondPage.getUrl());
-        Assert.assertEquals("title", "Page B", secondPage.getTitleText());
+        assertEquals("url", URL_SECOND, secondPage.getUrl());
+        assertEquals("title", "Page B", secondPage.getTitleText());
     }
 
     /**
@@ -351,14 +347,14 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAnchor anchor = page.getHtmlElementById("a1");
 
-        Assert.assertEquals("size incorrect before test", 1, page.getWebClient().getWebWindows().size());
+        assertEquals("size incorrect before test", 1, page.getWebClient().getWebWindows().size());
 
         final HtmlPage secondPage = (HtmlPage) anchor.openLinkInNewWindow();
 
         assertNotSame("new page not returned", page, secondPage);
         assertTrue("new page in wrong window type",
                 TopLevelWindow.class.isInstance(secondPage.getEnclosingWindow()));
-        Assert.assertEquals("new window not created", 2, page.getWebClient().getWebWindows().size());
+        assertEquals("new window not created", 2, page.getWebClient().getWebWindows().size());
         assertNotSame("new window not used", page.getEnclosingWindow(), secondPage
                 .getEnclosingWindow());
     }
@@ -450,10 +446,10 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
         final HtmlAnchor anchor = firstPage.getHtmlElementById("clickme");
         final HtmlPage pageAfterClick = anchor.click();
 
-        Assert.assertEquals("Second window did not open", 2, client.getWebWindows().size());
+        assertEquals("Second window did not open", 2, client.getWebWindows().size());
         assertNotSame("New Page was not returned", firstPage, pageAfterClick);
-        Assert.assertEquals("Wrong new Page returned", "Popup", pageAfterClick.getTitleText());
-        Assert.assertEquals("Original window not updated", "Second",
+        assertEquals("Wrong new Page returned", "Popup", pageAfterClick.getTitleText());
+        assertEquals("Original window not updated", "Second",
             ((HtmlPage) firstPage.getEnclosingWindow().getEnclosedPage()).getTitleText());
     }
 

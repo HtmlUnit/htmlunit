@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.List;

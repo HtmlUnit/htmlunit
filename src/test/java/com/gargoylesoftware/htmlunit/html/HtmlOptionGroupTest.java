@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -47,7 +46,7 @@ public class HtmlOptionGroupTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlOptionGroup optionGroup = page.getHtmlElementById("myId");
-        Assert.assertNotNull(optionGroup.getEnclosingSelect());
+        assertNotNull(optionGroup.getEnclosingSelect());
     }
 
     /**

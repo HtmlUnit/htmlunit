@@ -23,7 +23,6 @@ import static org.junit.Assert.fail;
 
 import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
@@ -71,7 +70,7 @@ public class JQuery182Test extends WebDriverTestCase {
     protected void runTest(final String testName) throws Exception {
         final int testNumber = readTestNumber(testName);
         if (testNumber == -1) {
-            Assert.assertEquals("Test number not found for: " + testName, 0, getExpectedAlerts().length);
+            assertEquals("Test number not found for: " + testName, 0, getExpectedAlerts().length);
             return;
         }
         final long runTime = 60 * DEFAULT_WAIT_TIME;

@@ -20,7 +20,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -62,7 +61,7 @@ public final class TextUtilTest extends SimpleWebTestCase {
 
             final InputStream inputStream = TextUtil.toInputStream(input, encoding);
             final String actualResult = new BufferedReader(new InputStreamReader(inputStream, encoding)).readLine();
-            Assert.assertEquals(expectedResult, actualResult);
+            assertEquals(expectedResult, actualResult);
         }
     }
 
@@ -72,17 +71,17 @@ public final class TextUtilTest extends SimpleWebTestCase {
     @Test
     public void stringToByteArray() throws Exception {
         byte[] result = TextUtil.stringToByteArray(null, "UTF-8");
-        Assert.assertEquals(0, result.length);
+        assertEquals(0, result.length);
 
         result = TextUtil.stringToByteArray("", "UTF-8");
-        Assert.assertEquals(0, result.length);
+        assertEquals(0, result.length);
 
         result = TextUtil.stringToByteArray("htmlunit", "UTF-8");
-        Assert.assertEquals(8, result.length);
-        Assert.assertEquals(104, result[0]);
+        assertEquals(8, result.length);
+        assertEquals(104, result[0]);
 
         result = TextUtil.stringToByteArray("htmlunit", "Klingon");
-        Assert.assertEquals(0, result.length);
+        assertEquals(0, result.length);
     }
 
 }

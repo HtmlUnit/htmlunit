@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import java.io.StringReader;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.css.sac.InputSource;
@@ -52,29 +51,29 @@ public class SelectorSpecificityTest extends SimpleWebTestCase {
         final SelectorSpecificity specificy21 = selectorSpecifity("li.red.level", "0,0,2,1");
         final SelectorSpecificity specificy100 = selectorSpecifity("#x34y", "0,1,0,0");
 
-        Assert.assertEquals(0, specificy0.compareTo(specificy0));
-        Assert.assertTrue(specificy0.compareTo(specificy1) < 0);
-        Assert.assertTrue(specificy0.compareTo(specificy2a) < 0);
-        Assert.assertTrue(specificy0.compareTo(specificy13) < 0);
+        assertEquals(0, specificy0.compareTo(specificy0));
+        assertTrue(specificy0.compareTo(specificy1) < 0);
+        assertTrue(specificy0.compareTo(specificy2a) < 0);
+        assertTrue(specificy0.compareTo(specificy13) < 0);
 
-        Assert.assertEquals(0, specificy1.compareTo(specificy1));
-        Assert.assertTrue(specificy1.compareTo(specificy0) > 0);
-        Assert.assertTrue(specificy1.compareTo(specificy2a) < 0);
-        Assert.assertTrue(specificy1.compareTo(specificy13) < 0);
+        assertEquals(0, specificy1.compareTo(specificy1));
+        assertTrue(specificy1.compareTo(specificy0) > 0);
+        assertTrue(specificy1.compareTo(specificy2a) < 0);
+        assertTrue(specificy1.compareTo(specificy13) < 0);
 
-        Assert.assertEquals(0, specificy2a.compareTo(specificy2b));
-        Assert.assertEquals(0, specificy2a.compareTo(specificy2c));
-        Assert.assertTrue(specificy2a.compareTo(specificy0) > 0);
-        Assert.assertTrue(specificy2a.compareTo(specificy3) < 0);
-        Assert.assertTrue(specificy2a.compareTo(specificy11) < 0);
-        Assert.assertTrue(specificy2a.compareTo(specificy13) < 0);
-        Assert.assertTrue(specificy2a.compareTo(specificy100) < 0);
+        assertEquals(0, specificy2a.compareTo(specificy2b));
+        assertEquals(0, specificy2a.compareTo(specificy2c));
+        assertTrue(specificy2a.compareTo(specificy0) > 0);
+        assertTrue(specificy2a.compareTo(specificy3) < 0);
+        assertTrue(specificy2a.compareTo(specificy11) < 0);
+        assertTrue(specificy2a.compareTo(specificy13) < 0);
+        assertTrue(specificy2a.compareTo(specificy100) < 0);
 
-        Assert.assertEquals(0, specificy11.compareTo(specificy11));
-        Assert.assertTrue(specificy11.compareTo(specificy0) > 0);
-        Assert.assertTrue(specificy11.compareTo(specificy13) < 0);
-        Assert.assertTrue(specificy11.compareTo(specificy21) < 0);
-        Assert.assertTrue(specificy11.compareTo(specificy100) < 0);
+        assertEquals(0, specificy11.compareTo(specificy11));
+        assertTrue(specificy11.compareTo(specificy0) > 0);
+        assertTrue(specificy11.compareTo(specificy13) < 0);
+        assertTrue(specificy11.compareTo(specificy21) < 0);
+        assertTrue(specificy11.compareTo(specificy100) < 0);
     }
 
     private SelectorSpecificity selectorSpecifity(final String selector, final String expectedSpecificity)

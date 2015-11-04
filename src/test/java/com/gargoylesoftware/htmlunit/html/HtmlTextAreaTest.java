@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -109,8 +105,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
-        Assert.assertEquals("White space must be preserved!", " foo \n bar ", textArea.getText());
-        Assert.assertEquals(" foo \n bar ", textArea.getDefaultValue());
+        assertEquals("White space must be preserved!", " foo \n bar ", textArea.getText());
+        assertEquals(" foo \n bar ", textArea.getDefaultValue());
     }
 
     /**

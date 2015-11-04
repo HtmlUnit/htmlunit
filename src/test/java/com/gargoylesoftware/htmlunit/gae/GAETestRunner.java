@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.gae;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +25,6 @@ import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
@@ -108,7 +109,7 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
      */
     private static Set<String> loadWhiteList() {
         final InputStream is = GAETestRunner.class.getResourceAsStream("whitelist.txt");
-        Assert.assertNotNull(is);
+        assertNotNull(is);
         final List<String> lines;
         try {
             lines = IOUtils.readLines(is);

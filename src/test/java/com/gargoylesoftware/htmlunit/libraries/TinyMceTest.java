@@ -15,12 +15,10 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,7 +92,7 @@ public class TinyMceTest extends WebDriverTestCase {
 
         final WebElement failedSpan = result.findElement(By.xpath("./span[@class='bad']"));
         final int failed = Integer.parseInt(failedSpan.getText());
-        Assert.assertEquals(msg.toString(), expectedFailed, failed);
+        assertEquals(msg.toString(), expectedFailed, failed);
     }
 
     /**

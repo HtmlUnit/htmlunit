@@ -24,7 +24,6 @@ import java.util.Random;
 import java.util.zip.Deflater;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -368,7 +367,7 @@ public class WebClient3Test extends WebDriverTestCase {
         for (int i = 1; i < 100; i++) {
             final WebDriver webDriver = loadPage2(firstContent);
             webDriver.findElement(By.tagName("a")).click();
-            Assert.assertEquals("Run " + i, URL_SECOND.toExternalForm(), webDriver.getCurrentUrl());
+            assertEquals("Run " + i, URL_SECOND.toExternalForm(), webDriver.getCurrentUrl());
         }
     }
 

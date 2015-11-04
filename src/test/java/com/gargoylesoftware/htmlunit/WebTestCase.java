@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -186,6 +184,70 @@ public abstract class WebTestCase {
     }
 
     /**
+     * Assert that the specified object is null.
+     * @param message the message
+     * @param object the object to check
+     */
+    public static void assertNull(final String message, final Object object) {
+        Assert.assertNull(message, object);
+    }
+
+    /**
+     * Assert that the specified object is not null.
+     * @param object the object to check
+     */
+    public static void assertNotNull(final Object object) {
+        Assert.assertNotNull(object);
+    }
+
+    /**
+     * Assert that the specified object is not null.
+     * @param message the message
+     * @param object the object to check
+     */
+    public static void assertNotNull(final String message, final Object object) {
+        Assert.assertNotNull(message, object);
+    }
+
+    /**
+     * Asserts that two objects refer to the same object.
+     * @param expected the expected object
+     * @param actual the actual object
+     */
+    public static void assertSame(final Object expected, final Object actual) {
+        Assert.assertSame(expected, actual);
+    }
+
+    /**
+     * Asserts that two objects refer to the same object.
+     * @param message the message
+     * @param expected the expected object
+     * @param actual the actual object
+     */
+    public static void assertSame(final String message, final Object expected, final Object actual) {
+        Assert.assertSame(message, expected, actual);
+    }
+
+    /**
+     * Asserts that two objects do not refer to the same object.
+     * @param expected the expected object
+     * @param actual the actual object
+     */
+    public static void assertNotSame(final Object expected, final Object actual) {
+        Assert.assertNotSame(expected, actual);
+    }
+
+    /**
+     * Asserts that two objects do not refer to the same object.
+     * @param message the message
+     * @param expected the expected object
+     * @param actual the actual object
+     */
+    public static void assertNotSame(final String message, final Object expected, final Object actual) {
+        Assert.assertNotSame(message, expected, actual);
+    }
+
+    /**
      * Facility to test external form of urls. Comparing external form of URLs is
      * really faster than URL.equals() as the host doesn't need to be resolved.
      * @param expectedUrl the expected URL
@@ -202,6 +264,17 @@ public abstract class WebTestCase {
      */
     protected static void assertEquals(final Object expected, final Object actual) {
         Assert.assertEquals(expected, actual);
+    }
+
+
+    /**
+     * Asserts the two objects are equal.
+     * @param message the message
+     * @param expected the expected object
+     * @param actual the object to test
+     */
+    protected static void assertEquals(final String message, final Object expected, final Object actual) {
+        Assert.assertEquals(message, expected, actual);
     }
 
     /**
