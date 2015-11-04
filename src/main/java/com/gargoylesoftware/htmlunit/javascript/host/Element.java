@@ -132,7 +132,7 @@ public class Element extends EventNode {
         final HTMLCollection collection = new HTMLCollection(domNode, attributeChangeSensitive, description) {
             @Override
             protected List<Object> computeElements() {
-                return new ArrayList<Object>(domNode.getByXPath(expression));
+                return new ArrayList<>(domNode.getByXPath(expression));
             }
         };
         return collection;

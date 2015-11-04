@@ -18,11 +18,11 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static org.junit.Assert.fail;
 
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1047,7 +1047,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         try {
             driver.switchTo().window("foo2");
-            Assert.fail("Window foo2 found");
+            fail("Window foo2 found");
         }
         catch (final NoSuchWindowException e) {
             // ok

@@ -499,7 +499,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         try {
             loadPageWithAlerts(htmlContent);
-            Assert.fail("ScriptException expected");
+            fail("ScriptException expected");
         }
         catch (final ScriptException e) {
             // expected

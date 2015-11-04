@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -97,7 +99,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
         htmlimage.setAttribute("src", url);
         try {
             htmlimage.getImageReader();
-            Assert.fail("it was not an image!");
+            fail("it was not an image!");
         }
         catch (final IOException ioe) {
             // Correct behavior

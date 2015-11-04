@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,7 +168,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -187,7 +188,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -207,7 +208,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -228,7 +229,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -248,7 +249,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -268,7 +269,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -290,7 +291,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**

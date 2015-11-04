@@ -61,6 +61,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      *
      * @see HTMLBodyElement#getEventListenersContainer()
      */
+    @Override
     public EventListenersContainer getEventListenersContainer() {
         return getWindow().getEventListenersContainer();
     }

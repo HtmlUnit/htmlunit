@@ -46,6 +46,7 @@ public class Iterator extends SimpleScriptable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setParentScope(final Scriptable scope) {
         super.setParentScope(scope);
         try {

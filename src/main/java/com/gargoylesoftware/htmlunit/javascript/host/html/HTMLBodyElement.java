@@ -80,6 +80,7 @@ public class HTMLBodyElement extends HTMLElement {
      *
      * @see HTMLFrameSetElement#getEventListenersContainer()
      */
+    @Override
     public EventListenersContainer getEventListenersContainer() {
         return getWindow().getEventListenersContainer();
     }

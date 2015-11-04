@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.fail;
+
 import java.util.Collections;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -67,7 +68,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final WebElement p = driver.findElement(By.id("p"));
         try {
             p.sendKeys("abc");
-            Assert.fail();
+            fail();
         }
         catch (final InvalidElementStateException e) {
             // as expected

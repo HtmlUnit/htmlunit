@@ -396,6 +396,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the HTML page that this document is modeling.
      * @return the HTML page that this document is modeling
      */
+    @Override
     public HtmlPage getPage() {
         return (HtmlPage) getDomNodeOrDie();
     }
@@ -1022,11 +1023,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public String getCharset() {
         String charset = getPage().getPageEncoding();
-        if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
-            return EncodingSniffer.translateEncodingLabel(charset);
-        }
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            charset = charset.toLowerCase(Locale.ROOT);
+        if (charset != null) {
+            if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
+                return EncodingSniffer.translateEncodingLabel(charset);
+            }
+            if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+                charset = charset.toLowerCase(Locale.ROOT);
+            }
         }
         return charset;
     }

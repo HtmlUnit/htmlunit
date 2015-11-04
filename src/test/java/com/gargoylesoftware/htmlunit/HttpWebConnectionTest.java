@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.fail;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -92,10 +94,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             return;
         }
         if (expected == null || actual == null) {
-            Assert.fail(message);
+            fail(message);
         }
         if (expected.length < length || actual.length < length) {
-            Assert.fail(message);
+            fail(message);
         }
         for (int i = 0; i < length; i++) {
             Assert.assertEquals(message, expected[i], actual[i]);
@@ -128,7 +130,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         if (expected == null || actual == null) {
             try {
-                Assert.fail(message);
+                fail(message);
             }
             finally {
                 try {

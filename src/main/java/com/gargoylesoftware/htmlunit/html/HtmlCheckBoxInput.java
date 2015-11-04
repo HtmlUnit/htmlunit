@@ -111,6 +111,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * Returns {@code true} if this element is currently selected.
      * @return {@code true} if this element is currently selected
      */
+    @Override
     public boolean isChecked() {
         return checkedState_;
     }

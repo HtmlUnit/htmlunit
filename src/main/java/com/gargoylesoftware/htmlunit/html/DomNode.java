@@ -1391,7 +1391,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         return new Iterable<DomNode>() {
             @Override
             public Iterator<DomNode> iterator() {
-                return new DescendantElementsIterator<DomNode>(DomNode.class);
+                return new DescendantElementsIterator<>(DomNode.class);
             }
         };
     }
@@ -1408,7 +1408,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         return new Iterable<HtmlElement>() {
             @Override
             public Iterator<HtmlElement> iterator() {
-                return new DescendantElementsIterator<HtmlElement>(HtmlElement.class);
+                return new DescendantElementsIterator<>(HtmlElement.class);
             }
         };
     }
@@ -1425,7 +1425,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         return new Iterable<DomElement>() {
             @Override
             public Iterator<DomElement> iterator() {
-                return new DescendantElementsIterator<DomElement>(DomElement.class);
+                return new DescendantElementsIterator<>(DomElement.class);
             }
         };
     }

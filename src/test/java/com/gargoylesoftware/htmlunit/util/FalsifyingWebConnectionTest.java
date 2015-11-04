@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -123,7 +124,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
 
         try {
             webClient.getPage(URL_FIRST);
-            Assert.fail("HTTP Exception expected!");
+            fail("HTTP Exception expected!");
         }
         catch (final FailingHttpStatusCodeException e) {
             // that's fine

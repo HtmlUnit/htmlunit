@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.fail;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -37,7 +39,7 @@ public class NamedAttrNodeMapImplTest {
     public void construction() throws Exception {
         try {
             new NamedAttrNodeMapImpl(null, true);
-            Assert.fail("IllegalArgumentException expected.");
+            fail("IllegalArgumentException expected.");
         }
         catch (final IllegalArgumentException e) {
             // expected
@@ -45,7 +47,7 @@ public class NamedAttrNodeMapImplTest {
 
         try {
             new NamedAttrNodeMapImpl(null, false);
-            Assert.fail("IllegalArgumentException expected.");
+            fail("IllegalArgumentException expected.");
         }
         catch (final IllegalArgumentException e) {
             // expected

@@ -13,12 +13,13 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit.selenium;
+
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -327,7 +328,7 @@ public class TypingTest extends SeleniumTest {
     @Test
     @NotYetImplemented
     public void chordControlCutAndPaste() {
-        Assert.fail();
+        fail();
     }
 
     /**

@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.Assume.assumeNotNull;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -207,7 +207,7 @@ public class ExternalTest {
             page = page.getAnchorByText("Log in as guest").click();
             webClient.waitForBackgroundJavaScript(1000);
             final HtmlTable table = page.getFirstByXPath("//table[@class='statusTable']");
-            assumeTrue(page.asXml(), table != null);
+            assumeNotNull(page.asXml(), table);
             final HtmlTableCell cell = table.getRow(1).getCell(3);
             final String triggerText = cell.asText();
 

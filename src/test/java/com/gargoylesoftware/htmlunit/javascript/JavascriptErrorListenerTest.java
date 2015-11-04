@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static org.junit.Assert.fail;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -72,7 +73,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         webConnection.setResponse(URL_FIRST, content);
         try {
             webClient.getPage(URL_FIRST);
-            Assert.fail("FailingHttpStatusCodeException expected");
+            fail("FailingHttpStatusCodeException expected");
         }
         catch (final FailingHttpStatusCodeException e) {
             // expected
@@ -140,7 +141,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
         try {
             loadPage(html);
-            Assert.fail("FailingHttpStatusCodeException expected");
+            fail("FailingHttpStatusCodeException expected");
         }
         catch (final FailingHttpStatusCodeException e) {
             // expected

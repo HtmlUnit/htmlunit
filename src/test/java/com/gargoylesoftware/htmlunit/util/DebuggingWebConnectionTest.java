@@ -106,12 +106,13 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
             responseHeaders);
 
         final String dirName = "test-" + getClass().getSimpleName();
-        final DebuggingWebConnection dwc = new DebuggingWebConnection(mockConnection, dirName);
+        try (final DebuggingWebConnection dwc = new DebuggingWebConnection(mockConnection, dirName)) {
 
-        final WebRequest request = new WebRequest(getDefaultUrl());
-        final WebResponse response = dwc.getResponse(request); // was throwing here
-        assertNull(response.getResponseHeaderValue("Content-Encoding"));
+            final WebRequest request = new WebRequest(getDefaultUrl());
+            final WebResponse response = dwc.getResponse(request); // was throwing here
+            assertNull(response.getResponseHeaderValue("Content-Encoding"));
 
-        FileUtils.deleteDirectory(dwc.getReportFolder());
+            FileUtils.deleteDirectory(dwc.getReportFolder());
+        }
     }
 }

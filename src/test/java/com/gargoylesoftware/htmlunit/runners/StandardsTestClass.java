@@ -43,6 +43,7 @@ public class StandardsTestClass extends TestClass {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected void scanAnnotatedMembers(final Map<Class<? extends Annotation>,
             List<FrameworkMethod>> methodsForAnnotations,
             final Map<Class<? extends Annotation>, List<FrameworkField>> fieldsForAnnotations) {

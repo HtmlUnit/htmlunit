@@ -18,8 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static org.junit.Assert.fail;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -361,7 +361,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         try {
             loadPageWithAlerts2(html);
             if (getExpectedAlerts().length == 0) {
-                Assert.fail("WebDriverException expected");
+                fail("WebDriverException expected");
             }
         }
         catch (final WebDriverException e) {
