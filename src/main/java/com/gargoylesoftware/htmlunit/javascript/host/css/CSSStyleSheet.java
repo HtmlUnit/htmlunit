@@ -345,7 +345,6 @@ public class CSSStyleSheet extends StyleSheet {
                 sheet = new CSSStyleSheet(element, source, uri);
                 // cache the style sheet
                 cache.cacheIfPossible(request, response, sheet.getWrappedSheet());
-                response.cleanUp();
             }
         }
         catch (final FailingHttpStatusCodeException e) {
