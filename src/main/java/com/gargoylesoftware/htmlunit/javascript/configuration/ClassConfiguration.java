@@ -23,6 +23,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -39,9 +42,10 @@ public final class ClassConfiguration {
     private Map<String, Method> functionMap_ = new HashMap<>();
     private Map<String, PropertyInfo> staticPropertyMap_ = new HashMap<>();
     private Map<String, Method> staticFunctionMap_ = new HashMap<>();
-    private List<String> constants_ = new ArrayList<>();
+    private List<ConstantInfo> constants_ = new ArrayList<>();
     private String extendedClassName_;
     private final Class<? extends HtmlUnitScriptable> hostClass_;
+    private final String hostClassSimpleName_;
 
     /**
      * The constructor method in the {@link #hostClass_}
@@ -71,6 +75,7 @@ public final class ClassConfiguration {
             extendedClassName_ = "";
         }
         hostClass_ = hostClass;
+        hostClassSimpleName_ = hostClass_.getSimpleName();
         jsObject_ = jsObject;
         definedInStandardsMode_ = definedInStandardsMode;
         domClasses_ = domClasses;
@@ -117,7 +122,19 @@ public final class ClassConfiguration {
      * @param name - Name of the configuration
      */
     public void addConstant(final String name) {
-        constants_.add(name);
+        try {
+            final Object value = getHostClass().getField(name).get(null);
+            int flag = ScriptableObject.READONLY | ScriptableObject.PERMANENT;
+            // https://code.google.com/p/chromium/issues/detail?id=500633
+            if (getClassName().endsWith("Array")) {
+                flag |= ScriptableObject.DONTENUM;
+            }
+            constants_.add(new ConstantInfo(name, value, flag));
+        }
+        catch (final Exception e) {
+            throw Context.reportRuntimeError("Cannot get field '" + name + "' for type: "
+                + getHostClass().getName());
+        }
     }
 
     /**
@@ -164,7 +181,7 @@ public final class ClassConfiguration {
      * Returns the constant list.
      * @return a list
      */
-    public List<String> getConstants() {
+    public List<ConstantInfo> getConstants() {
         return constants_;
     }
 
@@ -197,6 +214,13 @@ public final class ClassConfiguration {
      */
     public Class<? extends HtmlUnitScriptable> getHostClass() {
         return hostClass_;
+    }
+
+    /**
+     * @return the hostClassSimpleName
+     */
+    public String getHostClassSimpleName() {
+        return hostClassSimpleName_;
     }
 
     /**
@@ -244,8 +268,8 @@ public final class ClassConfiguration {
      * methods that implement the get and set functions.
      */
     public static class PropertyInfo {
-        private Method readMethod_;
-        private Method writeMethod_;
+        private final Method readMethod_;
+        private final Method writeMethod_;
 
         /**
          * Constructor.
@@ -270,6 +294,49 @@ public final class ClassConfiguration {
          */
         public Method getWriteMethod() {
             return writeMethod_;
+        }
+    }
+
+    /**
+     * Class used to contain the constant information name, value and flag.
+     */
+    public static class ConstantInfo {
+        private final String name_;
+        private final Object value_;
+        private final int flag_;
+
+        /**
+         * Constructor.
+         *
+         * @param name the name
+         * @param value the value
+         * @param flag the flag
+         */
+        public ConstantInfo(final String name, final Object value, final int flag) {
+            name_ = name;
+            value_ = value;
+            flag_ = flag;
+        }
+
+        /**
+         * @return the name
+         */
+        public String getName() {
+            return name_;
+        }
+
+        /**
+         * @return the value
+         */
+        public Object getValue() {
+            return value_;
+        }
+
+        /**
+         * @return the flag
+         */
+        public int getFlag() {
+            return flag_;
         }
     }
 }

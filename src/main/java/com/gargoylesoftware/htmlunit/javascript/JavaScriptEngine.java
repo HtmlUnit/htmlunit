@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
@@ -277,7 +278,7 @@ public class JavaScriptEngine {
             final Member jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
             Scriptable prototype = prototypesPerJSName.get(jsClassName);
-            final String hostClassSimpleName = config.getHostClass().getSimpleName();
+            final String hostClassSimpleName = config.getHostClassSimpleName();
             if ("Image".equals(hostClassSimpleName)
                     && browserVersion.hasFeature(JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE)) {
                 prototype = prototypesPerJSName.get("HTMLImageElement");
@@ -622,13 +623,8 @@ public class JavaScriptEngine {
      */
     private static void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
             final ScriptableObject scriptable, final BrowserVersion browserVersion) {
-
-        // the constants
         configureConstants(config, scriptable);
-
-        // the properties
-        configureProperties(config, browserVersion, scriptable);
-
+        configureProperties(config, scriptable);
         configureFunctions(config, browserVersion, scriptable);
     }
 
@@ -651,28 +647,13 @@ public class JavaScriptEngine {
         }
     }
 
-    private static void configureConstants(final ClassConfiguration config,
-            final ScriptableObject scriptable) {
-        final Class<?> linkedClass = config.getHostClass();
-        for (final String constant : config.getConstants()) {
-            try {
-                final Object value = linkedClass.getField(constant).get(null);
-                int flag = ScriptableObject.READONLY | ScriptableObject.PERMANENT;
-                // https://code.google.com/p/chromium/issues/detail?id=500633
-                if (config.getClassName().endsWith("Array")) {
-                    flag |= ScriptableObject.DONTENUM;
-                }
-                scriptable.defineProperty(constant, value, flag);
-            }
-            catch (final Exception e) {
-                throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
-                    + config.getHostClass().getName());
-            }
+    private static void configureConstants(final ClassConfiguration config, final ScriptableObject scriptable) {
+        for (final ConstantInfo constantInfo : config.getConstants()) {
+            scriptable.defineProperty(constantInfo.getName(), constantInfo.getValue(), constantInfo.getFlag());
         }
     }
 
-    private static void configureProperties(final ClassConfiguration config, final BrowserVersion browserVersion,
-            final ScriptableObject scriptable) {
+    private static void configureProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
 
         for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getPropertyEntries()) {
             final String propertyName = propertyEntry.getKey();
