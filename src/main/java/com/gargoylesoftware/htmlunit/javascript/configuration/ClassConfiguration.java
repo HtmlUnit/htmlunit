@@ -74,7 +74,12 @@ public final class ClassConfiguration {
         jsObject_ = jsObject;
         definedInStandardsMode_ = definedInStandardsMode;
         domClasses_ = domClasses;
-        className_ = className;
+        if (className == null) {
+            className_ = getHostClass().getSimpleName();
+        }
+        else {
+            className_ = className;
+        }
     }
 
     void setJSConstructor(final Member jsConstructor) {
@@ -231,10 +236,7 @@ public final class ClassConfiguration {
      * @return the class name
      */
     public String getClassName() {
-        if (className_ != null) {
-            return className_;
-        }
-        return getHostClass().getSimpleName();
+        return className_;
     }
 
     /**
