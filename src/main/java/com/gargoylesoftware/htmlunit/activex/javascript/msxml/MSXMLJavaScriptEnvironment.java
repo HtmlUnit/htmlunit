@@ -19,17 +19,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 
 /**
  * JavaScript environment for the MSXML ActiveX library.
@@ -139,16 +139,9 @@ public class MSXMLJavaScriptEnvironment {
 
     private void configureConstants(final ClassConfiguration config,
             final ScriptableObject scriptable) {
-        final Class<?> linkedClass = config.getHostClass();
-        for (final String constant : config.getConstants()) {
-            try {
-                final Object value = linkedClass.getField(constant).get(null);
-                scriptable.defineProperty(constant, value, ScriptableObject.READONLY | ScriptableObject.PERMANENT);
-            }
-            catch (final Exception e) {
-                throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
-                    + config.getHostClass().getName());
-            }
+        for (final ConstantInfo constantInfo : config.getConstants()) {
+            scriptable.defineProperty(constantInfo.getName(), constantInfo.getValue(),
+                    ScriptableObject.READONLY | ScriptableObject.PERMANENT);
         }
     }
 

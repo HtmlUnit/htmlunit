@@ -16,10 +16,8 @@ package com.gargoylesoftware.htmlunit.general;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -32,6 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.TestCaseTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
@@ -102,22 +101,22 @@ public class HostConstantsTest extends WebDriverTestCase {
             return "";
         }
         final JavaScriptConfiguration javaScriptConfig = JavaScriptConfiguration.getInstance(getBrowserVersion());
-        final Map<String, Object> constants = new TreeMap<>();
+        final List<String> constants = new ArrayList<>();
         ClassConfiguration classConfig = javaScriptConfig.getClassConfiguration(host_);
 
         boolean first = true;
         while (classConfig != null && (!first || classConfig.isJsObject())) {
-            final Class<?> linkedClass = classConfig.getHostClass();
-            for (final String constant : new TreeSet<>(classConfig.getConstants())) {
-                final Object value = linkedClass.getField(constant).get(null);
-                constants.put(constant, value);
+            for (final ConstantInfo constantInfo : classConfig.getConstants()) {
+                constants.add(constantInfo.getName() + ":" + constantInfo.getValue());
             }
             classConfig = javaScriptConfig.getClassConfiguration(classConfig.getExtendedClassName());
             first = false;
         }
+
+        Collections.sort(constants);
         final StringBuilder builder = new StringBuilder();
-        for (final String key : constants.keySet()) {
-            builder.append(key).append(':').append(constants.get(key)).append(' ');
+        for (final String key : constants) {
+            builder.append(key).append(' ');
         }
         return builder.toString();
     }
