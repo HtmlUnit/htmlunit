@@ -145,8 +145,7 @@ public abstract class AbstractJavaScriptConfiguration {
                         new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
                                 isDefinedInStandardsMode, className);
 
-                process(classConfiguration, hostClassName, expectedBrowserName,
-                        browserVersionNumeric);
+                process(classConfiguration, hostClassName, expectedBrowserName, browserVersionNumeric);
                 return classConfiguration;
             }
 
@@ -167,8 +166,7 @@ public abstract class AbstractJavaScriptConfiguration {
                     = new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), jsxClass.isJSObject(),
                             jsxClass.isDefinedInStandardsMode(), className);
 
-                process(classConfiguration, hostClassName, expectedBrowserName,
-                        browserVersionNumeric);
+                process(classConfiguration, hostClassName, expectedBrowserName, browserVersionNumeric);
                 return classConfiguration;
             }
         }
