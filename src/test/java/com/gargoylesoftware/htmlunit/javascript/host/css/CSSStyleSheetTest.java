@@ -20,16 +20,23 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Unit tests for {@link CSSStyleSheet}.
@@ -1045,6 +1052,57 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "rgb(255, 0, 0)",
+            IE8 = "red")
+    public void veryBig() throws Exception {
+        final int maxInMemory;
+        try (final WebClient webClient = new WebClient()) {
+            maxInMemory = webClient.getOptions().getMaxInMemory();
+        }
+        final String baseUrl = getDefaultUrl().toExternalForm();
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <link href='" + baseUrl + "style.css' rel='stylesheet'></link>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "    <a href='second.html'>second page</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String html2 = "<html>\n"
+                + "  <head>\n"
+                + "    <link href='" + baseUrl + "style.css' rel='stylesheet'></link>\n"
+                + "  </head>\n"
+                + "  <body class='someRed'>\n"
+                + "    <script>\n"
+                + "      var getStyle = function(e) {\n"
+                + "        return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle;\n"
+                + "      };\n"
+                + "      alert(getStyle(document.body).color);\n"
+                + "    </script>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        final List<NameValuePair> headers2 = new ArrayList<>();
+        headers2.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        final String bigContent = ".someRed { color: red; }" + StringUtils.repeat(' ', maxInMemory);
+        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), bigContent, 200, "OK", "text/html", headers2);
+        conn.setResponse(new URL(getDefaultUrl(), "second.html"), html2);
+
+        final List<NameValuePair> headers1 = new ArrayList<>();
+        headers1.add(new NameValuePair("Location", "style2.css"));
+        conn.setResponse(new URL(getDefaultUrl(), "style.css"), "", 302, "Moved", "text/html", headers1);
+
+        final WebDriver driver = loadPage2(html, new URL(getDefaultUrl(), "test.html"));
+        driver.findElement(By.linkText("second page")).click();
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
 }

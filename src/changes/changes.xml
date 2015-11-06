@@ -8,6 +8,13 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes, Media query support">
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: Cache.cacheIfPossible() to return boolean
+                and rename .isDynamicContent() to isCacheableContent().
+            </action>
+            <action type="fix" dev="asashour">
+                CSSStyleSheet: response is cleaned up when it is not cached.
+            </action>
             <action type="add" dev="rbri" issue="1681" due-to="Adam Afeltowicz">
                 JavaScript: Support for History.pushState() and History.replaceState().
             </action>

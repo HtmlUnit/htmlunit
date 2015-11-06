@@ -344,7 +344,9 @@ public class CSSStyleSheet extends StyleSheet {
                 source.setEncoding(response.getContentCharset());
                 sheet = new CSSStyleSheet(element, source, uri);
                 // cache the style sheet
-                cache.cacheIfPossible(request, response, sheet.getWrappedSheet());
+                if (!cache.cacheIfPossible(request, response, sheet.getWrappedSheet())) {
+                    response.cleanUp();
+                }
             }
         }
         catch (final FailingHttpStatusCodeException e) {

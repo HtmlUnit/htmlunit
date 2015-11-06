@@ -63,28 +63,28 @@ public class CacheTest extends SimpleWebTestCase {
             }
         };
 
-        assertTrue(cache.isDynamicContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.put("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT");
-        assertFalse(cache.isDynamicContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Last-Modified", formatHttpDate(DateUtils.addMinutes(new Date(), -5)));
-        assertTrue(cache.isDynamicContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.put("Expires", formatHttpDate(DateUtils.addMinutes(new Date(), 5)));
-        assertTrue(cache.isDynamicContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.put("Expires", formatHttpDate(DateUtils.addHours(new Date(), 1)));
-        assertFalse(cache.isDynamicContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.remove("Last-Modified");
-        assertFalse(cache.isDynamicContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Expires", "0");
-        assertTrue(cache.isDynamicContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.put("Expires", "-1");
-        assertTrue(cache.isDynamicContent(response));
+        assertTrue(cache.isCacheableContent(response));
     }
 
     /**

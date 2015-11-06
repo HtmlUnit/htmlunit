@@ -32,6 +32,7 @@ import org.w3c.dom.css.CSSStyleSheet;
  *
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class Cache implements Serializable {
 
@@ -111,14 +112,21 @@ public class Cache implements Serializable {
      * @param response the response corresponding to the specified compiled script
      * @param toCache the object that is to be cached, if possible (may be for instance a compiled script or
      * simply a WebResponse)
+     * @return whether the response was cached or not
      */
-    public void cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
+    public boolean cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
+        final boolean wasCached;
         if (isCacheable(request, response)) {
             final String url = response.getWebRequest().getUrl().toString();
             final Entry entry = new Entry(url, response, toCache);
             entries_.put(entry.key_, entry);
             deleteOverflow();
+            wasCached = true;
         }
+        else {
+            wasCached = false;
+        }
+        return wasCached;
     }
 
     /**
@@ -126,7 +134,7 @@ public class Cache implements Serializable {
      * than requests and responses as is done above) because a) this allows us to cache inline CSS, b) CSS is
      * extremely expensive to parse, so we want to avoid it as much as possible, c) CSS files aren't usually
      * nearly as large as JavaScript files, so memory bloat won't be too bad, and d) caching on requests and
-     * responses requires checking dynamicity (see {@link #isDynamicContent(WebResponse)}), and headers often
+     * responses requires checking dynamicity (see {@link #isCacheableContent(WebResponse)}), and headers often
      * aren't set up correctly, disallowing caching when in fact it should be allowed.
      *
      * @param css the CSS snippet from which <tt>styleSheet</tt> is derived
@@ -162,7 +170,7 @@ public class Cache implements Serializable {
      */
     protected boolean isCacheable(final WebRequest request, final WebResponse response) {
         return HttpMethod.GET == response.getWebRequest().getHttpMethod()
-            && !isDynamicContent(response);
+            && isCacheableContent(response);
     }
 
     /**
@@ -178,19 +186,17 @@ public class Cache implements Serializable {
      *
      * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">RFC 2616</a>
      * @param response the response to examine
-     * @return {@code true} if the response should be considered as dynamic and therefore uncacheable
+     * @return {@code true} if the response should be considered as cacheable
      */
-    protected boolean isDynamicContent(final WebResponse response) {
+    protected boolean isCacheableContent(final WebResponse response) {
         final Date lastModified = parseDateHeader(response, "Last-Modified");
         final Date expires = parseDateHeader(response, "Expires");
 
         final long delay = 10 * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_MINUTE;
         final long now = getCurrentTimestamp();
 
-        final boolean cacheableContent = expires != null && (expires.getTime() - now > delay)
+        return expires != null && (expires.getTime() - now > delay)
                 || (expires == null && lastModified != null && (now - lastModified.getTime() > delay));
-
-        return !cacheableContent;
     }
 
     /**
