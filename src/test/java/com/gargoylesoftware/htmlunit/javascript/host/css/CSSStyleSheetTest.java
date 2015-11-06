@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -1054,6 +1055,18 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    @SuppressWarnings("unchecked")
+    private static <T> T get(final Object o, final Class<?> c, final String fieldName) {
+        try {
+            final Field field = c.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return (T) field.get(o);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * @throws Exception if an error occurs
      */
@@ -1061,10 +1074,14 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "rgb(255, 0, 0)",
             IE8 = "red")
     public void veryBig() throws Exception {
-        final int maxInMemory;
-        try (final WebClient webClient = new WebClient()) {
+        getWebDriver();
+
+        int maxInMemory = 0;
+        final WebClient webClient = get(this, WebDriverTestCase.class, "webClient_");
+        if (webClient != null) {
             maxInMemory = webClient.getOptions().getMaxInMemory();
         }
+
         final String baseUrl = getDefaultUrl().toExternalForm();
         final String html = "<html>\n"
             + "  <head>\n"

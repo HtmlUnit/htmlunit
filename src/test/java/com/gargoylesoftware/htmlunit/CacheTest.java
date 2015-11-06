@@ -53,7 +53,7 @@ public class CacheTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void isDynamicContent() throws Exception {
+    public void isCacheableContent() throws Exception {
         final Cache cache = new Cache();
         final Map<String, String> headers = new HashMap<>();
         final WebResponse response = new DummyWebResponse() {
@@ -63,28 +63,28 @@ public class CacheTest extends SimpleWebTestCase {
             }
         };
 
-        assertTrue(cache.isCacheableContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT");
-        assertFalse(cache.isCacheableContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.put("Last-Modified", formatHttpDate(DateUtils.addMinutes(new Date(), -5)));
-        assertTrue(cache.isCacheableContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Expires", formatHttpDate(DateUtils.addMinutes(new Date(), 5)));
-        assertTrue(cache.isCacheableContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Expires", formatHttpDate(DateUtils.addHours(new Date(), 1)));
-        assertFalse(cache.isCacheableContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.remove("Last-Modified");
-        assertFalse(cache.isCacheableContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.put("Expires", "0");
-        assertTrue(cache.isCacheableContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Expires", "-1");
-        assertTrue(cache.isCacheableContent(response));
+        assertFalse(cache.isCacheableContent(response));
     }
 
     /**
