@@ -187,8 +187,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClipboardData}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -3817,8 +3815,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XSLTemplate}.
-     *
      * @throws Exception if an error occurs
      */
     @Test

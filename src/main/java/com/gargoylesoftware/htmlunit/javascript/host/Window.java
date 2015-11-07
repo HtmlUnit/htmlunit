@@ -124,6 +124,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.DataTransfer;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -565,14 +566,14 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the JavaScript property {@code clipboardData}.
-     * @return the ClipboardData
+     * @return the {@link DataTransfer}
      */
     @JsxGetter(@WebBrowser(IE))
-    public ClipboardData getClipboardData() {
-        final ClipboardData clipboardData = new ClipboardData();
-        clipboardData.setParentScope(this);
-        clipboardData.setPrototype(getPrototype(clipboardData.getClass()));
-        return clipboardData;
+    public DataTransfer getClipboardData() {
+        final DataTransfer dataTransfer = new DataTransfer();
+        dataTransfer.setParentScope(this);
+        dataTransfer.setPrototype(getPrototype(dataTransfer.getClass()));
+        return dataTransfer;
     }
 
     /**

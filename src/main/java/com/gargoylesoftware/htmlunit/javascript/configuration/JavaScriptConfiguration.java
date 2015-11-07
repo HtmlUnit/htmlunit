@@ -402,7 +402,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Blob.class, BlobEvent.class, BroadcastChannel.class, Cache.class, CacheStorage.class,
         CanvasGradient.class, CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class,
         CDATASection.class, ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class,
-        ClientRectList.class, /* ClipboardData.class, */ ClipboardEvent.class,
+        ClientRectList.class, ClipboardEvent.class,
         CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class, Console.class,
         ConvolverNode.class, Coordinates.class, Crypto.class, CryptoKey.class, CSS.class, CSS2Properties.class,
         CSSCharsetRule.class, CSSConditionRule.class, CSSCounterStyleRule.class, CSSFontFaceRule.class,
@@ -546,7 +546,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestProgressEvent.class,
         XMLHttpRequestUpload.class, XMLSerializer.class,
         XPathEvaluator.class, XPathExpression.class,
-        XPathNSResolver.class, XPathResult.class, /* XSLTemplate.class, */ XSLTProcessor.class};
+        XPathNSResolver.class, XPathResult.class, XSLTProcessor.class};
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static final Map<BrowserVersion, JavaScriptConfiguration> CONFIGURATION_MAP_ =
