@@ -45,6 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class EventListenersContainer implements Serializable {
 
@@ -95,13 +96,12 @@ public class EventListenersContainer implements Serializable {
         }
 
         final List<Scriptable> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
-        if (listeners.contains(listener)) {
+        if (!listeners.add(listener)) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
             }
             return false;
         }
-        listeners.add(listener);
         return true;
     }
 
