@@ -1720,9 +1720,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 newListeners = new LinkedHashSet<>(domListeners_.size() + 1);
                 newListeners.addAll(domListeners_);
             }
-            if (newListeners.add(listener)) {
-                domListeners_ = newListeners;
-            }
+            newListeners.add(listener);
+            domListeners_ = newListeners;
         }
     }
 
@@ -1786,9 +1785,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 newListeners = new LinkedHashSet<>(characterDataListeners_.size() + 1);
                 newListeners.addAll(characterDataListeners_);
             }
-            if (newListeners.add(listener)) {
-                characterDataListeners_ = newListeners;
-            }
+            newListeners.add(listener);
+            characterDataListeners_ = newListeners;
         }
     }
 

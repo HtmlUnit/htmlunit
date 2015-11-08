@@ -52,21 +52,34 @@ public class EventListenersContainer implements Serializable {
     private static final Log LOG = LogFactory.getLog(EventListenersContainer.class);
 
     static class Handlers implements Serializable {
-        private final List<Scriptable> capturingHandlers_ = new ArrayList<>();
-        private final List<Scriptable> bubblingHandlers_ = new ArrayList<>();
+        private final List<Scriptable> capturingHandlers_;
+        private final List<Scriptable> bubblingHandlers_;
         private Object handler_;
+
+        Handlers() {
+            super();
+            capturingHandlers_ = new ArrayList<>();
+            bubblingHandlers_ = new ArrayList<>();
+        }
+
+        private Handlers(final List<Scriptable> capturingHandlers,
+                    final List<Scriptable> bubblingHandlers, final Object handler) {
+            super();
+            capturingHandlers_ = new ArrayList<>(capturingHandlers);
+            bubblingHandlers_ = new ArrayList<>(bubblingHandlers);
+            handler_ = handler;
+        }
+
         List<Scriptable> getHandlers(final boolean useCapture) {
             if (useCapture) {
                 return capturingHandlers_;
             }
             return bubblingHandlers_;
         }
+
         @Override
         protected Handlers clone() {
-            final Handlers clone = new Handlers();
-            clone.handler_ = handler_;
-            clone.capturingHandlers_.addAll(capturingHandlers_);
-            clone.bubblingHandlers_.addAll(bubblingHandlers_);
+            final Handlers clone = new Handlers(capturingHandlers_, bubblingHandlers_, handler_);
             return clone;
         }
     }
@@ -96,12 +109,13 @@ public class EventListenersContainer implements Serializable {
         }
 
         final List<Scriptable> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
-        if (!listeners.add(listener)) {
+        if (listeners.contains(listener)) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
             }
             return false;
         }
+        listeners.add(listener);
         return true;
     }
 
