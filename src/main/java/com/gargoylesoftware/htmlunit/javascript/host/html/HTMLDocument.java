@@ -2049,6 +2049,16 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
+     * Returns {@code false} if the active element in the document has no focus;
+     * {@code true} if the active element in the document has focus.
+     * @return  whether the active element in the document has focus or not
+     */
+    @JsxFunction
+    public boolean hasFocus() {
+        return activeElement_ != null && getPage().getFocusedElement() == activeElement_.getDomNodeOrDie();
+    }
+
+    /**
      * Sets the specified element as the document's active element.
      * @see HTMLElement#setActive()
      * @param element the new active element for this document

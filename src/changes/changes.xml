@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.19" date="" description="Bugfixes, Media query support">
+            <action type="add" dev="asashour">
+                JavaScript: support document.hasFocus().
+            </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: Cache.cacheIfPossible() to return boolean
                 and rename .isDynamicContent() to isCacheableContent().
