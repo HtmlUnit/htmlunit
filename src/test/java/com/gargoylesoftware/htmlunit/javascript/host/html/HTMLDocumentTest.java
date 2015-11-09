@@ -2415,7 +2415,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @BuggyWebDriver(FF38)
     @NotYetImplemented
     public void hasFocus() throws Exception {
         final String html = ""

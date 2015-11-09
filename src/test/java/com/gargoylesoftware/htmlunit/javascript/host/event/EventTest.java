@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.apache.commons.lang3.StringUtils;
@@ -763,7 +764,7 @@ public class EventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "activeElement BODY" },
             FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY" },
             IE11 = { "activeElement BODY", "focus BODY", "handler: activeElement BODY" })
-    @BuggyWebDriver(FF) // FFDriver doesn't behave like "manually driven" FF
+    @BuggyWebDriver(FF31) // FFDriver doesn't behave like "manually driven" FF
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @NotYetImplemented({ FF, IE11 })
     public void document_focus() throws Exception {

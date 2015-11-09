@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -200,10 +203,12 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF38 = "Symbol(Symbol.iterator)",
             FF31 = {},
             IE = {})
     // The current WebTestCase alert handling is incorrect, as it uses 'String(alertValue)'
     // In real browsers, the exception is thrown
+    @NotYetImplemented(FF38)
     public void defaultValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
