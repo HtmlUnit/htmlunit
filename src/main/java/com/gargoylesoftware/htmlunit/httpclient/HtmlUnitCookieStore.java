@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.httpclient;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -59,7 +58,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
     @Override
     public synchronized List<Cookie> getCookies() {
         if (manager_.isCookiesEnabled()) {
-            return Arrays.asList(com.gargoylesoftware.htmlunit.util.Cookie.toHttpClient(manager_.getCookies()));
+            return com.gargoylesoftware.htmlunit.util.Cookie.toHttpClient(manager_.getCookies());
         }
         return Collections.<Cookie>emptyList();
     }

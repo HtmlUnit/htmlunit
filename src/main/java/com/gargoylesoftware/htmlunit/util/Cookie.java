@@ -232,15 +232,15 @@ public class Cookie implements Serializable {
     }
 
     /**
-     * Converts the specified collection of cookies into an array of HttpClient cookies.
+     * Converts the specified collection of cookies into an collection of HttpClient cookies.
      * @param cookies the cookies to be converted
      * @return the specified cookies, as HttpClient cookies
      */
-    public static org.apache.http.cookie.Cookie[] toHttpClient(final Collection<Cookie> cookies) {
-        final org.apache.http.cookie.Cookie[] array = new org.apache.http.cookie.Cookie[cookies.size()];
+    public static List<org.apache.http.cookie.Cookie> toHttpClient(final Collection<Cookie> cookies) {
+        final ArrayList<org.apache.http.cookie.Cookie> array = new ArrayList<>(cookies.size());
         final Iterator<Cookie> it = cookies.iterator();
-        for (int i = 0; i < cookies.size(); i++) {
-            array[i] = it.next().toHttpClient();
+        while (it.hasNext()) {
+            array.add(it.next().toHttpClient());
         }
         return array;
     }

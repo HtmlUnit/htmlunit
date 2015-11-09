@@ -2201,10 +2201,10 @@ public class WebClient implements Serializable, AutoCloseable {
         // discard expired cookies
         cookieManager.clearExpired(new Date());
 
-        final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookieManager.getCookies());
+        final List<org.apache.http.cookie.Cookie> all = Cookie.toHttpClient(cookieManager.getCookies());
         final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
 
-        if (all.length > 0) {
+        if (all.size() > 0) {
             final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
             final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion());
             for (final org.apache.http.cookie.Cookie cookie : all) {
