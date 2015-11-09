@@ -25,6 +25,7 @@ import java.io.File;
  * @author David D. Kilzer
  * @author Mike Bowler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class KeyDataPair extends NameValuePair {
 
@@ -44,9 +45,9 @@ public class KeyDataPair extends NameValuePair {
     public KeyDataPair(final String key, final File file, final String mimeType,
             final String charset) {
 
-        super(key, file.getName());
+        super(key, (file == null) ? "" : file.getName());
 
-        if (file.exists()) {
+        if (file != null && file.exists()) {
             fileObject_ = file;
         }
         else {

@@ -119,7 +119,7 @@ public class HtmlFileInput extends HtmlInput {
         final String valueAttribute = getValueAttribute();
 
         if (StringUtils.isEmpty(valueAttribute)) {
-            return new NameValuePair[] {new KeyDataPair(getNameAttribute(), new File(""), null, null)};
+            return new NameValuePair[] {new KeyDataPair(getNameAttribute(), null, null, null)};
         }
 
         final List<NameValuePair> list = new ArrayList<>();
