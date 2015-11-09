@@ -2409,4 +2409,27 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    @BuggyWebDriver(FF38)
+    @NotYetImplemented
+    public void hasFocus() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.hasFocus());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
