@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.background;
 
 import java.lang.ref.WeakReference;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     // TODO: is there utility in not having these as transient?
     private final transient WeakReference<WebClient> webClient_;
 
-    private final transient List<WeakReference<JavaScriptJobManager>> jobManagerList_ = new LinkedList<>();
+    private transient List<WeakReference<JavaScriptJobManager>> jobManagerList_ = new LinkedList<>();
 
     private volatile boolean shutdown_ = false;
 
@@ -103,17 +102,13 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      * Returns the JobExecutor corresponding to the earliest job.
      * @return the JobExectuor with the earliest job.
      */
-    protected synchronized JavaScriptJobManager getJobManagerWithEarliestJob() {
+    protected JavaScriptJobManager getJobManagerWithEarliestJob() {
         JavaScriptJobManager javaScriptJobManager = null;
         JavaScriptJob earliestJob = null;
         // iterate over the list and find the earliest job to run.
-        final Iterator<WeakReference<JavaScriptJobManager>> managers = jobManagerList_.iterator();
-        while (managers.hasNext()) {
-            final JavaScriptJobManager jobManager = managers.next().get();
-            if (jobManager == null) {
-                managers.remove();
-            }
-            else {
+        for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
+            final JavaScriptJobManager jobManager = weakReference.get();
+            if (jobManager != null) {
                 final JavaScriptJob newJob = jobManager.getEarliestJob();
                 if (newJob != null) {
                     if (earliestJob == null || earliestJob.compareTo(newJob) > 0) {
@@ -145,13 +140,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         // otherwise the VM has to fight with the OS to get such small periods
         final long sleepInterval = 10;
         while (!shutdown_ && webClient_.get() != null) {
-            if (trace) {
-                LOG.trace("started finding earliestJob at " + System.currentTimeMillis());
-            }
             final JavaScriptJobManager jobManager = getJobManagerWithEarliestJob();
-            if (trace) {
-                LOG.trace("stopped finding earliestJob at " + System.currentTimeMillis());
-            }
 
             if (jobManager != null) {
                 final JavaScriptJob earliestJob = jobManager.getEarliestJob();
@@ -195,21 +184,31 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      * @param newWindow the new web window
      */
     @Override
-    public synchronized void addWindow(final WebWindow newWindow) {
+    public void addWindow(final WebWindow newWindow) {
         final JavaScriptJobManager jobManager = newWindow.getJobManager();
-        if (jobManager != null && !contains(jobManager)) {
-            jobManagerList_.add(new WeakReference<>(jobManager));
+        if (jobManager != null) {
+            updateJobMangerList(jobManager);
             startThreadIfNeeded();
         }
     }
 
-    private boolean contains(final JavaScriptJobManager newJobManager) {
-        for (final WeakReference<JavaScriptJobManager> jobManagerRef : jobManagerList_) {
-            if (jobManagerRef.get() == newJobManager) {
-                return true;
+    private synchronized void updateJobMangerList(final JavaScriptJobManager newJobManager) {
+        for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
+            final JavaScriptJobManager manager = weakReference.get();
+            if (newJobManager == manager) {
+                return;
             }
         }
-        return false;
+
+        final List<WeakReference<JavaScriptJobManager>> managers = new LinkedList<>();
+        for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
+            final JavaScriptJobManager manager = weakReference.get();
+            if (null != manager) {
+                managers.add(weakReference);
+            }
+        }
+        managers.add(new WeakReference<>(newJobManager));
+        jobManagerList_ = managers;
     }
 
     /** Notes that this thread has been shutdown. */
