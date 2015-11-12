@@ -104,6 +104,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             else {
                 client_ = new WebSocketClient();
             }
+            client_.setCookieStore(new WebSocketCookieStore(window.getWebWindow().getWebClient()));
             client_.start();
             incomingSession_ = client_.connect(new WebSocketImpl(), new URI(url)).get();
             readyState_ = OPEN;
