@@ -194,7 +194,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
         private class ChatWebSocket extends WebSocketAdapter {
             private Session session_;
-            private int counter = 1;
+            private int counter_ = 1;
 
             @Override
             public void onWebSocketConnect(final Session session) {
@@ -205,7 +205,7 @@ public class WebSocketTest extends WebDriverTestCase {
             @Override
             public void onWebSocketText(final String data) {
                 try {
-                    final String cookie = session_.getUpgradeRequest().getHeaders().get("Cookie").get(0) + counter++;
+                    final String cookie = session_.getUpgradeRequest().getHeaders().get("Cookie").get(0) + counter_++;
                     for (final ChatWebSocket webSocket : webSockets_) {
                         webSocket.session_.getRemote().sendString(cookie);
                     }

@@ -84,7 +84,7 @@
                         Update the version number in pom.xml
                     </li>
                     <li>
-                        Update the version number and release date in src/site/xdoc/index.xml
+                        Update the version number and release date in src/site/xdoc/index.xml (maven dependency as well)
                     </li>
                     <li>
                         Update the release date in src/changes/changes.xml
