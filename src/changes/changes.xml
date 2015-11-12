@@ -7,6 +7,8 @@
     </properties>
 
     <body>
+        <release version="2.20" date="???" description="Bugfixes">
+        </release>
         <release version="2.19" date="Nov 12, 2015" description="Bugfixes, Media query support">
             <action type="add" dev="asashour">
                 JavaScript: support document.hasFocus().
