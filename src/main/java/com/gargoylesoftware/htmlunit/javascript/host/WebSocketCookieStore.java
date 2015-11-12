@@ -32,8 +32,8 @@ class WebSocketCookieStore implements CookieStore {
 
     private final WebClient webClient_;
 
-    public WebSocketCookieStore(final WebClient webClient) {
-        this.webClient_ = webClient;
+    WebSocketCookieStore(final WebClient webClient) {
+        webClient_ = webClient;
     }
 
     /**
@@ -59,7 +59,7 @@ class WebSocketCookieStore implements CookieStore {
                 cookies.add(httpCookie);
             }
         }
-        catch(final Exception e) {
+        catch (final Exception e) {
             throw new RuntimeException(e);
         }
         return cookies;
