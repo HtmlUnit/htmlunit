@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -33,6 +35,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -136,4 +139,86 @@ public class WebSocketTest extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(FF)
+    public void cookies() throws Exception {
+        //TODO: compatibility of FF and Chrome versions.
+        if (getBrowserVersion().isFirefox()) {
+            final String firstResponse = ": myname=My value!1";
+            final String secondResponse = ": myname=My value!2";
+
+            startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+                null, null, new CookiesWebSocketHandler());
+            final WebDriver driver = getWebDriver();
+            driver.get("http://localhost:" + PORT + "/WebSocketTest_cookies.html");
+
+            driver.findElement(By.id("username")).sendKeys("Browser");
+            driver.findElement(By.id("joinB")).click();
+            final WebElement chatE = driver.findElement(By.id("chat"));
+            int counter = 0;
+            do {
+                Thread.sleep(100);
+            } while (chatE.getText().isEmpty() && counter++ < 10);
+
+            assertEquals(firstResponse, chatE.getText());
+
+            driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
+            driver.findElement(By.id("sendB")).click();
+            counter = 0;
+            do {
+                Thread.sleep(100);
+            } while (!chatE.getText().contains(secondResponse) && counter++ < 10);
+
+            assertEquals(firstResponse + "\n" + secondResponse, chatE.getText());
+        }
+    }
+
+    private static class CookiesWebSocketHandler extends WebSocketHandler {
+
+        private final Set<ChatWebSocket> webSockets_ = new CopyOnWriteArraySet<>();
+
+        @Override
+        public void configure(final WebSocketServletFactory factory) {
+            factory.register(ChatWebSocket.class);
+            factory.setCreator(new WebSocketCreator() {
+                @Override
+                public Object createWebSocket(final ServletUpgradeRequest servletUpgradeRequest,
+                        final ServletUpgradeResponse servletUpgradeResponse) {
+                    return new ChatWebSocket();
+                }
+            });
+        }
+
+        private class ChatWebSocket extends WebSocketAdapter {
+            private Session session_;
+            private int counter = 1;
+
+            @Override
+            public void onWebSocketConnect(final Session session) {
+                this.session_ = session;
+                webSockets_.add(this);
+            }
+
+            @Override
+            public void onWebSocketText(final String data) {
+                try {
+                    final String cookie = session_.getUpgradeRequest().getHeaders().get("Cookie").get(0) + counter++;
+                    for (final ChatWebSocket webSocket : webSockets_) {
+                        webSocket.session_.getRemote().sendString(cookie);
+                    }
+                }
+                catch (final IOException x) {
+                    session_.close();
+                }
+            }
+
+            @Override
+            public void onWebSocketClose(final int closeCode, final String message) {
+                webSockets_.remove(this);
+            }
+        }
+    }
 }
