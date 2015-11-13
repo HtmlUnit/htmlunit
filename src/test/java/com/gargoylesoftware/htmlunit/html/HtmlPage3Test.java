@@ -355,4 +355,12 @@ public class HtmlPage3Test extends WebDriverTestCase {
         basePath("---****://==", URL_SECOND + "---****://path");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathLeadingAndTrailingWhitespace()  throws Exception {
+        basePath(" \t\n" + "http://localhost:" + PORT + "/base_path/" + "\n\t ",
+                "http://localhost:" + PORT + "/base_path/path");
+    }
 }

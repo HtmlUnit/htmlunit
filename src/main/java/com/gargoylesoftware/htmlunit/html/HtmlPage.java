@@ -2280,7 +2280,7 @@ public class HtmlPage extends InteractivePage {
             }
         }
         else {
-            final String href = base_.getHrefAttribute();
+            final String href = base_.getHrefAttribute().trim();
             if (StringUtils.isEmpty(href)) {
                 baseUrl = getUrl();
             }
