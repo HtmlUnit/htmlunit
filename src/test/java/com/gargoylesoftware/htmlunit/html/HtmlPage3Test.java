@@ -363,4 +363,20 @@ public class HtmlPage3Test extends WebDriverTestCase {
         basePath(" \t\n" + "http://localhost:" + PORT + "/base_path/" + "\n\t ",
                 "http://localhost:" + PORT + "/base_path/path");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathEmpty()  throws Exception {
+        basePath("", "http://localhost:" + PORT + "/second/path");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathWhitespaceOnly()  throws Exception {
+        basePath(" \t\n ", "http://localhost:" + PORT + "/second/path");
+    }
 }
