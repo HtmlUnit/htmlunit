@@ -126,6 +126,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Joerg Werner
  */
 public class HtmlPage extends InteractivePage {
 

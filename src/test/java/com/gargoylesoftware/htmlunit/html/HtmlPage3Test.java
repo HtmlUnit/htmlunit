@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Joerg Werner
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPage3Test extends WebDriverTestCase {
