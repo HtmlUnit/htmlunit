@@ -1470,7 +1470,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             @Override
             protected List<Object> computeElements() {
                 final List<DomElement> elements = page.getElementsByName(expElementName);
-                final List<Object> result = new ArrayList<Object>(elements.size());
+                final List<Object> result = new ArrayList<>(elements.size());
 
                 for (DomElement domElement : elements) {
                     if (filter.matches(domElement)) {

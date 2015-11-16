@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="Bugfixes">
+            <action type="add" dev="asashour">
+                DefaultCredentialsProvider: to have .removeCredentials(). 
+            </action>
             <action type="update" dev="rbri">
                 Dependency to Commons Collections removed.
             </action>

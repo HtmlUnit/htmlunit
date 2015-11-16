@@ -73,4 +73,27 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         assertTrue(page.asText().contains("Hello World"));
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void removeCredentials() throws Exception {
+        final String realm = "blah";
+        final String scheme = new BasicScheme().getSchemeName();
+
+        final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
+        provider.addCredentials("username", "password", "host", 80, realm);
+
+        UsernamePasswordCredentials credentials =
+            (UsernamePasswordCredentials) provider.getCredentials(new AuthScope("host", 80, realm, scheme));
+        assertEquals("username", credentials.getUserName());
+        assertEquals("password", credentials.getPassword());
+
+        provider.removeCredentials(new AuthScope("host", 80, realm, scheme));
+
+        credentials = (UsernamePasswordCredentials) provider.getCredentials(new AuthScope("host", 80, realm, scheme));
+        assertNull(credentials);
+    }
+
 }
