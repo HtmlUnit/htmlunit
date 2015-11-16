@@ -19,10 +19,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
-import org.apache.commons.collections.ListUtils;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -313,41 +311,22 @@ public class Range extends SimpleScriptable {
      */
     @JsxGetter
     public Object getCommonAncestorContainer() {
-        final Node ancestor = getCommonAncestor();
-        if (ancestor == null) {
-            return Context.getUndefinedValue();
-        }
-        return ancestor;
-    }
-
-    /**
-     * Returns the deepest common ancestor container of the Range's two boundary points.
-     * @return the deepest common ancestor container of the Range's two boundary points
-     */
-    @SuppressWarnings("unchecked")
-    private Node getCommonAncestor() {
-        final List<Node> startAncestors = getAncestorsAndSelf(startContainer_);
-        final List<Node> endAncestors = getAncestorsAndSelf(endContainer_);
-        final List<Node> commonAncestors = ListUtils.intersection(startAncestors, endAncestors);
-        if (commonAncestors.isEmpty()) {
-            return null;
-        }
-        return commonAncestors.get(0);
-    }
-
-    /**
-     * Returns the ancestors of the specified node.
-     * @param node the node to start with
-     * @return the ancestors of the specified node
-     */
-    private List<Node> getAncestorsAndSelf(final Node node) {
-        final List<Node> ancestors = new ArrayList<>();
-        Node ancestor = node;
+        final HashSet<Node> startAncestors = new HashSet<>();
+        Node ancestor = startContainer_;
         while (ancestor != null) {
-            ancestors.add(ancestor);
+            startAncestors.add(ancestor);
             ancestor = ancestor.getParent();
         }
-        return ancestors;
+
+        ancestor = endContainer_;
+        while (ancestor != null) {
+            if (startAncestors.contains(ancestor)) {
+                return ancestor;
+            }
+            ancestor = ancestor.getParent();
+        }
+
+        return Context.getUndefinedValue();
     }
 
     /**
