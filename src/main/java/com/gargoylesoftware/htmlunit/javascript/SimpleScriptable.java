@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SET_READONLY_
 import java.lang.reflect.Method;
 import java.util.Stack;
 
-import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -259,19 +258,6 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
             return getPrototype((Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());
         }
         return prototype;
-    }
-
-    /**
-     * Gets a transformer getting the scriptable element for an {@link HtmlElement}.
-     * @return the transformer
-     */
-    protected Transformer getTransformerScriptableFor() {
-        return new Transformer() {
-            @Override
-            public Object transform(final Object obj) {
-                return getScriptableFor(obj);
-            }
-        };
     }
 
     /**
