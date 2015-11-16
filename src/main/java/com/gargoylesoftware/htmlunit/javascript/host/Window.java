@@ -48,8 +48,6 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1439,7 +1437,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     private Object getElementsByName(final HtmlPage page, final String name) {
-        Object result = NOT_FOUND;
 
         // May be attempting to retrieve element(s) by name. IMPORTANT: We're using map-backed operations
         // like getHtmlElementsByName() and getHtmlElementById() as much as possible, so as to avoid XPath
@@ -1449,56 +1446,48 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         final List<DomElement> elements = page.getElementsByName(name);
 
         final boolean includeFormFields = getBrowserVersion().hasFeature(JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME);
-        final Predicate filter = new Predicate() {
-            @Override
-            public boolean evaluate(final Object object) {
-                if (object instanceof HtmlEmbed
-                    || object instanceof HtmlForm
-                    || object instanceof HtmlImage
-                    || object instanceof HtmlObject) {
-                    return true;
-                }
-                if (includeFormFields && (
-                        object instanceof HtmlAnchor
-                        || object instanceof HtmlButton
-                        || object instanceof HtmlInput
-                        || object instanceof HtmlMap
-                        || object instanceof HtmlSelect
-                        || object instanceof HtmlTextArea)) {
-                    return true;
-                }
-                return false;
+        final Filter filter = new Filter(includeFormFields);
+
+        final Iterator<DomElement> it = elements.iterator();
+        while (it.hasNext()) {
+            if (!filter.matches(it.next())) {
+                it.remove();
             }
-        };
-        CollectionUtils.filter(elements, filter);
+        }
+
+        if (elements.size() == 0) {
+            return NOT_FOUND;
+        }
 
         if (elements.size() == 1) {
-            result = getScriptableFor(elements.get(0));
+            return getScriptableFor(elements.get(0));
         }
-        else if (elements.size() > 1) {
-            // Null must be changed to '' for proper collection initialization.
-            final String expElementName = "null".equals(name) ? "" : name;
 
-            result = new HTMLCollection(page, true, "Window.getElementsByName('" + name + "')") {
-                @Override
-                protected List<Object> computeElements() {
-                    final List<DomElement> elements = page.getElementsByName(expElementName);
-                    CollectionUtils.filter(elements, filter);
+        // Null must be changed to '' for proper collection initialization.
+        final String expElementName = "null".equals(name) ? "" : name;
 
-                    return new ArrayList<Object>(elements);
-                }
+        return new HTMLCollection(page, true, "Window.getElementsByName('" + name + "')") {
+            @Override
+            protected List<Object> computeElements() {
+                final List<DomElement> elements = page.getElementsByName(expElementName);
+                final List<Object> result = new ArrayList<Object>(elements.size());
 
-                @Override
-                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                    if ("name".equals(event.getName())) {
-                        return EffectOnCache.RESET;
+                for (DomElement domElement : elements) {
+                    if (filter.matches(domElement)) {
+                        result.add(domElement);
                     }
-                    return EffectOnCache.NONE;
                 }
-            };
-        }
+                return result;
+            }
 
-        return result;
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                if ("name".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
     }
 
     /**
@@ -1861,6 +1850,33 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             "class",
             "height",
             "width"));
+
+    private static final class Filter {
+        private final boolean includeFormFields_;
+
+        private Filter(final boolean includeFormFields) {
+            includeFormFields_ = includeFormFields;
+        }
+
+        private boolean matches(final Object object) {
+            if (object instanceof HtmlEmbed
+                || object instanceof HtmlForm
+                || object instanceof HtmlImage
+                || object instanceof HtmlObject) {
+                return true;
+            }
+            if (includeFormFields_ && (
+                    object instanceof HtmlAnchor
+                    || object instanceof HtmlButton
+                    || object instanceof HtmlInput
+                    || object instanceof HtmlMap
+                    || object instanceof HtmlSelect
+                    || object instanceof HtmlTextArea)) {
+                return true;
+            }
+            return false;
+        }
+    }
 
     /**
      * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
