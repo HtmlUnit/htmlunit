@@ -417,7 +417,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 }
 
                 @Override
-                public final Object call(final Context cx, final Scriptable scope,
+                public Object call(final Context cx, final Scriptable scope,
                         final Scriptable thisObj, final Object[] args) {
                     if (allowFunctionCall) {
                         return super.call(cx, scope, thisObj, args);
