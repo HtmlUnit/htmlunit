@@ -73,7 +73,6 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         assertTrue(page.asText().contains("Hello World"));
     }
 
-
     /**
      * @throws Exception if the test fails
      */
