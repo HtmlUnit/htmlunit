@@ -307,24 +307,28 @@ public class CSSStyleSheet extends StyleSheet {
         try {
             // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
             final WebRequest request;
-            final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
+            final WebResponse response;
             final WebClient client = page.getWebClient();
             if (link != null) {
                 // Use link.
                 request = link.getWebRequest();
-                request.setAdditionalHeader("Accept", accept);
+                // our cache is a bit strange;
+                // loadWebResponse check the cache for the web response
+                // AND also fixes the request url for the following cache lookups
+                response = link.getWebResponse(true, request);
             }
             else {
                 // Use href.
+                final String accept = client.getBrowserVersion().getCssAcceptHeader();
                 request = new WebRequest(new URL(url), accept);
                 final String referer = page.getUrl().toExternalForm();
                 request.setAdditionalHeader("Referer", referer);
-            }
 
-            // our cache is a bit strange;
-            // loadWebResponse check the cache for the web response
-            // AND also fixes the request url for the following cache lookups
-            final WebResponse response = client.loadWebResponse(request);
+                // our cache is a bit strange;
+                // loadWebResponse check the cache for the web response
+                // AND also fixes the request url for the following cache lookups
+                response = client.loadWebResponse(request);
+            }
 
             // now we can look into the cache with the fixed request for
             // a cached script

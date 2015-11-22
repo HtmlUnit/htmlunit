@@ -163,9 +163,30 @@ public class HtmlLink extends HtmlElement {
      * @throws IOException if an error occurs while downloading the content
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
+        return getWebResponse(downloadIfNeeded, null);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * If the linked content is not already downloaded it triggers a download. Then it stores the response
+     * for later use.<br>
+     *
+     * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
+     * @param request the request; if null getWebRequest() is called to create one
+     * @return {@code null} if no download should be performed and when this wasn't already done; the response
+     * received when performing a request for the content referenced by this tag otherwise
+     * @throws IOException if an error occurs while downloading the content
+     */
+    public WebResponse getWebResponse(final boolean downloadIfNeeded, final WebRequest request) throws IOException {
         if (downloadIfNeeded && cachedWebResponse_ == null) {
             final WebClient webclient = getPage().getWebClient();
-            cachedWebResponse_ = webclient.loadWebResponse(getWebRequest());
+            if (null == request) {
+                cachedWebResponse_ = webclient.loadWebResponse(getWebRequest());
+            }
+            else {
+                cachedWebResponse_ = webclient.loadWebResponse(request);
+            }
         }
         return cachedWebResponse_;
     }
@@ -178,8 +199,14 @@ public class HtmlLink extends HtmlElement {
     public WebRequest getWebRequest() throws MalformedURLException {
         final HtmlPage page = (HtmlPage) getPage();
         final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
+
         final WebRequest request = new WebRequest(url);
+
         request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+
+        final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
+        request.setAdditionalHeader("Accept", accept);
+
         return request;
     }
 
