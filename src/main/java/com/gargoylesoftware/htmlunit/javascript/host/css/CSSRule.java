@@ -172,7 +172,7 @@ public class CSSRule extends SimpleScriptable {
                 return new CSSFontFaceRule(stylesheet, (org.w3c.dom.css.CSSFontFaceRule) rule);
             default:
                 throw new UnsupportedOperationException("CSSRule "
-                    + rule.getClass().getName() + " is not yet supported:" + rule.getCssText());
+                    + rule.getClass().getName() + " is not yet supported; rule content: '" + rule.getCssText() + "'");
         }
     }
 
