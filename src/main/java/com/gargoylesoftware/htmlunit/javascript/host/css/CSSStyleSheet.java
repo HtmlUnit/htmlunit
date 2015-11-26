@@ -1386,6 +1386,12 @@ public class CSSStyleSheet extends StyleSheet {
                         && isValidSelector(cc1.getSecondCondition(), documentMode, domNode);
             case Condition.SAC_ATTRIBUTE_CONDITION:
             case Condition.SAC_ID_CONDITION:
+            case Condition.SAC_LANG_CONDITION:
+            case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
+            case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
+            case Condition.SAC_ONLY_CHILD_CONDITION:
+            case Condition.SAC_ONLY_TYPE_CONDITION:
+            case Condition.SAC_CONTENT_CONDITION:
             case Condition.SAC_CLASS_CONDITION:
                 return true;
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
