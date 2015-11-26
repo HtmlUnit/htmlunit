@@ -7325,4 +7325,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("MozPowerManager");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "object")
+    @NotYetImplemented(FF)
+    public void mozCSSKeyframesRule() throws Exception {
+        test("MozCSSKeyframesRule");
+    }
 }

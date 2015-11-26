@@ -10277,4 +10277,15 @@ public class HostClassNameTest extends WebDriverTestCase {
     public void mediaDeviceInfo() throws Exception {
         test("MediaDeviceInfo");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "[object MozCSSKeyframesRule]")
+    @NotYetImplemented(FF)
+    public void mozCSSKeyframesRule() throws Exception {
+        test("MozCSSKeyframesRule");
+    }
 }
