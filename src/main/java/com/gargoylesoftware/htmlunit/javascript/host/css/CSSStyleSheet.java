@@ -1353,7 +1353,7 @@ public class CSSStyleSheet extends StyleSheet {
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
                 final SimpleSelector simpleSel = conditional.getSimpleSelector();
                 return (simpleSel == null || isValidSelector(simpleSel, documentMode, domNode))
-                        && isValidSelector(conditional.getCondition(), documentMode, domNode);
+                        && isValidCondition(conditional.getCondition(), documentMode, domNode);
             case Selector.SAC_DESCENDANT_SELECTOR:
             case Selector.SAC_CHILD_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
@@ -1378,12 +1378,12 @@ public class CSSStyleSheet extends StyleSheet {
     /**
      * @param documentMode see {@link HTMLDocument#getDocumentMode()}
      */
-    private static boolean isValidSelector(final Condition condition, final int documentMode, final DomNode domNode) {
+    private static boolean isValidCondition(final Condition condition, final int documentMode, final DomNode domNode) {
         switch (condition.getConditionType()) {
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
-                return isValidSelector(cc1.getFirstCondition(), documentMode, domNode)
-                        && isValidSelector(cc1.getSecondCondition(), documentMode, domNode);
+                return isValidCondition(cc1.getFirstCondition(), documentMode, domNode)
+                        && isValidCondition(cc1.getSecondCondition(), documentMode, domNode);
             case Condition.SAC_ATTRIBUTE_CONDITION:
             case Condition.SAC_ID_CONDITION:
             case Condition.SAC_LANG_CONDITION:
