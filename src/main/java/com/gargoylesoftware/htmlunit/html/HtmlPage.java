@@ -524,10 +524,7 @@ public class HtmlPage extends InteractivePage {
      * @param tagName the tag name, preferably in lowercase
      */
     @Override
-    public DomElement createElement(String tagName) {
-        if (tagName.indexOf(':') == -1) {
-            tagName = tagName.toLowerCase(Locale.ROOT);
-        }
+    public DomElement createElement(final String tagName) {
         return HTMLParser.getFactory(tagName).createElementNS(this, null, tagName, null, true);
     }
 
