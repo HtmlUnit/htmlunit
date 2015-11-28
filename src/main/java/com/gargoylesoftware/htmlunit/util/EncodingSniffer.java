@@ -505,14 +505,12 @@ public final class EncodingSniffer {
                     value = value.substring(0, i);
                 }
                 value = value.trim().toLowerCase(Locale.ROOT);
-                boolean found = false;
                 for (String ending : contentTypeEndings) {
                     if (value.endsWith(ending.toLowerCase(Locale.ROOT))) {
-                        found = true;
-                        break;
+                        return true;
                     }
                 }
-                return found;
+                return false;
             }
         }
         return false;
