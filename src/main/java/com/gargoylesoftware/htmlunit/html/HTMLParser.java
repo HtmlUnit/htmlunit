@@ -365,11 +365,11 @@ public final class HTMLParser {
 
             String tagName = qualifiedName;
             final int index = tagName.indexOf(':');
-            if (index != -1) {
-                tagName = tagName.substring(index + 1);
+            if (index == -1) {
+                tagName = tagName.toLowerCase(Locale.ROOT);
             }
             else {
-                tagName = tagName.toLowerCase(Locale.ROOT);
+                tagName = tagName.substring(index + 1);
             }
             final ElementFactory factory = ELEMENT_FACTORIES.get(tagName);
 
