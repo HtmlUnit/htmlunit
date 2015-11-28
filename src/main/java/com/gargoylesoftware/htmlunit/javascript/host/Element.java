@@ -101,7 +101,9 @@ public class Element extends EventNode {
         final DomElement htmlElt = (DomElement) domNode;
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
             final String eventName = attr.getName();
-            if (eventName.toLowerCase(Locale.ROOT).startsWith("on")) {
+            if (eventName.length() > 2 // the has to be onX at least
+                    && Character.toLowerCase(eventName.charAt(0)) == 'o'
+                    && Character.toLowerCase(eventName.charAt(1)) == 'n') {
                 createEventHandler(eventName, attr.getValue());
             }
         }
