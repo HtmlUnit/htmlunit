@@ -684,7 +684,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Sets the javascript error listener for this webclient.
-     * @param javaScriptErrorListener the new javaScriptErrorHandler or null if none is specified
+     * @param javaScriptErrorListener the new JavaScriptErrorListener or null if none is specified
      */
     public void setJavaScriptErrorListener(final JavaScriptErrorListener javaScriptErrorListener) {
         javaScriptErrorListener_ = javaScriptErrorListener;

@@ -950,13 +950,14 @@ public class HtmlPage extends InteractivePage {
                 LOG.info("Ignoring script src [" + srcAttribute + "]");
                 return JavaScriptLoadResult.NOOP;
             }
-            else if (!"http".equals(protocol) && !"https".equals(protocol)
+            if (!"http".equals(protocol) && !"https".equals(protocol)
                     && !"data".equals(protocol) && !"file".equals(protocol)) {
-                LOG.error("Unable to build URL for script src tag [" + srcAttribute + "] (protocol: " + protocol + ")");
+                LOG.error("Unable to build URL for script src tag ["
+                                + srcAttribute + "] (protocol: '" + protocol + "')");
                 final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
                 if (javaScriptErrorListener != null) {
                     javaScriptErrorListener.malformedScriptURL(this, srcAttribute,
-                        new MalformedURLException("unknown protocol: " + protocol));
+                        new MalformedURLException("unknown protocol: '" + protocol + "'"));
                 }
                 return JavaScriptLoadResult.NOOP;
             }
