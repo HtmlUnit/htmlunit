@@ -167,15 +167,18 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         final CollectingJavaScriptErrorListener javaScriptErrorListener = new CollectingJavaScriptErrorListener();
         webClient.setJavaScriptErrorListener(javaScriptErrorListener);
 
-        final String html = "<html><head><title>Throw JavaScript Error</title>"
-                + "<script src='unknown://nowhere' type='text/javascript'></script></head>"
-                + "<body></body></html>";
+        final String html = "<html>\n"
+                + "<head><title>Throw JavaScript Error</title>\n"
+                + "<script src='unknown://nowhere' type='text/javascript'></script>\n"
+                + "</head>\n"
+                + "<body></body>\n"
+                + "</html>";
 
         loadPage(html);
 
         assertEquals("", javaScriptErrorListener.getScriptExceptions());
         assertEquals("", javaScriptErrorListener.getLoadScriptErrors());
-        assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: unknown",
+        assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: 'unknown'",
                     javaScriptErrorListener.getMalformedScriptURLErrors());
         assertEquals("", javaScriptErrorListener.getTimeoutErrors());
     }
