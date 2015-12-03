@@ -47,9 +47,26 @@ public class UrlUtilsTest extends SimpleWebTestCase {
      */
     @Test
     public void getUrlWithNewHost() throws Exception {
-        final URL a = new URL("http://my.home.com/index.html?query#ref");
-        final URL b = UrlUtils.getUrlWithNewHost(a, "your.home.com");
+        URL a = new URL("http://my.home.com/index.html?query#ref");
+        URL b = UrlUtils.getUrlWithNewHost(a, "your.home.com");
         assertEquals("http://your.home.com/index.html?query#ref", b.toExternalForm());
+
+        // preserve user info
+        a = new URL("http://john.smith:secret@my.home.com/index.html?query#ref");
+        b = UrlUtils.getUrlWithNewHost(a, "your.home.com");
+        assertEquals("http://john.smith:secret@your.home.com/index.html?query#ref", b.toExternalForm());
+
+        a = new URL("http://john.smith:@my.home.com/index.html?query#ref");
+        b = UrlUtils.getUrlWithNewHost(a, "your.home.com");
+        assertEquals("http://john.smith:@your.home.com/index.html?query#ref", b.toExternalForm());
+
+        a = new URL("http://john.smith@my.home.com/index.html?query#ref");
+        b = UrlUtils.getUrlWithNewHost(a, "your.home.com");
+        assertEquals("http://john.smith@your.home.com/index.html?query#ref", b.toExternalForm());
+
+        a = new URL("http://@my.home.com/index.html?query#ref");
+        b = UrlUtils.getUrlWithNewHost(a, "your.home.com");
+        assertEquals("http://@your.home.com/index.html?query#ref", b.toExternalForm());
     }
 
     /**
@@ -57,12 +74,16 @@ public class UrlUtilsTest extends SimpleWebTestCase {
      */
     @Test
     public void getUrlWithNewHostAndPort() throws Exception {
-        final URL a = new URL("http://my.home.com/index.html?query#ref");
+        URL a = new URL("http://my.home.com/index.html?query#ref");
         URL b = UrlUtils.getUrlWithNewHostAndPort(a, "your.home.com", 4711);
         assertEquals("http://your.home.com:4711/index.html?query#ref", b.toExternalForm());
 
         b = UrlUtils.getUrlWithNewHostAndPort(a, "your.home.com", -1);
         assertEquals("http://your.home.com/index.html?query#ref", b.toExternalForm());
+
+        a = new URL("http://john.smith:secret@my.home.com/index.html?query#ref");
+        b = UrlUtils.getUrlWithNewHostAndPort(a, "your.home.com", -1);
+        assertEquals("http://john.smith:secret@your.home.com/index.html?query#ref", b.toExternalForm());
     }
 
     /**
@@ -70,12 +91,16 @@ public class UrlUtilsTest extends SimpleWebTestCase {
      */
     @Test
     public void getUrlWithNewPort() throws Exception {
-        final URL a = new URL("http://my.home.com/index.html?query#ref");
+        URL a = new URL("http://my.home.com/index.html?query#ref");
         URL b = UrlUtils.getUrlWithNewPort(a, 8080);
         assertEquals("http://my.home.com:8080/index.html?query#ref", b.toExternalForm());
 
         b = UrlUtils.getUrlWithNewPort(a, -1);
         assertEquals("http://my.home.com/index.html?query#ref", b.toExternalForm());
+
+        a = new URL("http://john.smith:secret@my.home.com/index.html?query#ref");
+        b = UrlUtils.getUrlWithNewPort(a, 8080);
+        assertEquals("http://john.smith:secret@my.home.com:8080/index.html?query#ref", b.toExternalForm());
     }
 
     /**
@@ -243,6 +268,10 @@ public class UrlUtilsTest extends SimpleWebTestCase {
 
         url = new URL("http://localhost/bug%AB.html");
         assertEquals("http://localhost/bug%AB.html",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://john.smith:secret@localhost/bug%AB.html");
+        assertEquals("http://john.smith:secret@localhost/bug%AB.html",
                 UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
     }
 

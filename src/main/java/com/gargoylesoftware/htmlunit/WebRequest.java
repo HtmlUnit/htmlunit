@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Rodney Gitzel
  * @author Ronald Brill
  * @author Adam Afeltowicz
+ * @author Joerg Werner
  */
 public class WebRequest implements Serializable {
 
@@ -111,17 +112,16 @@ public class WebRequest implements Serializable {
             final String path = url.getPath();
             if (path.isEmpty()) {
                 if (!url.getFile().isEmpty() || url.getProtocol().startsWith("http")) {
-                    url = buildUrlWithNewFile(url, "/" + url.getFile());
+                    url = buildUrlWithNewPath(url, "/");
                 }
             }
             else if (path.contains("/.")) {
-                final String query = (url.getQuery() != null) ? "?" + url.getQuery() : "";
-                url = buildUrlWithNewFile(url, removeDots(path) + query);
+                url = buildUrlWithNewPath(url, removeDots(path));
             }
             final String idn = IDN.toASCII(url.getHost());
             if (!idn.equals(url.getHost())) {
                 try {
-                    url = new URL(url.getProtocol(), idn, url.getPort(), url.getFile());
+                    url = UrlUtils.getUrlWithNewHost(url, idn);
                 }
                 catch (final Exception e) {
                     throw new RuntimeException("Cannot change hostname of URL: " + url.toExternalForm(), e);
@@ -179,18 +179,12 @@ public class WebRequest implements Serializable {
         return newPath;
     }
 
-    private URL buildUrlWithNewFile(URL url, String newFile) {
+    private URL buildUrlWithNewPath(URL url, final String newPath) {
         try {
-            if (url.getRef() != null) {
-                newFile += '#' + url.getRef();
-            }
-            if ("file".equals(url.getProtocol()) && url.getAuthority() != null && url.getAuthority().endsWith(":")) {
-                newFile = ":" + newFile;
-            }
-            url = new URL(url.getProtocol(), url.getHost(), url.getPort(), newFile);
+            url = UrlUtils.getUrlWithNewPath(url, newPath);
         }
         catch (final Exception e) {
-            throw new RuntimeException("Cannot set URL: " + url.toExternalForm(), e);
+            throw new RuntimeException("Cannot change path of URL: " + url.toExternalForm(), e);
         }
         return url;
     }

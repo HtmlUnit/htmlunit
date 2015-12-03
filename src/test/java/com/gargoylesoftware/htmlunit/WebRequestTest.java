@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
 
@@ -29,6 +30,7 @@ import org.junit.Test;
  * @author Marc Guillemot
  * @author Rodney Gitzel
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 public class WebRequestTest {
 
@@ -113,6 +115,45 @@ public class WebRequestTest {
         final URL url = new URL("http://john.smith:secret@localhost/");
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
+        assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
+        assertEquals("secret", credentials.getPassword());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void credentialsAndEmptyPath() throws Exception {
+        final URL url = new URL("http://john.smith:secret@localhost");
+        final WebRequest request = new WebRequest(url);
+        final Credentials credentials = request.getUrlCredentials();
+        assertNotNull("Credentials object is null", credentials);
+        assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
+        assertEquals("secret", credentials.getPassword());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void credentialsAndPathWithDots() throws Exception {
+        final URL url = new URL("http://john.smith:secret@localhost/../foo.html");
+        final WebRequest request = new WebRequest(url);
+        final Credentials credentials = request.getUrlCredentials();
+        assertNotNull("Credentials object is null", credentials);
+        assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
+        assertEquals("secret", credentials.getPassword());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void credentialsAndInternationalizedDomainName() throws Exception {
+        final URL url = new URL("http://john.smith:secret@löcälhöst/");
+        final WebRequest request = new WebRequest(url);
+        final Credentials credentials = request.getUrlCredentials();
+        assertNotNull("Credentials object is null", credentials);
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }

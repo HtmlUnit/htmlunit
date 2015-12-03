@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1731" due-to="Joerg Werner">
+                Basic authentication credentials in the URL could get lost.
+            </action>
             <action type="add" dev="asashour">
                 DefaultCredentialsProvider: to have .removeCredentials().
             </action>

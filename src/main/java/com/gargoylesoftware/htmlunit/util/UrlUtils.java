@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 public final class UrlUtils {
     private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
@@ -227,7 +228,8 @@ public final class UrlUtils {
             if (anchor != null) {
                 anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "UTF-8");
             }
-            return createNewUrl(url.getProtocol(), url.getHost(), url.getPort(), path, anchor, query);
+            return createNewUrl(url.getProtocol(), url.getUserInfo(), url.getHost(),
+                                url.getPort(), path, anchor, query);
         }
         catch (final MalformedURLException e) {
             // Impossible... I think.
@@ -355,7 +357,8 @@ public final class UrlUtils {
      */
     public static URL getUrlWithNewHost(final URL u, final String newHost)
         throws MalformedURLException {
-        return createNewUrl(u.getProtocol(), newHost, u.getPort(), u.getPath(), u.getRef(), u.getQuery());
+        return createNewUrl(u.getProtocol(), u.getUserInfo(), newHost,
+                            u.getPort(), u.getPath(), u.getRef(), u.getQuery());
     }
 
     /**
@@ -368,7 +371,7 @@ public final class UrlUtils {
      */
     public static URL getUrlWithNewHostAndPort(final URL u, final String newHost, final int newPort)
         throws MalformedURLException {
-        return createNewUrl(u.getProtocol(), newHost, newPort, u.getPath(), u.getRef(), u.getQuery());
+        return createNewUrl(u.getProtocol(), u.getUserInfo(), newHost, newPort, u.getPath(), u.getRef(), u.getQuery());
     }
 
     /**
@@ -379,7 +382,8 @@ public final class UrlUtils {
      * @throws MalformedURLException if there is a problem creating the new URL
      */
     public static URL getUrlWithNewPort(final URL u, final int newPort) throws MalformedURLException {
-        return createNewUrl(u.getProtocol(), u.getHost(), newPort, u.getPath(), u.getRef(), u.getQuery());
+        return createNewUrl(u.getProtocol(), u.getUserInfo(), u.getHost(),
+                            newPort, u.getPath(), u.getRef(), u.getQuery());
     }
 
     /**
@@ -418,6 +422,7 @@ public final class UrlUtils {
     /**
      * Creates a new URL based on the specified fragments.
      * @param protocol the protocol to use (may not be {@code null})
+     * @param userInfo the user info to use (may be {@code null})
      * @param host the host to use (may not be {@code null})
      * @param port the port to use (may be <tt>-1</tt> if no port is specified)
      * @param path the path to use (may be {@code null} and may omit the initial <tt>'/'</tt>)
@@ -426,11 +431,14 @@ public final class UrlUtils {
      * @return a new URL based on the specified fragments
      * @throws MalformedURLException if there is a problem creating the new URL
      */
-    private static URL createNewUrl(final String protocol, final String host, final int port,
+    private static URL createNewUrl(final String protocol, final String userInfo, final String host, final int port,
             final String path, final String ref, final String query) throws MalformedURLException {
         final StringBuilder s = new StringBuilder();
         s.append(protocol);
         s.append("://");
+        if (userInfo != null) {
+            s.append(userInfo).append("@");
+        }
         s.append(host);
         if (port != -1) {
             s.append(":").append(port);
