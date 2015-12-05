@@ -14,18 +14,23 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLAreaElement}.
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAreaElementTest extends WebDriverTestCase {
@@ -81,6 +86,55 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <map><area id='a1'/><area id='a2' accesskey='A'/></map>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLButtonElement]", "[object HTMLButtonElement]",
+                "http://localhost:12345/", "http://srv/htmlunit.org"})
+    @BuggyWebDriver(FF)
+    public void focus() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var testNode = document.getElementById('myButton');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+
+            + "      testNode = document.getElementById('a1');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+
+            + "      testNode = document.getElementById('a2');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+
+            + "      testNode = document.getElementById('a3');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <button id='myButton'>Press</button>\n"
+            + "  <img usemap='#dot'"
+                    + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                    + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+            + "  <map name='dot'>\n"
+            + "    <area id='a1' shape='rect' coords='0,0,1,1'/>\n"
+            + "    <area id='a2' href='' shape='rect' coords='0,0,1,1'/>\n"
+            + "    <area id='a3' href='http://srv/htmlunit.org' shape='rect' coords='0,0,1,1'/>\n"
+            + "  <map>\n"
+            + "</body>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }

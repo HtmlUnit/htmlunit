@@ -4440,7 +4440,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "  <div id='myDiv'>blah</div>\n"
             + "  <a id='myA' href='http://srv/htmlunit.org'>anchor</a>\n"
             + "  <button id='myButton'>Press</button>\n"

@@ -788,7 +788,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "  <button id='myButton'>Press</button>\n"
             + "  <a id='myA'>anchor</a>\n"
             + "  <a id='myHrefEmpty' href=''>anchor</a>\n"

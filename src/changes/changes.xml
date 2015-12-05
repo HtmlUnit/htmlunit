@@ -9,6 +9,9 @@
     <body>
         <release version="2.20" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Area elements are not focusable if no href attribute defined.
+            </action>
+            <action type="fix" dev="rbri">
                 Anchors are not focusable if no href attribute defined.
             </action>
             <action type="fix" dev="rbri" issue="1731" due-to="Joerg Werner">
