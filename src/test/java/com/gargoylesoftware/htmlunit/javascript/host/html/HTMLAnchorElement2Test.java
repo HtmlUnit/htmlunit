@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -753,5 +754,48 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @NotYetImplemented
     public void origin() throws Exception {
         attribute("origin", "something");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLButtonElement]", "[object HTMLButtonElement]",
+                "http://localhost:12345/", "http://srv/htmlunit.org"})
+    public void focus() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var testNode = document.getElementById('myButton');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+
+            + "      testNode = document.getElementById('myA');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+
+            + "      testNode = document.getElementById('myHrefEmpty');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+
+            + "      testNode = document.getElementById('myHref');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "  <button id='myButton'>Press</button>\n"
+            + "  <a id='myA'>anchor</a>\n"
+            + "  <a id='myHrefEmpty' href=''>anchor</a>\n"
+            + "  <a id='myHref' href='http://srv/htmlunit.org'>anchor</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }

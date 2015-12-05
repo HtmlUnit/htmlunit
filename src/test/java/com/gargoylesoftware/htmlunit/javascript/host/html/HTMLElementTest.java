@@ -4409,4 +4409,44 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLBodyElement]", "[object HTMLButtonElement]",
+                    "http://srv/htmlunit.org", "http://srv/htmlunit.org"})
+    public void focus() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.activeElement);\n"
+
+            + "      var testNode = document.getElementById('myButton');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+
+            + "      testNode = document.getElementById('myA');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+
+            + "      testNode = document.getElementById('myDiv');\n"
+            + "      testNode.focus();\n"
+            + "      alert(document.activeElement);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "  <div id='myDiv'>blah</div>\n"
+            + "  <a id='myA' href='http://srv/htmlunit.org'>anchor</a>\n"
+            + "  <button id='myButton'>Press</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

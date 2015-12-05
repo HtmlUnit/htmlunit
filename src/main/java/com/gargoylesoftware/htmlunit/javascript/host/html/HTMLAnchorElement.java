@@ -30,6 +30,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -41,14 +43,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object that represents an anchor.
@@ -106,6 +107,21 @@ public class HTMLAnchorElement extends HTMLElement {
         catch (final MalformedURLException e) {
             return hrefAttr;
         }
+    }
+
+    /**
+     * Sets the focus to this element.
+     */
+    @JsxFunction
+    public void focus() {
+        final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+        final String hrefAttr = anchor.getHrefAttribute();
+
+        if (hrefAttr == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            return;
+        }
+
+        anchor.focus();
     }
 
     /**

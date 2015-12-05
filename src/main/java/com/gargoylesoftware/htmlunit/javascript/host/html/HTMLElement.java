@@ -2071,8 +2071,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxFunction
     public void focus() {
         final HtmlElement domNode = getDomNodeOrDie();
-        if (domNode instanceof SubmittableElement || domNode instanceof HtmlAnchor
-                || domNode instanceof HtmlArea) {
+        if (domNode instanceof SubmittableElement || domNode instanceof HtmlArea) {
             domNode.focus();
         }
 
