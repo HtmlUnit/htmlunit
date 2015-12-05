@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersion.BEST_SUPPORTED;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeNotNull;
@@ -194,7 +195,7 @@ public class ExternalTest {
     }
 
     private static WebClient getWebClient() {
-        return new WebClient();
+        return new WebClient(BEST_SUPPORTED);
     }
 
     /**

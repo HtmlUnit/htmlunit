@@ -157,17 +157,19 @@ public class BrowserVersion implements Serializable, Cloneable {
         + " (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240",
         12, "Edge", null);
 
+    /** The best supported browser version at the moment. */
+    public static final BrowserVersion BEST_SUPPORTED = FIREFOX_38;
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_8;
 
     /** Register plugins for the browser versions. */
     static {
+        // IE8
         INTERNET_EXPLORER_8.initDefaultFeatures();
-        INTERNET_EXPLORER_11.initDefaultFeatures();
+        INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
 
+        // FF31
         FIREFOX_31.initDefaultFeatures();
-        FIREFOX_38.initDefaultFeatures();
-
         FIREFOX_31.setBrowserLanguage("en-US");
         FIREFOX_31.setVendor("");
         FIREFOX_31.buildId_ = "20150504194141";
@@ -178,6 +180,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_31.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_31.setCssAcceptHeader("text/css,*/*;q=0.1");
 
+        // FF38
+        FIREFOX_38.initDefaultFeatures();
         FIREFOX_38.setBrowserLanguage("en-US");
         FIREFOX_38.setVendor("");
         FIREFOX_38.buildId_ = "20151027170520";
@@ -188,8 +192,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_38.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_38.setCssAcceptHeader("text/css,*/*;q=0.1");
 
-        INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
-
+        // IE11
+        INTERNET_EXPLORER_11.initDefaultFeatures();
         INTERNET_EXPLORER_11.setBrowserLanguage("en-US");
         INTERNET_EXPLORER_11.setVendor("");
         INTERNET_EXPLORER_11.setHeaderNamesOrdered(new String[] {
@@ -200,10 +204,12 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
         INTERNET_EXPLORER_11.setScriptAcceptHeader("application/javascript, */*;q=0.8");
 
+        // EDGE
         EDGE.initDefaultFeatures();
         EDGE.setBrowserLanguage("en-US");
         EDGE.setVendor("");
 
+        // CHROME
         CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
         CHROME.setVendor("Google Inc.");

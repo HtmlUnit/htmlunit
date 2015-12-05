@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="Bugfixes">
+            <action type="add" dev="rbri" due-to="mguillem">
+                BrowserVersion BEST_SUPPORTED added. This is (for now) a shortcut for FIREFOX38.
+            </action>
             <action type="fix" dev="rbri">
                 Area elements are not focusable if no href attribute defined.
             </action>
