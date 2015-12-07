@@ -301,4 +301,22 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
         assertEquals("tes t", t.getValueAttribute());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeDelKey() throws Exception {
+        final String html = "<html><head></head><body><input id='t'/></body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextInput t = page.getHtmlElementById("t");
+        t.type('t');
+        t.type('e');
+        t.type('t');
+        assertEquals("tet", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        assertEquals("tet", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_DELETE);
+        assertEquals("tt", t.getValueAttribute());
+    }
 }

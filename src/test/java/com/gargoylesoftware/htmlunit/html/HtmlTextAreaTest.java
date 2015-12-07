@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 
 /**
  * Tests for {@link HtmlTextArea}.
@@ -238,5 +239,44 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
         assertEquals(" foo \n bar ", textArea.getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeLeftArrow() throws Exception {
+        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextArea t = page.getHtmlElementById("t");
+        t.type('t');
+        t.type('e');
+        t.type('t');
+        assertEquals("tet", t.getText());
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        assertEquals("tet", t.getText());
+        t.type('s');
+        assertEquals("test", t.getText());
+        t.type(KeyboardEvent.DOM_VK_SPACE);
+        assertEquals("tes t", t.getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeDelKey() throws Exception {
+        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextArea t = page.getHtmlElementById("t");
+        t.type('t');
+        t.type('e');
+        t.type('t');
+        assertEquals("tet", t.getText());
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        assertEquals("tet", t.getText());
+        t.type(KeyboardEvent.DOM_VK_DELETE);
+        assertEquals("tt", t.getText());
     }
 }

@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.20" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Bring the implementation of special key support (e.g. VK_DELETE) for password input and textarea control
+                in sync with the input text control.
+            </action>
             <action type="add" dev="rbri" due-to="mguillem">
                 BrowserVersion BEST_SUPPORTED added. This is (for now) a shortcut for FIREFOX38.
             </action>

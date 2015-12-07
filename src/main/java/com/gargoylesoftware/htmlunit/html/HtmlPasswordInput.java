@@ -136,6 +136,14 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      * {@inheritDoc}
      */
     @Override
+    protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void typeDone(final String newValue) {
         if (newValue.length() <= getMaxLength()) {
             setAttribute("value", newValue);
