@@ -397,7 +397,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void redirection307_TemporaryRedirect_PostMethod() throws Exception {
         final int statusCode = 307;
         final HttpMethod initialRequestMethod = HttpMethod.POST;
-        final HttpMethod expectedRedirectedRequestMethod = null;
+        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.POST;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
