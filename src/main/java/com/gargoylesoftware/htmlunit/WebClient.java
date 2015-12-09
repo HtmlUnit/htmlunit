@@ -1335,7 +1335,7 @@ public class WebClient implements Serializable, AutoCloseable {
             getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxy'", this);
         }
         else if (status >= HttpStatus.SC_MOVED_PERMANENTLY
-            && status <= HttpStatus.SC_TEMPORARY_REDIRECT
+            && status <= 308
             && status != HttpStatus.SC_NOT_MODIFIED
             && getOptions().isRedirectEnabled()) {
 
@@ -1364,18 +1364,20 @@ public class WebClient implements Serializable, AutoCloseable {
                 throw new FailingHttpStatusCodeException("Too much redirect for "
                     + webResponse.getWebRequest().getUrl(), webResponse);
             }
-            else if ((status == HttpStatus.SC_MOVED_PERMANENTLY || status == HttpStatus.SC_TEMPORARY_REDIRECT)
-                && method == HttpMethod.GET) {
-                final WebRequest wrs = new WebRequest(newUrl);
+            else if (status == HttpStatus.SC_MOVED_PERMANENTLY
+                        || status == HttpStatus.SC_MOVED_TEMPORARILY
+                        || status == HttpStatus.SC_SEE_OTHER) {
+                final WebRequest wrs = new WebRequest(newUrl, HttpMethod.GET);
                 wrs.setRequestParameters(parameters);
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
-            else if (status <= HttpStatus.SC_SEE_OTHER) {
-                final WebRequest wrs = new WebRequest(newUrl);
-                wrs.setHttpMethod(HttpMethod.GET);
+            else if (status == HttpStatus.SC_TEMPORARY_REDIRECT
+                        || status == 308) {
+                final WebRequest wrs = new WebRequest(newUrl, webRequest.getHttpMethod());
+                wrs.setRequestParameters(parameters);
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
