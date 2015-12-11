@@ -24,6 +24,7 @@ import java.util.Random;
 import java.util.zip.Deflater;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -53,7 +54,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts("§§URL§§page2.html")
     public void redirect301() throws Exception {
         redirectGet(301, HttpMethod.GET, "/page2.html");
-        redirectPost(301, HttpMethod.GET, "/page2.html");
+        redirectPost(301, HttpMethod.GET, "/page2.html", false);
     }
 
     /**
@@ -63,7 +64,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts("§§URL§§page2.html")
     public void redirectAbsolute301() throws Exception {
         redirectGet(301, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm());
-        redirectPost(301, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm());
+        redirectPost(301, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm(), false);
     }
 
     /**
@@ -74,7 +75,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect301WithQuery() throws Exception {
         redirectGet(301, HttpMethod.GET, "/page2.html?test=foo");
-        redirectPost(301, HttpMethod.GET, "/page2.html?test=foo");
+        redirectPost(301, HttpMethod.GET, "/page2.html?test=foo", true);
     }
 
     /**
@@ -85,7 +86,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect301WithHash() throws Exception {
         redirectGet(301, HttpMethod.GET, "/page2.html#hash");
-        redirectPost(301, HttpMethod.GET, "/page2.html#hash");
+        redirectPost(301, HttpMethod.GET, "/page2.html#hash", false);
     }
 
     /**
@@ -96,7 +97,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect301WithQueryAndHash() throws Exception {
         redirectGet(301, HttpMethod.GET, "/page2.html?test=foo#hash");
-        redirectPost(301, HttpMethod.GET, "/page2.html?test=foo#hash");
+        redirectPost(301, HttpMethod.GET, "/page2.html?test=foo#hash", true);
     }
 
     /**
@@ -142,7 +143,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect302() throws Exception {
         redirectGet(302, HttpMethod.GET, "/page2.html");
-        redirectPost(302, HttpMethod.GET, "/page2.html");
+        redirectPost(302, HttpMethod.GET, "/page2.html", false);
     }
 
     /**
@@ -152,7 +153,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts("§§URL§§page2.html")
     public void redirectAbsolute302() throws Exception {
         redirectGet(302, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm());
-        redirectPost(302, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm());
+        redirectPost(302, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm(), false);
     }
 
     /**
@@ -163,7 +164,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect302WithQuery() throws Exception {
         redirectGet(302, HttpMethod.GET, "/page2.html?test=foo");
-        redirectPost(302, HttpMethod.GET, "/page2.html?test=foo");
+        redirectPost(302, HttpMethod.GET, "/page2.html?test=foo", true);
     }
 
     /**
@@ -174,7 +175,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect302WithHash() throws Exception {
         redirectGet(302, HttpMethod.GET, "/page2.html#hash");
-        redirectPost(302, HttpMethod.GET, "/page2.html#hash");
+        redirectPost(302, HttpMethod.GET, "/page2.html#hash", false);
     }
 
     /**
@@ -185,7 +186,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect302WithQueryAndHash() throws Exception {
         redirectGet(302, HttpMethod.GET, "/page2.html?test=foo#hash");
-        redirectPost(302, HttpMethod.GET, "/page2.html?test=foo#hash");
+        redirectPost(302, HttpMethod.GET, "/page2.html?test=foo#hash", true);
     }
 
     /**
@@ -196,7 +197,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect303() throws Exception {
         redirectGet(303, HttpMethod.GET, "/page2.html");
-        redirectPost(303, HttpMethod.GET, "/page2.html");
+        redirectPost(303, HttpMethod.GET, "/page2.html", false);
     }
 
     /**
@@ -206,7 +207,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts("§§URL§§page2.html")
     public void redirectAbsolute303() throws Exception {
         redirectGet(303, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm());
-        redirectPost(303, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm());
+        redirectPost(303, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm(), false);
     }
 
     /**
@@ -217,7 +218,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect303WithQuery() throws Exception {
         redirectGet(303, HttpMethod.GET, "/page2.html?test=foo");
-        redirectPost(303, HttpMethod.GET, "/page2.html?test=foo");
+        redirectPost(303, HttpMethod.GET, "/page2.html?test=foo", true);
     }
 
     /**
@@ -228,7 +229,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect303WithHash() throws Exception {
         redirectGet(303, HttpMethod.GET, "/page2.html#hash");
-        redirectPost(303, HttpMethod.GET, "/page2.html#hash");
+        redirectPost(303, HttpMethod.GET, "/page2.html#hash", false);
     }
 
     /**
@@ -239,7 +240,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect303WithQueryAndHash() throws Exception {
         redirectGet(303, HttpMethod.GET, "/page2.html?test=foo#hash");
-        redirectPost(303, HttpMethod.GET, "/page2.html?test=foo#hash");
+        redirectPost(303, HttpMethod.GET, "/page2.html?test=foo#hash", true);
     }
 
     /**
@@ -250,7 +251,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect307() throws Exception {
         redirectGet(307, HttpMethod.GET, "/page2.html");
-        redirectPost(307, HttpMethod.POST, "/page2.html");
+        redirectPost(307, HttpMethod.POST, "/page2.html", true);
     }
 
     /**
@@ -261,7 +262,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect307WithQuery() throws Exception {
         redirectGet(307, HttpMethod.GET, "/page2.html?test=foo");
-        redirectPost(307, HttpMethod.POST, "/page2.html?test=foo");
+        redirectPost(307, HttpMethod.POST, "/page2.html?test=foo", true);
     }
 
     /**
@@ -271,7 +272,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts("§§URL§§page2.html")
     public void redirectAbsolute307() throws Exception {
         redirectGet(307, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm());
-        redirectPost(307, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm());
+        redirectPost(307, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm(), true);
     }
 
     /**
@@ -282,7 +283,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect307WithHash() throws Exception {
         redirectGet(307, HttpMethod.GET, "/page2.html#hash");
-        redirectPost(307, HttpMethod.POST, "/page2.html#hash");
+        redirectPost(307, HttpMethod.POST, "/page2.html#hash", true);
     }
 
     /**
@@ -293,7 +294,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect307WithQueryAndHash() throws Exception {
         redirectGet(307, HttpMethod.GET, "/page2.html?test=foo#hash");
-        redirectPost(307, HttpMethod.POST, "/page2.html?test=foo#hash");
+        redirectPost(307, HttpMethod.POST, "/page2.html?test=foo#hash", true);
     }
 
     /**
@@ -304,7 +305,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect308() throws Exception {
         redirectGet(308, HttpMethod.GET, "/page2.html");
-        redirectPost(308, HttpMethod.POST, "/page2.html");
+        redirectPost(308, HttpMethod.POST, "/page2.html", true);
     }
 
     /**
@@ -315,7 +316,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect308WithQuery() throws Exception {
         redirectGet(308, HttpMethod.GET, "/page2.html?test=foo");
-        redirectPost(308, HttpMethod.POST, "/page2.html?test=foo");
+        redirectPost(308, HttpMethod.POST, "/page2.html?test=foo", true);
     }
 
     /**
@@ -325,7 +326,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts("§§URL§§page2.html")
     public void redirectAbsolute308() throws Exception {
         redirectGet(308, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm());
-        redirectPost(308, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm());
+        redirectPost(308, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm(), true);
     }
 
     /**
@@ -336,7 +337,7 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect308WithHash() throws Exception {
         redirectGet(308, HttpMethod.GET, "/page2.html#hash");
-        redirectPost(308, HttpMethod.POST, "/page2.html#hash");
+        redirectPost(308, HttpMethod.POST, "/page2.html#hash", true);
     }
 
     /**
@@ -347,21 +348,23 @@ public class WebClient3Test extends WebDriverTestCase {
     // FF38 succeeds only when running alone
     public void redirect308WithQueryAndHash() throws Exception {
         redirectGet(308, HttpMethod.GET, "/page2.html?test=foo#hash");
-        redirectPost(308, HttpMethod.POST, "/page2.html?test=foo#hash");
+        redirectPost(308, HttpMethod.POST, "/page2.html?test=foo#hash", true);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
-            IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
+    @Alerts(DEFAULT =
+                "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4",
+            IE = "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&x26;ignoresearch_submit=Get%20Resumes&x26;mne=4")
     @NotYetImplemented
     // FF38 succeeds only when running alone
     public void redirect302WithQueryAndHashSpecialChars() throws Exception {
-        redirectGet(302, HttpMethod.GET, "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4");
+        redirectGet(302, HttpMethod.GET,
+                "/page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4");
         redirectPost(302, HttpMethod.GET,
-                "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4");
+                "/page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4", true);
     }
 
     private void redirectGet(final int code, final HttpMethod httpMethod, final String redirectUrl) throws Exception {
@@ -384,7 +387,8 @@ public class WebClient3Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
-    private void redirectPost(final int code, final HttpMethod httpMethod, final String redirectUrl) throws Exception {
+    private void redirectPost(final int code, final HttpMethod httpMethod,
+            final String redirectUrl, final boolean resendParams) throws Exception {
         final String html = "<html><body><form action='redirect.html' method='POST'>"
                 + " <input type='hidden' name='param1' value='paramValue'>"
                 + " <input type='submit' id='postBtn' value='Submit'>"
@@ -405,9 +409,23 @@ public class WebClient3Test extends WebDriverTestCase {
         assertEquals(reqCount + 3, getMockWebConnection().getRequestCount());
         assertEquals(httpMethod, getMockWebConnection().getLastWebRequest().getHttpMethod());
 
-        final NameValuePair param = getMockWebConnection().getLastWebRequest().getRequestParameters().get(0);
-        assertEquals("param1", param.getName());
-        assertEquals("paramValue", param.getValue());
+        if (resendParams) {
+            assertTrue(getMockWebConnection().getLastWebRequest().getRequestParameters().size() > 0);
+
+            final NameValuePair param = getMockWebConnection().getLastWebRequest().getRequestParameters().get(0);
+            if ("param1".equals(param.getName())) {
+                assertEquals("paramValue", param.getValue());
+            }
+            else if ("test".equals(param.getName())) {
+                assertEquals("foo", param.getValue());
+            }
+            else if (!param.getName().startsWith("ignore")) {
+                Assert.fail("unexpected param '" + param.getName() + "'");
+            }
+        }
+        else {
+            assertEquals(0, getMockWebConnection().getLastWebRequest().getRequestParameters().size());
+        }
 
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
     }

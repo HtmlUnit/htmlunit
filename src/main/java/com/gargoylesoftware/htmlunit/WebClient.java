@@ -1365,10 +1365,9 @@ public class WebClient implements Serializable, AutoCloseable {
                     + webResponse.getWebRequest().getUrl(), webResponse);
             }
             else if (status == HttpStatus.SC_MOVED_PERMANENTLY
-                        || status == HttpStatus.SC_MOVED_TEMPORARILY
-                        || status == HttpStatus.SC_SEE_OTHER) {
+                    || status == HttpStatus.SC_MOVED_TEMPORARILY
+                    || status == HttpStatus.SC_SEE_OTHER) {
                 final WebRequest wrs = new WebRequest(newUrl, HttpMethod.GET);
-                wrs.setRequestParameters(parameters);
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
