@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_308;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PROTOCOL_DATA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
@@ -1335,7 +1336,7 @@ public class WebClient implements Serializable, AutoCloseable {
             getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxy'", this);
         }
         else if (status >= HttpStatus.SC_MOVED_PERMANENTLY
-            && status <= 308
+            && status <= (getBrowserVersion().hasFeature(HTTP_REDIRECT_308) ? 308 : 307)
             && status != HttpStatus.SC_NOT_MODIFIED
             && getOptions().isRedirectEnabled()) {
 

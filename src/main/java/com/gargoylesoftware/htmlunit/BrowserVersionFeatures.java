@@ -743,6 +743,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
     HTTP_COOKIE_START_DATE_1970,
 
+    /** Supports redirect via 308 code. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    HTTP_REDIRECT_308,
+
     /** Indicates that the browser should ignore contents of inner head elements. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     IGNORE_CONTENTS_OF_INNER_HEAD,
