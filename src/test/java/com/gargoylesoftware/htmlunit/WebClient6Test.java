@@ -306,7 +306,7 @@ public class WebClient6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "§§URL§§page2.html", "3" },
-            IE11 = { "§§URL§§redirect.html", "2" })
+            IE = { "§§URL§§redirect.html", "2" })
     // FF38 succeeds only when running alone
     public void redirect308() throws Exception {
         redirectGet(308, HttpMethod.GET, "/page2.html");
@@ -318,7 +318,7 @@ public class WebClient6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "§§URL§§page2.html?test=foo", "3" },
-            IE11 = { "§§URL§§redirect.html", "2" })
+            IE = { "§§URL§§redirect.html", "2" })
     // FF38 succeeds only when running alone
     public void redirect308WithQuery() throws Exception {
         redirectGet(308, HttpMethod.GET, "/page2.html?test=foo");
@@ -330,7 +330,7 @@ public class WebClient6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "§§URL§§page2.html", "3" },
-            IE11 = { "§§URL§§redirect.html", "2" })
+            IE = { "§§URL§§redirect.html", "2" })
     public void redirectAbsolute308() throws Exception {
         redirectGet(308, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm());
         redirectPost(308, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm(), true);
@@ -341,7 +341,7 @@ public class WebClient6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "§§URL§§page2.html#hash", "3" },
-            IE11 = { "§§URL§§redirect.html", "2" })
+            IE = { "§§URL§§redirect.html", "2" })
     // FF38 succeeds only when running alone
     public void redirect308WithHash() throws Exception {
         redirectGet(308, HttpMethod.GET, "/page2.html#hash");
@@ -353,7 +353,7 @@ public class WebClient6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "§§URL§§page2.html?test=foo#hash", "3" },
-            IE11 = { "§§URL§§redirect.html", "2" })
+            IE = { "§§URL§§redirect.html", "2" })
     // FF38 succeeds only when running alone
     public void redirect308WithQueryAndHash() throws Exception {
         redirectGet(308, HttpMethod.GET, "/page2.html?test=foo#hash");
