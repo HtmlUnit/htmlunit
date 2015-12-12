@@ -127,16 +127,20 @@ public class WebClient6Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4", "3" },
-            IE = { "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4", "3" })
+    @Alerts(DEFAULT =
+                { "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4",
+                    "3" },
+            IE = { "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&x26;ignoresearch_submit=Get%20Resumes&x26;mne=4",
+                    "3" })
     @NotYetImplemented
     // FF38 succeeds only when running alone
     public void redirectAbsolute301WithQueryAndHashSpecialChars() throws Exception {
         redirectGet(301, HttpMethod.GET, new URL(URL_FIRST,
-                "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4").toExternalForm());
+            "/page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4")
+                .toExternalForm());
         redirectPost(301, HttpMethod.GET, new URL(URL_FIRST,
-                "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4").toExternalForm(),
-                true);
+            "/page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4")
+                    .toExternalForm(), true);
     }
 
     /**
@@ -365,8 +369,10 @@ public class WebClient6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT =
-                "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4",
-            IE = "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&x26;ignoresearch_submit=Get%20Resumes&x26;mne=4")
+                { "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4",
+                    "3" },
+            IE = { "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&x26;ignoresearch_submit=Get%20Resumes&x26;mne=4",
+                    "3" })
     @NotYetImplemented
     // FF38 succeeds only when running alone
     public void redirect302WithQueryAndHashSpecialChars() throws Exception {
