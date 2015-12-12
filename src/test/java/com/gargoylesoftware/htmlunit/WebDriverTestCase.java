@@ -253,6 +253,33 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Some of our selenium test are only working fine, if the
+     * browser session was started directly before the test. For
+     * this kind of test classes overload this method and return true;
+     * @return always false
+     */
+    protected boolean shutDownRealBrowsersAfterEachTest() {
+        return false;
+    }
+
+    /**
+     * Closes the real browser drivers.
+     * @see #shutDownRealBrowsersAfterTest()
+     * @throws Exception If an error occurs
+     */
+    @After
+    public void shutDownRealBrowsers() throws Exception {
+        if (!shutDownRealBrowsersAfterEachTest()) {
+            return;
+        }
+
+        for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
+            driver.quit();
+        }
+        WEB_DRIVERS_REAL_BROWSERS.clear();
+    }
+
+    /**
      * Stops all WebServers.
      * @throws Exception if it fails
      */
@@ -918,25 +945,27 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         if (useRealBrowser_) {
-            final WebDriver driver = getWebDriver();
-            final String currentWindow = driver.getWindowHandle();
+            final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(getBrowserVersion());
+            if (driver != null) {
+                final String currentWindow = driver.getWindowHandle();
 
-            // close all windows except the current one
-            for (final String handle : driver.getWindowHandles()) {
-                if (!currentWindow.equals(handle)) {
-                    driver.switchTo().window(handle).close();
+                // close all windows except the current one
+                for (final String handle : driver.getWindowHandles()) {
+                    if (!currentWindow.equals(handle)) {
+                        driver.switchTo().window(handle).close();
+                    }
                 }
+
+                // we have to force webdriver to treat the remaining window
+                // as the one we like to work with from now on
+                // looks like a web driver issue to me (version 2.47.2)
+                driver.switchTo().window(currentWindow);
+
+                driver.manage().deleteAllCookies();
+
+                // in the remaining window, load a blank page
+                driver.get("about:blank");
             }
-
-            // we have to force webdriver to treat the remaining window
-            // as the one we like to work with from now on
-            // looks like a web driver issue to me (version 2.47.2)
-            driver.switchTo().window(currentWindow);
-
-            driver.manage().deleteAllCookies();
-
-            // in the remaining window, load a blank page
-            driver.get("about:blank");
         }
     }
 
