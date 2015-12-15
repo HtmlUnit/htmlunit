@@ -113,15 +113,14 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the focus to this element.
      */
     @JsxFunction
+    @Override
     public void focus() {
         final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
         final String hrefAttr = anchor.getHrefAttribute();
 
-        if (hrefAttr == DomElement.ATTRIBUTE_NOT_DEFINED) {
-            return;
+        if (hrefAttr != DomElement.ATTRIBUTE_NOT_DEFINED) {
+            anchor.focus();
         }
-
-        anchor.focus();
     }
 
     /**

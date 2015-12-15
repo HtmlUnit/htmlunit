@@ -108,15 +108,14 @@ public class HTMLAreaElement extends HTMLElement {
      * Sets the focus to this element.
      */
     @JsxFunction
+    @Override
     public void focus() {
         // in reality this depends also on the visibility of the area itself
         final HtmlArea area = (HtmlArea) getDomNodeOrDie();
         final String hrefAttr = area.getHrefAttribute();
 
-        if (hrefAttr == DomElement.ATTRIBUTE_NOT_DEFINED) {
-            return;
+        if (hrefAttr != DomElement.ATTRIBUTE_NOT_DEFINED) {
+            area.focus();
         }
-
-        area.focus();
     }
 }
