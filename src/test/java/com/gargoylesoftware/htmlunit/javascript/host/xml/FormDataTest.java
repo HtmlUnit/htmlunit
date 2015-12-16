@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link FormData}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class FormDataTest extends WebDriverTestCase {
@@ -84,6 +85,8 @@ public class FormDataTest extends WebDriverTestCase {
             + "    var formData = new FormData();\n"
             + "    formData.append('myKey', 'myValue');\n"
             + "    formData.append('myKey', 'myValue2');\n"
+            + "    formData.append('myKeyNull', null);\n"
+            + "    formData.append('myKeyUndef', undefined);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
             + "  }\n"
@@ -97,7 +100,7 @@ public class FormDataTest extends WebDriverTestCase {
         final List<String> alerts = getCollectedAlerts(driver);
         if (!alerts.isEmpty()) {
             final String[] lines = alerts.get(0).split("\\n");
-            assertEquals(9, lines.length);
+            assertEquals(17, lines.length);
             assertEquals("Content-Disposition: form-data; name=\"myKey\"", lines[1]);
             assertEquals("", lines[2]);
             assertEquals("myValue", lines[3]);
@@ -105,7 +108,15 @@ public class FormDataTest extends WebDriverTestCase {
             assertEquals("Content-Disposition: form-data; name=\"myKey\"", lines[5]);
             assertEquals("", lines[6]);
             assertEquals("myValue2", lines[7]);
-            assertEquals(lines[0] + "--", lines[8]);
+            assertEquals(lines[0], lines[8]);
+            assertEquals("Content-Disposition: form-data; name=\"myKeyNull\"", lines[9]);
+            assertEquals("", lines[10]);
+            assertEquals("null", lines[11]);
+            assertEquals(lines[0], lines[12]);
+            assertEquals("Content-Disposition: form-data; name=\"myKeyUndef\"", lines[13]);
+            assertEquals("", lines[14]);
+            assertEquals("undefined", lines[15]);
+            assertEquals(lines[0] + "--", lines[16]);
         }
     }
 

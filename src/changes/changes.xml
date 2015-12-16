@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Fix NPE in FormData#append when calling with null or undefined as value.
+            </action>
             <action type="fix" dev="rbri" issue="1733">
                 Fix redirect handling for status code 301, 302 and 307 (POST); add support for status code 308.
             </action>

@@ -22,6 +22,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -37,6 +39,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * A JavaScript object for {@code FormData}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
         @WebBrowser(EDGE) })
@@ -65,7 +68,7 @@ public class FormData extends SimpleScriptable {
             requestParameters_.add(new KeyDataPair(name, file.getFile(), file.getType(), null));
         }
         else {
-            requestParameters_.add(new NameValuePair(name, value.toString()));
+            requestParameters_.add(new NameValuePair(name, Context.toString(value)));
         }
     }
 
