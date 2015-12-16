@@ -26,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -370,7 +371,9 @@ public class WebClient6Test extends WebDriverTestCase {
     }
 
     private void redirectGet(final int code, final HttpMethod httpMethod, final String redirectUrl) throws Exception {
-        final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
+        final String html =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><body><a href='redirect.html'>redirect</a></body></html>";
         final int reqCount = getMockWebConnection().getRequestCount();
 
         final URL url = new URL(getDefaultUrl(), "page2.html");
@@ -394,7 +397,9 @@ public class WebClient6Test extends WebDriverTestCase {
 
     private void redirectPost(final int code, final HttpMethod httpMethod,
             final String redirectUrl, final boolean resendParams) throws Exception {
-        final String html = "<html><body><form action='redirect.html' method='POST'>"
+        final String html =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><body><form action='redirect.html' method='POST'>"
                 + " <input type='hidden' name='param1' value='paramValue'>"
                 + " <input type='submit' id='postBtn' value='Submit'>"
                 + "</form></body></html>";
