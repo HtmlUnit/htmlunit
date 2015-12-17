@@ -19,8 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_IMAGE_URL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS;
@@ -54,7 +52,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -5293,11 +5290,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setZIndex(final Object zIndex) {
-        if (zIndex == null
-                && getBrowserVersion().hasFeature(CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR)) {
-            throw new EvaluatorException("Null is invalid for z-index.");
-        }
-
         // empty
         if (zIndex == null || StringUtils.isEmpty(zIndex.toString())) {
             setStyleAttribute(Z_INDEX, "");
@@ -5305,12 +5297,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
         // undefined
         if (Context.getUndefinedValue().equals(zIndex)) {
-            if (getBrowserVersion().hasFeature(CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR)) {
-                throw new EvaluatorException("Undefind is invalid for z-index.");
-            }
-            if (getBrowserVersion().hasFeature(CSS_ZINDEX_UNDEFINED_FORCES_RESET)) {
-                setStyleAttribute(Z_INDEX, "");
-            }
             return;
         }
 

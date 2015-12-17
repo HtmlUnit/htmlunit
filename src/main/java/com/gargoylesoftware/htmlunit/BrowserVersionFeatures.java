@@ -160,14 +160,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_ZINDEX_TYPE_INTEGER,
 
-    /** If values for the zIndex is undefined than set the zindex to the default value. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_ZINDEX_UNDEFINED_FORCES_RESET,
-
-    /** If values for the zIndex is undefined or null than set the zindex throws an error. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR,
-
     /** */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     DIALOGWINDOW_REFERER,
@@ -175,14 +167,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     DISPLAYED_COLLAPSE,
-
-    /** */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    DOCTYPE_4_0_TRANSITIONAL_STANDARDS,
-
-    /** DOCTYPE is a Comment from JavaScript perspective. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    DOCTYPE_IS_COMMENT,
 
     /** DOCTYPE has undefined value for 'prefix'. */
     @BrowserFeature(@WebBrowser(CHROME))

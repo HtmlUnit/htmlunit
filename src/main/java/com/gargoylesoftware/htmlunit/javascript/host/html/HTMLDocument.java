@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_4_0_TRANSITIONAL_STANDARDS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_LEVEL_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_LEVEL_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
@@ -935,9 +934,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
                 if ("http://www.w3.org/TR/html4/loose.dtd".equals(systemId)) {
                     final String publicId = docType.getPublicId();
-                    if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)
-                        || ("-//W3C//DTD HTML 4.0 Transitional//EN".equals(publicId)
-                                && browserVersion.hasFeature(DOCTYPE_4_0_TRANSITIONAL_STANDARDS))) {
+                    if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)) {
                         return false;
                     }
                 }
@@ -951,7 +948,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 if (docType.getName() != null) {
                     return false;
                 }
-                return !browserVersion.hasFeature(DOCTYPE_4_0_TRANSITIONAL_STANDARDS);
+                return true;
             }
         }
         return true;
