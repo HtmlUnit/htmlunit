@@ -32,9 +32,34 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDocumentWrite2Test extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLDocument]",
+            IE8 = "[object]")
+    public void openResult() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var res = document.open();\n"
+            + "  alert(res);\n"
+            + "  document.close();\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 
     /**
      * @throws Exception if the test fails

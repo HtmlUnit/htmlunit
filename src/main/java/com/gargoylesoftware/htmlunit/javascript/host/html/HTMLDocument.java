@@ -1094,7 +1094,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param name the name
      * @param features the features
      * @param replace whether to replace in the history list or no
-     * @return a reference to the new document object or the window object.
+     * @return a reference to the new document object.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536652.aspx">MSDN documentation</a>
      */
     @JsxFunction
@@ -1118,7 +1118,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             final URL enclosingUrl = ((FrameWindow) getWindow().getWebWindow()).getEnclosingPage().getUrl();
             getPage().getWebResponse().getWebRequest().setUrl(enclosingUrl);
         }
-        return null;
+        return this;
     }
 
     /**

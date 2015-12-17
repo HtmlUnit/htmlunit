@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1730">
+                Function document.open(..) returns the opened document.
+            </action>
             <action type="fix" dev="rbri">
                 Browsers do not escape double quote and backslash in cookie values.
             </action>
