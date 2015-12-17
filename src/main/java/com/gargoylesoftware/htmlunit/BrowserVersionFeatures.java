@@ -73,19 +73,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     CSS_DEFAULT_ELEMENT_HEIGHT_18,
 
-    /** Indicates that the default value for height of elements is 19 instead of 20. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_DEFAULT_ELEMENT_HEIGHT_19,
-
-    /** Indicates that the default value for height of elements is used instead
-     * of the calculated value, if the calculated value is smaller. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN,
-
-    /** Indicates that the default value for width is 'auto'. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_DEFAULT_WIDTH_AUTO,
-
     /** Is display style of HtmlDialog is 'none'. */
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_DIALOG_NONE,
@@ -109,10 +96,6 @@ public enum BrowserVersionFeatures {
     /** Default is 'normal'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     CSS_FONT_STRECH_DEFAULT_NORMAL,
-
-    /** Is display style of HtmlFrameSet is 'inline'. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_FRAMESET_INLINE,
 
     /** Indicates that the browser can surrounds image url's with quotes. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })

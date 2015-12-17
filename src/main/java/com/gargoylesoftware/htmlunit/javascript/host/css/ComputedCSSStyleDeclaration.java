@@ -16,9 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_19;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX;
@@ -30,6 +27,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.css.sac.Selector;
@@ -63,8 +62,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -1957,10 +1954,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             public String get(final ComputedCSSStyleDeclaration style) {
                 final String value = style.getStyleAttribute(WIDTH);
                 if (StringUtils.isEmpty(value)) {
-                    if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)) {
-                        return "auto";
-                    }
-
                     if ("absolute".equals(getStyleAttribute("position"))) {
                         final String content = getDomNodeOrDie().getTextContent();
                         // do this only for small content
@@ -1973,10 +1966,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     return getWindowDefaultValue() + "px";
                 }
                 else if ("auto".equals(value)) {
-                    if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)) {
-                        return "auto";
-                    }
-
                     return getWindowDefaultValue() + "px";
                 }
 
@@ -2039,18 +2028,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else if ("block".equals(display)) {
                 // Block elements take up 100% of the parent's width.
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptableObject();
-                final String parentWidth = getWindow().getComputedStyle(parentJS, null).getWidth();
-                if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)
-                        && "auto".equals(parentWidth)) {
-                    width = windowWidth;
-                }
-                else {
-                    width = pixelValue(parentJS, new CssValue(windowWidth) {
-                        @Override public String get(final ComputedCSSStyleDeclaration style) {
-                            return style.getWidth();
-                        }
-                    });
-                }
+                width = pixelValue(parentJS, new CssValue(windowWidth) {
+                    @Override public String get(final ComputedCSSStyleDeclaration style) {
+                        return style.getWidth();
+                    }
+                });
                 width -= getBorderHorizontal() + getPaddingHorizontal();
             }
             else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
@@ -2151,13 +2133,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int contentHeight = getContentHeight();
-        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN);
         final boolean explicitHeightSpecified = !super.getHeight().isEmpty();
 
         int height;
-        if (contentHeight > 0
-                && ((useDefaultHeight && contentHeight > elementHeight)
-                        || (!useDefaultHeight && !explicitHeightSpecified))) {
+        if (contentHeight > 0 && !explicitHeightSpecified) {
             height = contentHeight;
         }
         else {
@@ -2222,9 +2201,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 defaultHeight = 0;
             }
         }
-        else if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_19)) {
-            defaultHeight = 19;
-        }
         else if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_18)) {
             defaultHeight = 18;
         }
@@ -2244,8 +2220,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         });
 
-        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN);
-        if (height == 0 && !explicitHeightSpecified || (useDefaultHeight && height < defaultHeight)) {
+        if (height == 0 && !explicitHeightSpecified) {
             height = defaultHeight;
         }
 

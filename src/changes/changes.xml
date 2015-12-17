@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.20" date="???" description="Bugfixes">
+        <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri" issue="1730">
                 Function document.open(..) returns the opened document.
             </action>
