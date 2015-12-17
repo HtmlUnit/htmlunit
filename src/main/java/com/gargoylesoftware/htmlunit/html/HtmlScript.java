@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SCRIPT_DISPLAY_INLINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
@@ -30,6 +29,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUP
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -51,8 +52,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 /**
  * Wrapper for the HTML element "script".<br>
@@ -622,9 +621,6 @@ public class HtmlScript extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_SCRIPT_DISPLAY_INLINE)) {
-            return DisplayStyle.INLINE;
-        }
         return DisplayStyle.NONE;
     }
 }

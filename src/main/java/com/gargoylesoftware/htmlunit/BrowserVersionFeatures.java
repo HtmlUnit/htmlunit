@@ -121,10 +121,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     CSS_NOSCRIPT_DISPLAY_INLINE,
 
-    /** Indicates that only integers are allowed for pixel value. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_PIXEL_VALUES_INT_ONLY,
-
     /** The default value of the display property for the 'progress' tag is 'inline' instead of the default one. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_PROGRESS_DISPLAY_INLINE,
@@ -133,10 +129,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
     CSS_RP_DISPLAY_NONE,
 
-    /** The default value of the display property for the 'rp' tag is 'inline'. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_RT_DISPLAY_INLINE,
-
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 38) })
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
@@ -144,10 +136,6 @@ public enum BrowserVersionFeatures {
     /** The default value of the display property for the 'ruby' tag is 'inline'. */
     @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 31), @WebBrowser(CHROME) })
     CSS_RUBY_DISPLAY_INLINE,
-
-    /** The default value of the display property for the 'script' tag is 'inline' instead of the default one. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_SCRIPT_DISPLAY_INLINE,
 
     /** Indicates that the id^="" selector produces hits. */
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8) })
@@ -171,10 +159,6 @@ public enum BrowserVersionFeatures {
     /** zIndex is of type Integer. Other values are ignored (''). */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_ZINDEX_TYPE_INTEGER,
-
-    /** IE uses the type Number for the zIndex Values (instead of String). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    CSS_ZINDEX_TYPE_NUMBER,
 
     /** If values for the zIndex is undefined than set the zindex to the default value. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

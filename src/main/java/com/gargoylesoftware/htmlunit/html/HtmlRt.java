@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_INLINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
 
 import java.util.Map;
@@ -79,17 +78,9 @@ public class HtmlRt extends HtmlElement {
             if (getParentNode() == null) {
                 return DisplayStyle.EMPTY;
             }
-            if (hasFeature(CSS_RT_DISPLAY_INLINE) && !getHtmlPageOrNull().isQuirksMode()) {
-                return DisplayStyle.RUBY_TEXT;
-            }
         }
         else {
-            if (!hasFeature(CSS_RT_DISPLAY_INLINE)) {
-                return DisplayStyle.BLOCK;
-            }
-            else if (!getHtmlPageOrNull().isQuirksMode()) {
-                return DisplayStyle.RUBY_TEXT;
-            }
+            return DisplayStyle.BLOCK;
         }
         return DisplayStyle.INLINE;
     }

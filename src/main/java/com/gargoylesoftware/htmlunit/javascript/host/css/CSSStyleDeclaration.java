@@ -16,11 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_IMAGE_URL_QUOTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PIXEL_VALUES_INT_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
@@ -55,6 +53,11 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
@@ -82,12 +85,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.steadystate.css.dom.CSSValueImpl;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
 
 /**
  * A JavaScript object for {@code CSSStyleDeclaration}.
@@ -5280,21 +5277,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             }
         }
 
-        if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_NUMBER)) {
-            if (value == null
-                    || Context.getUndefinedValue().equals(value)
-                    || StringUtils.isEmpty(value.toString())) {
-                return Integer.valueOf(0);
-            }
-            try {
-                final Double numericValue = Double.valueOf(value);
-                return Integer.valueOf(numericValue.intValue());
-            }
-            catch (final NumberFormatException e) {
-                return Integer.valueOf(0);
-            }
-        }
-
         // zIndex is string
         try {
             Integer.parseInt(value);
@@ -5329,24 +5311,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             if (getBrowserVersion().hasFeature(CSS_ZINDEX_UNDEFINED_FORCES_RESET)) {
                 setStyleAttribute(Z_INDEX, "");
             }
-            return;
-        }
-
-        // number
-        if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_NUMBER)) {
-            final Double d;
-            if (zIndex instanceof Double) {
-                d = (Double) zIndex;
-            }
-            else {
-                try {
-                    d = Double.valueOf(zIndex.toString());
-                }
-                catch (final NumberFormatException e) {
-                    throw new WrappedException(e);
-                }
-            }
-            setStyleAttribute(Z_INDEX, Integer.toString(d.intValue()));
             return;
         }
 
@@ -6079,16 +6043,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
         try {
             final float floatValue = Float.parseFloat(value);
-            if (getBrowserVersion().hasFeature(CSS_PIXEL_VALUES_INT_ONLY)) {
+            if (floatValue % 1 == 0) {
                 value = Integer.toString((int) floatValue) + "px";
             }
             else {
-                if (floatValue % 1 == 0) {
-                    value = Integer.toString((int) floatValue) + "px";
-                }
-                else {
-                    value = Float.toString(floatValue) + "px";
-                }
+                value = Float.toString(floatValue) + "px";
             }
         }
         catch (final Exception e) {
