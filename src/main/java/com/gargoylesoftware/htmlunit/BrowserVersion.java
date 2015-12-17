@@ -128,14 +128,6 @@ public class BrowserVersion implements Serializable, Cloneable {
         "Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0",
         (float) 38.0, "FF38", null);
 
-    /**
-     * Internet Explorer 8.
-     * It exists as Internet Explorer 11 has Enterprise Mode, which behaves as Internet Explorer 8.
-     */
-    public static final BrowserVersion INTERNET_EXPLORER_8 = new BrowserVersion(
-        INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
-        "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
-
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER_11 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
@@ -160,14 +152,10 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** The best supported browser version at the moment. */
     public static final BrowserVersion BEST_SUPPORTED = FIREFOX_38;
     /** The default browser version. */
-    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_8;
+    private static BrowserVersion DefaultBrowserVersion_ = BEST_SUPPORTED;
 
     /** Register plugins for the browser versions. */
     static {
-        // IE8
-        INTERNET_EXPLORER_8.initDefaultFeatures();
-        INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
-
         // FF31
         FIREFOX_31.initDefaultFeatures();
         FIREFOX_31.setBrowserLanguage("en-US");

@@ -83,10 +83,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 expectedAlerts = alerts.value();
             }
             else {
-                if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
-                    expectedAlerts = firstDefined(alerts.IE8(), alerts.IE(), alerts.DEFAULT());
-                }
-                else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_11) {
+                if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_11) {
                     expectedAlerts = firstDefined(alerts.IE11(), alerts.IE(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.EDGE) {
@@ -114,10 +111,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 expectedAlerts = alerts.value();
             }
             else {
-                if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
-                    expectedAlerts = firstDefined(alerts.IE8(), alerts.IE(), alerts.DEFAULT());
-                }
-                else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_11) {
+                if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_11) {
                     expectedAlerts = firstDefined(alerts.IE11(), alerts.IE(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.EDGE) {
@@ -266,12 +260,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             switch (browser) {
                 case IE:
                     if (browserVersion_.isIE()) {
-                        return true;
-                    }
-                    break;
-
-                case IE8:
-                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
                         return true;
                     }
                     break;

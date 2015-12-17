@@ -32,12 +32,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
@@ -81,13 +79,7 @@ public class JQuery1113Test extends WebDriverTestCase {
         final long endTime = System.currentTimeMillis() + runTime;
 
         try {
-            // ignore IE8 for the moment
             final WebDriver webdriver = getWebDriver();
-            if (webdriver instanceof HtmlUnitDriver
-                    && ((HtmlUnitDriver) webdriver).getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_8) {
-                return;
-            }
-
             final String url = "http://localhost:" + PORT + "/jquery/test/index.html?dev&testNumber=" + testNumber;
             webdriver.get(url);
 
