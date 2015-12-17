@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.20" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Browsers do not escape double quote and backslash in cookie values.
+            </action>
+            <action type="fix" dev="rbri" issue="1735">
+                Fix for possible StringIndexOutOfBoundsException in HtmlUnitBrowserCompatCookieSpec.
+            </action>
             <action type="add" dev="rbri">
                 Fix NPE in FormData#append when calling with null or undefined as value.
             </action>

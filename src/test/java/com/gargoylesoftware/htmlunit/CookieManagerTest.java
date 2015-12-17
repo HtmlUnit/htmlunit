@@ -164,6 +164,28 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for issue 1735.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void valueEmpty() throws Exception {
+        ensureCookieValueIsSentBackUnquoted("SID=");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void valueUnsafe() throws Exception {
+        ensureCookieValueIsSentBackUnquoted("SID=\"");
+        ensureCookieValueIsSentBackUnquoted("SID=\"\"");
+        ensureCookieValueIsSentBackUnquoted("SID=ab\"cd");
+
+        ensureCookieValueIsSentBackUnquoted("SID=\\");
+        ensureCookieValueIsSentBackUnquoted("SID=ab\\cd");
+    }
+
+    /**
      * If a Version 1 cookie is set with a value that requires quoting,
      * but wasn't quoted by the server, then this value should be
      * sent back unquoted as well.

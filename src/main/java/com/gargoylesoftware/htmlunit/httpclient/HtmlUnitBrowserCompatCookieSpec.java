@@ -247,6 +247,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
 
     private static boolean isQuoteEnclosed(final String s) {
         return s != null
+                && s.length() > 1
                 && '\"' == s.charAt(0)
                 && '\"' == s.charAt(s.length() - 1);
     }

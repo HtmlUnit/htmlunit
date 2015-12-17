@@ -42,4 +42,12 @@ public class HtmlUnitBrowserCompatCookieHeaderValueFormatter extends BasicHeader
     protected boolean isSeparator(final char ch) {
         return false;
     }
+
+    /**
+     * Looks like browsers are not doing any escaping.
+     * {@inheritDoc}
+     */
+    protected boolean isUnsafe(final char ch) {
+        return false;
+    }
 }
