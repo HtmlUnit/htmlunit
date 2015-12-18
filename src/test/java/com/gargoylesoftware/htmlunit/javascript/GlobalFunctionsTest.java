@@ -60,8 +60,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" },
-            IE8 = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "0", "0", "64", "0", "1", "8", "9", "100" })
+    @Alerts({ "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" })
     public void parseInt() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

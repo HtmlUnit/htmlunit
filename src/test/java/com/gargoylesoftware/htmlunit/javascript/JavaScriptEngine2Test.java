@@ -190,9 +190,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             FF38 = { "function Window() {\n    [native code]\n}",
                 "function Window() {\n    [native code]\n}", "true",
                 "function HTMLDocument() {\n    [native code]\n}",
-                "function HTMLDocument() {\n    [native code]\n}", "true", "function" },
-            IE8 = { "ex window", "undefined", "ex win const", "ex doc",
-                    "undefined", "exception doc const", "function" })
+                "function HTMLDocument() {\n    [native code]\n}", "true", "function" })
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -263,8 +261,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "function" },
-            IE8 = { "undefined", "undefined" })
+    @Alerts({ "function", "function" })
     public void inline() throws Exception {
         final String html = "<html><head><script>\n"
                 + "alert(typeof Array.prototype.filter);\n"
@@ -280,8 +277,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "found",
-            IE8 = "")
+    @Alerts("found")
     public void enumerateMethods() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -342,7 +338,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = { "1", "2" })
     @BuggyWebDriver({ IE11, FF, CHROME })
     public void function_object_method() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -688,8 +683,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Window]",
-            IE8 = "")
+    @Alerts("[object Window]")
     public void boundFunction() throws Exception {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
