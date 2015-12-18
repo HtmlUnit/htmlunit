@@ -356,8 +356,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "My Link", "", "abcd" },
-            IE8 = {"undefined", "undefined", "undefined" })
+    @Alerts({ "My Link", "", "abcd" })
     public void getText() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -380,8 +379,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0" },
-            IE8 = { "undefined 0", "Hello 0", "undefined 1", "Hello 1", "undefined 2", "Hello 2" })
+    @Alerts({ "My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0" })
     public void setText() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -418,8 +416,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<a id=\"a\" href=\"#x\">foo</a>",
-            IE8 = "<A id=a href=\"#x\">foo</A>")
+    @Alerts("<a id=\"a\" href=\"#x\">foo</a>")
     public void innerHtmlHrefQuotedEvenInIE() throws Exception {
         final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>"
             + "<div id='d'><a id='a' href='#x'>foo</a></div></body></html>";

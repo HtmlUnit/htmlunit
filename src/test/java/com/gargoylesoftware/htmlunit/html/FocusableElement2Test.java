@@ -213,8 +213,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "done\nfocus",
-            CHROME = "done",
-            IE8 = "done")
+            CHROME = "done")
     @NotYetImplemented({ FF, IE11 })
     public void focusOnNonFocusableElementShouldNotTriggerDocumentFocus() throws Exception {
         final String html = "<html><head>\n"

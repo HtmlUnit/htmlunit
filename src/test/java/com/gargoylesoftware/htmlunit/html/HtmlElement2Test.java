@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,7 +47,6 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "value")
     public void onpropertychange() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -93,8 +91,6 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
-    @Alerts(IE8 = { "1", "1" })
     public void onpropertychange2() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -186,9 +182,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "down: 16,0 down: 49,0 press: 33,33 up: 49,0 up: 16,0"
                 + " down: 16,0 down: 220,0 press: 124,124 up: 220,0 up: 16,0",
             FF = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
-                + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0",
-            IE8 = "down: 16,undefined down: 49,undefined press: 33,undefined up: 49,undefined up: 16,undefined"
-                + " down: 16,undefined down: 220,undefined press: 124,undefined up: 220,undefined up: 16,undefined")
+                + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0")
     //https://github.com/SeleniumHQ/selenium/issues/639
     @BuggyWebDriver(Browser.FF)
     public void shiftKeys() throws Exception {

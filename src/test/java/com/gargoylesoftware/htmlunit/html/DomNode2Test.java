@@ -36,8 +36,7 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "0" },
-            IE8 = {"true", "0" })
+    @Alerts({ "exception", "0" })
     public void appendChild_recursive() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
