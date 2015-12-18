@@ -35,8 +35,7 @@ public class CDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Comment]",
-            IE8 = "null")
+    @Alerts("[object Comment]")
     public void simpleScriptable() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

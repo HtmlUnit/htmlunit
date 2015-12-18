@@ -35,8 +35,7 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Comment]",
-            IE8 = "[object]")
+    @Alerts("[object Comment]")
     public void simpleScriptable() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -51,8 +50,7 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "after", "comment" },
-            IE8 = { "undefined", "undefined" })
+    @Alerts({ "after", "comment" })
     public void textContent() throws Exception {
         final String html
             = "<html><body>\n"
@@ -100,8 +98,7 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "")
+    @Alerts("undefined")
     public void id() throws Exception {
         property("id");
     }
@@ -110,8 +107,7 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "")
+    @Alerts("undefined")
     public void className() throws Exception {
         property("className");
     }
@@ -120,8 +116,7 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "!")
+    @Alerts("undefined")
     public void tagName() throws Exception {
         property("tagName");
     }
@@ -140,8 +135,7 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "[object]")
+    @Alerts("undefined")
     public void document() throws Exception {
         property("document");
     }

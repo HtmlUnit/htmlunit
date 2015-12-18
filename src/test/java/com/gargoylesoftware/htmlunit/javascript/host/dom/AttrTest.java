@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -40,8 +37,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "exception thrown" },
-            IE8 = { "true", "false" })
+    @Alerts({ "true", "exception thrown" })
     public void specified() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -93,8 +89,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOptionElement]",
-            IE8 = "undefined")
+    @Alerts("[object HTMLOptionElement]")
     public void ownerElement() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -189,8 +184,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "test()",
-            IE8 = "undefined")
+    @Alerts("test()")
     public void textContent() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -208,8 +202,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null", "null", "null" },
-            IE8 = { "[object]", "[object]", "null", "null" })
+    @Alerts({ "null", "null", "null", "null" })
     public void getAttributeNodeUndefinedAttribute() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -231,8 +224,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null", "null", "null" },
-            IE8 = { "[object]", "[object]", "null", "null" })
+    @Alerts({ "null", "null", "null", "null" })
     public void getAttributesUndefinedAttribute() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -254,9 +246,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "", "[object Attr]", "" },
-            IE8 = { "[object]", "undefined", "[object]", "" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "[object Attr]", "", "[object Attr]", "" })
     public void value() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -283,8 +273,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "undefined" },
-            IE8 = { "[object]", "undefined" })
+    @Alerts({ "[object Attr]", "undefined" })
     public void html_baseName() throws Exception {
         html("baseName");
     }
@@ -305,8 +294,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "null" },
-            IE8 = { "[object]", "undefined" })
+    @Alerts({ "[object Attr]", "null" })
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
     }
@@ -326,8 +314,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "null" },
-            IE8 = { "[object]", "undefined" })
+    @Alerts({ "[object Attr]", "null" })
     public void html_prefix() throws Exception {
         html("prefix");
     }
@@ -356,8 +343,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "undefined" },
-            IE8 = { "[object]", "testAttr" })
+    @Alerts({ "[object Attr]", "undefined" })
     public void xml_baseName() throws Exception {
         xml("baseName");
     }
@@ -378,8 +364,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "null" },
-            IE8 = { "[object]", "" })
+    @Alerts({ "[object Attr]", "null" })
     public void xml_namespaceURI() throws Exception {
         xml("namespaceURI");
     }
@@ -388,8 +373,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "testAttr" },
-            IE8 = { "[object]", "undefined" })
+    @Alerts({ "[object Attr]", "testAttr" })
     public void xml_localName() throws Exception {
         xml("localName");
     }
@@ -398,8 +382,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "null" },
-            IE8 = { "[object]", "" })
+    @Alerts({ "[object Attr]", "null" })
     public void xml_prefix() throws Exception {
         xml("prefix");
     }

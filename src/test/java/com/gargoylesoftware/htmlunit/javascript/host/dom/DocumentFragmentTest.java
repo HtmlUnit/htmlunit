@@ -39,8 +39,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSStyleDeclaration]",
-            FF = "[object CSS2Properties]",
-            IE8 = "exception")
+            FF = "[object CSS2Properties]")
     public void getComputedStyleOnChild() throws Exception {
         final String html = "<html><head><style>\n"
             + "  body > div { background-color: green#FF0000; }\n"
@@ -143,8 +142,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object DocumentFragment]", "undefined" },
-            IE8 = { "[object HTMLDocument]", "about:blank" })
+    @Alerts({ "[object DocumentFragment]", "undefined" })
     public void url() throws Exception {
         final String html = "<!DOCTYPE><html><head>\n"
             + "<script>\n"
