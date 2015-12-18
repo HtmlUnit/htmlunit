@@ -713,12 +713,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "form1 -> custom", "form2 -> [object HTMLFormElement]",
+    @Alerts({ "form1 -> custom", "form2 -> [object HTMLFormElement]",
             "form1: [object HTMLFormElement]", "form2: [object HTMLFormElement]",
-            "form1 -> custom", "form2 -> [object HTMLFormElement]" },
-            IE8 = { "form1 -> custom", "form2 -> [object]",
-            "form1: [object]", "form2: [object]",
-            "form1 -> custom", "form2 -> [object]" })
+            "form1 -> custom", "form2 -> [object HTMLFormElement]" })
     public void nameResolution() throws Exception {
         final String html = "<html><head><script>\n"
             + "var form1 = 'custom';\n"
@@ -798,7 +795,6 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "blur INPUT",
-            IE8 = "",
             IE11 = { "blur BODY", "blur INPUT" })
     @NotYetImplemented(IE11)
     public void document_input_blur() throws Exception {

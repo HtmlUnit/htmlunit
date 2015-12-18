@@ -47,9 +47,7 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object Event] change b:true c:false [select] [-]",
                 "[object MouseEvent] click b:true c:true [clickMe] [1]" },
             IE = { "[object Event] change b:true c:false [select] [-]",
-                "[object MouseEvent] click b:true c:true [select] [1]" },
-            IE8 = { "[object] change b:undefined c:undefined [select] [-]",
-                "[object] click b:undefined c:undefined [select] [-]" })
+                "[object MouseEvent] click b:true c:true [select] [1]" })
     @BuggyWebDriver({ CHROME, FF })
     // FFDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" first that doesn't occur
     // manually
@@ -339,10 +337,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"object", "undefined", "undefined", "undefined", "undefined",
-            "object", "false", "false", "false", "false" },
-            IE8 = {"object", "false", "false", "false", "undefined",
-            "object", "false", "false", "false", "undefined" })
+    @Alerts({"object", "undefined", "undefined", "undefined", "undefined",
+            "object", "false", "false", "false", "false" })
     public void testKeys() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"

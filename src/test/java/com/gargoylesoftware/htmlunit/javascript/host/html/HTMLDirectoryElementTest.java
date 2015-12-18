@@ -66,10 +66,8 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true", "true", "true", "null", "", "blah", "2",
-                "true", "false", "true", "false", "", "null", "", "null" },
-            IE8 = { "false", "true", "true", "true", "false", "true", "true", "true",
-                "true", "false", "true", "false", "true", "false", "true", "false" })
+    @Alerts({ "false", "true", "true", "true", "null", "", "blah", "2",
+                "true", "false", "true", "false", "", "null", "", "null" })
     public void compact() throws Exception {
         final String html =
                 "<html>\n"

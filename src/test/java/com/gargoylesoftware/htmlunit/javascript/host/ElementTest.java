@@ -83,8 +83,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "1", "title" })
+    @Alerts(DEFAULT = "exception")
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -322,16 +321,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDivElement],DIV",
+    @Alerts({ "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV" },
-            IE8 = { "[object],DIV",
-                "[object],APP:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],APP:DIV" })
+                "[object HTMLUnknownElement],APP:DIV" })
     public void html_nodeName() throws Exception {
         html("nodeName");
     }
@@ -340,16 +334,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDivElement],DIV",
+    @Alerts({ "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV" },
-            IE8 = { "[object],DIV",
-                "[object],APP:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],APP:DIV" })
+                "[object HTMLUnknownElement],APP:DIV" })
     public void html_tagName() throws Exception {
         html("tagName");
     }
@@ -358,16 +347,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDivElement],null",
+    @Alerts({ "[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object Element],app",
                 "[object HTMLDivElement],null",
-                "[object HTMLUnknownElement],null" },
-            IE8 = { "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined" })
+                "[object HTMLUnknownElement],null" })
     public void html_prefix() throws Exception {
         html("prefix");
     }
@@ -376,16 +360,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDivElement],div",
+    @Alerts({ "[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div",
                 "[object Element],dIv",
                 "[object HTMLDivElement],div",
-                "[object HTMLUnknownElement],app:div" },
-            IE8 = { "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined" })
+                "[object HTMLUnknownElement],app:div" })
     public void html_localName() throws Exception {
         html("localName");
     }
@@ -394,16 +373,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDivElement],undefined",
+    @Alerts({ "[object HTMLDivElement],undefined",
                 "[object HTMLUnknownElement],undefined",
                 "[object Element],undefined",
                 "[object HTMLDivElement],undefined",
-                "[object HTMLUnknownElement],undefined" },
-            IE8 = { "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined" })
+                "[object HTMLUnknownElement],undefined" })
     public void html_baseName() throws Exception {
         html("baseName");
     }
@@ -412,16 +386,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+    @Alerts({ "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object Element],http://www.appcelerator.org",
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
-                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml" },
-            IE8 = { "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined" })
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml" })
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
     }
@@ -456,21 +425,13 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLDivElement],DIV",
+    @Alerts({"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV"
-                },
-            IE8 = {"[object],DIV",
-                "[object],dIv",
-                "[object],ANOTHER:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],dIv",
-                "[object],ANOTHER:DIV"
                 })
     public void namespace_nodeName() throws Exception {
         namespace("nodeName");
@@ -480,21 +441,13 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLDivElement],DIV",
+    @Alerts({"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV"
-                },
-            IE8 = {"[object],DIV",
-                "[object],dIv",
-                "[object],ANOTHER:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],dIv",
-                "[object],ANOTHER:DIV"
                 })
     public void namespace_tagName() throws Exception {
         namespace("tagName");
@@ -504,21 +457,13 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLDivElement],null",
+    @Alerts({"[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object Element],app",
                 "[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object HTMLUnknownElement],null"
-                },
-            IE8 = {"[object],undefined",
-                "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined",
-                "[object],undefined"
                 })
     public void namespace_prefix() throws Exception {
         namespace("prefix");
@@ -528,21 +473,13 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLDivElement],div",
+    @Alerts({"[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div",
                 "[object HTMLUnknownElement],another:div",
                 "[object Element],dIv",
                 "[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div",
                 "[object HTMLUnknownElement],another:div"
-                },
-            IE8 = {"[object],undefined",
-                "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined",
-                "[object],undefined"
                 })
     public void namespace_localName() throws Exception {
         namespace("localName");
@@ -552,21 +489,13 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+    @Alerts({"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object Element],http://www.appcelerator.org",
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
-                },
-            IE8 = {"[object],undefined",
-                "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined",
-                "[object],undefined"
                 })
     public void namespace_namespaceURI() throws Exception {
         namespace("namespaceURI");
@@ -605,15 +534,10 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "dIv",
+    @Alerts({"[object Element]", "dIv",
                 "[object HTMLHtmlElement]", "html",
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"
-                },
-            IE8 = {"[object Error]", "dIv",
-                "[object Error]", "html",
-                "[object Error]", "div",
-                "[object Error]", "dIv"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_nodeName() throws Exception {
@@ -624,15 +548,10 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "dIv",
+    @Alerts({"[object Element]", "dIv",
                 "[object HTMLHtmlElement]", "html",
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"
-                },
-            IE8 = {"[object Error]", "dIv",
-                "[object Error]", "html",
-                "[object Error]", "div",
-                "[object Error]", "dIv"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_tagName() throws Exception {
@@ -643,15 +562,10 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "null",
+    @Alerts({"[object Element]", "null",
                 "[object HTMLHtmlElement]", "null",
                 "[object HTMLDivElement]", "null",
                 "[object HTMLUnknownElement]", "null"
-                },
-            IE8 = {"[object Error]", "",
-                "[object Error]", "",
-                "[object Error]", "",
-                "[object Error]", ""
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_prefix() throws Exception {
@@ -662,15 +576,10 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "dIv",
+    @Alerts({"[object Element]", "dIv",
                 "[object HTMLHtmlElement]", "html",
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"
-                },
-            IE8 = {"[object Error]", "undefined",
-                "[object Error]", "undefined",
-                "[object Error]", "undefined",
-                "[object Error]", "undefined"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_localName() throws Exception {
@@ -681,15 +590,10 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "undefined",
+    @Alerts({"[object Element]", "undefined",
                 "[object HTMLHtmlElement]", "undefined",
                 "[object HTMLDivElement]", "undefined",
                 "[object HTMLUnknownElement]", "undefined"
-                },
-            IE8 = {"[object Error]", "dIv",
-                "[object Error]", "html",
-                "[object Error]", "div",
-                "[object Error]", "dIv"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_baseName() throws Exception {
@@ -700,15 +604,10 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "null",
+    @Alerts({"[object Element]", "null",
                 "[object HTMLHtmlElement]", "http://www.w3.org/1999/xhtml",
                 "[object HTMLDivElement]", "http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"
-                },
-            IE8 = {"[object Error]", "",
-                "[object Error]", "http://www.w3.org/1999/xhtml",
-                "[object Error]", "http://www.w3.org/1999/xhtml",
-                "[object Error]", "http://www.w3.org/1999/xhtml"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_namespaceURI() throws Exception {

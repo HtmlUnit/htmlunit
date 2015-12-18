@@ -273,10 +273,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" },
             CHROME = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
-                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: true" },
-            IE8 = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
-                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
-                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" })
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: true" })
     public void hasFeature_SVG_BasicStructure() throws Exception {
         hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "['1.0', '1.1', '1.2']");
     }
@@ -290,10 +287,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" },
             CHROME = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
-                "http://www.w3.org/TR/SVG11/feature#Shape 1.2: true" },
-            IE8 = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
-                "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",
-                "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" })
+                "http://www.w3.org/TR/SVG11/feature#Shape 1.2: true" })
     public void hasFeature_SVG_Shape() throws Exception {
         hasFeature("http://www.w3.org/TR/SVG11/feature#Shape", "['1.0', '1.1', '1.2']");
     }
@@ -321,8 +315,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = { })
+    @Alerts("[object XMLDocument]")
     public void createDocument() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -341,7 +334,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "mydoc", "null", "mydoc", "null" }, IE8 = { })
+    @Alerts(DEFAULT = { "mydoc", "null", "mydoc", "null" })
     public void createDocument_qualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -364,7 +357,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "mydoc", "null", "mydoc", "http://mynamespace" }, IE8 = { })
+    @Alerts(DEFAULT = { "mydoc", "null", "mydoc", "http://mynamespace" })
     public void createDocument_namespaceAndQualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -387,7 +380,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "m:mydoc", "m", "mydoc", "http://mynamespace" }, IE8 = { })
+    @Alerts(DEFAULT = { "m:mydoc", "m", "mydoc", "http://mynamespace" })
     public void createDocument_namespaceAndQualifiedNameWithPrefix() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

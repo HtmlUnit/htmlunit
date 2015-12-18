@@ -170,7 +170,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CanvasRenderingContext2D]", IE8 = "")
+    @Alerts("[object CanvasRenderingContext2D]")
     public void getContextShouldNotThrowForSize0() throws Exception {
         final String html = "<html><body>\n"
             + "<canvas id='it' width=0 height=0></canvas>\n"

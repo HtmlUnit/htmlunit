@@ -103,8 +103,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "onclick",
-            IE8 = { "addEventListener not available", "href" })
+    @Alerts("onclick")
     public void javaScriptPreventDefault() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
@@ -192,9 +191,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "§§URL§§testsite1.html", "testsite1.html", "§§URL§§testsite2.html",
-                "testsite2.html", "13", "testanchor", "mailto:" },
-            IE8 = { "§§URL§§testsite1.html", "§§URL§§testsite1.html", "testsite2.html",
+    @Alerts({ "§§URL§§testsite1.html", "testsite1.html", "§§URL§§testsite2.html",
                 "testsite2.html", "13", "testanchor", "mailto:" })
     public void getAttribute_and_href() throws Exception {
         final String html
@@ -663,8 +660,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "http:||||||/", "https:||||||/", "mailto:||||||", "tel:||||||",
                         "foo:||||||", "p:||||||", "p:||||||", "p:||||||" },
-            IE8 = { "http:||||||", "https:||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                        "foo:||||||blabla", "file:||||||p://", "file:||||||p:/", "file:||||||p:/TeMp" },
             IE11 = { "http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
                         "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp" },
             CHROME = { ":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
