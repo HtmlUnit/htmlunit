@@ -39,8 +39,7 @@ public class SvgLinearGradientTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGLinearGradientElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object SVGLinearGradientElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
