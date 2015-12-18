@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +21,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -39,9 +36,7 @@ public class HtmlProgressTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLProgressElement]",
-            IE8 = "[object HTMLUnknownElement]")
-    @NotYetImplemented(IE8)
+    @Alerts("[object HTMLProgressElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
@@ -69,8 +64,7 @@ public class HtmlProgressTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "number70", "number100" },
-            IE8 = { })
+    @Alerts({ "number70", "number100" })
     public void properties() throws Exception {
         final String html = "<html><body>\n"
             + "<progress id='it' value='70' max='100'>70%</progress>\n"

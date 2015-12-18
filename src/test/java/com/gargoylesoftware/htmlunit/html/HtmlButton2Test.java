@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.List;
 
@@ -51,8 +50,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLButtonElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLButtonElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -303,9 +301,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial-OK", "newValue-newValue-OK", "newValue-newValue-OK" },
-            IE8 = { "initial-initial-OK", "newValue--OK", "newValue--OK" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "initial-initial-OK", "newValue-newValue-OK", "newValue-newValue-OK" })
     public void valueAttributeNode() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -336,8 +332,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "submit", "1", "button-pushme", "Second" },
-            IE8 = { "button", "0", "", "First" })
+    @Alerts({ "submit", "1", "button-pushme", "Second" })
     public void defaultButtonType_StandardsCompliantBrowser() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -370,8 +365,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE8 = "1")
+    @Alerts("2")
     public void typeUnknown() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -502,8 +496,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE8 = "1")
+    @Alerts("2")
     public void submitWithoutType() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -723,8 +716,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "submit",
-            IE8 = "button")
+    @Alerts("submit")
     public void type() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

@@ -55,8 +55,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "beforeafter", "undefined" },
-            IE8 = { "before", "after", "TABLE" })
+    @Alerts({ "beforeafter", "undefined" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void testHtmlTableTextAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
@@ -105,8 +104,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "Hi!",
-            IE8 = { })
+    @Alerts("Hi!")
     @NotYetImplemented
     public void unclosedCommentsInScript() throws Exception {
         final String html = "<html><body>\n"
@@ -251,8 +249,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2" },
-            IE8 = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1" })
+    @Alerts({ "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2" })
     public void childNodes_p_parent() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -284,8 +281,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3" },
-            IE8 = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1" })
+    @Alerts({ "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3" })
     public void childNodes_f() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -318,8 +314,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "<!--[if gt IE 11]><br><![endif]-->", "<!--[if lt IE 11]><br><![endif]-->" },
-            IE8 = { "", "<BR>" })
+    @Alerts({ "<!--[if gt IE 11]><br><![endif]-->", "<!--[if lt IE 11]><br><![endif]-->" })
     public void ieConditionalCommentsNotInDom() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

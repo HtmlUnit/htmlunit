@@ -200,8 +200,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @exception Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLInputElement]", "1" },
-            IE8 = { "[object]", "1" })
+    @Alerts({ "[object HTMLInputElement]", "1" })
     @BuggyWebDriver(IE11)
     public void write_getElementById_afterParsing() throws Exception {
         final String html = "<html>\n"
@@ -222,8 +221,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @exception Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLInputElement]", "1" },
-            IE8 = { "[object]", "1" })
+    @Alerts({ "[object HTMLInputElement]", "1" })
     public void write_getElementById_duringParsing() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -240,8 +238,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Hello",
-            IE8 = { })
+    @Alerts("Hello")
     public void application_javascript_type() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -257,8 +254,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Hello",
-            IE8 = { })
+    @Alerts("Hello")
     public void application_x_javascript_type() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
