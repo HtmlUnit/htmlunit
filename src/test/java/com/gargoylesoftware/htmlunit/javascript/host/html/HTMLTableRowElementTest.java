@@ -294,7 +294,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "0", "3", "1", "-1", "true", "false" },
             CHROME = { "0", "0", "3", "1", "-1", "false", "false" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(CHROME)
     public void rowIndex_sectionRowIndex() throws Exception {
         final String html
             = "<html><body><table>\n"

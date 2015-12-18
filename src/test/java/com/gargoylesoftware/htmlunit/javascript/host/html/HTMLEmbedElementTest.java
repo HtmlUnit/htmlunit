@@ -44,7 +44,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                     "absbottom", "absmiddle", "baseline", "texttop", "wrong", "" },
             IE = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                 "undefined", "undefined", "undefined", "undefined", "undefined" })
-    @NotYetImplemented({ CHROME, FF, IE8 })
+    @NotYetImplemented({ CHROME, FF })
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"

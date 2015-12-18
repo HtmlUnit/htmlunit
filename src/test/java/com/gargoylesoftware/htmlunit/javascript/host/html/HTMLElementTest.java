@@ -2385,7 +2385,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "0", "0" })
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ CHROME })
     public void clientLeftTop_documentElement() throws Exception {
         final String html =
               "<!DOCTYPE HTML "

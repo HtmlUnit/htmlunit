@@ -1228,7 +1228,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                     "false-selected", "false-null", "false-true" },
             IE8 = { "false-", "true-selected", "true-selected",
                     "false-", "false-", "true-selected" })
-    @NotYetImplemented({ FF, IE8 })
+    @NotYetImplemented(FF)
     public void setSelectedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

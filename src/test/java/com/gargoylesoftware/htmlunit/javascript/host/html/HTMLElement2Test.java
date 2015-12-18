@@ -1169,7 +1169,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
-    @NotYetImplemented({ FF, CHROME, IE8 })
+    @NotYetImplemented({ FF, CHROME })
     public void offsetLeft_PositionFixed() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
