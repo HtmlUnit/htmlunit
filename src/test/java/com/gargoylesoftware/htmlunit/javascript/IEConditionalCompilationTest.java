@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -76,7 +73,6 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
     @Test
     @Alerts(IE8 = { "1", "testing @cc_on" })
     //TODO: fails with IE8 with WebDriver, but succeeds manually
-    @BuggyWebDriver(IE8)
     public void simple4() throws Exception {
         final String script = "/*@cc_on alert(1) @*/\n"
             + "/*@if (@_win32)\n"

@@ -297,8 +297,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "en-US",
-            IE8 = "undefined")
+    @Alerts("en-US")
     public void language() throws Exception {
         final String html
             = "<html><head><title>First</title></head>\n"
@@ -333,8 +332,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Gecko",
-            IE8 = "undefined")
+    @Alerts("Gecko")
     public void product() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -353,8 +351,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Geolocation]",
-            IE8 = "undefined")
+    @Alerts("[object Geolocation]")
     public void geolocation() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

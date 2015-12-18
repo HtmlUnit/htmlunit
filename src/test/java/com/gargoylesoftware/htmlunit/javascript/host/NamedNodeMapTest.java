@@ -357,8 +357,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<input id=\"myinput\" name=\"test_input\">",
-            IE8 = "<INPUT id=myinput name=test_input>")
+    @Alerts("<input id=\"myinput\" name=\"test_input\">")
     public void readAccessOnlyDefinesNewAttribs() throws Exception {
         final String html =
                 "<html>\n"

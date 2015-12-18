@@ -247,8 +247,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE8 = "hasAttribute not available")
+    @Alerts("false")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -835,8 +834,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE8 = "exception")
+    @Alerts("function")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -850,8 +848,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = "1")
+    @Alerts("0")
     public void commentIsElement() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myId'><!-- --></div>\n"

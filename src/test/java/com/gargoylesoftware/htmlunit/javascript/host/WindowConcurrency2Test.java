@@ -38,8 +38,7 @@ public class WindowConcurrency2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "xxx",
-            IE8 = "x")
+    @Alerts("xxx")
     public void setIntervalZeroDelay() throws Exception {
         final String html
             = "<html><body><div id='d'></div>\n"

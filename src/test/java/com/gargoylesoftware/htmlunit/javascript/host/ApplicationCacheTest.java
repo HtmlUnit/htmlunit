@@ -55,8 +55,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function(e){}",
-            IE8 = "no applicationCache")
+    @Alerts("function(e){}")
     public void onchecking() throws Exception {
         eventHandler("onchecking");
     }
@@ -65,8 +64,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function(e){}",
-            IE8 = "no applicationCache")
+    @Alerts("function(e){}")
     public void onerror() throws Exception {
         eventHandler("onerror");
     }
@@ -75,8 +73,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function(e){}",
-            IE8 = "no applicationCache")
+    @Alerts("function(e){}")
     public void onnoupdate() throws Exception {
         eventHandler("onnoupdate");
     }
@@ -85,8 +82,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function(e){}",
-            IE8 = "no applicationCache")
+    @Alerts("function(e){}")
     public void ondownloading() throws Exception {
         eventHandler("ondownloading");
     }
@@ -95,8 +91,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function(e){}",
-            IE8 = "no applicationCache")
+    @Alerts("function(e){}")
     public void onprogress() throws Exception {
         eventHandler("onprogress");
     }
@@ -105,8 +100,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function(e){}",
-            IE8 = "no applicationCache")
+    @Alerts("function(e){}")
     public void onupdateready() throws Exception {
         eventHandler("onupdateready");
     }
@@ -115,8 +109,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function(e){}",
-            IE8 = "no applicationCache")
+    @Alerts("function(e){}")
     public void oncached() throws Exception {
         eventHandler("oncached");
     }

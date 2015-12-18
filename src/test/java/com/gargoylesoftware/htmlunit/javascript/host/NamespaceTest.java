@@ -35,8 +35,7 @@ public class NamespaceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no namespaces",
-            IE8 = "me, http://mysite")
+    @Alerts("no namespaces")
     public void test() throws Exception {
         final String html
             = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:me='http://mysite'>\n"

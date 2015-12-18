@@ -213,8 +213,7 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" },
-            IE8 = {})
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" })
     @NotYetImplemented({CHROME, IE11})
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
@@ -304,8 +303,7 @@ public class History2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null",
                         "[object PopStateEvent]", "null",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}" },
-            IE8 = {})
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}" })
     public void replaceState() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -394,8 +392,7 @@ public class History2Test extends WebDriverTestCase {
             IE11 = {    "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" },
-            IE8 = {})
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" })
     @NotYetImplemented({CHROME, IE11})
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
@@ -634,8 +631,7 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "undefined")
+    @Alerts("null")
     public void state() throws Exception {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"

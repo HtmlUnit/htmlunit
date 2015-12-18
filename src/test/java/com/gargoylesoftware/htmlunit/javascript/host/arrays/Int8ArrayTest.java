@@ -111,8 +111,7 @@ public class Int8ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE8 = "exception")
+    @Alerts("1")
     public void constant() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

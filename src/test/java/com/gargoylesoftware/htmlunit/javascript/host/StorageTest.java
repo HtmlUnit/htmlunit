@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 
 import java.util.List;
 
@@ -27,7 +27,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -163,8 +162,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "I was here",
-            IE8 = "")
+    @Alerts("I was here")
     @BuggyWebDriver({ CHROME, FF })
     // The way ChromeDriver and FFDriver start the real browsers clears the LocalStorage somehow.
     // But when executed manually the LocalStorage is shared.
@@ -235,8 +233,7 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function", "null", "function", "value", "1" },
-            IE11 = { "function", "null", "string", "value", "1" },
-            IE8 = { "undefined", "null", "string", "value", "1" })
+            IE11 = { "function", "null", "string", "value", "1" })
     public void prototypePropertiesAreVisible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -258,9 +255,8 @@ public class StorageTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function", "null", "string", "value", "1" },
             CHROME = { "function", "null", "string", "null", "0" },
-            FF38 = { "function", "null", "function", "value", "1" },
-            IE8 = { "undefined", "null", "string", "value", "1" })
-    @NotYetImplemented({ IE8, Browser.FF38 })
+            FF38 = { "function", "null", "function", "value", "1" })
+    @NotYetImplemented({ FF38 })
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

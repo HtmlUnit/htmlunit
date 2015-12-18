@@ -60,8 +60,7 @@ public class Uint32ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "4",
-            IE8 = "exception")
+    @Alerts("4")
     public void constant() throws Exception {
         final String html
             = "<html><head><script>\n"

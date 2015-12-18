@@ -606,8 +606,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
-            IE = { "supported", "onhashchange undefined  undefined" },
-            IE8 = { "supported", "onhashchange -" })
+            IE = { "supported", "onhashchange undefined  undefined" })
     public void onHashChange() throws Exception {
         final String html =
             "<html><head>\n"
@@ -656,8 +655,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "supported", "onhashchange §§URL§§#1  §§URL§§" },
-            IE = { "supported", "onhashchange undefined  undefined" },
-            IE8 = { "supported", "onhashchange -" })
+            IE = { "supported", "onhashchange undefined  undefined" })
     public void onHashChangeJS() throws Exception {
         final String html =
             "<html><head>\n"
@@ -827,8 +825,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§ORIGIN§§",
-            IE8 = "undefined")
+    @Alerts("§§ORIGIN§§")
     public void origin() throws Exception {
         final String html =
                 "<html><body><script>\n"

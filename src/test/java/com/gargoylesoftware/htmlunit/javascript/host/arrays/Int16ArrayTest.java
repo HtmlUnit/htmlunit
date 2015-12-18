@@ -84,8 +84,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE8 = "exception")
+    @Alerts("2")
     public void constant() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -131,8 +130,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "exception")
+    @Alerts("undefined")
     public void outOfRange() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

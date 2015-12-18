@@ -219,8 +219,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "1")
+    @Alerts("exception")
     public void execScript2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -239,8 +238,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "true")
+    @Alerts("exception")
     public void execScript_returnValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "try {\n"
@@ -696,8 +694,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "679", "1256", "662", "1239" },
             FF = { "674", "1258", "657", "1241" },
-            IE11 = { "705", "1256", "688", "1239" },
-            IE8 = { "605", "1256", "705", "1256" })
+            IE11 = { "705", "1256", "688", "1239" })
     @NotYetImplemented({ FF, IE11, CHROME })
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
@@ -1023,8 +1020,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "rgb(0, 0, 0)",
-            IE8 = "exception")
+    @Alerts("rgb(0, 0, 0)")
     public void getComputedStyle() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'></div>\n"
@@ -1043,8 +1039,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "rgb(255, 0, 0)",
-            IE8 = "exception")
+    @Alerts("rgb(255, 0, 0)")
     public void getComputedStyle_WithComputedColor() throws Exception {
         final String html =
               "<html>\n"
@@ -1073,8 +1068,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "rgb(0, 0, 0)",
-            IE8 = "exception")
+    @Alerts("rgb(0, 0, 0)")
     public void getComputedStyle_svg() throws Exception {
         final String html = "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'></svg>\n"
@@ -1620,8 +1614,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object Window]", "[object Window]", "" },
             CHROME = { "[object Window]", "function Window() { [native code] }",
             "toString, TEMPORARY, PERSISTENT, " },
-            FF38 = { "[object Window]", "function Window() {\n    [native code]\n}", "" },
-            IE8 = { "[object]", "exception" })
+            FF38 = { "[object Window]", "function Window() {\n    [native code]\n}", "" })
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"

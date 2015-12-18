@@ -493,8 +493,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "frame1", "frame1", "0", "0" },
-            IE = { "frame1", "frame1", "2", "2" },
-            IE8 = { "frame1", "frame1", "exception:w.f2", "exception:f2" })
+            IE = { "frame1", "frame1", "2", "2" })
     @NotYetImplemented(IE)
     public void frameByName() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
@@ -1098,8 +1097,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "detached")
+    @Alerts("exception")
     public void detachEventInAttachEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1205,8 +1203,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE8 = "exception")
+    @Alerts("1")
     public void evalScopeOtherWindow() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
@@ -1602,8 +1599,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE8 = "undefined")
+    @Alerts("1")
     public void devicePixelRatio() throws Exception {
         final String html
             = "<html><head><script>\n"

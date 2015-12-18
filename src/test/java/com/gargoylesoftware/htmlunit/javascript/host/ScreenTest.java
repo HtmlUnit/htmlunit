@@ -47,8 +47,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "0" },
-            IE = { "undefined", "1234" },
-            IE8 = { "undefined", "set exception" })
+            IE = { "undefined", "1234" })
     public void availLeft() throws Exception {
         testNumericProperty("availLeft");
     }
@@ -58,8 +57,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "0" },
-            IE = { "undefined", "1234" },
-            IE8 = { "undefined", "set exception" })
+            IE = { "undefined", "1234" })
     public void availTop() throws Exception {
         testNumericProperty("availTop");
     }
@@ -78,8 +76,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "0", "0" },
-            IE8 = { "0", "-1" })
+            IE = { "0", "0" })
     public void bufferDepth() throws Exception {
         testNumericProperty("bufferDepth");
     }
@@ -98,8 +95,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+            IE = { "96", "96" })
     public void deviceXDPI() throws Exception {
         testNumericProperty("deviceXDPI");
     }
@@ -109,8 +105,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+            IE = { "96", "96" })
     public void deviceYDPI() throws Exception {
         testNumericProperty("deviceYDPI");
     }
@@ -120,8 +115,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "false" },
-            IE = { "true", "true" },
-            IE8 = { "true", "set exception" })
+            IE = { "true", "true" })
     public void fontSmoothingEnabled() throws Exception {
         testBooleanProperty("fontSmoothingEnabled");
     }
@@ -140,8 +134,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
-            FF = { "0", "0" },
-            IE8 = { "undefined", "set exception" })
+            FF = { "0", "0" })
     public void left() throws Exception {
         testNumericProperty("left");
     }
@@ -151,8 +144,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
-            FF = { "0", "0" },
-            IE8 = { "undefined", "set exception" })
+            FF = { "0", "0" })
     public void top() throws Exception {
         testNumericProperty("top");
     }
@@ -162,8 +154,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+            IE = { "96", "96" })
     public void logicalXDPI() throws Exception {
         testNumericProperty("logicalXDPI");
     }
@@ -173,8 +164,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+            IE = { "96", "96" })
     public void logicalYDPI() throws Exception {
         testNumericProperty("logicalYDPI");
     }
@@ -193,8 +183,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+            IE = { "96", "96" })
     public void systemXDPI() throws Exception {
         testNumericProperty("systemXDPI");
     }
@@ -204,8 +193,7 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+            IE = { "96", "96" })
     public void systemYDPI() throws Exception {
         testNumericProperty("systemYDPI");
     }

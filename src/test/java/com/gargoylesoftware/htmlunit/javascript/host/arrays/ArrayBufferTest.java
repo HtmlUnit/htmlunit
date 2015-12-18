@@ -35,8 +35,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "5",
-            IE8 = "exception")
+    @Alerts("5")
     public void byteLength() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
