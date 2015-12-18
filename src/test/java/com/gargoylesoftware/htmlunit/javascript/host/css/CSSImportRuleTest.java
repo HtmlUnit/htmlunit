@@ -45,9 +45,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             FF31 = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
             FF38 = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
             IE11 = { "[object CSSImportRule]", "§§URL§§second/",
-                "all", "0", "[object CSSStyleSheet]" },
-            IE8 = "cssRules undefined")
-    // IE8 does not support CSSStyleSheet.cssRules
+                "all", "0", "[object CSSStyleSheet]" })
     public void getImportFromCssRulesCollection_absolute() throws Exception {
         getImportFromCssRulesCollection(getDefaultUrl(), URL_SECOND.toExternalForm(), URL_SECOND);
     }
@@ -61,9 +59,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
                 "[object MediaList]", "0", "[object CSSStyleSheet]" },
             FF31 = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
             FF38 = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
-            IE11 = { "[object CSSImportRule]", "foo.css", "all", "0", "[object CSSStyleSheet]" },
-            IE8 = "cssRules undefined")
-    // IE8 does not support CSSStyleSheet.cssRules
+            IE11 = { "[object CSSImportRule]", "foo.css", "all", "0", "[object CSSStyleSheet]" })
     public void getImportFromCssRulesCollection_relative() throws Exception {
         final URL urlPage = new URL(URL_FIRST, "/dir1/dir2/foo.html");
         final URL urlCss = new URL(URL_FIRST, "/dir1/dir2/foo.css");

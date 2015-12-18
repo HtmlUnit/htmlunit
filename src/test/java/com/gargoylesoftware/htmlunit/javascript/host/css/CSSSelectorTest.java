@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -106,8 +105,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "li2", "li1", "li2", "li1", "li3", "li1", "2", "li1", "li2" },
-            IE8 = "exception")
+    @Alerts({ "li2", "li1", "li2", "li1", "li3", "li1", "2", "li1", "li2" })
     public void nth_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -144,8 +142,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "li2", "2", "li1", "li3" },
-            IE8 = "exception")
+    @Alerts({ "1", "li2", "2", "li1", "li3" })
     public void nth_child_even_odd() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -232,8 +229,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "li1", "li4", "li7", "li10" },
-            IE8 = { "exception" })
+    @Alerts({ "li1", "li4", "li7", "li10" })
     public void nth_child_equation() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -346,8 +342,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = { "2", "<UL id=something></UL>", "<UL id=thing1></UL>" })
+    @Alerts("0")
     public void prefixAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -403,8 +398,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = { "2", "<UL id=something></UL>", "<UL id=thing2></UL>" })
+    @Alerts("0")
     public void suffixAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -461,8 +455,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = { "2", "<UL id=something></UL>", "<UL id=thing2></UL>" })
+    @Alerts("0")
     public void substringAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -632,8 +625,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "li3", "2", "li1", "li3" },
-            IE8 = "exception")
+    @Alerts({ "li3", "2", "li1", "li3" })
     public void nth_last_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -665,8 +657,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "div1", "div3", "2", "div1", "div3", "2", "div1", "div3", "0" },
-            IE8 = "exception")
+    @Alerts({ "2", "div1", "div3", "2", "div1", "div3", "2", "div1", "div3", "0" })
     public void nth_last_child2() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -711,8 +702,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3",
-            IE8 = "exception")
+    @Alerts("id3")
     public void nth_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -740,8 +730,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3",
-            IE8 = "exception")
+    @Alerts("id3")
     public void nth_last_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -769,9 +758,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { },
-            IE8 = { "li1" })
-    @NotYetImplemented(IE8)
+    @Alerts({ })
     public void pseudoAfter() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Pseudo-After</title><script>\n"
@@ -826,8 +813,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "li3",
-            IE8 = "exception")
+    @Alerts("li3")
     public void last_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -855,8 +841,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id2",
-            IE8 = "exception")
+    @Alerts("id2")
     public void first_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -918,8 +903,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id4",
-            IE8 = "exception")
+    @Alerts("id4")
     public void last_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -949,8 +933,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3",
-            IE8 = "exception")
+    @Alerts("id3")
     public void only_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -980,8 +963,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3",
-            IE8 = "exception")
+    @Alerts("id3")
     public void only_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1011,8 +993,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "id2", "span1" },
-            IE8 = "exception")
+    @Alerts({ "id2", "span1" })
     public void empty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1040,8 +1021,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id2",
-            IE8 = "exception")
+    @Alerts("id2")
     public void not() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1066,8 +1046,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "item_2", "item_3" },
-            IE8 = "exception")
+    @Alerts({ "2", "item_2", "item_3" })
     public void childNot() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
@@ -1098,8 +1077,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "item_2" },
-            IE8 = "exception")
+    @Alerts({ "1", "item_2" })
     public void childNotNot() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
@@ -1169,8 +1147,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "5", "cb1", "rd1", "sl1", "ml1", "ml3" },
-            IE8 = "exception")
+    @Alerts({ "5", "cb1", "rd1", "sl1", "ml1", "ml3" })
     public void checked() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1211,8 +1188,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "cb1", "rd1", "2", "cb2", "rd2" },
-            IE8 = { "exception", "exception" })
+    @Alerts({ "2", "cb1", "rd1", "2", "cb2", "rd2" })
     public void checkedChanged() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1290,9 +1266,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "1-iy", "1-iy", "2", "1-iy", "1-iz"},
-            IE8 = { "1", "exception", "exception", "2", "exception", "exception" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "1", "1-iy", "1-iy", "2", "1-iy", "1-iz"})
     public void selectedChecked() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1337,8 +1311,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "id1", "id3" },
-            IE8 = "exception")
+    @Alerts({ "2", "id1", "id3" })
     public void enabled() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1366,8 +1339,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "id2" },
-            IE8 = "exception")
+    @Alerts({ "1", "id2" })
     public void disabled() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1396,8 +1368,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "id2" },
-            CHROME = { "0" },
-            IE8 = "exception")
+            CHROME = { "0" })
     @NotYetImplemented(CHROME)
     public void target() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -1426,8 +1397,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0" },
-            IE8 = "exception")
+    @Alerts({ "0" })
     public void targetNoHash() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1454,8 +1424,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0" },
-            IE8 = "exception")
+    @Alerts({ "0" })
     public void targetUnknown() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1482,8 +1451,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "[object HTMLHtmlElement]" },
-            IE8 = "exception")
+    @Alerts({ "1", "[object HTMLHtmlElement]" })
     public void root() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1623,7 +1591,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void checkedEmptyDetached() throws Exception {
         emptyAndDetached("*:checked");
@@ -1634,7 +1601,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void disabledEmptyDetached() throws Exception {
         emptyAndDetached("*:disabled");
@@ -1645,7 +1611,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void emptyEmptyDetached() throws Exception {
         emptyAndDetached("*:empty");
@@ -1656,7 +1621,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void enabledEmptyDetached() throws Exception {
         emptyAndDetached("*:enabled");
@@ -1666,9 +1630,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "[object HTMLUnknownElement]", "null" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "null", "null" })
     public void firstchildEmptyDetached() throws Exception {
         emptyAndDetached("*:first-child");
     }
@@ -1678,7 +1640,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void firstoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:first-of-type");
@@ -1707,7 +1668,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void lastchildEmptyDetached() throws Exception {
         emptyAndDetached("*:last-child");
@@ -1718,7 +1678,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void lastoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:last-of-type");
@@ -1738,7 +1697,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void notEmptyDetached() throws Exception {
         emptyAndDetached("*:not(p)");
@@ -1749,7 +1707,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void nthchildEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-child(2n)");
@@ -1760,7 +1717,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void nthlastchildEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-last-child(2n)");
@@ -1771,7 +1727,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void nthoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-of-type(2n)");
@@ -1782,7 +1737,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void onlychildEmptyDetached() throws Exception {
         emptyAndDetached("*:only-child");
@@ -1793,7 +1747,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void onlyoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:only-of-type");
@@ -1804,7 +1757,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
             IE11 = { "null", "exception" })
     public void rootEmptyDetached() throws Exception {
         emptyAndDetached("*:root");

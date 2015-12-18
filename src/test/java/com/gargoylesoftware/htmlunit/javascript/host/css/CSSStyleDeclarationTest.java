@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.Arrays;
 
@@ -75,8 +74,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = { "black", "pink", "color: pink; background: blue; foo: bar;" },
-            FF31 = { "black", "pink", "color: pink; background: none repeat scroll 0% 0% blue;" },
+    @Alerts(FF31 = { "black", "pink", "color: pink; background: none repeat scroll 0% 0% blue;" },
             FF38 = { "black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
             CHROME = { "black", "pink", "color: pink; background: blue;" },
             IE11 = { "black", "pink", "background: blue; color: pink; foo: bar;" })
@@ -132,8 +130,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "hidden", "undefined" },
-            IE8 = {"", "hidden", "" })
+    @Alerts({"", "hidden", "undefined" })
     public void mozillaStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -153,8 +150,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "")
+    @Alerts("undefined")
     public void behavior() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -233,8 +229,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "blue",
             FF31 = "none repeat scroll 0% 0% blue",
-            FF38 = "blue none repeat scroll 0% 0%",
-            IE8 = "exception")
+            FF38 = "blue none repeat scroll 0% 0%")
     @NotYetImplemented(FF)
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -254,7 +249,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "*blue* string", "" }, IE8 = { })
+    @Alerts({ "*blue* string", "" })
     public void removeProperty() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -275,7 +270,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "** string", "blue" }, IE8 = { })
+    @Alerts({ "** string", "blue" })
     public void removePropertyUnknown() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -296,8 +291,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "** string", "blue" },
-            IE8 = "removeProperty not available")
+    @Alerts({ "** string", "blue" })
     public void removePropertyUndefined() throws Exception {
         final String html = "<html>\n"
             + "<head><title>First</title>\n"
@@ -322,8 +316,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "30px", "", "30px", "arial", "", "arial" },
-            IE8 = { "30px", "exception", "exception", "arial", "exception", "exception" })
+    @Alerts({ "30px", "", "30px", "arial", "", "arial" })
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
             "<html><body onload='test()'><script>\n"
@@ -355,8 +348,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "" },
-            IE8 = { "", "alpha(opacity=50)" })
+    @Alerts({ "", "" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
@@ -379,8 +371,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "0.5", "0.4", "0.33333", "-3", "3", "", "", "" },
-            IE8 = { "", "0.5", ".4", "0.33333", "-3", "3", "10px", "foo", "auto" })
+    @Alerts({ "", "0.5", "0.4", "0.33333", "-3", "3", "", "", "" })
     public void initOpacity() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='o1' style='opacity: '>d</div>\n"
@@ -409,8 +400,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = " 0.5 0.4 0.33333 -3 3 8 7 7 7 7 ",
-            IE8 = "undefined 0.5 0.4 0.33333 -3 3 8  7  10px foo auto ")
+    @Alerts(" 0.5 0.4 0.33333 -3 3 8 7 7 7 7 ")
     public void setOpacity() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d'>d</div>\n"
@@ -450,8 +440,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "exception" },
-            IE8 = "function")
+    @Alerts({ "undefined", "exception" })
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -471,8 +460,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "exception" },
-            IE8 = "function")
+    @Alerts({ "undefined", "exception" })
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -610,8 +598,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "string", "", "1", "2", "2", "2", "2", "5", "5", "5", "5" },
-            IE8 = { "number", "0", "1", "2", "3", "4", "4", "5", "6", "7", "8" })
+    @Alerts({ "string", "", "1", "2", "2", "2", "2", "5", "5", "5", "5" })
     public void zIndex() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -651,7 +638,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "string", "", "string", "", "string", "4", "string", "", "string", "", "string", "" },
-            IE8 = { "number", "0", "number", "0", "number", "4", "number", "4", "number", "4", "number", "0" },
             IE11 = { "string", "", "string", "", "number", "4", "string", "", "string", "", "string", "" })
     public void zIndexDefault() throws Exception {
         final String html
@@ -699,8 +685,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "1", "1" },
-            IE8 = { "0", "error", "0", "1", "error", "1" })
+    @Alerts({ "", "", "1", "1" })
     public void zIndexSetUndefined() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -735,8 +720,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "1", "" },
-            IE8 = { "0", "error", "0", "1", "error", "1" })
+    @Alerts({ "", "", "1", "" })
     public void zIndexSetNull() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -770,8 +754,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "7", "7", "", "4", "1" },
-            IE8 = {"0", "7", "7", "0", "error", "4", "error", "1" })
+    @Alerts({"", "7", "7", "", "4", "1" })
     public void zIndexSetString() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -814,8 +797,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "1", "1" },
-            IE8 = {"0", "error", "0", "1", "error", "1" })
+    @Alerts({"", "", "1", "1" })
     public void zIndexSetInvalid() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -871,7 +853,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1px", "solid", "red" }, IE8 = { })
+    @Alerts({ "1px", "solid", "red" })
     public void border() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -916,8 +898,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "none",
             CHROME = "",
-            IE11 = "inline",
-            IE8 = "ignored")
+            IE11 = "inline")
     @NotYetImplemented({ IE11, CHROME })
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
@@ -1158,7 +1139,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { },
-            IE8 = { "", "green", "green", "", "green", "green", "", "green", "" },
             IE11 = { "", "green", "green", "", "green", "green", "", "green", "green" })
     public void getAttribute() throws Exception {
         getAttribute("\"font\"", new String[0]);
@@ -1206,16 +1186,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                 "'ColoR', 'red', 0, green, red",
                 "'font', 'blah', 1, green, green",
                 "'color', 'red', 1, green, red",
-                "'ColoR', 'red', 1, green, red" },
-            IE8 = { "'font', 'blah', green, green",
-                "'color', 'red', green, red",
-                "'ColoR', 'red', green, green",
-                "'font', 'blah', 0, green, green",
-                "'color', 'red', 0, green, red",
-                "'ColoR', 'red', 0, green, red",
-                "'font', 'blah', 1, green, green",
-                "'color', 'red', 1, green, red",
-                "'ColoR', 'red', 1, green, green" })
+                "'ColoR', 'red', 1, green, red" })
     public void setAttribute() throws Exception {
         final String[] expected = getExpectedAlerts();
         setAttribute("'font', 'blah'", expected[0]);
@@ -1266,16 +1237,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                 "'ColoR', 0, green, true, ",
                 "'font', 1, green, false, green",
                 "'color', 1, green, true, ",
-                "'ColoR', 1, green, true, " },
-            IE8 = { "'font', green, false, green",
-                "'color', green, true, ",
-                "'ColoR', green, false, green",
-                "'font', 0, green, false, green",
-                "'color', 0, green, true, ",
-                "'ColoR', 0, green, true, ",
-                "'font', 1, green, false, green",
-                "'color', 1, green, true, ",
-                "'ColoR', 1, green, false, green" })
+                "'ColoR', 1, green, true, " })
     public void removeAttribute() throws Exception {
         final String[] expected = getExpectedAlerts();
         removeAttribute("'font'", expected[0]);
@@ -1316,8 +1278,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "red ", "black ", "blue important", "gray " },
-            IE8 = { "not supported", "not supported", "not supported", "not supported" })
+    @Alerts({ "red ", "black ", "blue important", "gray " })
     public void setProperty() throws Exception {
         final String[] expected = getExpectedAlerts();
         setProperty("'background-color', 'red', ''", expected[0]);
@@ -1331,8 +1292,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "green ", "black important", "green " },
-            FF = { "green ", "green ", "green " },
-            IE8 = { "not supported", "not supported", "not supported" })
+            FF = { "green ", "green ", "green " })
     public void setPropertyImportant() throws Exception {
         final String[] expected = getExpectedAlerts();
         setProperty("'background-color', 'white', 'crucial'", expected[0]);
@@ -1367,8 +1327,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "important", "", "important" },
-            IE8 = "not supported")
+    @Alerts({ "", "important", "", "important" })
     public void getPropertyPriority() throws Exception {
         final String html =
                 "<html><body onload='test()'>\n"
@@ -1546,7 +1505,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "none" },
             CHROME = { "undefined", "before", "none", "exception" },
-            IE8 = "exception",
             IE11 = { "function", "before", "none", "after", "none" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void interceptSetter() throws Exception {
@@ -1580,9 +1538,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "", "" },
-            IE8 = {"", "error", "", "", "error", "" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "", "", "", "" })
     public void setToNull() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -1615,8 +1571,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "width", "", "undefined" },
-            FF = { "1", "width", "undefined", "undefined" },
-            IE8 = { "undefined", "width", "", "undefined" })
+            FF = { "1", "width", "undefined", "undefined" })
     public void length() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1666,8 +1621,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "auto", "auto" },
-            CHROME = { "auto", "" },
-            IE8 = { "undefined", "undefined" })
+            CHROME = { "auto", "" })
     @NotYetImplemented(CHROME)
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"

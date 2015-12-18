@@ -34,8 +34,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "screen", "print", "screen, print" },
-            IE8 = { "Your browser does not support this example!" })
+    @Alerts(DEFAULT = { "2", "screen", "print", "screen, print" })
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"
@@ -68,8 +67,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "only screen and (color)", "print", "only screen and (color)", "print" },
-            IE8 = { "Your browser does not support this example!" })
+    @Alerts(DEFAULT = { "2", "only screen and (color)", "print", "only screen and (color)", "print" })
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"

@@ -67,8 +67,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "rgb(255, 0, 0)", "rgb(255, 0, 0)" },
-            IE8 = "exception")
+    @Alerts({ "rgb(255, 0, 0)", "rgb(255, 0, 0)" })
     public void getComputedStyle_Link() throws Exception {
         final String html =
               "<html>\n"
@@ -102,7 +101,6 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "undefined", "undefined", "undefined" },
-            IE8 = { "0", "exception for 0", "exception for 46", "exception for -2" },
             IE11 = { "0", "undefined", "undefined", "undefined" })
     public void arrayIndexOutOfBoundAccess() throws Exception {
         final String html =
@@ -147,8 +145,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" },
-            IE8 = { "1", "[object]", "[object]" })
+    @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" })
     public void nonExistentStylesheet() throws Exception {
         final String html =
               "<html>\n"
@@ -174,8 +171,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" },
-            IE8 = { "1", "[object]", "[object]" })
+    @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" })
     public void emptyGZipEncodedStylesheet() throws Exception {
         final String html =
               "<html>\n"
@@ -208,8 +204,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" },
-            IE8 = { "1", "[object]", "[object]" })
+    @Alerts({ "1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" })
     public void brokenGZipEncodedStylesheet() throws Exception {
         final String html =
               "<html>\n"

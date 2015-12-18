@@ -39,8 +39,7 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object CSSKeyframesRule], 7, identifier, 2" },
-            FF = { "[object MozCSSKeyframesRule]", "7", "identifier", "2" },
-            IE8 = { "Your browser does not support this example" })
+            FF = { "[object MozCSSKeyframesRule]", "7", "identifier", "2" })
     @NotYetImplemented({FF, CHROME, IE11 })
     public void simple() throws Exception {
         final String html

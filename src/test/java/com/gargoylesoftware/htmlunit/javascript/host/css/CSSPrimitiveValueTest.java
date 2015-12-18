@@ -64,7 +64,6 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "rgb(0, 0, 255)", "0" },
-            IE8 = "document.defaultView not available",
             IE11 = "style.getPropertyCSSValue not available",
             CHROME = "style.getPropertyCSSValue not available")
     public void getPropertyCSSValue() throws Exception {

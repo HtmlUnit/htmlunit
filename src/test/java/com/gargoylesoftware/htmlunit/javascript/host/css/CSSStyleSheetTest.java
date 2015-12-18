@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -55,7 +54,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" },
-            IE8 = {"[object]", "undefined", "false", "[object]", "true" },
             IE11 = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
                     "true", "[object HTMLStyleElement]", "true" })
     public void owningNodeOwningElement() throws Exception {
@@ -82,8 +80,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "4", "0", "1", "2", "3", "length", "item" },
-            FF38 = { "4", "0", "1", "2", "3", "item", "length" },
-            IE8 = { "4", "length", "0", "1", "2", "3" })
+            FF38 = { "4", "0", "1", "2", "3", "item", "length" })
     public void rules() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -114,8 +111,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null" },
-            IE8 = { "4", "§§URL§§style2.css", "style4.css", "", "" })
+    @Alerts({ "4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null" })
     public void href() throws Exception {
         final String baseUrl = getDefaultUrl().toExternalForm();
         final String html = "<html>\n"
@@ -151,8 +147,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "false", "false", "0", "2", "p" },
-            FF = { "1", "false", "true", "0", "2", "p" },
-            IE8 = { "1", "true", "false", "-1", "2", "DIV" })
+            FF = { "1", "false", "true", "0", "2", "p" })
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -182,8 +177,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2", "false", "false", "undefined", "1", "div" },
-            FF = { "2", "false", "true", "undefined", "1", "div" },
-            IE8 = { "2", "true", "false", "undefined", "1", "DIV" })
+            FF = { "2", "false", "true", "undefined", "1", "div" })
     public void removeRule_deleteRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -239,8 +233,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", ".testStyleDef", ".testStyle" },
-            IE8 = { })
+    @Alerts({ "2", ".testStyleDef", ".testStyle" })
     public void insertRuleLeadingWhitespace() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -296,7 +289,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "true", "false" },
-            IE8 = { "false", "false", "false", "false", "false" },
             CHROME = { "false", "false", "false", "false", "false" })
     @NotYetImplemented(CHROME)
     public void langCondition() throws Exception {
@@ -311,7 +303,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "false" },
-            IE8 = { "false", "false" },
             CHROME = { "false", "false" })
     @NotYetImplemented(CHROME)
     public void css2_root() throws Exception {
@@ -324,7 +315,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "false" },
-            IE8 = { "false", "false", "false" },
             CHROME = { "false", "false", "false" })
     @NotYetImplemented(CHROME)
     public void css3_not() throws Exception {
@@ -336,7 +326,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
-            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" },
             CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
     @NotYetImplemented(CHROME)
     public void css3_enabled() throws Exception {
@@ -354,7 +343,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
-            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" },
             CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
     @NotYetImplemented(CHROME)
     public void css3_disabled() throws Exception {
@@ -372,7 +360,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false", "false", "false", "true", "false", "true", "false" },
-            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" },
             CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
     @NotYetImplemented(CHROME)
     public void css3_checked() throws Exception {
@@ -771,9 +758,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE8 = { "block", "1" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "none", "1" })
     public void mediaRule_max_width_match() throws Exception {
         mediaRule("screen and (max-width: 10000px)");
     }
@@ -811,9 +796,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE8 = { "block", "1" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "none", "1" })
     public void mediaRule_max_device_width_match() throws Exception {
         mediaRule("screen and (max-device-width: 10000px)");
     }
@@ -831,9 +814,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE8 = { "block", "1" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "none", "1" })
     public void mediaRule_min_device_width_match() throws Exception {
         mediaRule("screen and (min-device-width: 123px)");
     }
@@ -853,9 +834,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE8 = { "block", "1" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "none", "1" })
     public void mediaRule_max_height_match() throws Exception {
         mediaRule("screen and (max-height: 10000px)");
     }
@@ -893,9 +872,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE8 = { "block", "1" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "none", "1" })
     public void mediaRule_max_device_height_match() throws Exception {
         mediaRule("screen and (max-device-height: 10000px)");
     }
@@ -913,9 +890,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE8 = { "block", "1" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "none", "1" })
     public void mediaRule_min_device_height_match() throws Exception {
         mediaRule("screen and (min-device-height: 123px)");
     }
@@ -955,9 +930,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE8 = { "block", "1" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "none", "1" })
     public void mediaRule_max_resolution_match() throws Exception {
         mediaRule("screen and (max-resolution: 10000dpi)");
     }
@@ -1071,8 +1044,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "rgb(255, 0, 0)",
-            IE8 = "red")
+    @Alerts("rgb(255, 0, 0)")
     public void veryBig() throws Exception {
         getWebDriver();
 

@@ -34,8 +34,7 @@ public class CSSRuleListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSStyleRule]",
-            IE8 = "[object]")
+    @Alerts("[object CSSStyleRule]")
     public void ruleList() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

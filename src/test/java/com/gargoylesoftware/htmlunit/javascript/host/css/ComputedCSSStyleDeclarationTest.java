@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,8 +43,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "none",
-            IE8 = "undefined")
+    @Alerts("none")
     public void cssFloat() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -103,8 +101,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "auto", "pointer" },
-            IE8 = { "", "" })
+    @Alerts({ "", "", "auto", "pointer" })
     public void styleElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
@@ -140,8 +137,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "pointer", "pointer" },
-            IE8 = { "", "" })
+    @Alerts({ "", "", "pointer", "pointer" })
     public void styleElement2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
@@ -172,8 +168,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "auto", "string" },
-            IE8 = { "0", "number" })
+    @Alerts({ "auto", "string" })
     public void zIndex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -218,9 +213,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px",
-                   "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px" },
-            IE8 = { "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em",
-                   "1em 1em", "1em 1em", "1em 1em", "1em 1em", "1em 1em" })
+                   "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px" })
     public void lengthsConvertedToPixels() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d' style='width:1em; height:1em; border:1em solid black; padding:1em; margin:1em;'>d</div>\n"
@@ -253,7 +246,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none" },
             CHROME = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block",
                             "block", "none" },
-            IE8 = { "inline", "inline", "inline", "block", /* "none", */ "inline", "inline", "inline", "inline" },
             IE11 = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none" })
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -390,8 +382,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "none", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block" },
-            CHROME = { "none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block" },
-            IE8 = { "inline", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block" })
+            CHROME = { "none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block" })
     public void defaultDisplayValues_D() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <datalist id='datalist'></datalist>\n"
@@ -470,8 +461,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "block", "block", "inline", "block", "block" },
-            IE8 = { "block", "inline", "inline", "inline", "inline", "block" })
+    @Alerts({ "block", "block", "block", "inline", "block", "block" })
     public void defaultDisplayValues_F() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <form id='form'>\n"
@@ -513,8 +503,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "block", "block", "block", "block", "block", "block", "block" },
-            IE8 = { "block", "block", "block", "block", "block", "block", "inline", "block" })
+    @Alerts({ "block", "block", "block", "block", "block", "block", "block", "block" })
     public void defaultDisplayValues_H() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <h1 id='h1'></h1>\n"
@@ -698,7 +687,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "none", "inline", "block", "block", "block", "inline" },
             CHROME = { "block", "inline", "inline", "block", "block", "block", "inline" },
-            IE8 = { "inline", "inline", "inline", "block", "inline", "inline", "inline" },
             IE11 = { "block", "none", "inline", "block", "inline", "inline", "inline" })
     public void defaultDisplayValues_NO() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -750,9 +738,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "none", "block", "inline-block", "inline" },
-            IE8 = { "block", "null", "block", "inline", "inline" },
             IE11 = { "block", "inline", "block", "inline", "inline" })
-    @NotYetImplemented(IE8)
     public void defaultDisplayValues_PQ() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'><q id='q'></q></p>\n"
@@ -824,9 +810,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "inline", "inline", "none", "block", "inline-block", "inline",
                         "inline", "inline", "inline", "inline", "inline", "inline", "inline" },
             CHROME = { "inline", "inline", "none", "block", "inline-block", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "block", "inline" },
-            IE8 = { "inline", "inline", "inline", "inline", "inline-block", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "inline", "inline" })
+                        "inline", "inline", "inline", "inline", "inline", "block", "inline" })
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"
@@ -979,8 +963,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "transparent", "rgb(255, 0, 0)", "rgb(255, 255, 255)" },
-            CHROME = { "rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)" },
-            IE8 = { "transparent", "red", "white" })
+            CHROME = { "rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)" })
     public void backgroundColor() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0'>div 0</div>\n"
@@ -1032,8 +1015,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1240px", "auto" },
-            FF = { "1242px", "auto" },
-            IE8 = { "auto", "auto" })
+            FF = { "1242px", "auto" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
@@ -1083,8 +1065,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "underline", "none", "underline" },
-            IE8 = { "underline", "underline", "underline" })
+    @Alerts({ "underline", "none", "underline" })
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1116,8 +1097,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "100px,100px" },
-            IE8 = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "50%,25%" })
+    @Alerts({ "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "100px,100px" })
     public void widthAndHeightPercentagesAndPx() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:200px;height:400px'><div id='d2' style='width:50%;height:25%'></div></div>\n"
@@ -1143,8 +1123,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "10em,20em", "160,320", "160px,320px", "50%,25%", "80,80", "80px,80px" },
-            IE8 = { "10em,20em", "160,320", "10em,20em", "50%,25%", "80,80", "50%,25%" })
+    @Alerts({ "10em,20em", "160,320", "160px,320px", "50%,25%", "80,80", "80px,80px" })
     public void widthAndHeightPercentagesAndEm() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:10em;height:20em'><div id='d2' style='width:50%;height:25%'></div></div>\n"
@@ -1234,8 +1213,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "auto", "auto" },
-            CHROME = { "", "" },
-            IE8 = { "-", "-" })
+            CHROME = { "", "" })
     @NotYetImplemented(CHROME)
     public void widthAndHeightDisconnected() throws Exception {
         final String html = "<html>\n"
@@ -1258,9 +1236,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "false", "false", "true", "true", "true", "false" },
-            IE8 = { "true", "true", "true", "false", "true", "false", "false", "true", "false", "true" })
-    @NotYetImplemented(IE8)
+    @Alerts({ "true", "true", "true", "true", "false", "false", "true", "true", "true", "false" })
     public void widthAuto() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1290,8 +1266,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "rgb(0, 0, 255)" },
-            IE8 = "exception")
+    @Alerts({ "", "rgb(0, 0, 255)" })
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -1385,8 +1360,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "18",
-            FF = "20",
-            IE8 = "19")
+            FF = "20")
     public void offsetHeight_with_content() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"

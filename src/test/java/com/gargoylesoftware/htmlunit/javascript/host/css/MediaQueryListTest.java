@@ -34,8 +34,7 @@ public class MediaQueryListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "")
+    @Alerts("true")
     public void matches() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -54,8 +53,7 @@ public class MediaQueryListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "added", "removed" },
-            IE8 = "")
+    @Alerts({ "added", "removed" })
     public void listener() throws Exception {
         final String html
             = "<html><head><script>\n"
