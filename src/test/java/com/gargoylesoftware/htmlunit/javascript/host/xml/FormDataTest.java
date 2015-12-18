@@ -52,8 +52,7 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function, undefined, undefined, undefined, undefined, undefined",
-            IE8 = "")
+    @Alerts("function, undefined, undefined, undefined, undefined, undefined")
     public void functions() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

@@ -41,7 +41,6 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "97", "[object Element]" },
-            IE8 = { "createDocument not available", "exception" },
             IE11 = "exception",
             CHROME = "exception")
     @NotYetImplemented(FF)

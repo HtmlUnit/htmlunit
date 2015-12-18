@@ -129,7 +129,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "1", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR },
-            IE8 = { "0", "1", "1", "2", "4", MSG_NO_CONTENT },
             FF = { "0", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR })
     @NotYetImplemented(CHROME)
     public void testAsyncUseWithNetworkConnectionFailure() throws Exception {

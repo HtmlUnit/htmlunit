@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -112,8 +111,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLHttpRequest]",
-            IE8 = "[object]")
+    @Alerts("[object XMLHttpRequest]")
     public void creation() throws Exception {
         final String html =
             "<html>\n"
@@ -138,8 +136,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1: 0-", "2: ", "3: 200-OK" },
-            IE8 = {"1: ex: status-ex: statusText, 2: , 3: 200-OK" })
+    @Alerts({ "1: 0-", "2: ", "3: 200-OK" })
     public void statusSync() throws Exception {
         final String html =
             "<html>\n"
@@ -181,9 +178,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "#1: 0-", "4: 0-",
                             "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
             FF = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
-            IE8 = { "1: ex: status-ex: statusText", "2: ex: status-ex: statusText", "#1: ex: status-ex: statusText",
-                    "3: ex: status-ex: statusText", "#1: ex: status-ex: statusText", "4: ex: status-ex: statusText",
-                    "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
             CHROME = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-",
                     "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" })
     public void statusAsync() throws Exception {
@@ -272,7 +266,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" },
             FF = { "orsc1", "open-done", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" },
-            IE8 = { "orsc1", "open-done", "orsc1", "send-done", "orsc2", "orsc3", "orsc4" },
             CHROME = {"orsc1", "open-done", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" })
     public void onload() throws Exception {
@@ -412,8 +405,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "[object Object]")
+    @Alerts("[object XMLDocument]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_text_xml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -437,8 +429,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "[object Object]")
+    @Alerts("[object XMLDocument]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_xml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -462,8 +453,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "[object Object]")
+    @Alerts("[object XMLDocument]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_xhtmlXml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -487,8 +477,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "[object Object]")
+    @Alerts("[object XMLDocument]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_svgXml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -513,8 +502,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "someAttr", "undefined", "undefined" },
-            IE8 = { "1", "someAttr", "someValue", "someAttr=\"someValue\"" })
+    @Alerts({ "1", "someAttr", "undefined", "undefined" })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML2() throws Exception {
         final String html = "<html><head>\n"
@@ -650,8 +638,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false" },
-            IE8 = "not supported")
+    @Alerts({ "true", "false" })
     public void overrideMimeType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -685,8 +672,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "overwritten" },
             CHROME = { "true", "exception" },
-            IE11 = { "true", "exception" },
-            IE8 = "not supported")
+            IE11 = { "true", "exception" })
     public void overrideMimeTypeAfterSend() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -716,8 +702,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "27035",
-            IE8 = "not supported")
+    @Alerts("27035")
     public void overrideMimeType_charset() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -743,8 +728,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "27035",
-            IE8 = "not supported")
+    @Alerts("27035")
     public void overrideMimeType_charset_upper_case() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -770,8 +754,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "40644",
-            IE8 = "not supported")
+    @Alerts("40644")
     public void overrideMimeType_charset_empty() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -799,7 +782,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "40644",
             CHROME = "233",
-            IE8 = "not supported",
             IE11 = "NaN")
     @NotYetImplemented({ IE11, CHROME })
     public void overrideMimeType_charset_wrong() throws Exception {
@@ -927,8 +909,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "selectNodes not available",
-            IE8 = "2")
+    @Alerts("selectNodes not available")
     public void responseXML_selectNodesIE() throws Exception {
         final String html =
               "<html>\n"
@@ -964,8 +945,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "myID", "blah", "span", "[object XMLDocument]" },
             CHROME = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" },
-            FF38 = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" },
-            IE8 = "responseXML.getElementById not available")
+            FF38 = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" })
     public void responseXML_getElementById_FF() throws Exception {
         final String html =
               "<html>\n"
@@ -1011,9 +991,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
-                "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" },
-            IE8 = { "[object]", "[object]", "[object]",
-                "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" })
+                "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_getElementById() throws Exception {
         final String html =
@@ -1153,8 +1131,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myID",
-            IE8 = "exception")
+    @Alerts("myID")
     public void responseXML_html_select() throws Exception {
         final String html =
               "<html>\n"
@@ -1192,8 +1169,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myInput",
-            IE8 = "exception")
+    @Alerts("myInput")
     public void responseXML_html_form() throws Exception {
         final String html =
               "<html>\n"
@@ -1296,7 +1272,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "39", "27035", "65533", "39" },
-            IE8 = "not supported",
             IE11 = { "39", "27035", "63" })
     @NotYetImplemented(IE11)
     public void overrideMimeType_charset_all() throws Exception {
@@ -1349,7 +1324,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object ProgressEvent]",
             CHROME = "[object XMLHttpRequestProgressEvent]")
-    @NotYetImplemented(IE8)
     public void loadParameter() throws Exception {
         final String html =
               "<html>\n"
@@ -1383,8 +1357,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "someLoad [object ProgressEvent]", "load", "true" },
-            CHROME = { "someLoad [object XMLHttpRequestProgressEvent]", "load", "false" },
-            IE8 = "exception")
+            CHROME = { "someLoad [object XMLHttpRequestProgressEvent]", "load", "false" })
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"
@@ -1420,8 +1393,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "someLoad [object ProgressEvent]", "load", "true", "11", "11" },
-            CHROME = { "someLoad [object XMLHttpRequestProgressEvent]", "load", "false", "11", "0" },
-            IE8 = "exception")
+            CHROME = { "someLoad [object XMLHttpRequestProgressEvent]", "load", "false", "11", "0" })
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void addEventListenerDetails() throws Exception {
         final String html =
@@ -1460,8 +1432,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            CHROME = "function",
-            IE8 = "exception")
+            CHROME = "function")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void addEventListenerCaller() throws Exception {
         final String html =

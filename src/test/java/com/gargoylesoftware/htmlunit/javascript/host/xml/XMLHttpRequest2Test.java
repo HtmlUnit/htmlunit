@@ -191,7 +191,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
-            IE8 = { "3", "exception", "exception", "pass", "pass" },
             IE11 = { "1", "exception", "exception", "pass", "pass" })
     @NotYetImplemented(IE11)
     // real IE11 invokes just one request and returns the other two responses from it's cache
@@ -224,8 +223,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" },
-            IE8 = { "1", "bla", "someAttr", "someValue", "false", "foo", "2", "fi1" })
+    @Alerts({ "1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML() throws Exception {
         testResponseXML("text/xml");
@@ -376,8 +374,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "[object]")
+    @Alerts("[object XMLDocument]")
     public void iframeInResponse() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -495,8 +492,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "4",
-            IE8 = { "1", "2", "3", "4" })
+    @Alerts("4")
     public void testOnreadystatechange_sync() throws Exception {
         final String html =
               "<html>\n"
@@ -535,8 +531,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
-            IE8 = "no param")
+    @Alerts("[object Event]#[object XMLHttpRequest]")
     public void testOnreadystatechangeSyncWithParam() throws Exception {
         final String html =
               "<html>\n"
@@ -577,8 +572,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
-            IE8 = "no param")
+    @Alerts("[object Event]#[object XMLHttpRequest]")
     public void testOnreadystatechangeAsyncWithParam() throws Exception {
         final String html =
               "<html>\n"

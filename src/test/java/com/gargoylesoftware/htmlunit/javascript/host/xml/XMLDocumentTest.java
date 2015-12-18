@@ -296,8 +296,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "false")
+    @Alerts("undefined")
     public void preserveWhiteSpace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -316,8 +315,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "")
+    @Alerts("exception")
     public void setProperty() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -337,8 +335,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception" },
-            IE8 = { "1", "books" })
+    @Alerts({ "exception" })
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -369,8 +366,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "0", "1" })
+    @Alerts("exception")
     public void selectNodes_caseSensitive() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -400,8 +396,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception" },
-            IE8 = { "2", "1" })
+    @Alerts({ "exception" })
     public void selectNodes_namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -438,8 +433,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "book", "null", "book", "null" })
+    @Alerts("exception")
     public void selectNodes_nextNodeAndReset() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -473,8 +467,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "book", "exception /title, exception title" },
-            IE8 = { "book", "0", "1" })
+    @Alerts({ "book", "exception /title, exception title" })
     // IE11 works only if running alone
     public void selectNodes_fromRoot() throws Exception {
         final String html = "<html><head><script>\n"
@@ -506,8 +499,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "book", "#document", "book", "#document" })
+    @Alerts("exception")
     public void selectSingleNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -648,8 +640,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "columns")
+    @Alerts("exception")
     public void xmlInsideHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -674,8 +665,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "exception")
+    @Alerts("true")
     public void instanceOf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -848,8 +838,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "true", "false", "false", "false" },
             CHROME = { "false", "false", "true", "false" },
             FF38 = { "false", "false", "true", "false" },
-            IE = { "false", "false", "false", "false" },
-            IE8 = "exception")
+            IE = { "false", "false", "false", "false" })
     @NotYetImplemented(FF31)
     // XML ID handling not yet correctly implemented
     public void getElementById_xml() throws Exception {
@@ -885,8 +874,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "false" },
             CHROME = { "true", "true" },
-            FF38 = { "true", "true" },
-            IE8 = "exception")
+            FF38 = { "true", "true" })
     // XML ID handling not yet correctly implemented
     public void getElementById_html() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -910,8 +898,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true" },
-            IE8 = "exception")
+    @Alerts({ "true", "true" })
     public void getElementById_xhtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1014,8 +1001,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "nodeFromID not available",
-            IE8 = "nodeFromID null")
+    @Alerts("nodeFromID not available")
     public void nodeFromID() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1085,7 +1071,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLDocument]",
-            IE8 = "[object]",
             IE11 = "[object Document]")
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void html() throws Exception {
@@ -1105,7 +1090,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = {},
             IE11 = "[object Document]")
     @BuggyWebDriver(CHROME)
     @NotYetImplemented
