@@ -113,7 +113,6 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "", "blah", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "u" },
-            IE8 = { "", "", "", "A", "", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" },
             IE11 = { "", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" })
     public void type() throws Exception {
         final String html =

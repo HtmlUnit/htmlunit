@@ -368,7 +368,6 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", "" },
             CHROME = {"cell1", "[object HTMLTableRowElement]",
                         "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1" },
-            IE8 = { "cell1", "[object]", "abc", "[object]", "" },
             IE11 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
     public void innerText_body() throws Exception {
         final String html
@@ -398,7 +397,6 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", "" },
             CHROME = {"cell1", "[object HTMLTableRowElement]",
                         "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1" },
-            IE8 = { "cell1", "[object]", "abc", "[object]", "" },
             IE11 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
     public void innerText_header() throws Exception {
         final String html
@@ -428,7 +426,6 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", "" },
             CHROME = {"cell1", "[object HTMLTableRowElement]",
                         "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1" },
-            IE8 = { "cell1", "[object]", "abc", "[object]", "" },
             IE11 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
     public void innerText_footer() throws Exception {
         final String html

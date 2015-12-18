@@ -305,8 +305,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Window]",
             CHROME = "[object HTMLFrameElement]",
-            FF = "[object HTMLFrameElement]",
-            IE8 = "[object]")
+            FF = "[object HTMLFrameElement]")
     public void frames_framesetOnLoad() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"
@@ -357,8 +356,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Window]",
             CHROME = "[object HTMLFrameElement]",
-            FF = "[object HTMLFrameElement]",
-            IE8 = "[object]")
+            FF = "[object HTMLFrameElement]")
     public void parent_frames() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"

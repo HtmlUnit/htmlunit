@@ -172,7 +172,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5", "7,7" },
-            IE8 = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5", "10,5" },
             IE11 = { "0,0", "0,0", "10,10", "5,5", "7,7" })
     @NotYetImplemented(IE11)
     public void selection_reverseOrder() throws Exception {
@@ -472,8 +471,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "9", "9", "2", "7" },
-            IE8 = "setSelectionRange not available")
+    @Alerts(DEFAULT = { "9", "9", "2", "7" })
     public void selectionRange() throws Exception {
         final String html
             = "<html>\n"
@@ -574,7 +572,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-1", /* "null", */ "32", "32", "-1", "ms" },
-            IE8 = { "undefined", /* "null", */ "32", "32", "ms", "ms" },
             IE11 = { "2147483647", /* "null", */ "32", "32", "2147483647", "ms" })
     public void getMaxLength() throws Exception {
         final String html

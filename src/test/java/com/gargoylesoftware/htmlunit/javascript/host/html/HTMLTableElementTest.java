@@ -710,7 +710,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "[object Text]", "abc", "[object Text]", "" },
             CHROME = {"cell1", "[object Text]", "ex", "cell1", "[object Text]", "ex", "cell1" },
-            IE8 = { "cell1", "[object]", "abc", "[object]", "" },
             IE11 = { "cell1", "[object Text]", "abc", "[object Text]", "" })
     @NotYetImplemented({ CHROME, IE11 })
     public void innerText() throws Exception {

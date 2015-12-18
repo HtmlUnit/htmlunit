@@ -355,7 +355,6 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "[object HTMLTableCellElement]", "abc", "[object HTMLTableCellElement]", "" },
             CHROME = {"cell1", "[object HTMLTableCellElement]",
                         "ex", "cell1", "[object HTMLTableCellElement]", "ex", "cell1" },
-            IE8 = { "cell1", "[object]", "abc", "[object]", "" },
             IE11 = { "cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", "" })
     public void innerText() throws Exception {
         final String html
@@ -383,7 +382,6 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", "" },
-            IE8 = { "undefined", "[object]", "abc", "[object]", "" },
             IE11 = { "cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", "" })
     public void textContent() throws Exception {
         final String html

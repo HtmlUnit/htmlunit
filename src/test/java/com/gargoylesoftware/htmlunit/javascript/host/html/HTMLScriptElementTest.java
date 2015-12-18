@@ -967,8 +967,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "\n    <script id=\"testScript\">function foo() { return a > b}</script>\n  " },
-            IE8 = "")
+    @Alerts(DEFAULT = { "\n    <script id=\"testScript\">function foo() { return a > b}</script>\n  " })
     public void innerHTMLGetSet() throws Exception {
         final String html
             = "<html>\n"

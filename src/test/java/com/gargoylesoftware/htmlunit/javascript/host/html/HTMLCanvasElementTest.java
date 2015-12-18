@@ -76,7 +76,6 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             + "oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
             + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
             + "AAAAAAAAAAAAAAAAAAAAAAAAAAAOA1v9QAATX68/0AAAAASUVORK5CYII=" },
-            IE8 = "exception",
             IE11 = { "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAAAARnQU1BAA"
             + "Cxjwv8YQUAAADGSURBVHhe7cExAQAAAMKg9U9tCF8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
             + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -141,8 +140,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object CanvasRenderingContext2D], [object WebGLRenderingContext], "
             + "[object WebGLRenderingContext], null, null, null",
             IE11 = "[object CanvasRenderingContext2D], null, "
-                    + "[object WebGLRenderingContext], null, null, null",
-            IE8 = "")
+                    + "[object WebGLRenderingContext], null, null, null")
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void getContext() throws Exception {
         final String html =

@@ -556,7 +556,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
             CHROME = { "number: 300", "number: 200", "number: 20", "number: 20", "number: 20", "number: 20" },
-            IE8 = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
             IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" })
     @NotYetImplemented(CHROME)
     public void widthHeightInvalidSource() throws Exception {

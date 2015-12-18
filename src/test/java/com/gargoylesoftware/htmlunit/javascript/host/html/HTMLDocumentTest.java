@@ -1419,8 +1419,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "div1" },
-            IE8 = "undefined")
+    @Alerts(DEFAULT = { "3", "div1" })
     public void querySelectorAll_quirks() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -2122,7 +2121,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE8 = { "5", "BackCompat", "undefined", "undefined" },
             IE11 = { "11", "BackCompat", "function", "function" })
     public void documentMode() throws Exception {
         documentMode("", "");
@@ -2133,7 +2131,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE8 = { "8", "CSS1Compat", "object", "object" },
             IE11 = { "11", "CSS1Compat", "function", "function" })
     public void documentMode_doctypeStrict() throws Exception {
         documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_, "");
@@ -2144,7 +2141,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE8 = { "8", "CSS1Compat", "object", "object" },
             IE11 = { "11", "BackCompat", "function", "function" })
     public void documentMode_doctypeTransitional() throws Exception {
         documentMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\""
@@ -2156,7 +2152,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE8 = { "8", "CSS1Compat", "object", "object" },
             IE11 = { "11", "CSS1Compat", "function", "function" })
     public void documentMode_doctypeHTML5() throws Exception {
         documentMode("<!DOCTYPE html>\n", "");
@@ -2199,7 +2194,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE8 = { "5", "BackCompat", "undefined", "undefined" },
             IE11 = { "11", "BackCompat", "function", "function" })
     public void documentMode_metaEmulateIE8() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=Emulate8'>\n");
@@ -2210,7 +2204,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE8 = { "8", "CSS1Compat", "object", "object" },
             IE11 = { "11", "CSS1Compat", "function", "function" })
     public void documentMode_metaEmulateIE8_doctypeStrict() throws Exception {
         documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_,
@@ -2232,7 +2225,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE8 = { "8", "CSS1Compat", "object", "object" },
             IE11 = { "11", "CSS1Compat", "function", "function" })
     public void documentMode_metaIEEdge() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n");
@@ -2304,7 +2296,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "[object HTMLDocument]", "[object HTMLDocument]" },
-            IE8 = { "[object]", "exception" },
             CHROME = { "[object HTMLDocument]", "function HTMLDocument() { [native code] }" },
             FF = { "[object HTMLDocument]", "function HTMLDocument() {\n    [native code]\n}" })
     public void type() throws Exception {

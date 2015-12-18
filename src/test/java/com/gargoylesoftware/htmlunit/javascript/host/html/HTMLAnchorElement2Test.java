@@ -74,8 +74,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "attachEvent not available", "href" },
-            IE8 = "onclick")
+    @Alerts(DEFAULT = { "attachEvent not available", "href" })
     public void javaScriptPreventDefaultIE() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
@@ -562,7 +561,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "§§URL§§second/", "HTMLAnchorElement", "[object HTMLAnchorElement]" },
-            IE8 = { "§§URL§§second/", "object", "exception" },
             CHROME = { "§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }" },
             FF = { "§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}" })
     public void typeof() throws Exception {

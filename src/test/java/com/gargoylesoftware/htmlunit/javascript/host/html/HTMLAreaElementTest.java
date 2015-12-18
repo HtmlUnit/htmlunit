@@ -67,7 +67,6 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "", "[object HTMLAreaElement]" },
-            IE8 = { "", "exception" },
             CHROME = { "", "function HTMLAreaElement() { [native code] }" },
             FF = { "", "function HTMLAreaElement() {\n    [native code]\n}" })
     public void type() throws Exception {

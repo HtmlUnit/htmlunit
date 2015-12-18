@@ -34,7 +34,6 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "[object HTMLAudioElement]", "[object HTMLAudioElement]" },
-            IE8 = { "[object]", "exception" },
             CHROME = { "[object HTMLAudioElement]", "function HTMLAudioElement() { [native code] }" },
             FF = { "[object HTMLAudioElement]", "function HTMLAudioElement() {\n    [native code]\n}" })
     public void type() throws Exception {

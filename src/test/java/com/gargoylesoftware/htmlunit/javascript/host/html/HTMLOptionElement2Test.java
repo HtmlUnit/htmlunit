@@ -996,7 +996,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2", "1", "0", "o2" },
-            IE8 = { "evaluate not supported", "1", "1", "evaluate not supported" },
             IE11 = { "evaluate not supported", "1", "0", "evaluate not supported" })
     public void xpathSelected() throws Exception {
         final String selectionChangeCode = "    sel.options[1].selected = false;\n";

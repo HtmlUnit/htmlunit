@@ -152,7 +152,6 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "[object HTMLBaseFontElement]", "[object HTMLBaseFontElement]" },
-            IE8 = { "[object]", "exception" },
             CHROME = { "[object HTMLElement]", "exception" },
             FF31 = { "[object HTMLSpanElement]", "exception" },
             FF38 = { "[object HTMLElement]", "exception" })

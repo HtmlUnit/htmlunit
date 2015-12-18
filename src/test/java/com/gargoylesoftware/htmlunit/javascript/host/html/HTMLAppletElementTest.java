@@ -101,7 +101,6 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "[object HTMLAppletElement]", "[object HTMLAppletElement]" },
-            IE8 = { "[object]", "exception" },
             CHROME = { "[object HTMLAppletElement]", "function HTMLAppletElement() { [native code] }" },
             FF = { "[object HTMLAppletElement]", "function HTMLAppletElement() {\n    [native code]\n}" })
     public void type() throws Exception {

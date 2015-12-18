@@ -302,8 +302,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
             + "DOCUMENT_POSITION_PRECEDING, "
             + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
-            + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
-            IE8 = "exception")
+            + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " })
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"

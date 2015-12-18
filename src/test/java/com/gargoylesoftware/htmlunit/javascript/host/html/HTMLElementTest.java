@@ -194,8 +194,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "bla", "true" },
-            IE11 = { "", "bla", "true" },
-            IE8 = "exception")
+            IE11 = { "", "bla", "true" })
     @NotYetImplemented({ FF, CHROME })
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
@@ -228,7 +227,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined" },
             IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
-            IE8 = { "text", "i", "i", "[object]", "function", "a", "undefined" },
             CHROME = { "text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined" })
     @NotYetImplemented({ FF, IE11 })
     public void attributesAccess() throws Exception {
@@ -1098,7 +1096,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
-            IE8 = { "Outer = \r\n<P id=myNode>New cell value " },
             IE11 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
     @NotYetImplemented
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
@@ -2260,8 +2257,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "true", "true" })
     public void instanceOf() throws Exception {
         final String html = "<html><head><title>instanceof test</title>\n"
             + "<script>\n"
@@ -2400,8 +2396,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object ClientRect]",
             FF31 = "[object DOMRect]",
-            FF38 = "[object DOMRect]",
-            IE8 = "[object]")
+            FF38 = "[object DOMRect]")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><div id='div1'>hello</div><script>\n"
             + "try {\n"
@@ -2661,8 +2656,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "page2 loaded",
-            IE8 = "exception")
+            FF = "page2 loaded")
     public void dispatchEvent_submitOnForm() throws Exception {
         final String html = "<html>\n"
             + "<head><title>page 1</title></head>\n"
@@ -3165,7 +3159,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false,false,false,false,false,true,false", "clearAttributes not available" },
-            IE8 = { "false,false,false,false,false,false,false", "false,false,false,false,false,false,false" },
             IE11 = { "false,false,false,false,false,true,false", "false,false,false,false,false,true,false" })
     public void clearAttributes() throws Exception {
         final String html
@@ -4071,8 +4064,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "executed",
-            FF = "insertAdjacentElement not available",
-            IE8 = "exception-append")
+            FF = "insertAdjacentElement not available")
     public void insertAdjacentElementExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -4101,8 +4093,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "executed",
-            FF = "insertAdjacentElement not available",
-            IE8 = "exception-append")
+            FF = "insertAdjacentElement not available")
     public void insertAdjacentElementExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -4133,8 +4124,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "declared",
-            FF = "insertAdjacentElement not available",
-            IE8 = "exception-append")
+            FF = "insertAdjacentElement not available")
     public void insertAdjacentElementDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

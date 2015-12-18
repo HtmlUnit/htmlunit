@@ -61,7 +61,6 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "[object HTMLBaseElement]", "[object HTMLBaseElement]" },
-            IE8 = { "[object]", "exception" },
             CHROME = { "[object HTMLBaseElement]", "function HTMLBaseElement() { [native code] }" },
             FF = { "[object HTMLBaseElement]", "function HTMLBaseElement() {\n    [native code]\n}" })
     public void type() throws Exception {
