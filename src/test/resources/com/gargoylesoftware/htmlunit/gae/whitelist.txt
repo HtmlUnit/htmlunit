@@ -1019,6 +1019,15 @@ javax.lang.model.util.SimpleTypeVisitor7
 javax.lang.model.util.TypeKindVisitor6
 javax.lang.model.util.TypeKindVisitor7
 javax.lang.model.util.Types
+javax.naming.CompositeName
+javax.naming.InvalidNameException
+javax.naming.Name
+javax.naming.NamingEnumeration
+javax.naming.NamingException
+javax.naming.directory.Attribute
+javax.naming.directory.Attributes
+javax.naming.ldap.LdapName
+javax.naming.ldap.Rdn
 javax.net.DefaultSocketFactory
 javax.net.SocketFactory
 javax.net.ssl.CertPathTrustManagerParameters
@@ -1264,7 +1273,7 @@ javax.xml.crypto.Data
 javax.xml.crypto.KeySelector
 javax.xml.crypto.KeySelectorException
 javax.xml.crypto.KeySelectorResult
-javax.xml.crypto.MarshallException
+javax.xml.crypto.MarshalException
 javax.xml.crypto.NoSuchMechanismException
 javax.xml.crypto.NodeSetData
 javax.xml.crypto.OctetStreamData
@@ -1275,7 +1284,7 @@ javax.xml.crypto.XMLCryptoContext
 javax.xml.crypto.XMLStructure
 javax.xml.crypto.dom.DOMCryptoContext
 javax.xml.crypto.dom.DOMStructure
-javax.xml.crypto.dom.DOMURIReferecne
+javax.xml.crypto.dom.DOMURIReference
 javax.xml.crypto.dsig.CanonicalizationMethod
 javax.xml.crypto.dsig.DigestMethod
 javax.xml.crypto.dsig.Manifest
@@ -1312,7 +1321,6 @@ javax.xml.crypto.dsig.spec.TransformParameterSpec
 javax.xml.crypto.dsig.spec.XPathFilter2ParameterSpec
 javax.xml.crypto.dsig.spec.XPathFilterParameterSpec
 javax.xml.crypto.dsig.spec.XPathType
-javax.xml.crypto.dsig.spec.XPathType.Filter
 javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec
 javax.xml.datatype.DatatypeConfigurationException
 javax.xml.datatype.DatatypeConstants
