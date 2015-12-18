@@ -65,8 +65,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "created", "hello", "replaced" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "created", "hello", "replaced" })
     public void addedFromDocumentFragment() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='A'></span>\n"
@@ -319,8 +318,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "s-x", "z" },
-            IE11 = { "s-x", "x", "z" },
-            IE8 = "s-x")
+            IE11 = { "s-x", "x", "z" })
     public void addEventListener_load() throws Exception {
         final String html
             = "<html><head>\n"

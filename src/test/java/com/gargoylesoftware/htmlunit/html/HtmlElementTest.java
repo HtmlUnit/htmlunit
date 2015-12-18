@@ -775,8 +775,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "mousedown-2-mouseup-2-contextmenu-2-",
-            FF = "mousedown-3-mouseup-3-contextmenu-3-",
-            IE8 = "mousedown-2-mouseup-2-contextmenu-0-")
+            FF = "mousedown-3-mouseup-3-contextmenu-3-")
     public void rightClick() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

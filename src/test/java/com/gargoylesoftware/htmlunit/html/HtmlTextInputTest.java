@@ -163,8 +163,7 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "My old value" },
-            IE8 = "My new value")
+    @Alerts(DEFAULT = { "exception", "My old value" })
     public void setSelectionText() throws Exception {
         final String html =
               "<html><head><script>\n"

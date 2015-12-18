@@ -198,7 +198,6 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-", "-", "-" },
-            IE8 = { "Submit Query-", "Submit Query-", "Submit Query-" },
             IE11 = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"

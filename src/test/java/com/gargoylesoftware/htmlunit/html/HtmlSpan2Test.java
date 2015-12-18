@@ -62,8 +62,7 @@ public class HtmlSpan2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
-            IE11 = "[object HTMLBlockElement]",
-            IE8 = "[object]")
+            IE11 = "[object HTMLBlockElement]")
     public void simpleScriptable_others() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
