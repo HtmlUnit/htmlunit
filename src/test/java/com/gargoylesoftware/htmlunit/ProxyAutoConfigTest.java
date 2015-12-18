@@ -19,9 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import org.junit.Test;
-
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
+import org.junit.Test;
 
 /**
  * Tests for the {@link ProxyAutoConfig}.
