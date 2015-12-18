@@ -43,8 +43,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOptionElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLOptionElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

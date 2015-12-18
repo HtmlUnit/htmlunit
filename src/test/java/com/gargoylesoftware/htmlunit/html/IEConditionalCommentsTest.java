@@ -183,8 +183,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "8+",
-            IE8 = "8+")
+    @Alerts("8+")
     public void downlevelRevealed1() throws Exception {
         final String html = "<html><head>"
             + "<![if gte IE 8]>\n"
@@ -198,8 +197,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "8+",
-            IE8 = "8+")
+    @Alerts("8+")
     public void downlevelRevealed2() throws Exception {
         final String html = "<html><head>"
             + "<!--[if gte IE 8]>-->\n"
@@ -213,8 +211,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "8+",
-            IE8 = "8+")
+    @Alerts("8+")
     public void downlevelRevealed3() throws Exception {
         final String html = "<html><head>"
             + "<!--[if gte IE 8]><!-->\n"

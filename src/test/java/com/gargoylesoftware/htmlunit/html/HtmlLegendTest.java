@@ -36,8 +36,7 @@ public class HtmlLegendTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLLegendElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLLegendElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

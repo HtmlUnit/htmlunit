@@ -90,8 +90,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLScriptElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLScriptElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -261,8 +260,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "3",
-            IE8 = "exception")
+    @Alerts("3")
     public void setTextMultipleTextNodes() throws Exception {
         final String html
             = "<html><body>\n"

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -106,9 +104,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
-            IE11 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" },
-            IE8 = { "mousedown; onfocus; mouseup; onclick;", "onchange;" })
-    @BuggyWebDriver(IE8)
+            IE11 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" })
     public void clickCheckboxEventSequence() throws Exception {
         testClickEventSequence("<input type='checkbox' id='" + TEST_ID + "'>Check", false);
     }
@@ -131,9 +127,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
-            IE11 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" },
-            IE8 = { "mousedown; onfocus; mouseup; onclick;", "onchange;" })
-    @BuggyWebDriver(IE8)
+            IE11 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" })
     public void clickRadioEventSequence() throws Exception {
         testClickEventSequence("<input type='radio' name='test' id='" + TEST_ID + "'>Check", false);
     }

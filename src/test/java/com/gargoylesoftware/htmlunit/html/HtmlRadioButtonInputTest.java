@@ -62,8 +62,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "newtrue",
-            IE8 = "on")
+    @Alerts("newtrue")
     public void onchangeHandlerInvoked() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -157,8 +156,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Second",
-            IE8 = "First")
+    @Alerts("Second")
     public void setChecked() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"

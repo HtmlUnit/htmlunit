@@ -38,8 +38,7 @@ public class HtmlStyle2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLStyleElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLStyleElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<style type='text/css' id='myId'>\n"

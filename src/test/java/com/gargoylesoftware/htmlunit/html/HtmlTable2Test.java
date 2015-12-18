@@ -36,8 +36,7 @@ public class HtmlTable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLTableElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

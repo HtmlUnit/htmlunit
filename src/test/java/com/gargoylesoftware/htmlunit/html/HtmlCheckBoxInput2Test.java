@@ -520,8 +520,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Second",
-            IE8 = "First")
+    @Alerts("Second")
     public void setChecked() throws Exception {
         final String firstHtml =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -37,8 +37,7 @@ public class HtmlSpan2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSpanElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLSpanElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

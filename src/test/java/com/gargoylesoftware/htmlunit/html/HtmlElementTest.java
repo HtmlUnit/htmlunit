@@ -726,8 +726,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown-0",
-            IE8 = "mousedown-1")
+    @Alerts("mousedown-0")
     public void testMouseDown() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

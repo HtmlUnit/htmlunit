@@ -38,8 +38,7 @@ public class HtmlTableSection2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLTableSectionElement]",
-            "[object HTMLTableSectionElement]", "[object HTMLTableSectionElement]" },
-            IE8 = { "[object]", "[object]", "[object]" })
+            "[object HTMLTableSectionElement]", "[object HTMLTableSectionElement]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
