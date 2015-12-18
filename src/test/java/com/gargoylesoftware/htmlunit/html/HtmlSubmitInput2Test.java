@@ -89,8 +89,7 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE8 = { })
+    @Alerts(DEFAULT = "1")
     public void onclick() throws Exception {
         final String html =
             "<html><head></head>\n"

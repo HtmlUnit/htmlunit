@@ -79,8 +79,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "hello",
-            IE8 = { "hello", "IE up to 8" })
+    @Alerts(DEFAULT = "hello")
     public void if_lte_IE_8() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"

@@ -37,8 +37,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void IE() throws Exception {
         doTest("IE");
     }
@@ -78,8 +77,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void IE_8() throws Exception {
         doTest("IE 8");
     }
@@ -139,8 +137,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void lt_IE_9() throws Exception {
         doTest("lt IE 9");
     }
@@ -150,8 +147,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void gt_IE_5_5() throws Exception {
         doTest("gt IE 5.5");
     }
@@ -161,8 +157,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void gt_IE_6() throws Exception {
         doTest("gt IE 6");
     }
@@ -172,8 +167,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void gt_IE_7() throws Exception {
         doTest("gt IE 7");
     }
@@ -193,8 +187,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void gte_IE_5_5() throws Exception {
         doTest("gte IE 5.5");
     }
@@ -204,8 +197,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void gte_IE_6() throws Exception {
         doTest("gte IE 6");
     }
@@ -215,8 +207,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void gte_IE_7() throws Exception {
         doTest("gte IE 7");
     }
@@ -226,8 +217,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void gte_IE_8() throws Exception {
         doTest("gte IE 8");
     }
@@ -237,8 +227,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void parenthese_5() throws Exception {
         doTest("!(IE 5)");
     }
@@ -248,8 +237,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void parenthese_6() throws Exception {
         doTest("!(IE 6)");
     }
@@ -259,8 +247,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void parenthese_7() throws Exception {
         doTest("!(IE 7)");
     }
@@ -300,8 +287,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void true_() throws Exception {
         doTest("true");
     }
@@ -341,8 +327,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void mso_3() throws Exception {
         doTest("lt mso 9");
     }
@@ -352,8 +337,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void mso_4() throws Exception {
         doTest("lt mso 1");
     }
@@ -393,8 +377,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = { "cond", "done" })
+    @Alerts(DEFAULT = "done")
     public void unknown_4() throws Exception {
         doTest("lt foo 1");
     }
