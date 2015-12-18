@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
 
 import org.eclipse.jetty.server.Server;
@@ -1189,9 +1188,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
-        IE11 = "0, 2, 2",
-        IE8 = "9, 1, 10")
-    @NotYetImplemented(IE8)
+        IE11 = "0, 2, 2")
     public void support__body_background_is_not_lost_if_set_prior_to_loading_jQuery___9238_() throws Exception {
         runTest("support: body background is not lost if set prior to loading jQuery (#9238)");
     }
@@ -1211,8 +1208,6 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "6, 24, 30")
-    @NotYetImplemented(IE8)
     public void support__Verify_that_the_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that the support tests resolve as expected per browser");
     }
@@ -2245,7 +2240,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE8)
     public void event__submit_event_bubbles_on_copied_forms___11649_() throws Exception {
         runTest("event: submit event bubbles on copied forms (#11649)");
     }
@@ -3319,8 +3313,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
-        IE11 = "0, 2, 2",
-        IE8 = "0, 3, 3")
+        IE11 = "0, 2, 2")
     public void manipulation__append_the_same_fragment_with_events__Bug__6997__5566_() throws Exception {
         runTest("manipulation: append the same fragment with events (Bug #6997, 5566)");
     }
@@ -3613,8 +3606,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 5, 5",
         FF31 = "0, 5, 5",
         FF38 = "0, 5, 5",
-        IE11 = "1, 4, 5",
-        IE8 = "0, 5, 5")
+        IE11 = "1, 4, 5")
     @NotYetImplemented(IE11)
     public void manipulation__clone_form_element___Bug__3879___6655_() throws Exception {
         runTest("manipulation: clone(form element) (Bug #3879, #6655)");
@@ -3916,7 +3908,6 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "0, 5, 5")
     public void css__css_String__Object__for_MSIE() throws Exception {
         runTest("css: css(String, Object) for MSIE");
     }
@@ -3936,7 +3927,6 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "0, 2, 2")
     public void css__Setting_opacity_to_1_properly_removes_filter__style___6652_() throws Exception {
         runTest("css: Setting opacity to 1 properly removes filter: style (#6652)");
     }
@@ -3979,8 +3969,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 7, 7",
         FF31 = "0, 7, 7",
         FF38 = "0, 7, 7",
-        IE11 = "0, 7, 7",
-        IE8 = "2, 1, 3")
+        IE11 = "0, 7, 7")
     @NotYetImplemented
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
@@ -4096,8 +4085,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "2, 2, 4",
         FF31 = "0, 4, 4",
         FF38 = "0, 4, 4",
-        IE11 = "0, 4, 4",
-        IE8 = "0, 4, 4")
+        IE11 = "0, 4, 4")
     @NotYetImplemented(CHROME)
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
@@ -5183,7 +5171,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(IE8)
     public void effects__animate_negative_height() throws Exception {
         runTest("effects: animate negative height");
     }
@@ -5225,7 +5212,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE8)
     public void effects__animate_block_as_inline_width_height() throws Exception {
         runTest("effects: animate block as inline width/height");
     }
@@ -5236,7 +5222,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE8)
     public void effects__animate_native_inline_width_height() throws Exception {
         runTest("effects: animate native inline width/height");
     }
@@ -5247,7 +5232,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE8)
     public void effects__animate_block_width_height() throws Exception {
         runTest("effects: animate block width/height");
     }
@@ -6042,7 +6026,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(IE8)
     public void effects__slideToggle___stop___slideToggle__() throws Exception {
         runTest("effects: slideToggle().stop().slideToggle()");
     }
@@ -6276,8 +6259,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         FF31 = "0, 1, 1",
         FF38 = "0, 1, 1",
-        IE11 = "0, 1, 1",
-        IE8 = "0, 2, 2")
+        IE11 = "0, 1, 1")
     @NotYetImplemented({ CHROME, IE11 })
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");

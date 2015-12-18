@@ -70,8 +70,6 @@ public class MooTools121Test extends WebDriverTestCase {
      */
     @Alerts(CHROME = { "364", "1", "0",
                     "should return the function bound to an object with multiple arguments" },
-            IE8 = { "364", "0", "1",
-                    "should return a CSS string representing the Element's styles" },
             IE11 = { "364", "2", "0",
                     "should return the function bound to an object with multiple arguments",
                     "should return a CSS string representing the Element's styles" },

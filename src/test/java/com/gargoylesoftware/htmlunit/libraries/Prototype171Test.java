@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -63,7 +62,6 @@ public class Prototype171Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE8)
     public void array() throws Exception {
         test("array_test.html");
     }
@@ -247,7 +245,6 @@ public class Prototype171Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE8)
     public void selector() throws Exception {
         test("selector_test.html");
     }

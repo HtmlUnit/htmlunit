@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
 
 import java.util.Arrays;
@@ -87,7 +86,6 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
     public void calendar() throws Exception {
         doTest("calendar.html", "btnRun");
     }
@@ -96,7 +94,6 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
     public void colorPicker() throws Exception {
         doTest("colorpicker.html");
     }
@@ -125,7 +122,6 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
     public void dom() throws Exception {
         doTest("dom.html", Arrays.asList(getExpectedAlerts()));
     }
@@ -134,8 +130,6 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = { "test_startDrag", "test_dragOver", "test_containerScroll" })
-    @NotYetImplemented(IE8)
     public void dragDrop() throws Exception {
         doTest("dragdrop.html", Arrays.asList(getExpectedAlerts()));
     }
@@ -155,7 +149,6 @@ public class YuiTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "test_regex", "test_createlink" },
             FF38 = { "test_createlink" },
             CHROME = { "test_regex", "test_createlink", "test_selected_element", "test_dom_path" },
-            IE8 = "test_createlink",
             IE11 = { "test_bold", "test_createlink" })
     @NotYetImplemented
     public void editor() throws Exception {
@@ -202,7 +195,6 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
     public void imageLoader() throws Exception {
         doTest("imageloader.html");
     }
@@ -211,7 +203,6 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
     public void element() throws Exception {
         doTest("element.html");
     }
