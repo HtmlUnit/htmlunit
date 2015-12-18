@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp.mozilla.js1_2;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -88,9 +85,7 @@ public class StringSplitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = ",,,",
-            IE8 = "")
-    @NotYetImplemented(IE8)
+    @Alerts(",,,")
     public void test6() throws Exception {
         test("'abc'.split(/[a-z]/)");
     }
@@ -100,9 +95,7 @@ public class StringSplitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = ",,,",
-            IE8 = "")
-    @NotYetImplemented(IE8)
+    @Alerts(",,,")
     public void test7() throws Exception {
         test("'abc'.split(/[a-z]/)");
     }
@@ -112,9 +105,7 @@ public class StringSplitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = ",,,",
-            IE8 = "")
-    @NotYetImplemented(IE8)
+    @Alerts(",,,")
     public void test8() throws Exception {
         test("'abc'.split(new RegExp('[a-z]'))");
     }
@@ -124,9 +115,7 @@ public class StringSplitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = ",,,",
-            IE8 = "")
-    @NotYetImplemented(IE8)
+    @Alerts(",,,")
     public void test9() throws Exception {
         test("'abc'.split(new RegExp('[a-z]'))");
     }
