@@ -91,7 +91,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                         "removeHitRegion", "scrollPathIntoView", "35 methods" },
             FF38 = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
                         "removeHitRegion", "scrollPathIntoView", "35 methods" },
-            IE8 = "exception",
             IE11 = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "removeHitRegion",
                         "scrollPathIntoView", "35 methods" },
             CHROME = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "removeHitRegion",
@@ -203,8 +202,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "rendering...", "exception" },
-        IE8 = "exception")
+    @Alerts(DEFAULT = { "rendering...", "exception" })
     public void drawImage_noImage() throws Exception {
         final String html = "<html><body>\n"
             + "<img id='myImage'>\n"

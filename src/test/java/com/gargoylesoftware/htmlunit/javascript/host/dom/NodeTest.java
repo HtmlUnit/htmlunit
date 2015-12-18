@@ -567,8 +567,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "20", "20", "4", "10", "10", "2", "20", "exception" },
-            IE8 = "compareDocumentPosition not available")
+    @Alerts(DEFAULT = { "0", "20", "20", "4", "10", "10", "2", "20", "exception" })
     public void compareDocumentPosition() throws Exception {
         final String html
             = "<html><head>\n"
@@ -609,8 +608,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "16" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "0", "16" })
     public void compareDocumentPosition2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

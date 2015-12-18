@@ -38,7 +38,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Core 1.0: true", "Core 2.0: true", "Core 3.0: true" },
-            IE8 = { "Core 1.0: false", "Core 2.0: false", "Core 3.0: false" },
             IE11 = { "Core 1.0: true", "Core 2.0: true", "Core 3.0: false" })
     public void hasFeature_Core() throws Exception {
         hasFeature("Core", "['1.0', '2.0', '3.0']");
@@ -69,7 +68,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "XHTML 1.0: true", "XHTML 2.0: true", "XHTML 3.0: true" },
-            IE8 = { "XHTML 1.0: false", "XHTML 2.0: false", "XHTML 3.0: false" },
             IE11 = { "XHTML 1.0: true", "XHTML 2.0: true", "XHTML 3.0: false" })
     public void hasFeature_XHTML() throws Exception {
         hasFeature("XHTML", "['1.0', '2.0', '3.0']");
@@ -130,7 +128,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Events 1.0: true", "Events 2.0: true", "Events 3.0: true" },
-            IE8 = { "Events 1.0: false", "Events 2.0: false", "Events 3.0: false" },
             IE11 = { "Events 1.0: false", "Events 2.0: true", "Events 3.0: true" })
     public void hasFeature_Events() throws Exception {
         hasFeature("Events", "['1.0', '2.0', '3.0']");
@@ -141,7 +138,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "UIEvents 1.0: true", "UIEvents 2.0: true", "UIEvents 3.0: true" },
-            IE8 = { "UIEvents 1.0: false", "UIEvents 2.0: false", "UIEvents 3.0: false" },
             IE11 = { "UIEvents 1.0: false", "UIEvents 2.0: false", "UIEvents 3.0: true" })
     public void hasFeature_UIEvents() throws Exception {
         hasFeature("UIEvents", "['1.0', '2.0', '3.0']");
@@ -152,7 +148,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "MouseEvents 1.0: true", "MouseEvents 2.0: true", "MouseEvents 3.0: true" },
-            IE8 = { "MouseEvents 1.0: false", "MouseEvents 2.0: false", "MouseEvents 3.0: false" },
             IE11 = { "MouseEvents 1.0: false", "MouseEvents 2.0: true", "MouseEvents 3.0: true" })
     public void hasFeature_MouseEvents() throws Exception {
         hasFeature("MouseEvents", "['1.0', '2.0', '3.0']");
@@ -183,7 +178,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "MutationEvents 1.0: true", "MutationEvents 2.0: true", "MutationEvents 3.0: true" },
-            IE8 = { "MutationEvents 1.0: false", "MutationEvents 2.0: false", "MutationEvents 3.0: false" },
             IE11 = { "MutationEvents 1.0: false", "MutationEvents 2.0: true", "MutationEvents 3.0: true" })
     public void hasFeature_MutationEvents() throws Exception {
         hasFeature("MutationEvents", "['1.0', '2.0', '3.0']");
@@ -205,7 +199,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "HTMLEvents 1.0: true", "HTMLEvents 2.0: true", "HTMLEvents 3.0: true" },
-            IE8 = { "HTMLEvents 1.0: false", "HTMLEvents 2.0: false", "HTMLEvents 3.0: false" },
             IE11 = { "HTMLEvents 1.0: false", "HTMLEvents 2.0: true", "HTMLEvents 3.0: true" })
     public void hasFeature_HTMLEvents() throws Exception {
         hasFeature("HTMLEvents", "['1.0', '2.0', '3.0']");

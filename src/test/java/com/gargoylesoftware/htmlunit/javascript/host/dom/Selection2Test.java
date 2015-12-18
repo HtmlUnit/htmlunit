@@ -193,7 +193,6 @@ public class Selection2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "1" },
             CHROME = { "0", "3" },
-            IE8 = { "undefined", "exception", "undefined" },
             IE11 = { "0", "exception", "1" })
     @NotYetImplemented(CHROME)
     public void extend() throws Exception {

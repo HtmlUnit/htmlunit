@@ -122,8 +122,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Text]", "[object HTMLTableRowElement]" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "[object Text]", "[object HTMLTableRowElement]" })
     public void createContextualFragment2() throws Exception {
         final String html = "<html><body>\n"
             + "<div id ='d'></div>\n"

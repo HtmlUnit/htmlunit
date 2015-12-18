@@ -34,8 +34,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLDivElement], [object HTMLSpanElement], [object HTMLSpanElement],"
-                + " [object HTMLSpanElement]",
-            IE8 = "")
+                + " [object HTMLSpanElement]")
     public void filterNull() throws Exception {
         final String html
             = "<html>\n"

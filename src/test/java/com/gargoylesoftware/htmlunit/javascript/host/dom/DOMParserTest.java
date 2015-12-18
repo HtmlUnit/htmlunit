@@ -151,8 +151,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object SVGDocument]",
             CHROME = "[object XMLDocument]",
-            IE11 = "[object XMLDocument]",
-            IE8 = "exception")
+            IE11 = "[object XMLDocument]")
     @NotYetImplemented(FF)
     public void parseFromString_application_svgXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -256,8 +255,7 @@ public class DOMParserTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "parsererror",
-            IE = "0",
-            IE8 = "exception")
+            IE = "0")
     @NotYetImplemented(CHROME)
     public void parseFromString_emptyString() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -306,8 +304,7 @@ public class DOMParserTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "5", "[object CDATASection]", "[object Comment]", "[object Element]",
-            "[object ProcessingInstruction]", "[object Text]" },
-            IE8 = "exception")
+            "[object ProcessingInstruction]", "[object Text]" })
     public void parseFromString_processingInstructionKept() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
