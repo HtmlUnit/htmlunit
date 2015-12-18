@@ -205,6 +205,12 @@ public class BrowserRunner extends Suite {
         String[] IE() default { EMPTY_DEFAULT };
 
         /**
+         * Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used.
+         * @return the alerts
+         */
+        String[] IE8() default { EMPTY_DEFAULT };
+
+        /**
          * Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used.
          * @return the alerts
          */
