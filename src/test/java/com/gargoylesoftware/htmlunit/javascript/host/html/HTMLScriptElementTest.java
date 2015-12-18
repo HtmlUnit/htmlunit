@@ -48,8 +48,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1 2 3 4 onload ",
-            IE8 = "1 2 3 b=loading 4 b=loaded ")
+    @Alerts("1 2 3 4 onload ")
     public void onReadyStateChangeHandler() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
@@ -903,8 +902,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "onload for window,",
-            IE8 = "onload for window,onclick for div1,")
+    @Alerts("onload for window,")
     public void scriptEventFor() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

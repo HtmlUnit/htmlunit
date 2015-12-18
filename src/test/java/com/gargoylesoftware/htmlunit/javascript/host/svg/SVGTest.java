@@ -36,8 +36,7 @@ public class SVGTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "svgElem",
-            IE8 = "exception")
+    @Alerts("svgElem")
     public void getAttribute() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -56,8 +55,7 @@ public class SVGTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "clicked",
-            IE8 = "exception")
+    @Alerts("clicked")
     public void triggerEvent() throws Exception {
         final String html =
                 "<html>\n"

@@ -515,8 +515,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "18" },
-            FF = { "0", "20" },
-            IE8 = { "19", "19" })
+            FF = { "0", "20" })
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -533,8 +532,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "75", "2", "5", "20", "50", "50", "18" },
-            FF = { "77", "2", "5", "20", "50", "50", "20" },
-            IE8 = { "108", "19", "20", "20", "50", "50", "19" })
+            FF = { "77", "2", "5", "20", "50", "50", "20" })
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"
@@ -1029,8 +1027,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE8 = "undefined")
+    @Alerts("1")
     public void querySelectorAll_noDuplication() throws Exception {
         final String html = "<html><body>\n"
             + "<div><span>First</span></div>\n"
@@ -1167,8 +1164,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     @NotYetImplemented({ FF, CHROME })
     public void offsetLeft_PositionFixed() throws Exception {
         final String html = "<html>\n"

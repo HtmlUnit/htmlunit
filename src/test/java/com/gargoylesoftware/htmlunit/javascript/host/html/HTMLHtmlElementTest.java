@@ -40,8 +40,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHtmlElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLHtmlElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -63,8 +62,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() {\n    [native code]\n}" },
             CHROME = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }" },
-            IE11 = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" },
-            IE8 = { "[object]", "exception" })
+            IE11 = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" })
     public void HTMLHtmlElement_toString() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"

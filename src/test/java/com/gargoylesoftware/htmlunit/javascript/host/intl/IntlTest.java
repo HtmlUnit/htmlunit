@@ -34,8 +34,7 @@ public class IntlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Object]",
-            IE8 = "exception")
+    @Alerts("[object Object]")
     public void intl() throws Exception {
         test("Intl");
     }

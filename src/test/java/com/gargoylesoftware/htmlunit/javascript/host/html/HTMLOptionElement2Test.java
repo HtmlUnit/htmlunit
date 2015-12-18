@@ -527,8 +527,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE11 = { "null", "undefined" },
-            IE8 = { "null", "exception" })
+            IE11 = { "null", "undefined" })
     public void optionIndexOutOfBound() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -807,8 +806,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLOptionsCollection]", "0", "exception", "0" },
-            IE11 = { "[object HTMLSelectElement]", "0", "1" },
-            IE8 = { "[object HTMLSelectElement]", "0", "exception", "0" })
+            IE11 = { "[object HTMLSelectElement]", "0", "1" })
     @NotYetImplemented(IE)
     public void without_new() throws Exception {
         final String html =

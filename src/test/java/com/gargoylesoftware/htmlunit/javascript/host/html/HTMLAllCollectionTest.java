@@ -226,8 +226,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2",
-            IE8 = "[object HTMLCommentElement]")
+    @Alerts("b2-button2")
     public void item_ById() throws Exception {
         item("'b2'");
     }
@@ -259,8 +258,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHtml-undefined",
-            IE8 = "[object HTMLCommentElement]")
+    @Alerts("myHtml-undefined")
     public void item_ZeroIndex() throws Exception {
         item("0");
     }
@@ -269,8 +267,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            IE8 = "myHtml-undefined")
+    @Alerts("myHead-undefined")
     public void item_ValidIndex() throws Exception {
         item("1");
     }
@@ -398,8 +395,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHtml-undefined",
-            IE8 = "[object HTMLCommentElement]")
+    @Alerts("myHtml-undefined")
     public void arrayIndex_ZeroIndex() throws Exception {
         arrayIndex("0");
     }
@@ -408,8 +404,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            IE8 = "myHtml-undefined")
+    @Alerts("myHead-undefined")
     public void arrayIndex_ValidIndex() throws Exception {
         arrayIndex("1");
     }
@@ -438,8 +433,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myTitle-undefined",
-            IE8 = "myHead-undefined")
+    @Alerts("myTitle-undefined")
     public void arrayIndex_IndexAsString() throws Exception {
         arrayIndex("'2'");
     }

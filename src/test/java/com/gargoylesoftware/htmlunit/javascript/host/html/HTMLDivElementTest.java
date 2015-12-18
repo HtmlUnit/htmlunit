@@ -40,8 +40,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no",
-            IE8 = "yes")
+    @Alerts("no")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"

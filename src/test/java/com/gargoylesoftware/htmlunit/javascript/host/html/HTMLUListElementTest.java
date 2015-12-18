@@ -41,8 +41,7 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUListElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLUListElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

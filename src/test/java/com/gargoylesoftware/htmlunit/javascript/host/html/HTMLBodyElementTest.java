@@ -44,8 +44,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,," },
-            FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,," },
-            IE8 = {"0px,0px,0px,0px,0px", ",,,,", "15px 10px,10px,10px,15px,15px", ",,,," })
+            FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,," })
     @NotYetImplemented(CHROME)
     public void defaultPaddingAndMargins() throws Exception {
         final String html =
@@ -71,8 +70,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "[object]")
+    @Alerts("exception")
     public void attachEvent() throws Exception {
         final String html =
             "<html>\n"
@@ -103,8 +101,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no",
-            IE8 = "yes")
+    @Alerts("no")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"

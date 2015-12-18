@@ -45,8 +45,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "caption4" },
-            CHROME = { "caption1", "caption2", "null", "caption3", "exception" },
-            IE8 = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "exception", "caption3" })
+            CHROME = { "caption1", "caption2", "null", "caption3", "exception" })
     @NotYetImplemented(CHROME)
     public void tableCaptions() throws Exception {
         final String html
@@ -82,8 +81,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "thead4" },
-            CHROME = { "thead1", "thead2", "null", "thead3", "exception" },
-            IE8 = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "exception", "thead3" })
+            CHROME = { "thead1", "thead2", "null", "thead3", "exception" })
     @NotYetImplemented(CHROME)
     public void tableHeaders() throws Exception {
         final String html
@@ -272,8 +270,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "tfoot4" },
-            CHROME = { "tfoot1", "tfoot2", "null", "tfoot3", "exception" },
-            IE8 = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "exception", "tfoot3" })
+            CHROME = { "tfoot1", "tfoot2", "null", "tfoot3", "exception" })
     @NotYetImplemented(CHROME)
     public void tableFooters() throws Exception {
         final String html
@@ -544,8 +541,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             IE = { "table: [object HTMLTableElement]",
                 "row: [object HTMLTableRowElement]",
                 "headcell: [object HTMLTableHeaderCellElement]",
-                "datacell: [object HTMLTableDataCellElement]" },
-            IE8 = { "table: [object]", "row: [object]", "headcell: [object]", "datacell: [object]" })
+                "datacell: [object HTMLTableDataCellElement]" })
     public void stringValues() throws Exception {
         final String html =
             "<html><head>\n"
@@ -614,8 +610,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no refresh function",
-            IE8 = "refreshed")
+    @Alerts("no refresh function")
     public void refresh() throws Exception {
         final String html
             = "<html><head><script>\n"

@@ -1357,8 +1357,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object NodeList]",
-            IE8 = "[object StaticNodeList]")
+    @Alerts("[object NodeList]")
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void querySelectorAllType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
@@ -1453,8 +1452,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "3",
-            IE8 = "undefined")
+    @Alerts("3")
     public void querySelectorAll_implicitAttribute() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<script>\n"
@@ -1677,8 +1675,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "INPUT")
+    @Alerts("exception")
     public void createElement_notOnlyTagName() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -1707,8 +1704,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "")
+    @Alerts("null")
     public void getElementById_quirks() throws Exception {
         getElementById_strict(false);
     }
@@ -1732,8 +1728,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "[object]")
+    @Alerts("null")
     public void getElementById_caseSensitivity() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1757,8 +1752,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHeadElement]",
-            IE8 = "undefined")
+    @Alerts("[object HTMLHeadElement]")
     public void head() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -2228,8 +2222,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE = { "9", "CSS1Compat", "function", "function" },
-            IE8 = { "8", "CSS1Compat", "object", "object" })
+            IE = { "9", "CSS1Compat", "function", "function" })
     public void documentMode_metaIE9() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=9'>\n");
     }

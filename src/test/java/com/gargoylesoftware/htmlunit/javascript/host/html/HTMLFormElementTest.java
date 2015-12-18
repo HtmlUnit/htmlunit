@@ -513,8 +513,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§foo.html",
-            IE8 = "foo.html")
+    @Alerts("§§URL§§foo.html")
     public void getFormFromFormsById() throws Exception {
         final String html =
             "<html>\n"
@@ -550,8 +549,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§",
-            IE8 = "")
+    @Alerts("§§URL§§")
     public void actionEmpty() throws Exception {
         final String html =
             "<html>\n"
@@ -1285,8 +1283,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE8 = "string")
+    @Alerts("function")
     public void onchangeHandler() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -1341,8 +1338,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "srcElement null: false", "srcElement==form: true",
                                                         "target null: false", "target==form: true" },
-            FF = { "srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true" },
-            IE8 = { "srcElement null: false", "srcElement==form: true", "target null: true", "target==form: false" })
+            FF = { "srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true" })
     public void onSubmitEvent() throws Exception {
         final String html = "<html><head><title>first</title>\n"
             + "<script>\n"

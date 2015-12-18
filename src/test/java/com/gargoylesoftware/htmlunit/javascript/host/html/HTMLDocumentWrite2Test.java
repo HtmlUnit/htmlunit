@@ -41,8 +41,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDocument]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLDocument]")
     public void openResult() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

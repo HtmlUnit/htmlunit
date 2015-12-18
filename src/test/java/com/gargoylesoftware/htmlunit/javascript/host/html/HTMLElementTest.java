@@ -126,8 +126,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "[object]")
+    @Alerts("null")
     public void getAttribute_styleAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -146,8 +145,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "color: green;",
-            IE8 = "")
+    @Alerts("color: green;")
     public void getAttribute_styleAttributeWithFlag() throws Exception {
         final String html =
               "<html><body onload='test()'><div id='div' style='color: green;'>abc</div>\n"
@@ -168,8 +166,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "0 attribute",
-            IE8 = "at least 1 attribute")
+    @Alerts("0 attribute")
     public void attributes() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -419,8 +416,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "inform('newHandler')", "null" },
-            IE11 = { "null", "inform('newHandler')", "" },
-            IE8 = { "null", "inform('newHandler')", "null" })
+            IE11 = { "null", "inform('newHandler')", "" })
     @NotYetImplemented(IE11)
     public void setAttribute_eventHandlerNull() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -784,8 +780,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "if (1 > 2 & 3 < 2) willNotHappen('yo');",
-            IE8 = "\r\nif (1 > 2 & 3 < 2) willNotHappen('yo');")
+    @Alerts("if (1 > 2 & 3 < 2) willNotHappen('yo');")
     public void getInnerHTML() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -811,8 +806,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "<div id=\"i\" foo=\"\" name=\"\"></div>",
-            IE8 = "<DIV id=i name=\"\" foo=\"\"></DIV>")
+    @Alerts("<div id=\"i\" foo=\"\" name=\"\"></div>")
     public void getInnerHTML_EmptyAttributes() throws Exception {
         final String html = "<body onload='alert(document.body.innerHTML)'><div id='i' foo='' name=''></div></body>";
         loadPageWithAlerts2(html);
@@ -992,8 +986,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "" },
-            FF = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" },
-            IE8 = { "\r\n<DIV id=div><UL></UL></DIV>", "<UL></UL>", "" })
+            FF = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" })
     public void getSetInnerHtmlEmptyTag_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -1014,8 +1007,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "" },
-            FF = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" },
-            IE8 = { "\r\n<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", "" })
+            FF = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" })
     public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -1139,8 +1131,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = null", "Childs: 1" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = null", "Childs: 1" })
+            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = null", "Childs: 1" })
     public void setOuterHTMLNull() throws Exception {
         final String html = createPageForSetOuterHTML("div", null);
         loadPageWithAlerts2(html);
@@ -1302,8 +1293,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <div>test</div>", "Childs: 1" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
+                    "New = <div>test</div>", "Childs: 1" })
     public void setOuterHTMLAddBlockToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -1316,8 +1306,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <p>test</p>", "Childs: 1" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
+                    "New = <p>test</p>", "Childs: 1" })
     public void setOuterHTMLAddParagraphToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
         loadPageWithAlerts2(html);
@@ -1342,8 +1331,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <a>test</a>", "Childs: 1" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
+                    "New = <a>test</a>", "Childs: 1" })
     public void setOuterHTMLAddAnchorToAnchor() throws Exception {
         final String html = createPageForSetOuterHTML("a", "<a>test</a>");
         loadPageWithAlerts2(html);
@@ -1366,8 +1354,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <div><div></div></div>", "Childs: 1" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV>\r\n<DIV></DIV></DIV>", "Childs: 1" })
+                    "New = <div><div></div></div>", "Childs: 1" })
     @NotYetImplemented
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
@@ -1434,8 +1421,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
     public void setOuterHTMLDetachedElementNull() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1468,8 +1454,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
     public void setOuterHTMLDetachedElementUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1502,8 +1487,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
     public void setOuterHTMLDetachedElementEmpty() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1536,8 +1520,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
     public void setOuterHTMLDetachedElementBlank() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1570,8 +1553,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
-            IE = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+            IE = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
     public void setOuterHTMLDetachedElement() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -2223,8 +2205,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined",
-            "undefined", "123", "from myFunction", "123", "from myFunction" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined", "exception" })
+            "undefined", "123", "from myFunction", "123", "from myFunction" })
     public void prototype() throws Exception {
         final String html = "<html><head><title>Prototype test</title>\n"
             + "<script>\n"
@@ -2258,8 +2239,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "in selectNodes",
-            IE8 = "exception")
+    @Alerts("in selectNodes")
     public void prototype_Element() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2326,8 +2306,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE11 = { "[object MSCurrentStyleCSSProperties]", "#000000" },
-            IE8 = { "[object]", "#000000" })
+            IE11 = { "[object MSCurrentStyleCSSProperties]", "#000000" })
     @NotYetImplemented(IE)
     public void currentStyle() throws Exception {
         style("currentStyle");
@@ -2338,8 +2317,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE11 = { "[object MSStyleCSSProperties]", "" },
-            IE8 = { "[object]", "" })
+            IE11 = { "[object MSStyleCSSProperties]", "" })
     @NotYetImplemented(IE11)
     public void runtimeStyle() throws Exception {
         style("runtimeStyle");
@@ -2499,8 +2477,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object ClientRectList]", "1" },
             FF31 = { "[object DOMRect]", "1" },
-            FF38 = { "[object DOMRect]", "1" },
-            IE8 = { "[object]", "1" })
+            FF38 = { "[object DOMRect]", "1" })
     @NotYetImplemented
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2660,8 +2637,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "clicked",
-            IE8 = "exception")
+    @Alerts("clicked")
     public void dispatchEvent() throws Exception {
         final String html =
             "<html><head>\n"
@@ -2760,8 +2736,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE8 = "object")
+    @Alerts("function")
     public void hasAttributeTypeOf() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -2934,8 +2909,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "false", "false", "false", "false", "true", "true", "false", "false" },
             IE11 = { "true", "true", "true", "false", "false", "false", "false", "true", "false", "false",
-                        "exception" },
-            IE8 = { "true", "true", "true", "false", "false", "false", "false", "true", "exception" })
+                        "exception" })
     public void contains() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2993,8 +2967,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "defined")
+    @Alerts("undefined")
     public void filters() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3040,8 +3013,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function", "* => body: 0, div1: 0", "foo => body: 3, div1: 1", "foo red => body: 1, div1: 0",
-            "red foo => body: 1, div1: 0", "blue foo => body: 0, div1: 0", "null => body: 0, div1: 0" },
-            IE8 = { "undefined", "exception" })
+            "red foo => body: 1, div1: 0", "blue foo => body: 0, div1: 0", "null => body: 0, div1: 0" })
     public void getElementsByClassName() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -3361,8 +3333,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<span onclick=\"var f = &quot;hello&quot; + 'world'\">test span</span>",
-            IE8 = "<SPAN onclick=\"var f = &quot;hello&quot; + 'world'\">test span</SPAN>")
+    @Alerts("<span onclick=\"var f = &quot;hello&quot; + 'world'\">test span</span>")
     public void innerHTMLwithQuotes() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -3383,8 +3354,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "button", "null", "false", "true" },
-            IE11 = { "button", "", "false", "true" },
-            IE8 = { "button", "getAttributeNS() not supported" })
+            IE11 = { "button", "", "false", "true" })
     @NotYetImplemented({ FF, CHROME })
     public void attributeNS() throws Exception {
         final String html
@@ -3413,8 +3383,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMStringMap]",
-            IE8 = "undefined")
+    @Alerts("[object DOMStringMap]")
     public void dataset() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3434,8 +3403,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE8 = "t")
+    @Alerts("")
     public void setAttribute_className() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -3455,8 +3423,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "t",
-            IE8 = "")
+    @Alerts("t")
     public void setAttribute_class() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -3681,8 +3648,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "executed",
-            IE8 = "exception-append")
+    @Alerts("executed")
     // IE8 does not support appendChild for script elements
     public void appendChildExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -3708,8 +3674,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "executed",
-            IE8 = "exception-append")
+    @Alerts("executed")
     // IE8 does not support appendChild for script elements
     public void appendChildExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -3737,8 +3702,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "declared",
-            IE8 = "exception-append")
+    @Alerts("declared")
     // IE8 does not support appendChild for script elements
     public void appendChildDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -3767,8 +3731,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "executed",
-            IE8 = "exception-append")
+    @Alerts("executed")
     // IE8 does not support appendChild for script elements
     public void insertBeforeExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -3794,8 +3757,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "executed",
-            IE8 = "exception-append")
+    @Alerts("executed")
     // IE8 does not support appendChild for script elements
     public void insertBeforeExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -3823,8 +3785,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "declared",
-            IE8 = "exception-append")
+    @Alerts("declared")
     // IE8 does not support appendChild for script elements
     public void insertBeforeDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -3853,8 +3814,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "executed",
-            IE8 = "exception-append")
+    @Alerts("executed")
     // IE8 does not support appendChild for script elements
     public void replaceChildExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -3880,8 +3840,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "executed",
-            IE8 = "exception-append")
+    @Alerts("executed")
     // IE8 does not support appendChild for script elements
     public void replaceChildExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -3909,8 +3868,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "declared",
-            IE8 = "exception-append")
+    @Alerts("declared")
     // IE8 does not support appendChild for script elements
     public void replaceChildDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -4331,8 +4289,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void oninput() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

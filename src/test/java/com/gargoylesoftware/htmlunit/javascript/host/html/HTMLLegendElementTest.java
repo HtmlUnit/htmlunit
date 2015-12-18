@@ -65,8 +65,7 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFormElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLFormElement]")
     public void form() throws Exception {
         final String html
             = "<html><body><form><fieldset><legend id='a'>a</legend></fieldset></form><script>\n"

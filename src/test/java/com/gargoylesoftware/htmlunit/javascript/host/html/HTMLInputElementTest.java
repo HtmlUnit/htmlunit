@@ -874,8 +874,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "30", "30", "30",
                 "undefined", "40", "string", "number" },
-            CHROME = {"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number" },
-            IE8 = { "30", "undefined", "undefined", "30", "30", "30", "undefined", "30", "string", "number" })
+            CHROME = {"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number" })
     public void minLength() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1403,8 +1402,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "30", "undefined", "30", "30",
                 "40", "50", "string", "string" },
-            CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" },
-            IE8 = { "30", "undefined", "30", "30", "30", "50", "number", "number" })
+            CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" })
     public void min() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1435,8 +1433,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "30", "undefined", "30", "30",
                 "40", "50", "string", "string" },
-            CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" },
-            IE8 = { "30", "undefined", "30", "30", "30", "50", "number", "number" })
+            CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" })
     public void max() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

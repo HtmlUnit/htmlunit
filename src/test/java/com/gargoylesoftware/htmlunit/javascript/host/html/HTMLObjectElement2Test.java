@@ -59,8 +59,7 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "[object Object]")
+    @Alerts("[object XMLDocument]")
     public void responseXML_htmlObject() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

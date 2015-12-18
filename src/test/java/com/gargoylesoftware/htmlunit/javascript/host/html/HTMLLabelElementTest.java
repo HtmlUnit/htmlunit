@@ -121,8 +121,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFormElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLFormElement]")
     public void form() throws Exception {
         final String html
             = "<html><body><form><label id='a'>a</label></form><script>\n"

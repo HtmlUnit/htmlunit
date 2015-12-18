@@ -62,8 +62,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE8 = "object")
+    @Alerts("function")
     public void toStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -298,8 +297,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  { "function", "function", "function", "function" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts(DEFAULT =  { "function", "function", "function", "function" })
     public void array_prototype() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -320,8 +318,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  { "function", "function", "function", "function" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts(DEFAULT =  { "function", "function", "function", "function" })
     public void array_prototype_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
@@ -389,8 +386,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "exception")
+    @Alerts("null")
     public void item_NegativIndex() throws Exception {
         item("-1");
     }

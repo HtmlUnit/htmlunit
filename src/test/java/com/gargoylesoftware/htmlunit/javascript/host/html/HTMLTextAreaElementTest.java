@@ -152,8 +152,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10", "7,7" },
-            IE11 = { "0,0", "0,0", "3,3", "3,10", "0,0" },
-            IE8 = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10", "3,10" })
+            IE11 = { "0,0", "0,0", "3,3", "3,10", "0,0" })
     public void selection() throws Exception {
         selection(3, 10);
     }
@@ -163,8 +162,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11", "7,7" },
-            IE11 = { "0,0", "0,0", "0,0", "0,11", "0,0" },
-            IE8 = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15", "-3,15" })
+            IE11 = { "0,0", "0,0", "0,0", "0,11", "0,0" })
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
     }
@@ -209,8 +207,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no",
-            IE8 = "yes")
+    @Alerts("no")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -239,8 +236,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Hello\nworld\n",
-            IE8 = "Hello\r\nworld\r\n")
+    @Alerts("Hello\nworld\n")
     public void value_ignoreFirstNewLine() throws Exception {
         value("\nHello\nworld\n");
     }
@@ -249,8 +245,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = " \nHello\nworld\n",
-            IE8 = " \r\nHello\r\nworld\r\n")
+    @Alerts(" \nHello\nworld\n")
     public void value_spaceBeforeFirstNewLine() throws Exception {
         value(" \nHello\nworld\n");
     }
@@ -637,8 +632,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "10", "10", "error", "10", "10", "0", "0" },
-            IE11 = { "10", "10", "-1", "-1", "0", "0" },
-            IE8 = { "10", "10", "-1", "-1", "abc", "abc" })
+            IE11 = { "10", "10", "-1", "-1", "0", "0" })
     public void setMaxLength() throws Exception {
         final String html
             = "<html>\n"

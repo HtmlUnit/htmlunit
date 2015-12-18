@@ -412,8 +412,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "exception")
+    @Alerts("undefined")
     public void getMinusOneEmpty() throws Exception {
         get("-1", true);
     }
@@ -422,8 +421,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "exception")
+    @Alerts("undefined")
     public void getMinusOne() throws Exception {
         get("-1", false);
     }
