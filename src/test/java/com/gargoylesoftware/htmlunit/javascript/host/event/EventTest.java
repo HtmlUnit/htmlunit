@@ -110,8 +110,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "", "false", "false" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "[object Event]", "", "false", "false" })
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -156,8 +155,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "event", "true", "false" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "[object Event]", "event", "true", "false" })
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -537,8 +535,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "click", "true", "true", "click", "false", "false" },
-            IE8 = "no createEvent")
+    @Alerts(DEFAULT = { "click", "true", "true", "click", "false", "false" })
     public void testInitEventClick() throws Exception {
         testInitEvent("click");
     }
@@ -547,8 +544,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "dblclick", "true", "true", "dblclick", "false", "false" },
-            IE8 = "no createEvent")
+    @Alerts(DEFAULT = { "dblclick", "true", "true", "dblclick", "false", "false" })
     public void testInitEventDblClick() throws Exception {
         testInitEvent("dblclick");
     }
@@ -557,8 +553,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "unknown", "true", "true", "unknown", "false", "false" },
-            IE8 = "no createEvent")
+    @Alerts(DEFAULT = { "unknown", "true", "true", "unknown", "false", "false" })
     public void testInitEventUnknown() throws Exception {
         testInitEvent("unknown");
     }
@@ -567,8 +562,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "cASe", "true", "true", "cASe", "false", "false" },
-            IE8 = "no createEvent")
+    @Alerts(DEFAULT = { "cASe", "true", "true", "cASe", "false", "false" })
     public void testInitEventCaseSensitive() throws Exception {
         testInitEvent("cASe");
     }
@@ -668,8 +662,7 @@ public class EventTest extends WebDriverTestCase {
                      "e-12", "100", "400", "200", "e-16", "e-17", "e-18",
                      "1", "20", "10", "8", "4", "2",
                      "e-25", "e-26", "e-27", "e-28", "4000", "e-30", "e-31", "e-32",
-                     "e-33" },
-            IE8 = "no Event")
+                     "e-33" })
     public void constants() throws Exception {
         final String html =
               "<html><body>\n"

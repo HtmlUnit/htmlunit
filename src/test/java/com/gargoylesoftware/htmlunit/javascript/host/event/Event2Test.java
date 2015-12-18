@@ -129,8 +129,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void inputTextClick() throws Exception {
         final String firstSnippet = "       <input type='text' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -144,8 +143,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void inputPasswordClick() throws Exception {
         final String firstSnippet = "       <input type='password' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -159,8 +157,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void textareaClick() throws Exception {
         final String firstSnippet = "       <textarea name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = "></textarea>\n";
@@ -186,8 +183,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void resetClick() throws Exception {
         final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -201,8 +197,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void buttonClick() throws Exception {
         final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -216,8 +211,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void anchorClick() throws Exception {
         final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">anchor</a>\n";
@@ -405,8 +399,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "DOMContentLoaded type=DOMContentLoaded", "onLoad" },
-            IE8 = "onLoad")
+    @Alerts(DEFAULT = { "DOMContentLoaded type=DOMContentLoaded", "onLoad" })
     public void testDOMContentLoaded() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -512,8 +505,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "capturing", "at target", "bubbling" },
-            IE8 = "unknown")
+    @Alerts(DEFAULT = { "capturing", "at target", "bubbling" })
     @NotYetImplemented(CHROME)
     public void eventPhase() throws Exception {
         final String html =
@@ -554,8 +546,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing",
-                "span bubbling", "div", "div bubbling", "window bubbling" },
-            IE8 = "div")
+                "span bubbling", "div", "div bubbling", "window bubbling" })
     public void eventCapturingAndBubbling() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

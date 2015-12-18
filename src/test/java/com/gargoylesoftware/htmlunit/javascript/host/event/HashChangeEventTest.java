@@ -171,8 +171,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "hashchange", "true", "false", "undefined", "undefined" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "[object Event]", "hashchange", "true", "false", "undefined", "undefined" })
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

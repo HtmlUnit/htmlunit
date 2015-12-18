@@ -67,7 +67,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "0-0", "0-0", "undefined-undefined" },
             CHROME = { "exception", "0-0", "undefined-undefined" },
-            IE8 = { "exception", "exception", "exception" },
             IE11 = { "exception", "0-0", "undefined-undefined" })
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

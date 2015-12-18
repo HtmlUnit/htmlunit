@@ -33,8 +33,7 @@ public class CustomEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE8 = "exception")
+    @Alerts("function")
     public void initCustomEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

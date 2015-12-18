@@ -61,7 +61,6 @@ public class IntlTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function () { [native code] }",
             FF = "function Collator() {\n    [native code]\n}",
-            IE8 = "exception",
             IE11 = "\nfunction Collator() {\n    [native code]\n}\n")
     public void collator() throws Exception {
         test("Intl.Collator");
@@ -73,7 +72,6 @@ public class IntlTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function () { [native code] }",
             FF = "function DateTimeFormat() {\n    [native code]\n}",
-            IE8 = "exception",
             IE11 = "\nfunction DateTimeFormat() {\n    [native code]\n}\n")
     public void dateTimeFormat() throws Exception {
         test("Intl.DateTimeFormat");
@@ -85,7 +83,6 @@ public class IntlTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function () { [native code] }",
             FF = "function NumberFormat() {\n    [native code]\n}",
-            IE8 = "exception",
             IE11 = "\nfunction NumberFormat() {\n    [native code]\n}\n")
     public void numberFormat() throws Exception {
         test("Intl.NumberFormat");
@@ -96,8 +93,7 @@ public class IntlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function () { [native code] }",
-            IE8 = "exception")
+            CHROME = "function () { [native code] }")
     public void v8BreakIterator() throws Exception {
         test("Intl.v8BreakIterator");
     }

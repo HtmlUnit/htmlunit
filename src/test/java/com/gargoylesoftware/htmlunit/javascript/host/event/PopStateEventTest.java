@@ -102,8 +102,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null", "", "false", "false", "null" },
-            CHROME = { "[object PopStateEvent]", "null", "popstate", "false", "true", "null" },
-            IE8 = "exception")
+            CHROME = { "[object PopStateEvent]", "null", "popstate", "false", "true", "null" })
     @NotYetImplemented(CHROME)
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -126,8 +125,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null", "", "false", "false", "null" },
-            CHROME = { "[object PopStateEvent]", "null", "popstate", "false", "true", "null" },
-            IE8 = "exception")
+            CHROME = { "[object PopStateEvent]", "null", "popstate", "false", "true", "null" })
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

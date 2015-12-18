@@ -98,8 +98,7 @@ public class ProgressEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object ProgressEvent]", "", "false", "false", "false", "0", "0" },
-            FF = "exception",
-            IE8 = "exception")
+            FF = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

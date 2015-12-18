@@ -61,8 +61,7 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object UIEvent]", "click", "true", "true", "true", "7" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "[object UIEvent]", "click", "true", "true", "true", "7" })
     public void initUIEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -84,7 +83,6 @@ public class UIEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "1", "[object MouseEvent]", "2" },
-            IE8 = { "[object]", "undefined", "[object]", "undefined", "[object]", "undefined" },
             IE11 = { "[object Event]", "undefined", "[object PointerEvent]", "0", "[object PointerEvent]", "0" })
     @BuggyWebDriver(FF31)
     // FF31/38 has a detail of '1' for the double click but it is '2' when executed manually
@@ -114,7 +112,6 @@ public class UIEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "[object Window]" },
-            IE8 = { "[object]", "undefined", "[object]", "undefined" },
             IE11 = { "[object Event]", "undefined", "[object PointerEvent]", "[object Window]" })
     public void view() throws Exception {
         final String html =
