@@ -80,8 +80,7 @@ public class XmlPage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Element]",
-            IE8 = "exception")
+    @Alerts("[object Element]")
     public void createElementNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
