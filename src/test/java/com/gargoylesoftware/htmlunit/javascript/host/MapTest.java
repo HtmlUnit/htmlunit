@@ -35,7 +35,6 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "value1" },
-            IE8 = { },
             IE11 = { "1", "undefined" })
     public void get() throws Exception {
         final String html = "<html><head><script>\n"

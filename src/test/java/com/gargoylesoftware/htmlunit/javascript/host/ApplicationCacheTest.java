@@ -36,8 +36,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object ApplicationCache]",
-            FF = "[object OfflineResourceList]",
-            IE8 = "undefined")
+            FF = "[object OfflineResourceList]")
     public void scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -139,8 +138,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true" },
-            IE8 = "no applicationCache")
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true" })
     public void eventListener() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

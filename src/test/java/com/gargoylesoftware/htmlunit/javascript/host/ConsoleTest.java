@@ -78,8 +78,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "function", "function", "function", "function" },
-            IE8 = "window.console not available")
+    @Alerts(DEFAULT = { "function", "function", "function", "function", "function" })
     public void methods() throws Exception {
         final String html
             = "<html>\n"

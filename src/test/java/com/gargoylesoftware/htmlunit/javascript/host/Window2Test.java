@@ -298,7 +298,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
             CHROME = { "function Node() { [native code] }", "function Element() { [native code] }" },
-            IE8 = { "undefined", "undefined" },
             IE11 = { "[object Node]", "[object Element]" })
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -648,7 +647,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "exception", "exception", "exception", "exception" },
-            IE8 = { "JScript", "5", "8", "number" },
             IE11 = { "JScript", "11", "0", "number" })
     public void IEScriptEngineXxx() throws Exception {
         final String html = "<html><head><script>\n"
@@ -669,7 +667,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "true", "true", "89", "true", "true", "16" },
             FF = { "true", "true", "94", "true", "true", "14" },
-            IE8 = { "false", "false", "NaN", "false", "false", "NaN" },
             IE11 = { "true", "true", "63", "true", "true", "16" })
     public void heightsAndWidths() throws Exception {
         final String html
@@ -798,7 +795,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "0", "0", "0" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" },
             IE11 = { "0", "0", "undefined", "undefined" })
     public void pageXOffset() throws Exception {
         final String html
@@ -878,8 +874,7 @@ public class Window2Test extends WebDriverTestCase {
      * @see com.gargoylesoftware.htmlunit.javascript.host.event.EventTest#firedEvent_equals_original_event()
      */
     @Test
-    @Alerts(DEFAULT = { "true", "I was here" },
-            IE8 = "undefined")
+    @Alerts(DEFAULT = { "true", "I was here" })
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
@@ -1232,8 +1227,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-onsubmit-" },
-            IE8 = "")
+    @Alerts(DEFAULT = { "-onsubmit-" })
     public void onsubmit_withHandler() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1357,8 +1351,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  "sync: false",
-            IE8 = "sync: true")
+    @Alerts(DEFAULT =  "sync: false")
     public void postMessageSyncOrAsync() throws Exception {
         final String html
             = "<html>"

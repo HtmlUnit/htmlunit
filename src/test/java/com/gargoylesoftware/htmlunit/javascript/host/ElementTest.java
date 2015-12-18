@@ -216,8 +216,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "1" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "1", "1" })
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -772,8 +771,7 @@ public class ElementTest extends WebDriverTestCase {
                     + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
                     + "DOCUMENT_POSITION_PRECEDING, "
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
-                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
-            IE8 = "exception occured")
+                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " })
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
@@ -906,8 +904,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "first", "third", "3", "second", "second" },
-            IE8 = "")
+    @Alerts(DEFAULT = { "first", "third", "3", "second", "second" })
     public void firstElementChild() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1028,8 +1025,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "test value", "true", "false", "finished" },
-            IE8 = "createDocument not available")
+    @Alerts(DEFAULT = { "test value", "true", "false", "finished" })
     public void attributeNS() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
@@ -1145,8 +1141,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "undefined", "undefined" })
     public void allowKeyboardInput() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1195,7 +1190,6 @@ public class ElementTest extends WebDriverTestCase {
             "[object ElementPrototype]", "function Element() {\n    [native code]\n}" },
             CHROME = { "function Element() { [native code] }", "[object Object]",
             "function Element() { [native code] }" },
-            IE8 = "exception",
             IE11 = { "[object Element]", "[object ElementPrototype]", "[object Element]" })
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void prototypConstructor() throws Exception {
@@ -1230,7 +1224,6 @@ public class ElementTest extends WebDriverTestCase {
             "[object ElementPrototype]", "function Element() {\n    [native code]\n}" },
             CHROME = { "function Element() { [native code] }", "[object Object]",
             "function Element() { [native code] }" },
-            IE8 = { "[object Element]", "[Interface prototype object]", "null" },
             IE11 = { "[object Element]", "[object ElementPrototype]", "[object Element]" })
     @NotYetImplemented
     public void prototypConstructorStandards() throws Exception {

@@ -58,8 +58,7 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object PopStateEvent]", "null" },
-            IE8 = "no pushState")
+    @Alerts(DEFAULT = { "[object PopStateEvent]", "null" })
     public void pushStateSimple() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -650,8 +649,7 @@ public class History2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "back", "forward", "go", "length", "pushState", "replaceState", "state" },
             CHROME = { "back", "forward", "go", "length", "pushState", "replaceState",
-                        "scrollRestoration", "state" },
-            IE8 = "length")
+                        "scrollRestoration", "state" })
     @NotYetImplemented(CHROME)
     public void properties() throws Exception {
         final String html = "<html><head><script>\n"
