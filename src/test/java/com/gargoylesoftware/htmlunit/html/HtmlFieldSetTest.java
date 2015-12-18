@@ -38,8 +38,7 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLFieldSetElement]", "[object HTMLFormElement]" },
-            IE8 = { "[object]", "[object]" })
+    @Alerts({ "[object HTMLFieldSetElement]", "[object HTMLFormElement]" })
     public void simpleScriptable() throws Exception {
         final String html
             = "<html><head>\n"

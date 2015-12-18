@@ -370,8 +370,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-initial", "-initial", "-newDefault", "-newDefault" },
-            IE8 = { "-", "-", "-newDefault", "-newDefault" })
+    @Alerts({ "-initial", "-initial", "-newDefault", "-newDefault" })
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -403,8 +402,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-initial", "-initial", "-newDefault", "-newDefault" },
-            IE8 = { "-", "-", "-newDefault", "-newDefault" })
+    @Alerts({ "-initial", "-initial", "-newDefault", "-newDefault" })
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -435,8 +433,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-initial", "-default" },
-            IE8 = { "-", "-default" })
+    @Alerts({ "-initial", "-default" })
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"

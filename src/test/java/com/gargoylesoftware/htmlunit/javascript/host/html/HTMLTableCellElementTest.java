@@ -81,8 +81,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "p", "po", "", "u", "8", "U8" },
-            IE8 = { "", "", "", "u", "8", "U8" })
+    @Alerts({ "p", "po", "", "u", "8", "U8" })
     public void ch() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -114,8 +113,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "4", "", "5.2", "-3", "abc" },
-            IE8 = { "", "", "", "5.2", "-3", "abc" })
+    @Alerts({ "0", "4", "", "5.2", "-3", "abc" })
     public void chOff() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -217,8 +215,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "true", "", "true", "blah", "false", "null" },
-            IE8 = {"false", "false", "true", "true", "true", "true", "true", "true", "false", "false" })
+    @Alerts({"false", "null", "true", "", "true", "", "true", "blah", "false", "null" })
     public void noWrap() throws Exception {
         final String html =
             "<html>\n"
@@ -412,8 +409,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" },
-            IE8 = { "84,30", "84,30", "84,30", "83,30", "82,30", "83,30" })
+    @Alerts({ "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" })
     @NotYetImplemented(IE)
     public void cellWidthHeightWithBorderCollapse() throws Exception {
         final String html

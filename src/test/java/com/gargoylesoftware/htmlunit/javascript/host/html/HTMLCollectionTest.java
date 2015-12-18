@@ -80,8 +80,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "5", "exception" },
-            IE8 = { "5", "6" })
+    @Alerts({ "5", "exception" })
     public void getElements() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -243,8 +242,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "#text", "5" },
-            IE8 = { "1", "DIV", "2" })
+    @Alerts({ "3", "#text", "5" })
     public void childNodes() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -285,8 +283,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLHeadingElement]", "undefined" },
-            IE8 = { "[object]", "undefined" })
+    @Alerts({ "[object HTMLHeadingElement]", "undefined" })
     public void getElementWithDollarSign() throws Exception {
         final String html
             = "<h3 id='$h'>h</h3><script>\n"

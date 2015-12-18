@@ -363,8 +363,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "8" },
-            IE8 = { "0", "0" })
+    @Alerts({ "0", "8" })
     @NotYetImplemented
     public void top() throws Exception {
         final String html =

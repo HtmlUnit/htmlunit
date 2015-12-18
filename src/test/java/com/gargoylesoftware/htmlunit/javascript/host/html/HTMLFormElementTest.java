@@ -756,8 +756,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function handler() {}", "null", "null" },
-            IE8 = { "function handler() {}", "null", "exception" })
+    @Alerts({ "function handler() {}", "null", "null" })
     public void onsubmitNull() throws Exception {
         final String html =
             "<html><head>\n"
@@ -1266,8 +1265,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLInputElement]", "[object HTMLInputElement]" },
-            IE8 = { "[object]", "[object]" })
+    @Alerts({ "[object HTMLInputElement]", "[object HTMLInputElement]" })
     public void lostChildrenFromElements() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1424,8 +1422,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "submit form", "listener: submitted ok" },
-            IE8 = { "submit form", "eventHandler: submitted ok" })
+    @Alerts({ "submit form", "listener: submitted ok" })
     public void submitWithTargetOnIFrameAndOnload_bubbling() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"

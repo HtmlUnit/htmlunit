@@ -75,8 +75,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "one", "two", "three" },
-            IE8 = { "undefined", "one", "two", "three" })
+    @Alerts({ "null", "one", "two", "three" })
     @BuggyWebDriver
     public void opener() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
@@ -832,8 +831,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2-2", "3-3" },
-            IE8 = { "2-2", "2-2" })
+    @Alerts({ "2-2", "3-3" })
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void elementsByName_changedAfterGet_nyi() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1026,8 +1024,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "a", "null" },
-            IE8 = { "a", "exception", "[object Object]" })
+    @Alerts({ "a", "null" })
     public void onloadNotAFunction() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body><script>\n"
@@ -1045,8 +1042,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "test1", "test2", "onload" },
-            IE8 = { "true", "true", "exception", "onload" })
+    @Alerts({ "false", "false", "test1", "test2", "onload" })
     public void addOnLoadEventListener() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1074,8 +1070,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "exception", "onload" },
-            IE8 = { "false", "false", "onload", "test2", "test1, param null: false", "test1, param null: false" })
+    @Alerts({ "true", "true", "exception", "onload" })
     public void attachOnLoadEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1152,8 +1147,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "number", "number", "number", "number" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({ "number", "number", "number", "number" })
     public void mozillaViewport() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1302,8 +1296,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "123", "captured" },
-            IE8 = { "exception", "123" })
+    @Alerts({ "123", "captured" })
     public void captureEvents() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"

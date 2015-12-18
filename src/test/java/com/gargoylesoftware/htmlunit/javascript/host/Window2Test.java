@@ -50,8 +50,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Window]", "undefined", "hello" },
-            IE8 = { "[object]", "undefined", "hello" })
+    @Alerts({ "[object Window]", "undefined", "hello" })
     public void thisIsWindow() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -856,8 +855,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "exception", "Success" },
-            IE8 = { "Success", "Success", "Success" })
+    @Alerts({ "exception", "exception", "Success" })
     public void eval() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -943,8 +941,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "function", "null", "null" },
-            IE8 = { "null", "function", "null", "exception" })
+    @Alerts({ "null", "function", "null", "null" })
     public void onbeforeunload() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
@@ -1005,8 +1002,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "function", "5" },
-            IE8 = { "null", "function", "3" })
+    @Alerts({ "null", "function", "5" })
     public void onError() throws Exception {
         final String html
             = "<script>\n"
@@ -1189,8 +1185,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "null" },
-            IE8 = { "false", "undefined" })
+    @Alerts({ "true", "null" })
     public void onchange_noHandler() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -1204,8 +1199,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "changed" },
-            IE8 = { })
+    @Alerts({ "changed" })
     public void onchange_withHandler() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1227,8 +1221,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "null" },
-            IE8 = { "false", "undefined" })
+    @Alerts({ "true", "null" })
     public void onsubmit_noHandler() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

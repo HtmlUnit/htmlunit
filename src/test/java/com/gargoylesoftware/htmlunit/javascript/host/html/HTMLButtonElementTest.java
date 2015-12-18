@@ -68,8 +68,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "submit", "button", "submit" },
-            IE8 = { "button", "exception", "button", "button" })
+    @Alerts({ "submit", "button", "submit" })
     public void type() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -91,8 +90,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "submit", "submit", "submit", "submit", "reset", "button", "submit" },
-            IE8 = { "button", "button", "submit", "button", "reset", "button", "button" })
+    @Alerts({ "submit", "submit", "submit", "submit", "reset", "button", "submit" })
     public void getType() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
@@ -182,8 +180,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLButtonElement]", "26" },
-            IE8 = { "test", "4", "42", "2", "[object]", "8" })
+    @Alerts({ "test", "4", "42", "2", "[object HTMLButtonElement]", "26" })
     public void getAttributeAndSetValue() throws Exception {
         final String html =
             "<html>\n"

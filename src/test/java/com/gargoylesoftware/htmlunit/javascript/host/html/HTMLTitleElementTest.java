@@ -58,8 +58,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "New Title" },
-            IE8 = { "undefined", "New Title" })
+    @Alerts({"", "New Title" })
     public void textCreateElement() throws Exception {
         final String html =
             "<html>\n"

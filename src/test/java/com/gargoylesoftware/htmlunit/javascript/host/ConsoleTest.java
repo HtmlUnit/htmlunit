@@ -35,8 +35,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "object", "true" },
-            IE8 = { "true", "undefined", "false" })
+    @Alerts({ "false", "object", "true" })
     public void prototype() throws Exception {
         final String html
             = "<html>\n"

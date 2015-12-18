@@ -147,8 +147,7 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "§§URL§§second/" },
-            IE8 = { "1", "2", "§§URL§§" })
+    @Alerts({ "1", "2", "§§URL§§second/" })
     public void eventListener_returnValue_false() throws Exception {
         final String html
             = "<html><head>\n"

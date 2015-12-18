@@ -810,8 +810,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "<div>caption</div>", "TABLE" },
-            IE8 = { "<DIV>caption</DIV>", "TABLE" })
+    @Alerts({ "<div>caption</div>", "TABLE" })
     public void nonInlineElementInCaption() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"

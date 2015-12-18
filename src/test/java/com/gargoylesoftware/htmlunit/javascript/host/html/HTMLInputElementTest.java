@@ -660,8 +660,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"radio", "hidden", "image" },
-            IE8 = {"radio", "error", "radio", "error", "radio"})
+    @Alerts({"radio", "hidden", "image" })
     public void changeType() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -842,8 +841,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number" },
-            IE8 = {"undefined", "30", "undefined", "30", "30", "30", "30", "50", "number", "number" })
+    @Alerts({"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number" })
     public void maxLength() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1165,8 +1163,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLInputElement]", "25" },
-            IE8 = { "test", "4", "42", "2", "[object]", "8" })
+    @Alerts({ "test", "4", "42", "2", "[object HTMLInputElement]", "25" })
     public void getAttributeAndSetValue() throws Exception {
         final String html
             = "<html>\n"
@@ -1203,8 +1200,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "4", "", "0" },
-            IE8 = { "null", "4", "null", "4" })
+    @Alerts({ "null", "4", "", "0" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void getAttributeAndSetValueNull() throws Exception {
         final String html
@@ -1238,8 +1234,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0", "2", "7" },
-            IE8 = { "undefined", "undefined", "input.setSelectionRange not available" })
+    @Alerts({ "0", "0", "2", "7" })
     public void selectionRange() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1292,8 +1287,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "§§URL§§" },
-            IE8 = { "2", "§§URL§§?myName=" })
+    @Alerts({ "1", "§§URL§§" })
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void submitRequired() throws Exception {
         final String html
@@ -1323,8 +1317,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true" },
-            IE8 = { "checkValidity not supported", "checkValidity not supported" })
+    @Alerts({ "false", "true" })
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void checkValidity() throws Exception {
         final String html

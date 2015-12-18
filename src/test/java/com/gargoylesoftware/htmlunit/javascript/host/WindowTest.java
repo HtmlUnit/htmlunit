@@ -1273,8 +1273,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "10", "20", "30", "40" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({ "10", "20", "30", "40" })
     public void mozillaViewportSetters() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"

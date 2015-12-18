@@ -202,8 +202,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" },
-            IE8 = { "initial-initial", "initial-default", "newValue-default", "newValue-newDefault" })
+    @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" })
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

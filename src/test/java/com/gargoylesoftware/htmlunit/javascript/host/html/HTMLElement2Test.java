@@ -49,8 +49,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE8 = { "HTML", "" })
+    @Alerts({ "undefined", "undefined" })
     public void scopeName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -69,8 +68,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "http://www.meh.com/meh" },
-            IE8 = { "blah", "http://www.blah.com/blah", "error" })
+    @Alerts({ "undefined", "undefined", "undefined", "http://www.meh.com/meh" })
     public void scopeName2() throws Exception {
         final String html = "<html xmlns:blah='http://www.blah.com/blah'><head>\n"
             + "<script>\n"
@@ -418,8 +416,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "8", "8" },
-            IE8 = { "10", "15" })
+    @Alerts({ "8", "8" })
     public void offsetTopAndLeftWhenParentIsBody() throws Exception {
         final String html
             = "<html>\n"
@@ -462,8 +459,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "30px", "46", "55px", "71", "71", "0", "0", "0", "0" },
-            IE8 = { "30px", "44", "55px", "55", "55", "0", "0", "0", "0" })
+    @Alerts({ "30px", "46", "55px", "71", "71", "0", "0", "0", "0" })
     public void offsetWidthAndHeight() throws Exception {
         final String html =
               "<html><head>\n"
@@ -628,8 +624,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "something", "0" },
-            IE8 = { "something", "something" })
+    @Alerts({ "something", "0" })
     public void textContent_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -657,8 +652,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "something", "0" },
-            IE8 = { "something", "something" })
+    @Alerts({ "something", "0" })
     public void textContent_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1206,8 +1200,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "clicked", "fireEvent not available" },
-            IE8 = { "clicked", "clicked" })
+    @Alerts({ "clicked", "fireEvent not available" })
     public void fireEvent_WithoutTemplate() throws Exception {
         final String html =
             "<html>\n"
@@ -1240,8 +1233,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "click", "fireEvent not available", "fireEvent not available" },
-            IE8 = { "click", "click", "click" })
+    @Alerts({ "click", "fireEvent not available", "fireEvent not available" })
     public void fireEvent_WithTemplate() throws Exception {
         final String html =
             "<html>\n"

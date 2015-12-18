@@ -47,8 +47,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "[object Storage]", "[object Storage]" },
-            IE8 = { "undefined", "[object]", "[object]" })
+    @Alerts({ "undefined", "[object Storage]", "[object Storage]" })
     public void storage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -65,8 +64,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "global: true", "local: true", "session: true" },
-            IE8 = { "global: true", "exception", "exception" })
+    @Alerts({ "global: true", "local: true", "session: true" })
     public void storageEquals() throws Exception {
         final String html
             = "<html><body><script>\n"

@@ -55,8 +55,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLImageElement]", "[object HTMLImageElement]" },
-            IE8 = { "[object]", "[object]" })
+    @Alerts({ "[object HTMLImageElement]", "[object HTMLImageElement]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

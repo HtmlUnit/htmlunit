@@ -132,8 +132,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "DOM2: [object Event]", "DOM3: [object Event]", "vendor: [object Event]" },
-            IE8 = { "DOM2: exception", "DOM3: exception", "vendor: exception" })
+    @Alerts({ "DOM2: [object Event]", "DOM3: [object Event]", "vendor: [object Event]" })
     public void create_createEventForDifferentTypes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -321,8 +320,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Window]", "[object HTMLDivElement]" },
-            IE8 = { "no addEventListener", "no event param" })
+    @Alerts({ "[object Window]", "[object HTMLDivElement]" })
     public void currentTarget_sameListenerForEltAndWindow() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -373,8 +371,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" },
-            IE8 = { "124a", "1a2a4ab1ab2ab4abc" })
+    @Alerts({ "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" })
     public void typing_input() throws Exception {
         testTyping("<input type='text'", "");
         testTyping("<input type='password'", "");
@@ -385,8 +382,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" },
-            IE8 = { "124a", "1a2a4ab1ab2ab4abc" })
+    @Alerts({ "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" })
     public void typing_textara() throws Exception {
         testTyping("<textarea", "</textarea>");
     }
@@ -530,8 +526,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "number" },
-            IE8 = { "[object]", "undefined" })
+    @Alerts({ "[object Event]", "number" })
     public void timeStamp() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -806,8 +801,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "focus INPUT", "focus INPUT" },
-            IE8 = { })
+    @Alerts({ "focus INPUT", "focus INPUT" })
     public void document_input_focus() throws Exception {
         document_input("focus");
     }
@@ -871,8 +865,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2from window", "1from document" },
-            IE8 = { "1from document", "3from window" })
+    @Alerts({ "2from window", "1from document" })
     public void eventHandlersParentScope() throws Exception {
         final String html = "<html><body>\n"
             + "<button name='button1' id='button1' onclick='alert(1 + foo)'>click me</button>\n"

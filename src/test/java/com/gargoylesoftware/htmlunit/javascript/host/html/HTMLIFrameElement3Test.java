@@ -408,8 +408,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "[object HTMLBodyElement]" },
-            IE8 = { "null", "[object]" })
+    @Alerts({ "null", "[object HTMLBodyElement]" })
     public void body() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

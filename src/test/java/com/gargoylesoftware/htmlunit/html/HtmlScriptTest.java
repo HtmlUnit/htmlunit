@@ -252,8 +252,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "c", "f" },
-            IE8 = { })
+    @Alerts({ "c", "f" })
     public void addEventListener_error_clientThrows() throws Exception {
         addEventListener_error(true);
     }

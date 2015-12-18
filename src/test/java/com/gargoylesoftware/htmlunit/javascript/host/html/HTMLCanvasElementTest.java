@@ -40,8 +40,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "300", "number", "150", "number", "[object CanvasRenderingContext2D]" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({ "300", "number", "150", "number", "[object CanvasRenderingContext2D]" })
     public void test() throws Exception {
         final String html =
             "<html>\n"
@@ -191,8 +190,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"3", "3"},
-            IE8 = {"3.1", "3.1"})
+    @Alerts({"3", "3"})
     public void getWidthDot() throws Exception {
         getWidth("3.1");
     }
@@ -201,8 +199,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"3", "3"},
-            IE8 = {"3a1", "3a1"})
+    @Alerts({"3", "3"})
     public void getWidthDigitAlpha() throws Exception {
         getWidth("3a1");
     }
@@ -211,8 +208,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"300", "150"},
-            IE8 = {"abb", "abb"})
+    @Alerts({"300", "150"})
     public void getWidthAlpha() throws Exception {
         getWidth("abb");
     }

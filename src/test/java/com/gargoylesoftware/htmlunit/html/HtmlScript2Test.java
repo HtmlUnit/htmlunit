@@ -175,8 +175,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "deferred", "normal", "onload" },
-            IE8 = { "normal", "deferred", "onload" })
+    @Alerts({ "deferred", "normal", "onload" })
     public void defer() throws Exception {
         final String html = "<html><head>\n"
             + "<script defer>alert('deferred')</script>\n"
@@ -286,8 +285,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "3" },
-            IE8 = { "1", "2", "3", "4", "5" })
+    @Alerts({ "1", "2", "3" })
     public void settingSrcAttribute() throws Exception {
         final String html =
             "<html>\n"

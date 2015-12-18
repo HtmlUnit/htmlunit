@@ -310,8 +310,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "pass", "fail:66", "fail:undefined" },
-            IE8 = { "pass", "fail:66", "fail:0" })
+    @Alerts({ "pass", "fail:66", "fail:undefined" })
     public void eventOnKeyDown() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -433,8 +432,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "not canceled", "true", "canceled", "true" },
-            IE8 = { })
+    @Alerts({ "false", "not canceled", "true", "canceled", "true" })
     public void testPreventDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -675,8 +673,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2" },
-            IE8 = { })
+    @Alerts({ "w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2" })
     public void stopPropagation_WithMultipleEventHandlers() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

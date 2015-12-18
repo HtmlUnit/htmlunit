@@ -35,8 +35,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLStyleElement]", "[object CSSStyleSheet]", "undefined" },
-            IE8 = { "[object]", "undefined", "[object]" })
+    @Alerts({ "[object HTMLStyleElement]", "[object CSSStyleSheet]", "undefined" })
     public void stylesheet() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

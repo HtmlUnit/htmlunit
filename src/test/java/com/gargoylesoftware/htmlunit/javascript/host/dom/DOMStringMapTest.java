@@ -34,8 +34,7 @@ public class DOMStringMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "there" },
-            IE8 = { })
+    @Alerts({ "undefined", "there" })
     public void get() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -55,8 +54,7 @@ public class DOMStringMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "old", "old", "null", "null" },
-            IE8 = { })
+    @Alerts({ "old", "old", "null", "null" })
     public void put() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

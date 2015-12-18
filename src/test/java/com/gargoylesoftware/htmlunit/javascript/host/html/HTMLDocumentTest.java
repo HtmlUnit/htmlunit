@@ -985,8 +985,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "9" },
-            IE8 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "exception:setAttributeNS", "8" })
+    @Alerts({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "9" })
     public void getElementsByName_changedAfterGet() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -1094,8 +1093,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "9" },
-            IE8 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "exception:setAttributeNS", "8" })
+    @Alerts({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "9" })
     public void getElementsByName_changedAfterGet_nested() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -1518,8 +1516,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "0" },
-            IE8 = { "0", "1" })
+    @Alerts({ "1", "0" })
     public void getElementsByTagName2() throws Exception {
         final String html = "<html xmlns:ns1='http://example.com'>\n"
             + "<head>\n"
@@ -1895,8 +1892,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "true" },
-            IE8 = { })
+    @Alerts({ "", "true" })
     public void getSelection() throws Exception {
         final String html =
             "<html>\n"

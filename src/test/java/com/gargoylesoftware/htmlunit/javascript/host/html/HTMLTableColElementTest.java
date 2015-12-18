@@ -109,8 +109,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "p", "po", "", "u", "8", "U8" },
-            IE8 = { "", "", "", "u", "8", "U8" })
+    @Alerts({ "p", "po", "", "u", "8", "U8" })
     public void ch() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -145,8 +144,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "4", "", "5.2", "-3", "abc" },
-            IE8 = { "", "", "", "5.2", "-3", "abc" })
+    @Alerts({ "0", "4", "", "5.2", "-3", "abc" })
     public void chOff() throws Exception {
         final String html
             = "<html><body><table>\n"

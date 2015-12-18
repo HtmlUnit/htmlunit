@@ -41,8 +41,7 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "DOM2: [object UIEvent]", "DOM3: [object UIEvent]" },
-            IE8 = { "DOM2: exception", "DOM3: exception" })
+    @Alerts({ "DOM2: [object UIEvent]", "DOM3: [object UIEvent]" })
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

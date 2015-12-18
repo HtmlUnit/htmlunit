@@ -106,8 +106,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "name", "f", "name", "f", "name", "f", "name", "f", "null" },
-            IE8 = { "name", "f", "name", "f", "name", "f", "exception", "null" })
+    @Alerts({ "name", "f", "name", "f", "name", "f", "name", "f", "null" })
     public void getNamedItem_HTML() throws Exception {
         final String html =
               "<html>\n"
@@ -184,8 +183,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "name", "y", "name", "y", "null", "undefined", "null" },
-            IE8 = { "name", "y", "exception", "null", "undefined", "null" })
+    @Alerts({ "name", "y", "name", "y", "null", "undefined", "null" })
     public void getNamedItem_XML() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -304,8 +302,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
-            IE8 = { "[object]", "[object]", "[object]" })
+    @Alerts({ "undefined", "undefined", "undefined" })
     public void unspecifiedAttributes() throws Exception {
         final String html =
               "<html>\n"

@@ -743,8 +743,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "\n    cell1\n  ", "[object Text]", "abc", "[object Text]", "" },
-            IE8 = { "undefined", "[object]", "abc", "[object]", "" })
+    @Alerts({ "\n    cell1\n  ", "[object Text]", "abc", "[object Text]", "" })
     @NotYetImplemented(CHROME)
     public void textContent() throws Exception {
         final String html

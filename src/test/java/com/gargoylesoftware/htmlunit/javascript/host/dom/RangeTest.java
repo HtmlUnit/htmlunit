@@ -63,8 +63,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" },
-            IE8 = { })
+    @Alerts({ "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" })
     public void emptyRange() throws Exception {
         loadPageWithAlerts2(contentStart + "alertRange(r);" + contentEnd);
     }

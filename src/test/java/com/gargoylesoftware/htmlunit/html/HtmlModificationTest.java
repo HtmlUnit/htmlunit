@@ -36,8 +36,7 @@ public class HtmlModificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLModElement]", "[object HTMLModElement]" },
-            IE8 = { "[object]", "[object]" })
+    @Alerts({ "[object HTMLModElement]", "[object HTMLModElement]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

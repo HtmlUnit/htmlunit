@@ -347,8 +347,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault" },
-            IE8 = { "initial-initial", "initial-default", "newValue-default", "newValue-newdefault" })
+    @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault" })
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

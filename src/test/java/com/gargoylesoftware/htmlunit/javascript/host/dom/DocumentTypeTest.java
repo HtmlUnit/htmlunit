@@ -157,8 +157,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object DocumentType]", "[object HTMLHtmlElement]" },
-            IE8 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" })
+    @Alerts({ "[object DocumentType]", "[object HTMLHtmlElement]" })
     public void document_children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
             + "<head>\n"

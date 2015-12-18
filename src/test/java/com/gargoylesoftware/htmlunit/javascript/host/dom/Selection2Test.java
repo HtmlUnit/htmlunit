@@ -49,8 +49,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "cx" },
-            IE8 = { "[object]", "[object]" })
+    @Alerts({ "", "cx" })
     public void stringValue() throws Exception {
         test("", "selection", "x");
     }
@@ -59,8 +58,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "s1" },
-            IE8 = { "undefined", "undefined" })
+    @Alerts({ "null", "s1" })
     public void anchorNode() throws Exception {
         test("", "selection.anchorNode", "x ? x.parentNode.id : x");
     }
@@ -69,8 +67,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "2" },
-            IE8 = { "undefined", "undefined" })
+    @Alerts({ "0", "2" })
     public void anchorOffset() throws Exception {
         test("", "selection.anchorOffset", "x");
     }
@@ -79,8 +76,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "s2" },
-            IE8 = { "undefined", "undefined" })
+    @Alerts({ "null", "s2" })
     public void focusNode() throws Exception {
         test("", "selection.focusNode", "x ? x.parentNode.id : x");
     }
@@ -89,8 +85,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1" },
-            IE8 = { "undefined", "undefined" })
+    @Alerts({ "0", "1" })
     public void focusOffset() throws Exception {
         test("", "selection.focusOffset", "x");
     }
@@ -99,8 +94,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false" },
-            IE8 = { "undefined", "undefined" })
+    @Alerts({ "true", "false" })
     public void isCollapsed() throws Exception {
         test("", "selection.isCollapsed", "x");
     }
@@ -109,8 +103,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1" },
-            IE8 = { "undefined", "undefined" })
+    @Alerts({ "0", "1" })
     public void rangeCount() throws Exception {
         test("", "selection.rangeCount", "x");
     }
@@ -119,8 +112,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1" },
-            IE8 = { "undefined", "exception", "undefined" })
+    @Alerts({ "0", "1" })
     public void rangeCount2() throws Exception {
         test("try{selection.collapseToEnd()}catch(e){alert('exception')}", "selection.rangeCount", "x");
     }
@@ -129,8 +121,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "undefined", "exception", "undefined" })
+    @Alerts({ "null", "null" })
     public void removeAllRanges_anchorNode() throws Exception {
         test("try{selection.removeAllRanges()}catch(e){alert('exception')}",
                 "selection.anchorNode", "x ? x.parentNode.id : x");
@@ -140,8 +131,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0" },
-            IE8 = { "undefined", "exception", "undefined" })
+    @Alerts({ "0", "0" })
     public void removeAllRanges_anchorOffset() throws Exception {
         test("try{selection.removeAllRanges()}catch(e){alert('exception')}",
                 "selection.anchorOffset", "x ? x.parentNode.id : x");
@@ -151,8 +141,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "undefined", "exception", "undefined" })
+    @Alerts({ "null", "null" })
     public void removeAllRanges_focusNode() throws Exception {
         test("try{selection.removeAllRanges()}catch(e){alert('exception')}",
                 "selection.focusNode", "x ? x.parentNode.id : x");
@@ -162,8 +151,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0" },
-            IE8 = { "undefined", "exception", "undefined" })
+    @Alerts({ "0", "0" })
     public void removeAllRanges_focusOffset() throws Exception {
         test("try{selection.removeAllRanges()}catch(e){alert('exception')}",
                 "selection.focusOffset", "x ? x.parentNode.id : x");
@@ -173,8 +161,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "s1" },
-            IE8 = { "undefined", "exception", "undefined" })
+    @Alerts({ "null", "s1" })
     public void collapse() throws Exception {
         test("try{selection.collapse(s1, 1)}catch(e){alert('exception')}",
                 "selection.focusNode", "x ? x.id : x");
@@ -184,8 +171,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "s2" },
-            IE8 = { "undefined", "exception", "undefined" })
+    @Alerts({ "null", "s2" })
     public void collapseToEnd() throws Exception {
         test("try{selection.collapseToEnd()}catch(e){alert('exception')}",
                 "selection.anchorNode", "x ? x.parentNode.id : x");
@@ -195,8 +181,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "s1" },
-            IE8 = { "undefined", "exception", "undefined" })
+    @Alerts({ "null", "s1" })
     public void collapseToStart() throws Exception {
         test("try{selection.collapseToStart()}catch(e){alert('exception')}",
                 "selection.focusNode", "x ? x.parentNode.id : x");
@@ -219,8 +204,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0" },
-            IE8 = { "undefined", "exception", "undefined" })
+    @Alerts({ "0", "0" })
     public void selectAllChildren() throws Exception {
         test("try{selection.selectAllChildren(document.body)}catch(e){alert('exception')}",
                 "selection.anchorOffset", "x");
@@ -230,8 +214,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "cx" },
-            IE8 = { "none", "none" })
+    @Alerts({ "none", "cx" })
     public void getRangeAt() throws Exception {
         test("", "selection.rangeCount > 0 ? selection.getRangeAt(0) : 'none'", "x");
     }
@@ -240,8 +223,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "true" },
-            IE8 = { "", "" })
+    @Alerts({ "", "true" })
     public void getRangeAt_prototype() throws Exception {
         test("", "selection.rangeCount > 0 ? (selection.getRangeAt(0) instanceof Range) : ''", "x");
     }
@@ -261,8 +243,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "unsupported action", "unsupported action" },
-            IE8 = { "[object]", "[object]" })
+    @Alerts({ "unsupported action", "unsupported action" })
     public void createRange() throws Exception {
         test("", "selection.createRange()", "x");
     }

@@ -279,8 +279,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "<form></form>", "[object HTMLFormElement]" },
-            IE8 = { "<FORM></FORM>", "[object]" })
+    @Alerts({ "<form></form>", "[object HTMLFormElement]" })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeOnOpenedWindow_WindowIsProxied() throws Exception {
         final String html
@@ -305,8 +304,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "<form></form>", "[object HTMLFormElement]" },
-            IE8 = { "<FORM></FORM>", "[object]" })
+    @Alerts({ "<form></form>", "[object HTMLFormElement]" })
     public void writeOnOpenedWindow_DocumentIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -419,8 +417,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5" },
-            IE8 = { "null", "[object]", "s1 s2 s3 s4 s5" })
+    @Alerts({ "null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5" })
     public void write_Destination() throws Exception {
         final String html =
               "<html>\n"
@@ -458,8 +455,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "[object HTMLBodyElement]", "", "foo" },
-            IE8 = { "null", "[object]", "", "foo" })
+    @Alerts({ "null", "[object HTMLBodyElement]", "", "foo" })
     public void write_BodyAttributesKept() throws Exception {
         final String html =
               "<html>\n"

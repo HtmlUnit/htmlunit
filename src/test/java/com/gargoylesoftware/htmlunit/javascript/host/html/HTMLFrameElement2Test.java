@@ -64,8 +64,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDocument]", "true" },
-            IE8 = { "[object]", "true" })
+    @Alerts({ "[object HTMLDocument]", "true" })
     public void contentDocument() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -146,8 +145,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function handler() {}", "null", "null" },
-            IE8 = { "function handler() {}", "null", "exception" })
+    @Alerts({ "function handler() {}", "null", "null" })
     @NotYetImplemented
     // Currently a \n is put between the {}
     public void onloadNull() throws Exception {

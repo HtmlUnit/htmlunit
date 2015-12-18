@@ -114,8 +114,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "loaded", "foo" },
-            IE8 = { })
+    @Alerts({ "loaded", "foo" })
     public void documentCreateElement_onLoad() throws Exception {
         final String html =
               "<html>\n"
@@ -148,8 +147,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "loaded", "" },
-            IE8 = { })
+    @Alerts({ "loaded", "" })
     public void documentCreateElement_onLoad_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -179,8 +177,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "loaded", "foo" },
-            IE8 = { "createIFrame" })
+    @Alerts({ "createIFrame", "loaded", "foo" })
     public void documentCreateElement_onLoad2() throws Exception {
         final String html =
               "<html>\n"
@@ -214,8 +211,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "loaded", "" },
-            IE8 = { "createIFrame" })
+    @Alerts({ "createIFrame", "loaded", "" })
     public void documentCreateElement_onLoad2_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -298,8 +294,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "loaded", "foo" },
-            IE8 = { "createIFrame" })
+    @Alerts({ "createIFrame", "loaded", "foo" })
     public void documentCreateElement_onLoad3() throws Exception {
         final String html =
               "<html>\n"
@@ -333,8 +328,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "loaded", "" },
-            IE8 = { "createIFrame" })
+    @Alerts({ "createIFrame", "loaded", "" })
     public void documentCreateElement_onLoad3_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -622,8 +616,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "fragment append done", "loaded" },
-            IE8 = { "fragment append done" })
+    @Alerts({ "fragment append done", "loaded" })
     public void documentDocumentFragmentCreateElement_onLoad_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -654,8 +647,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
-            IE8 = { "createIFrame", "fragment append done" })
+    @Alerts({ "createIFrame", "fragment append done", "loaded" })
     public void documentDocumentFragmentCreateElement_onLoad2() throws Exception {
         final String html =
               "<html>\n"
@@ -690,8 +682,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
-            IE8 = { "createIFrame", "fragment append done" })
+    @Alerts({ "createIFrame", "fragment append done", "loaded" })
     public void documentDocumentFragmentCreateElement_onLoad2_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -723,8 +714,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
-            IE8 = { "createIFrame", "fragment append done" })
+    @Alerts({ "createIFrame", "fragment append done", "loaded" })
     public void documentDocumentFragmentCreateElement_onLoad3() throws Exception {
         final String html =
               "<html>\n"
@@ -759,8 +749,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
-            IE8 = { "createIFrame", "fragment append done" })
+    @Alerts({ "createIFrame", "fragment append done", "loaded" })
     public void documentDocumentFragmentCreateElement_onLoad3_noSrc() throws Exception {
         final String html =
               "<html>\n"

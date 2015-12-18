@@ -162,8 +162,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "hello", "><" },
-            IE8 = { "hello", ">endif<" })
+    @Alerts({ "hello", "><" })
     public void nested() throws Exception {
         final String html = "<html><body>\n"
             + "<script>alert('hello')</script>\n"

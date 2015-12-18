@@ -40,8 +40,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "768", "768" },
-            IE8 = { "768", "set exception" })
+    @Alerts({ "768", "768" })
     public void availHeight() throws Exception {
         testNumericProperty("availHeight");
     }
@@ -72,8 +71,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "1024", "1024" },
-            IE8 = { "1024", "set exception" })
+    @Alerts({ "1024", "1024" })
     public void availWidth() throws Exception {
         testNumericProperty("availWidth");
     }
@@ -93,8 +91,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "24", "24" },
-            IE8 = { "24", "set exception" })
+    @Alerts({ "24", "24" })
     public void colorDepth() throws Exception {
         testNumericProperty("colorDepth");
     }
@@ -136,8 +133,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "768", "768" },
-            IE8 = { "768", "set exception" })
+    @Alerts({ "768", "768" })
     public void height() throws Exception {
         testNumericProperty("height");
     }
@@ -190,8 +186,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "24", "24" },
-            IE8 = { "undefined", "set exception" })
+    @Alerts({ "24", "24" })
     public void pixelDepth() throws Exception {
         testNumericProperty("pixelDepth");
     }
@@ -222,8 +217,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE8 = { "0", "1234" })
+    @Alerts({ "undefined", "1234" })
     public void updateInterval() throws Exception {
         testNumericProperty("updateInterval");
     }
@@ -232,8 +226,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "1024", "1024" },
-            IE8 = { "1024", "set exception" })
+    @Alerts({ "1024", "1024" })
     public void width() throws Exception {
         testNumericProperty("width");
     }

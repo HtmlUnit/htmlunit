@@ -883,8 +883,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "4", "2", "foo", "One", "Two*", "Three*" },
-            IE8 = { "3", "4", "2", "foo", "One", "Two*", "Three*" })
+    @Alerts({ "3", "4", "2", "foo", "One", "Two*", "Three*" })
     public void addOptionMethodOptionFirstMulti() throws Exception {
         addOptionMethod(", oSelect.options[0]", false, true);
     }
@@ -1570,8 +1569,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Two", "", "Two", "", "" },
-            IE8 = { "", "", "", "", "" })
+    @Alerts({ "Two", "", "Two", "", "" })
     public void getValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2105,8 +2103,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "first", "null", "null" },
-            IE8 = { "first", "null", "exception" })
+    @Alerts({ "first", "null", "null" })
     public void item() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

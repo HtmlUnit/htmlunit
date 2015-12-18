@@ -33,8 +33,7 @@ public class ScriptRuntimeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "50", "100", "xxx", "zzz", "yyy" },
-            IE8 = {"xxx", "50", "zzz", "100", "0", "yyy" })
+    @Alerts({ "0", "50", "100", "xxx", "zzz", "yyy" })
     public void enumChangeObject() throws Exception {
         final String html
             = "<html><head><script>\n"

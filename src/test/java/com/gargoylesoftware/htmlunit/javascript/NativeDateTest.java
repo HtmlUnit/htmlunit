@@ -38,8 +38,7 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-13", "84", "109" },
-            IE8 = { "1887", "84", "2009" })
+    @Alerts({ "-13", "84", "109" })
     public void getYear() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -103,8 +102,7 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"toISOString: function", "toJSON: function" },
-            IE8 = {"toISOString: undefined", "toJSON: undefined" })
+    @Alerts({"toISOString: function", "toJSON: function" })
     public void methods_differences() throws Exception {
         final String[] methods = {"toISOString", "toJSON"};
         final String html = createHTMLTestMethods("new Date()", methods);

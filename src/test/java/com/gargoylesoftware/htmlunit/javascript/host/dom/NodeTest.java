@@ -342,8 +342,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "null", "#document-fragment" })
+    @Alerts({ "null", "null" })
     public void appendChild_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -367,8 +366,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "exception", "1", "exception", "1", "exception", "1" },
-            IE8 = { "1", "1", "1", "0" })
+    @Alerts({ "1", "exception", "1", "exception", "1", "exception", "1" })
     public void append_insert_html_node() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -417,8 +415,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "3", "3", "3", "3", "3", "3", "3" },
-            IE8 = { "undefined", "not supported" })
+    @Alerts({ "3", "3", "3", "3", "3", "3", "3", "3" })
     public void nodePrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -549,8 +546,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "1", "2", "4", "8", "16", "32" },
-            IE8 = { "undefined", "not supported" })
+    @Alerts({ "1", "1", "2", "4", "8", "16", "32" })
     public void documentPositionConstants() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -848,8 +844,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "null", "#document-fragment" })
+    @Alerts({ "null", "null" })
     public void insertBefore_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1012,8 +1007,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true" },
-            IE8 = { "false", "false" })
+    @Alerts({ "true", "true" })
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"

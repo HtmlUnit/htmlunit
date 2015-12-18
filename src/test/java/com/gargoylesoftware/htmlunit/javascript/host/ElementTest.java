@@ -141,8 +141,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "lbl_SettingName", "outerHTML", "undefined" },
-            IE8 = { "lbl_SettingName", "outerHTML", "Item" })
+    @Alerts({ "lbl_SettingName", "outerHTML", "undefined" })
     public void getAttributeNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -191,8 +190,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "book", "exception" },
-            IE8 = { "book", "0", "1" })
+    @Alerts({ "book", "exception" })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void selectNode_root() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -307,8 +305,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE8 = { "<a><b c=\"d\">e</b></a>\r\n", "<a><b c=\"d\">e</b></a>" })
+    @Alerts({ "undefined", "undefined" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

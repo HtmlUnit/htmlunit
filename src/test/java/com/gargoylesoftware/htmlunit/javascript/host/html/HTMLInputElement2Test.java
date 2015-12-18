@@ -41,8 +41,7 @@ public class HTMLInputElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "hello", "me te" },
-            IE8 = { "input.setSelectionRange not available", "" })
+    @Alerts({ "hello", "me te" })
     public void selectionRange() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

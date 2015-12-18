@@ -133,8 +133,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "true", "null", "true" },
-            IE8 = { "undefined", "false", "undefined", "false" })
+    @Alerts({ "null", "true", "null", "true" })
     public void handlers() throws Exception {
         final String html
             = "<html><body>\n"

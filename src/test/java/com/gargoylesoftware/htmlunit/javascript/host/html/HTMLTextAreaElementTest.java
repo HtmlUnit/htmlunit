@@ -279,8 +279,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { " foo \n bar ", " foo \n bar " },
-            IE8 = { " foo \r\n bar ", " foo \r\n bar " })
+    @Alerts({ " foo \n bar ", " foo \n bar " })
     public void defaultValue() throws Exception {
         final String html
             = "<html>\n"
@@ -508,8 +507,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLTextAreaElement]", "28" },
-            IE8 = { "test", "4", "42", "2", "[object]", "8" })
+    @Alerts({ "test", "4", "42", "2", "[object HTMLTextAreaElement]", "28" })
     public void getAttributeAndSetValue() throws Exception {
         final String html =
             "<html>\n"
