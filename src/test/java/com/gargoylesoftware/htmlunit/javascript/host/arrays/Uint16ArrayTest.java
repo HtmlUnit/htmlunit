@@ -34,8 +34,7 @@ public class Uint16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "64302", "46", "-5" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "64302", "46", "-5" })
     public void arrayConstruction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

@@ -155,8 +155,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2005-12-03T07:14:15.000Z", "2005-07-12T11:04:15.000Z",
-                        "2005-07-03T15:14:05.000Z" },
-            IE8 = "")
+                        "2005-07-03T15:14:05.000Z" })
     public void toISOString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

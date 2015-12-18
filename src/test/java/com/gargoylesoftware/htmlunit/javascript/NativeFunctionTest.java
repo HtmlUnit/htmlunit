@@ -217,8 +217,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "t: [object Window]", "0", "t: ", "1", "a0: x",
-                            "t: ab", "2", "a0: x", "a1: y" },
-            IE8 = "bind not supported")
+                            "t: ab", "2", "a0: x", "a1: y" })
     public void bind() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -255,8 +254,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "t: ab", "1", "a0: x,y" },
-            IE8 = "bind not supported")
+    @Alerts(DEFAULT = { "t: ab", "1", "a0: x,y" })
     public void bindArrayParam() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -35,8 +35,7 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "93", "255", "0", "93", "-1" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "0", "93", "255", "0", "93", "-1" })
     public void arrayConstruction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

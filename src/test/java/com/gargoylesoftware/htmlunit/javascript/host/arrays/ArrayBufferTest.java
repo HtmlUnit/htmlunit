@@ -57,8 +57,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1234", "1234", "6789", "1234" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "1234", "1234", "6789", "1234" })
     public void slice() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

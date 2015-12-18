@@ -34,8 +34,7 @@ public class Uint32ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "4294967251", "-45", "-1", "-1", "-1" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "4294967251", "-45", "-1", "-1", "-1" })
     public void arrayConstruction() throws Exception {
         final String html
             = "<html><head><script>\n"
