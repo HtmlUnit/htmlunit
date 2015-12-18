@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -359,7 +358,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented(IE8)
     public void caption() throws Exception {
         loadPageWithAlerts2(test("caption"));
     }
@@ -1662,7 +1660,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented(IE8)
     public void picture() throws Exception {
         loadPageWithAlerts2(test("picture"));
     }

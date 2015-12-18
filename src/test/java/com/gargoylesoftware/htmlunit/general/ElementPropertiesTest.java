@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -424,7 +423,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "name,ownerElement,specified,value",
             IE = "expando,name,ownerElement,specified,value")
-    @NotYetImplemented({ IE8, EDGE })
+    @NotYetImplemented(EDGE)
     public void attr() throws Exception {
         testString("document.createAttribute('some_attrib'), unknown");
     }
@@ -436,7 +435,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "appendData(),data,deleteData(),insertData(),length,replaceData(),substringData()",
             IE11 = "appendData(),data,deleteData(),insertData(),length,replaceData(),substringData(),text",
             EDGE = "appendData(),data,deleteData(),insertData(),length,replaceData(),substringData(),text")
-    @NotYetImplemented({ IE8, EDGE })
+    @NotYetImplemented(EDGE)
     public void comment() throws Exception {
         testString("document.createComment('come_comment'), unknown");
     }
@@ -1154,7 +1153,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("cite,dateTime")
-    @NotYetImplemented(IE8)
     public void del() throws Exception {
         test("del");
     }
@@ -1549,7 +1547,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "cite",
             IE = "cite,dateTime")
-    @NotYetImplemented(IE8)
     public void q() throws Exception {
         test("q");
     }
@@ -2265,7 +2262,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "disabled,media,scoped,sheet,type",
             IE11 = "media,sheet,type",
             EDGE = "media,sheet,type")
-    @NotYetImplemented({ FF, IE8, CHROME, EDGE })
+    @NotYetImplemented({ FF, CHROME, EDGE })
     public void style() throws Exception {
         test("style");
     }
@@ -2494,7 +2491,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("text")
-    @NotYetImplemented(IE8)
     public void title() throws Exception {
         test("title");
     }

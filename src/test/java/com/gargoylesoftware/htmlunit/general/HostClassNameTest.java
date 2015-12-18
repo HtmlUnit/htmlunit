@@ -413,8 +413,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards(DEFAULT = "exception",
-            IE8 = "[object HTMLCommentElement]")
+    @AlertsStandards("exception")
     public void htmlCommentElement() throws Exception {
         test("HTMLCommentElement");
     }
@@ -1544,8 +1543,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards(DEFAULT = "exception",
-            IE8 = "[object HTMLNoShowElement]")
+    @AlertsStandards("exception")
     public void htmlNoShowElement() throws Exception {
         test("HTMLNoShowElement");
     }
@@ -1954,8 +1952,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards(DEFAULT = "exception",
-            IE8 = "[object HTMLTextElement]")
+    @AlertsStandards("exception")
     public void htmlTextElement() throws Exception {
         test("HTMLTextElement");
     }
@@ -2040,8 +2037,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards(DEFAULT = "exception",
-            IE8 = "[object HTMLGenericElement]")
+    @AlertsStandards("exception")
     public void htmlGenericElement() throws Exception {
         test("HTMLGenericElement");
     }
@@ -3348,8 +3344,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards(DEFAULT = "exception",
-        IE8 = "[object StaticNodeList]")
+    @AlertsStandards("exception")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void staticNodeList() throws Exception {
         test("StaticNodeList");

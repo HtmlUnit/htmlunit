@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -290,7 +289,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE8)
     public void button() throws Exception {
         loadPageWithAlerts2(test("button"));
     }
@@ -1389,7 +1387,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE8)
     public void col() throws Exception {
         loadPageWithAlerts2(test("col"));
     }
@@ -1412,7 +1409,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE8)
     public void tbody() throws Exception {
         loadPageWithAlerts2(test("tbody"));
     }
