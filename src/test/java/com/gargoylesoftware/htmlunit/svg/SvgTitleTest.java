@@ -39,8 +39,7 @@ public class SvgTitleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTitleElement]",
-            IE8 = "[object HTMLTitleElement]")
+    @Alerts("[object SVGTitleElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
