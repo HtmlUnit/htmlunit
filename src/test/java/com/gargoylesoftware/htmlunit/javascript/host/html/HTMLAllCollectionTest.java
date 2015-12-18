@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -221,7 +218,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             FF38 = "null",
             IE11 = "null",
             IE8 = "[object HTMLCommentElement]")
-    @NotYetImplemented(IE8)
     public void item_Unknown() throws Exception {
         item("'foo'");
     }
@@ -232,7 +228,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "b2-button2",
             IE8 = "[object HTMLCommentElement]")
-    @NotYetImplemented(IE8)
     public void item_ById() throws Exception {
         item("'b2'");
     }
@@ -244,7 +239,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "b2-button2",
             CHROME = "undefined",
             IE8 = "[object HTMLCommentElement]")
-    @NotYetImplemented(IE8)
     public void item_ByName() throws Exception {
         item("'button2'");
     }

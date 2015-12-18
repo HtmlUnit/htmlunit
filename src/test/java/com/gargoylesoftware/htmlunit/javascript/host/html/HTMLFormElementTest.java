@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -759,7 +758,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function handler() {}", "null", "null" },
             IE8 = { "function handler() {}", "null", "exception" })
-    @NotYetImplemented(IE8)
     public void onsubmitNull() throws Exception {
         final String html =
             "<html><head>\n"

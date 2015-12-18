@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -663,7 +662,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"radio", "hidden", "image" },
             IE8 = {"radio", "error", "radio", "error", "radio"})
-    @NotYetImplemented(IE8)
     public void changeType() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -846,7 +844,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number" },
             IE8 = {"undefined", "30", "undefined", "30", "30", "30", "30", "50", "number", "number" })
-    @NotYetImplemented(IE8)
     public void maxLength() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -881,7 +878,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 "undefined", "40", "string", "number" },
             CHROME = {"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number" },
             IE8 = { "30", "undefined", "undefined", "30", "30", "30", "undefined", "30", "string", "number" })
-    @NotYetImplemented(IE8)
     public void minLength() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1416,7 +1412,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 "40", "50", "string", "string" },
             CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" },
             IE8 = { "30", "undefined", "30", "30", "30", "50", "number", "number" })
-    @NotYetImplemented(IE8)
     public void min() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1449,7 +1444,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 "40", "50", "string", "string" },
             CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string" },
             IE8 = { "30", "undefined", "30", "30", "30", "50", "number", "number" })
-    @NotYetImplemented(IE8)
     public void max() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.Arrays;
 
@@ -48,7 +47,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "", "", "§§URL§§test.css", "stylesheet", "stylesheet1" },
             IE8 = { "", "", "", "test.css", "stylesheet", "stylesheet1" })
-    @NotYetImplemented(IE8)
     public void attributes() throws Exception {
         final String html =
               "<html>\n"
@@ -200,7 +198,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 "testsite2.html", "13", "testanchor", "mailto:" },
             IE8 = { "§§URL§§testsite1.html", "§§URL§§testsite1.html", "testsite2.html",
                 "testsite2.html", "13", "testanchor", "mailto:" })
-    @NotYetImplemented(IE8)
     public void getAttribute_and_href() throws Exception {
         final String html
             = "<html><head><title>AnchorTest</title>\n"

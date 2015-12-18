@@ -201,8 +201,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE8 = "true")
+    @Alerts("false")
     public void escaping() throws Exception {
         final String script = "var isMSIE=eval('false;/*@cc_on@if(@\\x5fwin32)isMSIE=true@end@*/');\n"
             + "alert(isMSIE);";
@@ -213,8 +212,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE8 = "true")
+    @Alerts("false")
     public void eval() throws Exception {
         final String script =
             "var isMSIE;\n"

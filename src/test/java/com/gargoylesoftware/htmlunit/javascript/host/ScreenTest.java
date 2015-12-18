@@ -53,7 +53,6 @@ public class ScreenTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "0" },
             IE = { "undefined", "1234" },
             IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
     public void availLeft() throws Exception {
         testNumericProperty("availLeft");
     }
@@ -65,7 +64,6 @@ public class ScreenTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "0" },
             IE = { "undefined", "1234" },
             IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
     public void availTop() throws Exception {
         testNumericProperty("availTop");
     }
@@ -151,7 +149,6 @@ public class ScreenTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "1234" },
             FF = { "0", "0" },
             IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
     public void left() throws Exception {
         testNumericProperty("left");
     }
@@ -163,7 +160,6 @@ public class ScreenTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "1234" },
             FF = { "0", "0" },
             IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
     public void top() throws Exception {
         testNumericProperty("top");
     }
@@ -196,7 +192,6 @@ public class ScreenTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "24", "24" },
             IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
     public void pixelDepth() throws Exception {
         testNumericProperty("pixelDepth");
     }
@@ -229,7 +224,6 @@ public class ScreenTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "1234" },
             IE8 = { "0", "1234" })
-    @NotYetImplemented(IE8)
     public void updateInterval() throws Exception {
         testNumericProperty("updateInterval");
     }

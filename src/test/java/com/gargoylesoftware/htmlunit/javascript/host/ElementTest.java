@@ -622,7 +622,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Error]", "dIv"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-    @NotYetImplemented(IE8)
     public void xml_nodeName() throws Exception {
         xml("nodeName");
     }
@@ -642,7 +641,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Error]", "dIv"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-    @NotYetImplemented(IE8)
     public void xml_tagName() throws Exception {
         xml("tagName");
     }
@@ -662,7 +660,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Error]", ""
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-    @NotYetImplemented(IE8)
     public void xml_prefix() throws Exception {
         xml("prefix");
     }
@@ -682,7 +679,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Error]", "undefined"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-    @NotYetImplemented(IE8)
     public void xml_localName() throws Exception {
         xml("localName");
     }
@@ -702,7 +698,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Error]", "dIv"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-    @NotYetImplemented(IE8)
     public void xml_baseName() throws Exception {
         xml("baseName");
     }
@@ -722,7 +717,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Error]", "http://www.w3.org/1999/xhtml"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-    @NotYetImplemented(IE8)
     public void xml_namespaceURI() throws Exception {
         xml("namespaceURI");
     }

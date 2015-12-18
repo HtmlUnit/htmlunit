@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -616,7 +615,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented(IE8)
     public void getMaxLength_IE8Failing() throws Exception {
         final String html
             = "<html>\n"

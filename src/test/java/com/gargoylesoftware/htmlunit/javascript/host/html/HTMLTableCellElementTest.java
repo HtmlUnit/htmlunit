@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -491,7 +490,6 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE8 = { "1" })
-    @NotYetImplemented(IE8)
     public void offsetHeight() throws Exception {
         final String html =
             "<html><body>\n"

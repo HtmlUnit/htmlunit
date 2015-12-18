@@ -1153,8 +1153,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE8 = "true")
+    @Alerts("false")
     public void isDisplayed() throws Exception {
         final String html = "<html><head>\n"
             + "</head>\n"

@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -40,7 +37,6 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "", "", "", "§§URL§§test.css", "text/css", "stylesheet", "stylesheet1" },
             IE8 = { "", "", "", "", "test.css", "text/css", "stylesheet", "stylesheet1" })
-    @NotYetImplemented(IE8)
     public void basicLinkAttributes() throws Exception {
         final String html =
               "<html>\n"

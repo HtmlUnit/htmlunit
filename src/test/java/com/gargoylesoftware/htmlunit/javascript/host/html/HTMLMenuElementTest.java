@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -25,7 +23,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlMenu;
 
@@ -124,7 +121,6 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                     "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", "" },
             IE11 = { "", "", "", "", "", "null", "", "blah",
                     "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", "" })
-    @NotYetImplemented(IE8)
     public void type() throws Exception {
         final String html =
                 "<html>\n"

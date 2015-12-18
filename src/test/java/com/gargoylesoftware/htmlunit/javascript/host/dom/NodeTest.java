@@ -286,7 +286,6 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE8 = { "in foo2", "in foo1" })
-    @NotYetImplemented(IE8)
     public void attachEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<title>First</title>\n"
@@ -370,7 +369,6 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "exception", "1", "exception", "1", "exception", "1" },
             IE8 = { "1", "1", "1", "0" })
-    @NotYetImplemented(IE8)
     public void append_insert_html_node() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

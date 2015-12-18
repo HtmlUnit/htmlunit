@@ -185,7 +185,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     */
     @Test
     @Alerts(IE8 = "0")
-    @NotYetImplemented(IE8)
     public void missingSingleQuote() throws Exception {
         final String html = "<html><body>"
             + "Go to <a href='http://blah.com>blah</a> now."
@@ -200,7 +199,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     */
     @Test
     @Alerts(IE8 = "0")
-    @NotYetImplemented(IE8)
     public void missingDoubleQuote() throws Exception {
         final String html = "<html><body>"
                 + "Go to <a href='http://blah.com>blah</a> now."

@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 
@@ -564,7 +563,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "inform(\"onclick\")", "inform('newHandler')", "newHandler" },
             IE8 = { "function onclick()\n{\ninform(\"onclick\")\n}", "inform('newHandler')" })
-    @NotYetImplemented(IE8)
     public void getAttribute_eventHandler() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -711,7 +709,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "8", "3" },
             IE8 = { "9", "3" })
-    @NotYetImplemented(IE8)
     public void getElementsByTagNameAsterisk() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -820,7 +817,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<div id=\"i\" foo=\"\" name=\"\"></div>",
             IE8 = "<DIV id=i name=\"\" foo=\"\"></DIV>")
-    @NotYetImplemented(IE8)
     public void getInnerHTML_EmptyAttributes() throws Exception {
         final String html = "<body onload='alert(document.body.innerHTML)'><div id='i' foo='' name=''></div></body>";
         loadPageWithAlerts2(html);
@@ -1003,7 +999,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "" },
             FF = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" },
             IE8 = { "\r\n<DIV id=div><UL></UL></DIV>", "<UL></UL>", "" })
-    @NotYetImplemented(IE8)
     public void getSetInnerHtmlEmptyTag_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -1026,7 +1021,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "" },
             FF = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" },
             IE8 = { "\r\n<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", "" })
-    @NotYetImplemented(IE8)
     public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -1084,7 +1078,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Outer = <div id=\"myNode\">New  cell value</div>" },
             IE8 = { "Outer = \r\n<DIV id=myNode>New cell value</DIV>" })
-    @NotYetImplemented(IE8)
     public void getOuterHTMLFromBlock() throws Exception {
         final String html = createPageForGetOuterHTML("div", "New  cell value", false);
         loadPageWithAlerts2(html);
@@ -2804,7 +2797,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE8 = "object")
-    @NotYetImplemented(IE8)
     public void hasAttributeTypeOf() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -2830,7 +2822,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function", "true", "true", "false" },
             IE8 = { "undefined", "exception" })
-    @NotYetImplemented(IE8)
     public void hasAttributeQuirksMode() throws Exception {
         final String html =
               "<html>\n"
@@ -2984,7 +2975,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE11 = { "true", "true", "true", "false", "false", "false", "false", "true", "false", "false",
                         "exception" },
             IE8 = { "true", "true", "true", "false", "false", "false", "false", "true", "exception" })
-    @NotYetImplemented(IE8)
     public void contains() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3341,8 +3331,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE8 = "true")
+    @Alerts("false")
     public void document() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3628,7 +3617,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "DIV", "SECTION", "<div></div>", "<section></section>" },
             IE8 = { "DIV", "section", "\r\n<DIV></DIV>", "<:section></:section>" })
-    @NotYetImplemented(IE8)
     public void nodeNameVsOuterElement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -4118,7 +4106,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = { "outside", "1", "middle", "2", "3", "4",
                 "before-begin after-begininside before-end after-end" },
             FF = "insertAdjacentElement not available")
-    @NotYetImplemented(IE8)
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
@@ -4268,7 +4255,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             FF = "insertAdjacentText not available",
             IE8 = { "outside", "middle",
                 "before-begin after-begininside before-end after-end" })
-    @NotYetImplemented(IE8)
     public void insertAdjacentText() throws Exception {
         insertAdjacentText("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentText("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");

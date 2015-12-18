@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1573,7 +1572,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Two", "", "Two", "", "" },
             IE8 = { "", "", "", "", "" })
-    @NotYetImplemented(IE8)
     public void getValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

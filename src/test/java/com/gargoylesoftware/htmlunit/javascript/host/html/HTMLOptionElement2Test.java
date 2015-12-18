@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -631,7 +630,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "null", "[object Attr]", "null", "null", "null",
                 "null", "null", "null", "null", "null" })
-    @NotYetImplemented(IE8)
     public void getAttributeNode() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -676,7 +674,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                         "true null selected", "false null ", "false null ",
                         "false null ", "true null selected", "false null ",
                         "false null ", "true null selected", "false null "})
-    @NotYetImplemented(IE8)
     public void selectedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -733,7 +730,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                         "true null selected", "false null ", "true null selected",
                         "true null selected", "true null selected", "true null selected",
                         "true null selected", "false null ", "true null selected"})
-    @NotYetImplemented(IE8)
     public void selectedAttributeMultiple() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -784,7 +780,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HTMLOptionsCollection]", "0", "1" },
             IE = { "[object HTMLSelectElement]", "0", "1" })
-    @NotYetImplemented(IE8)
     public void with_new() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1183,7 +1178,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             IE8 = { "false-", "true-selected", "false-",
                 "true-selected", "false-", "false-",
                 "false-", "false-", "false-" })
-    @NotYetImplemented(IE8)
     public void selectAndAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

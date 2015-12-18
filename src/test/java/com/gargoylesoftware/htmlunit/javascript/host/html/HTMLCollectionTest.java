@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,7 +64,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE8 = "object")
-    @NotYetImplemented(IE8)
     public void toStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -327,7 +325,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT =  { "function", "function", "function", "function" },
             IE8 = { "undefined", "undefined", "undefined", "undefined" })
-    @NotYetImplemented(IE8)
     public void array_prototype_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"

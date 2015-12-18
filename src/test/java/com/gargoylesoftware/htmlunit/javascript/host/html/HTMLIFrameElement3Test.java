@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 
@@ -138,7 +137,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "[object HTMLDocument]", "true" })
-    @NotYetImplemented(IE8)
     public void contentDocument() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

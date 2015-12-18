@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -72,7 +71,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "http://www.meh.com/meh" },
             IE8 = { "blah", "http://www.blah.com/blah", "error" })
-    @NotYetImplemented(IE8)
     public void scopeName2() throws Exception {
         final String html = "<html xmlns:blah='http://www.blah.com/blah'><head>\n"
             + "<script>\n"
@@ -466,7 +464,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "30px", "46", "55px", "71", "71", "0", "0", "0", "0" },
             IE8 = { "30px", "44", "55px", "55", "55", "0", "0", "0", "0" })
-    @NotYetImplemented(IE8)
     public void offsetWidthAndHeight() throws Exception {
         final String html =
               "<html><head>\n"

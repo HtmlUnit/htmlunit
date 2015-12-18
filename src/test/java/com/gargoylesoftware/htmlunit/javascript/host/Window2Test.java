@@ -181,7 +181,6 @@ public class Window2Test extends WebDriverTestCase {
             "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
             "encodeURIComponent: function,function", "decodeURI: function,function",
             "decodeURIComponent: function,function", "escape: function,function", "unescape: function,function" })
-    @NotYetImplemented(IE8)
     public void topLevelProperties() throws Exception {
         final String[] properties = {"getClass", "java", "javax", "javafx", "org", "com", "edu", "net", "JavaAdapter",
             "JavaImporter", "Continuation", "Packages", "XML", "XMLList", "Namespace", "QName", "arguments", "load",
@@ -946,7 +945,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "function", "null", "null" },
             IE8 = { "null", "function", "null", "exception" })
-    @NotYetImplemented(IE8)
     public void onbeforeunload() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"

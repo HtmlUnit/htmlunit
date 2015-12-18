@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -127,7 +124,6 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "blue" },
             IE = { "#ff0000", "#0000ff" },
             IE11 = { "red", "blue" })
-    @NotYetImplemented(IE8)
     public void color() throws Exception {
         final String html =
             "<html>\n"

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 
@@ -736,7 +735,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "4", "2", "5" },
             IE8 = { "1", "2", "3", "4", "5", "6", "7" })
-    @NotYetImplemented(IE8)
     public void onReadyStateChange_Order() throws Exception {
         final String html =
               "<html>\n"
@@ -991,7 +989,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "\n    <script id=\"testScript\">function foo() { return a > b}</script>\n  " },
             IE8 = "")
-    @NotYetImplemented(IE8)
     public void innerHTMLGetSet() throws Exception {
         final String html
             = "<html>\n"

@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -38,7 +35,6 @@ public class HTMLPreElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "number", "100", "77", "number", "123" },
             IE = { "", "string", "100", "77", "string", "123" })
-    @NotYetImplemented(IE8)
     public void width() throws Exception {
         final String html =
             "<html>\n"

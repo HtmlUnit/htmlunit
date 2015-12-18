@@ -78,7 +78,6 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "null", "one", "two", "three" },
             IE8 = { "undefined", "one", "two", "three" })
     @BuggyWebDriver
-    @NotYetImplemented(IE8)
     public void opener() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
@@ -1077,7 +1076,6 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "true", "exception", "onload" },
             IE8 = { "false", "false", "onload", "test2", "test1, param null: false", "test1, param null: false" })
-    @NotYetImplemented(IE8)
     public void attachOnLoadEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1216,7 +1214,6 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE8 = "exception")
-    @NotYetImplemented(IE8)
     public void evalScopeOtherWindow() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
@@ -1307,7 +1304,6 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "123", "captured" },
             IE8 = { "exception", "123" })
-    @NotYetImplemented(IE8)
     public void captureEvents() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"

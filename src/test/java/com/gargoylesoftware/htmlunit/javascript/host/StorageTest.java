@@ -67,7 +67,6 @@ public class StorageTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "global: true", "local: true", "session: true" },
             IE8 = { "global: true", "exception", "exception" })
-    @NotYetImplemented(IE8)
     public void storageEquals() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -240,7 +239,6 @@ public class StorageTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "function", "null", "function", "value", "1" },
             IE11 = { "function", "null", "string", "value", "1" },
             IE8 = { "undefined", "null", "string", "value", "1" })
-    @NotYetImplemented(IE8)
     public void prototypePropertiesAreVisible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
