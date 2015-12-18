@@ -410,7 +410,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "appendData(),data,deleteData(),insertData(),length,replaceData(),replaceWholeText(),splitText(),"
                 + "substringData(),"
                 + "wholeText",
-            IE8 = "appendData(),data,deleteData(),insertData(),length,replaceData(),splitText(),substringData()",
             EDGE = "appendData(),data,deleteData(),insertData(),length,replaceData(),replaceWholeText(),splitText(),"
                 + "substringData(),"
                 + "wholeText")
@@ -436,7 +435,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "appendData(),data,deleteData(),insertData(),length,replaceData(),substringData()",
             IE11 = "appendData(),data,deleteData(),insertData(),length,replaceData(),substringData(),text",
-            IE8 = "appendData(),atomic,data,deleteData(),insertData(),length,replaceData(),substringData(),text",
             EDGE = "appendData(),data,deleteData(),insertData(),length,replaceData(),substringData(),text")
     @NotYetImplemented({ IE8, EDGE })
     public void comment() throws Exception {
@@ -447,8 +445,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE11 = "namedRecordset(),recordset",
-            IE8 = "namedRecordset()")
+    @Alerts(IE11 = "namedRecordset(),recordset")
     @NotYetImplemented(IE)
     public void unknown() throws Exception {
         testString("unknown, div");
@@ -512,34 +509,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber",
-            IE8 = "accessKey,addBehavior(),all,appendChild(),applyElement(),aria-activedescendant,aria-busy,"
-                + "aria-checked,aria-controls,aria-describedby,aria-disabled,aria-expanded,aria-flowto,"
-                + "aria-haspopup,aria-hidden,aria-invalid,aria-labelledby,aria-level,aria-live,aria-multiselectable,"
-                + "aria-owns,aria-posinset,aria-pressed,aria-readonly,aria-relevant,aria-required,aria-secret,"
-                + "aria-selected,aria-setsize,aria-valuemax,aria-valuemin,aria-valuenow,attachEvent(),behaviorUrns,"
-                + "blur(),canHaveChildren,canHaveHTML,children,className,clearAttributes(),click(),clientHeight,"
-                + "clientLeft,clientTop,clientWidth,cloneNode(),componentFromPoint(),contains(),contentEditable,"
-                + "createControlRange(),currentStyle,detachEvent(),dir,disabled,document,doScroll(),dragDrop(),"
-                + "filters,fireEvent(),focus(),getAdjacentText(),getAttribute(),getAttributeNode(),"
-                + "getBoundingClientRect(),getClientRects(),getElementsByTagName(),getExpression(),hideFocus,id,"
-                + "innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
-                + "insertBefore(),isContentEditable,isDisabled,isMultiLine,isTextEdit,lang,language,"
-                + "mergeAttributes(),namedRecordset(),offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,"
-                + "onactivate,onafterupdate,onbeforeactivate,onbeforecopy,onbeforecut,onbeforedeactivate,"
-                + "onbeforeeditfocus,onbeforepaste,onbeforeupdate,onblur,oncellchange,onclick,oncontextmenu,"
-                + "oncontrolselect,oncopy,oncut,ondataavailable,ondatasetchanged,ondatasetcomplete,ondblclick,"
-                + "ondeactivate,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
-                + "onerrorupdate,onfilterchange,onfocus,onfocusin,onfocusout,onhelp,onkeydown,onkeypress,onkeyup,"
-                + "onlayoutcomplete,onlosecapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmove,onmoveend,onmovestart,onpage,onpaste,onpropertychange,"
-                + "onreadystatechange,onresize,onresizeend,onresizestart,onrowenter,onrowexit,onrowsdelete,"
-                + "onrowsinserted,onscroll,onselectstart,outerHTML,outerText,parentElement,parentElement(),"
-                + "parentTextEdit,readyState,recordNumber,releaseCapture(),removeAttribute(),removeAttributeNode(),"
-                + "removeBehavior(),removeChild(),removeExpression(),removeNode(),replaceAdjacentText(),"
-                + "replaceChild(),replaceNode(),role,runtimeStyle,scopeName,scrollHeight,scrollIntoView(),"
-                + "scrollLeft,scrollTop,scrollWidth,setActive(),setAttribute(),setAttributeNode(),setCapture(),"
-                + "setExpression(),sourceIndex,style,swapNode(),tabIndex,tagUrn,"
-                + "title",
             EDGE = "accessKey,blur(),children,className,click(),contentEditable,dataset,dir,dragDrop(),draggable,"
                 + "focus(),getElementsByClassName(),hidden,hideFocus,innerHTML,innerText,insertAdjacentElement(),"
                 + "insertAdjacentHTML(),insertAdjacentText(),isContentEditable,lang,msGetInputContext(),"
@@ -592,12 +561,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "defaultPrevented,eventPhase,initEvent(),isTrusted,preventDefault(),srcElement,"
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
                 + "type",
-            IE8 = "altKey,altLeft,behaviorCookie,behaviorPart,bookmarks,boundElements,button,cancelBubble,clientX,"
-                + "clientY,contentOverflow,ctrlKey,ctrlLeft,data,dataFld,dataTransfer,fromElement,getAttribute(),"
-                + "keyCode,nextPage,nextPage(),offsetX,offsetY,origin,propertyName,qualifier,reason,recordset,"
-                + "removeAttribute(),repeat,returnValue,screenX,screenY,setAttribute(),shiftKey,shiftLeft,source,"
-                + "srcElement,srcFilter,srcUrn,toElement,type,url,wheelDelta,x,"
-                + "y",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
                 + "defaultPrevented,eventPhase,initEvent(),isTrusted,preventDefault(),returnValue,srcElement,"
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
@@ -720,16 +683,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "sessionStorage,setImmediate(),setInterval(),setTimeout(),showHelp(),showModalDialog(),"
                 + "showModelessDialog(),sortFunction(),status,styleMedia,test(),top,toStaticHTML(),toString(),"
                 + "window",
-            IE8 = "alert(),attachEvent(),blur(),clearInterval(),clearTimeout(),clientInformation,clipboardData,"
-                + "close(),closed,confirm(),createPopup(),defaultStatus,detachEvent(),document,event,execScript(),"
-                + "external,focus(),frameElement,frames,history,item(),length,localStorage,location,"
-                + "maxConnectionsPerServer,moveBy(),moveTo(),name,navigate(),navigator,offscreenBuffering,"
-                + "onafterprint,onbeforeprint,onbeforeunload,onblur,onerror,onfocus,onhashchange,onhelp,onload(),"
-                + "onmessage,onresize,onscroll,onunload,open(),opener,parent,postMessage(),print(),prompt(),"
-                + "resizeBy(),resizeTo(),screen,screenLeft,screenTop,scroll(),scrollBy(),scrollTo(),self,"
-                + "sessionStorage,setInterval(),setTimeout(),showHelp(),showModalDialog(),showModelessDialog(),"
-                + "status,top,toStaticHTML(),"
-                + "window",
             EDGE = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),chrome,clearImmediate(),clearInterval(),clearTimeout(),clientInformation,close(),"
                 + "closed,confirm(),console,createXmlDocument(),crypto,defaultStatus,devicePixelRatio,"
@@ -798,9 +751,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
                 + "urn",
-            IE8 = "charset,coords,dataFld,dataFormatAs,dataSrc,hash,host,hostname,href,hreflang,Methods,mimeType,"
-                + "name,nameProp,pathname,port,protocol,protocolLong,rel,rev,search,shape,target,type,"
-                + "urn",
             EDGE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
                 + "urn")
@@ -815,8 +765,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE11 = "cite,clear,width",
-            IE8 = "cite,clear,clear(),width")
+    @Alerts(IE11 = "cite,clear,width")
     @NotYetImplemented(IE)
     public void address() throws Exception {
         test("address");
@@ -831,8 +780,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align,alt,archive,code,codeBase,height,hspace,name,object,vspace,width",
             IE11 = "align,alt,altHtml,archive,BaseHref,border,classid,code,codeBase,codeType,contentDocument,data,"
                 + "declare,form,height,hspace,name,object,standby,type,useMap,vspace,width",
-            IE8 = "align,alt,altHtml,archive,BaseHref,border,code,codeBase,codeType,contentDocument,dataFld,"
-                + "dataFormatAs,dataSrc,declare,form,height,hspace,name,onerror,standby,type,useMap,vspace,width",
             EDGE = "align,alt,altHtml,archive,BaseHref,border,code,codeBase,codeType,contentDocument,data,declare,"
                 + "form,height,hspace,name,object,standby,type,useMap,vspace,"
                 + "width")
@@ -911,7 +858,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,"
                 + "NETWORK_NO_SOURCE,networkState,pause(),paused,play(),playbackRate,played,preload,readyState,"
                 + "seekable,seeking,src,textTracks,volume",
-            IE8 = "",
             EDGE = "addTextTrack(),audioTracks,autoplay,buffered,canPlayType(),controls,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,msGraphicsTrustStatus,msKeys,"
@@ -1009,8 +955,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "cite",
-            IE11 = "cite,clear,width",
-            IE8 = "cite,clear,clear(),width")
+            IE11 = "cite,clear,width")
     @NotYetImplemented(IE)
     public void blockquote() throws Exception {
         test("blockquote");
@@ -1035,10 +980,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "aLink,background,bgColor,bgProperties,bottomMargin,createTextRange(),leftMargin,link,noWrap,"
                 + "onafterprint,onbeforeprint,onbeforeunload,onhashchange,onmessage,onoffline,ononline,onpagehide,"
                 + "onpageshow,onpopstate,onresize,onstorage,onunload,rightMargin,scroll,text,topMargin,"
-                + "vLink",
-            IE8 = "aLink,background,bgColor,bgProperties,bottomMargin,createTextRange(),leftMargin,link,noWrap,"
-                + "onafterprint,onbeforeprint,onbeforeunload,onhashchange,onload,onoffline,ononline,onselect,"
-                + "onunload,rightMargin,scroll,scroll(),text,topMargin,"
                 + "vLink",
             EDGE = "aLink,background,bgColor,bgProperties,link,noWrap,onafterprint,onbeforeprint,onbeforeunload,"
                 + "onhashchange,onmessage,onoffline,ononline,onpagehide,onpageshow,onpopstate,onresize,onstorage,"
@@ -1066,8 +1007,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "clear",
-            IE8 = "clear,clear()")
+    @Alerts("clear")
     public void br() throws Exception {
         test("br");
     }
@@ -1091,7 +1031,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "autofocus,checkValidity(),createTextRange(),form,formAction,formEnctype,formMethod,"
                 + "formNoValidate,formTarget,name,setCustomValidity(),status,type,validationMessage,validity,value,"
                 + "willValidate",
-            IE8 = "createTextRange(),dataFld,dataFormatAs,dataSrc,form,name,status,type,value",
             EDGE = "autofocus,checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
                 + "formTarget,name,setCustomValidity(),status,type,validationMessage,validity,value,"
                 + "willValidate")
@@ -1109,7 +1048,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "getContext(),height,toDataURL(),width",
             FF = "getContext(),height,mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             IE11 = "getContext(),height,msToBlob(),toDataURL(),width",
-            IE8 = "",
             EDGE = "getContext(),height,msToBlob(),toDataURL(),width")
     @NotYetImplemented({ IE11, FF, EDGE })
     public void canvas() throws Exception {
@@ -1136,8 +1074,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE11 = "cite,clear,width",
-            IE8 = "cite,clear,clear(),width")
+    @Alerts(IE11 = "cite,clear,width")
     @NotYetImplemented(IE)
     public void center() throws Exception {
         test("center");
@@ -1181,8 +1118,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "options",
-            IE8 = "")
+    @Alerts("options")
     @NotYetImplemented(EDGE)
     public void datalist() throws Exception {
         test("datalist");
@@ -1270,7 +1206,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align",
             IE11 = "align,noWrap",
-            IE8 = "align,dataFld,dataFormatAs,dataSrc,noWrap",
             EDGE = "align,noWrap")
     @NotYetImplemented({ IE, EDGE })
     public void div() throws Exception {
@@ -1310,7 +1245,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "getSVGDocument(),height,msPlayToDisabled,msPlayToPreferredSourceUri,msPlayToPrimary,name,palette,"
                 + "pluginspage,readyState,src,units,"
                 + "width",
-            IE8 = "height,hidden,name,palette,pluginspage,src,units,width",
             EDGE = "getSVGDocument(),height,msPlayToDisabled,msPlayToPreferredSourceUri,msPlayToPrimary,name,palette,"
                 + "pluginspage,readyState,src,units,"
                 + "width")
@@ -1342,7 +1276,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "checkValidity(),disabled,elements,form,name,setCustomValidity(),type,validationMessage,validity,"
                 + "willValidate",
             IE11 = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate",
-            IE8 = "align,form",
             EDGE = "align,checkValidity(),disabled,form,setCustomValidity(),validationMessage,validity,willValidate")
     @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void fieldset() throws Exception {
@@ -1395,9 +1328,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,item(),length,method,"
                 + "name,namedItem(),noValidate,reset(),submit(),"
                 + "target",
-            IE8 = "acceptCharset,action,elements,encoding,item(),length,method,name,namedItem(),onreset,onsubmit,"
-                + "reset(),submit(),tags(),target,"
-                + "urns()",
             EDGE = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,item(),length,method,"
                 + "name,namedItem(),noValidate,reset(),submit(),"
                 + "target")
@@ -1431,10 +1361,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "border,borderColor,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),"
                 + "height,longDesc,marginHeight,marginWidth,name,noResize,scrolling,security,src,"
                 + "width",
-            IE8 = "allowTransparency,border,borderColor,contentDocument,contentWindow,dataFld,dataFormatAs,dataSrc,"
-                + "frameBorder,frameSpacing,height,longDesc,marginHeight,marginWidth,name,noResize,onload,scrolling,"
-                + "src,"
-                + "width",
             EDGE = "border,borderColor,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),"
                 + "height,longDesc,marginHeight,marginWidth,name,noResize,scrolling,src,"
                 + "width")
@@ -1461,9 +1387,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "rows",
             IE11 = "border,borderColor,cols,frameBorder,frameSpacing,name,onafterprint,onbeforeprint,onbeforeunload,"
                 + "onhashchange,onmessage,onoffline,ononline,onpagehide,onpageshow,onresize,onstorage,onunload,"
-                + "rows",
-            IE8 = "border,borderColor,cols,frameBorder,frameSpacing,name,onafterprint,onbeforeprint,onbeforeunload,"
-                + "onload,onunload,"
                 + "rows",
             EDGE = "border,borderColor,cols,frameBorder,frameSpacing,name,onafterprint,onbeforeprint,onbeforeunload,"
                 + "onhashchange,onmessage,onoffline,ononline,onpagehide,onpageshow,onresize,onstorage,onunload,"
@@ -1503,8 +1426,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "align",
-            IE11 = "align,clear",
-            IE8 = "align,clear,clear()")
+            IE11 = "align,clear")
     @NotYetImplemented(IE)
     public void h1() throws Exception {
         test("h1");
@@ -1517,8 +1439,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "align",
-            IE11 = "align,clear",
-            IE8 = "align,clear,clear()")
+            IE11 = "align,clear")
     @NotYetImplemented(IE)
     public void h2() throws Exception {
         test("h2");
@@ -1531,8 +1452,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "align",
-            IE11 = "align,clear",
-            IE8 = "align,clear,clear()")
+            IE11 = "align,clear")
     @NotYetImplemented(IE)
     public void h3() throws Exception {
         test("h3");
@@ -1545,8 +1465,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "align",
-            IE11 = "align,clear",
-            IE8 = "align,clear,clear()")
+            IE11 = "align,clear")
     @NotYetImplemented(IE)
     public void h4() throws Exception {
         test("h4");
@@ -1559,8 +1478,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "align",
-            IE11 = "align,clear",
-            IE8 = "align,clear,clear()")
+            IE11 = "align,clear")
     @NotYetImplemented(IE)
     public void h5() throws Exception {
         test("h5");
@@ -1573,8 +1491,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "align",
-            IE11 = "align,clear",
-            IE8 = "align,clear,clear()")
+            IE11 = "align,clear")
     @NotYetImplemented(IE)
     public void h6() throws Exception {
         test("h6");
@@ -1615,10 +1532,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "align,border,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),height,"
                 + "hspace,longDesc,marginHeight,marginWidth,name,noResize,sandbox,scrolling,security,src,vspace,"
                 + "width",
-            IE8 = "align,allowTransparency,border,contentDocument,contentWindow,dataFld,dataFormatAs,dataSrc,"
-                + "frameBorder,frameSpacing,height,hspace,longDesc,marginHeight,marginWidth,name,noResize,onload,"
-                + "scrolling,src,vspace,"
-                + "width",
             EDGE = "align,allowFullscreen,border,contentDocument,contentWindow,frameBorder,frameSpacing,"
                 + "getSVGDocument(),height,hspace,longDesc,marginHeight,marginWidth,name,noResize,sandbox,scrolling,"
                 + "src,vspace,"
@@ -1658,10 +1571,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,protocol,src,"
                 + "start,useMap,vrml,vspace,"
                 + "width",
-            IE8 = "align,alt,border,complete,dataFld,dataFormatAs,dataSrc,dynsrc,fileCreatedDate,fileModifiedDate,"
-                + "fileSize,fileUpdatedDate,height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,name,nameProp,"
-                + "onabort,onerror,onload,protocol,src,start,start(),useMap,vrml,vspace,"
-                + "width",
             EDGE = "align,alt,border,complete,crossOrigin,height,hspace,isMap,longDesc,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,naturalHeight,naturalWidth,src,srcset,useMap,"
                 + "vspace,width,x,"
@@ -1682,10 +1591,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,protocol,src,"
                 + "start,useMap,vrml,vspace,"
                 + "width",
-            IE8 = "align,alt,border,complete,dataFld,dataFormatAs,dataSrc,dynsrc,fileCreatedDate,fileModifiedDate,"
-                + "fileSize,fileUpdatedDate,height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,name,nameProp,"
-                + "onabort,onerror,onload,protocol,src,start,start(),useMap,vrml,vspace,"
-                + "width",
             EDGE = "align,alt,border,complete,crossOrigin,height,hspace,isMap,longDesc,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,naturalHeight,naturalWidth,src,srcset,useMap,"
                 + "vspace,width,x,"
@@ -1702,7 +1607,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("cite,dateTime")
-    @NotYetImplemented(IE8)
     public void ins() throws Exception {
         test("ins");
     }
@@ -1713,8 +1617,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE11 = "action,form,prompt",
-            IE8 = "action,form,prompt,prompt()")
+    @Alerts(IE11 = "action,form,prompt")
     @NotYetImplemented(IE)
     public void isindex() throws Exception {
         test("isindex");
@@ -1766,7 +1669,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "control,form,htmlFor",
             IE11 = "form,htmlFor",
-            IE8 = "dataFld,dataFormatAs,dataSrc,form,htmlFor",
             EDGE = "form,htmlFor")
     @NotYetImplemented({ FF, CHROME })
     public void label() throws Exception {
@@ -1789,8 +1691,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,form",
-            IE8 = "align,dataFld,dataFormatAs,dataSrc,form")
+    @Alerts("align,form")
     @NotYetImplemented
     public void legend() throws Exception {
         test("legend");
@@ -1805,7 +1706,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "width",
             FF31 = "",
             IE11 = "cite,clear,width",
-            IE8 = "cite,clear,clear(),width",
             EDGE = "width")
     @NotYetImplemented({ IE, EDGE })
     public void listing() throws Exception {
@@ -1834,7 +1734,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                             + "media,rel,rev,sheet,sizes,target,type",
             FF = "charset,crossOrigin,disabled,href,hreflang,media,rel,relList,rev,sheet,sizes,target,type",
             IE11 = "charset,href,hreflang,media,rel,rev,sheet,target,type",
-            IE8 = "charset,href,hreflang,media,onerror,onload,rel,rev,styleSheet,target,type",
             EDGE = "charset,disabled,href,hreflang,media,rel,rev,sheet,target,type")
     @NotYetImplemented
     public void link() throws Exception {
@@ -1884,8 +1783,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "align",
             IE11 = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,"
                 + "start(),stop(),trueSpeed,vspace,width",
-            IE8 = "behavior,bgColor,dataFld,dataFormatAs,dataSrc,direction,height,hspace,loop,onbounce,onfinish,"
-                + "onstart,scrollAmount,scrollDelay,start(),stop(),trueSpeed,vspace,width",
             EDGE = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,"
                 + "start(),stop(),trueSpeed,vspace,"
                 + "width")
@@ -2052,8 +1949,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "contentDocument,data,declare,form,getSVGDocument(),height,hspace,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,object,readyState,setCustomValidity(),standby,"
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate",
-            IE8 = "align,alt,altHtml,archive,BaseHref,border,code,codeBase,codeType,contentDocument,dataFld,"
-                + "dataFormatAs,dataSrc,declare,form,height,hspace,name,onerror,standby,type,useMap,vspace,width",
             EDGE = "align,alt,altHtml,archive,BaseHref,border,checkValidity(),code,codeBase,codeType,contentDocument,"
                 + "data,declare,form,getSVGDocument(),height,hspace,msPlayToDisabled,msPlayToPreferredSourceUri,"
                 + "msPlayToPrimary,name,object,readyState,setCustomValidity(),standby,type,useMap,validationMessage,"
@@ -2072,7 +1967,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "compact,reversed,start,type",
             IE11 = "compact,start,type",
-            IE8 = "compact,start,start(),type",
             EDGE = "compact,start,type")
     @NotYetImplemented
     public void ol() throws Exception {
@@ -2087,7 +1981,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "disabled,label",
             IE11 = "defaultSelected,form,index,label,selected,text,value",
-            IE8 = "dataFld,dataFormatAs,dataSrc,defaultSelected,form,index,label,selected,text,value",
             EDGE = "defaultSelected,disabled,form,index,label,selected,text,value")
     @NotYetImplemented({ IE, EDGE })
     public void optgroup() throws Exception {
@@ -2101,8 +1994,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "defaultSelected,disabled,form,index,label,selected,text,value",
-            IE11 = "defaultSelected,form,index,label,selected,text,value",
-            IE8 = "dataFld,dataFormatAs,dataSrc,defaultSelected,form,index,label,selected,text,value")
+            IE11 = "defaultSelected,form,index,label,selected,text,value")
     public void option() throws Exception {
         test("option");
     }
@@ -2134,7 +2026,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align",
             IE11 = "align,clear",
-            IE8 = "align,clear,clear()",
             EDGE = "align,clear")
     @NotYetImplemented({ IE, EDGE })
     public void p() throws Exception {
@@ -2159,8 +2050,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE11 = "cite,clear,width",
-            IE8 = "cite,clear,clear(),width")
+    @Alerts(IE11 = "cite,clear,width")
     @NotYetImplemented(IE)
     public void plaintext() throws Exception {
         test("plaintext");
@@ -2173,8 +2063,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "width",
-            IE11 = "cite,clear,width",
-            IE8 = "cite,clear,clear(),width")
+            IE11 = "cite,clear,width")
     @NotYetImplemented(IE)
     public void pre() throws Exception {
         test("pre");
@@ -2189,7 +2078,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "labels,max,position,value",
             FF = "max,position,value",
             IE11 = "form,max,position,value",
-            IE8 = "",
             EDGE = "form,max,position,value")
     @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void progress() throws Exception {
@@ -2263,7 +2151,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "async,charset,crossOrigin,defer,event,htmlFor,src,text,type",
             CHROME = "async,charset,crossOrigin,defer,event,htmlFor,integrity,src,text,type",
             IE11 = "async,charset,defer,event,htmlFor,src,text,type",
-            IE8 = "charset,defer,event,htmlFor,onerror,src,text,type",
             EDGE = "async,charset,defer,event,htmlFor,src,text,type")
     @NotYetImplemented
     public void script() throws Exception {
@@ -2301,9 +2188,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "add(),autofocus,checkValidity(),form,item(),length,multiple,name,namedItem(),options,remove(),"
                 + "required,selectedIndex,setCustomValidity(),size,type,validationMessage,validity,value,"
                 + "willValidate",
-            IE8 = "add(),dataFld,dataFormatAs,dataSrc,form,item(),length,multiple,name,namedItem(),onchange,options,"
-                + "remove(),selectedIndex,size,tags(),type,urns(),"
-                + "value",
             EDGE = "add(),autofocus,checkValidity(),disabled,form,item(),length,multiple,name,namedItem(),options,"
                 + "required,selectedIndex,selectedOptions,setCustomValidity(),size,type,validationMessage,validity,"
                 + "value,"
@@ -2333,7 +2217,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "media,sizes,src,srcset,type",
             FF31 = "media,src,type",
             IE11 = "media,src,type",
-            IE8 = "",
             EDGE = "media,msKeySystem,src,type")
     @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void source() throws Exception {
@@ -2346,7 +2229,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = "dataFld,dataFormatAs,dataSrc")
     public void span() throws Exception {
         test("span");
     }
@@ -2382,7 +2264,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "disabled,media,sheet,type",
             FF = "disabled,media,scoped,sheet,type",
             IE11 = "media,sheet,type",
-            IE8 = "media,onerror,onload,styleSheet,type",
             EDGE = "media,sheet,type")
     @NotYetImplemented({ FF, IE8, CHROME, EDGE })
     public void style() throws Exception {
@@ -2434,12 +2315,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE11 = "align,background,bgColor,border,borderColor,borderColorDark,borderColorLight,caption,cellPadding,"
                 + "cells,cellSpacing,cols,createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
                 + "deleteRow(),deleteTFoot(),deleteTHead(),frame,height,insertRow(),moveRow(),rows,rules,summary,"
-                + "tBodies,tFoot,tHead,"
-                + "width",
-            IE8 = "align,background,bgColor,border,borderColor,borderColorDark,borderColorLight,caption,cellPadding,"
-                + "cells,cellSpacing,cols,createCaption(),createTFoot(),createTHead(),dataFld,dataFormatAs,"
-                + "dataPageSize,dataSrc,deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),firstPage(),frame,"
-                + "height,insertRow(),lastPage(),moveRow(),nextPage(),previousPage(),refresh(),rows,rules,summary,"
                 + "tBodies,tFoot,tHead,"
                 + "width",
             EDGE = "align,bgColor,border,borderColor,caption,cellPadding,cellSpacing,cols,createCaption(),"
@@ -2556,9 +2431,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "readOnly,required,rows,select(),selectionEnd,selectionStart,setCustomValidity(),"
                 + "setSelectionRange(),status,type,validationMessage,validity,value,willValidate,"
                 + "wrap",
-            IE8 = "cols,createTextRange(),dataFld,dataFormatAs,dataSrc,form,name,onchange,onselect,readOnly,rows,"
-                + "select(),status,type,value,"
-                + "wrap",
             EDGE = "autofocus,checkValidity(),cols,defaultValue,disabled,form,maxLength,name,placeholder,readOnly,"
                 + "required,rows,select(),selectionEnd,selectionStart,setCustomValidity(),setSelectionRange(),"
                 + "status,type,validationMessage,validity,value,willValidate,"
@@ -2621,8 +2493,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "text",
-            IE8 = "")
+    @Alerts("text")
     @NotYetImplemented(IE8)
     public void title() throws Exception {
         test("title");
@@ -2634,8 +2505,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track",
-            IE8 = "")
+    @Alerts("default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track")
     @NotYetImplemented({ CHROME, IE11, FF, EDGE })
     public void track() throws Exception {
         test("track");
@@ -2716,7 +2586,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,pause(),paused,play(),playbackRate,played,poster,"
                 + "preload,readyState,seekable,seeking,src,textTracks,videoHeight,videoWidth,volume,"
                 + "width",
-            IE8 = "",
             EDGE = "addTextTrack(),audioTracks,autoplay,buffered,canPlayType(),controls,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,getVideoPlaybackQuality(),"
                 + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),"
@@ -2750,8 +2619,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "width",
             FF = "",
-            IE11 = "cite,clear,width",
-            IE8 = "cite,clear,clear(),width")
+            IE11 = "cite,clear,width")
     @NotYetImplemented({ IE, EDGE })
     public void xmp() throws Exception {
         test("xmp");
@@ -2763,11 +2631,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = "accept,align,alt,border,checked,complete,createTextRange(),dataFld,dataFormatAs,dataSrc,"
-                + "defaultChecked,dynsrc,form,height,hspace,indeterminate,loop,lowsrc,maxLength,name,onabort,"
-                + "onchange,onerror,onload,onselect,readOnly,select(),size,src,start,start(),status,type,useMap,"
-                + "value,vrml,vspace,width",
-            FF31 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
+    @Alerts(FF31 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
                 + "indeterminate,list,max,maxLength,min,mozIsTextField(),multiple,name,pattern,placeholder,readOnly,"
                 + "required,select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),"
