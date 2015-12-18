@@ -29,7 +29,7 @@ import org.apache.http.message.BasicHeaderValueFormatter;
 public class HtmlUnitBrowserCompatCookieHeaderValueFormatter extends BasicHeaderValueFormatter {
 
     /**
-     * Single instance linke in BasicHeaderValueFormatter.
+     * Single instance as in BasicHeaderValueFormatter.
      */
     public static final HtmlUnitBrowserCompatCookieHeaderValueFormatter
                             INSTANCE = new HtmlUnitBrowserCompatCookieHeaderValueFormatter();
@@ -47,6 +47,7 @@ public class HtmlUnitBrowserCompatCookieHeaderValueFormatter extends BasicHeader
      * Looks like browsers are not doing any escaping.
      * {@inheritDoc}
      */
+    @Override
     protected boolean isUnsafe(final char ch) {
         return false;
     }
