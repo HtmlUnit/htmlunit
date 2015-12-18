@@ -232,8 +232,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "defined",
-            IE8 = "undefined")
+    @Alerts("defined")
     public void eventArgDefined() throws Exception {
         final String content
             = "<html><head></head>\n"
@@ -251,8 +250,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "pass",
-            IE8 = "no event param")
+    @Alerts("pass")
     public void eventTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head>\n"
@@ -274,8 +272,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLInputElement]", "true" },
-            FF = { "undefined", "false" },
-            IE8 = { "[object]", "true" })
+            FF = { "undefined", "false" })
     public void eventSrcElementSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -297,8 +294,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "pass",
-            IE8 = "no event param")
+    @Alerts("pass")
     public void eventCurrentTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head>\n"
@@ -346,8 +342,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE8 = "true")
+    @Alerts("")
     public void testAddEventListener_HandlerNull() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -508,8 +503,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "load", "false", "false" },
-            FF31 = { "[object Event]", "load", "false", "true" },
-            IE8 = { "[object]", "load", "undefined", "undefined" })
+            FF31 = { "[object Event]", "load", "false", "true" })
     public void onload() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"

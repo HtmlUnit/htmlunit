@@ -48,8 +48,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "exception")
+    @Alerts("true")
     public void equality_getSelection() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -64,8 +63,7 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "0", "0", "cdefg" },
-            CHROME = { "0", "1", "1", "cdefg" },
-            IE8 = { })
+            CHROME = { "0", "1", "1", "cdefg" })
     @NotYetImplemented(CHROME)
     public void inputSelectionsAreIndependent() throws Exception {
         final String html = "<html><body onload='test()'>\n"
@@ -97,8 +95,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "2:s2/0/s2/1/false/undefined/1/xyz/xyz" },
             CHROME = {
                         "1:null/0/null/0/true/None/0/",
-                        "2:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz" },
-            IE8 = { })
+                        "2:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz" })
     @NotYetImplemented(CHROME)
     public void selectAllChildren() throws Exception {
         final String jsSnippet = ""
@@ -152,8 +149,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "2:s2/0/s2/0/true/undefined/1//" },
             CHROME = {
                         "1:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz",
-                        "2:[object Text]/3/[object Text]/3/true/Caret/1//" },
-            IE8 = { })
+                        "2:[object Text]/3/[object Text]/3/true/Caret/1//" })
     @NotYetImplemented(CHROME)
     public void collapseToStart() throws Exception {
         final String jsSnippet = ""
@@ -174,8 +170,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "2:s2/1/s2/1/true/undefined/1//" },
             CHROME = {
                         "1:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz",
-                        "2:[object Text]/3/[object Text]/3/true/Caret/1//" },
-            IE8 = { })
+                        "2:[object Text]/3/[object Text]/3/true/Caret/1//" })
     @NotYetImplemented(CHROME)
     public void collapseToEnd() throws Exception {
         final String jsSnippet = ""
@@ -200,8 +195,7 @@ public class SelectionTest extends WebDriverTestCase {
                     "1:null/0/null/0/true/None/0/",
                     "2:null/0/null/0/true/None/0/",
                     "3:[object Text]/0/[object Text]/3/false/Range/1/foo/foo",
-                    "4:null/0/null/0/true/None/0/" },
-            IE8 = { })
+                    "4:null/0/null/0/true/None/0/" })
     @NotYetImplemented(CHROME)
     public void range() throws Exception {
         final String jsSnippet = ""
@@ -230,8 +224,7 @@ public class SelectionTest extends WebDriverTestCase {
                     "false", "true" },
             CHROME = {
                     "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo/yzfo",
-                    "exception" },
-            IE8 = { })
+                    "exception" })
     @NotYetImplemented(CHROME)
     public void aLittleBitOfEverything_removeRange() throws Exception {
         final String jsSnippet = ""
@@ -291,8 +284,7 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "null-0", "", "null-0", "", "null-0", "", "null-0" },
-            FF = { "", "null-0", "", "null-0", "null", "null" },
-            IE8 = { })
+            FF = { "", "null-0", "", "null-0", "null", "null" })
     public void getSelection_display() throws Exception {
         final String html = "<html>\n"
             + "<body onload='test()'>\n"

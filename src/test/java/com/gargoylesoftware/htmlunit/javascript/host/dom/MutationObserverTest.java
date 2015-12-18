@@ -33,8 +33,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "old, new",
-            IE8 = "")
+    @Alerts("old, new")
     public void characterData() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -67,8 +66,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null, new",
-            IE8 = "")
+    @Alerts("null, new")
     public void characterDataNoOldValue() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -131,8 +129,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "attributes, ltr",
-            IE8 = "")
+    @Alerts("attributes, ltr")
     public void attributes() throws Exception {
         final String html
             = "<html><head><script>\n"

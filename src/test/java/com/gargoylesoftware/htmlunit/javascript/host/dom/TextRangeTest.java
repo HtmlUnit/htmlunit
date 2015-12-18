@@ -127,8 +127,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "")
+    @Alerts("exception")
     public void select() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -259,8 +258,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "false")
+    @Alerts("exception")
     public void inRange2() throws Exception {
         final String html = "<html><body>"
             + "<form name='f'><input name='q' value=''></form>"
@@ -279,8 +277,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "s3 foo <SPAN id=s3>foo</SPAN>")
+    @Alerts("exception")
     public void moveToElementText() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
@@ -327,8 +324,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "BODY")
+    @Alerts("exception")
     public void createRangeParentElement() throws Exception {
         final String html =
             "<html><body>\n"
@@ -347,8 +343,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "")
+    @Alerts("exception")
     public void createRangeHtmlText() throws Exception {
         final String html =
             "<html><body>\n"
@@ -387,8 +382,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE8 = "0")
+    @Alerts("")
     public void compareEndPoints() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -45,8 +45,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "DOM3: [object KeyboardEvent]", "vendor: exception" },
-            FF = { "DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]" },
-            IE8 = { "DOM3: exception", "vendor: exception" })
+            FF = { "DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]" })
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

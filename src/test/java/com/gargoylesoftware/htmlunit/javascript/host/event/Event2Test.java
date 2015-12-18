@@ -97,8 +97,7 @@ public class Event2Test extends WebDriverTestCase {
             FF = { "[object MouseEvent] click b:true c:true [radio] [1]",
                 "[object Event] change b:true c:false [radio] [-]" },
             IE = { "[object Event] change b:true c:false [radio] [-]",
-                "[object PointerEvent] click b:true c:true [radio] [1]" },
-            IE8 = { "[object] click b:undefined c:undefined [radio] [-]" })
+                "[object PointerEvent] click b:true c:true [radio] [1]" })
     public void radioClick() throws Exception {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
@@ -116,8 +115,7 @@ public class Event2Test extends WebDriverTestCase {
             FF = { "[object MouseEvent] click b:true c:true [checkbox] [1]",
                 "[object Event] change b:true c:false [checkbox] [-]" },
             IE = { "[object Event] change b:true c:false [checkbox] [-]",
-                "[object PointerEvent] click b:true c:true [checkbox] [1]" },
-            IE8 = { "[object] click b:undefined c:undefined [checkbox] [-]" })
+                "[object PointerEvent] click b:true c:true [checkbox] [1]" })
     public void checkboxClick() throws Exception {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";
@@ -486,8 +484,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false", "SPAN" },
-            FF = { "false", "true", "SPAN" },
-            IE8 = { "true", "false", "SPAN" })
+            FF = { "false", "true", "SPAN" })
     public void eventTransmission() throws Exception {
         final String html =
             "<html>\n"
@@ -603,8 +600,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true" },
-            CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false" },
-            IE8 = { "div", "div" })
+            CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false" })
     @NotYetImplemented(CHROME)
     public void stopPropagation() throws Exception {
         stopPropagation("stopPropagation()");
@@ -619,8 +615,7 @@ public class Event2Test extends WebDriverTestCase {
             CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true",
                         "div capturing, true, true", "span capturing, true, true" },
             IE11 = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false",
-                        "div capturing, false, false", "span capturing, false, true" },
-            IE8 = { "div", "div" })
+                        "div capturing, false, false", "span capturing, false, true" })
     @NotYetImplemented({ CHROME, IE11 })
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");

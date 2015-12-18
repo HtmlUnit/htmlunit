@@ -214,8 +214,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HashChangeEvent]", "hashchange", "true", "false", "§§URL§§", "§§URL§§#1" },
             CHROME = { "[object HashChangeEvent]", "hashchange", "false", "false", "§§URL§§", "§§URL§§#1" },
-            IE = { "[object Event]", "hashchange", "false", "false", "undefined", "undefined" },
-            IE8 = { "no event" })
+            IE = { "[object Event]", "hashchange", "false", "false", "undefined", "undefined" })
     public void onHashChange() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

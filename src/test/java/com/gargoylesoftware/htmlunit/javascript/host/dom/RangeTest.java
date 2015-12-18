@@ -185,8 +185,7 @@ public class RangeTest extends WebDriverTestCase {
             "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
             "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
             "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
-            "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>" },
-            IE8 = { })
+            "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>" })
     public void extractContents2() throws Exception {
         final String html =
               "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div><script>\n"

@@ -81,8 +81,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "true", "undefined", "undefined", "HIERARCHY_REQUEST_ERR: 3", "1" },
-            FF = { "3", "true", "6", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1" },
-            IE8 = { "1" })
+            FF = { "3", "true", "6", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1" })
     /*
      * Messages:
      * CHROME: "A Node was inserted somewhere it doesn't belong."

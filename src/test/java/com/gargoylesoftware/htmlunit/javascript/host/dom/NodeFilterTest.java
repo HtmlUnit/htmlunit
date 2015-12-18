@@ -58,8 +58,7 @@ public class NodeFilterTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "4294967295",
-            IE8 = "exception")
+    @Alerts("4294967295")
     public void constants_SHOW_ALL() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

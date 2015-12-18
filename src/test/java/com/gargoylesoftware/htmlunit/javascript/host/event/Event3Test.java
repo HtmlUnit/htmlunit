@@ -197,8 +197,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE8 = "true") // here not alerts! ;-)
+    @Alerts("false") // here not alerts! ;-)
     @NotYetImplemented(IE11)
     public void eventBubblingReturns_2() throws Exception {
         final boolean changesPage = Boolean.parseBoolean(getExpectedAlerts()[0]);

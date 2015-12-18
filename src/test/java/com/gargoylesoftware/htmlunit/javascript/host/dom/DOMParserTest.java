@@ -41,8 +41,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMParser]",
-            IE8 = "exception")
+    @Alerts("[object DOMParser]")
     public void scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -61,8 +60,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDocument]",
-            IE8 = "exception")
+    @Alerts("[object HTMLDocument]")
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void parseFromString_text_html() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -85,8 +83,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "exception")
+    @Alerts("[object XMLDocument]")
     public void parseFromString_text_xml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -108,8 +105,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "exception")
+    @Alerts("[object XMLDocument]")
     public void parseFromString_application_xml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -131,8 +127,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "exception")
+    @Alerts("[object XMLDocument]")
     public void parseFromString_application_xhtmlXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -202,8 +197,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "9",
-            IE8 = "exception")
+    @Alerts("9")
     public void parseFromString() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

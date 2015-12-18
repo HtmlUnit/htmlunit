@@ -47,8 +47,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE8 = "exception")
+    @Alerts("done")
     public void test() throws Exception {
         final String html =
             "<html><head><script>\n"

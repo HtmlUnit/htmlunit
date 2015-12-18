@@ -312,8 +312,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "false" },
-            FF = { "isSameNode not supported" },
-            IE8 = { "isSameNode not supported" })
+            FF = { "isSameNode not supported" })
     public void isSameNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -445,8 +444,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>" },
-            IE8 = { "exception thrown" })
+            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>" })
     public void replaceChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -475,8 +473,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div id=\"myDiv3\"></div>" },
-            IE8 = { "exception thrown" })
+            "<div id=\"myDiv3\"></div>" })
     public void replaceChild_EmptyDocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -653,8 +650,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<root><![CDATA[abc]]><![CDATA[def]]></root>",
-            IE8 = "<root><![CDATA[abc]]><![CDATA[def]]></root>\r\n")
+    @Alerts("<root><![CDATA[abc]]><![CDATA[def]]></root>")
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -865,8 +861,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableColElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLTableColElement]")
     public void insertBefore_inTable() throws Exception {
         final String html
             = "<html><head>\n"

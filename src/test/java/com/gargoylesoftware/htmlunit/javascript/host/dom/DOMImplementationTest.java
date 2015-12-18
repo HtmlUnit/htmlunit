@@ -49,8 +49,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: true" },
-            IE11 = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: false" },
-            IE8 = { "HTML 1.0: true", "HTML 2.0: false", "HTML 3.0: false" })
+            IE11 = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: false" })
     public void hasFeature_HTML() throws Exception {
         hasFeature("HTML", "['1.0', '2.0', '3.0']");
     }
@@ -60,8 +59,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: true" },
-            IE11 = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: false" },
-            IE8 = { "XML 1.0: false", "XML 2.0: false", "XML 3.0: false" })
+            IE11 = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: false" })
     public void hasFeature_XML() throws Exception {
         hasFeature("XML", "['1.0', '2.0', '3.0']");
     }
@@ -82,8 +80,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Views 1.0: true", "Views 2.0: true", "Views 3.0: true" },
-            IE11 = { "Views 1.0: false", "Views 2.0: true", "Views 3.0: false" },
-            IE8 = { "Views 1.0: false", "Views 2.0: false", "Views 3.0: false" })
+            IE11 = { "Views 1.0: false", "Views 2.0: true", "Views 3.0: false" })
     public void hasFeature_Views() throws Exception {
         hasFeature("Views", "['1.0', '2.0', '3.0']");
     }
@@ -113,8 +110,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "CSS2 1.0: true", "CSS2 2.0: true", "CSS2 3.0: true" },
-            IE11 = { "CSS2 1.0: false", "CSS2 2.0: true", "CSS2 3.0: false" },
-            IE8 = { "CSS2 1.0: false", "CSS2 2.0: false", "CSS2 3.0: false" })
+            IE11 = { "CSS2 1.0: false", "CSS2 2.0: true", "CSS2 3.0: false" })
     public void hasFeature_CSS2() throws Exception {
         hasFeature("CSS2", "['1.0', '2.0', '3.0']");
     }
@@ -220,8 +216,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Range 1.0: true", "Range 2.0: true", "Range 3.0: true" },
-            IE11 = { "Range 1.0: false", "Range 2.0: true", "Range 3.0: false" },
-            IE8 = { "Range 1.0: false", "Range 2.0: false", "Range 3.0: false" })
+            IE11 = { "Range 1.0: false", "Range 2.0: true", "Range 3.0: false" })
     public void hasFeature_Range() throws Exception {
         hasFeature("Range", "['1.0', '2.0', '3.0']");
     }
@@ -231,8 +226,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Traversal 1.0: true", "Traversal 2.0: true", "Traversal 3.0: true" },
-            IE11 = { "Traversal 1.0: false", "Traversal 2.0: true", "Traversal 3.0: false" },
-            IE8 = { "Traversal 1.0: false", "Traversal 2.0: false", "Traversal 3.0: false" })
+            IE11 = { "Traversal 1.0: false", "Traversal 2.0: true", "Traversal 3.0: false" })
     public void hasFeature_Traversal() throws Exception {
         hasFeature("Traversal", "['1.0', '2.0', '3.0']");
     }

@@ -33,8 +33,7 @@ public class EventTargetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "not defined",
-            IE8 = "called!")
+    @Alerts("not defined")
     public void cloneEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

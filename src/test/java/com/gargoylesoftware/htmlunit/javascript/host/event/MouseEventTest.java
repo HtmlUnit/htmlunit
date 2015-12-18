@@ -165,8 +165,7 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = "1")
+    @Alerts("0")
     public void button_onmousedown() throws Exception {
         final String html = "<html><body>\n"
             + "<p id='clicker'>Click me!</p>\n"

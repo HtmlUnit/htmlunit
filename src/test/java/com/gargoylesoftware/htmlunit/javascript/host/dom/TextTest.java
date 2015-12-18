@@ -35,8 +35,7 @@ public class TextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Text]",
-            IE8 = "null")
+    @Alerts("[object Text]")
     public void simpleScriptable() throws Exception {
         final String html
             = "<html>\n"
@@ -57,8 +56,7 @@ public class TextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "abcd",
-            IE8 = "undefined")
+    @Alerts("abcd")
     public void wholeText() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
