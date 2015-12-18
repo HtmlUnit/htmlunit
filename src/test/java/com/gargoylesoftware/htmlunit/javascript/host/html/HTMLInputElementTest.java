@@ -88,11 +88,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE11 = "button, button, checkbox, file, hidden, select-one, select-multiple, "
                 + "password, radio, reset, reset, "
                 + "submit, submit, text, textarea, text, text, text, text, text, text, text, number, range, "
-                + "search, email, tel, url",
-            IE8 = "button, button, checkbox, file, hidden, select-one, select-multiple, "
-                + "radio,  password, reset, reset, "
-                + "submit, submit, text, textarea, text, text, text, text, text, text, text, text, text, "
-                + "text, text, text, text"
+                + "search, email, tel, url"
             )
     @NotYetImplemented
     public void type() throws Exception {
@@ -105,10 +101,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "null, undefined, null, [object FileList], null, undefined, undefined, null, null, null,"
                 + " undefined, null, undefined, null, undefined, null, null, null, null, null, null, null,"
                 + " null, null, null, null, null, null",
-            IE8 = "undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
-                + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
-                + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
-                + " undefined, undefined, undefined, undefined",
             IE11 = "undefined, undefined, undefined, [object FileList], undefined, undefined, undefined, undefined,"
                 + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
                 + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
@@ -140,10 +132,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE11 = { "false", "undefined", "true", "false", "false", "undefined", "undefined",
                 "false", "true", "false", "undefined", "false", "undefined", "false",
                 "undefined", "false", "false", "false", "false", "false", "false",
-                "false", "false", "false", "false", "false", "false", "false" },
-            IE8 = { "false", "", "true", "false", "false", "", "",
-                "false", "true", "false", "", "false", "", "false",
-                "", "false", "false", "false", "false", "false", "false",
                 "false", "false", "false", "false", "false", "false", "false" })
     @Test
     @NotYetImplemented(IE)
@@ -154,13 +142,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = { "true", "undefined", "true", "true", "true", "undefined", "undefined",
+    @Alerts({ "true", "undefined", "true", "true", "true", "undefined", "undefined",
                 "true", "true", "true", "undefined", "true", "undefined", "true",
                 "undefined", "true", "true", "true", "true", "true", "true",
-                "true", "true", "true", "true", "true", "true", "true" },
-            IE8 = { "true", "true", "true", "true", "true", "true", "true",
-                "true", "true", "true", "true", "true", "true", "true",
-                "true", "true", "true", "true", "true", "true", "true",
                 "true", "true", "true", "true", "true", "true", "true" })
     @Test
     public void setCheckedTrue() throws Exception {
@@ -170,13 +154,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = { "true", "undefined", "true", "true", "true", "undefined", "undefined",
+    @Alerts({ "true", "undefined", "true", "true", "true", "undefined", "undefined",
                 "true", "true", "true", "undefined", "true", "undefined", "true",
                 "undefined", "true", "true", "true", "true", "true", "true",
-                "true", "true", "true", "true", "true", "true", "true" },
-            IE8 = { "true", "", "true", "true", "true", "", "",
-                "true", "true", "true", "", "true", "", "true",
-                "", "true", "true", "true", "true", "true", "true",
                 "true", "true", "true", "true", "true", "true", "true" })
     @Test
     public void setCheckedBlank() throws Exception {
@@ -194,10 +174,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                         "", "", "", "", "", "50", "abc", "abc", "abc", "abc" },
             IE11 = { "abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                         "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
-                        "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc" },
-            IE8 = { "abc", "", "abc", "", "abc", "", "", "abc", "abc", "abc", "", "abc",
-                        "", "abc", "foo", "abc", "abc", "abc", "abc", "abc", "abc", "abc",
-                        "abc", "abc", "abc", "abc", "abc", "abc" })
+                        "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc" })
     @Test
     @NotYetImplemented
     public void setValueAttribute() throws Exception {
@@ -988,8 +965,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"text TeXt", "password PassWord", "hidden Hidden",
                     "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
-            IE8 = {"text text", "password password", "hidden hidden",
-                    "checkbox checkbox", "radio radio", "file file", "error" },
             IE11 = {"text TeXt", "password PassWord", "hidden Hidden",
                     "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
     @NotYetImplemented({ FF, IE, CHROME })

@@ -484,8 +484,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = { "1" })
+    @Alerts(DEFAULT = "0")
     public void offsetHeight() throws Exception {
         final String html =
             "<html><body>\n"

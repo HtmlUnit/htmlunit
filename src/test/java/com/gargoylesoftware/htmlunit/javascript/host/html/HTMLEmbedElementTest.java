@@ -77,8 +77,6 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                     "absbottom", "absmiddle", "bottom", "texttop" },
             CHROME = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop" },
-            IE8 = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
-                    "absbottom", "absmiddle", "baseline", "texttop" },
             IE11 = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop" })
     @NotYetImplemented(FF)

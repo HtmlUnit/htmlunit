@@ -953,8 +953,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "JavaScript", "JScript", "exception1", "exception2: Invalid class string" })
+    @Alerts(DEFAULT = "exception")
     public void execScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"

@@ -282,8 +282,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "in foo2", "in foo1" })
+    @Alerts(DEFAULT = "exception")
     public void attachEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<title>First</title>\n"
@@ -502,8 +501,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "in click",
-            IE8 = { "in click", "in click", "in click" })
+    @Alerts(DEFAULT = "in click")
     public void cloneNode_copiesListenerOnlyForIE() throws Exception {
         final String html =
               "<html>\n"
@@ -698,7 +696,6 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE8 = "exception")
     public void insertBefore_undefinedRef() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
@@ -1022,8 +1019,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "[object]", "[object]" })
+    @Alerts(DEFAULT = "exception")
     public void event() throws Exception {
         final String firstHtml = "<html>\n"
             + "<head><title>First Page</title>\n"
@@ -1132,8 +1128,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = { "[object HTMLDocument]", "about:blank", "11" })
+    @Alerts(DEFAULT = "null")
     public void cloneParent() throws Exception {
         final String html =
               "<!DOCTYPE><html>\n"

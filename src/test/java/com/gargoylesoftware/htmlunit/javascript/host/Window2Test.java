@@ -1411,8 +1411,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "posted",
-            IE8 = { "received", "posted" })
+    @Alerts(DEFAULT = "posted")
     public void postMessage_otherPort() throws Exception {
         postMessage("http://localhost:" + (PORT + 1) + "/");
     }

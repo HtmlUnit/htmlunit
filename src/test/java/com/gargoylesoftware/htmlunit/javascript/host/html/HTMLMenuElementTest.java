@@ -63,10 +63,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true", "true", "true", "null", "", "blah", "2",
-                   "true", "false", "true", "false", "", "null", "", "null" },
-            IE8 = { "false", "true", "true", "true", "false", "true", "true", "true",
-                   "true", "false", "true", "false", "true", "false", "true", "false" })
+    @Alerts({ "false", "true", "true", "true", "null", "", "blah", "2",
+                   "true", "false", "true", "false", "", "null", "", "null" })
     public void compact() throws Exception {
         final String html =
                 "<html>\n"
@@ -116,8 +114,6 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
             CHROME = { "undefined", "undefined", "undefined", "undefined", "undefined",
                     "null", "", "blah", "context", "ToolBar", "list",
                     "context", "toolbar", "ConText", "", "unknown" },
-            IE8 = { "", "", "", "", "", "", "", "blah",
-                    "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", "" },
             IE11 = { "", "", "", "", "", "null", "", "blah",
                     "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", "" })
     public void type() throws Exception {

@@ -330,7 +330,6 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLFrameElement]",
-            IE8 = "[object]",
             IE11 = "[object Window]")
     public void frames_bodyOnLoad() throws Exception {
         final String mainHtml =

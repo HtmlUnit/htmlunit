@@ -806,8 +806,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "onload",
-            IE8 = { "defer", "onload" })
+    @Alerts(DEFAULT = "onload")
     public void onload_after_deferReadStateComplete() throws Exception {
         final String html =
               "<html>\n"

@@ -369,7 +369,6 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "exception")
     public void write_fromScriptAddedWithAppendChild_inline() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<div id='it'><script>\n"

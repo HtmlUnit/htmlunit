@@ -340,8 +340,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<tr><td>world</td></tr>",
-            IE8 = { "exception", "<tr>\r\n<td>hello</td></tr>" })
+    @Alerts(DEFAULT = "<tr><td>world</td></tr>")
     public void TBODY_innerHTML() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

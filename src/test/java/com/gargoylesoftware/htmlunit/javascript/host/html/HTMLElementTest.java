@@ -56,10 +56,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "all is not supported", "all is not supported",
-            "all is not supported", "all is not supported", "all is not supported" },
-            IE8 = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
-            "all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: " })
+    @Alerts({ "all is not supported", "all is not supported",
+            "all is not supported", "all is not supported", "all is not supported" })
     public void all_IndexByInt() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -303,21 +301,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             "specified=true",
             "value=bleh"
             },
-            IE8 = {
-            "null",
-            "expando=true",
-            "firstChild=null",
-            "lastChild=null",
-            "name=custom_attribute",
-            "nextSibling=null",
-            "nodeName=custom_attribute",
-            "nodeType=2",
-            "nodeValue=bleh",
-            "(ownerDocument==document)=true",
-            "parentNode=null",
-            "previousSibling=null",
-            "specified=true",
-            "value=bleh" },
             IE11 = {
             "null",
             "expando=true",
@@ -864,12 +847,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {
-            "Old = <b>Old innerHTML</b>",
-            "New = New  cell value &amp; \u0110 \u0110" },
-            IE8 = {
-            "Old = <B>Old innerHTML</B>",
-            "New = New cell value &amp; \u0110 \u0110" })
+    @Alerts({ "Old = <b>Old innerHTML</b>",
+            "New = New  cell value &amp; \u0110 \u0110" })
     public void getSetInnerHTMLChar_FF() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2115,9 +2094,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "null", "body", "exception", "body", "body", "body",
             "f1", "body", "h1", "i1", "td", "exception", "td", "body", "body" },
             FF = { "null", "body", "body", "body", "body", "body",
-            "f1", "body", "h1", "i1", "td", "body", "td", "body", "body" },
-            IE8 = { "null", "body", "body", "body", "body", "body",
-            "body", "body", "h1", "i1", "td", "td", "td", "body", "body" })
+            "f1", "body", "h1", "i1", "td", "body", "td", "body", "body" })
     @NotYetImplemented(CHROME)
     public void offsetParent_WithCSS() throws Exception {
         final String html = "<html>\n"
@@ -2867,10 +2844,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-undefined-x", "null-x-null", "null-[object Attr]-null", "null-[object Attr]-null",
-            "x-byClassname", "[object Attr]-[object Attr]", "byClassname-byClassname", "[object Attr]-[object Attr]" },
-            IE8 = { "-undefined-x", "-null-x", "[object]-[object]-null", "[object]-[object]-null", "null-byClassname",
-            "[object]-null", "byClassname-byClassname", "[object]-null" })
+    @Alerts({ "-undefined-x", "null-x-null", "null-[object Attr]-null", "null-[object Attr]-null",
+            "x-byClassname", "[object Attr]-[object Attr]", "byClassname-byClassname", "[object Attr]-[object Attr]" })
     public void class_className_attribute2() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3190,9 +3165,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "mergeAttributes not available",
             IE11 = { "false,false,false,false,false,true,true", "i", "",
-                        "false,false,false,false,false,true,true", "i", "" },
-            IE8 = { "false,false,false,false,false,true,true", "i", "",
-                    "false,false,false,false,false,false,false", "i", "" })
+                        "false,false,false,false,false,true,true", "i", "" })
     public void mergeAttributes() throws Exception {
         mergeAttributesTest("i2");
     }
@@ -3203,9 +3176,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "mergeAttributes not available",
             IE11 = { "false,false,false,false,false,true,true", "i", "",
-                        "false,false,false,false,false,true,true", "i", "" },
-            IE8 = { "false,false,false,false,false,true,true", "i", "",
-                        "false,false,false,false,false,false,false", "i", "" })
+                        "false,false,false,false,false,true,true", "i", "" })
     public void mergeAttributesTrue() throws Exception {
         mergeAttributesTest("i2, true");
     }
@@ -3216,9 +3187,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "mergeAttributes not available",
             IE11 = { "false,false,false,false,false,true,true", "i", "",
-                        "false,false,false,false,false,true,true", "i2", "i2" },
-            IE8 = { "false,false,false,false,false,true,true", "i", "",
-                        "false,false,false,false,false,false,false", "i2", "i2" })
+                        "false,false,false,false,false,true,true", "i2", "i2" })
     public void mergeAttributesfalse() throws Exception {
         mergeAttributesTest("i2, false");
     }
@@ -4009,8 +3978,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "outside", "1", "middle", "2", "3", "4",
                 "before-begin after-begin inside before-end after-end" },
-            IE8 = { "outside", "1", "middle", "2", "3", "4",
-                "before-begin after-begininside before-end after-end" },
             FF = "insertAdjacentElement not available")
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeend", "afterend", "beforebegin", "afterbegin");
@@ -4155,9 +4122,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "outside", "middle",
                 "before-begin after-begin inside before-end after-end" },
-            FF = "insertAdjacentText not available",
-            IE8 = { "outside", "middle",
-                "before-begin after-begininside before-end after-end" })
+            FF = "insertAdjacentText not available")
     public void insertAdjacentText() throws Exception {
         insertAdjacentText("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentText("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");

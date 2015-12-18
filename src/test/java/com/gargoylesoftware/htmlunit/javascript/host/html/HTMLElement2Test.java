@@ -122,8 +122,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "attachEvent not available",
-            IE8 = { "30", "30", "30" })
+    @Alerts(DEFAULT = "attachEvent not available")
     public void offsetWidth_withEvent() throws Exception {
         final String html =
               "<html>\n"
@@ -301,14 +300,10 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 10", "4 fixed_auto 10",
+    @Alerts({ "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 10", "4 fixed_auto 10",
                 "5 fixed_length 50", "6 fixed_inherit 10", "7 relative_auto 0", "8 relative_length 50",
                 "9 relative_inherit 10", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
-                "13 inherit_auto 0", "14 inherit_length 50", "15 inherit_inherit 10" },
-            IE8 = { "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 0", "4 fixed_auto 0",
-                "5 fixed_length 0", "6 fixed_inherit 0", "7 relative_auto 0", "8 relative_length 50",
-                "9 relative_inherit 0", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
-                "13 inherit_auto 0", "14 inherit_length 0", "15 inherit_inherit 0" })
+                "13 inherit_auto 0", "14 inherit_length 50", "15 inherit_inherit 10" })
     public void offsetLeft_PositionLeft_DifferentCombinations() throws Exception {
         final String html = "<html><body onload='test()'><script language='javascript'>\n"
             + "String.prototype.trim = function() {\n"
@@ -1049,10 +1044,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {
                 "Old = <b>Old innerHTML</b><!-- old comment -->",
                 "New =  <b><i id=\"newElt\">New cell value</i></b>",
-                "I" },
-            IE8 = {
-                "Old = <B>Old innerHTML</B><!-- old comment -->",
-                "New = <B><I id=newElt>New cell value</I></B>",
                 "I" })
     public void getSetInnerHTMLComplex() throws Exception {
         final String html = "<html>\n"
@@ -1088,11 +1079,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Old = <b id=\"innerNode\">Old outerHTML</b>",
+    @Alerts({ "Old = <b id=\"innerNode\">Old outerHTML</b>",
                 "New =  <b><i id=\"newElt\">New cell value</i></b>",
-                "I" },
-            IE8 = { "Old = <B id=innerNode>Old outerHTML</B>",
-                "New = <B><I id=newElt>New cell value</I></B>",
                 "I" })
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
@@ -1128,7 +1116,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true" }, IE8 = { })
+    @Alerts({ "false", "true" })
     public void dispatchEvent2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

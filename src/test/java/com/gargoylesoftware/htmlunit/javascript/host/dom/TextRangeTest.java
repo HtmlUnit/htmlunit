@@ -36,8 +36,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "", "bla bla", "bla blabli bli" })
+    @Alerts(DEFAULT = "exception")
     public void text() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -94,8 +93,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "hello", "" })
+    @Alerts(DEFAULT = "exception")
     public void collapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -153,8 +151,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "hello", "hell", "ell" })
+    @Alerts(DEFAULT = "exception")
     public void moveEnd() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -187,8 +184,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "hello", "hell", "ell", "1", "-1", "hello" })
+    @Alerts(DEFAULT = "exception")
     public void moveOutOfBounds_input() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

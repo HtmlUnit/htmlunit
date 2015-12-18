@@ -57,9 +57,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "addBehavior not available", "http://localhost:12345/" },
-            IE8 = { "isHomePage = false", "isHomePage = true", "isHomePage = true",
-                    "isHomePage = false", "http://localhost:12345/second/" })
+    @Alerts({ "addBehavior not available", "http://localhost:12345/" })
     public void addBehaviorDefaultHomePage() throws Exception {
         final String html1 =
             "<html>\n"
