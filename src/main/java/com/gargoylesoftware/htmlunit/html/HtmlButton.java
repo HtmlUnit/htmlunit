@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_UNKNOWN_TYPE_DOES_NOT_SUBMIT;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
@@ -63,11 +60,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
         originalName_ = getNameAttribute();
-        if ((attributes == null || !attributes.containsKey("type"))
-                && hasFeature(BUTTON_EMPTY_TYPE_BUTTON)
-                && page instanceof HtmlPage && !((HtmlPage) page).isQuirksMode()) {
-            setAttribute("type", "submit");
-        }
     }
 
     /**
@@ -99,9 +91,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
             if ("reset".equals(type)) {
                 form.reset();
-                return false;
-            }
-            if (hasFeature(BUTTON_UNKNOWN_TYPE_DOES_NOT_SUBMIT)) {
                 return false;
             }
 
@@ -230,12 +219,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
         String type = super.getAttribute(attributeName);
 
         if (type == DomElement.ATTRIBUTE_NOT_DEFINED && "type".equalsIgnoreCase(attributeName)) {
-            if (hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
-                type = "button";
-            }
-            else {
-                type = "submit";
-            }
+            type = "submit";
         }
         return type;
     }

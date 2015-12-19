@@ -24,8 +24,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POPSTATEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_NORMALIZED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
@@ -34,7 +32,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_METHOD_AS_VARIABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
@@ -343,52 +340,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return super.getDomNodeOrDie();
         }
         catch (final IllegalStateException e) {
-            final DomNode node = getDomNodeOrNullFromRealDocument();
-            if (node != null) {
-                return node;
-            }
             throw Context.reportRuntimeError("No node attached to this object");
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode getDomNodeOrNull() {
-        DomNode node = super.getDomNodeOrNull();
-        if (node == null) {
-            node = getDomNodeOrNullFromRealDocument();
-        }
-        return node;
-    }
-
-    /**
-     * Document functions invoked on the window end up executing on the document prototype -- and
-     * this is supposed to work when we're emulating IE! So when {@link #getDomNodeOrDie()} or
-     * {@link #getDomNodeOrNull()} are invoked on the document prototype (which would usually fail),
-     * we need to actually return the real document's DOM node so that other functions which rely
-     * on these two functions work. See {@link HTMLDocumentTest#documentMethodsWithoutDocument()}
-     * for sample JavaScript code.
-     *
-     * @return the real document's DOM node, or {@code null} if we're not emulating IE
-     */
-    private DomNode getDomNodeOrNullFromRealDocument() {
-        DomNode node = null;
-        // don't use getWindow().getBrowserVersion() here because this is called
-        // from getBrowserVersion() and results in endless loop
-        if (getWindow().getWebWindow().getWebClient().getBrowserVersion()
-                .hasFeature(HTMLDOCUMENT_METHOD_AS_VARIABLE)) {
-            final Scriptable scope = getParentScope();
-            if (scope instanceof Window) {
-                final Window w = (Window) scope;
-                final Document realDocument = w.getDocument();
-                if (realDocument != this) {
-                    node = realDocument.getDomNodeOrDie();
-                }
-            }
-        }
-        return node;
     }
 
     /**
@@ -1075,7 +1028,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     return true;
                 }
             };
-            all_.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
+            all_.setAvoidObjectDetection(true);
         }
         return all_;
     }
@@ -2019,9 +1972,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
         if (!hasCommand(cmd)) {
-            if (getBrowserVersion().hasFeature(EXECCOMMAND_THROWS_ON_WRONG_COMMAND)) {
-                throw Context.reportRuntimeError("document.execCommand(): invalid command '" + cmd + "'");
-            }
             return false;
         }
         LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");

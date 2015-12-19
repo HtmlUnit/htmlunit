@@ -14,10 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -27,9 +25,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
-import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -44,11 +46,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * The parent class of {@link NodeList} and {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection}.
@@ -276,10 +273,7 @@ public class AbstractList extends SimpleScriptable implements Function {
             return response;
         }
         for (final DomNode node : getCandidates()) {
-            final boolean commentIncluded = getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT)
-                    && node instanceof DomComment;
-
-            if ((node instanceof DomElement || commentIncluded) && isMatching(node)) {
+            if ((node instanceof DomElement) && isMatching(node)) {
                 response.add(node);
             }
         }
@@ -341,7 +335,7 @@ public class AbstractList extends SimpleScriptable implements Function {
         }
         else if (!matchingElements.isEmpty()) {
             final AbstractList collection = new AbstractList(getDomNodeOrDie(), matchingElements);
-            collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
+            collection.setAvoidObjectDetection(true);
             return collection;
         }
 
@@ -365,8 +359,7 @@ public class AbstractList extends SimpleScriptable implements Function {
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
         final AbstractList collection = new AbstractList(domNode, matchingElements);
-        collection.setAvoidObjectDetection(
-                !getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
+        collection.setAvoidObjectDetection(true);
         return collection;
     }
 

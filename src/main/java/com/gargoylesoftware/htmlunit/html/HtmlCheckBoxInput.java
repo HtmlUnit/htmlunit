@@ -15,9 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_AFTER_ONCLICK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 
 import java.io.IOException;
@@ -123,9 +120,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
     public Page setChecked(final boolean isChecked) {
         checkedState_ = isChecked;
 
-        if (hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
-            return getPage();
-        }
         return executeOnChangeHandlerIfAppropriate(this);
     }
 
@@ -155,7 +149,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     @Override
     protected ScriptResult doClickFireClickEvent(final Event event) throws IOException {
-        if (!hasFeature(EVENT_ONCHANGE_LOSING_FOCUS) && !hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
+        if (!hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
 
@@ -167,7 +161,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     @Override
     protected void doClickFireChangeEvent() throws IOException {
-        if (!hasFeature(EVENT_ONCHANGE_LOSING_FOCUS) && hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
+        if (hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
     }
@@ -208,9 +202,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
     public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
         setChecked(defaultChecked);
-        if (hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
-            reset();
-        }
     }
 
     /**
@@ -222,21 +213,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
         return defaultCheckedState_;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode cloneNode(final boolean deep) {
-        final HtmlCheckBoxInput clone = (HtmlCheckBoxInput) super.cloneNode(deep);
-        if (wasCreatedByJavascript() && hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
-            clone.checkedState_ = false;
-        }
-        if (hasFeature(HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE)) {
-            clone.setDefaultValue(getValueAttribute(), false);
-        }
-        return clone;
-    }
-
     @Override
     Object getInternalValue() {
         return isChecked();
@@ -244,10 +220,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
 
     @Override
     void handleFocusLostValueChanged() {
-        final boolean fireOnChange = hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
-        if (fireOnChange) {
-            executeOnChangeHandlerIfAppropriate(this);
-        }
     }
 
     /**

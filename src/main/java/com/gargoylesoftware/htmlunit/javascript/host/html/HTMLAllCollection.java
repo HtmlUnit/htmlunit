@@ -22,9 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLEC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -33,6 +31,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -40,11 +43,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A special {@link HTMLCollection} for <code>document.all</code>.
@@ -108,10 +106,6 @@ public class HTMLAllCollection extends HTMLCollection {
         if (!browser.hasFeature(HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO)
                 && (Double.isInfinite(numb) || numb != Math.floor(numb))) {
             return itemNotFound(browser);
-        }
-
-        if (numb < 0 && browser.hasFeature(HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX)) {
-            throw Context.reportRuntimeError("Invalid index.");
         }
 
         final Object object = get(numb.intValue(), this);
@@ -182,7 +176,7 @@ public class HTMLAllCollection extends HTMLCollection {
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
         final HTMLCollection collection = new HTMLCollection(domNode, matchingByName);
-        collection.setAvoidObjectDetection(!browser.hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
+        collection.setAvoidObjectDetection(true);
         return collection;
     }
 

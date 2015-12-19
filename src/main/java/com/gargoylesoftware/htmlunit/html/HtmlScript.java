@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONREADY_STATE_CHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE;
@@ -527,12 +526,6 @@ public class HtmlScript extends HtmlElement {
      * @param state this script ready state
      */
     protected void setAndExecuteReadyState(final String state) {
-        if (hasFeature(EVENT_ONREADY_STATE_CHANGE)) {
-            setReadyState(state);
-            final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
-            final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
-            script.executeEventLocally(event);
-        }
     }
 
     /**

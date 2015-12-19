@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSERVENT_BUTTON_CODE_IE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MOUSE_EVENT_KEY_CODE_ZERO;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -22,6 +21,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.LinkedList;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -32,9 +34,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * JavaScript object representing a Mouse Event.
@@ -85,9 +84,6 @@ public class MouseEvent extends UIEvent {
 
     /** The code for right mouse button. */
     public static final int BUTTON_RIGHT = 2;
-
-    /** The button code for IE (1: left button, 4: middle button, 2: right button). */
-    private static final int[] buttonCodeToIE = {1, 4, 2};
 
     /** The event's screen coordinates; initially {@code null} and lazily initialized for performance reasons. */
     private Integer screenX_, screenY_;
@@ -239,15 +235,6 @@ public class MouseEvent extends UIEvent {
      */
     @JsxGetter
     public int getButton() {
-        if (getBrowserVersion().hasFeature(EVENT_MOUSERVENT_BUTTON_CODE_IE)) {
-            if (getType().equals(TYPE_CONTEXT_MENU)) {
-                return 0;
-            }
-            if (getType().equals(TYPE_CLICK)) {
-                return button_;
-            }
-            return buttonCodeToIE[button_];
-        }
         return button_;
     }
 
@@ -256,25 +243,7 @@ public class MouseEvent extends UIEvent {
      * @param value the button code
      */
     @JsxSetter
-    public void setButton(int value) {
-        if (getBrowserVersion().hasFeature(EVENT_MOUSERVENT_BUTTON_CODE_IE)
-                && !TYPE_CLICK.equals(getType())) {
-            switch (value) {
-                case 1:
-                    value = 0;
-                    break;
-
-                case 4:
-                    value = 1;
-                    break;
-
-                case 2:
-                    value = 2;
-                    break;
-
-                default:
-            }
-        }
+    public void setButton(final int value) {
         button_ = value;
     }
 

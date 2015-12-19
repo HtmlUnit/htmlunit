@@ -14,11 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -29,7 +26,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.html.DomComment;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -43,11 +44,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -138,10 +134,8 @@ public class HTMLCollection extends AbstractList {
         if (domNode == null) {
             return response;
         }
-        final boolean commentIsElement = getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT);
         for (final DomNode node : getCandidates()) {
-            if ((node instanceof DomElement
-                    || (commentIsElement && node instanceof DomComment)) && isMatching(node)) {
+            if ((node instanceof DomElement) && isMatching(node)) {
                 response.add(node);
             }
         }
@@ -194,8 +188,7 @@ public class HTMLCollection extends AbstractList {
         }
         else if (!matchingElements.isEmpty()) {
             final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), matchingElements);
-            collection.setAvoidObjectDetection(
-                    !getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
+            collection.setAvoidObjectDetection(true);
             return collection;
         }
 
@@ -230,7 +223,7 @@ public class HTMLCollection extends AbstractList {
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
         final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
-        collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
+        collection.setAvoidObjectDetection(true);
         return collection;
     }
 
@@ -261,10 +254,6 @@ public class HTMLCollection extends AbstractList {
         final Double doubleValue = Context.toNumber(index);
         if (ScriptRuntime.NaN != doubleValue && !doubleValue.isNaN()) {
             idx = doubleValue.intValue();
-        }
-
-        if (idx < 0 && getBrowserVersion().hasFeature(HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX)) {
-            throw Context.reportRuntimeError("Invalid index.");
         }
 
         final Object object = get(idx, this);

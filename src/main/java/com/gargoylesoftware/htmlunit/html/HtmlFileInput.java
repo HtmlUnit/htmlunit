@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FILEINPUT_EMPTY_DEFAULT_VALUE;
-
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -61,14 +59,9 @@ public class HtmlFileInput extends HtmlInput {
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, addValueIfNeeded(page, attributes));
 
-        if (hasFeature(FILEINPUT_EMPTY_DEFAULT_VALUE)) {
-            setDefaultValue("", false);
-        }
-        else {
-            for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-                if ("value".equalsIgnoreCase(entry.getKey())) {
-                    setDefaultValue(entry.getValue().getNodeValue(), false);
-                }
+        for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
+            if ("value".equalsIgnoreCase(entry.getKey())) {
+                setDefaultValue(entry.getValue().getNodeValue(), false);
             }
         }
     }

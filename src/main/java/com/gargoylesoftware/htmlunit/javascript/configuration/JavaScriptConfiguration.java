@@ -426,7 +426,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
         HTMLBaseElement.class, HTMLBaseFontElement.class, HTMLBGSoundElement.class, HTMLBlockElement.class,
         HTMLBodyElement.class, HTMLBRElement.class, HTMLButtonElement.class,
-        HTMLCanvasElement.class, HTMLCollection.class, HTMLCommentElement.class, HTMLContentElement.class,
+        HTMLCanvasElement.class, HTMLCollection.class, HTMLContentElement.class,
         HTMLDataElement.class, HTMLDataListElement.class,
         HTMLDDElement.class, HTMLDetailsElement.class, HTMLDialogElement.class, HTMLDirectoryElement.class,
         HTMLDivElement.class, HTMLDListElement.class, HTMLDocument.class, HTMLDTElement.class, HTMLElement.class,

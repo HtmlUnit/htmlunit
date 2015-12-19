@@ -49,14 +49,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     APPLET_INLINE_BLOCK,
 
-    /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    BUTTON_EMPTY_TYPE_BUTTON,
-
-    /** If the "type" attribute of HtmlButton is not known clicking the button will not submit. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    BUTTON_UNKNOWN_TYPE_DOES_NOT_SUBMIT,
-
     /** Is canvas supported? */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CANVAS,
@@ -137,10 +129,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 31), @WebBrowser(CHROME) })
     CSS_RUBY_DISPLAY_INLINE,
 
-    /** Indicates that the id^="" selector produces hits. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8) })
-    CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING,
-
     /** Indicates that the :lang(..) selector is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CSS_SELECTOR_LANG,
@@ -216,10 +204,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_INPUT,
 
-    /** MouseEvent.button uses IE numbering scheme. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    EVENT_MOUSERVENT_BUTTON_CODE_IE,
-
     /** Triggers 'onbeforeunload' event handler using <code>Event</code>. */
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8) })
     EVENT_ONBEFOREUNLOAD_USES_EVENT,
@@ -227,10 +211,6 @@ public enum BrowserVersionFeatures {
     /** Triggers "onchange" event handler after "onclick" event handler. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_ONCHANGE_AFTER_ONCLICK,
-
-    /** Triggers "onchange" event handler on losing focus. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    EVENT_ONCHANGE_LOSING_FOCUS,
 
     /** Triggers "onclick" event handler for the select only, not for the clicked option. */
     @BrowserFeature(@WebBrowser(IE))
@@ -265,10 +245,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     EVENT_ONLOAD_INTERNAL_JAVASCRIPT,
 
-    /** Setting the 'onload' event handler to <code>undefined</code> throws an error. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    EVENT_ONLOAD_UNDEFINED_THROWS_ERROR,
-
     /** Does not trigger "onmousedown" event handler for the select options. */
     @BrowserFeature({ @WebBrowser(IE) })
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,
@@ -284,14 +260,6 @@ public enum BrowserVersionFeatures {
     /** Does not trigger "onmouseup" event handler for the select options. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION,
-
-    /** Triggers "onreadystatechange" event. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    EVENT_ONREADY_STATE_CHANGE,
-
-    /** Triggers "propertychange" event. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    EVENT_PROPERTY_CHANGE,
 
     /** Supports event type 'BeforeUnloadEvent'. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
@@ -324,14 +292,6 @@ public enum BrowserVersionFeatures {
     /** Supports event type 'XMLHttpRequestProgressEvent'. */
     @BrowserFeature(@WebBrowser(CHROME))
     EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT,
-
-    /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
-
-    /** */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    FILEINPUT_EMPTY_DEFAULT_VALUE,
 
     /** For new pages the focus points to the body node. */
     @BrowserFeature(@WebBrowser(IE))
@@ -402,22 +362,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLBASE_HREF_DEFAULT_EMPTY,
 
-    /** Set this checked state to false when added to page (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
-
-    /** Set the default value based on the current value when clone (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE,
-
-    /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLCOLLECTION_COMMENT_IS_ELEMENT,
-
-    /** HtmlCollection returns the first hit instead of a collection if many elements found. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX,
-
     /** HtmlCollection.item() supports also doubles as index. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
     HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
@@ -438,20 +382,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(value = FF, minVersion = 38) })
     HTMLCOLLECTION_NULL_IF_NOT_FOUND,
 
-    /** Allow detection of object type for collection elements. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLCOLLECTION_OBJECT_DETECTION,
-
     /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlCommand} have no end tag. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
     HTMLCOMMAND_END_TAG_FORBIDDEN,
-
-    /**
-     * Supports Conditional Comments.
-     * @see <a href="http://en.wikipedia.org/wiki/Conditional_comment">Conditional comment</a>
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLCONDITIONAL_COMMENTS,
 
     /** Is document.charset lower-case (and defaultCharset is 'windows-1252'). */
     @BrowserFeature(@WebBrowser(IE))
@@ -488,24 +421,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS,
 
-    /** Can stored the document methods as variable. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLDOCUMENT_METHOD_AS_VARIABLE,
-
     /** Allows invalid 'align' values. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLELEMENT_ALIGN_INVALID,
-
-    /** Handle html attributes as JavaScript properties. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLELEMENT_ATTRIBUTE_AS_JS_PROPERTY,
-
-    /**
-     * Indicates that attribute name should be fixed for get/setAttribute(), specifically "className" and "class",
-     * only in quirks mode.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE,
 
     /** The html5 hidden attribute is not supported. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

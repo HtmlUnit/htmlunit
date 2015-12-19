@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_AS_JS_PROPERTY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_SHORT_HEX;
@@ -607,46 +605,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     */
     @Override
     public Object getWithFallback(final String name) {
-        if (getBrowserVersion().hasFeature(HTMLELEMENT_ATTRIBUTE_AS_JS_PROPERTY) && !"class".equals(name)) {
-            final HtmlElement htmlElement = getDomNodeOrNull();
-            if (htmlElement != null) {
-                final DomAttr attr = htmlElement.getAttributeNode(name);
-                if (attr != null && attr.getName().equals(name)) {
-                    final String value = attr.getValue();
-                    if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
-                        if (LOG.isDebugEnabled()) {
-                            LOG.debug("Found attribute for evaluation of property \"" + name
-                                    + "\" for of " + this);
-                        }
-                        return value;
-                    }
-                }
-            }
-        }
-
         return NOT_FOUND;
-    }
-
-    /**
-     * For IE, foo.getAttribute(x) uses same names as foo.x.
-     * @param attributeName the name
-     * @return the real name
-     */
-    @Override
-    protected String fixAttributeName(final String attributeName) {
-        if (getBrowserVersion().hasFeature(HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE)) {
-            final HtmlPage htmlPage = getDomNodeOrDie().getHtmlPageOrNull();
-            if (htmlPage != null && htmlPage.isQuirksMode()) {
-                if ("className".equals(attributeName)) {
-                    return "class";
-                }
-                if ("class".equals(attributeName)) {
-                    return "_class"; // attribute should not be retrieved with "class"
-                }
-            }
-        }
-
-        return attributeName;
     }
 
     /**

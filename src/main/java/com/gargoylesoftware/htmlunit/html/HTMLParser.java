@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLPARSER_REMOVE_EMPTY_CONTENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
@@ -46,7 +45,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.apache.xerces.util.DefaultErrorHandler;
-import org.apache.xerces.util.XMLStringBuffer;
 import org.apache.xerces.xni.Augmentations;
 import org.apache.xerces.xni.QName;
 import org.apache.xerces.xni.XMLAttributes;
@@ -67,7 +65,6 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -476,16 +473,6 @@ public final class HTMLParser {
          * @return the configuration
          */
         private static XMLParserConfiguration createConfiguration(final WebClient webClient) {
-            final BrowserVersion browserVersion = webClient.getBrowserVersion();
-            // for IE we need a special scanner that will be able to understand conditional comments
-            if (browserVersion.hasFeature(HTMLCONDITIONAL_COMMENTS)) {
-                return new HTMLConfiguration() {
-                    @Override
-                    protected HTMLScanner createDocumentScanner() {
-                        return new HTMLScannerForIE(browserVersion);
-                    }
-                };
-            }
             return new HTMLConfiguration();
         }
 
@@ -1082,108 +1069,5 @@ class HTMLErrorHandler extends DefaultErrorHandler {
                 exception.getLineNumber(),
                 exception.getColumnNumber(),
                 key);
-    }
-}
-
-class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
-    HTMLScannerForIE(final BrowserVersion browserVersion) {
-        fContentScanner = new ContentScannerForIE(browserVersion);
-    }
-
-    class ContentScannerForIE extends HTMLScanner.ContentScanner {
-        private final BrowserVersion browserVersion_;
-
-        ContentScannerForIE(final BrowserVersion browserVersion) {
-            browserVersion_ = browserVersion;
-        }
-
-        @Override
-        protected void scanComment() throws IOException {
-            final String s = nextContent(30); // [if ...
-            if (s.startsWith("[if ") && s.contains("]>")) {
-                final String condition = StringUtils.substringBefore(s.substring(4), "]>");
-                try {
-                    if (IEConditionalCommentExpressionEvaluator.evaluate(condition, browserVersion_)) {
-                        // skip until ">"
-                        for (int i = 0; i < condition.length() + 6; i++) {
-                            read();
-                        }
-                        if (s.contains("]><!-->")) {
-                            skip("<!-->", false);
-                        }
-                        else if (s.contains("]>-->")) {
-                            skip("-->", false);
-                        }
-                    }
-                    else {
-                        final StringBuilder builder = new StringBuilder();
-                        while (!builder.toString().endsWith("-->")) {
-                            builder.append((char) read());
-                        }
-                    }
-                    return;
-                }
-                catch (final Exception e) { // incorrect expression => handle it as plain text
-                    // TODO: report it!
-                    final XMLStringBuffer buffer = new XMLStringBuffer("<!--");
-                    scanMarkupContent(buffer, '-');
-                    buffer.append("-->");
-                    fDocumentHandler.characters(buffer, locationAugs());
-                    return;
-                }
-            }
-            // this is a normal comment, not a conditional comment for IE
-            super.scanComment();
-        }
-
-        @Override
-        public String nextContent(final int len) throws IOException {
-            return super.nextContent(len);
-        }
-
-        @Override
-        public boolean scanMarkupContent(final XMLStringBuffer buffer, final char cend) throws IOException {
-            return super.scanMarkupContent(buffer, cend);
-        }
-    }
-
-    @Override
-    protected boolean skipMarkup(final boolean balance) throws IOException {
-        final ContentScannerForIE contentScanner = (ContentScannerForIE) fContentScanner;
-        final String s = contentScanner.nextContent(30);
-        if (s.startsWith("[if ") && s.contains("]>")) {
-            final String condition = StringUtils.substringBefore(s.substring(4), "]>");
-            try {
-                if (IEConditionalCommentExpressionEvaluator.evaluate(condition, contentScanner.browserVersion_)) {
-                    // skip until ">"
-                    for (int i = 0; i < condition.length() + 6; i++) {
-                        read();
-                    }
-                    return true;
-                }
-
-                final XMLStringBuffer buffer = new XMLStringBuffer();
-                int ch;
-                while ((ch = read()) != -1) {
-                    buffer.append((char) ch);
-                    if (buffer.toString().endsWith("<![endif]>")) {
-                        final XMLStringBuffer trimmedBuffer
-                            = new XMLStringBuffer(buffer.ch, 0, buffer.length - 3);
-                        fDocumentHandler.comment(trimmedBuffer, locationAugs());
-                        return true;
-                    }
-                }
-            }
-            catch (final Exception e) { // incorrect expression => handle it as plain text
-                // TODO: report it!
-                final XMLStringBuffer buffer = new XMLStringBuffer("<!--");
-                contentScanner.scanMarkupContent(buffer, '-');
-                buffer.append("-->");
-                fDocumentHandler.characters(buffer, locationAugs());
-                return true;
-            }
-
-        }
-        return super.skipMarkup(balance);
     }
 }

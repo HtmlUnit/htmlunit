@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_PROPERTY_CHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
@@ -209,10 +207,6 @@ public abstract class HtmlElement extends DomElement {
             fireHtmlAttributeReplaced(htmlEvent);
             htmlPage.fireHtmlAttributeReplaced(htmlEvent);
         }
-
-        if (hasFeature(EVENT_PROPERTY_CHANGE)) {
-            fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
-        }
     }
 
     /**
@@ -252,10 +246,6 @@ public abstract class HtmlElement extends DomElement {
             htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
             fireHtmlAttributeReplaced(htmlEvent);
             htmlPage.fireHtmlAttributeReplaced(htmlEvent);
-        }
-
-        if (hasFeature(EVENT_PROPERTY_CHANGE)) {
-            fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
         }
 
         return result;
@@ -602,11 +592,9 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            if (!browserVersion.hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
-                final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
-                if (submit != null) {
-                    return submit.click();
-                }
+            final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
+            if (submit != null) {
+                return submit.click();
             }
             form.submit((SubmittableElement) this);
             webClient.getJavaScriptEngine().processPostponedActions();

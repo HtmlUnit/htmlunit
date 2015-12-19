@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
@@ -40,6 +39,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -119,8 +120,6 @@ import com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
 import com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for {@code CSSStyleSheet}.
@@ -487,28 +486,16 @@ public class CSSStyleSheet extends StyleSheet {
         if (condition instanceof PrefixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
-            if (browserVersion.hasFeature(CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING)) {
-                final String attrib = element.getAttribute(ac.getLocalName());
-                return attrib != DomElement.ATTRIBUTE_NOT_DEFINED && attrib.startsWith(value);
-            }
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).startsWith(value);
         }
         if (condition instanceof SuffixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
-            if (browserVersion.hasFeature(CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING)) {
-                final String attrib = element.getAttribute(ac.getLocalName());
-                return attrib != DomElement.ATTRIBUTE_NOT_DEFINED && attrib.endsWith(value);
-            }
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).endsWith(value);
         }
         if (condition instanceof SubstringAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
-            if (browserVersion.hasFeature(CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING)) {
-                final String attrib = element.getAttribute(ac.getLocalName());
-                return attrib != DomElement.ATTRIBUTE_NOT_DEFINED && attrib.contains(value);
-            }
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).contains(value);
         }
         switch (condition.getConditionType()) {

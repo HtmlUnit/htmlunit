@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_IS_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK;
@@ -22,16 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVAL_LOCAL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NON_ECMA_GET_YEAR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
-import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
-
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -43,6 +32,15 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
 import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
+import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
 /**
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from
@@ -189,14 +187,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
             //source = new StringScriptPreProcessor(HtmlUnitContextFactory.this)
             //    .preProcess(page, source, sourceName, lineno, null);
-
-            // PreProcess IE Conditional Compilation if needed
-            if (browserVersion_.hasFeature(HTMLCONDITIONAL_COMMENTS)) {
-                final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
-                source = ieCCPreProcessor.preProcess(page, source, sourceName, lineno, null);
-//                sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
-//                    .preProcess(htmlPage, sourceCode, sourceName, null);
-            }
 
             return super.compileString(source, compiler, compilationErrorReporter,
                     sourceName, lineno, securityDomain);

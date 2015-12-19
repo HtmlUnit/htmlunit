@@ -84,11 +84,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class BrowserVersion implements Serializable, Cloneable {
 
     /**
-     * Application name for the Internet Explorer series of browsers.
-     */
-    private static final String INTERNET_EXPLORER = "Microsoft Internet Explorer";
-
-    /**
      * Application name the Netscape navigator series of browsers.
      */
     private static final String NETSCAPE = "Netscape";
