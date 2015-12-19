@@ -37,14 +37,11 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<body>\r\n"
+    @Alerts("<body>\r\n"
                         + "  <noscript>\r\n"
                         + "    &lt;div&gt;hello\r\n"
                         + "  </noscript>\r\n"
-                        + "</body>\r\n",
-            IE8 = "<body>\r\n"
-                    + "  <noscript>\r\n  </noscript>\r\n"
-                    + "</body>\r\n")
+                        + "</body>\r\n")
     public void asXml_jsEnabled() throws Exception {
         final String html
             = "<html><body>\n"

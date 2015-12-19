@@ -558,11 +558,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "o2: text: Option 2, label: Option 2, value: 2, defaultSelected: false, selected: false",
+    @Alerts({ "o2: text: Option 2, label: Option 2, value: 2, defaultSelected: false, selected: false",
             "o3: text: Option 3, label: Option 3, value: 3, defaultSelected: true, selected: false",
-            "0", "1" },
-        IE8 = { "o2: text: Option 2, label: , value: 2, defaultSelected: false, selected: false",
-            "o3: text: Option 3, label: , value: 3, defaultSelected: true, selected: false",
             "0", "1" })
     public void constructor() throws Exception {
         final String html =
@@ -664,14 +661,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false null null", "false null null", "true *selected selected",
+    @Alerts({ "false null null", "false null null", "true *selected selected",
                         "true null null", "false null null", "false *selected selected",
                         "false null null", "true null null", "false *selected selected",
-                        "true null null", "false null null", "false *selected selected" },
-            IE8 = { "false null ", "false null ", "true null selected",
-                        "true null selected", "false null ", "false null ",
-                        "false null ", "true null selected", "false null ",
-                        "false null ", "true null selected", "false null "})
+                        "true null null", "false null null", "false *selected selected" })
     public void selectedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -720,14 +713,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false null null", "false null null", "true *selected selected",
-                        "true null null", "false null null", "true *selected selected",
-                        "true null null", "true null null", "true *selected selected",
-                        "true null null", "false null null", "true *selected selected" },
-            IE8 = { "false null ", "false null ", "true null selected",
-                        "true null selected", "false null ", "true null selected",
-                        "true null selected", "true null selected", "true null selected",
-                        "true null selected", "false null ", "true null selected"})
+    @Alerts({ "false null null", "false null null", "true *selected selected",
+                "true null null", "false null null", "true *selected selected",
+                "true null null", "true null null", "true *selected selected",
+                "true null null", "false null null", "true *selected selected" })
     public void selectedAttributeMultiple() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1168,12 +1157,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false-null", "true-selected", "false-null",
+    @Alerts({ "false-null", "true-selected", "false-null",
                 "true-null", "false-selected", "false-null",
-                "false-null", "false-selected", "false-null" },
-            IE8 = { "false-", "true-selected", "false-",
-                "true-selected", "false-", "false-",
-                "false-", "false-", "false-" })
+                "false-null", "false-selected", "false-null" })
     public void selectAndAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1222,9 +1208,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "false-null", "true-true", "true-null",
                         "false-selected", "false-null", "true-true" },
             FF = { "false-null", "true-true", "true-null",
-                    "false-selected", "false-null", "false-true" },
-            IE8 = { "false-", "true-selected", "true-selected",
-                    "false-", "false-", "true-selected" })
+                    "false-selected", "false-null", "false-true" })
     @NotYetImplemented(FF)
     public void setSelectedAttribute() throws Exception {
         final String html =
@@ -1274,9 +1258,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             CHROME  = { "false-null", "true-true", "true-null",
                         "false-null", "true-true", "true-null" },
             IE11 = { "false-null", "true-true", "true-",
-                    "false-null", "true-true", "false-null" },
-            IE8 = { "false-", "true-selected", "true-selected",
-                    "false-", "true-selected", "true-selected" })
+                    "false-null", "true-true", "false-null" })
     @NotYetImplemented(IE)
     public void createOption() throws Exception {
         final String html =

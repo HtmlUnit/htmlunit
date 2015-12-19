@@ -738,7 +738,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "[object]")
     public void onReadyStateChange_EventAvailable() throws Exception {
         final String html =
               "<html><body><script>\n"

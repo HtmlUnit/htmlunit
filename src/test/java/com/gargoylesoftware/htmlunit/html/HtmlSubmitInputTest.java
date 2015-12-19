@@ -265,10 +265,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" },
-            IE8 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" })
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -306,10 +304,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" },
-            IE8 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" })
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

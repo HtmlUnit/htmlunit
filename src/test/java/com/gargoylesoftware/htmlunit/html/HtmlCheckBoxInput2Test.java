@@ -836,10 +836,8 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "null", "true", "null", "false", "null", "true", "", "false", "", "true", "",
-                        "true", "yes", "false", "yes", "true", "yes"},
-            IE8 = { "false", "", "true", "", "false", "", "true", "checked", "false", "checked",
-                    "true", "checked", "true", "checked", "false", "checked", "true", "checked" })
+    @Alerts({ "false", "null", "true", "null", "false", "null", "true", "", "false", "", "true", "",
+                        "true", "yes", "false", "yes", "true", "yes"})
     public void checkedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -898,10 +896,8 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "null", "false", "null", "true", "", "true", "",
-                        "true", "yes", "true", "yes"},
-            IE8 = { "false", "", "false", "", "true", "checked",
-                    "true", "checked", "true", "checked", "true", "checked" })
+    @Alerts({ "false", "null", "false", "null", "true", "", "true", "",
+                        "true", "yes", "true", "yes"})
     public void defaultCheckedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

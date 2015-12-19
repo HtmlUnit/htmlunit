@@ -96,15 +96,14 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object PopStateEvent]", "{\"hi\":\"there\"}",
-                        "[object PopStateEvent]", "{\"hi\":\"there\"}",
-                        "[object PopStateEvent]", "null",
-                        "[object PopStateEvent]", "null",
-                        "[object PopStateEvent]", "{\"hi\":\"there\"}",
-                        "[object PopStateEvent]", "{\"hi\":\"there\"}",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}" },
-           IE8 = {})
+    @Alerts({ "[object PopStateEvent]", "{\"hi\":\"there\"}",
+                "[object PopStateEvent]", "{\"hi\":\"there\"}",
+                "[object PopStateEvent]", "null",
+                "[object PopStateEvent]", "null",
+                "[object PopStateEvent]", "{\"hi\":\"there\"}",
+                "[object PopStateEvent]", "{\"hi\":\"there\"}",
+                "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
+                "[object PopStateEvent]", "{\"hi2\":\"there2\"}" })
     public void pushState() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
