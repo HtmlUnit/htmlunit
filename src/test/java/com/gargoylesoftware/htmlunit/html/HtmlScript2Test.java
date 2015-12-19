@@ -65,7 +65,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "created", "hello", "replaced" })
+    @Alerts({ "created", "hello", "replaced" })
     public void addedFromDocumentFragment() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='A'></span>\n"

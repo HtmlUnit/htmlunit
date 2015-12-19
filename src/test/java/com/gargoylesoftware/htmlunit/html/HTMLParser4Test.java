@@ -148,7 +148,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "4", "[object HTMLParagraphElement]", "[object Text]",
+    @Alerts({ "4", "[object HTMLParagraphElement]", "[object Text]",
                 "[object HTMLScriptElement]", "[object Text]" })
     @NotYetImplemented
     public void badlyFormedHTML_scriptAfterHtml() throws Exception {
@@ -357,7 +357,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "titles", "HEAD", "Outer Html", "DIV", "Inner Html",
+    @Alerts({ "titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv" })
     @BuggyWebDriver(IE11)

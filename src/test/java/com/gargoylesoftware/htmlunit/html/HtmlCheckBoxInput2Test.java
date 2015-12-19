@@ -458,7 +458,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "foo,change,")
+    @Alerts("foo,change,")
     public void onchangeFires() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -542,7 +542,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Second")
+    @Alerts("Second")
     public void setChecked2() throws Exception {
         final String firstHtml =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -810,7 +810,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "changed")
+    @Alerts("changed")
     public void clickShouldTriggerOnchange() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
