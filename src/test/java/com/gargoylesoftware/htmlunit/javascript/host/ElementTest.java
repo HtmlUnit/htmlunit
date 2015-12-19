@@ -83,7 +83,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -215,7 +215,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "1" })
+    @Alerts({ "1", "1" })
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -803,7 +803,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "first", "third", "3", "second", "second" })
+    @Alerts({ "first", "third", "3", "second", "second" })
     public void firstElementChild() throws Exception {
         final String html
             = "<html><head>\n"
@@ -924,7 +924,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "test value", "true", "false", "finished" })
+    @Alerts({ "test value", "true", "false", "finished" })
     public void attributeNS() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
@@ -1040,7 +1040,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" })
+    @Alerts({ "undefined", "undefined" })
     public void allowKeyboardInput() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

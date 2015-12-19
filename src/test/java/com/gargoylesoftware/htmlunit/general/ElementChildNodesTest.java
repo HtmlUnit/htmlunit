@@ -1126,7 +1126,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1" })
+    @Alerts("1")
     @NotYetImplemented
     public void plaintext() throws Exception {
         loadPageWithAlerts2(test("plaintext"));

@@ -58,7 +58,7 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object PopStateEvent]", "null" })
+    @Alerts({ "[object PopStateEvent]", "null" })
     public void pushStateSimple() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -298,10 +298,10 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object PopStateEvent]", "null",
-                        "[object PopStateEvent]", "null",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}" })
+    @Alerts({ "[object PopStateEvent]", "null",
+                "[object PopStateEvent]", "null",
+                "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
+                "[object PopStateEvent]", "{\"hi2\":\"there2\"}" })
     public void replaceState() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

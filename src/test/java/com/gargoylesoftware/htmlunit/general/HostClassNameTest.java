@@ -3811,7 +3811,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Object]")
+    @Alerts("[object Object]")
     public void intl() throws Exception {
         test("Intl");
     }

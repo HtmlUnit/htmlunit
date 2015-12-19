@@ -971,7 +971,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false")
+    @Alerts("false")
     public void _Element_HTMLNoShowElement() throws Exception {
         test("Element", "HTMLNoShowElement");
     }
@@ -1201,7 +1201,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false")
+    @Alerts("false")
     public void _Element_HTMLTextElement() throws Exception {
         test("Element", "HTMLTextElement");
     }
@@ -2257,7 +2257,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true")
+    @Alerts("true")
     public void _CSSPageRule_CSSPageRule() throws Exception {
         test("CSSPageRule", "CSSPageRule");
     }
@@ -2266,7 +2266,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true")
+    @Alerts("true")
     public void _CSSRule_CSSPageRule() throws Exception {
         test("CSSRule", "CSSPageRule");
     }

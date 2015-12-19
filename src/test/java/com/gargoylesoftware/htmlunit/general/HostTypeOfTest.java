@@ -1378,7 +1378,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined")
+    @Alerts("undefined")
     public void htmlNoShowElement() throws Exception {
         test("HTMLNoShowElement");
     }
@@ -3512,7 +3512,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "object")
+    @Alerts("object")
     public void intl() throws Exception {
         test("Intl");
     }

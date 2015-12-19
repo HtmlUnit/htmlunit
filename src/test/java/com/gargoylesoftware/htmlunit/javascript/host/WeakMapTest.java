@@ -55,7 +55,7 @@ public class WeakMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void setNonObject() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

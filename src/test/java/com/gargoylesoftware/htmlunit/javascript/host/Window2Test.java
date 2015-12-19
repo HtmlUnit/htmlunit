@@ -854,7 +854,7 @@ public class Window2Test extends WebDriverTestCase {
      * @see com.gargoylesoftware.htmlunit.javascript.host.event.EventTest#firedEvent_equals_original_event()
      */
     @Test
-    @Alerts(DEFAULT = { "true", "I was here" })
+    @Alerts({ "true", "I was here" })
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
@@ -1167,7 +1167,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "changed" })
+    @Alerts("changed")
     public void onchange_withHandler() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1207,7 +1207,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-onsubmit-" })
+    @Alerts("-onsubmit-")
     public void onsubmit_withHandler() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1331,7 +1331,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  "sync: false")
+    @Alerts("sync: false")
     public void postMessageSyncOrAsync() throws Exception {
         final String html
             = "<html>"
@@ -1391,7 +1391,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "posted")
+    @Alerts("posted")
     public void postMessage_otherPort() throws Exception {
         postMessage("http://localhost:" + (PORT + 1) + "/");
     }

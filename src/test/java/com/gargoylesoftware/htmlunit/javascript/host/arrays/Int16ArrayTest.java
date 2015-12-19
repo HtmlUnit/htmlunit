@@ -34,7 +34,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object ArrayBuffer]", "10", "0" })
+    @Alerts({ "[object ArrayBuffer]", "10", "0" })
     public void buffer() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -58,7 +58,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "17", "-45", "2" })
+    @Alerts({ "17", "-45", "2" })
     public void arrayConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -103,7 +103,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "17", "0", "-45", "-1" })
+    @Alerts({ "17", "0", "-45", "-1" })
     public void bufferConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

@@ -34,7 +34,7 @@ public class Float32ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "63", "-76", "-106", "73", "79", "97", "60", "-53" })
+    @Alerts({ "63", "-76", "-106", "73", "79", "97", "60", "-53" })
     public void bufferConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
