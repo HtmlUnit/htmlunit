@@ -17,8 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHECKED_RETURNS_CHECKED_OR_EMPTY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -32,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -173,25 +170,6 @@ public class HTMLInputElement extends FormField {
             ((HtmlTextInput) input).select();
         }
         // currently nothing for other input types
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getAttribute(String attributeName, final Integer flags) {
-        final Object value = super.getAttribute(attributeName, flags);
-        if (getBrowserVersion().hasFeature(JS_CHECKED_RETURNS_CHECKED_OR_EMPTY)) {
-            attributeName = fixAttributeName(attributeName);
-            if ("checked".equals(attributeName)) {
-                if (value == null) {
-                    return DomElement.ATTRIBUTE_NOT_DEFINED;
-                }
-                return "checked";
-            }
-        }
-
-        return value;
     }
 
     /**
@@ -479,9 +457,7 @@ public class HTMLInputElement extends FormField {
         final boolean newState = domNode.isChecked();
 
         if (originalState != newState
-            && (domNode instanceof HtmlRadioButtonInput
-                    || (domNode instanceof HtmlCheckBoxInput
-                            && !getBrowserVersion().hasFeature(JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT)))) {
+            && (domNode instanceof HtmlRadioButtonInput || domNode instanceof HtmlCheckBoxInput)) {
             domNode.fireEvent(Event.TYPE_CHANGE);
         }
     }

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
@@ -468,29 +467,7 @@ public class Node extends EventTarget {
         final DomNode clonedNode = domNode.cloneNode(deep);
 
         final Node jsClonedNode = getJavaScriptNode(clonedNode);
-        if (getBrowserVersion().hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)) {
-            // need to copy the event listener when they exist
-            copyEventListenersWhenNeeded(domNode, clonedNode);
-        }
-
         return jsClonedNode;
-    }
-
-    private void copyEventListenersWhenNeeded(final DomNode domNode, final DomNode clonedNode) {
-        final Node jsNode = (Node) domNode.getScriptableObject();
-        if (jsNode != null) {
-            final Node jsClonedNode = getJavaScriptNode(clonedNode);
-            jsClonedNode.getEventListenersContainer().copyFrom(jsNode.getEventListenersContainer());
-        }
-
-        // look through the children
-        DomNode child = domNode.getFirstChild();
-        DomNode clonedChild = clonedNode.getFirstChild();
-        while (child != null && clonedChild != null) {
-            copyEventListenersWhenNeeded(child, clonedChild);
-            child = child.getNextSibling();
-            clonedChild = clonedChild.getNextSibling();
-        }
     }
 
     /**

@@ -15,14 +15,14 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_PREFIX_UNDEFINED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.NamedNodeMap;
@@ -32,9 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code DocumentType}.
@@ -118,9 +115,6 @@ public class DocumentType extends Node {
         if (getBrowserVersion().hasFeature(JS_DOCTYPE_ENTITIES_NULL)) {
             return null;
         }
-        if (getBrowserVersion().hasFeature(JS_DOCTYPE_ENTITIES_EMPTY_STRING)) {
-            return "";
-        }
         return Context.getUndefinedValue();
     }
 
@@ -137,9 +131,6 @@ public class DocumentType extends Node {
 
         if (getBrowserVersion().hasFeature(JS_DOCTYPE_NOTATIONS_NULL)) {
             return null;
-        }
-        if (getBrowserVersion().hasFeature(JS_DOCTYPE_NOTATIONS_EMPTY_STRING)) {
-            return "";
         }
         return Context.getUndefinedValue();
     }

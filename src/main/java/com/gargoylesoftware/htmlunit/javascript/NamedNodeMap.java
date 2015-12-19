@@ -14,30 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTRIBUTES_BY_NAME_CASE_SENSITIVE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import java.util.HashSet;
-
-import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when
@@ -108,18 +99,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     public Object getWithFallback(final String name) {
         final Object response = getNamedItem(name);
         if (response != null) {
-            if (response instanceof Attr && getBrowserVersion().hasFeature(JS_ATTRIBUTES_BY_NAME_CASE_SENSITIVE)) {
-                final Attr attr = (Attr) response;
-                if (attr.getName().equals(name)) {
-                    return response;
-                }
-            }
-            else {
-                return response;
-            }
-        }
-        if (getDomNodeOrNull() != null && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
-            return getUnspecifiedAttributeNode(name);
+            return response;
         }
 
         return NOT_FOUND;
@@ -140,9 +120,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
             if (attr != null) {
                 return attr.getScriptableObject();
             }
-            if (!"className".equals(name) && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
-                return getUnspecifiedAttributeNode(name);
-            }
         }
 
         return null;
@@ -159,12 +136,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (null != attr) {
             return attr;
         }
-
-        // for IE we have to add the synthetic class attribute
-        if ("class".equals(name) && useRecursiveAttributeForIE()) {
-            return getUnspecifiedAttributeNode(name);
-        }
-
         return null;
     }
 
@@ -197,36 +168,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (attr != null) {
             return attr.getScriptableObject();
         }
-        if (useRecursiveAttributeForIE()) {
-            // we have to search only inside not yet defined items
-            final HashSet<String> tmpIds = new HashSet<>();
-            for (int i = 0; i < attributes_.getLength(); i++) {
-                tmpIds.add(attributes_.item(i).getNodeName());
-            }
-
-            final String name = getRecusiveAttributeNameAt(index + 1, tmpIds);
-            if (name != null) {
-                return getUnspecifiedAttributeNode(name);
-            }
-        }
         return null;
-    }
-
-    private boolean useRecursiveAttributeForIE() {
-        return getBrowserVersion().hasFeature(JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES)
-            && getDomNodeOrDie() instanceof HtmlElement;
-    }
-
-    /**
-     * Creates a new unspecified attribute node.
-     * @return a new unspecified attribute node
-     */
-    private Attr getUnspecifiedAttributeNode(final String attrName) {
-        final HtmlElement domNode = (HtmlElement) getDomNodeOrDie();
-
-        final DomAttr attr = domNode.getPage().createAttribute(attrName);
-        domNode.setAttributeNode(attr);
-        return (Attr) attr.getScriptableObject();
     }
 
     /**
@@ -235,52 +177,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     @JsxGetter
     public int getLength() {
-        int length = attributes_.getLength();
-        if (useRecursiveAttributeForIE()) {
-            // we have to count only inside not yet defined items
-            final HashSet<String> tmpIds = new HashSet<>();
-            for (int i = 0; i < length; i++) {
-                tmpIds.add(attributes_.item(i).getNodeName());
-            }
-            collectRecursiveAttributes(tmpIds);
-            length = tmpIds.size();
-        }
-        return length;
-    }
-
-    private boolean isRecursiveAttribute(final String name) {
-        for (Scriptable object = getDomNodeOrDie().getScriptableObject(); object != null;
-            object = object.getPrototype()) {
-            for (final Object id : object.getIds()) {
-                if (name.equals(Context.toString(id))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private void collectRecursiveAttributes(final HashSet<String> ids) {
-        for (Scriptable object = getDomNodeOrDie().getScriptableObject(); object != null;
-            object = object.getPrototype()) {
-            for (final Object id : object.getIds()) {
-                ids.add(Context.toString(id));
-            }
-        }
-    }
-
-    private String getRecusiveAttributeNameAt(final int index, final HashSet<String> ids) {
-        for (Scriptable object = getDomNodeOrDie().getScriptableObject(); object != null;
-            object = object.getPrototype()) {
-            for (final Object id : object.getIds()) {
-                final String name = Context.toString(id);
-                ids.add(name);
-                if (ids.size() == index) {
-                    return name;
-                }
-            }
-        }
-        return null;
+        return attributes_.getLength();
     }
 
     /**

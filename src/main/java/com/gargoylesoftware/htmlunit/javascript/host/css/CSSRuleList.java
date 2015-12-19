@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_CHARSET_RULE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_DONT_ENUM_ITEM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_ENUM_ITEM_LENGTH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -26,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -34,8 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.steadystate.css.dom.CSSRuleListImpl;
-
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code CSSRuleList}.
@@ -111,26 +110,17 @@ public class CSSRuleList extends SimpleScriptable {
         final List<String> idList = new ArrayList<>();
 
         final int length = getLength();
-        if (getBrowserVersion().hasFeature(JS_CSSRULELIST_DONT_ENUM_ITEM)) {
-            idList.add("length");
+        for (int i = 0; i < length; i++) {
+            idList.add(Integer.toString(i));
+        }
 
-            for (int i = 0; i < length; i++) {
-                idList.add(Integer.toString(i));
-            }
+        if (getBrowserVersion().hasFeature(JS_CSSRULELIST_ENUM_ITEM_LENGTH)) {
+            idList.add("item");
+            idList.add("length");
         }
         else {
-            for (int i = 0; i < length; i++) {
-                idList.add(Integer.toString(i));
-            }
-
-            if (getBrowserVersion().hasFeature(JS_CSSRULELIST_ENUM_ITEM_LENGTH)) {
-                idList.add("item");
-                idList.add("length");
-            }
-            else {
-                idList.add("length");
-                idList.add("item");
-            }
+            idList.add("length");
+            idList.add("item");
         }
         return idList.toArray();
     }

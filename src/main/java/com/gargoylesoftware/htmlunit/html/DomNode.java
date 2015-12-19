@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DISPLAYED_COLLAPSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.NODE_APPEND_CHILD_SELF_IGNORE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
@@ -36,7 +35,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.xml.utils.PrefixResolver;
@@ -896,13 +894,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
         }
 
-        if (hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)
-                && !(this instanceof Document) && !(this instanceof DomDocumentFragment)) {
-            final Scriptable prototype = newnode.getScriptableObject().getPrototype();
-            final DomNode documentFragment = getPage().createDocumentFragment();
-            documentFragment.basicAppend(newnode);
-            newnode.getScriptableObject().setPrototype(prototype);
-        }
         return newnode;
     }
 

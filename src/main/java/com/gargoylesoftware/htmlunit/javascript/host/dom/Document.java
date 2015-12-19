@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_COMMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_ONLY_FOR_FRAMES;
@@ -29,6 +27,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -71,9 +72,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 
 /**
  * A JavaScript object for {@code Document}.
@@ -464,8 +462,7 @@ public class Document extends EventNode {
                             + tagName + "' contains an invalid character; '<' and '>' are not allowed");
                 throw Context.reportRuntimeError("String contains an invalid character");
             }
-            else if (!browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX)
-                  && tagName.startsWith("<") && tagName.endsWith(">")) {
+            else if (tagName.startsWith("<") && tagName.endsWith(">")) {
                 tagName = tagName.substring(1, tagName.length() - 1);
 
                 final Matcher matcher = TAG_NAME_PATTERN.matcher(tagName);
@@ -476,43 +473,30 @@ public class Document extends EventNode {
             }
 
             final SgmlPage page = getPage();
-            final org.w3c.dom.Node element;
-            if ("comment".equalsIgnoreCase(tagName) && browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_COMMENT)) {
-                element = new DomComment(page, "");
+            final org.w3c.dom.Node element = page.createElement(tagName);
+
+            if (element instanceof BaseFrameElement) {
+                ((BaseFrameElement) element).markAsCreatedByJavascript();
             }
-            else {
-                element = page.createElement(tagName);
-                if (element instanceof BaseFrameElement) {
-                    ((BaseFrameElement) element).markAsCreatedByJavascript();
-                }
-                else if (element instanceof HtmlInput) {
-                    ((HtmlInput) element).markAsCreatedByJavascript();
-                }
-                else if (element instanceof HtmlImage) {
-                    ((HtmlImage) element).markAsCreatedByJavascript();
-                }
-                else if (element instanceof HtmlKeygen) {
-                    ((HtmlKeygen) element).markAsCreatedByJavascript();
-                }
-                else if (element instanceof HtmlRp) {
-                    ((HtmlRp) element).markAsCreatedByJavascript();
-                }
-                else if (element instanceof HtmlRt) {
-                    ((HtmlRt) element).markAsCreatedByJavascript();
-                }
-                else if (element instanceof HtmlUnknownElement) {
-                    ((HtmlUnknownElement) element).markAsCreatedByJavascript();
-                }
+            else if (element instanceof HtmlInput) {
+                ((HtmlInput) element).markAsCreatedByJavascript();
             }
-            final Object jsElement;
-            if ("event".equalsIgnoreCase(tagName) && browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_COMMENT)) {
-                jsElement = new SimpleScriptable();
-                ((SimpleScriptable) jsElement).setClassName("Object");
-                ((SimpleScriptable) jsElement).setParentScope(window_);
+            else if (element instanceof HtmlImage) {
+                ((HtmlImage) element).markAsCreatedByJavascript();
             }
-            else {
-                jsElement = getScriptableFor(element);
+            else if (element instanceof HtmlKeygen) {
+                ((HtmlKeygen) element).markAsCreatedByJavascript();
             }
+            else if (element instanceof HtmlRp) {
+                ((HtmlRp) element).markAsCreatedByJavascript();
+            }
+            else if (element instanceof HtmlRt) {
+                ((HtmlRt) element).markAsCreatedByJavascript();
+            }
+            else if (element instanceof HtmlUnknownElement) {
+                ((HtmlUnknownElement) element).markAsCreatedByJavascript();
+            }
+            final Object jsElement = getScriptableFor(element);
 
             if (jsElement == NOT_FOUND) {
                 if (LOG.isDebugEnabled()) {

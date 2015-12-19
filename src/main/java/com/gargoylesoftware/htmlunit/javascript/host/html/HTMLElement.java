@@ -19,10 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EX
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_EMULATED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_OFF_EMULATED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENT_LEFT_TOP_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT;
@@ -452,18 +448,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         COLORS_MAP_IE.put("Yellow", "#FFFF00");
         COLORS_MAP_IE.put("YellowGreen", "#9ACD32");
     }
-
-    /**
-     * The value of the "ch" JavaScript attribute for browsers that say that they support it, but do not really
-     * provide access to the value of the "char" DOM attribute. Not applicable to all types of HTML elements.
-     */
-    private String ch_ = "";
-
-    /**
-     * The value of the "chOff" JavaScript attribute for browsers that say that they support it, but do not really
-     * provide access to the value of the "charOff" DOM attribute. Not applicable to all types of HTML elements.
-     */
-    private String chOff_ = "";
 
     private boolean endTagForbidden_;
 
@@ -2481,11 +2465,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the {@code ch} property
      */
     protected String getCh() {
-        final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_EMULATED);
-        if (emulated) {
-            return ch_;
-        }
-
         return getDomNodeOrDie().getAttribute("char");
     }
 
@@ -2494,13 +2473,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param ch the value of the {@code ch} property
      */
     protected void setCh(final String ch) {
-        final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_EMULATED);
-        if (emulated) {
-            ch_ = ch;
-        }
-        else {
-            getDomNodeOrDie().setAttribute("char", ch);
-        }
+        getDomNodeOrDie().setAttribute("char", ch);
     }
 
     /**
@@ -2508,10 +2481,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the {@code chOff} property
      */
     protected String getChOff() {
-        final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_OFF_EMULATED);
-        if (emulated) {
-            return chOff_;
-        }
         return getDomNodeOrDie().getAttribute("charOff");
     }
 
@@ -2520,12 +2489,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param chOff the value of the {@code chOff} property
      */
     protected void setChOff(String chOff) {
-        final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_OFF_EMULATED);
-        if (emulated) {
-            chOff_ = chOff;
-            return;
-        }
-
         try {
             final float f = Float.parseFloat(chOff);
             final int i = (int) f;
@@ -2646,9 +2609,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public int getClientLeft() {
-        if (getBrowserVersion().hasFeature(JS_CLIENT_LEFT_TOP_ZERO)) {
-            return 0;
-        }
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getBorderLeftValue();
     }
@@ -2659,9 +2619,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public int getClientTop() {
-        if (getBrowserVersion().hasFeature(JS_CLIENT_LEFT_TOP_ZERO)) {
-            return 0;
-        }
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getBorderTopValue();
     }
@@ -2812,11 +2769,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             top -= elem.getScrollTop();
 
             parentNode = elem.getParentNode();
-        }
-
-        if (getBrowserVersion().hasFeature(JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
-            left += 2;
-            top += 2;
         }
 
         final ClientRect textRectangle = new ClientRect(top + getOffsetHeight(), left, left + getOffsetWidth(), top);

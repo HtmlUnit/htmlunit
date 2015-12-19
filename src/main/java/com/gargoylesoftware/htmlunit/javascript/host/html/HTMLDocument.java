@@ -34,8 +34,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_ELEMENT_FROM_POINT_NULL_WHEN_OUTSIDE;
@@ -69,8 +67,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -184,9 +180,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /** The format to use for the <tt>lastModified</tt> attribute. */
     private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
-
-    private static final Pattern FIRST_TAG_PATTERN = Pattern.compile("<(\\w+)(\\s+[^>]*)?>");
-    private static final Pattern ATTRIBUTES_PATTERN = Pattern.compile("(\\w+)\\s*=\\s*['\"]([^'\"]*)['\"]");
 
     /**
      * Map<String, Class> which maps strings a caller may use when calling into
@@ -1126,51 +1119,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public Object appendChild(final Object childObject) {
-        if (getBrowserVersion().hasFeature(JS_DOCUMENT_APPEND_CHILD_SUPPORTED)) {
-            // We're emulating IE; we can allow insertion.
-            return super.appendChild(childObject);
-        }
-
         // Firefox does not allow insertion at the document level.
         throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
-    }
-
-    /**
-     * Create a new HTML element with the given tag name.
-     *
-     * @param tagName the tag name
-     * @return the new HTML element, or NOT_FOUND if the tag is not supported
-     */
-    @Override
-    public Object createElement(String tagName) {
-        Object result = NOT_FOUND;
-
-        // IE can handle HTML, but it takes only the first tag found
-        if (tagName.startsWith("<") && getBrowserVersion().hasFeature(JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX)) {
-            final Matcher m = FIRST_TAG_PATTERN.matcher(tagName);
-            if (m.find()) {
-                tagName = m.group(1);
-                result = super.createElement(tagName);
-                if (result == NOT_FOUND || m.group(2) == null) {
-                    return result;
-                }
-                final HTMLElement elt = (HTMLElement) result;
-
-                // handle attributes
-                final String attributes = m.group(2);
-                final Matcher mAttribute = ATTRIBUTES_PATTERN.matcher(attributes);
-                while (mAttribute.find()) {
-                    final String attrName = mAttribute.group(1);
-                    final String attrValue = mAttribute.group(2);
-                    elt.setAttribute(attrName, attrValue);
-                }
-            }
-        }
-        else {
-            return super.createElement(tagName);
-        }
-
-        return result;
     }
 
     /**

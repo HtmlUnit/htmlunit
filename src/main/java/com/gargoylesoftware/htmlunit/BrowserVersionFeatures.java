@@ -631,22 +631,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_APPLET_OBJECT,
 
-    /** Indicates that the class name of "arguments" object is "Object". */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_ARGUMENTS_IS_OBJECT,
-
     /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
-
-    /** Indicates that getting an attribute by name (attributes.name) is case-sensitive. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_ATTRIBUTES_BY_NAME_CASE_SENSITIVE,
-
-    /** Indicates that the attributes map contains empty attr
-     * objects for all properties of the object (like IE does). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
 
     /** Is {@code baseURI} null. */
     @BrowserFeature(@WebBrowser(CHROME))
@@ -660,21 +647,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_BGSOUND_AS_UNKNOWN,
 
-    /** Body {@code margin} is 15px. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_BODY_MARGINS_15,
-
     /** Body {@code margin} is 8px. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_BODY_MARGINS_8,
-
-    /** Indicates that the getBoundingClientRect adds an offset of 2. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_BOUNDING_CLIENT_RECT_OFFSET_TWO,
-
-    /** Trying to change the type of a button element throws an exception (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_BUTTON_SET_TYPE_THROWS_EXCEPTION,
 
     /** If we're emulating IE, the overall JavaScript return value is the last return value. */
     @BrowserFeature(@WebBrowser(IE))
@@ -688,34 +663,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_CANVAS_DATA_URL_IE_PNG,
 
-    /** Indicates that the browser emulates the char attribute. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_CHAR_EMULATED,
-
-    /** Indicates that the browser emulates the charOff attribute. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_CHAR_OFF_EMULATED,
-
-    /** Checkbox checked property returns always 'checked' instead of the set attrib value. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_CHECKED_RETURNS_CHECKED_OR_EMPTY,
-
     /** Do not allow invalid clear values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_CLEAR_RESTRICT,
-
-    /** Indicates that the click method call does not trigger the onchange
-     * event handlers for checkboxes. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT,
-
-    /** Indicates that the clientLeft and clientTop returning zero in all cases. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_CLIENT_LEFT_TOP_ZERO,
-
-    /** Indicates that the cloneNode call copies all event listeners. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_CLONE_NODE_COPIES_EVENT_LISTENERS,
 
     /** Indicates that "constructor" property is defined, e.g. <tt>document.constructor</tt>. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
@@ -725,10 +675,6 @@ public enum BrowserVersionFeatures {
     /** Supports {@code CSSCharsetRule}. */
     @BrowserFeature(@WebBrowser(FF))
     JS_CSSRULELIST_CHARSET_RULE,
-
-    /** item is not a enumerable property of CSSRuleList. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_CSSRULELIST_DONT_ENUM_ITEM,
 
     /** item is enumerated before length property of CSSRuleList. */
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
@@ -758,36 +704,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_DEFINE_GETTER,
 
-    /** Javascript doctyp.entities returns an empty string (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DOCTYPE_ENTITIES_EMPTY_STRING,
-
     /** Javascript doctyp.entities returns null (FF10). */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_DOCTYPE_ENTITIES_NULL,
 
-    /** Javascript doctyp.notations returns an empty string (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DOCTYPE_NOTATIONS_EMPTY_STRING,
-
     /** Javascript doctyp.notations returns null (FF10). */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_DOCTYPE_NOTATIONS_NULL,
-
-    /** Javascript document.appendChild is allowed (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
-
-    /** Javascript function document.createElement can create DomComment. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DOCUMENT_CREATE_ELEMENT_COMMENT,
-
-    /** Javascript function document.createElement can process html code.
-     * e.g. {@code document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")}
-     * @see "http://msdn.microsoft.com/en-us/library/ms536389%28v=VS.85%29.aspx"
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX,
 
     /** Javascript function document.createElement accepts only tag names. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
