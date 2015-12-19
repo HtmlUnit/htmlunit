@@ -176,10 +176,8 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
-                        "Sun, 03 Jul 2005 15:14:05 GMT" },
-            IE8 = { "Sat, 3 Dec 2005 07:14:15 UTC", "Tue, 12 Jul 2005 11:04:15 UTC",
-                    "Sun, 3 Jul 2005 15:14:05 UTC" })
+    @Alerts({ "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
+                        "Sun, 03 Jul 2005 15:14:05 GMT" })
     public void toUTCString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -198,10 +196,8 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
-                    "Sun, 03 Jul 2005 15:14:05 GMT" },
-            IE8 = { "Sat, 3 Dec 2005 07:14:15 UTC", "Tue, 12 Jul 2005 11:04:15 UTC",
-                    "Sun, 3 Jul 2005 15:14:05 UTC" })
+    @Alerts({ "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
+                    "Sun, 03 Jul 2005 15:14:05 GMT" })
     public void toGMTString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

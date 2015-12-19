@@ -55,8 +55,7 @@ public class NativeGlobalTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "undefined", "NaN", "Infinity" },
-            IE8 =  { "true", "123", "NaN", "Infinity" })
+    @Alerts({ "true", "undefined", "NaN", "Infinity" })
     public void redeclareConst() throws Exception {
         final String html
             = "<html><body><script>\n"

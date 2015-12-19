@@ -232,9 +232,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined", "undefined",
-                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({ "32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57" })
     public void keyCodes_keypress() throws Exception {
         final String html = "<html><head>"
             + "<script>"
@@ -258,14 +256,10 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "97", "98", "99",
+    @Alerts({ "97", "98", "99",
             "100", "101", "102", "103", "104", "105", "106", "107", "108", "109",
             "110", "111", "112", "113", "114", "115", "116", "117", "118", "119",
-            "120", "121", "122" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-            "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-            "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-            "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" })
+            "120", "121", "122" })
     public void keyCodes2_keypress() throws Exception {
         final String html = "<html><head>"
             + "<script>"
@@ -314,20 +308,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:190,0,190",
                     "keypress:46,46,46",
                     "keyup:190,0,190" },
-             IE8 = { "keydown:16,undefined,undefined",
-                    "keydown:65,undefined,undefined",
-                    "keypress:65,undefined,undefined",
-                    "keyup:65,undefined,undefined",
-                    "keyup:16,undefined,undefined",
-                    "keydown:65,undefined,undefined",
-                    "keypress:97,undefined,undefined",
-                    "keyup:65,undefined,undefined",
-                    "keydown:190,undefined,undefined",
-                    "keypress:46,undefined,undefined",
-                    "keyup:190,undefined,undefined",
-                    "keydown:13,undefined,undefined",
-                    "keypress:13,undefined,undefined",
-                    "keyup:13,undefined,undefined" },
            IE11 = { "keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:65,65,65",

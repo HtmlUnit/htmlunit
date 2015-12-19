@@ -1101,7 +1101,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Hello", IE8 = "")
+    @Alerts("Hello")
     public void setTextContent() throws Exception {
         final String html =
               "<html>\n"

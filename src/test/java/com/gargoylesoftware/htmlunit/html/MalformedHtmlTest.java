@@ -182,7 +182,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     * @throws Exception if an error occurs
     */
     @Test
-    @Alerts(IE8 = "0")
     public void missingSingleQuote() throws Exception {
         final String html = "<html><body>"
             + "Go to <a href='http://blah.com>blah</a> now."
@@ -196,7 +195,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     * @throws Exception if an error occurs
     */
     @Test
-    @Alerts(IE8 = "0")
     public void missingDoubleQuote() throws Exception {
         final String html = "<html><body>"
                 + "Go to <a href='http://blah.com>blah</a> now."
@@ -283,16 +281,11 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "4", "#text:\n    ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
+    @Alerts({ "4", "#text:\n    ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
                 "innerDiv", "BODY:null", "3", "A:null", "A:null", "#text:Y",
                 "outerA", "BODY:null", "1", "#text:V", "true", "false",
                 "outerA", "DIV:null", "1", "#text:W", "false", "false",
-                "innerA", "DIV:null", "1", "#text:X", "false", "true" },
-            IE8 = { "6", "A:null", "A:null", "#text:Y", "#text:Z", "2",
-                "innerDiv", "A:null", "3", "#text:W", "A:null", "#text:Y",
-                "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                "innerA", "DIV:null", "1", "#text:X", "false", "true",
-                "exception" })
+                "innerA", "DIV:null", "1", "#text:X", "false", "true" })
     @NotYetImplemented
     // Input:
     // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div>Z</a>

@@ -57,10 +57,8 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "__defineGetter__: function", "__defineSetter__: function", "__lookupGetter__: function",
-            "__lookupSetter__: function" },
-            IE8 = { "__defineGetter__: undefined", "__defineSetter__: undefined", "__lookupGetter__: undefined",
-            "__lookupSetter__: undefined" })
+    @Alerts({ "__defineGetter__: function", "__defineSetter__: function", "__lookupGetter__: function",
+            "__lookupSetter__: function" })
     public void methods_different() throws Exception {
         final String[] methods = {"__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);

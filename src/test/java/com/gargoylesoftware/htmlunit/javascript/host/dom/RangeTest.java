@@ -72,7 +72,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "BODY", "BODY", "1", "BODY", "2" }, IE8 = { })
+    @Alerts({ "false", "BODY", "BODY", "1", "BODY", "2" })
     public void selectNode() throws Exception {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
             + "alertRange(r);";
@@ -84,7 +84,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "DIV", "DIV", "0", "DIV", "2" }, IE8 = { })
+    @Alerts({ "false", "DIV", "DIV", "0", "DIV", "2" })
     public void selectNodeContents() throws Exception {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
             + "alertRange(r);";
@@ -149,8 +149,8 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
-            "[object HTMLSpanElement]" }, IE8 = { })
+    @Alerts({ "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
+            "[object HTMLSpanElement]" })
     public void extractContents() throws Exception {
         final String html =
               "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -215,7 +215,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "2", "3" }, IE8 = { })
+    @Alerts({ "0", "1", "2", "3" })
     public void constants() throws Exception {
         final String html =
               "<html><body><script>\n"
@@ -233,7 +233,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-1", "1", "1", "-1", "0" }, IE8 = { })
+    @Alerts({ "-1", "1", "1", "-1", "0" })
     public void compareBoundaryPoints() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d1'><div id='d2'></div></div>\n"
@@ -257,7 +257,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "abcd", "bc", "null", "null", "ad", "bc" }, IE8 = { })
+    @Alerts({ "abcd", "bc", "null", "null", "ad", "bc" })
     public void extractContents3() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span>"
@@ -284,8 +284,8 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]",
-            "qwerty", "[object HTMLSpanElement]" }, IE8 = { })
+    @Alerts({ "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]",
+            "qwerty", "[object HTMLSpanElement]" })
     public void cloneContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -311,7 +311,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "qwerty", "bcqwertyxy", "null", "az" }, IE8 = { })
+    @Alerts({ "qwerty", "bcqwertyxy", "null", "az" })
     public void deleteContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -335,7 +335,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "abcd", "bc", "null", "null", "ad" }, IE8 = { })
+    @Alerts({ "abcd", "bc", "null", "null", "ad" })
     public void deleteContents2() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"

@@ -127,7 +127,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "SGVsbG8gV29ybGQh", "Hello World!" }, IE8 = { })
+    @Alerts({ "SGVsbG8gV29ybGQh", "Hello World!" })
     public void atob() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -149,7 +149,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "getClass: undefined,undefined", "java: undefined,undefined", "javax: undefined,undefined",
+    @Alerts({ "getClass: undefined,undefined", "java: undefined,undefined", "javax: undefined,undefined",
             "javafx: undefined,undefined", "org: undefined,undefined", "com: undefined,undefined",
             "edu: undefined,undefined", "net: undefined,undefined", "JavaAdapter: undefined,undefined",
             "JavaImporter: undefined,undefined", "Continuation: undefined,undefined", "Packages: undefined,undefined",
@@ -160,21 +160,6 @@ public class Window2Test extends WebDriverTestCase {
             "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
             "Java: undefined,undefined", "JSAdapter: undefined,undefined",
             "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: function,function",
-            "parseInt: function,function", "parseFloat: function,function",
-            "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
-            "encodeURIComponent: function,function", "decodeURI: function,function",
-            "decodeURIComponent: function,function", "escape: function,function", "unescape: function,function" },
-        IE8 = { "getClass: undefined,undefined", "java: undefined,undefined", "javax: undefined,undefined",
-            "javafx: undefined,undefined", "org: undefined,undefined", "com: undefined,undefined",
-            "edu: undefined,undefined", "net: undefined,undefined", "JavaAdapter: undefined,undefined",
-            "JavaImporter: undefined,undefined", "Continuation: undefined,undefined", "Packages: undefined,undefined",
-            "XML: undefined,undefined", "XMLList: undefined,undefined", "Namespace: undefined,undefined",
-            "QName: undefined,undefined", "arguments: undefined,undefined", "load: undefined,undefined",
-            "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
-            "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
-            "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
-            "Java: undefined,undefined", "JSAdapter: undefined,undefined",
-            "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: object,object",
             "parseInt: function,function", "parseFloat: function,function",
             "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
             "encodeURIComponent: function,function", "decodeURI: function,function",
@@ -456,12 +441,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object Window]", "[object Window]", "[object Window]", "1", "true", "true",
+    @Alerts({ "[object Window]", "[object Window]", "[object Window]", "1", "true", "true",
                     "[object Window]", "true", "true", "no function", "undefined", "true", "true",
-                    "[object History]", "true", "true", "[object Window]", "true", "true" },
-            IE8 = { "[object]", "[object]", "[object]", "1", "true", "true",
-                    "[object]", "true", "true", "[object]", "true", "true", "undefined", "true", "true",
-                    "[object]", "true", "true", "[object]", "true", "true" })
+                    "[object History]", "true", "true", "[object Window]", "true", "true" })
     public void framesAreWindows() throws Exception {
         final String html = "<html><body><iframe name='f'></iframe><script>\n"
             + "alert(window.frames);\n"
@@ -605,8 +587,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
                     "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" },
-            IE8 = { "[object]", "[object] (true)", "1234 (true)", "null (true)", "undefined (true)", "[object] (true)",
-                "[object] (true)", "[object] (true)" },
             IE11 = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
                 "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" })
     public void set_opener() throws Exception {
@@ -1652,8 +1632,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "function" },
-        IE8 = { "undefined", "undefined" })
+    @Alerts({ "function", "function" })
     public void requestAnimationFrame() throws Exception {
         final String html
             = "<html><body><script>\n"

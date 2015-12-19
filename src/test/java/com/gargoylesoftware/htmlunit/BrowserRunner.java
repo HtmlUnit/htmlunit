@@ -160,9 +160,6 @@ public class BrowserRunner extends Suite {
         /** All versions of Internet Explorer. */
         IE,
 
-        /** Internet Explorer 8. */
-        IE8,
-
         /** Internet Explorer 11. */
         IE11,
 
@@ -203,12 +200,6 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] IE() default { EMPTY_DEFAULT };
-
-        /**
-         * Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used.
-         * @return the alerts
-         */
-        String[] IE8() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used.
@@ -273,12 +264,6 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] IE() default { EMPTY_DEFAULT };
-
-        /**
-         * Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used.
-         * @return the alerts
-         */
-        String[] IE8() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used.

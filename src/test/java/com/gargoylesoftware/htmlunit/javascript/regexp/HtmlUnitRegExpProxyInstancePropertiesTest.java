@@ -144,10 +144,8 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "html,body,div,div,div", "undefined", "undefined", "undefined",
-                "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]" },
-            IE8 = { "html,body,div,div,div", "25", "28", "/html/body/div[5]/div[1]/div[1]",
-                    "null" })
+    @Alerts({ "html,body,div,div,div", "undefined", "undefined", "undefined",
+                "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]" })
     @NotYetImplemented
     public void regExResultProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
