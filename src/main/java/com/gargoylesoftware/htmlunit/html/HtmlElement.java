@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 
@@ -1302,8 +1301,7 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public boolean isDisplayed() {
-        if (!hasFeature(HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED)
-                && ATTRIBUTE_NOT_DEFINED != getAttribute("hidden")) {
+        if (ATTRIBUTE_NOT_DEFINED != getAttribute("hidden")) {
             return false;
         }
         return super.isDisplayed();

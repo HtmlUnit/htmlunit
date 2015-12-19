@@ -15,10 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLPARSER_REMOVE_EMPTY_CONTENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_CDATA_AS_COMMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.META_X_UA_COMPATIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY;
@@ -74,7 +72,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
 
 /**
@@ -517,10 +514,6 @@ public final class HTMLParser {
                 return;
             }
 
-            if (parsingInnerHead_ && page_.hasFeature(IGNORE_CONTENTS_OF_INNER_HEAD)) {
-                return;
-            }
-
             if (namespaceURI != null) {
                 namespaceURI = namespaceURI.trim();
             }
@@ -759,7 +752,7 @@ public final class HTMLParser {
                 if ("head".equals(tagLower)) {
                     parsingInnerHead_ = false;
                 }
-                if ("head".equals(tagLower) || page_.hasFeature(IGNORE_CONTENTS_OF_INNER_HEAD)) {
+                if ("head".equals(tagLower)) {
                     return;
                 }
             }
@@ -788,64 +781,10 @@ public final class HTMLParser {
         /** {@inheritDoc} */
         @Override
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
-            if ((characters_ == null || characters_.length() == 0)
-                    && page_.hasFeature(HTMLPARSER_REMOVE_EMPTY_CONTENT)
-                    && StringUtils.isBlank(new String(ch, start, length))) {
-
-                DomNode node = currentNode_.getLastChild();
-                if (currentNode_ instanceof HTMLElement.ProxyDomNode) {
-                    final HTMLElement.ProxyDomNode proxyNode = (HTMLElement.ProxyDomNode) currentNode_;
-                    node = proxyNode.getDomNode();
-                    if (!proxyNode.isAppend()) {
-                        node = node.getPreviousSibling();
-                        if (node == null) {
-                            node = proxyNode.getDomNode().getParentNode();
-                        }
-                    }
-                }
-                if (removeEmptyCharacters(node)) {
-                    return;
-                }
-            }
             if (characters_ == null) {
                 characters_ = new StringBuilder();
             }
             characters_.append(ch, start, length);
-        }
-
-        private boolean removeEmptyCharacters(final DomNode node) {
-            if (node != null) {
-                if (node instanceof HtmlInput) {
-                    return false;
-                }
-                if (node.getFirstChild() != null
-                    && (node instanceof HtmlAnchor || node instanceof HtmlSpan
-                        || node instanceof HtmlFont
-                        || node instanceof HtmlStrong || node instanceof HtmlBold
-                        || node instanceof HtmlItalic || node instanceof HtmlUnderlined
-                        || node instanceof HtmlEmphasis
-                        || node instanceof HtmlAbbreviated || node instanceof HtmlAcronym
-                        || node instanceof HtmlBaseFont || node instanceof HtmlBidirectionalOverride
-                        || node instanceof HtmlBig || node instanceof HtmlBlink
-                        || node instanceof HtmlCitation || node instanceof HtmlCode
-                        || node instanceof HtmlDeletedText || node instanceof HtmlDefinition
-                        || node instanceof HtmlInsertedText || node instanceof HtmlKeyboard
-                        || node instanceof HtmlLabel || node instanceof HtmlMap
-                        || node instanceof HtmlNoBreak || node instanceof HtmlInlineQuotation
-                        || node instanceof HtmlS || node instanceof HtmlSample
-                        || node instanceof HtmlSmall || node instanceof HtmlStrike
-                        || node instanceof HtmlSubscript || node instanceof HtmlSuperscript
-                        || node instanceof HtmlTeletype || node instanceof HtmlVariable
-                        )) {
-                    return false;
-                }
-            }
-            else {
-                if (currentNode_ instanceof HtmlFont) {
-                    return false;
-                }
-            }
-            return true;
         }
 
         /** {@inheritDoc} */

@@ -14,12 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_SHORT_HEX;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_REPLACE_NAME_BY_HEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT_AND_FILL_UP;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO;
@@ -948,15 +945,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else if (html) {
             final DomElement element = (DomElement) node;
             final Element scriptObject = (Element) node.getScriptableObject();
-            final boolean isUpperCase = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_HTML_UPPER_CASE);
-            String tag = element.getTagName();
+            final String tag = element.getTagName();
 
             HTMLElement htmlElement = null;
             if (scriptObject instanceof HTMLElement) {
                 htmlElement = (HTMLElement) scriptObject;
-                if (isUpperCase && !htmlElement.isLowerCaseInOuterHtml()) {
-                    tag = tag.toUpperCase(Locale.ROOT);
-                }
             }
             buffer.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.
@@ -2365,18 +2358,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     protected void setColorAttribute(final String name, final String value) {
         String s = value;
         if (!s.isEmpty()) {
-            final boolean replaceNameByHex = getBrowserVersion().hasFeature(HTML_COLOR_REPLACE_NAME_BY_HEX);
             final boolean restrict = getBrowserVersion().hasFeature(HTML_COLOR_RESTRICT);
-            final boolean restrictAndFillUp = getBrowserVersion().hasFeature(HTML_COLOR_RESTRICT_AND_FILL_UP);
 
             boolean isName = false;
-            if (replaceNameByHex || restrict || restrictAndFillUp) {
+            if (restrict) {
                 for (final String key : COLORS_MAP_IE.keySet()) {
                     if (key.equalsIgnoreCase(value)) {
                         isName = true;
-                        if (replaceNameByHex) {
-                            s = COLORS_MAP_IE.get(key).toLowerCase(Locale.ROOT);
-                        }
                         break;
                     }
                 }
@@ -2390,7 +2378,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                         .append('0').append(s.charAt(3));
                     s = builder.toString();
                 }
-                if (restrict || restrictAndFillUp) {
+                if (restrict) {
                     if (s.charAt(0) == '#') {
                         s = s.substring(1);
                     }
@@ -2401,11 +2389,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                             builder.append(ch);
                         }
                         else {
-                            builder.append('0');
-                        }
-                    }
-                    if (restrictAndFillUp) {
-                        while (builder.length() < 6) {
                             builder.append('0');
                         }
                     }

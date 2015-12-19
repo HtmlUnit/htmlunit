@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALLOW_CONST_ASSIGNMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CONSTRUCTOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_USE_UTC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
@@ -44,6 +43,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
 
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -67,17 +77,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino JavaScript engine</a>
@@ -504,10 +503,6 @@ public class JavaScriptEngine {
         deleteProperties(window, "isXMLName");
 
         NativeFunctionToStringFunction.installFix(window, webClient.getBrowserVersion());
-
-        if (browserVersion.hasFeature(JS_ALLOW_CONST_ASSIGNMENT)) {
-            makeConstWritable(window, "undefined", "NaN", "Infinity");
-        }
 
         final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Date");
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},

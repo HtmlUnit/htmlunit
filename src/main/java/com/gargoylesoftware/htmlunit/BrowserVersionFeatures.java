@@ -425,14 +425,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLELEMENT_ALIGN_INVALID,
 
-    /** The html5 hidden attribute is not supported. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED,
-
-    /** Indicates that element.innerHTML/outerHTML the tag name is in upper case or not. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLELEMENT_OUTER_HTML_UPPER_CASE,
-
     /**
      * Indicates outer/innerHtml quotes attributes.
      */
@@ -493,16 +485,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     HTMLKEYGEN_END_TAG_FORBIDDEN,
 
-    /** Attribute 'compact' may only be a boolean value. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLLIST_LIMIT_COMPACT_TO_BOOLEAN,
-
-    /**
-     * Set this property if the browser does NOT support the disabling of an individual option group.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLOPTIONGROUP_NO_DISABLED,
-
     /** */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
@@ -518,10 +500,6 @@ public enum BrowserVersionFeatures {
     /** Un-selecting an option in a (single-value) select causes the first option to become selected. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLOPTION_UNSELECT_SELECTS_FIRST,
-
-    /** Indicates that for some elements, the empty text after it should be removed. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTMLPARSER_REMOVE_EMPTY_CONTENT,
 
     /**
      * Set this property if the script tag supports the
@@ -566,18 +544,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     HTML_COLOR_EXPAND_ZERO,
 
-    /** Replace color names by their 6-digit hex color code. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTML_COLOR_REPLACE_NAME_BY_HEX,
-
     /** Do not allow anything invalid in color, but restrict to valid values (names and hex digits) only. */
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11) })
     HTML_COLOR_RESTRICT,
-
-    /** Do not allow anything invalid in color, but restrict to valid values (names and hex digits) only.
-     * Fill up to 6 digits if shorter. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTML_COLOR_RESTRICT_AND_FILL_UP,
 
     /** Convert the color (name and hex code) to lower case. */
     @BrowserFeature(@WebBrowser(IE))
@@ -586,10 +555,6 @@ public enum BrowserVersionFeatures {
     /** Supports &lt;object&gt; classid attribute. */
     @BrowserFeature(@WebBrowser(IE))
     HTML_OBJECT_CLASSID,
-
-    /** In HTMLUnknownElement, use "localName" for the "nodeName". */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTML_UNKNOWN_LOCAL_NAME,
 
     /** Additionally support dates in format "d/M/yyyy". */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8) })
@@ -616,10 +581,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTTP_REDIRECT_308,
 
-    /** Indicates that the browser should ignore contents of inner head elements. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    IGNORE_CONTENTS_OF_INNER_HEAD,
-
     /** Setting the property align to arbitrary values is allowed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_ALIGN_ACCEPTS_ARBITRARY_VALUES,
@@ -630,10 +591,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_ALIGN_FOR_INPUT_IGNORES_VALUES,
-
-    /** Top scope constants can be assign (and are not... constants). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_ALLOW_CONST_ASSIGNMENT,
 
     /**
      * Javascript property anchors includes all anchors with a name or an id property.
@@ -669,16 +626,6 @@ public enum BrowserVersionFeatures {
     /** The typeof element (not prototype) is "HTMLAnchorElement". */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_ANCHOR_TYPE_HTMLANCHORELEMENT,
-
-    /** Indicates that the appendChild call create a DocumentFragment to be
-     * the parentNode's parentNode if this was null. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT,
-
-    /** Indicates that the appendChild call throws no exception
-     * if the provided node cannot be inserted. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE,
 
     /** Applet is an "[object]" even in standards mode. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

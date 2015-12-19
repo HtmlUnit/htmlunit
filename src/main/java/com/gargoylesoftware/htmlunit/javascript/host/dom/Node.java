@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
@@ -217,9 +215,6 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(childNode)) {
-                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
-                    return childNode;
-                }
                 throw asJavaScriptException(
                     new DOMException("Node cannot be inserted at the specified point in the hierarchy",
                         DOMException.HIERARCHY_REQUEST_ERR));
@@ -234,16 +229,6 @@ public class Node extends EventTarget {
             // Append the child to the parent node
             parentNode.appendChild(childDomNode);
             appendedChild = childObject;
-
-            // if the parentNode has null parentNode in IE,
-            // create a DocumentFragment to be the parentNode's parentNode.
-            if (!(parentNode instanceof SgmlPage)
-                    && !(this instanceof DocumentFragment) && parentNode.getParentNode() == null
-                    && getBrowserVersion().hasFeature(
-                            JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
-                final DomDocumentFragment fragment = parentNode.getPage().createDocumentFragment();
-                fragment.appendChild(parentNode);
-            }
 
             initInlineFrameIfNeeded(childDomNode);
             for (final DomNode domNode : childDomNode.getDescendants()) {
@@ -337,9 +322,6 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
-                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
-                    return newChild;
-                }
                 throw asJavaScriptException(
                     new DOMException("Node cannot be inserted at the specified point in the hierarchy",
                         DOMException.HIERARCHY_REQUEST_ERR));
@@ -348,9 +330,6 @@ public class Node extends EventTarget {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
                     if (!isNodeInsertable((Node) child.getScriptableObject())) {
-                        if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
-                            return newChild;
-                        }
                         throw asJavaScriptException(
                             new DOMException("Node cannot be inserted at the specified point in the hierarchy",
                                 DOMException.HIERARCHY_REQUEST_ERR));
@@ -394,13 +373,6 @@ public class Node extends EventTarget {
                             DOMException.HIERARCHY_REQUEST_ERR));
             }
             insertedChild = newChild;
-
-            // if parentNode is null, create a DocumentFragment to be the parentNode
-            if (domNode.getParentNode() == null && getBrowserVersion()
-                    .hasFeature(JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
-                final DomDocumentFragment fragment = domNode.getPage().createDocumentFragment();
-                fragment.appendChild(domNode);
-            }
         }
         return insertedChild;
     }

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOMMAND_END_TAG_FORBIDDEN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_UNKNOWN_LOCAL_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_GENERIC_ELEMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_HYPHEN_ELEMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_RUBY_ELEMENT_CLASS_NAME;
@@ -26,7 +25,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRp;
 import com.gargoylesoftware.htmlunit.html.HtmlRt;
 import com.gargoylesoftware.htmlunit.html.HtmlRuby;
@@ -67,8 +65,7 @@ public class HTMLUnknownElement extends HTMLElement {
     public String getNodeName() {
         final HtmlElement elem = getDomNodeOrDie();
         final Page page = elem.getPage();
-        if (page instanceof XmlPage || (getBrowserVersion().hasFeature(HTML_UNKNOWN_LOCAL_NAME)
-            && ((HtmlPage) page).getNamespaces().containsKey(elem.getPrefix()))) {
+        if (page instanceof XmlPage) {
             return elem.getLocalName();
         }
         return super.getNodeName();
