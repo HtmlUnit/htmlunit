@@ -39,7 +39,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<note>32<to>Tove</to>3210<from>Jani</from>321032<body>Do32not32forget32me32this32weekend!</body>"
+    @Alerts("<note>32<to>Tove</to>3210<from>Jani</from>321032<body>Do32not32forget32me32this32weekend!</body>"
                     + "32<outer>10323232<inner>Some32Value</inner></outer>32</note>")
     public void test() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
@@ -307,7 +307,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "<area xmlns=\"http://www.w3.org/1999/xhtml\" />",
+    @Alerts({ "<area xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<base xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<basefont xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<br xmlns=\"http://www.w3.org/1999/xhtml\" />",

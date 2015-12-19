@@ -1419,7 +1419,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "div1" })
+    @Alerts({ "3", "div1" })
     public void querySelectorAll_quirks() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<style>\n"

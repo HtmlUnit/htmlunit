@@ -36,7 +36,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void text() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -93,7 +93,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void collapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -151,7 +151,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void moveEnd() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -184,7 +184,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void moveOutOfBounds_input() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

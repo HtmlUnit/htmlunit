@@ -509,7 +509,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "loaded" })
+    @Alerts({ "createIFrame", "loaded" })
     public void documentCreateElement_onLoad_srcAboutBlank() throws Exception {
         documentCreateElement_onLoad_srcX("about:blank");
     }
@@ -518,7 +518,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "createIFrame", "loaded" })
+    @Alerts({ "createIFrame", "loaded" })
     public void documentCreateElement_onLoad_srcSomePage() throws Exception {
         documentCreateElement_onLoad_srcX("foo.html");
     }
@@ -579,7 +579,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "fragment append done", "loaded" })
+    @Alerts({ "fragment append done", "loaded" })
     public void documentDocumentFragmentCreateElement_onLoad() throws Exception {
         final String html =
               "<html>\n"

@@ -395,7 +395,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "DOMContentLoaded type=DOMContentLoaded", "onLoad" })
+    @Alerts({ "DOMContentLoaded type=DOMContentLoaded", "onLoad" })
     public void testDOMContentLoaded() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -501,7 +501,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "capturing", "at target", "bubbling" })
+    @Alerts({ "capturing", "at target", "bubbling" })
     @NotYetImplemented(CHROME)
     public void eventPhase() throws Exception {
         final String html =
@@ -541,7 +541,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing",
+    @Alerts({ "window capturing", "div capturing", "span capturing",
                 "span bubbling", "div", "div bubbling", "window bubbling" })
     public void eventCapturingAndBubbling() throws Exception {
         final String html = "<html>\n"

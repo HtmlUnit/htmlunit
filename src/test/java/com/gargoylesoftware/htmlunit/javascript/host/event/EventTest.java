@@ -110,7 +110,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "", "false", "false" })
+    @Alerts({ "[object Event]", "", "false", "false" })
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -155,7 +155,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "event", "true", "false" })
+    @Alerts({ "[object Event]", "event", "true", "false" })
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -535,7 +535,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "click", "true", "true", "click", "false", "false" })
+    @Alerts({ "click", "true", "true", "click", "false", "false" })
     public void testInitEventClick() throws Exception {
         testInitEvent("click");
     }
@@ -544,7 +544,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "dblclick", "true", "true", "dblclick", "false", "false" })
+    @Alerts({ "dblclick", "true", "true", "dblclick", "false", "false" })
     public void testInitEventDblClick() throws Exception {
         testInitEvent("dblclick");
     }
@@ -553,7 +553,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "unknown", "true", "true", "unknown", "false", "false" })
+    @Alerts({ "unknown", "true", "true", "unknown", "false", "false" })
     public void testInitEventUnknown() throws Exception {
         testInitEvent("unknown");
     }
@@ -562,7 +562,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "cASe", "true", "true", "cASe", "false", "false" })
+    @Alerts({ "cASe", "true", "true", "cASe", "false", "false" })
     public void testInitEventCaseSensitive() throws Exception {
         testInitEvent("cASe");
     }

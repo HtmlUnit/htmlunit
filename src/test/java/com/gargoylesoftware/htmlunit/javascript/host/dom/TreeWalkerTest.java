@@ -246,7 +246,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "BODY", "DIV", "SPAN", "A", "P", "undefined", "P" })
+    @Alerts({ "BODY", "DIV", "SPAN", "A", "P", "undefined", "P" })
     public void next() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -265,7 +265,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "P", "A", "SPAN", "DIV", "BODY", "undefined", "BODY" })
+    @Alerts({ "P", "A", "SPAN", "DIV", "BODY", "undefined", "BODY" })
     public void previous() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -285,8 +285,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "DIV", "SPAN", "A", "undefined", "P", "BODY", "undefined", "SPAN", "undefined",
-            "P", "SPAN", "CODE", "PRE", "undefined" })
+    @Alerts({ "DIV", "SPAN", "A", "undefined", "P", "BODY", "undefined", "SPAN", "undefined",
+                "P", "SPAN", "CODE", "PRE", "undefined" })
     public void walking() throws Exception {
         final String script = "var tw = document.createTreeWalker(document.body, 1, null, true);\n"
             + "alert(safeTagName(tw.firstChild()));\n"
@@ -311,7 +311,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "TITLE", "SCRIPT", "HEAD", "HTML", "HEAD", "BODY", "undefined" })
+    @Alerts({ "TITLE", "SCRIPT", "HEAD", "HTML", "HEAD", "BODY", "undefined" })
     public void walkingOutsideTheRoot() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -368,7 +368,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined" })
+    @Alerts({ "TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined" })
     public void simpleFilter_asAFunction() throws Exception {
         final String script = "var noScripts = function(node) {"
             + "if (node.tagName == 'SCRIPT') return NodeFilter.FILTER_REJECT;"

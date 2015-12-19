@@ -96,7 +96,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>")
+    @Alerts("<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>")
     public void createContextualFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -121,7 +121,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Text]", "[object HTMLTableRowElement]" })
+    @Alerts({ "[object Text]", "[object HTMLTableRowElement]" })
     public void createContextualFragment2() throws Exception {
         final String html = "<html><body>\n"
             + "<div id ='d'></div>\n"
@@ -176,7 +176,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {
+    @Alerts({
             "1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
             "2 text1",
             "3 [object DocumentFragment]",

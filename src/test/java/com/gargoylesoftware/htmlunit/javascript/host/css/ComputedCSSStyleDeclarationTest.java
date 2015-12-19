@@ -212,7 +212,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px",
+    @Alerts({ "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px",
                    "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px" })
     public void lengthsConvertedToPixels() throws Exception {
         final String html = "<html><body>\n"

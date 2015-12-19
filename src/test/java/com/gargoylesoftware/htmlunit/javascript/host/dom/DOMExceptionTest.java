@@ -34,7 +34,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" })
+    @Alerts({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" })
     public void constants() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -57,7 +57,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({ "undefined", "undefined", "undefined", "undefined" })
     public void properties() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

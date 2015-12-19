@@ -990,7 +990,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
+    @Alerts({ "[object Element]", "[object Element]", "[object HTMLBodyElement]",
                 "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_getElementById() throws Exception {

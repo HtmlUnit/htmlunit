@@ -202,7 +202,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "rendering...", "exception" })
+    @Alerts({ "rendering...", "exception" })
     public void drawImage_noImage() throws Exception {
         final String html = "<html><body>\n"
             + "<img id='myImage'>\n"

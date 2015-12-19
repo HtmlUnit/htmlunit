@@ -805,7 +805,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "onload")
+    @Alerts("onload")
     public void onload_after_deferReadStateComplete() throws Exception {
         final String html =
               "<html>\n"
@@ -965,7 +965,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "\n    <script id=\"testScript\">function foo() { return a > b}</script>\n  " })
+    @Alerts("\n    <script id=\"testScript\">function foo() { return a > b}</script>\n  ")
     public void innerHTMLGetSet() throws Exception {
         final String html
             = "<html>\n"

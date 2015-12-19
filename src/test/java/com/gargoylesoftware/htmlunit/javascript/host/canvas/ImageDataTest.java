@@ -70,7 +70,7 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11")
+    @Alerts("0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11")
     public void data() throws Exception {
         final String html =
             "<html><head><script>\n"

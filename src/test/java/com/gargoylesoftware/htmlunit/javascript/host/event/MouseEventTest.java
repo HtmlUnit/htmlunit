@@ -60,7 +60,7 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true" })
+    @Alerts({ "click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true" })
     public void initMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

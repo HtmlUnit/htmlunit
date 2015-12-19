@@ -334,7 +334,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "mydoc", "null", "mydoc", "null" })
+    @Alerts({ "mydoc", "null", "mydoc", "null" })
     public void createDocument_qualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -357,7 +357,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "mydoc", "null", "mydoc", "http://mynamespace" })
+    @Alerts({ "mydoc", "null", "mydoc", "http://mynamespace" })
     public void createDocument_namespaceAndQualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -380,7 +380,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "m:mydoc", "m", "mydoc", "http://mynamespace" })
+    @Alerts({ "m:mydoc", "m", "mydoc", "http://mynamespace" })
     public void createDocument_namespaceAndQualifiedNameWithPrefix() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

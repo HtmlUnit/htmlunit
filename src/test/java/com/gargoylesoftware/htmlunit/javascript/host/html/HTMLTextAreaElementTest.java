@@ -471,7 +471,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "9", "9", "2", "7" })
+    @Alerts({ "9", "9", "2", "7" })
     public void selectionRange() throws Exception {
         final String html
             = "<html>\n"

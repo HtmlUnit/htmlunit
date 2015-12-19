@@ -61,7 +61,7 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object UIEvent]", "click", "true", "true", "true", "7" })
+    @Alerts({ "[object UIEvent]", "click", "true", "true", "true", "7" })
     public void initUIEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

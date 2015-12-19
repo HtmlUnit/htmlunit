@@ -35,7 +35,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Received:worker loaded" })
+    @Alerts("Received:worker loaded")
     public void postMessageFromWorker() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
@@ -58,7 +58,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Received: Result = 15" })
+    @Alerts("Received: Result = 15")
     public void postMessageToWorker() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -84,7 +84,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "start worker", "in imported script1", "in imported script2", "end worker" })
+    @Alerts({ "start worker", "in imported script1", "in imported script2", "end worker" })
     public void importScripts() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -113,7 +113,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object DedicatedWorkerGlobalScope]", "[object DedicatedWorkerGlobalScope]", "true" })
+    @Alerts({ "[object DedicatedWorkerGlobalScope]", "[object DedicatedWorkerGlobalScope]", "true" })
     public void thisAndSelf() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

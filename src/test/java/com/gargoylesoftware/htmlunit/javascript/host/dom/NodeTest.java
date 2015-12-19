@@ -282,7 +282,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void attachEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<title>First</title>\n"
@@ -442,7 +442,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
+    @Alerts({ "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
             "<div>one</div><div>two</div><div id=\"myDiv3\"></div>" })
     public void replaceChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -471,7 +471,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
+    @Alerts({ "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
             "<div id=\"myDiv3\"></div>" })
     public void replaceChild_EmptyDocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -501,7 +501,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "in click")
+    @Alerts("in click")
     public void cloneNode_copiesListenerOnlyForIE() throws Exception {
         final String html =
               "<html>\n"
@@ -565,7 +565,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "20", "20", "4", "10", "10", "2", "20", "exception" })
+    @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20", "exception" })
     public void compareDocumentPosition() throws Exception {
         final String html
             = "<html><head>\n"
@@ -606,7 +606,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "16" })
+    @Alerts({ "0", "16" })
     public void compareDocumentPosition2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1019,7 +1019,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void event() throws Exception {
         final String firstHtml = "<html>\n"
             + "<head><title>First Page</title>\n"
@@ -1128,7 +1128,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "null")
+    @Alerts("null")
     public void cloneParent() throws Exception {
         final String html =
               "<!DOCTYPE><html>\n"

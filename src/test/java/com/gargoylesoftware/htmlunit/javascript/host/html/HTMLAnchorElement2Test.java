@@ -74,7 +74,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "attachEvent not available", "href" })
+    @Alerts({ "attachEvent not available", "href" })
     public void javaScriptPreventDefaultIE() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"

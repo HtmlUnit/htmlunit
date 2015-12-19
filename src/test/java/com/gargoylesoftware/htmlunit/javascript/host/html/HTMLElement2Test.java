@@ -122,7 +122,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "attachEvent not available")
+    @Alerts("attachEvent not available")
     public void offsetWidth_withEvent() throws Exception {
         final String html =
               "<html>\n"
@@ -910,7 +910,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "div1" })
+    @Alerts({ "3", "div1" })
     public void querySelectorAll() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -942,7 +942,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "p1" })
+    @Alerts({ "1", "p1" })
     public void querySelectorAllOnDisconnectedElement() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<script>\n"
@@ -1041,8 +1041,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {
-                "Old = <b>Old innerHTML</b><!-- old comment -->",
+    @Alerts({ "Old = <b>Old innerHTML</b><!-- old comment -->",
                 "New =  <b><i id=\"newElt\">New cell value</i></b>",
                 "I" })
     public void getSetInnerHTMLComplex() throws Exception {
