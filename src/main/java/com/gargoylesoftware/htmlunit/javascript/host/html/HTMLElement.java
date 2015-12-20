@@ -684,7 +684,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public void setAttribute(String name, final String value) {
-        name = fixAttributeName(name);
         getDomNodeOrDie().setAttribute(name, value);
 
         // call corresponding event handler setOnxxx if found

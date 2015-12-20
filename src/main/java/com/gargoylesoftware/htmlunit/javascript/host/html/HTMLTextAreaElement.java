@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION;
@@ -29,7 +28,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.util.regex.Pattern;
 
-import com.gargoylesoftware.htmlunit.html.DomElement;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -38,9 +38,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object {@code HTMLTextAreaElement}.
@@ -352,10 +349,6 @@ public class HTMLTextAreaElement extends FormField {
     @JsxGetter
     public Object getMaxLength() {
         final String maxLength = getDomNodeOrDie().getAttribute("maxLength");
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == maxLength
-                && getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED)) {
-            return Undefined.instance;
-        }
 
         try {
             return Integer.parseInt(maxLength);
@@ -363,9 +356,6 @@ public class HTMLTextAreaElement extends FormField {
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT)) {
                 return Integer.MAX_VALUE;
-            }
-            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED)) {
-                return maxLength;
             }
             return -1;
         }
@@ -387,11 +377,6 @@ public class HTMLTextAreaElement extends FormField {
             getDomNodeOrDie().setAttribute("maxLength", maxLength);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED)) {
-                getDomNodeOrDie().setAttribute("maxLength", maxLength);
-                return;
-            }
-
             getDomNodeOrDie().setAttribute("maxLength", "0");
             return;
         }

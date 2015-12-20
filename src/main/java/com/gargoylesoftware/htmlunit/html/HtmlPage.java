@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONBEFOR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IN_STANDARDS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 
 import java.io.File;
@@ -2216,11 +2215,6 @@ public class HtmlPage extends InteractivePage {
     @Override
     protected void setDocumentType(final DocumentType type) {
         super.setDocumentType(type);
-
-        if (hasFeature(JS_WINDOW_IN_STANDARDS_MODE) && !isQuirksMode()) {
-            final JavaScriptEngine jsEngine = getWebClient().getJavaScriptEngine();
-            jsEngine.definePropertiesInStandardsMode(this);
-        }
     }
 
     /**

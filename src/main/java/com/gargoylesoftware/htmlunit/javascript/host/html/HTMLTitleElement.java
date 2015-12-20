@@ -15,13 +15,11 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TITLE_TEXT_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -65,9 +63,6 @@ public class HTMLTitleElement extends HTMLElement {
         final DomNode firstChild = getDomNodeOrDie().getFirstChild();
         if (firstChild != null) {
             return firstChild.getNodeValue();
-        }
-        if (getBrowserVersion().hasFeature(JS_TITLE_TEXT_UNDEFINED)) {
-            return Undefined.instance;
         }
         return "";
     }

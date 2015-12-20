@@ -1043,24 +1043,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     JS_FUNCTION_TOSTRING_ENUMERATED,
 
-    /** Indicates that the getAttribute method supports IE style flags, only in quirks mode . */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE,
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB,
-
-    /** Javascript function getElementsByName returns an empty collection if called with empty string. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING,
-
-    /** Javascript function getElementsByTagName does not support namespaces. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_GET_ELEMENTS_BY_TAG_NAME_NOT_SUPPORTS_NAMESPACES,
-
-    /** Javascript function getElementById calls getElementByName if nothing found by id, only in quirks mode. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE,
 
     /** Javascript function getElementById compares the id's case sensitive. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
@@ -1579,22 +1564,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,
 
-    /** Value of attribute 'sectionRowIndex' is a big int if the row is not attached to a table. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_TABLE_ROW_SECTION_INDEX_BIG_INT_IF_UNATTACHED,
-
-    /** When trying to set a table caption although there is already one an error is thrown. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR,
-
-    /** When trying to set a table footer (tfoot) although there is already one an error is thrown. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_TABLE_SET_TFOOT_ALTHOUGH_ALREADY_SET_THROWS_ERROR,
-
-    /** When trying to set a table header (thead) although there is already one an error is thrown. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR,
-
     /** Throws an exception if the value for column span is less than one. */
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID,
@@ -1608,12 +1577,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT,
-
-    /** Getting the property maxLength if it is not defined in the DOM returns undefined (IE8).
-     * FF and Chrome return -1.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED,
 
     /** Setting the property cols throws an exception, if the provided value is less
      * than 0 (IE).
@@ -1649,11 +1612,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
-
-    /** Property title.text returns undefined instead of an empty string.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_TITLE_TEXT_UNDEFINED,
 
     /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always {@code false}. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })

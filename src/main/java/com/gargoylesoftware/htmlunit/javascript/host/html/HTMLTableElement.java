@@ -16,9 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_TFOOT_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -26,6 +23,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -38,8 +37,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLTableElement}.
@@ -91,10 +88,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setCaption(final Object o) {
-        if (getBrowserVersion().hasFeature(JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("Can't set caption");
-        }
-        else if (!(o instanceof HTMLTableCaptionElement)) {
+        if (!(o instanceof HTMLTableCaptionElement)) {
             throw Context.reportRuntimeError("Not a caption");
         }
 
@@ -125,10 +119,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTFoot(final Object o) {
-        if (getBrowserVersion().hasFeature(JS_TABLE_SET_TFOOT_ALTHOUGH_ALREADY_SET_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("Can't set tFoot");
-        }
-        else if (!(o instanceof HTMLTableSectionElement
+        if (!(o instanceof HTMLTableSectionElement
             && "TFOOT".equals(((HTMLTableSectionElement) o).getTagName()))) {
             throw Context.reportRuntimeError("Not a tFoot");
         }
@@ -160,10 +151,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTHead(final Object o) {
-        if (getBrowserVersion().hasFeature(JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("Can't set tHead");
-        }
-        else if (!(o instanceof HTMLTableSectionElement
+        if (!(o instanceof HTMLTableSectionElement
             && "THEAD".equals(((HTMLTableSectionElement) o).getTagName()))) {
             throw Context.reportRuntimeError("Not a tHead");
         }

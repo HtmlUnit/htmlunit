@@ -39,8 +39,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_E
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_BODY_NULL_IF_NOT_LOADED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
@@ -74,7 +72,6 @@ import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -1194,17 +1191,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
-            final BrowserVersion browser = getBrowserVersion();
-            if (browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE)
-                    && getPage().isQuirksMode()) {
-                final HTMLCollection elements = getElementsByName(id);
-                result = elements.get(0, elements);
-                if (result instanceof UniqueTag) {
-                    return null;
-                }
-                LOG.warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
-                return result;
-            }
             if (LOG.isDebugEnabled()) {
                 LOG.debug("getElementById(" + id + "): no DOM node found with this id");
             }
@@ -1235,9 +1221,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public HTMLCollection getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
-        if (getBrowserVersion().hasFeature(JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING)
-                && StringUtils.isEmpty(elementName)
-                || "null".equals(elementName)) {
+        if ("null".equals(elementName)) {
             return HTMLCollection.emptyCollection(getWindow());
         }
         // Null must me changed to '' for proper collection initialization.

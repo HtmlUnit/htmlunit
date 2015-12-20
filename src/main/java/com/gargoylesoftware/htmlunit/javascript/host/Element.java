@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_CLASS_LIST_NULL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -29,13 +28,11 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -203,43 +200,14 @@ public class Element extends EventNode {
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
     @JsxFunction
-    public Object getAttribute(String attributeName, final Integer flags) {
-        attributeName = fixAttributeName(attributeName);
-        final HtmlPage htmlPage = getDomNodeOrDie().getHtmlPageOrNull();
-        final boolean supportsFlags = getBrowserVersion().hasFeature(JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE)
-                && htmlPage != null && htmlPage.isQuirksMode();
-
-        Object value;
-        if (supportsFlags && flags != null && flags == 2 && "style".equalsIgnoreCase(attributeName)) {
-            value = "";
-        }
-        else {
-            value = getDomNodeOrDie().getAttribute(attributeName);
-        }
+    public Object getAttribute(final String attributeName, final Integer flags) {
+        Object value = getDomNodeOrDie().getAttribute(attributeName);
 
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             value = null;
-            if (supportsFlags) {
-                for (Scriptable object = this; object != null; object = object.getPrototype()) {
-                    final Object property = object.get(attributeName, this);
-                    if (property != NOT_FOUND) {
-                        value = property;
-                        break;
-                    }
-                }
-            }
         }
 
         return value;
-    }
-
-    /**
-     * Allows subclasses to transform the attribute name before it gets used.
-     * @param attributeName the original attribute
-     * @return this implementation returns the original value
-     */
-    protected String fixAttributeName(final String attributeName) {
-        return attributeName;
     }
 
     /**

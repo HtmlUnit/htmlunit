@@ -307,9 +307,8 @@ public class HTMLOptionElement extends FormChild {
      * {@inheritDoc}
      */
     @Override
-    public void setAttribute(String name, final String value) {
+    public void setAttribute(final String name, final String value) {
         super.setAttribute(name, value);
-        name = fixAttributeName(name);
         if ("selected".equals(name)) {
             setSelected(true);
         }
@@ -319,10 +318,9 @@ public class HTMLOptionElement extends FormChild {
      * {@inheritDoc}
      */
     @Override
-    public void removeAttribute(String name) {
+    public void removeAttribute(final String name) {
         super.removeAttribute(name);
         if (getBrowserVersion().hasFeature(HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS)) {
-            name = fixAttributeName(name);
             if ("selected".equals(name)) {
                 setSelected(false);
             }
