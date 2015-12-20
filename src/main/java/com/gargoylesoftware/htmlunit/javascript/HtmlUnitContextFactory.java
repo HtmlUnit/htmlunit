@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVAL_LOCAL_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NON_ECMA_GET_YEAR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES;
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -309,7 +308,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_PARENT_PROTO_PROPERTIES:
                 return !browserVersion_.hasFeature(JS_PARENT_PROTO_PROPERTIES);
             case Context.FEATURE_NON_ECMA_GET_YEAR:
-                return browserVersion_.hasFeature(JS_NON_ECMA_GET_YEAR);
+                return false;
             case Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY:
                 return true;
             case Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION:

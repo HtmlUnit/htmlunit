@@ -1197,10 +1197,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
 
-    /** <code>Node.childNodes</code> ignores empty text nodes for XML pages. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES,
-
     /** <code>Node.contains</code> returns false instead of throwing an exception. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG,
@@ -1209,17 +1205,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
 
-    /** Should throw exception if extra argument is passed to node.insertBefore(). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT,
-
     /** Functions are enumerated. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
-
-    /** If {@code true}, Date.prototype.getYear subtracts 1900 only if 1900 &lt;= date &lt; 2000. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_NON_ECMA_GET_YEAR,
 
     /** "[object]" in quirks mode. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
@@ -1238,26 +1226,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
-    /** Indicates that someObj.offsetParent throws an exception when called on an object that is not yet attached
-     *  to the page's DOM.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_OFFSET_PARENT_THROWS_NOT_ATTACHED,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_OFFSET_PARENT_USE_TABLES_IF_FIXED,
-
-    /** Setting the property opacity of an css style declaration to arbitrary values is allowed.
-     * FF accepts only valid floats.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
-
-    /** Indicates that new option(..) does not update the label property (IE8). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_OPTION_CONSTRUCTOR_IGNORES_LABEL,
-
     /**
      * Is class name of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Option} the same as
      * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
@@ -1265,20 +1233,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     JS_OPTION_HTML_OPTION_ELEMENT,
 
-    /** If <code>alert(Option)</code> returns an object, not function. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_OPTION_OBJECT,
-
     /**
      * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Option} the same as
      * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
      */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION,
-
-    /** element.outerHTML handles the body and head tag as readonly (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_OUTER_HTML_BODY_HEAD_READONLY,
 
     /** element.outerHTML handles null value as string "null" (IE). */
     @BrowserFeature(@WebBrowser(IE))
@@ -1291,12 +1251,6 @@ public enum BrowserVersionFeatures {
     /** element.outerHTML removes all children from detached node (IE). */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_OUTER_HTML_THROWS_FOR_DETACHED,
-
-    /** element.outerHTML throws an exception, if the new tag will close
-     * the outer one when parsing the html source (IE).
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_OUTER_HTML_THROW_EXCEPTION_WHEN_CLOSES,
 
     /** If {@code true}, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1327,26 +1281,6 @@ public enum BrowserVersionFeatures {
     /** RegExp group <code>$0</code> returns the whole previous match (see {@link java.util.regex.Matcher#group()}. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH,
-
-    /** Javascript script.text(...) reexecutes the script (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SCREEN_SETTER_THROWS_ERROR,
-
-    /** Javascript script.text(...) reexecutes the script (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT,
-
-    /**
-     * Always execute the script if IE;
-     * in FF, only execute if the old "src" attribute was undefined
-     * and there was no inline code.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE,
-
-    /** Javascript script.appendChild throws an error (IE6-IE8). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION,
 
     /** Script async attribute is not supported. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

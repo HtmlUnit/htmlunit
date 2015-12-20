@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ASYNC_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
@@ -207,22 +206,9 @@ public class HtmlScript extends HtmlElement {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
         if (isDirectlyAttachedToPage()) {
-            final boolean alwaysReexecute = hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
-            // always execute if IE;
-            if (alwaysReexecute) {
-                resetExecuted();
-                final PostponedAction action = new PostponedAction(getPage()) {
-                    @Override
-                    public void execute() {
-                        executeScriptIfNeeded();
-                    }
-                };
-                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
-                engine.addPostponedAction(action);
-            }
             // if FF, only execute if the "src" attribute
             // was undefined and there was no inline code.
-            else if (oldValue.isEmpty() && getFirstChild() == null) {
+            if (oldValue.isEmpty() && getFirstChild() == null) {
                 final PostponedAction action = new PostponedAction(getPage()) {
                     @Override
                     public void execute() {

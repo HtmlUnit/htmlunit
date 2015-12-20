@@ -15,15 +15,12 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_8;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_BODY_HEAD_READONLY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Locale;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -228,18 +225,5 @@ public class HTMLBodyElement extends HTMLElement {
     @JsxSetter
     public void setVLink(final String vLink) {
         setColorAttribute("vLink", vLink);
-    }
-
-    /**
-     * Overwritten to throw an exception in IE8/9.
-     * @param value the new value for replacing this node
-     */
-    @JsxSetter
-    @Override
-    public void setOuterHTML(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_OUTER_HTML_BODY_HEAD_READONLY)) {
-            throw Context.reportRuntimeError("outerHTML is read-only for tag 'body'");
-        }
-        super.setOuterHTML(value);
     }
 }

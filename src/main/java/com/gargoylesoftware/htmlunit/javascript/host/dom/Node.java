@@ -14,10 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -41,7 +39,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -338,19 +335,11 @@ public class Node extends EventTarget {
             // extract refChild
             final DomNode refChildNode;
             if (refChildObject == Undefined.instance) {
-                if (getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT)) {
-                    if (args.length > 1) {
-                        throw Context.reportRuntimeError("Invalid argument.");
-                    }
+                if (args.length == 2 || getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
                     refChildNode = null;
                 }
                 else {
-                    if (args.length == 2 || getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
-                        refChildNode = null;
-                    }
-                    else {
-                        throw Context.reportRuntimeError("insertBefore: not enough arguments");
-                    }
+                    throw Context.reportRuntimeError("insertBefore: not enough arguments");
                 }
             }
             else if (refChildObject != null) {
@@ -502,20 +491,11 @@ public class Node extends EventTarget {
     public NodeList getChildNodes() {
         if (childNodes_ == null) {
             final DomNode node = getDomNodeOrDie();
-            final boolean ignoreEmptyTextNode = node.getOwnerDocument() instanceof XmlPage
-                    && getBrowserVersion().hasFeature(JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES)
-                    && isXMLSpaceDefault(node);
-
             childNodes_ = new NodeList(node, false, "Node.childNodes") {
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> response = new ArrayList<>();
                     for (final DomNode child : node.getChildren()) {
-                        //IE: XmlPage ignores all empty text nodes
-                        if (ignoreEmptyTextNode && child instanceof DomText
-                            && StringUtils.isBlank(((DomText) child).getNodeValue())) { //and 'xml:space' is 'default'
-                            continue;
-                        }
                         response.add(child);
                     }
 

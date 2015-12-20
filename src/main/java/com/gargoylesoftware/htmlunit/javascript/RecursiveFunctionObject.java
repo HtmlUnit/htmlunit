@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_T
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML_IMAGE_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XMLHTTPREQUEST_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XSLTPROCESSOR_OBJECT;
 
@@ -115,9 +114,6 @@ public class RecursiveFunctionObject extends FunctionObject {
     @Override
     public Object getDefaultValue(final Class<?> typeHint) {
         final String functionName = getFunctionName();
-        if ("HTMLOptionElement".equals(functionName) && getBrowserVersion().hasFeature(JS_OPTION_OBJECT)) {
-            return "[object " + functionName + ']';
-        }
         if ("XSLTProcessor".equals(functionName) && getBrowserVersion().hasFeature(JS_XSLTPROCESSOR_OBJECT)) {
             return "[object " + functionName + ']';
         }
@@ -134,9 +130,6 @@ public class RecursiveFunctionObject extends FunctionObject {
     @Override
     public String getTypeOf() {
         final String functionName = getFunctionName();
-        if ("HTMLOptionElement".equals(functionName) && getBrowserVersion().hasFeature(JS_OPTION_OBJECT)) {
-            return "object";
-        }
         if ("XMLHttpRequest".equals(functionName) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
             return "object";
         }

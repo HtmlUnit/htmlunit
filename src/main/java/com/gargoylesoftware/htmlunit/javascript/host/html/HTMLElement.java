@@ -22,12 +22,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MERGE_ATTRIBUTES_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_USE_TABLES_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROW_EXCEPTION_WHEN_CLOSES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
@@ -62,7 +59,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cyberneko.html.HTMLElements;
 import org.w3c.css.sac.CSSException;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -1064,26 +1060,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             append = true;
         }
 
-        final DomNode proxyDomNode = new ProxyDomNode(target.getPage(), target, append) {
-            @Override
-            public DomNode appendChild(final org.w3c.dom.Node node) {
-                if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROW_EXCEPTION_WHEN_CLOSES)
-                    && node instanceof DomElement) {
-                    final String parentName = parent.getNodeName().toUpperCase(Locale.ROOT);
-                    final short[] closes = HTMLElements.getElement(node.getNodeName()).closes;
-                    if (closes != null) {
-                        for (final short close : closes) {
-                            if (HTMLElements.getElement(close).name.equals(parentName)) {
-                                throw Context.reportRuntimeError("outerHTML can not set '" + valueStr
-                                    + "' while its parent is " + domNode.getParentNode());
-                            }
-                        }
-                    }
-                }
-
-                return super.appendChild(node);
-            }
-        };
+        final DomNode proxyDomNode = new ProxyDomNode(target.getPage(), target, append);
         parseHtmlSnippet(proxyDomNode, valueStr);
     }
 
@@ -2670,9 +2647,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         DomNode currentElement = getDomNodeOrDie();
 
         if (currentElement.getParentNode() == null) {
-            if (getBrowserVersion().hasFeature(JS_OFFSET_PARENT_THROWS_NOT_ATTACHED)) {
-                throw Context.reportRuntimeError("Unspecified error");
-            }
             return null;
         }
 
@@ -2684,11 +2658,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         final ComputedCSSStyleDeclaration style = htmlElement.getWindow().getComputedStyle(htmlElement, null);
         final String position = style.getPositionWithInheritance();
-        final boolean useTablesIfFixed = getBrowserVersion().hasFeature(JS_OFFSET_PARENT_USE_TABLES_IF_FIXED);
         final boolean staticPos = "static".equals(position);
 
-        final boolean fixedPos = "fixed".equals(position);
-        final boolean useTables = (useTablesIfFixed && (staticPos || fixedPos)) || (!useTablesIfFixed && staticPos);
+        final boolean useTables = staticPos;
 
         while (currentElement != null) {
 
@@ -2706,8 +2678,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                             parentElement.getWindow().getComputedStyle(parentElement, null);
                 final String parentPosition = parentStyle.getPositionWithInheritance();
                 final boolean parentIsStatic = "static".equals(parentPosition);
-                final boolean parentIsFixed = "fixed".equals(parentPosition);
-                if ((useTablesIfFixed && !parentIsStatic && !parentIsFixed) || (!useTablesIfFixed && !parentIsStatic)) {
+                if (!parentIsStatic) {
                     offsetParent = parentNode.getScriptableObject();
                     break;
                 }

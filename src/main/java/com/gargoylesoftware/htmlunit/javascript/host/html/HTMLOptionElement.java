@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_CONSTRUCTOR_IGNORES_LABEL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -86,9 +85,7 @@ public class HTMLOptionElement extends FormChild {
 
         if (!"undefined".equals(newText)) {
             htmlOption.appendChild(new DomText(page, newText));
-            if (!getBrowserVersion().hasFeature(JS_OPTION_CONSTRUCTOR_IGNORES_LABEL)) {
-                htmlOption.setLabelAttribute(newText);
-            }
+            htmlOption.setLabelAttribute(newText);
         }
         if (!"undefined".equals(newValue)) {
             htmlOption.setValueAttribute(newValue);
