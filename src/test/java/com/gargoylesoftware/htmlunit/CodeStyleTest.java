@@ -781,7 +781,7 @@ public class CodeStyleTest {
                 break;
 
             case "IE":
-                if (previousList.contains("IE8") || previousList.contains("IE11")) {
+                if (previousList.contains("IE11")) {
                     addFailure("IE must be before specifc IE version in "
                             + relativePath + ", line: " + (lineIndex + 1));
                 }

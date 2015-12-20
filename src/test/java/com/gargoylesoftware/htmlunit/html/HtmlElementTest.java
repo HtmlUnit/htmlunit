@@ -958,9 +958,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "some more hidden text</p>\n"
             + "</body>\n"
             + "</html>";
-        final String expected = "IE8".equals(getBrowserVersion().getNickname())
-            ? "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "hidden text to the world some more hidden text"
-            : "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "to the world";
+        final String expected = "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "to the world";
 
         final HtmlPage page = loadPage(html);
         assertEquals(expected, page.asText());

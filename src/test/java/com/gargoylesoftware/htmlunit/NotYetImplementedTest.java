@@ -149,7 +149,6 @@ public class NotYetImplementedTest {
         String lastFile = null;
 
         int count = 0;
-        int countIE8 = 0;
         int countIE11 = 0;
         int countFF31 = 0;
         int countFF38 = 0;
@@ -190,16 +189,11 @@ public class NotYetImplementedTest {
             builder.append("    <td>").append(description).append("</td>\n");
             builder.append("  </tr>\n");
 
-            if (browser.contains("IE8")) {
-                countIE8++;
-            }
             if (browser.contains("IE11")) {
                 countIE11++;
             }
-            if (!browser.contains("IE8")
-                    && !browser.contains("IE11")
+            if (!browser.contains("IE11")
                     && browser.contains("IE")) {
-                countIE8++;
                 countIE11++;
             }
 
@@ -222,7 +216,6 @@ public class NotYetImplementedTest {
                 countEdge++;
             }
             if (browser.contains("All")) {
-                countIE8++;
                 countIE11++;
                 countFF31++;
                 countFF38++;
@@ -237,11 +230,6 @@ public class NotYetImplementedTest {
         overview.append("  <tr>\n");
         overview.append("    <td class='numeric'>").append(Integer.toString(count)).append("</td>\n");
         overview.append("    <td>methods marked as NotYetImplemented</td>\n");
-        overview.append("  </tr>\n");
-
-        overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countIE8)).append("</td>\n");
-        overview.append("    <td>for IE8</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");

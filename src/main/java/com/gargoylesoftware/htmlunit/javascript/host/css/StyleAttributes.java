@@ -1776,7 +1776,7 @@ final class StyleAttributes {
         POSITION("position", "position", chrome("static")),
 
         /** The style property {@code quotes}. */
-        QUOTES("quotes", "quotes", ff("\"“\" \"”\" \"‘\" \"’\""), chrome("")),
+        QUOTES("quotes", "quotes", ff("\"“\" \"”\" \"‘\" \"’\""), ie(""), chrome("")),
 
         /** The style property {@code r}. */
         R("r", "r", chrome("0px")),

@@ -182,14 +182,8 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void selects_pseudoClass_lang() throws Exception {
-        if ("IE8".equals(getBrowserVersion().getNickname())) {
-            testSelects(":lang(en)", false, false, false);
-            testSelects(":lang(de)", false, false, false);
-        }
-        else {
-            testSelects(":lang(en)", false, true, true);
-            testSelects(":lang(de)", false, false, false);
-        }
+        testSelects(":lang(en)", false, true, true);
+        testSelects(":lang(de)", false, false, false);
     }
 
     /**

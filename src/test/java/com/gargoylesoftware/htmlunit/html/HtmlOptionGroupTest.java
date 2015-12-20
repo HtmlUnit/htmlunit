@@ -87,8 +87,7 @@ public class HtmlOptionGroupTest extends SimpleWebTestCase {
             + "</form></body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        final boolean disabled = !"IE8".equals(getBrowserVersion().getNickname());
-        assertEquals(disabled, ((HtmlOptionGroup) page.getElementById("g1")).isDisabled());
+        assertEquals(true, ((HtmlOptionGroup) page.getElementById("g1")).isDisabled());
         assertFalse(((HtmlOptionGroup) page.getElementById("g2")).isDisabled());
     }
 
