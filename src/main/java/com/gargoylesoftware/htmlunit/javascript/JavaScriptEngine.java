@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CONSTRUCTOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_USE_UTC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DONT_ENUM_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_BIND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
@@ -528,14 +527,6 @@ public class JavaScriptEngine {
         window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
     }
 
-    private void makeConstWritable(final ScriptableObject scope, final String... constNames) {
-        for (final String name : constNames) {
-            final Object value = ScriptableObject.getProperty(scope, name);
-            ScriptableObject.defineProperty(scope, name, value,
-                    ScriptableObject.DONTENUM | ScriptableObject.PERMANENT);
-        }
-    }
-
     /**
      * Deletes the properties with the provided names.
      * @param scope the scope from which properties have to be removed
@@ -626,13 +617,8 @@ public class JavaScriptEngine {
     private static void configureFunctions(final ClassConfiguration config,
             final BrowserVersion browserVersion,
             final ScriptableObject scriptable) {
-        final int attributes;
-        if (browserVersion.hasFeature(JS_DONT_ENUM_FUNCTIONS)) {
-            attributes = ScriptableObject.DONTENUM;
-        }
-        else {
-            attributes = ScriptableObject.EMPTY;
-        }
+
+        final int attributes = ScriptableObject.EMPTY;
         // the functions
         for (final Entry<String, Method> functionInfo : config.getFunctionEntries()) {
             final String functionName = functionInfo.getKey();

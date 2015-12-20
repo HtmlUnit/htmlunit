@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_ONLY_FOR_FRAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_TAG_NAME_NOT_SUPPORTS_NAMESPACES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -31,7 +29,6 @@ import java.util.regex.Pattern;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xml.utils.PrefixResolver;
@@ -46,7 +43,6 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -212,9 +208,6 @@ public class Document extends EventNode {
             else {
                 designMode_ = "off";
             }
-            if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST)) {
-                designMode_ = StringUtils.capitalize(designMode_);
-            }
         }
         return designMode_;
     }
@@ -230,12 +223,8 @@ public class Document extends EventNode {
             if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
                 throw Context.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
             }
-            if (!(getWindow().getWebWindow() instanceof FrameWindow)
-                && getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_ONLY_FOR_FRAMES)) {
-                // IE evaluates all designMode changes for documents that aren't in frames as Off
-                designMode_ = "off";
-            }
-            else if ("on".equalsIgnoreCase(mode)) {
+
+            if ("on".equalsIgnoreCase(mode)) {
                 designMode_ = "on";
             }
             else if ("off".equalsIgnoreCase(mode)) {
@@ -243,10 +232,6 @@ public class Document extends EventNode {
             }
             else if ("inherit".equalsIgnoreCase(mode)) {
                 designMode_ = "inherit";
-            }
-
-            if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST)) {
-                designMode_ = StringUtils.capitalize(designMode_);
             }
         }
         else {

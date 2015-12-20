@@ -14,15 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EMBED_OBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -112,19 +109,5 @@ public class HTMLEmbedElement extends HTMLElement {
     @Override
     protected boolean isEndTagForbidden() {
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if ((String.class.equals(hint) || hint == null) && getBrowserVersion().hasFeature(JS_EMBED_OBJECT)) {
-            final HtmlElement htmlElement = getDomNodeOrNull();
-            if (htmlElement != null && !((HtmlPage) htmlElement.getPage()).isQuirksMode()) {
-                return "[object]";
-            }
-        }
-        return super.getDefaultValue(hint);
     }
 }

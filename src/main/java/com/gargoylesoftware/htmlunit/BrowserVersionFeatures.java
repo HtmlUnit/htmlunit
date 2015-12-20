@@ -627,10 +627,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_ANCHOR_TYPE_HTMLANCHORELEMENT,
 
-    /** Applet is an "[object]" even in standards mode. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_APPLET_OBJECT,
-
     /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
@@ -717,21 +713,9 @@ public enum BrowserVersionFeatures {
         @WebBrowser(value = IE, minVersion = 11) })
     JS_DOCUMENT_CREATE_ELEMENT_STRICT,
 
-    /** Design mode constants start with a capital letter. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST,
-
     /** The browser supports the design mode 'Inherit' (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_DESIGN_MODE_INHERIT,
-
-    /** The browser supports the design mode only for frames. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DOCUMENT_DESIGN_MODE_ONLY_FOR_FRAMES,
-
-    /** Javascript document.doctype returns null (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DOCUMENT_DOCTYPE_NULL,
 
     /** Javascript property document.domain is lowercase. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -836,10 +820,6 @@ public enum BrowserVersionFeatures {
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DOMIMPLEMENTATION_FEATURE_MUTATIONNAMEEVENTS,
-
-    /** If document.implementation.hasFeature() supports only 'HTML'. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DOMIMPLEMENTATION_FEATURE_ONLY_HTML,
 
     /** If document.implementation.hasFeature() supports 'Range 1.0'. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
@@ -954,10 +934,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT,
 
-    /** Don't enumerate functions, see {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#DONTENUM}. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_DONT_ENUM_FUNCTIONS,
-
     /** Enables Javascript ECMA5 functions (like Date.toISOString or Date.toJSON). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_ECMA5_FUNCTIONS,
@@ -965,20 +941,6 @@ public enum BrowserVersionFeatures {
     /** Element.classList returns null. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
     JS_ELEMENT_CLASS_LIST_NULL,
-
-    /** Javascript calculation of element clientHeight/Width does not
-     * include the padding.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_ELEMENT_EXTENT_WITHOUT_PADDING,
-
-    /** Element.removeAttirbute removes the named property also. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY,
-
-    /** HTMLEmbedElement is an "[object]" even in standards mode. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_EMBED_OBJECT,
 
     /** The Enumerator constructor throws an exception if called with HtmlCollections
      * as parameter. */
@@ -989,10 +951,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
     JS_ENUM_NUMBERS_FIRST,
-
-    /** Indicates that the default value of subclasses of {@code Error} are not functions. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_ERROR,
 
     /** Indicates that 'exception' (technically NativeError) exposes "stack" property. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })

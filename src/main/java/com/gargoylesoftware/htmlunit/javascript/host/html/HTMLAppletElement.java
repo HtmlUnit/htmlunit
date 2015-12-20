@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPLET_OBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -22,6 +21,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.applet.Applet;
 import java.lang.reflect.Method;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
@@ -31,12 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * The JavaScript object {@code HTMLAppletElement}.
@@ -169,17 +168,6 @@ public class HTMLAppletElement extends HTMLElement {
     @JsxSetter
     public void setAlign(final String align) {
         setAlign(align, false);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if ((String.class.equals(hint) || hint == null) && getBrowserVersion().hasFeature(JS_APPLET_OBJECT)) {
-            return "[object]";
-        }
-        return super.getDefaultValue(hint);
     }
 
     /**

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_CLASS_LIST_NULL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -28,6 +27,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -49,9 +51,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@link DomElement}.
@@ -360,9 +359,6 @@ public class Element extends EventNode {
     @JsxFunction
     public void removeAttribute(final String name) {
         getDomNodeOrDie().removeAttribute(name);
-        if (getBrowserVersion().hasFeature(JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY)) {
-            delete(name);
-        }
     }
 
     /**

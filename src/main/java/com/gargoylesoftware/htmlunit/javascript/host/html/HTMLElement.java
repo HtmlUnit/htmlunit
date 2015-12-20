@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EX
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
@@ -821,9 +820,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getClientHeight() {
-        final boolean includePadding = !getBrowserVersion().hasFeature(JS_ELEMENT_EXTENT_WITHOUT_PADDING);
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        return style.getCalculatedHeight(false, includePadding);
+        return style.getCalculatedHeight(false, true);
     }
 
     /**
@@ -832,9 +830,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getClientWidth() {
-        final boolean includePadding = !getBrowserVersion().hasFeature(JS_ELEMENT_EXTENT_WITHOUT_PADDING);
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        return style.getCalculatedWidth(false, includePadding);
+        return style.getCalculatedWidth(false, true);
     }
 
     /**

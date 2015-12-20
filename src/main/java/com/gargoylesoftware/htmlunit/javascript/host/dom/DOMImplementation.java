@@ -35,7 +35,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEME
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MUTATIONNAMEEVENTS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_ONLY_HTML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_RANGE_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_RANGE_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_RANGE_3;
@@ -104,202 +103,195 @@ public class DOMImplementation extends SimpleScriptable {
      */
     @JsxFunction
     public boolean hasFeature(final String feature, final String version) {
-        if (getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_ONLY_HTML)) {
-            if ("HTML".equals(feature) && "1.0".equals(version)) {
+        if ("Core".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CORE_1);
+            }
+            if ("2.0".equals(version)) {
+                return true;
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CORE_3);
+            }
+        }
+        else if ("HTML".equals(feature)) {
+            if ("1.0".equals(version) || "2.0".equals(version)) {
+                return true;
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_HTML_3);
+            }
+        }
+        else if ("XHTML".equals(feature)) {
+            if ("1.0".equals(version) || "2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XHTML_1);
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XHTML_3);
+            }
+        }
+        else if ("XML".equals(feature)) {
+            if ("1.0".equals(version) || "2.0".equals(version)) {
+                return true;
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XML_3);
+            }
+        }
+        else if ("Views".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VIEWS_1);
+            }
+            if ("2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VIEWS_2);
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VIEWS_3);
+            }
+        }
+        else if ("StyleSheets".equals(feature)) {
+            return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS);
+        }
+        else if ("CSS".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_1);
+            }
+            if ("2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_2);
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_3);
+            }
+        }
+        else if ("CSS2".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_1);
+            }
+            if ("2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_2);
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_3);
+            }
+        }
+        else if ("CSS3".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS3_1);
+            }
+            if ("2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS3_2);
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS3_3);
+            }
+        }
+        else if ("Events".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1);
+            }
+            if ("2.0".equals(version) || "3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
+            }
+        }
+        else if ("HTMLEvents".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1);
+            }
+            if ("2.0".equals(version) || "3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
+            }
+        }
+        else if ("UIEvents".equals(feature)) {
+            if ("1.0".equals(version) || "2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2);
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_3);
+            }
+        }
+        else if ("KeyboardEvents".equals(feature)) {
+            return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_KEYBOARDEVENTS);
+        }
+        else if ("MouseEvents".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_1);
+            }
+            if ("2.0".equals(version) || "3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_2);
+            }
+        }
+        else if ("MutationEvents".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_1);
+            }
+            if ("2.0".equals(version) || "3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2);
+            }
+        }
+        else if ("MutationNameEvents".equals(feature)) {
+            return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONNAMEEVENTS);
+        }
+        else if ("TextEvents".equals(feature)) {
+            return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS);
+        }
+        else if ("LS".equals(feature) || "LS-Async".equals(feature)) {
+            return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_LS);
+        }
+        else if ("Range".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_RANGE_1);
+            }
+            if ("2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_RANGE_2);
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_RANGE_3);
+            }
+        }
+        else if ("Traversal".equals(feature)) {
+            if ("1.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1);
+            }
+            if ("2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2);
+            }
+            if ("3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_3);
+            }
+        }
+        else if ("Validation".equals(feature)) {
+            return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VALIDATION);
+        }
+        else if ("XPath".equals(feature)) {
+            return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XPATH);
+        }
+        else if ("http://www.w3.org/TR/SVG11/feature#BasicStructure".equals(feature)) {
+            if ("1.0".equals(version)
+                    && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_0)) {
+                return true;
+            }
+            if ("1.1".equals(version)) {
+                return true;
+            }
+            if ("1.2".equals(version)
+                    && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_2)) {
                 return true;
             }
         }
-        else {
-            if ("Core".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CORE_1);
-                }
-                if ("2.0".equals(version)) {
-                    return true;
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CORE_3);
-                }
+        else if ("http://www.w3.org/TR/SVG11/feature#Shape".equals(feature)) {
+            if ("1.0".equals(version)
+                    && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_0)) {
+                return true;
             }
-            else if ("HTML".equals(feature)) {
-                if ("1.0".equals(version) || "2.0".equals(version)) {
-                    return true;
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_HTML_3);
-                }
+            if ("1.1".equals(version)) {
+                return true;
             }
-            else if ("XHTML".equals(feature)) {
-                if ("1.0".equals(version) || "2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XHTML_1);
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XHTML_3);
-                }
+            if ("1.2".equals(version)
+                    && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_2)) {
+                return true;
             }
-            else if ("XML".equals(feature)) {
-                if ("1.0".equals(version) || "2.0".equals(version)) {
-                    return true;
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XML_3);
-                }
-            }
-            else if ("Views".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VIEWS_1);
-                }
-                if ("2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VIEWS_2);
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VIEWS_3);
-                }
-            }
-            else if ("StyleSheets".equals(feature)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS);
-            }
-            else if ("CSS".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_1);
-                }
-                if ("2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_2);
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_3);
-                }
-            }
-            else if ("CSS2".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_1);
-                }
-                if ("2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_2);
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_3);
-                }
-            }
-            else if ("CSS3".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS3_1);
-                }
-                if ("2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS3_2);
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS3_3);
-                }
-            }
-            else if ("Events".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1);
-                }
-                if ("2.0".equals(version) || "3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
-                }
-            }
-            else if ("HTMLEvents".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1);
-                }
-                if ("2.0".equals(version) || "3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
-                }
-            }
-            else if ("UIEvents".equals(feature)) {
-                if ("1.0".equals(version) || "2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2);
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_3);
-                }
-            }
-            else if ("KeyboardEvents".equals(feature)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_KEYBOARDEVENTS);
-            }
-            else if ("MouseEvents".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_1);
-                }
-                if ("2.0".equals(version) || "3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_2);
-                }
-            }
-            else if ("MutationEvents".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_1);
-                }
-                if ("2.0".equals(version) || "3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2);
-                }
-            }
-            else if ("MutationNameEvents".equals(feature)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONNAMEEVENTS);
-            }
-            else if ("TextEvents".equals(feature)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS);
-            }
-            else if ("LS".equals(feature) || "LS-Async".equals(feature)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_LS);
-            }
-            else if ("Range".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_RANGE_1);
-                }
-                if ("2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_RANGE_2);
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_RANGE_3);
-                }
-            }
-            else if ("Traversal".equals(feature)) {
-                if ("1.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1);
-                }
-                if ("2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2);
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_3);
-                }
-            }
-            else if ("Validation".equals(feature)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VALIDATION);
-            }
-            else if ("XPath".equals(feature)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XPATH);
-            }
-            else if ("http://www.w3.org/TR/SVG11/feature#BasicStructure".equals(feature)) {
-                if ("1.0".equals(version)
-                        && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_0)) {
-                    return true;
-                }
-                if ("1.1".equals(version)) {
-                    return true;
-                }
-                if ("1.2".equals(version)
-                        && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_2)) {
-                    return true;
-                }
-            }
-            else if ("http://www.w3.org/TR/SVG11/feature#Shape".equals(feature)) {
-                if ("1.0".equals(version)
-                        && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_0)) {
-                    return true;
-                }
-                if ("1.1".equals(version)) {
-                    return true;
-                }
-                if ("1.2".equals(version)
-                        && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_2)) {
-                    return true;
-                }
-            }
-            //TODO: other features.
         }
+        //TODO: other features.
         return false;
     }
 
