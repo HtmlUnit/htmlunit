@@ -33,9 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClasses({
         @JsxClass(domClass = HtmlDefinitionList.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlDefinitionList.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+                        @WebBrowser(EDGE) })
     })
 public class HTMLDListElement extends HTMLListElement {
 

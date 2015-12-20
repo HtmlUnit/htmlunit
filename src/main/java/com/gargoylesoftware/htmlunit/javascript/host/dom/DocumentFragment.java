@@ -26,14 +26,12 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.w3c.css.sac.CSSException;
 
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
@@ -49,9 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 @JsxClasses({
         @JsxClass(domClass = DomDocumentFragment.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-                domClass = DomDocumentFragment.class, browsers = @WebBrowser(value = IE, maxVersion = 8))
+                        @WebBrowser(EDGE) })
     })
 public class DocumentFragment extends Node {
 
@@ -85,17 +81,6 @@ public class DocumentFragment extends Node {
     @JsxFunction(@WebBrowser(IE))
     public Object createAttribute(final String attributeName) {
         return getDocument().createAttribute(attributeName);
-    }
-
-    /**
-     * Create a new HTML element with the given tag name.
-     *
-     * @param tagName the tag name
-     * @return the new HTML element, or NOT_FOUND if the tag is not supported
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public Object createElement(final String tagName) {
-        return getDocument().createElement(tagName);
     }
 
     /**
@@ -176,15 +161,6 @@ public class DocumentFragment extends Node {
             throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
                     + selectors + "' error: " + e.getMessage() + ").");
         }
-    }
-
-    /**
-     * Returns the value of the {@code URL} property.
-     * @return the value of the {@code URL} property
-     */
-    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 8), propertyName = "URL")
-    public String getURL() {
-        return WebClient.ABOUT_BLANK;
     }
 
     /**

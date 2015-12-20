@@ -39,9 +39,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClasses({
         @JsxClass(domClass = HtmlCaption.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlCaption.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+                        @WebBrowser(EDGE) })
     })
 public class HTMLTableCaptionElement extends HTMLElement {
 

@@ -41,9 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClasses({
         @JsxClass(domClass = HtmlBreak.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                    @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlBreak.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+                    @WebBrowser(EDGE) })
     })
 public class HTMLBRElement extends HTMLElement {
 

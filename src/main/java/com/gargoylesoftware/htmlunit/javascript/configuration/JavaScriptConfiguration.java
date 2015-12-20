@@ -448,7 +448,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
         HTMLTableComponent.class, HTMLTableDataCellElement.class, HTMLTableElement.class,
         HTMLTableHeaderCellElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
-        HTMLTemplateElement.class, HTMLTextAreaElement.class, HTMLTextElement.class, HTMLTimeElement.class,
+        HTMLTemplateElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class,
         HTMLTitleElement.class, HTMLTrackElement.class, HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLVideoElement.class,
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,

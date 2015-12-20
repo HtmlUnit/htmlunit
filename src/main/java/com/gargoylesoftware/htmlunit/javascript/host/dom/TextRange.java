@@ -46,8 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author David Gileadi
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) })
     })
 public class TextRange extends SimpleScriptable {
 

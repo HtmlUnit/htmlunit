@@ -37,9 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlBase.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
-            @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, domClass = HtmlBase.class,
-            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
+            @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
     })
 public class HTMLBaseElement extends HTMLElement {
 

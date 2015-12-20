@@ -28,9 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlDefinitionTerm.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlDefinitionTerm.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8))
+        @JsxClass(domClass = HtmlDefinitionTerm.class, browsers = @WebBrowser(value = IE, minVersion = 11))
     })
 public class HTMLDTElement extends HTMLElement {
 

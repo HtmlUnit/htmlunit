@@ -39,9 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContain
 @JsxClasses({
         @JsxClass(domClass = HtmlFrameSet.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlFrameSet.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+                        @WebBrowser(EDGE) })
     })
 public class HTMLFrameSetElement extends HTMLElement {
 

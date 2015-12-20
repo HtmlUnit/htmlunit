@@ -64,9 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
 @JsxClasses({
         @JsxClass(domClass = HtmlInput.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlInput.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+                        @WebBrowser(EDGE) })
     })
 public class HTMLInputElement extends FormField {
 

@@ -94,8 +94,7 @@ import com.steadystate.css.parser.SACParserCSS3;
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+                @WebBrowser(EDGE) })
     })
 public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
     /** CSS important property constant. */
@@ -1047,46 +1046,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setBackgroundRepeat(final String backgroundRepeat) {
         setStyleAttribute(BACKGROUND_REPEAT, backgroundRepeat);
-    }
-
-    /**
-     * Gets the object's behavior (IE only).
-     * @return the object's behavior
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getBehavior() {
-        return getStyleAttribute(BEHAVIOR);
-    }
-
-    /**
-     * Sets the object's behavior (IE only).
-     * @param behavior the new behavior
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setBehavior(final String behavior) {
-        setStyleAttribute(BEHAVIOR, behavior);
-
-        // many methods/properties need to be moved from HTMLElement to Element
-        // is it the case for behavior related methods? Assuming not in a first time...
-        if (!(jsElement_ instanceof HTMLElement)) {
-            throw new RuntimeException("Bug! behavior can be set for Element too!!!");
-        }
-
-        final HTMLElement htmlElement = (HTMLElement) jsElement_;
-        htmlElement.removeBehavior(HTMLElement.BEHAVIOR_ID_CLIENT_CAPS);
-        htmlElement.removeBehavior(HTMLElement.BEHAVIOR_ID_HOMEPAGE);
-        htmlElement.removeBehavior(HTMLElement.BEHAVIOR_ID_DOWNLOAD);
-        if (!behavior.isEmpty()) {
-            try {
-                final Object[] url = URL_FORMAT.parse(behavior);
-                if (url.length > 0) {
-                    htmlElement.addBehavior((String) url[0]);
-                }
-            }
-            catch (final ParseException e) {
-                LOG.warn("Invalid behavior: '" + behavior + "'.");
-            }
-        }
     }
 
     /**
@@ -5423,31 +5382,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public String removeProperty(final Object name) {
         return removeStyleAttribute(Context.toString(name));
-    }
-
-    /**
-     * Sets an expression for the specified Style.
-     *
-     * @param propertyName Specifies the name of the property to which expression is added
-     * @param expression specifies any valid script statement without quotations or semicolons;
-     *        this string can include references to other properties on the current page.
-     *        Array references are not allowed on object properties included in this script.
-     * @param language specified the language used
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public void setExpression(final String propertyName, final String expression, final String language) {
-        // Empty.
-    }
-
-    /**
-     * Removes the expression from the specified property.
-     *
-     * @param propertyName the name of the property from which to remove an expression
-     * @return true if the expression was successfully removed
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public boolean removeExpression(final String propertyName) {
-        return true;
     }
 
     /**

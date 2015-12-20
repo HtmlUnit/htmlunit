@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -42,9 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClasses({
         @JsxClass(domClass = DomComment.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                    @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8))
+                    @WebBrowser(EDGE) })
     })
 public class Comment extends CharacterData {
 
@@ -56,48 +53,12 @@ public class Comment extends CharacterData {
     }
 
     /**
-     * Returns the element ID.
-     * @return the ID of this element
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getId() {
-        return "";
-    }
-
-    /**
-     * Returns the class defined for this element.
-     * @return the class name
-     */
-    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 8), propertyName = "className")
-    public Object getClassName_js() {
-        return "";
-    }
-
-    /**
-     * Returns the tag name of this element.
-     * @return the tag name
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public Object getTagName() {
-        return "!";
-    }
-
-    /**
      * Returns the text of this element.
      * @return the text
      */
     @JsxGetter(@WebBrowser(IE))
     public String getText() {
         return "<!--" + getData() + "-->";
-    }
-
-    /**
-     * Returns the document of this element.
-     * @return the document
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public Object getDocument() {
-        return getWindow().getDocument_js();
     }
 
     /**
@@ -121,23 +82,5 @@ public class Comment extends CharacterData {
     @JsxFunction(@WebBrowser(IE))
     public Object getAttribute(final String attributeName, final Integer flags) {
         return null;
-    }
-
-    /**
-     * Gets the innerText attribute.
-     * @return the innerText
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getInnerText() {
-        return "";
-    }
-
-    /**
-     * Currently does nothing.
-     * @param value the new value for the contents of this node
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setInnerText(final String value) {
-        // nothing
     }
 }

@@ -53,9 +53,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 @JsxClasses({
         @JsxClass(domClass = HtmlTableCell.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableCell.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+                        @WebBrowser(EDGE) })
     })
 public class HTMLTableCellElement extends HTMLTableComponent {
 
