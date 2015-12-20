@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_HTML_DOCUMENT_FRAGMENT_ALWAYS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_NON_EMPTY_TAGS;
@@ -136,7 +135,6 @@ public class XMLSerializer extends SimpleScriptable {
             final DomNode node = root.getDomNodeOrDie();
             final SgmlPage page = node.getPage();
             final boolean isHtmlPage = page != null && page.isHtmlPage();
-            final boolean appendCrlf = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_APPENDS_CRLF);
             final boolean addXhtmlNamespace = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE);
 
             String forcedNamespace = null;
@@ -145,11 +143,8 @@ public class XMLSerializer extends SimpleScriptable {
                     forcedNamespace = "http://www.w3.org/1999/xhtml";
                 }
             }
-            toXml(1, node, buffer, forcedNamespace, appendCrlf);
+            toXml(1, node, buffer, forcedNamespace);
 
-            if (appendCrlf) {
-                buffer.append("\r\n");
-            }
             return buffer.toString();
         }
         if (root instanceof CDATASection
@@ -165,7 +160,7 @@ public class XMLSerializer extends SimpleScriptable {
 
     private void toXml(final int indent,
             final DomNode node, final StringBuilder buffer,
-            final String foredNamespace, final boolean appendCrLf) {
+            final String foredNamespace) {
         final String nodeName = node.getNodeName();
         buffer.append('<').append(nodeName);
 
@@ -203,24 +198,13 @@ public class XMLSerializer extends SimpleScriptable {
             }
             switch (child.getNodeType()) {
                 case Node.ELEMENT_NODE:
-                    toXml(indent + 1, child, buffer, null, appendCrLf);
+                    toXml(indent + 1, child, buffer, null);
                     break;
 
                 case Node.TEXT_NODE:
                     String value = child.getNodeValue();
                     value = StringUtils.escapeXmlChars(value);
-                    if (appendCrLf && org.apache.commons.lang3.StringUtils.isBlank(value)) {
-                        buffer.append("\r\n");
-                        final DomNode sibling = child.getNextSibling();
-                        if (sibling != null && sibling.getNodeType() == Node.ELEMENT_NODE) {
-                            for (int i = 0; i < indent; i++) {
-                                buffer.append('\t');
-                            }
-                        }
-                    }
-                    else {
-                        buffer.append(value);
-                    }
+                    buffer.append(value);
                     break;
 
                 case Node.CDATA_SECTION_NODE:

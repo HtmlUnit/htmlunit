@@ -20,9 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_SCRIPT_STARTSWITH_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MERGE_ATTRIBUTES_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
@@ -75,7 +72,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
-import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -861,9 +857,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         final String tagName = getTagName();
         boolean isPlain = "SCRIPT".equals(tagName);
-        if (isPlain && getBrowserVersion().hasFeature(JS_INNER_HTML_SCRIPT_STARTSWITH_NEW_LINE)) {
-            buf.append("\r\n");
-        }
 
         isPlain = isPlain || "STYLE".equals(tagName);
 
@@ -914,9 +907,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else if (node instanceof DomCharacterData) {
             // Remove whitespace sequences, possibly escape XML characters.
             String s = node.getNodeValue();
-            if (getBrowserVersion().hasFeature(JS_INNER_HTML_REDUCE_WHITESPACES)) {
-                s = PRINT_NODE_PATTERN.matcher(s).replaceAll(" ");
-            }
             if (html) {
                 s = com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlChars(s);
             }
@@ -997,14 +987,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
             final String valueAsString = Context.toString(value);
             parseHtmlSnippet(domNode, valueAsString);
-
-            final boolean createFragment = getBrowserVersion().hasFeature(JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT);
-            // if the parentNode has null parentNode in IE,
-            // create a DocumentFragment to be the parentNode's parentNode.
-            if (domNode.getParentNode() == null && createFragment) {
-                final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDocumentFragment();
-                fragment.appendChild(domNode);
-            }
         }
     }
 
@@ -1028,14 +1010,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         if (value != null && !value.isEmpty()) {
             domNode.appendChild(new DomText(domNode.getPage(), Context.toString(value)));
-        }
-
-        final boolean createFragment = getBrowserVersion().hasFeature(JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT);
-        // if the parentNode has null parentNode in IE,
-        // create a DocumentFragment to be the parentNode's parentNode.
-        if (domNode.getParentNode() == null && createFragment) {
-            final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDocumentFragment();
-            fragment.appendChild(domNode);
         }
     }
 

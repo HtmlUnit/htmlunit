@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSTRING_ENUMERATED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML_IMAGE_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_OBJECT;
@@ -27,11 +26,11 @@ import java.lang.reflect.Member;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * A FunctionObject that returns IDs of this object and all its parent classes.
@@ -116,9 +115,6 @@ public class RecursiveFunctionObject extends FunctionObject {
     @Override
     public Object getDefaultValue(final Class<?> typeHint) {
         final String functionName = getFunctionName();
-        if ("HTMLImageElement".equals(functionName) && getBrowserVersion().hasFeature(JS_IMAGE_OBJECT)) {
-            return "[object " + functionName + ']';
-        }
         if ("HTMLOptionElement".equals(functionName) && getBrowserVersion().hasFeature(JS_OPTION_OBJECT)) {
             return "[object " + functionName + ']';
         }
@@ -138,9 +134,6 @@ public class RecursiveFunctionObject extends FunctionObject {
     @Override
     public String getTypeOf() {
         final String functionName = getFunctionName();
-        if ("HTMLImageElement".equals(functionName) && getBrowserVersion().hasFeature(JS_IMAGE_OBJECT)) {
-            return "object";
-        }
         if ("HTMLOptionElement".equals(functionName) && getBrowserVersion().hasFeature(JS_OPTION_OBJECT)) {
             return "object";
         }

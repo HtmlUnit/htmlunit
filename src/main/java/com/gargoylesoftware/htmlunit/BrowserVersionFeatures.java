@@ -1081,10 +1081,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     JS_IMAGE_HTML_IMAGE_ELEMENT,
 
-    /** If <code>alert(Image)</code> returns an object, not function. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_IMAGE_OBJECT,
-
     /**
      * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Image} the same as
      * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
@@ -1108,13 +1104,6 @@ public enum BrowserVersionFeatures {
 
     /**
      * Getting the width and height of an image tag without a source returns 28x30;
-     * for invalid values returns 1.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1,
-
-    /**
-     * Getting the width and height of an image tag without a source returns 28x30;
      * for invalid values returns same.
      */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
@@ -1123,23 +1112,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that innerHTML adds the child also for null values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE,
-
-    /** Indicates that innerHTML creates a document fragment as parent node
-     * if the receiver node has no parent at all. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT,
-
-    /** Indicates that innerHTML is readonly for some tags. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_INNER_HTML_READONLY_FOR_SOME_TAGS,
-
-    /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_INNER_HTML_REDUCE_WHITESPACES,
-
-    /** the inner html of a script tag start always with a \r\n. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_INNER_HTML_SCRIPT_STARTSWITH_NEW_LINE,
 
     /** Indicates that innerText is readonly for tables. */
     @BrowserFeature(@WebBrowser(CHROME))
@@ -1161,10 +1133,6 @@ public enum BrowserVersionFeatures {
     /** Supports Iterator and StopIteration. */
     @BrowserFeature(@WebBrowser(FF))
     JS_Iterator,
-
-    /** Javascript function returning a length (e.g. getWidth) without 'px' at the end. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_LENGTH_WITHOUT_PX,
 
     /**
      * Set this property if the browser evaluates<br>
@@ -1659,10 +1627,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
-    /** Window is defined in only Standards mode. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_WINDOW_IN_STANDARDS_MODE,
-
     /** Window property usable as function. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_WINDOW_IS_A_FUNCTION,
@@ -1718,18 +1682,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
 
-    /** Indicates that XML code embedded in an HTML page is handled by MSXML ActiveX. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_XML_IN_HTML_VIA_ACTIVEXOBJECT,
-
     /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,
-
-    /** Indicates that new XMLSerializer().serializeToString(..) always appends a CRLF at the end
-     * of the produced string. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_XML_SERIALIZER_APPENDS_CRLF,
 
     /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
@@ -1776,10 +1731,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     MULTICOL_BLOCK,
 
-    /** If true, then silently ignore element.appendChild(element). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    NODE_APPEND_CHILD_SELF_IGNORE,
-
     /** Body of a &lt;noscript&gt; tag is not totally ignored but considered as a (not displayed) text node. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     NOSCRIPT_BODY_AS_TEXT,
@@ -1804,17 +1755,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE,
 
-    /** Document mode is always 5 in quirks mode ignoring the browser version. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    QUIRKS_MODE_ALWAYS_DOC_MODE_5,
-
     /** Set the value attribute of a reset input to 'Reset' if no value attribute specified. */
     @BrowserFeature(@WebBrowser(IE))
     RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
-
-    /** Set the default value attribute of a reset input to 'undefined' if declared as 'Reset'. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    RESETINPUT_DEFAULT_VALUE_UNDEFINED,
 
     /**
      * Indicates that all options of a select are deselected,
@@ -1857,17 +1800,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     STYLESHEET_HREF_EXPANDURL,
 
-    /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is "". */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    STYLESHEET_HREF_STYLE_EMPTY,
-
     /** Set the value attribute of a submit input to 'Submit Query' if no value attribute specified. */
     @BrowserFeature(@WebBrowser(IE))
     SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
-
-    /** Set the default value attribute of a submit input to 'undefined' if declared as 'Reset'. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    SUBMITINPUT_DEFAULT_VALUE_UNDEFINED,
 
     /** Indicates if SVG is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })

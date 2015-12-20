@@ -25,7 +25,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POS
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_IN_HTML_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -77,8 +76,6 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.XMLDOMDocument;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -137,7 +134,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
@@ -1389,21 +1385,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             if (result instanceof Window) {
                 final WebWindow webWindow = ((Window) result).getWebWindow();
                 result = getProxy(webWindow);
-            }
-            else if (result instanceof HTMLUnknownElement && getBrowserVersion()
-                    .hasFeature(JS_XML_IN_HTML_VIA_ACTIVEXOBJECT)) {
-                final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
-                if ("xml".equals(unknownElement.getNodeName())) {
-                    final MSXMLActiveXObjectFactory factory =
-                            getWebWindow().getWebClient().getMSXMLActiveXObjectFactory();
-                    final XMLDOMDocument document = (XMLDOMDocument) factory.create("Microsoft.XMLDOM", getWebWindow());
-                    final Iterator<HtmlElement> children = unknownElement.getHtmlElementDescendants().iterator();
-                    if (children.hasNext()) {
-                        final HtmlElement root = children.next();
-                        document.loadXML(root.asXml().trim());
-                    }
-                    result = document;
-                }
             }
         }
 

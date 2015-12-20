@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -738,12 +737,7 @@ public class Node extends EventTarget {
             if (this instanceof Element) {
                 final XMLSerializer serializer = new XMLSerializer();
                 serializer.setParentScope(getParentScope());
-                String xml = serializer.serializeToString(this);
-                if (getBrowserVersion().hasFeature(JS_XML_SERIALIZER_APPENDS_CRLF)
-                        && xml.endsWith("\r\n")) {
-                    xml = xml.substring(0, xml.length() - 2);
-                }
-                return xml;
+                return serializer.serializeToString(this);
             }
             return node.asXml();
         }

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -78,19 +77,6 @@ public class HTMLHtmlElement extends HTMLElement {
     @Override
     public void setOuterHTML(final Object value) {
         throw Context.reportRuntimeError("outerHTML is read-only for tag 'html'");
-    }
-
-    /**
-     * Overwritten to throw an exception in IE8/9.
-     * @param value the new value for the contents of this node
-     */
-    @JsxSetter
-    @Override
-    public void setInnerHTML(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS)) {
-            throw Context.reportRuntimeError("innerHTML is read-only for tag 'html'");
-        }
-        super.setInnerHTML(value);
     }
 
     /**

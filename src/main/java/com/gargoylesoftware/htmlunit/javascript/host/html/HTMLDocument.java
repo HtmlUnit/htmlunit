@@ -43,7 +43,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMEN
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUIRKS_MODE_ALWAYS_DOC_MODE_5;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -842,11 +841,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final BrowserVersion browserVersion = getBrowserVersion();
         if (isQuirksDocType(browserVersion)) {
             compatMode_ = "BackCompat";
-
-            if (browserVersion.hasFeature(QUIRKS_MODE_ALWAYS_DOC_MODE_5)) {
-                documentMode_ = 5;
-                return documentMode_;
-            }
         }
 
         final float version = browserVersion.getBrowserVersionNumeric();

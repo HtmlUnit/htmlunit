@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_C
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
@@ -2819,9 +2818,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @see #pixelString(Element, CSSStyleDeclaration.CssValue)
      */
     protected String pixelString(final String value) {
-        if (getBrowserVersion().hasFeature(JS_LENGTH_WITHOUT_PX)) {
-            return value;
-        }
         if (value.endsWith("px")) {
             return value;
         }
@@ -2839,9 +2835,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     protected String pixelString(final Element element, final CssValue value) {
         final String s = value.get(element);
-        if (getBrowserVersion().hasFeature(JS_LENGTH_WITHOUT_PX)) {
-            return s;
-        }
         if (s.endsWith("px")) {
             return s;
         }
