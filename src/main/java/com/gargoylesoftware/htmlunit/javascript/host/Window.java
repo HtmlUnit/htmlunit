@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
@@ -1317,19 +1316,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_A_FUNCTION)) {
-            throw Context.reportRuntimeError("Window is not a function.");
-        }
-        if (args.length > 0) {
-            final Object arg = args[0];
-            if (arg instanceof String) {
-                return ScriptableObject.getProperty(this, (String) arg);
-            }
-            if (arg instanceof Number) {
-                return ScriptableObject.getProperty(this, ((Number) arg).intValue());
-            }
-        }
-        return Context.getUndefinedValue();
+        throw Context.reportRuntimeError("Window is not a function.");
     }
 
     /**
@@ -1337,10 +1324,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @Override
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_A_FUNCTION)) {
-            throw Context.reportRuntimeError("Window is not a function.");
-        }
-        return null;
+        throw Context.reportRuntimeError("Window is not a function.");
     }
 
     /**

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SCR_NOT_EXPANDED;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -72,14 +71,12 @@ public class HTMLScriptElement extends HTMLElement {
         if (ATTRIBUTE_NOT_DEFINED == src) {
             return src;
         }
-        if (!getBrowserVersion().hasFeature(JS_SCRIPT_SCR_NOT_EXPANDED)) {
-            try {
-                final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
-                src = expandedSrc.toString();
-            }
-            catch (final MalformedURLException e) {
-                // ignore
-            }
+        try {
+            final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
+            src = expandedSrc.toString();
+        }
+        catch (final MalformedURLException e) {
+            // ignore
         }
         return src;
     }

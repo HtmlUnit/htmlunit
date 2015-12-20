@@ -106,11 +106,11 @@ public enum BrowserVersionFeatures {
     CSS_KEYGEN_DISPLAY_INLINE_JS,
 
     /** Is display style of HtmlNoEmbed is 'inline'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature(@WebBrowser(CHROME))
     CSS_NOEMBED_INLINE,
 
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature(@WebBrowser(CHROME))
     CSS_NOSCRIPT_DISPLAY_INLINE,
 
     /** The default value of the display property for the 'progress' tag is 'inline' instead of the default one. */
@@ -203,10 +203,6 @@ public enum BrowserVersionFeatures {
     /** Triggers "input" event. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_INPUT,
-
-    /** Triggers 'onbeforeunload' event handler using <code>Event</code>. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8) })
-    EVENT_ONBEFOREUNLOAD_USES_EVENT,
 
     /** Triggers "onchange" event handler after "onclick" event handler. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -302,7 +298,7 @@ public enum BrowserVersionFeatures {
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
 
     /** Indicates if a form field is directly reachable by its original name once this has been changed. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     FORMFIELD_REACHABLE_BY_ORIGINAL_NAME,
 
     /** Form submit is done without the hash part of the action url. */
@@ -350,8 +346,7 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8),
-        @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
@@ -379,7 +374,7 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlCollection returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(value = FF, minVersion = 38) })
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
     HTMLCOLLECTION_NULL_IF_NOT_FOUND,
 
     /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlCommand} have no end tag. */
@@ -529,16 +524,12 @@ public enum BrowserVersionFeatures {
     HTMLTRACK_END_TAG_FORBIDDEN,
 
     /** HTML attributes are always lower case. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTML_ATTRIBUTE_LOWER_CASE,
 
     /** Adds CData nodes as Comment elements to the DOM. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTML_CDATA_AS_COMMENT,
-
-    /** Expand shorthand to 6-digit hex color codes. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8) })
-    HTML_COLOR_EXPAND_SHORT_HEX,
 
     /** Expand #0 to #000000. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
@@ -557,7 +548,7 @@ public enum BrowserVersionFeatures {
     HTML_OBJECT_CLASSID,
 
     /** Additionally support dates in format "d/M/yyyy". */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature(@WebBrowser(FF))
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1,
 
     /** Dates format pattern 2. */
@@ -574,7 +565,7 @@ public enum BrowserVersionFeatures {
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTTP_COOKIE_START_DATE_1970,
 
     /** Supports redirect via 308 code. */
@@ -604,7 +595,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
 
     /** The anchor pathname property returns nothing for broken http(s) url's. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature(@WebBrowser(CHROME))
     JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL,
 
     /** The anchor pathname property returns nothing for none http(s) url's. */
@@ -636,7 +627,7 @@ public enum BrowserVersionFeatures {
     JS_ATTR_BASE_URI_NULL,
 
     /** firstChild and lastChild returns null for Attr (like IE does). */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(FF) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
     /** HTMLBGSoundElement reported as HTMLUnknownElement. */
@@ -687,10 +678,6 @@ public enum BrowserVersionFeatures {
     /** <code>Date.toLocaleTimeString()</code> returns a form with some weird special chars. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS,
-
-    /** Is Date.toUTCString() and Date.toGMTString are returning UTC instead of GMT. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8) })
-    JS_DATE_USE_UTC,
 
     /** */
     @BrowserFeature(@WebBrowser(IE))
@@ -1006,13 +993,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK,
 
-    /**
-     * Indicates that function can be defined as
-     * <code>function object.property() {}</code> instead of <code>object.property = function() {}</code>.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_FUNCTION_OBJECT_METHOD,
-
     /** Indicates if the method toSource exists on the native objects. */
     @BrowserFeature(@WebBrowser(FF))
     JS_FUNCTION_TOSOURCE,
@@ -1052,7 +1032,7 @@ public enum BrowserVersionFeatures {
      * Is class name of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Image} the same as
      * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
      */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature(@WebBrowser(CHROME))
     JS_IMAGE_HTML_IMAGE_ELEMENT,
 
     /**
@@ -1149,10 +1129,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_MENU_TYPE_EMPTY,
 
-    /** Javascript event.keyCode returns 0 instead of undefined for mouse events. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_MOUSE_EVENT_KEY_CODE_ZERO,
-
     /**
      * Indicates if the String representation of a native function is without newline.
      */
@@ -1177,10 +1153,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
 
-    /** HTMLObjectElement is an "[object]" even in standards mode. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_OBJECT_OBJECT,
-
     /** Indicates that objects with prototype property available in window scope. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
@@ -1194,7 +1166,7 @@ public enum BrowserVersionFeatures {
      * Is class name of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Option} the same as
      * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
      */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature(@WebBrowser(CHROME))
     JS_OPTION_HTML_OPTION_ELEMENT,
 
     /**
@@ -1241,10 +1213,6 @@ public enum BrowserVersionFeatures {
     /** RegExp group <code>$0</code> returns the whole previous match (see {@link java.util.regex.Matcher#group()}. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH,
-
-    /** Javascript script.src returns the plain value. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SCRIPT_SCR_NOT_EXPANDED,
 
     /** Javascript script tags supports the 'for' and the 'event'
      * attribute (IE).
@@ -1452,10 +1420,6 @@ public enum BrowserVersionFeatures {
     /** <code>window..frames['id']</code> returns the frame window instead of the frame element. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
-
-    /** Window property usable as function. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_WINDOW_IS_A_FUNCTION,
 
     /** <code>Window.onerror</code> gets the column number as as 4th
      * and the error as 5th argument. */

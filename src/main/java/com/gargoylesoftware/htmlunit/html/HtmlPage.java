@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONBEFOREUNLOAD_USES_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
@@ -1207,8 +1206,7 @@ public class HtmlPage extends InteractivePage {
                 return true;
             }
             final Event event;
-            if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)
-                && !hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
+            if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
                 event = new BeforeUnloadEvent(element, eventType);
             }
             else {
@@ -1245,8 +1243,7 @@ public class HtmlPage extends InteractivePage {
                     LOG.debug("Executing on" + eventType + " handler for " + frame);
                 }
                 final Event event;
-                if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)
-                    && !hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
+                if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
                     event = new BeforeUnloadEvent(frame, eventType);
                 }
                 else {

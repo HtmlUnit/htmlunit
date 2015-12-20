@@ -64,14 +64,6 @@ class BrowserConfiguration {
         return ff(defaultValue).startingWith(38);
     }
 
-    public static BrowserConfiguration ie8up(final String defaultValue) {
-        return ie(defaultValue).startingWith(8);
-    }
-
-    public static BrowserConfiguration ieBelow11(final String defaultValue) {
-        return ie(defaultValue).upTo(10);
-    }
-
     public static BrowserConfiguration ie11up(final String defaultValue) {
         return ie(defaultValue).startingWith(11);
     }

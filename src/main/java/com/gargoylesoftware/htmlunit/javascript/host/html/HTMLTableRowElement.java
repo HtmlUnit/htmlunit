@@ -206,7 +206,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     }
 
     /**
-     * Overwritten to throw an exception in IE8/9.
+     * Overwritten to throw an exception.
      * @param value the new value for replacing this node
      */
     @JsxSetter

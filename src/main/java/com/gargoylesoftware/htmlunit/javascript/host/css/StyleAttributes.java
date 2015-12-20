@@ -21,8 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfigura
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow38;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie11up;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie8up;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ieBelow11;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -658,7 +656,7 @@ final class StyleAttributes {
         FILL_RULE_("fill-rule", "fill-rule", ff38up("nonzero")),
 
         /** The style property {@code filter}. */
-        FILTER("filter", "filter", ff("none"), ieBelow11(""), ie11up("none"), chrome("none")),
+        FILTER("filter", "filter", ff("none"), ie11up("none"), chrome("none")),
 
         /** The style property {@code flex}. */
         FLEX("flex", "flex", ff(""), ie11up("0 1 auto"), chrome("0 1 auto")),
@@ -896,7 +894,7 @@ final class StyleAttributes {
         LINE_BREAK("lineBreak", "line-break", ie11up("undefined")),
 
         /** The style property {@code lineHeight}. */
-        LINE_HEIGHT("lineHeight", "line-height", ff("20px"), ieBelow11("20px"), ie11up("normal"), chrome("normal")),
+        LINE_HEIGHT("lineHeight", "line-height", ff("20px"), ie11up("normal"), chrome("normal")),
 
         /** The style property {@code line-height}. */
         LINE_HEIGHT_("line-height", "line-height", ff38up("20px")),
@@ -1778,7 +1776,7 @@ final class StyleAttributes {
         POSITION("position", "position", chrome("static")),
 
         /** The style property {@code quotes}. */
-        QUOTES("quotes", "quotes", ff("\"“\" \"”\" \"‘\" \"’\""), ie8up(""), chrome("")),
+        QUOTES("quotes", "quotes", ff("\"“\" \"”\" \"‘\" \"’\""), chrome("")),
 
         /** The style property {@code r}. */
         R("r", "r", chrome("0px")),
@@ -2093,7 +2091,7 @@ final class StyleAttributes {
 
         /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",
-                ff("-moz-isolate"), ieBelow11("embed"), ie11up("normal"), chrome("normal")),
+                ff("-moz-isolate"), ie11up("normal"), chrome("normal")),
 
         /** The style property {@code unicode-bidi}. */
         UNICODE_BIDI_("unicode-bidi", "unicode-bidi", ff38up("-moz-isolate")),
@@ -2506,7 +2504,7 @@ final class StyleAttributes {
         WILL_CHANGE_("will-change", "will-change", ff38up("auto")),
 
         /** The style property {@code wordBreak}. */
-        WORD_BREAK("wordBreak", "word-break", ff("normal"), ieBelow11(""), ie11up("normal"), chrome("normal")),
+        WORD_BREAK("wordBreak", "word-break", ff("normal"), ie11up("normal"), chrome("normal")),
 
         /** The style property {@code word-break}. */
         WORD_BREAK_("word-break", "word-break", ff38up("normal")),

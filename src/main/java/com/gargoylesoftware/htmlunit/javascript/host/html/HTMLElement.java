@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_SHORT_HEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
@@ -2271,14 +2270,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
             }
             if (!isName) {
-                if (s.charAt(0) == '#' && s.length() == 4
-                        && getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_SHORT_HEX)) {
-                    final StringBuilder builder = new StringBuilder(7);
-                    builder.append("#0").append(s.charAt(1))
-                        .append('0').append(s.charAt(2))
-                        .append('0').append(s.charAt(3));
-                    s = builder.toString();
-                }
                 if (restrict) {
                     if (s.charAt(0) == '#') {
                         s = s.substring(1);

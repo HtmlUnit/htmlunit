@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MOUSE_EVENT_KEY_CODE_ZERO;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -368,9 +367,6 @@ public class MouseEvent extends UIEvent {
     @Override
     @JsxGetter({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
     public Object getKeyCode() {
-        if (getBrowserVersion().hasFeature(JS_MOUSE_EVENT_KEY_CODE_ZERO)) {
-            return 0;
-        }
         return Undefined.instance;
     }
 }

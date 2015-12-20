@@ -328,7 +328,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_CONSTRUCTOR)
                         || htmlPage == null || !htmlPage.isQuirksMode();
             case Context.FEATURE_HTMLUNIT_FUNCTION_OBJECT_METHOD:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_OBJECT_METHOD);
+                return false;
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK);
             case Context.FEATURE_HTMLUNIT_PARSE_INT_RADIX_10:
