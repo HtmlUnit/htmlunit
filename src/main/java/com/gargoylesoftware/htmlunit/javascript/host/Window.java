@@ -20,8 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -2153,8 +2151,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                                 + targetOrigin + "' was specified."));
             }
 
-            if (!getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT)
-                    && getPort(targetURL) != getPort(currentURL)) {
+            if (getPort(targetURL) != getPort(currentURL)) {
                 return;
             }
             if (!targetURL.getHost().equals(currentURL.getHost())) {
@@ -2169,11 +2166,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", this, transfer);
         event.setParentScope(this);
         event.setPrototype(getPrototype(event.getClass()));
-
-        if (getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_SYNCHRONOUS)) {
-            dispatchEvent(event);
-            return;
-        }
 
         final JavaScriptEngine jsEngine = getWebWindow().getWebClient().getJavaScriptEngine();
         final PostponedAction action = new PostponedAction(getDomNodeOrDie().getPage()) {

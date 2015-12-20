@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_WINDOW_EXECUTE_IF_DITACHED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -27,7 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.ArrayUtils;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 
@@ -43,10 +45,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code EventTarget}.
@@ -106,13 +104,7 @@ public class EventTarget extends SimpleScriptable {
             final Object[] args = new Object[] {event};
 
             // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs;
-            if (getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            }
-            else {
-                propHandlerArgs = args;
-            }
+            final Object[] propHandlerArgs = args;
 
             window.setCurrentEvent(event);
             try {
@@ -188,13 +180,7 @@ public class EventTarget extends SimpleScriptable {
             }
 
             // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs;
-            if (getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            }
-            else {
-                propHandlerArgs = args;
-            }
+            final Object[] propHandlerArgs = args;
 
             // bubbling phase
             event.setEventPhase(Event.AT_TARGET);

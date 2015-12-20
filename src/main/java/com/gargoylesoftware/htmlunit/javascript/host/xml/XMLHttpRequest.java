@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ERRORHANDLER_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
@@ -25,8 +24,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_XML_IS_ACTIVEXOBJECT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
@@ -67,8 +64,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.XMLDOMDocument;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -308,7 +303,7 @@ public class XMLHttpRequest extends EventTarget {
      */
     private void processError(Context context) {
         final BrowserVersion browser = getBrowserVersion();
-        if (errorHandler_ != null && !browser.hasFeature(XHR_ERRORHANDLER_NOT_SUPPORTED)) {
+        if (errorHandler_ != null) {
             final Scriptable scope = errorHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
@@ -384,13 +379,6 @@ public class XMLHttpRequest extends EventTarget {
         if (contentType.isEmpty() || contentType.contains("xml")) {
             final WebWindow webWindow = getWindow().getWebWindow();
             try {
-                if (getBrowserVersion().hasFeature(XHR_RESPONSE_XML_IS_ACTIVEXOBJECT)) {
-                    final XmlPage page = new XmlPage(webResponse_, webWindow, true, false);
-                    final MSXMLActiveXObjectFactory factory = webWindow.getWebClient().getMSXMLActiveXObjectFactory();
-                    final XMLDOMDocument document = (XMLDOMDocument) factory.create("Microsoft.XMLDOM", webWindow);
-                    document.setDomNode(page);
-                    return document;
-                }
                 final XmlPage page = new XmlPage(webResponse_, webWindow);
                 final XMLDocument document = new XMLDocument();
                 document.setPrototype(getPrototype(document.getClass()));
@@ -419,9 +407,6 @@ public class XMLHttpRequest extends EventTarget {
     @JsxGetter
     public int getStatus() {
         if (state_ == UNSENT || state_ == OPENED) {
-            if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
-                throw Context.reportRuntimeError("status not set");
-            }
             return 0;
         }
         if (webResponse_ != null) {
@@ -440,9 +425,6 @@ public class XMLHttpRequest extends EventTarget {
     @JsxGetter
     public String getStatusText() {
         if (state_ == UNSENT || state_ == OPENED) {
-            if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
-                throw Context.reportRuntimeError("statusText not set");
-            }
             return "";
         }
         if (webResponse_ != null) {

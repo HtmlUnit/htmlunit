@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_C
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.util.Arrays;
@@ -2410,13 +2409,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the computed left (X coordinate), relative to the node's parent's left edge
      */
     public int getLeft(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
-        String p = getPositionWithInheritance();
+        final String p = getPositionWithInheritance();
         final String l = getLeftWithInheritance();
         final String r = getRightWithInheritance();
-
-        if ("fixed".equals(p) && getBrowserVersion().hasFeature(TREATS_POSITION_FIXED_LIKE_POSITION_STATIC)) {
-            p = "static";
-        }
 
         int left;
         if ("absolute".equals(p) && !"auto".equals(l)) {

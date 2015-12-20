@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -507,24 +506,6 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Recursively checks whether "xml:space" attribute is set to "default".
-     * @param node node to start checking from
-     * @return whether "xml:space" attribute is set to "default"
-     */
-    private static boolean isXMLSpaceDefault(DomNode node) {
-        for ( ; node instanceof DomElement; node = node.getParentNode()) {
-            final String value = ((DomElement) node).getAttribute("xml:space");
-            if (!value.isEmpty()) {
-                if ("default".equals(value)) {
-                    return true;
-                }
-                return false;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Returns this node's parent node.
      * @return this node's parent node
      */
@@ -642,12 +623,7 @@ public class Node extends EventTarget {
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object getPrefix() {
         final DomNode domNode = getDomNodeOrDie();
-        final String prefix = domNode.getPrefix();
-        if (getBrowserVersion().hasFeature(JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED)
-                && (prefix == null || domNode.getHtmlPageOrNull() != null)) {
-            return "";
-        }
-        return prefix;
+        return domNode.getPrefix();
     }
 
     /**

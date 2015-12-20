@@ -956,31 +956,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_ERROR_STACK,
 
-    /** Indicates that "eval" function should have access to the local function scope. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_EVAL_LOCAL_SCOPE,
-
-    /** Javascript event aborted check is based on the event handler return value (IE);
-     * (standards-compliant browsers doing this via preventDefault).
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE,
-
     /** Javascript event.keyCode and event.charCode distinguish between printable and not printable keys. */
     @BrowserFeature(@WebBrowser(FF))
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
 
-    /** Javascript event handlers declared as property on a node don't receive the event as argument. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT,
-
     /** If an event handler has the value <code>undefined</code> {@code null} is returned instead. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     JS_EVENT_HANDLER_UNDEFINED_AS_NULL,
-
-    /** Javascript event.keyCode returns undefined instead of zero if the keyCode is not set. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_EVENT_KEY_CODE_UNDEFINED,
 
     /** Do not send parameter in event handlers. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1248,10 +1230,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_PHRASE_COMMON_CLASS_NAME,
 
-    /** Indicates that the prefix property returns an empty string if no prefix defined. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED,
-
     /** Indicates that the {@code pre.width} is string. */
     @BrowserFeature(@WebBrowser(IE))
     JS_PRE_WIDTH_STRING,
@@ -1502,14 +1480,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94,
 
-    /** Window.postMessage is sent when the targetOrigin port is different than the current port. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT,
-
-    /** Window.postMessage is synchronous. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_WINDOW_POST_MESSAGE_SYNCHRONOUS,
-
     /** Window.getSelection returns null, if the window is not visible. */
     @BrowserFeature(@WebBrowser(FF))
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
@@ -1521,10 +1491,6 @@ public enum BrowserVersionFeatures {
     /** Supports XML. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,
-
-    /** If <code>alert(XMLHttpRequest)</code> returns an object, not function. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_XMLHTTPREQUEST_OBJECT,
 
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
@@ -1660,10 +1626,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     SVG_UNKNOWN_ARE_DOM,
 
-    /** Indicates that the browser treats "position: fixed" as if it were "position: static". */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    TREATS_POSITION_FIXED_LIKE_POSITION_STATIC,
-
     /**
      * Indicates, that the pathname for the url 'blank' is empty;
      * instead of 'blank'.
@@ -1696,10 +1658,6 @@ public enum BrowserVersionFeatures {
     /** Execute window events. */
     @BrowserFeature(@WebBrowser(IE))
     WINDOW_EXECUTE_EVENTS,
-
-    /** XMLHttpRequest does not trigger the error handler. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    XHR_ERRORHANDLER_NOT_SUPPORTED,
 
     /** XMLHttpRequest triggers the opened event at the beginning of the send method again. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1741,15 +1699,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that method overrideMimeType throws if msg was already sent. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
-
-    /** Indicates that <code>responseXML</code> returns an MXSML ActiveX object. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    XHR_RESPONSE_XML_IS_ACTIVEXOBJECT,
-
-    /** Indicates that the impl throws an exception when accessing the status/statusText
-     * property in unset state. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET,
 
     /** Indicates that the onload handler is not triggered if completed (FF). */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVAL_LOCAL_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES;
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
@@ -320,7 +319,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW:
                 return browserVersion_.hasFeature(JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION);
             case Context.FEATURE_HTMLUNIT_EVAL_LOCAL_SCOPE:
-                return browserVersion_.hasFeature(JS_EVAL_LOCAL_SCOPE);
+                return false;
             case Context.FEATURE_HTMLUNIT_ERROR_STACK:
                 return browserVersion_.hasFeature(JS_ERROR_STACK);
             case Context.FEATURE_HTMLUNIT_CONSTRUCTOR:

@@ -17,14 +17,16 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_KEY_CODE_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.LinkedList;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -41,11 +43,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * JavaScript object representing an event that is passed into event handlers when they are
@@ -492,9 +489,6 @@ public class Event extends SimpleScriptable {
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getKeyCode() {
         if (keyCode_ == null) {
-            if (getBrowserVersion().hasFeature(JS_EVENT_KEY_CODE_UNDEFINED)) {
-                return Undefined.instance;
-            }
             return Integer.valueOf(0);
         }
         return keyCode_;
@@ -697,10 +691,7 @@ public class Event extends SimpleScriptable {
      * @return {@code true} if this event has been aborted
      */
     public boolean isAborted(final ScriptResult result) {
-        final boolean checkReturnValue = getBrowserVersion().hasFeature(JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE);
-        return ScriptResult.isFalse(result)
-                || (!checkReturnValue && preventDefault_)
-                || (checkReturnValue && Boolean.FALSE.equals(returnValue_));
+        return ScriptResult.isFalse(result) || preventDefault_;
     }
 
     /**

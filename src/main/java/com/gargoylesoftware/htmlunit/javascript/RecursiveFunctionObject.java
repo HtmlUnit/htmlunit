@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_T
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML_IMAGE_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XMLHTTPREQUEST_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XSLTPROCESSOR_OBJECT;
 
 import java.lang.reflect.Member;
@@ -117,23 +116,8 @@ public class RecursiveFunctionObject extends FunctionObject {
         if ("XSLTProcessor".equals(functionName) && getBrowserVersion().hasFeature(JS_XSLTPROCESSOR_OBJECT)) {
             return "[object " + functionName + ']';
         }
-        if ("XMLHttpRequest".equals(functionName) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
-            return "[object " + functionName + ']';
-        }
 
         return super.getDefaultValue(typeHint);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTypeOf() {
-        final String functionName = getFunctionName();
-        if ("XMLHttpRequest".equals(functionName) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
-            return "object";
-        }
-        return super.getTypeOf();
     }
 
     /**
