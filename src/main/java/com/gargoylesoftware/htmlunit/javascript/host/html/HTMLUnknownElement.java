@@ -43,9 +43,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 @JsxClasses({
         @JsxClass(domClass = HtmlUnknownElement.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-            @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlUnknownElement.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+            @WebBrowser(EDGE) })
     })
 public class HTMLUnknownElement extends HTMLElement {
 

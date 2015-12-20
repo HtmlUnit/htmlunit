@@ -49,7 +49,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -69,13 +68,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.CSSException;
-import org.w3c.css.sac.InputSource;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
 
@@ -113,9 +110,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
@@ -165,8 +160,7 @@ import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, browsers = { @WebBrowser(value = IE, maxVersion = 8) })
+                @WebBrowser(EDGE) })
     })
 public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
 
@@ -210,7 +204,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private HTMLCollection anchors_; // has to be a member to have equality (==) working
     private HTMLCollection applets_; // has to be a member to have equality (==) working
     private StyleSheetList styleSheets_; // has to be a member to have equality (==) working
-    private NamespaceCollection namespaces_; // has to be a member to have equality (==) working
     private HTMLElement activeElement_;
 
     /** The buffer that will be used for calls to document.write(). */
@@ -421,18 +414,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return new Date();
         }
         return date;
-    }
-
-    /**
-     * Returns the value of the JavaScript attribute {@code namespaces}.
-     * @return the value of the JavaScript attribute {@code namespaces}
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public Object getNamespaces() {
-        if (namespaces_ == null) {
-            namespaces_ = new NamespaceCollection(this);
-        }
-        return namespaces_;
     }
 
     /**
@@ -1113,52 +1094,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Creates a new Stylesheet.
-     * Current implementation just creates an empty {@link CSSStyleSheet} object.
-     * @param url the stylesheet URL
-     * @param index where to insert the sheet in the collection
-     * @return the newly created stylesheet
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public CSSStyleSheet createStyleSheet(final String url, final Object index) {
-        final HTMLLinkElement link = (HTMLLinkElement) createElement("link");
-        link.setHref(url);
-        link.setRel("stylesheet");
-
-        int insertPos = Integer.MAX_VALUE;
-        if (Undefined.instance != index) {
-            try {
-                insertPos = ((Double) index).intValue();
-            }
-            catch (final NumberFormatException e) {
-                // ignore
-            }
-        }
-        final InputSource source = new InputSource(new StringReader(""));
-        final CSSStyleSheet stylesheet = new CSSStyleSheet(link, source, url);
-        stylesheet.setPrototype(getPrototype(CSSStyleSheet.class));
-        stylesheet.setParentScope(getWindow());
-
-        final HTMLCollection heads = getElementsByTagName("head");
-        if (heads.getLength() > 0) {
-            final DomNode head = ((SimpleScriptable) heads.item(0)).getDomNodeOrDie();
-
-            int stylesheetPos = -1;
-            for (DomNode domNode : head.getChildNodes()) {
-                if (StyleSheetList.isStyleSheetLink(domNode)) {
-                    stylesheetPos++;
-                    if (insertPos <= stylesheetPos) {
-                        domNode.insertBefore(link.getDomNodeOrDie());
-                        return stylesheet;
-                    }
-                }
-            }
-            head.appendChild(link.getDomNodeOrDie());
-        }
-        return stylesheet;
-    }
-
-    /**
      * Returns the element with the specified ID, or {@code null} if that element could not be found.
      * @param id the ID to search for
      * @return the element, or {@code null} if it could not be found
@@ -1631,15 +1566,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute <tt>selection</tt>.
-     * @return the value of the JavaScript attribute <tt>selection</tt>
-     */
-    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 8), propertyName = "selection")
-    public Selection getSelection_js() {
-        return getWindow().getSelectionImpl();
-    }
-
-    /**
      * Returns the value of the {@code frames} property.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537459.aspx">MSDN documentation</a>
      * @return the live collection of frames contained by this document
@@ -1722,22 +1648,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             throw Context.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
                             + "' for event type of '" + eventType + "': " + e.getMessage());
         }
-    }
-
-    /**
-     * Implementation of the <tt>createEventObject</tt> method supported by Internet Explorer. This
-     * method returns an uninitialized event object. It is up to the caller of the method to initialize
-     * the properties of the event.
-     *
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536390.aspx">MSDN Documentation</a>
-     * @return an uninitialized event object
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public Event createEventObject() {
-        final Event event = new MouseEvent();
-        event.setParentScope(getWindow());
-        event.setPrototype(getPrototype(event.getClass()));
-        return event;
     }
 
     /**

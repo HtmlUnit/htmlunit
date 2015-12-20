@@ -52,8 +52,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
     })
 public class Selection extends SimpleScriptable {
 
-    private String type_ = "None";
-
     /**
      * Creates an instance.
      */
@@ -150,34 +148,6 @@ public class Selection extends SimpleScriptable {
     }
 
     /**
-     * Returns the type of selection (IE only).
-     * @return the type of selection
-     */
-    @JsxGetter({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
-    public String getType() {
-        return type_;
-    }
-
-    /**
-     * Creates a TextRange object from the current text selection (IE only).
-     * @return the created TextRange object
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public TextRange createRange() {
-        final TextRange range;
-        final Range first = getFirstRange();
-        if (first != null) {
-            range = new TextRange(first);
-        }
-        else {
-            range = new TextRange(new SimpleRange());
-        }
-        range.setParentScope(getParentScope());
-        range.setPrototype(getPrototype(range.getClass()));
-        return range;
-    }
-
-    /**
      * Adds a range to the selection.
      * @param range the range to add
      */
@@ -262,14 +232,6 @@ public class Selection extends SimpleScriptable {
             ranges.add(first);
             first.collapse(true);
         }
-    }
-
-    /**
-     * Cancels the current selection, sets the selection type to none, and sets the item property to null (IE only).
-     */
-    @JsxFunction({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
-    public void empty() {
-        type_ = "None";
     }
 
     /**

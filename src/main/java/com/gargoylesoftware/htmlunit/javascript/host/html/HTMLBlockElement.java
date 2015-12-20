@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
-import com.gargoylesoftware.htmlunit.html.HtmlPreformattedText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -39,23 +38,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlAddress.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlAddress.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlBlockQuote.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlCenter.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlExample.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
         @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlListing.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlPlainText.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlPreformattedText.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        @JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(value = IE, minVersion = 11))
     })
 public class HTMLBlockElement extends HTMLElement {
 

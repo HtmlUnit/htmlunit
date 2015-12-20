@@ -50,8 +50,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * The JavaScript object {@code Node} which is the base class for all DOM
@@ -578,19 +576,6 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "onclick")
-     * @param listener the event listener
-     * @return {@code true} if the listener has been added
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
-     * @see #addEventListener(String, Scriptable, boolean)
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public boolean attachEvent(final String type, final Function listener) {
-        return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
-    }
-
-    /**
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
      * @param listener the event listener
@@ -644,20 +629,6 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Returns the base name of this element.
-     * @return the base name of this element
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public Object getBaseName() {
-        final DomElement domElem = (DomElement) getDomNodeOrDie();
-        final boolean isXmlPage = domElem.getOwnerDocument() instanceof XmlPage;
-        if (isXmlPage) {
-            return domElem.getLocalName();
-        }
-        return Undefined.instance;
-    }
-
-    /**
      * Compares the positions of this node and the provided node within the document.
      * @param node node object that specifies the node to check
      * @return how the node is positioned relatively to the reference node.
@@ -678,24 +649,6 @@ public class Node extends EventTarget {
     @JsxFunction
     public void normalize() {
         getDomNodeOrDie().normalize();
-    }
-
-    /**
-     * Represents the xml content of the node and its descendants.
-     * @return the xml content of the node and its descendants
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public Object getXml() {
-        final DomNode node = getDomNodeOrDie();
-        if (node.getPage() instanceof XmlPage) {
-            if (this instanceof Element) {
-                final XMLSerializer serializer = new XMLSerializer();
-                serializer.setParentScope(getParentScope());
-                return serializer.serializeToString(this);
-            }
-            return node.asXml();
-        }
-        return Undefined.instance;
     }
 
     /**

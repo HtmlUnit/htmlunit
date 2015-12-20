@@ -27,10 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = HtmlIsIndex.class,
-                browsers = { @WebBrowser(value = IE, maxVersion = 8) }),
-        @JsxClass(domClass = HtmlIsIndex.class, browsers = { @WebBrowser(value = IE, minVersion = 11) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        @JsxClass(domClass = HtmlIsIndex.class, browsers = { @WebBrowser(value = IE, minVersion = 11) })
     })
 public class HTMLIsIndexElement extends HTMLElement {
 

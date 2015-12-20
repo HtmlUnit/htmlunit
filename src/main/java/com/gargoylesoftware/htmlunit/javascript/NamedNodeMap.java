@@ -47,8 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
             @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) }),
         @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-            browsers = @WebBrowser(value = FF, maxVersion = 31)),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+            browsers = @WebBrowser(value = FF, maxVersion = 31))
     })
 public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter {
 

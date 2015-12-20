@@ -53,7 +53,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.PermissionStatus;
 import com.gargoylesoftware.htmlunit.javascript.host.Permissions;
 import com.gargoylesoftware.htmlunit.javascript.host.Plugin;
 import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
-import com.gargoylesoftware.htmlunit.javascript.host.Popup;
 import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 import com.gargoylesoftware.htmlunit.javascript.host.Proxy;
 import com.gargoylesoftware.htmlunit.javascript.host.PushManager;
@@ -372,7 +371,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorkerContain
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorkerRegistration;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.Worker;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
-import com.gargoylesoftware.htmlunit.javascript.host.xml.XDomainRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestEventTarget;
@@ -439,7 +437,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLLegendElement.class, HTMLLIElement.class, HTMLLinkElement.class, HTMLListElement.class,
         HTMLMapElement.class, HTMLMarqueeElement.class,
         HTMLMediaElement.class, HTMLMenuElement.class, HTMLMenuItemElement.class, HTMLMetaElement.class,
-        HTMLMeterElement.class, HTMLModElement.class, HTMLNextIdElement.class, HTMLNoShowElement.class,
+        HTMLMeterElement.class, HTMLModElement.class, HTMLNextIdElement.class,
         HTMLObjectElement.class, HTMLOListElement.class, HTMLOptGroupElement.class,
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLOutputElement.class,
         HTMLParagraphElement.class, HTMLParamElement.class, HTMLPhraseElement.class, HTMLPictureElement.class,
@@ -477,7 +475,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Path2D.class, Performance.class, PerformanceEntry.class, PerformanceMark.class,
         PerformanceMeasure.class, PerformanceNavigation.class, PerformanceResourceTiming.class, PerformanceTiming.class,
         PeriodicWave.class, Permissions.class, PermissionStatus.class, Plugin.class, PluginArray.class,
-        PointerEvent.class, PopStateEvent.class, Popup.class, Position.class, PositionError.class,
+        PointerEvent.class, PopStateEvent.class, Position.class, PositionError.class,
         ProcessingInstruction.class, ProgressEvent.class,
         Promise.class, Proxy.class, PushManager.class, PushSubscription.class, RadioNodeList.class, Range.class,
         ReadableByteStream.class, ReadableStream.class, Request.class, Response.class, RowContainer.class,
@@ -542,7 +540,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         webkitOfflineAudioContext.class, webkitRTCPeerConnection.class, webkitSpeechGrammar.class,
         webkitSpeechGrammarList.class, webkitSpeechRecognition.class, webkitSpeechRecognitionError.class,
         webkitSpeechRecognitionEvent.class, WebKitTransitionEvent.class, webkitURL.class,
-        WebSocket.class, WheelEvent.class, Window.class, Worker.class, XDomainRequest.class, XMLDocument.class,
+        WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestProgressEvent.class,
         XMLHttpRequestUpload.class, XMLSerializer.class,
         XPathEvaluator.class, XPathExpression.class,

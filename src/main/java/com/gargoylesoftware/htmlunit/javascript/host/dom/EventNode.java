@@ -25,7 +25,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -394,7 +393,6 @@ public class EventNode extends Node {
      * @param event specifies the event object from which to obtain event object properties.
      * @return {@code true} if the event fired successfully, {@code false} if it was canceled
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public boolean fireEvent(final String type, Event event) {
         if (event == null) {
             event = new MouseEvent();

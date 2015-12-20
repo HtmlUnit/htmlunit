@@ -61,18 +61,6 @@ public class DocumentFragment extends Node {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getXml() {
-        final Node node = getFirstChild();
-        if (node != null) {
-            return node.getXml();
-        }
-        return "";
-    }
-
-    /**
      * Creates a new HTML attribute with the specified name.
      *
      * @param attributeName the name of the attribute to create

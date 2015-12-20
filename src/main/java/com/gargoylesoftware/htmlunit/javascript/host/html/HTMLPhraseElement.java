@@ -29,10 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBold;
 import com.gargoylesoftware.htmlunit.html.HtmlCitation;
 import com.gargoylesoftware.htmlunit.html.HtmlCode;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinition;
-import com.gargoylesoftware.htmlunit.html.HtmlDeletedText;
 import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
-import com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation;
-import com.gargoylesoftware.htmlunit.html.HtmlInsertedText;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
 import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
@@ -62,74 +59,31 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ronald Brill
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlAbbreviated.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlAbbreviated.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlAcronym.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlAcronym.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlBidirectionalOverride.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlBig.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlBig.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlBlink.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlBlink.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlBold.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlBold.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlCitation.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlCitation.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlCode.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlCode.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlDefinition.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlDefinition.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlDeletedText.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlEmphasis.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlEmphasis.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlInlineQuotation.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlInsertedText.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlItalic.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlItalic.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlKeyboard.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlKeyboard.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlNoBreak.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlNoBreak.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlRt.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlRt.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlRp.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlRp.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlRuby.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlRuby.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlS.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlS.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlSample.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlSample.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlSmall.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlSmall.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlStrike.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlStrike.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlSubscript.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlSubscript.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlSuperscript.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlSuperscript.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlStrong.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlStrong.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlTeletype.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlTeletype.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlUnderlined.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlUnderlined.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlVariable.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlVariable.class, browsers = @WebBrowser(value = IE, minVersion = 11))
     })
 public class HTMLPhraseElement extends HTMLElement {

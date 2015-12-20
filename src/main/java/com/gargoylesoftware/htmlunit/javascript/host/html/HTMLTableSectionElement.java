@@ -44,18 +44,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
         @JsxClass(domClass = HtmlTableBody.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
                         @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableBody.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlTableHeader.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                    @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableHeader.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-            @JsxClass(domClass = HtmlTableFooter.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
                     @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlTableFooter.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                    @WebBrowser(EDGE) })
     })
 public class HTMLTableSectionElement extends RowContainer {
 

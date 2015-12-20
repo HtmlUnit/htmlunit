@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,9 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 @JsxClasses({
         @JsxClass(domClass = DomElement.class,
                 browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, domClass = DomElement.class,
-            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
+                        @WebBrowser(EDGE) })
     })
 public class Element extends EventNode {
 
@@ -115,40 +112,6 @@ public class Element extends EventNode {
         // TODO: check that it is an "allowed" event for the browser, and take care to the case
         final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
         setEventHandler(eventName, eventHandler);
-    }
-
-    /**
-     * Applies the specified XPath expression to this node's context and returns the generated list of matching nodes.
-     * @param expression a string specifying an XPath expression
-     * @return list of the found elements
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public HTMLCollection selectNodes(final String expression) {
-        final DomElement domNode = getDomNodeOrDie();
-        final boolean attributeChangeSensitive = expression.contains("@");
-        final String description = "Element.selectNodes('" + expression + "')";
-        final HTMLCollection collection = new HTMLCollection(domNode, attributeChangeSensitive, description) {
-            @Override
-            protected List<Object> computeElements() {
-                return new ArrayList<>(domNode.getByXPath(expression));
-            }
-        };
-        return collection;
-    }
-
-    /**
-     * Applies the specified pattern-matching operation to this node's context and returns the first matching node.
-     * @param expression a string specifying an XPath expression
-     * @return the first node that matches the given pattern-matching operation
-     *         If no nodes match the expression, returns a null value.
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public Object selectSingleNode(final String expression) {
-        final HTMLCollection collection = selectNodes(expression);
-        if (collection.getLength() > 0) {
-            return collection.get(0, collection);
-        }
-        return null;
     }
 
     /**

@@ -88,15 +88,6 @@ public class HTMLStyleElement extends HTMLElement {
     }
 
     /**
-     * Gets the associated sheet (IE).
-     * @return the sheet
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public CSSStyleSheet getStyleSheet() {
-        return getSheet();
-    }
-
-    /**
      * Returns the type of this style.
      * @return the type
      */

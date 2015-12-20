@@ -46,7 +46,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -437,20 +436,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         final URL newUrl = makeUrlForOpenWindow(urlString);
         final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow_);
         return getProxy(newWebWindow);
-    }
-
-    /**
-     * Creates a popup window.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536392.aspx">MSDN documentation</a>
-     * @return the created popup
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public Popup createPopup() {
-        final Popup popup = new Popup();
-        popup.setParentScope(this);
-        popup.setPrototype(getPrototype(Popup.class));
-        popup.init(this);
-        return popup;
     }
 
     private URL makeUrlForOpenWindow(final String urlString) {
@@ -1182,29 +1167,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "load")
-     * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
-     * @return {@code true} if the listener has been added
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public boolean attachEvent(final String type, final Function listener) {
-        return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
-    }
-
-    /**
-     * Allows the removal of event listeners on the event target.
-     * @param type the event type to listen for (like "onload")
-     * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public void detachEvent(final String type, final Function listener) {
-        getEventListenersContainer().removeEventListener(StringUtils.substring(type, 2), listener, false);
-    }
-
-    /**
      * Returns the value of the window's {@code name} property.
      * @return the value of the window's {@code name} property
      */
@@ -1454,28 +1416,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     public static WindowProxy getProxy(final WebWindow w) {
         return ((Window) w.getScriptableObject()).windowProxy_;
-    }
-
-    /**
-     * Executes the specified script code as long as the language is JavaScript or JScript.
-     * @param script the script code to execute
-     * @param language the language of the specified code ("JavaScript" or "JScript")
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public void execScript(final String script, final Object language) {
-        final String languageStr = Context.toString(language);
-        if (language == Undefined.instance
-            || "javascript".equalsIgnoreCase(languageStr) || "jscript".equalsIgnoreCase(languageStr)) {
-            ScriptRuntime.evalSpecial(Context.getCurrentContext(), this, this, new Object[] {script}, null, 0);
-        }
-        else if ("vbscript".equalsIgnoreCase(languageStr)) {
-            throw Context.reportRuntimeError("VBScript not supported in Window.execScript().");
-        }
-        else {
-            // Unrecognized language: use the IE error message ("Invalid class string").
-            throw Context.reportRuntimeError("Invalid class string");
-        }
     }
 
     /**

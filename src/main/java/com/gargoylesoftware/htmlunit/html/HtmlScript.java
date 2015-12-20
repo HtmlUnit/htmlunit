@@ -290,7 +290,7 @@ public class HtmlScript extends HtmlElement {
             if (hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
                 final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
                 final BaseFunction function = new EventHandler(this, event, scriptCode);
-                window.attachEvent(event, function);
+                window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
                 return;
             }
         }

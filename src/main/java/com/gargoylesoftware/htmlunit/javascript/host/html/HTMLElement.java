@@ -282,7 +282,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private static int UniqueID_Counter_ = 1;
 
     private final Set<String> behaviors_ = new HashSet<>();
-    private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_;
     private int scrollTop_;
     private String uniqueID_;
@@ -447,23 +446,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the value of the {@code all} property.
-     * @return the value of the {@code all} property
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public HTMLCollection getAll() {
-        if (all_ == null) {
-            all_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLElement.all") {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return true;
-                }
-            };
-        }
-        return all_;
-    }
-
-    /**
      * Sets the DOM node that corresponds to this JavaScript object.
      * @param domNode the DOM node
      */
@@ -522,15 +504,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxGetter(@WebBrowser(IE))
     public boolean getDisabled() {
         return getDomNodeOrDie().hasAttribute("disabled");
-    }
-
-    /**
-     * Returns the document.
-     * @return the document
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public DocumentProxy getDocument() {
-        return getWindow().getDocument_js();
     }
 
     /**
@@ -1253,7 +1226,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param behavior the URL of the behavior to add, or a default behavior name
      * @return an identifier that can be user later to detach the behavior from the element
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public int addBehavior(final String behavior) {
         // if behavior already defined, then nothing to do
         if (behaviors_.contains(behavior)) {
@@ -1306,7 +1278,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Removes the behavior corresponding to the specified identifier from this element.
      * @param id the identifier for the behavior to remove
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public void removeBehavior(final int id) {
         switch (id) {
             case BEHAVIOR_ID_CLIENT_CAPS:
@@ -1778,31 +1749,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the namespace defined for the element.
-     * @return the namespace defined for the element
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534388.aspx">MSDN documentation</a>
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getScopeName() {
-        final String prefix = getDomNodeOrDie().getPrefix();
-        return prefix != null ? prefix : "HTML";
-    }
-
-    /**
-     * Gets the Uniform Resource Name (URN) specified in the namespace declaration.
-     * @return the Uniform Resource Name (URN) specified in the namespace declaration
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getTagUrn() {
-        final String urn = getDomNodeOrDie().getNamespaceURI();
-        if (HTMLParser.XHTML_NAMESPACE.equals(urn)) {
-            return "";
-        }
-        return urn != null ? urn : "";
-    }
-
-    /**
      * Sets the Uniform Resource Name (URN) specified in the namespace declaration.
      * @param tagUrn the Uniform Resource Name (URN) specified in the namespace declaration
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
@@ -1842,31 +1788,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxFunction(@WebBrowser(IE))
     public Object getClientRects() {
         return new NativeArray(0);
-    }
-
-    /**
-     * Sets an expression for the specified HTMLElement.
-     *
-     * @param propertyName Specifies the name of the property to which expression is added
-     * @param expression specifies any valid script statement without quotations or semicolons
-     *        This string can include references to other properties on the current page.
-     *        Array references are not allowed on object properties included in this script.
-     * @param language specified the language used
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public void setExpression(final String propertyName, final String expression, final String language) {
-        // Empty.
-    }
-
-    /**
-     * Removes the expression from the specified property.
-     *
-     * @param propertyName Specifies the name of the property from which to remove an expression
-     * @return true if the expression was successfully removed
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public boolean removeExpression(final String propertyName) {
-        return true;
     }
 
     /**
@@ -2032,16 +1953,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the filters.
-     * @return the filters
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537452.aspx">MSDN doc</a>
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public Object getFilters() {
-        return this; // return anything, what matters is that it is not null
-    }
-
-    /**
      * Click this element. This simulates the action of the user clicking with the mouse.
      * @throws IOException if this click triggers a page load that encounters problems
      */
@@ -2138,19 +2049,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxSetter
     public void setTabIndex(final int tabIndex) {
         getDomNodeOrDie().setAttribute("tabindex", Integer.toString(tabIndex));
-    }
-
-    /**
-     * Simulates a click on a scrollbar component (IE only).
-     * @param scrollAction the type of scroll action to simulate
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public void doScroll(final String scrollAction) {
-        final DomNode domNode = getDomNodeOrNull();
-        if (domNode == null || ((HtmlPage) domNode.getPage()).isBeingParsed()) {
-            throw Context.reportRuntimeError("The data necessary to complete this operation is not yet available.");
-        }
-        // Ignore because we aren't displaying anything!
     }
 
     /**

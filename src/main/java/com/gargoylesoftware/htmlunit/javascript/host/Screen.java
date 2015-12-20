@@ -42,8 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+                @WebBrowser(EDGE) })
     })
 public class Screen extends SimpleScriptable {
 
@@ -361,15 +360,6 @@ public class Screen extends SimpleScriptable {
     @JsxSetter(@WebBrowser(FF))
     public void setTop(final int top) {
         // ignore
-    }
-
-    /**
-     * Returns the {@code updateInterval} property.
-     * @return the {@code updateInterval} property
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public int getUpdateInterval() {
-        return 0;
     }
 
     /**
