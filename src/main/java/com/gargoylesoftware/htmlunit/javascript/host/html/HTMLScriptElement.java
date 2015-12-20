@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SCR_NOT_EXPANDED;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -24,8 +23,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -211,20 +208,6 @@ public class HTMLScriptElement extends HTMLElement {
             tmpScript.executeScriptIfNeeded();
         }
         return result;
-    }
-
-    /**
-     * Overwritten for special IE handling.
-     *
-     * @param args the arguments
-     * @return the newly added child node
-     */
-    @Override
-    protected Object insertBeforeImpl(final Object[] args) {
-        if (getBrowserVersion().hasFeature(JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION)) {
-            throw Context.reportRuntimeError("Unexpected call to method or property access");
-        }
-        return super.insertBeforeImpl(args);
     }
 
     /**

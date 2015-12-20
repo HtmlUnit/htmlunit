@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_ID_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_TEXT_LOWERCASE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_TEXT_UPPERCASE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -83,9 +82,6 @@ public class CSSStyleRule extends CSSRule {
                         && ((HtmlPage) getWindow().getWebWindow().getEnclosedPage()).isQuirksMode()) {
                     fixedName = fixedName.toLowerCase(Locale.ROOT);
                 }
-            }
-            else if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_UPPERCASE)) {
-                fixedName = fixedName.toUpperCase(Locale.ROOT);
             }
             else if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_LOWERCASE)) {
                 fixedName = fixedName.toLowerCase(Locale.ROOT);

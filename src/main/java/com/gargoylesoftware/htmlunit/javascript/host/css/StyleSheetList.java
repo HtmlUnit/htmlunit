@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -179,17 +177,9 @@ public class StyleSheetList extends SimpleScriptable {
     @JsxFunction
     public Object item(final int index) {
         if (index < 0) {
-            if (getWindow().getBrowserVersion().hasFeature(
-                    JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX)) {
-                throw Context.reportRuntimeError("Invalid negative index: " + index);
-            }
             return Context.getUndefinedValue();
         }
-        else if (index >= nodes_.getLength()) {
-            if (getWindow().getBrowserVersion().hasFeature(
-                    JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX)) {
-                throw Context.reportRuntimeError("Invalid index: " + index);
-            }
+        if (index >= nodes_.getLength()) {
             return Context.getUndefinedValue();
         }
 

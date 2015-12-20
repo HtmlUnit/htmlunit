@@ -19,10 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ASYNC_NOT_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -36,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
@@ -243,23 +239,7 @@ public class HtmlScript extends HtmlElement {
                         && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
 
                 try {
-                    final boolean onReady = hasFeature(JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
-                    if (onReady) {
-                        if (!isDeferred()) {
-                            if (SLASH_SLASH_COLON.equals(getSrcAttribute())) {
-                                setAndExecuteReadyState(READY_STATE_COMPLETE);
-                                executeScriptIfNeeded();
-                            }
-                            else {
-                                setAndExecuteReadyState(READY_STATE_LOADING);
-                                executeScriptIfNeeded();
-                                setAndExecuteReadyState(READY_STATE_LOADED);
-                            }
-                        }
-                    }
-                    else {
-                        executeScriptIfNeeded();
-                    }
+                    executeScriptIfNeeded();
                 }
                 finally {
                     jsDoc.setExecutingDynamicExternalPosponed(false);
@@ -267,7 +247,7 @@ public class HtmlScript extends HtmlElement {
             }
         };
 
-        if ((!hasFeature(JS_SCRIPT_ASYNC_NOT_SUPPORTED) && hasAttribute("async"))
+        if (hasAttribute("async")
                 || postponed && StringUtils.isBlank(getTextContent())) {
             final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
@@ -311,17 +291,6 @@ public class HtmlScript extends HtmlElement {
                 final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
                 final BaseFunction function = new EventHandler(this, event, scriptCode);
                 window.attachEvent(event, function);
-                return;
-            }
-            if (hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID)) {
-                try {
-                    final HtmlElement elt = ((HtmlPage) getPage()).getHtmlElementById(forr);
-                    elt.setEventHandler(event, scriptCode);
-                }
-                catch (final ElementNotFoundException e) {
-                    LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
-                        + forr + "\". Ignoring.");
-                }
                 return;
             }
         }

@@ -1014,10 +1014,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_FORM_USABLE_AS_FUNCTION,
 
-    /** Indicated that the body of a not yet loaded frame/iframe is null. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_FRAME_BODY_NULL_IF_NOT_LOADED,
-
     /** Indicates if Function.bind is available. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_FUNCTION_BIND,
@@ -1050,10 +1046,6 @@ public enum BrowserVersionFeatures {
     /** Javascript function getElementById compares the id's case sensitive. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
-
-    /** HTMLGenericElement instead of HTMLUnknownElement. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_HTML_GENERIC_ELEMENT_CLASS_NAME,
 
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -1175,12 +1167,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_MENU_TYPE_EMPTY,
 
-    /**
-     * Method mergeAttributes will merge all attributes instead only the known/supported ones.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_MERGE_ATTRIBUTES_ALL,
-
     /** Javascript event.keyCode returns 0 instead of undefined for mouse events. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_MOUSE_EVENT_KEY_CODE_ZERO,
@@ -1208,10 +1194,6 @@ public enum BrowserVersionFeatures {
     /** Functions are enumerated. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
-
-    /** "[object]" in quirks mode. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_OBJECT_IN_QUIRKS_MODE,
 
     /** HTMLObjectElement is an "[object]" even in standards mode. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
@@ -1282,14 +1264,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH,
 
-    /** Script async attribute is not supported. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SCRIPT_ASYNC_NOT_SUPPORTED,
-
-    /** Javascript script.insertBefore throws an error (IE6-IE8). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION,
-
     /** Javascript script.src returns the plain value. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SCRIPT_SCR_NOT_EXPANDED,
@@ -1297,26 +1271,12 @@ public enum BrowserVersionFeatures {
     /** Javascript script tags supports the 'for' and the 'event'
      * attribute (IE).
      */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID,
-
-    /** Javascript script tags supports the 'for' and the 'event'
-     * attribute (IE).
-     */
     @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW,
-
-    /** Javascript script object supports the onreadystatechange event (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE,
 
     /** If true the content of a selection is it's default value instead of toString. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_SELECTION_CONTENT_IS_DEFAULT_VALUE,
-
-    /** Only one selection per page. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SELECTION_ONLY_ONE_PER_PAGE,
 
     /** Javascript selectorText property returns ID selectors in lower case. */
     @BrowserFeature(@WebBrowser(CHROME))
@@ -1325,14 +1285,6 @@ public enum BrowserVersionFeatures {
     /** Javascript selectorText property returns selectors in lower case. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_SELECTOR_TEXT_LOWERCASE,
-
-    /** Javascript selectorText property returns selectors in upper case. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SELECTOR_TEXT_UPPERCASE,
-
-    /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
 
     /** When expanding the collection by setting the length don't add
      * a empty text node. */
@@ -1381,13 +1333,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS,
 
-    /**
-     * When <tt>setInterval()</tt> is called with a 0 millisecond delay, Internet Explorer turns it
-     * into a <tt>setTimeout()</tt> call.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT,
-
     /** Whether to get any property from the items first. */
     @BrowserFeature(@WebBrowser(IE))
     JS_STORAGE_GET_FROM_ITEMS,
@@ -1399,29 +1344,6 @@ public enum BrowserVersionFeatures {
     /** Stylesheet list contains only active style sheets. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_STYLESHEETLIST_ACTIVE_ONLY,
-
-    /** When addressing an item in a stylesheet list using a negative index an exception is thrown. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX,
-
-    /**
-     * When addressing an item in a stylesheet list using an index higher than the count of contained items an
-     * exception is thrown.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX,
-
-    /** Indicates if style.getAttribute supports a (second) flags argument. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS,
-
-    /** Indicates if style.removeAttribute supports a (second) flags argument. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_STYLE_REMOVE_ATTRIBUTE_SUPPORTS_FLAGS,
-
-    /** Indicates if style.setAttribute supports a (second) flags argument. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_STYLE_SET_ATTRIBUTE_SUPPORTS_FLAGS,
 
     /** Indicates if style.setProperty ignores case when determining the priority. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
@@ -1441,14 +1363,6 @@ public enum BrowserVersionFeatures {
     /** The width cell height does not return negative values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES,
-
-    /** Value of attribute 'nowrap' is always set to true if a not empty value is set. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE,
-
-    /** Attribute 'nowrap' has value true instead of empty if set. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET,
 
     /** The width cell offset calculation takes border into account. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1745,10 +1659,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that unknown tags inside an SVG element are handled as DOM elements, not SVG elements. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     SVG_UNKNOWN_ARE_DOM,
-
-    /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    TEXTAREA_CRNL,
 
     /** Indicates that the browser treats "position: fixed" as if it were "position: static". */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

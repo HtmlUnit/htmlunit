@@ -20,9 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_REMOVE_ATTRIBUTE_SUPPORTS_FLAGS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_ATTRIBUTE_SUPPORTS_FLAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
@@ -5464,11 +5461,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxFunction(@WebBrowser(IE))
     public Object getAttribute(final String name, final int flag) {
-        if (getBrowserVersion().hasFeature(JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS) && flag == 1) {
-            // Case-sensitive.
-            return getStyleAttribute(name);
-        }
-
         // Case-insensitive.
         final StyleElement style = getStyleElementCaseInSensitive(name);
         if (null == style) {
@@ -5487,27 +5479,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxFunction(@WebBrowser(IE))
     public void setAttribute(final String name, final String value, final Object flag) {
-        int flagInt = 0;
-        if (getBrowserVersion().hasFeature(JS_STYLE_SET_ATTRIBUTE_SUPPORTS_FLAGS)) {
-            if (flag == Undefined.instance) {
-                flagInt = 1;
-            }
-            else {
-                flagInt = (int) Context.toNumber(flag);
-            }
-        }
-        if (flagInt == 0) {
-            // Case-insensitive.
-            final StyleElement style = getStyleElementCaseInSensitive(name);
-            if (null != style) {
-                setStyleAttribute(style.getName(), value);
-            }
-        }
-        else {
-            // Case-sensitive.
-            if (!getStyleAttribute(name).isEmpty()) {
-                setStyleAttribute(name, value);
-            }
+        // Case-insensitive.
+        final StyleElement style = getStyleElementCaseInSensitive(name);
+        if (null != style) {
+            setStyleAttribute(style.getName(), value);
         }
     }
 
@@ -5521,29 +5496,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxFunction(@WebBrowser(IE))
     public boolean removeAttribute(final String name, final Object flag) {
-        int flagInt = 0;
-        if (getBrowserVersion().hasFeature(JS_STYLE_REMOVE_ATTRIBUTE_SUPPORTS_FLAGS)) {
-            if (flag == Undefined.instance) {
-                flagInt = 1;
-            }
-            else {
-                flagInt = (int) Context.toNumber(flag);
-            }
-        }
-        if (flagInt == 0) {
-            // Case-insensitive.
-            final StyleElement style = getStyleElementCaseInSensitive(name);
-            if (style != null) {
-                removeStyleAttribute(style.getName());
-                return true;
-            }
-            return false;
-        }
-
-        // Case-sensitive.
-        final String s = getStyleAttribute(name);
-        if (!s.isEmpty()) {
-            removeStyleAttribute(name);
+        // Case-insensitive.
+        final StyleElement style = getStyleElementCaseInSensitive(name);
+        if (style != null) {
+            removeStyleAttribute(style.getName());
             return true;
         }
         return false;

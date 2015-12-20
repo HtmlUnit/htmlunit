@@ -20,14 +20,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TEXTAREA_CRNL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
-import java.util.regex.Pattern;
-
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -60,8 +56,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
     })
 public class HTMLTextAreaElement extends FormField {
 
-    private static final Pattern NORMALIZE_VALUE_PATTERN = Pattern.compile("([^\\r])\\n");
-
     /**
      * Creates an instance.
      */
@@ -84,11 +78,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @Override
     public String getValue() {
-        String value = ((HtmlTextArea) getDomNodeOrDie()).getText();
-        if (getBrowserVersion().hasFeature(TEXTAREA_CRNL)) {
-            value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
-        }
-        return value;
+        return ((HtmlTextArea) getDomNodeOrDie()).getText();
     }
 
     /**
@@ -189,11 +179,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxGetter
     public String getDefaultValue() {
-        String value = ((HtmlTextArea) getDomNodeOrDie()).getDefaultValue();
-        if (getBrowserVersion().hasFeature(TEXTAREA_CRNL)) {
-            value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
-        }
-        return value;
+        return ((HtmlTextArea) getDomNodeOrDie()).getDefaultValue();
     }
 
     /**

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
@@ -1532,10 +1531,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @JsxFunction
     public int setInterval(final Object code, int timeout, final Object language) {
-        if (timeout == 0 && getBrowserVersion().hasFeature(JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT)) {
-            return setTimeout(code, timeout, language);
-        }
-
         if (timeout < MIN_TIMER_DELAY) {
             timeout = MIN_TIMER_DELAY;
         }

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOMMAND_END_TAG_FORBIDDEN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_GENERIC_ELEMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_HYPHEN_ELEMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_RUBY_ELEMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -77,9 +76,6 @@ public class HTMLUnknownElement extends HTMLElement {
     @Override
     public String getClassName() {
         if (getWindow().getWebWindow() != null) {
-            if (getBrowserVersion().hasFeature(JS_HTML_GENERIC_ELEMENT_CLASS_NAME)) {
-                return "HTMLGenericElement";
-            }
             final HtmlElement element = getDomNodeOrNull();
             if (element != null) {
                 final String name = element.getNodeName();

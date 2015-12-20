@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MERGE_ATTRIBUTES_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED;
@@ -622,31 +621,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void mergeAttributes(final HTMLElement source, final Object preserveIdentity) {
         final HtmlElement src = source.getDomNodeOrDie();
         final HtmlElement target = getDomNodeOrDie();
-
-        if (getBrowserVersion().hasFeature(JS_MERGE_ATTRIBUTES_ALL)) {
-            // Merge custom attributes defined directly in HTML.
-            for (final Map.Entry<String, DomAttr> attribute : src.getAttributesMap().entrySet()) {
-                // Quick hack to figure out what's a "custom" attribute, and what isn't.
-                // May not be 100% correct.
-                final String attributeName = attribute.getKey();
-                if (!ScriptableObject.hasProperty(getPrototype(), attributeName)) {
-                    final String attributeValue = attribute.getValue().getNodeValue();
-                    target.setAttribute(attributeName, attributeValue);
-                }
-            }
-
-            // Merge custom attributes defined at runtime via JavaScript.
-            for (final Object id : source.getAllIds()) {
-                if (id instanceof Integer) {
-                    final int i = ((Integer) id).intValue();
-                    put(i, this, source.get(i, source));
-                }
-                else if (id instanceof String) {
-                    final String s = (String) id;
-                    put(s, this, source.get(s, source));
-                }
-            }
-        }
 
         // Merge ID and name if we aren't preserving identity.
         if (preserveIdentity instanceof Boolean && !((Boolean) preserveIdentity).booleanValue()) {

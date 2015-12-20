@@ -14,12 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.impl;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTION_ONLY_ONE_PER_PAGE;
-
 import org.w3c.dom.ranges.Range;
-
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Contains standard selection-related functionality used by various input elements.
@@ -86,7 +81,6 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
         if (selection_.getEndOffset() < selectionStart) {
             selection_.setEnd(element_, selectionStart);
         }
-        makeThisTheOnlySelectionIfEmulatingIE();
     }
 
     /**
@@ -108,17 +102,5 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
         if (selection_.getStartOffset() > selectionEnd) {
             selection_.setStart(element_, selectionEnd);
         }
-        makeThisTheOnlySelectionIfEmulatingIE();
     }
-
-    private void makeThisTheOnlySelectionIfEmulatingIE() {
-        final Page page = element_.getPage();
-        if (page != null && page.isHtmlPage()) {
-            final HtmlPage htmlPage = (HtmlPage) page;
-            if (htmlPage.getWebClient().getBrowserVersion().hasFeature(JS_SELECTION_ONLY_ONE_PER_PAGE)) {
-                htmlPage.setSelectionRange(selection_);
-            }
-        }
-    }
-
 }
