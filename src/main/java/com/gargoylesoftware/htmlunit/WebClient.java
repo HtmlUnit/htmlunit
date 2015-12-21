@@ -182,8 +182,6 @@ public class WebClient implements Serializable, AutoCloseable {
     /** URL for "about:blank". */
     public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe(ABOUT_BLANK);
 
-    private ScriptPreProcessor scriptPreProcessor_;
-
     private Map<String, String> activeXObjectMap_ = Collections.emptyMap();
     private transient MSXMLActiveXObjectFactory msxmlActiveXObjectFactory_;
     private RefreshHandler refreshHandler_ = new NiceRefreshHandler(2);
@@ -1460,22 +1458,6 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public RefreshHandler getRefreshHandler() {
         return refreshHandler_;
-    }
-
-    /**
-     * Sets the script pre processor for this webclient.
-     * @param scriptPreProcessor the new preprocessor or null if none is specified
-     */
-    public void setScriptPreProcessor(final ScriptPreProcessor scriptPreProcessor) {
-        scriptPreProcessor_ = scriptPreProcessor;
-    }
-
-    /**
-     * Returns the script pre processor for this webclient.
-     * @return the pre processor or null of one hasn't been set
-     */
-    public ScriptPreProcessor getScriptPreProcessor() {
-        return scriptPreProcessor_;
     }
 
     /**

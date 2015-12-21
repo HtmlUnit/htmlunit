@@ -654,11 +654,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CLEAR_RESTRICT,
 
-    /** Indicates that "constructor" property is defined, e.g. <tt>document.constructor</tt>. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
-    JS_CONSTRUCTOR,
-
     /** Supports {@code CSSCharsetRule}. */
     @BrowserFeature(@WebBrowser(FF))
     JS_CSSRULELIST_CHARSET_RULE,
@@ -1074,11 +1069,6 @@ public enum BrowserVersionFeatures {
     /** Setting the value of an Input Text/Password/TextArea resets the selection. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START,
-
-    /** Indicates that {@code Intl} is supported. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
-    JS_INTL,
 
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature(@WebBrowser(CHROME))
