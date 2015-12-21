@@ -1,3 +1,8 @@
+# can't see any reason why this interface is not on the white list
+# please open a issue if i'm wrong
+java.net.CookieStore
+
+
 # From http://code.google.com/appengine/docs/java/jrewhitelist.html
 
 java.awt.datatransfer.DataFlavor

@@ -19,20 +19,14 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 
-import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
+import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -41,11 +35,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.DefaultRenderingBackend;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.GaeRenderingBackend;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code CanvasRenderingContext2D}.
@@ -59,11 +53,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
         @WebBrowser(EDGE) })
 public class CanvasRenderingContext2D extends SimpleScriptable {
 
-    private static final Log LOG = LogFactory.getLog(CanvasRenderingContext2D.class);
-
     private final HTMLCanvasElement canvas_;
-    private final BufferedImage image_;
-    private final Graphics2D graphics2D_;
+    private final RenderingBackend renderingBackend_;
 
     /**
      * Default constructor.
@@ -71,8 +62,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public CanvasRenderingContext2D() {
         canvas_ = null;
-        image_ = null;
-        graphics2D_ = null;
+        renderingBackend_ = null;
     }
 
     /**
@@ -83,8 +73,12 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
         canvas_ = canvas;
         final int imageWidth = Math.max(1, canvas.getWidth());
         final int imageHeight = Math.max(1, canvas.getHeight());
-        image_ = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
-        graphics2D_ = image_.createGraphics();
+        if (GAEUtils.isGaeMode()) {
+            renderingBackend_ = new GaeRenderingBackend(imageWidth, imageHeight);
+        }
+        else {
+            renderingBackend_ = new DefaultRenderingBackend(imageWidth, imageHeight);
+        }
     }
 
     /**
@@ -101,32 +95,8 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param fillStyle the {@code fillStyle} property
      */
     @JsxSetter
-    public void setFillStyle(String fillStyle) {
-        fillStyle = fillStyle.replaceAll("\\s", "");
-        Color color = null;
-        if (fillStyle.startsWith("rgb(")) {
-            final String[] colors = fillStyle.substring(4, fillStyle.length() - 1).split(",");
-            color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]));
-        }
-        else if (fillStyle.startsWith("rgba(")) {
-            final String[] colors = fillStyle.substring(5, fillStyle.length() - 1).split(",");
-            color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]),
-                (int) (Float.parseFloat(colors[3]) * 255));
-        }
-        else if (fillStyle.startsWith("#")) {
-            color = Color.decode(fillStyle);
-        }
-        else {
-            try {
-                final Field f = Color.class.getField(fillStyle);
-                color = (Color) f.get(null);
-            }
-            catch (final Exception e) {
-                LOG.info("Can not find color '" + fillStyle + '\'');
-                color = Color.black;
-            }
-        }
-        graphics2D_.setColor(color);
+    public void setFillStyle(final String fillStyle) {
+        renderingBackend_.setFillStyle(fillStyle);
     }
 
     /**
@@ -346,10 +316,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             if (image instanceof HTMLImageElement) {
                 final ImageReader imageReader =
                         ((HtmlImage) ((HTMLImageElement) image).getDomNodeOrDie()).getImageReader();
-                if (imageReader.getNumImages(true) != 0) {
-                    final BufferedImage img = imageReader.read(0);
-                    graphics2D_.drawImage(img, dxI, dyI, null);
-                }
+                renderingBackend_.drawImage(imageReader, dxI, dyI);
             }
         }
         catch (final IOException ioe) {
@@ -368,20 +335,10 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             if (type == null) {
                 type = "png";
             }
-            return "data:" + type + ";base64," + encodeToString(image_, type);
+            return "data:" + type + ";base64," + renderingBackend_.encodeToString(type);
         }
         catch (final IOException ioe) {
             throw Context.throwAsScriptRuntimeEx(ioe);
-        }
-    }
-
-    private static String encodeToString(final BufferedImage image, final String type) throws IOException {
-        try (final ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-            ImageIO.write(image, type, bos);
-
-            final byte[] imageBytes = bos.toByteArray();
-
-            return new String(new Base64().encode(imageBytes));
         }
     }
 
@@ -421,7 +378,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void fillRect(final int x, final int y, final int w, final int h) {
-        graphics2D_.fillRect(x, y, w, h);
+        renderingBackend_.fillRect(x, y, w, h);
     }
 
     /**
@@ -442,7 +399,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public ImageData getImageData(final int sx, final int sy, final int sw, final int sh) {
-        final ImageData imageData = new ImageData(image_, sx, sy, sw, sh);
+        final ImageData imageData = new ImageData(renderingBackend_, sx, sy, sw, sh);
         imageData.setParentScope(getParentScope());
         imageData.setPrototype(getPrototype(imageData.getClass()));
         return imageData;

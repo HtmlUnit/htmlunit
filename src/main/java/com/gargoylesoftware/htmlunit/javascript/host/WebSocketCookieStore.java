@@ -96,5 +96,4 @@ class WebSocketCookieStore implements CookieStore {
     public boolean removeAll() {
         return false;
     }
-
 }
