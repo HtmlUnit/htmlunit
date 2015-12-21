@@ -1419,9 +1419,13 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "div1" })
+    @Alerts(DEFAULT = { "3", "div1" },
+            IE = "undefined")
     public void querySelectorAll_quirks() throws Exception {
-        final String html = "<html><head><title>Test</title>\n"
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=7' />\n"
             + "<style>\n"
             + "  .red   {color:#FF0000;}\n"
             + "  .green {color:#00FF00;}\n"
@@ -1437,7 +1441,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  else\n"
             + "    alert('undefined');\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <div id='div1' class='red'>First</div>\n"
             + "  <div id='div2' class='red'>Second</div>\n"
             + "  <div id='div3' class='green'>Third</div>\n"

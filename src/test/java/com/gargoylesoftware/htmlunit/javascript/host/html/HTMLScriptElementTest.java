@@ -823,7 +823,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     /**
      * Regression test for bug 47038.
      * http://sourceforge.net/tracker/?func=detail&atid=448266&aid=3403860&group_id=47038
-     * TODO: IE check only done with IE6 and IE8, check with other versions
      * @throws Exception if the test fails
      */
     @Test

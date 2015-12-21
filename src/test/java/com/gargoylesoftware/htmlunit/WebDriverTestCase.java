@@ -90,8 +90,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * The file should contain four properties: "browsers", "ie.bin", "ff38.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie8", "hu-ff31",
- *   "ff31", "ff38", "ie8", "ie11", "chrome", which will be used to driver real browsers,
+ *   "hu-ie11", "hu-ff31",
+ *   "ff31", "ff38", "ie11", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
  *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
@@ -189,7 +189,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 BROWSERS_PROPERTIES_.add("hu-chrome");
                 BROWSERS_PROPERTIES_.add("hu-ff31");
                 BROWSERS_PROPERTIES_.add("hu-ff38");
-                BROWSERS_PROPERTIES_.add("hu-ie8");
                 BROWSERS_PROPERTIES_.add("hu-ie11");
             }
         }

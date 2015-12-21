@@ -1035,9 +1035,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object XMLDocument]", "OK" },
             IE = "[object XMLDocument]",
             IE11 = { "[object Document]", "OK" })
-    //TODO: in my real IE8 (without WebDriver), I got [object HTMLDocument]
-    //so it should be HTMLDocument not XMLDocument for IE
-    //Also, IE8 with WebDriver gives "" (empty Alert)
     @NotYetImplemented(IE11)
     // Real IE11 seems to generate always an (HTML)Document within an iframe.
     public void test() throws Exception {
