@@ -33,9 +33,9 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Ronald Brill
  */
-public class DefaultRenderingBackend implements RenderingBackend {
+public class AwtRenderingBackend implements RenderingBackend {
 
-    private static final Log LOG = LogFactory.getLog(DefaultRenderingBackend.class);
+    private static final Log LOG = LogFactory.getLog(AwtRenderingBackend.class);
 
     private final BufferedImage image_;
     private final Graphics2D graphics2D_;
@@ -45,7 +45,7 @@ public class DefaultRenderingBackend implements RenderingBackend {
      * @param imageWidth the width
      * @param imageHeight the height
      */
-    public DefaultRenderingBackend(final int imageWidth, final int imageHeight) {
+    public AwtRenderingBackend(final int imageWidth, final int imageHeight) {
         image_ = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
         graphics2D_ = image_.createGraphics();
     }

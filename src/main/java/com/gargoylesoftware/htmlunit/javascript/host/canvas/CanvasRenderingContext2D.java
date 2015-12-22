@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.DefaultRenderingBackend;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.GaeRenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
@@ -77,7 +77,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             renderingBackend_ = new GaeRenderingBackend(imageWidth, imageHeight);
         }
         else {
-            renderingBackend_ = new DefaultRenderingBackend(imageWidth, imageHeight);
+            renderingBackend_ = new AwtRenderingBackend(imageWidth, imageHeight);
         }
     }
 
