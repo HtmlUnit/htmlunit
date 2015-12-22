@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,6 +32,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,10 +59,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 /**
  * @author Ahmed Ashour
@@ -1099,10 +1100,17 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      */
     private Page doMouseEvent(final String eventType, final boolean shiftKey, final boolean ctrlKey,
         final boolean altKey, final int button) {
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return getPage();
+        final SgmlPage page = getPage();
+
+        if (!MouseEvent.TYPE_MOUSE_OVER.equals(eventType)
+                || !(this instanceof HtmlOption)
+                || !page.getWebClient().getBrowserVersion().hasFeature(EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION)) {
+
+            if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+                return page;
+            }
         }
-        final Page page = getPage();
+
         final Event event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
             && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {

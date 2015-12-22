@@ -9,6 +9,12 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                IE never triggers a mouseover event for select options.
+            </action>
+            <action type="fix" dev="rbri">
+                FF triggers a mouseover event for select options even if the option is disabled.
+            </action>
+            <action type="fix" dev="rbri">
                 GAE support is back for FF/IE/CHROME.
             </action>
             <action type="fix" dev="rbri" issue="1730">

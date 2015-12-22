@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_B
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN;
@@ -390,6 +391,18 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         final HtmlSerializer ser = new HtmlSerializer();
         ser.setIgnoreMaskedElements(false);
         return ser.asText(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Page mouseOver(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+        final SgmlPage page = getPage();
+        if (page.getWebClient().getBrowserVersion().hasFeature(EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION)) {
+            return page;
+        }
+        return super.mouseOver(shiftKey, ctrlKey, altKey, button);
     }
 
     /**

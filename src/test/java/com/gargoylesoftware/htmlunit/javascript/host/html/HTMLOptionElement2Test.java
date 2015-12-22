@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -1300,5 +1301,107 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT =  "mouse over",
+            IE = "")
+    public void mouseOver() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      alert('mouse over');\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1' size='2' disabled='disabled'>\n"
+            + "      <option value='option1' id='option1' onmouseover='doTest()'>Option1</option>\n"
+            + "      <option value='option2' id='option2'>Option2</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("option1")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "mouse over",
+            IE = "")
+    public void mouseOverDisabledSelect() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      alert('mouse over');\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1' size='2' disabled='disabled'>\n"
+            + "      <option value='option1' id='option1' onmouseover='doTest()'>Option1</option>\n"
+            + "      <option value='option2' id='option2'>Option2</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("option1")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            FF = "mouse over")
+    public void mouseOverDisabledOption() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      alert('mouse over');\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1' size='2' >\n"
+            + "      <option value='option1' id='option1' onmouseover='doTest()' disabled='disabled'>Option1</option>\n"
+            + "      <option value='option2' id='option2'>Option2</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("option1")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

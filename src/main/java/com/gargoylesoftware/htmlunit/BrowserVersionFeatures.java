@@ -249,6 +249,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION,
 
+    /** FF triggers an mouseover event even if the option is disabled. */
+    @BrowserFeature(@WebBrowser(FF))
+    EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION,
+
+    /** IE never triggers an mouseover event for select options. */
+    @BrowserFeature(@WebBrowser(IE))
+    EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION,
+
     /** Does not trigger "onmousedown" event handler for the select options. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT,
