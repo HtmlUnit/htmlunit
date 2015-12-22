@@ -1322,7 +1322,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "  </head>\n"
             + "<body>\n"
             + "  <form id='form1'>\n"
-            + "    <select name='select1' id='select1' size='2' disabled='disabled'>\n"
+            + "    <select name='select1' id='select1' size='2'>\n"
             + "      <option value='option1' id='option1' onmouseover='doTest()'>Option1</option>\n"
             + "      <option value='option2' id='option2'>Option2</option>\n"
             + "    </select>\n"
