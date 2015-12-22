@@ -15,15 +15,18 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -2330,5 +2333,71 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("mouse over")
+    @BuggyWebDriver(IE)
+    public void mouseOver() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      alert('mouse over');\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1' size='4' onmouseover='doTest()'>\n"
+            + "      <option value='option1' id='option1' >Option1</option>\n"
+            + "      <option value='option2' id='option2'>Option2</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("select1")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void mouseOverDisabledSelect() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      alert('mouse over');\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1' size='4' onmouseover='doTest()' disabled='disabled'>\n"
+            + "      <option value='option1' id='option1'>Option1</option>\n"
+            + "      <option value='option2' id='option2'>Option2</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("select1")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }
