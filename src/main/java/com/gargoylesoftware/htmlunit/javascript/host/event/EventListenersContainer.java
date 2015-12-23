@@ -232,7 +232,7 @@ public class EventListenersContainer implements Serializable {
     private ScriptResult executeEventListeners(final boolean useCapture, final Event event, final Object[] args) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-        if (!event.applies(node)) {
+        if (node != null && !node.handles(event)) {
             return null;
         }
         ScriptResult allResult = null;
@@ -282,7 +282,7 @@ public class EventListenersContainer implements Serializable {
     private ScriptResult executeEventHandler(final Event event, final Object[] propHandlerArgs) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-        if (!event.applies(node)) {
+        if (node != null && !node.handles(event)) {
             return null;
         }
         final Function handler = getEventHandler(event.getType());

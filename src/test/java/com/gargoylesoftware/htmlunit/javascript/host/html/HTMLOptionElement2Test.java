@@ -1307,23 +1307,41 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT =  "mouse over",
+    @Alerts(DEFAULT = { "o-mouse over [option1]", "s-mouse over [option1]" },
             IE = "")
     public void mouseOver() throws Exception {
         final String html =
-            "<html>\n"
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Test</title>\n"
             + "    <script>\n"
-            + "    function doTest() {\n"
-            + "      alert('mouse over');\n"
+            + "    function dumpEvent(event, pre) {\n"
+            + "      // target\n"
+            + "      var eTarget;\n"
+            + "      if (event.target) {\n"
+            + "        eTarget = event.target;\n"
+            + "      } else if (event.srcElement) {\n"
+            + "        eTarget = event.srcElement;\n"
+            + "      }\n"
+            + "      // defeat Safari bug\n"
+            + "      if (eTarget.nodeType == 3) {\n"
+            + "        eTarget = eTarget.parentNode;\n"
+            + "      }\n"
+            + "      var msg = pre + '-mouse over';\n"
+            + "      if (eTarget.name) {\n"
+            + "        msg = msg + ' [' + eTarget.name + ']';\n"
+            + "      } else {\n"
+            + "        msg = msg + ' [' + eTarget.id + ']';\n"
+            + "      }\n"
+            + "      alert(msg);\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "<body>\n"
             + "  <form id='form1'>\n"
-            + "    <select name='select1' id='select1' size='2'>\n"
-            + "      <option value='option1' id='option1' onmouseover='doTest()'>Option1</option>\n"
+            + "    <select name='select1' id='select1' size='2' onmouseover='dumpEvent(event, \"s\");' >\n"
+            + "      <option value='option1' id='option1' onmouseover='dumpEvent(event, \"o\");' >Option1</option>\n"
             + "      <option value='option2' id='option2'>Option2</option>\n"
             + "    </select>\n"
             + "  </form>\n"
@@ -1341,23 +1359,42 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "mouse over",
+    @Alerts(DEFAULT = "o-mouse over [option1]",
             IE = "")
     public void mouseOverDisabledSelect() throws Exception {
         final String html =
-            "<html>\n"
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Test</title>\n"
             + "    <script>\n"
-            + "    function doTest() {\n"
-            + "      alert('mouse over');\n"
+            + "    function dumpEvent(event, pre) {\n"
+            + "      // target\n"
+            + "      var eTarget;\n"
+            + "      if (event.target) {\n"
+            + "        eTarget = event.target;\n"
+            + "      } else if (event.srcElement) {\n"
+            + "        eTarget = event.srcElement;\n"
+            + "      }\n"
+            + "      // defeat Safari bug\n"
+            + "      if (eTarget.nodeType == 3) {\n"
+            + "        eTarget = eTarget.parentNode;\n"
+            + "      }\n"
+            + "      var msg = pre + '-mouse over';\n"
+            + "      if (eTarget.name) {\n"
+            + "        msg = msg + ' [' + eTarget.name + ']';\n"
+            + "      } else {\n"
+            + "        msg = msg + ' [' + eTarget.id + ']';\n"
+            + "      }\n"
+            + "      alert(msg);\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "<body>\n"
             + "  <form id='form1'>\n"
-            + "    <select name='select1' id='select1' size='2' disabled='disabled'>\n"
-            + "      <option value='option1' id='option1' onmouseover='doTest()'>Option1</option>\n"
+            + "    <select name='select1' id='select1' size='2' disabled='disabled' "
+                            + "onmouseover='dumpEvent(event, \"s\");' >\n"
+            + "      <option value='option1' id='option1' onmouseover='dumpEvent(event, \"o\");'>Option1</option>\n"
             + "      <option value='option2' id='option2'>Option2</option>\n"
             + "    </select>\n"
             + "  </form>\n"
@@ -1376,22 +1413,41 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "mouse over")
+            FF = { "o-mouse over [option1]", "s-mouse over [option1]" })
     public void mouseOverDisabledOption() throws Exception {
         final String html =
-            "<html>\n"
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Test</title>\n"
             + "    <script>\n"
-            + "    function doTest() {\n"
-            + "      alert('mouse over');\n"
+            + "    function dumpEvent(event, pre) {\n"
+            + "      // target\n"
+            + "      var eTarget;\n"
+            + "      if (event.target) {\n"
+            + "        eTarget = event.target;\n"
+            + "      } else if (event.srcElement) {\n"
+            + "        eTarget = event.srcElement;\n"
+            + "      }\n"
+            + "      // defeat Safari bug\n"
+            + "      if (eTarget.nodeType == 3) {\n"
+            + "        eTarget = eTarget.parentNode;\n"
+            + "      }\n"
+            + "      var msg = pre + '-mouse over';\n"
+            + "      if (eTarget.name) {\n"
+            + "        msg = msg + ' [' + eTarget.name + ']';\n"
+            + "      } else {\n"
+            + "        msg = msg + ' [' + eTarget.id + ']';\n"
+            + "      }\n"
+            + "      alert(msg);\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "<body>\n"
             + "  <form id='form1'>\n"
-            + "    <select name='select1' id='select1' size='2' >\n"
-            + "      <option value='option1' id='option1' onmouseover='doTest()' disabled='disabled'>Option1</option>\n"
+            + "    <select name='select1' id='select1' size='2' onmouseover='dumpEvent(event, \"s\");' >\n"
+            + "      <option value='option1' id='option1' onmouseover='dumpEvent(event, \"o\");' "
+                                + "disabled='disabled'>Option1</option>\n"
             + "      <option value='option2' id='option2'>Option2</option>\n"
             + "    </select>\n"
             + "  </form>\n"

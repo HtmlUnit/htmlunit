@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -1102,15 +1101,6 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         final boolean altKey, final int button) {
         final SgmlPage page = getPage();
 
-        if (!MouseEvent.TYPE_MOUSE_OVER.equals(eventType)
-                || !(this instanceof HtmlOption)
-                || !page.getWebClient().getBrowserVersion().hasFeature(EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION)) {
-
-            if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-                return page;
-            }
-        }
-
         final Event event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
             && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
@@ -1154,7 +1144,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             return null;
         }
 
-        if (!event.applies(this)) {
+        if (!this.handles(event)) {
             return null;
         }
 

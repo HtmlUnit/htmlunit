@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -30,10 +29,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlArea;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -699,22 +694,4 @@ public class Event extends SimpleScriptable {
         buffer.append(");");
         return buffer.toString();
     }
-
-    /**
-     * Indicates if the current event can be applied to the provided node.
-     * TODO: investigate systematically ALL nodes and ALL events!
-     * @param node the node to test
-     * @return {@code false} if the event can't be applied
-     */
-    public boolean applies(final DomNode node) {
-        if (TYPE_BLUR.equals(getType()) || TYPE_FOCUS.equals(getType())) {
-            if (getBrowserVersion().hasFeature(EVENT_FOCUS_DOCUMENT_DESCENDANTS) && node instanceof HtmlPage) {
-                return true;
-            }
-            return node instanceof SubmittableElement || node instanceof HtmlAnchor
-                || node instanceof HtmlArea;
-        }
-        return true;
-    }
-
 }

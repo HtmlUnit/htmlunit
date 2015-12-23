@@ -1377,4 +1377,20 @@ public abstract class HtmlElement extends DomElement {
 
         super.detach();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean handles(final Event event) {
+        if (Event.TYPE_BLUR.equals(event.getType()) || Event.TYPE_FOCUS.equals(event.getType())) {
+            return this instanceof SubmittableElement;
+        }
+
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return false;
+        }
+
+        return super.handles(event);
+    }
 }
