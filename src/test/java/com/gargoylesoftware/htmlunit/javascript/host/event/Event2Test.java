@@ -300,9 +300,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
-                        "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
-                        "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
+    @Alerts({ "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+                "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
+                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
     public void inputTextType() throws Exception {
         final String firstSnippet = "       <input type='text' id='typeHere'\n";
         final String secondSnippet = "/>\n";
@@ -315,9 +315,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
-                        "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
-                        "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
+    @Alerts({ "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+                "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
+                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
     public void inputPasswordType() throws Exception {
         final String firstSnippet = "       <input type='password' id='typeHere'\n";
         final String secondSnippet = "/>\n";
@@ -330,9 +330,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
-                        "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
-                        "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
+    @Alerts({ "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+                "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
+                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
     public void textAreaType() throws Exception {
         final String firstSnippet = "       <textarea id='typeHere' rows='4' cols='2'\n";
         final String secondSnippet = "></textarea >\n";
