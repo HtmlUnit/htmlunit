@@ -62,7 +62,7 @@ public class Event2Test extends WebDriverTestCase {
                 + "               <option id='o_id3' value='o_value3'>option3</option>\n"
                 + "       </select>\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -82,7 +82,7 @@ public class Event2Test extends WebDriverTestCase {
                 + "               <option id='o_id3' value='o_value3'>option3</option>\n"
                 + "       </select>\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -100,7 +100,7 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -118,7 +118,7 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -132,7 +132,7 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <input type='text' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -146,7 +146,7 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <input type='password' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -160,7 +160,7 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <textarea name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = "></textarea>\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -172,7 +172,7 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <input type='submit' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -186,7 +186,7 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -200,7 +200,7 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -214,10 +214,10 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">anchor</a>\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
-    private void testEvents(final String firstSnippet, final String secondSnippet) throws Exception {
+    private void testClickEvents(final String firstSnippet, final String secondSnippet) throws Exception {
         final String html =
                 "<html>\n"
                 + "<head>\n"
@@ -291,6 +291,129 @@ public class Event2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Test event order for typing into an entry field.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+                        "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
+                        "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
+    public void inputTextType() throws Exception {
+        final String firstSnippet = "       <input type='text' id='typeHere'\n";
+        final String secondSnippet = "/>\n";
+
+        testTypeEvents(firstSnippet, secondSnippet);
+    }
+
+    /**
+     * Test event order for typing into an password field.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+                        "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
+                        "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
+    public void inputPasswordType() throws Exception {
+        final String firstSnippet = "       <input type='password' id='typeHere'\n";
+        final String secondSnippet = "/>\n";
+
+        testTypeEvents(firstSnippet, secondSnippet);
+    }
+
+    /**
+     * Test event order for typing into an password field.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+                        "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
+                        "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
+    public void textAreaType() throws Exception {
+        final String firstSnippet = "       <textarea id='typeHere' rows='4' cols='2'\n";
+        final String secondSnippet = "></textarea >\n";
+
+        testTypeEvents(firstSnippet, secondSnippet);
+    }
+
+    private void testTypeEvents(final String firstSnippet, final String secondSnippet) throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "  <script type='text/javascript'>\n"
+                + "  <!--\n"
+                + "    function dumpEvent(event) {\n"
+                + "      var msg = event;\n"
+                + "      msg = msg + ' ' + event.type;\n"
+                + "      msg = msg + ' b:' + event.bubbles;\n"
+                + "      msg = msg + ' c:' + event.cancelable;\n"
+                + "\n"
+                + "      // target\n"
+                + "      var eTarget;\n"
+                + "      if (event.target) {\n"
+                + "        eTarget = event.target;\n"
+                + "      } else if (event.srcElement) {\n"
+                + "        eTarget = event.srcElement;\n"
+                + "      }\n"
+                + "      // defeat Safari bug\n"
+                + "      if (eTarget.nodeType == 3) {\n"
+                + "        eTarget = eTarget.parentNode;\n"
+                + "      }\n"
+                + "\n"
+                + "      if (eTarget.name) {\n"
+                + "        msg = msg + ' [' + eTarget.name + ']';\n"
+                + "      } else {\n"
+                + "        msg = msg + ' [' + eTarget.id + ']';\n"
+                + "      }\n"
+                + "\n"
+                + "      // key code\n"
+                + "      var eCode;\n"
+                + "      if (event.keyCode) {\n"
+                + "        eCode = event.keyCode;\n"
+                + "      } else if (event.which) {\n"
+                + "        eCode = event.which;\n"
+                + "      } else if (event.button) {\n"
+                + "        eCode = event.button;\n"
+                + "      }\n"
+                + "      if (eCode) {\n"
+                + "        var char = String.fromCharCode(eCode);\n"
+                + "        msg = msg + ' [' + eCode + ']';\n"
+                + "      } else {\n"
+                + "        msg = msg + ' [-]';\n"
+                + "      }\n"
+                + "\n"
+                + "      alert(msg);\n"
+                + "    }\n"
+                + "  //-->\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "    <form id='form' name='form' action='#'>\n"
+                + "        <input type='text' id='start' name='startText'/>\n"
+                + "\n"
+                + firstSnippet
+                + "           onclick='dumpEvent(event);'\n"
+//                + "           ondblclick='dumpEvent(event);'\n"
+//                + "           oncontextmenu='dumpEvent(event);'\n"
+//                + "           onfocus='dumpEvent(event);'\n"
+//                + "           onblur='dumpEvent(event);'\n"
+//                + "           onmousedown = 'dumpEvent(event);'\n"
+//                + "           onmouseup = 'dumpEvent(event);'\n"
+                + "           onkeydown = 'dumpEvent(event);'\n"
+                + "           onkeyup = 'dumpEvent(event);'\n"
+                + "           onkeypress = 'dumpEvent(event);'\n"
+//                + "           onselect = 'dumpEvent(event);'\n"
+                + "           onchange = 'dumpEvent(event);'"
+                + secondSnippet
+                + "   </form>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("typeHere")).sendKeys("a");
 
         verifyAlerts(driver, getExpectedAlerts());
     }
