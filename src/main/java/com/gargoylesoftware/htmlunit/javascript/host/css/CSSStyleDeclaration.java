@@ -5663,6 +5663,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                             ? value.getWindowDefaultValue() : pixelValue(parent, value, true);
             return (int) ((i / 100D) * absoluteValue);
         }
+        if ("auto".equals(s)) {
+            return value.getDefaultValue();
+        }
         if (s.isEmpty()) {
             if (element instanceof HTMLCanvasElement) {
                 return value.getWindowDefaultValue();
@@ -5729,14 +5732,25 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Encapsulates the retrieval of a style attribute, given a DOM element from which to retrieve it.
      */
     protected abstract static class CssValue {
+        private final int defaultValue_;
         private final int windowDefaultValue_;
 
         /**
          * C'tor.
+         * @param defaultValue the default value
          * @param windowDefaultValue the default value for the window
          */
-        public CssValue(final int windowDefaultValue) {
+        public CssValue(final int defaultValue, final int windowDefaultValue) {
+            defaultValue_ = defaultValue;
             windowDefaultValue_ = windowDefaultValue;
+        }
+
+        /**
+         * Gets the default value.
+         * @return the default value
+         */
+        public int getDefaultValue() {
+            return defaultValue_;
         }
 
         /**

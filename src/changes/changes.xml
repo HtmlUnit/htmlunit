@@ -9,6 +9,9 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                Improved clientHeight calculation when height is set to auto.
+            </action>
+            <action type="fix" dev="rbri">
                 Updates on event handling, mouse-over for option and select elements are more correct now.
             </action>
             <action type="fix" dev="rbri">
