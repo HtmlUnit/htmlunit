@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * A JavaScript object for {@code Performance}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
         @WebBrowser(EDGE) })
@@ -51,5 +53,13 @@ public class Performance extends EventTarget {
         navigation.setParentScope(getParentScope());
         navigation.setPrototype(getPrototype(navigation.getClass()));
         return navigation;
+    }
+
+    /**
+     * @return a timestamp
+     */
+    @JsxFunction
+    public double now() {
+        return System.nanoTime() / 1000000d;
     }
 }
