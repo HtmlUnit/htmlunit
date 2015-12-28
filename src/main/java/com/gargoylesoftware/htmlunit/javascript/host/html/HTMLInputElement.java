@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -24,6 +25,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -76,17 +78,29 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
+     * Returns the {@code type} property.
+     * @return the {@code type} property
+     */
+    @JsxGetter
+    public String getType() {
+        return getDomNodeOrDie().getTypeAttribute().toLowerCase(Locale.ROOT);
+    }
+
+    /**
      * Sets the value of the attribute {@code type}.
      * Note: this replace the DOM node with a new one.
      * @param newType the new type to set
      */
     @JsxSetter
-    public void setType(final String newType) {
+    public void setType(String newType) {
         HtmlInput input = getDomNodeOrDie();
 
         final String currentType = input.getAttribute("type");
 
         if (!currentType.equalsIgnoreCase(newType)) {
+            if (newType != null && getBrowserVersion().hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
+                newType = newType.toLowerCase(Locale.ROOT);
+            }
             final AttributesImpl attributes = readAttributes(input);
             final int index = attributes.getIndex("type");
             if (index > -1) {
@@ -458,15 +472,6 @@ public class HTMLInputElement extends FormField {
             && (domNode instanceof HtmlRadioButtonInput || domNode instanceof HtmlCheckBoxInput)) {
             domNode.fireEvent(Event.TYPE_CHANGE);
         }
-    }
-
-    /**
-     * Returns the {@code type} property.
-     * @return the {@code type} property
-     */
-    @JsxGetter
-    public String getType() {
-        return getDomNodeOrDie().getTypeAttribute();
     }
 
     /**

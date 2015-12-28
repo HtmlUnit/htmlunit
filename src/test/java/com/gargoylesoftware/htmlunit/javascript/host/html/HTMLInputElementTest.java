@@ -967,7 +967,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                     "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
             IE11 = {"text TeXt", "password PassWord", "hidden Hidden",
                     "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
-    @NotYetImplemented({ FF, IE, CHROME })
     public void typeCase() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
