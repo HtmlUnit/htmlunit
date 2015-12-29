@@ -91,7 +91,7 @@ import com.steadystate.css.parser.SACParserCSS3;
  * @author Frank Danek
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                 @WebBrowser(EDGE) })
     })
 public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
@@ -743,7 +743,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code accelerator} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getAccelerator() {
         return defaultIfEmpty(getStyleAttribute(Definition.ACCELERATOR.getAttributeName()), "false");
     }
@@ -752,7 +752,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code accelerator} style attribute.
      * @param accelerator the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setAccelerator(final String accelerator) {
         setStyleAttributePixel(Definition.ACCELERATOR.getAttributeName(), accelerator);
     }
@@ -1725,7 +1725,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code cssFloat} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public String getCssFloat() {
         return getStyleAttribute(FLOAT);
     }
@@ -1734,7 +1734,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code cssFloat} style attribute.
      * @param value the new attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void setCssFloat(final String value) {
         setStyleAttribute(FLOAT, value);
     }
@@ -1887,7 +1887,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code fontSizeAdjust} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public String getFontSizeAdjust() {
         return getStyleAttribute(FONT_SIZE_ADJUST);
     }
@@ -1896,7 +1896,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code fontSizeAdjust} style attribute.
      * @param fontSizeAdjust the new attribute
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public void setFontSizeAdjust(final String fontSizeAdjust) {
         setStyleAttribute(FONT_SIZE_ADJUST, fontSizeAdjust);
     }
@@ -1905,7 +1905,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code fontStretch} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public String getFontStretch() {
         return getStyleAttribute(FONT_STRETCH);
     }
@@ -1914,7 +1914,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code fontStretch} style attribute.
      * @param fontStretch the new attribute
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public void setFontStretch(final String fontStretch) {
         setStyleAttribute(FONT_STRETCH, fontStretch);
     }
@@ -2004,7 +2004,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code imeMode} style attribute.
      * @param imeMode the new attribute
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public void setImeMode(final String imeMode) {
         setStyleAttribute(IME_MODE, imeMode);
     }
@@ -2139,7 +2139,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "length", not yet implemented.
      * @return the length
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public int getLength() {
         return getStyleMap().size();
     }
@@ -2596,7 +2596,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msContentZoomChaining} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsContentZoomChaining() {
         return getStyleAttribute(Definition.MS_CONTENT_ZOOM_CHAINING.getAttributeName());
     }
@@ -2605,7 +2605,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msContentZoomChaining} style attribute.
      * @param msContentZoomChaining the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsContentZoomChaining(final String msContentZoomChaining) {
         setStyleAttribute(Definition.MS_CONTENT_ZOOM_CHAINING.getAttributeName(), msContentZoomChaining);
     }
@@ -2614,7 +2614,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msContentZoomLimit} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsContentZoomLimit() {
         return getStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT.getAttributeName());
     }
@@ -2623,7 +2623,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msContentZoomLimit} style attribute.
      * @param msContentZoomLimit the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsContentZoomLimit(final String msContentZoomLimit) {
         setStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT.getAttributeName(), msContentZoomLimit);
     }
@@ -2632,7 +2632,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msContentZoomLimitMax} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsContentZoomLimitMax() {
         return getStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT_MAX.getAttributeName());
     }
@@ -2641,7 +2641,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msContentZoomLimitMax} style attribute.
      * @param msContentZoomLimitMax the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsContentZoomLimitMax(final String msContentZoomLimitMax) {
         setStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT_MAX.getAttributeName(), msContentZoomLimitMax);
     }
@@ -2650,7 +2650,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msContentZoomLimitMin} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsContentZoomLimitMin() {
         return getStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT_MIN.getAttributeName());
     }
@@ -2659,7 +2659,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msContentZoomLimitMin} style attribute.
      * @param msContentZoomLimitMin the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsContentZoomLimitMin(final String msContentZoomLimitMin) {
         setStyleAttribute(Definition.MS_CONTENT_ZOOM_LIMIT_MIN.getAttributeName(), msContentZoomLimitMin);
     }
@@ -2668,7 +2668,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msContentZoomSnap} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsContentZoomSnap() {
         return getStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP.getAttributeName());
     }
@@ -2677,7 +2677,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msContentZoomSnap} style attribute.
      * @param msContentZoomSnap the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsContentZoomSnap(final String msContentZoomSnap) {
         setStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP.getAttributeName(), msContentZoomSnap);
     }
@@ -2686,7 +2686,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msContentZoomSnapPoints} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsContentZoomSnapPoints() {
         return getStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP_POINTS.getAttributeName());
     }
@@ -2695,7 +2695,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msContentZoomSnapPoints} style attribute.
      * @param msContentZoomSnapPoints the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsContentZoomSnapPoints(final String msContentZoomSnapPoints) {
         setStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP_POINTS.getAttributeName(), msContentZoomSnapPoints);
     }
@@ -2704,7 +2704,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msContentZoomSnapType} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsContentZoomSnapType() {
         return getStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP_TYPE.getAttributeName());
     }
@@ -2713,7 +2713,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msContentZoomSnapType} style attribute.
      * @param msContentZoomSnapType the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsContentZoomSnapType(final String msContentZoomSnapType) {
         setStyleAttribute(Definition.MS_CONTENT_ZOOM_SNAP_TYPE.getAttributeName(), msContentZoomSnapType);
     }
@@ -2722,7 +2722,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msContentZooming} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsContentZooming() {
         return getStyleAttribute(Definition.MS_CONTENT_ZOOMING.getAttributeName());
     }
@@ -2731,7 +2731,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msContentZooming} style attribute.
      * @param msContentZooming the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsContentZooming(final String msContentZooming) {
         setStyleAttribute(Definition.MS_CONTENT_ZOOMING.getAttributeName(), msContentZooming);
     }
@@ -2740,7 +2740,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlex} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlex() {
         return getStyleAttribute(Definition.MS_FLEX.getAttributeName());
     }
@@ -2749,7 +2749,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlex} style attribute.
      * @param msFlex the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlex(final String msFlex) {
         setStyleAttribute(Definition.MS_FLEX.getAttributeName(), msFlex);
     }
@@ -2758,7 +2758,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexAlign() {
         return getStyleAttribute(Definition.MS_FLEX_ALIGN.getAttributeName());
     }
@@ -2767,7 +2767,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexAlign} style attribute.
      * @param msFlexAlign the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexAlign(final String msFlexAlign) {
         setStyleAttribute(Definition.MS_FLEX_ALIGN.getAttributeName(), msFlexAlign);
     }
@@ -2776,7 +2776,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexDirection} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexDirection() {
         return getStyleAttribute(Definition.MS_FLEX_DIRECTION.getAttributeName());
     }
@@ -2785,7 +2785,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexDirection} style attribute.
      * @param msFlexDirection the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexDirection(final String msFlexDirection) {
         setStyleAttribute(Definition.MS_FLEX_DIRECTION.getAttributeName(), msFlexDirection);
     }
@@ -2794,7 +2794,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexFlow} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexFlow() {
         return getStyleAttribute(Definition.MS_FLEX_FLOW.getAttributeName());
     }
@@ -2803,7 +2803,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexFlow} style attribute.
      * @param msFlexFlow the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexFlow(final String msFlexFlow) {
         setStyleAttribute(Definition.MS_FLEX_FLOW.getAttributeName(), msFlexFlow);
     }
@@ -2812,7 +2812,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexItemAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexItemAlign() {
         return getStyleAttribute(Definition.MS_FLEX_ITEM_ALIGN.getAttributeName());
     }
@@ -2821,7 +2821,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexItemAlign} style attribute.
      * @param msFlexItemAlign the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexItemAlign(final String msFlexItemAlign) {
         setStyleAttribute(Definition.MS_FLEX_ITEM_ALIGN.getAttributeName(), msFlexItemAlign);
     }
@@ -2830,7 +2830,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexLinePack} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexLinePack() {
         return getStyleAttribute(Definition.MS_FLEX_LINE_PACK.getAttributeName());
     }
@@ -2839,7 +2839,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexLinePack} style attribute.
      * @param msFlexLinePack the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexLinePack(final String msFlexLinePack) {
         setStyleAttribute(Definition.MS_FLEX_LINE_PACK.getAttributeName(), msFlexLinePack);
     }
@@ -2848,7 +2848,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexNegative} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexNegative() {
         return getStyleAttribute(Definition.MS_FLEX_NEGATIVE.getAttributeName());
     }
@@ -2857,7 +2857,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexNegative} style attribute.
      * @param msFlexNegative the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexNegative(final String msFlexNegative) {
         setStyleAttribute(Definition.MS_FLEX_NEGATIVE.getAttributeName(), msFlexNegative);
     }
@@ -2866,7 +2866,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexOrder} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexOrder() {
         return getStyleAttribute(Definition.MS_FLEX_ORDER.getAttributeName());
     }
@@ -2875,7 +2875,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexOrder} style attribute.
      * @param msFlexOrder the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexOrder(final String msFlexOrder) {
         setStyleAttribute(Definition.MS_FLEX_ORDER.getAttributeName(), msFlexOrder);
     }
@@ -2884,7 +2884,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexPack} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexPack() {
         return getStyleAttribute(Definition.MS_FLEX_PACK.getAttributeName());
     }
@@ -2893,7 +2893,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexPack} style attribute.
      * @param msFlexPack the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexPack(final String msFlexPack) {
         setStyleAttribute(Definition.MS_FLEX_PACK.getAttributeName(), msFlexPack);
     }
@@ -2902,7 +2902,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexPositive} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexPositive() {
         return getStyleAttribute(Definition.MS_FLEX_POSITIVE.getAttributeName());
     }
@@ -2911,7 +2911,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexPositive} style attribute.
      * @param msFlexPositive the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexPositive(final String msFlexPositive) {
         setStyleAttribute(Definition.MS_FLEX_POSITIVE.getAttributeName(), msFlexPositive);
     }
@@ -2920,7 +2920,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexPreferredSize} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexPreferredSize() {
         return getStyleAttribute(Definition.MS_FLEX_PREFERRED_SIZE.getAttributeName());
     }
@@ -2929,7 +2929,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexPreferredSize} style attribute.
      * @param msFlexPreferredSize the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexPreferredSize(final String msFlexPreferredSize) {
         setStyleAttribute(Definition.MS_FLEX_PREFERRED_SIZE.getAttributeName(), msFlexPreferredSize);
     }
@@ -2938,7 +2938,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlexWrap} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlexWrap() {
         return getStyleAttribute(Definition.MS_FLEX_WRAP.getAttributeName());
     }
@@ -2947,7 +2947,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlexWrap} style attribute.
      * @param msFlexWrap the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlexWrap(final String msFlexWrap) {
         setStyleAttribute(Definition.MS_FLEX_WRAP.getAttributeName(), msFlexWrap);
     }
@@ -2956,7 +2956,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlowFrom} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlowFrom() {
         return getStyleAttribute(Definition.MS_FLOW_FROM.getAttributeName());
     }
@@ -2965,7 +2965,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlowFrom} style attribute.
      * @param msFlowFrom the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlowFrom(final String msFlowFrom) {
         setStyleAttribute(Definition.MS_FLOW_FROM.getAttributeName(), msFlowFrom);
     }
@@ -2974,7 +2974,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFlowInto} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFlowInto() {
         return getStyleAttribute(Definition.MS_FLOW_INTO.getAttributeName());
     }
@@ -2983,7 +2983,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFlowInto} style attribute.
      * @param msFlowInto the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFlowInto(final String msFlowInto) {
         setStyleAttribute(Definition.MS_FLOW_INTO.getAttributeName(), msFlowInto);
     }
@@ -2992,7 +2992,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msFontFeatureSettings} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsFontFeatureSettings() {
         return getStyleAttribute(Definition.MS_FONT_FEATURE_SETTINGS.getAttributeName());
     }
@@ -3001,7 +3001,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msFontFeatureSettings} style attribute.
      * @param msFontFeatureSettings the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsFontFeatureSettings(final String msFontFeatureSettings) {
         setStyleAttribute(Definition.MS_FONT_FEATURE_SETTINGS.getAttributeName(), msFontFeatureSettings);
     }
@@ -3010,7 +3010,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msGridColumn} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsGridColumn() {
         return getStyleAttribute(Definition.MS_GRID_COLUMN.getAttributeName());
     }
@@ -3019,7 +3019,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msGridColumn} style attribute.
      * @param msGridColumn the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsGridColumn(final String msGridColumn) {
         setStyleAttribute(Definition.MS_GRID_COLUMN.getAttributeName(), msGridColumn);
     }
@@ -3028,7 +3028,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msGridColumnAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsGridColumnAlign() {
         return getStyleAttribute(Definition.MS_GRID_COLUMN_ALIGN.getAttributeName());
     }
@@ -3037,7 +3037,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msGridColumnAlign} style attribute.
      * @param msGridColumnAlign the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsGridColumnAlign(final String msGridColumnAlign) {
         setStyleAttribute(Definition.MS_GRID_COLUMN_ALIGN.getAttributeName(), msGridColumnAlign);
     }
@@ -3046,7 +3046,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msGridColumnSpan} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsGridColumnSpan() {
         return getStyleAttribute(Definition.MS_GRID_COLUMN_SPAN.getAttributeName());
     }
@@ -3055,7 +3055,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msGridColumnSpan} style attribute.
      * @param msGridColumnSpan the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsGridColumnSpan(final String msGridColumnSpan) {
         setStyleAttribute(Definition.MS_GRID_COLUMN_SPAN.getAttributeName(), msGridColumnSpan);
     }
@@ -3064,7 +3064,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msGridColumns} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsGridColumns() {
         return getStyleAttribute(Definition.MS_GRID_COLUMNS.getAttributeName());
     }
@@ -3073,7 +3073,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msGridColumns} style attribute.
      * @param msGridColumns the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsGridColumns(final String msGridColumns) {
         setStyleAttribute(Definition.MS_GRID_COLUMNS.getAttributeName(), msGridColumns);
     }
@@ -3082,7 +3082,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msGridRow} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsGridRow() {
         return getStyleAttribute(Definition.MS_GRID_ROW.getAttributeName());
     }
@@ -3091,7 +3091,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msGridRow} style attribute.
      * @param msGridRow the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsGridRow(final String msGridRow) {
         setStyleAttribute(Definition.MS_GRID_ROW.getAttributeName(), msGridRow);
     }
@@ -3100,7 +3100,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msGridRowAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsGridRowAlign() {
         return getStyleAttribute(Definition.MS_GRID_ROW_ALIGN.getAttributeName());
     }
@@ -3109,7 +3109,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msGridRowAlign} style attribute.
      * @param msGridRowAlign the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsGridRowAlign(final String msGridRowAlign) {
         setStyleAttribute(Definition.MS_GRID_ROW_ALIGN.getAttributeName(), msGridRowAlign);
     }
@@ -3118,7 +3118,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msGridRowSpan} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsGridRowSpan() {
         return getStyleAttribute(Definition.MS_GRID_ROW_SPAN.getAttributeName());
     }
@@ -3127,7 +3127,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msGridRowSpan} style attribute.
      * @param msGridRowSpan the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsGridRowSpan(final String msGridRowSpan) {
         setStyleAttribute(Definition.MS_GRID_ROW_SPAN.getAttributeName(), msGridRowSpan);
     }
@@ -3136,7 +3136,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msGridRows} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsGridRows() {
         return getStyleAttribute(Definition.MS_GRID_ROWS.getAttributeName());
     }
@@ -3145,7 +3145,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msGridRows} style attribute.
      * @param msGridRows the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsGridRows(final String msGridRows) {
         setStyleAttribute(Definition.MS_GRID_ROWS.getAttributeName(), msGridRows);
     }
@@ -3154,7 +3154,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msHighContrastAdjust} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsHighContrastAdjust() {
         return getStyleAttribute(Definition.MS_HIGH_CONTRAST_ADJUST.getAttributeName());
     }
@@ -3163,7 +3163,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msHighContrastAdjust} style attribute.
      * @param msHighContrastAdjust the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsHighContrastAdjust(final String msHighContrastAdjust) {
         setStyleAttribute(Definition.MS_HIGH_CONTRAST_ADJUST.getAttributeName(), msHighContrastAdjust);
     }
@@ -3172,7 +3172,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msHyphenateLimitChars} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsHyphenateLimitChars() {
         return getStyleAttribute(Definition.MS_HYPHENATE_LIMIT_CHARS.getAttributeName());
     }
@@ -3181,7 +3181,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msHyphenateLimitChars} style attribute.
      * @param msHyphenateLimitChars the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsHyphenateLimitChars(final String msHyphenateLimitChars) {
         setStyleAttribute(Definition.MS_HYPHENATE_LIMIT_CHARS.getAttributeName(), msHyphenateLimitChars);
     }
@@ -3190,7 +3190,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msHyphenateLimitLines} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsHyphenateLimitLines() {
         return getStyleAttribute(Definition.MS_HYPHENATE_LIMIT_LINES.getAttributeName());
     }
@@ -3199,7 +3199,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msHyphenateLimitLines} style attribute.
      * @param msHyphenateLimitLines the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsHyphenateLimitLines(final String msHyphenateLimitLines) {
         setStyleAttribute(Definition.MS_HYPHENATE_LIMIT_LINES.getAttributeName(), msHyphenateLimitLines);
     }
@@ -3208,7 +3208,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msHyphenateLimitZone} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsHyphenateLimitZone() {
         return getStyleAttribute(Definition.MS_HYPHENATE_LIMIT_ZONE.getAttributeName());
     }
@@ -3217,7 +3217,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msHyphenateLimitZone} style attribute.
      * @param msHyphenateLimitZone the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsHyphenateLimitZone(final String msHyphenateLimitZone) {
         setStyleAttribute(Definition.MS_HYPHENATE_LIMIT_ZONE.getAttributeName(), msHyphenateLimitZone);
     }
@@ -3226,7 +3226,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msHyphens} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsHyphens() {
         return getStyleAttribute(Definition.MS_HYPHENS.getAttributeName());
     }
@@ -3235,7 +3235,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msHyphens} style attribute.
      * @param msHyphens the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsHyphens(final String msHyphens) {
         setStyleAttribute(Definition.MS_HYPHENS.getAttributeName(), msHyphens);
     }
@@ -3244,7 +3244,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msImeAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsImeAlign() {
         return getStyleAttribute(Definition.MS_IME_ALIGN.getAttributeName());
     }
@@ -3253,7 +3253,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msImeAlign} style attribute.
      * @param msImeAlign the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsImeAlign(final String msImeAlign) {
         setStyleAttribute(Definition.MS_IME_ALIGN.getAttributeName(), msImeAlign);
     }
@@ -3262,7 +3262,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msOverflowStyle} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsOverflowStyle() {
         return getStyleAttribute(Definition.MS_OVERFLOW_STYLE.getAttributeName());
     }
@@ -3271,7 +3271,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msOverflowStyle} style attribute.
      * @param msOverflowStyle the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsOverflowStyle(final String msOverflowStyle) {
         setStyleAttribute(Definition.MS_OVERFLOW_STYLE.getAttributeName(), msOverflowStyle);
     }
@@ -3280,7 +3280,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msPerspective} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsPerspective() {
         return getStyleAttribute(Definition.MS_PERSPECTIVE.getAttributeName());
     }
@@ -3289,7 +3289,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msPerspective} style attribute.
      * @param msPerspective the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsPerspective(final String msPerspective) {
         setStyleAttribute(Definition.MS_PERSPECTIVE.getAttributeName(), msPerspective);
     }
@@ -3298,7 +3298,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msPerspectiveOrigin} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsPerspectiveOrigin() {
         return getStyleAttribute(Definition.MS_PERSPECTIVE_ORIGIN.getAttributeName());
     }
@@ -3307,7 +3307,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msPerspectiveOrigin} style attribute.
      * @param msPerspectiveOrigin the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsPerspectiveOrigin(final String msPerspectiveOrigin) {
         setStyleAttribute(Definition.MS_PERSPECTIVE_ORIGIN.getAttributeName(), msPerspectiveOrigin);
     }
@@ -3316,7 +3316,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollChaining} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollChaining() {
         return getStyleAttribute(Definition.MS_SCROLL_CHAINING.getAttributeName());
     }
@@ -3325,7 +3325,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollChaining} style attribute.
      * @param msScrollChaining the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollChaining(final String msScrollChaining) {
         setStyleAttribute(Definition.MS_SCROLL_CHAINING.getAttributeName(), msScrollChaining);
     }
@@ -3334,7 +3334,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollLimit} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollLimit() {
         return getStyleAttribute(Definition.MS_SCROLL_LIMIT.getAttributeName());
     }
@@ -3343,7 +3343,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollLimit} style attribute.
      * @param msScrollLimit the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollLimit(final String msScrollLimit) {
         setStyleAttribute(Definition.MS_SCROLL_LIMIT.getAttributeName(), msScrollLimit);
     }
@@ -3352,7 +3352,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollLimitXMax} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollLimitXMax() {
         return getStyleAttribute(Definition.MS_SCROLL_LIMIT_X_MAX.getAttributeName());
     }
@@ -3361,7 +3361,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollLimitXMax} style attribute.
      * @param msScrollLimitXMax the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollLimitXMax(final String msScrollLimitXMax) {
         setStyleAttribute(Definition.MS_SCROLL_LIMIT_X_MAX.getAttributeName(), msScrollLimitXMax);
     }
@@ -3370,7 +3370,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollLimitXMin} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollLimitXMin() {
         return getStyleAttribute(Definition.MS_SCROLL_LIMIT_X_MIN.getAttributeName());
     }
@@ -3379,7 +3379,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollLimitXMin} style attribute.
      * @param msScrollLimitXMin the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollLimitXMin(final String msScrollLimitXMin) {
         setStyleAttribute(Definition.MS_SCROLL_LIMIT_X_MIN.getAttributeName(), msScrollLimitXMin);
     }
@@ -3388,7 +3388,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollLimitYMax} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollLimitYMax() {
         return getStyleAttribute(Definition.MS_SCROLL_LIMIT_Y_MAX.getAttributeName());
     }
@@ -3397,7 +3397,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollLimitYMax} style attribute.
      * @param msScrollLimitYMax the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollLimitYMax(final String msScrollLimitYMax) {
         setStyleAttribute(Definition.MS_SCROLL_LIMIT_Y_MAX.getAttributeName(), msScrollLimitYMax);
     }
@@ -3406,7 +3406,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollLimitYMin} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollLimitYMin() {
         return getStyleAttribute(Definition.MS_SCROLL_LIMIT_Y_MIN.getAttributeName());
     }
@@ -3415,7 +3415,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollLimitYMin} style attribute.
      * @param msScrollLimitYMin the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollLimitYMin(final String msScrollLimitYMin) {
         setStyleAttribute(Definition.MS_SCROLL_LIMIT_Y_MIN.getAttributeName(), msScrollLimitYMin);
     }
@@ -3424,7 +3424,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollRails} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollRails() {
         return getStyleAttribute(Definition.MS_SCROLL_RAILS.getAttributeName());
     }
@@ -3433,7 +3433,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollRails} style attribute.
      * @param msScrollRails the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollRails(final String msScrollRails) {
         setStyleAttribute(Definition.MS_SCROLL_RAILS.getAttributeName(), msScrollRails);
     }
@@ -3442,7 +3442,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollSnapPointsX} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollSnapPointsX() {
         return getStyleAttribute(Definition.MS_SCROLL_SNAP_POINTS_X.getAttributeName());
     }
@@ -3451,7 +3451,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollSnapPointsX} style attribute.
      * @param msScrollSnapPointsX the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollSnapPointsX(final String msScrollSnapPointsX) {
         setStyleAttribute(Definition.MS_SCROLL_SNAP_POINTS_X.getAttributeName(), msScrollSnapPointsX);
     }
@@ -3460,7 +3460,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollSnapPointsY} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollSnapPointsY() {
         return getStyleAttribute(Definition.MS_SCROLL_SNAP_POINTS_Y.getAttributeName());
     }
@@ -3469,7 +3469,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollSnapPointsY} style attribute.
      * @param msScrollSnapPointsY the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollSnapPointsY(final String msScrollSnapPointsY) {
         setStyleAttribute(Definition.MS_SCROLL_SNAP_POINTS_Y.getAttributeName(), msScrollSnapPointsY);
     }
@@ -3478,7 +3478,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollSnapType} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollSnapType() {
         return getStyleAttribute(Definition.MS_SCROLL_SNAP_TYPE.getAttributeName());
     }
@@ -3487,7 +3487,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollSnapType} style attribute.
      * @param msScrollSnapType the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollSnapType(final String msScrollSnapType) {
         setStyleAttribute(Definition.MS_SCROLL_SNAP_TYPE.getAttributeName(), msScrollSnapType);
     }
@@ -3496,7 +3496,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollSnapX} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollSnapX() {
         return getStyleAttribute(Definition.MS_SCROLL_SNAP_X.getAttributeName());
     }
@@ -3505,7 +3505,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollSnapX} style attribute.
      * @param msScrollSnapX the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollSnapX(final String msScrollSnapX) {
         setStyleAttribute(Definition.MS_SCROLL_SNAP_X.getAttributeName(), msScrollSnapX);
     }
@@ -3514,7 +3514,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollSnapY} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollSnapY() {
         return getStyleAttribute(Definition.MS_SCROLL_SNAP_Y.getAttributeName());
     }
@@ -3523,7 +3523,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollSnapY} style attribute.
      * @param msScrollSnapY the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollSnapY(final String msScrollSnapY) {
         setStyleAttribute(Definition.MS_SCROLL_SNAP_Y.getAttributeName(), msScrollSnapY);
     }
@@ -3532,7 +3532,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msScrollTranslation} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsScrollTranslation() {
         return getStyleAttribute(Definition.MS_SCROLL_TRANSLATION.getAttributeName());
     }
@@ -3541,7 +3541,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msScrollTranslation} style attribute.
      * @param msScrollTranslation the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsScrollTranslation(final String msScrollTranslation) {
         setStyleAttribute(Definition.MS_SCROLL_TRANSLATION.getAttributeName(), msScrollTranslation);
     }
@@ -3550,7 +3550,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTextCombineHorizontal} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTextCombineHorizontal() {
         return getStyleAttribute(Definition.MS_TEXT_COMBINE_HORIZONTAL.getAttributeName());
     }
@@ -3559,7 +3559,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTextCombineHorizontal} style attribute.
      * @param msTextCombineHorizontal the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTextCombineHorizontal(final String msTextCombineHorizontal) {
         setStyleAttribute(Definition.MS_TEXT_COMBINE_HORIZONTAL.getAttributeName(), msTextCombineHorizontal);
     }
@@ -3568,7 +3568,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTouchAction} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTouchAction() {
         return getStyleAttribute(Definition.MS_TOUCH_ACTION.getAttributeName());
     }
@@ -3577,7 +3577,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTouchAction} style attribute.
      * @param msTouchAction the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTouchAction(final String msTouchAction) {
         setStyleAttribute(Definition.MS_TOUCH_ACTION.getAttributeName(), msTouchAction);
     }
@@ -3586,7 +3586,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTouchSelect} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTouchSelect() {
         return getStyleAttribute(Definition.MS_TOUCH_SELECT.getAttributeName());
     }
@@ -3595,7 +3595,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTouchSelect} style attribute.
      * @param msTouchSelect the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTouchSelect(final String msTouchSelect) {
         setStyleAttribute(Definition.MS_TOUCH_SELECT.getAttributeName(), msTouchSelect);
     }
@@ -3604,7 +3604,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTransform} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTransform() {
         return getStyleAttribute(Definition.MS_TRANSFORM.getAttributeName());
     }
@@ -3613,7 +3613,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTransform} style attribute.
      * @param msTransform the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTransform(final String msTransform) {
         setStyleAttribute(Definition.MS_TRANSFORM.getAttributeName(), msTransform);
     }
@@ -3622,7 +3622,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTransformOrigin} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTransformOrigin() {
         return getStyleAttribute(Definition.MS_TRANSFORM_ORIGIN.getAttributeName());
     }
@@ -3631,7 +3631,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTransformOrigin} style attribute.
      * @param msTransformOrigin the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTransformOrigin(final String msTransformOrigin) {
         setStyleAttribute(Definition.MS_TRANSFORM_ORIGIN.getAttributeName(), msTransformOrigin);
     }
@@ -3640,7 +3640,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTransformStyle} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTransformStyle() {
         return getStyleAttribute(Definition.MS_TRANSFORM_STYLE.getAttributeName());
     }
@@ -3649,7 +3649,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTransformStyle} style attribute.
      * @param msTransformStyle the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTransformStyle(final String msTransformStyle) {
         setStyleAttribute(Definition.MS_TRANSFORM_STYLE.getAttributeName(), msTransformStyle);
     }
@@ -3658,7 +3658,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTransition} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTransition() {
         return getStyleAttribute(Definition.MS_TRANSITION.getAttributeName());
     }
@@ -3667,7 +3667,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTransition} style attribute.
      * @param msTransition the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTransition(final String msTransition) {
         setStyleAttribute(Definition.MS_TRANSITION.getAttributeName(), msTransition);
     }
@@ -3676,7 +3676,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTransitionDelay} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTransitionDelay() {
         return getStyleAttribute(Definition.MS_TRANSITION_DELAY.getAttributeName());
     }
@@ -3685,7 +3685,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTransitionDelay} style attribute.
      * @param msTransitionDelay the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTransitionDelay(final String msTransitionDelay) {
         setStyleAttribute(Definition.MS_TRANSITION_DELAY.getAttributeName(), msTransitionDelay);
     }
@@ -3694,7 +3694,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTransitionDuration} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTransitionDuration() {
         return getStyleAttribute(Definition.MS_TRANSITION_DURATION.getAttributeName());
     }
@@ -3703,7 +3703,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTransitionDuration} style attribute.
      * @param msTransitionDuration the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTransitionDuration(final String msTransitionDuration) {
         setStyleAttribute(Definition.MS_TRANSITION_DURATION.getAttributeName(), msTransitionDuration);
     }
@@ -3712,7 +3712,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTransitionProperty} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTransitionProperty() {
         return getStyleAttribute(Definition.MS_TRANSITION_PROPERTY.getAttributeName());
     }
@@ -3721,7 +3721,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTransitionProperty} style attribute.
      * @param msTransitionProperty the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTransitionProperty(final String msTransitionProperty) {
         setStyleAttribute(Definition.MS_TRANSITION_PROPERTY.getAttributeName(), msTransitionProperty);
     }
@@ -3730,7 +3730,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msTransitionTimingFunction} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsTransitionTimingFunction() {
         return getStyleAttribute(Definition.MS_TRANSITION_TIMING_FUNCTION.getAttributeName());
     }
@@ -3739,7 +3739,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msTransitionTimingFunction} style attribute.
      * @param msTransitionTimingFunction the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsTransitionTimingFunction(final String msTransitionTimingFunction) {
         setStyleAttribute(Definition.MS_TRANSITION_TIMING_FUNCTION.getAttributeName(), msTransitionTimingFunction);
     }
@@ -3748,7 +3748,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msUserSelect} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsUserSelect() {
         return getStyleAttribute(Definition.MS_USER_SELECT.getAttributeName());
     }
@@ -3757,7 +3757,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msUserSelect} style attribute.
      * @param msUserSelect the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsUserSelect(final String msUserSelect) {
         setStyleAttribute(Definition.MS_USER_SELECT.getAttributeName(), msUserSelect);
     }
@@ -3766,7 +3766,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msWrapFlow} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsWrapFlow() {
         return getStyleAttribute(Definition.MS_WRAP_FLOW.getAttributeName());
     }
@@ -3775,7 +3775,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msWrapFlow} style attribute.
      * @param msWrapFlow the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsWrapFlow(final String msWrapFlow) {
         setStyleAttribute(Definition.MS_WRAP_FLOW.getAttributeName(), msWrapFlow);
     }
@@ -3784,7 +3784,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msWrapMargin} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsWrapMargin() {
         return getStyleAttribute(Definition.MS_WRAP_MARGIN.getAttributeName());
     }
@@ -3793,7 +3793,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msWrapMargin} style attribute.
      * @param msWrapMargin the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsWrapMargin(final String msWrapMargin) {
         setStyleAttribute(Definition.MS_WRAP_MARGIN.getAttributeName(), msWrapMargin);
     }
@@ -3802,7 +3802,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the {@code msWrapThrough} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsWrapThrough() {
         return getStyleAttribute(Definition.MS_WRAP_THROUGH.getAttributeName());
     }
@@ -3811,7 +3811,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code msWrapThrough} style attribute.
      * @param msWrapThrough the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsWrapThrough(final String msWrapThrough) {
         setStyleAttribute(Definition.MS_WRAP_THROUGH.getAttributeName(), msWrapThrough);
     }
@@ -3820,7 +3820,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code opacity} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public String getOpacity() {
         final String opacity = getStyleAttribute(OPACITY);
         if (opacity == null || opacity.isEmpty()) {
@@ -3845,7 +3845,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code opacity} style attribute.
      * @param opacity the new attribute
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public void setOpacity(final String opacity) {
         if (opacity.isEmpty()) {
             setStyleAttribute(OPACITY, opacity);
@@ -4196,7 +4196,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code pointerEvents} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public String getPointerEvents() {
         return getStyleAttribute(POINTER_EVENTS);
     }
@@ -4205,7 +4205,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code pointerEvents} style attribute.
      * @param pointerEvents the new attribute
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public void setPointerEvents(final String pointerEvents) {
         setStyleAttribute(POINTER_EVENTS, pointerEvents);
     }
@@ -4232,7 +4232,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code pixelHeight} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public int getPixelHeight() {
         return pixelValue(getHeight());
     }
@@ -4241,7 +4241,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code pixelHeight} style attribute.
      * @param pixelHeight the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setPixelHeight(final int pixelHeight) {
         setHeight(pixelHeight + "px");
     }
@@ -4304,7 +4304,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code pixelWidth} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public int getPixelWidth() {
         return pixelValue(getWidth());
     }
@@ -4313,7 +4313,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code pixelWidth} style attribute.
      * @param pixelWidth the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setPixelWidth(final int pixelWidth) {
         setWidth(pixelWidth + "px");
     }
@@ -4988,7 +4988,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code textShadow} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public String getTextShadow() {
         return getStyleAttribute(TEXT_SHADOW);
     }
@@ -4997,7 +4997,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code textShadow} style attribute.
      * @param textShadow the new attribute
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public void setTextShadow(final String textShadow) {
         setStyleAttribute(TEXT_SHADOW, textShadow);
     }
@@ -5284,7 +5284,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the style property name
      * @return empty string if nothing found
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public String getPropertyValue(final String name) {
         if (name != null && name.contains("-")) {
             final Object value = getProperty(this, camelize(name));
@@ -5343,7 +5343,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the style property name
      * @return empty string if nothing found
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public String getPropertyPriority(final String name) {
         return getStylePriority(name);
     }
@@ -5355,7 +5355,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param value the value to assign to the attribute
      * @param important may be null
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public void setProperty(final String name, final String value, final String important) {
         if (StringUtils.isEmpty(important) || "null".equals(important)) {
             setStyleAttribute(name, value, "");
@@ -5377,7 +5377,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the name of the property to remove
      * @return the value deleted
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public String removeProperty(final Object name) {
         return removeStyleAttribute(Context.toString(name));
     }

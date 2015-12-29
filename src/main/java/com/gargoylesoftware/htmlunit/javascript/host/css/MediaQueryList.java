@@ -35,7 +35,7 @@ import com.steadystate.css.dom.MediaListImpl;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class MediaQueryList extends EventTarget {
 
@@ -81,7 +81,7 @@ public class MediaQueryList extends EventTarget {
      * Adds the {@code listener} event handler for this element.
      * @param listener the {@code listener} event handler for this element
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public void addListener(final Object listener) {
         // dummy impl for the moment
     }
@@ -90,7 +90,7 @@ public class MediaQueryList extends EventTarget {
      * Removes the {@code listener} event handler for this element.
      * @param listener the {@code listener} event handler to be removed
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public void removeListener(final Object listener) {
         // dummy impl for the moment
     }

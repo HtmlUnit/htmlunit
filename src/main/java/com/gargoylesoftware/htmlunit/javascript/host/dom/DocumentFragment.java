@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  */
 @JsxClasses({
         @JsxClass(domClass = DomDocumentFragment.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class DocumentFragment extends Node {

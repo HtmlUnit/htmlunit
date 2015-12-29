@@ -43,7 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClasses({
         @JsxClass(domClass = DomText.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class Text extends CharacterData {
@@ -70,7 +70,7 @@ public class Text extends CharacterData {
      * Returns wholeText value.
      * @return wholeText value
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public String getWholeText() {
         return ((DomText) getDomNodeOrDie()).getWholeText();
     }

@@ -371,7 +371,7 @@ public class EventNode extends Node {
      * Returns the {@code oninput} event handler for this element.
      * @return the {@code oninput} event handler for this element
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public Function getOninput() {
         return getEventHandler("oninput");
     }
@@ -380,7 +380,7 @@ public class EventNode extends Node {
      * Sets the {@code oninput} event handler for this element.
      * @param onchange the {@code oninput} event handler for this element
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public void setOninput(final Object onchange) {
         setEventHandlerProp("oninput", onchange);
     }

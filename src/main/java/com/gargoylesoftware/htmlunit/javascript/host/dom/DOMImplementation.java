@@ -81,7 +81,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * W3C Dom Level 1</a>
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                 @WebBrowser(EDGE) })
     })
 public class DOMImplementation extends SimpleScriptable {
@@ -301,7 +301,7 @@ public class DOMImplementation extends SimpleScriptable {
      * @param doctype the document types of the document
      * @return the newly created {@link XMLDocument}
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
     public XMLDocument createDocument(final String namespaceURI, final String qualifiedName,
             final DocumentType doctype) {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());

@@ -37,7 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class DOMException extends SimpleScriptable {
     /** If the specified range of text does not fit into a DOMString. */
@@ -116,10 +116,10 @@ public class DOMException extends SimpleScriptable {
     @JsxConstant
     public static final short DATA_CLONE_ERR = 25;
     /** Parse error. */
-    @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
+    @JsxConstant(@WebBrowser(IE))
     public static final short PARSE_ERR = 81;
     /** Serialize error. */
-    @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
+    @JsxConstant(@WebBrowser(IE))
     public static final short SERIALIZE_ERR = 82;
 
     private final short code_;
