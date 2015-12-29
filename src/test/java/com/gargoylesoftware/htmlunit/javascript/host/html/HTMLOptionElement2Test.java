@@ -825,9 +825,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"text1", "New Text" },
-            CHROME = {"label1", "label1" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"text1", "New Text1", "", "New Text2", "text3", "New Text3", "text4", "New Text4" },
+            CHROME = {"label1", "label1", "label2", "label2", "text3", "New Text3", "text4", "New Text4" })
     public void text() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -838,7 +837,22 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "      function test() {\n"
             + "         var option = document.getElementsByTagName('option')[0];\n"
             + "         alert(option.text);\n"
-            + "         option.text='New Text';\n"
+            + "         option.text='New Text1';\n"
+            + "         alert(option.text);\n"
+
+            + "         option = document.getElementsByTagName('option')[1];\n"
+            + "         alert(option.text);\n"
+            + "         option.text='New Text2';\n"
+            + "         alert(option.text);\n"
+
+            + "         option = document.getElementsByTagName('option')[2];\n"
+            + "         alert(option.text);\n"
+            + "         option.text='New Text3';\n"
+            + "         alert(option.text);\n"
+
+            + "         option = document.getElementsByTagName('option')[3];\n"
+            + "         alert(option.text);\n"
+            + "         option.text='New Text4';\n"
             + "         alert(option.text);\n"
             + "      }\n"
             + "    </script>\n"
@@ -846,6 +860,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "  <body onload='test()'>\n"
             + "    <select>\n"
             + "      <option value='value1' label='label1'>text1</option>\n"
+            + "      <option value='value2' label='label2'></option>\n"
+            + "      <option value='value3' label=''>text3</option>\n"
+            + "      <option value='value4' >text4</option>\n"
             + "    </select>\n"
             + "  </body>\n"
             + "</html>";
