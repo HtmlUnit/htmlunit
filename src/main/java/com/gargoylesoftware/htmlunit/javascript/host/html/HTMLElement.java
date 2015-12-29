@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_CR_NL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED;
@@ -885,7 +886,17 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else {
             final HtmlElement element = (HtmlElement) node;
             if ("p".equals(element.getTagName())) {
-                buffer.append("\r\n"); // \r\n because it's to implement something IE specific
+                if (getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
+                    buffer.append("\r\n"); // \r\n because it's to implement something IE specific
+                }
+                else {
+                    int i = buffer.length() - 1;
+                    while (i >= 0 && Character.isWhitespace(buffer.charAt(i))) {
+                        i--;
+                    }
+                    buffer.setLength(i + 1);
+                    buffer.append("\n");
+                }
             }
             if (!"script".equals(element.getTagName())) {
                 printChildren(buffer, node, html);

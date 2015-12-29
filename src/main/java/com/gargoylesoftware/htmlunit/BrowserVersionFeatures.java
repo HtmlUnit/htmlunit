@@ -815,14 +815,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
     JS_ELEMENT_CLASS_LIST_NULL,
 
+    /** Indicates that attributeNS returns an empty string instead of null if not found. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY,
+
     /** The Enumerator constructor throws an exception if called with HtmlCollections
      * as parameter. */
     @BrowserFeature(@WebBrowser(IE))
     JS_ENUMERATOR_CONSTRUCTOR_THROWS,
-
-    /** Indicates that attributeNS returns an empty string instead of null if not found. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY,
 
     /** Indicates that for(x in y) should enumerate the numbers first. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
@@ -936,6 +936,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that innerHTML adds the child also for null values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE,
+
+    /** Indicates that innerHTML uses crnl instead of nl. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_INNER_TEXT_CR_NL,
 
     /** Indicates that innerText is readonly for tables. */
     @BrowserFeature(@WebBrowser(CHROME))
