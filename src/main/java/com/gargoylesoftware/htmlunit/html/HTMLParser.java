@@ -831,10 +831,8 @@ public final class HTMLParser {
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
             final String data = new String(ch, start, length);
-            if (!data.startsWith("[CDATA")) {
-                final DomComment comment = new DomComment(page_, data);
-                currentNode_.appendChild(comment);
-            }
+            final DomComment comment = new DomComment(page_, data);
+            currentNode_.appendChild(comment);
         }
 
         /** {@inheritDoc} */
