@@ -42,33 +42,33 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                 @WebBrowser(EDGE) })
     })
 public class KeyboardEvent extends UIEvent {
 
     /** Constant for {@code DOM_KEY_LOCATION_STANDARD}. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public static final int DOM_KEY_LOCATION_STANDARD = 0;
 
     /** Constant for {@code DOM_KEY_LOCATION_LEFT}. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public static final int DOM_KEY_LOCATION_LEFT = 1;
 
     /** Constant for {@code DOM_KEY_LOCATION_RIGHT}. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public static final int DOM_KEY_LOCATION_RIGHT = 2;
 
     /** Constant for {@code DOM_KEY_LOCATION_NUMPAD}. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public static final int DOM_KEY_LOCATION_NUMPAD = 3;
 
     /** Constant for {@code DOM_KEY_LOCATION_MOBILE}. */
-    @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
+    @JsxConstant(@WebBrowser(IE))
     public static final int DOM_KEY_LOCATION_MOBILE = 4;
 
     /** Constant for {@code DOM_KEY_LOCATION_JOYSTICK}. */
-    @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
+    @JsxConstant(@WebBrowser(IE))
     public static final int DOM_KEY_LOCATION_JOYSTICK = 5;
 
     /** Constant for DOM_VK_CANCEL. */
@@ -989,7 +989,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns the char code associated with the event.
      * @return the char code associated with the event
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public int getCharCode() {
         return charCode_;
     }
@@ -998,7 +998,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed.
      * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public Object getWhich() {
         return which_;
     }
@@ -1025,7 +1025,7 @@ public class KeyboardEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public Object getKeyCode() {
         return super.getKeyCode();
     }

@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Frank Danek
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                 @WebBrowser(EDGE) })
     })
 public class MessageEvent extends Event {
@@ -78,7 +78,7 @@ public class MessageEvent extends Event {
      * @param source the window object that contains the document that caused the event
      * @param ports the message ports
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE) })
     public void initMessageEvent(
             final String type,
             final boolean canBubble,
@@ -136,7 +136,7 @@ public class MessageEvent extends Event {
      * Returns the {@code ports} property.
      * @return the {@code ports} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
     public Object getPorts() {
         return ports_;
     }

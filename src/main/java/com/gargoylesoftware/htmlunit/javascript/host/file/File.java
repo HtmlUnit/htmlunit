@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class File extends Blob {
     private static final String LAST_MODIFIED_DATE_FORMAT = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzzz)";
@@ -137,7 +137,7 @@ public class File extends Blob {
     /**
      * Closes the file.
      */
-    @JsxFunction(@WebBrowser(value = IE, minVersion = 11))
+    @JsxFunction(@WebBrowser(IE))
     public void msClose() {
     }
 

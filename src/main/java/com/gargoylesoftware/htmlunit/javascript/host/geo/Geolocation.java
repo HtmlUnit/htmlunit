@@ -53,7 +53,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) }),
+        @JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE) }),
         @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
         browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
     })

@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(value = IE, minVersion = 11))
+@JsxClass(browsers = @WebBrowser(IE))
 public class MouseWheelEvent extends UIEvent {
 
 }

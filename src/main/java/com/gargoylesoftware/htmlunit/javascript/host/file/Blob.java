@@ -29,14 +29,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class Blob extends SimpleScriptable {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(IE),
         @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
     public Blob() {
     }
