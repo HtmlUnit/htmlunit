@@ -871,10 +871,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     JS_FUNCTION_TOSTRING_ENUMERATED,
 
-    /** Javascript function getElementById compares the id's case sensitive. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
-
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,

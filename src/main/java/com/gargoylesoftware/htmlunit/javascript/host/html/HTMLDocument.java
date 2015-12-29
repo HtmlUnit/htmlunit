@@ -33,7 +33,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_RE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
@@ -72,7 +71,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -1097,9 +1095,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public Object getElementById(final String id) {
         implicitCloseIfNecessary();
         Object result = null;
-        try {
-            final boolean caseSensitive = getBrowserVersion().hasFeature(JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE);
-            final DomElement domElement = getPage().getElementById(id, caseSensitive);
+        final DomElement domElement = getPage().getElementById(id);
+        if (null == domElement) {
+            // Just fall through - result is already set to null
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("getElementById(" + id + "): no DOM node found with this id");
+            }
+        }
+        else {
             final Object jsElement = getScriptableFor(domElement);
             if (jsElement == NOT_FOUND) {
                 if (LOG.isDebugEnabled()) {
@@ -1110,12 +1113,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             else {
                 result = jsElement;
-            }
-        }
-        catch (final ElementNotFoundException e) {
-            // Just fall through - result is already set to null
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("getElementById(" + id + "): no DOM node found with this id");
             }
         }
         return result;

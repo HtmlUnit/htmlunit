@@ -575,12 +575,11 @@ public class HtmlPage extends InteractivePage {
      */
     @Override
     public DomElement getElementById(final String elementId) {
-        try {
-            return getElementById(elementId, true);
+        final SortedSet<DomElement> elements = idMap_.get(elementId);
+        if (elements != null) {
+            return elements.first();
         }
-        catch (final ElementNotFoundException e) {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -1553,64 +1552,18 @@ public class HtmlPage extends InteractivePage {
      * has this ID (not allowed by the HTML spec), then this method returns the
      * first one.
      *
-     * @param id the ID value to search for
+     * @param elementId the ID value to search for
      * @param <E> the element type
      * @return the HTML element with the specified ID
      * @throws ElementNotFoundException if no element was found matching the specified ID
      */
     @SuppressWarnings("unchecked")
-    public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
-        return (E) getElementById(id, true);
-    }
-
-    /**
-     * Returns the HTML element with the specified ID. If more than one element
-     * has this ID (not allowed by the HTML spec), then this method returns the
-     * first one.
-     *
-     * @param id the ID value to search for
-     * @param caseSensitive whether to consider case sensitivity or not
-     * @param <E> the element type
-     * @return the HTML element with the specified ID
-     * @throws ElementNotFoundException if no element was found matching the specified ID
-     */
-    public <E extends HtmlElement> E getHtmlElementById(final String id, final boolean caseSensitive)
-        throws ElementNotFoundException {
-
-        return getElementById(id, caseSensitive);
-    }
-
-    /**
-     * Returns the element with the specified ID. If more than one element
-     * has this ID, then this method returns the
-     * first one.
-     *
-     * @param id the ID value to search for
-     * @param caseSensitive whether to consider case sensitivity or not
-     * @param <E> the element type
-     * @return the element with the specified ID
-     * @throws ElementNotFoundException if no element was found matching the specified ID
-     */
-    @SuppressWarnings("unchecked")
-    public <E extends DomElement> E getElementById(final String id, final boolean caseSensitive)
-        throws ElementNotFoundException {
-
-        SortedSet<DomElement> elements = idMap_.get(id);
-
-        // not found maybe we have to search case insensitive
-        if (null == elements && !caseSensitive) {
-            for (final String key : idMap_.keySet()) {
-                if (key.equalsIgnoreCase(id)) {
-                    elements = idMap_.get(key);
-                    break;
-                }
-            }
+    public <E extends HtmlElement> E getHtmlElementById(final String elementId) throws ElementNotFoundException {
+        final DomElement element = getElementById(elementId);
+        if (element == null) {
+            throw new ElementNotFoundException("*", "id", elementId);
         }
-
-        if (elements != null) {
-            return (E) elements.first();
-        }
-        throw new ElementNotFoundException("*", "id", id);
+        return (E) element;
     }
 
     /**
