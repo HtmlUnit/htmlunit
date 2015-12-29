@@ -1371,8 +1371,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
             CHROME = { "0" })
     @NotYetImplemented(CHROME)
     public void target() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>First</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"

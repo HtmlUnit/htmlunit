@@ -302,6 +302,22 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(DEFAULT = { "false", "false", "true", "false", "true" },
+            CHROME = { "false", "false", "false", "false", "false" })
+    @NotYetImplemented(CHROME)
+    public void langConditionParent() throws Exception {
+        final String htmlSnippet =
+                "<div id='elt2' lang='en'>\n"
+                + "  <div id='elt3' lang='de'></div>\n"
+                + "  <div id='elt4' ></div>\n"
+                + "</div>\n";
+        doTest(":lang(en)", htmlSnippet);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
     @Alerts(DEFAULT = { "true", "false" },
             CHROME = { "false", "false" })
     @NotYetImplemented(CHROME)

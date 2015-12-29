@@ -14,11 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -546,17 +546,14 @@ public class CSSStyleSheet extends StyleSheet {
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
-                if (!browserVersion.hasFeature(CSS_SELECTOR_LANG)) {
-                    return false;
-                }
                 final String lcLang = ((LangCondition) condition).getLang();
                 final int lcLangLength = lcLang.length();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
                     final String nodeLang = ((HtmlElement) node).getAttribute("lang");
-                    // "en", "en-GB" should be matched by "en" but not "english"
-                    if (nodeLang.startsWith(lcLang)
-                        && (nodeLang.length() == lcLangLength || '-' == nodeLang.charAt(lcLangLength))) {
-                        return true;
+                    if (ATTRIBUTE_NOT_DEFINED != nodeLang) {
+                        // "en", "en-GB" should be matched by "en" but not "english"
+                        return nodeLang.startsWith(lcLang)
+                            && (nodeLang.length() == lcLangLength || '-' == nodeLang.charAt(lcLangLength));
                     }
                 }
                 return false;

@@ -129,10 +129,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 31), @WebBrowser(CHROME) })
     CSS_RUBY_DISPLAY_INLINE,
 
-    /** Indicates that the :lang(..) selector is supported. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    CSS_SELECTOR_LANG,
-
     /** Throws exception on setting a CSS style value to null. */
     @BrowserFeature(@WebBrowser(IE))
     CSS_SET_NULL_THROWS,
