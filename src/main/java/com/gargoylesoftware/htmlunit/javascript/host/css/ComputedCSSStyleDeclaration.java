@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.util.Arrays;
@@ -338,14 +337,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundColor() {
-        String value = super.getBackgroundColor();
+        final String value = super.getBackgroundColor();
         if (StringUtils.isEmpty(value)) {
-            value = Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
+            return Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
         }
-        else if (getBrowserVersion().hasFeature(JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB)) {
-            value = toRGBColor(value);
-        }
-        return value;
+        return toRGBColor(value);
     }
 
     /**
@@ -618,11 +614,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getColor() {
-        String value = defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)");
-        if (getBrowserVersion().hasFeature(JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB)) {
-            value = toRGBColor(value);
-        }
-        return value;
+        final String value = defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)");
+        return toRGBColor(value);
     }
 
     /**

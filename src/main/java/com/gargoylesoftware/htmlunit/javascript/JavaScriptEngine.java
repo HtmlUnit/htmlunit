@@ -14,11 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
@@ -223,8 +221,6 @@ public class JavaScriptEngine {
         final Scriptable fallbackCaller = new FallbackCaller();
         ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
 
-        final boolean putPrototypeInWindowScope =
-                browserVersion.hasFeature(JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE);
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
@@ -237,16 +233,14 @@ public class JavaScriptEngine {
                 final HtmlUnitScriptable prototype = configureClass(config, window, browserVersion);
                 if (config.isJsObject()) {
                     // Place object with prototype property in Window scope
-                    if (putPrototypeInWindowScope) {
-                        final HtmlUnitScriptable obj = config.getHostClass().newInstance();
-                        prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
-                        obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
-                        obj.setParentScope(window);
-                        obj.setClassName(config.getClassName());
-                        ScriptableObject.defineProperty(window, obj.getClassName(), obj, ScriptableObject.DONTENUM);
-                        // this obj won't have prototype, constants need to be configured on it again
-                        configureConstants(config, obj);
-                    }
+                    final HtmlUnitScriptable obj = config.getHostClass().newInstance();
+                    prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
+                    obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
+                    obj.setParentScope(window);
+                    obj.setClassName(config.getClassName());
+                    ScriptableObject.defineProperty(window, obj.getClassName(), obj, ScriptableObject.DONTENUM);
+                    // this obj won't have prototype, constants need to be configured on it again
+                    configureConstants(config, obj);
                 }
                 prototypes.put(config.getHostClass(), prototype);
                 prototypesPerJSName.put(config.getClassName(), prototype);
@@ -442,10 +436,6 @@ public class JavaScriptEngine {
                 (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
             stringPrototype.defineFunctionProperties(new String[] {"contains"},
                 StringCustom.class, ScriptableObject.EMPTY);
-        }
-
-        if (!browserVersion.hasFeature(JS_ECMA5_FUNCTIONS)) {
-            removePrototypeProperties(window, "Date", "toISOString", "toJSON");
         }
 
         // only FF has toSource

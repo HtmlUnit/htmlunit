@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTION_CONTENT_IS_DEFAULT_VALUE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -22,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.w3c.dom.ranges.Range;
 
@@ -34,8 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for {@code Selection}.
@@ -66,9 +65,7 @@ public class Selection extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        final boolean returnSelectionContent =
-                getPrototype() != null && getBrowserVersion().hasFeature(JS_SELECTION_CONTENT_IS_DEFAULT_VALUE);
-        if (returnSelectionContent && (String.class.equals(hint) || hint == null)) {
+        if (getPrototype() != null && (String.class.equals(hint) || hint == null)) {
             final StringBuilder sb = new StringBuilder();
             for (final Range r : getRanges()) {
                 sb.append(r.toString());

@@ -807,10 +807,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT,
 
-    /** Enables Javascript ECMA5 functions (like Date.toISOString or Date.toJSON). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_ECMA5_FUNCTIONS,
-
     /** Element.classList returns null. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
     JS_ELEMENT_CLASS_LIST_NULL,
@@ -874,10 +870,6 @@ public enum BrowserVersionFeatures {
     /** Indicates if the method 'toString' is enumerated. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_FUNCTION_TOSTRING_ENUMERATED,
-
-    /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB,
 
     /** Javascript function getElementById compares the id's case sensitive. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
@@ -1026,10 +1018,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
 
-    /** Indicates that objects with prototype property available in window scope. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
-
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style.
      */
     @BrowserFeature(@WebBrowser(IE))
@@ -1093,10 +1081,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW,
 
-    /** If true the content of a selection is it's default value instead of toString. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_SELECTION_CONTENT_IS_DEFAULT_VALUE,
-
     /** Javascript selectorText property returns ID selectors in lower case. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_SELECTOR_ID_LOWERCASE,
@@ -1146,11 +1130,6 @@ public enum BrowserVersionFeatures {
      * not the option text. */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE,
-
-    /** Indicates that the set attribute method is able to update the event handlers also.
-     * e.g. element.setAttribute("onclick", "test(1);"); */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS,
 
     /** Whether to get any property from the items first. */
     @BrowserFeature(@WebBrowser(IE))

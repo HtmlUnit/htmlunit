@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PAR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -621,7 +620,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         getDomNodeOrDie().setAttribute(name, value);
 
         // call corresponding event handler setOnxxx if found
-        if (getBrowserVersion().hasFeature(JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS) && !name.isEmpty()) {
+        if (!name.isEmpty()) {
             name = name.toLowerCase(Locale.ROOT);
             if (name.startsWith("on")) {
                 try {
