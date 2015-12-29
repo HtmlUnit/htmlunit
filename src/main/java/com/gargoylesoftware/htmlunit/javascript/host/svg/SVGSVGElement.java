@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgSvg;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgSvg.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class SVGSVGElement extends SVGGraphicsElement {
 
     /** The constant {@code SVG_ZOOMANDPAN_UNKNOWN}. */

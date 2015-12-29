@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  */
 @JsxClasses({
     @JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
-            @WebBrowser(value = IE, minVersion = 11) }),
+            @WebBrowser(IE) }),
     @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(value = FF, maxVersion = 31))
     })
 public class XMLHttpRequestEventTarget extends EventTarget {

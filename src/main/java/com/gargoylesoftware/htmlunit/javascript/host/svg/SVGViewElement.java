@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgView;
  * @author Frank Danek
  */
 @JsxClass(domClass = SvgView.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class SVGViewElement extends SVGElement {
 
     /** The constant {@code SVG_ZOOMANDPAN_UNKNOWN}. */

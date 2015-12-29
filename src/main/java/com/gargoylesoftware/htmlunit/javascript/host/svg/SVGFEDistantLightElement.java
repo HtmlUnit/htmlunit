@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeDistantLight;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeDistantLight.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class SVGFEDistantLightElement extends SVGElement {
 
     /**

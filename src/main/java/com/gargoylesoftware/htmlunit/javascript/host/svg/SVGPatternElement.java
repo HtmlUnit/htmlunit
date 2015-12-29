@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgPattern;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgPattern.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class SVGPatternElement extends SVGElement {
 
     /**

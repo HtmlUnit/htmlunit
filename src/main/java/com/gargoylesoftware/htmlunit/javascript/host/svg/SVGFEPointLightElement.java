@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFePointLight;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFePointLight.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class SVGFEPointLightElement extends SVGElement {
 
     /**

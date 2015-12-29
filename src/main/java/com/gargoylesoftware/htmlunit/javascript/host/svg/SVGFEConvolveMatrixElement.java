@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeConvolveMatrix;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeConvolveMatrix.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class SVGFEConvolveMatrixElement extends SVGElement {
 
     /** The constant {@code SVG_EDGEMODE_UNKNOWN}. */

@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Marc Guillemot
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME),
+@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME),
             @WebBrowser(EDGE) })
 public class SVGAngle extends SimpleScriptable {
 

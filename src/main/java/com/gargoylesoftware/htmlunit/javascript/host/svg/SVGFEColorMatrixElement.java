@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeColorMatrix;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeColorMatrix.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class SVGFEColorMatrixElement extends SVGElement {
 
     /** The constant {@code SVG_FECOLORMATRIX_TYPE_UNKNOWN}. */

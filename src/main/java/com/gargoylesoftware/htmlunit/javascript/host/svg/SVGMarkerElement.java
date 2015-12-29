@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgMarker;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgMarker.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class SVGMarkerElement extends SVGElement {
 
     /** The constant {@code SVG_MARKER_ORIENT_UNKNOWN}. */

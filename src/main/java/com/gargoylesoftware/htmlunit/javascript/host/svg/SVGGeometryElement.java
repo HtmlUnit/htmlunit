@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClasses({
     @JsxClass(browsers = @WebBrowser(CHROME)),
     @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-        browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(EDGE) })
+        browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(EDGE) })
     })
 public class SVGGeometryElement extends SVGGraphicsElement {
 

@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
  *
  * @author Marc Guillemot
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
 public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);
