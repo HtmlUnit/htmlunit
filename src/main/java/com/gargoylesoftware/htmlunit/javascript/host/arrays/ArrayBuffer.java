@@ -35,7 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class ArrayBuffer extends SimpleScriptable {
 
@@ -66,7 +66,7 @@ public class ArrayBuffer extends SimpleScriptable {
      * @param end (optional) byte index to end slicing
      * @return the newly created ArrayBuffer
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public ArrayBuffer slice(final int begin, Object end) {
         if (end == Undefined.instance) {
             end = getByteLength();

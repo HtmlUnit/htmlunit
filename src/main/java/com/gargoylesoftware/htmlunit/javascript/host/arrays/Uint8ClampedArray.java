@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class Uint8ClampedArray extends ArrayBufferViewBase {
 

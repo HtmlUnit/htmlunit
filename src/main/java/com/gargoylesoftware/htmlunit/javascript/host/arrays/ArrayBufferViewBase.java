@@ -37,7 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  */
 @JsxClass(isJSObject = false,
-        browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+        browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
 public class ArrayBufferViewBase extends ArrayBufferView {
 
     /**

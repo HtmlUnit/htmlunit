@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class Crypto extends SimpleScriptable {
 

@@ -35,7 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class DataView extends ArrayBufferView {
 
