@@ -970,6 +970,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_FORM_ACTION_EXPANDURL,
 
+    /** Indicates that the action property will not be expanded if defined as empty string. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY,
+
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature(@WebBrowser(FF))
     JS_FORM_DISPATCHEVENT_SUBMITS,

@@ -549,13 +549,32 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
+    @Alerts(DEFAULT = "§§URL§§",
+            FF = "")
     public void actionEmpty() throws Exception {
         final String html =
             "<html>\n"
             + "<head></head>\n"
             + "<body onload=\"alert(document.forms['myForm'].action)\">\n"
             + "<form id='myForm' action=''>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§")
+    public void actionBlank() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head></head>\n"
+            + "<body onload=\"alert(document.forms['myForm'].action)\">\n"
+            + "<form id='myForm' action='  '>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
