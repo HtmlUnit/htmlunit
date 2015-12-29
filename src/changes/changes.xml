@@ -9,6 +9,9 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                Empty form actions are not expanded by FF.
+            </action>
+            <action type="fix" dev="rbri">
                 Type attribute is case sensitive for input elements.
             </action>
             <action type="add" dev="rbri">
