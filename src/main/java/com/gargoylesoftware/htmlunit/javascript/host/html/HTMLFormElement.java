@@ -83,7 +83,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlForm.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class HTMLFormElement extends HTMLElement implements Function {

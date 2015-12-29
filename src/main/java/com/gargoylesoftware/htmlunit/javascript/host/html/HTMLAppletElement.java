@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlApplet.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class HTMLAppletElement extends HTMLElement {
@@ -172,7 +172,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Gets the {@code classid} attribute.
      * @return the {@code classid} attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getClassid() {
         return getDomNodeOrDie().getAttribute("classid");
     }
@@ -181,7 +181,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Sets the {@code classid} attribute.
      * @param classid the {@code classid} attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
         // see HTMLObjectElement.setClassid

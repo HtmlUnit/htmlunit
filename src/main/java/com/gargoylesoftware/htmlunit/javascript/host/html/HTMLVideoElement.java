@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlVideo.class, browsers = { @WebBrowser(FF),
-        @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+        @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class HTMLVideoElement extends HTMLMediaElement {
 
     /**

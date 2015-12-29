@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlHead.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class HTMLHeadElement extends HTMLElement {

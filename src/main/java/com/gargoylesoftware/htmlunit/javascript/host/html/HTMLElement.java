@@ -177,9 +177,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
         @JsxClass(domClass = HtmlAcronym.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlAddress.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlArticle.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlAside.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlBaseFont.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) }),
         @JsxClass(domClass = HtmlBidirectionalIsolation.class, browsers = @WebBrowser(CHROME)),
@@ -194,33 +194,33 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
         @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlDefinitionTerm.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlElement.class,
-            browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlEmphasis.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(FF)),
         @JsxClass(domClass = HtmlFigure.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlFigureCaption.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlFooter.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlHeader.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlItalic.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlKeyboard.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlLayer.class, browsers = @WebBrowser(CHROME)),
         @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(FF)),
         @JsxClass(domClass = HtmlMark.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlNav.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlNoBreak.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlNoEmbed.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlNoFrames.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlNoLayer.class, browsers = @WebBrowser(CHROME)),
         @JsxClass(domClass = HtmlNoScript.class,
-            browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) }),
+            browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) }),
         @JsxClass(domClass = HtmlPlainText.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlRuby.class, browsers = @WebBrowser(CHROME)),
         @JsxClass(domClass = HtmlRp.class, browsers = @WebBrowser(CHROME)),
@@ -228,7 +228,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
         @JsxClass(domClass = HtmlS.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlSample.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlSection.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlSmall.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlStrike.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlStrong.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
@@ -238,7 +238,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
         @JsxClass(domClass = HtmlTeletype.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlUnderlined.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlWordBreak.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlMain.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlVariable.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
     })
@@ -602,7 +602,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param localName the local name of the attribute to look for
      * @return the specified attribute, {@code null} if the attribute is not defined
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public Object getAttributeNodeNS(final String namespaceURI, final String localName) {
         return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptableObject();
     }
@@ -706,7 +706,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param className the name to search for
      * @return all the descendant elements with the specified class name
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public HTMLCollection getElementsByClassName(final String className) {
         final HtmlElement elt = getDomNodeOrDie();
         final String description = "HTMLElement.getElementsByClassName('" + className + "')";
@@ -2569,7 +2569,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the token list of class attribute
      */
     @Override
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");
     }
@@ -2606,7 +2606,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the {@code dataset} attribute
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 11) })
+        @WebBrowser(IE) })
     public DOMStringMap getDataset() {
         return new DOMStringMap(this);
     }
@@ -2633,7 +2633,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the {@code onchange} event handler for this element.
      * @param onchange the {@code onchange} event handler for this element
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public void setOnchange(final Object onchange) {
         setEventHandlerProp("onchange", onchange);
     }
@@ -2642,7 +2642,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the {@code onchange} event handler for this element.
      * @return the {@code onchange} event handler for this element
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public Function getOnchange() {
         return getEventHandler("onchange");
     }
@@ -2651,7 +2651,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the {@code onsubmit} event handler for this element.
      * @return the {@code onsubmit} event handler for this element
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public Object getOnsubmit() {
         return getEventHandlerProp("onsubmit");
     }
@@ -2660,7 +2660,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the {@code onsubmit} event handler for this element.
      * @param onsubmit the {@code onsubmit} event handler for this element
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public void setOnsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);
     }

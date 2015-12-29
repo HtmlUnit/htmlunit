@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 */
 @JsxClasses({
         @JsxClass(domClass = HtmlArea.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class HTMLAreaElement extends HTMLElement {

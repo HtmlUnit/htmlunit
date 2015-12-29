@@ -37,7 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlFont.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class HTMLFontElement extends HTMLElement {

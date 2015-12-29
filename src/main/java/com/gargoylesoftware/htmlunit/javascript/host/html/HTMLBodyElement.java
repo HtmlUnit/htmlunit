@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContain
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlBody.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
-            @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+            @WebBrowser(IE), @WebBrowser(EDGE) })
     })
 public class HTMLBodyElement extends HTMLElement {
 

@@ -66,7 +66,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlAnchor.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
-            @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+            @WebBrowser(IE), @WebBrowser(EDGE) })
     })
 public class HTMLAnchorElement extends HTMLElement {
 
@@ -522,7 +522,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code text} attribute.
      * @return the {@code text} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public String getText() {
         final DomNode htmlElement = getDomNodeOrDie();
         return htmlElement.asText();
@@ -532,7 +532,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code text} attribute.
      * @param text the {@code text} attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void setText(final String text) {
         final DomNode htmlElement = getDomNodeOrDie();
         htmlElement.setTextContent(text);

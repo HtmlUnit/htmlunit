@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlMarquee.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+            browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
     })
 public class HTMLMarqueeElement extends HTMLElement {
 

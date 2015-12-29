@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlBaseFont.class, browsers = { @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(domClass = HtmlBaseFont.class, browsers = { @WebBrowser(IE),
                 @WebBrowser(EDGE) })
     })
 public class HTMLBaseFontElement extends HTMLElement {

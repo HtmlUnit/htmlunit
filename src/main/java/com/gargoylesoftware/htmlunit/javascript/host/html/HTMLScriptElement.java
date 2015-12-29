@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlScript.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
             @WebBrowser(EDGE) })
     })
 public class HTMLScriptElement extends HTMLElement {
@@ -159,7 +159,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public Object getOnload() {
         return getEventHandlerProp("onload");
     }
@@ -168,7 +168,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the event handler that fires on load.
      * @param handler the event handler that fires on load
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void setOnload(final Object handler) {
         setEventHandlerProp("onload", handler);
     }
@@ -209,7 +209,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the <tt>async</tt> attribute.
      * @return the <tt>async</tt> attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11)})
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)})
     public String getAsync() {
         return getDomNodeOrDie().getAttribute("async");
     }
@@ -218,7 +218,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the <tt>async</tt> attribute.
      * @param type the <tt>async</tt> attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11)})
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)})
     public void setAsync(final String type) {
         getDomNodeOrDie().setAttribute("async", type);
     }

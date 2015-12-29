@@ -38,13 +38,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlAddress.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(value = IE, minVersion = 11))
+        @JsxClass(domClass = HtmlAddress.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(IE))
     })
 public class HTMLBlockElement extends HTMLElement {
 

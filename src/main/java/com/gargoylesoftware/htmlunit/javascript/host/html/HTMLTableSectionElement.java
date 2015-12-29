@@ -42,13 +42,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlTableBody.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlTableHeader.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                     @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlTableFooter.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                     @WebBrowser(EDGE) })
     })
 public class HTMLTableSectionElement extends RowContainer {

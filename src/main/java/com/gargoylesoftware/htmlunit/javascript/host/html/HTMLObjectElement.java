@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectImpl;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlObject.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class HTMLObjectElement extends FormChild implements Wrapper {
@@ -103,7 +103,7 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
      * Gets the {@code classid} attribute.
      * @return the {@code classid} attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getClassid() {
         final String classid = getDomNodeOrDie().getAttribute("classid");
         return classid;
@@ -113,7 +113,7 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
      * Sets the {@code classid} attribute.
      * @param classid the {@code classid} attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
         if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(HTML_OBJECT_CLASSID)) {

@@ -37,7 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class V8BreakIterator extends SimpleScriptable {
 
     private transient BreakIterator breakIterator_;

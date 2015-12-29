@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlDivision.class,
-                browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE),
                         @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlMarquee.class, browsers = @WebBrowser(FF))
     })

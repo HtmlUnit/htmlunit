@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlNextId.class, browsers = { @WebBrowser(value = IE, minVersion = 11) })
+        @JsxClass(domClass = HtmlNextId.class, browsers = { @WebBrowser(IE) })
     })
 public class HTMLNextIdElement extends HTMLElement {
 

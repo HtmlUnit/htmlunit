@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlBackgroundSound.class,
-                browsers = { @WebBrowser(value = IE, minVersion = 11) }),
+                browsers = { @WebBrowser(IE) }),
         @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = HtmlBackgroundSound.class,
                 browsers = @WebBrowser(FF))
     })

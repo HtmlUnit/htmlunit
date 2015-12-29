@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlInput.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class HTMLInputElement extends FormField {
@@ -251,7 +251,7 @@ public class HTMLInputElement extends FormField {
      * Gets the value of {@code selectionStart} attribute.
      * @return the selection start
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public int getSelectionStart() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionStart();
     }
@@ -260,7 +260,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of {@code selectionStart} attribute.
      * @param start selection start
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public void setSelectionStart(final int start) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionStart(start);
     }
@@ -269,7 +269,7 @@ public class HTMLInputElement extends FormField {
      * Gets the value of {@code selectionEnd} attribute.
      * @return the selection end
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public int getSelectionEnd() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionEnd();
     }
@@ -278,7 +278,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of {@code selectionEnd} attribute.
      * @param end selection end
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public void setSelectionEnd(final int end) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionEnd(end);
     }
@@ -325,7 +325,7 @@ public class HTMLInputElement extends FormField {
      * Gets the {@code min} property.
      * @return the {@code min} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public String getMin() {
         return getDomNodeOrDie().getAttribute("min");
     }
@@ -334,7 +334,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code min} property.
      * @param min the {@code min} property
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void setMin(final String min) {
         getDomNodeOrDie().setAttribute("min", min);
     }
@@ -343,7 +343,7 @@ public class HTMLInputElement extends FormField {
      * Gets the {@code max} property.
      * @return the {@code max} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public String getMax() {
         return getDomNodeOrDie().getAttribute("max");
     }
@@ -352,7 +352,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code max} property.
      * @param max the {@code max} property
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void setMax(final String max) {
         getDomNodeOrDie().setAttribute("max", max);
     }
@@ -380,7 +380,7 @@ public class HTMLInputElement extends FormField {
      * @param start the index of the first character to select
      * @param end the index of the character after the selection
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public void setSelectionRange(final int start, final int end) {
         setSelectionStart(start);
         setSelectionEnd(end);
@@ -486,7 +486,7 @@ public class HTMLInputElement extends FormField {
      * Returns the {@code required} attribute.
      * @return the {@code required} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public boolean isRequired() {
         return getDomNodeOrDie().isRequired();
     }
@@ -495,7 +495,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code required} attribute.
      * @param required the new attribute value
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void setRequired(final boolean required) {
         getDomNodeOrDie().setRequired(required);
     }
@@ -540,7 +540,7 @@ public class HTMLInputElement extends FormField {
      * Returns the {@code autocomplete} attribute.
      * @return the {@code autocomplete} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public String getAutocomplete() {
         return getDomNodeOrDie().getAutocomplete();
     }
@@ -549,7 +549,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code autocomplete} attribute.
      * @param autocomplete the new {@code autocomplete} value
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void setAutocomplete(final String autocomplete) {
         getDomNodeOrDie().setAutocomplete(autocomplete);
     }
@@ -558,7 +558,7 @@ public class HTMLInputElement extends FormField {
      * Returns the {@code files} property.
      * @return the {@code files} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public Object getFiles() {
         if (getDomNodeOrDie() instanceof HtmlFileInput) {
             final FileList list = new FileList(HtmlFileInput.splitFiles(getValue()));
@@ -576,7 +576,7 @@ public class HTMLInputElement extends FormField {
      * Returns the {@code placeholder} attribute.
      * @return the {@code placeholder} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public String getPlaceholder() {
         return getDomNodeOrDie().getPlaceholder();
     }
@@ -585,7 +585,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code placeholder} attribute.
      * @param placeholder the new {@code placeholder} value
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void setPlaceholder(final String placeholder) {
         getDomNodeOrDie().setPlaceholder(placeholder);
     }

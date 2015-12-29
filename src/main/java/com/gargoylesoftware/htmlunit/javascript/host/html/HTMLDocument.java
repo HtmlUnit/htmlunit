@@ -152,7 +152,7 @@ import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
  * W3C DOM Level 1</a>
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                 @WebBrowser(EDGE) })
     })
 public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
@@ -897,7 +897,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns a string representing the encoding under which the document was parsed.
      * @return a string representing the encoding under which the document was parsed
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public String getInputEncoding() {
         final String encoding = getPage().getPageEncoding();
         if (encoding != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
@@ -910,7 +910,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the character encoding of the current document.
      * @return the character encoding of the current document
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public String getCharacterSet() {
         final String charset = getPage().getPageEncoding();
         if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
@@ -1124,7 +1124,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return all the descendant elements with the specified class name
      * @see <a href="https://developer.mozilla.org/en/DOM/document.getElementsByClassName">Mozilla doc</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public HTMLCollection getElementsByClassName(final String className) {
         return ((HTMLElement) getDocumentElement()).getElementsByClassName(className);
     }
@@ -1272,7 +1272,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns this document's <tt>head</tt> element.
      * @return this document's <tt>head</tt> element
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public HTMLElement getHead() {
         final HtmlElement head = getPage().getHead();
         if (head != null) {
@@ -1661,7 +1661,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return a new range
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">XUL Planet</a>
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public Range createRange() {
         final Range r = new Range(this);
         r.setParentScope(getWindow());
@@ -1690,7 +1690,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @throws DOMException on attempt to create a TreeWalker with a root that is {@code null}
      * @return a new TreeWalker
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public Object createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
             boolean expandEntityReferences) throws DOMException {
 
@@ -1855,7 +1855,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Override
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
@@ -1949,7 +1949,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets the head.
      * @param head the head
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
     public void setHead(final ScriptableObject head) {
         //ignore
     }
@@ -1958,7 +1958,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public Selection getSelection() {
         return getWindow().getSelectionImpl();
     }
@@ -1981,7 +1981,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param filter an object implementing the {@link NodeFilter} interface
      * @return a new NodeIterator object
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public NodeIterator createNodeIterator(final Node root, final double whatToShow, final Scriptable filter) {
         final NodeIterator iterator = new NodeIterator(root, whatToShow, filter);
         iterator.setParentScope(getParentScope());

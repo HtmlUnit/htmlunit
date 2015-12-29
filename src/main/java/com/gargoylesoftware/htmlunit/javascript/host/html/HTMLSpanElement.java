@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlSpan.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) }),
         @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF)),
         @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(value = FF, maxVersion = 31))

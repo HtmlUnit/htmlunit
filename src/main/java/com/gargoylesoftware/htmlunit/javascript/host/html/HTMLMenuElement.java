@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlMenu.class,
-    browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
 public class HTMLMenuElement extends HTMLListElement {
 
     private String label_;

@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlImage.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class HTMLImageElement extends HTMLElement {
@@ -368,7 +368,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the {@code naturalWidth} property.
      * @return the value of the {@code naturalWidth} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public int getNaturalWidth() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         try {
@@ -383,7 +383,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the {@code naturalHeight} property.
      * @return the value of the {@code naturalHeight} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public int getNaturalHeight() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         try {

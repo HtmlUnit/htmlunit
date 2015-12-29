@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME),
+@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(EDGE) })
 public class DateTimeFormat extends SimpleScriptable {
 

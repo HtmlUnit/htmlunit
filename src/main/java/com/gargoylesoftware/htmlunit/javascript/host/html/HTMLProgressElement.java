@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlProgress.class,
-    browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class HTMLProgressElement extends HTMLElement {
 
     /**

@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlStyle.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                         @WebBrowser(EDGE) })
     })
 public class HTMLStyleElement extends HTMLElement {
@@ -62,7 +62,7 @@ public class HTMLStyleElement extends HTMLElement {
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLStyleElement.html">Mozilla doc</a>
      * @return the sheet
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public CSSStyleSheet getSheet() {
         if (sheet_ != null) {
             return sheet_;
