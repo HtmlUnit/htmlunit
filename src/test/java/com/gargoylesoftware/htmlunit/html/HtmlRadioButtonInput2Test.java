@@ -24,7 +24,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -644,11 +643,6 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("radio")).click();
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
-
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
-            driver.findElement(By.id("myInput")).click();
-            assertEquals(getExpectedAlerts()[1], driver.getTitle());
-        }
     }
 
     /**

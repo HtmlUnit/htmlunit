@@ -105,12 +105,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      */
     @Test
     public void clonedRowHasNullParent() throws Exception {
-        if (getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() == 8) {
-            assertNotNull(rowClone_.getParentNode());
-        }
-        else {
-            assertNull(rowClone_.getParentNode());
-        }
+        assertNull(rowClone_.getParentNode());
     }
 
     /**

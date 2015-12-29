@@ -191,8 +191,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void selects_pseudoClass_negation() throws Exception {
-        final boolean css3 = !(getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() <= 9);
-        testSelects(":not(div)", css3, false, css3);
+        testSelects(":not(div)", true, false, true);
     }
 
     private void testSelects(final String css, final boolean selectBody, final boolean selectDivD,

@@ -27,7 +27,6 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -189,15 +188,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         // tested with real ff17 and ie6; running in selenium returns different results
         assertEquals(4, actualAlerts.size());
 
-        // ignore order of frame windows
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
-            // returns 'first' 'third' 'fourth' 'second'
-            assertEquals("first", actualAlerts.get(0));
-        }
-        else {
-            // returns 'first' at last
-            assertEquals("first", actualAlerts.get(3));
-        }
+        // returns 'first' at last
+        assertEquals("first", actualAlerts.get(3));
     }
 
     /**
