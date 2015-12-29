@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SET_READONLY_PROPERTIES;
 
 import java.lang.reflect.Method;
 import java.util.Stack;
@@ -377,10 +376,6 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
 
     @Override
     protected boolean isReadOnlySettable(final String name, final Object value) {
-        if (!getBrowserVersion().hasFeature(SET_READONLY_PROPERTIES)) {
-            throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
-                    name, getClassName(), Context.toString(value));
-        }
         for (final Method m : getClass().getMethods()) {
             final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
             if (jsxGetter != null) {

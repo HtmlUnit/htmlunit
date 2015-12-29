@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.META_X_UA_COMPATIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -344,7 +343,7 @@ public final class HTMLParser {
      */
     static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
             final String qualifiedName) {
-        if (SVG_NAMESPACE.equals(namespaceURI) && page.hasFeature(SVG)) {
+        if (SVG_NAMESPACE.equals(namespaceURI)) {
             return SVG_FACTORY;
         }
         if (namespaceURI == null || namespaceURI.isEmpty()

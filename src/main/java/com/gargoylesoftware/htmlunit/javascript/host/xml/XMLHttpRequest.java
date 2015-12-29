@@ -18,13 +18,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_XM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -51,7 +47,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -199,20 +194,14 @@ public class XMLHttpRequest extends EventTarget {
         state_ = state;
 
         final BrowserVersion browser = getBrowserVersion();
-        // Firefox doesn't trigger onreadystatechange handler for sync requests except for 'completed'
-        final boolean noTriggerForSync = browser.hasFeature(XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED);
-        if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || state == DONE)) {
+        if (stateChangeHandler_ != null && (async_ || state == DONE)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
             }
-            Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            if (browser.hasFeature(XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
-                params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
-            }
-
+            final Object[] params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
             jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
             if (LOG.isDebugEnabled()) {
                 if (context == null) {
@@ -223,9 +212,7 @@ public class XMLHttpRequest extends EventTarget {
             }
         }
 
-        // Firefox has a separate onload handler, too.
-        final boolean triggerOnload = browser.hasFeature(XHR_TRIGGER_ONLOAD_ON_COMPLETED);
-        if (triggerOnload && state == DONE) {
+        if (state == DONE) {
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             final XMLHttpRequestProgressEvent event = new XMLHttpRequestProgressEvent(this, Event.TYPE_LOAD);
@@ -529,7 +516,7 @@ public class XMLHttpRequest extends EventTarget {
             request.setCharset("UTF-8");
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
-            if (!isSameOrigin(originUrl, fullUrl) && getBrowserVersion().hasFeature(XHR_ORIGIN_HEADER)) {
+            if (!isSameOrigin(originUrl, fullUrl)) {
                 final StringBuilder origin = new StringBuilder().append(originUrl.getProtocol()).append("://")
                         .append(originUrl.getHost());
                 if (originUrl.getPort() != -1) {

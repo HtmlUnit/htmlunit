@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -1250,14 +1249,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             final String url = e.getPage().getUrl().toExternalForm();
             final int line = e.getFailingLineNumber();
 
-            Object[] args;
-            if (getBrowserVersion().hasFeature(JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT)) {
-                final int column = e.getFailingColumnNumber();
-                args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
-            }
-            else {
-                args = new Object[] {msg, url, Integer.valueOf(line)};
-            }
+            final int column = e.getFailingColumnNumber();
+            final Object[] args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
             f.call(Context.getCurrentContext(), this, this, args);
         }
     }

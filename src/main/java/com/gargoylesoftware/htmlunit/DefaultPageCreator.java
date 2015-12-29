@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -346,7 +344,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     protected boolean isSvg(final SgmlPage page) {
         final DomElement documentElement = page.getDocumentElement();
-        return documentElement != null && page.hasFeature(SVG) && "svg".equals(documentElement.getTagName())
+        return documentElement != null && "svg".equals(documentElement.getTagName())
                 && HTMLParser.SVG_NAMESPACE.equals(documentElement.getNamespaceURI());
     }
 }

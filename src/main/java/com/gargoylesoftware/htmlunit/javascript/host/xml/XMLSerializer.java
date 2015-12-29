@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_HTML_DOCUMENT_FRAGMENT_ALWAYS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_NON_EMPTY_TAGS;
@@ -135,13 +134,10 @@ public class XMLSerializer extends SimpleScriptable {
             final DomNode node = root.getDomNodeOrDie();
             final SgmlPage page = node.getPage();
             final boolean isHtmlPage = page != null && page.isHtmlPage();
-            final boolean addXhtmlNamespace = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE);
 
             String forcedNamespace = null;
-            if (addXhtmlNamespace) {
-                if (isHtmlPage) {
-                    forcedNamespace = "http://www.w3.org/1999/xhtml";
-                }
+            if (isHtmlPage) {
+                forcedNamespace = "http://www.w3.org/1999/xhtml";
             }
             toXml(1, node, buffer, forcedNamespace);
 

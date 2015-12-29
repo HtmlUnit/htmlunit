@@ -1294,11 +1294,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
-    /** <code>Window.onerror</code> gets the column number as as 4th
-     * and the error as 5th argument. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
-    JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT,
-
     /**
      * Difference of window.outer/inner height is 63.
      */
@@ -1332,10 +1327,6 @@ public enum BrowserVersionFeatures {
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
-
-    /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,
 
     /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1382,10 +1373,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     MULTICOL_BLOCK,
 
-    /** Body of a &lt;noscript&gt; tag is not totally ignored but considered as a (not displayed) text node. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    NOSCRIPT_BODY_AS_TEXT,
-
     /** */
     @BrowserFeature(@WebBrowser(IE))
     PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
@@ -1417,21 +1404,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
 
-    /**
-     * Indicates that a read only JS property can potentially be set.
-     * If supported, {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject}.isReadOnlySettable()
-     * will be checked, if not supported, an exception will be thrown.
-     */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
-    SET_READONLY_PROPERTIES,
-
     /** Indicates that string.contains() is supported. */
     @BrowserFeature(@WebBrowser(FF))
     STRING_CONTAINS,
-
-    /** Indicates that string.trim() is supported. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    STRING_TRIM,
 
     /** Indicates that string.trimLeft() and .trimRight() are supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -1444,20 +1419,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     STYLESHEET_HREF_EMPTY_IS_NULL,
 
-    /**
-     * Indicates that the href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
-     * is the fully qualified URL.
-     */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    STYLESHEET_HREF_EXPANDURL,
-
     /** Set the value attribute of a submit input to 'Submit Query' if no value attribute specified. */
     @BrowserFeature(@WebBrowser(IE))
     SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
-
-    /** Indicates if SVG is supported. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    SVG,
 
     /** Indicates that unknown tags inside an SVG element are handled as DOM elements, not SVG elements. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1513,14 +1477,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
 
-    /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED,
-
-    /** Indicates that the onreadystatechange handler is triggered with an event parameter. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
-
     /** Indicates if an empty url is allowed as url param for the open method. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     XHR_OPEN_ALLOW_EMTPY_URL,
@@ -1529,17 +1485,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION,
 
-    /** Indicates if a "Origin" header should be sent. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    XHR_ORIGIN_HEADER,
-
     /** Indicates that method overrideMimeType throws if msg was already sent. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
-
-    /** Indicates that the onload handler is not triggered if completed (FF). */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
-    XHR_TRIGGER_ONLOAD_ON_COMPLETED,
 
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
     @BrowserFeature(@WebBrowser(IE))
