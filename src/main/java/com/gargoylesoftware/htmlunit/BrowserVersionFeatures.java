@@ -49,14 +49,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     APPLET_INLINE_BLOCK,
 
-    /** Is canvas supported? */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    CANVAS,
-
-    /** Indicates that the browser can inherit CSS property values. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    CAN_INHERIT_CSS_PROPERTY_VALUES,
-
     /** Background image is 'initial'. */
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_BACKGROUND_INITIAL,
@@ -88,10 +80,6 @@ public enum BrowserVersionFeatures {
     /** Default is 'normal'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     CSS_FONT_STRECH_DEFAULT_NORMAL,
-
-    /** Indicates that the browser can surrounds image url's with quotes. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    CSS_IMAGE_URL_QUOTED,
 
     /** The default value of the display property for the 'input' tags is 'inline-block'. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
@@ -164,29 +152,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     EVENT_BEFOREUNLOAD_AUTO_TYPE,
 
-    /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false as default. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE,
-
-    /** Triggers "DOMContentLoaded" event. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_DOM_CONTENT_LOADED,
-
-    /** Supports DOM level 2 events. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_DOM_LEVEL_2,
-
-    /** Supports DOM level 3 events. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_DOM_LEVEL_3,
-
     /** Event false result. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_FALSE_RESULT,
-
-    /** Is setting 'focus' and 'blur' events of 'document', triggers the event for the descendants elements. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_FOCUS_DOCUMENT_DESCENDANTS,
 
     /** Triggers the onfocus onfocusin blur onfocusout events in this order. */
     @BrowserFeature(@WebBrowser(CHROME))
@@ -195,11 +163,6 @@ public enum BrowserVersionFeatures {
     /** Triggers the onfocusin onfocus onfocusout blur events in this order. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_FOCUS_IN_FOCUS_OUT_BLUR,
-
-    /** Triggers "input" event. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_INPUT,
-
     /** Triggers "onchange" event handler after "onclick" event handler. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_ONCHANGE_AFTER_ONCLICK,
@@ -211,11 +174,6 @@ public enum BrowserVersionFeatures {
     /** Triggers 'onclick' and 'ondblclick' event handler using <code>PointerEvent</code>. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_ONCLICK_USES_POINTEREVENT,
-
-    /** Triggers "onerror" if external loading of an external javascript failed. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_ONERROR_EXTERNAL_JAVASCRIPT,
-
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     EVENT_ONHASHCHANGE_BUBBLES_AND_CANCELABLE_FALSE,
@@ -224,14 +182,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
         @WebBrowser(IE) })
     EVENT_ONLOAD_CANCELABLE_FALSE,
-
-    /** Triggers "onload" event if external javascript successfully loaded. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_ONLOAD_EXTERNAL_JAVASCRIPT,
-
-    /** Triggers "onload" event if an iframe was created by javascript and added to the page. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT,
 
     /** Triggers "onload" event if internal javascript loaded. */
     @BrowserFeature(@WebBrowser(IE))
@@ -265,10 +215,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     EVENT_TYPE_BEFOREUNLOADEVENT,
 
-    /** Supports vendor specific event type 'Events'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
-    EVENT_TYPE_EVENTS,
-
     /** Supports event type 'HashChangeEvent'. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     EVENT_TYPE_HASHCHANGEEVENT,
@@ -280,10 +226,6 @@ public enum BrowserVersionFeatures {
     /** Supports event type 'PointerEvent'. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_TYPE_POINTEREVENT,
-
-    /** Supports event type 'PopStateEvent'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
-    EVENT_TYPE_POPSTATEEVENT,
 
     /** Supports event type 'ProgressEvent'. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
@@ -313,17 +255,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
-    /** Indicates if HTML5 tags source, video and audio are recognized. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
-    HTML5_TAGS,
-
     /** */
     @BrowserFeature(@WebBrowser(IE))
     HTMLABBREVIATED,
-
-    /** Is HtmlAllCollection supported. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    HTMLALLCOLLECTION,
 
     /** HtmlAllCollection default value is [object HTML document.all class]. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
@@ -424,21 +358,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLELEMENT_ALIGN_INVALID,
 
-    /**
-     * Indicates outer/innerHtml quotes attributes.
-     */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES,
-
     /** Removing the active element from the dom tree triggers the onblur event. */
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
-
-    /**
-     * Indicates if a self-closing &lt;iframe/&gt; tag should be considered as an opening tag.
-     */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    HTMLIFRAME_IGNORE_SELFCLOSING,
 
     /** Handle blank source like empty. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
@@ -472,14 +394,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLINPUT_FILES_UNDEFINED,
 
-    /** Setting defaultValue updates the value also. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
-    HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE,
-
-    /** Setting value updates the defaultValue also. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
-    HTMLINPUT_SET_VALUE_UPDATES_DEFAULT_VALUE,
-
     /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlKeygen} have no end tag. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLKEYGEN_END_TAG_FORBIDDEN,
@@ -495,17 +409,6 @@ public enum BrowserVersionFeatures {
     /** Removing the selected attribute, de selects the option. */
     @BrowserFeature(@WebBrowser(FF))
     HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
-
-    /** Un-selecting an option in a (single-value) select causes the first option to become selected. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    HTMLOPTION_UNSELECT_SELECTS_FIRST,
-
-    /**
-     * Set this property if the script tag supports the
-     * types {@code application/javascript} and {@code application/x-javascript}.
-     */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    HTMLSCRIPT_APPLICATION_JAVASCRIPT,
 
     /** Trims the value of the type attribute before to verify it. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -530,10 +433,6 @@ public enum BrowserVersionFeatures {
     /** HTML attributes are always lower case. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTML_ATTRIBUTE_LOWER_CASE,
-
-    /** Adds CData nodes as Comment elements to the DOM. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    HTML_CDATA_AS_COMMENT,
 
     /** Expand #0 to #000000. */
     @BrowserFeature(@WebBrowser(IE))
@@ -682,10 +581,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DEFERRED,
 
-    /** Object prototype supports <tt>__defineGetter__</tt> and similar properties. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_DEFINE_GETTER,
-
     /** Javascript doctyp.entities returns null (FF10). */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCTYPE_ENTITIES_NULL,
@@ -707,10 +602,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOCUMENT_DOMAIN_IS_LOWERCASE,
 
-    /** dicument.elementFromPoint returns null if at least one point coordinat is zero or smaller. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_DOCUMENT_ELEMENT_FROM_POINT_NULL_WHEN_OUTSIDE,
-
     /** Javascript document.forms(...) supported (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
@@ -722,10 +613,6 @@ public enum BrowserVersionFeatures {
     /** If setting the document.location inside onclick() of anchor element should be triggered. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
     JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR,
-
-    /** If document.implementation.hasFeature() supports 'Core 1.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_DOMIMPLEMENTATION_FEATURE_CORE_1,
 
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -938,17 +825,9 @@ public enum BrowserVersionFeatures {
         @WebBrowser(IE) })
     JS_ENUM_NUMBERS_FIRST,
 
-    /** Indicates that 'exception' (technically NativeError) exposes "stack" property. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_ERROR_STACK,
-
     /** Javascript event.keyCode and event.charCode distinguish between printable and not printable keys. */
     @BrowserFeature(@WebBrowser(FF))
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
-
-    /** If an event handler has the value <code>undefined</code> {@code null} is returned instead. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
-    JS_EVENT_HANDLER_UNDEFINED_AS_NULL,
 
     /** Do not send parameter in event handlers. */
     @BrowserFeature(@WebBrowser(IE))
@@ -961,10 +840,6 @@ public enum BrowserVersionFeatures {
     /** FF uses a different date format for file.lastModifiedDate. */
     @BrowserFeature(@WebBrowser(FF))
     JS_FILE_SHORT_DATE_FORMAT,
-
-    /** Indicates that the action property of a form is the fully qualified URL. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_FORM_ACTION_EXPANDURL,
 
     /** Indicates that the action property will not be expanded if defined as empty string. */
     @BrowserFeature(@WebBrowser(FF))
@@ -985,10 +860,6 @@ public enum BrowserVersionFeatures {
     /** Support for document.formName('inputName'). */
     @BrowserFeature(@WebBrowser(IE))
     JS_FORM_USABLE_AS_FUNCTION,
-
-    /** Indicates if Function.bind is available. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
-    JS_FUNCTION_BIND,
 
     /**
      * Indicates that function is defined even before its declaration, inside a block.

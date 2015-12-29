@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CORE_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CORE_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_2;
@@ -104,7 +103,7 @@ public class DOMImplementation extends SimpleScriptable {
     public boolean hasFeature(final String feature, final String version) {
         if ("Core".equals(feature)) {
             if ("1.0".equals(version)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CORE_1);
+                return true;
             }
             if ("2.0".equals(version)) {
                 return true;

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -156,11 +155,7 @@ public class HTMLOptionElement extends FormChild {
         final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
         if (!selected && optionNode.isSelected()
                 && enclosingSelect != null && !enclosingSelect.isMultipleSelectEnabled()) {
-
-            // un-selecting selected option has no effect in IE and selects first option in FF
-            if (getBrowserVersion().hasFeature(HTMLOPTION_UNSELECT_SELECTS_FIRST)) {
-                enclosingSelect.getOption(0).setSelected(true, false);
-            }
+            enclosingSelect.getOption(0).setSelected(true, false);
         }
         else {
             optionNode.setSelected(selected, false);

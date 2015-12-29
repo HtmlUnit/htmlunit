@@ -14,10 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_CDATA_AS_COMMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.META_X_UA_COMPATIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
@@ -34,9 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -453,8 +447,7 @@ public final class HTMLParser {
                 }
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature(FEATURE_PARSE_NOSCRIPT, !webClient.getOptions().isJavaScriptEnabled());
-                setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME,
-                    !webClient.getBrowserVersion().hasFeature(HTMLIFRAME_IGNORE_SELFCLOSING));
+                setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME, false);
 
                 setContentHandler(this);
                 setLexicalHandler(this); //comments and CDATA
@@ -569,15 +562,6 @@ public final class HTMLParser {
             else if ("head".equals(tagLower)) {
                 head_ = (HtmlElement) newElement;
             }
-            else if ("html".equals(tagLower)) {
-                if (!page_.hasFeature(JS_DEFINE_GETTER) && page_.isQuirksMode()) {
-                    // this is not really correct; a following meta tag may disable the quirks
-                    // mode; but at the moment i have no idea for a better place for this
-                    removePrototypeProperties(page_.getEnclosingWindow().getScriptableObject(), "Array",
-                        "every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
-                        "reduceRight", "some");
-                }
-            }
             else if ("meta".equals(tagLower)) {
                 // i like the IE
                 if (page_.hasFeature(META_X_UA_COMPATIBLE)) {
@@ -609,20 +593,6 @@ public final class HTMLParser {
             }
             currentNode_ = newElement;
             stack_.push(currentNode_);
-        }
-
-        /**
-         * Removes prototype properties.
-         * @param scope the scope
-         * @param className the class for which properties should be removed
-         * @param properties the properties to remove
-         */
-        private void removePrototypeProperties(final Scriptable scope, final String className,
-                final String... properties) {
-            final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, className);
-            for (final String property : properties) {
-                prototype.delete(property);
-            }
         }
 
         /**
@@ -862,8 +832,7 @@ public final class HTMLParser {
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
             final String data = new String(ch, start, length);
-            if (!data.startsWith("[CDATA")
-                    || page_.hasFeature(HTML_CDATA_AS_COMMENT)) {
+            if (!data.startsWith("[CDATA")) {
                 final DomComment comment = new DomComment(page_, data);
                 currentNode_.appendChild(comment);
             }

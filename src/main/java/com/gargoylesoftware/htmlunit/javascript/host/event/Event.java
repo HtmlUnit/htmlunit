@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -327,10 +326,8 @@ public class Event extends SimpleScriptable {
      * This method is called after the parent scope was set so you are able to access the browser version.
      */
     public void eventCreated() {
-        if (getBrowserVersion().hasFeature(EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE)) {
-            setBubbles(false);
-            setCancelable(false);
-        }
+        setBubbles(false);
+        setCancelable(false);
     }
 
     /**

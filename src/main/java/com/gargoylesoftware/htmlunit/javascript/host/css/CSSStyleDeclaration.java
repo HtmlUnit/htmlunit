@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_IMAGE_URL_QUOTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
@@ -5475,10 +5474,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private String findImageUrl(final String text) {
         final Matcher m = URL_PATTERN.matcher(text);
         if (m.find()) {
-            if (getBrowserVersion().hasFeature(CSS_IMAGE_URL_QUOTED)) {
-                return "url(\"" + m.group(1) + "\")";
-            }
-            return "url(" + m.group(1) + ")";
+            return "url(\"" + m.group(1) + "\")";
         }
         return null;
     }

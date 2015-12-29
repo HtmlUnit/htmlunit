@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
@@ -236,9 +233,7 @@ public class HtmlPage extends InteractivePage {
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
 
-        if (hasFeature(EVENT_DOM_CONTENT_LOADED)) {
-            executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
-        }
+        executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         executeDeferredScriptsIfNeeded();
         setReadyStateOnDeferredScriptsIfNeeded();
 
@@ -1221,16 +1216,6 @@ public class HtmlPage extends InteractivePage {
 
         // If this page was loaded in a frame, execute the version of the event specified on the frame tag.
         if (window instanceof FrameWindow) {
-            if (Event.TYPE_LOAD.equals(eventType)) {
-                if (!hasFeature(EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT)) {
-                    final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
-                    // IE8 triggers this event only in some cases
-                    if (frame.wasCreatedByJavascript()) {
-                        return true;
-                    }
-                }
-            }
-
             final FrameWindow fw = (FrameWindow) window;
             final BaseFrameElement frame = fw.getFrameElement();
 
@@ -2327,10 +2312,7 @@ public class HtmlPage extends InteractivePage {
     @Override
     public boolean handles(final Event event) {
         if (Event.TYPE_BLUR.equals(event.getType()) || Event.TYPE_FOCUS.equals(event.getType())) {
-            if (hasFeature(EVENT_FOCUS_DOCUMENT_DESCENDANTS)) {
-                return true;
-            }
-            return false;
+            return true;
         }
         return super.handles(event);
     }

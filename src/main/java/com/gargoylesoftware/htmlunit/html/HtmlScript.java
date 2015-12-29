@@ -14,10 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
 
@@ -32,7 +29,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
@@ -337,7 +333,7 @@ public class HtmlScript extends HtmlElement {
 
         final String src = getSrcAttribute();
         if (src.equals(SLASH_SLASH_COLON)) {
-            executeEventIfBrowserHasFeature(Event.TYPE_ERROR, EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+            executeEvent(Event.TYPE_ERROR);
             return;
         }
 
@@ -351,14 +347,14 @@ public class HtmlScript extends HtmlElement {
                     executed_ = true;
                     final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, getCharsetAttribute());
                     if (result == JavaScriptLoadResult.SUCCESS) {
-                        executeEventIfBrowserHasFeature(Event.TYPE_LOAD, EVENT_ONLOAD_EXTERNAL_JAVASCRIPT);
+                        executeEvent(Event.TYPE_LOAD);
                     }
                     else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
-                        executeEventIfBrowserHasFeature(Event.TYPE_ERROR, EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+                        executeEvent(Event.TYPE_ERROR);
                     }
                 }
                 catch (final FailingHttpStatusCodeException e) {
-                    executeEventIfBrowserHasFeature(Event.TYPE_ERROR, EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+                    executeEvent(Event.TYPE_ERROR);
                     throw e;
                 }
             }
@@ -367,16 +363,16 @@ public class HtmlScript extends HtmlElement {
             // <script>[code]</script>
             executeInlineScriptIfNeeded();
 
-            executeEventIfBrowserHasFeature(Event.TYPE_LOAD, EVENT_ONLOAD_INTERNAL_JAVASCRIPT);
+            if (hasFeature(EVENT_ONLOAD_INTERNAL_JAVASCRIPT)) {
+                executeEvent(Event.TYPE_LOAD);
+            }
         }
     }
 
-    private void executeEventIfBrowserHasFeature(final String type, final BrowserVersionFeatures feature) {
-        if (hasFeature(feature)) {
-            final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
-            final Event event = new Event(HtmlScript.this, type);
-            script.executeEventLocally(event);
-        }
+    private void executeEvent(final String type) {
+        final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
+        final Event event = new Event(HtmlScript.this, type);
+        script.executeEventLocally(event);
     }
 
     /**
@@ -459,11 +455,9 @@ public class HtmlScript extends HtmlElement {
                 return true;
             }
 
-            final boolean appJavascriptSupported = browserVersion.hasFeature(HTMLSCRIPT_APPLICATION_JAVASCRIPT);
-            if (appJavascriptSupported
-                    && ("application/javascript".equalsIgnoreCase(typeAttribute)
+            if ("application/javascript".equalsIgnoreCase(typeAttribute)
                             || "application/ecmascript".equalsIgnoreCase(typeAttribute)
-                            || "application/x-javascript".equalsIgnoreCase(typeAttribute))) {
+                            || "application/x-javascript".equalsIgnoreCase(typeAttribute)) {
                 return true;
             }
             return false;

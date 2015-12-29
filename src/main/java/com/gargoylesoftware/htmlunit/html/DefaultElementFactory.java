@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CANVAS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_TAGS;
-
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -171,26 +168,14 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlArticle.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlArticle(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlAside.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlAside(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlAudio.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlAudio(qualifiedName, page, attributeMap);
                 break;
 
@@ -243,10 +228,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlCanvas.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(CANVAS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlCanvas(qualifiedName, page, attributeMap);
                 break;
 
@@ -279,10 +260,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlDataList.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlDataList(qualifiedName, page, attributeMap);
                 break;
 
@@ -339,18 +316,10 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlFigure.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlFigure(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlFigureCaption.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlFigureCaption(qualifiedName, page, attributeMap);
                 break;
 
@@ -363,10 +332,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlFooter.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlFooter(qualifiedName, page, attributeMap);
                 break;
 
@@ -389,10 +354,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlHeader.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlHeader(qualifiedName, page, attributeMap);
                 break;
 
@@ -464,10 +425,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlKeygen.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlKeygen(qualifiedName, page, attributeMap);
                 break;
 
@@ -504,10 +461,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlMark.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlMark(qualifiedName, page, attributeMap);
                 break;
 
@@ -528,10 +481,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlMeter.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlMeter(qualifiedName, page, attributeMap);
                 break;
 
@@ -540,10 +489,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlNav.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlNav(qualifiedName, page, attributeMap);
                 break;
 
@@ -588,10 +533,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlOutput.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlOutput(qualifiedName, page, attributeMap);
                 break;
 
@@ -644,10 +585,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlSection.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlSection(qualifiedName, page, attributeMap);
                 break;
 
@@ -660,10 +597,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlSource.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlSource(qualifiedName, page, attributeMap);
                 break;
 
@@ -744,10 +677,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlTime.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlTime(qualifiedName, page, attributeMap);
                 break;
 
@@ -772,10 +701,6 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlVideo.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlVideo(qualifiedName, page, attributeMap);
                 break;
 

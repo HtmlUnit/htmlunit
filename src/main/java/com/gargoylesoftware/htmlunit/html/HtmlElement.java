@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 
@@ -571,11 +570,9 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final WebClient webClient = page.getWebClient();
-        final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        if (browserVersion.hasFeature(EVENT_INPUT)
-            && (this instanceof HtmlTextInput
+        if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
-            || this instanceof HtmlPasswordInput)) {
+            || this instanceof HtmlPasswordInput) {
             final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, c, shiftKey, ctrlKey, altKey);
             fireEvent(input);
         }
@@ -787,10 +784,9 @@ public abstract class HtmlElement extends DomElement {
             doType(keyCode, shiftKey, ctrlKey, altKey);
         }
 
-        if (browserVersion.hasFeature(EVENT_INPUT)
-            && (this instanceof HtmlTextInput
+        if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
-            || this instanceof HtmlPasswordInput)) {
+            || this instanceof HtmlPasswordInput) {
             final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, keyCode, shiftKey, ctrlKey, altKey);
             fireEvent(input);
         }

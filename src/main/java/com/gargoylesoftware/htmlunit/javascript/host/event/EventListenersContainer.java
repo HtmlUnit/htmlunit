@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FALSE_RESULT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_UNDEFINED_AS_NULL;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -207,8 +206,7 @@ public class EventListenersContainer implements Serializable {
      */
     public void setEventHandlerProp(final String eventName, final Object value) {
         Object handler = value;
-        if (Undefined.instance == value
-            && jsNode_.getWindow().getBrowserVersion().hasFeature(JS_EVENT_HANDLER_UNDEFINED_AS_NULL)) {
+        if (Undefined.instance == value) {
             handler = null;
         }
 

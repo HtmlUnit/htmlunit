@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNCTIONS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_BIND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
@@ -450,16 +448,8 @@ public class JavaScriptEngine {
                 StringCustom.class, ScriptableObject.EMPTY);
         }
 
-        if (!browserVersion.hasFeature(JS_FUNCTION_BIND)) {
-            removePrototypeProperties(window, "Function", "bind");
-        }
         if (!browserVersion.hasFeature(JS_ECMA5_FUNCTIONS)) {
             removePrototypeProperties(window, "Date", "toISOString", "toJSON");
-        }
-
-        if (!browserVersion.hasFeature(JS_DEFINE_GETTER)) {
-            removePrototypeProperties(window, "Object", "__defineGetter__", "__defineSetter__", "__lookupGetter__",
-                    "__lookupSetter__");
         }
 
         // only FF has toSource

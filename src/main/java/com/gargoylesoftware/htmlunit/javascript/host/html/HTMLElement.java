@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
@@ -53,7 +52,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.CSSException;
@@ -72,7 +70,6 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
 import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
 import com.gargoylesoftware.htmlunit.html.HtmlAddress;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlArticle;
 import com.gargoylesoftware.htmlunit.html.HtmlAside;
 import com.gargoylesoftware.htmlunit.html.HtmlBaseFont;
@@ -864,7 +861,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
             buffer.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.
-            final boolean doQoute = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES);
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 if (!attr.getSpecified()) {
                     continue;
@@ -872,18 +868,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
                 final String name = attr.getName();
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
-                final boolean quote = doQoute
-                    || StringUtils.containsWhitespace(value)
-                    || value.isEmpty()
-                    || (element instanceof HtmlAnchor && "href".equals(name));
                 buffer.append(' ').append(name).append("=");
-                if (quote) {
-                    buffer.append("\"");
-                }
+                buffer.append("\"");
                 buffer.append(value);
-                if (quote) {
-                    buffer.append("\"");
-                }
+                buffer.append("\"");
             }
             buffer.append(">");
             // Add the children.

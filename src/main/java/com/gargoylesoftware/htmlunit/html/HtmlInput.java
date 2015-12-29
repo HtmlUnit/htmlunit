@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_INPUT_DISPLAY_INLINE_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -374,8 +373,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public void setDefaultValue(final String defaultValue) {
-        final boolean modifyValue = hasFeature(HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE);
-        setDefaultValue(defaultValue, modifyValue);
+        setDefaultValue(defaultValue, true);
     }
 
     /**

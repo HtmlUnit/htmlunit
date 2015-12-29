@@ -14,14 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_LEVEL_2;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_LEVEL_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POPSTATEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
@@ -35,7 +31,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_ELEMENT_FROM_POINT_NULL_WHEN_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
@@ -1601,17 +1596,15 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @throws DOMException if the event type is not supported (will have a type of
      *         DOMException.NOT_SUPPORTED_ERR)
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public Event createEvent(final String eventType) throws DOMException {
         Class<? extends Event> clazz = null;
-        if (getBrowserVersion().hasFeature(EVENT_DOM_LEVEL_2)) {
-            clazz = SUPPORTED_DOM2_EVENT_TYPE_MAP.get(eventType);
-        }
-        if (clazz == null && getBrowserVersion().hasFeature(EVENT_DOM_LEVEL_3)) {
+        clazz = SUPPORTED_DOM2_EVENT_TYPE_MAP.get(eventType);
+        if (clazz == null) {
             clazz = SUPPORTED_DOM3_EVENT_TYPE_MAP.get(eventType);
         }
         if (clazz == null) {
-            if ("Events".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_EVENTS)
+            if ("Events".equals(eventType)
                 || "KeyEvents".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_KEY_EVENTS)
                 || "HashChangeEvent".equals(eventType)
                     && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
@@ -1620,7 +1613,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 || "PointerEvent".equals(eventType)
                     && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
                 || "PopStateEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_POPSTATEEVENT)
                 || "ProgressEvent".equals(eventType)
                     && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)
                 || "XMLHttpRequestProgressEvent".equals(eventType)
@@ -1661,8 +1653,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public Object elementFromPoint(final int x, final int y) {
         // minimal implementation to make simple unit test happy for FF and IE
-        if (getBrowserVersion().hasFeature(JS_DOCUMENT_ELEMENT_FROM_POINT_NULL_WHEN_OUTSIDE)
-                && (x <= 0 || y <= 0)) {
+        if (x <= 0 || y <= 0) {
             return null;
         }
         return getBody();

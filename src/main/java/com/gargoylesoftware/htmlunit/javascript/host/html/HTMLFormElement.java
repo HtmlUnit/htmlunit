@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
@@ -206,8 +205,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     public String getAction() {
         String action = getHtmlForm().getActionAttribute();
         final BrowserVersion browser = getBrowserVersion();
-        if (browser.hasFeature(JS_FORM_ACTION_EXPANDURL)
-                && action != DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (action != DomElement.ATTRIBUTE_NOT_DEFINED) {
             if (action.length() == 0 && browser.hasFeature(JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY)) {
                 return action;
             }

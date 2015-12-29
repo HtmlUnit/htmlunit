@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
@@ -2485,18 +2484,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getPositionWithInheritance() {
         String p = getPosition();
         if ("inherit".equals(p)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    p = "static";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    p = style.getPositionWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                p = "static";
             }
             else {
-                p = "static";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                p = style.getPositionWithInheritance();
             }
         }
         return p;
@@ -2509,18 +2503,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getLeftWithInheritance() {
         String left = getLeft();
         if ("inherit".equals(left)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    left = "auto";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    left = style.getLeftWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                left = "auto";
             }
             else {
-                left = "auto";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                left = style.getLeftWithInheritance();
             }
         }
         return left;
@@ -2533,18 +2522,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getRightWithInheritance() {
         String right = getRight();
         if ("inherit".equals(right)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    right = "auto";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    right = style.getRightWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                right = "auto";
             }
             else {
-                right = "auto";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                right = style.getRightWithInheritance();
             }
         }
         return right;
@@ -2557,18 +2541,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getTopWithInheritance() {
         String top = getTop();
         if ("inherit".equals(top)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    top = "auto";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    top = style.getTopWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                top = "auto";
             }
             else {
-                top = "auto";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                top = style.getTopWithInheritance();
             }
         }
         return top;
@@ -2581,18 +2560,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getBottomWithInheritance() {
         String bottom = getBottom();
         if ("inherit".equals(bottom)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    bottom = "auto";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    bottom = style.getBottomWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                bottom = "auto";
             }
             else {
-                bottom = "auto";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                bottom = style.getBottomWithInheritance();
             }
         }
         return bottom;
