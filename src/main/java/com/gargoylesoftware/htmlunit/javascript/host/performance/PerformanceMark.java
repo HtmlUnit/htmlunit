@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
-            @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+            @WebBrowser(IE), @WebBrowser(EDGE) })
 public class PerformanceMark extends PerformanceEntry {
 
     /**
