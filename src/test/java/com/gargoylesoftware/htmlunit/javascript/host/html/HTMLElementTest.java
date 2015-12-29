@@ -193,7 +193,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "bla", "true" },
             IE11 = { "", "bla", "true" })
-    @NotYetImplemented({ FF, CHROME })
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -3317,7 +3316,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "button", "null", "false", "true" },
             IE11 = { "button", "", "false", "true" })
-    @NotYetImplemented({ FF, CHROME })
     public void attributeNS() throws Exception {
         final String html
             = "<html><head>\n"

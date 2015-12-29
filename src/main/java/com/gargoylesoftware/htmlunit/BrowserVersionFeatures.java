@@ -820,6 +820,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_ENUMERATOR_CONSTRUCTOR_THROWS,
 
+    /** Indicates that attributeNS returns an empty string instead of null if not found. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY,
+
     /** Indicates that for(x in y) should enumerate the numbers first. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(IE) })
