@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24),
-            @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) }),
+            @WebBrowser(IE), @WebBrowser(EDGE) }),
         @JsxClass(className = "DOMRect",
             browsers = { @WebBrowser(FF) })
     })
@@ -144,7 +144,7 @@ public class ClientRect extends SimpleScriptable {
      * Returns the {@code width} property.
      * @return the {@code width} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public int getWidth() {
         return getRight() - getLeft();
     }
@@ -153,7 +153,7 @@ public class ClientRect extends SimpleScriptable {
      * Returns the {@code height} property.
      * @return the {@code height} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public int getHeight() {
         return getBottom() - getTop();
     }

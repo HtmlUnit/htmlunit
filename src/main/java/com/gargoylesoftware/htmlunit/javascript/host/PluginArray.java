@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/PluginArray.html">XUL Planet</a>
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class PluginArray extends SimpleArray {
 

@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE),
             @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) }),
         @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
             browsers = @WebBrowser(value = FF, maxVersion = 31))

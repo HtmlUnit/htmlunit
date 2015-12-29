@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class MessagePort extends EventTarget {
 

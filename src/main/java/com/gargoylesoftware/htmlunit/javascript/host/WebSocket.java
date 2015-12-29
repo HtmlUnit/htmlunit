@@ -52,7 +52,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/WebSocket">Mozilla documentation</a>
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
         @WebBrowser(EDGE) })
 public class WebSocket extends EventTarget implements AutoCloseable {
 

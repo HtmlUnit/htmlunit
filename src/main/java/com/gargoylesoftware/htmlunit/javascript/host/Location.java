@@ -69,7 +69,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN Documentation</a>
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                 @WebBrowser(EDGE) })
     })
 public class Location extends SimpleScriptable {
@@ -536,7 +536,7 @@ public class Location extends SimpleScriptable {
      * Returns the {@code origin} property.
      * @return the {@code origin} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public String getOrigin() {
         return getUrl().getProtocol() + "://" + getHost();
     }

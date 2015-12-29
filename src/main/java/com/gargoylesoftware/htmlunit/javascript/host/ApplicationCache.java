@@ -47,7 +47,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) }),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) }),
         @JsxClass(className = "OfflineResourceList", browsers = @WebBrowser(FF))
     })
 public class ApplicationCache extends EventTarget {

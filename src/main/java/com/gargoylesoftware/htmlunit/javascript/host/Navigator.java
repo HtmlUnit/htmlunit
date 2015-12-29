@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535867.aspx">MSDN documentation</a>
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                 @WebBrowser(EDGE) })
     })
 public class Navigator extends SimpleScriptable {
@@ -106,7 +106,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the language of the browser.
      * @return the language
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
         @WebBrowser(EDGE) })
     public String getLanguage() {
         return getBrowserVersion().getBrowserLanguage();
@@ -152,7 +152,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code product} property.
      * @return the {@code product} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
     public String getProduct() {
         return "Gecko";
     }
@@ -266,7 +266,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code geolocation} property.
      * @return the {@code geolocation} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE),
         @WebBrowser(EDGE) })
     public Geolocation getGeolocation() {
         final Geolocation geolocation = new Geolocation();
@@ -288,7 +288,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the vendor.
      * @return the vendor
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE),
         @WebBrowser(EDGE)})
     public String getVendor() {
         return getBrowserVersion().getVendor();

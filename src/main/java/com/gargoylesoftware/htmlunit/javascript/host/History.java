@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Adam Afeltowicz
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
                 @WebBrowser(EDGE) })
     })
 public class History extends SimpleScriptable {
@@ -74,7 +74,7 @@ public class History extends SimpleScriptable {
      * Returns the {@code state} property.
      * @return the {@code state} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public Object getState() {
         final WebWindow w = getWindow().getWebWindow();
         return w.getHistory().getCurrentState();
@@ -129,7 +129,7 @@ public class History extends SimpleScriptable {
      * @param title the title
      * @param url an optional URL
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void replaceState(final Object object, final String title, final String url) {
         final WebWindow w = getWindow().getWebWindow();
         final HtmlPage page = (HtmlPage) w.getEnclosedPage();
@@ -154,7 +154,7 @@ public class History extends SimpleScriptable {
      * @param title the title
      * @param url an optional URL
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
     public void pushState(final Object object, final String title, final String url) {
         try {
             getWindow().getLocation().setHref(url, true, object);
