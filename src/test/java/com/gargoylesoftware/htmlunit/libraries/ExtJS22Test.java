@@ -123,21 +123,25 @@ public class ExtJS22Test extends WebDriverTestCase {
         assertTrue(core_spotlight_isDisabled(buttons.get(3)));
 
         buttons.get(0).click();
+        Thread.sleep(200);
         assertFalse(core_spotlight_isDisabled(buttons.get(1)));
         assertTrue(core_spotlight_isDisabled(buttons.get(2)));
         assertTrue(core_spotlight_isDisabled(buttons.get(3)));
 
         buttons.get(1).click();
+        Thread.sleep(200);
         assertTrue(core_spotlight_isDisabled(buttons.get(1)));
         assertFalse(core_spotlight_isDisabled(buttons.get(2)));
         assertTrue(core_spotlight_isDisabled(buttons.get(3)));
 
         buttons.get(2).click();
+        Thread.sleep(200);
         assertTrue(core_spotlight_isDisabled(buttons.get(1)));
         assertTrue(core_spotlight_isDisabled(buttons.get(2)));
         assertFalse(core_spotlight_isDisabled(buttons.get(3)));
 
         buttons.get(3).click();
+        Thread.sleep(200);
         assertTrue(core_spotlight_isDisabled(buttons.get(1)));
         assertTrue(core_spotlight_isDisabled(buttons.get(2)));
         assertTrue(core_spotlight_isDisabled(buttons.get(3)));
@@ -145,9 +149,6 @@ public class ExtJS22Test extends WebDriverTestCase {
 
     private boolean core_spotlight_isDisabled(final WebElement button) {
         final WebElement table = button.findElement(By.xpath("ancestor::table[1]"));
-        if (getBrowserVersion().isIE()) {
-            return !table.isEnabled();
-        }
         return table.getAttribute("class").contains("disabled");
     }
 
