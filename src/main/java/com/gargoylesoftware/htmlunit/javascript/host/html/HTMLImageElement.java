@@ -31,6 +31,7 @@ import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -265,7 +266,10 @@ public class HTMLImageElement extends HTMLElement {
                     return 28;
                 }
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
-                    return 0;
+                    if (StringUtils.isBlank(src)) {
+                        return 0;
+                    }
+                    return 20;
                 }
                 return 24;
             }
@@ -321,7 +325,10 @@ public class HTMLImageElement extends HTMLElement {
                     return 30;
                 }
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
-                    return 0;
+                    if (StringUtils.isBlank(src)) {
+                        return 0;
+                    }
+                    return 20;
                 }
                 return 24;
             }
