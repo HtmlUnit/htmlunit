@@ -2000,11 +2000,12 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param requestingWindow the window from which the request comes
      * @param target the name of the target window
      * @param request the request to perform
+     * @param checkHash if true check for hashChenage
      * @param forceLoad if true always load the request even if there is already the same in the queue
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
-        final WebRequest request, final boolean forceLoad, final String description) {
+        final WebRequest request, final boolean checkHash, final boolean forceLoad, final String description) {
         final WebWindow win = resolveWindow(requestingWindow, target);
         final URL url = request.getUrl();
         boolean justHashJump = false;
@@ -2017,11 +2018,13 @@ public class WebClient implements Serializable, AutoCloseable {
                         return;
                     }
 
-                    final URL current = page.getUrl();
-                    justHashJump =
-                            HttpMethod.GET == request.getHttpMethod()
-                            && url.sameFile(current)
-                            && null != url.getRef();
+                    if (checkHash) {
+                        final URL current = page.getUrl();
+                        justHashJump =
+                                HttpMethod.GET == request.getHttpMethod()
+                                && url.sameFile(current)
+                                && null != url.getRef();
+                    }
                 }
             }
 

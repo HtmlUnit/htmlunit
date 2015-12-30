@@ -247,6 +247,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     FORMFIELD_REACHABLE_BY_ORIGINAL_NAME,
 
+    /** Form submit forces an real request also if only the hash was changed. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
+
     /** Form submit is done without the hash part of the action url. */
     @BrowserFeature(@WebBrowser(IE))
     FORM_SUBMISSION_URL_WITHOUT_HASH,
