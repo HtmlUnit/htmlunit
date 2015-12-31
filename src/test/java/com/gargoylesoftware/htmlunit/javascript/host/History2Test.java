@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -212,7 +212,7 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" })
-    @NotYetImplemented({CHROME, IE11})
+    @NotYetImplemented({CHROME, IE})
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -391,7 +391,7 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" })
-    @NotYetImplemented({CHROME, IE11})
+    @NotYetImplemented({CHROME, IE})
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

@@ -3358,7 +3358,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Storage() { [native code] }",
             FF31 = "[object Storage]",
             FF38 = "function Storage() {\n    [native code]\n}",
-            IE11  = "[object Storage]")
+            IE  = "[object Storage]")
     @AlertsStandards(DEFAULT = "function Storage() { [native code] }",
             FF31 = "[object Storage]",
             IE = "[object Storage]",

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.List;
 
@@ -200,7 +200,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "[object HTMLInputElement]", "1" })
-    @BuggyWebDriver(IE11)
+    @BuggyWebDriver(IE)
     public void write_getElementById_afterParsing() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title><script>\n"

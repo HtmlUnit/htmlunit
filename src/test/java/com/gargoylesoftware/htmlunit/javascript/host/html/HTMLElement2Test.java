@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -1280,7 +1279,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "body1", "setActive not available" },
             IE = {"body1", "text1", "[object HTMLButtonElement]", "text2", "[object Window]", "onfocus text2" })
-    @BuggyWebDriver(IE11)
+    @BuggyWebDriver(IE)
     @NotYetImplemented(IE)
     public void setActiveAndFocus() throws Exception {
         final String firstHtml =
