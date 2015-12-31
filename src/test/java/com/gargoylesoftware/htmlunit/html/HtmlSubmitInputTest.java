@@ -198,7 +198,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-", "-", "-" },
-            IE11 = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
+            IE = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -230,8 +230,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-", "-", "-" },
-            IE = { "Submit Query-", "Submit Query-", "Submit Query-" },
-            IE11 = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
+            IE = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

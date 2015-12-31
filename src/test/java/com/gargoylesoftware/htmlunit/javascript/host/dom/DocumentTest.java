@@ -1256,7 +1256,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
             CHROME = { "undefined", "undefined", "null" },
             FF38 = { "null", "null", "null" },
-            IE11 = { "undefined", "null", "undefined" })
+            IE = { "undefined", "null", "undefined" })
     public void all_NotExisting() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -1546,7 +1546,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "object", "FORM" },
-            IE11 = { "function", "undefined" })
+            IE = { "function", "undefined" })
     public void precedence() throws Exception {
         final String html = "<html><head></head>\n"
             + "<body>\n"
@@ -1563,8 +1563,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "false" },
-            IE = { "false", "true" },
-            IE11 = { "true", "true" })
+            IE = { "true", "true" })
     public void defaultViewAndParentWindow() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test(){\n"
@@ -1813,8 +1812,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
-            IE = { "Inherit", "!", "Inherit", "Off", "Off", "!", "Off", "Off", "Off", "Off", "Off" },
-            IE11 = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
+            IE = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
     public void designMode_root() throws Exception {
         designMode("document");
     }
@@ -1825,8 +1823,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
-            IE = { "Inherit", "!", "Inherit", "On", "On", "!", "On", "Off", "Off", "Inherit", "Inherit" },
-            IE11 = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
+            IE = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
     public void designMode_iframe() throws Exception {
         designMode("window.frames['f'].document");
     }

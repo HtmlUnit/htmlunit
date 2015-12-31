@@ -42,8 +42,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
             FF = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,undefined,undefined" },
-            IE = "null",
-            IE11 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
+            IE = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,null,null" })
     public void doctype() throws Exception {
@@ -85,9 +84,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,undefined,undefined" },
         IE = {
-            "[object]", "greeting,10,null,,undefined,",
-            "greeting,undefined,undefined,undefined,," },
-        IE11 = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,null,null" })
     public void doctype_xml() throws Exception {
