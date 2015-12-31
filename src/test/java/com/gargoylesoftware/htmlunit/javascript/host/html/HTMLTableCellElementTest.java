@@ -187,8 +187,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#000000" },
-            IE11 = {"", "#0000aa", "#0" })
+            IE = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -505,7 +504,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "#667788", "unknown", "undefined", "undefined", "undefined" },
-            IE11 = { "", "#667788", "#000000", "red", "#123456", "#000000" })
+            IE = { "", "#667788", "#000000", "red", "#123456", "#000000" })
     @NotYetImplemented(IE)
     public void borderColor() throws Exception {
         final String html

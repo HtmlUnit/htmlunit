@@ -263,8 +263,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "#0000aa", "x" },
-            IE = { "", "#0000aa", "#000000" },
-            IE11 = { "", "#0000aa", "#0" })
+            IE = { "", "#0000aa", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -355,7 +354,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "[object HTMLTableCellElement]", "abc", "[object HTMLTableCellElement]", "" },
             CHROME = {"cell1", "[object HTMLTableCellElement]",
                         "ex", "cell1", "[object HTMLTableCellElement]", "ex", "cell1" },
-            IE11 = { "cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", "" })
+            IE = { "cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", "" })
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -382,7 +381,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", "" },
-            IE11 = { "cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", "" })
+            IE = { "cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", "" })
     public void textContent() throws Exception {
         final String html
             = "<html><body>\n"
@@ -495,7 +494,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "#667788", "unknown", "undefined", "undefined", "undefined" },
-            IE11 = { "", "#667788", "#000000", "red", "#123456", "#000000" })
+            IE = { "", "#667788", "#000000", "red", "#123456", "#000000" })
     @NotYetImplemented(IE)
     public void borderColor() throws Exception {
         final String html
@@ -530,7 +529,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            IE11 = { "", "", "", "red", "#123456", "#000000" })
+            IE = { "", "", "", "red", "#123456", "#000000" })
     @NotYetImplemented(IE)
     public void borderColorDark() throws Exception {
         final String html
@@ -565,7 +564,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            IE11 = { "", "", "", "red", "#123456", "#000000" })
+            IE = { "", "", "", "red", "#123456", "#000000" })
     @NotYetImplemented(IE)
     public void borderColorLight() throws Exception {
         final String html

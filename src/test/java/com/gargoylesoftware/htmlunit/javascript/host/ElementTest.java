@@ -900,8 +900,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts(CHROME = { "", "a b c" },
             FF31 = { "null", "a b c" },
             FF38 = { "", "a b c" },
-            IE = { "undefined", "undefined" },
-            IE11 = { "undefined", "a b c" })
+            IE = { "undefined", "a b c" })
     public void classList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -1089,7 +1088,7 @@ public class ElementTest extends WebDriverTestCase {
             "[object ElementPrototype]", "function Element() {\n    [native code]\n}" },
             CHROME = { "function Element() { [native code] }", "[object Object]",
             "function Element() { [native code] }" },
-            IE11 = { "[object Element]", "[object ElementPrototype]", "[object Element]" })
+            IE = { "[object Element]", "[object ElementPrototype]", "[object Element]" })
     @NotYetImplemented({ FF, CHROME, IE })
     public void prototypConstructor() throws Exception {
         final String html
@@ -1123,7 +1122,7 @@ public class ElementTest extends WebDriverTestCase {
             "[object ElementPrototype]", "function Element() {\n    [native code]\n}" },
             CHROME = { "function Element() { [native code] }", "[object Object]",
             "function Element() { [native code] }" },
-            IE11 = { "[object Element]", "[object ElementPrototype]", "[object Element]" })
+            IE = { "[object Element]", "[object ElementPrototype]", "[object Element]" })
     @NotYetImplemented
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

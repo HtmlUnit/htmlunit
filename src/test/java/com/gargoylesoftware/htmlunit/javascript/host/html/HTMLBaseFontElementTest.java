@@ -37,8 +37,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object HTMLSpanElement]", "undefined", "undefined", "undefined" },
             CHROME = { "[object HTMLElement]", "undefined", "undefined", "undefined" },
             FF38 = { "[object HTMLElement]", "undefined", "undefined", "undefined" },
-            IE = { "[object]", "", "3", "" },
-            IE11 = { "[object HTMLBaseFontElement]", "", "3", "" })
+            IE = { "[object HTMLBaseFontElement]", "", "3", "" })
     public void defaults() throws Exception {
         final String html =
             "<html>\n"
@@ -122,8 +121,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "blue" },
-            IE = { "#ff0000", "#0000ff" },
-            IE11 = { "red", "blue" })
+            IE = { "red", "blue" })
     public void color() throws Exception {
         final String html =
             "<html>\n"

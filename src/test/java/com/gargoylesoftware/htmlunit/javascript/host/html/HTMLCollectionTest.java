@@ -104,8 +104,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Alerts(FF31 = { "string 0", "string @@iterator", "string item", "string length", "string namedItem" },
             FF38 = { "string 0", "string item", "string length", "string namedItem" },
             CHROME = { "string 0", "string item", "string length", "string myForm", "string namedItem" },
-            IE = { "string length", "string myForm" },
-            IE11 = { "string item", "string length", "string myForm", "string namedItem" })
+            IE = { "string item", "string length", "string myForm", "string namedItem" })
     @NotYetImplemented({  FF31, IE, CHROME })
     public void for_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -139,7 +138,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
                  "string action", "string first_submit", "string id1", "string input_disabled",
                  "string item", "string length", "string namedItem", "string second_submit",
                  "string val1, string val2" },
-            IE11 = { "string 1", "string action", "string first_submit", "string item",
+            IE = { "string 1", "string action", "string first_submit", "string item",
                 "string length", "string namedItem", "string second_submit", "string val1",
                 "string val2" })
     @NotYetImplemented({ FF31, IE, CHROME })
@@ -198,8 +197,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @NotYetImplemented({ FF, CHROME })
     @Alerts(DEFAULT = { "null", "null", "undefined", "exception" },
-            IE = { "null", "null", "undefined", "null" },
-            IE11 = { "null", "null", "undefined", "undefined" })
+            IE = { "null", "null", "undefined", "undefined" })
     public void outOfBoundAccess() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

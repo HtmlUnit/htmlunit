@@ -283,7 +283,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
             CHROME = { "function Node() { [native code] }", "function Element() { [native code] }" },
-            IE11 = { "[object Node]", "[object Element]" })
+            IE = { "[object Node]", "[object Element]" })
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -587,7 +587,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
                     "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" },
-            IE11 = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
+            IE = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
                 "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" })
     public void set_opener() throws Exception {
         final String html = "<html><head><script>\n"
@@ -627,7 +627,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "exception", "exception", "exception", "exception" },
-            IE11 = { "JScript", "11", "0", "number" })
+            IE = { "JScript", "11", "0", "number" })
     public void IEScriptEngineXxx() throws Exception {
         final String html = "<html><head><script>\n"
             + "try { alert(ScriptEngine()); } catch(e) { alert('exception') }\n"
@@ -647,7 +647,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "true", "true", "89", "true", "true", "16" },
             FF = { "true", "true", "94", "true", "true", "14" },
-            IE11 = { "true", "true", "63", "true", "true", "16" })
+            IE = { "true", "true", "63", "true", "true", "16" })
     public void heightsAndWidths() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -671,7 +671,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "679", "1256", "662", "1239" },
             FF = { "674", "1258", "657", "1241" },
-            IE11 = { "705", "1256", "688", "1239" })
+            IE = { "705", "1256", "688", "1239" })
     @NotYetImplemented({ FF, IE, CHROME })
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
@@ -775,7 +775,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "0", "0", "0" },
-            IE11 = { "0", "0", "undefined", "undefined" })
+            IE = { "0", "0", "undefined", "undefined" })
     public void pageXOffset() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1246,9 +1246,7 @@ public class Window2Test extends WebDriverTestCase {
                 "origin: ", "source: [object Window]", "lastEventId: " },
             CHROME = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: " },
-            IE = { "type: message", "bubbles: undefined", "cancelable: undefined", "data: hello",
-                "origin: ", "source: [object]", "lastEventId: undefined" },
-            IE11 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
+            IE = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: undefined" })
     public void postMessage() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
@@ -1368,7 +1366,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "received", "posted" },
             CHROME = { "posted", "received" },
-            IE11 = { "posted", "received" })
+            IE = { "posted", "received" })
     @BuggyWebDriver(FF)
     @NotYetImplemented(FF)
     public void postMessage_exactURL() throws Exception {

@@ -537,8 +537,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
-            IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE11 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" })
+            IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -793,8 +792,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "not defined",
-            IE = { "false", "1", "about:blank", "about:blank" },
-            IE11 = { "true", "1" })
+            IE = { "true", "1" })
     @NotYetImplemented(IE)
     public void frames() throws Exception {
         final String html = "<html><head><script>\n"
@@ -1770,8 +1768,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
-            IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE11 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
+            IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void alinkColor() throws Exception {
         final String html =
             "<html>\n"
@@ -1800,8 +1797,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
-            IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE11 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
+            IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void linkColor() throws Exception {
         final String html =
             "<html>\n"
@@ -1830,8 +1826,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
-            IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE11 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" })
+            IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void vlinkColor() throws Exception {
         final String html =
             "<html>\n"
@@ -1860,8 +1855,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
-            IE = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE11 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" })
+            IE = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void fgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -1913,8 +1907,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "undefined", "false" },
-            IE = { "true", "[object]", "true" },
-            IE11 = { "true", "[object HTMLFormElement]", "true" })
+            IE = { "true", "[object HTMLFormElement]", "true" })
     public void document_xxx_formAccess() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1941,8 +1934,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "windows-1252", "windows-1252", "windows-1252", "windows-1252" },
             FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
-            IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
-            IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
+            IE = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
     public void encoding() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1966,8 +1958,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "windows-1252", "windows-1252", "windows-1252", "windows-1252" },
             FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
-            IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
-            IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
+            IE = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
     public void encoding2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1992,8 +1983,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "windows-1252", "windows-1252", "windows-1252", "windows-1252" },
             FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
-            IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
-            IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
+            IE = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
     public void encoding3() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2020,8 +2010,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "UTF-8", "UTF-8", "UTF-8", "windows-1252" },
             FF = { "UTF-8", "UTF-8", "undefined", "undefined" },
-            IE = { "undefined", "undefined", "utf-8", "windows-1252" },
-            IE11 = { "UTF-8", "utf-8", "utf-8", "windows-1252" })
+            IE = { "UTF-8", "utf-8", "utf-8", "windows-1252" })
     public void encoding4() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2048,8 +2037,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "UTF-8", "UTF-8", "UTF-8", "windows-1252" },
             FF = { "UTF-8", "UTF-8", "undefined", "undefined" },
-            IE = { "undefined", "undefined", "utf-8", "windows-1252" },
-            IE11 = { "UTF-8", "utf-8", "utf-8", "windows-1252" })
+            IE = { "UTF-8", "utf-8", "utf-8", "windows-1252" })
     public void encoding5() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2076,8 +2064,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "UTF-8", "UTF-8", "UTF-8", "windows-1252" },
             FF = { "UTF-8", "UTF-8", "undefined", "undefined" },
-            IE = { "undefined", "undefined", "utf-8", "windows-1252" },
-            IE11 = { "UTF-8", "utf-8", "utf-8", "windows-1252" })
+            IE = { "UTF-8", "utf-8", "utf-8", "windows-1252" })
     public void encoding6() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2125,7 +2112,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE11 = { "11", "BackCompat", "function", "function" })
+            IE = { "11", "BackCompat", "function", "function" })
     public void documentMode() throws Exception {
         documentMode("", "");
     }
@@ -2135,7 +2122,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE11 = { "11", "CSS1Compat", "function", "function" })
+            IE = { "11", "CSS1Compat", "function", "function" })
     public void documentMode_doctypeStrict() throws Exception {
         documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_, "");
     }
@@ -2145,7 +2132,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE11 = { "11", "BackCompat", "function", "function" })
+            IE = { "11", "BackCompat", "function", "function" })
     public void documentMode_doctypeTransitional() throws Exception {
         documentMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\""
                 + " \"http://www.w3.org/TR/html4/loose.dtd\">\n", "");
@@ -2156,7 +2143,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE11 = { "11", "CSS1Compat", "function", "function" })
+            IE = { "11", "CSS1Compat", "function", "function" })
     public void documentMode_doctypeHTML5() throws Exception {
         documentMode("<!DOCTYPE html>\n", "");
     }
@@ -2198,7 +2185,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE11 = { "11", "BackCompat", "function", "function" })
+            IE = { "11", "BackCompat", "function", "function" })
     public void documentMode_metaEmulateIE8() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=Emulate8'>\n");
     }
@@ -2208,7 +2195,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE11 = { "11", "CSS1Compat", "function", "function" })
+            IE = { "11", "CSS1Compat", "function", "function" })
     public void documentMode_metaEmulateIE8_doctypeStrict() throws Exception {
         documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_,
                 "  <meta http-equiv='X-UA-Compatible' content='IE=Emulate8'>\n");
@@ -2229,7 +2216,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE11 = { "11", "CSS1Compat", "function", "function" })
+            IE = { "11", "CSS1Compat", "function", "function" })
     public void documentMode_metaIEEdge() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n");
     }

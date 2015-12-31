@@ -679,8 +679,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#000000" },
-            IE11 = {"", "#0000aa", "#0" })
+            IE = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -709,7 +708,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "[object Text]", "abc", "[object Text]", "" },
             CHROME = {"cell1", "[object Text]", "ex", "cell1", "[object Text]", "ex", "cell1" },
-            IE11 = { "cell1", "[object Text]", "abc", "[object Text]", "" })
+            IE = { "cell1", "[object Text]", "abc", "[object Text]", "" })
     @NotYetImplemented({ CHROME, IE })
     public void innerText() throws Exception {
         final String html

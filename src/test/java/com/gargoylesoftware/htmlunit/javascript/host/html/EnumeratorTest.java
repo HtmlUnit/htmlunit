@@ -123,8 +123,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "f t1 t2", "Enumerator not supported" },
-            IE = { "f t1 t2", "t1", "t2" },
-            IE11 = { "f t1 t2", "exception" })
+            IE = { "f t1 t2", "exception" })
     public void formEnumerator() throws Exception {
         final String html
             = "<html>\n"
@@ -157,8 +156,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "Enumerator not supported" },
-            IE = { "undefined", "text" },
-            IE11 = { "undefined", "exception" })
+            IE = { "undefined", "exception" })
     public void item() throws Exception {
         final String html
             = "<html><head>\n"

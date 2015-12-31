@@ -192,7 +192,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "bla", "true" },
-            IE11 = { "", "bla", "true" })
+            IE = { "", "bla", "true" })
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -223,7 +223,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined" },
-            IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
+            IE = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
             CHROME = { "text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined" })
     @NotYetImplemented({ FF, IE })
     public void attributesAccess() throws Exception {
@@ -300,7 +300,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             "specified=true",
             "value=bleh"
             },
-            IE11 = {
+            IE = {
             "null",
             "expando=true",
             "firstChild=[object Text]",
@@ -396,8 +396,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "inform('newHandler')", "null" },
-            IE11 = { "null", "inform('newHandler')", "" })
-    @NotYetImplemented(IE11)
+            IE = { "null", "inform('newHandler')", "" })
+    @NotYetImplemented(IE)
     public void setAttribute_eventHandlerNull() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1074,7 +1074,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
-            IE11 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
+            IE = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
     @NotYetImplemented
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
@@ -1106,7 +1106,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = null", "Childs: 1" })
+            IE = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = null", "Childs: 1" })
     public void setOuterHTMLNull() throws Exception {
         final String html = createPageForSetOuterHTML("div", null);
         loadPageWithAlerts2(html);
@@ -1396,7 +1396,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
+            IE = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
     public void setOuterHTMLDetachedElementNull() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1429,7 +1429,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
+            IE = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
     public void setOuterHTMLDetachedElementUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1462,7 +1462,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
+            IE = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
     public void setOuterHTMLDetachedElementEmpty() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1495,7 +1495,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
-            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
+            IE = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" })
     public void setOuterHTMLDetachedElementBlank() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -2277,7 +2277,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE11 = { "[object MSCurrentStyleCSSProperties]", "#000000" })
+            IE = { "[object MSCurrentStyleCSSProperties]", "#000000" })
     @NotYetImplemented(IE)
     public void currentStyle() throws Exception {
         style("currentStyle");
@@ -2288,7 +2288,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE11 = { "[object MSStyleCSSProperties]", "" })
+            IE = { "[object MSStyleCSSProperties]", "" })
     @NotYetImplemented(IE11)
     public void runtimeStyle() throws Exception {
         style("runtimeStyle");
@@ -2875,7 +2875,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "false", "false", "false", "false", "true", "true", "false", "false" },
-            IE11 = { "true", "true", "true", "false", "false", "false", "false", "true", "false", "false",
+            IE = { "true", "true", "true", "false", "false", "false", "false", "true", "false", "false",
                         "exception" })
     public void contains() throws Exception {
         final String html
@@ -3132,7 +3132,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false,false,false,false,false,true,false", "clearAttributes not available" },
-            IE11 = { "false,false,false,false,false,true,false", "false,false,false,false,false,true,false" })
+            IE = { "false,false,false,false,false,true,false", "false,false,false,false,false,true,false" })
     public void clearAttributes() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3162,7 +3162,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "mergeAttributes not available",
-            IE11 = { "false,false,false,false,false,true,true", "i", "",
+            IE = { "false,false,false,false,false,true,true", "i", "",
                         "false,false,false,false,false,true,true", "i", "" })
     public void mergeAttributes() throws Exception {
         mergeAttributesTest("i2");
@@ -3173,7 +3173,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "mergeAttributes not available",
-            IE11 = { "false,false,false,false,false,true,true", "i", "",
+            IE = { "false,false,false,false,false,true,true", "i", "",
                         "false,false,false,false,false,true,true", "i", "" })
     public void mergeAttributesTrue() throws Exception {
         mergeAttributesTest("i2, true");
@@ -3184,7 +3184,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "mergeAttributes not available",
-            IE11 = { "false,false,false,false,false,true,true", "i", "",
+            IE = { "false,false,false,false,false,true,true", "i", "",
                         "false,false,false,false,false,true,true", "i2", "i2" })
     public void mergeAttributesfalse() throws Exception {
         mergeAttributesTest("i2, false");
@@ -3261,8 +3261,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex" },
-            IE = {"", "#0000aa", "#000000", "#ffebcd", "#ab00e0", "#b00e00" },
-            IE11 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" })
+            IE = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" })
     public void setColorAttribute() throws Exception {
         final String html =
             "<html>\n"
@@ -3314,7 +3313,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "button", "null", "false", "true" },
-            IE11 = { "button", "", "false", "true" })
+            IE = { "button", "", "false", "true" })
     public void attributeNS() throws Exception {
         final String html
             = "<html><head>\n"

@@ -367,7 +367,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", "" },
             CHROME = {"cell1", "[object HTMLTableRowElement]",
                         "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1" },
-            IE11 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
+            IE = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
     public void innerText_body() throws Exception {
         final String html
             = "<html><body>\n"
@@ -396,7 +396,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", "" },
             CHROME = {"cell1", "[object HTMLTableRowElement]",
                         "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1" },
-            IE11 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
+            IE = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
     public void innerText_header() throws Exception {
         final String html
             = "<html><body>\n"
@@ -425,7 +425,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", "" },
             CHROME = {"cell1", "[object HTMLTableRowElement]",
                         "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1" },
-            IE11 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
+            IE = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
     public void innerText_footer() throws Exception {
         final String html
             = "<html><body>\n"
@@ -530,8 +530,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "#0000aa", "x" },
-            IE = { "", "#0000aa", "#000000" },
-            IE11 = { "", "#0000aa", "#0" })
+            IE = { "", "#0000aa", "#0" })
     public void bgColorFooter() throws Exception {
         final String html =
             "<html>\n"
@@ -559,8 +558,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "#0000aa", "x" },
-            IE = { "", "#0000aa", "#000000" },
-            IE11 = { "", "#0000aa", "#0" })
+            IE = { "", "#0000aa", "#0" })
     public void bgColorHeader() throws Exception {
         final String html =
             "<html>\n"

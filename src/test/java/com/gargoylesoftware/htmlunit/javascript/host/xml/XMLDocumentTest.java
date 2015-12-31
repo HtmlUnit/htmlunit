@@ -201,7 +201,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "true" },
             CHROME = { "undefined", "undefined" },
-            IE11 = { "undefined", "undefined" })
+            IE = { "undefined", "undefined" })
     public void async() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -799,7 +799,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "1", "0", "1" },
             CHROME = { "1", "0" },
-            IE11 = { "1", "0" })
+            IE = { "1", "0" })
     @NotYetImplemented({ CHROME, IE })
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1033,8 +1033,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object XMLDocument]", "OK" },
-            IE = "[object XMLDocument]",
-            IE11 = { "[object Document]", "OK" })
+            IE = { "[object Document]", "OK" })
     @NotYetImplemented(IE)
     // Real IE11 seems to generate always an (HTML)Document within an iframe.
     public void test() throws Exception {

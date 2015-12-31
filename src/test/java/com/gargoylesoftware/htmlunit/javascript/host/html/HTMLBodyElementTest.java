@@ -129,8 +129,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#000000" },
-            IE11 = {"", "#0000aa", "#0" })
+            IE = {"", "#0000aa", "#0" })
     public void aLink() throws Exception {
         final String html =
             "<html>\n"
@@ -181,8 +180,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#000000" },
-            IE11 = {"", "#0000aa", "#0" })
+            IE = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -208,8 +206,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#000000" },
-            IE11 = {"", "#0000aa", "#0" })
+            IE = {"", "#0000aa", "#0" })
     public void link() throws Exception {
         final String html =
             "<html>\n"
@@ -235,8 +232,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#000000" },
-            IE11 = {"", "#0000aa", "#0" })
+            IE = {"", "#0000aa", "#0" })
     public void text() throws Exception {
         final String html =
             "<html>\n"
@@ -262,8 +258,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#000000" },
-            IE11 = {"", "#0000aa", "#0" })
+            IE = {"", "#0000aa", "#0" })
     public void vLink() throws Exception {
         final String html =
             "<html>\n"

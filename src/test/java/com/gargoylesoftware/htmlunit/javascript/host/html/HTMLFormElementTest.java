@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -803,8 +803,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "page1.html", "page2.html", "page1.html", "page1.html" },
-            IE11 = { "page1.html", "page1.html", "page1.html", "page1.html" })
-    @NotYetImplemented(IE11)
+            IE = { "page1.html", "page1.html", "page1.html", "page1.html" })
+    @NotYetImplemented(IE)
     public void changeFormActionAfterSubmit() throws Exception {
         final String[] expectedFiles = getExpectedAlerts();
         setExpectedAlerts();
@@ -957,8 +957,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "page4.html?f1=v1&f2=v2", "page4.html?f1=v1&f2=v2", "page3.html?f1=v1", "page3.html?f1=v1" },
-            IE11 = { "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1" })
-    @NotYetImplemented(IE11)
+            IE = { "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1" })
+    @NotYetImplemented(IE)
     public void changesAfterCallToSubmit() throws Exception {
         final String[] expectedUrlSuffixes = getExpectedAlerts();
         setExpectedAlerts();
@@ -1244,10 +1244,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object HTMLInputElement]", "undefined",
                         "[object HTMLInputElement]", "[object HTMLInputElement]",
                         "[object HTMLInputElement]", "[object HTMLInputElement]", "[object HTMLInputElement]" },
-            IE = { "[object]", "undefined",
-                    "[object]", "undefined",
-                    "[object]", "undefined", "undefined" },
-            IE11 = { "[object HTMLInputElement]", "undefined",
+            IE = { "[object HTMLInputElement]", "undefined",
                         "undefined", "[object HTMLInputElement]",
                         "undefined", "undefined", "[object HTMLInputElement]" })
     public void accessByNameAfterNameChange() throws Exception {
