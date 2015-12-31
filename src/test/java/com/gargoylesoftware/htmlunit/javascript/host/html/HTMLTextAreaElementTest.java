@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -173,7 +173,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5", "7,7" },
             IE = { "0,0", "0,0", "10,10", "5,5", "7,7" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
     }

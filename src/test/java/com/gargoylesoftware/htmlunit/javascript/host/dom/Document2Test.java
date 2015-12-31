@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
 
@@ -306,7 +306,7 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HTMLBodyElement]", "http://localhost:12345/#", "http://localhost:12345/#" },
             IE = { "null", "http://localhost:12345/#", "http://localhost:12345/#" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void activeElement_iframe() throws Exception {
         final String html =
                 "<html>\n"

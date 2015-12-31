@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -946,7 +946,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void asTextVisibilityCollapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

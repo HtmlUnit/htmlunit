@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -3657,7 +3656,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object MSStyleCSSProperties]")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void msStyleCSSProperties() throws Exception {
         test("MSStyleCSSProperties");
     }
@@ -3670,7 +3669,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object MSCurrentStyleCSSProperties]")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void msCurrentStyleCSSProperties() throws Exception {
         test("MSCurrentStyleCSSProperties");
     }

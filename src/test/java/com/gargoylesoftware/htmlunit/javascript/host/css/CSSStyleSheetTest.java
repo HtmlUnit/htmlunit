@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -765,7 +764,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "1" },
             IE = { "none", "1" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void mediaRule_max_width() throws Exception {
         mediaRule("screen and (max-width: 123px)");
     }
@@ -841,7 +840,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "1" },
             IE = { "none", "1" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void mediaRule_max_height() throws Exception {
         mediaRule("screen and (max-height: 123px)");
     }
@@ -937,7 +936,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "1" },
             IE = { "none", "1" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void mediaRule_max_resolution() throws Exception {
         mediaRule("screen and (max-resolution: 90dpi)");
     }
@@ -977,7 +976,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "1" },
             IE = { "none", "1" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void mediaRule_portrait() throws Exception {
         mediaRule("screen and (orientation: portrait)");
     }
@@ -1010,7 +1009,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "1" },
             IE = { "none", "1" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void mediaRule_landscape_not() throws Exception {
         mediaRule("not screen and (orientation: landscape)");
     }

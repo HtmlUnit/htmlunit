@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
 
@@ -224,7 +223,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "123", "undefined" },
             IE = { "123" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void iFrameReinitialized() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

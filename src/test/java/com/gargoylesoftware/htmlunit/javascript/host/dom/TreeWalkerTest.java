@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -103,7 +103,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "A", "A", "4294967295", "undefined" },
             IE = { "A", "A", "-1", "true" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     // The spec states it is an unsigned long.
     public void getters2() throws Exception {
         final String script = "var theA = document.getElementById('theA');\n"

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -192,7 +192,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
             IE = { "1", "exception", "exception", "pass", "pass" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     // real IE11 invokes just one request and returns the other two responses from it's cache
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
@@ -423,7 +423,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "hello", "in timeout" })
-    @BuggyWebDriver(IE11)
+    @BuggyWebDriver(IE)
     // IEDriver catches "in timeout", "hello" but real IE11 gets the correct order
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"
