@@ -127,7 +127,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "myFormId", "null", "null", "null", "null", "myFormId", "null", "myForm2Id", "myForm2Id" },
-            IE11 = { "myFormId", "myFormId", "null", "myFormId", "myFormId", "null", "myFormId", "myFormId", "null" })
+            IE = { "myFormId", "myFormId", "null", "myFormId", "myFormId", "null", "myFormId", "myFormId", "null" })
     @NotYetImplemented({ FF, CHROME })
     public void getForm() throws Exception {
         final String html = "<html>\n"

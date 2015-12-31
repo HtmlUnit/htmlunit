@@ -232,7 +232,7 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function", "null", "function", "value", "1" },
-            IE11 = { "function", "null", "string", "value", "1" })
+            IE = { "function", "null", "string", "value", "1" })
     public void prototypePropertiesAreVisible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

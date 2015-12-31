@@ -114,7 +114,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
             CHROME = { "undefined", "undefined", "undefined", "undefined", "undefined",
                     "null", "", "blah", "context", "ToolBar", "list",
                     "context", "toolbar", "ConText", "", "unknown" },
-            IE11 = { "", "", "", "", "", "null", "", "blah",
+            IE = { "", "", "", "", "", "null", "", "blah",
                     "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", "" })
     public void type() throws Exception {
         final String html =

@@ -528,7 +528,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE11 = { "null", "undefined" })
+            IE = { "null", "undefined" })
     public void optionIndexOutOfBound() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -796,7 +796,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLOptionsCollection]", "0", "exception", "0" },
-            IE11 = { "[object HTMLSelectElement]", "0", "1" })
+            IE = { "[object HTMLSelectElement]", "0", "1" })
     @NotYetImplemented(IE)
     public void without_new() throws Exception {
         final String html =
@@ -1003,7 +1003,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2", "1", "0", "o2" },
-            IE11 = { "evaluate not supported", "1", "0", "evaluate not supported" })
+            IE = { "evaluate not supported", "1", "0", "evaluate not supported" })
     public void xpathSelected() throws Exception {
         final String selectionChangeCode = "    sel.options[1].selected = false;\n";
 
@@ -1275,7 +1275,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                         "false-null", "true-true", "false-null" },
             CHROME  = { "false-null", "true-true", "true-null",
                         "false-null", "true-true", "true-null" },
-            IE11 = { "false-null", "true-true", "true-",
+            IE = { "false-null", "true-true", "true-",
                     "false-null", "true-true", "false-null" })
     @NotYetImplemented(IE)
     public void createOption() throws Exception {

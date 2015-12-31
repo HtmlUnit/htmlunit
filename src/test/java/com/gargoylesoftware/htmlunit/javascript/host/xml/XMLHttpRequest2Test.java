@@ -191,7 +191,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
-            IE11 = { "1", "exception", "exception", "pass", "pass" })
+            IE = { "1", "exception", "exception", "pass", "pass" })
     @NotYetImplemented(IE11)
     // real IE11 invokes just one request and returns the other two responses from it's cache
     public void openThrowOnEmptyUrl() throws Exception {

@@ -35,7 +35,7 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "value2" },
             FF31 = { "undefined", "undefined" },
-            IE11 = { "undefined", "undefined" })
+            IE = { "undefined", "undefined" })
     public void get() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

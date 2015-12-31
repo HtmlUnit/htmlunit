@@ -193,7 +193,7 @@ public class Selection2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "1" },
             CHROME = { "0", "3" },
-            IE11 = { "0", "exception", "1" })
+            IE = { "0", "exception", "1" })
     @NotYetImplemented(CHROME)
     public void extend() throws Exception {
         test("try{selection.extend(s2, 1)}catch(e){alert('exception')}", "selection.focusOffset", "x");
@@ -233,7 +233,7 @@ public class Selection2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = { "None", "None" },
         FF = { "undefined", "exception", "undefined" },
-        IE11 = { "undefined", "exception", "undefined" })
+        IE = { "undefined", "exception", "undefined" })
     public void empty() throws Exception {
         test("try{selection.empty()}catch(e){alert('exception')}", "selection.type", "x ? x : 'undefined'");
     }

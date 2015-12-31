@@ -67,7 +67,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "#cdata-section,abcdefghij,4", "abcdefghij", "<![CDATA[abcdefghij]]>" },
-            IE11 = { "#cdata-section,abcdefghij,4", "abcdefghij", "abcdefghij" })
+            IE = { "#cdata-section,abcdefghij,4", "abcdefghij", "abcdefghij" })
     public void createCDATASection() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -92,7 +92,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "#cdata-section,<>&?,4", "<>&?", "<![CDATA[<>&?]]>" },
-            IE11 = { "#cdata-section,<>&?,4", "<>&?", "&lt;&gt;&amp;?" })
+            IE = { "#cdata-section,<>&?,4", "<>&?", "&lt;&gt;&amp;?" })
     public void createCDATASection_specialChars() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -536,7 +536,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3" },
-            IE11 = { "id: 1", "name: item1", "id: 2", "name: item2", "id: 3", "name: item3" })
+            IE = { "id: 1", "name: item1", "id: 2", "name: item2", "id: 3", "name: item3" })
     @NotYetImplemented({ FF, CHROME })
     public void attributeOrder() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

@@ -1592,7 +1592,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void checkedEmptyDetached() throws Exception {
         emptyAndDetached("*:checked");
     }
@@ -1602,7 +1602,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void disabledEmptyDetached() throws Exception {
         emptyAndDetached("*:disabled");
     }
@@ -1612,7 +1612,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void emptyEmptyDetached() throws Exception {
         emptyAndDetached("*:empty");
     }
@@ -1622,7 +1622,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void enabledEmptyDetached() throws Exception {
         emptyAndDetached("*:enabled");
     }
@@ -1641,7 +1641,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void firstoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:first-of-type");
     }
@@ -1669,7 +1669,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void lastchildEmptyDetached() throws Exception {
         emptyAndDetached("*:last-child");
     }
@@ -1679,7 +1679,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void lastoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:last-of-type");
     }
@@ -1698,7 +1698,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void notEmptyDetached() throws Exception {
         emptyAndDetached("*:not(p)");
     }
@@ -1708,7 +1708,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void nthchildEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-child(2n)");
     }
@@ -1718,7 +1718,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void nthlastchildEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-last-child(2n)");
     }
@@ -1728,7 +1728,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void nthoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-of-type(2n)");
     }
@@ -1738,7 +1738,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void onlychildEmptyDetached() throws Exception {
         emptyAndDetached("*:only-child");
     }
@@ -1748,7 +1748,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void onlyoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:only-of-type");
     }
@@ -1758,7 +1758,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "null", "exception" })
+            IE = { "null", "exception" })
     public void rootEmptyDetached() throws Exception {
         emptyAndDetached("*:root");
     }

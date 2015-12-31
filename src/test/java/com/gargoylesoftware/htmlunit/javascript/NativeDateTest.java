@@ -236,7 +236,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "00:00:00", "07:08:09" },
-            IE11 = { "\u200E00\u200E:\u200E00\u200E:\u200E00", "\u200E07\u200E:\u200E08\u200E:\u200E09" })
+            IE = { "\u200E00\u200E:\u200E00\u200E:\u200E00", "\u200E07\u200E:\u200E08\u200E:\u200E09" })
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

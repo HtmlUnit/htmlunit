@@ -204,7 +204,7 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" },
-            IE11 = {    "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
+            IE = {    "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
@@ -387,7 +387,7 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" },
-            IE11 = {    "[object PopStateEvent]", "null", "true",
+            IE = {    "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false" })

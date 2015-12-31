@@ -246,7 +246,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none" },
             CHROME = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block",
                             "block", "none" },
-            IE11 = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none" })
+            IE = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none" })
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -687,7 +687,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "none", "inline", "block", "block", "block", "inline" },
             CHROME = { "block", "inline", "inline", "block", "block", "block", "inline" },
-            IE11 = { "block", "none", "inline", "block", "inline", "inline", "inline" })
+            IE = { "block", "none", "inline", "block", "inline", "inline", "inline" })
     public void defaultDisplayValues_NO() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <nav id='nav'>\n"
@@ -738,7 +738,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "none", "block", "inline-block", "inline" },
-            IE11 = { "block", "inline", "block", "inline", "inline" })
+            IE = { "block", "inline", "block", "inline", "inline" })
     public void defaultDisplayValues_PQ() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'><q id='q'></q></p>\n"

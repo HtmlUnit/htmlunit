@@ -114,7 +114,7 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined",
                         "null", "", "blah", "A", "1", "a", "A", "i", "I", "u" },
-            IE11 = { "", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" })
+            IE = { "", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" })
     @NotYetImplemented(IE11)
     public void type() throws Exception {
         final String html =

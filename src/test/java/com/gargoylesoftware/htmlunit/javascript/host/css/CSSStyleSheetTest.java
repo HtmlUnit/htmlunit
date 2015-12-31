@@ -54,7 +54,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" },
-            IE11 = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
+            IE = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
                     "true", "[object HTMLStyleElement]", "true" })
     public void owningNodeOwningElement() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
@@ -764,7 +764,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "1" },
-            IE11 = { "none", "1" })
+            IE = { "none", "1" })
     @NotYetImplemented(IE11)
     public void mediaRule_max_width() throws Exception {
         mediaRule("screen and (max-width: 123px)");
@@ -840,7 +840,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "1" },
-            IE11 = { "none", "1" })
+            IE = { "none", "1" })
     @NotYetImplemented(IE11)
     public void mediaRule_max_height() throws Exception {
         mediaRule("screen and (max-height: 123px)");
@@ -936,7 +936,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "1" },
-            IE11 = { "none", "1" })
+            IE = { "none", "1" })
     @NotYetImplemented(IE11)
     public void mediaRule_max_resolution() throws Exception {
         mediaRule("screen and (max-resolution: 90dpi)");
@@ -976,7 +976,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "1" },
-            IE11 = { "none", "1" })
+            IE = { "none", "1" })
     @NotYetImplemented(IE11)
     public void mediaRule_portrait() throws Exception {
         mediaRule("screen and (orientation: portrait)");
@@ -1009,7 +1009,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "1" },
-            IE11 = { "none", "1" })
+            IE = { "none", "1" })
     @NotYetImplemented(IE11)
     public void mediaRule_landscape_not() throws Exception {
         mediaRule("not screen and (orientation: landscape)");

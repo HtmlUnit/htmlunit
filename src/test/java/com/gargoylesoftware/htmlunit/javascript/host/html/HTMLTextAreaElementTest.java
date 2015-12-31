@@ -152,7 +152,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10", "7,7" },
-            IE11 = { "0,0", "0,0", "3,3", "3,10", "0,0" })
+            IE = { "0,0", "0,0", "3,3", "3,10", "0,0" })
     public void selection() throws Exception {
         selection(3, 10);
     }
@@ -162,7 +162,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11", "7,7" },
-            IE11 = { "0,0", "0,0", "0,0", "0,11", "0,0" })
+            IE = { "0,0", "0,0", "0,0", "0,11", "0,0" })
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
     }
@@ -172,7 +172,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5", "7,7" },
-            IE11 = { "0,0", "0,0", "10,10", "5,5", "7,7" })
+            IE = { "0,0", "0,0", "10,10", "5,5", "7,7" })
     @NotYetImplemented(IE11)
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
@@ -572,7 +572,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-1", /* "null", */ "32", "32", "-1", "ms" },
-            IE11 = { "2147483647", /* "null", */ "32", "32", "2147483647", "ms" })
+            IE = { "2147483647", /* "null", */ "32", "32", "2147483647", "ms" })
     public void getMaxLength() throws Exception {
         final String html
             = "<html>\n"
@@ -629,7 +629,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "10", "10", "error", "10", "10", "0", "0" },
-            IE11 = { "10", "10", "-1", "-1", "0", "0" })
+            IE = { "10", "10", "-1", "-1", "0", "0" })
     public void setMaxLength() throws Exception {
         final String html
             = "<html>\n"

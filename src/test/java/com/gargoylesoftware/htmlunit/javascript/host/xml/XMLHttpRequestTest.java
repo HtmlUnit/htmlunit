@@ -672,7 +672,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "overwritten" },
             CHROME = { "true", "exception" },
-            IE11 = { "true", "exception" })
+            IE = { "true", "exception" })
     public void overrideMimeTypeAfterSend() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1272,7 +1272,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "39", "27035", "65533", "39" },
-            IE11 = { "39", "27035", "63" })
+            IE = { "39", "27035", "63" })
     @NotYetImplemented(IE)
     public void overrideMimeType_charset_all() throws Exception {
         final String html = "<html><head>\n"

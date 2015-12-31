@@ -210,7 +210,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<foo/>", "<foo/>" },
-            IE11 = { "<foo />", "<foo />" })
+            IE = { "<foo />", "<foo />" })
     public void document() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -230,7 +230,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" },
-            IE11 = { "<img />", "", "<?myTarget myData?>" })
+            IE = { "<img />", "", "<?myTarget myData?>" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -377,7 +377,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
                     "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>" },
-            IE11 = { "<div xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            IE = { "<div xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<p xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\" />",

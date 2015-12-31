@@ -77,7 +77,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(FF31 = { "black", "pink", "color: pink; background: none repeat scroll 0% 0% blue;" },
             FF38 = { "black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
             CHROME = { "black", "pink", "color: pink; background: blue;" },
-            IE11 = { "black", "pink", "background: blue; color: pink; foo: bar;" })
+            IE = { "black", "pink", "background: blue; color: pink; foo: bar;" })
     @NotYetImplemented({ FF, IE, CHROME })
     public void style_MultipleCssAttributes() throws Exception {
         final String html
@@ -638,7 +638,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "string", "", "string", "", "string", "4", "string", "", "string", "", "string", "" },
-            IE11 = { "string", "", "string", "", "number", "4", "string", "", "string", "", "string", "" })
+            IE = { "string", "", "string", "", "number", "4", "string", "", "string", "", "string", "" })
     public void zIndexDefault() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1139,7 +1139,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { },
-            IE11 = { "", "green", "green", "", "green", "green", "", "green", "green" })
+            IE = { "", "green", "green", "", "green", "green", "", "green", "green" })
     public void getAttribute() throws Exception {
         getAttribute("\"font\"", new String[0]);
         final String[] expected = getExpectedAlerts();
@@ -1367,7 +1367,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;", "color: pink;" },
             CHROME = { "black", "pink", "color: pink;", "color: pink;" },
-            IE11 = { "black", "pink", "color: pink;", "color: pink;" })
+            IE = { "black", "pink", "color: pink;", "color: pink;" })
     @NotYetImplemented({ IE, CHROME })
     public void caseInsensitive() throws Exception {
         final String html
@@ -1505,7 +1505,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "none" },
             CHROME = { "undefined", "before", "none", "exception" },
-            IE11 = { "function", "before", "none", "after", "none" })
+            IE = { "function", "before", "none", "after", "none" })
     @NotYetImplemented({ FF, IE, CHROME })
     public void interceptSetter() throws Exception {
         final String html = "<html>\n"

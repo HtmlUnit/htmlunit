@@ -120,7 +120,7 @@ public class SelectionTest extends WebDriverTestCase {
                     "2:[object Text]/0/[object Text]/3/false/Range/1/xyzfoo/xyzfoo",
                     "3:[object Text]/0/[object Text]/3/false/Range/1/xyzfoo---/xyzfoo---",
                     "4:[object Text]/0/[object Text]/3/false/Range/1/xyzfoo---foo/xyzfoo---foo" },
-            IE11 = { "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
+            IE = { "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
                         "selection.extend not available" })
     @NotYetImplemented(CHROME)
     public void extend() throws Exception {

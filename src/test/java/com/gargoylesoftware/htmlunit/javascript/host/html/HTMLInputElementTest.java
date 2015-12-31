@@ -128,7 +128,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 "true", "true", "true", "undefined", "true", "undefined", "true",
                 "undefined", "true", "true", "true", "true", "true", "true",
                 "true", "true", "true", "true", "true", "true", "true" },
-            IE11 = { "false", "undefined", "true", "false", "false", "undefined", "undefined",
+            IE = { "false", "undefined", "true", "false", "false", "undefined", "undefined",
                 "false", "true", "false", "undefined", "false", "undefined", "false",
                 "undefined", "false", "false", "false", "false", "false", "false",
                 "false", "false", "false", "false", "false", "false", "false" })
@@ -171,7 +171,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             CHROME = { "abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                         "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
                         "", "", "", "", "", "50", "abc", "abc", "abc", "abc" },
-            IE11 = { "abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+            IE = { "abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                         "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
                         "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc" })
     @Test
@@ -964,7 +964,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"text TeXt", "password PassWord", "hidden Hidden",
                     "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
-            IE11 = {"text TeXt", "password PassWord", "hidden Hidden",
+            IE = {"text TeXt", "password PassWord", "hidden Hidden",
                     "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
     public void typeCase() throws Exception {
         final String html

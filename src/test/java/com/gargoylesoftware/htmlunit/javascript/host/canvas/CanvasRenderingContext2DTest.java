@@ -91,7 +91,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                         "removeHitRegion", "scrollPathIntoView", "35 methods" },
             FF38 = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
                         "removeHitRegion", "scrollPathIntoView", "35 methods" },
-            IE11 = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "removeHitRegion",
+            IE = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "removeHitRegion",
                         "scrollPathIntoView", "35 methods" },
             CHROME = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "removeHitRegion",
                         "scrollPathIntoView", "36 methods" })

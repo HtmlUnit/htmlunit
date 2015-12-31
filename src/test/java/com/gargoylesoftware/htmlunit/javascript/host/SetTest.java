@@ -35,7 +35,7 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "true" },
-            IE11 = { "1", "false" })
+            IE = { "1", "false" })
     public void has() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

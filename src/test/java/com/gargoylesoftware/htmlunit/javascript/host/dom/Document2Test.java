@@ -305,7 +305,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLBodyElement]", "http://localhost:12345/#", "http://localhost:12345/#" },
-            IE11 = { "null", "http://localhost:12345/#", "http://localhost:12345/#" })
+            IE = { "null", "http://localhost:12345/#", "http://localhost:12345/#" })
     @NotYetImplemented(IE11)
     public void activeElement_iframe() throws Exception {
         final String html =

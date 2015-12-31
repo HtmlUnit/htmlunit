@@ -742,7 +742,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "activeElement BODY" },
             FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY" },
-            IE11 = { "activeElement BODY", "focus BODY", "handler: activeElement BODY" })
+            IE = { "activeElement BODY", "focus BODY", "handler: activeElement BODY" })
     @BuggyWebDriver(FF31) // FFDriver doesn't behave like "manually driven" FF
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @NotYetImplemented({ FF, IE })
@@ -795,7 +795,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "blur INPUT",
-            IE11 = { "blur BODY", "blur INPUT" })
+            IE = { "blur BODY", "blur INPUT" })
     @NotYetImplemented(IE)
     public void document_input_blur() throws Exception {
         document_input("blur");

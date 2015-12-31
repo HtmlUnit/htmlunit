@@ -135,7 +135,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "0", "3", "8" },
-            IE11 = { "3", "0", "3", "7" })
+            IE = { "3", "0", "3", "7" })
     public void length() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -166,7 +166,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "a", "b", "c", "d", "\u000B", "e", "f", "g", "null", "null", "null" },
-            IE11 = { "a", "b", "c", "d", "e", "f", "g", "null", "null", "null" })
+            IE = { "a", "b", "c", "d", "e", "f", "g", "null", "null", "null" })
     public void item() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -305,7 +305,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a b", "2", "false" },
-            IE11 = {"a b", "2", "exception" })
+            IE = {"a b", "2", "exception" })
     public void containsVt() throws Exception {
         contains("a b", "\u000B");
     }
@@ -474,7 +474,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a b", "2", "3", "a b \u000B" },
-            IE11 = {"a b", "2", "exception", "2", "a b" })
+            IE = {"a b", "2", "exception", "2", "a b" })
     public void addVt() throws Exception {
         add("a b", "\u000B");
     }
@@ -493,7 +493,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {" \t \n  ", "0", "1", " \t \n  a" },
-            IE11 = {" \t \n  ", "0", "1", "a" },
+            IE = {" \t \n  ", "0", "1", "a" },
             CHROME = {"", "0", "1", " \t \n  a" })
     @NotYetImplemented(CHROME)
     public void addToWhitespace() throws Exception {
@@ -505,7 +505,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a  ", "1", "2", "a  b" },
-            IE11 = {"a  ", "1", "2", "a b" })
+            IE = {"a  ", "1", "2", "a b" })
     public void addToWhitespaceAtEnd() throws Exception {
         add("a  ", "b");
     }
@@ -560,7 +560,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "a \t c \n d  e", "4", "4", "a \t c \n d  e" },
-            IE11 = { "a \t c \n d  e", "4", "4", "a \t c \n d  e" })
+            IE = { "a \t c \n d  e", "4", "4", "a \t c \n d  e" })
     public void addToWhitespaceExisting() throws Exception {
         add("a \t c \n d  e", "c");
     }
@@ -639,7 +639,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a b", "2", "2", "a b" },
-            IE11 = {"a b", "2", "exception", "2", "a b" })
+            IE = {"a b", "2", "exception", "2", "a b" })
     public void removeVt() throws Exception {
         remove("a b", "\u000B");
     }
@@ -714,7 +714,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "a \t c \n d  e", "4", "3", "a d  e" },
-            IE11 = { "a \t c \n d  e", "4", "3", "a d e" })
+            IE = { "a \t c \n d  e", "4", "3", "a d e" })
     public void removeWhitespace() throws Exception {
         remove("a \t c \n d  e", "c");
     }

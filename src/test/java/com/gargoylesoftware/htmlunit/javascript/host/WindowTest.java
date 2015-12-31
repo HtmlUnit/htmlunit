@@ -1142,7 +1142,7 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            IE11 = { "[object Window]", "a" })
+            IE = { "[object Window]", "a" })
     public void showModelessDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"

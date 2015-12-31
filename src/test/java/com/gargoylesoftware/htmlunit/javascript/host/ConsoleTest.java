@@ -57,7 +57,7 @@ public class ConsoleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "undefined", "false" },
-            IE11 = { "false", "object", "true" })
+            IE = { "false", "object", "true" })
     public void prototypeUppercase() throws Exception {
         final String html
             = "<html>\n"

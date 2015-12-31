@@ -123,7 +123,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "10em center", "scroll" },
             CHROME = { "initial", "initial", "initial", "10em 50%", "initial" },
-            IE11 = { "transparent", "none", "repeat", "10em", "scroll" })
+            IE = { "transparent", "none", "repeat", "10em", "scroll" })
     public void backgroundPosition4() throws Exception {
         background("10em center");
     }
@@ -274,7 +274,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "transparent", "none", "repeat", "50% 0%", "scroll" },
             CHROME = { "rgba(0, 0, 0, 0)", "none", "repeat", "50% 0%", "scroll" },
-            IE11 = { "transparent", "none", "repeat", "top", "scroll" })
+            IE = { "transparent", "none", "repeat", "top", "scroll" })
     @NotYetImplemented(IE)
     public void backgroundCssPosition4() throws Exception {
         backgroundCss("top center");

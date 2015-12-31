@@ -660,7 +660,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "http:||||||/", "https:||||||/", "mailto:||||||", "tel:||||||",
                         "foo:||||||", "p:||||||", "p:||||||", "p:||||||" },
-            IE11 = { "http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
+            IE = { "http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
                         "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp" },
             CHROME = { ":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
                         "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp" })

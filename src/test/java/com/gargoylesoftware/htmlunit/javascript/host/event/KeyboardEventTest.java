@@ -67,7 +67,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "0-0", "0-0", "undefined-undefined" },
             CHROME = { "exception", "0-0", "undefined-undefined" },
-            IE11 = { "exception", "0-0", "undefined-undefined" })
+            IE = { "exception", "0-0", "undefined-undefined" })
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -308,7 +308,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:190,0,190",
                     "keypress:46,46,46",
                     "keyup:190,0,190" },
-           IE11 = { "keydown:16,0,16",
+           IE = { "keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:65,65,65",
                     "keyup:65,0,65",

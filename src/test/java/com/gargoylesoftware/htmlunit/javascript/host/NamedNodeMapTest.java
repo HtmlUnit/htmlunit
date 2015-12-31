@@ -46,7 +46,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     @NotYetImplemented({ FF, IE })
     @Alerts(FF = { "baz=blah", "foo=bar", "id=f", "name=f" },
             CHROME = { "name=f", "id=f", "foo=bar", "baz=blah" },
-            IE11 = { "name=f", "id=f", "baz=blah", "foo=bar" })
+            IE = { "name=f", "id=f", "baz=blah", "foo=bar" })
     public void attributes() throws Exception {
         final String html =
               "<html>\n"

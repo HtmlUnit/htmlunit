@@ -62,7 +62,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() {\n    [native code]\n}" },
             CHROME = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }" },
-            IE11 = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" })
+            IE = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" })
     public void HTMLHtmlElement_toString() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"

@@ -178,7 +178,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "§§URL§§subdir/frame.html", "§§URL§§frame.html" },
-            IE11 = { "§§URL§§subdir/frame.html" })
+            IE = { "§§URL§§subdir/frame.html" })
     @NotYetImplemented(IE11)
     public void location() throws Exception {
         location("Frame1.location = \"frame.html\"");

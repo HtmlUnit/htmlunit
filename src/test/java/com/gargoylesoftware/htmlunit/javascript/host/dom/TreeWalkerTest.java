@@ -89,7 +89,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "BODY", "1", "undefined" },
-            IE11 = { "BODY", "BODY", "1", "false" })
+            IE = { "BODY", "BODY", "1", "false" })
     public void getters1() throws Exception {
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, false);"
                             + "alertTreeWalker(tw);";
@@ -102,7 +102,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "A", "A", "4294967295", "undefined" },
-            IE11 = { "A", "A", "-1", "true" })
+            IE = { "A", "A", "-1", "true" })
     @NotYetImplemented(IE11)
     // The spec states it is an unsigned long.
     public void getters2() throws Exception {
@@ -118,7 +118,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "undefined" },
-            IE11 = { "BODY", "DIV", "1", "true" })
+            IE = { "BODY", "DIV", "1", "true" })
     public void firstChild() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -133,7 +133,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "SPAN", "1", "undefined" },
-            IE11 = { "BODY", "SPAN", "1", "true" })
+            IE = { "BODY", "SPAN", "1", "true" })
     public void firstChild2() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -149,7 +149,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "P", "1", "undefined" },
-            IE11 = { "BODY", "P", "1", "true" })
+            IE = { "BODY", "P", "1", "true" })
     public void lastChild() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -164,7 +164,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "SPAN", "1", "undefined" },
-            IE11 = { "BODY", "SPAN", "1", "true" })
+            IE = { "BODY", "SPAN", "1", "true" })
     public void lastChild2() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -180,7 +180,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "BODY", "1", "undefined", "null" },
-            IE11 = { "BODY", "BODY", "1", "true", "null" })
+            IE = { "BODY", "BODY", "1", "true", "null" })
     public void parentNode() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -197,7 +197,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "undefined" },
-            IE11 = { "BODY", "DIV", "1", "true" })
+            IE = { "BODY", "DIV", "1", "true" })
     public void parentNode2() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -213,7 +213,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "P", "1", "undefined", "null" },
-            IE11 = { "BODY", "P", "1", "true", "null" })
+            IE = { "BODY", "P", "1", "true", "null" })
     public void siblings() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
@@ -230,7 +230,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "undefined", "null" },
-            IE11 = { "BODY", "DIV", "1", "true", "null" })
+            IE = { "BODY", "DIV", "1", "true", "null" })
     public void siblings2() throws Exception {
         final String script1 =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"

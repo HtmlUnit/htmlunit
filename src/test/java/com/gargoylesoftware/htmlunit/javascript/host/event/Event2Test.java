@@ -724,7 +724,7 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true" },
             CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true",
                         "div capturing, true, true", "span capturing, true, true" },
-            IE11 = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false",
+            IE = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false",
                         "div capturing, false, false", "span capturing, false, true" })
     @NotYetImplemented({ CHROME, IE })
     public void stopPropagationCancelBubble() throws Exception {

@@ -37,7 +37,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "NaN", "false", "No", "No", "No", "No" },
-            IE11 = {"undefined", "\nfunction ActiveXObject() {\n    [native code]\n}\n",
+            IE = {"undefined", "\nfunction ActiveXObject() {\n    [native code]\n}\n",
                     "NaN", "false", "No", "No", "Yes", "Yes" })
     public void browserDetection() throws Exception {
         final String html = "<html>\n"

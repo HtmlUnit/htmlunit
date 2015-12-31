@@ -223,7 +223,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "123", "undefined" },
-            IE11 = { "123" })
+            IE = { "123" })
     @NotYetImplemented(IE11)
     public void iFrameReinitialized() throws Exception {
         final String html

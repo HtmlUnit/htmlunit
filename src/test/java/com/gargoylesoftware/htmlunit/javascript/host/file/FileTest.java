@@ -46,7 +46,7 @@ public class FileTest extends WebDriverTestCase {
                             "undefined", "undefined", "14", "text/plain" },
             FF38 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
                             "1437920507000", "undefined", "14", "text/plain" },
-            IE11 = { "1", "ScriptExceptionTest1.txt",
+            IE = { "1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
                             "undefined", "undefined", "14", "text/plain" })
     public void properties() throws Exception {
