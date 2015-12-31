@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +61,7 @@ public class DOMParserTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLDocument]")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     public void parseFromString_text_html() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

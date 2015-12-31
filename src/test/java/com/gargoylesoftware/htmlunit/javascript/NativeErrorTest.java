@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,7 +42,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "method (url)",
             FF = "method@url")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     public void stack() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -78,7 +78,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "method (url)",
             FF = "method@url")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     public void stackNewError() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

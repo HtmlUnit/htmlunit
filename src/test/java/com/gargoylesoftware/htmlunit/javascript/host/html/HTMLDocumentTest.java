@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
@@ -1358,7 +1357,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object NodeList]")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     public void querySelectorAllType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
             + "<script>\n"

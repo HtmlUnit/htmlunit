@@ -216,7 +216,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "12", "12" },
             CHROME = { "15", "15" },
             IE11 = { "15", "15" })
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented({ CHROME, IE })
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
               "<html>\n"

@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class GeolocationTest extends WebServerTestCase {
      */
     @Test
     @Alerts("12.34567891 98.76543211")
-    @NotYetImplemented({ FF, CHROME, IE11 }) //since it runs on Windows only (for now)
+    @NotYetImplemented({ FF, CHROME, IE }) //since it runs on Windows only (for now)
     public void getCurrentPosition_enabled() throws Exception {
         if (getBrowserVersion().isFirefox() && GEOLOCATION_IGNORE) {
             fail("To succeed!");

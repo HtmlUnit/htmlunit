@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -126,7 +126,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null", "", "false", "false", "null" },
             CHROME = { "[object PopStateEvent]", "null", "popstate", "false", "true", "null" })
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -151,7 +151,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "exception" },
             FF38 = { "dispatched" },
             CHROME = { "[object PopStateEvent]", "[object Window]", "popstate", "false", "true", "null", "dispatched" })
-    @NotYetImplemented({ CHROME, FF31, IE11})
+    @NotYetImplemented({ CHROME, FF31, IE})
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1174,7 +1173,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "null", "4", "", "0" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE, CHROME })
     public void getAttributeAndSetValueNull() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1261,7 +1260,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "§§URL§§" })
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @NotYetImplemented({ FF, CHROME, IE })
     public void submitRequired() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1291,7 +1290,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "false", "true" })
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @NotYetImplemented({ FF, CHROME, IE })
     public void checkValidity() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

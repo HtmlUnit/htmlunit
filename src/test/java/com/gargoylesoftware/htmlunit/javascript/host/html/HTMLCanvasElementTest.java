@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -141,7 +141,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             + "[object WebGLRenderingContext], null, null, null",
             IE11 = "[object CanvasRenderingContext2D], null, "
                     + "[object WebGLRenderingContext], null, null, null")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     public void getContext() throws Exception {
         final String html =
             "<html>\n"

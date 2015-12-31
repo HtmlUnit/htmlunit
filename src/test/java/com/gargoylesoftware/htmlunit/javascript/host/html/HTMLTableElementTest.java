@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -711,7 +710,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "[object Text]", "abc", "[object Text]", "" },
             CHROME = {"cell1", "[object Text]", "ex", "cell1", "[object Text]", "ex", "cell1" },
             IE11 = { "cell1", "[object Text]", "abc", "[object Text]", "" })
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented({ CHROME, IE })
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"

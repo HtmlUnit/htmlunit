@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
 
@@ -800,7 +800,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "1", "0", "1" },
             CHROME = { "1", "0" },
             IE11 = { "1", "0" })
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented({ CHROME, IE })
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1035,7 +1035,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object XMLDocument]", "OK" },
             IE = "[object XMLDocument]",
             IE11 = { "[object Document]", "OK" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     // Real IE11 seems to generate always an (HTML)Document within an iframe.
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1069,7 +1069,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLDocument]",
             IE11 = "[object Document]")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     public void html() throws Exception {
         final String svg
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"

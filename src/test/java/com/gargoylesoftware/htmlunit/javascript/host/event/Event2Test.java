@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,7 +52,7 @@ public class Event2Test extends WebDriverTestCase {
     // FFDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" first that doesn't occur
     // manually
     // ChromeDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" instead of "clickMe"
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     // No idea why the IE11 fires a MouseEvent here instead of a PointerEvent
     public void optionClick() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'\n";
@@ -726,7 +726,7 @@ public class Event2Test extends WebDriverTestCase {
                         "div capturing, true, true", "span capturing, true, true" },
             IE11 = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false",
                         "div capturing, false, false", "span capturing, false, true" })
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented({ CHROME, IE })
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
     }

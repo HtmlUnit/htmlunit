@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -783,7 +783,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "40644",
             CHROME = "233",
             IE11 = "NaN")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented({ IE, CHROME })
     public void overrideMimeType_charset_wrong() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1273,7 +1273,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "39", "27035", "65533", "39" },
             IE11 = { "39", "27035", "63" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void overrideMimeType_charset_all() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1394,7 +1394,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "someLoad [object ProgressEvent]", "load", "true", "11", "11" },
             CHROME = { "someLoad [object XMLHttpRequestProgressEvent]", "load", "false", "11", "0" })
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @NotYetImplemented({ FF, CHROME, IE })
     public void addEventListenerDetails() throws Exception {
         final String html =
               "<html>\n"
@@ -1433,7 +1433,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             CHROME = "function")
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @NotYetImplemented({ FF, CHROME, IE })
     public void addEventListenerCaller() throws Exception {
         final String html =
               "<html>\n"

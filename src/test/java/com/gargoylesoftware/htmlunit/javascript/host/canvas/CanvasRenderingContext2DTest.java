@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -166,7 +166,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "pcjFqCo5YBFYwZVUXFUG8rBtsasZcK7VcrcCsVqHT+K306rg+0QWvQSIzkfM6sZVCpeNwok2IymcS1k024dNjCQsGmbgS6k"
             + "zGkmmOIxWIkopCWAMeh2yDwDIrFPC+sQL2uKDJ0PY7Ojnac7z+Ei8d70HOwHYlEgmcoULOxvfl8lpeCZ/Ds+dNMQo9/bNYT"
             + "UfbPwd18qs91kKRhGuX7d+/9Yr/cNzIyIpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     public void drawImage() throws Exception {
         final InputStream is = getClass().getResourceAsStream("html.png");
         final byte[] directBytes = IOUtils.toByteArray(is);
@@ -263,7 +263,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             IE11 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhX"
                 + "Y/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     // The output depends on the deflation algorithm
     // check the output of: $pngcheck -v file.png
     // chrome gives: zlib: deflated, 256-byte window, fast compression
@@ -287,7 +287,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             IE11 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhX"
                 + "Y/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     public void drawImage_1x1_24bits() throws Exception {
         drawImage("1x1red_24_bit_depth.png");
     }

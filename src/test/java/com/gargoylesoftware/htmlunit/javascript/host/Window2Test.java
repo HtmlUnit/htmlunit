@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -672,7 +672,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = { "679", "1256", "662", "1239" },
             FF = { "674", "1258", "657", "1241" },
             IE11 = { "705", "1256", "688", "1239" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE, CHROME })
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
     public void changeHeightsAndWidths() throws Exception {

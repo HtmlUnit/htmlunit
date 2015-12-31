@@ -225,7 +225,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined" },
             IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
             CHROME = { "text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE })
     public void attributesAccess() throws Exception {
         final String html
             = "<html><head>\n"

@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.Arrays;
 
@@ -78,7 +78,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF38 = { "black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
             CHROME = { "black", "pink", "color: pink; background: blue;" },
             IE11 = { "black", "pink", "background: blue; color: pink; foo: bar;" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE, CHROME })
     public void style_MultipleCssAttributes() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -349,7 +349,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "", "" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE, CHROME })
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"
@@ -899,7 +899,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "none",
             CHROME = "",
             IE11 = "inline")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented({ IE, CHROME })
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1368,7 +1368,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;", "color: pink;" },
             CHROME = { "black", "pink", "color: pink;", "color: pink;" },
             IE11 = { "black", "pink", "color: pink;", "color: pink;" })
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented({ IE, CHROME })
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1506,7 +1506,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "none" },
             CHROME = { "undefined", "before", "none", "exception" },
             IE11 = { "function", "before", "none", "after", "none" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE, CHROME })
     public void interceptSetter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
