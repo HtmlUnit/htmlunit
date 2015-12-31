@@ -355,7 +355,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             CHROME = { "3", "2", "2", "3", "2", "3" },
-            IE11 = { "3", "2", "2", "3", "2", "3" })
+            IE = { "3", "2", "2", "3", "2", "3" })
     @NotYetImplemented({ CHROME, IE })
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
@@ -753,7 +753,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
             CHROME = { "3", "2", "2", "3", "2", "2" },
             FF31 = { "1", "0", "1", "1", "0", "1" },
             FF38 = { "1", "0", "1", "1", "0", "1" },
-            IE11 = { "1", "0", "1", "1", "0", "1" })
+            IE = { "1", "0", "1", "1", "0", "1" })
     @NotYetImplemented({ FF, IE })
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
@@ -866,7 +866,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
-            IE11 = { "3", "2", "2", "3", "2", "2" })
+            IE = { "3", "2", "2", "3", "2", "2" })
     @NotYetImplemented({FF, CHROME})
     public void main() throws Exception {
         loadPageWithAlerts2(test("main"));

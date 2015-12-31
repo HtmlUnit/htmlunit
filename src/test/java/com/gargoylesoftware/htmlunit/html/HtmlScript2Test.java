@@ -318,7 +318,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "s-x", "z" },
-            IE11 = { "s-x", "x", "z" })
+            IE = { "s-x", "x", "z" })
     public void addEventListener_load() throws Exception {
         final String html
             = "<html><head>\n"
