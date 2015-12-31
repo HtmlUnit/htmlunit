@@ -153,8 +153,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<basefont>",
-            IE = "<BASEFONT></BASEFONT>",
-            IE11 = "<basefont></basefont>")
+            IE = "<basefont></basefont>")
     public void basefont() throws Exception {
         loadPageWithAlerts2(test("basefont"));
     }
@@ -634,7 +633,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<image></image>",
             CHROME = "<image>",
-            IE11 = "<img>")
+            IE = "<img>")
     public void image() throws Exception {
         loadPageWithAlerts2(test("image"));
     }
@@ -662,8 +661,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<isindex></isindex>",
-            IE = "<ISINDEX>",
-            IE11 = "<isindex>")
+            IE = "<isindex>")
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
@@ -845,7 +843,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<nextid></nextid>",
-            IE11 = "<nextid>")
+            IE = "<nextid>")
     public void nextid() throws Exception {
         loadPageWithAlerts2(test("nextid"));
     }

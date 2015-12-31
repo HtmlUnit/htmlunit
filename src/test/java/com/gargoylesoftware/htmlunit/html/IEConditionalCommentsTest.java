@@ -36,9 +36,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "hello",
-            IE = { "hello", "IE" },
-            IE11 = "hello")
+    @Alerts("hello")
     public void ifIE() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -92,9 +90,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "hello",
-            IE = { "hello", "IE up to 9" },
-            IE11 = "hello")
+    @Alerts("hello")
     public void if_lte_IE_9() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -107,9 +103,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "hello",
-            IE = { "hello", "IE up to 10" },
-            IE11 = "hello")
+    @Alerts("hello")
     public void if_lte_IE_10() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -122,9 +116,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "hello",
-            IE = { "hello", "lt mso 9" },
-            IE11 = "hello")
+    @Alerts("hello")
     public void if_lte_mso_9() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"

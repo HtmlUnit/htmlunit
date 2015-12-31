@@ -848,8 +848,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "Unexpected call to method or property access",
-            IE11 = "")
+    @Alerts(IE = "")
     public void appendChild_UnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -873,8 +872,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "Unexpected call to method or property access",
-            IE11 = "")
+    @Alerts(IE = "")
     public void insertBeforeUnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.insertBefore(source, null)
         final String html =

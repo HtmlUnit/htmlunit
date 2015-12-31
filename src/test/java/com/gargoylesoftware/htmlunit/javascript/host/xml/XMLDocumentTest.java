@@ -220,9 +220,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
-            IE = { "true", "books", "books", "1", "book", "0" },
             CHROME = "exception",
-            IE11 = "exception")
+            IE = "exception")
     public void load() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -258,9 +257,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
-            IE = { "true", "books", "books", "1", "book", "0" },
             CHROME = "exception",
-            IE11 = "exception")
+            IE = "exception")
     // TODO what is the difference to load()?
     public void load_relativeURL() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -922,8 +920,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            IE = "1",
-            IE11 = "exception")
+            IE = "exception")
     public void xpathWithNamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1067,7 +1064,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLDocument]",
-            IE11 = "[object Document]")
+            IE = "[object Document]")
     @NotYetImplemented({ CHROME, FF, IE })
     public void html() throws Exception {
         final String svg
@@ -1086,7 +1083,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object XMLDocument]",
-            IE11 = "[object Document]")
+            IE = "[object Document]")
     @BuggyWebDriver(CHROME)
     @NotYetImplemented
     public void svg() throws Exception {

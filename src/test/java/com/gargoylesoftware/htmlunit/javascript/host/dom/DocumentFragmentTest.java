@@ -64,8 +64,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "",
-            IE = "DIV",
-            IE11 = "")
+            IE = "")
     public void createElement() throws Exception {
         final String html
             = "<html>\n"

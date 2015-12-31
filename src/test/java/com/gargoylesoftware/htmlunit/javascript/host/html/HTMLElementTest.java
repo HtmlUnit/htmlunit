@@ -2658,8 +2658,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "exception",
-            IE11 = "")
+    @Alerts(IE = "")
     public void dispatchEvent_submitOnFormChild() throws Exception {
         final String html = "<html><head><title>page 1</title></head><body>\n"
             + "<form action='page2'><span id='foo'/></form>\n"
@@ -2919,7 +2918,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE11 = "false")
+            IE = "false")
     public void contains_invalid_argument() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -3576,9 +3575,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<svg id=\"svgElem2\"></svg>",
-            IE = "undefined",
-            IE11 = "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svgElem2\" />")
-    @NotYetImplemented(IE11)
+            IE = "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svgElem2\" />")
+    @NotYetImplemented(IE)
     public void innerHTML_svg() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

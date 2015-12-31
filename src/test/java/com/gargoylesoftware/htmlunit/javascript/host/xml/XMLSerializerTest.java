@@ -94,7 +94,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<?xml32version=\"1.0\"32encoding=\"UTF-8\"?>1310<xsl:stylesheet32version=\"1.0\"32"
                     + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232<xsl:template32match=\"/\">103232<html>"
                     + "1032323232<body>1032323232</body>103232</html>103232</xsl:template>10</xsl:stylesheet>",
-            IE11 = "<xsl:stylesheet32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"32version=\"1.0\">103232"
+            IE = "<xsl:stylesheet32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"32version=\"1.0\">103232"
                     + "<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>103232"
                     + "</xsl:template>10</xsl:stylesheet>")
     @NotYetImplemented
@@ -123,7 +123,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
                     + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>",
-            IE11 = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
+            IE = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
                     + "<inner32attrib=\"attribValue\"32/><meta32attrib=\"attribValue\"32/></outer></document>")
     public void attributes() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
@@ -149,7 +149,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
                     + "</html>",
-            IE11 = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+            IE = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                     + "<head><title>html</title></head>"
                     + "<body>"
                     + "<span32class=\"spanClass\">foo</span>"
@@ -259,8 +259,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>",
-            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\r\n",
-            IE11 = "<root><my:parent xmlns:my=\"myUri\"><my:child /><another_child /></my:parent></root>")
+            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child /><another_child /></my:parent></root>")
     public void namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -289,7 +288,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>",
-            IE11 = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
+            IE = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
     public void mixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
