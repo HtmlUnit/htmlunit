@@ -1640,4 +1640,34 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            CHROME = "undefined")
+    public void showModalDialog() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  alert(typeof window.showModalDialog);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "function")
+    public void showModelessDialog() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  alert(typeof window.showModelessDialog);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

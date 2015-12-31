@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -1042,12 +1041,13 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "Jane", "Smith", "sdg", "finished" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = { "undefined", "Jane", "Smith", "sdg", "finished" },
+            CHROME = "not available")
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
             + "  function test() {\n"
+            + "    if (!window.showModalDialog) {alert('not available'); return; }\n"
             + "    alert(window.returnValue);\n"
             + "    var o = new Object();\n"
             + "    o.firstName = 'Jane';\n"
@@ -1082,8 +1082,10 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlElement button = page.getHtmlElementById("b");
         final HtmlPage dialogPage = button.click();
 
-        final DialogWindow dialog = (DialogWindow) dialogPage.getEnclosingWindow();
-        dialog.close();
+        if (getExpectedAlerts().length > 1) {
+            final DialogWindow dialog = (DialogWindow) dialogPage.getEnclosingWindow();
+            dialog.close();
+        }
 
         assertEquals(getExpectedAlerts(), actual);
     }
