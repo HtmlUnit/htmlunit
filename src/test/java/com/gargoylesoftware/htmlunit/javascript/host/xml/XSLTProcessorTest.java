@@ -41,7 +41,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "97", "[object Element]" },
-            IE11 = "exception",
+            IE = "exception",
             CHROME = "exception")
     @NotYetImplemented(FF)
     public void test() throws Exception {

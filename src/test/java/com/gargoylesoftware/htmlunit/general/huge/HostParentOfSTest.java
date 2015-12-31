@@ -1721,7 +1721,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _StyleMedia_StyleMedia() throws Exception {
         test("StyleMedia", "StyleMedia");
     }

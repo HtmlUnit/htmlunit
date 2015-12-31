@@ -418,7 +418,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "modified",
-            IE11 = "Hello world")
+            IE = "Hello world")
     @NotYetImplemented(IE11)
     // IE11 does not support deflate compression anymore but I couldn't find a way to disable it in HttpClient
     public void deflateCompressionNonGZipCompatible() throws Exception {

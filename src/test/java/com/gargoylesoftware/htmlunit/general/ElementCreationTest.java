@@ -783,7 +783,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLSpanElement]",
             CHROME = "[object HTMLKeygenElement]",
-            IE11 = "[object HTMLBlockElement]")
+            IE = "[object HTMLBlockElement]")
     public void keygen() throws Exception {
         test("keygen");
     }
@@ -852,7 +852,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void main() throws Exception {
         test("main");
     }
@@ -932,7 +932,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLMeterElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void meter() throws Exception {
         test("meter");
     }
@@ -1067,7 +1067,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLOutputElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void output() throws Exception {
         test("output");
     }
@@ -1383,7 +1383,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLTableCellElement]",
-            IE11 = "[object HTMLTableDataCellElement]")
+            IE = "[object HTMLTableDataCellElement]")
     public void td() throws Exception {
         test("td");
     }
@@ -1417,7 +1417,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLTableCellElement]",
-            IE11 = "[object HTMLTableHeaderCellElement]")
+            IE = "[object HTMLTableHeaderCellElement]")
     public void th() throws Exception {
         test("th");
     }
@@ -2025,7 +2025,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLContentElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void content() throws Exception {
         test("content");
     }
@@ -2050,7 +2050,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLTemplateElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void template() throws Exception {
         test("template");
     }

@@ -353,7 +353,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b1-button1",
-            IE11 = "null")
+            IE = "null")
     public void item_Unknown() throws Exception {
         item("'foo'");
     }
@@ -363,7 +363,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b1-button1",
-            IE11 = "b2-button2")
+            IE = "b2-button2")
     public void item_ById() throws Exception {
         item("'b2'");
     }
@@ -373,7 +373,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b1-button1",
-            IE11 = "b2-button2")
+            IE = "b2-button2")
     public void item_ByName() throws Exception {
         item("'button2'");
     }
@@ -428,7 +428,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b2-button2",
-            IE11 = "null")
+            IE = "null")
     public void item_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -438,7 +438,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b2-button2",
-            IE11 = "null")
+            IE = "null")
     public void item_IndexDoubleAsString() throws Exception {
         item("'1.1'");
     }
@@ -699,7 +699,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b2-button2",
-            IE11 = "null")
+            IE = "null")
     public void namedItem_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -709,7 +709,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b2-button2",
-            IE11 = "null")
+            IE = "null")
     public void namedItem_IndexDoubleAsString() throws Exception {
         item("'1.1'");
     }

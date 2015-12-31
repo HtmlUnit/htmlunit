@@ -51,7 +51,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
             CHROME = "§§URL§§?button.x=9&button.y=7&button=foo",
-            IE11 = "§§URL§§?button.x=14&button.y=15")
+            IE = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({ CHROME, IE })
     public void click_NoPosition() throws Exception {
         final String html
@@ -74,7 +74,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
             CHROME = "§§URL§§?button.x=22&button.y=7",
-            IE11 = "§§URL§§?button.x=14&button.y=15")
+            IE = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({ CHROME, IE })
     public void click_NoPosition_NoValue() throws Exception {
         final String html

@@ -277,7 +277,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _PointerEvent_PointerEvent() throws Exception {
         test("PointerEvent", "PointerEvent");
     }
@@ -287,7 +287,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Position_Position() throws Exception {
         test("Position", "Position");
     }
@@ -315,7 +315,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _MouseEvent_PointerEvent() throws Exception {
         test("MouseEvent", "PointerEvent");
     }
@@ -424,7 +424,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLBGSoundElement() throws Exception {
         test("Node", "HTMLBGSoundElement");
     }
@@ -452,7 +452,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLBaseFontElement() throws Exception {
         test("Node", "HTMLBaseFontElement");
     }
@@ -462,7 +462,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLBlockElement() throws Exception {
         test("Node", "HTMLBlockElement");
     }
@@ -517,7 +517,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLDDElement() throws Exception {
         test("Node", "HTMLDDElement");
     }
@@ -547,7 +547,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLDTElement() throws Exception {
         test("Node", "HTMLDTElement");
     }
@@ -719,7 +719,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLIsIndexElement() throws Exception {
         test("Node", "HTMLIsIndexElement");
     }
@@ -850,7 +850,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLNextIdElement() throws Exception {
         test("Node", "HTMLNextIdElement");
     }
@@ -924,7 +924,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLPhraseElement() throws Exception {
         test("Node", "HTMLPhraseElement");
     }
@@ -1024,7 +1024,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLTableDataCellElement() throws Exception {
         test("Node", "HTMLTableDataCellElement");
     }
@@ -1043,7 +1043,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Node_HTMLTableHeaderCellElement() throws Exception {
         test("Node", "HTMLTableHeaderCellElement");
     }
@@ -2055,7 +2055,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     @NotYetImplemented(IE11)
     public void _MouseEvent_MouseWheelEvent() throws Exception {
         test("MouseEvent", "MouseWheelEvent");
@@ -2066,7 +2066,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _MouseWheelEvent_MouseWheelEvent() throws Exception {
         test("MouseWheelEvent", "MouseWheelEvent");
     }
@@ -2536,7 +2536,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _PositionError_PositionError() throws Exception {
         test("PositionError", "PositionError");
     }

@@ -85,7 +85,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE11 = "en-US")
+            IE = "en-US")
     public void browserLanguage_IE() throws Exception {
         attribute("browserLanguage", getExpectedAlerts()[0]);
     }

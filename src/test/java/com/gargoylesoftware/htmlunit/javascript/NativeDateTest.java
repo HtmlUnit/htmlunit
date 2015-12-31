@@ -137,7 +137,7 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "Saturday, January 01, 2000",
             CHROME = "1.1.2000",
             FF = "1.1.2000",
-            IE11 = "\u200E01\u200E.\u200E01\u200E.\u200E2000")
+            IE = "\u200E01\u200E.\u200E01\u200E.\u200E2000")
     public void toLocaleDateString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

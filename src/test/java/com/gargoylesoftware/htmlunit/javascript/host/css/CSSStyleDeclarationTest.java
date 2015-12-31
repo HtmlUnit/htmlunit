@@ -898,7 +898,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "none",
             CHROME = "",
-            IE11 = "inline")
+            IE = "inline")
     @NotYetImplemented({ IE, CHROME })
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"

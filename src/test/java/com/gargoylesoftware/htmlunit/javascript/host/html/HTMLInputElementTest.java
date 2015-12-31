@@ -84,7 +84,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 + "password, radio, reset, reset, "
                 + "submit, submit, text, textarea, color, text, text, text, text, text, text, number, range, "
                 + "search, email, tel, url",
-            IE11 = "button, button, checkbox, file, hidden, select-one, select-multiple, "
+            IE = "button, button, checkbox, file, hidden, select-one, select-multiple, "
                 + "password, radio, reset, reset, "
                 + "submit, submit, text, textarea, text, text, text, text, text, text, text, number, range, "
                 + "search, email, tel, url"
@@ -100,7 +100,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "null, undefined, null, [object FileList], null, undefined, undefined, null, null, null,"
                 + " undefined, null, undefined, null, undefined, null, null, null, null, null, null, null,"
                 + " null, null, null, null, null, null",
-            IE11 = "undefined, undefined, undefined, [object FileList], undefined, undefined, undefined, undefined,"
+            IE = "undefined, undefined, undefined, [object FileList], undefined, undefined, undefined, undefined,"
                 + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
                 + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
                 + " undefined, undefined, undefined, undefined")

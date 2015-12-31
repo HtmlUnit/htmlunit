@@ -479,7 +479,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "afood$0$7b",
-            IE11 = "afoodfoo$7b")
+            IE = "afoodfoo$7b")
     public void replace_backReferences() throws Exception {
         testEvaluate("'afoob'.replace(/(foo)/g, '$1d$0$7')");
     }
@@ -559,7 +559,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0db",
-            IE11 = "adfoodb")
+            IE = "adfoodb")
     public void replace_backReference_$0() throws Exception {
         testEvaluate("'afoob'.replace(/(foo)/g, 'd$0d')");
         testEvaluate("'afoob'.replace(/(foo)/, 'd$0d')");
@@ -570,7 +570,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0db",
-            IE11 = "adfkxxxkodb")
+            IE = "adfkxxxkodb")
     public void replace_backReference_$0WithMultipleGroups() throws Exception {
         testEvaluate("'afkxxxkob'.replace(/(f)k(.*)k(o)/g, 'd$0d')");
         testEvaluate("'afkxxxkob'.replace(/(f)k(.*)k(o)/, 'd$0d')");
@@ -581,7 +581,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0db",
-            IE11 = "adfoodb")
+            IE = "adfoodb")
     public void replace_backReference_$0WithNoGroups() throws Exception {
         testEvaluate("'afoob'.replace(/foo/g, 'd$0d')");
         testEvaluate("'afoob'.replace(/foo/, 'd$0d')");
@@ -592,7 +592,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0dbfuoc",
-            IE11 = "adfoodbfuoc")
+            IE = "adfoodbfuoc")
     public void replace_backReference_$0WithMultipleHits() throws Exception {
         testEvaluate("'afoobfuoc'.replace(/(f.o)/, 'd$0d')");
     }
@@ -602,7 +602,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0dbd$0dc",
-            IE11 = "adfoodbdfuodc")
+            IE = "adfoodbdfuodc")
     public void replace_backReference_$0WithMultipleHitsGlobal() throws Exception {
         testEvaluate("'afoobfuoc'.replace(/(f.o)/g, 'd$0d')");
     }

@@ -67,7 +67,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"//:\");\n}",
             CHROME = "@font-face { font-family: Delicious; src: url(http:///); }",
-            IE11 = "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(//:);\r\n}\r\n")
+            IE = "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(//:);\r\n}\r\n")
     public void urlSlashSlashColon() throws Exception {
         final String html
             = "<html><body>\n"
@@ -93,7 +93,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"/:\");\n}",
             CHROME = "@font-face { font-family: Delicious; src: url(§§URL§§:); }",
-            IE11 = "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(/:);\r\n}\r\n")
+            IE = "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(/:);\r\n}\r\n")
     public void urlSlashColon() throws Exception {
         final String html
             = "<html><body>\n"
@@ -119,7 +119,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"//\");\n}",
             CHROME = "@font-face { font-family: Delicious; src: url(http:); }",
-            IE11 = "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(//);\r\n}\r\n")
+            IE = "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(//);\r\n}\r\n")
     public void urlSlashSlash() throws Exception {
         final String html
             = "<html><body>\n"

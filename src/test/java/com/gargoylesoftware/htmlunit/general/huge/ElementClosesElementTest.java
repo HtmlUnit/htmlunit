@@ -157,7 +157,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -319,7 +319,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -490,7 +490,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -652,7 +652,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -814,7 +814,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -2191,7 +2191,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -2353,7 +2353,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -2515,7 +2515,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -5063,7 +5063,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_abbr() throws Exception {
@@ -5075,7 +5075,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_acronym() throws Exception {
@@ -5087,7 +5087,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_a() throws Exception {
@@ -5099,7 +5099,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_address() throws Exception {
@@ -5111,7 +5111,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_applet() throws Exception {
@@ -5123,7 +5123,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_area() throws Exception {
@@ -5135,7 +5135,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_article() throws Exception {
@@ -5147,7 +5147,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_aside() throws Exception {
@@ -5159,7 +5159,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_audio() throws Exception {
@@ -5171,7 +5171,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_bgsound() throws Exception {
@@ -5183,7 +5183,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_base() throws Exception {
@@ -5204,7 +5204,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_bdi() throws Exception {
@@ -5216,7 +5216,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_bdo() throws Exception {
@@ -5228,7 +5228,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_big() throws Exception {
@@ -5240,7 +5240,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_blink() throws Exception {
@@ -5252,7 +5252,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_blockquote() throws Exception {
@@ -5273,7 +5273,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_b() throws Exception {
@@ -5285,7 +5285,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_br() throws Exception {
@@ -5297,7 +5297,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_button() throws Exception {
@@ -5309,7 +5309,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_canvas() throws Exception {
@@ -5321,7 +5321,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_caption() throws Exception {
@@ -5333,7 +5333,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_center() throws Exception {
@@ -5345,7 +5345,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_cite() throws Exception {
@@ -5357,7 +5357,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_code() throws Exception {
@@ -5369,7 +5369,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_command() throws Exception {
@@ -5381,7 +5381,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_datalist() throws Exception {
@@ -5393,7 +5393,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_dfn() throws Exception {
@@ -5405,7 +5405,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_dd() throws Exception {
@@ -5417,7 +5417,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_del() throws Exception {
@@ -5429,7 +5429,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_details() throws Exception {
@@ -5441,7 +5441,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_dialog() throws Exception {
@@ -5453,7 +5453,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_dir() throws Exception {
@@ -5465,7 +5465,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_div() throws Exception {
@@ -5477,7 +5477,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_dl() throws Exception {
@@ -5489,7 +5489,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_dt() throws Exception {
@@ -5501,7 +5501,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_embed() throws Exception {
@@ -5513,7 +5513,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_em() throws Exception {
@@ -5525,7 +5525,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_fieldset() throws Exception {
@@ -5537,7 +5537,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_figcaption() throws Exception {
@@ -5549,7 +5549,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_figure() throws Exception {
@@ -5561,7 +5561,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_font() throws Exception {
@@ -5573,7 +5573,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_form() throws Exception {
@@ -5585,7 +5585,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_footer() throws Exception {
@@ -5597,7 +5597,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_frame() throws Exception {
@@ -5609,7 +5609,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_frameset() throws Exception {
@@ -5630,7 +5630,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_header() throws Exception {
@@ -5642,7 +5642,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_h1() throws Exception {
@@ -5654,7 +5654,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_h2() throws Exception {
@@ -5666,7 +5666,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_h3() throws Exception {
@@ -5678,7 +5678,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_h4() throws Exception {
@@ -5690,7 +5690,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_h5() throws Exception {
@@ -5702,7 +5702,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_h6() throws Exception {
@@ -5714,7 +5714,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_hr() throws Exception {
@@ -5735,7 +5735,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_iframe() throws Exception {
@@ -5747,7 +5747,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_q() throws Exception {
@@ -5759,7 +5759,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_img() throws Exception {
@@ -5771,7 +5771,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_image() throws Exception {
@@ -5783,7 +5783,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_ins() throws Exception {
@@ -5795,7 +5795,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_isindex() throws Exception {
@@ -5807,7 +5807,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_i() throws Exception {
@@ -5819,7 +5819,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_kbd() throws Exception {
@@ -5831,7 +5831,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_keygen() throws Exception {
@@ -5843,7 +5843,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_label() throws Exception {
@@ -5855,7 +5855,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_layer() throws Exception {
@@ -5867,7 +5867,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_legend() throws Exception {
@@ -5879,7 +5879,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_listing() throws Exception {
@@ -5891,7 +5891,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_li() throws Exception {
@@ -5903,7 +5903,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_link() throws Exception {
@@ -5915,7 +5915,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_main() throws Exception {
@@ -5927,7 +5927,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_map() throws Exception {
@@ -5939,7 +5939,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_mark() throws Exception {
@@ -5951,7 +5951,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_marquee() throws Exception {
@@ -5963,7 +5963,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_menu() throws Exception {
@@ -5975,7 +5975,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_menuitem() throws Exception {
@@ -5987,7 +5987,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_meta() throws Exception {
@@ -5999,7 +5999,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_meter() throws Exception {
@@ -6011,7 +6011,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_multicol() throws Exception {
@@ -6023,7 +6023,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_nav() throws Exception {
@@ -6035,7 +6035,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_nextid() throws Exception {
@@ -6047,7 +6047,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_nobr() throws Exception {
@@ -6059,7 +6059,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_noembed() throws Exception {
@@ -6071,7 +6071,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_noframes() throws Exception {
@@ -6083,7 +6083,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_nolayer() throws Exception {
@@ -6095,7 +6095,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_noscript() throws Exception {
@@ -6116,7 +6116,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_ol() throws Exception {
@@ -6128,7 +6128,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_optgroup() throws Exception {
@@ -6140,7 +6140,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_option() throws Exception {
@@ -6152,7 +6152,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_output() throws Exception {
@@ -6164,7 +6164,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_p() throws Exception {
@@ -6176,7 +6176,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_param() throws Exception {
@@ -6188,7 +6188,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_plaintext() throws Exception {
@@ -6200,7 +6200,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_pre() throws Exception {
@@ -6212,7 +6212,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_progress() throws Exception {
@@ -6224,7 +6224,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_rp() throws Exception {
@@ -6236,7 +6236,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_rt() throws Exception {
@@ -6248,7 +6248,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_ruby() throws Exception {
@@ -6260,7 +6260,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_s() throws Exception {
@@ -6272,7 +6272,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_samp() throws Exception {
@@ -6284,7 +6284,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     @NotYetImplemented
@@ -6297,7 +6297,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_section() throws Exception {
@@ -6309,7 +6309,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_select() throws Exception {
@@ -6321,7 +6321,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_small() throws Exception {
@@ -6333,7 +6333,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_source() throws Exception {
@@ -6345,7 +6345,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_span() throws Exception {
@@ -6357,7 +6357,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_strike() throws Exception {
@@ -6369,7 +6369,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_strong() throws Exception {
@@ -6381,7 +6381,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_style() throws Exception {
@@ -6393,7 +6393,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_sub() throws Exception {
@@ -6405,7 +6405,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_summary() throws Exception {
@@ -6417,7 +6417,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_sup() throws Exception {
@@ -6429,7 +6429,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_table() throws Exception {
@@ -6441,7 +6441,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_col() throws Exception {
@@ -6453,7 +6453,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_colgroup() throws Exception {
@@ -6465,7 +6465,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_tbody() throws Exception {
@@ -6477,7 +6477,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_td() throws Exception {
@@ -6489,7 +6489,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_th() throws Exception {
@@ -6501,7 +6501,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_tr() throws Exception {
@@ -6513,7 +6513,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_textarea() throws Exception {
@@ -6525,7 +6525,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_tfoot() throws Exception {
@@ -6537,7 +6537,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_thead() throws Exception {
@@ -6549,7 +6549,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_tt() throws Exception {
@@ -6561,7 +6561,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_time() throws Exception {
@@ -6582,7 +6582,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_track() throws Exception {
@@ -6594,7 +6594,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_u() throws Exception {
@@ -6606,7 +6606,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_ul() throws Exception {
@@ -6618,7 +6618,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_var() throws Exception {
@@ -6630,7 +6630,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_video() throws Exception {
@@ -6642,7 +6642,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_wbr() throws Exception {
@@ -6654,7 +6654,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _basefont_xmp() throws Exception {
@@ -6712,7 +6712,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -6874,7 +6874,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -7036,7 +7036,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -7198,7 +7198,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -7360,7 +7360,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -7521,7 +7521,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     @NotYetImplemented({ FF, CHROME, IE11 })
@@ -7561,7 +7561,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_bgsound() throws Exception {
@@ -7573,7 +7573,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_base() throws Exception {
@@ -7585,7 +7585,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_basefont() throws Exception {
@@ -7651,7 +7651,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_br() throws Exception {
@@ -7708,7 +7708,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF = "2")
     @NotYetImplemented({ CHROME, IE11 })
     public void _body_command() throws Exception {
@@ -7810,7 +7810,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_embed() throws Exception {
@@ -7948,7 +7948,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_hr() throws Exception {
@@ -7978,7 +7978,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_img() throws Exception {
@@ -7990,7 +7990,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     @NotYetImplemented
@@ -8012,7 +8012,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     @NotYetImplemented({ FF, IE11 })
@@ -8043,7 +8043,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_keygen() throws Exception {
@@ -8100,7 +8100,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_link() throws Exception {
@@ -8166,7 +8166,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_meta() throws Exception {
@@ -8316,7 +8316,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     @NotYetImplemented({ FF, CHROME, IE11 })
@@ -8438,7 +8438,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     @NotYetImplemented({ FF, CHROME, IE11 })
@@ -8560,7 +8560,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     @NotYetImplemented({ FF, CHROME, IE11 })
@@ -8609,7 +8609,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "3",
-            IE11 = "3",
+            IE = "3",
             FF31 = "3",
             FF38 = "3")
     public void _body_wbr() throws Exception {
@@ -8676,7 +8676,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -10063,7 +10063,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -10225,7 +10225,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -11603,7 +11603,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -11765,7 +11765,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -11927,7 +11927,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -13827,7 +13827,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -13989,7 +13989,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -14151,7 +14151,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -14331,7 +14331,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -14493,7 +14493,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -14655,7 +14655,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -14817,7 +14817,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -14979,7 +14979,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -15141,7 +15141,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -15303,7 +15303,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -16699,7 +16699,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -16861,7 +16861,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -17023,7 +17023,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -17185,7 +17185,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -17347,7 +17347,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -17509,7 +17509,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -17671,7 +17671,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -21749,7 +21749,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -21911,7 +21911,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -21933,7 +21933,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h1_h1() throws Exception {
@@ -21945,7 +21945,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h1_h2() throws Exception {
@@ -21957,7 +21957,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h1_h3() throws Exception {
@@ -21969,7 +21969,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h1_h4() throws Exception {
@@ -21981,7 +21981,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h1_h5() throws Exception {
@@ -21993,7 +21993,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h1_h6() throws Exception {
@@ -22145,7 +22145,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -22167,7 +22167,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h2_h1() throws Exception {
@@ -22179,7 +22179,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h2_h2() throws Exception {
@@ -22191,7 +22191,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h2_h3() throws Exception {
@@ -22203,7 +22203,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h2_h4() throws Exception {
@@ -22215,7 +22215,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h2_h5() throws Exception {
@@ -22227,7 +22227,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h2_h6() throws Exception {
@@ -22379,7 +22379,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -22401,7 +22401,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h3_h1() throws Exception {
@@ -22413,7 +22413,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h3_h2() throws Exception {
@@ -22425,7 +22425,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h3_h3() throws Exception {
@@ -22437,7 +22437,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h3_h4() throws Exception {
@@ -22449,7 +22449,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h3_h5() throws Exception {
@@ -22461,7 +22461,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h3_h6() throws Exception {
@@ -22613,7 +22613,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -22635,7 +22635,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h4_h1() throws Exception {
@@ -22647,7 +22647,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h4_h2() throws Exception {
@@ -22659,7 +22659,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h4_h3() throws Exception {
@@ -22671,7 +22671,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h4_h4() throws Exception {
@@ -22683,7 +22683,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h4_h5() throws Exception {
@@ -22695,7 +22695,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h4_h6() throws Exception {
@@ -22847,7 +22847,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -22869,7 +22869,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h5_h1() throws Exception {
@@ -22881,7 +22881,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h5_h2() throws Exception {
@@ -22893,7 +22893,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h5_h3() throws Exception {
@@ -22905,7 +22905,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h5_h4() throws Exception {
@@ -22917,7 +22917,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h5_h5() throws Exception {
@@ -22929,7 +22929,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h5_h6() throws Exception {
@@ -23081,7 +23081,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -23103,7 +23103,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h6_h1() throws Exception {
@@ -23115,7 +23115,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h6_h2() throws Exception {
@@ -23127,7 +23127,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h6_h3() throws Exception {
@@ -23139,7 +23139,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h6_h4() throws Exception {
@@ -23151,7 +23151,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h6_h5() throws Exception {
@@ -23163,7 +23163,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0",
             FF38 = "0")
     public void _h6_h6() throws Exception {
@@ -25881,7 +25881,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _q_command() throws Exception {
@@ -28607,7 +28607,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -28990,7 +28990,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -29152,7 +29152,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -30934,7 +30934,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -31096,7 +31096,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -31258,7 +31258,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -31420,7 +31420,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -31582,7 +31582,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -32969,7 +32969,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -33130,7 +33130,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -33292,7 +33292,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -33454,7 +33454,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -33616,7 +33616,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -33778,7 +33778,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -35156,7 +35156,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -35318,7 +35318,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -35480,7 +35480,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -35646,7 +35646,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ FF, CHROME, IE11 })
@@ -35815,7 +35815,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -35986,7 +35986,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -36148,7 +36148,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -36309,7 +36309,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE11 })
@@ -36475,7 +36475,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented
@@ -36648,7 +36648,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented
@@ -36837,7 +36837,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1",
             FF38 = "1")
     @NotYetImplemented({ CHROME, IE })
@@ -36972,7 +36972,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_article() throws Exception {
@@ -36984,7 +36984,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_aside() throws Exception {
@@ -37050,7 +37050,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _p_command() throws Exception {
@@ -37071,7 +37071,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_details() throws Exception {
@@ -37137,7 +37137,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_figcaption() throws Exception {
@@ -37149,7 +37149,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_figure() throws Exception {
@@ -37161,7 +37161,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _p_form() throws Exception {
@@ -37173,7 +37173,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_footer() throws Exception {
@@ -37185,7 +37185,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_header() throws Exception {
@@ -37315,7 +37315,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "1",
+            IE = "1",
             FF31 = "0")
     @NotYetImplemented({ FF31, CHROME, FF38 })
     public void _p_main() throws Exception {
@@ -37345,7 +37345,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_nav() throws Exception {
@@ -37404,7 +37404,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_section() throws Exception {
@@ -37426,7 +37426,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _p_summary() throws Exception {
@@ -38737,7 +38737,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE, FF38 })
     public void _pre_command() throws Exception {
@@ -38898,7 +38898,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE, FF38 })
     public void _progress_command() throws Exception {
@@ -39059,7 +39059,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE, FF38 })
     public void _rp_command() throws Exception {
@@ -39220,7 +39220,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE, FF38 })
     public void _rt_command() throws Exception {
@@ -39381,7 +39381,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _ruby_command() throws Exception {
@@ -39542,7 +39542,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _s_command() throws Exception {
@@ -39703,7 +39703,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _samp_command() throws Exception {
@@ -39864,7 +39864,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE, FF38 })
     public void _section_command() throws Exception {
@@ -39979,7 +39979,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _select_keygen() throws Exception {
@@ -40056,7 +40056,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _small_command() throws Exception {
@@ -41566,7 +41566,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _span_command() throws Exception {
@@ -41727,7 +41727,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _strike_command() throws Exception {
@@ -41888,7 +41888,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _strong_command() throws Exception {
@@ -42049,7 +42049,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _sub_command() throws Exception {
@@ -42210,7 +42210,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE, FF38 })
     public void _summary_command() throws Exception {
@@ -42371,7 +42371,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _sup_command() throws Exception {
@@ -42486,7 +42486,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_abbr() throws Exception {
@@ -42498,7 +42498,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_acronym() throws Exception {
@@ -42510,7 +42510,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_a() throws Exception {
@@ -42522,7 +42522,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_address() throws Exception {
@@ -42534,7 +42534,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_applet() throws Exception {
@@ -42546,7 +42546,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_article() throws Exception {
@@ -42558,7 +42558,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_aside() throws Exception {
@@ -42570,7 +42570,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_audio() throws Exception {
@@ -42582,7 +42582,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_bdi() throws Exception {
@@ -42594,7 +42594,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_bdo() throws Exception {
@@ -42606,7 +42606,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_big() throws Exception {
@@ -42618,7 +42618,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_blink() throws Exception {
@@ -42630,7 +42630,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_blockquote() throws Exception {
@@ -42642,7 +42642,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_b() throws Exception {
@@ -42654,7 +42654,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented
     public void _table_button() throws Exception {
@@ -42666,7 +42666,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_canvas() throws Exception {
@@ -42678,7 +42678,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_center() throws Exception {
@@ -42690,7 +42690,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_cite() throws Exception {
@@ -42702,7 +42702,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_code() throws Exception {
@@ -42714,7 +42714,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_datalist() throws Exception {
@@ -42726,7 +42726,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_dfn() throws Exception {
@@ -42738,7 +42738,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_dd() throws Exception {
@@ -42750,7 +42750,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_del() throws Exception {
@@ -42762,7 +42762,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_details() throws Exception {
@@ -42774,7 +42774,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_dialog() throws Exception {
@@ -42786,7 +42786,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_dir() throws Exception {
@@ -42798,7 +42798,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_div() throws Exception {
@@ -42810,7 +42810,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_dl() throws Exception {
@@ -42822,7 +42822,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_dt() throws Exception {
@@ -42834,7 +42834,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_em() throws Exception {
@@ -42846,7 +42846,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_fieldset() throws Exception {
@@ -42858,7 +42858,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_figcaption() throws Exception {
@@ -42870,7 +42870,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_figure() throws Exception {
@@ -42882,7 +42882,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_font() throws Exception {
@@ -42904,7 +42904,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_footer() throws Exception {
@@ -42916,7 +42916,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_header() throws Exception {
@@ -42928,7 +42928,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_h1() throws Exception {
@@ -42940,7 +42940,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_h2() throws Exception {
@@ -42952,7 +42952,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_h3() throws Exception {
@@ -42964,7 +42964,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_h4() throws Exception {
@@ -42976,7 +42976,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_h5() throws Exception {
@@ -42988,7 +42988,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_h6() throws Exception {
@@ -43000,7 +43000,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_iframe() throws Exception {
@@ -43012,7 +43012,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_q() throws Exception {
@@ -43024,7 +43024,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_ins() throws Exception {
@@ -43036,7 +43036,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "1",
+            IE = "1",
             FF31 = "1")
     @NotYetImplemented({ FF31, FF38 })
     public void _table_isindex() throws Exception {
@@ -43048,7 +43048,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_i() throws Exception {
@@ -43060,7 +43060,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_kbd() throws Exception {
@@ -43072,7 +43072,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_label() throws Exception {
@@ -43084,7 +43084,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_layer() throws Exception {
@@ -43096,7 +43096,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_legend() throws Exception {
@@ -43108,7 +43108,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_listing() throws Exception {
@@ -43120,7 +43120,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_li() throws Exception {
@@ -43132,7 +43132,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_main() throws Exception {
@@ -43144,7 +43144,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_map() throws Exception {
@@ -43156,7 +43156,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_mark() throws Exception {
@@ -43168,7 +43168,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_marquee() throws Exception {
@@ -43180,7 +43180,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_menu() throws Exception {
@@ -43192,7 +43192,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_menuitem() throws Exception {
@@ -43204,7 +43204,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_meter() throws Exception {
@@ -43216,7 +43216,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_multicol() throws Exception {
@@ -43228,7 +43228,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_nav() throws Exception {
@@ -43240,7 +43240,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented
     public void _table_nextid() throws Exception {
@@ -43252,7 +43252,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_nobr() throws Exception {
@@ -43264,7 +43264,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_noembed() throws Exception {
@@ -43276,7 +43276,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_noframes() throws Exception {
@@ -43288,7 +43288,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_nolayer() throws Exception {
@@ -43300,7 +43300,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_noscript() throws Exception {
@@ -43312,7 +43312,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_object() throws Exception {
@@ -43324,7 +43324,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_ol() throws Exception {
@@ -43336,7 +43336,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented
     public void _table_optgroup() throws Exception {
@@ -43348,7 +43348,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented
     public void _table_option() throws Exception {
@@ -43360,7 +43360,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_output() throws Exception {
@@ -43372,7 +43372,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_p() throws Exception {
@@ -43384,7 +43384,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_plaintext() throws Exception {
@@ -43396,7 +43396,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_pre() throws Exception {
@@ -43408,7 +43408,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_progress() throws Exception {
@@ -43420,7 +43420,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_rp() throws Exception {
@@ -43432,7 +43432,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_rt() throws Exception {
@@ -43444,7 +43444,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_ruby() throws Exception {
@@ -43456,7 +43456,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_s() throws Exception {
@@ -43468,7 +43468,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_samp() throws Exception {
@@ -43480,7 +43480,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_section() throws Exception {
@@ -43492,7 +43492,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented
     public void _table_select() throws Exception {
@@ -43504,7 +43504,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_small() throws Exception {
@@ -43516,7 +43516,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_span() throws Exception {
@@ -43528,7 +43528,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_strike() throws Exception {
@@ -43540,7 +43540,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_strong() throws Exception {
@@ -43552,7 +43552,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_sub() throws Exception {
@@ -43564,7 +43564,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_summary() throws Exception {
@@ -43576,7 +43576,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_sup() throws Exception {
@@ -43588,7 +43588,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_table() throws Exception {
@@ -43600,7 +43600,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented
     public void _table_textarea() throws Exception {
@@ -43612,7 +43612,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_tt() throws Exception {
@@ -43624,7 +43624,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_time() throws Exception {
@@ -43636,7 +43636,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_title() throws Exception {
@@ -43648,7 +43648,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_u() throws Exception {
@@ -43660,7 +43660,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_ul() throws Exception {
@@ -43672,7 +43672,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_var() throws Exception {
@@ -43684,7 +43684,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_video() throws Exception {
@@ -43696,7 +43696,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented(FF38)
     public void _table_xmp() throws Exception {
@@ -53482,7 +53482,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _tt_command() throws Exception {
@@ -53643,7 +53643,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE, FF38 })
     public void _time_command() throws Exception {
@@ -55153,7 +55153,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _u_command() throws Exception {
@@ -55314,7 +55314,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _ul_command() throws Exception {
@@ -55475,7 +55475,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE11, FF38 })
     public void _var_command() throws Exception {
@@ -55636,7 +55636,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "2",
-            IE11 = "2",
+            IE = "2",
             FF31 = "1")
     @NotYetImplemented({ CHROME, IE, FF38 })
     public void _video_command() throws Exception {
@@ -56967,7 +56967,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _a_isindex() throws Exception {
@@ -56979,7 +56979,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _abbr_isindex() throws Exception {
@@ -56991,7 +56991,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _acronym_isindex() throws Exception {
@@ -57003,7 +57003,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _address_isindex() throws Exception {
@@ -57015,7 +57015,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _applet_isindex() throws Exception {
@@ -57027,7 +57027,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _article_isindex() throws Exception {
@@ -57039,7 +57039,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _aside_isindex() throws Exception {
@@ -57051,7 +57051,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _audio_isindex() throws Exception {
@@ -57063,7 +57063,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _b_isindex() throws Exception {
@@ -57075,7 +57075,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _bdi_isindex() throws Exception {
@@ -57087,7 +57087,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _bdo_isindex() throws Exception {
@@ -57099,7 +57099,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _big_isindex() throws Exception {
@@ -57111,7 +57111,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _blink_isindex() throws Exception {
@@ -57123,7 +57123,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _blockquote_isindex() throws Exception {
@@ -57135,7 +57135,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _button_isindex() throws Exception {
@@ -57147,7 +57147,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _canvas_isindex() throws Exception {
@@ -57159,7 +57159,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _center_isindex() throws Exception {
@@ -57171,7 +57171,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _cite_isindex() throws Exception {
@@ -57183,7 +57183,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _code_isindex() throws Exception {
@@ -57195,7 +57195,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _datalist_isindex() throws Exception {
@@ -57207,7 +57207,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _dd_isindex() throws Exception {
@@ -57219,7 +57219,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _del_isindex() throws Exception {
@@ -57231,7 +57231,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _details_isindex() throws Exception {
@@ -57243,7 +57243,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _dfn_isindex() throws Exception {
@@ -57255,7 +57255,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _dialog_isindex() throws Exception {
@@ -57267,7 +57267,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _dir_isindex() throws Exception {
@@ -57279,7 +57279,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _div_isindex() throws Exception {
@@ -57291,7 +57291,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _dl_isindex() throws Exception {
@@ -57303,7 +57303,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _dt_isindex() throws Exception {
@@ -57315,7 +57315,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _em_isindex() throws Exception {
@@ -57327,7 +57327,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _fieldset_isindex() throws Exception {
@@ -57339,7 +57339,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _figcaption_isindex() throws Exception {
@@ -57351,7 +57351,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _figure_isindex() throws Exception {
@@ -57363,7 +57363,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _font_isindex() throws Exception {
@@ -57375,7 +57375,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _footer_isindex() throws Exception {
@@ -57387,7 +57387,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _h1_isindex() throws Exception {
@@ -57399,7 +57399,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _h2_isindex() throws Exception {
@@ -57411,7 +57411,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _h3_isindex() throws Exception {
@@ -57423,7 +57423,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _h4_isindex() throws Exception {
@@ -57435,7 +57435,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _h5_isindex() throws Exception {
@@ -57447,7 +57447,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _h6_isindex() throws Exception {
@@ -57459,7 +57459,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _header_isindex() throws Exception {
@@ -57471,7 +57471,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _i_isindex() throws Exception {
@@ -57483,7 +57483,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _ins_isindex() throws Exception {
@@ -59029,7 +59029,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _kbd_isindex() throws Exception {
@@ -59041,7 +59041,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _label_isindex() throws Exception {
@@ -59053,7 +59053,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _layer_isindex() throws Exception {
@@ -59065,7 +59065,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _legend_isindex() throws Exception {
@@ -59077,7 +59077,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _li_isindex() throws Exception {
@@ -59089,7 +59089,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _listing_isindex() throws Exception {
@@ -59101,7 +59101,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _main_isindex() throws Exception {
@@ -59113,7 +59113,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _map_isindex() throws Exception {
@@ -59125,7 +59125,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _mark_isindex() throws Exception {
@@ -59137,7 +59137,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _marquee_isindex() throws Exception {
@@ -59149,7 +59149,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _menu_isindex() throws Exception {
@@ -59161,7 +59161,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _menuitem_isindex() throws Exception {
@@ -59173,7 +59173,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _meter_isindex() throws Exception {
@@ -59185,7 +59185,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _multicol_isindex() throws Exception {
@@ -59197,7 +59197,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _nav_isindex() throws Exception {
@@ -59209,7 +59209,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void _nextid_isindex() throws Exception {
@@ -59221,7 +59221,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ IE11, FF })
     public void _nobr_isindex() throws Exception {
@@ -59233,7 +59233,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _nolayer_isindex() throws Exception {
@@ -59245,7 +59245,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF, IE })
     public void _object_isindex() throws Exception {
@@ -59257,7 +59257,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _ol_isindex() throws Exception {
@@ -59269,7 +59269,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented
     public void _optgroup_isindex() throws Exception {
@@ -59281,7 +59281,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF = "2")
     @NotYetImplemented
     public void _option_isindex() throws Exception {
@@ -59293,7 +59293,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE })
     public void _output_isindex() throws Exception {
@@ -59305,7 +59305,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "0",
+            IE = "0",
             FF31 = "0")
     @NotYetImplemented({ FF31, IE11 })
     public void _p_isindex() throws Exception {
@@ -59317,7 +59317,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE })
     public void _pre_isindex() throws Exception {
@@ -59329,7 +59329,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE })
     public void _progress_isindex() throws Exception {
@@ -59341,7 +59341,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _q_isindex() throws Exception {
@@ -59353,7 +59353,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _rp_isindex() throws Exception {
@@ -59365,7 +59365,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _rt_isindex() throws Exception {
@@ -59377,7 +59377,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE11 })
     public void _ruby_isindex() throws Exception {
@@ -59389,7 +59389,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE11 })
     public void _s_isindex() throws Exception {
@@ -59401,7 +59401,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _samp_isindex() throws Exception {
@@ -59413,7 +59413,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE })
     public void _section_isindex() throws Exception {
@@ -59425,7 +59425,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _small_isindex() throws Exception {
@@ -59437,7 +59437,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE11 })
     public void _span_isindex() throws Exception {
@@ -59449,7 +59449,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _strike_isindex() throws Exception {
@@ -59461,7 +59461,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _strong_isindex() throws Exception {
@@ -59473,7 +59473,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _sub_isindex() throws Exception {
@@ -59485,7 +59485,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE })
     public void _summary_isindex() throws Exception {
@@ -59497,7 +59497,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _sup_isindex() throws Exception {
@@ -59509,7 +59509,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE })
     public void _time_isindex() throws Exception {
@@ -59521,7 +59521,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _tt_isindex() throws Exception {
@@ -59533,7 +59533,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _u_isindex() throws Exception {
@@ -59545,7 +59545,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE11 })
     public void _ul_isindex() throws Exception {
@@ -59557,7 +59557,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ IE11, FF31 })
     public void _var_isindex() throws Exception {
@@ -59569,7 +59569,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "2",
+            IE = "2",
             FF31 = "2")
     @NotYetImplemented({ FF31, IE })
     public void _video_isindex() throws Exception {
@@ -121160,7 +121160,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "2",
+            IE = "2",
             CHROME = "2",
             FF38 = "2")
     public void _button_input() throws Exception {
@@ -121236,7 +121236,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "0",
+            IE = "0",
             CHROME = "0",
             FF38 = "2")
     @NotYetImplemented({ CHROME, IE })
@@ -121513,7 +121513,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "2",
+            IE = "2",
             CHROME = "2",
             FF38 = "2")
     @NotYetImplemented({ CHROME, IE11, FF })
@@ -122789,7 +122789,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "0",
-            IE11 = "0",
+            IE = "0",
             CHROME = "2",
             FF38 = "0")
     @NotYetImplemented({ FF31, IE, FF38 })
@@ -122812,7 +122812,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "0",
+            IE = "0",
             CHROME = "0",
             FF38 = "2")
     @NotYetImplemented(FF)
@@ -122907,7 +122907,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "2",
+            IE = "2",
             CHROME = "2",
             FF38 = "2")
     public void _marquee_input() throws Exception {
@@ -123002,7 +123002,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "2",
+            IE = "2",
             CHROME = "2",
             FF38 = "2")
     public void _object_input() throws Exception {
@@ -123670,7 +123670,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = "2",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE })
     public void _content_command() throws Exception {
         test("content", "command");
@@ -123840,7 +123840,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = "2",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE })
     public void _data_command() throws Exception {
         test("data", "command");
@@ -124400,7 +124400,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "2",
+            IE = "2",
             FF38 = "2")
     @NotYetImplemented({ FF, IE })
     public void _content_isindex() throws Exception {
@@ -124413,7 +124413,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "2",
+            IE = "2",
             FF38 = "2")
     @NotYetImplemented({ FF, IE })
     public void _data_isindex() throws Exception {
@@ -127463,7 +127463,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = "0",
-            IE11 = "0")
+            IE = "0")
     @NotYetImplemented({ CHROME, IE11 })
     public void _command_picture() throws Exception {
         test("command", "picture");
@@ -127561,7 +127561,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF31 = "2",
-            IE11 = "0",
+            IE = "0",
             FF38 = "2")
     @NotYetImplemented({ FF })
     public void _keygen_picture() throws Exception {
@@ -127647,7 +127647,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = "2",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE11 })
     public void _picture_command() throws Exception {
         test("picture", "command");
@@ -127791,7 +127791,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             FF31 = "null",
-            IE11 = "null")
+            IE = "null")
     @NotYetImplemented(FF38)
     public void _tbody_picture() throws Exception {
         test("tbody", "picture");
@@ -127804,7 +127804,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             FF31 = "null",
-            IE11 = "null")
+            IE = "null")
     @NotYetImplemented(FF38)
     public void _td_picture() throws Exception {
         test("td", "picture");
@@ -127817,7 +127817,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             FF31 = "null",
-            IE11 = "null")
+            IE = "null")
     @NotYetImplemented(FF38)
     public void _tfoot_picture() throws Exception {
         test("tfoot", "picture");
@@ -127830,7 +127830,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             FF31 = "null",
-            IE11 = "null")
+            IE = "null")
     @NotYetImplemented(FF38)
     public void _th_picture() throws Exception {
         test("th", "picture");
@@ -127843,7 +127843,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             FF31 = "null",
-            IE11 = "null")
+            IE = "null")
     @NotYetImplemented(FF38)
     public void _thead_picture() throws Exception {
         test("thead", "picture");
@@ -127856,7 +127856,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             FF31 = "null",
-            IE11 = "null")
+            IE = "null")
     @NotYetImplemented(FF38)
     public void _tr_picture() throws Exception {
         test("tr", "picture");
@@ -128092,7 +128092,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "0",
-            IE11 = "0",
+            IE = "0",
             FF38 = "0")
     @NotYetImplemented({ FF31, IE11, FF38 })
     public void _isindex_picture() throws Exception {
@@ -128105,7 +128105,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ FF31, IE11 })
     public void _picture_isindex() throws Exception {
         test("picture", "isindex");
@@ -128198,7 +128198,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = "0",
-            IE11 = "0")
+            IE = "0")
     @NotYetImplemented({ CHROME, IE11 })
     public void _command_template() throws Exception {
         test("command", "template");
@@ -128296,7 +128296,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "2",
-            IE11 = "0")
+            IE = "0")
     @NotYetImplemented({ FF })
     public void _keygen_template() throws Exception {
         test("keygen", "template");
@@ -128424,7 +128424,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE11, FF })
     public void _template_area() throws Exception {
         test("template", "area");
@@ -128485,7 +128485,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_base() throws Exception {
         test("template", "base");
@@ -128498,7 +128498,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_basefont() throws Exception {
         test("template", "basefont");
@@ -128535,7 +128535,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_bgsound() throws Exception {
         test("template", "bgsound");
@@ -128596,7 +128596,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_br() throws Exception {
         test("template", "br");
@@ -128705,7 +128705,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE11, FF })
     public void _template_command() throws Exception {
         test("template", "command");
@@ -128874,7 +128874,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_embed() throws Exception {
         test("template", "embed");
@@ -129079,7 +129079,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_hr() throws Exception {
         test("template", "hr");
@@ -129128,7 +129128,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE11, FF })
     public void _template_image() throws Exception {
         test("template", "image");
@@ -129141,7 +129141,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_img() throws Exception {
         test("template", "img");
@@ -129154,7 +129154,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_input() throws Exception {
         test("template", "input");
@@ -129179,7 +129179,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE11, FF })
     public void _template_isindex() throws Exception {
         test("template", "isindex");
@@ -129204,7 +129204,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_keygen() throws Exception {
         test("template", "keygen");
@@ -129265,7 +129265,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_link() throws Exception {
         test("template", "link");
@@ -129362,7 +129362,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_meta() throws Exception {
         test("template", "meta");
@@ -129555,7 +129555,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE11, FF })
     public void _template_param() throws Exception {
         test("template", "param");
@@ -129736,7 +129736,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE11, FF })
     public void _template_source() throws Exception {
         test("template", "source");
@@ -129965,7 +129965,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, IE11, FF })
     public void _template_track() throws Exception {
         test("template", "track");
@@ -130038,7 +130038,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0",
-            IE11 = "2")
+            IE = "2")
     @NotYetImplemented({ CHROME, FF })
     public void _template_wbr() throws Exception {
         test("template", "wbr");
@@ -130117,7 +130117,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF = "0",
-            IE11 = "0")
+            IE = "0")
     @NotYetImplemented({ IE11, FF })
     public void _isindex_template() throws Exception {
         test("isindex", "template");
@@ -130128,7 +130128,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "0")
+            IE = "0")
     @NotYetImplemented({ CHROME, FF })
     public void _table_template() throws Exception {
         test("table", "template");

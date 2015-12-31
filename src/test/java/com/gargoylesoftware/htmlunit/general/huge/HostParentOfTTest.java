@@ -241,7 +241,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _UIEvent_PointerEvent() throws Exception {
         test("UIEvent", "PointerEvent");
     }
@@ -413,7 +413,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _UIEvent_MouseWheelEvent() throws Exception {
         test("UIEvent", "MouseWheelEvent");
     }
@@ -539,7 +539,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _TextEvent_TextEvent() throws Exception {
         test("TextEvent", "TextEvent");
     }
@@ -559,7 +559,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _TextTrackCue_TextTrackCue() throws Exception {
         test("TextTrackCue", "TextTrackCue");
     }
@@ -616,7 +616,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _UIEvent_TextEvent() throws Exception {
         test("UIEvent", "TextEvent");
     }
@@ -655,7 +655,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _WebGLContextEvent_WebGLContextEvent() throws Exception {
         test("WebGLContextEvent", "WebGLContextEvent");
     }

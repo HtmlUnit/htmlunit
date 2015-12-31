@@ -257,7 +257,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Console_Console() throws Exception {
         test("Console", "Console");
     }
@@ -267,7 +267,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Coordinates_Coordinates() throws Exception {
         test("Coordinates", "Coordinates");
     }
@@ -415,7 +415,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Geolocation_Geolocation() throws Exception {
         test("Geolocation", "Geolocation");
     }
@@ -1155,7 +1155,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Element_HTMLTableDataCellElement() throws Exception {
         test("Element", "HTMLTableDataCellElement");
     }
@@ -1174,7 +1174,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Element_HTMLTableHeaderCellElement() throws Exception {
         test("Element", "HTMLTableHeaderCellElement");
     }
@@ -1961,7 +1961,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Event_PointerEvent() throws Exception {
         test("Event", "PointerEvent");
     }
@@ -2277,7 +2277,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
         CHROME = "true",
-        IE11 = "true")
+        IE = "true")
     public void _ClientRectList_ClientRectList() throws Exception {
         test("ClientRectList", "ClientRectList");
     }
@@ -2503,7 +2503,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _CSSKeyframeRule_CSSKeyframeRule() throws Exception {
         test("CSSKeyframeRule", "CSSKeyframeRule");
     }
@@ -2514,7 +2514,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _CSSKeyframesRule_CSSKeyframesRule() throws Exception {
         test("CSSKeyframesRule", "CSSKeyframesRule");
     }
@@ -2525,7 +2525,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _CSSRule_CSSKeyframeRule() throws Exception {
         test("CSSRule", "CSSKeyframeRule");
     }
@@ -2536,7 +2536,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _CSSRule_CSSKeyframesRule() throws Exception {
         test("CSSRule", "CSSKeyframesRule");
     }
@@ -4865,7 +4865,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _CSSNamespaceRule_CSSNamespaceRule() throws Exception {
         test("CSSNamespaceRule", "CSSNamespaceRule");
     }
@@ -4875,7 +4875,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _CSSRule_CSSNamespaceRule() throws Exception {
         test("CSSRule", "CSSNamespaceRule");
     }
@@ -4885,7 +4885,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _Event_MouseWheelEvent() throws Exception {
         test("Event", "MouseWheelEvent");
     }
@@ -5925,7 +5925,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _Event_TextEvent() throws Exception {
         test("Event", "TextEvent");
     }
@@ -5945,7 +5945,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _Event_WebGLContextEvent() throws Exception {
         test("Event", "WebGLContextEvent");
     }

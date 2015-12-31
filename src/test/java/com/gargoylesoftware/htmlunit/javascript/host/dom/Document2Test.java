@@ -195,7 +195,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"parent", "child" },
-            IE11 = "evaluate not available")
+            IE = "evaluate not available")
     public void importNodeWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(
@@ -237,7 +237,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"parent", "child", "child3" },
-            IE11 = "evaluate not available")
+            IE = "evaluate not available")
     public void importNodesWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(

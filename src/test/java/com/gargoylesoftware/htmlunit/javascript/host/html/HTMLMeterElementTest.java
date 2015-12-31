@@ -34,7 +34,7 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLMeterElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void tag() throws Exception {
         final String html = "<html><body>\n"
             + "<meter id='it' min='200' max='500' value='350'>\n"

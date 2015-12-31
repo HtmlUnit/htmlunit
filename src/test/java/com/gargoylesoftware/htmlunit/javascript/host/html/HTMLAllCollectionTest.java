@@ -107,7 +107,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
+            IE = "undefined",
             FF31 = "undefined")
     public void namedItem_ZeroIndex() throws Exception {
         namedItem("0");
@@ -118,7 +118,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
+            IE = "undefined",
             FF31 = "undefined")
     public void namedItem_ValidIndex() throws Exception {
         namedItem("1");
@@ -129,7 +129,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
+            IE = "undefined",
             FF31 = "undefined")
     public void namedItem_DoubleIndex() throws Exception {
         namedItem("1.1");
@@ -140,7 +140,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
+            IE = "undefined",
             FF31 = "undefined")
     public void namedItem_InvalidIndex() throws Exception {
         namedItem("200");
@@ -151,7 +151,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
+            IE = "undefined",
             FF31 = "undefined")
     public void namedItem_IndexAsString() throws Exception {
         namedItem("'1'");
@@ -162,7 +162,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
+            IE = "undefined",
             FF31 = "undefined")
     public void namedItem_IndexDoubleAsString() throws Exception {
         namedItem("'1.1'");
@@ -215,7 +215,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF38 = "null",
-            IE11 = "null")
+            IE = "null")
     public void item_Unknown() throws Exception {
         item("'foo'");
     }
@@ -245,7 +245,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF38 = "null",
-            IE11 = "null")
+            IE = "null")
     public void item_NegativIndex() throws Exception {
         item("-1");
     }
@@ -274,7 +274,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF38 = "myHead-undefined",
-            IE11 = "myHead-undefined")
+            IE = "myHead-undefined")
     public void item_DoubleIndex() throws Exception {
         item("1.1");
     }
@@ -297,7 +297,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "myHead-undefined",
             FF38 = "null",
-            IE11 = "null")
+            IE = "null")
     public void item_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -308,7 +308,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF38 = "null",
-            IE11 = "null")
+            IE = "null")
     public void item_IndexDoubleAsString() throws Exception {
         item("'1.1'");
     }
@@ -407,7 +407,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE11 = "myHead-undefined")
+            IE = "myHead-undefined")
     public void arrayIndex_DoubleIndex() throws Exception {
         arrayIndex("1.1");
     }

@@ -330,7 +330,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLFrameElement]",
-            IE11 = "[object Window]")
+            IE = "[object Window]")
     public void frames_bodyOnLoad() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"

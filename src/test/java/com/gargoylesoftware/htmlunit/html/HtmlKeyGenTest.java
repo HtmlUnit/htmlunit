@@ -35,7 +35,7 @@ public class HtmlKeyGenTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = ", inline-block, inline-block",
             FF = "block, inline, inline-block",
-            IE11 = "inline, inline, inline")
+            IE = "inline, inline, inline")
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

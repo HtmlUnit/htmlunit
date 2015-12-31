@@ -1339,7 +1339,7 @@ public class JQuery1113Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
-        IE11 = "0, 2, 2")
+        IE = "0, 2, 2")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
@@ -3056,7 +3056,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
-        IE11 = "0, 2, 2")
+        IE = "0, 2, 2")
     public void event__Check_order_of_focusin_focusout_events() throws Exception {
         runTest("event: Check order of focusin/focusout events");
     }
@@ -3067,7 +3067,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "0, 5, 5",
-        IE11 = "0, 5, 5")
+        IE = "0, 5, 5")
     public void event__focus_blur_order___12868_() throws Exception {
         runTest("event: focus-blur order (#12868)");
     }
@@ -3140,7 +3140,7 @@ public class JQuery1113Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 54, 54",
         FF31 = "0, 54, 54",
         FF38 = "0, 54, 54",
-        IE11 = "0, 54, 54")
+        IE = "0, 54, 54")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void selector__attributes() throws Exception {
         runTest("selector: attributes");
@@ -3928,7 +3928,7 @@ public class JQuery1113Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
-        IE11 = "0, 2, 2")
+        IE = "0, 2, 2")
     public void manipulation__append_the_same_fragment_with_events__Bug__6997__5566_() throws Exception {
         runTest("manipulation: append the same fragment with events (Bug #6997, 5566)");
     }
@@ -5548,7 +5548,7 @@ public class JQuery1113Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 1, 1",
         FF31 = "0, 1, 1",
         FF38 = "0, 1, 1",
-        IE11 = "0, 1, 1")
+        IE = "0, 1, 1")
     public void css__Don_t_append_px_to_CSS__order__value___14049_() throws Exception {
         runTest("css: Don't append px to CSS \"order\" value (#14049)");
     }
@@ -7797,7 +7797,7 @@ public class JQuery1113Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         FF31 = "0, 1, 1",
         FF38 = "0, 1, 1",
-        IE11 = "0, 1, 1")
+        IE = "0, 1, 1")
     @NotYetImplemented({ CHROME, IE11 })
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");

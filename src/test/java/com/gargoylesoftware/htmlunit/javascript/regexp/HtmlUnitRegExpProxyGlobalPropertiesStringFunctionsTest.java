@@ -92,7 +92,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = "HtmlUnitxy,H,t,m,l,U,n,i,t,x,y, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z",
-            IE11 = "HtmlUnitxy,H,t,m,l,U,n,i,t,x,y, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
+            IE = "HtmlUnitxy,H,t,m,l,U,n,i,t,x,y, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
     public void regExpMatchTooManyGroups() throws Exception {
         testMatch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)')");
     }
@@ -129,7 +129,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = "HtmlUnitxy,H,t,m,l,U,n,i,t,x,y, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z",
-            IE11 = "HtmlUnitxy,H,t,m,l,U,n,i,t,x,y, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
+            IE = "HtmlUnitxy,H,t,m,l,U,n,i,t,x,y, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
     public void regExpMatchTooManyGroupsIgnoreCase() throws Exception {
         testMatch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i')");
     }
@@ -175,7 +175,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = "HtmlUnitxy, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z",
-            IE11 = "HtmlUnitxy, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
+            IE = "HtmlUnitxy, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
     public void regExpMatchTooManyGroupsGlobal() throws Exception {
         testMatch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g')");
     }
@@ -240,7 +240,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = "4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z",
-            IE11 = "4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
+            IE = "4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
     public void regExpSearchTooManyGroups() throws Exception {
         testSearch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)')");
     }
@@ -277,7 +277,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = "4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z",
-            IE11 = "4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
+            IE = "4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
     public void regExpSearchTooManyGroupsIgnoreCase() throws Exception {
         testSearch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i')");
     }
@@ -323,7 +323,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = "4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z",
-            IE11 = "4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
+            IE = "4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
     public void regExpSearchTooManyGroupsGlobal() throws Exception {
         testSearch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g')");
     }
@@ -388,7 +388,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = "1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z",
-            IE11 = "1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
+            IE = "1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
     public void regExpReplaceTooManyGroups() throws Exception {
         testReplace("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)')");
     }
@@ -425,7 +425,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = "1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z",
-            IE11 = "1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
+            IE = "1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
     public void regExpReplaceTooManyGroupsIgnoreCase() throws Exception {
         testReplace("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i')");
     }
@@ -472,7 +472,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = "1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z",
-            IE11 = "1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
+            IE = "1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, , 1234, z")
     public void regExpReplaceTooManyGroupsGlobal() throws Exception {
         testReplace("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g')");
     }

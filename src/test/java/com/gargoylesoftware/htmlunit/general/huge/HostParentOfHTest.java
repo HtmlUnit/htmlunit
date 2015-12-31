@@ -239,7 +239,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE11 = "false")
+            IE = "false")
     @NotYetImplemented({ CHROME, FF })
     public void _HTMLCollection_HTMLOptionsCollection() throws Exception {
         test("HTMLCollection", "HTMLOptionsCollection");
@@ -794,7 +794,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLTableDataCellElement_HTMLTableDataCellElement() throws Exception {
         test("HTMLTableDataCellElement", "HTMLTableDataCellElement");
     }
@@ -813,7 +813,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLTableHeaderCellElement_HTMLTableHeaderCellElement() throws Exception {
         test("HTMLTableHeaderCellElement", "HTMLTableHeaderCellElement");
     }
@@ -914,7 +914,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     @NotYetImplemented({ CHROME, FF38 })
     public void _HTMLCollection_HTMLAllCollection() throws Exception {
         test("HTMLCollection", "HTMLAllCollection");
@@ -961,7 +961,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLBGSoundElement() throws Exception {
         test("HTMLElement", "HTMLBGSoundElement");
     }
@@ -989,7 +989,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLBaseFontElement() throws Exception {
         test("HTMLElement", "HTMLBaseFontElement");
     }
@@ -999,7 +999,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLBlockElement() throws Exception {
         test("HTMLElement", "HTMLBlockElement");
     }
@@ -1054,7 +1054,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLDDElement() throws Exception {
         test("HTMLElement", "HTMLDDElement");
     }
@@ -1084,7 +1084,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLDTElement() throws Exception {
         test("HTMLElement", "HTMLDTElement");
     }
@@ -1238,7 +1238,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLIsIndexElement() throws Exception {
         test("HTMLElement", "HTMLIsIndexElement");
     }
@@ -1369,7 +1369,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLNextIdElement() throws Exception {
         test("HTMLElement", "HTMLNextIdElement");
     }
@@ -1443,7 +1443,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLPhraseElement() throws Exception {
         test("HTMLElement", "HTMLPhraseElement");
     }
@@ -1543,7 +1543,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLTableDataCellElement() throws Exception {
         test("HTMLElement", "HTMLTableDataCellElement");
     }
@@ -1562,7 +1562,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLElement_HTMLTableHeaderCellElement() throws Exception {
         test("HTMLElement", "HTMLTableHeaderCellElement");
     }
@@ -1690,7 +1690,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLTableCellElement_HTMLTableDataCellElement() throws Exception {
         test("HTMLTableCellElement", "HTMLTableDataCellElement");
     }
@@ -1700,7 +1700,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _HTMLTableCellElement_HTMLTableHeaderCellElement() throws Exception {
         test("HTMLTableCellElement", "HTMLTableHeaderCellElement");
     }

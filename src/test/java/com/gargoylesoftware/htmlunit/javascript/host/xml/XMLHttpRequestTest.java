@@ -782,7 +782,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "40644",
             CHROME = "233",
-            IE11 = "NaN")
+            IE = "NaN")
     @NotYetImplemented({ IE, CHROME })
     public void overrideMimeType_charset_wrong() throws Exception {
         final String html = "<html><head>\n"

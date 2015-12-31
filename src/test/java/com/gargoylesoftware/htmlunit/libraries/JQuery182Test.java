@@ -1188,7 +1188,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
-        IE11 = "0, 2, 2")
+        IE = "0, 2, 2")
     public void support__body_background_is_not_lost_if_set_prior_to_loading_jQuery___9238_() throws Exception {
         runTest("support: body background is not lost if set prior to loading jQuery (#9238)");
     }
@@ -3313,7 +3313,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
-        IE11 = "0, 2, 2")
+        IE = "0, 2, 2")
     public void manipulation__append_the_same_fragment_with_events__Bug__6997__5566_() throws Exception {
         runTest("manipulation: append the same fragment with events (Bug #6997, 5566)");
     }
@@ -3606,7 +3606,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 5, 5",
         FF31 = "0, 5, 5",
         FF38 = "0, 5, 5",
-        IE11 = "1, 4, 5")
+        IE = "1, 4, 5")
     @NotYetImplemented(IE11)
     public void manipulation__clone_form_element___Bug__3879___6655_() throws Exception {
         runTest("manipulation: clone(form element) (Bug #3879, #6655)");
@@ -3969,7 +3969,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 7, 7",
         FF31 = "0, 7, 7",
         FF38 = "0, 7, 7",
-        IE11 = "0, 7, 7")
+        IE = "0, 7, 7")
     @NotYetImplemented
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
@@ -4085,7 +4085,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "2, 2, 4",
         FF31 = "0, 4, 4",
         FF38 = "0, 4, 4",
-        IE11 = "0, 4, 4")
+        IE = "0, 4, 4")
     @NotYetImplemented(CHROME)
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
@@ -6259,7 +6259,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(CHROME = "0, 2, 2",
         FF31 = "0, 1, 1",
         FF38 = "0, 1, 1",
-        IE11 = "0, 1, 1")
+        IE = "0, 1, 1")
     @NotYetImplemented({ CHROME, IE11 })
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
