@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -3088,7 +3088,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("undefined")
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @NotYetImplemented({ FF, CHROME, IE })
     public void staticNodeList() throws Exception {
         test("StaticNodeList");
     }
@@ -3366,7 +3366,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void msStyleCSSProperties() throws Exception {
         test("MSStyleCSSProperties");
     }
@@ -3379,7 +3379,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void msCurrentStyleCSSProperties() throws Exception {
         test("MSCurrentStyleCSSProperties");
     }

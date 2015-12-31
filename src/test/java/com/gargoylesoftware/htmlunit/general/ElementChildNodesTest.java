@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -254,7 +253,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE, CHROME })
     public void body() throws Exception {
         loadPageWithAlerts2(test("body"));
     }
@@ -755,7 +754,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
             FF31 = { "1", "0", "1", "1", "0", "1" },
             FF38 = { "1", "0", "1", "1", "0", "1" },
             IE11 = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE })
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
@@ -1375,7 +1374,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "3", "2" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE, CHROME })
     public void table() throws Exception {
         loadPageWithAlerts2(test("table"));
     }
@@ -1520,7 +1519,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE, CHROME })
     public void title() throws Exception {
         loadPageWithAlerts2(test("title"));
     }

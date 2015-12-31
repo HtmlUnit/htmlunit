@@ -3345,7 +3345,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     @AlertsStandards("exception")
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @NotYetImplemented({ FF, CHROME, IE })
     public void staticNodeList() throws Exception {
         test("StaticNodeList");
     }

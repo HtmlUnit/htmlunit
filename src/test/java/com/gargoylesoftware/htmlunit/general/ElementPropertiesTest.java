@@ -864,7 +864,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onmsneedkey,pause(),paused,play(),"
                 + "playbackRate,played,preload,readyState,seekable,seeking,src,srcObject,textTracks,videoTracks,"
                 + "volume")
-    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void audio() throws Exception {
         test("audio");
     }
@@ -1048,7 +1048,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "getContext(),height,mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             IE11 = "getContext(),height,msToBlob(),toDataURL(),width",
             EDGE = "getContext(),height,msToBlob(),toDataURL(),width")
-    @NotYetImplemented({ IE11, FF, EDGE })
+    @NotYetImplemented({ IE, FF, EDGE })
     public void canvas() throws Exception {
         test("canvas");
     }
@@ -1275,7 +1275,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             IE11 = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate",
             EDGE = "align,checkValidity(),disabled,form,setCustomValidity(),validationMessage,validity,willValidate")
-    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -1653,7 +1653,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setCustomValidity(),type,validationMessage,validity,"
                 + "willValidate",
             IE11 = "cite,clear,width")
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented({ IE, CHROME })
     public void keygen() throws Exception {
         test("keygen");
     }
@@ -2076,7 +2076,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "max,position,value",
             IE11 = "form,max,position,value",
             EDGE = "form,max,position,value")
-    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void progress() throws Exception {
         test("progress");
     }
@@ -2215,7 +2215,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF31 = "media,src,type",
             IE11 = "media,src,type",
             EDGE = "media,msKeySystem,src,type")
-    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void source() throws Exception {
         test("source");
     }
@@ -2502,7 +2502,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track")
-    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void track() throws Exception {
         test("track");
     }
@@ -2592,7 +2592,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitDisplayingFullscreen,webkitEnterFullscreen(),webkitEnterFullScreen(),"
                 + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,"
                 + "width")
-    @NotYetImplemented({ CHROME, IE11, FF, EDGE })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void video() throws Exception {
         test("video");
     }
@@ -2766,7 +2766,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
                 + "getModifierState(),initKeyboardEvent(),key,keyCode,locale,location,metaKey,repeat,shiftKey,"
                 + "which")
-    @NotYetImplemented({ CHROME, FF, IE11, EDGE })
+    @NotYetImplemented({ CHROME, FF, IE, EDGE })
     public void keyboardEvent() throws Exception {
         testString("document.createEvent ? document.createEvent('KeyboardEvent') : '',"
                 + " document.createEvent ? document.createEvent('UIEvent') : ''");

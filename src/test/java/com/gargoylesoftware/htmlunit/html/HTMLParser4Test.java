@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -301,7 +301,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Alerts({ "titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv" })
-    @BuggyWebDriver(IE11)
+    @BuggyWebDriver(IE)
     // The correct values for IE11 are:
     //            IE11 = { "titles", "HEAD", "Outer Html", "DIV", "",
     //                "bodyTitles", "DIV", "",
@@ -360,7 +360,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Alerts({ "titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv" })
-    @BuggyWebDriver(IE11)
+    @BuggyWebDriver(IE)
     // The correct values for IE11 are:
     //            IE11 = { "titles", "HEAD", "Outer Html", "DIV", "",
     //                "bodyTitles", "DIV", "",
@@ -466,7 +466,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "titles", "HEAD", "Inner Html", "misc", "true", "BODY" })
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE })
     // currently the content of HEAD and BODY are added directly to HTML
     public void setCompleteHtmlToHTML_innerHTML() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
