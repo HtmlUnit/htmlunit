@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.Collection;
 
@@ -221,7 +221,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE })
     public void _NodeFilter_NodeFilter() throws Exception {
         test("NodeFilter", "NodeFilter");
     }
@@ -2056,7 +2056,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void _MouseEvent_MouseWheelEvent() throws Exception {
         test("MouseEvent", "MouseWheelEvent");
     }
