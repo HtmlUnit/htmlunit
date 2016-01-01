@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -436,7 +434,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = { "0", "inner" })
-    @NotYetImplemented(CHROME)
     public void javascriptTargetWhitespace() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='  '",
@@ -459,7 +456,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = { "0", "inner" })
-    @NotYetImplemented(CHROME)
     public void javascriptTargetBlank() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='_blank'",
@@ -473,7 +469,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "main",
             CHROME = "inner")
-    @NotYetImplemented(CHROME)
     public void javascriptTargetTop() throws Exception {
         javascriptTarget("target='_top'", 0, getExpectedAlerts());
     }
@@ -484,7 +479,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "main",
             CHROME = "inner")
-    @NotYetImplemented(CHROME)
     public void javascriptTargetParent() throws Exception {
         javascriptTarget("target='_parent'", 0, getExpectedAlerts());
     }
@@ -495,7 +489,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = { "0", "inner" })
-    @NotYetImplemented(CHROME)
     public void javascriptTargetUnknown() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='unknown'",

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_IGNORE_TARGET_FOR_JS_HREF;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -99,12 +100,17 @@ public class HtmlAnchor extends HtmlElement {
                 builder.append(ch);
             }
 
-            final WebWindow win = htmlPage.getWebClient().openTargetWindow(htmlPage.getEnclosingWindow(),
-                    htmlPage.getResolvedTarget(getTargetAttribute()), "_self");
-            final Page page = win.getEnclosedPage();
-            if (page != null && page.isHtmlPage()) {
-                htmlPage = (HtmlPage) page;
+            if (hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF)) {
                 htmlPage.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+            }
+            else {
+                final WebWindow win = htmlPage.getWebClient().openTargetWindow(htmlPage.getEnclosingWindow(),
+                        htmlPage.getResolvedTarget(getTargetAttribute()), "_self");
+                final Page page = win.getEnclosedPage();
+                if (page != null && page.isHtmlPage()) {
+                    htmlPage = (HtmlPage) page;
+                    htmlPage.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+                }
             }
             return;
         }
