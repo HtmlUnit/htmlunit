@@ -43,9 +43,9 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "caption4" },
-            CHROME = { "caption1", "caption2", "null", "caption3", "exception" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = { "caption1", "caption2", "null", "caption3", "exception",
+                            "[object HTMLTableCaptionElement]", "caption3", "caption4" },
+            CHROME = { "caption1", "caption2", "null", "caption3", "exception", "null", "caption4" })
     public void tableCaptions() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -56,15 +56,21 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  <script type='text/javascript' language='JavaScript'>\n"
             + "    var table = document.getElementById('table_1');\n"
             + "    alert(table.caption.innerHTML);\n"
+
             + "    table.deleteCaption();\n"
             + "    alert(table.caption.innerHTML);\n"
+
             + "    table.deleteCaption();\n"
             + "    alert(table.caption);\n"
+
             + "    var newCaption = table.createCaption();\n"
             + "    newCaption.innerHTML = 'caption3';\n"
             + "    alert(table.caption.innerHTML);\n"
+
             + "    try { table.caption = 123; } catch(e) { alert('exception') }\n"
-            + "    alert(table.caption.innerHTML);\n"
+            + "    alert(table.caption);\n"
+            + "    if (table.caption) { alert(table.caption.innerHTML) }\n"
+
             + "    var caption4 = document.createElement('caption');\n"
             + "    caption4.innerHTML = 'caption4';\n"
             + "    try { table.caption = caption4; } catch(e) { alert('exception') }\n"
@@ -79,9 +85,9 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "thead4" },
-            CHROME = { "thead1", "thead2", "null", "thead3", "exception" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = { "thead1", "thead2", "null", "thead3", "exception",
+                            "[object HTMLTableSectionElement]", "thead3", "thead4" },
+            CHROME = { "thead1", "thead2", "null", "thead3", "exception", "null", "thead4" })
     public void tableHeaders() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -94,15 +100,21 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  <script type='text/javascript' language='JavaScript'>\n"
             + "    var table = document.getElementById('table_1');\n"
             + "    alert(table.tHead.id);\n"
+
             + "    table.deleteTHead();\n"
             + "    alert(table.tHead.id);\n"
+
             + "    table.deleteTHead();\n"
             + "    alert(table.tHead);\n"
+
             + "    var newTHead = table.createTHead();\n"
             + "    newTHead.id = 'thead3';\n"
             + "    alert(table.tHead.id);\n"
+
             + "    try { table.tHead = 123; } catch(e) { alert('exception') }\n"
-            + "    alert(table.tHead.id);\n"
+            + "    alert(table.tHead);\n"
+            + "    if (table.tHead) { alert(table.tHead.id) }\n"
+
             + "    var tHead4 = document.createElement('tHead');\n"
             + "    tHead4.id = 'thead4';\n"
             + "    try { table.tHead = tHead4; } catch(e) { alert('exception') }\n"
@@ -268,9 +280,9 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "tfoot4" },
-            CHROME = { "tfoot1", "tfoot2", "null", "tfoot3", "exception" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = { "tfoot1", "tfoot2", "null", "tfoot3", "exception",
+                            "[object HTMLTableSectionElement]", "tfoot3", "tfoot4" },
+            CHROME = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "null", "tfoot4" })
     public void tableFooters() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -283,15 +295,21 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    var table = document.getElementById('table_1');\n"
             + "    alert(table.tFoot.id);\n"
+
             + "    table.deleteTFoot();\n"
             + "    alert(table.tFoot.id);\n"
+
             + "    table.deleteTFoot();\n"
             + "    alert(table.tFoot);\n"
+
             + "    var newTFoot = table.createTFoot();\n"
             + "    newTFoot.id = 'tfoot3';\n"
             + "    alert(table.tFoot.id);\n"
+
             + "    try { table.tFoot = 123; } catch(e) { alert('exception') }\n"
-            + "    alert(table.tFoot.id);\n"
+            + "    alert(table.tFoot);\n"
+            + "    if (table.tFoot) { alert(table.tFoot.id) }\n"
+
             + "    var tFoot4 = document.createElement('tFoot');\n"
             + "    tFoot4.id = 'tfoot4';\n"
             + "    try { table.tFoot = tFoot4; } catch(e) { alert('exception') }\n"
