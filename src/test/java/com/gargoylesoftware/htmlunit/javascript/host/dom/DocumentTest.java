@@ -1097,7 +1097,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("<->form2")
-    @NotYetImplemented(CHROME)
     public void all_NamedItem_ByName_formWithoutId() throws Exception {
         namedItem("form2");
     }
@@ -1107,7 +1106,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("f3<->form3")
-    @NotYetImplemented(CHROME)
     public void all_NamedItem_ByName() throws Exception {
         namedItem("form3");
     }
@@ -1128,7 +1126,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "coll 2", "f5_1<->form5", "f5_2<->form5" },
             IE = "f5_1<->form5")
-    @NotYetImplemented(CHROME)
     public void all_NamedItem_DuplicateName() throws Exception {
         namedItem("form5");
     }

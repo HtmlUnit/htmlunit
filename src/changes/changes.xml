@@ -9,6 +9,9 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                Fixed document.all.namedItem for Chrome when parameter is a form name.
+            </action>
+            <action type="fix" dev="rbri">
                 Chrome ignores the target attribute if the href starts with 'javascript:'.
             </action>
             <action type="fix" dev="rbri">

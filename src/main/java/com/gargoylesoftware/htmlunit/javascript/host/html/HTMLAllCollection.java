@@ -30,18 +30,19 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A special {@link HTMLCollection} for <code>document.all</code>.
@@ -146,8 +147,7 @@ public class HTMLAllCollection extends HTMLCollection {
         for (final Object next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
-                final String nodeName = elem.getAttribute("name");
-                if (byName && name.equals(nodeName)) {
+                if ((byName || (elem instanceof HtmlForm)) && name.equals(elem.getAttribute("name"))) {
                     matchingByName.add(elem);
                 }
                 else {
