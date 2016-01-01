@@ -733,6 +733,44 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test getting the class for the element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "* x # x *", "*\tx\t#\tx\t*", "*  #  *", "*\t\t#\t\t*", "*\t \n \n#\t \n \n*", "*x\ty#x\ty*" },
+            CHROME = { "* x # x *", "*\tx\t#\tx\t*", "*#  *", "*#\t\t*", "*#\t \n \n*", "*x\ty#x\ty*" })
+    public void getClassNameWhitespace() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "    var elem = document.getElementById('pid1');\n"
+            + "    alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "    elem = document.getElementById('pid2');\n"
+            + "    alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "    elem = document.getElementById('pid3');\n"
+            + "    alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "    elem = document.getElementById('pid4');\n"
+            + "    alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "    elem = document.getElementById('pid5');\n"
+            + "    alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "    elem = document.getElementById('pid6');\n"
+            + "    alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <p id='pid1' class=' x '>text</p>\n"
+            + "  <p id='pid2' class='\tx\t'>text</p>\n"
+            + "  <p id='pid3' class='  '>text</p>\n"
+            + "  <p id='pid4' class='\t\t'>text</p>\n"
+            + "  <p id='pid5' class='\t \r \n'>text</p>\n"
+            + "  <p id='pid6' class='x\ty'>text</p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test setting the class for the element.
      * @throws Exception if the test fails
      */

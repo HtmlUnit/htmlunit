@@ -565,6 +565,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CANVAS_DATA_URL_IE_PNG,
 
+    /** className returns an empty string if attribute is blank. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_CLASS_NAME_TROMMED_WHEN_BLANK,
+
     /** Do not allow invalid clear values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_CLEAR_RESTRICT,

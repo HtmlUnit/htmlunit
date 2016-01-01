@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -325,7 +322,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {" \t \n  ", "0", "false" },
             CHROME = {"", "0", "false" })
-    @NotYetImplemented(CHROME)
     public void containsInsideWhitespace() throws Exception {
         contains(" \t \r  ", "a");
     }
@@ -495,7 +491,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {" \t \n  ", "0", "1", " \t \n  a" },
             IE = {" \t \n  ", "0", "1", "a" },
             CHROME = {"", "0", "1", " \t \n  a" })
-    @NotYetImplemented(CHROME)
     public void addToWhitespace() throws Exception {
         add(" \t \r  ", "a");
     }
@@ -659,7 +654,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {" \t \n  ", "0", "0", " \t \n  " },
             CHROME = {"", "0", "0", "" })
-    @NotYetImplemented(CHROME)
     public void removeFromWhitespace() throws Exception {
         remove(" \t \r  ", "a");
     }
