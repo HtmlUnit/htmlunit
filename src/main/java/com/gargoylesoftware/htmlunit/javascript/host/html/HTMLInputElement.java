@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_EMAIL_TRIMMED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_URL_TRIMMED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -162,7 +164,16 @@ public class HTMLInputElement extends FormField {
             return;
         }
 
-        getDomNodeOrDie().setAttribute("value", Context.toString(newValue));
+        if (StringUtils.isBlank(val)) {
+            if ("email".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED))  {
+                val = "";
+            }
+            else if ("url".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
+                val = "";
+            }
+        }
+
+        getDomNodeOrDie().setAttribute("value", val);
     }
 
     /**

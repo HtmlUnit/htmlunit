@@ -958,12 +958,20 @@ public enum BrowserVersionFeatures {
     JS_INNER_TEXT_READONLY_FOR_TABLE,
 
     /** Setting the type property of an input converts the type to lowercase. */
-    @BrowserFeature({ @WebBrowser(IE) })
+    @BrowserFeature(@WebBrowser(IE))
     JS_INPUT_SET_TYPE_LOWERCASE,
+
+    /** Setting the value of an Input URL to blank will result in an empty value. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_INPUT_SET_VALUE_EMAIL_TRIMMED,
 
     /** Setting the value of an Input Text/Password/TextArea resets the selection. */
     @BrowserFeature(@WebBrowser(IE))
     JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START,
+
+    /** Setting the value of an Input URL to blank will result in an empty value. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_INPUT_SET_VALUE_URL_TRIMMED,
 
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature(@WebBrowser(CHROME))
