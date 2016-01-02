@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -539,7 +538,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "4", "", "0" },
             IE = { "null", "4", "null", "4" })
-    @NotYetImplemented({ CHROME, FF })
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"
@@ -553,6 +551,38 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "          alert(t.value.length);\n"
 
             + "        t.value = null;\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea id='t'>abc</textarea>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "12", "2", "[object HTMLTextAreaElement]", "28" })
+    public void getAttributeAndSetValueOther() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head><title>foo</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var t = document.getElementById('t');\n"
+            + "        t.value = 12;\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = t;\n"
             + "        alert(t.value);\n"
             + "        if (t.value != null)\n"
             + "          alert(t.value.length);\n"

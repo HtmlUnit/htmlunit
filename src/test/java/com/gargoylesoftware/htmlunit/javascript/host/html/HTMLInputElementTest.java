@@ -75,6 +75,201 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Alerts(DEFAULT = { "error fileupload1", "abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                        "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "abc", "abc", "abc", "abc", "abc",
+                        "abc", "", "50", "abc", "abc", "abc", "abc" },
+            CHROME = { "error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+                        "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "", "", "",
+                        "", "", "50", "abc", "abc", "abc", "abc" },
+            IE = { "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc",
+                    "abc", "", "50", "abc", "abc", "abc", "abc" })
+    @Test
+    @NotYetImplemented
+    public void setValueString() throws Exception {
+        testValue("'abc'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "", "", "", "", "", "foo", "", "", "",
+                        "", "", "", "", "", "", "#000000", "", "", "", "", "",
+                        "", "", "50", "", "", "", "" },
+            CHROME = { "", "", "", "", "", "", "", "", "",
+                        "", "", "", "", "", "", "#000000", "", "", "", "", "",
+                        "", "", "50", "", "", "", "" },
+            IE = { "", "", "", "", "", "", "", "", "",
+                    "", "", "", "", "", "", "", "", "", "", "", "",
+                    "", "", "50", "", "", "", "" })
+    @Test
+    @NotYetImplemented
+    public void setValueEmptyString() throws Exception {
+        testValue("''");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "error fileupload1", "  ", "  ", "  ", "", "  ", "foo", "", "  ", "  ",
+                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "  ", "  ", "  ", "  ", "  ",
+                        "  ", "", "50", "  ", "", "  ", "" },
+            CHROME = { "error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
+                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "", "  ", "", "", "",
+                        "", "", "50", "  ", "", "  ", "  " },
+            IE = { "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
+                    "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ",
+                    "  ", "", "50", "  ",  "  ", "  ", "  " })
+    @Test
+    @NotYetImplemented
+    public void setValueBlankString() throws Exception {
+        testValue("'  '");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "error fileupload1", "12", "12", "12", "", "12", "foo", "", "12", "12",
+                        "12", "12", "12", "12", "12", "12", "#000000", "12", "12", "12", "12", "12",
+                        "12", "12", "12", "12", "12", "12", "12" },
+            CHROME = { "error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
+                        "12", "12", "12", "12", "12", "12", "#000000", "", "12", "", "", "",
+                        "", "12", "12", "12", "12", "12", "12" },
+            IE = { "12", "12", "12", "", "12", "", "", "12", "12",
+                    "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12",
+                    "12", "12", "12", "12", "12", "12", "12" })
+    @Test
+    @NotYetImplemented
+    public void setValueNumber() throws Exception {
+        testValue("12");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "", "null", "", "", "", "foo", "", "", "",
+                        "", "null", "", "null", "", "", "#000000", "", "", "", "", "",
+                        "", "", "50", "", "", "", "" },
+            CHROME = { "", "null", "", "", "", "", "", "", "",
+                        "", "null", "", "null", "", "", "#000000", "", "", "", "", "",
+                        "", "", "50", "", "", "", "" },
+            IE = { "", "null", "", "", "", "", "", "", "",
+                    "", "null", "", "null", "", "null", "", "", "", "", "", "",
+                    "", "", "50", "", "", "", "" })
+    @Test
+    @NotYetImplemented
+    public void setValueNull() throws Exception {
+        testValue("null");
+    }
+
+    private void testValue(final String value) throws Exception {
+        String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+
+            + "    document.form1.button1.value = " + value + ";\n"
+            + "    document.form1.button2.value = " + value + ";\n"
+            + "    document.form1.checkbox1.value = " + value + ";\n"
+            + "    try { document.form1.fileupload1.value = " + value + " } catch(e) { alert('error fileupload1') }\n"
+            + "    document.form1.hidden1.value = " + value + ";\n"
+            + "    document.form1.select1.value = " + value + ";\n"
+            + "    document.form1.select2.value = " + value + ";\n"
+            + "    document.form1.password1.value = " + value + ";\n"
+            + "    document.form1.radio1.value = " + value + ";\n"
+            + "    document.form1.reset1.value = " + value + ";\n"
+            + "    document.form1.reset2.value = " + value + ";\n"
+            + "    document.form1.submit1.value = " + value + ";\n"
+            + "    document.form1.submit2.value = " + value + ";\n"
+            + "    document.form1.textInput1.value = " + value + ";\n"
+            + "    document.form1.textarea1.value = " + value + ";\n"
+            + "    document.form1.color1.value = " + value + ";\n"
+            + "    document.form1.date1.value = " + value + ";\n"
+            + "    document.form1.datetime1.value = " + value + ";\n"
+            + "    document.form1.datetimeLocal1.value = " + value + ";\n"
+            + "    document.form1.time1.value = " + value + ";\n"
+            + "    document.form1.week1.value = " + value + ";\n"
+            + "    document.form1.month1.value = " + value + ";\n"
+            + "    document.form1.number1.value = " + value + ";\n"
+            + "    document.form1.range1.value = " + value + ";\n"
+            + "    document.form1.search1.value = " + value + ";\n"
+            + "    document.form1.email1.value = " + value + ";\n"
+            + "    document.form1.tel1.value = " + value + ";\n"
+            + "    document.form1.url1.value = " + value + ";\n"
+
+            + "    alert(document.form1.button1.value);\n"
+            + "    alert(document.form1.button2.value);\n"
+            + "    alert(document.form1.checkbox1.value);\n"
+            + "    alert(document.form1.fileupload1.value);\n"
+            + "    alert(document.form1.hidden1.value);\n"
+            + "    alert(document.form1.select1.value);\n"
+            + "    alert(document.form1.select2.value);\n"
+            + "    alert(document.form1.password1.value);\n"
+            + "    alert(document.form1.radio1.value);\n"
+            + "    alert(document.form1.reset1.value);\n"
+            + "    alert(document.form1.reset2.value);\n"
+            + "    alert(document.form1.submit1.value);\n"
+            + "    alert(document.form1.submit2.value);\n"
+            + "    alert(document.form1.textInput1.value);\n"
+            + "    alert(document.form1.textarea1.value);\n"
+            + "    alert(document.form1.color1.value);\n"
+            + "    alert(document.form1.date1.value);\n"
+            + "    alert(document.form1.datetime1.value);\n"
+            + "    alert(document.form1.datetimeLocal1.value);\n"
+            + "    alert(document.form1.time1.value);\n"
+            + "    alert(document.form1.week1.value);\n"
+            + "    alert(document.form1.month1.value);\n"
+            + "    alert(document.form1.number1.value);\n"
+            + "    alert(document.form1.range1.value);\n"
+            + "    alert(document.form1.search1.value);\n"
+            + "    alert(document.form1.email1.value);\n"
+            + "    alert(document.form1.tel1.value);\n"
+            + "    alert(document.form1.url1.value);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <input type='button' name='button1'></button>\n"
+            + "    <button type='button' name='button2'></button>\n"
+            + "    <input type='checkbox' name='checkbox1'/>\n"
+            + "    <input type='file' name='fileupload1'/>\n"
+            + "    <input type='hidden' name='hidden1'/>\n"
+            + "    <select name='select1'>\n"
+            + "        <option>foo</option>\n"
+            + "    </select>\n"
+            + "    <select multiple='multiple' name='select2'>\n"
+            + "        <option>foo</option>\n"
+            + "    </select>\n"
+            + "    <input type='password' name='password1'/>\n"
+            + "    <input type='radio' name='radio1'/>\n"
+            + "    <input type='reset' name='reset1'/>\n"
+            + "    <button type='reset' name='reset2'></button>\n"
+            + "    <input type='submit' name='submit1'/>\n"
+            + "    <button type='submit' name='submit2'></button>\n"
+            + "    <input type='text' name='textInput1'/>\n"
+            + "    <textarea name='textarea1'>foo</textarea>\n"
+            + "    <input type='color' name='color1'/>\n"
+            + "    <input type='date' name='date1'/>\n"
+            + "    <input type='datetime' name='datetime1'/>\n"
+            + "    <input type='datetime-local' name='datetimeLocal1'/>\n"
+            + "    <input type='time' name='time1'/>\n"
+            + "    <input type='week' name='week1'/>\n"
+            + "    <input type='month' name='month1'/>\n"
+            + "    <input type='number' name='number1'/>\n"
+            + "    <input type='range' name='range1'/>\n"
+            + "    <input type='search' name='search1'/>\n"
+            + "    <input type='email' name='email1'/>\n"
+            + "    <input type='tel' name='tel1'/>\n"
+            + "    <input type='url' name='url1'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(CHROME = "button, button, checkbox, file, hidden, select-one, select-multiple, "
                 + "password, radio, reset, reset, "
@@ -91,7 +286,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             )
     @NotYetImplemented
     public void type() throws Exception {
-        test("type", "", null);
+        testAttribute("type", "", null);
     }
 
     /**
@@ -106,7 +301,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 + " undefined, undefined, undefined, undefined")
     @Test
     public void files() throws Exception {
-        test("files", "", null);
+        testAttribute("files", "", null);
     }
 
     /**
@@ -118,7 +313,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 "false", "false", "false", "false", "false", "false", "false" })
     @Test
     public void checked() throws Exception {
-        test("checked", "", null);
+        testAttribute("checked", "", null);
     }
 
     /**
@@ -135,7 +330,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @NotYetImplemented(IE)
     public void checkedWithAttribute() throws Exception {
-        test("checked", "checked", null);
+        testAttribute("checked", "checked", null);
     }
 
     /**
@@ -147,7 +342,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 "true", "true", "true", "true", "true", "true", "true" })
     @Test
     public void setCheckedTrue() throws Exception {
-        test("checked", "", "true");
+        testAttribute("checked", "", "true");
     }
 
     /**
@@ -159,7 +354,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 "true", "true", "true", "true", "true", "true", "true" })
     @Test
     public void setCheckedBlank() throws Exception {
-        test("checked", "", "");
+        testAttribute("checked", "", "");
     }
 
     /**
@@ -177,10 +372,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @NotYetImplemented
     public void setValueAttribute() throws Exception {
-        test("value", "", "abc");
+        testAttribute("value", "", "abc");
     }
 
-    private void test(final String property, final String attrib, final String value) throws Exception {
+    private void testAttribute(final String property, final String attrib, final String value) throws Exception {
         String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -1173,7 +1368,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "null", "4", "", "0" })
-    @NotYetImplemented({ FF, IE, CHROME })
     public void getAttributeAndSetValueNull() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

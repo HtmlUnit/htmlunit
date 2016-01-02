@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -27,8 +28,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.io.IOException;
 import java.util.Locale;
 
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -50,6 +50,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object for {@code HTMLInputElement}.
@@ -136,6 +139,30 @@ public class HTMLInputElement extends FormField {
                 super.setAttribute("type", newType);
             }
         }
+    }
+
+    /**
+     * Sets the value of the JavaScript attribute {@code value}.
+     *
+     * @param newValue the new value
+     */
+    @JsxSetter
+    @Override
+    public void setValue(final Object newValue) {
+        if (null == newValue) {
+            getDomNodeOrDie().setAttribute("value", "");
+            return;
+        }
+
+        String val = Context.toString(newValue);
+        if (StringUtils.isNotEmpty(val) && "file".equalsIgnoreCase(getType())) {
+            if (getBrowserVersion().hasFeature(JS_SELECT_FILE_THROWS)) {
+                throw Context.reportRuntimeError("InvalidStateError: Failed to set the 'value' property on 'HTMLInputElement'.");
+            }
+            return;
+        }
+
+        getDomNodeOrDie().setAttribute("value", Context.toString(newValue));
     }
 
     /**

@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
@@ -69,8 +70,8 @@ public class FormField extends FormChild {
      * @param newValue the new value
      */
     @JsxSetter
-    public void setValue(final String newValue) {
-        getDomNodeOrDie().setAttribute("value", newValue);
+    public void setValue(final Object newValue) {
+        getDomNodeOrDie().setAttribute("value", Context.toString(newValue));
     }
 
     /**

@@ -1109,6 +1109,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_SELECTOR_TEXT_LOWERCASE,
 
+    /** Indicates that setting the value to null has no effect. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_SELECT_FILE_THROWS,
+
     /** When expanding the collection by setting the length don't add
      * a empty text node. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
@@ -1254,6 +1258,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
+
+    /** Setting the value processes null as null value. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_TEXT_AREA_SET_VALUE_NULL,
 
     /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always {@code false}. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
