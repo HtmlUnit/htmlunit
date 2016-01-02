@@ -351,7 +351,6 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "string" },
             IE = { "", "string" })
-    @NotYetImplemented({ FF, CHROME })
     public void width_null() throws Exception {
         final String html
             = "<html><head>"

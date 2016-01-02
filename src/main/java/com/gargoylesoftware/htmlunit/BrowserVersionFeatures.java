@@ -1194,6 +1194,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES,
 
+    /** The width column property has a value of 'null' for null */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_TABLE_COLUMN_WIDTH_NULL_STRING,
+
     /** Calling deleteCell without an index throws an exeption. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,

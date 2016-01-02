@@ -15,12 +15,12 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_COLUMN_WIDTH_NULL_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumnGroup;
@@ -30,6 +30,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLTableColElement}.
@@ -111,7 +113,14 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setWidth(final Object width) {
-        setWidthOrHeight("width", width == null ? "" : Context.toString(width), false);
+        final String value;
+        if (width == null && !getBrowserVersion().hasFeature(JS_TABLE_COLUMN_WIDTH_NULL_STRING)) {
+            value = "";
+        }
+        else {
+            value = Context.toString(width);
+        }
+        setWidthOrHeight("width", value, false);
     }
 
     /**

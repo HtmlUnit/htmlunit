@@ -9,6 +9,9 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                Setting the width of a table column to null now works correct for FF/Chrome also.
+            </action>
+            <action type="fix" dev="rbri">
                 Fix our simulation of setting table caption/tHead/tFoot for Chrome.
             </action>
             <action type="fix" dev="rbri">
