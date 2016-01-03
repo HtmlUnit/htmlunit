@@ -150,6 +150,11 @@ public class HtmlPage extends InteractivePage {
     private URL baseUrl_;
     private List<AutoCloseable> autoCloseableList_;
 
+    private static final List<String> TABBABLE_TAGS = Arrays.asList(new String[]
+            {"a", "area", HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, "object", HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME});
+    final List<String> ACCEPTABLE_TAG_NAMES = Arrays.asList(
+            new String[]{"a", "area", HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, "label", "legend", HtmlTextArea.TAG_NAME});
+
     static class DocumentPositionComparator implements Comparator<DomElement>, Serializable {
         @Override
         public int compare(final DomElement elt1, final DomElement elt2) {
@@ -741,12 +746,10 @@ public class HtmlPage extends InteractivePage {
     * @return all the tabbable elements in proper tab order
     */
     public List<HtmlElement> getTabbableElements() {
-        final List<String> tags = Arrays
-            .asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
         final List<HtmlElement> tabbableElements = new ArrayList<>();
         for (final HtmlElement element : getHtmlElementDescendants()) {
             final String tagName = element.getTagName();
-            if (tags.contains(tagName)) {
+            if (TABBABLE_TAGS.contains(tagName)) {
                 final boolean disabled = element.hasAttribute("disabled");
                 if (!disabled && element.getTabIndex() != HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
                     tabbableElements.add(element);
@@ -843,11 +846,8 @@ public class HtmlPage extends InteractivePage {
         final List<HtmlElement> elements = new ArrayList<>();
 
         final String searchString = Character.toString(accessKey).toLowerCase(Locale.ROOT);
-        final List<String> acceptableTagNames = Arrays.asList(
-                new String[]{"a", "area", "button", "input", "label", "legend", "textarea"});
-
         for (final HtmlElement element : getHtmlElementDescendants()) {
-            if (acceptableTagNames.contains(element.getTagName())) {
+            if (ACCEPTABLE_TAG_NAMES.contains(element.getTagName())) {
                 final String accessKeyAttribute = element.getAttribute("accesskey");
                 if (searchString.equalsIgnoreCase(accessKeyAttribute)) {
                     elements.add(element);

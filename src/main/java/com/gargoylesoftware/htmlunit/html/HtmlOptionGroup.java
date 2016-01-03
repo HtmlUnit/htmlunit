@@ -97,7 +97,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      * @return {@code null} if no select is found (for instance malformed html)
      */
     public HtmlSelect getEnclosingSelect() {
-        return (HtmlSelect) getEnclosingElement("select");
+        return (HtmlSelect) getEnclosingElement(HtmlSelect.TAG_NAME);
     }
 
     /**

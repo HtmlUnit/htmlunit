@@ -133,7 +133,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return {@code null} if no select is found (for instance malformed HTML)
      */
     public HtmlSelect getEnclosingSelect() {
-        return (HtmlSelect) getEnclosingElement("select");
+        return (HtmlSelect) getEnclosingElement(HtmlSelect.TAG_NAME);
     }
 
     /**

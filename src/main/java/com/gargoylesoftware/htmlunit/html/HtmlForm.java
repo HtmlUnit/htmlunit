@@ -68,7 +68,7 @@ public class HtmlForm extends HtmlElement {
     public static final String TAG_NAME = "form";
 
     private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES =
-        Arrays.asList(new String[]{"input", "button", "select", "textarea", "isindex"});
+        Arrays.asList(new String[]{HtmlInput.TAG_NAME, HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME});
 
     private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
 
@@ -324,11 +324,11 @@ public class HtmlForm extends HtmlElement {
             return true;
         }
 
-        if (!"isindex".equals(tagName) && !element.hasAttribute("name")) {
+        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && !element.hasAttribute("name")) {
             return false;
         }
 
-        if (!"isindex".equals(tagName) && "".equals(element.getAttribute("name"))) {
+        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && "".equals(element.getAttribute("name"))) {
             return false;
         }
 
@@ -338,7 +338,7 @@ public class HtmlForm extends HtmlElement {
                 return ((HtmlInput) element).isChecked();
             }
         }
-        if ("select".equals(tagName)) {
+        if (HtmlSelect.TAG_NAME.equals(tagName)) {
             return ((HtmlSelect) element).isValidForSubmission();
         }
         return true;
@@ -370,7 +370,7 @@ public class HtmlForm extends HtmlElement {
                 return false;
             }
         }
-        if ("button".equals(tagName)) {
+        if (HtmlButton.TAG_NAME.equals(tagName)) {
             return false;
         }
 
@@ -384,7 +384,7 @@ public class HtmlForm extends HtmlElement {
      * @return all input elements which are members of this form and have the specified name
      */
     public List<HtmlInput> getInputsByName(final String name) {
-        final List<HtmlInput> list = getFormElementsByAttribute("input", "name", name);
+        final List<HtmlInput> list = getFormElementsByAttribute(HtmlInput.TAG_NAME, "name", name);
 
         // collect inputs from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -462,7 +462,7 @@ public class HtmlForm extends HtmlElement {
         final List<HtmlInput> inputs = getInputsByName(name);
 
         if (inputs.isEmpty()) {
-            throw new ElementNotFoundException("input", "name", name);
+            throw new ElementNotFoundException(HtmlInput.TAG_NAME, "name", name);
         }
         return (I) inputs.get(0);
     }
@@ -474,7 +474,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlSelect} elements in this form that have the specified name
      */
     public List<HtmlSelect> getSelectsByName(final String name) {
-        final List<HtmlSelect> list = getFormElementsByAttribute("select", "name", name);
+        final List<HtmlSelect> list = getFormElementsByAttribute(HtmlSelect.TAG_NAME, "name", name);
 
         // collect selects from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -496,7 +496,7 @@ public class HtmlForm extends HtmlElement {
     public HtmlSelect getSelectByName(final String name) throws ElementNotFoundException {
         final List<HtmlSelect> list = getSelectsByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException("select", "name", name);
+            throw new ElementNotFoundException(HtmlSelect.TAG_NAME, "name", name);
         }
         return list.get(0);
     }
@@ -508,7 +508,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlButton} elements in this form that have the specified name
      */
     public List<HtmlButton> getButtonsByName(final String name) {
-        final List<HtmlButton> list = getFormElementsByAttribute("button", "name", name);
+        final List<HtmlButton> list = getFormElementsByAttribute(HtmlButton.TAG_NAME, "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -530,7 +530,7 @@ public class HtmlForm extends HtmlElement {
     public HtmlButton getButtonByName(final String name) throws ElementNotFoundException {
         final List<HtmlButton> list = getButtonsByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException("button", "name", name);
+            throw new ElementNotFoundException(HtmlButton.TAG_NAME, "name", name);
         }
         return list.get(0);
     }
@@ -542,7 +542,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlTextArea} elements in this form that have the specified name
      */
     public List<HtmlTextArea> getTextAreasByName(final String name) {
-        final List<HtmlTextArea> list = getFormElementsByAttribute("textarea", "name", name);
+        final List<HtmlTextArea> list = getFormElementsByAttribute(HtmlTextArea.TAG_NAME, "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -564,7 +564,7 @@ public class HtmlForm extends HtmlElement {
     public HtmlTextArea getTextAreaByName(final String name) throws ElementNotFoundException {
         final List<HtmlTextArea> list = getTextAreasByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException("textarea", "name", name);
+            throw new ElementNotFoundException(HtmlTextArea.TAG_NAME, "name", name);
         }
         return list.get(0);
     }
@@ -791,7 +791,7 @@ public class HtmlForm extends HtmlElement {
     public <I extends HtmlInput> I getInputByValue(final String value) throws ElementNotFoundException {
         final List<HtmlInput> list = getInputsByValue(value);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException("input", "value", value);
+            throw new ElementNotFoundException(HtmlInput.TAG_NAME, "value", value);
         }
         return (I) list.get(0);
     }
@@ -802,7 +802,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the inputs in this form with the specified value
      */
     public List<HtmlInput> getInputsByValue(final String value) {
-        final List<HtmlInput> results = getFormElementsByAttribute("input", "value", value);
+        final List<HtmlInput> results = getFormElementsByAttribute(HtmlInput.TAG_NAME, "value", value);
 
         for (final HtmlElement element : getLostChildren()) {
             if (element instanceof HtmlInput && value.equals(element.getAttribute("value"))) {
