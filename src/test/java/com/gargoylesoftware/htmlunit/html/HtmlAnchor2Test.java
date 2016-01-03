@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -21,9 +25,12 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -551,5 +558,35 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("a3")).click();
         assertEquals(3, webConnection.getRequestCount());
+    }
+
+    /**
+     * FF behaves is different.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = "click href click doubleClick ",
+            CHROME = "click href click href doubleClick ",
+            FF = "click href click doubleClick href ")
+    @BuggyWebDriver({ FF, CHROME })
+    @NotYetImplemented({ FF, IE })
+    public void doubleClick() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "  <a id='myAnchor' "
+            +       "href=\"javascript:document.getElementById('myTextarea').value+='href ';void(0);\" "
+            +       "onClick=\"document.getElementById('myTextarea').value+='click ';\" "
+            +       "onDblClick=\"document.getElementById('myTextarea').value+='doubleClick ';\">foo</a>\n"
+            + "  <textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Actions action = new Actions(driver);
+        action.doubleClick(driver.findElement(By.id("myAnchor")));
+        action.perform();
+
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("myTextarea")).getAttribute("value"));
     }
 }

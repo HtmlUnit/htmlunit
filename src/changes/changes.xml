@@ -9,6 +9,9 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                Improved simulation of double click.
+            </action>
+            <action type="fix" dev="rbri">
                 Improving null handling when setting the value of text areas and input elements.
             </action>
             <action type="fix" dev="rbri">

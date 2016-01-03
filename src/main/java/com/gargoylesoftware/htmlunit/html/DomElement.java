@@ -886,8 +886,17 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             return (P) getPage();
         }
 
-        //call click event first
-        final P clickPage = click(shiftKey, ctrlKey, altKey);
+        // call click event first
+        P clickPage = click(shiftKey, ctrlKey, altKey);
+        if (clickPage != getPage()) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("dblClick() is ignored, as click() loaded a different page.");
+            }
+            return clickPage;
+        }
+
+        // call click event a second time
+        clickPage = click(shiftKey, ctrlKey, altKey);
         if (clickPage != getPage()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("dblClick() is ignored, as click() loaded a different page.");
