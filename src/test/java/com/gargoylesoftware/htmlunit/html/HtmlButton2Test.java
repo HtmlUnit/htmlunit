@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import java.util.List;
 
 import org.junit.Test;
@@ -28,7 +25,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -528,7 +524,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
-    @NotYetImplemented({ FF, CHROME })
     public void typeUnknownExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -560,7 +555,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
-    @NotYetImplemented({ FF, CHROME })
     public void typeSubmitExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -622,7 +616,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
-    @NotYetImplemented({ FF, CHROME })
     public void submitWithoutTypeExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -682,9 +675,44 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"2", "second"},
+            IE = {"1", "first"})
+    public void externalPreferenceFrom() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm2' action='" + URL_SECOND + "'>\n"
+            + "  </form>\n"
+            + "  <form id='myForm3' action='" + URL_THIRD + "'>\n"
+            + "    <button type='submit' id='myButton' form='myForm2'>Explicit Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+        final String thirdContent
+            = "<html><head><title>third</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
-    @NotYetImplemented
     public void internalDifferentFrom() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"

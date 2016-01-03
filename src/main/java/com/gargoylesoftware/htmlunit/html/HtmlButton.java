@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
@@ -78,7 +80,20 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     protected boolean doClickStateUpdate() throws IOException {
         final String type = getTypeAttribute().toLowerCase(Locale.ROOT);
 
-        final HtmlForm form = getEnclosingForm();
+        HtmlForm form = null;
+        String formId = getAttribute("form");
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == formId) {
+            form = getEnclosingForm();
+        }
+        else {
+            if (hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED))  {
+                DomElement elem = getHtmlPageOrNull().getElementById(formId);
+                if (elem instanceof HtmlForm) {
+                    form = (HtmlForm) elem;
+                }
+            }
+        }
+
         if (form != null) {
             if ("button".equals(type)) {
                 return false;
@@ -97,6 +112,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
             form.submit(this);
             return false;
         }
+
         super.doClickStateUpdate();
         return false;
     }

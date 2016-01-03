@@ -251,6 +251,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     FORMFIELD_REACHABLE_BY_ORIGINAL_NAME,
 
+    /** Form elements are able to refer to the for by using the from attribute. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    FORM_FORM_ATTRIBUTE_SUPPORTED,
+
     /** Form submit forces an real request also if only the hash was changed. */
     @BrowserFeature(@WebBrowser(CHROME))
     FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
