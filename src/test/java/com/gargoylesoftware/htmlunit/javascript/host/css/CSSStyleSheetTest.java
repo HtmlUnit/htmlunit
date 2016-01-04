@@ -113,29 +113,78 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts({ "4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null" })
     public void href() throws Exception {
         final String baseUrl = getDefaultUrl().toExternalForm();
-        final String html = "<html>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "  <head>\n"
-            + "    <link href='" + baseUrl + "style1.css' type='text/css'></link>\n" // Ignored.
+            + "    <link href='" + baseUrl + "style1.css' type='text/css'></link>\n"
             + "    <link href='" + baseUrl + "style2.css' rel='stylesheet'></link>\n"
-            + "    <link href='" + baseUrl + "style3.css'></link>\n" // Ignored.
+            + "    <link href='" + baseUrl + "style3.css'></link>\n"
             + "    <link href='style4.css' rel='stylesheet'></link>\n"
             + "    <style>div.x { color: red; }</style>\n"
             + "  </head>\n" + "  <body>\n"
             + "    <style>div.y { color: green; }</style>\n"
             + "    <script>\n"
             + "      alert(document.styleSheets.length);\n"
-            + "      alert(document.styleSheets[0].href);\n"
-            + "      alert(document.styleSheets[1].href);\n"
-            + "      alert(document.styleSheets[2].href);\n"
-            + "      alert(document.styleSheets[3].href);\n"
+            + "      for (i = 0; i < document.styleSheets.length; i++) {\n"
+            + "        alert(document.styleSheets[i].href);\n"
+            + "      }\n"
             + "    </script>\n" + "  </body>\n"
             + "</html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(getDefaultUrl(), "style1.css"), "");
-        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), "");
-        conn.setResponse(new URL(getDefaultUrl(), "style3.css"), "");
-        conn.setResponse(new URL(getDefaultUrl(), "style4.css"), "");
+        conn.setResponse(new URL(getDefaultUrl(), "style1.css"), "", "text/css");
+        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), "", "text/css");
+        conn.setResponse(new URL(getDefaultUrl(), "style3.css"), "", "text/css");
+        conn.setResponse(new URL(getDefaultUrl(), "style4.css"), "", "text/css");
+
+        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "test.html"));
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "8", "§§URL§§style1.css 1", "§§URL§§style2.css 0",
+                        "§§URL§§style3.css 0","§§URL§§style4.css 1",
+                        "§§URL§§style5.css 1", "§§URL§§style6.css 0",
+                        "§§URL§§style7.css 0","§§URL§§style8.css 1"},
+            IE = { "2", "§§URL§§style1.css 1", "§§URL§§style5.css 1" })
+    @NotYetImplemented
+    public void hrefWrongContentType() throws Exception {
+        final String baseUrl = getDefaultUrl().toExternalForm();
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <link href='" + baseUrl + "style1.css' rel='stylesheet' type='text/css'></link>\n"
+            + "    <link href='" + baseUrl + "style2.css' rel='stylesheet' type='text/css'></link>\n"
+            + "    <link href='" + baseUrl + "style3.css' rel='stylesheet' type='text/css'></link>\n"
+            + "    <link href='" + baseUrl + "style4.css' rel='stylesheet' type='text/css'></link>\n"
+            + "    <link href='" + baseUrl + "style5.css' rel='stylesheet' ></link>\n"
+            + "    <link href='" + baseUrl + "style6.css' rel='stylesheet' ></link>\n"
+            + "    <link href='" + baseUrl + "style7.css' rel='stylesheet' ></link>\n"
+            + "    <link href='" + baseUrl + "style8.css' rel='stylesheet' ></link>\n"
+            + "  </head>\n" + "  <body>\n"
+            + "    <script>\n"
+            + "      alert(document.styleSheets.length);\n"
+            + "      for (i = 0; i < document.styleSheets.length; i++) {\n"
+            + "        var sheet = document.styleSheets[i];\n"
+            + "        alert(sheet.href + ' ' + sheet.cssRules.length);\n"
+            + "      }\n"
+            + "    </script>\n" + "  </body>\n"
+            + "</html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(new URL(getDefaultUrl(), "style1.css"), "div { color: red; }", "text/css");
+        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), "div { color: red; }", "text/html");
+        conn.setResponse(new URL(getDefaultUrl(), "style3.css"), "div { color: red; }", "text/plain");
+        conn.setResponse(new URL(getDefaultUrl(), "style4.css"), "div { color: red; }", "");
+        conn.setResponse(new URL(getDefaultUrl(), "style5.css"), "div { color: red; }", "text/css");
+        conn.setResponse(new URL(getDefaultUrl(), "style6.css"), "div { color: red; }", "text/html");
+        conn.setResponse(new URL(getDefaultUrl(), "style7.css"), "div { color: red; }", "text/plain");
+        conn.setResponse(new URL(getDefaultUrl(), "style8.css"), "div { color: red; }", "");
 
         loadPageWithAlerts2(html, new URL(getDefaultUrl(), "test.html"));
     }
