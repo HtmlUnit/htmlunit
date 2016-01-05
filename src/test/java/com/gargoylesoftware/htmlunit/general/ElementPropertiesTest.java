@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests all properties of an object.
@@ -71,7 +72,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     private void testString(final String string) throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = 
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><script>\n"
                 + "  var ieMethods = ['abort', 'add', 'addBehavior', 'AddChannel', 'AddDesktopComponent', "
                 + "'addElement', 'AddFavorite', 'addFilter', 'addImport', 'AddInPrivateSubscription', 'addPageRule', "
                 + "'addReadRequest', 'addRule', 'AddSearchProvider', 'AddService', 'AddToFavoritesBar', 'alert', "
@@ -796,7 +799,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "shape,target,username",
             FF = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
                 + "rel,relList,search,searchParams,shape,target,username",
-            IE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,search,shape,target",
+            IE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,target",
             EDGE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,target")
     @NotYetImplemented
     public void area() throws Exception {
