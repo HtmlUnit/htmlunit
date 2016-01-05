@@ -38,8 +38,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,6 +53,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -72,6 +71,8 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * Base class for tests using WebDriver.
@@ -948,17 +949,28 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (driver != null) {
                 final String currentWindow = driver.getWindowHandle();
 
+                final Set<String> handles = driver.getWindowHandles();
                 // close all windows except the current one
-                for (final String handle : driver.getWindowHandles()) {
-                    if (!currentWindow.equals(handle)) {
-                        driver.switchTo().window(handle).close();
-                    }
-                }
+                handles.remove(currentWindow);
 
-                // we have to force webdriver to treat the remaining window
-                // as the one we like to work with from now on
-                // looks like a web driver issue to me (version 2.47.2)
-                driver.switchTo().window(currentWindow);
+                if (handles.size() > 0) {
+                    for (final String handle : handles) {
+                        try {
+                            driver.switchTo().window(handle);
+                            driver.close();
+                        } catch (NoSuchWindowException e) {
+                            LOG.error("Error switching to browser window; quit browser.", e);
+                            WEB_DRIVERS_REAL_BROWSERS.remove(getBrowserVersion());
+                            driver.quit();
+                            return;
+                        }
+                    }
+    
+                    // we have to force webdriver to treat the remaining window
+                    // as the one we like to work with from now on
+                    // looks like a web driver issue to me (version 2.47.2)
+                    driver.switchTo().window(currentWindow);
+                }
 
                 driver.manage().deleteAllCookies();
 
