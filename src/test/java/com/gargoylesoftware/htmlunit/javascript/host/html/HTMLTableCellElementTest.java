@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLTableCellElement}.
@@ -408,11 +409,13 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" })
+    @Alerts(DEFAULT = { "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" },
+            IE = { "84,34", "84,34", "84,34", "82,32", "82,32", "82,32" })
     @NotYetImplemented(IE)
     public void cellWidthHeightWithBorderCollapse() throws Exception {
         final String html
-            = "<html><body><table id='t'><tr>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body><table id='t'><tr>\n"
             + "<td id='td1' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
             + "<td id='td2' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
             + "<td id='td3' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
