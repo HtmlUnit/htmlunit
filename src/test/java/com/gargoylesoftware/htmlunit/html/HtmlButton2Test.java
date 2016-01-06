@@ -705,14 +705,16 @@ public class HtmlButton2Test extends WebDriverTestCase {
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
+
+        shutDownRealBrowsers();
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1")
+    @Alerts(DEFAULT = {"2", "second"},
+            IE = {"1", "first"})
     public void internalDifferentFrom() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -727,17 +729,20 @@ public class HtmlButton2Test extends WebDriverTestCase {
             = "<html><head><title>second</title></head><body>\n"
             + "  <p>hello world</p>\n"
             + "</body></html>";
+        final String thirdContent
+            = "<html><head><title>third</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse(secondContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent);
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
-        if (expectedReqCount > 1) {
-            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
-        }
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
     }
 
     /**
