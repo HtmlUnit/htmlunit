@@ -282,7 +282,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #shutDownRealBrowsersAfterTest()
      * @throws Exception If an error occurs
      */
-    public void shutDownRealBrowsers() throws Exception {
+    protected void shutDownRealBrowsers() throws Exception {
         for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
             driver.quit();
         }
