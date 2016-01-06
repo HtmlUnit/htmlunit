@@ -45,6 +45,9 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class WebClient3Test extends WebDriverTestCase {
+    protected boolean shutDownRealBrowsersAfterEachTest() {
+        return true;
+    }
 
     /**
      * Regression test for bug 3012067: a null pointer exception was occurring.
