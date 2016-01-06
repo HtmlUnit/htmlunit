@@ -16,17 +16,9 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.fail;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.net.URL;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -46,60 +38,6 @@ import org.junit.Test;
  * @author Ronald Brill
  */
 public class WebClient5Test extends WebTestCase {
-
-    /**
-     * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void tests() throws Exception {
-        testTests(new File("src/test/java"));
-    }
-
-    private void testTests(final File dir) throws Exception {
-        for (final File file : dir.listFiles()) {
-            if (file.isDirectory()) {
-                if (!".svn".equals(file.getName())) {
-                    testTests(file);
-                }
-            }
-            else {
-                if (file.getName().endsWith(".java")) {
-                    final int index = new File("src/test/java").getAbsolutePath().length();
-                    String name = file.getAbsolutePath();
-                    name = name.substring(index + 1, name.length() - 5);
-                    name = name.replace(File.separatorChar, '.');
-                    final Class<?> clazz;
-                    try {
-                        clazz = Class.forName(name);
-                    }
-                    catch (final Exception e) {
-                        continue;
-                    }
-                    name = file.getName();
-                    if (name.endsWith("Test.java") || name.endsWith("TestCase.java")) {
-                        for (final Constructor<?> ctor : clazz.getConstructors()) {
-                            if (ctor.getParameterTypes().length == 0) {
-                                for (final Method method : clazz.getDeclaredMethods()) {
-                                    if (Modifier.isPublic(method.getModifiers())
-                                            && method.getAnnotation(Before.class) == null
-                                            && method.getAnnotation(BeforeClass.class) == null
-                                            && method.getAnnotation(After.class) == null
-                                            && method.getAnnotation(AfterClass.class) == null
-                                            && method.getAnnotation(Test.class) == null
-                                            && method.getReturnType() == Void.TYPE
-                                            && method.getParameterTypes().length == 0) {
-                                        fail("Method '" + method.getName()
-                                                + "' in " + name + " does not declare @Test annotation");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     /**
      * @throws Exception if the test fails
