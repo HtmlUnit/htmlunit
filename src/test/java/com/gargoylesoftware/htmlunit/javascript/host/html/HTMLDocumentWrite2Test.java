@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.net.URL;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -65,7 +66,6 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello There")
-    // TODO [IE11] real IE11 waits for the page to load until infinity
     public void write() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -79,6 +79,10 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<body onload='test()'>"
             + "</body>\n"
             + "</html>";
+        // [IE11] real IE11 waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
         loadPageWithAlerts2(html);
     }
 
@@ -268,8 +272,10 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
         assertEquals(new URL(getDefaultUrl(), "foo"), getMockWebConnection().getLastWebRequest().getUrl());
 
-        // for some reason, the selenium driven browser is in an invalid state after this test
-        shutDownAll();
+        // [IE11] real IE11 waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
     }
 
     /**

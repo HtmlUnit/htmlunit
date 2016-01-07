@@ -55,6 +55,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -203,7 +204,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected WebDriver getWebDriver() {
         final BrowserVersion browserVersion = getBrowserVersion();
         WebDriver driver;
-        if (useRealBrowser_) {
+        if (useRealBrowser()) {
             driver = WEB_DRIVERS_REAL_BROWSERS.get(browserVersion);
             if (driver == null) {
                 try {
@@ -280,9 +281,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Closes the real browser drivers.
      * @see #shutDownRealBrowsersAfterTest()
-     * @throws Exception If an error occurs
      */
-    protected void shutDownRealBrowsers() throws Exception {
+    protected void shutDownRealBrowsers() {
         for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
             driver.quit();
         }
@@ -309,6 +309,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * @return whether to use real browser or not.
+     */
+    protected boolean useRealBrowser() {
+        return useRealBrowser_;
+    }
+
+    /**
      * Sets whether to use real browser or not.
      * @param useRealBrowser whether to use real browser or not
      */
@@ -330,7 +337,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws IOException in case of exception
      */
     protected WebDriver buildWebDriver() throws IOException {
-        if (useRealBrowser_) {
+        if (useRealBrowser()) {
             if (getBrowserVersion().isIE()) {
                 if (IE_BIN_ != null) {
                     System.setProperty("webdriver.ie.driver", IE_BIN_);
@@ -796,12 +803,20 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected void verifyAlerts(final long maxWaitTime, final WebDriver driver, final String... expectedAlerts)
         throws Exception {
-        // gets the collected alerts, waiting a bit if necessary
-        List<String> actualAlerts = getCollectedAlerts(driver);
-        final long maxWait = System.currentTimeMillis() + maxWaitTime;
-        while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
-            Thread.sleep(30);
+        List<String> actualAlerts = null;
+
+        try {
+            // gets the collected alerts, waiting a bit if necessary
             actualAlerts = getCollectedAlerts(driver);
+
+            final long maxWait = System.currentTimeMillis() + maxWaitTime;
+            while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
+                Thread.sleep(30);
+                actualAlerts = getCollectedAlerts(driver);
+            }
+        } catch (WebDriverException e) {
+            shutDownRealBrowsers();
+            throw e;
         }
 
         assertEquals(expectedAlerts, actualAlerts);
@@ -954,38 +969,42 @@ public abstract class WebDriverTestCase extends WebTestCase {
             assertEquals(0, getJavaScriptThreads().size());
         }
 
-        if (useRealBrowser_) {
+        if (useRealBrowser()) {
             final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(getBrowserVersion());
             if (driver != null) {
-                final String currentWindow = driver.getWindowHandle();
-
-                final Set<String> handles = driver.getWindowHandles();
-                // close all windows except the current one
-                handles.remove(currentWindow);
-
-                if (handles.size() > 0) {
-                    for (final String handle : handles) {
-                        try {
-                            driver.switchTo().window(handle);
-                            driver.close();
-                        } catch (NoSuchWindowException e) {
-                            LOG.error("Error switching to browser window; quit browser.", e);
-                            WEB_DRIVERS_REAL_BROWSERS.remove(getBrowserVersion());
-                            driver.quit();
-                            return;
+                try {
+                    final String currentWindow = driver.getWindowHandle();
+    
+                    final Set<String> handles = driver.getWindowHandles();
+                    // close all windows except the current one
+                    handles.remove(currentWindow);
+    
+                    if (handles.size() > 0) {
+                        for (final String handle : handles) {
+                            try {
+                                driver.switchTo().window(handle);
+                                driver.close();
+                            } catch (NoSuchWindowException e) {
+                                LOG.error("Error switching to browser window; quit browser.", e);
+                                WEB_DRIVERS_REAL_BROWSERS.remove(getBrowserVersion());
+                                driver.quit();
+                                return;
+                            }
                         }
+        
+                        // we have to force webdriver to treat the remaining window
+                        // as the one we like to work with from now on
+                        // looks like a web driver issue to me (version 2.47.2)
+                        driver.switchTo().window(currentWindow);
                     }
     
-                    // we have to force webdriver to treat the remaining window
-                    // as the one we like to work with from now on
-                    // looks like a web driver issue to me (version 2.47.2)
-                    driver.switchTo().window(currentWindow);
+                    driver.manage().deleteAllCookies();
+    
+                    // in the remaining window, load a blank page
+                    driver.get("about:blank");
+                } catch (WebDriverException e) {
+                    shutDownRealBrowsers();
                 }
-
-                driver.manage().deleteAllCookies();
-
-                // in the remaining window, load a blank page
-                driver.get("about:blank");
             }
         }
     }
