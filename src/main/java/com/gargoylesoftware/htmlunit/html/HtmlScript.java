@@ -243,9 +243,13 @@ public class HtmlScript extends HtmlElement {
             }
         };
 
-        if (hasAttribute("async")
+        final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+        if (hasAttribute("async") && !engine.isScriptRunning()) {
+            final HtmlPage owningPage = getHtmlPageOrNull();
+            owningPage.addAfterLoadAction(action);
+        }
+        else if (hasAttribute("async")
                 || postponed && StringUtils.isBlank(getTextContent())) {
-            final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }
         else {

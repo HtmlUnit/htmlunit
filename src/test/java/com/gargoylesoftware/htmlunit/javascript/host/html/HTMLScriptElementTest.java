@@ -992,7 +992,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "3", "2" })
-    @NotYetImplemented({ FF, CHROME, IE })
     public void async() throws Exception {
         final String html = "<html><body>\n"
             + "<script src='js1.js'></script>\n"
@@ -1035,7 +1034,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "1" })
-    @NotYetImplemented({ FF, CHROME, IE })
     public void asyncLoadsAsync() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
@@ -1049,6 +1047,29 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "alert(1);");
         getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "alert(2);");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "2", "3" })
+    public void asyncFromAsyncTask() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "function addAsyncScript() {\n"
+            + "  var script = document.createElement('script');\n"
+            + "  script.src = 'js.js';\n"
+            + "  script.async = true;\n"
+            + "  document.head.appendChild(script);\n"
+            + "  alert(2);\n"
+            + "}\n"
+            + "setTimeout(addAsyncScript, 5);\n"
+            + "alert(1);\n"
+            + "</script></body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js.js"), "alert(3);");
 
         loadPageWithAlerts2(html);
     }
