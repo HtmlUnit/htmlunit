@@ -34,6 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -157,18 +158,20 @@ public class HTMLInputElement extends FormField {
         }
 
         String val = Context.toString(newValue);
+        final BrowserVersion browserVersion = getBrowserVersion();
         if (StringUtils.isNotEmpty(val) && "file".equalsIgnoreCase(getType())) {
-            if (getBrowserVersion().hasFeature(JS_SELECT_FILE_THROWS)) {
-                throw Context.reportRuntimeError("InvalidStateError: Failed to set the 'value' property on 'HTMLInputElement'.");
+            if (browserVersion.hasFeature(JS_SELECT_FILE_THROWS)) {
+                throw Context.reportRuntimeError("InvalidStateError: "
+                        + "Failed to set the 'value' property on 'HTMLInputElement'.");
             }
             return;
         }
 
         if (StringUtils.isBlank(val)) {
-            if ("email".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED))  {
+            if ("email".equalsIgnoreCase(getType()) && browserVersion.hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED))  {
                 val = "";
             }
-            else if ("url".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
+            else if ("url".equalsIgnoreCase(getType()) && browserVersion.hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
                 val = "";
             }
         }

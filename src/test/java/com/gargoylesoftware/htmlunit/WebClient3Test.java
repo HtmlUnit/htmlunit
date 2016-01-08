@@ -45,6 +45,12 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class WebClient3Test extends WebDriverTestCase {
+
+    /**
+     * Forces shutdown.
+     * @return true
+     */
+    @Override
     protected boolean shutDownRealBrowsersAfterEachTest() {
         return true;
     }

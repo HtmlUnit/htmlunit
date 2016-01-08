@@ -72,8 +72,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     private void testString(final String string) throws Exception {
-        final String html = 
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head><script>\n"
                 + "  var ieMethods = ['abort', 'add', 'addBehavior', 'AddChannel', 'AddDesktopComponent', "
                 + "'addElement', 'AddFavorite', 'addFilter', 'addImport', 'AddInPrivateSubscription', 'addPageRule', "

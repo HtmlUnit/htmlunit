@@ -152,7 +152,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Alerts(DEFAULT = { "foo", "", "#000000", "  ", "  ", "  ", "  ", "  ", "  ", "", "50" },
             CHROME = { "", "", "#000000", "", "  ", "", "", "", "", "", "50" },
-            IE = { "", "", "  ", "  ", "  ", "  ", "  ", "  ","  ", "", "50" })
+            IE = { "", "", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "", "50" })
     @Test
     @NotYetImplemented
     public void setValueBlankStringNYI() throws Exception {
@@ -205,7 +205,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         testValue("null");
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -219,8 +218,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     }
 
     private void testValue(final String value) throws Exception {
-        String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
 
@@ -324,8 +322,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     }
 
     private void testValueNYI(final String value) throws Exception {
-        String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
 

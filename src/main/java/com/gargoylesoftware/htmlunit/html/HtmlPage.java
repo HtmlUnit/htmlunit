@@ -150,10 +150,10 @@ public class HtmlPage extends InteractivePage {
     private URL baseUrl_;
     private List<AutoCloseable> autoCloseableList_;
 
-    private static final List<String> TABBABLE_TAGS = Arrays.asList(new String[]
-            {"a", "area", HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, "object", HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME});
-    final List<String> ACCEPTABLE_TAG_NAMES = Arrays.asList(
-            new String[]{"a", "area", HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, "label", "legend", HtmlTextArea.TAG_NAME});
+    private static final List<String> TABBABLE_TAGS = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
+            HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME);
+    private static final List<String> ACCEPTABLE_TAG_NAMES = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
+            HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlLabel.TAG_NAME, HtmlLegend.TAG_NAME, HtmlTextArea.TAG_NAME);
 
     static class DocumentPositionComparator implements Comparator<DomElement>, Serializable {
         @Override

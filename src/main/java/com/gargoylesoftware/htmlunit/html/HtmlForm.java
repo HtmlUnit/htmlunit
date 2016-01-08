@@ -67,8 +67,8 @@ public class HtmlForm extends HtmlElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "form";
 
-    private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES =
-        Arrays.asList(new String[]{HtmlInput.TAG_NAME, HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME});
+    private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES = Arrays.asList(HtmlInput.TAG_NAME,
+        HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME);
 
     private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
 

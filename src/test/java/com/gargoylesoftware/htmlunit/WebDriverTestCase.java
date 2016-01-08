@@ -277,7 +277,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         shutDownRealBrowsers();
     }
 
-
     /**
      * Closes the real browser drivers.
      * @see #shutDownRealBrowsersAfterTest()
@@ -814,7 +813,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 Thread.sleep(30);
                 actualAlerts = getCollectedAlerts(driver);
             }
-        } catch (WebDriverException e) {
+        }
+        catch (final WebDriverException e) {
             shutDownRealBrowsers();
             throw e;
         }
@@ -974,35 +974,37 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (driver != null) {
                 try {
                     final String currentWindow = driver.getWindowHandle();
-    
+
                     final Set<String> handles = driver.getWindowHandles();
                     // close all windows except the current one
                     handles.remove(currentWindow);
-    
+
                     if (handles.size() > 0) {
                         for (final String handle : handles) {
                             try {
                                 driver.switchTo().window(handle);
                                 driver.close();
-                            } catch (NoSuchWindowException e) {
+                            }
+                            catch (final NoSuchWindowException e) {
                                 LOG.error("Error switching to browser window; quit browser.", e);
                                 WEB_DRIVERS_REAL_BROWSERS.remove(getBrowserVersion());
                                 driver.quit();
                                 return;
                             }
                         }
-        
-                        // we have to force webdriver to treat the remaining window
+
+                        // we have to force WebDriver to treat the remaining window
                         // as the one we like to work with from now on
                         // looks like a web driver issue to me (version 2.47.2)
                         driver.switchTo().window(currentWindow);
                     }
-    
+
                     driver.manage().deleteAllCookies();
-    
+
                     // in the remaining window, load a blank page
                     driver.get("about:blank");
-                } catch (WebDriverException e) {
+                }
+                catch (final WebDriverException e) {
                     shutDownRealBrowsers();
                 }
             }
