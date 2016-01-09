@@ -3833,7 +3833,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 78, 78")
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented(CHROME)
     public void manipulation__append_String_Element_Array_Element__jQuery_() throws Exception {
         runTest("manipulation: append(String|Element|Array<Element>|jQuery)");
     }
