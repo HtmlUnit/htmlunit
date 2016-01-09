@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import java.net.URL;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -79,6 +79,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<body onload='test()'>"
             + "</body>\n"
             + "</html>";
+
         // [IE11] real IE11 waits for the page to load until infinity
         if (useRealBrowser() && getBrowserVersion().isIE()) {
             Assert.fail("Blocks real IE");
@@ -252,6 +253,9 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"2", "§§URL§§foo"},
+            IE = {"1", "§§URL§§"})
+    @NotYetImplemented(IE)
     public void urlResolutionInWriteForm() throws Exception {
         final String html = "<html><head>"
             + "<script>"
@@ -265,17 +269,16 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<body onload='test()'>"
             + "</body></html>";
 
+        final int startCount = getMockWebConnection().getRequestCount();
+        expandExpectedAlertsVariables(URL_FIRST);
+
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.switchTo().window("myPopup");
         driver.findElement(By.id("it")).click();
 
-        assertEquals(new URL(getDefaultUrl(), "foo"), getMockWebConnection().getLastWebRequest().getUrl());
-
-        // [IE11] real IE11 waits for the page to load until infinity
-        if (useRealBrowser() && getBrowserVersion().isIE()) {
-            Assert.fail("Blocks real IE");
-        }
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount() - startCount);
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
     }
 
     /**
