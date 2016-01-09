@@ -533,10 +533,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS,
 
-    /** The typeof element (not prototype) is "HTMLAnchorElement". */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_ANCHOR_TYPE_HTMLANCHORELEMENT,
-
     /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
