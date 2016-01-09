@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_11;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -254,38 +255,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Some of our selenium test are only working fine, if the
-     * browser session was started directly before the test. For
-     * this kind of test classes overload this method and return true;
-     * @return always false
-     */
-    protected boolean shutDownRealBrowsersAfterEachTest() {
-        return false;
-    }
-
-    /**
-     * Closes the real browser drivers.
-     * @see #shutDownRealBrowsersAfterTest()
-     * @throws Exception If an error occurs
-     */
-    @After
-    public void shutDownRealBrowsersAfter() throws Exception {
-        if (!shutDownRealBrowsersAfterEachTest()) {
-            return;
-        }
-
-        shutDownRealBrowsers();
-    }
-
-    /**
      * Closes the real browser drivers.
      * @see #shutDownRealBrowsersAfterTest()
      */
-    protected void shutDownRealBrowsers() {
+    private void shutDownRealBrowsers() {
         for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
             driver.quit();
         }
         WEB_DRIVERS_REAL_BROWSERS.clear();
+    }
+
+    /**
+     * Closes the real ie browser drivers.
+     */
+    protected void shutDownRealIE() {
+        final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(INTERNET_EXPLORER_11);
+        if (driver != null) {
+            driver.quit();
+            WEB_DRIVERS_REAL_BROWSERS.remove(INTERNET_EXPLORER_11);
+        }
     }
 
     /**

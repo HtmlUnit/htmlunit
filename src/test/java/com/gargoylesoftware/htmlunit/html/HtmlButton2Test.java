@@ -706,7 +706,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
 
-        shutDownRealBrowsers();
+        shutDownRealIE();
     }
 
     /**

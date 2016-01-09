@@ -40,15 +40,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class WebClient6Test extends WebDriverTestCase {
 
     /**
-     * We need fresh webDriver sessions for each test.
-     * @return true
-     */
-    @Override
-    protected boolean shutDownRealBrowsersAfterEachTest() {
-        return true;
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test

@@ -47,15 +47,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class WebClient3Test extends WebDriverTestCase {
 
     /**
-     * Forces shutdown.
-     * @return true
-     */
-    @Override
-    protected boolean shutDownRealBrowsersAfterEachTest() {
-        return true;
-    }
-
-    /**
      * Regression test for bug 3012067: a null pointer exception was occurring.
      * @throws Exception if an error occurs
      */
@@ -189,8 +180,10 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "open", "first", "second" })
-    // TODO [IE11]MODALPANEL real IE11 opens a modal panel 'really close window?' which webdriver cannot handle
     public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String firstContent = "<html>"
             + "<head>"
             + "<script type='text/javascript'>"
@@ -234,8 +227,10 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "open", "first", "second" })
-    // TODO [IE11]MODALPANEL real IE11 opens a modal panel 'really close window?' which webdriver cannot handle
     public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String firstContent = "<html>"
             + "<head>"
             + "<script type='text/javascript'>"
@@ -416,8 +411,10 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("modified")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void deflateCompressionGZipCompatible() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         doTestDeflateCompression(true);
     }
 
