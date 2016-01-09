@@ -15,13 +15,10 @@
 package com.gargoylesoftware.htmlunit;
 import static org.junit.Assert.fail;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -94,12 +91,6 @@ public final class ScriptExceptionTest extends SimpleWebTestCase {
             return;
         }
         fail("Exception not thrown");
-    }
-
-    private String getFileContent(final String fileName) throws IOException {
-        final InputStream stream = getClass().getClassLoader().getResourceAsStream(fileName);
-        assertNotNull(fileName, stream);
-        return IOUtils.toString(stream);
     }
 
     /**

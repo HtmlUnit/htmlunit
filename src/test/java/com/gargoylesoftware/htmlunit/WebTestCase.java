@@ -494,9 +494,7 @@ public abstract class WebTestCase {
      */
     private String createInstrumentationScript(final List<String> expectedAlerts) throws IOException {
         // generate the js code
-        final InputStream is = getClass().getClassLoader().getResourceAsStream("alertVerifier.js");
-        final String baseJS = IOUtils.toString(is);
-        IOUtils.closeQuietly(is);
+        final String baseJS = getFileContent("alertVerifier.js");
 
         final StringBuilder sb = new StringBuilder();
         sb.append("\n<script type='text/javascript'>\n");
@@ -780,4 +778,17 @@ public abstract class WebTestCase {
 
         return jsThreads;
     }
+
+    /**
+     * Read the content of the given file using our classloader.
+     * @param fileName the file name
+     * @return the content as string
+     * @throws IOException in case of error
+     */
+    protected String getFileContent(final String fileName) throws IOException {
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream(fileName);
+        assertNotNull(fileName, stream);
+        return IOUtils.toString(stream);
+    }
+
 }

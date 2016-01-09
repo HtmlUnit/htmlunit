@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import java.net.URL;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +24,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -191,6 +192,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Click on DIV(id=div1): true, true, false, false")
+    @BuggyWebDriver(IE)
     public void eventCoordinates_div() throws Exception {
         eventCoordinates("div1");
     }
@@ -223,13 +225,12 @@ public class MouseEventTest extends WebDriverTestCase {
     }
 
     private void eventCoordinates(final String id) throws Exception {
-        final URL url = getClass().getClassLoader().getResource("event_coordinates.html");
-        assertNotNull(url);
+        final String html = getFileContent("event_coordinates.html");
 
         final String[] expected = getExpectedAlerts();
 
         setExpectedAlerts();
-        final WebDriver driver = loadPageWithAlerts2(url);
+        final WebDriver driver = loadPageWithAlerts2(html);
         assertEquals("Mouse Event coordinates", driver.getTitle());
 
         final WebElement textarea = driver.findElement(By.id("myTextarea"));
