@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_TYPE_HTMLANCHORELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -29,8 +28,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -50,6 +47,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object that represents an anchor.
@@ -536,17 +535,6 @@ public class HTMLAnchorElement extends HTMLElement {
     public void setText(final String text) {
         final DomNode htmlElement = getDomNodeOrDie();
         htmlElement.setTextContent(text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTypeOf() {
-        if (getPrototype() != null && getBrowserVersion().hasFeature(JS_ANCHOR_TYPE_HTMLANCHORELEMENT)) {
-            return "HTMLAnchorElement";
-        }
-        return super.getTypeOf();
     }
 
     /**

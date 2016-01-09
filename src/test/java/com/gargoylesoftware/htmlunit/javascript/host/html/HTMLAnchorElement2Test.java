@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -550,7 +554,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "§§URL§§second/", "HTMLAnchorElement", "[object HTMLAnchorElement]" },
+    @Alerts(IE = { "§§URL§§second/", "object", "[object HTMLAnchorElement]" },
             CHROME = { "§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }" },
             FF = { "§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}" })
     public void typeof() throws Exception {
@@ -714,7 +718,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(", 0,0")
+    @Alerts(DEFAULT = ", 0,0",
+            IE = {"", "0,0,0,0"})
+    @NotYetImplemented(IE)
     public void coords() throws Exception {
         attribute("coords", "0,0");
     }
@@ -732,8 +738,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(", ")
-    @NotYetImplemented
+    @Alerts(DEFAULT = ", ",
+            IE = {"undefined", "something"})
+    @NotYetImplemented({FF, CHROME})
     public void origin() throws Exception {
         attribute("origin", "something");
     }

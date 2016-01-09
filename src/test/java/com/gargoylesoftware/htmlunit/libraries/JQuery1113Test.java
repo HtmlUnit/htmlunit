@@ -3844,7 +3844,7 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 78, 78")
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented(CHROME)
     public void manipulation__append_Function_() throws Exception {
         runTest("manipulation: append(Function)");
     }
@@ -3885,7 +3885,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(IE11)
     public void manipulation__append_Function__returns_Array_Element_() throws Exception {
         runTest("manipulation: append(Function) returns Array<Element>");
     }
@@ -4049,7 +4048,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(IE11)
     public void manipulation__prepend_Array_Element__() throws Exception {
         runTest("manipulation: prepend(Array<Element>)");
     }
@@ -4100,7 +4098,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(IE11)
     public void manipulation__prepend_Function__with_incoming_value____Array_Element_() throws Exception {
         runTest("manipulation: prepend(Function) with incoming value -- Array<Element>");
     }
@@ -4191,7 +4188,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(IE11)
     public void manipulation__before_Array_Element__() throws Exception {
         runTest("manipulation: before(Array<Element>)");
     }
@@ -4242,7 +4238,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(IE11)
     public void manipulation__before_Function_____Returns_Array_Element_() throws Exception {
         runTest("manipulation: before(Function) -- Returns Array<Element>");
     }
@@ -4383,7 +4378,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(IE11)
     public void manipulation___after_Array_Element__() throws Exception {
         runTest("manipulation: .after(Array<Element>)");
     }
@@ -4424,7 +4418,6 @@ public class JQuery1113Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(IE11)
     public void manipulation___after_Function__returns_Array_Element_() throws Exception {
         runTest("manipulation: .after(Function) returns Array<Element>");
     }
