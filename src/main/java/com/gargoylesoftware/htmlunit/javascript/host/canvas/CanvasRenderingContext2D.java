@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CANVAS_DRAW_THROWS_FOR_MISSING_IMG;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -22,9 +23,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.io.IOException;
 
 import javax.imageio.ImageReader;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -40,6 +38,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.GaeRenderi
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code CanvasRenderingContext2D}.
@@ -320,7 +321,9 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             }
         }
         catch (final IOException ioe) {
-            throw Context.throwAsScriptRuntimeEx(ioe);
+            if (getBrowserVersion().hasFeature(JS_CANVAS_DRAW_THROWS_FOR_MISSING_IMG)) {
+                throw Context.throwAsScriptRuntimeEx(ioe);
+            }
         }
     }
 

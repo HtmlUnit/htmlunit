@@ -565,6 +565,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CANVAS_DATA_URL_IE_PNG,
 
+    /** draw for canvas throws an error if no image available. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_CANVAS_DRAW_THROWS_FOR_MISSING_IMG,
+
     /** className returns an empty string if attribute is blank. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_CLASS_NAME_TROMMED_WHEN_BLANK,
