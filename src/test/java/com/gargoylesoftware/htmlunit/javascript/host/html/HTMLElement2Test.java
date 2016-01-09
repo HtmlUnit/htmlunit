@@ -378,28 +378,43 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "2", "3", "4", "5", "6", "7", "8", "9", "99", "199", "5999" },
+            IE = { "true", "true", "2.0555555555555553", "3.0555555555555553",
+                    "4.111111111111111", "5.111111111111111", "6.111111111111111",
+                    "7.166666666666667", "8.166666666666666", "9.222222222222221",
+                    "101.22222222222223", "203.44444444444446", "6132.333333333333" })
+    @NotYetImplemented(IE)
     public void offsetTopWithPreviousSiblings() throws Exception {
-        String html = "<html><head>\n"
+        String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('d1').offsetTop == 0);\n"
-            + "    alert(document.getElementById('d2').offsetTop > 0);\n"
-            + "    alert(document.getElementById('d3').offsetTop == document.getElementById('d2').offsetTop * 2);\n"
-            + "    alert(document.getElementById('d4').offsetTop == document.getElementById('d2').offsetTop * 3);\n"
-            + "    alert(document.getElementById('d5').offsetTop == document.getElementById('d2').offsetTop * 6004);\n"
+            + "    var d2OffsetTop = document.getElementById('d2').offsetTop;\n"
+            + "    alert(d2OffsetTop > 0);\n"
+
+            + "    alert(document.getElementById('d3').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d4').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d5').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d6').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d7').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d8').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d9').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d10').offsetTop/d2OffsetTop);\n"
+
+            + "    alert(document.getElementById('d100').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d200').offsetTop/d2OffsetTop);\n"
+
+            + "    alert(document.getElementById('d6000').offsetTop/d2OffsetTop);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body style='padding: 0px; margin: 0px;' onload='test()'>\n"
-            + "  <div id='d1'>foo</div>\n"
-            + "  <div id='d2'>foo</div>\n"
-            + "  <div id='d3'>foo</div>\n"
-            + "  <div id='d4'>foo</div>\n";
-        for (int i = 0; i < 6000; i++) {
-            html += "  <div>foo</div>\n";
+            + "<body style='padding: 0px; margin: 0px;' onload='test()'>\n";
+        for (int i = 1; i <= 6000; i++) {
+            html += "  <div id='d" + i + "'>bar</div>\n";
         }
-        html += "  <div id='d5'>bar</div>\n"
+        html = html
             + "</body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
