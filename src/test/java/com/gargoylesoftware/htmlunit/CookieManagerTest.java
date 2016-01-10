@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.utils.DateUtils;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -42,6 +43,15 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  */
 @RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebDriverTestCase {
+
+    /**
+     * Closes the real ie because clearing all cookies seem to be not working
+     * at the moment.
+     */
+    @After
+    public void shutDownRealBrowsersAfter() {
+        shutDownRealIE();
+    }
 
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
     public static final String HTML_ALERT_COOKIE = "<html><head>\n"
