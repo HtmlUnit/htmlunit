@@ -1625,6 +1625,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "§§URL§§?myName=abcdefg",
+            IE = "§§URL§§")
+    @NotYetImplemented(IE)
     public void maxLengthJavaScript() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1645,13 +1648,16 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         driver.findElement(By.id("myButton")).click();
         assertEquals("abcdefg", driver.findElement(By.id("myInput")).getAttribute("value"));
         driver.findElement(By.id("mySubmit")).click();
-        assertEquals(URL_FIRST + "?myName=abcdefg", driver.getCurrentUrl());
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§URL§§?myName=ab")
     public void maxLength2() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1667,8 +1673,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myInput")).sendKeys("abcdefg");
         assertEquals("ab", driver.findElement(By.id("myInput")).getAttribute("value"));
+
         driver.findElement(By.id("mySubmit")).click();
-        assertEquals(URL_FIRST + "?myName=ab", driver.getCurrentUrl());
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
