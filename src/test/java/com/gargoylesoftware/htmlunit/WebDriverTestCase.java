@@ -67,6 +67,8 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.SessionNotFoundException;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -260,7 +262,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     private void shutDownRealBrowsers() {
         for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
-            driver.quit();
+            try {
+                driver.quit();
+            }
+            catch (final UnreachableBrowserException e) {
+                LOG.error("Can't quit browser", e);
+                // ignore, the browser is gone
+            }
         }
         WEB_DRIVERS_REAL_BROWSERS.clear();
     }
@@ -672,9 +680,18 @@ public abstract class WebDriverTestCase extends WebTestCase {
         mockWebConnection.setResponse(url, html, contentType, charset);
         startWebServer(mockWebConnection);
 
-        final WebDriver driver = getWebDriver();
+        WebDriver driver = getWebDriver();
         if (!(driver instanceof HtmlUnitDriver)) {
-            driver.manage().window().setSize(new Dimension(1272, 768));
+            try {
+                driver.manage().window().setSize(new Dimension(1272, 768));
+            }
+            catch (final SessionNotFoundException e) {
+                // maybe the driver was killed by the test before; setup a new one
+                shutDownRealBrowsers();
+
+                driver = getWebDriver();
+                driver.manage().window().setSize(new Dimension(1272, 768));
+            }
         }
         driver.get(url.toExternalForm());
 

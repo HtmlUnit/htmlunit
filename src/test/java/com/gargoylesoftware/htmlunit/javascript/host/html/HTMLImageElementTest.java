@@ -578,6 +578,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+
+        shutDownRealIE();
     }
 
     /**
