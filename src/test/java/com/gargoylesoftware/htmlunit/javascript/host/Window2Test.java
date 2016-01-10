@@ -481,6 +481,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "Hello window", "" })
+    @BuggyWebDriver(IE)
     public void open() throws Exception {
         final String html = "<html><head>"
             + "<script>\n"
@@ -506,7 +507,8 @@ public class Window2Test extends WebDriverTestCase {
                 + "</body></html>";
         getMockWebConnection().setDefaultResponse(windowContent);
         loadPageWithAlerts2(html);
-        // for some reason, the selenium driven browser is in an invalid state after this test
+
+        // for unknown reason, the selenium driven browser is in an invalid state after this test
         shutDownAll();
     }
 
@@ -516,6 +518,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "Hello window", "New window" })
+    @BuggyWebDriver(IE)
     public void openWindowParams() throws Exception {
         final String html = "<html><head>"
             + "<script>\n"
@@ -541,7 +544,8 @@ public class Window2Test extends WebDriverTestCase {
                 + "</body></html>";
         getMockWebConnection().setDefaultResponse(windowContent);
         loadPageWithAlerts2(html);
-        // for some reason, the selenium driven browser is in an invalid state after this test
+
+        // for unknown reason, the selenium driven browser is in an invalid state after this test
         shutDownAll();
     }
 
@@ -551,6 +555,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "window1", "window2" })
+    @BuggyWebDriver(IE)
     public void openWindowParamReplace() throws Exception {
         final String html = "<html><head>"
             + "<script>\n"
@@ -576,7 +581,8 @@ public class Window2Test extends WebDriverTestCase {
                 + "</body></html>";
         getMockWebConnection().setDefaultResponse(windowContent);
         loadPageWithAlerts2(html);
-        // for some reason, the selenium driven browser is in an invalid state after this test
+
+        // for unknown reason, the selenium driven browser is in an invalid state after this test
         shutDownAll();
     }
 
