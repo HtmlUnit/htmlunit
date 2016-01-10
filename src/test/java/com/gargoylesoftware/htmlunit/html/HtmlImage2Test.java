@@ -211,5 +211,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_SECOND);
         loadPageWithAlerts2(html);
+
+        shutDownRealIE();
     }
 }

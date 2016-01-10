@@ -118,7 +118,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "10px", "20em", "80%", "40", "wrong", "" },
-            IE = { "10", "20", "80%", "40", "0", "" })
+            IE = { "10", "20", "80%", "40", "", "" })
     @NotYetImplemented(IE)
     public void getHeight() throws Exception {
         final String html
