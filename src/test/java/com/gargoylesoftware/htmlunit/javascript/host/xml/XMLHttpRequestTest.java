@@ -72,8 +72,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Tries(3)
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void syncUse() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -269,6 +271,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             CHROME = {"orsc1", "open-done", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" })
     public void onload() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -325,6 +330,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     public void relativeUrl() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -359,8 +367,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("bla bla")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseText_NotXml() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -382,8 +392,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_text_html() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -406,8 +418,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object XMLDocument]")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_text_xml() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -430,8 +444,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object XMLDocument]")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_xml() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -454,8 +470,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object XMLDocument]")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_xhtmlXml() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -478,8 +496,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object XMLDocument]")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_svgXml() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -503,8 +523,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "someAttr", "undefined", "undefined" })
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML2() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -704,6 +726,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts("27035")
     public void overrideMimeType_charset() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -730,6 +755,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts("27035")
     public void overrideMimeType_charset_upper_case() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -756,6 +784,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts("40644")
     public void overrideMimeType_charset_empty() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -785,6 +816,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             IE = "NaN")
     @NotYetImplemented({ IE, CHROME })
     public void overrideMimeType_charset_wrong() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -814,8 +848,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "ibcdefg", "xxxxxfg" })
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void replaceOnTextData() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -992,8 +1028,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts({ "[object Element]", "[object Element]", "[object HTMLBodyElement]",
                 "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" })
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_getElementById() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -1039,6 +1077,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts("ol\u00E9")
     public void defaultEncodingIsUTF8() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -1275,6 +1316,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             IE = { "39", "27035", "63" })
     @NotYetImplemented(IE)
     public void overrideMimeType_charset_all() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
