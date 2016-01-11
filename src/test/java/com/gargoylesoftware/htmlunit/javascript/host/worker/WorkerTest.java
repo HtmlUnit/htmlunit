@@ -14,13 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.net.URL;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -30,6 +34,15 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class WorkerTest extends WebDriverTestCase {
+
+    /**
+     * Closes the real ie because clearing all cookies seem to be not working
+     * at the moment.
+     */
+    @After
+    public void shutDownRealBrowsersAfter() {
+        shutDownRealIE();
+    }
 
     /**
      * @throws Exception if the test fails
@@ -113,7 +126,9 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object DedicatedWorkerGlobalScope]", "[object DedicatedWorkerGlobalScope]", "true" })
+    @Alerts(DEFAULT = { "[object DedicatedWorkerGlobalScope]", "[object DedicatedWorkerGlobalScope]", "true" },
+            IE = { "[object WorkerGlobalScope]", "[object WorkerGlobalScope]", "true" })
+    @NotYetImplemented(IE)
     public void thisAndSelf() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
