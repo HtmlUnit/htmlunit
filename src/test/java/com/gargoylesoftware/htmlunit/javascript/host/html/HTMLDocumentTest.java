@@ -1578,8 +1578,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "", "foo=bar", "foo=hello world" })
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void cookie_write_cookiesEnabled() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         loadPageWithAlerts2(getCookieWriteHtmlCode());
     }
 
@@ -2216,7 +2218,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE = { "11", "CSS1Compat", "function", "function" })
+            IE = { "11", "BackCompat", "function", "function" })
+    @NotYetImplemented(IE)
     public void documentMode_metaIEEdge() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n");
     }
@@ -2312,7 +2315,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
+    @Alerts(DEFAULT = "§§URL§§",
+            IE = "undefined")
     public void baseURI_noBaseTag() throws Exception {
         final String html = "<html><body><script>\n"
             + "alert(document.baseURI);\n"
@@ -2325,7 +2329,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("http://myotherwebsite.com/foo")
+    @Alerts(DEFAULT = "http://myotherwebsite.com/foo",
+            IE = "undefined")
     public void baseURI_withBaseTag() throws Exception {
         final String html = "<html><head>\n"
             + "<base href='http://myotherwebsite.com/foo'>"
@@ -2341,7 +2346,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("http://myotherwebsite.com/foo")
+    @Alerts(DEFAULT = "http://myotherwebsite.com/foo",
+            IE = "undefined")
     public void baseURI_withBaseTagInBody() throws Exception {
         final String html = "<html><body>\n"
             + "<base href='http://myotherwebsite.com/foo'>"

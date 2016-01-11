@@ -753,7 +753,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the base URL to resolve relative URLs.
      * @return the base URL
      */
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public String getBaseURI() {
         return getPage().getBaseURL().toString();
     }
