@@ -2217,11 +2217,33 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
+            IE = { "9", "CSS1Compat", "function", "function" })
+    public void documentMode_metaIE9_doctypeStrict() throws Exception {
+        documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_,
+                "  <meta http-equiv='X-UA-Compatible' content='IE=9'>\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
             IE = { "11", "BackCompat", "function", "function" })
     @NotYetImplemented(IE)
     public void documentMode_metaIEEdge() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
+            IE = { "11", "CSS1Compat", "function", "function" })
+    public void documentMode_metaIEEdge_doctypeStrict() throws Exception {
+        documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_,
+                "  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n");
     }
 
     private void documentMode(final String doctype, final String meta) throws Exception {
