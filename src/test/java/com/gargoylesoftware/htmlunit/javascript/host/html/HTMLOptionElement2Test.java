@@ -1327,6 +1327,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "o-mouse over [option1]", "s-mouse over [option1]" },
             IE = "")
     public void mouseOver() throws Exception {
+        shutDownRealIE();
+
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
