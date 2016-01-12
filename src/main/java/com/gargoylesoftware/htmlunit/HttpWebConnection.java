@@ -698,9 +698,13 @@ public class HttpWebConnection implements WebConnection {
                     final File file = File.createTempFile("htmlunit", ".tmp");
                     file.deleteOnExit();
                     final FileOutputStream fos = new FileOutputStream(file);
-                    bos.writeTo(fos); // what we have already read
-                    IOUtils.copyLarge(is, fos); // what remains from the server response
-                    fos.close();
+                    try {
+                        bos.writeTo(fos); // what we have already read
+                        IOUtils.copyLarge(is, fos); // what remains from the server response
+                    }
+                    finally {
+                        fos.close();
+                    }
                     return new DownloadedContent.OnFile(file, true);
                 }
             }
