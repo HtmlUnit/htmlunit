@@ -466,8 +466,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "book", "exception /title, exception title" })
-    // IE11 works only if running alone
     public void selectNodes_fromRoot() throws Exception {
+        // IE11 works only if running alone
+        shutDownRealIE();
+
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
