@@ -226,7 +226,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_38.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 18.0 r0", "18.0.0.209", "Flash32_18_0_0_209.ocx");
+                "Shockwave Flash 20.0 r0", "20.0.0.270", "Flash32_20_0_0_270.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER_11.getPlugins().add(flash);
