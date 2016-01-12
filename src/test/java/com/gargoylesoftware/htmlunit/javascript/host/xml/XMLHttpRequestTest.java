@@ -983,6 +983,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             CHROME = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" },
             FF38 = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" })
     public void responseXML_getElementById_FF() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -1212,6 +1215,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts("myInput")
     public void responseXML_html_form() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html =
               "<html>\n"
             + "  <head>\n"
