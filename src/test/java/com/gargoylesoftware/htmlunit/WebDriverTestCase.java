@@ -166,7 +166,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final Properties properties = new Properties();
                 final File file = new File("test.properties");
                 if (file.exists()) {
-                    properties.load(new FileInputStream(file));
+                    final FileInputStream in = new FileInputStream(file);
+                    try {
+                        properties.load(in);
+                    }
+                    finally {
+                        in.close();
+                    }
+
                     String browsersValue = properties.getProperty("browsers");
                     if (browsersValue == null || browsersValue.isEmpty()) {
                         browsersValue = "hu";
