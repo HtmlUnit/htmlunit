@@ -266,11 +266,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     }
 
     private void appendToJSFile(final String str) throws IOException {
-        final FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true);
-        jsFileWriter.write(str);
-        jsFileWriter.flush();
-
-        jsFileWriter.close();
+        try (final FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true)) {
+            jsFileWriter.write(str);
+        }
     }
 
     /**

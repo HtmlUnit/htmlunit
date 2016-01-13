@@ -195,19 +195,17 @@ public class ScriptException extends RuntimeException {
             return "<no source>";
         }
 
-        try {
-            final BufferedReader reader = new BufferedReader(new StringReader(scriptSourceCode_));
+        try (final BufferedReader reader = new BufferedReader(new StringReader(scriptSourceCode_))) {
             for (int i = 0; i < lineNumber - 1; i++) {
                 reader.readLine();
             }
-            final String result = reader.readLine();
-            reader.close();
-            return result;
+            return reader.readLine();
         }
         catch (final IOException e) {
             // Theoretically impossible
             e.printStackTrace();
         }
+
         return "";
     }
 

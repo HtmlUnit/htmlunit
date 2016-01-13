@@ -246,12 +246,12 @@ public class Geolocation extends SimpleScriptable {
     private List<String> runCommand(final String command) throws IOException {
         final List<String> list = new ArrayList<>();
         final Process p = Runtime.getRuntime().exec(command);
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            list.add(line);
+        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                list.add(line);
+            }
         }
-        reader.close();
         return list;
     }
 

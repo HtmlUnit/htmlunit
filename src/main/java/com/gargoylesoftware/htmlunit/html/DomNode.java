@@ -804,7 +804,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns a string representation of the XML document from this element and all it's children (recursively).
      * The charset used is the current page encoding.
-     *
      * @return the XML string
      */
     public String asXml() {
@@ -813,15 +812,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (htmlPage != null) {
             charsetName = htmlPage.getPageEncoding();
         }
+
         final StringWriter stringWriter = new StringWriter();
-        final PrintWriter printWriter = new PrintWriter(stringWriter);
-        if (charsetName != null && this instanceof HtmlHtml) {
-            printWriter.print("<?xml version=\"1.0\" encoding=\"" + charsetName + "\"?>");
-            printWriter.print("\r\n");
+        try (final PrintWriter printWriter = new PrintWriter(stringWriter)) {
+            if (charsetName != null && this instanceof HtmlHtml) {
+                printWriter.print("<?xml version=\"1.0\" encoding=\"");
+                printWriter.print(charsetName);
+                printWriter.print("\"?>\r\n");
+            }
+            printXml("", printWriter);
+            return stringWriter.toString();
         }
-        printXml("", printWriter);
-        printWriter.close();
-        return stringWriter.toString();
     }
 
     /**
