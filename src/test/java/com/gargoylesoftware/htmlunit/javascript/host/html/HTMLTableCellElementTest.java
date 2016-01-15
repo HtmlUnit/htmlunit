@@ -409,10 +409,72 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" },
-            IE = { "84,34", "84,34", "84,34", "82,32", "82,32", "82,32" })
-    @NotYetImplemented(IE)
+    @Alerts({ "100,42", "90,36" })
+    @NotYetImplemented
     public void cellWidthHeightWithBorderCollapse() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body><table id='t'><tr>\n"
+            + "<td id='td1' style='width: 80px; height: 30px; "
+                        + "border: 2px solid blue; border-width: 2px 7px 10px 13px; padding: 0px;'>a</td>\n"
+            + "</tr></table>\n"
+            + "<script>\n"
+            + "  var t = document.getElementById('t');\n"
+            + "  var td1 = document.getElementById('td1');\n"
+
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+
+            + "  t.style.borderCollapse = 'collapse';\n"
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "84,42", "84,42", "100,42", "82,36", "88,36", "90,36" },
+            CHROME = { "84,42", "84,42", "100,42", "82,36", "87,36", "90,36" })
+    @NotYetImplemented
+    public void cellWidthHeightWithBorderCollapseCellsInRow() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body><table id='t'><tr>\n"
+            + "<td id='td1' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
+            + "<td id='td2' style='width: 80px; height: 30px; "
+                        + "border: solid blue; border-width: 2px; padding: 0px;'>a</td>\n"
+            + "<td id='td3' style='width: 80px; height: 30px; "
+                        + "border: 2px solid blue; border-width: 2px 7px 10px 13px; padding: 0px;'>a</td>\n"
+            + "</tr></table>\n"
+            + "<script>\n"
+            + "  var t = document.getElementById('t');\n"
+            + "  var td1 = document.getElementById('td1');\n"
+            + "  var td2 = document.getElementById('td2');\n"
+            + "  var td3 = document.getElementById('td3');\n"
+
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+            + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
+            + "  alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
+
+            + "  t.style.borderCollapse = 'collapse';\n"
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+            + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
+            + "  alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests some obscure table cell CSS calculations required by the MochiKit tests.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "84,34", "84,34", "84,34", "82,32", "82,32", "82,32" })
+    @NotYetImplemented
+    public void cellWidthHeightWithBorderCollapseSameCellLayout() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body><table id='t'><tr>\n"
