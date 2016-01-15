@@ -574,6 +574,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
              + "</body></html>";
 
         loadPageWithAlerts2(html);
+
+        shutDownAll();
     }
 
      /**
