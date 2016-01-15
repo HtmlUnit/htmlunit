@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -110,7 +109,6 @@ public class PostponedActionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "setting timeout", "before", "after", "iframe.html", "simpleAlert"})
-    @NotYetImplemented
     public void loadingJavaScriptWithTimeout() throws Exception {
         final String html = "<html>\n"
                 + "<head><title>First Page</title>\n"
