@@ -296,6 +296,18 @@ public class DomTextTest extends SimpleWebTestCase {
     }
 
     /**
+     * Test case for #1366.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void getTextContentWhitespace() throws Exception {
+        final String html = "<html><body><div id='s'><b>Hello</b> <b>World</b>!</div></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlElement text = page.getHtmlElementById("s");
+        assertEquals("Hello World", text.getTextContent());
+    }
+
+    /**
      * Tests if {@code getCanonicalXPath()} returns the correct XPath for a text
      * node without other text node siblings.
      * @throws Exception if an error occurs
