@@ -57,6 +57,19 @@ public class HtmlElementTest extends SimpleWebTestCase {
     }
 
     /**
+     * Test hasAttribute() on an element with the attribute but without an value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void hasAttributeWithMissingValue() throws Exception {
+        final String html = "<html><head></head><body id='tag' attrib>text</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final HtmlElement node = page.getHtmlElementById("tag");
+        assertTrue("Element should have attribute", node.hasAttribute("attrib"));
+    }
+
+    /**
      * Test hasAttribute() on an element without the attributes.
      * @throws Exception if the test fails
      */
@@ -107,6 +120,34 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
+    }
+
+    /**
+     * Test getAttribute() on an element with the attribute but without an value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getAttributeWithMissingValue() throws Exception {
+        final String html = "<html><head></head><body id='tag' attrib>text</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final HtmlElement node = page.getHtmlElementById("tag");
+        assertEquals("", node.getAttribute("attrib"));
+        assertTrue(DomElement.ATTRIBUTE_VALUE_EMPTY == node.getAttribute("attrib"));
+    }
+
+    /**
+     * Test getAttribute() on an element with the attribute but without an value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getAttributeWithEmptyValue() throws Exception {
+        final String html = "<html><head></head><body id='tag' attrib=''>text</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final HtmlElement node = page.getHtmlElementById("tag");
+        assertEquals("", node.getAttribute("attrib"));
+        assertTrue(DomElement.ATTRIBUTE_VALUE_EMPTY == node.getAttribute("attrib"));
     }
 
     /**
