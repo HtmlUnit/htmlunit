@@ -140,10 +140,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     DIALOGWINDOW_REFERER,
 
-    /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    DISPLAYED_COLLAPSE,
-
     /** DOCTYPE has undefined value for 'prefix'. */
     @BrowserFeature(@WebBrowser(CHROME))
     DOCTYPE_PREFIX_UNDEFINED,

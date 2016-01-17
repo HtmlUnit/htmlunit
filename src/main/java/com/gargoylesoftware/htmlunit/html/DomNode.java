@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DISPLAYED_COLLAPSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
@@ -32,9 +31,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.xml.utils.PrefixResolver;
 import org.w3c.css.sac.CSSException;
@@ -67,6 +63,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the
@@ -749,7 +748,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
             }
 
-            final boolean collapseInvisible = hasFeature(DISPLAYED_COLLAPSE);
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
             for (int i = styles.size() - 1; i >= 0; i--) {
@@ -759,7 +757,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     if ("visible".equals(visibility)) {
                         return true;
                     }
-                    if ("hidden".equals(visibility) || (collapseInvisible && "collapse".equals(visibility))) {
+                    if ("hidden".equals(visibility) || "collapse".equals(visibility)) {
                         return false;
                     }
                 }

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -987,7 +986,6 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @NotYetImplemented(IE)
     public void asTextVisibilityCollapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -995,7 +993,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "</head>\n"
             + "<body>Welcome\n"
             + "<p style='visibility:collapse'>hidden text\n"
-            + "<FONT COLOR='#FF0000' style='visibility:visible'>to the world</FONT>\n"
+            + "<font color='#FF0000' style='visibility:visible'>to the world</font>\n"
             + "some more hidden text</p>\n"
             + "</body>\n"
             + "</html>";

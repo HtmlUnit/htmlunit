@@ -9,6 +9,9 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                Paragraph with style visibility:collapse is invisible in IE11 also.
+            </action>
+            <action type="fix" dev="rbri">
                 Document baseURI property is not available for IE.
             </action>
             <action type="fix" dev="mguillem">
