@@ -304,7 +304,7 @@ public class DomTextTest extends SimpleWebTestCase {
         final String html = "<html><body><div id='s'><b>Hello</b> <b>World</b>!</div></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlElement text = page.getHtmlElementById("s");
-        assertEquals("Hello World", text.getTextContent());
+        assertEquals("Hello World!", text.getTextContent());
     }
 
     /**
