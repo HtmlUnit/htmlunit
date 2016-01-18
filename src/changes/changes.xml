@@ -9,6 +9,11 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                Fix really weird IE behavior when applying a CSS3 pseudo selector to an detached node.
+                This fixes the 'Invalid selector' output for the :enabled and :checked selector for pages
+                using jQuery.
+            </action>
+            <action type="fix" dev="rbri">
                 Paragraph with style visibility:collapse is invisible in IE11 also.
             </action>
             <action type="fix" dev="rbri">

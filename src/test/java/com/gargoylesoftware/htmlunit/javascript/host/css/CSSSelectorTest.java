@@ -761,7 +761,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts({ })
     public void pseudoAfter() throws Exception {
         final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Pseudo-After</title><script>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>Pseudo-After</title><script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "    try {\n"
@@ -1582,198 +1583,220 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({ "null", "null", "null" })
     public void activeEmptyDetached() throws Exception {
         emptyAndDetached("*:active");
+        emptyAndDetached(":active");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "null" },
+            IE = { "null", "exception", "null" })
     public void checkedEmptyDetached() throws Exception {
         emptyAndDetached("*:checked");
+        emptyAndDetached(":checked");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "null" },
+            IE = { "null", "exception", "null" })
     public void disabledEmptyDetached() throws Exception {
         emptyAndDetached("*:disabled");
+        emptyAndDetached(":disabled");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "[object HTMLSpanElement]" },
+            IE = { "null", "exception", "[object HTMLSpanElement]" })
     public void emptyEmptyDetached() throws Exception {
         emptyAndDetached("*:empty");
+        emptyAndDetached(":empty");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "null" },
+            IE = { "null", "exception", "null" })
     public void enabledEmptyDetached() throws Exception {
         emptyAndDetached("*:enabled");
+        emptyAndDetached(":enabled");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({ "null", "null", "[object HTMLSpanElement]" })
     public void firstchildEmptyDetached() throws Exception {
         emptyAndDetached("*:first-child");
+        emptyAndDetached(":first-child");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "[object HTMLSpanElement]" },
+            IE = { "null", "exception", "[object HTMLSpanElement]" })
     public void firstoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:first-of-type");
+        emptyAndDetached(":first-of-type");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({ "null", "null", "null" })
     public void focusEmptyDetached() throws Exception {
         emptyAndDetached("*:focus");
+        emptyAndDetached(":focus");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({ "null", "null", "null" })
     public void hoverEmptyDetached() throws Exception {
         emptyAndDetached("*:hover");
+        emptyAndDetached(":hover");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "[object HTMLSpanElement]" },
+            IE = { "null", "exception", "[object HTMLSpanElement]" })
     public void lastchildEmptyDetached() throws Exception {
         emptyAndDetached("*:last-child");
+        emptyAndDetached(":last-child");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "[object HTMLSpanElement]" },
+            IE = { "null", "exception", "[object HTMLSpanElement]" })
     public void lastoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:last-of-type");
+        emptyAndDetached(":last-of-type");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({ "null", "null", "null" })
     public void linkEmptyDetached() throws Exception {
         emptyAndDetached("*:link");
+        emptyAndDetached(":link");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "[object HTMLSpanElement]" },
+            IE = { "null", "exception", "[object HTMLSpanElement]" })
     public void notEmptyDetached() throws Exception {
         emptyAndDetached("*:not(p)");
+        emptyAndDetached(":not(p)");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "null" },
+            IE = { "null", "exception", "null" })
     public void nthchildEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-child(2n)");
+        emptyAndDetached(":nth-child(2n)");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "null" },
+            IE = { "null", "exception", "null" })
     public void nthlastchildEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-last-child(2n)");
+        emptyAndDetached(":nth-last-child(2n)");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "null" },
+            IE = { "null", "exception", "null" })
     public void nthoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-of-type(2n)");
+        emptyAndDetached(":nth-of-type(2n)");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "[object HTMLSpanElement]" },
+            IE = { "null", "exception", "[object HTMLSpanElement]" })
     public void onlychildEmptyDetached() throws Exception {
         emptyAndDetached("*:only-child");
+        emptyAndDetached(":only-child");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "[object HTMLSpanElement]" },
+            IE = { "null", "exception", "[object HTMLSpanElement]" })
     public void onlyoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:only-of-type");
+        emptyAndDetached(":only-of-type");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "null", "exception" })
+    @Alerts(DEFAULT = { "null", "null", "null" },
+            IE = { "null", "exception", "null" })
     public void rootEmptyDetached() throws Exception {
         emptyAndDetached("*:root");
+        emptyAndDetached(":root");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({ "null", "null", "null" })
     public void visitedEmptyDetached() throws Exception {
         emptyAndDetached("*:visited");
+        emptyAndDetached(":visited");
     }
 
     private void emptyAndDetached(final String selector) throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -1785,6 +1808,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  } catch(e) {alert('exception')}\n"
 
             + "  div = document.createElement('div');\n"
+            + "  try {\n"
+            + "    found = div.querySelector('" + selector + "');\n"
+            + "    alert(found);\n"
+            + "  } catch(e) {alert('exception')}\n"
+
+            + "  var input = document.createElement('span');\n"
+            + "  div.appendChild(input);\n"
             + "  try {\n"
             + "    found = div.querySelector('" + selector + "');\n"
             + "    alert(found);\n"
