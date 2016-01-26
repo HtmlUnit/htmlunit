@@ -41,17 +41,10 @@ public class HTMLParamElementTest extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var param = document.getElementById('tester1');\n"
-            + "    alert(param.value);\n"
-
-            + "    param = document.getElementById('tester2');\n"
-            + "    alert(param.value);\n"
-
-            + "    param = document.getElementById('tester3');\n"
-            + "    alert(param.value);\n"
-
-            + "    param = document.getElementById('tester4');\n"
-            + "    alert(param.value);\n"
+            + "    for(var i = 1; i < 5; i++) {\n"
+            + "      var param = document.getElementById('tester' + i);\n"
+            + "      alert(param.value);\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -78,17 +71,10 @@ public class HTMLParamElementTest extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var param = document.getElementById('tester1');\n"
-            + "    alert(param.name);\n"
-
-            + "    param = document.getElementById('tester2');\n"
-            + "    alert(param.name);\n"
-
-            + "    param = document.getElementById('tester3');\n"
-            + "    alert(param.name);\n"
-
-            + "    param = document.getElementById('tester4');\n"
-            + "    alert(param.name);\n"
+            + "    for(var i = 1; i < 5; i++) {\n"
+            + "      var param = document.getElementById('tester' + i);\n"
+            + "      alert(param.name);\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -98,6 +84,75 @@ public class HTMLParamElementTest extends WebDriverTestCase {
             + "    <param id='tester2' name='' value='myValue'/>\n"
             + "    <param id='tester3' value='myValue'/>\n"
             + "    <param id='tester4' />\n"
+            + "  </object>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "ttt", "", "", "", "ttt", "", "", "", "ttt", "ttt", "ttt" })
+    public void type() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    for(var i = 1; i < 12; i++) {\n"
+            + "      var param = document.getElementById('tester' + i);\n"
+            + "      alert(param.type);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <object>\n"
+            + "    <param id='tester1' type='ttt' value='myValue'/>\n"
+            + "    <param id='tester2' type='' value='myValue'/>\n"
+            + "    <param id='tester3' value='myValue'/>\n"
+            + "    <param id='tester4' />\n"
+
+            + "    <param id='tester5' type='ttt' value='myValue' valueType='ref'/>\n"
+            + "    <param id='tester6' type='' value='myValue' valueType='ref'/>\n"
+            + "    <param id='tester7' value='myValue' valueType='ref'/>\n"
+            + "    <param id='tester8' valueType='ref'/>\n"
+
+            + "    <param id='tester9' type='ttt' value='myValue' valueType='data'/>\n"
+            + "    <param id='tester10' type='ttt' value='myValue' valueType='object'/>\n"
+            + "    <param id='tester11' type='ttt' value='myValue' valueType='foo'/>\n"
+            + "  </object>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "ref", "object", "data", "foo" })
+    public void valueType() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    for(var i = 1; i < 5; i++) {\n"
+            + "      var param = document.getElementById('tester' + i);\n"
+            + "      alert(param.valueType);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <object>\n"
+            + "    <param id='tester1' valuetype='ref' value='myValue'/>\n"
+            + "    <param id='tester2' valuetype='object' value='myValue'/>\n"
+            + "    <param id='tester3' valuetype='data' value='myValue'/>\n"
+            + "    <param id='tester4' valuetype='foo' value='myValue'/>\n"
             + "  </object>\n"
             + "</body></html>";
 

@@ -65,6 +65,24 @@ public class HTMLParamElement extends HTMLElement {
     }
 
     /**
+     * Returns the {@code type} attribute.
+     * @return the {@code type} attribute
+     */
+    @JsxGetter
+    public String getType() {
+        return getDomNodeOrDie().getAttribute("type");
+    }
+
+    /**
+     * Returns the {@code valuetype} attribute.
+     * @return the {@code valuetype} attribute
+     */
+    @JsxGetter
+    public String getValueType() {
+        return getDomNodeOrDie().getAttribute("valuetype");
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

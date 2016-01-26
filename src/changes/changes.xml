@@ -9,7 +9,7 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri" issue="#1740">
-                Add name and value property support to HTMLParamElement.
+                Add properties name, value, type, valuetype support to HTMLParamElement.
             </action>
             <action type="fix" dev="rbri">
                 Fix really weird IE behavior when applying a CSS3 pseudo selector to an detached node.
