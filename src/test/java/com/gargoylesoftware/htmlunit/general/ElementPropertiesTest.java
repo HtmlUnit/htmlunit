@@ -2037,7 +2037,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("name,type,value,valueType")
-    @NotYetImplemented
     public void param() throws Exception {
         test("param");
     }
