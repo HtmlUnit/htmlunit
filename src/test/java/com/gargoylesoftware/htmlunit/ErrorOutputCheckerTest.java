@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class ErrorOutputCheckereTest extends WebTestCase {
+public class ErrorOutputCheckerTest extends WebTestCase {
 
     // no need to specify Rule here as it is specified in {@link WebTestCase}
 
