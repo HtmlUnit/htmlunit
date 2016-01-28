@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -368,7 +367,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Alerts(CHROME = { "20", "5", "8", "4", "20", "20", "20", "3" },
             FF = { "20", "5", "8", "4", "error", "4", "error", "4", "20", "3" },
             IE = { "20", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3" })
-    @NotYetImplemented(CHROME)
     public void cols() throws Exception {
         final String html
             = "<html><head>\n"
@@ -420,7 +418,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Alerts(CHROME = { "2", "5", "8", "4", "2", "2", "2", "3" },
             FF = { "2", "5", "8", "4", "error", "4", "error", "4", "2", "3" },
             IE = { "2", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3" })
-    @NotYetImplemented(CHROME)
     public void rows() throws Exception {
         final String html
             = "<html><head>\n"

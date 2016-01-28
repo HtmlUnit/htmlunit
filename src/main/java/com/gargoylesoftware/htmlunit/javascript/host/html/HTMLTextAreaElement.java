@@ -116,7 +116,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxSetter
     public void setCols(final String cols) {
-        final int i;
+        int i;
         try {
             i = Float.valueOf(cols).intValue();
             if (i < 0) {
@@ -131,7 +131,7 @@ public class HTMLTextAreaElement extends FormField {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            return;
+            i = 20;
         }
         getDomNodeOrDie().setAttribute("cols", Integer.toString(i));
     }
@@ -157,7 +157,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxSetter
     public void setRows(final String rows) {
-        final int i;
+        int i;
         try {
             i = new Float(rows).intValue();
             if (i < 0) {
@@ -172,7 +172,8 @@ public class HTMLTextAreaElement extends FormField {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            return;
+
+            i = 2;
         }
         getDomNodeOrDie().setAttribute("rows", Integer.toString(i));
     }
