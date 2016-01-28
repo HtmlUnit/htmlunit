@@ -2417,7 +2417,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns "clientLeft" attribute.
      * @return the {@code clientLeft} attribute
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter
     public int getClientLeft() {
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getBorderLeftValue();
@@ -2427,7 +2427,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns "clientTop" attribute.
      * @return the {@code clientTop} attribute
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter
     public int getClientTop() {
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getBorderTopValue();

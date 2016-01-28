@@ -2354,7 +2354,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "0", "0" })
-    @NotYetImplemented(CHROME)
     public void clientLeftTop() throws Exception {
         final String html = "<html><body>"
             + "<div id='div1'>hello</div><script>\n"
@@ -2371,7 +2370,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "0", "0" })
-    @NotYetImplemented({ CHROME })
     public void clientLeftTop_documentElement() throws Exception {
         final String html =
               "<!DOCTYPE HTML "
@@ -2391,7 +2389,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "4", "4" })
-    @NotYetImplemented(CHROME)
     public void clientLeftTopWithBorder() throws Exception {
         final String html = "<html><body>"
             + "<div id='div1' style='border: 4px solid black;'>hello</div><script>\n"
