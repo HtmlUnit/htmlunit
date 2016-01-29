@@ -93,16 +93,16 @@ public class CSSFontFaceRule extends CSSRule {
             final HtmlPage page = (HtmlPage)
                     ((CSSStyleSheet) getParentScope()).getWindow().getWebWindow().getEnclosedPage();
             try {
-                cssText = matcher.replaceFirst("src: url(" + page.getFullyQualifiedUrl(url) + ");");
+                cssText = matcher.replaceFirst("src: url(\"" + page.getFullyQualifiedUrl(url) + "\");");
             }
             catch (final Exception e) {
                 switch (url) {
                     case "//:":
-                        cssText = matcher.replaceFirst("src: url(" + "http:///" + ");");
+                        cssText = matcher.replaceFirst("src: url(\"" + "http:///" + "\");");
                         break;
 
                     case "//":
-                        cssText = matcher.replaceFirst("src: url(" + "http:" + ");");
+                        cssText = matcher.replaceFirst("src: url(\"" + "http:" + "\");");
                         break;
 
                     default:
