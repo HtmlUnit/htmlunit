@@ -737,8 +737,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "* x # x *", "*\tx\t#\tx\t*", "*  #  *", "*\t\t#\t\t*", "*\t \n \n#\t \n \n*", "*x\ty#x\ty*" },
-            CHROME = { "* x # x *", "*\tx\t#\tx\t*", "*#  *", "*#\t\t*", "*#\t \n \n*", "*x\ty#x\ty*" })
+    @Alerts({ "* x # x *", "*\tx\t#\tx\t*", "*  #  *", "*\t\t#\t\t*", "*\t \n \n#\t \n \n*", "*x\ty#x\ty*" })
     public void getClassNameWhitespace() throws Exception {
         final String html
             = "<html><head>\n"

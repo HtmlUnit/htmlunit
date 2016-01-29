@@ -9,13 +9,16 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
-                HashChangeEvent.initHashChangeEvent() not supported by chrome.
+                Element.className no longer trims whitespace for Chrome.
             </action>
             <action type="fix" dev="rbri">
-                Applet is no longer supported by chrome.
+                HashChangeEvent.initHashChangeEvent() not supported by Chrome.
             </action>
             <action type="fix" dev="rbri">
-                Implementation of option.text is now in sync with latest chrome.
+                Applet is no longer supported by Chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                Implementation of option.text is now in sync with latest Chrome.
             </action>
             <action type="fix" dev="rbri">
                 Properties clientLeft and clientTop are available in Chrome also.

@@ -561,10 +561,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_CANVAS_DRAW_THROWS_FOR_MISSING_IMG,
 
-    /** className returns an empty string if attribute is blank. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_CLASS_NAME_TROMMED_WHEN_BLANK,
-
     /** Do not allow invalid clear values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_CLEAR_RESTRICT,
