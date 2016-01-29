@@ -70,7 +70,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
-            CHROME = { "initial", "url(http://localhost:12345/myImage.png)", "initial", "initial", "initial" })
+            CHROME = { "initial", "url(\"myImage.png\")", "initial", "initial", "initial" })
     @NotYetImplemented(CHROME)
     public void backgroundImage() throws Exception {
         background("url(myImage.png)");
@@ -155,7 +155,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "red", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
-            CHROME = { "red", "url(http://localhost:12345/myImage.png)", "initial", "initial", "initial" })
+            CHROME = { "red", "url(\"myImage.png\")", "initial", "initial", "initial" })
     @NotYetImplemented(CHROME)
     public void backgroundMixed() throws Exception {
         background("red url(\"myImage.png\")");
@@ -222,7 +222,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "transparent", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
-            CHROME = { "rgba(0, 0, 0, 0)", "url(http://localhost:12345/myImage.png)", "repeat", "0% 0%", "scroll" })
+            CHROME = { "rgba(0, 0, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" })
     @NotYetImplemented
     public void backgroundCssImage() throws Exception {
         backgroundCss("url(myImage.png)");
@@ -304,7 +304,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
-            CHROME = { "rgb(255, 0, 0)", "url(http://localhost:12345/myImage.png)", "repeat", "0% 0%", "scroll" })
+            CHROME = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" })
     @NotYetImplemented
     public void backgroundCssMixed() throws Exception {
         backgroundCss("red url(\"myImage.png\")");
