@@ -207,7 +207,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(FF31 = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.209", "NPSWF32_18_0_0_209.dll"},
             FF38 = {"Shockwave Flash", "Shockwave Flash 20.0 r0", "20.0.0.286", "NPSWF32_20_0_0_286.dll"},
-            CHROME = { "Shockwave Flash", "Shockwave Flash 18.0 r0", "undefined", "pepflashplayer.dll"},
+            CHROME = { "Shockwave Flash", "Shockwave Flash 20.0 r0", "undefined", "pepflashplayer.dll"},
             IE = {"Shockwave Flash, Shockwave Flash 20.0 r0", "20.0.0.270", "Flash32_20_0_0_270.ocx"},
             EDGE = {"Shockwave Flash, Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
