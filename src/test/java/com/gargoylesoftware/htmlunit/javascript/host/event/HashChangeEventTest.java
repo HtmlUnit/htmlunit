@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link HashChangeEvent}.
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HashChangeEventTest extends WebDriverTestCase {
@@ -122,18 +123,26 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HashChangeEvent]", "hashchange", "true", "false", "§§URL§§", "§§URL§§#1" },
-            IE = "exception")
+    @Alerts(DEFAULT = { "[object HashChangeEvent]", "[object HashChangeEvent]",
+                            "hashchange", "true", "false", "§§URL§§", "§§URL§§#1" },
+            CHROME = { "[object HashChangeEvent]", "missing initHashChangeEvent" },
+            IE = "exception createEvent")
     public void initHashChangeEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('HashChangeEvent');\n"
+            + "      alert(event);\n"
+            + "    } catch (e) { alert('exception createEvent'); return; }\n"
+
+            + "    if (!event.initHashChangeEvent) {alert('missing initHashChangeEvent'); return;}\n"
+
+            + "    try {\n"
             + "      event.initHashChangeEvent('hashchange', true, false, '" + URL_FIRST + "', '"
             + URL_FIRST + "#1');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { alert('exception initHashChangeEvent') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -147,6 +156,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HashChangeEvent]", "hashchange", "true", "false", "§§URL§§", "§§URL§§#1" },
+            CHROME = "exception",
             IE = "exception")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -98,7 +98,7 @@ public class HashChangeEvent extends Event {
      * @param oldURL the old URL
      * @param newURL the new URL
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxFunction(@WebBrowser(FF))
     public void initHashChangeEvent(final String type, final boolean bubbles, final boolean cancelable,
         final String oldURL, final String newURL) {
         initEvent(type, bubbles, cancelable);
