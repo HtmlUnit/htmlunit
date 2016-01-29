@@ -222,7 +222,10 @@ public class History implements Serializable {
      * @return the current state object
      */
     public Object getCurrentState() {
-        return webRequests_.get(index_).getState();
+        if (index_ >= 0 && index_ < webRequests_.size()) {
+            return webRequests_.get(index_).getState();
+        }
+        return null;
     }
 
     /**
