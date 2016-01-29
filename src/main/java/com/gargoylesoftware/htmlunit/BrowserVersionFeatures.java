@@ -966,7 +966,7 @@ public enum BrowserVersionFeatures {
     JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START,
 
     /** Setting the value of an Input URL to blank will result in an empty value. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_INPUT_SET_VALUE_URL_TRIMMED,
 
     /** Indicates that Intl.v8BreakIterator is supported. */
