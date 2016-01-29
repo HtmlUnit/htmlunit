@@ -14,14 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_GET_TEXT_PREFERES_LABEL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -120,14 +118,7 @@ public class HTMLOptionElement extends FormChild {
     public String getText() {
         final DomNode dom = getDomNodeOrNull();
         if (dom instanceof HtmlOption) {
-            if (getBrowserVersion().hasFeature(HTMLOPTION_GET_TEXT_PREFERES_LABEL)
-                    && dom.isDirectlyAttachedToPage()) {
-                final String label = ((HtmlOption) dom).getLabelAttribute();
-                if (!StringUtils.isEmpty(label)) {
-                    return label;
-                }
-            }
-            return ((HtmlOption) getDomNodeOrNull()).getText();
+            return ((HtmlOption) dom).getText();
         }
         return null;
     }

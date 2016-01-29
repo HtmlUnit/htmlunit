@@ -825,8 +825,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"text1", "New Text1", "", "New Text2", "text3", "New Text3", "text4", "New Text4" },
-            CHROME = {"label1", "label1", "label2", "label2", "text3", "New Text3", "text4", "New Text4" })
+    @Alerts({"text1", "New Text1", "", "New Text2", "text3", "New Text3", "text4", "New Text4" })
     public void text() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1096,8 +1095,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "", "", "text2", "text2", "text2", "label2" },
-            CHROME = { "", "", "", "", "text2", "text2", "label2", "label2" })
+    @Alerts({ "", "", "", "", "text2", "text2", "text2", "label2" })
     @NotYetImplemented
     public void setLabel() throws Exception {
         final String html =

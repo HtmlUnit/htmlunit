@@ -306,8 +306,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "value1", "One", "value2", "Two", "value3", "Three" },
-            CHROME = { "3", "value1", "OneLabel", "value2", "TwoLabel", "value3", "ThreeLabel" })
+    @Alerts({ "3", "value1", "One", "value2", "Two", "value3", "Three" })
     public void getOptionLabel() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

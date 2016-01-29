@@ -410,10 +410,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
 
-    /** Text property getter preferes the label if defined. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    HTMLOPTION_GET_TEXT_PREFERES_LABEL,
-
     /** */
     @BrowserFeature(@WebBrowser(IE))
     HTMLOPTION_PREVENT_DISABLED,
