@@ -9,6 +9,9 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                Applet is no longer supported by chrome.
+            </action>
+            <action type="fix" dev="rbri">
                 Implementation of option.text is now in sync with latest chrome.
             </action>
             <action type="fix" dev="rbri">

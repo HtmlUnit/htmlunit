@@ -46,8 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlApplet.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) })
+                browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
     })
 public class HTMLAppletElement extends HTMLElement {
 

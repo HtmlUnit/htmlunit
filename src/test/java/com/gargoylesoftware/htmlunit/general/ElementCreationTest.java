@@ -97,7 +97,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("[object HTMLAppletElement]")
+    @Alerts(DEFAULT = "[object HTMLAppletElement]",
+            CHROME = "[object HTMLUnknownElement]")
     public void applet() throws Exception {
         test("applet");
     }
@@ -1847,6 +1848,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            CHROME = "[object HTMLElement]",
             FF38 = "[object HTMLElement]")
     public void rb() throws Exception {
         test("rb");
@@ -1866,6 +1868,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            CHROME = "[object HTMLElement]",
             FF38 = "[object HTMLElement]")
     public void rtc() throws Exception {
         test("rtc");

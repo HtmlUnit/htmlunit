@@ -892,7 +892,7 @@ public enum BrowserVersionFeatures {
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
 
     /** HTMLElement instead of HTMLUnknownElement for ruby elements. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
     /** IE ignores the last line containing uncommented. */
