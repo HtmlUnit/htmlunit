@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
@@ -127,8 +128,9 @@ public class WorkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object DedicatedWorkerGlobalScope]", "[object DedicatedWorkerGlobalScope]", "true" },
+            CHROME = { "[object global]", "[object global]", "true" },
             IE = { "[object WorkerGlobalScope]", "[object WorkerGlobalScope]", "true" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ CHROME, IE })
     public void thisAndSelf() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
