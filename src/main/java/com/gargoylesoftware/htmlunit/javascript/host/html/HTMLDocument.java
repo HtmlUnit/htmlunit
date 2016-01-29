@@ -294,6 +294,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         );
         for (String cmd : cmds) {
             EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ROOT));
+            EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
         }
     }
 

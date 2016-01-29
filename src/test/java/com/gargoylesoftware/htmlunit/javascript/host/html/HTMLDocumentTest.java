@@ -1240,8 +1240,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "32 commands supported", "not supported: foo, 123" },
-            CHROME = { "29 commands supported", "not supported: Copy, Cut, Paste, foo, 123" })
+    @Alerts({ "32 commands supported", "not supported: foo, 123" })
     public void queryCommandSupported_common() throws Exception {
         final String[] commands = {"BackColor", "Bold",
             "Copy", "CreateLink", "Cut", "Delete",
