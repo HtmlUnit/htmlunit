@@ -456,7 +456,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "accessKey,blur(),click(),contentEditable,dataset,dir,draggable,focus(),hidden,"
-                + "innerText,isContentEditable,lang,onabort,"
+                + "innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onautocomplete,onautocompleteerror,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,"
                 + "onclose,oncontextmenu,oncuechange,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
                 + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,"
@@ -575,7 +575,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
-                + "captureEvents(),chrome,clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),"
+                + "cancelIdleCallback(),captureEvents(),chrome,clearInterval(),clearTimeout(),clientInformation,"
+                + "close(),closed,confirm(),"
                 + "console,createXmlDocument(),crypto,defaultstatus,defaultStatus,devicePixelRatio,"
                 + "dispatchEvent(),document,external,fetch(),find(),focus(),frameElement,frames,getComputedStyle(),"
                 + "getMatchedCSSRules(),getSelection(),history,ieMethods,indexedDB,innerHeight,innerWidth,length,"
@@ -831,13 +832,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+    @Alerts(CHROME = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,"
-                + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,onwebkitkeyadded,onwebkitkeyerror,"
-                + "onwebkitkeymessage,onwebkitneedkey,pause(),paused,play(),playbackRate,played,preload,readyState,"
-                + "seekable,seeking,setMediaKeys(),src,textTracks,volume,webkitAddKey(),webkitAudioDecodedByteCount,"
-                + "webkitCancelKeyRequest(),webkitGenerateKeyRequest(),webkitVideoDecodedByteCount",
+                + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
+                + "pause(),paused,play(),playbackRate,played,preload,readyState,"
+                + "seekable,seeking,setMediaKeys(),src,textTracks,volume,webkitAudioDecodedByteCount,"
+                + "webkitVideoDecodedByteCount",
             FF31 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
                 + "HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mozAudioCaptured,"
@@ -1351,7 +1352,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "contentDocument,contentWindow,frameBorder,getSVGDocument(),longDesc,marginHeight,marginWidth,"
+    @Alerts(DEFAULT = "contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,"
                 + "name,noResize,scrolling,"
                 + "src",
             FF = "contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,name,noResize,"
@@ -2549,13 +2550,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,muted,NETWORK_EMPTY,"
-                + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,onwebkitkeyadded,"
-                + "onwebkitkeyerror,onwebkitkeymessage,onwebkitneedkey,pause(),paused,play(),playbackRate,played,"
+                + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
+                + "pause(),paused,play(),playbackRate,played,"
                 + "poster,preload,readyState,seekable,seeking,setMediaKeys(),src,textTracks,videoHeight,videoWidth,"
-                + "volume,webkitAddKey(),webkitAudioDecodedByteCount,webkitCancelKeyRequest(),webkitDecodedFrameCount,"
-                + "webkitDisplayingFullscreen,webkitDroppedFrameCount,webkitEnterFullscreen(),"
-                + "webkitEnterFullScreen(),webkitExitFullscreen(),webkitExitFullScreen(),webkitGenerateKeyRequest(),"
-                + "webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
+                + "volume,webkitAudioDecodedByteCount,webkitDecodedFrameCount,"
+                + "webkitDisplayingFullscreen,webkitDroppedFrameCount,webkitEnterFullScreen(),webkitEnterFullscreen(),"
+                + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
                 + "width",
             FF31 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
@@ -2721,8 +2721,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            CHROME = "altKey,charCode,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,"
+    @Alerts(CHROME = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
+                + "DOM_KEY_LOCATION_RIGHT,"
                 + "DOM_KEY_LOCATION_STANDARD,getModifierState(),initKeyboardEvent(),keyCode,keyIdentifier,keyLocation,"
                 + "location,metaKey,repeat,"
                 + "shiftKey",
@@ -2766,7 +2766,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
                 + "getModifierState(),initKeyboardEvent(),key,keyCode,locale,location,metaKey,repeat,shiftKey,"
                 + "which")
-    @NotYetImplemented({ CHROME, FF, IE, EDGE })
+    @NotYetImplemented
     public void keyboardEvent() throws Exception {
         testString("document.createEvent ? document.createEvent('KeyboardEvent') : '',"
                 + " document.createEvent ? document.createEvent('UIEvent') : ''");
