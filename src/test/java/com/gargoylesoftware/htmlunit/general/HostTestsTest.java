@@ -61,8 +61,11 @@ public class HostTestsTest {
             set.remove("Arguments");
             set.add("arguments");
         }
+
+        // Worker
         set.remove("DedicatedWorkerGlobalScope");
         set.remove("WorkerGlobalScope");
+        set.remove("global");
 
         ensure(new File(testRoot, HostClassNameTest.class.getName().replace('.', '/') + ".java"), set);
         ensure(new File(testRoot, HostTypeOfTest.class.getName().replace('.', '/') + ".java"), set);
