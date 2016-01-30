@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 
 import org.junit.Test;
@@ -104,8 +105,10 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "symbol",
             FF31 = {},
             IE = {})
+    @NotYetImplemented(CHROME)
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
     }
@@ -138,8 +141,10 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "symbol",
             FF31 = {},
             IE = {})
+    @NotYetImplemented(CHROME)
     public void toPrimitive() throws Exception {
         name("toPrimitive");
     }
@@ -202,13 +207,10 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF38 = "Symbol(Symbol.iterator)",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator)",
             FF31 = {},
             IE = {})
-    // The current WebTestCase alert handling is incorrect, as it uses 'String(alertValue)'
-    // In real browsers, the exception is thrown
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({FF38, CHROME})
     public void defaultValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
