@@ -93,19 +93,19 @@ final class StyleAttributes {
         ACCELERATOR("accelerator", "accelerator", ie("undefined")),
 
         /** The style property {@code alignContent}. */
-        ALIGN_CONTENT("alignContent", "align-content", ie("stretch"), ff("stretch"), chrome("start")),
+        ALIGN_CONTENT("alignContent", "align-content", ie("stretch"), ff("stretch"), chrome("stretch")),
 
         /** The style property {@code align-content}. */
         ALIGN_CONTENT_("align-content", "align-content", ff38up("stretch")),
 
         /** The style property {@code alignItems}. */
-        ALIGN_ITEMS("alignItems", "align-items", ff("stretch"), ie("stretch"), chrome("start")),
+        ALIGN_ITEMS("alignItems", "align-items", ff("stretch"), ie("stretch"), chrome("stretch")),
 
         /** The style property {@code align-items}. */
         ALIGN_ITEMS_("align-items", "align-items", ff38up("stretch")),
 
         /** The style property {@code alignSelf}. */
-        ALIGN_SELF("alignSelf", "align-self", ff("stretch"), ie("auto"), chrome("start")),
+        ALIGN_SELF("alignSelf", "align-self", ff("stretch"), ie("auto"), chrome("stretch")),
 
         /** The style property {@code align-self}. */
         ALIGN_SELF_("align-self", "align-self", ff38up("stretch")),
@@ -848,7 +848,7 @@ final class StyleAttributes {
 
         /** The style property {@code justifyContent}. */
         JUSTIFY_CONTENT("justifyContent", "justify-content",
-                ff("flex-start"), ie("flex-start"), chrome("start")),
+                ff("flex-start"), ie("flex-start"), chrome("flex-start")),
 
         /** The style property {@code justify-content}. */
         JUSTIFY_CONTENT_("justify-content", "justify-content", ff38up("flex-start")),
@@ -1968,7 +1968,7 @@ final class StyleAttributes {
         TEXT_AUTOSPACE("textAutospace", "text-autospace", ie("undefined")),
 
         /** The style property {@code textCombineUpright}. */
-        TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("undefined")),
+        TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("none")),
 
         /** The style property {@code textDecoration}. */
         TEXT_DECORATION("textDecoration", "text-decoration", chrome("none")),
@@ -2522,7 +2522,7 @@ final class StyleAttributes {
         WORD_WRAP_("word-wrap", "word-wrap", ff38up("normal")),
 
         /** The style property {@code writingMode}. */
-        WRITING_MODE("writingMode", "writing-mode", ie("undefined"), chrome("lr-tb")),
+        WRITING_MODE("writingMode", "writing-mode", ie("undefined"), chrome("horizontal-tb")),
 
         /** The style property {@code x}. */
         X("x", "x", chrome("0px")),
