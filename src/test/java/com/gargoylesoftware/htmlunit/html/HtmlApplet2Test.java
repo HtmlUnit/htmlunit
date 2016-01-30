@@ -38,12 +38,15 @@ public class HtmlApplet2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLAppletElement]", "[object HTMLAppletElement]" })
+    @Alerts(DEFAULT = { "[object HTMLAppletElement]", "[object HTMLCollection]", "1", "[object HTMLAppletElement]" },
+            CHROME = { "[object HTMLUnknownElement]", "[object HTMLCollection]", "0", "undefined" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
+            + "    alert(document.applets);\n"
+            + "    alert(document.applets.length);\n"
             + "    alert(document.applets[0]);\n"
             + "  }\n"
             + "</script>\n"
@@ -53,8 +56,14 @@ public class HtmlApplet2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlApplet.class.isInstance(page.getHtmlElementById("myId")));
+            if (getBrowserVersion().isChrome()) {
+                final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+                assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+            }
+            else {
+                final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+                assertTrue(HtmlApplet.class.isInstance(page.getHtmlElementById("myId")));
+            }
         }
     }
 
