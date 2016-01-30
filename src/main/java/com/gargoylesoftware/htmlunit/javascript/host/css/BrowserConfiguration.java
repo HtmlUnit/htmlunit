@@ -64,10 +64,6 @@ class BrowserConfiguration {
         return ff(defaultValue).startingWith(38);
     }
 
-    public static BrowserConfiguration ie11up(final String defaultValue) {
-        return ie(defaultValue).startingWith(11);
-    }
-
     public static boolean isDefined(final BrowserVersion browserVersion,
             final BrowserConfiguration[] browserConfigurations) {
         if (browserConfigurations == null) {
