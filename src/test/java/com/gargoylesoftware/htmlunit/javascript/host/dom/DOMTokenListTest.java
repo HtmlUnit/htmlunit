@@ -320,8 +320,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {" \t \n  ", "0", "false" },
-            CHROME = {"", "0", "false" })
+    @Alerts(DEFAULT = {" \t \n  ", "0", "false" })
     public void containsInsideWhitespace() throws Exception {
         contains(" \t \r  ", "a");
     }
@@ -489,8 +488,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {" \t \n  ", "0", "1", " \t \n  a" },
-            IE = {" \t \n  ", "0", "1", "a" },
-            CHROME = {"", "0", "1", " \t \n  a" })
+            IE = {" \t \n  ", "0", "1", "a" })
     public void addToWhitespace() throws Exception {
         add(" \t \r  ", "a");
     }
@@ -652,8 +650,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {" \t \n  ", "0", "0", " \t \n  " },
-            CHROME = {"", "0", "0", "" })
+    @Alerts(DEFAULT = {" \t \n  ", "0", "0", " \t \n  " })
     public void removeFromWhitespace() throws Exception {
         remove(" \t \r  ", "a");
     }
@@ -708,6 +705,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "a \t c \n d  e", "4", "3", "a d  e" },
+            CHROME = { "a \t c \n d  e", "4", "3", "a d e" },
             IE = { "a \t c \n d  e", "4", "3", "a d e" })
     public void removeWhitespace() throws Exception {
         remove("a \t c \n d  e", "c");
