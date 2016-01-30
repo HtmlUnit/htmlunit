@@ -396,7 +396,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", CHROME = "false")
     public void _Node_HTMLAppletElement() throws Exception {
         test("Node", "HTMLAppletElement");
     }

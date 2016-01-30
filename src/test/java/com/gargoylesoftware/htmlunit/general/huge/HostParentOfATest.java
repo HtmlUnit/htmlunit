@@ -517,7 +517,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", CHROME = "false")
     public void _Element_HTMLAppletElement() throws Exception {
         test("Element", "HTMLAppletElement");
     }
@@ -2899,8 +2899,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _EventTarget_HTMLAppletElement() throws Exception {
         test("EventTarget", "HTMLAppletElement");
     }
