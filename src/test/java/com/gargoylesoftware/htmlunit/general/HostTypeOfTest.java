@@ -696,7 +696,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "object",
-            CHROME = "function",
+            CHROME = "undefined",
             FF = "function")
     public void htmlAppletElement() throws Exception {
         test("HTMLAppletElement");
