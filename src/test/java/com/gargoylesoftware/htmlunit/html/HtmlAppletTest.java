@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.AppletConfirmHandler;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.StatusHandler;
@@ -49,14 +50,14 @@ public class HtmlAppletTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlApplet appletNode = page.getHtmlElementById("myId");
-        assertEquals("Your browser doesn't support applets", appletNode.asText());
+        assertEquals("Your browser doesn't support applets", page.getHtmlElementById("myId").asText());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "", CHROME = "Your browser doesn't support applets")
     public void asText_appletEnabled() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
@@ -67,8 +68,8 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         client.getOptions().setAppletEnabled(true);
         final HtmlPage page = loadPage(html);
 
-        final HtmlApplet appletNode = page.getHtmlElementById("myId");
-        assertEquals("", appletNode.asText()); // should we display something else?
+        assertEquals(getExpectedAlerts()[0],
+                page.getHtmlElementById("myId").asText()); // should we display something else?
     }
 
     /**
@@ -76,6 +77,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void simpleInstantiation() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/emptyApplet.html");
 
         final HtmlPage page = getWebClient().getPage(url);
@@ -90,6 +95,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletBaseWithoutCodebase() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
@@ -125,6 +134,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletBase() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/codebaseApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -160,6 +173,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkSubdirAppletBase() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/subdir/codebaseApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -195,6 +212,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkSubdirRelativeAppletBase() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/subdir/archiveRelativeApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -230,6 +251,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletParams() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
@@ -267,6 +292,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletOverwriteArchive() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/subdir/codebaseParamApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -304,6 +333,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletUnknownArchive() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/unknownArchiveApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -337,6 +370,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletIgnoreUnknownArchive() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/ignoreUnknownArchiveApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -363,6 +400,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void appletConfirmHandler() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
@@ -397,6 +438,10 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void appletConfirmHandlerPermit() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
