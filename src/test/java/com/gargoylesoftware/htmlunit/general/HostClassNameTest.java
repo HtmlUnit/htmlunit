@@ -753,7 +753,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function HTMLAppletElement() { [native code] }",
+    @Alerts(DEFAULT = "exception",
             IE = "[object HTMLAppletElement]",
             FF = "function HTMLAppletElement() {\n    [native code]\n}")
     public void htmlAppletElement() throws Exception {
