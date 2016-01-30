@@ -38,8 +38,7 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "value1", "text1", "label1", "value2", "text2", "" },
-            CHROME = { "value1", "label1", "label1", "value2", "text2", "" })
+    @Alerts({ "value1", "text1", "label1", "value2", "text2", "" })
     public void label() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
