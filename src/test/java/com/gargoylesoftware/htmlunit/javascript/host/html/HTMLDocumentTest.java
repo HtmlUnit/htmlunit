@@ -2255,10 +2255,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      alert(document.documentMode);\n"
             + "      alert(document.compatMode);\n"
             + "      alert(typeof document.querySelectorAll);\n"
-            + "      alert(typeof document.createElement('div').querySelector);\n"
+            + "      alert(typeof document.getElementById('myDiv').querySelector);\n"
             + "    }\n"
             + "  </script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
