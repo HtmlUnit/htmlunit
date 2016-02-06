@@ -320,7 +320,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {" \t \n  ", "0", "false" })
+    @Alerts({" \t \n  ", "0", "false" })
     public void containsInsideWhitespace() throws Exception {
         contains(" \t \r  ", "a");
     }
@@ -650,7 +650,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {" \t \n  ", "0", "0", " \t \n  " })
+    @Alerts({" \t \n  ", "0", "0", " \t \n  " })
     public void removeFromWhitespace() throws Exception {
         remove(" \t \r  ", "a");
     }
