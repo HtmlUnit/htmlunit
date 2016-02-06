@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -59,8 +60,8 @@ public class CookieManager4Test extends WebDriverTestCase {
      *
      * @throws Exception if the test fails
      */
-    @Before
-    public void checkSettings() throws Exception {
+    @BeforeClass
+    public static void checkSettings() throws Exception {
         try {
             InetAddress.getByName(new URL(URL_HOST1).getHost());
         }
@@ -97,7 +98,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Before
     public void clearCookies() throws Exception {
-        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setDefaultResponse("<html><head></head><body></body></html>");
         startWebServer(getMockWebConnection());
         final WebDriver driver = getWebDriver();
         driver.get(URL_HOST1);
