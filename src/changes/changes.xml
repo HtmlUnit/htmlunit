@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
+            <action type="fix" dev="rbri" issue='1742'>
+                SVGElements are supporting querySelector() and querySelectorAll().
+            </action>
+            <action type="fix" dev="rbri">
+                id property was missing for SVGElements.
+            </action>
             <action type="fix" dev="rbri">
                 Element.className no longer trims whitespace for Chrome.
             </action>
@@ -23,7 +29,7 @@
             <action type="fix" dev="rbri">
                 Properties clientLeft and clientTop are available in Chrome also.
             </action>
-            <action type="fix" dev="rbri" issue="#1740">
+            <action type="fix" dev="rbri" issue="1740">
                 Add properties name, value, type, valuetype support to HTMLParamElement.
             </action>
             <action type="fix" dev="rbri">
