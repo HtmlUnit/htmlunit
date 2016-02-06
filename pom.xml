@@ -23,7 +23,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.5</version>
                 <configuration>
                     <!-- Update the links reference in PDM and clover plugins when this changes -->
                     <source>1.7</source>
@@ -49,7 +49,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>6.14.1</version>
+                        <version>6.15</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -854,13 +854,13 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.13</version>
+            <version>1.7.14</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.13</version>
+            <version>1.7.14</version>
             <scope>test</scope>
         </dependency>
         <dependency>
