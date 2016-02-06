@@ -255,6 +255,7 @@
                             <excludes>
                                 <exclude>**/libraries/*.java</exclude>
                                 <exclude>**/huge/*.java</exclude>
+                                <exclude>**/CookieManager4Test.java</exclude>
                             </excludes>
                             <argLine>-Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
