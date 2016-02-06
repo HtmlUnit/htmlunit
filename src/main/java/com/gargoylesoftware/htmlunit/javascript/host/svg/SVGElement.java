@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.svg.SvgElement;
@@ -39,5 +40,14 @@ public class SVGElement extends Element {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public SVGElement() {
+    }
+
+    /**
+     * Returns the element ID.
+     * @return the ID of this element
+     */
+    @JsxGetter
+    public String getId() {
+        return getDomNodeOrDie().getId();
     }
 }

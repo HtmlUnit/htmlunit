@@ -22,13 +22,14 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import org.w3c.css.sac.CSSException;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -47,8 +48,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for {@link DomElement}.
@@ -538,4 +543,45 @@ public class Element extends EventNode {
         }
     }
 
+    /**
+     * Retrieves all element nodes from descendants of the starting element node that match any selector
+     * within the supplied selector strings.
+     * The NodeList object returned by the querySelectorAll() method must be static, not live.
+     * @param selectors the selectors
+     * @return the static node list
+     */
+    @JsxFunction
+    public StaticNodeList querySelectorAll(final String selectors) {
+        try {
+            final List<Node> nodes = new ArrayList<>();
+            for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
+                nodes.add((Node) domNode.getScriptableObject());
+            }
+            return new StaticNodeList(nodes, this);
+        }
+        catch (final CSSException e) {
+            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+                    + selectors + "' error: " + e.getMessage() + ").");
+        }
+    }
+
+    /**
+     * Returns the first element within the document that matches the specified group of selectors.
+     * @param selectors the selectors
+     * @return null if no matches are found; otherwise, it returns the first matching element
+     */
+    @JsxFunction
+    public Node querySelector(final String selectors) {
+        try {
+            final DomNode node = getDomNodeOrDie().querySelector(selectors);
+            if (node != null) {
+                return (Node) node.getScriptableObject();
+            }
+            return null;
+        }
+        catch (final CSSException e) {
+            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+                    + selectors + "' error: " + e.getMessage() + ").");
+        }
+    }
 }

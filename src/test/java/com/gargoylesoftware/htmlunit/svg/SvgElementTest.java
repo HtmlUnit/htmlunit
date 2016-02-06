@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class SvgElementTest extends WebDriverTestCase {
@@ -77,7 +78,8 @@ public class SvgElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void oninput() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
             + "  <title>Test</title>\n"
@@ -94,6 +96,80 @@ public class SvgElementTest extends WebDriverTestCase {
             + "  </svg>\n"
             + "</body>\n"
             + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "myLine" })
+    public void querySelectorAll() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<style>\n"
+            + "  .red   {color:#FF0000;}\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var testNode = document.getElementById('myId');\n"
+            + "  if(testNode.querySelectorAll) {\n"
+            + "    var redTags = testNode.querySelectorAll('.red');\n"
+            + "    alert(redTags.length);\n"
+            + "    alert(redTags.item(0).id);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
+            + "    <g id='myId'>\n"
+            + "      <line id='myLine' x1='0' y1='0' x2='2' y2='4' class='red' />\n"
+            + "    </g>\n"
+            + "  </svg>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object SVGLineElement]")
+    public void querySelector() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<style>\n"
+            + "  .red   {color:#FF0000;}\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var testNode = document.getElementById('myId');\n"
+            + "  if(testNode.querySelector) {\n"
+            + "    alert(testNode.querySelector('.red'));\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
+            + "    <g id='myId'>\n"
+            + "      <line id='myLine' x1='0' y1='0' x2='2' y2='4' class='red' />\n"
+            + "    </g>\n"
+            + "  </svg>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }

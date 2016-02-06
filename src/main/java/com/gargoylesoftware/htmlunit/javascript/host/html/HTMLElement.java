@@ -47,7 +47,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.css.sac.CSSException;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -142,7 +141,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
@@ -1863,48 +1861,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (window.getWebWindow() == window.getWebWindow().getWebClient().getCurrentWindow()) {
             final HtmlElement element = getDomNodeOrDie();
             ((HtmlPage) element.getPage()).setFocusedElement(element);
-        }
-    }
-
-    /**
-     * Retrieves all element nodes from descendants of the starting element node that match any selector
-     * within the supplied selector strings.
-     * The NodeList object returned by the querySelectorAll() method must be static, not live.
-     * @param selectors the selectors
-     * @return the static node list
-     */
-    @JsxFunction
-    public StaticNodeList querySelectorAll(final String selectors) {
-        try {
-            final List<Node> nodes = new ArrayList<>();
-            for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add((Node) domNode.getScriptableObject());
-            }
-            return new StaticNodeList(nodes, this);
-        }
-        catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
-        }
-    }
-
-    /**
-     * Returns the first element within the document that matches the specified group of selectors.
-     * @param selectors the selectors
-     * @return null if no matches are found; otherwise, it returns the first matching element
-     */
-    @JsxFunction
-    public Node querySelector(final String selectors) {
-        try {
-            final DomNode node = getDomNodeOrDie().querySelector(selectors);
-            if (node != null) {
-                return (Node) node.getScriptableObject();
-            }
-            return null;
-        }
-        catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
         }
     }
 
