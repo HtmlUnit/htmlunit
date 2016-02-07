@@ -38,7 +38,7 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "value1", "text1", "label1", "value2", "text2", "" })
+    @Alerts({ "value1", "text1", "label1", "value2", "text2", "text2" })
     public void label() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -69,6 +69,6 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
         assertEquals("label1", select.getOption(0).getLabelAttribute());
         assertEquals("value2", select.getOption(1).getValueAttribute());
         assertEquals("text2", select.getOption(1).getTextContent());
-        assertEquals("", select.getOption(1).getLabelAttribute());
+        assertEquals("text2", select.getOption(1).getLabelAttribute());
     }
 }

@@ -1095,8 +1095,38 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "value1", "text1", "label1", "value2", "text2", "text2" })
+    public void label() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var s = document.getElementById('testSelect');\n"
+            + "  var lastIndex = s.length;\n"
+            + "  s.length += 1;\n"
+            + "  s[lastIndex].value = 'value2';\n"
+            + "  s[lastIndex].text  = 'text2';\n"
+            + "  alert(s[0].value);\n"
+            + "  alert(s[0].text);\n"
+            + "  alert(s[0].label);\n"
+            + "  alert(s[1].value);\n"
+            + "  alert(s[1].text);\n"
+            + "  alert(s[1].label);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <select id='testSelect'>\n"
+            + "    <option value='value1' label='label1'>text1</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "", "", "", "", "text2", "text2", "text2", "label2" })
-    @NotYetImplemented
     public void setLabel() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

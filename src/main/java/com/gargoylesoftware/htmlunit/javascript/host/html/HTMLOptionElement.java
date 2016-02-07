@@ -133,6 +133,10 @@ public class HTMLOptionElement extends FormChild {
         final DomNode dom = getDomNodeOrNull();
         if (dom instanceof HtmlOption) {
             ((HtmlOption) dom).setText(newText);
+
+            if (!hasAttribute("label")) {
+                setLabel(newText);
+            }
         }
     }
 
