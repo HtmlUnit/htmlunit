@@ -71,7 +71,7 @@ public class WebClient2Test extends SimpleWebTestCase {
 
         // with query string not encoded
         HtmlPage page = client.getPage("http://first?a=b c&d=\u00E9\u00E8");
-        String expected;
+        final String expected;
         final boolean ie = getBrowserVersion().isIE();
         if (ie) {
             expected = "?a=b%20c&d=\u00E9\u00E8";

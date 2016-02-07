@@ -295,7 +295,7 @@ public class HTMLCollection extends AbstractList {
      */
     @JsxFunction(@WebBrowser(IE))
     public Object nextNode() {
-        Object nextNode;
+        final Object nextNode;
         final List<Object> elements = getElements();
         if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
             nextNode = elements.get(currentIndex_);

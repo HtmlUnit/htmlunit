@@ -270,9 +270,9 @@ public final class ProxyAutoConfig {
             }
         }
 
-        int day1, day2, month1, month2, year1, year2;
-        Calendar cal1;
-        Calendar cal2;
+        final int day1, day2, month1, month2, year1, year2;
+        final Calendar cal1;
+        final Calendar cal2;
         switch (length) {
             case 1:
                 final int day = getSmallInt(value1);

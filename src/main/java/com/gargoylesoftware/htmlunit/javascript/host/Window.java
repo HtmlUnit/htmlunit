@@ -1570,17 +1570,15 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
     public CSS2Properties getComputedStyle(final Element element, final String pseudo) {
-        CSS2Properties style;
-
         synchronized (computedStyles_) {
-            style = computedStyles_.get(element);
-        }
-        if (style != null) {
-            return style;
+            final CSS2Properties style = computedStyles_.get(element);
+            if (style != null) {
+                return style;
+            }
         }
 
         final CSSStyleDeclaration original = element.getStyle();
-        style = new CSS2Properties(original);
+        final CSS2Properties style = new CSS2Properties(original);
 
         final StyleSheetList sheets = ((HTMLDocument) document_).getStyleSheets();
         final boolean trace = LOG.isTraceEnabled();

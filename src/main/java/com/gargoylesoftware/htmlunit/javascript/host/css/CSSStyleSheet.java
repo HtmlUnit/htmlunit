@@ -1164,7 +1164,7 @@ public class CSSStyleSheet extends StyleSheet {
         final String mediaType = mediaQuery.getMedia();
         if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
             for (final Property property : mediaQuery.getProperties()) {
-                float val;
+                final float val;
                 switch (property.getName()) {
                     case "max-width":
                         val = pixelValue((CSSValueImpl) property.getValue());

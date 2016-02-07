@@ -89,14 +89,10 @@ public class HTMLTableSectionElement extends RowContainer {
      * @return the valid "vAlign" values for this element, depending on the browser being emulated
      */
     private String[] getValidVAlignValues() {
-        String[] valid;
         if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
-            valid = VALIGN_VALID_VALUES_IE;
+            return VALIGN_VALID_VALUES_IE;
         }
-        else {
-            valid = null;
-        }
-        return valid;
+        return null;
     }
 
     /**

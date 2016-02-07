@@ -199,23 +199,19 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setColSpan(final String colSpan) {
-        String s;
         try {
             final int i = (int) Double.parseDouble(colSpan);
-            if (i > 0) {
-                s = Integer.toString(i);
-            }
-            else {
+            if (i <= 0) {
                 throw new NumberFormatException(colSpan);
             }
+            getDomNodeOrDie().setAttribute("colSpan", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            s = "1";
+            getDomNodeOrDie().setAttribute("colSpan", "1");
         }
-        getDomNodeOrDie().setAttribute("colSpan", s);
     }
 
     /**
@@ -239,23 +235,19 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setRowSpan(final String rowSpan) {
-        String s;
         try {
             final int i = (int) Double.parseDouble(rowSpan);
-            if (i > 0) {
-                s = Integer.toString(i);
-            }
-            else {
+            if (i <= 0) {
                 throw new NumberFormatException(rowSpan);
             }
+            getDomNodeOrDie().setAttribute("rowSpan", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            s = "1";
+            getDomNodeOrDie().setAttribute("rowSpan", "1");
         }
-        getDomNodeOrDie().setAttribute("rowSpan", s);
     }
 
     /**

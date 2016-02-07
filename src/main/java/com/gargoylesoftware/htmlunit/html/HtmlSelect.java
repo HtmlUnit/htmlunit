@@ -111,7 +111,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the currently selected options
      */
     public List<HtmlOption> getSelectedOptions() {
-        List<HtmlOption> result;
+        final List<HtmlOption> result;
         if (isMultipleSelectEnabled()) {
             // Multiple selections possible.
             result = new ArrayList<>();

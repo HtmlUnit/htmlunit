@@ -2001,7 +2001,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         final int windowWidth = getElement().getWindow().getWebWindow().getInnerWidth();
 
-        int width;
+        final int width;
         final String styleWidth = super.getWidth();
         final DomNode parent = node.getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
@@ -2023,8 +2023,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     @Override public String get(final ComputedCSSStyleDeclaration style) {
                         return style.getWidth();
                     }
-                });
-                width -= getBorderHorizontal() + getPaddingHorizontal();
+                }) - (getBorderHorizontal() + getPaddingHorizontal());
             }
             else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
                         || node instanceof HtmlButtonInput || node instanceof HtmlButton
@@ -2126,7 +2125,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int contentHeight = getContentHeight();
         final boolean explicitHeightSpecified = !super.getHeight().isEmpty();
 
-        int height;
+        final int height;
         if (contentHeight > 0 && !explicitHeightSpecified) {
             height = contentHeight;
         }

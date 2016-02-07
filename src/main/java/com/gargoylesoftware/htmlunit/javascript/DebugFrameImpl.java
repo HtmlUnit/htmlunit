@@ -276,7 +276,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      */
     private String getFirstLine(final Context cx) {
         final Object line = cx.getThreadLocal(KEY_LAST_LINE);
-        String result;
+        final String result;
         if (line == null) {
             result = "??";
         }

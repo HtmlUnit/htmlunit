@@ -144,7 +144,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      */
     @JsxFunction
     public Object nextNode() {
-        Object nextNode;
+        final Object nextNode;
         final List<DomNode> elements = getElements();
         if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
             nextNode = elements.get(currentIndex_).getScriptableObject();

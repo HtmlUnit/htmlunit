@@ -81,7 +81,7 @@ public class HTMLAllCollection extends HTMLCollection {
     public Object item(final Object index) {
         Double numb;
 
-        BrowserVersion browser;
+        final BrowserVersion browser;
         if (index instanceof String) {
             final String name = (String) index;
             final Object result = namedItem(name);

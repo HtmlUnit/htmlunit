@@ -116,9 +116,8 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxSetter
     public void setCols(final String cols) {
-        int i;
         try {
-            i = Float.valueOf(cols).intValue();
+            final int i = Float.valueOf(cols).intValue();
             if (i < 0) {
                 if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION)) {
                     throw new NumberFormatException("New value for cols '" + cols + "' is smaller than zero.");
@@ -126,14 +125,14 @@ public class HTMLTextAreaElement extends FormField {
                 getDomNodeOrDie().setAttribute("cols", null);
                 return;
             }
+            getDomNodeOrDie().setAttribute("cols", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            i = 20;
+            getDomNodeOrDie().setAttribute("cols", "20");
         }
-        getDomNodeOrDie().setAttribute("cols", Integer.toString(i));
     }
 
     /**
@@ -157,9 +156,8 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxSetter
     public void setRows(final String rows) {
-        int i;
         try {
-            i = new Float(rows).intValue();
+            final int i = new Float(rows).intValue();
             if (i < 0) {
                 if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION)) {
                     throw new NumberFormatException("New value for rows '" + rows + "' is smaller than zero.");
@@ -167,15 +165,15 @@ public class HTMLTextAreaElement extends FormField {
                 getDomNodeOrDie().setAttribute("rows", null);
                 return;
             }
+            getDomNodeOrDie().setAttribute("rows", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
 
-            i = 2;
+            getDomNodeOrDie().setAttribute("rows", "2");
         }
-        getDomNodeOrDie().setAttribute("rows", Integer.toString(i));
     }
 
     /**

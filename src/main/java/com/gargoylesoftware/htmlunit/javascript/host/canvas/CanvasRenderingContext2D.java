@@ -292,8 +292,8 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @SuppressWarnings("unused")
     public void drawImage(final Object image, final int sx, final int sy, final Object sWidth, final Object sHeight,
             final Object dx, final Object dy, final Object dWidth, final Object dHeight) {
-        Integer dxI;
-        Integer dyI;
+        final Integer dxI;
+        final Integer dyI;
         Integer dWidthI = null;
         Integer dHeightI = null;
         Integer sWidthI = null;
