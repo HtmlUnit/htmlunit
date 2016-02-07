@@ -69,14 +69,15 @@ public class ExternalTest {
                 }
             }
             assertVersion("org.sonatype.oss", "oss-parent", "9");
-            assertChromeDriver("2.20");
+            assertChromeDriver("2.21");
         }
     }
 
     private void assertChromeDriver(final String version) throws Exception {
         try (final WebClient webClient = getWebClient()) {
-            final TextPage page = webClient.getPage("http://chromedriver.storage.googleapis.com/LATEST_RELEASE");
-            assertEquals("Chrome Driver", page.getContent(), version);
+            final AbstractPage page = webClient.getPage("http://chromedriver.storage.googleapis.com/LATEST_RELEASE");
+            final String pageContent = page.getWebResponse().getContentAsString().trim();
+            assertEquals("Chrome Driver", pageContent, version);
         }
     }
 
@@ -116,9 +117,14 @@ public class ExternalTest {
     private static void assertVersion(final String groupId, final String artifactId, final String version)
             throws Exception {
         String latestVersion = null;
+        String url = "https://repo1.maven.org/maven2/"
+                        + groupId.replace('.', '/') + '/'
+                        + artifactId.replace('.', '/');
+        if (!url.endsWith("/")) {
+            url += "/";
+        }
         try (final WebClient webClient = getWebClient()) {
-            final HtmlPage page = webClient.getPage("https://repo1.maven.org/maven2/" + groupId.replace('.', '/') + '/'
-                    + artifactId.replace('.', '/'));
+            final HtmlPage page = webClient.getPage(url);
             for (final HtmlAnchor anchor : page.getAnchors()) {
                 String itemVersion = anchor.getTextContent();
                 itemVersion = itemVersion.substring(0, itemVersion.length() - 1);
