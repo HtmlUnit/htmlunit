@@ -40,7 +40,7 @@ public class HostParentOfITest extends HostParentOf {
 
     /**
      * Returns the parameterized data.
-     * 
+     *
      * @return the parameterized data
      * @throws Exception
      *             if an error occurs
