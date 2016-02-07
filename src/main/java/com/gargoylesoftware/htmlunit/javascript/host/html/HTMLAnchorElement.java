@@ -597,7 +597,16 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public String getOrigin() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        if (!getDomNodeOrDie().hasAttribute("href")) {
+            return "";
+        }
+
+        try {
+            return getUrl().getProtocol() + "://" + getHost();
+        }
+        catch (final Exception e) {
+            return "";
+        }
     }
 
     /**

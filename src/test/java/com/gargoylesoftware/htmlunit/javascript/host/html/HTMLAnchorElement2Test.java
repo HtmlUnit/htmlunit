@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
+import java.net.URL;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -743,6 +744,43 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @NotYetImplemented({FF, CHROME})
     public void origin() throws Exception {
         attribute("origin", "something");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "§§URL§§", "§§URL§§", "§§URL§§", "http://www.htmlunit.org",
+                        "http://www.htmlunit.org:1234", "https://www.htmlunit.org:1234"},
+            IE = {"undefined", "undefined", "undefined", "undefined", "undefined",
+                    "undefined", "undefined"})
+    public void originAttrib() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html =
+                "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      function test() {\n"
+                + "         for(i=0; i<7; i++) {\n"
+                + "           var a = document.getElementById('a'+i);\n"
+                + "           alert(a.origin);\n"
+                + "        }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "    <a id='a0'>a0</a>\n"
+                + "    <a id='a1' href=''>a1</a>\n"
+                + "    <a id='a2' href='  \t '>a2</a>\n"
+                + "    <a id='a3' href='relative.html'>a3</a>\n"
+                + "    <a id='a4' href='http://www.htmlunit.org/index.html'>a4</a>\n"
+                + "    <a id='a5' href='http://www.htmlunit.org:1234/index.html'>a5</a>\n"
+                + "    <a id='a6' href='https://www.htmlunit.org:1234/index.html'>a6</a>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**

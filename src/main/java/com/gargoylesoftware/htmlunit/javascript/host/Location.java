@@ -536,7 +536,7 @@ public class Location extends SimpleScriptable {
      * Returns the {@code origin} property.
      * @return the {@code origin} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public String getOrigin() {
         return getUrl().getProtocol() + "://" + getHost();
     }

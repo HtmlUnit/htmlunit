@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
+            <action type="fix" dev="rbri">
+                Origin attribute for anchors now works (FF, CHROME).
+            </action>
             <action type="fix" dev="rbri" issue='1742'>
                 SVGElements are supporting querySelector() and querySelectorAll().
             </action>
