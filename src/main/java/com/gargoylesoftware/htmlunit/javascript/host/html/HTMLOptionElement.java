@@ -105,8 +105,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setValue(final String newValue) {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            ((HtmlOption) getDomNodeOrNull()).setValueAttribute(newValue);
+        final DomNode dom = getDomNodeOrNull();
+        if (dom instanceof HtmlOption) {
+            ((HtmlOption) dom).setValueAttribute(newValue);
         }
     }
 
@@ -129,8 +130,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setText(final String newText) {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            ((HtmlOption) getDomNodeOrNull()).setText(newText);
+        final DomNode dom = getDomNodeOrNull();
+        if (dom instanceof HtmlOption) {
+            ((HtmlOption) dom).setText(newText);
         }
     }
 
@@ -140,8 +142,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public boolean getSelected() {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            return ((HtmlOption) getDomNodeOrNull()).isSelected();
+        final DomNode dom = getDomNodeOrNull();
+        if (dom instanceof HtmlOption) {
+            return ((HtmlOption) dom).isSelected();
         }
         return false;
     }
@@ -169,8 +172,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public boolean getDefaultSelected() {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            return ((HtmlOption) getDomNodeOrNull()).isDefaultSelected();
+        final DomNode dom = getDomNodeOrNull();
+        if (dom instanceof HtmlOption) {
+            return ((HtmlOption) dom).isDefaultSelected();
         }
         return false;
     }
