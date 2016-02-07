@@ -421,7 +421,7 @@ public class HttpWebConnection implements WebConnection {
             return;
         }
 
-        String filename;
+        final String filename;
         if (pairWithFile.getFile() == null) {
             filename = pairWithFile.getValue();
         }
@@ -935,7 +935,7 @@ public class HttpWebConnection implements WebConnection {
     private PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
         final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
 
-        LayeredConnectionSocketFactory sslSocketFactory;
+        LayeredConnectionSocketFactory sslSocketFactory = null;
         try {
             sslSocketFactory = (LayeredConnectionSocketFactory)
                         FieldUtils.readDeclaredField(builder, "sslSocketFactory", true);
