@@ -36,24 +36,28 @@ public class GaeRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setFillStyle(final String fillStyle) {
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void fillRect(final int x, final int y, final int w, final int h) {
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void drawImage(final ImageReader imageReader, final int dxI, final int dyI) throws IOException {
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public byte[] getBytes(final int width, final int height, final int sx, final int sy) {
         return new byte[width * height * 4];
     }
@@ -61,6 +65,7 @@ public class GaeRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String encodeToString(final String type) throws IOException {
         return "";
     }

@@ -53,6 +53,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setFillStyle(final String fillStyle) {
         final String tmpFillStyle = fillStyle.replaceAll("\\s", "");
         Color color = null;
@@ -84,6 +85,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void fillRect(final int x, final int y, final int w, final int h) {
         graphics2D_.fillRect(x, y, w, h);
     }
@@ -91,6 +93,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void drawImage(final ImageReader imageReader, final int dxI, final int dyI) throws IOException {
         if (imageReader.getNumImages(true) != 0) {
             final BufferedImage img = imageReader.read(0);
@@ -101,6 +104,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public byte[] getBytes(final int width, final int height, final int sx, final int sy) {
         final byte[] array = new byte[width * height * 4];
         int index = 0;
@@ -119,6 +123,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String encodeToString(final String type) throws IOException {
         try (final ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             ImageIO.write(image_, type, bos);
