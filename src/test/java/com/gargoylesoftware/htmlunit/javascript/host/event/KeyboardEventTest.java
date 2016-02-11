@@ -283,6 +283,36 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "13", "13", "13" },
+            FF = { "0", "13", "13" })
+    public void keyCodeEnter_keypress() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function handleKey(e) {\n"
+            + "  alert(e.charCode);\n"
+            + "  alert(e.keyCode);\n"
+            + "  alert(e.which);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <textarea id='t' onkeypress='handleKey(event)'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement field = driver.findElement(By.id("t"));
+
+        field.sendKeys("\n");
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(FF = {  "keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:0,65,65",

@@ -9,6 +9,9 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="rbri">
+                Use the right keyCode when simulating enter.
+            </action>
+            <action type="fix" dev="rbri">
                 Setting the text property of an option creates a label attribute if there is no label defined so far.
             </action>
             <action type="fix" dev="rbri">

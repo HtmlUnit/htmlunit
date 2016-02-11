@@ -887,8 +887,21 @@ public class KeyboardEvent extends UIEvent {
     public KeyboardEvent(final DomNode domNode, final String type, final char character,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         super(domNode, type);
-        int keyCode = 0;
 
+        setShiftKey(shiftKey);
+        setCtrlKey(ctrlKey);
+        setAltKey(altKey);
+
+        if ('\n' == character) {
+            setKeyCode(DOM_VK_RETURN);
+            if (!getBrowserVersion().hasFeature(JS_EVENT_DISTINGUISH_PRINTABLE_KEY)) {
+                charCode_ = DOM_VK_RETURN;
+            }
+            which_ = DOM_VK_RETURN;
+            return;
+        }
+
+        int keyCode = 0;
         if (!getType().equals(Event.TYPE_KEY_PRESS)) {
             keyCode = Integer.valueOf(charToKeyCode(character));
         }
@@ -909,9 +922,6 @@ public class KeyboardEvent extends UIEvent {
                 charCode_ = character;
             }
         }
-        setShiftKey(shiftKey);
-        setCtrlKey(ctrlKey);
-        setAltKey(altKey);
         which_ = charCode_ != 0 ? Integer.valueOf(charCode_) : keyCode;
     }
 
