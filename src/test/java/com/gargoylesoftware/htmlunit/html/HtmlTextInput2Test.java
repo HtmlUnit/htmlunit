@@ -16,9 +16,13 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -334,5 +338,50 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitOnEnter() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <form action='result.html'>\n"
+            + "    <input id='t' value='hello'/>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement field = driver.findElement(By.id("t"));
+
+        field.sendKeys("\n");
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void submitOnEnterWithoutForm() throws Exception {
+        // this seem to be a bug in Selenium
+        // real browsers simply ignore the missing form
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <input id='t' value='hello'/>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement field = driver.findElement(By.id("t"));
+
+        field.sendKeys("\n");
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
     }
 }

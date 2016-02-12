@@ -318,4 +318,46 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
         t.type(KeyboardEvent.DOM_VK_DELETE);
         assertEquals("tt", t.getValueAttribute());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitOnEnter() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <form action='result.html'>\n"
+            + "    <input id='t' value='hello'/>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlTextInput t = page.getHtmlElementById("t");
+
+        t.type("\n");
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitOnEnterWithoutForm() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <input id='t' value='hello'/>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlTextInput t = page.getHtmlElementById("t");
+
+        t.type("\n");
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
 }
