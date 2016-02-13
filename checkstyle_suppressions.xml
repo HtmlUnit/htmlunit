@@ -13,8 +13,9 @@
     <suppress checks="FileLength" files="ElementClosesElementTest.java"/>
     <suppress checks="FileLength" files="ElementCreationTest.java"/>
     <suppress checks="FileLength" files="ElementPropertiesTest.java"/>
-    <suppress checks="FileLength" files="JQuery182Test.java"/>
-    <suppress checks="FileLength" files="JQuery1113Test.java"/>
+    <suppress checks="FileLength" files="JQuery1x8x2Test.java"/>
+    <suppress checks="FileLength" files="JQuery1x11x3Test.java"/>
+    <suppress checks="FileLength" files="JQuery1x12x0Test.java"/>
     <suppress checks="FileLength" files="HostClassNameTest.java"/>
     <suppress checks="FileLength" files="HostClassNameStandardsTest.java"/>
     <suppress checks="FileLength" files="HostParentOfATest.java"/>
@@ -47,8 +48,9 @@
     <suppress checks="LineLength" files="HTMLScriptElementTest.java"/>
     <suppress checks="LineLength" files="HTMLTableElement.java" lines="1-30"/>
     <suppress checks="LineLength" files="HtmlUnitRegExpProxyTest.java"/>
-    <suppress checks="LineLength" files="JQuery182Test.java"/>
-    <suppress checks="LineLength" files="JQuery1113Test.java"/>
+    <suppress checks="LineLength" files="JQuery1x8x2Test.java"/>
+    <suppress checks="LineLength" files="JQuery1x11x3Test.java"/>
+    <suppress checks="LineLength" files="JQuery1x12x0Test.java"/>
     <suppress checks="LineLength" files="Node.java" lines="1-30"/>
     <suppress checks="LineLength" files="NodeTest.java" lines="1-30"/>
     <suppress checks="LineLength" files="XMLDOMNamedNodeMap.java"/>

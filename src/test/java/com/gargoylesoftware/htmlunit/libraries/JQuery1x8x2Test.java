@@ -20,9 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.fail;
 
-import org.eclipse.jetty.server.Server;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,8 +30,6 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for compatibility with web server loading of
@@ -49,15 +44,13 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class JQuery182Test extends WebDriverTestCase {
-
-    private static Server SERVER_;
+public class JQuery1x8x2Test extends JQueryTestBase {
 
     /**
-     * Returns the jQuery version being tested.
-     * @return the jQuery version being tested
+     * {@inheritDoc}
      */
-    protected static String getVersion() {
+    @Override
+    protected String getVersion() {
         return "1.8.2";
     }
 
@@ -106,37 +99,6 @@ public class JQuery182Test extends WebDriverTestCase {
             }
             throw e;
         }
-    }
-
-    private int readTestNumber(final String testName) throws Exception {
-        final String testResults = loadExpectation("/libraries/jQuery/" + getVersion() + "/expectations/results", ".txt");
-        final String[] lines = testResults.split("\n");
-        for (int i = 0; i < lines.length; i++) {
-            final String line = lines[i];
-            final int pos = line.indexOf(testName);
-            if (pos != -1
-                    && line.indexOf('(', pos + testName.length() + 3) == -1) {
-                return i + 1;
-            }
-        }
-
-        return -1;
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @BeforeClass
-    public static void aaa_startSesrver() throws Exception {
-        SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/jQuery/" + getVersion(), null);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @AfterClass
-    public static void zzz_stopServer() throws Exception {
-        SERVER_.stop();
     }
 
     /**

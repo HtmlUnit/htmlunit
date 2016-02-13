@@ -40,7 +40,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.libraries.JQuery1113Test;
+import com.gargoylesoftware.htmlunit.libraries.JQuery1x11x3Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
@@ -71,8 +71,8 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
-        final String version = "1.11.3";
-        final Class<? extends WebDriverTestCase> testClass = JQuery1113Test.class;
+        final String version = "1.12.0";
+        final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
 
         final String browser = "FF38";
         // final String browser = "FF31";
@@ -315,7 +315,7 @@ public final class JQueryExtractor {
 
     static class Expectation {
 
-        private static final Pattern pattern_ = Pattern.compile("(\\d+\\. ?)?(.+)\\((\\d+, \\d+, \\d+)\\)");
+        private static final Pattern pattern_ = Pattern.compile("(\\d+\\. ?)?(.+)\\((\\d+(, \\d+, \\d+)?)\\)");
         private final int line_;
         private final String testName_;
         private final String testResult_;
