@@ -182,9 +182,10 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.iterator)",
+    @Alerts(DEFAULT = { "Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)" },
             FF31 = "not supported",
             IE = "not supported")
+    @NotYetImplemented({FF38, CHROME})
     public void string() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -193,6 +194,8 @@ public class SymbolTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    alert(Symbol().toString());\n"
+            + "    alert(Symbol('foo').toString());\n"
             + "    alert(Symbol.iterator.toString());\n"
             + "  }\n"
             + "</script>\n"
@@ -206,7 +209,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.iterator)",
+    @Alerts(DEFAULT = { "Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)" },
             FF31 = "not supported",
             IE = "not supported")
     @NotYetImplemented({FF38, CHROME})
@@ -219,6 +222,8 @@ public class SymbolTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
             + "    try {"
+            + "      alert(Symbol());\n"
+            + "      alert(Symbol('foo'));\n"
             + "      alert(Symbol.iterator);\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
@@ -249,6 +254,67 @@ public class SymbolTest extends WebDriverTestCase {
             + "      alert(typeof Symbol());\n"
             + "      alert(typeof Symbol('foo'));\n"
             + "      alert(typeof Symbol.iterator);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "true", "Symbol(mario)" },
+            FF31 = "not supported",
+            IE = "not supported")
+    @NotYetImplemented({FF38, CHROME})
+    public void symbolFor() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      alert(Symbol('bar') === Symbol('bar'));\n"
+            + "      alert(Symbol.for('bar') === Symbol.for('bar'));\n"
+
+            + "      var sym = Symbol.for('mario');\n"
+            + "      alert(sym.toString());\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "exception", "exception" },
+            FF31 = "not supported",
+            IE = "not supported")
+    @NotYetImplemented({FF38, CHROME})
+    public void symbolNew() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      new Symbol();\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "    try {"
+            + "      new Symbol('foo');\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"
