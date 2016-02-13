@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link Symbol}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class SymbolTest extends WebDriverTestCase {
@@ -39,8 +40,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "symbol",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     public void iterator() throws Exception {
         name("iterator");
     }
@@ -50,8 +51,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     public void match() throws Exception {
         name("match");
     }
@@ -61,8 +62,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     public void replace() throws Exception {
         name("replace");
     }
@@ -72,8 +73,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     public void search() throws Exception {
         name("search");
     }
@@ -83,8 +84,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     public void split() throws Exception {
         name("split");
     }
@@ -94,8 +95,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     public void hasInstance() throws Exception {
         name("hasInstance");
     }
@@ -106,9 +107,8 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "symbol",
-            FF31 = {},
-            IE = {})
-    @NotYetImplemented(CHROME)
+            FF31 = "not supported",
+            IE = "not supported")
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
     }
@@ -118,9 +118,9 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "symbol",
-            FF = "undefined",
-            FF31 = {},
-            IE = {})
+            FF38 = "undefined",
+            FF31 = "not supported",
+            IE = "not supported")
     public void unscopables() throws Exception {
         name("unscopables");
     }
@@ -130,8 +130,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     public void species() throws Exception {
         name("species");
     }
@@ -142,8 +142,8 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "symbol",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     @NotYetImplemented(CHROME)
     public void toPrimitive() throws Exception {
         name("toPrimitive");
@@ -154,8 +154,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     public void toStringTag() throws Exception {
         name("toStringTag");
     }
@@ -167,9 +167,8 @@ public class SymbolTest extends WebDriverTestCase {
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    if (window.Symbol) {\n"
-            + "      alert(typeof Symbol." + name + ");\n"
-            + "    }\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    alert(typeof Symbol." + name + ");\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -183,8 +182,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.iterator)",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     public void string() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -192,9 +191,8 @@ public class SymbolTest extends WebDriverTestCase {
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    if (window.Symbol) {\n"
-            + "      alert(Symbol.iterator.toString());\n"
-            + "    }\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    alert(Symbol.iterator.toString());\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -208,8 +206,8 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.iterator)",
-            FF31 = {},
-            IE = {})
+            FF31 = "not supported",
+            IE = "not supported")
     @NotYetImplemented({FF38, CHROME})
     public void defaultValue() throws Exception {
         final String html =
@@ -218,11 +216,38 @@ public class SymbolTest extends WebDriverTestCase {
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    if (window.Symbol) {\n"
-            + "      try {"
-            + "        alert(Symbol.iterator);\n"
-            + "      } catch(e) {alert('exception')}\n"
-            + "    }\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      alert(Symbol.iterator);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "symbol", "symbol", "symbol" },
+            FF31 = "not supported",
+            IE = "not supported")
+    public void typeOf() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      alert(typeof Symbol());\n"
+            + "      alert(typeof Symbol('foo'));\n"
+            + "      alert(typeof Symbol.iterator);\n"
+            + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
