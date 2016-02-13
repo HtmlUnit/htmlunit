@@ -233,7 +233,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "symbol", "symbol", "symbol" },
+    @Alerts(DEFAULT = { "function", "symbol", "symbol", "symbol" },
             FF31 = "not supported",
             IE = "not supported")
     public void typeOf() throws Exception {
@@ -245,6 +245,7 @@ public class SymbolTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
             + "    try {"
+            + "      alert(typeof Symbol);\n"
             + "      alert(typeof Symbol());\n"
             + "      alert(typeof Symbol('foo'));\n"
             + "      alert(typeof Symbol.iterator);\n"
