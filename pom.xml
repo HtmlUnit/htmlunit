@@ -816,7 +816,7 @@
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>websocket-client</artifactId>
-            <version>9.2.14.v20151106</version>
+            <version>9.2.15.v20160210</version>
         </dependency>
         <!-- Test dependencies. -->
         <dependency>
@@ -872,13 +872,13 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>9.2.14.v20151106</version>
+            <version>9.2.15.v20160210</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>websocket-server</artifactId>
-            <version>9.2.14.v20151106</version>
+            <version>9.2.15.v20160210</version>
             <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
