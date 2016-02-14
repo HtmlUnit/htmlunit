@@ -59,6 +59,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @param testName the test name
      * @throws Exception if an error occurs
      */
+    @Override
     protected void runTest(final String testName) throws Exception {
         final int testNumber = readTestNumber(testName);
         if (testNumber == -1) {
