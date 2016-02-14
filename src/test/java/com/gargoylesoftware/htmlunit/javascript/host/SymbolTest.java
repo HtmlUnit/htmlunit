@@ -109,7 +109,6 @@ public class SymbolTest extends WebDriverTestCase {
             CHROME = "symbol",
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented(CHROME)
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
     }
@@ -145,7 +144,6 @@ public class SymbolTest extends WebDriverTestCase {
             CHROME = "symbol",
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented(CHROME)
     public void toPrimitive() throws Exception {
         name("toPrimitive");
     }

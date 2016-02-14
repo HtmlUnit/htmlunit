@@ -87,6 +87,34 @@ public class Symbol extends SimpleScriptable {
     }
 
     /**
+     * Returns the {@code isConcatSpreadable} static property.
+     * @param thisObj the scriptable
+     * @return the {@code isConcatSpreadable} static property
+     */
+    @JsxStaticGetter(@WebBrowser(CHROME))
+    public static Symbol getIsConcatSpreadable(final Scriptable thisObj) {
+        final Symbol symbol = new Symbol("isConcatSpreadable");
+        final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
+        symbol.setParentScope(scope);
+        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
+        return symbol;
+    }
+
+    /**
+     * Returns the {@code toPrimitive} static property.
+     * @param thisObj the scriptable
+     * @return the {@code toPrimitive} static property
+     */
+    @JsxStaticGetter(@WebBrowser(CHROME))
+    public static Symbol getToPrimitive(final Scriptable thisObj) {
+        final Symbol symbol = new Symbol("toPrimitive");
+        final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
+        symbol.setParentScope(scope);
+        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
+        return symbol;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -109,6 +137,7 @@ public class Symbol extends SimpleScriptable {
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         final StackTraceElement stackElement = new Throwable().getStackTrace()[3];
+        new Throwable().printStackTrace();
         if (("getObjectElem".equals(stackElement.getMethodName())
                 || "getElemFunctionAndThis".equals(stackElement.getMethodName()))
                     && ScriptRuntime.class.getName().equals(stackElement.getClassName())) {
