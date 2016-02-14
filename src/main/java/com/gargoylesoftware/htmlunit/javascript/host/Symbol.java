@@ -137,7 +137,6 @@ public class Symbol extends SimpleScriptable {
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         final StackTraceElement stackElement = new Throwable().getStackTrace()[3];
-        new Throwable().printStackTrace();
         if (("getObjectElem".equals(stackElement.getMethodName())
                 || "getElemFunctionAndThis".equals(stackElement.getMethodName()))
                     && ScriptRuntime.class.getName().equals(stackElement.getClassName())) {
