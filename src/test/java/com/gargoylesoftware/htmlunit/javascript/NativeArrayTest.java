@@ -171,4 +171,96 @@ public class NativeArrayTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "angel,clown,mandarin", "clown,mandarin", "angel" })
+    public void shift() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var myFish = ['angel', 'clown', 'mandarin' ];\n"
+            + "  alert(myFish);\n"
+
+            + "  var shifted = myFish.shift();\n"
+            + "  alert(myFish);\n"
+            + "  alert(shifted);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "mandarin", "", "mandarin" })
+    public void shiftOneElement() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var myFish = [ 'mandarin' ];\n"
+            + "  alert(myFish);\n"
+
+            + "  var shifted = myFish.shift();\n"
+            + "  alert(myFish);\n"
+            + "  alert(shifted);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "", "", "undefined" })
+    public void shiftEmpty() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var myFish = [ ];\n"
+            + "  alert(myFish);\n"
+
+            + "  var shifted = myFish.shift();\n"
+            + "  alert(myFish);\n"
+            + "  alert(shifted);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for issue #1747.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("angel")
+    public void shiftTrim() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var myFish = [' angel  ', 'clown', 'mandarin' ];\n"
+            + "  alert(myFish.shift().trim());\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
