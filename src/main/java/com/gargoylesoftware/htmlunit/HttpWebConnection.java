@@ -739,9 +739,11 @@ public class HttpWebConnection implements WebConnection {
     private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) throws IOException {
         final List<HttpRequestInterceptor> list = new ArrayList<>();
         final Map<String, String> requestHeaders = webRequest.getAdditionalHeaders();
-        final int port = webRequest.getUrl().getPort();
-        final StringBuilder host = new StringBuilder(webRequest.getUrl().getHost());
-        if (port != 80 && port > 0) {
+        final URL url = webRequest.getUrl();
+        final StringBuilder host = new StringBuilder(url.getHost());
+
+        final int port = url.getPort();
+        if (port > 0 && port != url.getDefaultPort()) {
             host.append(':');
             host.append(Integer.toString(port));
         }
