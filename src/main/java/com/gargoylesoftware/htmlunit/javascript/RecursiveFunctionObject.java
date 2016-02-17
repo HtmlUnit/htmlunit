@@ -24,6 +24,7 @@ import java.lang.reflect.Member;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -231,5 +232,29 @@ public class RecursiveFunctionObject extends FunctionObject {
             }
         }
         return super.get(name, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        final Object object = super.call(cx, scope, thisObj, args);
+        if (object instanceof Scriptable) {
+            final Scriptable result = (Scriptable) object;
+            if (result.getPrototype() == null) {
+                final Scriptable proto = getClassPrototype();
+                if (result != proto) {
+                    result.setPrototype(proto);
+                }
+            }
+            if (result.getParentScope() == null) {
+                final Scriptable parent = getParentScope();
+                if (result != parent) {
+                    result.setParentScope(parent);
+                }
+            }
+        }
+        return object;
     }
 }

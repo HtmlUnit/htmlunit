@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import com.gargoylesoftware.htmlunit.javascript.RecursiveFunctionObject;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -26,8 +27,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code Symbol}.
@@ -41,7 +42,7 @@ public class Symbol extends SimpleScriptable {
 
     static final String ITERATOR_STRING = INTERNAL_PREFIX + "Symbol(Symbol.iterator)";
 
-    private String name_;
+    private Object name_;
 
     /**
      * Default constructor.
@@ -54,7 +55,7 @@ public class Symbol extends SimpleScriptable {
      * @param name the name
      */
     @JsxConstructor
-    public Symbol(final String name) {
+    public Symbol(final Object name) {
         name_ = name;
     }
 
@@ -128,7 +129,17 @@ public class Symbol extends SimpleScriptable {
     @Override
     @JsxFunction
     public String toString() {
-        return "Symbol(Symbol." + name_ + ')';
+        String name;
+        if (name_ == Undefined.instance) {
+            name = "";
+        }
+        else {
+            name = Context.toString(name_);
+            if (((RecursiveFunctionObject) getParentScope().get("Symbol", this)).get(name) != null) {
+                name = "Symbol." + name;
+            }
+        }
+        return "Symbol(" + name + ')';
     }
 
     /**
@@ -136,12 +147,9 @@ public class Symbol extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        final StackTraceElement stackElement = new Throwable().getStackTrace()[3];
-        if (("getObjectElem".equals(stackElement.getMethodName())
-                || "getElemFunctionAndThis".equals(stackElement.getMethodName()))
-                    && ScriptRuntime.class.getName().equals(stackElement.getClassName())) {
-            return INTERNAL_PREFIX + toString();
+        if (String.class.equals(hint) || hint == null) {
+            return toString();
         }
-        throw Context.reportRuntimeError("TypeError: Cannot convert a Symbol value to a string");
+        return super.getDefaultValue(hint);
     }
 }

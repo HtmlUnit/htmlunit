@@ -183,7 +183,6 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)" },
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented({FF38, CHROME})
     public void string() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -210,7 +209,6 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)" },
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented({FF38, CHROME})
     public void defaultValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

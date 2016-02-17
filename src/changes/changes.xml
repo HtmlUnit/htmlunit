@@ -8,10 +8,13 @@
 
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
-            <action type="fix" dev="rbri" issue='1741'>
+            <action type="fix" dev="asashour">
+                JavaScript: set prototype for objects constructed without 'new' keyword. 
+            </action>
+            <action type="fix" dev="rbri" issue="1741">
                 Do not explicitly send the port 443 for https connections.
             </action>
-            <action type="fix" dev="rbri" issue='1694'>
+            <action type="fix" dev="rbri" issue="1694">
                 Use the right keyCode when simulating enter.
             </action>
             <action type="fix" dev="rbri">
@@ -20,7 +23,7 @@
             <action type="fix" dev="rbri">
                 Origin attribute for anchors now works (FF, CHROME).
             </action>
-            <action type="fix" dev="rbri" issue='1742'>
+            <action type="fix" dev="rbri" issue="1742">
                 SVGElements are supporting querySelector() and querySelectorAll().
             </action>
             <action type="fix" dev="rbri">
