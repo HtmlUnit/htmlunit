@@ -297,7 +297,6 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "exception", "exception" },
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented({FF38, CHROME})
     public void symbolNew() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

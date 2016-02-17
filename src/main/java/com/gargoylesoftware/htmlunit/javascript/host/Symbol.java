@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -55,6 +56,10 @@ public class Symbol extends SimpleScriptable {
     @JsxConstructor
     public Symbol(final Object name) {
         name_ = name;
+        final StackTraceElement stackElement = new Throwable().getStackTrace()[8];
+        if (stackElement.getClassName().contains("BaseFunction")) {
+            throw ScriptRuntime.typeError("Symbol is not a constructor");
+        }
     }
 
     /**
