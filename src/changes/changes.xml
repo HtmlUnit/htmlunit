@@ -9,7 +9,7 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="asashour">
-                JavaScript: set prototype for objects constructed without 'new' keyword. 
+                JavaScript: set prototype for objects constructed without 'new' keyword.
             </action>
             <action type="fix" dev="rbri" issue="1741">
                 Do not explicitly send the port 443 for https connections.

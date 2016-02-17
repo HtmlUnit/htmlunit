@@ -38,9 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
 public class Symbol extends SimpleScriptable {
 
-    private static final String INTERNAL_PREFIX = "~~Internal~~";
-
-    static final String ITERATOR_STRING = INTERNAL_PREFIX + "Symbol(Symbol.iterator)";
+    static final String ITERATOR_STRING = "Symbol(Symbol.iterator)";
 
     private Object name_;
 
