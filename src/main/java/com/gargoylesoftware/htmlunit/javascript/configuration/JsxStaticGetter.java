@@ -44,4 +44,3 @@ public @interface JsxStaticGetter {
         @WebBrowser(EDGE)
     };
 }
-

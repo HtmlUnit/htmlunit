@@ -46,4 +46,3 @@ public @interface WebBrowser {
      */
     float maxVersion() default Float.MAX_VALUE;
 }
-

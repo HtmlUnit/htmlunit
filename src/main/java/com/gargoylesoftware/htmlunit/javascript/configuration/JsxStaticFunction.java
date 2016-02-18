@@ -43,5 +43,10 @@ public @interface JsxStaticFunction {
         @WebBrowser(IE),
         @WebBrowser(EDGE)
     };
-}
 
+    /**
+     * The JavaScript function name.
+     * @return the function name
+     */
+    String functionName() default "";
+}

@@ -18,17 +18,23 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.RecursiveFunctionObject;
+import java.util.Map.Entry;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -120,6 +126,31 @@ public class Symbol extends SimpleScriptable {
     }
 
     /**
+     * Searches for existing symbols in a runtime-wide symbol registry with the given key and returns it if found.
+     * Otherwise a new symbol gets created in the global symbol registry with this key.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     * @return the symbol
+     */
+    @JsxStaticFunction(functionName = "for")
+    public static Symbol forFunction(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        final String key = Context.toString(args.length != 0 ? args[0] : Undefined.instance);
+
+        final SimpleScriptable parentScope = (SimpleScriptable) thisObj.getParentScope();
+        Symbol symbol = (Symbol) ((ScriptableObject) thisObj).get(key);
+        if (symbol == null) {
+            symbol = new Symbol(key);
+            symbol.setParentScope(parentScope);
+            symbol.setPrototype(parentScope.getPrototype(symbol.getClass()));
+            thisObj.put(key, thisObj, symbol);
+        }
+        return symbol;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -139,8 +170,15 @@ public class Symbol extends SimpleScriptable {
         }
         else {
             name = Context.toString(name_);
-            if (((RecursiveFunctionObject) getParentScope().get("Symbol", this)).get(name) != null) {
-                name = "Symbol." + name;
+            final ClassConfiguration config = AbstractJavaScriptConfiguration
+                    .getClassConfiguration(getClass(), getBrowserVersion());
+            
+            for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry
+                    : config.getStaticPropertyEntries()) {
+                if (propertyEntry.getKey().equals(name)) {
+                    name = "Symbol." + name;
+                    break;
+                }
             }
         }
         return "Symbol(" + name + ')';

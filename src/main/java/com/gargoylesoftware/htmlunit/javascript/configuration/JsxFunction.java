@@ -44,4 +44,3 @@ public @interface JsxFunction {
         @WebBrowser(EDGE)
     };
 }
-

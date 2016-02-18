@@ -195,10 +195,11 @@ public final class ClassConfiguration {
 
     /**
      * Add the static function to the configuration.
+     * @param name the function name
      * @param method the method
      */
-    public void addStaticFunction(final Method method) {
-        staticFunctionMap_.put(method.getName(), method);
+    public void addStaticFunction(final String name, final Method method) {
+        staticFunctionMap_.put(name, method);
     }
 
     /**

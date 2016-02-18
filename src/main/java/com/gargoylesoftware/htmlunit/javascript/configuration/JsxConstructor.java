@@ -45,4 +45,3 @@ public @interface JsxConstructor {
         @WebBrowser(EDGE)
     };
 }
-

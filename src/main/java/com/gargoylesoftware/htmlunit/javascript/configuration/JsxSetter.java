@@ -50,4 +50,3 @@ public @interface JsxSetter {
      */
     String propertyName() default "";
 }
-

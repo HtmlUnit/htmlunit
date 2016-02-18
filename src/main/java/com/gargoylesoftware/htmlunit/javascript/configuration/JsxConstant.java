@@ -44,4 +44,3 @@ public @interface JsxConstant {
         @WebBrowser(EDGE)
     };
 }
-
