@@ -172,7 +172,7 @@ public class Symbol extends SimpleScriptable {
             name = Context.toString(name_);
             final ClassConfiguration config = AbstractJavaScriptConfiguration
                     .getClassConfiguration(getClass(), getBrowserVersion());
-            
+
             for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry
                     : config.getStaticPropertyEntries()) {
                 if (propertyEntry.getKey().equals(name)) {
