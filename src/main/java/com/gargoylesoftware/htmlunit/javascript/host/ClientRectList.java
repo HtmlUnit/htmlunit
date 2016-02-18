@@ -19,24 +19,75 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code ClientRectList}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24),
         @WebBrowser(IE), @WebBrowser(EDGE) })
 public class ClientRectList extends SimpleScriptable {
+
+    private final List<ClientRect> clientRects_;
 
     /**
      * Creates an instance.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(EDGE) })
     public ClientRectList() {
+        clientRects_ = new ArrayList<ClientRect>();
+    }
+
+    /**
+     * Returns the length property.
+     * @return the length
+     */
+    @JsxGetter
+    public int getLength() {
+        return clientRects_.size();
+    }
+
+    /**
+     * Returns the element at the specified index, or {@link #NOT_FOUND} if the index is invalid.
+     * {@inheritDoc}
+     */
+    @Override
+    public final Object get(final int index, final Scriptable start) {
+        if (index >= 0 && index < clientRects_.size()) {
+            return clientRects_.get(index);
+        }
+        return NOT_FOUND;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxFunction
+    public ClientRect item(final int index) {
+        if (index >= 0 && index < clientRects_.size()) {
+            return clientRects_.get(index);
+        }
+        return null;
+    }
+
+    /**
+     * Add an rect.
+     * @param clientRect the rect to add
+     */
+    public void add(final ClientRect clientRect) {
+        clientRects_.add(clientRect);
     }
 }
