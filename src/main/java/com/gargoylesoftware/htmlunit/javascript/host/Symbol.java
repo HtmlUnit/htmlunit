@@ -56,9 +56,10 @@ public class Symbol extends SimpleScriptable {
     @JsxConstructor
     public Symbol(final Object name) {
         name_ = name;
-        final StackTraceElement stackElement = new Throwable().getStackTrace()[8];
-        if (stackElement.getClassName().contains("BaseFunction")) {
-            throw ScriptRuntime.typeError("Symbol is not a constructor");
+        for (final StackTraceElement stackElements : new Throwable().getStackTrace()) {
+            if (stackElements.getClassName().contains("BaseFunction")) {
+                throw ScriptRuntime.typeError("Symbol is not a constructor");
+            }
         }
     }
 
