@@ -38,43 +38,43 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class CSSRule extends SimpleScriptable {
 
     /**
-     * The rule is a <code>CSSUnknownRule</code>.
+     * The rule is a {@code CSSUnknownRule}.
      */
-    @JsxConstant
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
     public static final short UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
 
     /**
-     * The rule is a <code>CSSStyleRule</code>.
+     * The rule is a {@code CSSStyleRule}.
      */
     @JsxConstant
     public static final short STYLE_RULE                = org.w3c.dom.css.CSSRule.STYLE_RULE;
 
     /**
-     * The rule is a <code>CSSCharsetRule</code>.
+     * The rule is a {@code CSSCharsetRule}.
      */
     @JsxConstant
     public static final short CHARSET_RULE              = org.w3c.dom.css.CSSRule.CHARSET_RULE;
 
     /**
-     * The rule is a <code>CSSImportRule</code>.
+     * The rule is a {@code CSSImportRule}.
      */
     @JsxConstant
     public static final short IMPORT_RULE               = org.w3c.dom.css.CSSRule.IMPORT_RULE;
 
     /**
-     * The rule is a <code>CSSMediaRule</code>.
+     * The rule is a {@code CSSMediaRule}.
      */
     @JsxConstant
     public static final short MEDIA_RULE                = org.w3c.dom.css.CSSRule.MEDIA_RULE;
 
     /**
-     * The rule is a <code>CSSFontFaceRule</code>.
+     * The rule is a {@code CSSFontFaceRule}.
      */
     @JsxConstant
     public static final short FONT_FACE_RULE            = org.w3c.dom.css.CSSRule.FONT_FACE_RULE;
 
     /**
-     * The rule is a <code>CSSPageRule</code>.
+     * The rule is a {@code CSSPageRule}.
      */
     @JsxConstant
     public static final short PAGE_RULE                 = org.w3c.dom.css.CSSRule.PAGE_RULE;
@@ -118,7 +118,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSNamespaceRule}.
      */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public static final short NAMESPACE_RULE           = 10;
 
     /**

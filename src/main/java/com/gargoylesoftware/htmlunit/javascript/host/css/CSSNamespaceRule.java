@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -26,13 +27,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
 public class CSSNamespaceRule extends CSSRule {
 
     /**
      * Default constructor.
      */
-    @JsxConstructor(@WebBrowser(EDGE))
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
     public CSSNamespaceRule() {
     }
 }

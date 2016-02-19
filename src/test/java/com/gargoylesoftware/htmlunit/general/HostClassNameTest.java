@@ -6622,9 +6622,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            EDGE = "function CSSNamespaceRule() { [native code] }",
-            IE = "[object CSSNamespaceRule]")
+    @Alerts(DEFAULT = "function CSSNamespaceRule() { [native code] }",
+            IE = "[object CSSNamespaceRule]",
+            FF = "exception")
     public void cssNamespaceRule() throws Exception {
         test("CSSNamespaceRule");
     }
@@ -7245,9 +7245,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF38 = "function MediaDevices() {\n    [native code]\n}",
-            EDGE = "function MediaDevices() { [native code] }")
+    @Alerts(DEFAULT = "function MediaDevices() { [native code] }",
+            FF31 = "exception",
+            IE = "exception",
+            FF38 = "function MediaDevices() {\n    [native code]\n}")
     public void mediaDevices() throws Exception {
         test("MediaDevices");
     }
@@ -8695,8 +8696,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function MediaKeyError() { [native code] }")
+    @Alerts("exception")
     public void mediaKeyError() throws Exception {
         test("MediaKeyError");
     }
@@ -8705,8 +8705,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function MediaKeyEvent() { [native code] }")
+    @Alerts("exception")
     public void mediaKeyEvent() throws Exception {
         test("MediaKeyEvent");
     }
@@ -8806,7 +8805,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSeg() { [native code] }",
             FF = "function SVGPathSeg() {\n    [native code]\n}",
-            IE = "[object SVGPathSeg]")
+            IE = "[object SVGPathSeg]",
+            CHROME = "exception")
     public void svgPathSeg() throws Exception {
         test("SVGPathSeg");
     }
@@ -8817,7 +8817,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegArcAbs() { [native code] }",
             FF = "function SVGPathSegArcAbs() {\n    [native code]\n}",
-            IE = "[object SVGPathSegArcAbs]")
+            IE = "[object SVGPathSegArcAbs]",
+            CHROME = "exception")
     public void svgPathSegArcAbs() throws Exception {
         test("SVGPathSegArcAbs");
     }
@@ -8828,7 +8829,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegArcRel() { [native code] }",
             FF = "function SVGPathSegArcRel() {\n    [native code]\n}",
-            IE = "[object SVGPathSegArcRel]")
+            IE = "[object SVGPathSegArcRel]",
+            CHROME = "exception")
     public void svgPathSegArcRel() throws Exception {
         test("SVGPathSegArcRel");
     }
@@ -8839,7 +8841,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegClosePath() { [native code] }",
             FF = "function SVGPathSegClosePath() {\n    [native code]\n}",
-            IE = "[object SVGPathSegClosePath]")
+            IE = "[object SVGPathSegClosePath]",
+            CHROME = "exception")
     public void svgPathSegClosePath() throws Exception {
         test("SVGPathSegClosePath");
     }
@@ -8850,7 +8853,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoCubicAbs() { [native code] }",
             FF = "function SVGPathSegCurvetoCubicAbs() {\n    [native code]\n}",
-            IE = "[object SVGPathSegCurvetoCubicAbs]")
+            IE = "[object SVGPathSegCurvetoCubicAbs]",
+            CHROME = "exception")
     public void svgPathSegCurvetoCubicAbs() throws Exception {
         test("SVGPathSegCurvetoCubicAbs");
     }
@@ -8861,7 +8865,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoCubicRel() { [native code] }",
             FF = "function SVGPathSegCurvetoCubicRel() {\n    [native code]\n}",
-            IE = "[object SVGPathSegCurvetoCubicRel]")
+            IE = "[object SVGPathSegCurvetoCubicRel]",
+            CHROME = "exception")
     public void svgPathSegCurvetoCubicRel() throws Exception {
         test("SVGPathSegCurvetoCubicRel");
     }
@@ -8872,7 +8877,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoCubicSmoothAbs() { [native code] }",
             FF = "function SVGPathSegCurvetoCubicSmoothAbs() {\n    [native code]\n}",
-            IE = "[object SVGPathSegCurvetoCubicSmoothAbs]")
+            IE = "[object SVGPathSegCurvetoCubicSmoothAbs]",
+            CHROME = "exception")
     public void svgPathSegCurvetoCubicSmoothAbs() throws Exception {
         test("SVGPathSegCurvetoCubicSmoothAbs");
     }
@@ -8883,7 +8889,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoCubicSmoothRel() { [native code] }",
             FF = "function SVGPathSegCurvetoCubicSmoothRel() {\n    [native code]\n}",
-            IE = "[object SVGPathSegCurvetoCubicSmoothRel]")
+            IE = "[object SVGPathSegCurvetoCubicSmoothRel]",
+            CHROME = "exception")
     public void svgPathSegCurvetoCubicSmoothRel() throws Exception {
         test("SVGPathSegCurvetoCubicSmoothRel");
     }
@@ -8894,7 +8901,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoQuadraticAbs() { [native code] }",
             FF = "function SVGPathSegCurvetoQuadraticAbs() {\n    [native code]\n}",
-            IE = "[object SVGPathSegCurvetoQuadraticAbs]")
+            IE = "[object SVGPathSegCurvetoQuadraticAbs]",
+            CHROME = "exception")
     public void svgPathSegCurvetoQuadraticAbs() throws Exception {
         test("SVGPathSegCurvetoQuadraticAbs");
     }
@@ -8905,7 +8913,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoQuadraticRel() { [native code] }",
             FF = "function SVGPathSegCurvetoQuadraticRel() {\n    [native code]\n}",
-            IE = "[object SVGPathSegCurvetoQuadraticRel]")
+            IE = "[object SVGPathSegCurvetoQuadraticRel]",
+            CHROME = "exception")
     public void svgPathSegCurvetoQuadraticRel() throws Exception {
         test("SVGPathSegCurvetoQuadraticRel");
     }
@@ -8916,7 +8925,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoQuadraticSmoothAbs() { [native code] }",
             FF = "function SVGPathSegCurvetoQuadraticSmoothAbs() {\n    [native code]\n}",
-            IE = "[object SVGPathSegCurvetoQuadraticSmoothAbs]")
+            IE = "[object SVGPathSegCurvetoQuadraticSmoothAbs]",
+            CHROME = "exception")
     public void svgPathSegCurvetoQuadraticSmoothAbs() throws Exception {
         test("SVGPathSegCurvetoQuadraticSmoothAbs");
     }
@@ -8927,7 +8937,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoQuadraticSmoothRel() { [native code] }",
             FF = "function SVGPathSegCurvetoQuadraticSmoothRel() {\n    [native code]\n}",
-            IE = "[object SVGPathSegCurvetoQuadraticSmoothRel]")
+            IE = "[object SVGPathSegCurvetoQuadraticSmoothRel]",
+            CHROME = "exception")
     public void svgPathSegCurvetoQuadraticSmoothRel() throws Exception {
         test("SVGPathSegCurvetoQuadraticSmoothRel");
     }
@@ -8938,7 +8949,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoAbs() { [native code] }",
             FF = "function SVGPathSegLinetoAbs() {\n    [native code]\n}",
-            IE = "[object SVGPathSegLinetoAbs]")
+            IE = "[object SVGPathSegLinetoAbs]",
+            CHROME = "exception")
     public void svgPathSegLinetoAbs() throws Exception {
         test("SVGPathSegLinetoAbs");
     }
@@ -8949,7 +8961,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoHorizontalAbs() { [native code] }",
             FF = "function SVGPathSegLinetoHorizontalAbs() {\n    [native code]\n}",
-            IE = "[object SVGPathSegLinetoHorizontalAbs]")
+            IE = "[object SVGPathSegLinetoHorizontalAbs]",
+            CHROME = "exception")
     public void svgPathSegLinetoHorizontalAbs() throws Exception {
         test("SVGPathSegLinetoHorizontalAbs");
     }
@@ -8960,7 +8973,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoHorizontalRel() { [native code] }",
             FF = "function SVGPathSegLinetoHorizontalRel() {\n    [native code]\n}",
-            IE = "[object SVGPathSegLinetoHorizontalRel]")
+            IE = "[object SVGPathSegLinetoHorizontalRel]",
+            CHROME = "exception")
     public void svgPathSegLinetoHorizontalRel() throws Exception {
         test("SVGPathSegLinetoHorizontalRel");
     }
@@ -8971,7 +8985,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoRel() { [native code] }",
             FF = "function SVGPathSegLinetoRel() {\n    [native code]\n}",
-            IE = "[object SVGPathSegLinetoRel]")
+            IE = "[object SVGPathSegLinetoRel]",
+            CHROME = "exception")
     public void svgPathSegLinetoRel() throws Exception {
         test("SVGPathSegLinetoRel");
     }
@@ -8982,7 +8997,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoVerticalAbs() { [native code] }",
             FF = "function SVGPathSegLinetoVerticalAbs() {\n    [native code]\n}",
-            IE = "[object SVGPathSegLinetoVerticalAbs]")
+            IE = "[object SVGPathSegLinetoVerticalAbs]",
+            CHROME = "exception")
     public void svgPathSegLinetoVerticalAbs() throws Exception {
         test("SVGPathSegLinetoVerticalAbs");
     }
@@ -8993,7 +9009,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoVerticalRel() { [native code] }",
             FF = "function SVGPathSegLinetoVerticalRel() {\n    [native code]\n}",
-            IE = "[object SVGPathSegLinetoVerticalRel]")
+            IE = "[object SVGPathSegLinetoVerticalRel]",
+            CHROME = "exception")
     public void svgPathSegLinetoVerticalRel() throws Exception {
         test("SVGPathSegLinetoVerticalRel");
     }
@@ -9004,7 +9021,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegList() { [native code] }",
             FF = "function SVGPathSegList() {\n    [native code]\n}",
-            IE = "[object SVGPathSegList]")
+            IE = "[object SVGPathSegList]",
+            CHROME = "exception")
     public void svgPathSegList() throws Exception {
         test("SVGPathSegList");
     }
@@ -9015,7 +9033,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegMovetoAbs() { [native code] }",
             FF = "function SVGPathSegMovetoAbs() {\n    [native code]\n}",
-            IE = "[object SVGPathSegMovetoAbs]")
+            IE = "[object SVGPathSegMovetoAbs]",
+            CHROME = "exception")
     public void svgPathSegMovetoAbs() throws Exception {
         test("SVGPathSegMovetoAbs");
     }
@@ -9026,7 +9045,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegMovetoRel() { [native code] }",
             FF = "function SVGPathSegMovetoRel() {\n    [native code]\n}",
-            IE = "[object SVGPathSegMovetoRel]")
+            IE = "[object SVGPathSegMovetoRel]",
+            CHROME = "exception")
     public void svgPathSegMovetoRel() throws Exception {
         test("SVGPathSegMovetoRel");
     }

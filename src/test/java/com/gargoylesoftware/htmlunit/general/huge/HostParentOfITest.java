@@ -2915,6 +2915,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF38 = "true")
     public void _MediaDevices_MediaDevices() throws Exception {
         test("MediaDevices", "MediaDevices");
@@ -2928,28 +2929,6 @@ public class HostParentOfITest extends HostParentOf {
     @Alerts("true")
     public void _MediaError_MediaError() throws Exception {
         test("MediaError", "MediaError");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MediaKeyError_MediaKeyError() throws Exception {
-        test("MediaKeyError", "MediaKeyError");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MediaKeyEvent_MediaKeyEvent() throws Exception {
-        test("MediaKeyEvent", "MediaKeyEvent");
     }
 
     /**

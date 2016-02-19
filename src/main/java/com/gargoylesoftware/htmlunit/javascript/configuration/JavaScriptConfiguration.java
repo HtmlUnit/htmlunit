@@ -213,7 +213,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MIDIConnectionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MIDIMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaEncryptedEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MediaKeyEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaKeyMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaQueryListEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MediaStreamEvent;
@@ -307,7 +306,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaDevices;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaElementAudioSourceNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaError;
-import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeyError;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeySession;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeyStatusMap;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeySystemAccess;
@@ -456,7 +454,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         KeyboardEvent.class, LocalMediaStream.class,
         Location.class, LockedFile.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
         MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
-        MediaKeyError.class, MediaKeyEvent.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
+        MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
         MediaKeyStatusMap.class, MediaKeySystemAccess.class, MediaList.class, MediaQueryList.class,
         MediaQueryListEvent.class, MediaRecorder.class,
         MediaSource.class, MediaStream.class, MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
