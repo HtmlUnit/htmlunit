@@ -3835,7 +3835,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE = "object")
+            IE = "object",
+            CHROME = "function")
     public void cssNamespaceRule() throws Exception {
         test("CSSNamespaceRule");
     }
@@ -5792,7 +5793,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF38 = "function")
+            FF38 = "function",
+            CHROME = "function")
     public void mediaDevices() throws Exception {
         test("MediaDevices");
     }
@@ -5925,8 +5927,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void mediaKeyError() throws Exception {
         test("MediaKeyError");
     }
@@ -5935,8 +5936,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void mediaKeyEvent() throws Exception {
         test("MediaKeyEvent");
     }
@@ -6026,7 +6026,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSeg() throws Exception {
@@ -6038,7 +6037,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegArcAbs() throws Exception {
@@ -6050,7 +6048,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegArcRel() throws Exception {
@@ -6062,7 +6059,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegClosePath() throws Exception {
@@ -6074,7 +6070,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegCurvetoCubicAbs() throws Exception {
@@ -6086,7 +6081,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegCurvetoCubicRel() throws Exception {
@@ -6098,7 +6092,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegCurvetoCubicSmoothAbs() throws Exception {
@@ -6110,7 +6103,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegCurvetoCubicSmoothRel() throws Exception {
@@ -6122,7 +6114,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegCurvetoQuadraticAbs() throws Exception {
@@ -6134,7 +6125,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegCurvetoQuadraticRel() throws Exception {
@@ -6146,7 +6136,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegCurvetoQuadraticSmoothAbs() throws Exception {
@@ -6158,7 +6147,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegCurvetoQuadraticSmoothRel() throws Exception {
@@ -6170,7 +6158,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegLinetoAbs() throws Exception {
@@ -6182,7 +6169,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegLinetoHorizontalAbs() throws Exception {
@@ -6194,7 +6180,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegLinetoHorizontalRel() throws Exception {
@@ -6206,7 +6191,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegLinetoRel() throws Exception {
@@ -6218,7 +6202,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegLinetoVerticalAbs() throws Exception {
@@ -6230,7 +6213,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegLinetoVerticalRel() throws Exception {
@@ -6242,7 +6224,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegList() throws Exception {
@@ -6254,7 +6235,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegMovetoAbs() throws Exception {
@@ -6266,7 +6246,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgPathSegMovetoRel() throws Exception {

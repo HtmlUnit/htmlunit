@@ -48,7 +48,7 @@ public class ClientRectList extends SimpleScriptable {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(EDGE) })
     public ClientRectList() {
-        clientRects_ = new ArrayList<ClientRect>();
+        clientRects_ = new ArrayList<>();
     }
 
     /**
