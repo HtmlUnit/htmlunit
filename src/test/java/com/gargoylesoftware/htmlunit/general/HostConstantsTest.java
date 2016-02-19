@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -113,7 +114,13 @@ public class HostConstantsTest extends WebDriverTestCase {
             first = false;
         }
 
-        Collections.sort(constants);
+        Collections.sort(constants, new Comparator<String>() {
+
+            @Override
+            public int compare(final String o1, final String o2) {
+                return o1.substring(0, o1.indexOf(':')).compareTo(o2.substring(0, o2.indexOf(':')));
+            }
+        });
         final StringBuilder builder = new StringBuilder();
         for (final String key : constants) {
             builder.append(key).append(' ');

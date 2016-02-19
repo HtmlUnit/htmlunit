@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 public class Notification extends EventTarget {
 
     /**
-     * The rule is a {@code CSSKeyframesRule}.
+     * The maximum number of actions supported.
      */
     @JsxConstant(@WebBrowser(CHROME))
     public static final short maxActions            = 2;
