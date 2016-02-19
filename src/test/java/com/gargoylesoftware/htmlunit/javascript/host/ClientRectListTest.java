@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,7 +63,7 @@ public class ClientRectListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "null" },
             IE11 = { "exception", "exception" })
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented(FF)
     public void itemOutside() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"

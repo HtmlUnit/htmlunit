@@ -130,6 +130,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
+import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
@@ -145,7 +146,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -1777,9 +1777,18 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * or range within the client. Each rectangle describes a single line.
      * @return a collection of rectangles that describes the layout of the contents
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction
     public Object getClientRects() {
-        return new NativeArray(0);
+        final ClientRect rect = new ClientRect(0, 0, 1, 1);
+        rect.setParentScope(getWindow());
+        rect.setPrototype(getPrototype(rect.getClass()));
+
+        final ClientRectList rectList = new ClientRectList();
+        rectList.setParentScope(getWindow());
+        rectList.setPrototype(getPrototype(rectList.getClass()));
+
+        rectList.add(rect);
+        return rectList;
     }
 
     /**

@@ -2481,7 +2481,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object ClientRectList]", "1" },
             FF31 = { "[object DOMRect]", "1" },
             FF38 = { "[object DOMRect]", "1" })
-    @NotYetImplemented
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

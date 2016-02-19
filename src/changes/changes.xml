@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: implement ClientRectList methods.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: implement Symbol.for.
             </action>
