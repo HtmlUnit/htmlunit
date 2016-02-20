@@ -567,7 +567,7 @@ public enum BrowserVersionFeatures {
 
     /** ClientRectList.item throws instead of returning null if an element was not found. */
     @BrowserFeature(@WebBrowser(IE))
-    CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND,
+    JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND,
 
     /** Supports {@code CSSCharsetRule}. */
     @BrowserFeature(@WebBrowser(FF))

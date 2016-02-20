@@ -2481,6 +2481,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object ClientRectList]", "1" },
             FF31 = { "[object DOMRect]", "1" },
             FF38 = { "[object DOMRect]", "1" })
+    @NotYetImplemented(FF)
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2492,6 +2493,33 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'/>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object ClientRectList]", "0" },
+            FF = { "", "0" })
+    @NotYetImplemented(FF)
+    public void getClientRectsDisconnected() throws Exception {
+        final String html =
+            "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var d1 = document.createElement('div');\n"
+            + "    var rects = d1.getClientRects();\n"
+            + "    try {\n"
+            + "      alert(d1.getClientRects());\n"
+            + "    } catch(e) { alert('exception'); }\n"
+
+            + "    try {\n"
+            + "      alert(d1.getClientRects().length);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

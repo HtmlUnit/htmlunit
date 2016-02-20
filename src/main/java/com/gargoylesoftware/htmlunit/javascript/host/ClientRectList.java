@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -82,7 +82,7 @@ public class ClientRectList extends SimpleScriptable {
         if (index >= 0 && index < clientRects_.size()) {
             return clientRects_.get(index);
         }
-        if (getBrowserVersion().hasFeature(CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND)) {
+        if (getBrowserVersion().hasFeature(JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND)) {
             throw Context.reportRuntimeError("Invalid index '" + index + "'");
         }
         return null;

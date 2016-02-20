@@ -1779,15 +1779,17 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxFunction
     public Object getClientRects() {
-        final ClientRect rect = new ClientRect(0, 0, 1, 1);
-        rect.setParentScope(getWindow());
-        rect.setPrototype(getPrototype(rect.getClass()));
-
         final ClientRectList rectList = new ClientRectList();
         rectList.setParentScope(getWindow());
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
-        rectList.add(rect);
+        if (getDomNodeOrDie().isDirectlyAttachedToPage()) {
+            final ClientRect rect = new ClientRect(0, 0, 1, 1);
+            rect.setParentScope(getWindow());
+            rect.setPrototype(getPrototype(rect.getClass()));
+            rectList.add(rect);
+        }
+
         return rectList;
     }
 
