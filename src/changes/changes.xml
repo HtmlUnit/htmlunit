@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: HTMLElement.getBoundClientRect throws an error for IE if the element is not connected to a page.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: implement ClientRectList methods.
             </action>

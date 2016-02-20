@@ -545,6 +545,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_BODY_MARGINS_8,
 
+    /** HtmlElement.getBoundingClientRect throws an error if the element is not attached to the page. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED,
+
     /** If we're emulating IE, the overall JavaScript return value is the last return value. */
     @BrowserFeature(@WebBrowser(IE))
     JS_CALL_RESULT_IS_LAST_RETURN_VALUE,

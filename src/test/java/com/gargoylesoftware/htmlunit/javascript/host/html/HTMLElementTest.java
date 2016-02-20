@@ -2406,7 +2406,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             FF31 = "[object DOMRect]",
             FF38 = "[object DOMRect]")
     public void getBoundingClientRect() throws Exception {
-        final String html = "<html><body><div id='div1'>hello</div><script>\n"
+        final String html = "<html><body>\n"
+            + "<div id='div1'>hello</div><script>\n"
             + "try {\n"
             + "  var d1 = document.getElementById('div1');\n"
             + "  var pos = d1.getBoundingClientRect();\n"
@@ -2470,6 +2471,32 @@ public class HTMLElementTest extends WebDriverTestCase {
               + "style='position: absolute; height: 100px; width: 100px; top: 100px; left: 300px; z-index:99;'></div>\n"
             + "  <div style='position: absolute; top: 1000px;'>way down</div>\n"
             + "</div>"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object ClientRect]", "0", "0" },
+            FF = { "[object DOMRect]", "0", "0" },
+            IE = "exception")
+    public void getBoundingClientRectDisconnected() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var d1 = document.createElement('div');\n"
+            + "    try {\n"
+            + "      var pos = d1.getBoundingClientRect();\n"
+            + "      alert(pos);\n"
+            + "      alert(pos.left);\n"
+            + "      alert(pos.top);\n"
+            + "    } catch (e) { alert('exception');}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
