@@ -4866,6 +4866,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             IE = "true")
     public void _CSSNamespaceRule_CSSNamespaceRule() throws Exception {
         test("CSSNamespaceRule", "CSSNamespaceRule");
@@ -4876,7 +4877,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE = "true")
+            IE = "true",
+            CHROME = "true")
     public void _CSSRule_CSSNamespaceRule() throws Exception {
         test("CSSRule", "CSSNamespaceRule");
     }
@@ -5619,6 +5621,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF38 = "true")
     public void _EventTarget_MediaDevices() throws Exception {
         test("EventTarget", "MediaDevices");
@@ -5879,16 +5882,6 @@ public class HostParentOfATest extends HostParentOf {
             CHROME = "true")
     public void _Event_AutocompleteErrorEvent() throws Exception {
         test("Event", "AutocompleteErrorEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Event_MediaKeyEvent() throws Exception {
-        test("Event", "MediaKeyEvent");
     }
 
     /**
