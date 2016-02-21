@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Adam Afeltowicz
  */
 @RunWith(BrowserRunner.class)
 public class DOMImplementationTest extends WebDriverTestCase {
@@ -395,6 +397,68 @@ public class DOMImplementationTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLDocument]",
+            IE = "exception")
+    @NotYetImplemented
+    public void createHTMLDocument() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    if (!document.implementation.createHTMLDocument) {\n"
+                + "      alert('createHTMLDocument not available'); return;\n"
+                + "    }\n"
+
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument();\n"
+                + "      alert(doc);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "[object HTMLDocument]", "newdoctitle" })
+    @NotYetImplemented
+    public void createHTMLDocument_title() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    if (!document.implementation.createHTMLDocument) {\n"
+                + "      alert('createHTMLDocument not available'); return;\n"
+                + "    }\n"
+
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument('newdoctitle');\n"
+                + "      alert(doc);\n"
+                + "      alert(doc.title);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
