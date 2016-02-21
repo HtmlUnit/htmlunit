@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
@@ -39,8 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24),
-        @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
 public class ClientRectList extends SimpleScriptable {
 
     private final List<ClientRect> clientRects_;
@@ -48,7 +46,7 @@ public class ClientRectList extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
     public ClientRectList() {
         clientRects_ = new ArrayList<>();
     }
