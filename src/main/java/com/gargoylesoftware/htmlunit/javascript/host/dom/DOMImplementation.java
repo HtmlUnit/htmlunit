@@ -64,13 +64,21 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.io.IOException;
 
+import com.gargoylesoftware.htmlunit.StringWebResponse;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -327,13 +335,13 @@ public class DOMImplementation extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMImplementation/createHTMLDocument">
      *   createHTMLDocument (MDN)</a>
      *
-     * @param title the document title
+     * @param titleObj the document title
      * @return the newly created {@link HTMLDocument}
      * @throws IOException in case of problems
      */
     @JsxFunction
-    public HTMLDocument createHTMLDocument(final Object title) throws IOException {
-        if (title == Undefined.instance
+    public HTMLDocument createHTMLDocument(final Object titleObj) throws IOException {
+        if (titleObj == Undefined.instance
                 && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE)) {
             throw Context.reportRuntimeError("Title is required");
         }
@@ -344,13 +352,25 @@ public class DOMImplementation extends SimpleScriptable {
 
         // According to spec and behavior of function in browsers new document
         // has no location object and is not connected with any window
-        // TODO
-        //        final String html = "<!doctype html><html><head><title>"
-        //                                + Context.toString(title)
-        //                                + "</title></head><body></body></html>";
-        //        final WebResponse resp = new StringWebResponse(html, WebClient.URL_ABOUT_BLANK);
-        //        final HtmlPage page = HTMLParser.parseHtml(resp, null);
-        //        document.setDomNode(page);
+        final WebResponse resp = new StringWebResponse("", WebClient.URL_ABOUT_BLANK);
+        final HtmlPage page = new HtmlPage(resp, getWindow().getWebWindow());
+        document.setDomNode(page);
+
+        final HTMLHtmlElement html = (HTMLHtmlElement) document.createElement("html");
+        page.appendChild(html.getDomNodeOrDie());
+
+        final HTMLHeadElement head = (HTMLHeadElement) document.createElement("head");
+        html.appendChild(head);
+
+        final HTMLTitleElement title = (HTMLTitleElement) document.createElement("title");
+        head.appendChild(title);
+
+        final HTMLBodyElement body = (HTMLBodyElement) document.createElement("body");
+        html.appendChild(body);
+
+        title.setTextContent(Context.toString(titleObj));
+
+        page.setEnclosingWindow(null);
 
         return document;
     }

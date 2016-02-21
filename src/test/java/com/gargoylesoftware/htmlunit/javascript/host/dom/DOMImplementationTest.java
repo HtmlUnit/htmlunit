@@ -405,7 +405,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDocument]",
+    @Alerts(DEFAULT = { "[object HTMLDocument]", "undefined" },
             IE = "exception")
     public void createHTMLDocument() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -421,6 +421,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument();\n"
                 + "      alert(doc);\n"
+                + "      alert(doc.window);\n"
                 + "    } catch(e) { alert('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
@@ -436,7 +437,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "[object HTMLDocument]", "newdoctitle" })
-    @NotYetImplemented
     public void createHTMLDocument_title() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
@@ -467,7 +467,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "[object HTMLDocument]", "" })
-    @NotYetImplemented
     public void createHTMLDocument_titleEmpty() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
