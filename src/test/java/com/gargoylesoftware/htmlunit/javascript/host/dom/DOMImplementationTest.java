@@ -461,4 +461,66 @@ public class DOMImplementationTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "[object HTMLDocument]", "" })
+    @NotYetImplemented
+    public void createHTMLDocument_titleEmpty() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    if (!document.implementation.createHTMLDocument) {\n"
+                + "      alert('createHTMLDocument not available'); return;\n"
+                + "    }\n"
+
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument('');\n"
+                + "      alert(doc);\n"
+                + "      alert(doc.title);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void createHTMLDocument_jQuery() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    if (!document.implementation.createHTMLDocument) {\n"
+                + "      alert('createHTMLDocument not available'); return;\n"
+                + "    }\n"
+
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument('');\n"
+                + "      doc.body.innerHTML = '<form></form><form></form>';\n"
+                + "      alert(doc.body.childNodes.length);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
