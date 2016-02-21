@@ -520,4 +520,79 @@ public class DOMImplementationTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("createdElement")
+    public void createHTMLDocument_createElement() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    if (!document.implementation.createHTMLDocument) {\n"
+                + "      alert('createHTMLDocument not available'); return;\n"
+                + "    }\n"
+
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument('');\n"
+                + "      var p = doc.createElement('p');\n"
+                + "      p.innertHTML = 'createdElement';\n"
+                + "      alert(p.innertHTML);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"<html><head></head><body></body></html>",
+                        "<html><head><title></title></head><body></body></html>",
+                        "<html><head><title>abc</title></head><body></body></html>"},
+            IE = { "exception",
+                    "<html><head><title></title></head><body></body></html>",
+                    "<html><head><title>abc</title></head><body></body></html>"})
+    public void createHTMLDocument_htmlCode() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    if (!document.implementation.createHTMLDocument) {\n"
+                + "      alert('createHTMLDocument not available'); return;\n"
+                + "    }\n"
+
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument();\n"
+                + "      alert(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument('');\n"
+                + "      alert(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument('abc');\n"
+                + "      alert(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

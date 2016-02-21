@@ -363,13 +363,14 @@ public class DOMImplementation extends SimpleScriptable {
         final HTMLHeadElement head = (HTMLHeadElement) document.createElement("head");
         html.appendChild(head);
 
-        final HTMLTitleElement title = (HTMLTitleElement) document.createElement("title");
-        head.appendChild(title);
+        if (titleObj != Undefined.instance) {
+            final HTMLTitleElement title = (HTMLTitleElement) document.createElement("title");
+            head.appendChild(title);
+            title.setTextContent(Context.toString(titleObj));
+        }
 
         final HTMLBodyElement body = (HTMLBodyElement) document.createElement("body");
         html.appendChild(body);
-
-        title.setTextContent(Context.toString(titleObj));
 
         return document;
     }
