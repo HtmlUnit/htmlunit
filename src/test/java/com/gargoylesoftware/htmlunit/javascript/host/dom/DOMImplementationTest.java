@@ -407,7 +407,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLDocument]",
             IE = "exception")
-    @NotYetImplemented
     public void createHTMLDocument() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"

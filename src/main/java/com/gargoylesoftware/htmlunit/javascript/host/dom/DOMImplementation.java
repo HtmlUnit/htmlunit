@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CORE_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_2;
@@ -61,14 +62,20 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.io.IOException;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code DOMImplementation}.
@@ -76,6 +83,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Adam Afeltowicz
  *
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-102161490">
  * W3C Dom Level 1</a>
@@ -301,7 +309,7 @@ public class DOMImplementation extends SimpleScriptable {
      * @param doctype the document types of the document
      * @return the newly created {@link XMLDocument}
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxFunction
     public XMLDocument createDocument(final String namespaceURI, final String qualifiedName,
             final DocumentType doctype) {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());
@@ -311,6 +319,39 @@ public class DOMImplementation extends SimpleScriptable {
             final XmlPage page = (XmlPage) document.getDomNodeOrDie();
             page.appendChild(page.createElementNS("".equals(namespaceURI) ? null : namespaceURI, qualifiedName));
         }
+        return document;
+    }
+
+    /**
+     * Creates an {@link HTMLDocument}.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMImplementation/createHTMLDocument">
+     *   createHTMLDocument (MDN)</a>
+     *
+     * @param title the document title
+     * @return the newly created {@link HTMLDocument}
+     * @throws IOException in case of problems
+     */
+    @JsxFunction
+    public HTMLDocument createHTMLDocument(final Object title) throws IOException {
+        if (title == Undefined.instance
+                && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE)) {
+            throw Context.reportRuntimeError("Title is required");
+        }
+
+        final HTMLDocument document = new HTMLDocument();
+        document.setParentScope(getParentScope());
+        document.setPrototype(getPrototype(document.getClass()));
+
+        // According to spec and behavior of function in browsers new document
+        // has no location object and is not connected with any window
+        // TODO
+        //        final String html = "<!doctype html><html><head><title>"
+        //                                + Context.toString(title)
+        //                                + "</title></head><body></body></html>";
+        //        final WebResponse resp = new StringWebResponse(html, WebClient.URL_ABOUT_BLANK);
+        //        final HtmlPage page = HTMLParser.parseHtml(resp, null);
+        //        document.setDomNode(page);
+
         return document;
     }
 }

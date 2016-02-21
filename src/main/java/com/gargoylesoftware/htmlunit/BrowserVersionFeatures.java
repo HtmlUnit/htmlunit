@@ -630,6 +630,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
     JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR,
 
+    /** createHTMLDucument requires a title. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE,
+
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOMIMPLEMENTATION_FEATURE_CORE_3,
