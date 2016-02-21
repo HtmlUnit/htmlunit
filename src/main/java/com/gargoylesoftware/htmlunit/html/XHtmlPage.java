@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.net.URL;
-
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -30,12 +28,11 @@ public class XHtmlPage extends HtmlPage {
      * Creates a new XHTML page instance. An XHTML page instance is normally retrieved
      * with {@link com.gargoylesoftware.htmlunit.WebClient#getPage(String)}.
      *
-     * @param originatingUrl the URL that was used to load this page
      * @param webResponse the web response that was used to create this page
      * @param webWindow the window that this page is being loaded into
      */
-    public XHtmlPage(final URL originatingUrl, final WebResponse webResponse, final WebWindow webWindow) {
-        super(originatingUrl, webResponse, webWindow);
+    public XHtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
+        super(webResponse, webWindow);
     }
 
     /**

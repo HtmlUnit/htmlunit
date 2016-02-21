@@ -174,11 +174,10 @@ public class HtmlPage extends InteractivePage {
      * Creates an instance of HtmlPage.
      * An HtmlPage instance is normally retrieved with {@link WebClient#getPage(String)}.
      *
-     * @param originatingUrl the URL that was used to load this page
      * @param webResponse the web response that was used to create this page
      * @param webWindow the window that this page is being loaded into
      */
-    public HtmlPage(final URL originatingUrl, final WebResponse webResponse, final WebWindow webWindow) {
+    public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
     }
 

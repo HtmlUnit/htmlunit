@@ -180,7 +180,7 @@ public final class HTMLParser {
      * @throws IOException if there is an IO error
      */
     public static HtmlPage parseHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final HtmlPage page = new HtmlPage(webResponse.getWebRequest().getUrl(), webResponse, webWindow);
+        final HtmlPage page = new HtmlPage(webResponse, webWindow);
         parse(webResponse, webWindow, page, false);
         return page;
     }
@@ -194,7 +194,7 @@ public final class HTMLParser {
      * @throws IOException if there is an IO error
      */
     public static XHtmlPage parseXHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final XHtmlPage page = new XHtmlPage(webResponse.getWebRequest().getUrl(), webResponse, webWindow);
+        final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
         parse(webResponse, webWindow, page, true);
         return page;
     }
