@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -233,12 +234,13 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
      * @param scriptable the script object to initialize
      */
     protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
-        final WebWindow enclosingWindow = domNode.getPage().getEnclosingWindow();
-        if (enclosingWindow.getEnclosedPage() == domNode.getPage()) {
+        final SgmlPage page = domNode.getPage();
+        final WebWindow enclosingWindow = page.getEnclosingWindow();
+        if (enclosingWindow != null && enclosingWindow.getEnclosedPage() == page) {
             scriptable.setParentScope(enclosingWindow.getScriptableObject());
         }
         else {
-            scriptable.setParentScope(ScriptableObject.getTopLevelScope(domNode.getPage().getScriptableObject()));
+            scriptable.setParentScope(ScriptableObject.getTopLevelScope(page.getScriptableObject()));
         }
     }
 

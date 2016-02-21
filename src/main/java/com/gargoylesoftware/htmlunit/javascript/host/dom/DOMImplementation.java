@@ -354,6 +354,7 @@ public class DOMImplementation extends SimpleScriptable {
         // has no location object and is not connected with any window
         final WebResponse resp = new StringWebResponse("", WebClient.URL_ABOUT_BLANK);
         final HtmlPage page = new HtmlPage(resp, getWindow().getWebWindow());
+        page.setEnclosingWindow(null);
         document.setDomNode(page);
 
         final HTMLHtmlElement html = (HTMLHtmlElement) document.createElement("html");
@@ -369,8 +370,6 @@ public class DOMImplementation extends SimpleScriptable {
         html.appendChild(body);
 
         title.setTextContent(Context.toString(titleObj));
-
-        page.setEnclosingWindow(null);
 
         return document;
     }
