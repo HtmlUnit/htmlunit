@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -42,6 +43,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
                 @WebBrowser(EDGE) })
     })
 public class UIEvent extends Event {
+
+    /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SCROLL_PAGE_DOWN = 0x8000;
+
+    /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final short SCROLL_PAGE_UP = 0xFFFF8000;
 
     /** Specifies some detail information about the event. */
     private long detail_;

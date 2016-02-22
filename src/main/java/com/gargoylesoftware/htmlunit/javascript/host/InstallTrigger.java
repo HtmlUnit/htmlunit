@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -28,6 +29,25 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = @WebBrowser(FF))
 public class InstallTrigger extends SimpleScriptable {
 
+    /** Constant. */
+    @JsxConstant
+    public static final int SKIN = 1;
+
+    /** Constant. */
+    @JsxConstant
+    public static final int LOCALE = 2;
+
+    /** Constant. */
+    @JsxConstant
+    public static final int CONTENT = 4;
+
+    /** Constant. */
+    @JsxConstant
+    public static final int PACKAGE = 7;
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         return "[object InstallTriggerImpl]";
