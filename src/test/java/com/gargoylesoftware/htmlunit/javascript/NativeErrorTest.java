@@ -45,7 +45,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @NotYetImplemented({ CHROME, FF, IE })
     public void stack() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function test() {\n"
             + "  try {\n"
             + "    null.method();\n"
@@ -81,7 +81,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @NotYetImplemented({ CHROME, FF, IE })
     public void stackNewError() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function test() {\n"
             + "  try {\n"
             + "    throw new Error();\n"
@@ -107,4 +107,23 @@ public class NativeErrorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "10",
+            FF = "undefined")
+    public void stackTraceLimit() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  alert(Error.stackTraceLimit)\n;"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

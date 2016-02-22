@@ -849,6 +849,10 @@ public enum BrowserVersionFeatures {
         @WebBrowser(IE) })
     JS_ENUM_NUMBERS_FIRST,
 
+    /** Javascript {@code Error.stackTraceLimit}. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    JS_ERROR_STACK_TRACE_LIMIT,
+
     /** Javascript event.keyCode and event.charCode distinguish between printable and not printable keys. */
     @BrowserFeature(@WebBrowser(FF))
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
