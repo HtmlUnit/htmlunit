@@ -407,10 +407,7 @@ public class JavaScriptEngine {
         for (final Map.Entry<String, HtmlUnitScriptable> entry : prototypesPerJSName.entrySet()) {
             final String name = entry.getKey();
             final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
-            Scriptable prototype = entry.getValue();
-            if (prototype.getPrototype() != null) {
-                prototype = prototype.getPrototype(); // "double prototype" hack for FF
-            }
+            final Scriptable prototype = entry.getValue();
             if (!StringUtils.isEmpty(config.getExtendedClassName())) {
                 final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
                 prototype.setPrototype(parentPrototype);
