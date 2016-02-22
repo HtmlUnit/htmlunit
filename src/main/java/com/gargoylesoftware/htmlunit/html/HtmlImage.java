@@ -70,7 +70,7 @@ public class HtmlImage extends HtmlElement {
     private int lastClickX_;
     private int lastClickY_;
     private WebResponse imageWebResponse_;
-    private ImageData imageData_;
+    private transient ImageData imageData_;
     private boolean downloaded_;
     private boolean onloadInvoked_;
     private boolean createdByJavascript_;
