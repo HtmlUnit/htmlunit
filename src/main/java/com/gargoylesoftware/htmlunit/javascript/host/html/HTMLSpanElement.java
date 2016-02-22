@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Locale;
 
@@ -40,9 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlSpan.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) }),
+        @JsxClass(domClass = HtmlSpan.class),
         @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF)),
         @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(value = FF, maxVersion = 31))
     })

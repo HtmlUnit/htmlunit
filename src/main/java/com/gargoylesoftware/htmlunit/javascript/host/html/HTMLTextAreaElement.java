@@ -28,7 +28,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -49,11 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Frank Danek
  * @author Carsten Steul
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlTextArea.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) })
-    })
+@JsxClass(domClass = HtmlTextArea.class)
 public class HTMLTextAreaElement extends FormField {
 
     /**

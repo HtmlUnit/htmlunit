@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading2;
@@ -38,24 +37,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlHeading1.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlHeading2.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlHeading3.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlHeading4.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlHeading5.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlHeading6.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) })
+        @JsxClass(domClass = HtmlHeading1.class),
+        @JsxClass(domClass = HtmlHeading2.class),
+        @JsxClass(domClass = HtmlHeading3.class),
+        @JsxClass(domClass = HtmlHeading4.class),
+        @JsxClass(domClass = HtmlHeading5.class),
+        @JsxClass(domClass = HtmlHeading6.class)
     })
 public class HTMLHeadingElement extends HTMLElement {
 

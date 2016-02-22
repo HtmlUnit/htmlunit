@@ -22,14 +22,14 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import org.apache.commons.lang3.StringUtils;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 import com.gargoylesoftware.htmlunit.html.HtmlMenu;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLMenuElement}.

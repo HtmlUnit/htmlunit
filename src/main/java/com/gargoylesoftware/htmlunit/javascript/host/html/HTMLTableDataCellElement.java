@@ -27,8 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlTableDataCell.class, browsers = { @WebBrowser(IE),
-        @WebBrowser(EDGE) })
+@JsxClass(domClass = HtmlTableDataCell.class, browsers = { @WebBrowser(IE), @WebBrowser(EDGE) })
 public class HTMLTableDataCellElement extends HTMLTableCellElement {
 
     /**

@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -45,9 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Marc Guillemot
  * @author David Gileadi
  */
-@JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(IE) })
-    })
+@JsxClass(browsers = { @WebBrowser(IE) })
 public class TextRange extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(TextRange.class);

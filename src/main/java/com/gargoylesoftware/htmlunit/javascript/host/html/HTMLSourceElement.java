@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlSource;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -31,8 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlSource.class, browsers = { @WebBrowser(FF),
-        @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+@JsxClass(domClass = HtmlSource.class)
 public class HTMLSourceElement extends HTMLElement {
 
     /**

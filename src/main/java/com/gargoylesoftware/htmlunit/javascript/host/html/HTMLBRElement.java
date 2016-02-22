@@ -18,13 +18,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLEAR_REST
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBreak;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -38,11 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlBreak.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                    @WebBrowser(EDGE) })
-    })
+@JsxClass(domClass = HtmlBreak.class)
 public class HTMLBRElement extends HTMLElement {
 
     /** Valid values for the {@link #getClear() clear} property. */

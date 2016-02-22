@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
@@ -36,9 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlDivision.class,
-                browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE),
-                        @WebBrowser(EDGE) }),
+        @JsxClass(domClass = HtmlDivision.class),
         @JsxClass(domClass = HtmlMarquee.class, browsers = @WebBrowser(FF))
     })
 public class HTMLDivElement extends HTMLElement {

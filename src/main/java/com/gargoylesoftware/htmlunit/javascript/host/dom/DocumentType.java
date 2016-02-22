@@ -41,8 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms762752.aspx">MSDN documentation</a>
  * @see <a href="http://www.xulplanet.com/references/objref/DocumentType.html">XUL Planet</a>
  */
-@JsxClass(domClass = DomDocumentType.class,
-    browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(domClass = DomDocumentType.class)
 public class DocumentType extends Node {
 
     /**

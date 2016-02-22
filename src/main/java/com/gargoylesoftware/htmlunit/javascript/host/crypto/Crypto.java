@@ -21,8 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.util.Random;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -31,14 +29,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 /**
  * A JavaScript object for {@code Crypto}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class Crypto extends SimpleScriptable {
 
     /**

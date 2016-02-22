@@ -213,7 +213,6 @@ public class JavaScriptEngine {
             deleteProperties(window, "Iterator", "StopIteration");
         }
 
-        
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(window, "Error");
         if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
             errorObject.defineProperty("stackTraceLimit", 10, ScriptableObject.EMPTY);

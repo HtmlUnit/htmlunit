@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumnGroup;
@@ -40,12 +39,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlTableColumn.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableColumnGroup.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                    @WebBrowser(EDGE) })
+        @JsxClass(domClass = HtmlTableColumn.class),
+        @JsxClass(domClass = HtmlTableColumnGroup.class)
     })
 public class HTMLTableColElement extends HTMLTableComponent {
 

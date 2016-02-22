@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -99,10 +100,10 @@ public class HostConstantsTest extends WebDriverTestCase {
     }
 
     private String getExpectedString() throws Exception {
-        if (host_.endsWith("Array") || host_.equals("Image") || host_.equals("Option")) {
+        if (host_.endsWith("Array") || "Image".equals(host_) || "Option".equals(host_)) {
             return "";
         }
-        if (host_.equals("Error") && getBrowserVersion().hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
+        if ("Error".equals(host_) && getBrowserVersion().hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
             return "stackTraceLimit:10 ";
         }
         final JavaScriptConfiguration javaScriptConfig = JavaScriptConfiguration.getInstance(getBrowserVersion());

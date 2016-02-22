@@ -117,7 +117,10 @@ public abstract class AbstractJavaScriptConfiguration {
                         + hostClassName + "' has both.");
                 }
                 final JsxClass[] jsxClassValues = jsxClasses.value();
-
+                if (jsxClassValues.length == 1) {
+                    throw new RuntimeException("No need to specify JsxClasses with a single JsxClass for "
+                            + hostClassName);
+                }
                 final Set<Class<?>> domClasses = new HashSet<>();
 
                 boolean isJsObject = false;

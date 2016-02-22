@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTRACK_END
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTrack;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -31,8 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlTrack.class,
-    browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(domClass = HtmlTrack.class)
 public class HTMLTrackElement extends HTMLElement {
 
     /** Constant. */

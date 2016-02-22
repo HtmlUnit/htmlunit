@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -63,10 +62,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlAnchor.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
-            @WebBrowser(IE), @WebBrowser(EDGE) })
-    })
+@JsxClass(domClass = HtmlAnchor.class)
 public class HTMLAnchorElement extends HTMLElement {
 
     /**

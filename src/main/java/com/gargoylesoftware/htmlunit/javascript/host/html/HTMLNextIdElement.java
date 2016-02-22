@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlNextId;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -26,9 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlNextId.class, browsers = { @WebBrowser(IE) })
-    })
+@JsxClass(domClass = HtmlNextId.class, browsers = { @WebBrowser(IE) })
 public class HTMLNextIdElement extends HTMLElement {
 
     /**

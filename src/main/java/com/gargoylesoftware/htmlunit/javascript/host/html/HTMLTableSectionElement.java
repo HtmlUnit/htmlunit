@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableBody;
 import com.gargoylesoftware.htmlunit.html.HtmlTableFooter;
@@ -32,6 +31,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 /**
  * A JavaScript object representing "HTMLTableSectionElement", it is used by
  * {@link HtmlTableBody}, {@link HtmlTableHeader}, and {@link HtmlTableFooter}.
@@ -41,15 +42,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlTableBody.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableHeader.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                    @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableFooter.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-                    @WebBrowser(EDGE) })
+        @JsxClass(domClass = HtmlTableBody.class),
+        @JsxClass(domClass = HtmlTableHeader.class),
+        @JsxClass(domClass = HtmlTableFooter.class)
     })
 public class HTMLTableSectionElement extends RowContainer {
 

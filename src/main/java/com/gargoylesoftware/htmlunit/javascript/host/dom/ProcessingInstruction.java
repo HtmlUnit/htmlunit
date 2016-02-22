@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -31,9 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = DomProcessingInstruction.class,
-    browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-            @WebBrowser(EDGE) })
+@JsxClass(domClass = DomProcessingInstruction.class)
 public class ProcessingInstruction extends CharacterData {
 
     /**

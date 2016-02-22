@@ -35,8 +35,7 @@ import com.steadystate.css.dom.MediaListImpl;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class MediaQueryList extends EventTarget {
 
     private String media_;

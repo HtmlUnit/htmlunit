@@ -18,8 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACER
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_NO_CRLF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,8 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class CSSFontFaceRule extends CSSRule {
 
     private static final Pattern REPLACEMENT_1 = Pattern.compile("font-family: ([^;]*);");

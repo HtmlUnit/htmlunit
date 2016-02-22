@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDeletedText;
 import com.gargoylesoftware.htmlunit.html.HtmlInsertedText;
@@ -35,10 +34,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlDeletedText.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
-                    @WebBrowser(IE), @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlInsertedText.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
-                    @WebBrowser(IE), @WebBrowser(EDGE) })
+        @JsxClass(domClass = HtmlDeletedText.class),
+        @JsxClass(domClass = HtmlInsertedText.class)
     })
 public class HTMLModElement extends HTMLElement {
 
