@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -29,8 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeImage;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgFeImage.class,
-    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+@JsxClass(domClass = SvgFeImage.class)
 public class SVGFEImageElement extends SVGElement {
 
     /**

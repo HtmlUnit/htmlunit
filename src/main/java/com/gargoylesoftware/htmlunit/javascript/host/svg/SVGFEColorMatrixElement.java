@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -30,8 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeColorMatrix;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgFeColorMatrix.class,
-    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+@JsxClass(domClass = SvgFeColorMatrix.class)
 public class SVGFEColorMatrixElement extends SVGElement {
 
     /** The constant {@code SVG_FECOLORMATRIX_TYPE_UNKNOWN}. */

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -33,8 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/SVGMatrix">MDN doc</a>
  * @author Marc Guillemot
  */
-@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME),
-            @WebBrowser(EDGE) })
+@JsxClass
 public class SVGMatrix extends SimpleScriptable {
     private double fieldA_ = 1;
     private double fieldB_ = 0;

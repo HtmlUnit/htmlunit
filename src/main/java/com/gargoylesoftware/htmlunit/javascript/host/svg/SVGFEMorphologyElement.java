@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -30,8 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeMorphology;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgFeMorphology.class,
-    browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+@JsxClass(domClass = SvgFeMorphology.class)
 public class SVGFEMorphologyElement extends SVGElement {
 
     /** The constant {@code SVG_MORPHOLOGY_OPERATOR_UNKNOWN}. */

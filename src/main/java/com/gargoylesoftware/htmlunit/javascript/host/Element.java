@@ -68,7 +68,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass
+@JsxClass(domClass = DomElement.class)
 public class Element extends EventNode {
 
     private NamedNodeMap attributes_;
