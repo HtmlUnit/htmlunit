@@ -1962,6 +1962,17 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _Node_SVGDocument() throws Exception {
+        test("Node", "SVGDocument");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             FF = "false")
     public void _MessageChannel_MessageChannel() throws Exception {

@@ -4500,6 +4500,16 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _EventTarget_SVGDocument() throws Exception {
+        test("EventTarget", "SVGDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _EventTarget_XMLHttpRequest() throws Exception {
