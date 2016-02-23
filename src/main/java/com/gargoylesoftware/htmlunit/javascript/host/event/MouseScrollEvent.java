@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -27,6 +28,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = @WebBrowser(FF))
 public class MouseScrollEvent extends MouseEvent {
+
+    /** Constant for {@code HORIZONTAL_AXIS}. */
+    @JsxConstant
+    public static final int HORIZONTAL_AXIS = 1;
+
+    /** Constant for {@code VERTICAL_AXIS}. */
+    @JsxConstant
+    public static final int VERTICAL_AXIS = 2;
 
     /**
      * Default constructor.

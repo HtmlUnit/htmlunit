@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgAltGlyph;
@@ -29,6 +30,16 @@ import com.gargoylesoftware.htmlunit.svg.SvgAltGlyph;
  */
 @JsxClass(domClass = SvgAltGlyph.class, browsers = @WebBrowser(FF))
 public class SVGAltGlyphElement extends SVGElement {
+
+    /** Constant for {@code LENGTHADJUST_UNKNOWN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int LENGTHADJUST_UNKNOWN = 0;
+    /** Constant for {@code LENGTHADJUST_SPACING}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int LENGTHADJUST_SPACING = 1;
+    /** Constant for {@code LENGTHADJUST_SPACINGANDGLYPH}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int LENGTHADJUST_SPACINGANDGLYPHS = 2;
 
     /**
      * Creates an instance.

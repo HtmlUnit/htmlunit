@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 
 /**
  * A JavaScript object for {@code SVGDocument}.
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(FF))
-public class SVGDocument extends SimpleScriptable {
+public class SVGDocument extends Document {
 
     /**
      * Creates an instance.

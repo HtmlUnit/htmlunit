@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgClipPath;
@@ -30,6 +31,16 @@ import com.gargoylesoftware.htmlunit.svg.SvgClipPath;
  */
 @JsxClass(domClass = SvgClipPath.class)
 public class SVGClipPathElement extends SVGGraphicsElement {
+
+    /** Constant for {@code SVG_UNIT_TYPE_UNKNOWN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_UNIT_TYPE_UNKNOWN = 0;
+    /** Constant for {@code SVG_UNIT_TYPE_USERSPACEONUSE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_UNIT_TYPE_USERSPACEONUSE = 1;
+    /** Constant for {@code SVG_UNIT_TYPE_OBJECTBOUNDINGBOX}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 
     /**
      * Creates an instance.

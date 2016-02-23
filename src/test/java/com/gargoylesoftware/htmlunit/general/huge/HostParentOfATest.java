@@ -508,6 +508,16 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _Document_SVGDocument() throws Exception {
+        test("Document", "SVGDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Element_HTMLAnchorElement() throws Exception {
         test("Element", "HTMLAnchorElement");

@@ -50,6 +50,39 @@ public class SVGFEBlendElement extends SVGElement {
     /** The constant {@code SVG_FEBLEND_MODE_LIGHTEN}. */
     @JsxConstant
     public static final int SVG_FEBLEND_MODE_LIGHTEN = 5;
+    /** The constant {@code SVG_FEBLEND_MODE_OVERLAY}. */
+    @JsxConstant
+    public static final int SVG_FEBLEND_MODE_OVERLAY = 6;
+    /** The constant {@code SVG_FEBLEND_MODE_COLOR_DODGE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_COLOR_DODGE = 7;
+    /** The constant {@code SVG_FEBLEND_MODE_COLOR_BURN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_COLOR_BURN = 8;
+    /** The constant {@code SVG_FEBLEND_MODE_HARD_LIGHT}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_HARD_LIGHT = 9;
+    /** The constant {@code SVG_FEBLEND_MODE_SOFT_LIGHT}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_SOFT_LIGHT = 10;
+    /** The constant {@code SVG_FEBLEND_MODE_DIFFERENCE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_DIFFERENCE = 11;
+    /** The constant {@code SVG_FEBLEND_MODE_EXCLUSION}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_EXCLUSION = 12;
+    /** The constant {@code SVG_FEBLEND_MODE_HUE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_HUE = 13;
+    /** The constant {@code SVG_FEBLEND_MODE_SATURATION}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_SATURATION = 14;
+    /** The constant {@code SVG_FEBLEND_MODE_COLOR}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_COLOR = 15;
+    /** The constant {@code SVG_FEBLEND_MODE_LUMINOSITY}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SVG_FEBLEND_MODE_LUMINOSITY = 16;
 
     /**
      * Creates an instance.

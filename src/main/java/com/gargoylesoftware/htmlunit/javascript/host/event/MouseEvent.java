@@ -23,6 +23,7 @@ import java.util.LinkedList;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -43,6 +44,28 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClass
 public class MouseEvent extends UIEvent {
+
+    /** Constant for {@code MOZ_SOURCE_UNKNOWN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_UNKNOWN = 0;
+    /** Constant for {@code MOZ_SOURCE_MOUSE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_MOUSE = 1;
+    /** Constant for {@code MOZ_SOURCE_PEN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_PEN = 2;
+    /** Constant for {@code MOZ_SOURCE_ERASER}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_ERASER = 3;
+    /** Constant for {@code MOZ_SOURCE_CURSOR}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_CURSOR = 4;
+    /** Constant for {@code MOZ_SOURCE_TOUCH}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_TOUCH = 5;
+    /** Constant for {@code MOZ_SOURCE_KEYBOARD}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_KEYBOARD = 6;
 
     /** The click event type, triggered by "onclick" event handlers. */
     public static final String TYPE_CLICK = "click";
