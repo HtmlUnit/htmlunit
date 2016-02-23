@@ -27,6 +27,7 @@ import java.util.Set;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -231,7 +232,11 @@ public class RecursiveFunctionObject extends FunctionObject {
                 default:
             }
         }
-        return super.get(name, start);
+        Object value = super.get(name, start);
+        if (value == NOT_FOUND) {
+            value = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
+        }
+        return value;
     }
 
     /**
