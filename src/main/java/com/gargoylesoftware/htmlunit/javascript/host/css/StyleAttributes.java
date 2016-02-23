@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff38up;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow31;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow38;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 
@@ -1288,9 +1287,6 @@ final class StyleAttributes {
         /** The style property {@code MozTextAlignLast}. */
         MOZ_TEXT_ALIGN_LAST("MozTextAlignLast", "-moz-text-align-last",
                 ff("auto")),
-
-        /** The style property {@code MozTextBlink}. */
-        MOZ_TEXT_BLINK("MozTextBlink", "-moz-text-blink", ffBelow31("none")),
 
         /** The style property {@code MozTextDecorationColor}. */
         MOZ_TEXT_DECORATION_COLOR("MozTextDecorationColor",

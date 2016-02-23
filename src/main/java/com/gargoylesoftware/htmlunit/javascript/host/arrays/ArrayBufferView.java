@@ -14,14 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The ArrayBufferView type describes a particular view on the contents of an {@link ArrayBuffer}'s data.
@@ -29,8 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(isJSObject = false,
-        browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+@JsxClass(isJSObject = false)
 public class ArrayBufferView extends SimpleScriptable {
 
     private ArrayBuffer buffer_;

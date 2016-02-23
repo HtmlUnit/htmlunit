@@ -38,8 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlMenu.class,
-    browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(domClass = HtmlMenu.class)
 public class HTMLMenuElement extends HTMLListElement {
 
     private String label_;
