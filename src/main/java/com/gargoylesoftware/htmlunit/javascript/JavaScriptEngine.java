@@ -184,8 +184,8 @@ public class JavaScriptEngine {
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        final Map<Class<? extends HtmlUnitScriptable>, HtmlUnitScriptable> prototypes = new HashMap<>();
-        final Map<String, HtmlUnitScriptable> prototypesPerJSName = new HashMap<>();
+        final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
+        final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
 
         final Window window = new Window();
         ((SimpleScriptable) window).setClassName("Window");
@@ -404,7 +404,7 @@ public class JavaScriptEngine {
 
         // once all prototypes have been build, it's possible to configure the chains
         final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
-        for (final Map.Entry<String, HtmlUnitScriptable> entry : prototypesPerJSName.entrySet()) {
+        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
             final String name = entry.getKey();
             final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
             final Scriptable prototype = entry.getValue();
