@@ -298,6 +298,61 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"true", "true"})
+    @NotYetImplemented
+    public void pushStateLocationHref() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    if (!window.history.pushState) { alert('no pushState'); return }\n"
+                + "    try {\n"
+                + "      var stateObj = { hi: 'there' };\n"
+                + "      window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
+                + "      alert(location.href.indexOf('bar.html') > -1);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+
+                + "  function test2() {\n"
+                + "    if (!window.history.pushState) { alert('no pushState'); return }\n"
+                + "    try {\n"
+                + "      var stateObj = { hi2: 'there2' };\n"
+                + "      window.history.pushState(stateObj, 'page 3', 'bar2.html');\n"
+                + "      alert(location.href.indexOf('bar2.html') > -1);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <button id=myId onclick='test()'>Click me</button>\n"
+                + "  <button id=myId2 onclick='test2()'>Click me</button>\n"
+                + "</body></html>";
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myId")).click();
+        assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "bar.html", ((JavascriptExecutor) driver).executeScript("return location.href"));
+        driver.findElement(By.id("myId2")).click();
+        assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "bar2.html", ((JavascriptExecutor) driver).executeScript("return location.href"));
+        driver.navigate().back();
+        assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+        driver.navigate().back();
+        assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
+        driver.navigate().forward();
+        assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+        driver.navigate().forward();
+        assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
+
+        verifyAlerts(driver, expectedAlerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({ "[object PopStateEvent]", "null",
                 "[object PopStateEvent]", "null",
                 "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
