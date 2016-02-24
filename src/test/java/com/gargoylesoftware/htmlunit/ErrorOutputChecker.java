@@ -40,7 +40,7 @@ public class ErrorOutputChecker implements TestRule {
                     + "Only local connections are allowed\\.\r?\n");
     private static final Pattern WEB_DRIVER_IE_MSG =
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
-                    + "2.52.0.0\r?\n"
+                    + "2.52.1.0\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n");
 
