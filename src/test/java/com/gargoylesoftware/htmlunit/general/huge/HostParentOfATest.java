@@ -5937,9 +5937,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _Event_TextEvent() throws Exception {
         test("Event", "TextEvent");
     }

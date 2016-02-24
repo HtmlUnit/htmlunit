@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
@@ -37,13 +36,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
- * Tests all {@code constant}s defined in host classes.
+ * Test all {@code constant}s defined in host classes.
  *
- * This is meant to be run against real browsers.
+ * This is meant to run against real browsers.
  *
  * @author Ahmed Ashour
  */
-@Ignore
 @RunWith(BrowserParameterizedRunner.class)
 public class HostConstantsTest extends WebDriverTestCase {
 
@@ -80,19 +78,22 @@ public class HostConstantsTest extends WebDriverTestCase {
         loadPageWithAlerts2("<html><head>\n"
                 + "<script>\n"
                 + "function test() {\n"
-                + "  var all = [];\n"
-                + "  for (var x in " + host_ + ") {\n"
-                + "    if (typeof " + host_ + "[x] == 'number') {\n"
-                + "      all.push(x);\n"
+                + "  try {\n"
+                + "    var all = [];\n"
+                + "    for (var x in " + host_ + ") {\n"
+                + "      if (typeof " + host_ + "[x] == 'number') {\n"
+                + "        all.push(x);\n"
+                + "      }\n"
                 + "    }\n"
+                + "    all.sort();\n"
+                + "    var string = '';\n"
+                + "    for (var i in all) {\n"
+                + "      var x = all[i];\n"
+                + "      string += x + ':' + " + host_ + "[x] + ' ';\n"
+                + "    }\n"
+                + "    alert(string);\n"
+                + "  } catch (e) {\n"
                 + "  }\n"
-                + "  all.sort();\n"
-                + "  var string = '';\n"
-                + "  for (var i in all) {\n"
-                + "    var x = all[i];\n"
-                + "    string += x + ':' + " + host_ + "[x] + ' ';\n"
-                + "  }\n"
-                + "  alert(string);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"

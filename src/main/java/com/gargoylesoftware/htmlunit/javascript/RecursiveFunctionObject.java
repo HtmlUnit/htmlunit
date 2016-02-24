@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_T
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML_IMAGE_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONTEXT_EVENT_CONSTANTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XSLTPROCESSOR_OBJECT;
 
 import java.lang.reflect.Member;
@@ -226,8 +227,9 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
+        final String superFunctionName = super.getFunctionName();
         if ("prototype".equals(name)) {
-            switch (super.getFunctionName()) {
+            switch (superFunctionName) {
                 case "CSS":
                 case "Proxy":
                     return NOT_FOUND;
@@ -236,17 +238,25 @@ public class RecursiveFunctionObject extends FunctionObject {
             }
         }
         Object value = super.get(name, start);
-        if (value == NOT_FOUND) {
-            final Class<?> klass = getPrototypeProperty().getClass();
-            if (HtmlUnitScriptable.class.isAssignableFrom(klass)) {
+
+        if (value == NOT_FOUND && !"Image".equals(superFunctionName) && !"Option".equals(superFunctionName)
+                && (!"WebGLContextEvent".equals(superFunctionName)
+                        || getBrowserVersion().hasFeature(JS_WEBGL_CONTEXT_EVENT_CONSTANTS))) {
+            Class<?> klass = getPrototypeProperty().getClass();
+
+            final BrowserVersion browserVersion = getBrowserVersion();
+            while (value == NOT_FOUND && HtmlUnitScriptable.class.isAssignableFrom(klass)) {
                 final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
-                        klass.asSubclass(HtmlUnitScriptable.class), getBrowserVersion());
-                for (final ConstantInfo constantInfo : config.getConstants()) {
-                    if (constantInfo.getName().equals(name)) {
-                        value = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
-                        break;
+                        klass.asSubclass(HtmlUnitScriptable.class), browserVersion);
+                if (config != null) {
+                    for (final ConstantInfo constantInfo : config.getConstants()) {
+                        if (constantInfo.getName().equals(name)) {
+                            value = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
+                            break;
+                        }
                     }
                 }
+                klass = klass.getSuperclass();
             }
         }
         return value;

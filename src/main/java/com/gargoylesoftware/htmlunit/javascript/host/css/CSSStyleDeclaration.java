@@ -625,6 +625,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return a sorted map containing style elements, keyed on style element name
      */
     private Map<String, StyleElement> getStyleMap() {
+        if (jsElement_ == null) {
+            return Collections.emptyMap();
+        }
         final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
         if (styleString_ == styleAttribute) {
             return styleMap_;

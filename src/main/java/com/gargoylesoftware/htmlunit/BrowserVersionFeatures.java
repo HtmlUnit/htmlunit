@@ -1302,7 +1302,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
     JS_WEAKMAP_CONSTRUCTOR_ARGUMENT,
 
-    /** Setting the property width/heigth to arbitrary values is allowed. */
+    /** Allow inheriting parent constants in {@link WebGLContextEvent}. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_WEBGL_CONTEXT_EVENT_CONSTANTS,
+
+    /** Setting the property width/height to arbitrary values is allowed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
