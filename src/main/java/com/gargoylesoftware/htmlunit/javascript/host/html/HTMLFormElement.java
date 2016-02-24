@@ -334,7 +334,10 @@ public class HTMLFormElement extends HTMLElement implements Function {
         setEnctype(encoding);
     }
 
-    private HtmlForm getHtmlForm() {
+    /**
+     * @return the associated HtmlForm
+     */
+    public HtmlForm getHtmlForm() {
         return (HtmlForm) getDomNodeOrDie();
     }
 

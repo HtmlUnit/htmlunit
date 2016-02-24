@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -43,8 +44,19 @@ public class FormData extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public FormData() {
+    }
+
+    /**
+     * Constructor.
+     * @param formObj a form
+     */
+    @JsxConstructor
+    public FormData(final Object formObj) {
+        if (formObj instanceof HTMLFormElement) {
+            final HTMLFormElement form = (HTMLFormElement) formObj;
+            requestParameters_.addAll(form.getHtmlForm().getParameterListForSubmit(null));
+        }
     }
 
     /**

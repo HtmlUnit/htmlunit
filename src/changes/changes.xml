@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
+            <action type="fix" dev="rbri" due-to="Frank Danek" issue="1751">
+                JavaScript: FormData constructor should support form parameter.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: XMLHttpRequest.upload is available in IE also.
             </action>

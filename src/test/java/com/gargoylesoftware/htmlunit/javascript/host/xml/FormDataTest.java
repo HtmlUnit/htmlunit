@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class FormDataTest extends WebDriverTestCase {
@@ -54,7 +56,9 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts("function, undefined, undefined, undefined, undefined, undefined")
     public void functions() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    if (window.FormData) {\n"
             + "      var formData = new FormData();\n"
@@ -75,19 +79,71 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void post() throws Exception {
-        final String html = "<html><head><script>\n"
+    public void empty() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  if (window.FormData) {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
             + "    var xhr = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
             + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch (e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+        final List<String> alerts = getCollectedAlerts(driver);
+        if (!alerts.isEmpty()) {
+            String[] lines = alerts.get(0).split("\\n");
+            if (lines.length == 2 && lines[0].isEmpty()) {
+                // response of IE11 contains an additional empty line -> remove
+                lines = Arrays.copyOfRange(lines, 1, 2);
+            }
+            assertEquals("Response: " + alerts.get(0) + "; line count", 1, lines.length);
+            assertTrue(lines[0].startsWith("--") && lines[0].endsWith("--"));
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void append() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
             + "    var formData = new FormData();\n"
             + "    formData.append('myKey', 'myValue');\n"
             + "    formData.append('myKey', 'myValue2');\n"
             + "    formData.append('myKeyNull', null);\n"
             + "    formData.append('myKeyUndef', undefined);\n"
+            + "    formData.append('myKeyEmpty', '');\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+            + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
+            + "  } catch (e) {\n"
+            + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
@@ -99,7 +155,7 @@ public class FormDataTest extends WebDriverTestCase {
         final List<String> alerts = getCollectedAlerts(driver);
         if (!alerts.isEmpty()) {
             final String[] lines = alerts.get(0).split("\\n");
-            assertEquals(17, lines.length);
+            assertEquals("Response: " + alerts.get(0) + "; line count", 21, lines.length);
             assertEquals("Content-Disposition: form-data; name=\"myKey\"", lines[1]);
             assertEquals("", lines[2]);
             assertEquals("myValue", lines[3]);
@@ -115,7 +171,268 @@ public class FormDataTest extends WebDriverTestCase {
             assertEquals("Content-Disposition: form-data; name=\"myKeyUndef\"", lines[13]);
             assertEquals("", lines[14]);
             assertEquals("undefined", lines[15]);
-            assertEquals(lines[0] + "--", lines[16]);
+            assertEquals(lines[0], lines[16]);
+            assertEquals("Content-Disposition: form-data; name=\"myKeyEmpty\"", lines[17]);
+            assertEquals("", lines[18]);
+            assertEquals("", lines[19]);
+            assertEquals(lines[0] + "--", lines[20]);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void appendFile() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var files = document.testForm.myFile.files;\n"
+            + "    var formData = new FormData();\n"
+            + "    formData.append('myKey', files[0]);\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch (e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='myFile' name='myFile'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
+        try {
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("myFile")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            final List<String> alerts = getCollectedAlerts(driver);
+            if (!alerts.isEmpty()) {
+                final String[] lines = alerts.get(0).split("\\n");
+                assertEquals(6, lines.length);
+                assertTrue(lines[1].startsWith("Content-Disposition: form-data; name=\"myKey\"; filename="));
+                assertEquals("Content-Type: text/plain", lines[2]);
+                assertEquals("", lines[3]);
+                assertEquals("Hello HtmlUnit", lines[4]);
+                assertEquals(lines[0] + "--", lines[5]);
+            }
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void fromForm() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData(document.testForm);\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch (e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='text' id='myText' name='myText' value='textxy'>\n"
+            + "    <input type='file' id='myFile' name='myFile'>\n"
+            + "    <input type='hidden' id='myHidden' name='myHidden' value='hiddenxy'>\n"
+            + "    <input type='button' id='myButton' name='myButton' value='buttonxy'>\n"
+            + "    <input type='submit' id='mySubmit' name='mySubmit' value='submitxy'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
+        try {
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("myFile")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            final List<String> alerts = getCollectedAlerts(driver);
+            if (!alerts.isEmpty()) {
+                final String[] lines = alerts.get(0).split("\\n");
+                assertEquals("Response: " + alerts.get(0) + "; line count", 14, lines.length);
+                assertEquals("Content-Disposition: form-data; name=\"myText\"", lines[1]);
+                assertEquals("", lines[2]);
+                assertEquals("textxy", lines[3]);
+                assertEquals(lines[0], lines[4]);
+                assertTrue(lines[5].startsWith("Content-Disposition: form-data; name=\"myFile\"; filename="));
+                assertEquals("Content-Type: text/plain", lines[6]);
+                assertEquals("", lines[7]);
+                assertEquals("Hello HtmlUnit", lines[8]);
+                assertEquals(lines[0], lines[9]);
+                assertEquals("Content-Disposition: form-data; name=\"myHidden\"", lines[10]);
+                assertEquals("", lines[11]);
+                assertEquals("hiddenxy", lines[12]);
+                assertEquals(lines[0] + "--", lines[13]);
+            }
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void fromFormAndAppend() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData(document.testForm);\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    formData.append('myText', 'new value');\n"
+            + "    var xhr = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch (e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='text' id='myText' name='myText' value='textxy'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+
+        driver.findElement(By.id("testBtn")).click();
+
+        final List<String> alerts = getCollectedAlerts(driver);
+        if (!alerts.isEmpty()) {
+            final String[] lines = alerts.get(0).split("\\n");
+            assertEquals("Response: " + alerts.get(0) + "; line count", 9, lines.length);
+            assertEquals("Content-Disposition: form-data; name=\"myText\"", lines[1]);
+            assertEquals("", lines[2]);
+            assertEquals("textxy", lines[3]);
+            assertEquals(lines[0], lines[4]);
+            assertEquals("Content-Disposition: form-data; name=\"myText\"", lines[5]);
+            assertEquals("", lines[6]);
+            assertEquals("new value", lines[7]);
+            assertEquals(lines[0] + "--", lines[8]);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void fromFormChangeBeforeSend() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData(document.testForm);\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    document.getElementById('myText').value = 'new value';\n"
+            + "    var xhr = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch (e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='text' id='myText' name='myText' value='textxy'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+
+        driver.findElement(By.id("testBtn")).click();
+
+        final List<String> alerts = getCollectedAlerts(driver);
+        if (!alerts.isEmpty()) {
+            final String[] lines = alerts.get(0).split("\\n");
+            assertEquals("Response: " + alerts.get(0) + "; line count", 5, lines.length);
+            assertEquals("Content-Disposition: form-data; name=\"myText\"", lines[1]);
+            assertEquals("", lines[2]);
+            assertEquals("textxy", lines[3]);
+            assertEquals(lines[0] + "--", lines[4]);
         }
     }
 
@@ -140,67 +457,6 @@ public class FormDataTest extends WebDriverTestCase {
                 writer.write('\n');
             }
             writer.close();
-        }
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void xmlHttpRequest() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html>\n"
-            + "<head><title>foo</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  if (document.testForm.fileupload.files) {\n"
-            + "    var files = document.testForm.fileupload.files;\n"
-            + "    var xhr = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
-            + "    xhr.open('POST', '/test2', false);\n"
-            + "    var formData = new FormData();\n"
-            + "    formData.append('myKey', files[0]);\n"
-            + "    xhr.send(formData);\n"
-            + "    alert(xhr.responseText);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "  <form name='testForm'>\n"
-            + "    <input type='file' id='fileupload' name='fileupload'>\n"
-            + "  </form>\n"
-            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/test2", PostServlet.class);
-
-        final WebDriver driver = loadPage2(html, servlets);
-
-        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
-        try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
-
-            final String path = tstFile.getCanonicalPath();
-            driver.findElement(By.name("fileupload")).sendKeys(path);
-
-            driver.findElement(By.id("testBtn")).click();
-
-            final List<String> alerts = getCollectedAlerts(driver);
-            if (!alerts.isEmpty()) {
-                final String[] lines = alerts.get(0).split("\\n");
-                assertEquals(6, lines.length);
-                assertTrue(lines[1].startsWith("Content-Disposition: form-data; name=\"myKey\"; filename="));
-                assertEquals("Content-Type: text/plain", lines[2]);
-                assertEquals("", lines[3]);
-                assertEquals("Hello HtmlUnit", lines[4]);
-                assertEquals(lines[0] + "--", lines[5]);
-            }
-        }
-        finally {
-            FileUtils.deleteQuietly(tstFile);
         }
     }
 }

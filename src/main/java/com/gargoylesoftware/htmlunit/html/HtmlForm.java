@@ -240,6 +240,8 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns a list of {@link KeyValuePair}s that represent the data that will be
      * sent to the server when this form is submitted. This is primarily intended to aid
      * debugging.
@@ -249,7 +251,7 @@ public class HtmlForm extends HtmlElement {
      * @return the list of {@link KeyValuePair}s that represent that data that will be sent
      *         to the server when this form is submitted
      */
-    private List<NameValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
+    public List<NameValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
         final Collection<SubmittableElement> submittableElements = getSubmittableElements(submitElement);
 
         final List<NameValuePair> parameterList = new ArrayList<>(submittableElements.size());
