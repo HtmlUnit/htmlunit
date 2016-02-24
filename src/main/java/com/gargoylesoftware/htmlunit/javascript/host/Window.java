@@ -2062,7 +2062,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                 Context.throwAsScriptRuntimeEx(
                         new Exception(
                                 "SyntaxError: Failed to execute 'postMessage' on 'Window': Invalid target origin '"
-                                + targetOrigin + "' was specified."));
+                                + targetOrigin + "' was specified (reason: " + e.getMessage() + "."));
             }
 
             if (getPort(targetURL) != getPort(currentURL)) {
