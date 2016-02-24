@@ -247,7 +247,6 @@ public class RecursiveFunctionObject extends FunctionObject {
                         break;
                     }
                 }
-                
             }
         }
         return value;
