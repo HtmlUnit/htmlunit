@@ -234,7 +234,10 @@ public class RecursiveFunctionObject extends FunctionObject {
         }
         Object value = super.get(name, start);
         if (value == NOT_FOUND && !"toString".equals(name)) {
-            value = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
+            final Object prototypeProperty = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
+            if (prototypeProperty instanceof Number) {
+                value = prototypeProperty;
+            }
         }
         return value;
     }

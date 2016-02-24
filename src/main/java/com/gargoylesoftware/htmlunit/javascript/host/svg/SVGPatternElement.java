@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -33,13 +34,13 @@ import com.gargoylesoftware.htmlunit.svg.SvgPattern;
 public class SVGPatternElement extends SVGElement {
 
     /** Constant for {@code SVG_UNIT_TYPE_UNKNOWN}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(IE) })
     public static final int SVG_UNIT_TYPE_UNKNOWN = 0;
     /** Constant for {@code SVG_UNIT_TYPE_USERSPACEONUSE}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(IE) })
     public static final int SVG_UNIT_TYPE_USERSPACEONUSE = 1;
     /** Constant for {@code SVG_UNIT_TYPE_OBJECTBOUNDINGBOX}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(IE) })
     public static final int SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 
     /**

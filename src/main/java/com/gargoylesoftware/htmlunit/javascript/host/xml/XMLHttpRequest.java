@@ -99,19 +99,19 @@ public class XMLHttpRequest extends EventTarget {
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
 
     /** The object has been created, but not initialized (the open() method has not been called). */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstant
     public static final int UNSENT = 0;
     /** The object has been created, but the send() method has not been called. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstant
     public static final int OPENED = 1;
     /** The send() method has been called, but the status and headers are not yet available. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstant
     public static final int HEADERS_RECEIVED = 2;
     /** Some data has been received. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstant
     public static final int LOADING = 3;
     /** All the data has been received; the complete data is available in responseBody and responseText. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstant
     public static final int DONE = 4;
 
     private static final String HEADER_ORIGIN = "Origin";

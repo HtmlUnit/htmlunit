@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -29,6 +30,37 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
 public class TextEvent extends UIEvent {
+
+    /** Constant for {@code DOM_INPUT_METHOD_UNKNOWN}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_UNKNOWN = 0;
+    /** Constant for {@code DOM_INPUT_METHOD_KEYBOARD}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_KEYBOARD = 1;
+    /** Constant for {@code DOM_INPUT_METHOD_PASTE}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_PASTE = 2;
+    /** Constant for {@code DOM_INPUT_METHOD_DROP}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_DROP = 3;
+    /** Constant for {@code DOM_INPUT_METHOD_IME}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_IME = 4;
+    /** Constant for {@code DOM_INPUT_METHOD_OPTION}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_OPTION = 5;
+    /** Constant for {@code DOM_INPUT_METHOD_HANDWRITING}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_HANDWRITING = 6;
+    /** Constant for {@code DOM_INPUT_METHOD_VOICE}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_VOICE = 7;
+    /** Constant for {@code DOM_INPUT_METHOD_MULTIMODAL}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_MULTIMODAL = 8;
+    /** Constant for {@code DOM_INPUT_METHOD_SCRIPT}. */
+    @JsxConstant(@WebBrowser(IE))
+    public static final int DOM_INPUT_METHOD_SCRIPT = 9;
 
     /**
      * Default constructor.

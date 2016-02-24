@@ -51,7 +51,7 @@ public class SVGFEBlendElement extends SVGElement {
     @JsxConstant
     public static final int SVG_FEBLEND_MODE_LIGHTEN = 5;
     /** The constant {@code SVG_FEBLEND_MODE_OVERLAY}. */
-    @JsxConstant
+    @JsxConstant(@WebBrowser(FF))
     public static final int SVG_FEBLEND_MODE_OVERLAY = 6;
     /** The constant {@code SVG_FEBLEND_MODE_COLOR_DODGE}. */
     @JsxConstant(@WebBrowser(FF))

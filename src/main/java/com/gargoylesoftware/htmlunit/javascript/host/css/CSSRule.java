@@ -81,8 +81,14 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSKeyframesRule}.
      */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant
     public static final short KEYFRAMES_RULE            = 7;
+
+    /**
+     * The rule is a {@code CSSKeyframesRule}.
+     */
+    @JsxConstant(@WebBrowser(FF))
+    public static final short MOZ_KEYFRAMES_RULE        = 7;
 
     /**
      * The rule is a {@code CSSKeyframesRule}.
@@ -93,13 +99,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSKeyframeRule}.
      */
-    @JsxConstant(@WebBrowser(FF))
-    public static final short MOZ_KEYFRAMES_RULE        = 7;
-
-    /**
-     * The rule is a {@code CSSKeyframeRule}.
-     */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant
     public static final short KEYFRAME_RULE             = 8;
 
     /**
@@ -117,7 +117,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSNamespaceRule}.
      */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxConstant
     public static final short NAMESPACE_RULE           = 10;
 
     /**
@@ -129,7 +129,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSSupportsRule}.
      */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public static final short SUPPORTS_RULE             = 12;
 
     /**
@@ -137,6 +137,12 @@ public class CSSRule extends SimpleScriptable {
      */
     @JsxConstant(@WebBrowser(FF))
     public static final short FONT_FEATURE_VALUES_RULE  = 14;
+
+    /**
+     * The rule is a {@code CSSViewportRule}.
+     */
+    @JsxConstant(@WebBrowser(IE))
+    public static final short VIEWPORT_RULE  = 15;
 
     private final CSSStyleSheet stylesheet_;
 

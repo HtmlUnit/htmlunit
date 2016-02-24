@@ -111,9 +111,14 @@ public class HostConstantsTest extends WebDriverTestCase {
         ClassConfiguration classConfig = javaScriptConfig.getClassConfiguration(host_);
 
         boolean first = true;
-        while (classConfig != null && (!first || classConfig.isJsObject())) {
-            for (final ConstantInfo constantInfo : classConfig.getConstants()) {
-                constants.add(constantInfo.getName() + ":" + constantInfo.getValue());
+        while (classConfig != null) {
+            if (first && !classConfig.isJsObject()) {
+                break;
+            }
+            if (first || classConfig.getJsConstructor() != null) {
+                for (final ConstantInfo constantInfo : classConfig.getConstants()) {
+                    constants.add(constantInfo.getName() + ":" + constantInfo.getValue());
+                }
             }
             classConfig = javaScriptConfig.getClassConfiguration(classConfig.getExtendedClassName());
             first = false;

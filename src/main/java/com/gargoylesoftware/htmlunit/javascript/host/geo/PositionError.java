@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -29,6 +30,16 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE) })
 public class PositionError extends SimpleScriptable {
+
+    /** The constant for {@code PERMISSION_DENIED}. */
+    @JsxConstant
+    public static final short PERMISSION_DENIED = 1;
+    /** The constant for {@code POSITION_UNAVAILABLE}. */
+    @JsxConstant
+    public static final short POSITION_UNAVAILABLE = 2;
+    /** The constant for {@code TIMEOUT}. */
+    @JsxConstant
+    public static final short TIMEOUT = 3;
 
     /**
      * Default constructor.
