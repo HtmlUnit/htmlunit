@@ -1512,4 +1512,30 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object XMLHttpRequestUpload]",
+            IE = "[object XMLHttpRequestEventTarget]")
+    public void upload() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var request = " + XHR_INSTANTIATION + ";\n"
+            + "          alert(request.upload);\n"
+            + "        } catch (e) { alert('exception'); }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
