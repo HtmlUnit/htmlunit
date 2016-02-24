@@ -24,13 +24,16 @@ import java.lang.reflect.Member;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * A FunctionObject that returns IDs of this object and all its parent classes.
@@ -233,10 +236,18 @@ public class RecursiveFunctionObject extends FunctionObject {
             }
         }
         Object value = super.get(name, start);
-        if (value == NOT_FOUND && !"toString".equals(name)) {
-            final Object prototypeProperty = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
-            if (prototypeProperty instanceof Number) {
-                value = prototypeProperty;
+        if (value == NOT_FOUND) {
+            final Class<?> klass = getPrototypeProperty().getClass();
+            if (HtmlUnitScriptable.class.isAssignableFrom(klass)) {
+                final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
+                        klass.asSubclass(HtmlUnitScriptable.class), getBrowserVersion());
+                for (final ConstantInfo constantInfo : config.getConstants()) {
+                    if (constantInfo.getName().equals(name)) {
+                        value = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
+                        break;
+                    }
+                }
+                
             }
         }
         return value;
