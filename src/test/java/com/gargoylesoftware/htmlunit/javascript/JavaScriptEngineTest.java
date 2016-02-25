@@ -1395,7 +1395,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final BrowserVersion browser = new BrowserVersion("Mozilla", "5.0", "Mozilla/5.0", 11) {
             @Override
             public boolean hasFeature(final BrowserVersionFeatures feature) {
-                return BrowserVersion.INTERNET_EXPLORER_11.hasFeature(feature);
+                return BrowserVersion.INTERNET_EXPLORER.hasFeature(feature);
             }
         };
 

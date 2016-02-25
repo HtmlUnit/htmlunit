@@ -124,9 +124,16 @@ public class BrowserVersion implements Serializable, Cloneable {
         (float) 38.0, "FF38", null);
 
     /** Internet Explorer 11. */
-    public static final BrowserVersion INTERNET_EXPLORER_11 = new BrowserVersion(
+    public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
         "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE11", null);
+
+    /**
+     * Internet Explorer 11.
+     * @deprecated as of 2.20, please use {@link #INTERNET_EXPLORER} instead
+     */
+    @Deprecated
+    public static final BrowserVersion INTERNET_EXPLORER_11 = INTERNET_EXPLORER;
 
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
@@ -176,16 +183,16 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_38.setCssAcceptHeader("text/css,*/*;q=0.1");
 
         // IE11
-        INTERNET_EXPLORER_11.initDefaultFeatures();
-        INTERNET_EXPLORER_11.setBrowserLanguage("en-US");
-        INTERNET_EXPLORER_11.setVendor("");
-        INTERNET_EXPLORER_11.setHeaderNamesOrdered(new String[] {
+        INTERNET_EXPLORER.initDefaultFeatures();
+        INTERNET_EXPLORER.setBrowserLanguage("en-US");
+        INTERNET_EXPLORER.setVendor("");
+        INTERNET_EXPLORER.setHeaderNamesOrdered(new String[] {
             "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
             "Cookie" });
-        INTERNET_EXPLORER_11.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
-        INTERNET_EXPLORER_11.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
-        INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
-        INTERNET_EXPLORER_11.setScriptAcceptHeader("application/javascript, */*;q=0.8");
+        INTERNET_EXPLORER.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
+        INTERNET_EXPLORER.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
+        INTERNET_EXPLORER.setCssAcceptHeader("text/css, */*");
+        INTERNET_EXPLORER.setScriptAcceptHeader("application/javascript, */*;q=0.8");
 
         // EDGE
         EDGE.initDefaultFeatures();

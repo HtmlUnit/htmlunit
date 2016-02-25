@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_11;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -85,7 +85,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * "test.properties" in the HtmlUnit root directory.
  * Sample:
  * <pre>
-   browsers=hu,ff38,ie11
+   browsers=hu,ff38,ie
    edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
    ff38.bin=/usr/bin/firefox                            [Unix-like]
@@ -95,8 +95,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * The file should contain four properties: "browsers", "ie.bin", "ff38.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie11", "hu-ff31",
- *   "ff31", "ff38", "ie11", "chrome", which will be used to driver real browsers,
+ *   "hu-ie", "hu-ff31",
+ *   "ff31", "ff38", "ie", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
  *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
@@ -201,7 +201,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 BROWSERS_PROPERTIES_.add("hu-chrome");
                 BROWSERS_PROPERTIES_.add("hu-ff31");
                 BROWSERS_PROPERTIES_.add("hu-ff38");
-                BROWSERS_PROPERTIES_.add("hu-ie11");
+                BROWSERS_PROPERTIES_.add("hu-ie");
             }
         }
         return BROWSERS_PROPERTIES_;
@@ -284,10 +284,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Closes the real ie browser drivers.
      */
     protected void shutDownRealIE() {
-        final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(INTERNET_EXPLORER_11);
+        final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(INTERNET_EXPLORER);
         if (driver != null) {
             driver.quit();
-            WEB_DRIVERS_REAL_BROWSERS.remove(INTERNET_EXPLORER_11);
+            WEB_DRIVERS_REAL_BROWSERS.remove(INTERNET_EXPLORER);
         }
     }
 

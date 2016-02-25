@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
+            <action type="update" dev="asashour">
+                BrowserVersion: deprecate INTERNET_EXPLORER_11, use INTERNET_EXPLORER instead.
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek" issue="1751">
                 JavaScript: FormData constructor should support form parameter.
             </action>
