@@ -112,7 +112,7 @@ public class HtmlFileInput extends HtmlInput {
         final String valueAttribute = getValueAttribute();
 
         if (StringUtils.isEmpty(valueAttribute)) {
-            return new NameValuePair[] {new KeyDataPair(getNameAttribute(), null, null, null)};
+            return new NameValuePair[] {new KeyDataPair(getNameAttribute(), null, null, null, null)};
         }
 
         final List<NameValuePair> list = new ArrayList<>();
@@ -128,7 +128,7 @@ public class HtmlFileInput extends HtmlInput {
                 contentType = contentType_;
             }
             final String charset = getPage().getPageEncoding();
-            final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, contentType, charset);
+            final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, null, contentType, charset);
             keyDataPair.setData(data_);
             list.add(keyDataPair);
         }

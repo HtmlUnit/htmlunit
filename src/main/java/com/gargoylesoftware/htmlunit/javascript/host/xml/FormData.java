@@ -70,7 +70,11 @@ public class FormData extends SimpleScriptable {
     public void append(final String name, final Object value, final Object filename) {
         if (value instanceof File) {
             final File file = (File) value;
-            requestParameters_.add(new KeyDataPair(name, file.getFile(), file.getType(), null));
+            String fileName = null;
+            if (filename instanceof String) {
+                fileName = (String) filename;
+            }
+            requestParameters_.add(new KeyDataPair(name, file.getFile(), fileName, file.getType(), null));
         }
         else {
             requestParameters_.add(new NameValuePair(name, Context.toString(value)));

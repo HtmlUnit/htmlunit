@@ -397,6 +397,9 @@ public class HttpWebConnection implements WebConnection {
             if (file == null) {
                 filename = pairWithFile.getValue();
             }
+            else if (pairWithFile.getFileName() != null) {
+                filename = pairWithFile.getFileName();
+            }
             else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
                 filename = file.getAbsolutePath();
             }
@@ -424,6 +427,9 @@ public class HttpWebConnection implements WebConnection {
         final String filename;
         if (pairWithFile.getFile() == null) {
             filename = pairWithFile.getValue();
+        }
+        else if (pairWithFile.getFileName() != null) {
+            filename = pairWithFile.getFileName();
         }
         else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
             filename = pairWithFile.getFile().getAbsolutePath();
