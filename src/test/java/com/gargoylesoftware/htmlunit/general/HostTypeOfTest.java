@@ -7167,26 +7167,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "object")
-    public void webkitIndexedDB() throws Exception {
-        test("webkitIndexedDB");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "object")
-    public void webkitStorageInfo() throws Exception {
-        test("webkitStorageInfo");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("undefined")
     public void speechRecognitionAlternative() throws Exception {
         test("SpeechRecognitionAlternative");
@@ -7199,24 +7179,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void performanceObserverEntryList() throws Exception {
         test("PerformanceObserverEntryList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void simd_Bool32x4() throws Exception {
-        test("SIMD.Bool32x4");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void simd_Uint16x8() throws Exception {
-        test("SIMD.Uint16x8");
     }
 
     /**
@@ -7244,15 +7206,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void imageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void simd_Uint32x4() throws Exception {
-        test("SIMD.Uint32x4");
     }
 
     /**
@@ -7480,15 +7433,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("undefined")
-    public void simd_Bool8x16() throws Exception {
-        test("SIMD.Bool8x16");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
     public void bluetooth() throws Exception {
         test("Bluetooth");
     }
@@ -7581,35 +7525,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("undefined")
-    public void simd_Bool64x2() throws Exception {
-        test("SIMD.Bool64x2");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void simd_Uint8x16() throws Exception {
-        test("SIMD.Uint8x16");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
     public void webGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void simd_Bool16x8() throws Exception {
-        test("SIMD.Bool16x8");
     }
 
     /**
@@ -7663,7 +7580,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF38 = "function")
+            FF = "function")
     public void idbMutableFile() throws Exception {
         test("IDBMutableFile");
     }
