@@ -1163,4 +1163,25 @@ public class HostParentOfTTest extends HostParentOf {
     public void _webkitURL_webkitURL() throws Exception {
         test("webkitURL", "webkitURL");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _WEBGL_compressed_texture_s3tc_WEBGL_compressed_texture_s3tc() throws Exception {
+        test("WEBGL_compressed_texture_s3tc", "WEBGL_compressed_texture_s3tc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _WEBGL_debug_renderer_info_WEBGL_debug_renderer_info() throws Exception {
+        test("WEBGL_debug_renderer_info", "WEBGL_debug_renderer_info");
+    }
+
 }

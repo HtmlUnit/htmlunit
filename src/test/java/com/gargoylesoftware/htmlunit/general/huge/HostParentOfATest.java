@@ -6393,4 +6393,14 @@ public class HostParentOfATest extends HostParentOf {
         test("Event", "webkitSpeechRecognitionEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _EXT_texture_filter_anisotropic_EXT_texture_filter_anisotropic() throws Exception {
+        test("EXT_texture_filter_anisotropic", "EXT_texture_filter_anisotropic");
+    }
+
 }

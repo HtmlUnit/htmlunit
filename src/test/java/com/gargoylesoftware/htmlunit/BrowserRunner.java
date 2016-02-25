@@ -82,7 +82,7 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ff38")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, true));
                 }
-                if (browsers.contains("ie11")) {
+                if (browsers.contains("ie")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, true));
                 }
                 if (browsers.contains("edge")) {
@@ -99,7 +99,7 @@ public class BrowserRunner extends Suite {
             if (browsers.contains("hu-ff38")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, false));
             }
-            if (browsers.contains("hu-ie11")) {
+            if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, false));
             }
             if (browsers.contains("hu-edge")) {
@@ -157,11 +157,8 @@ public class BrowserRunner extends Suite {
         /** Latest version of Chrome. */
         CHROME,
 
-        /** All versions of Internet Explorer. */
-        IE,
-
         /** Internet Explorer 11. */
-        IE11,
+        IE,
 
         /** Edge. */
         EDGE,
@@ -196,16 +193,10 @@ public class BrowserRunner extends Suite {
         String[] value() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for any Internet Explorer, it can be overridden by specific IE version.
+         * Alerts for Internet Explorer 11.
          * @return the alerts
          */
         String[] IE() default { EMPTY_DEFAULT };
-
-        /**
-         * Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used.
-         * @return the alerts
-         */
-        String[] IE11() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Edge.
@@ -264,12 +255,6 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] IE() default { EMPTY_DEFAULT };
-
-        /**
-         * Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used.
-         * @return the alerts
-         */
-        String[] IE11() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Edge.

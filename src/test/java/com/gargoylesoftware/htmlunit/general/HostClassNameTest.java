@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.StandardsMode;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests the host class names.
+ * Test the host class names.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -9964,5 +9964,587 @@ public class HostClassNameTest extends WebDriverTestCase {
     @NotYetImplemented(FF)
     public void mozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IdleDeadline() { [native code] }")
+    public void idleDeadline() throws Exception {
+        test("IdleDeadline");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function InputDeviceCapabilities() { [native code] }")
+    public void inputDeviceCapabilities() throws Exception {
+        test("InputDeviceCapabilities");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Presentation() { [native code] }")
+    public void presentation() throws Exception {
+        test("Presentation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PresentationAvailability() { [native code] }")
+    public void presentationAvailability() throws Exception {
+        test("PresentationAvailability");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PresentationConnection() { [native code] }")
+    public void presentationConnection() throws Exception {
+        test("PresentationConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PresentationConnectionAvailableEvent() { [native code] }")
+    public void presentationConnectionAvailableEvent() throws Exception {
+        test("PresentationConnectionAvailableEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PresentationRequest() { [native code] }")
+    public void presentationRequest() throws Exception {
+        test("PresentationRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechRecognitionAlternative() throws Exception {
+        test("SpeechRecognitionAlternative");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void performanceObserverEntryList() throws Exception {
+        test("PerformanceObserverEntryList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Bool32x4() throws Exception {
+        test("SIMD.Bool32x4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Uint16x8() throws Exception {
+        test("SIMD.Uint16x8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL_compressed_texture_pvrtc() throws Exception {
+        test("WEBGL_compressed_texture_pvrtc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL_compressed_texture_atc() throws Exception {
+        test("WEBGL_compressed_texture_atc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void imageBitmapRenderingContext() throws Exception {
+        test("ImageBitmapRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Uint32x4() throws Exception {
+        test("SIMD.Uint32x4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sourceBufferList() throws Exception {
+        test("SourceBufferList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void htmlHyperlinkElementUtils() throws Exception {
+        test("HTMLHyperlinkElementUtils");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothRemoteGATTServer() throws Exception {
+        test("BluetoothRemoteGATTServer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void extendableMessageEvent() throws Exception {
+        test("ExtendableMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void performanceObserver() throws Exception {
+        test("PerformanceObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechGrammar() throws Exception {
+        test("SpeechGrammar");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void oes_texture_half_float_linear() throws Exception {
+        test("OES_texture_half_float_linear");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void trackDefault() throws Exception {
+        test("TrackDefault");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechRecognitionResult() throws Exception {
+        test("SpeechRecognitionResult");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechGrammarList() throws Exception {
+        test("SpeechGrammarList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void oes_texture_half_float() throws Exception {
+        test("OES_texture_half_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL_compressed_texture_es3() throws Exception {
+        test("WEBGL_compressed_texture_es3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void offscreenCanvas() throws Exception {
+        test("OffscreenCanvas");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL_compressed_texture_etc1() throws Exception {
+        test("WEBGL_compressed_texture_etc1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL_color_buffer_float() throws Exception {
+        test("WEBGL_color_buffer_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object OES_texture_float]")
+    public void oes_texture_float() throws Exception {
+        test("OES_texture_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void gestureEvent() throws Exception {
+        test("GestureEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechRecognitionError() throws Exception {
+        test("SpeechRecognitionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void keyframeEffect() throws Exception {
+        test("KeyframeEffect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechRecognitionEvent() throws Exception {
+        test("SpeechRecognitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object WEBGL_debug_renderer_info]")
+    public void webGL_debug_renderer_info() throws Exception {
+        test("WEBGL_debug_renderer_info");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object PerformanceNavigationTiming]")
+    public void performanceNavigationTiming() throws Exception {
+        test("PerformanceNavigationTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechSynthesisVoice() throws Exception {
+        test("SpeechSynthesisVoice");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object OES_texture_float_linear]")
+    public void oes_texture_float_linear() throws Exception {
+        test("OES_texture_float_linear");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Bool8x16() throws Exception {
+        test("SIMD.Bool8x16");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetooth() throws Exception {
+        test("Bluetooth");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void trackDefaultList() throws Exception {
+        test("TrackDefaultList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothRemoteGATTCharacteristic() throws Exception {
+        test("BluetoothRemoteGATTCharacteristic");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object EXT_texture_filter_anisotropic]")
+    public void ext_texture_filter_anisotropic() throws Exception {
+        test("EXT_texture_filter_anisotropic");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void serviceWorkerState() throws Exception {
+        test("ServiceWorkerState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object WEBGL_compressed_texture_s3tc]")
+    public void webGL_compressed_texture_s3tc() throws Exception {
+        test("WEBGL_compressed_texture_s3tc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void performanceFrameTiming() throws Exception {
+        test("PerformanceFrameTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sourceBuffer() throws Exception {
+        test("SourceBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechRecognitionResultList() throws Exception {
+        test("SpeechRecognitionResultList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL_debug_shaders() throws Exception {
+        test("WEBGL_debug_shaders");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Bool64x2() throws Exception {
+        test("SIMD.Bool64x2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Uint8x16() throws Exception {
+        test("SIMD.Uint8x16");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL2RenderingContext() throws Exception {
+        test("WebGL2RenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void simd_Bool16x8() throws Exception {
+        test("SIMD.Bool16x8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcIdentityAssertion() throws Exception {
+        test("RTCIdentityAssertion");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object MSGestureEvent]")
+    public void msGestureEvent() throws Exception {
+        test("MSGestureEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcCertificate() throws Exception {
+        test("RTCCertificate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechSynthesisErrorEvent() throws Exception {
+        test("SpeechSynthesisErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sharedArrayBuffer() throws Exception {
+        test("SharedArrayBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function IDBMutableFile() {\n    [native code]\n}")
+    public void idbMutableFile() throws Exception {
+        test("IDBMutableFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL_depth_texture() throws Exception {
+        test("WEBGL_depth_texture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void atomics() throws Exception {
+        test("Atomics");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void ext_color_buffer_half_float() throws Exception {
+        test("EXT_color_buffer_half_float");
     }
 }

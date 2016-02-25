@@ -15,9 +15,7 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.fail;
 
 import org.junit.ComparisonFailure;
@@ -2253,7 +2251,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented
     public void event__Delegated_events_in_SVG___10791_() throws Exception {
         runTest("event: Delegated events in SVG (#10791)");
     }
@@ -3570,7 +3568,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
         FF31 = "0, 5, 5",
         FF38 = "0, 5, 5",
         IE = "1, 4, 5")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void manipulation__clone_form_element___Bug__3879___6655_() throws Exception {
         runTest("manipulation: clone(form element) (Bug #3879, #6655)");
     }
@@ -4692,7 +4690,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void ajax__jQuery_ajax_____JSONP__Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Cross Domain");
     }
@@ -6223,7 +6221,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
         FF31 = "0, 1, 1",
         FF38 = "0, 1, 1",
         IE = "0, 1, 1")
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented({ CHROME, IE })
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }

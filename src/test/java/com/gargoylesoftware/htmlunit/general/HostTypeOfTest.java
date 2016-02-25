@@ -7092,4 +7092,606 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void mozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void idleDeadline() throws Exception {
+        test("IdleDeadline");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void inputDeviceCapabilities() throws Exception {
+        test("InputDeviceCapabilities");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentation() throws Exception {
+        test("Presentation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentationAvailability() throws Exception {
+        test("PresentationAvailability");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentationConnection() throws Exception {
+        test("PresentationConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentationConnectionAvailableEvent() throws Exception {
+        test("PresentationConnectionAvailableEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentationRequest() throws Exception {
+        test("PresentationRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "object")
+    public void webkitIndexedDB() throws Exception {
+        test("webkitIndexedDB");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "object")
+    public void webkitStorageInfo() throws Exception {
+        test("webkitStorageInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionAlternative() throws Exception {
+        test("SpeechRecognitionAlternative");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void performanceObserverEntryList() throws Exception {
+        test("PerformanceObserverEntryList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void simd_Bool32x4() throws Exception {
+        test("SIMD.Bool32x4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void simd_Uint16x8() throws Exception {
+        test("SIMD.Uint16x8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_compressed_texture_pvrtc() throws Exception {
+        test("WEBGL_compressed_texture_pvrtc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_compressed_texture_atc() throws Exception {
+        test("WEBGL_compressed_texture_atc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void imageBitmapRenderingContext() throws Exception {
+        test("ImageBitmapRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void simd_Uint32x4() throws Exception {
+        test("SIMD.Uint32x4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void sourceBufferList() throws Exception {
+        test("SourceBufferList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void htmlHyperlinkElementUtils() throws Exception {
+        test("HTMLHyperlinkElementUtils");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void bluetoothRemoteGATTServer() throws Exception {
+        test("BluetoothRemoteGATTServer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void extendableMessageEvent() throws Exception {
+        test("ExtendableMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void performanceObserver() throws Exception {
+        test("PerformanceObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechGrammar() throws Exception {
+        test("SpeechGrammar");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void oes_texture_half_float_linear() throws Exception {
+        test("OES_texture_half_float_linear");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void trackDefault() throws Exception {
+        test("TrackDefault");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionResult() throws Exception {
+        test("SpeechRecognitionResult");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechGrammarList() throws Exception {
+        test("SpeechGrammarList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void oes_texture_half_float() throws Exception {
+        test("OES_texture_half_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_compressed_texture_es3() throws Exception {
+        test("WEBGL_compressed_texture_es3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void offscreenCanvas() throws Exception {
+        test("OffscreenCanvas");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_compressed_texture_etc1() throws Exception {
+        test("WEBGL_compressed_texture_etc1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_color_buffer_float() throws Exception {
+        test("WEBGL_color_buffer_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void oes_texture_float() throws Exception {
+        test("OES_texture_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void gestureEvent() throws Exception {
+        test("GestureEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionError() throws Exception {
+        test("SpeechRecognitionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void keyframeEffect() throws Exception {
+        test("KeyframeEffect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionEvent() throws Exception {
+        test("SpeechRecognitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void webGL_debug_renderer_info() throws Exception {
+        test("WEBGL_debug_renderer_info");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void performanceNavigationTiming() throws Exception {
+        test("PerformanceNavigationTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechSynthesisVoice() throws Exception {
+        test("SpeechSynthesisVoice");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void oES_texture_float_linear() throws Exception {
+        test("OES_texture_float_linear");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void simd_Bool8x16() throws Exception {
+        test("SIMD.Bool8x16");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void bluetooth() throws Exception {
+        test("Bluetooth");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void trackDefaultList() throws Exception {
+        test("TrackDefaultList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void bluetoothRemoteGATTCharacteristic() throws Exception {
+        test("BluetoothRemoteGATTCharacteristic");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void ext_texture_filter_anisotropic() throws Exception {
+        test("EXT_texture_filter_anisotropic");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void serviceWorkerState() throws Exception {
+        test("ServiceWorkerState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void webGL_compressed_texture_s3tc() throws Exception {
+        test("WEBGL_compressed_texture_s3tc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void performanceFrameTiming() throws Exception {
+        test("PerformanceFrameTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void sourceBuffer() throws Exception {
+        test("SourceBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionResultList() throws Exception {
+        test("SpeechRecognitionResultList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_debug_shaders() throws Exception {
+        test("WEBGL_debug_shaders");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void simd_Bool64x2() throws Exception {
+        test("SIMD.Bool64x2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void simd_Uint8x16() throws Exception {
+        test("SIMD.Uint8x16");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL2RenderingContext() throws Exception {
+        test("WebGL2RenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void simd_Bool16x8() throws Exception {
+        test("SIMD.Bool16x8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void rtcIdentityAssertion() throws Exception {
+        test("RTCIdentityAssertion");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void mSGestureEvent() throws Exception {
+        test("MSGestureEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void rtcCertificate() throws Exception {
+        test("RTCCertificate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechSynthesisErrorEvent() throws Exception {
+        test("SpeechSynthesisErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void sharedArrayBuffer() throws Exception {
+        test("SharedArrayBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF38 = "function")
+    public void idbMutableFile() throws Exception {
+        test("IDBMutableFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_depth_texture() throws Exception {
+        test("WEBGL_depth_texture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void atomics() throws Exception {
+        test("Atomics");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void ext_color_buffer_half_float() throws Exception {
+        test("EXT_color_buffer_half_float");
+    }
 }

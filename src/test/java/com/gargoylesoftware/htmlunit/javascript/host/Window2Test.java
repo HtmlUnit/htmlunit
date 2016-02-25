@@ -1667,7 +1667,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE11 = "function")
+            IE = "function")
     public void showModelessDialog() throws Exception {
         final String html
             = "<html><body><script>\n"

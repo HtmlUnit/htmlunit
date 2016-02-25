@@ -3421,4 +3421,114 @@ public class HostParentOfITest extends HostParentOf {
         test("InstallTrigger", "InstallTrigger");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IdleDeadline_IdleDeadline() throws Exception {
+        test("IdleDeadline", "IdleDeadline");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _InputDeviceCapabilities_InputDeviceCapabilities() throws Exception {
+        test("InputDeviceCapabilities", "InputDeviceCapabilities");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PresentationAvailability_PresentationAvailability() throws Exception {
+        test("PresentationAvailability", "PresentationAvailability");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PresentationConnection_PresentationConnection() throws Exception {
+        test("PresentationConnection", "PresentationConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PresentationRequest_PresentationRequest() throws Exception {
+        test("PresentationRequest", "PresentationRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Presentation_Presentation() throws Exception {
+        test("Presentation", "Presentation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _IDBMutableFile_IDBMutableFile() throws Exception {
+        test("IDBMutableFile", "IDBMutableFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _MSGestureEvent_MSGestureEvent() throws Exception {
+        test("MSGestureEvent", "MSGestureEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _PerformanceNavigationTiming_PerformanceNavigationTiming() throws Exception {
+        test("PerformanceNavigationTiming", "PerformanceNavigationTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _OES_texture_float_linear_OES_texture_float_linear() throws Exception {
+        test("OES_texture_float_linear", "OES_texture_float_linear");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _OES_texture_float_OES_texture_float() throws Exception {
+        test("OES_texture_float", "OES_texture_float");
+    }
+
 }

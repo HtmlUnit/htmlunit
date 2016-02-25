@@ -62,7 +62,7 @@ public class ClientRectListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
-            IE11 = { "exception", "exception" })
+            IE = { "exception", "exception" })
     @NotYetImplemented(FF)
     public void itemOutside() throws Exception {
         final String html =
