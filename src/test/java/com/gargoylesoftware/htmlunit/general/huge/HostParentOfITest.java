@@ -3486,7 +3486,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _IDBMutableFile_IDBMutableFile() throws Exception {
         test("IDBMutableFile", "IDBMutableFile");
     }
@@ -3529,6 +3529,16 @@ public class HostParentOfITest extends HostParentOf {
             IE = "true")
     public void _OES_texture_float_OES_texture_float() throws Exception {
         test("OES_texture_float", "OES_texture_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PresentationConnectionAvailableEvent_PresentationConnectionAvailableEvent() throws Exception {
+        test("PresentationConnectionAvailableEvent", "PresentationConnectionAvailableEvent");
     }
 
 }

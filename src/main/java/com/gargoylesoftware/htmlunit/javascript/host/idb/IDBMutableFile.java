@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code IDBTransaction}.
+ * A JavaScript object for {@code IDBMutableFile}.
  *
  * @author Ahmed Ashour
  */

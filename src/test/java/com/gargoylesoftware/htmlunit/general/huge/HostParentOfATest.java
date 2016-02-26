@@ -6403,4 +6403,33 @@ public class HostParentOfATest extends HostParentOf {
         test("EXT_texture_filter_anisotropic", "EXT_texture_filter_anisotropic");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _EventTarget_IDBMutableFile() throws Exception {
+        test("EventTarget", "IDBMutableFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _Event_MSGestureEvent() throws Exception {
+        test("Event", "MSGestureEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_PresentationConnectionAvailableEvent() throws Exception {
+        test("Event", "PresentationConnectionAvailableEvent");
+    }
 }
