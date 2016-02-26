@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
+            <action type="fix" dev="rbri" issue="1749" due-to="Adam Afeltowicz">
+                JavaScript: Location should change immediately when calling history.pushState.
+            </action>
             <action type="fix" dev="mguillem">
                 HtmlPage.asXml(): expand empty I, BUTTON and unknown nodes to make generated XML readable as HTML on browsers.
             </action>

@@ -299,7 +299,6 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "true"})
-    @NotYetImplemented
     public void pushStateLocationHref() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

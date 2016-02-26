@@ -253,6 +253,9 @@ public class Location extends SimpleScriptable {
 
             final WebWindow webWindow = getWindow().getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, false, "JS set location");
+            if (justHistoryAPIPushState) {
+                webWindow.getWebClient().loadDownloadedResponses();
+            }
         }
         catch (final MalformedURLException e) {
             LOG.error("setHref('" + newLocation + "') got MalformedURLException", e);
