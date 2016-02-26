@@ -93,4 +93,20 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml() throws Exception {
+        final String html
+            = "<html><body><title>foo</title>\n"
+            + "<foo></foo>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        final String xml = driver.getPageSource();
+        assertTrue("Node not expanded in: " + xml, xml.contains("</foo>"));
+    }
 }

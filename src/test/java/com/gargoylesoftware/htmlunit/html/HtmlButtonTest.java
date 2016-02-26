@@ -133,4 +133,20 @@ public class HtmlButtonTest extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts()[0], button.getTypeAttribute());
         assertEquals(getExpectedAlerts()[0], button.getAttribute("type"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml() throws Exception {
+        final String html
+            = "<html><body><title>foo</title>\n"
+            + "<button></button>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final String xml = page.asXml();
+        assertTrue("Node not expanded in: " + xml, xml.contains("</button>"));
+    }
 }

@@ -344,4 +344,13 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE_BLOCK;
     }
+
+    /**
+     * {@inheritDoc}
+     * @return {@code true} to make generated XML readable as HTML.
+     */
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }
