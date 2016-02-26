@@ -1269,7 +1269,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({ "", "rgb(0, 0, 255)" })
     @NotYetImplemented
     public void getPropertyValue() throws Exception {
-        final String html = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "function doTest() {\n"
             + "  try {\n"
             + "    var d = document.getElementById('div1');\n"
@@ -1292,7 +1292,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({ "roman", "swiss", "roman" })
     public void handleImportant() throws Exception {
-        final String html = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function doTest() {\n"
             + "    alertFF(document.getElementById('div1'));\n"
             + "    alertFF(document.getElementById('div2'));\n"
@@ -1325,7 +1325,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void offsetHeight_empty_tag() throws Exception {
-        final String html = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('div1').offsetHeight);\n"
             + "  }\n"
@@ -1343,7 +1343,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void offsetHeight_empty() throws Exception {
-        final String html = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('div1').offsetHeight);\n"
             + "  }\n"
@@ -1362,7 +1362,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "18",
             FF = "20")
     public void offsetHeight_with_content() throws Exception {
-        final String html = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('div1').offsetHeight);\n"
             + "  }\n"
@@ -1380,7 +1380,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({ "true", "false" })
     public void offsetHeight_setting_height() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<style>\n"
             + "  .v-loading-indicator {\n"
             + "    height: 100%\n"
@@ -1400,4 +1400,30 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "false" })
+    @NotYetImplemented
+    public void scrollbarSize() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var scroller = document.createElement('div');\n"
+            + "    scroller.style['width'] = '50px';\n"
+            + "    scroller.style['height'] = '50px';\n"
+            + "    scroller.style['overflow'] = 'scroll';\n"
+            + "    alert(scroller.offsetWidth - scroller.clientWidth == 0);\n"
+            + "    document.body.appendChild(scroller);\n"
+            + "    alert(scroller.offsetWidth - scroller.clientWidth == 0);\n"
+            + "    document.body.removeChild(scroller);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
