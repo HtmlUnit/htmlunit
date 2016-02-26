@@ -42,8 +42,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "charset" attribute.
-     * @return the charset attribute
+     * Returns the {@code charset} attributee.
+     * @return the {@code charset} attribute
      */
     @JsxGetter(@WebBrowser(IE))
     public String getCharset() {
@@ -60,8 +60,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "content" attribute.
-     * @return the content attribute
+     * Returns the {@code content} attribute.
+     * @return the {@code content} attribute
      */
     @JsxGetter
     public String getContent() {
@@ -78,8 +78,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "http-equiv" attribute.
-     * @return the http-equiv attribute
+     * Returns the {@code http-equiv} attribute.
+     * @return the {@code http-equiv} attribute
      */
     @JsxGetter
     public String getHttpEquiv() {
@@ -96,8 +96,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "name" attribute.
-     * @return the name attribute
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
      */
     @JsxGetter
     public String getName() {
@@ -114,8 +114,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "scheme" attribute.
-     * @return the scheme attribute
+     * Returns the {@code scheme} attribute.
+     * @return the {@code scheme} attribute
      */
     @JsxGetter
     public String getScheme() {
@@ -132,8 +132,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "url" attribute.
-     * @return the url attribute
+     * Returns the {@code url} attribute.
+     * @return the {@code url} attribute
      */
     @JsxGetter(@WebBrowser(IE))
     public String getUrl() {

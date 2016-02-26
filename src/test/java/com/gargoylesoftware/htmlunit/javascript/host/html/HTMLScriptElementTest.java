@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import java.net.URL;
 
 import org.junit.Test;
@@ -1011,7 +1007,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "1" })
-    @NotYetImplemented({ FF, CHROME, IE })
+    @NotYetImplemented
     public void async2() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -1119,7 +1115,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "false", "null", "true", "true", "true", "", "true", "true", "false", "null" })
-    @NotYetImplemented({ FF, CHROME, IE })
+    @NotYetImplemented
     public void asyncAttribute() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

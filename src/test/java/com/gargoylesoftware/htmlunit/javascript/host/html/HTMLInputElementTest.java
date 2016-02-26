@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -1562,7 +1560,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "§§URL§§" })
-    @NotYetImplemented({ FF, CHROME, IE })
+    @NotYetImplemented
     public void submitRequired() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1592,7 +1590,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "false", "true" })
-    @NotYetImplemented({ FF, CHROME, IE })
+    @NotYetImplemented
     public void checkValidity() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

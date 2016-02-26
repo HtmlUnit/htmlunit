@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.io.BufferedReader;
@@ -1444,7 +1443,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "someLoad [object ProgressEvent]", "load", "true", "11", "11" },
             CHROME = { "someLoad [object XMLHttpRequestProgressEvent]", "load", "false", "11", "0" })
-    @NotYetImplemented({ FF, CHROME, IE })
+    @NotYetImplemented
     public void addEventListenerDetails() throws Exception {
         final String html =
               "<html>\n"
@@ -1483,7 +1482,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             CHROME = "function")
-    @NotYetImplemented({ FF, CHROME, IE })
+    @NotYetImplemented
     public void addEventListenerCaller() throws Exception {
         final String html =
               "<html>\n"

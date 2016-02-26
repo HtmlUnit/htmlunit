@@ -743,7 +743,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns "clientHeight" attribute.
+     * Returns the {@code clientHeight} attribute.
      * @return the {@code clientHeight} attribute
      */
     @JsxGetter
@@ -753,7 +753,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns "clientWidth" attribute.
+     * Returns the {@code clientWidth} attribute.
      * @return the {@code clientWidth} attribute
      */
     @JsxGetter
@@ -2351,7 +2351,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns "clientLeft" attribute.
+     * Returns the {@code clientLeft} attribute.
      * @return the {@code clientLeft} attribute
      */
     @JsxGetter
@@ -2361,7 +2361,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns "clientTop" attribute.
+     * Returns {@code clientTop} attribute.
      * @return the {@code clientTop} attribute
      */
     @JsxGetter
@@ -2371,10 +2371,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns this element's <tt>offsetTop</tt>, which is the calculated top position of this
-     * element relative to the <tt>offsetParent</tt>.
+     * Returns this element's {@code offsetTop}, which is the calculated top position of this
+     * element relative to the {@code offsetParent}.
      *
-     * @return this element's <tt>offsetTop</tt>
+     * @return this element's {@code offsetTop}
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534303.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>

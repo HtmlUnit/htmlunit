@@ -1267,7 +1267,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "", "rgb(0, 0, 255)" })
-    @NotYetImplemented({ FF, CHROME, IE })
+    @NotYetImplemented
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"

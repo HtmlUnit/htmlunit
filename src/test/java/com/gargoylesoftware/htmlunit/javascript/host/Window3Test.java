@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
@@ -827,7 +825,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2-2", "3-3" })
-    @NotYetImplemented({ FF, CHROME, IE })
+    @NotYetImplemented
     public void elementsByName_changedAfterGet_nyi() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
