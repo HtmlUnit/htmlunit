@@ -1976,6 +1976,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (includeBorder) {
             width += getBorderHorizontal();
         }
+        else if (isScrollable(true, true) && getElement().getDomNodeOrDie().isDirectlyAttachedToPage()) {
+            width -= 17;
+        }
         if (includePadding) {
             width += getPaddingHorizontal();
         }
@@ -2100,6 +2103,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         int height = getCalculatedHeight();
         if (includeBorder) {
             height += getBorderVertical();
+        }
+        else if (isScrollable(false, true) && getElement().getDomNodeOrDie().isDirectlyAttachedToPage()) {
+            height -= 17;
         }
         if (includePadding) {
             height += getPaddingVertical();
@@ -2272,18 +2278,25 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return {@code true} if the element is scrollable along the specified axis
      */
     public boolean isScrollable(final boolean horizontal) {
+        return isScrollable(horizontal, false);
+    }
+
+    /**
+     * @param ignoreSize whether to consider the content/calculated width/height
+     */
+    private boolean isScrollable(final boolean horizontal, final boolean ignoreSize) {
         final boolean scrollable;
         final Element node = getElement();
         final String overflow = getOverflow();
         if (horizontal) {
             // TODO: inherit, overflow-x
             scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
-                && getContentWidth() > getCalculatedWidth();
+                && (ignoreSize || getContentWidth() > getCalculatedWidth());
         }
         else {
             // TODO: inherit, overflow-y
             scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
-                && getContentHeight() > getEmptyHeight();
+                && (ignoreSize || getContentHeight() > getEmptyHeight());
         }
         return scrollable;
     }

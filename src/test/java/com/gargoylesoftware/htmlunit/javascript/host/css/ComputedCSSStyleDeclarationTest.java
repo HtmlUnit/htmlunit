@@ -1406,8 +1406,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "false" })
-    @NotYetImplemented
-    public void scrollbarSize() throws Exception {
+    public void scrollbarWidth() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var scroller = document.createElement('div');\n"
@@ -1417,6 +1416,32 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    alert(scroller.offsetWidth - scroller.clientWidth == 0);\n"
             + "    document.body.appendChild(scroller);\n"
             + "    alert(scroller.offsetWidth - scroller.clientWidth == 0);\n"
+            + "    document.body.removeChild(scroller);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "false" },
+            FF = { "true", "true" })
+    @NotYetImplemented(FF)
+    public void scrollbarHeight() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var scroller = document.createElement('div');\n"
+            + "    scroller.style['width'] = '50px';\n"
+            + "    scroller.style['height'] = '50px';\n"
+            + "    scroller.style['overflow'] = 'scroll';\n"
+            + "    alert(scroller.offsetHeight - scroller.clientHeight == 0);\n"
+            + "    document.body.appendChild(scroller);\n"
+            + "    alert(scroller.offsetHeight - scroller.clientHeight == 0);\n"
             + "    document.body.removeChild(scroller);\n"
             + "  }\n"
             + "</script>\n"

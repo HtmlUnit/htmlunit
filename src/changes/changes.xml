@@ -8,11 +8,14 @@
 
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: correct calculation of clientWidth and .clientHeight styles. 
+            </action>
             <action type="fix" dev="rbri">
                 WebSocket: fix duplicate cookies sent with requests.
             </action>
             <action type="fix" dev="rbri">
-                JavaScript: Doctype properties prefix, localName and namespaceURI returning undefined for chrome.
+                JavaScript: Doctype properties prefix, localName and namespaceURI returning undefined for Chrome.
             </action>
             <action type="fix" dev="rbri" issue="1749" due-to="Adam Afeltowicz">
                 JavaScript: Location should change immediately when calling history.pushState.
