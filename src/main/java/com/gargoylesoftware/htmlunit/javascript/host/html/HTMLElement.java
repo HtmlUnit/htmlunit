@@ -644,8 +644,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxFunction
     public void removeAttributeNode(final Attr attribute) {
         final String name = attribute.getName();
-        final String namespaceUri = attribute.getNamespaceURI();
-        removeAttributeNS(namespaceUri, name);
+        final Object namespaceUri = attribute.getNamespaceURI();
+        if (namespaceUri instanceof String) {
+            removeAttributeNS((String) namespaceUri, name);
+            return;
+        }
+        removeAttributeNS(null, name);
     }
 
     /**
