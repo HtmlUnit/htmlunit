@@ -610,7 +610,7 @@ public class Node extends EventTarget {
      * @return the local name of this element
      */
     @JsxGetter
-    public String getLocalName() {
+    public Object getLocalName() {
         return getDomNodeOrDie().getLocalName();
     }
 
@@ -619,9 +619,8 @@ public class Node extends EventTarget {
      * @return the URI that identifies an XML namespace
      */
     @JsxGetter
-    public String getNamespaceURI() {
-        final String namespaceURI = getDomNodeOrDie().getNamespaceURI();
-        return namespaceURI;
+    public Object getNamespaceURI() {
+        return getDomNodeOrDie().getNamespaceURI();
     }
 
     /**

@@ -139,9 +139,37 @@ public class DocumentType extends Node {
      */
     @Override
     public Object getPrefix() {
-        if (getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
+        final Object prefix = super.getPrefix();
+
+        if (prefix == null && getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
             return Undefined.instance;
         }
-        return super.getPrefix();
+        return prefix;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getLocalName() {
+        final Object localName = super.getLocalName();
+
+        if (localName == null && getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
+            return Undefined.instance;
+        }
+        return localName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getNamespaceURI() {
+        final Object namespaceURI = super.getNamespaceURI();
+
+        if (namespaceURI == null && getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
+            return Undefined.instance;
+        }
+        return namespaceURI;
     }
 }
