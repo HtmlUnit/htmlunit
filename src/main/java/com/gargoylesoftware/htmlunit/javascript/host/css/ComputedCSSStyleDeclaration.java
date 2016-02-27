@@ -1976,7 +1976,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (includeBorder) {
             width += getBorderHorizontal();
         }
-        else if (isScrollable(true, true) && getElement().getDomNodeOrDie().isDirectlyAttachedToPage()) {
+        else if (isScrollable(true, true) && !(getElement() instanceof HTMLBodyElement)
+                && getElement().getDomNodeOrDie().isDirectlyAttachedToPage()) {
             width -= 17;
         }
         if (includePadding) {
@@ -2104,7 +2105,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (includeBorder) {
             height += getBorderVertical();
         }
-        else if (isScrollable(false, true) && getElement().getDomNodeOrDie().isDirectlyAttachedToPage()) {
+        else if (isScrollable(false, true) && !(getElement() instanceof HTMLBodyElement)
+                && getElement().getDomNodeOrDie().isDirectlyAttachedToPage()) {
             height -= 17;
         }
         if (includePadding) {
