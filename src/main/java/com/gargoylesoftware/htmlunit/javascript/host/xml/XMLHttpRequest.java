@@ -221,6 +221,14 @@ public class XMLHttpRequest extends EventTarget {
                 event.setLengthComputable(true);
             }
 
+            if (webResponse_ != null) {
+                final long contentLength = webResponse_.getContentLength();
+                event.setLoaded(contentLength);
+                if (!browser.hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT)) {
+                    event.setTotal(contentLength);
+                }
+            }
+
             if (loadHandler_ != null) {
                 jsEngine.callFunction(containingPage_, loadHandler_, loadHandler_.getParentScope(), this, params);
             }

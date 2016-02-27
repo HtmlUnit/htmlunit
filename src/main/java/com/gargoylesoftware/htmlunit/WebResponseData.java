@@ -177,6 +177,14 @@ public class WebResponseData implements Serializable {
     }
 
     /**
+     * Returns length of the content data.
+     * @return the length
+     */
+    public long getContentLength() {
+        return downloadedContent_.length();
+    }
+
+    /**
      * Clean up the downloaded content.
      */
     public void cleanUp() {

@@ -60,7 +60,12 @@ public interface DownloadedContent extends Serializable {
 
         @Override
         public boolean isEmpty() {
-            return bytes_.length == 0;
+            return length() == 0;
+        }
+
+        @Override
+        public long length() {
+            return bytes_.length;
         }
     }
 
@@ -102,6 +107,14 @@ public interface DownloadedContent extends Serializable {
             super.finalize();
             cleanUp();
         }
+
+        @Override
+        public long length() {
+            if (file_ == null) {
+                return 0;
+            }
+            return file_.length();
+        }
     }
 
     /**
@@ -121,4 +134,10 @@ public interface DownloadedContent extends Serializable {
      * @return true or false
      */
     boolean isEmpty();
+
+    /**
+     * Returns the number of bytes.
+     * @return the length
+     */
+    long length();
 }

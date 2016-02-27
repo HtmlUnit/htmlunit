@@ -234,6 +234,17 @@ public class WebResponse implements Serializable {
     }
 
     /**
+     * Returns length of the content data.
+     * @return the length
+     */
+    public long getContentLength() {
+        if (responseData_ == null) {
+            return 0;
+        }
+        return responseData_.getContentLength();
+    }
+
+    /**
      * Returns the response content as an input stream.
      * @return the response content as an input stream
      * @throws IOException in case of IOProblems
