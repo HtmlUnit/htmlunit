@@ -395,7 +395,7 @@ public class Event extends SimpleScriptable {
      * Returns the event target to which the event was originally dispatched.
      * @return the event target to which the event was originally dispatched
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxGetter
     public Object getTarget() {
         return target_;
     }
@@ -413,7 +413,7 @@ public class Event extends SimpleScriptable {
      * is useful during event capturing and event bubbling.
      * @return the current event target
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxGetter
     public Scriptable getCurrentTarget() {
         return currentTarget_;
     }
@@ -456,7 +456,7 @@ public class Event extends SimpleScriptable {
      * Returns the time at which this event was created.
      * @return the time at which this event was created
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxGetter
     public long getTimeStamp() {
         return timeStamp_;
     }
@@ -645,7 +645,7 @@ public class Event extends SimpleScriptable {
      * @param bubbles whether or not the event should bubble
      * @param cancelable whether or not the event the event should be cancelable
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxFunction
     public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
         type_ = type;
         bubbles_ = bubbles;
@@ -657,7 +657,7 @@ public class Event extends SimpleScriptable {
      * Any default action associated with the event will not occur.
      * Calling this method for a non-cancelable event has no effect.
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxFunction
     public void preventDefault() {
         preventDefault_ = true;
     }
