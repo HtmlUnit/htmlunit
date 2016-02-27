@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -35,7 +33,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -143,37 +141,32 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF)
+    @Alerts({ ": myname=My value!1", ": myname=My value!2" })
     public void cookies() throws Exception {
-        //TODO: compatibility of FF and Chrome versions.
-        if (getBrowserVersion().isFirefox()) {
-            final String firstResponse = ": myname=My value!1";
-            final String secondResponse = ": myname=My value!2";
+        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+            null, null, new CookiesWebSocketHandler());
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/WebSocketTest_cookies.html");
 
-            startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
-                null, null, new CookiesWebSocketHandler());
-            final WebDriver driver = getWebDriver();
-            driver.get("http://localhost:" + PORT + "/WebSocketTest_cookies.html");
+        driver.findElement(By.id("username")).sendKeys("Browser");
+        driver.findElement(By.id("joinB")).click();
+        final WebElement chatE = driver.findElement(By.id("chat"));
+        int counter = 0;
+        do {
+            Thread.sleep(100);
+        } while (chatE.getText().isEmpty() && counter++ < 10);
 
-            driver.findElement(By.id("username")).sendKeys("Browser");
-            driver.findElement(By.id("joinB")).click();
-            final WebElement chatE = driver.findElement(By.id("chat"));
-            int counter = 0;
-            do {
-                Thread.sleep(100);
-            } while (chatE.getText().isEmpty() && counter++ < 10);
+        final String[] expected = getExpectedAlerts();
+        assertEquals(expected[0], chatE.getText());
 
-            assertEquals(firstResponse, chatE.getText());
+        driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
+        driver.findElement(By.id("sendB")).click();
+        counter = 0;
+        do {
+            Thread.sleep(100);
+        } while (!chatE.getText().contains(expected[1]) && counter++ < 10);
 
-            driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
-            driver.findElement(By.id("sendB")).click();
-            counter = 0;
-            do {
-                Thread.sleep(100);
-            } while (!chatE.getText().contains(secondResponse) && counter++ < 10);
-
-            assertEquals(firstResponse + "\n" + secondResponse, chatE.getText());
-        }
+        assertEquals(expected[0] + "\n" + expected[1], chatE.getText());
     }
 
     private static class CookiesWebSocketHandler extends WebSocketHandler {
