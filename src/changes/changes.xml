@@ -9,7 +9,7 @@
     <body>
         <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="asashour">
-                JavaScript: correct calculation of clientWidth and .clientHeight styles. 
+                JavaScript: correct calculation of clientWidth and .clientHeight styles.
             </action>
             <action type="fix" dev="rbri">
                 WebSocket: fix duplicate cookies sent with requests.
