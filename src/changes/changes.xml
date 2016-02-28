@@ -7,6 +7,8 @@
     </properties>
 
     <body>
+        <release version="2.21" date="???" description="Bugfixes">
+        </release>
         <release version="2.20" date="Feb 28, 2016" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="asashour">
                 JavaScript: correct calculation of clientWidth and .clientHeight styles.
