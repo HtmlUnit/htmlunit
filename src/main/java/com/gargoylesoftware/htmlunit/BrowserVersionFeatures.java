@@ -1302,7 +1302,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
     JS_WEAKMAP_CONSTRUCTOR_ARGUMENT,
 
-    /** Allow inheriting parent constants in {@link WebGLContextEvent}. */
+    /** Allow inheriting parent constants
+     * in {@link com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent}. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_WEBGL_CONTEXT_EVENT_CONSTANTS,
 

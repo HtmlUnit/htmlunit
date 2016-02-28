@@ -324,7 +324,7 @@
         ## Workaround for DOXIA-150 due to a non-desired behaviour in p-u
         ## @see org.codehaus.plexus.util.xml.Xpp3Dom#toString()
         ## @see org.codehaus.plexus.util.xml.Xpp3Dom#toUnescapedString()
-        #set ( $documentHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" )
+        #set ( $documentHeader = '<?xml version="1.0" encoding="UTF-8"?>' )
         #set ( $documentHeader = $documentHeader.replaceAll( "\\", "" ) )
         #if ( $item.name == "script" )
           $StringUtils.replace( $item.toUnescapedString(), $documentHeader, "" )

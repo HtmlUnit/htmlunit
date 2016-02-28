@@ -370,7 +370,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Returns the default browser version that is used whenever a specific version isn't specified.
-     * Defaults to {@link #INTERNET_EXPLORER_8}.
+     * Defaults to {@link #BEST_SUPPORTED}.
      * @return the default browser version
      */
     public static BrowserVersion getDefault() {
