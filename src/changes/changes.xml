@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.20" date="???" description="IE8 is no longer supported, Bugfixes">
+        <release version="2.20" date="Feb 28, 2016" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="asashour">
                 JavaScript: correct calculation of clientWidth and .clientHeight styles.
             </action>
@@ -51,7 +51,7 @@
                 JavaScript: set prototype for objects constructed without 'new' keyword.
             </action>
             <action type="fix" dev="rbri" issue="1741">
-                Do not explicitly send the port 443 for https connections.
+                Do not explicitly send the port 443 for HTTPS connections.
             </action>
             <action type="fix" dev="rbri" issue="1694">
                 Use the right keyCode when simulating enter.
@@ -60,7 +60,7 @@
                 Setting the text property of an option creates a label attribute if there is no label defined so far.
             </action>
             <action type="fix" dev="rbri">
-                Origin attribute for anchors now works (FF, CHROME).
+                Origin attribute for anchors now works (FF, Chrome).
             </action>
             <action type="fix" dev="rbri" issue="1742">
                 SVGElements are supporting querySelector() and querySelectorAll().
@@ -158,7 +158,7 @@
                 FF triggers a mouseover event for select options even if the option is disabled.
             </action>
             <action type="fix" dev="rbri">
-                GAE support is back for FF/IE/CHROME.
+                GAE support is back.
             </action>
             <action type="fix" dev="rbri" issue="1730">
                 Function document.open(..) returns the opened document.
@@ -180,7 +180,7 @@
                 in sync with the input text control.
             </action>
             <action type="add" dev="rbri" due-to="mguillem">
-                BrowserVersion BEST_SUPPORTED added. This is (for now) a shortcut for FIREFOX38.
+                BrowserVersion BEST_SUPPORTED added. This is (for now) a shortcut for FIREFOX_38.
             </action>
             <action type="fix" dev="rbri">
                 Area elements are not focusable if no href attribute defined.
