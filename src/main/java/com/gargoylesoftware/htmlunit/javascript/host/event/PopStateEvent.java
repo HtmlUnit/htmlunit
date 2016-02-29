@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_POP_STATE_EVENT_CLONE_STATE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -25,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -68,7 +70,18 @@ public class PopStateEvent extends Event {
      */
     public PopStateEvent(final SimpleScriptable scriptable, final String type, final Object state) {
         super(scriptable, type);
-        state_ = state;
+        if (state instanceof NativeObject && getBrowserVersion().hasFeature(JS_POP_STATE_EVENT_CLONE_STATE)) {
+            final NativeObject old = (NativeObject) state;
+            final NativeObject newState = new NativeObject();
+            for (final Object o : ScriptableObject.getPropertyIds(old)) {
+                final String property = Context.toString(o);
+                newState.defineProperty(property, ScriptableObject.getProperty(old, property), ScriptableObject.EMPTY);
+            }
+            state_ = newState;
+        }
+        else {
+            state_ = state;
+        }
     }
 
     /**

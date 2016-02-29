@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 
 /**
  * Constants of various features of each {@link BrowserVersion}.
@@ -1098,14 +1099,17 @@ public enum BrowserVersionFeatures {
     JS_PARENT_PROTO_PROPERTIES,
 
     /** Indicates that parseInt() should have radix 10 by default. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF),
-        @WebBrowser(CHROME) })
+    @BrowserFeature
     JS_PARSE_INT_RADIX_10,
 
     /** Indicates that HTMLPhraseElements returning 'HTMLElement'
      * as class name. */
     @BrowserFeature(@WebBrowser(FF))
     JS_PHRASE_COMMON_CLASS_NAME,
+
+    /** Indicates that the {@link PopStateEvent}.{@code state} is cloned. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    JS_POP_STATE_EVENT_CLONE_STATE,
 
     /** Indicates that the {@code pre.width} is string. */
     @BrowserFeature(@WebBrowser(IE))
