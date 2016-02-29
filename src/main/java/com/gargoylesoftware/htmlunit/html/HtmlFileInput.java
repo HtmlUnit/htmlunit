@@ -108,7 +108,7 @@ public class HtmlFileInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         final String valueAttribute = getValueAttribute();
 
         if (StringUtils.isEmpty(valueAttribute)) {

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                SubmittableElement: rename getSubmitKeyValuePairs() to getSubmitNameValuePairs().
+            </action>
         </release>
         <release version="2.20" date="Feb 28, 2016" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="asashour">

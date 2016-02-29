@@ -142,11 +142,11 @@ public class HtmlSubmitInput extends HtmlInput {
      * Returns "Submit Query" if <tt>name</tt> attribute is defined and <tt>value</tt> attribute is not defined.
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         if (!getNameAttribute().isEmpty() && !hasAttribute("value")) {
             return new NameValuePair[]{new NameValuePair(getNameAttribute(), DEFAULT_VALUE)};
         }
-        return super.getSubmitKeyValuePairs();
+        return super.getSubmitNameValuePairs();
     }
 
     /**

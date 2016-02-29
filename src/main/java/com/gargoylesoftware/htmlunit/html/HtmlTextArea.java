@@ -185,7 +185,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         String text = getText();
         text = text.replace("\r\n", "\n").replace("\n", "\r\n");
 

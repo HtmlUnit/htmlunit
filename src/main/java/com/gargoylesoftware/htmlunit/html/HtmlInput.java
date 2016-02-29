@@ -102,7 +102,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * {@inheritDoc}
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
     }
 

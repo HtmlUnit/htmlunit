@@ -72,7 +72,7 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
      * {@inheritDoc}
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         return new NameValuePair[]{new NameValuePair(getPromptAttribute(), getValue())};
     }
 

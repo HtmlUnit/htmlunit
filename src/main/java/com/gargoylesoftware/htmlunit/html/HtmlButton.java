@@ -129,7 +129,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
     }
 

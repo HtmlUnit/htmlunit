@@ -369,7 +369,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         final String name = getNameAttribute();
 
         final List<HtmlOption> selectedOptions = getSelectedOptions();
