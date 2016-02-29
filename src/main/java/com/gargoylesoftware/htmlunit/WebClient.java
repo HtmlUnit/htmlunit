@@ -1749,16 +1749,6 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Closes all opened windows, stopping all background JavaScript processing.
-     * @deprecated as of 2.16, please use {@link #close()}, or {@code try}-with-resources statement
-     */
-    @Deprecated
-    // Do not remove before March 2016
-    public void closeAllWindows() {
-        close();
-    }
-
-    /**
-     * Closes all opened windows, stopping all background JavaScript processing.
      *
      * {@inheritDoc}
      */

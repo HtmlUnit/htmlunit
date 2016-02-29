@@ -1340,7 +1340,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     private static Object getFrameWindowByName(final HtmlPage page, final String name) {
         try {
-            return page.getFrameByName(name).getScriptObject();
+            return page.getFrameByName(name).getScriptableObject();
         }
         catch (final ElementNotFoundException e) {
             return NOT_FOUND;
@@ -1649,7 +1649,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             // But we have to return so that the window can be close()'ed...
             // Maybe we can use Rhino's continuation support to save state and restart when
             // the dialog window is close()'ed? Would only work in interpreted mode, though.
-            final ScriptableObject jsDialog = (ScriptableObject) dialog.getScriptObject();
+            final ScriptableObject jsDialog = dialog.getScriptableObject();
             return jsDialog.get("returnValue", jsDialog);
         }
         catch (final IOException e) {
@@ -1672,7 +1672,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         try {
             final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
             final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
-            final Window jsDialog = (Window) dialog.getScriptObject();
+            final Window jsDialog = (Window) dialog.getScriptableObject();
             return jsDialog;
         }
         catch (final IOException e) {

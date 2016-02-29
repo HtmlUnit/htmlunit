@@ -42,7 +42,7 @@ public class DialogWindow extends WebWindowImpl {
      */
     @Override
     protected boolean isJavaScriptInitializationNeeded() {
-        return getScriptObject() == null;
+        return getScriptableObject() == null;
     }
 
     /**

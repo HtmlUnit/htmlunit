@@ -921,15 +921,6 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Shutdown the connection.
-     * @deprecated as of 2.19, please use {@link #close} instead
-     */
-    @Deprecated
-    public void shutdown() {
-        close();
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

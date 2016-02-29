@@ -156,14 +156,6 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
-    public Object getScriptObject() {
-        return getScriptableObject();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public ScriptableObject getScriptableObject() {
         return scriptObject_;
     }

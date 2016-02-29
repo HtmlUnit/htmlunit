@@ -137,16 +137,6 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     /**
      * Creates an empty {@link DomDocumentFragment} object.
      * @return a newly created {@link DomDocumentFragment}
-     * @deprecated as of 2.18, please use {@link #createDocumentFragment()} instead
-     */
-    @Deprecated
-    public DomDocumentFragment createDomDocumentFragment() {
-        return createDocumentFragment();
-    }
-
-    /**
-     * Creates an empty {@link DomDocumentFragment} object.
-     * @return a newly created {@link DomDocumentFragment}
      */
     @Override
     public DomDocumentFragment createDocumentFragment() {

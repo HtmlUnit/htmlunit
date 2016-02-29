@@ -152,16 +152,6 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the content of the page.
-     * @return the content of the page
-     * @deprecated as of 2.18, please use {@link #getWebResponse()}.getContentAsString()
-     */
-    @Deprecated
-    public String getContent() {
-        return getWebResponse().getContentAsString();
-    }
-
-    /**
      * Returns the DOM representation of the XML content.
      * @return {@code null} if the content couldn't be parsed
      */
@@ -170,31 +160,6 @@ public class XmlPage extends SgmlPage {
             return node_.getOwnerDocument();
         }
         return null;
-    }
-
-    /**
-     * Creates a new XML element with the given tag name.
-     *
-     * @param tagName the tag name
-     * @return the new XML element
-     * @deprecated as of 2.18, please use {@link #createElement(String)} instead
-     */
-    @Deprecated
-    public DomElement createXmlElement(final String tagName) {
-        return createElement(tagName);
-    }
-
-    /**
-     * Creates a new XML element with the given namespace and qualified name.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name of the element type to instantiate
-     * @return the new XML element
-     * @deprecated as of 2.18, please use {@link #createElementNS(String, String)} instead
-     */
-    @Deprecated
-    public DomElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
-        return createElementNS(namespaceURI, qualifiedName);
     }
 
     /**
@@ -273,17 +238,6 @@ public class XmlPage extends SgmlPage {
     @Override
     public Element getElementById(final String elementId) {
         throw new UnsupportedOperationException("XmlPage.getElementById is not yet implemented.");
-    }
-
-    /**
-     * Returns an {@link Iterable} that will recursively iterate over all of this node's {@link DomElement} descendants.
-     *
-     * @return an {@link Iterable} that will recursively iterate over all of this node's {@link DomElement} descendants
-     * @deprecated as of 2.18, please use {@link #getDomElementDescendants()} instead
-     */
-    @Deprecated
-    public final Iterable<DomElement> getXmlElementDescendants() {
-        return getDomElementDescendants();
     }
 
     /**
