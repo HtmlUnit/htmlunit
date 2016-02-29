@@ -712,7 +712,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "exception" },
             FF = { "1", "[object HTMLBodyElement]" })
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
-    @NotYetImplemented(CHROME)
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
     }
@@ -727,7 +726,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "exception" },
             FF = { "1", "[object Text]" })
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
-    @NotYetImplemented(CHROME)
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
     }

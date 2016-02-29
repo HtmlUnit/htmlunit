@@ -1761,7 +1761,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return EXECUTE_CMDS_IE.contains(cmdLC);
         }
         if (getBrowserVersion().isChrome()) {
-            return EXECUTE_CMDS_CHROME.contains(cmdLC);
+            return EXECUTE_CMDS_CHROME.contains(cmdLC) || "bold".equalsIgnoreCase(cmd);
         }
         return EXECUTE_CMDS_FF.contains(cmdLC);
     }

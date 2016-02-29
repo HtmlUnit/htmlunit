@@ -467,7 +467,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2,
 
-    /** Indicates that the pas is extracted from the location (IE11).
+    /** Indicates that the pas is extracted from the location.
      * Sample: from the location /foo/boo only /foo is used.
      */
     @BrowserFeature(@WebBrowser(IE))
@@ -611,7 +611,7 @@ public enum BrowserVersionFeatures {
         @WebBrowser(IE) })
     JS_DOCUMENT_CREATE_ELEMENT_STRICT,
 
-    /** The browser supports the design mode 'Inherit' (IE). */
+    /** The browser supports the design mode 'Inherit'. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_DESIGN_MODE_INHERIT,
 
@@ -619,7 +619,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOCUMENT_DOMAIN_IS_LOWERCASE,
 
-    /** Javascript document.forms(...) supported (IE). */
+    /** Javascript document.forms(...) supported. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
 
@@ -1082,15 +1082,15 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION,
 
-    /** element.outerHTML handles null value as string "null" (IE). */
+    /** element.outerHTML handles null value as string "null". */
     @BrowserFeature(@WebBrowser(IE))
     JS_OUTER_HTML_NULL_AS_STRING,
 
-    /** element.outerHTML removes all children from detached node (IE). */
+    /** element.outerHTML removes all children from detached node. */
     @BrowserFeature(@WebBrowser(IE))
     JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED,
 
-    /** element.outerHTML removes all children from detached node (IE). */
+    /** element.outerHTML removes all children from detached node. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_OUTER_HTML_THROWS_FOR_DETACHED,
 
@@ -1123,8 +1123,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH,
 
-    /** Javascript script tags supports the 'for' and the 'event'
-     * attribute (IE).
+    /** Javascript script tags supports the 'for' and the 'event' attribute.
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW,
@@ -1146,11 +1145,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
 
-    /** Indicates that select.options.childNodes is a valid property (IE). */
+    /** Indicates that select.options.childNodes is a valid property. */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY,
 
-    /** Indicates that select.options has a wong class name (IE11). */
+    /** Indicates that select.options has a wong class name. */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
 
@@ -1158,7 +1157,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
-    /** Indicates that select.options returns null if requested index is outside (IE). */
+    /** Indicates that select.options returns null if requested index is outside. */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE,
 
@@ -1242,25 +1241,23 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID,
 
-    /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline" (IE). */
+    /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline". */
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
 
-    /** Getting the property maxLength if it is not defined in the DOM returns MAX_INT (IE11).
+    /** Getting the property maxLength if it is not defined in the DOM returns MAX_INT.
      * FF and Chrome return -1.
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT,
 
-    /** Setting the property cols throws an exception, if the provided value is less
-     * than 0 (IE).
+    /** Setting the property cols throws an exception, if the provided value is less than 0.
      * FF ignores the provided value in this case.
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION,
 
-    /** Setting the property cols throws an exception, if the provided value is not
-     * convertible into an integer (IE).
+    /** Setting the property cols throws an exception, if the provided value is not convertible into an integer.
      * FF ignores the provided value in this case and sets cols to 0.
      */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
@@ -1273,15 +1270,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION,
 
-    /** Setting the property rows throws an exception, if the provided value is less
-     * than 0 (IE).
+    /** Setting the property rows throws an exception, if the provided value is less than 0.
      * FF ignores the provided value in this case.
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION,
 
-    /** Setting the property rows throws an exception, if the provided value is not
-     * convertible into an integer (IE).
+    /** Setting the property rows throws an exception, if the provided value is not convertible into an integer.
      * FF ignores the provided value in this case and sets rows to 0.
      */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
@@ -1396,7 +1391,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT,
 
-    /** Indicates that the browser uses the ActiveXObject for implementing XML support (IE). */
+    /** Indicates that the browser uses the ActiveXObject for implementing XML support. */
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
 
