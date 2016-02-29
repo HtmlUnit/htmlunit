@@ -1425,13 +1425,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     PROTOCOL_DATA,
 
-    /** Indicates {@code .querySelectorAll()} supports {@code :target} condition. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    QUERYSELECTORALL_NO_TARGET,
-
     /** Indicates <code>.querySelectorAll()</code> and <code>.querySelector()</code> is not supported in quirks mode. */
     @BrowserFeature(@WebBrowser(IE))
     QUERYSELECTORALL_NOT_IN_QUIRKS,
+
+    /** Indicates {@code .querySelectorAll()} supports {@code :target} condition. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    QUERYSELECTORALL_NO_TARGET,
 
     /** IE11 throws a syntax error if a css3 pseudo selector is used on an detached node. */
     @BrowserFeature(@WebBrowser(IE))
