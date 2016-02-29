@@ -144,9 +144,9 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * {@link org.apache.commons.httpclient.cookie.CookieSpec#match(String, int, String, boolean, Cookie[])} doesn't
-     * like empty hosts and negative ports, but these things happen if we're dealing with a local file. This method
-     * allows us to work around this limitation in HttpClient by feeding it a bogus host and port.
+     * {@link CookieOrigin} doesn't like empty hosts and negative ports,
+     * but these things happen if we're dealing with a local file.
+     * This method allows us to work around this limitation in HttpClient by feeding it a bogus host and port.
      *
      * @param url the URL to replace if necessary
      * @return the replacement URL, or the original URL if no replacement was necessary

@@ -1975,7 +1975,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * {@inheritDoc}
      * Used to allow re-declaration of constants (eg: "var undefined;").
-     * @see com.gargoylesoftware.htmlunit.javascript.NativeGlobalTest
      */
     @Override
     public boolean isConst(final String name) {

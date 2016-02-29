@@ -100,7 +100,7 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
     }
 
     /**
-     * Posts a message to the {@link WebWorker} in the page's context.
+     * Posts a message to the {@link Worker} in the page's context.
      * @param message the message
      */
     @JsxFunction
