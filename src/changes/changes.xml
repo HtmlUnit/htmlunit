@@ -9,7 +9,7 @@
     <body>
         <release version="2.21" date="???" description="Bugfixes">
             <action type="remove" dev="asashour">
-                Remove deprecated WebClient.closeAllWindows(), DomNode.getScriptObject(), WebWindow.getScriptObject(),
+                Remove deprecated WebClient.closeAllWindows(), DomNode.getScriptObject(),
                 HttpWebConnection.shutdown(), SgmlPage.createDomDocumentFragment(), XmlPage.getContent(),
                 XmlPage.createXmlElement(), XmlPage.createXmlElementNS() and XmlPage.getXmlElementDescendants().
             </action>
