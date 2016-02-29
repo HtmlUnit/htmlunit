@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.List;
 
