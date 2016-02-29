@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -68,57 +67,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
 
     private static final String MSG_NO_CONTENT = "no Content";
     private static final String MSG_PROCESSING_ERROR = "error processing";
-
-    /**
-     * Tests asynchronous use of XMLHttpRequest, using Mozilla style object creation.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "0", "1", "1", "2", "3", "4" },
-                FF = { "0", "1", "2", "3", "4" })
-    public void asyncUse() throws Exception {
-        final String html =
-              "<html>\n"
-            + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
-            + "    <script>\n"
-            + "      var request;\n"
-            + "      function testAsync() {\n"
-            + "        request = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
-            + "        request.onreadystatechange = onReadyStateChange;\n"
-            + "        alert(request.readyState);\n"
-            + "        request.open('GET', '" + URL_SECOND + "', true);\n"
-            + "        request.send('');\n"
-            + "      }\n"
-            + "      function onReadyStateChange() {\n"
-            + "        alert(request.readyState);\n"
-            + "        if (request.readyState == 4)\n"
-            + "          alert(request.responseText);\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='testAsync()'>\n"
-            + "  </body>\n"
-            + "</html>";
-
-        final String xml =
-              "<xml2>\n"
-            + "<content2>sdgxsdgx</content2>\n"
-            + "<content2>sdgxsdgx2</content2>\n"
-            + "</xml2>";
-
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-        client.getPage(URL_FIRST);
-
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
-        assertEquals(ArrayUtils.add(getExpectedAlerts(), xml), collectedAlerts);
-    }
 
     /**
      * Tests asynchronous use of XMLHttpRequest, where the XHR request fails due to IOException (Connection refused).

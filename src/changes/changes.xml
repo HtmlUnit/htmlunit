@@ -12,9 +12,6 @@
                 JavaScript: fix location.hash.
             </action>
             <action type="fix" dev="asashour">
-                XMLHttpRequest: Chrome also fires state loading twice in async mode.
-            </action>
-            <action type="fix" dev="asashour">
                 JavaScript: HTMLTableElement.innerText should not be read-only (Chrome).
             </action>
             <action type="remove" dev="asashour">

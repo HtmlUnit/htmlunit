@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -40,7 +36,7 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object CSSKeyframesRule], 7, identifier, 2" },
             FF = { "[object MozCSSKeyframesRule]", "7", "identifier", "2" })
-    @NotYetImplemented({FF, CHROME, IE })
+    @NotYetImplemented
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"

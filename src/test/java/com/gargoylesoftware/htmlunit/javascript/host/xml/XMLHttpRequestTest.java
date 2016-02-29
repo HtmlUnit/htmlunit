@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -1536,4 +1537,48 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Tests asynchronous use of XMLHttpRequest, using Mozilla style object creation.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "0", "1", "2", "3", "4" },
+            IE = { "0", "1", "1", "2", "3", "4" })
+    public void asyncUse() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function testAsync() {\n"
+            + "        request = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+            + "        request.onreadystatechange = onReadyStateChange;\n"
+            + "        alert(request.readyState);\n"
+            + "        request.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        request.send('');\n"
+            + "      }\n"
+            + "      function onReadyStateChange() {\n"
+            + "        alert(request.readyState);\n"
+            + "        if (request.readyState == 4)\n"
+            + "          alert(request.responseText);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='testAsync()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml2>\n"
+            + "<content2>sdgxsdgx</content2>\n"
+            + "<content2>sdgxsdgx2</content2>\n"
+            + "</xml2>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        setExpectedAlerts(ArrayUtils.add(getExpectedAlerts(), xml));
+        loadPageWithAlerts2(html);
+    }
+
 }
