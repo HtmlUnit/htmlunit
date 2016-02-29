@@ -703,7 +703,6 @@ public class History2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "back", "forward", "go", "length", "pushState", "replaceState", "state" },
             CHROME = { "back", "forward", "go", "length", "pushState", "replaceState",
                         "scrollRestoration", "state" })
-    @NotYetImplemented(CHROME)
     public void properties() throws Exception {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"

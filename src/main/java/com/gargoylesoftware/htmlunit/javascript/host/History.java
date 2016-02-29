@@ -158,4 +158,14 @@ public class History extends SimpleScriptable {
             Context.throwAsScriptRuntimeEx(e);
         }
     }
+
+    /**
+     * Returns the {@code scrollRestoration} property.
+     * @return the {@code scrollRestoration} property
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public String getScrollRestoration() {
+        return "auto";
+    }
+
 }
