@@ -297,7 +297,8 @@ public class Location extends SimpleScriptable {
     public String getHash() {
         final boolean decodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HASH_IS_DECODED);
         String hash = hash_;
-        if (decodeHash && hash_ != null) {
+
+        if (hash_ != null && (decodeHash || hash_.equals(getUrl().getRef()))) {
             hash = decodeHash(hash);
         }
 

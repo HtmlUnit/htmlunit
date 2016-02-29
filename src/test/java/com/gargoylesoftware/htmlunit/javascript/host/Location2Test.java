@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
@@ -28,7 +27,6 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -205,7 +203,6 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("#<a>foobar</a>")
-    @NotYetImplemented({ IE, CHROME })
     public void hash() throws Exception {
         checkHash(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>");
     }
