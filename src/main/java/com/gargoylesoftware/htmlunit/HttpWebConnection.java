@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -80,9 +81,13 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.config.ConnectionConfig;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.config.SocketConfig;
+import org.apache.http.conn.DnsResolver;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
+import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.util.PublicSuffixMatcher;
+import org.apache.http.conn.util.PublicSuffixMatcherLoader;
 import org.apache.http.cookie.CookieSpecProvider;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -92,9 +97,11 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.HttpProcessorBuilder;
+import org.apache.http.protocol.HttpRequestExecutor;
 import org.apache.http.protocol.RequestContent;
 import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.ssl.SSLContexts;
+import org.apache.http.util.TextUtils;
 
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
@@ -937,34 +944,42 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Has the exact logic in HttpClientBuilder, but with the ability to configure
-     * <code>socketFactory</code>.
+     * Has the exact logic in {@link HttpClientBuilder#build()} which sets the {@code connManager} part,
+     * but with the ability to configure {@code socketFactory}.
      */
     private PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
         final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
 
-        LayeredConnectionSocketFactory sslSocketFactory = null;
         try {
-            sslSocketFactory = (LayeredConnectionSocketFactory)
-                        FieldUtils.readDeclaredField(builder, "sslSocketFactory", true);
-            final SocketConfig defaultSocketConfig = (SocketConfig)
-                        FieldUtils.readDeclaredField(builder, "defaultSocketConfig", true);
-            final ConnectionConfig defaultConnectionConfig = (ConnectionConfig)
-                        FieldUtils.readDeclaredField(builder, "defaultConnectionConfig", true);
-            final boolean systemProperties = (Boolean) FieldUtils.readDeclaredField(builder, "systemProperties", true);
-            final int maxConnTotal = (Integer) FieldUtils.readDeclaredField(builder, "maxConnTotal", true);
-            final int maxConnPerRoute = (Integer) FieldUtils.readDeclaredField(builder, "maxConnPerRoute", true);
-            HostnameVerifier hostnameVerifier = (HostnameVerifier)
-                        FieldUtils.readDeclaredField(builder, "hostnameVerifier", true);
-            final SSLContext sslcontext = (SSLContext) FieldUtils.readDeclaredField(builder, "sslContext", true);
+            PublicSuffixMatcher publicSuffixMatcher = getField(builder, "publicSuffixMatcher");
+            if (publicSuffixMatcher == null) {
+                publicSuffixMatcher = PublicSuffixMatcherLoader.getDefault();
+            }
+
+            HttpRequestExecutor requestExec = getField(builder, "requestExec");
+            if (requestExec == null) {
+                requestExec = new HttpRequestExecutor();
+            }
+
+            LayeredConnectionSocketFactory sslSocketFactory = getField(builder, "sslSocketFactory");
+            final SocketConfig defaultSocketConfig = getField(builder, "defaultSocketConfig");
+            final ConnectionConfig defaultConnectionConfig = getField(builder, "defaultConnectionConfig");
+            final boolean systemProperties = getField(builder, "systemProperties");
+            final int maxConnTotal = getField(builder, "maxConnTotal");
+            final int maxConnPerRoute = getField(builder, "maxConnPerRoute");
+            HostnameVerifier hostnameVerifier = getField(builder, "hostnameVerifier");
+            final SSLContext sslcontext = getField(builder, "sslContext");
+            final DnsResolver dnsResolver = getField(builder, "dnsResolver");
+            final long connTimeToLive = getField(builder, "connTimeToLive");
+            final TimeUnit connTimeToLiveTimeUnit = getField(builder, "connTimeToLiveTimeUnit");
 
             if (sslSocketFactory == null) {
                 final String[] supportedProtocols = systemProperties
-                        ? StringUtils.split(System.getProperty("https.protocols"), ',') : null;
+                        ? split(System.getProperty("https.protocols")) : null;
                 final String[] supportedCipherSuites = systemProperties
-                        ? StringUtils.split(System.getProperty("https.cipherSuites"), ',') : null;
+                        ? split(System.getProperty("https.cipherSuites")) : null;
                 if (hostnameVerifier == null) {
-                    hostnameVerifier = SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER;
+                    hostnameVerifier = new DefaultHostnameVerifier(publicSuffixMatcher);
                 }
                 if (sslcontext != null) {
                     sslSocketFactory = new SSLConnectionSocketFactory(
@@ -984,36 +999,53 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
 
-            final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(
+            final PoolingHttpClientConnectionManager poolingmgr = new PoolingHttpClientConnectionManager(
                     RegistryBuilder.<ConnectionSocketFactory>create()
                         .register("http", socketFactory)
                         .register("https", sslSocketFactory)
-                        .build());
+                        .build(),
+                        null,
+                        null,
+                        dnsResolver,
+                        connTimeToLive,
+                        connTimeToLiveTimeUnit != null ? connTimeToLiveTimeUnit : TimeUnit.MILLISECONDS);
             if (defaultSocketConfig != null) {
-                connectionManager.setDefaultSocketConfig(defaultSocketConfig);
+                poolingmgr.setDefaultSocketConfig(defaultSocketConfig);
             }
             if (defaultConnectionConfig != null) {
-                connectionManager.setDefaultConnectionConfig(defaultConnectionConfig);
+                poolingmgr.setDefaultConnectionConfig(defaultConnectionConfig);
             }
             if (systemProperties) {
                 String s = System.getProperty("http.keepAlive", "true");
                 if ("true".equalsIgnoreCase(s)) {
                     s = System.getProperty("http.maxConnections", "5");
                     final int max = Integer.parseInt(s);
-                    connectionManager.setDefaultMaxPerRoute(max);
-                    connectionManager.setMaxTotal(2 * max);
+                    poolingmgr.setDefaultMaxPerRoute(max);
+                    poolingmgr.setMaxTotal(2 * max);
                 }
             }
             if (maxConnTotal > 0) {
-                connectionManager.setMaxTotal(maxConnTotal);
+                poolingmgr.setMaxTotal(maxConnTotal);
             }
             if (maxConnPerRoute > 0) {
-                connectionManager.setDefaultMaxPerRoute(maxConnPerRoute);
+                poolingmgr.setDefaultMaxPerRoute(maxConnPerRoute);
             }
-            return connectionManager;
+            return poolingmgr;
         }
         catch (final IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static String[] split(final String s) {
+        if (TextUtils.isBlank(s)) {
+            return null;
+        }
+        return s.split(" *, *");
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T getField(final Object target, final String fieldName) throws IllegalAccessException {
+        return (T) FieldUtils.readDeclaredField(target, fieldName, true);
     }
 }
