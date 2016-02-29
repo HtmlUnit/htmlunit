@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,7 +21,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -1370,7 +1367,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "id2" },
             CHROME = { "0" })
-    @NotYetImplemented(CHROME)
     public void target() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

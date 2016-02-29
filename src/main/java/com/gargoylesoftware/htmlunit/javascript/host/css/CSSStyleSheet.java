@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NO_TARGET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
@@ -766,6 +767,9 @@ public class CSSStyleSheet extends StyleSheet {
             return isEmpty(element);
         }
         else if ("target".equals(value)) {
+            if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
+                return false;
+            }
             final String ref = element.getPage().getUrl().getRef();
             return StringUtils.isNotBlank(ref) && ref.equals(element.getId());
         }
