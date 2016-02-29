@@ -616,7 +616,7 @@ public class XMLHttpRequest extends EventTarget {
         }
         else {
             if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
-                // quite strange but IE and FF seem both to fire state loading twice
+                // quite strange but IE and Chrome seem both to fire state loading twice
                 // in async mode (at least with HTML of the unit tests)
                 setState(OPENED, Context.getCurrentContext());
             }

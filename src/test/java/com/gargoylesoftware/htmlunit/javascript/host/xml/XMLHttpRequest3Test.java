@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
@@ -78,7 +76,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "1", "1", "2", "3", "4" },
                 FF = { "0", "1", "2", "3", "4" })
-    @NotYetImplemented(CHROME)
     public void asyncUse() throws Exception {
         final String html =
               "<html>\n"
@@ -130,7 +127,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "1", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR },
             FF = { "0", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR })
-    @NotYetImplemented(CHROME)
     public void testAsyncUseWithNetworkConnectionFailure() throws Exception {
         final String html =
               "<html>\n"
