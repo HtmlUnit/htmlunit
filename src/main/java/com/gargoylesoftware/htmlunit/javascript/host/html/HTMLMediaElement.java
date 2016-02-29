@@ -66,7 +66,7 @@ public class HTMLMediaElement extends HTMLElement {
     @JsxConstant
     public static final short HAVE_ENOUGH_DATA = 4;
 
-    /** There is no data yet.  The {@link #getReadyState} is also {@link #HAVE_NOTHING}. */
+    /** There is no data yet. */
     @JsxConstant
     public static final short NETWORK_EMPTY = 0;
 

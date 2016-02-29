@@ -73,7 +73,9 @@ public class ClientRectList extends SimpleScriptable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the item at the specified index.
+     * @param index the index
+     * @return the found item
      */
     @JsxFunction
     public ClientRect item(final int index) {

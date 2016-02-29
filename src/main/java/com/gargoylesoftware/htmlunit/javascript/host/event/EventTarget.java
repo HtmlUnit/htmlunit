@@ -73,7 +73,6 @@ public class EventTarget extends SimpleScriptable {
      * @param listener the event listener
      * @param useCapture If {@code true}, indicates that the user wishes to initiate capture
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
-     * @see #attachEvent(String, Function)
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
     public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {

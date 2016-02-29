@@ -1049,14 +1049,16 @@ public class JavaScriptEngine {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the javascript timeout.
+     * @return the javascript timeout
      */
     public long getJavaScriptTimeout() {
         return getContextFactory().getTimeout();
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the javascript timeout.
+     * @param timeout the timeout
      */
     public void setJavaScriptTimeout(final long timeout) {
         getContextFactory().setTimeout(timeout);

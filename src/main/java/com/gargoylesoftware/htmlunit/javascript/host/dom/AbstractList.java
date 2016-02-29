@@ -364,7 +364,8 @@ public class AbstractList extends SimpleScriptable implements Function {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the length.
+     * @return the length
      */
     @JsxGetter
     public final int getLength() {

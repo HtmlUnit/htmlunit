@@ -32,8 +32,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 
 /**
  * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when
- * used with an {@link HtmlElement},
- * but case-sensitive when used with a {@link DomElement}.
+ * used with an {@link com.gargoylesoftware.htmlunit.html.HtmlElement},
+ * but case-sensitive when used with a {@link com.gargoylesoftware.htmlunit.html.DomElement}.
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour

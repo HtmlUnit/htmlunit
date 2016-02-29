@@ -24,7 +24,7 @@ import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.protocol.HttpContext;
 
 /**
- * SOCKS aware {@link org.apache.http.conn.scheme.SchemeSocketFactory}.
+ * SOCKS aware {@link org.apache.http.conn.socket.ConnectionSocketFactory}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
