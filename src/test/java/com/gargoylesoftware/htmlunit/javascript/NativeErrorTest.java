@@ -42,7 +42,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "method (url)",
             FF = "method@url")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void stack() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -78,7 +78,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "method (url)",
             FF = "method@url")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void stackNewError() throws Exception {
         final String html
             = "<html><head><script>\n"

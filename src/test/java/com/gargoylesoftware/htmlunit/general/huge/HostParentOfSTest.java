@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import java.util.Collection;
 
 import org.junit.Test;
@@ -699,7 +695,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void _StaticNodeList_StaticNodeList() throws Exception {
         test("StaticNodeList", "StaticNodeList");
     }

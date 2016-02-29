@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -466,7 +464,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "titles", "HEAD", "Inner Html", "misc", "true", "BODY" })
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     // currently the content of HEAD and BODY are added directly to HTML
     public void setCompleteHtmlToHTML_innerHTML() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

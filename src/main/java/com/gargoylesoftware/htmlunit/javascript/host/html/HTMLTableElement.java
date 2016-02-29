@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_REMOVES_IF_INVALID;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -427,15 +426,4 @@ public class HTMLTableElement extends RowContainer {
         setColorAttribute("borderColorLight", borderColor);
     }
 
-    /**
-     * Overwritten to throw an exception because this is readonly.
-     * @param value the new value for the contents of this node
-     */
-    @Override
-    protected void setInnerTextImpl(final String value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
-            throw Context.reportRuntimeError("innerText is read-only for tag 'table'");
-        }
-        super.setInnerTextImpl(value);
-    }
 }

@@ -965,10 +965,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_INNER_TEXT_CR_NL,
 
-    /** Indicates that innerText is readonly for tables. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_INNER_TEXT_READONLY_FOR_TABLE,
-
     /** Setting the type property of an input converts the type to lowercase. */
     @BrowserFeature(@WebBrowser(IE))
     JS_INPUT_SET_TYPE_LOWERCASE,

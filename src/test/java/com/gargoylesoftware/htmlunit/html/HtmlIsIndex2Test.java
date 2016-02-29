@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -46,7 +42,7 @@ public class HtmlIsIndex2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             CHROME = "[object HTMLUnknownElement]")
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

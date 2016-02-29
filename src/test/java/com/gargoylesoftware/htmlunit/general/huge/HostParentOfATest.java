@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.Collection;
 
@@ -313,7 +311,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void _DOMStringMap_DOMStringMap() throws Exception {
         test("DOMStringMap", "DOMStringMap");
     }

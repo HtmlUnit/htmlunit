@@ -78,7 +78,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF38 = { "black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
             CHROME = { "black", "pink", "color: pink; background: blue;" },
             IE = { "black", "pink", "background: blue; color: pink; foo: bar;" })
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void style_MultipleCssAttributes() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -349,7 +349,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "", "" })
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"
@@ -1506,7 +1506,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "none" },
             CHROME = { "undefined", "before", "none", "exception" },
             IE = { "function", "before", "none", "after", "none" })
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void interceptSetter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"

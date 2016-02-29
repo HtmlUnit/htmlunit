@@ -1067,7 +1067,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLDocument]",
             IE = "[object Document]")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void html() throws Exception {
         final String svg
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"

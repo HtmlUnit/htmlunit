@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -166,7 +162,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "pcjFqCo5YBFYwZVUXFUG8rBtsasZcK7VcrcCsVqHT+K306rg+0QWvQSIzkfM6sZVCpeNwok2IymcS1k024dNjCQsGmbgS6k"
             + "zGkmmOIxWIkopCWAMeh2yDwDIrFPC+sQL2uKDJ0PY7Ojnac7z+Ei8d70HOwHYlEgmcoULOxvfl8lpeCZ/Ds+dNMQo9/bNYT"
             + "UfbPwd18qs91kKRhGuX7d+/9Yr/cNzIyIpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void drawImage() throws Exception {
         final InputStream is = getClass().getResourceAsStream("html.png");
         final byte[] directBytes = IOUtils.toByteArray(is);
@@ -274,7 +270,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "7VcrcCsVqHT+K306rg+0QWvQSIzkfM6sZVCpeNwok2IymcS1k024dNjCQsGmbgS6kzGkmmOIxWIkopCWAMeh2yDwDIrFPC+s"
                 + "QL2uKDJ0PY7Ojnac7z+Ei8d70HOwHYlEgmcoULOxvfl8lpeCZ/Ds+dNMQo9/bNYTUfbPwd18qs91kKRhGuX7d+/9Yr/cNzIy"
                 + "IpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     // The output depends on the deflation algorithm
     // check the output of: $pngcheck -v file.png
     // chrome gives: zlib: deflated, 256-byte window, fast compression

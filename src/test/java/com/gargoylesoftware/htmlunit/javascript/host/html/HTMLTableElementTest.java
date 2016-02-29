@@ -754,7 +754,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "\n    cell1\n  ", "[object Text]", "abc", "[object Text]", "" })
-    @NotYetImplemented(CHROME)
     public void textContent() throws Exception {
         final String html
             = "<html><body>\n"

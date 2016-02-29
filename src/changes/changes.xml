@@ -8,9 +8,12 @@
 
     <body>
         <release version="2.21" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: HTMLTableElement.innerText should not be read-only (Chrome).
+            </action>
             <action type="remove" dev="asashour">
-                Remove deprecated WebClient.closeAllWindows(), DomNode.getScriptObject(),
-                HttpWebConnection.shutdown(), SgmlPage.createDomDocumentFragment(), XmlPage.getContent(),
+                Remove deprecated WebClient.closeAllWindows(), HttpWebConnection.shutdown(),
+                SgmlPage.createDomDocumentFragment(), XmlPage.getContent(),
                 XmlPage.createXmlElement(), XmlPage.createXmlElementNS() and XmlPage.getXmlElementDescendants().
             </action>
             <action type="update" dev="asashour">

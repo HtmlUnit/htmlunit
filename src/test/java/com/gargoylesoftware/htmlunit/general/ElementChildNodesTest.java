@@ -253,7 +253,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void body() throws Exception {
         loadPageWithAlerts2(test("body"));
     }
@@ -1374,7 +1374,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "3", "2" })
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void table() throws Exception {
         loadPageWithAlerts2(test("table"));
     }
@@ -1519,7 +1519,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void title() throws Exception {
         loadPageWithAlerts2(test("title"));
     }

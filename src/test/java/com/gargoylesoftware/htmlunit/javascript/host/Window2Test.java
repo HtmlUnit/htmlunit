@@ -678,7 +678,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = { "679", "1256", "662", "1239" },
             FF = { "674", "1258", "657", "1241" },
             IE = { "705", "1256", "688", "1239" })
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
     public void changeHeightsAndWidths() throws Exception {

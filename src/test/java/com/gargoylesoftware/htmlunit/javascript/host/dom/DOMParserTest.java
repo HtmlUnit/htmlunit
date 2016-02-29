@@ -61,7 +61,7 @@ public class DOMParserTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLDocument]")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void parseFromString_text_html() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

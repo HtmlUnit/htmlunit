@@ -734,7 +734,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void html() throws Exception {
         loadPageWithAlerts2(test("html"));
     }
@@ -1037,7 +1037,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void nextid() throws Exception {
         loadPageWithAlerts2(test("nextid"));
     }
@@ -1205,7 +1205,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void ruby() throws Exception {
         loadPageWithAlerts2(test("ruby"));
     }
@@ -1316,7 +1316,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ FF, IE, CHROME })
+    @NotYetImplemented
     public void spacer() throws Exception {
         loadPageWithAlerts2(test("spacer"));
     }

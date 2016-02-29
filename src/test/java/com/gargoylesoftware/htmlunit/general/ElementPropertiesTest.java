@@ -866,7 +866,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onmsneedkey,pause(),paused,play(),"
                 + "playbackRate,played,preload,readyState,seekable,seeking,src,srcObject,textTracks,videoTracks,"
                 + "volume")
-    @NotYetImplemented({ CHROME, IE, FF, EDGE })
+    @NotYetImplemented
     public void audio() throws Exception {
         test("audio");
     }
@@ -1277,7 +1277,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             IE = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate",
             EDGE = "align,checkValidity(),disabled,form,setCustomValidity(),validationMessage,validity,willValidate")
-    @NotYetImplemented({ CHROME, IE, FF, EDGE })
+    @NotYetImplemented
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -2077,7 +2077,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "max,position,value",
             IE = "form,max,position,value",
             EDGE = "form,max,position,value")
-    @NotYetImplemented({ CHROME, IE, FF, EDGE })
+    @NotYetImplemented
     public void progress() throws Exception {
         test("progress");
     }
@@ -2216,7 +2216,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF31 = "media,src,type",
             IE = "media,src,type",
             EDGE = "media,msKeySystem,src,type")
-    @NotYetImplemented({ CHROME, IE, FF, EDGE })
+    @NotYetImplemented
     public void source() throws Exception {
         test("source");
     }
@@ -2503,7 +2503,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track")
-    @NotYetImplemented({ CHROME, IE, FF, EDGE })
+    @NotYetImplemented
     public void track() throws Exception {
         test("track");
     }
@@ -2592,7 +2592,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitDisplayingFullscreen,webkitEnterFullscreen(),webkitEnterFullScreen(),"
                 + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,"
                 + "width")
-    @NotYetImplemented({ CHROME, IE, FF, EDGE })
+    @NotYetImplemented
     public void video() throws Exception {
         test("video");
     }

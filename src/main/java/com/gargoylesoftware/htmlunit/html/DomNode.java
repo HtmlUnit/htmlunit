@@ -905,6 +905,22 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * a DOM node's JavaScript object should not have to check if they should create it first.
      *
      * @return the JavaScript object that corresponds to this node
+     * @deprecated as of 2.19, please use {@link #getScriptableObject()} instead
+     */
+    @Deprecated
+    public ScriptableObject getScriptObject() {
+        return getScriptableObject();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.
+     *
+     * The logic of when and where the JavaScript object is created needs a clean up: functions using
+     * a DOM node's JavaScript object should not have to check if they should create it first.
+     *
+     * @return the JavaScript object that corresponds to this node
      */
     public ScriptableObject getScriptableObject() {
         if (scriptObject_ == null) {

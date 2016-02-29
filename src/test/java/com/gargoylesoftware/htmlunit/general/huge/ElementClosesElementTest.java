@@ -86505,7 +86505,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void _noembed_basefont() throws Exception {
         test("noembed", "basefont");
     }
@@ -87006,7 +87006,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void _noembed_keygen() throws Exception {
         test("noembed", "keygen");
     }
@@ -101922,7 +101922,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void _select_basefont() throws Exception {
         test("select", "basefont");
     }
@@ -106690,7 +106690,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void _title_basefont() throws Exception {
         test("title", "basefont");
     }
@@ -107191,7 +107191,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void _title_keygen() throws Exception {
         test("title", "keygen");
     }
@@ -127915,7 +127915,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, FF, IE })
+    @NotYetImplemented
     public void _picture_nextid() throws Exception {
         test("picture", "nextid");
     }
