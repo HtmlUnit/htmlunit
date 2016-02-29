@@ -3712,7 +3712,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 78, 78")
-    @NotYetImplemented(CHROME)
     public void manipulation__append_String_Element_Array_Element__jQuery_() throws Exception {
         runTest("manipulation: append(String|Element|Array<Element>|jQuery)");
     }
@@ -3723,7 +3722,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 78, 78")
-    @NotYetImplemented(CHROME)
     public void manipulation__append_Function_() throws Exception {
         runTest("manipulation: append(Function)");
     }
