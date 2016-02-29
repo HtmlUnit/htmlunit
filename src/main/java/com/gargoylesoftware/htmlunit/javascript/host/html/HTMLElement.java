@@ -598,7 +598,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param localName the local name of the attribute to look for
      * @return the specified attribute, {@code null} if the attribute is not defined
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public Object getAttributeNodeNS(final String namespaceURI, final String localName) {
         return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptableObject();
     }
@@ -706,7 +706,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param className the name to search for
      * @return all the descendant elements with the specified class name
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public HTMLCollection getElementsByClassName(final String className) {
         final HtmlElement elt = getDomNodeOrDie();
         final String description = "HTMLElement.getElementsByClassName('" + className + "')";
@@ -2532,7 +2532,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the token list of class attribute
      */
     @Override
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");
     }
@@ -2596,7 +2596,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the {@code onchange} event handler for this element.
      * @param onchange the {@code onchange} event handler for this element
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxSetter
     public void setOnchange(final Object onchange) {
         setEventHandlerProp("onchange", onchange);
     }
@@ -2605,7 +2605,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the {@code onchange} event handler for this element.
      * @return the {@code onchange} event handler for this element
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public Function getOnchange() {
         return getEventHandler("onchange");
     }
@@ -2614,7 +2614,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the {@code onsubmit} event handler for this element.
      * @return the {@code onsubmit} event handler for this element
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public Object getOnsubmit() {
         return getEventHandlerProp("onsubmit");
     }
@@ -2623,7 +2623,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the {@code onsubmit} event handler for this element.
      * @param onsubmit the {@code onsubmit} event handler for this element
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxSetter
     public void setOnsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);
     }

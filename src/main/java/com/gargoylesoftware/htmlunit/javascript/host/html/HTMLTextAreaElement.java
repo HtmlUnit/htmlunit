@@ -24,7 +24,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -204,7 +203,7 @@ public class HTMLTextAreaElement extends FormField {
      * Gets the value of {@code selectionStart} attribute.
      * @return the selection start
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getSelectionStart() {
         return ((HtmlTextArea) getDomNodeOrDie()).getSelectionStart();
     }
@@ -213,7 +212,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of {@code selectionStart} attribute.
      * @param start selection start
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxSetter
     public void setSelectionStart(final int start) {
         ((HtmlTextArea) getDomNodeOrDie()).setSelectionStart(start);
     }
@@ -222,7 +221,7 @@ public class HTMLTextAreaElement extends FormField {
      * Gets the value of {@code selectionEnd} attribute.
      * @return the selection end
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getSelectionEnd() {
         return ((HtmlTextArea) getDomNodeOrDie()).getSelectionEnd();
     }
@@ -231,7 +230,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of {@code selectionEnd} attribute.
      * @param end selection end
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxSetter
     public void setSelectionEnd(final int end) {
         ((HtmlTextArea) getDomNodeOrDie()).setSelectionEnd(end);
     }
@@ -241,7 +240,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param start the index of the first character to select
      * @param end the index of the character after the selection
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public void setSelectionRange(final int start, final int end) {
         setSelectionStart(start);
         setSelectionEnd(end);
@@ -317,7 +316,7 @@ public class HTMLTextAreaElement extends FormField {
      * Returns the {@code placeholder} attribute.
      * @return the {@code placeholder} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public String getPlaceholder() {
         return ((HtmlTextArea) getDomNodeOrDie()).getPlaceholder();
     }
@@ -326,7 +325,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the {@code placeholder} attribute.
      * @param placeholder the new {@code placeholder} value
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxSetter
     public void setPlaceholder(final String placeholder) {
         ((HtmlTextArea) getDomNodeOrDie()).setPlaceholder(placeholder);
     }

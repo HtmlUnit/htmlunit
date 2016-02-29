@@ -993,7 +993,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Returns the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getCssRules() {
         if (cssRules_ == null) {
             cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
@@ -1041,7 +1041,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      * @return the position of the inserted rule
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public int insertRule(final String rule, final int position) {
         try {
             return wrapped_.insertRule(rule, position);

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -70,7 +69,7 @@ public class History extends SimpleScriptable {
      * Returns the {@code state} property.
      * @return the {@code state} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Object getState() {
         final WebWindow w = getWindow().getWebWindow();
         return w.getHistory().getCurrentState();
@@ -125,7 +124,7 @@ public class History extends SimpleScriptable {
      * @param title the title
      * @param url an optional URL
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public void replaceState(final Object object, final String title, final String url) {
         final WebWindow w = getWindow().getWebWindow();
         final HtmlPage page = (HtmlPage) w.getEnclosedPage();
@@ -150,7 +149,7 @@ public class History extends SimpleScriptable {
      * @param title the title
      * @param url an optional URL
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public void pushState(final Object object, final String title, final String url) {
         try {
             getWindow().getLocation().setHref(url, true, object);

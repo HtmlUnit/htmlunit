@@ -272,7 +272,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param stringToEncode string to encode
      * @return the encoded string
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public String btoa(final String stringToEncode) {
         return new String(Base64.encodeBase64(stringToEncode.getBytes()));
     }
@@ -282,7 +282,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param encodedData the encoded string
      * @return the decoded value
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public String atob(final String encodedData) {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
     }
@@ -339,7 +339,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the application cache.
      * @return the application cache
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public ApplicationCache getApplicationCache() {
         return applicationCache_;
     }
@@ -1492,7 +1492,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getInnerWidth() {
         return getWebWindow().getInnerWidth();
     }
@@ -1502,7 +1502,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getOuterWidth() {
         return getWebWindow().getOuterWidth();
     }
@@ -1512,7 +1512,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getInnerHeight() {
         return getWebWindow().getInnerHeight();
     }
@@ -1522,7 +1522,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getOuterHeight() {
         return getWebWindow().getOuterHeight();
     }
@@ -1545,7 +1545,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param type the type of events to capture
      * @see Document#captureEvents(String)
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public void captureEvents(final String type) {
         // Empty.
     }
@@ -1602,7 +1602,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public Selection getSelection() {
         final WebWindow webWindow = getWebWindow();
         // return null if the window is in a frame that is not displayed
@@ -1995,7 +1995,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Override
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
@@ -2120,7 +2120,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the {@code performance} property.
      * @return the {@code performance} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Performance getPerformance() {
         final Performance performance = new Performance();
         performance.setParentScope(this);
@@ -2132,7 +2132,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the {@code devicePixelRatio} property.
      * @return the {@code devicePixelRatio} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getDevicePixelRatio() {
         return 1;
     }
@@ -2155,7 +2155,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param mediaQueryString the media query
      * @return a new MediaQueryList object
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public MediaQueryList matchMedia(final String mediaQueryString) {
         final MediaQueryList mediaQueryList = new MediaQueryList(mediaQueryString);
         mediaQueryList.setParentScope(this);

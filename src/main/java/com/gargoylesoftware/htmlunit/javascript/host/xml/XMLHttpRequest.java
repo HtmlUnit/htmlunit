@@ -259,7 +259,7 @@ public class XMLHttpRequest extends EventTarget {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter
     public Function getOnload() {
         return loadHandler_;
     }
@@ -268,7 +268,7 @@ public class XMLHttpRequest extends EventTarget {
      * Sets the event handler that fires on load.
      * @param loadHandler the event handler that fires on load
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setOnload(final Function loadHandler) {
         loadHandler_ = loadHandler;
     }
@@ -277,7 +277,7 @@ public class XMLHttpRequest extends EventTarget {
      * Returns the event handler that fires on error.
      * @return the event handler that fires on error
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter
     public Function getOnerror() {
         return errorHandler_;
     }
@@ -286,7 +286,7 @@ public class XMLHttpRequest extends EventTarget {
      * Sets the event handler that fires on error.
      * @param errorHandler the event handler that fires on error
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setOnerror(final Function errorHandler) {
         errorHandler_ = errorHandler;
     }
@@ -913,7 +913,7 @@ public class XMLHttpRequest extends EventTarget {
      * @param mimeType the type used to override that returned by the server (if any)
      * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction
     public void overrideMimeType(final String mimeType) {
         if (getBrowserVersion().hasFeature(XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND)
                 && state_ != UNSENT && state_ != OPENED) {
@@ -926,7 +926,7 @@ public class XMLHttpRequest extends EventTarget {
      * Returns the {@code withCredentials} property.
      * @return the {@code withCredentials} property
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter
     public boolean getWithCredentials() {
         return withCredentials_;
     }
@@ -935,7 +935,7 @@ public class XMLHttpRequest extends EventTarget {
      * Sets the {@code withCredentials} property.
      * @param withCredentials the {@code withCredentials} property.
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setWithCredentials(final boolean withCredentials) {
         if (!async_ && state_ != UNSENT) {
             if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION)) {

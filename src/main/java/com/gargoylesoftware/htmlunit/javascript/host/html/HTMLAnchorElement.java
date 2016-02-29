@@ -517,7 +517,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code text} attribute.
      * @return the {@code text} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public String getText() {
         final DomNode htmlElement = getDomNodeOrDie();
         return htmlElement.asText();
@@ -527,7 +527,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code text} attribute.
      * @param text the {@code text} attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxSetter
     public void setText(final String text) {
         final DomNode htmlElement = getDomNodeOrDie();
         htmlElement.setTextContent(text);

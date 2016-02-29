@@ -291,7 +291,7 @@ public class MouseEvent extends UIEvent {
      * @param button what mouse button is pressed
      * @param relatedTarget is there a related target for the event
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public void initMouseEvent(
             final String type,
             final boolean bubbles,
@@ -354,7 +354,7 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public boolean getAltKey() {
         return super.getAltKey();
     }
@@ -363,7 +363,7 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public boolean getCtrlKey() {
         return super.getCtrlKey();
     }
@@ -372,7 +372,7 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public boolean getShiftKey() {
         return super.getShiftKey();
     }

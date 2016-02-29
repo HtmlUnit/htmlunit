@@ -87,7 +87,7 @@ public class UIEvent extends Event {
      *
      * @return some detail information about the event, depending on the event type
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public long getDetail() {
         return detail_;
     }
@@ -124,7 +124,7 @@ public class UIEvent extends Event {
      *
      * @return the view from which the event was generated
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Object getView() {
         return getWindow();
     }
@@ -154,7 +154,7 @@ public class UIEvent extends Event {
      * Returns whether or not the "meta" key was pressed during the event firing.
      * @return whether or not the "meta" key was pressed during the event firing
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public boolean getMetaKey() {
         return metaKey_;
     }

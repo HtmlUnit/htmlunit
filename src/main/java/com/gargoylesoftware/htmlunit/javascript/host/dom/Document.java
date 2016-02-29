@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -211,7 +212,8 @@ public class Document extends EventNode {
      */
     @JsxSetter
     public void setDesignMode(final String mode) {
-        final boolean inherit = getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
+        final BrowserVersion browserVersion = getBrowserVersion();
+        final boolean inherit = browserVersion.hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
         if (inherit) {
             if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
                 throw Context.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
@@ -231,7 +233,8 @@ public class Document extends EventNode {
             if ("on".equalsIgnoreCase(mode)) {
                 designMode_ = "on";
                 final SgmlPage page = getPage();
-                if (page != null && page.isHtmlPage()) {
+                if (page != null && page.isHtmlPage()
+                        && getBrowserVersion().hasFeature(JS_DOCUMENT_SELECTION_RANGE_COUNT)) {
                     final HtmlPage htmlPage = (HtmlPage) page;
                     final DomNode child = htmlPage.getBody().getFirstChild();
                     final DomNode rangeNode = child == null ? htmlPage.getBody() : child;
@@ -256,7 +259,7 @@ public class Document extends EventNode {
      * Gets the window in which this document is contained.
      * @return the window
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Object getDefaultView() {
         return getWindow();
     }
@@ -325,7 +328,7 @@ public class Document extends EventNode {
      * @param type the type of events to capture
      * @see Window#captureEvents(String)
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public void captureEvents(final String type) {
         // Empty.
     }
@@ -500,7 +503,7 @@ public class Document extends EventNode {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public Object createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
         if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {

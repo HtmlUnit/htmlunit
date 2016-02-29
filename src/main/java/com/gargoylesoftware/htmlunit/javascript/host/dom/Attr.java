@@ -111,7 +111,7 @@ public class Attr extends Node {
      * Returns the owner element.
      * @return the owner element
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Object getOwnerElement() {
         final DomElement parent = getDomNodeOrDie().getOwnerElement();
         if (parent != null) {

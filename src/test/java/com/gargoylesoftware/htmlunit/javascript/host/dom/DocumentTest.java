@@ -1859,7 +1859,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "0", "0" },
             FF = { "0", "1", "1" })
     @BuggyWebDriver(FF31)
-    @NotYetImplemented(CHROME)
     public void designMode_createsSelectionRange() throws Exception {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
         final String html2 = "<html><body onload='test()'>\n"
@@ -1882,13 +1881,12 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * Minimal test for <tt>execCommand</tt>.
+     * Minimal test for {@code execCommand}.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = { "true", "false" },
             CHROME = { "false", "false" })
-    @NotYetImplemented(CHROME)
     public void execCommand() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

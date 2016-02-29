@@ -256,7 +256,7 @@ public class Element extends EventNode {
      *                  which matches all elements.
      * @return a live NodeList of found elements in the order they appear in the tree
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Element.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
 
@@ -313,7 +313,7 @@ public class Element extends EventNode {
      * Returns the current number of child elements.
      * @return the child element count
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getChildElementCount() {
         return getDomNodeOrDie().getChildElementCount();
     }
@@ -322,7 +322,7 @@ public class Element extends EventNode {
      * Returns the first element child.
      * @return the first element child
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Element getFirstElementChild() {
         final DomElement child = getDomNodeOrDie().getFirstElementChild();
         if (child != null) {
@@ -335,7 +335,7 @@ public class Element extends EventNode {
      * Returns the last element child.
      * @return the last element child
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Element getLastElementChild() {
         final DomElement child = getDomNodeOrDie().getLastElementChild();
         if (child != null) {
@@ -348,7 +348,7 @@ public class Element extends EventNode {
      * Returns the next element sibling.
      * @return the next element sibling
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Element getNextElementSibling() {
         final DomElement child = getDomNodeOrDie().getNextElementSibling();
         if (child != null) {
@@ -361,7 +361,7 @@ public class Element extends EventNode {
      * Returns the previous element sibling.
      * @return the previous element sibling
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Element getPreviousElementSibling() {
         final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
         if (child != null) {
@@ -437,7 +437,7 @@ public class Element extends EventNode {
      * @param localName the local name of the attribute to look for
      * @return the value of the specified attribute, {@code null} if the attribute is not defined
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public String getAttributeNS(final String namespaceURI, final String localName) {
         final String value = getDomNodeOrDie().getAttributeNS(namespaceURI, localName);
         if (ATTRIBUTE_NOT_DEFINED == value
@@ -456,7 +456,7 @@ public class Element extends EventNode {
      * @param localName the local name of the attribute to look for
      * @return {@code true} if the node has this attribute
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public boolean hasAttributeNS(final String namespaceURI, final String localName) {
         return getDomNodeOrDie().hasAttributeNS(namespaceURI, localName);
     }
@@ -467,7 +467,7 @@ public class Element extends EventNode {
      * @param qualifiedName the qualified name of the attribute to look for
      * @param value the new attribute value
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
         getDomNodeOrDie().setAttributeNS(namespaceURI, qualifiedName, value);
     }
@@ -477,7 +477,7 @@ public class Element extends EventNode {
      * @param namespaceURI the namespace URI of the attribute to remove
      * @param localName the local name of the attribute to remove
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public void removeAttributeNS(final String namespaceURI, final String localName) {
         getDomNodeOrDie().removeAttributeNS(namespaceURI, localName);
     }

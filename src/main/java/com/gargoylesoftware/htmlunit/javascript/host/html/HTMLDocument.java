@@ -255,7 +255,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             "UnBookmark",
             "Paste"
         );
-        for (String cmd : cmds) {
+        for (final String cmd : cmds) {
             EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
         }
 
@@ -274,9 +274,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             "SelectAll", "StrikeThrough", "Subscript", "Superscript",
             "Underline", "Undo", "Unlink", "Unselect"
         );
-        for (String cmd : cmds) {
+        for (final String cmd : cmds) {
             EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
-            EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
+            if (!"Bold".equals(cmd)) {
+                EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
+            }
         }
 
         cmds = Arrays.asList(
@@ -288,9 +290,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             "removeFormat", "selectAll", "strikeThrough", "subscript", "superscript", "underline", "undo", "unlink",
             "useCSS", "styleWithCSS"
         );
-        for (String cmd : cmds) {
+        for (final String cmd : cmds) {
             EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ROOT));
-            EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
+            if (!"bold".equals(cmd)) {
+                EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
+            }
         }
     }
 
@@ -894,7 +898,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns a string representing the encoding under which the document was parsed.
      * @return a string representing the encoding under which the document was parsed
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public String getInputEncoding() {
         final String encoding = getPage().getPageEncoding();
         if (encoding != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
@@ -907,7 +911,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the character encoding of the current document.
      * @return the character encoding of the current document
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public String getCharacterSet() {
         final String charset = getPage().getPageEncoding();
         if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
@@ -1658,7 +1662,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return a new range
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">XUL Planet</a>
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public Range createRange() {
         final Range r = new Range(this);
         r.setParentScope(getWindow());
@@ -1687,7 +1691,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @throws DOMException on attempt to create a TreeWalker with a root that is {@code null}
      * @return a new TreeWalker
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public Object createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
             boolean expandEntityReferences) throws DOMException {
 
@@ -1852,7 +1856,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Override
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
@@ -1955,7 +1959,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public Selection getSelection() {
         return getWindow().getSelectionImpl();
     }
@@ -1978,7 +1982,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param filter an object implementing the {@link NodeFilter} interface
      * @return a new NodeIterator object
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public NodeIterator createNodeIterator(final Node root, final double whatToShow, final Scriptable filter) {
         final NodeIterator iterator = new NodeIterator(root, whatToShow, filter);
         iterator.setParentScope(getParentScope());

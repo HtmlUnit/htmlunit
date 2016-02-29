@@ -9,6 +9,9 @@
     <body>
         <release version="2.21" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: fix Selection.rangeCount for Chrome.
+            </action>
+            <action type="fix" dev="asashour">
                 CSS: Chrome doesn't support 'target' selector.
             </action>
             <action type="fix" dev="asashour">

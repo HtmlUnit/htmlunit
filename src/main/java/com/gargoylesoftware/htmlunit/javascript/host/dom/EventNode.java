@@ -14,13 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Locale;
-
-import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,6 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * A node which supports all of the <tt>onXXX</tt> event handlers and other event-related functions.
@@ -371,7 +369,7 @@ public class EventNode extends Node {
      * Returns the {@code oninput} event handler for this element.
      * @return the {@code oninput} event handler for this element
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public Function getOninput() {
         return getEventHandler("oninput");
     }
@@ -380,7 +378,7 @@ public class EventNode extends Node {
      * Sets the {@code oninput} event handler for this element.
      * @param onchange the {@code oninput} event handler for this element
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxSetter
     public void setOninput(final Object onchange) {
         setEventHandlerProp("oninput", onchange);
     }

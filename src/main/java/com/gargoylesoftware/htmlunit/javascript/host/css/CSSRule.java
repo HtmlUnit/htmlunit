@@ -197,7 +197,7 @@ public class CSSRule extends SimpleScriptable {
      * Returns the type of the rule.
      * @return the type of the rule.
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public short getType() {
         return rule_.getType();
     }
@@ -207,7 +207,7 @@ public class CSSRule extends SimpleScriptable {
      * This reflects the current state of the rule and not its initial value.
      * @return the parsable textual representation of the rule.
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public String getCssText() {
         return rule_.getCssText();
     }
@@ -225,7 +225,7 @@ public class CSSRule extends SimpleScriptable {
      * Returns the style sheet that contains this rule.
      * @return the style sheet that contains this rule.
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public CSSStyleSheet getParentStyleSheet() {
         return stylesheet_;
     }
@@ -235,7 +235,7 @@ public class CSSRule extends SimpleScriptable {
      * this is the containing rule. If this rule is not nested inside any other rules, this returns {@code null}.
      * @return the parent rule
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public CSSRule getParentRule() {
         final org.w3c.dom.css.CSSRule parentRule = rule_.getParentRule();
         if (parentRule != null) {

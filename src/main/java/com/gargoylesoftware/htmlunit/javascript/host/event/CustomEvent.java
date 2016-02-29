@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -51,7 +50,7 @@ public class CustomEvent extends Event {
      * @param cancelable can the event be canceled
      * @param detail the detail to set for the event
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public void initCustomEvent(
             final String type,
             final boolean bubbles,

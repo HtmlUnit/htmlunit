@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDT
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -370,7 +369,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the {@code naturalWidth} property.
      * @return the value of the {@code naturalWidth} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getNaturalWidth() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         try {
@@ -385,7 +384,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the {@code naturalHeight} property.
      * @return the value of the {@code naturalHeight} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getNaturalHeight() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         try {

@@ -1724,7 +1724,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code cssFloat} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public String getCssFloat() {
         return getStyleAttribute(FLOAT);
     }
@@ -1733,7 +1733,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code cssFloat} style attribute.
      * @param value the new attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxSetter
     public void setCssFloat(final String value) {
         setStyleAttribute(FLOAT, value);
     }
@@ -2138,7 +2138,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "length", not yet implemented.
      * @return the length
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public int getLength() {
         return getStyleMap().size();
     }
@@ -3819,7 +3819,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code opacity} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter
     public String getOpacity() {
         final String opacity = getStyleAttribute(OPACITY);
         if (opacity == null || opacity.isEmpty()) {
@@ -3844,7 +3844,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code opacity} style attribute.
      * @param opacity the new attribute
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxSetter
     public void setOpacity(final String opacity) {
         if (opacity.isEmpty()) {
             setStyleAttribute(OPACITY, opacity);
@@ -5283,7 +5283,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the style property name
      * @return empty string if nothing found
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public String getPropertyValue(final String name) {
         if (name != null && name.contains("-")) {
             final Object value = getProperty(this, camelize(name));
@@ -5342,7 +5342,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the style property name
      * @return empty string if nothing found
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public String getPropertyPriority(final String name) {
         return getStylePriority(name);
     }
@@ -5354,7 +5354,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param value the value to assign to the attribute
      * @param important may be null
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public void setProperty(final String name, final String value, final String important) {
         if (StringUtils.isEmpty(important) || "null".equals(important)) {
             setStyleAttribute(name, value, "");
@@ -5376,7 +5376,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the name of the property to remove
      * @return the value deleted
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public String removeProperty(final Object name) {
         return removeStyleAttribute(Context.toString(name));
     }

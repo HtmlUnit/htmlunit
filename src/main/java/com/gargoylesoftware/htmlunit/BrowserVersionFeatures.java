@@ -622,6 +622,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
 
+    /** The browser has selection {@code rangeCount}. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    JS_DOCUMENT_SELECTION_RANGE_COUNT,
+
     /** Javascript property document.domain doesn't allow to set domain of about:blank. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
@@ -643,7 +647,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_1,
 
     /** If document.implementation.hasFeature() supports 'CSS2 2.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_2,
 
     /** If document.implementation.hasFeature() supports 'CSS2 3.0'. */
@@ -679,7 +683,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1,
 
     /** If document.implementation.hasFeature() supports 'Events 3.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3,
 
     /** If document.implementation.hasFeature() supports 'HTML 3.0'. */
@@ -699,7 +703,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_1,
 
     /** If document.implementation.hasFeature() supports 'MouseEvents 2.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_2,
 
     /** If document.implementation.hasFeature() supports 'MutationEvents 1.0'. */
@@ -707,7 +711,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_1,
 
     /** If document.implementation.hasFeature() supports 'MutationEvents 2.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2,
 
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
@@ -719,7 +723,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_RANGE_1,
 
     /** If document.implementation.hasFeature() supports 'Range 2.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_RANGE_2,
 
     /** If document.implementation.hasFeature() supports 'Range 3.0'. */
@@ -731,7 +735,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS,
 
     /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_0,
 
     /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2'. */
@@ -739,7 +743,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_2,
 
     /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#Shape 1.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_0,
 
     /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#Shape 1.2'. */
@@ -755,7 +759,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1,
 
     /** If document.implementation.hasFeature() supports 'Traversal 2.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2,
 
     /** If document.implementation.hasFeature() supports 'Traversal 3.0'. */
@@ -767,7 +771,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2,
 
     /** If document.implementation.hasFeature() supports 'UIEvents 3.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_3,
 
     /** If document.implementation.hasFeature() supports 'Validation'. */
@@ -779,7 +783,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_1,
 
     /** If document.implementation.hasFeature() supports 'Views 2.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_2,
 
     /** If document.implementation.hasFeature() supports 'Views 3.0'. */
@@ -787,7 +791,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_3,
 
     /** If document.implementation.hasFeature() supports 'XHTML 1.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature
     JS_DOMIMPLEMENTATION_FEATURE_XHTML_1,
 
     /** If document.implementation.hasFeature() supports 'XHTML 3.0'. */

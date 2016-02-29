@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.SACMediaList;
@@ -80,7 +79,7 @@ public class MediaQueryList extends EventTarget {
      * Adds the {@code listener} event handler for this element.
      * @param listener the {@code listener} event handler for this element
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public void addListener(final Object listener) {
         // dummy impl for the moment
     }
@@ -89,7 +88,7 @@ public class MediaQueryList extends EventTarget {
      * Removes the {@code listener} event handler for this element.
      * @param listener the {@code listener} event handler to be removed
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public void removeListener(final Object listener) {
         // dummy impl for the moment
     }

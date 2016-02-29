@@ -72,7 +72,7 @@ public class DocumentType extends Node {
      * Returns the publicId.
      * @return the publicId
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public String getPublicId() {
         return ((DomDocumentType) getDomNodeOrDie()).getPublicId();
     }
@@ -81,7 +81,7 @@ public class DocumentType extends Node {
      * Returns the systemId.
      * @return the systemId
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public String getSystemId() {
         return ((DomDocumentType) getDomNodeOrDie()).getSystemId();
     }

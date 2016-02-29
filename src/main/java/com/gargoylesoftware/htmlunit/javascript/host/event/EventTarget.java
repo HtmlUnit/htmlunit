@@ -74,7 +74,7 @@ public class EventTarget extends SimpleScriptable {
      * @param useCapture If {@code true}, indicates that the user wishes to initiate capture
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
@@ -262,7 +262,7 @@ public class EventTarget extends SimpleScriptable {
      * @return {@code false} if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final DomElement element = (DomElement) getDomNodeOrNull();
@@ -289,7 +289,7 @@ public class EventTarget extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
      * documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }

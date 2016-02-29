@@ -44,19 +44,19 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class KeyboardEvent extends UIEvent {
 
     /** Constant for {@code DOM_KEY_LOCATION_STANDARD}. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxConstant
     public static final int DOM_KEY_LOCATION_STANDARD = 0;
 
     /** Constant for {@code DOM_KEY_LOCATION_LEFT}. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxConstant
     public static final int DOM_KEY_LOCATION_LEFT = 1;
 
     /** Constant for {@code DOM_KEY_LOCATION_RIGHT}. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxConstant
     public static final int DOM_KEY_LOCATION_RIGHT = 2;
 
     /** Constant for {@code DOM_KEY_LOCATION_NUMPAD}. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxConstant
     public static final int DOM_KEY_LOCATION_NUMPAD = 3;
 
     /** Constant for {@code DOM_KEY_LOCATION_MOBILE}. */

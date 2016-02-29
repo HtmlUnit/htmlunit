@@ -154,7 +154,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter
     public Object getOnload() {
         return getEventHandlerProp("onload");
     }
@@ -163,7 +163,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the event handler that fires on load.
      * @param handler the event handler that fires on load
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxSetter
     public void setOnload(final Object handler) {
         setEventHandlerProp("onload", handler);
     }
