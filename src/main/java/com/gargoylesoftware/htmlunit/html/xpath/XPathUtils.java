@@ -134,9 +134,10 @@ public final class XPathUtils {
             resolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
         }
 
-        final boolean caseSensitive = contextNode.getPage().hasCaseSensitiveTagNames()
-                || contextNode.getPage().getWebClient().getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE);
-        final XPathAdapter xpath = new XPathAdapter(str, null, resolver, null, caseSensitive);
+        final boolean caseSensitive = contextNode.getPage().hasCaseSensitiveTagNames();
+        final boolean attributeCaseSensitive
+            = contextNode.getPage().getWebClient().getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE);
+        final XPathAdapter xpath = new XPathAdapter(str, null, resolver, null, caseSensitive, attributeCaseSensitive);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
     }

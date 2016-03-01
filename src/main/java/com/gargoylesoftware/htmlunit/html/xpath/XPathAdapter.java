@@ -61,10 +61,12 @@ class XPathAdapter {
      * @param prefixResolver a prefix resolver to use to resolve prefixes to namespace URIs
      * @param errorListener the error listener, or {@code null} if default should be used
      * @param caseSensitive whether or not the XPath expression should be case-sensitive
+     * @param attributeCaseSensitive whether or not the attributes should be case-sensitive
      * @throws TransformerException if a syntax or other error occurs
      */
     XPathAdapter(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
-        ErrorListener errorListener, final boolean caseSensitive) throws TransformerException {
+        ErrorListener errorListener, final boolean caseSensitive, final boolean attributeCaseSensitive)
+                throws TransformerException {
 
         initFunctionTable();
 
@@ -72,7 +74,7 @@ class XPathAdapter {
             errorListener = new DefaultErrorHandler();
         }
 
-        exprString = preProcessXPath(exprString, caseSensitive);
+        exprString = preProcessXPath(exprString, caseSensitive, attributeCaseSensitive);
 
         final XPathParser parser = new XPathParser(errorListener, locator);
         final Compiler compiler = new Compiler(errorListener, locator, funcTable_);
@@ -94,14 +96,18 @@ class XPathAdapter {
      *
      * @param xpath the XPath expression to pre-process
      * @param caseSensitive whether or not the XPath expression should be case-sensitive
+     * @param attributeCaseSensitive whether or not the attributes should be case-sensitive
      * @return the processed XPath expression
      */
-    private static String preProcessXPath(String xpath, final boolean caseSensitive) {
+    private static String preProcessXPath(String xpath, final boolean caseSensitive,
+            final boolean attributeCaseSensitive) {
         final char[] charArray = xpath.toCharArray();
-        processOutsideBrackets(charArray);
+        if (!caseSensitive) {
+            processOutsideBrackets(charArray);
+        }
         xpath = new String(charArray);
 
-        if (!caseSensitive) {
+        if (!attributeCaseSensitive) {
             final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
             while (matcher.find()) {
                 final String attribute = matcher.group(1);
