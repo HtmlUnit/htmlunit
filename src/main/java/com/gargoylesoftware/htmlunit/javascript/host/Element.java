@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_CLASS_LIST_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
@@ -306,7 +307,15 @@ public class Element extends EventNode {
      */
     @JsxFunction
     public ClientRect getBoundingClientRect() {
-        return null;
+        if (!getDomNodeOrDie().isDirectlyAttachedToPage()
+                && getBrowserVersion().hasFeature(JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED)) {
+            throw Context.reportRuntimeError("Element is not attache to a page");
+        }
+
+        final ClientRect textRectangle = new ClientRect(1, 1, 1, 1);
+        textRectangle.setParentScope(getWindow());
+        textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
+        return textRectangle;
     }
 
     /**
