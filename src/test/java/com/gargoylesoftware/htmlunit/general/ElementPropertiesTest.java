@@ -1167,7 +1167,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             CHROME = "open")
-    @NotYetImplemented(CHROME)
     public void details() throws Exception {
         test("details");
     }

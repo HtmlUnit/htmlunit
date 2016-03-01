@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
@@ -228,7 +227,6 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "parsererror",
             IE = "exception")
-    @NotYetImplemented(CHROME)
     public void parseFromString_invalidXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -255,7 +253,6 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "parsererror",
             IE = "0")
-    @NotYetImplemented(CHROME)
     public void parseFromString_emptyString() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

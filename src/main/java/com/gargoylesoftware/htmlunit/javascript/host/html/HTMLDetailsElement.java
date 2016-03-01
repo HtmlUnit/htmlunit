@@ -35,4 +35,12 @@ public class HTMLDetailsElement extends HTMLElement {
     @JsxConstructor
     public HTMLDetailsElement() {
     }
+
+    /**
+     * Returns the {@code open} property.
+     * @return the {@code open} property
+     */
+    public boolean isOpen() {
+        return getDomNodeOrDie().hasAttribute("open");
+    }
 }

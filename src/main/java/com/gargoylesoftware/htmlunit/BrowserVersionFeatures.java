@@ -819,8 +819,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOMPARSER_EXCEPTION_ON_ERROR,
 
-    /** <code>DOMParser.parseFromString(..)</code> creates a document containing a <code>parsererror</code> element. */
-    @BrowserFeature(@WebBrowser(FF))
+    /** {@code DOMParser.parseFromString(..)} creates a document containing a {@code parsererror} element. */
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
 
     /** DOMTokenList uses a enhanced set of whitespace chars. */
@@ -835,8 +835,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE,
 
-    /** Javascript property function delete thows an exception if the
-     * given count is negative. */
+    /** Javascript property function {@code delete} throws an exception if the given count is negative. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT,
 
@@ -848,8 +847,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY,
 
-    /** The Enumerator constructor throws an exception if called with HtmlCollections
-     * as parameter. */
+    /** The Enumerator constructor throws an exception if called with HtmlCollections as parameter. */
     @BrowserFeature(@WebBrowser(IE))
     JS_ENUMERATOR_CONSTRUCTOR_THROWS,
 
@@ -898,9 +896,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_FORM_USABLE_AS_FUNCTION,
 
-    /**
-     * Indicates that function is defined even before its declaration, inside a block.
-     */
+    /** Indicates that function is defined even before its declaration, inside a block. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK,
 
@@ -1043,15 +1039,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_MENU_TYPE_EMPTY,
 
-    /**
-     * Indicates if the String representation of a native function is without newline.
-     */
+    /** Indicates if the String representation of a native function is without newline. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
 
-    /**
-     * Indicates if the String representation of a native function begins and ends with a \n.
-     */
+    /** Indicates if the String representation of a native function begins and ends with a {@code \n}.*/
     @BrowserFeature(@WebBrowser(IE))
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
 
@@ -1067,8 +1059,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
 
-    /** Indicates that someObj.offsetParent returns null, it someObj has fixed style.
-     */
+    /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
     @BrowserFeature(@WebBrowser(IE))
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
@@ -1267,16 +1258,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
 
-    /** Setting the property maxLength throws an exception, if the provided value is less
-     * than 0 (Chrome, FF).
-     * IE sets the value in this case.
-     */
+    /** Setting the property {@code maxLength} throws an exception, if the provided value is less than 0. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION,
 
-    /** Setting the property rows throws an exception, if the provided value is less than 0.
-     * FF ignores the provided value in this case.
-     */
+    /** Setting the property {@code rows} throws an exception, if the provided value is less than 0. */
     @BrowserFeature(@WebBrowser(IE))
     JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION,
 
