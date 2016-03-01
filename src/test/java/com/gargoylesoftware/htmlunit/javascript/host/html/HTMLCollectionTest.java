@@ -141,7 +141,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             IE = { "string 1", "string action", "string first_submit", "string item",
                 "string length", "string namedItem", "string second_submit", "string val1",
                 "string val2" })
-    @NotYetImplemented({ FF31, IE, CHROME })
+    @NotYetImplemented({ FF31, IE })
     public void for_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -653,7 +653,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "b6-button6",
             CHROME = "button6-button6_2")
-    @NotYetImplemented(CHROME)
     public void namedItem_DuplicateIdName() throws Exception {
         namedItem("button6");
     }

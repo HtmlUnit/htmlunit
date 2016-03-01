@@ -532,6 +532,7 @@ public class AbstractList extends SimpleScriptable implements Function {
         if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_CHILDREN)) {
             addElementIds(idList, elements);
         }
+
         return idList.toArray();
     }
 
@@ -552,14 +553,12 @@ public class AbstractList extends SimpleScriptable implements Function {
             if (name != DomElement.ATTRIBUTE_NOT_DEFINED) {
                 idList.add(name);
             }
-            else {
-                final String id = element.getId();
-                if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
-                    idList.add(id);
-                }
-                else {
-                    idList.add(Integer.toString(index));
-                }
+            final String id = element.getId();
+            if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
+                idList.add(id);
+            }
+            if (!getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
+                idList.add(Integer.toString(index));
             }
             index++;
         }

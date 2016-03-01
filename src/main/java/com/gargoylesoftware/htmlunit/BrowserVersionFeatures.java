@@ -320,6 +320,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO,
 
+    /** HtmlCollection.namedItem searches by id first. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLCOLLECTION_NAMED_ITEM_ID_FIRST,
+
     /** HtmlCollection.item returns null instead of undefined if an element was not found. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,

@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -208,6 +209,18 @@ public class HTMLCollection extends AbstractList {
     @JsxFunction
     public Object namedItem(final String name) {
         final List<Object> elements = getElements();
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(HTMLCOLLECTION_NAMED_ITEM_ID_FIRST)) {
+            for (final Object next : elements) {
+                if (next instanceof DomElement) {
+                    final DomElement elem = (DomElement) next;
+                    final String id = elem.getAttribute("id");
+                    if (name.equals(id)) {
+                        return getScriptableForElement(elem);
+                    }
+                }
+            }
+        }
         for (final Object next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
