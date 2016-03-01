@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.html.HtmlDetails;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -40,6 +41,7 @@ public class HTMLDetailsElement extends HTMLElement {
      * Returns the {@code open} property.
      * @return the {@code open} property
      */
+    @JsxGetter
     public boolean isOpen() {
         return getDomNodeOrDie().hasAttribute("open");
     }
