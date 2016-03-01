@@ -484,14 +484,16 @@ public class AbstractList extends SimpleScriptable implements Function {
 
         if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_CHILDREN)) {
             for (final Object next : getElements()) {
-                final HtmlElement element = (HtmlElement) next;
-                if (name.equals(element.getAttribute("name"))) {
-                    return true;
-                }
-                else {
-                    final String id = element.getId();
-                    if (name.equals(id)) {
+                if (next instanceof DomElement) {
+                    final DomElement element = (DomElement) next;
+                    if (name.equals(element.getAttribute("name"))) {
                         return true;
+                    }
+                    else {
+                        final String id = element.getId();
+                        if (name.equals(id)) {
+                            return true;
+                        }
                     }
                 }
             }
