@@ -82,7 +82,7 @@ public class SVGPathElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object SVGPathElement]", "647.213623046875" })
+    @Alerts({ "[object SVGPathElement]", "647.213623046875" })
     @NotYetImplemented
     public void getTotalLength() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
