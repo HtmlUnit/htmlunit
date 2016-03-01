@@ -1748,10 +1748,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean queryCommandSupported(final String cmd) {
-        return hasCommand(cmd);
+        return hasCommand(cmd, true);
     }
 
-    private boolean hasCommand(final String cmd) {
+    private boolean hasCommand(final String cmd, final boolean includeBold) {
         if (null == cmd) {
             return false;
         }
@@ -1761,7 +1761,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return EXECUTE_CMDS_IE.contains(cmdLC);
         }
         if (getBrowserVersion().isChrome()) {
-            return EXECUTE_CMDS_CHROME.contains(cmdLC) || "bold".equalsIgnoreCase(cmd);
+            return EXECUTE_CMDS_CHROME.contains(cmdLC) || (includeBold && "bold".equalsIgnoreCase(cmd));
         }
         return EXECUTE_CMDS_FF.contains(cmdLC);
     }
@@ -1774,7 +1774,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean queryCommandEnabled(final String cmd) {
-        return hasCommand(cmd);
+        return hasCommand(cmd, true);
     }
 
     /**
@@ -1787,7 +1787,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
-        if (!hasCommand(cmd)) {
+        if (!hasCommand(cmd, false)) {
             return false;
         }
         LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
