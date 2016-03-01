@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1752">
+                JavaScript: ClassCastException in DOMTokenList#updateAttribute().
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: HTMLCollection to enumerate children names (Chrome).
             </action>

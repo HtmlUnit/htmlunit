@@ -36,5 +36,4 @@ public class DOMSettableTokenList extends DOMTokenList {
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public DOMSettableTokenList() {
     }
-
 }

@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -577,6 +580,37 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class='" + in + "'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "2", "3" },
+            IE = "no list")
+    @NotYetImplemented(FF31)
+    public void addSvg() throws Exception {
+        final String html
+            = "<html><head><title>Test</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('myId');\n"
+            + "    var list = elem.classList;\n"
+            + "    if (!list) { alert('no list'); return; }\n"
+
+            + "    alert(list.length);\n"
+            + "    try {\n"
+            + "      list.add('new');\n"
+            + "    } catch(e) { alert('exception');}\n"
+            + "    alert(list.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
+            + "    <text id='myId' class='cls1, cls2'/>\n"
+            + "  </svg>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

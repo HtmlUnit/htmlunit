@@ -27,7 +27,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -210,7 +210,7 @@ public class DOMTokenList extends SimpleScriptable {
     }
 
     private void updateAttribute(final String value) {
-        final HtmlElement domNode = (HtmlElement) getDomNodeOrDie();
+        final DomElement domNode = (DomElement) getDomNodeOrDie();
         DomAttr attr = (DomAttr) domNode.getAttributes().getNamedItem(attributeName_);
         if (null == attr) {
             attr = domNode.getPage().createAttribute(attributeName_);
