@@ -340,6 +340,17 @@ public class AbstractList extends SimpleScriptable implements Function {
         }
 
         // no element found by id, let's search by name
+        return getWithPreemptionByName(name, elements);
+    }
+
+    /**
+     * Helper for {@link #getWithPreemption(String)} when finding by id doesn't get results.
+     * @param name the property name
+     * @param elements the children elements.
+     * @return {@link Scriptable#NOT_FOUND} if not found
+     */
+    protected Object getWithPreemptionByName(final String name, final List<Object> elements) {
+        final List<Object> matchingElements = new ArrayList<>();
         for (final Object next : elements) {
             if (next instanceof DomElement) {
                 final String nodeName = ((DomElement) next).getAttribute("name");
@@ -479,7 +490,7 @@ public class AbstractList extends SimpleScriptable implements Function {
 
             idList.add("length");
             final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
-                    .getJavaScriptEngine().getJavaScriptConfiguration();
+                .getJavaScriptEngine().getJavaScriptConfiguration();
             for (final String name : jsConfig.getClassConfiguration(getClassName()).getFunctionKeys()) {
                 idList.add(name);
             }

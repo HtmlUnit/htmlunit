@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -28,10 +27,8 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -41,7 +38,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -119,76 +115,12 @@ public class HTMLCollection extends AbstractList {
     }
 
     /**
-     * Returns the elements whose associated host objects are available through this collection.
-     * @return the elements whose associated host objects are available through this collection
-     */
-    @Override
-    protected List<Object> computeElements() {
-        final List<Object> response = new ArrayList<>();
-        final DomNode domNode = getDomNodeOrNull();
-        if (domNode == null) {
-            return response;
-        }
-        for (final DomNode node : getCandidates()) {
-            if ((node instanceof DomElement) && isMatching(node)) {
-                response.add(node);
-            }
-        }
-        return response;
-    }
-
-    /**
-     * Indicates if the node should belong to the collection.
-     * Belongs to the refactoring effort to improve HTMLCollection's performance.
-     * @param node the node to test. Will be a child node of the reference node.
-     * @return {@code false} here as subclasses for concrete collections should decide it.
-     */
-    @Override
-    protected boolean isMatching(final DomNode node) {
-        return false;
-    }
-
-    /**
-     * Returns the element or elements that match the specified key. If it is the name
-     * of a property, the property value is returned. If it is the id of an element in
-     * the array, that element is returned. Finally, if it is the name of an element or
-     * elements in the array, then all those elements are returned. Otherwise,
-     * {@link #NOT_FOUND} is returned.
      * {@inheritDoc}
      */
     @Override
-    protected Object getWithPreemption(final String name) {
-        // Test to see if we are trying to get the length of this collection?
-        // If so return NOT_FOUND here to let the property be retrieved using the prototype
-        if (/*xpath_ == null || */"length".equals(name)) {
-            return NOT_FOUND;
-        }
-
-        final List<Object> elements = getElements();
-
-        // See if there is an element in the element array with the specified id.
+    protected Object getWithPreemptionByName(final String name, final List<Object> elements) {
         final List<Object> matchingElements = new ArrayList<>();
-
-        for (final Object next : elements) {
-            if (next instanceof DomElement) {
-                final String id = ((DomElement) next).getAttribute("id");
-                if (name.equals(id)) {
-                    matchingElements.add(next);
-                }
-            }
-        }
-
-        if (matchingElements.size() == 1) {
-            return getScriptableForElement(matchingElements.get(0));
-        }
-        else if (!matchingElements.isEmpty()) {
-            final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), matchingElements);
-            collection.setAvoidObjectDetection(true);
-            return collection;
-        }
-
         final boolean searchName = isGetWithPreemptionSearchName();
-        // no element found by id, let's search by name
         for (final Object next : elements) {
             if (next instanceof DomElement
                     && (searchName || next instanceof HtmlInput || next instanceof HtmlForm)) {
@@ -330,106 +262,6 @@ public class HTMLCollection extends AbstractList {
         return collection;
     }
 
-    /**
-     * Called for the js "==".
-     * {@inheritDoc}
-     */
-    @Override
-    protected Object equivalentValues(final Object other) {
-        if (other == this) {
-            return Boolean.TRUE;
-        }
-        else if (other instanceof HTMLCollection) {
-            final HTMLCollection otherArray = (HTMLCollection) other;
-            final DomNode domNode = getDomNodeOrNull();
-            final DomNode domNodeOther = otherArray.getDomNodeOrNull();
-            if (getClass() == other.getClass()
-                    && domNode == domNodeOther
-                    && getElements().equals(otherArray.getElements())) {
-                return Boolean.TRUE;
-            }
-            return NOT_FOUND;
-        }
-
-        return super.equivalentValues(other);
-    }
-
-    /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public Object[] getIds() {
-        // let's Rhino work normally if current instance is the prototype
-        if (isPrototype()) {
-            return super.getIds();
-        }
-
-        final List<String> idList = new ArrayList<>();
-        final List<Object> elements = getElements();
-
-        if (getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
-            final int length = elements.size();
-            for (int i = 0; i < length; i++) {
-                idList.add(Integer.toString(i));
-            }
-
-            idList.add("length");
-            final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
-                .getJavaScriptEngine().getJavaScriptConfiguration();
-            for (final String name : jsConfig.getClassConfiguration(getClassName()).getFunctionKeys()) {
-                idList.add(name);
-            }
-        }
-        else {
-            idList.add("length");
-            addElementIds(idList, elements);
-        }
-        return idList.toArray();
-    }
-
-    private boolean isPrototype() {
-        return !(getPrototype() instanceof HTMLCollection);
-    }
-
-    /**
-     * Adds the ids of the collection's elements to the idList.
-     * @param idList the list to add the ids to
-     * @param elements the collection's elements
-     */
-    @Override
-    protected void addElementIds(final List<String> idList, final List<Object> elements) {
-        int index = 0;
-        for (final Object next : elements) {
-            final HtmlElement element = (HtmlElement) next;
-            final String name = element.getAttribute("name");
-            if (name != DomElement.ATTRIBUTE_NOT_DEFINED) {
-                idList.add(name);
-            }
-            else {
-                final String id = element.getId();
-                if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
-                    idList.add(id);
-                }
-                else {
-                    idList.add(Integer.toString(index));
-                }
-            }
-            index++;
-        }
-    }
-
-    /**
-     * Gets the scriptable for the provided element that may already be the right scriptable.
-     * @param object the object for which to get the scriptable
-     * @return the scriptable
-     */
-    @Override
-    protected Scriptable getScriptableForElement(final Object object) {
-        if (object instanceof Scriptable) {
-            return (Scriptable) object;
-        }
-        return getScriptableFor(object);
-    }
 }
 
 class HTMLSubCollection extends HTMLCollection {
