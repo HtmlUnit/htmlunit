@@ -542,6 +542,9 @@ public class CSSStyleSheet extends StyleSheet {
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
+                if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
+                    return false;
+                }
                 final String lcLang = ((LangCondition) condition).getLang();
                 final int lcLangLength = lcLang.length();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
@@ -639,104 +642,76 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         final String value = condition.getValue();
-        if ("root".equals(value)) {
+        switch (value) {
+        case "root":
+            if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
+                return false;
+            }
             return element == element.getPage().getDocumentElement();
-        }
-        else if ("enabled".equals(value)) {
+
+        case "enabled":
+            if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
+                return false;
+            }
             return element instanceof DisabledElement && !((DisabledElement) element).isDisabled();
-        }
-        if ("disabled".equals(value)) {
+
+        case "disabled":
+            if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
+                return false;
+            }
             return element instanceof DisabledElement && ((DisabledElement) element).isDisabled();
-        }
-        if ("focus".equals(value)) {
+
+        case "focus":
             final HtmlPage htmlPage = element.getHtmlPageOrNull();
             if (htmlPage != null) {
                 final DomElement focus = htmlPage.getFocusedElement();
                 return element == focus;
             }
-        }
-        else if ("checked".equals(value)) {
+            return false;
+
+        case "checked":
+            if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
+                return false;
+            }
             return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
-                || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
-                || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
-        }
-        else if ("first-child".equals(value)) {
+                    || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
+                            || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
+
+        case "first-child":
             for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
                 if (n instanceof DomElement) {
                     return false;
                 }
             }
             return true;
-        }
-        else if ("last-child".equals(value)) {
+
+        case "last-child":
             for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
                 if (n instanceof DomElement) {
                     return false;
                 }
             }
             return true;
-        }
-        else if ("first-of-type".equals(value)) {
-            final String type = element.getNodeName();
+
+        case "first-of-type":
+            final String firstType = element.getNodeName();
             for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                if (n instanceof DomElement && n.getNodeName().equals(firstType)) {
                     return false;
                 }
             }
             return true;
-        }
-        else if ("last-of-type".equals(value)) {
-            final String type = element.getNodeName();
+
+        case "last-of-type":
+            final String lastType = element.getNodeName();
             for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                if (n instanceof DomElement && n.getNodeName().equals(lastType)) {
                     return false;
                 }
             }
             return true;
-        }
-        else if (value.startsWith("nth-child(")) {
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if (value.startsWith("nth-last-child(")) {
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if (value.startsWith("nth-of-type(")) {
-            final String type = element.getNodeName();
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if (value.startsWith("nth-last-of-type(")) {
-            final String type = element.getNodeName();
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if ("only-child".equals(value)) {
+
+        case "only-child":
             for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
                 if (n instanceof DomElement) {
                     return false;
@@ -748,8 +723,8 @@ public class CSSStyleSheet extends StyleSheet {
                 }
             }
             return true;
-        }
-        else if ("only-of-type".equals(value)) {
+
+        case "only-of-type":
             final String type = element.getNodeName();
             for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
                 if (n instanceof DomElement && n.getNodeName().equals(type)) {
@@ -762,53 +737,100 @@ public class CSSStyleSheet extends StyleSheet {
                 }
             }
             return true;
-        }
-        else if ("empty".equals(value)) {
+
+        case "empty":
             return isEmpty(element);
-        }
-        else if ("target".equals(value)) {
+
+        case "target":
             if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
                 return false;
             }
             final String ref = element.getPage().getUrl().getRef();
             return StringUtils.isNotBlank(ref) && ref.equals(element.getId());
-        }
-        else if (value.startsWith("not(")) {
-            final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            final AtomicBoolean errorOccured = new AtomicBoolean(false);
-            final ErrorHandler errorHandler = new ErrorHandler() {
-                @Override
-                public void warning(final CSSParseException exception) throws CSSException {
-                    // ignore
-                }
 
-                @Override
-                public void fatalError(final CSSParseException exception) throws CSSException {
-                    errorOccured.set(true);
+        default:
+            if (value.startsWith("nth-child(")) {
+                final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                int index = 0;
+                for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
+                    if (n instanceof DomElement) {
+                        index++;
+                    }
                 }
-
-                @Override
-                public void error(final CSSParseException exception) throws CSSException {
-                    errorOccured.set(true);
-                }
-            };
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
-            parser.setErrorHandler(errorHandler);
-            try {
-                final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
-                if (errorOccured.get() || selectorList == null || selectorList.getLength() != 1) {
-                    throw new CSSException("Invalid selectors: " + selectors);
-                }
-
-                validateSelectors(selectorList, 9, element);
-
-                return !CSSStyleSheet.selects(browserVersion, selectorList.item(0), element);
+                return getNth(nth, index);
             }
-            catch (final IOException e) {
-                throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
+            else if (value.startsWith("nth-last-child(")) {
+                final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                int index = 0;
+                for (DomNode n = element; n != null; n = n.getNextSibling()) {
+                    if (n instanceof DomElement) {
+                        index++;
+                    }
+                }
+                return getNth(nth, index);
             }
+            else if (value.startsWith("nth-of-type(")) {
+                final String nthType = element.getNodeName();
+                final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                int index = 0;
+                for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
+                    if (n instanceof DomElement && n.getNodeName().equals(nthType)) {
+                        index++;
+                    }
+                }
+                return getNth(nth, index);
+            }
+            else if (value.startsWith("nth-last-of-type(")) {
+                final String nthLastType = element.getNodeName();
+                final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                int index = 0;
+                for (DomNode n = element; n != null; n = n.getNextSibling()) {
+                    if (n instanceof DomElement && n.getNodeName().equals(nthLastType)) {
+                        index++;
+                    }
+                }
+                return getNth(nth, index);
+            }
+            else if (value.startsWith("not(")) {
+                if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
+                    return false;
+                }
+                final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                final AtomicBoolean errorOccured = new AtomicBoolean(false);
+                final ErrorHandler errorHandler = new ErrorHandler() {
+                    @Override
+                    public void warning(final CSSParseException exception) throws CSSException {
+                        // ignore
+                    }
+
+                    @Override
+                    public void fatalError(final CSSParseException exception) throws CSSException {
+                        errorOccured.set(true);
+                    }
+
+                    @Override
+                    public void error(final CSSParseException exception) throws CSSException {
+                        errorOccured.set(true);
+                    }
+                };
+                final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+                parser.setErrorHandler(errorHandler);
+                try {
+                    final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
+                    if (errorOccured.get() || selectorList == null || selectorList.getLength() != 1) {
+                        throw new CSSException("Invalid selectors: " + selectors);
+                    }
+
+                    validateSelectors(selectorList, 9, element);
+
+                    return !CSSStyleSheet.selects(browserVersion, selectorList.item(0), element);
+                }
+                catch (final IOException e) {
+                    throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
+                }
+            }
+            return false;
         }
-        return false;
     }
 
     private static boolean isEmpty(final DomElement element) {

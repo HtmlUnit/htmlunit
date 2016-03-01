@@ -15,7 +15,8 @@
                 JavaScript: fix Selection.rangeCount for Chrome.
             </action>
             <action type="fix" dev="asashour">
-                CSS: Chrome doesn't support 'target' selector.
+                CSS: Chrome doesn't support 'target', 'root', 'not', 'checked', 'disabled',
+                'enabled' and 'lang' selectors.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix location.hash.

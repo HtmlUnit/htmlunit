@@ -337,7 +337,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "true", "false" },
             CHROME = { "false", "false", "false", "false", "false" })
-    @NotYetImplemented(CHROME)
     public void langCondition() throws Exception {
         final String htmlSnippet = "<div id='elt2' lang='en'></div>\n"
                 + "  <div id='elt3' lang='en-GB'></div>\n"
@@ -351,7 +350,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "false", "true" },
             CHROME = { "false", "false", "false", "false", "false" })
-    @NotYetImplemented(CHROME)
     public void langConditionParent() throws Exception {
         final String htmlSnippet =
                 "<div id='elt2' lang='en'>\n"
@@ -367,7 +365,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "false" },
             CHROME = { "false", "false" })
-    @NotYetImplemented(CHROME)
     public void css2_root() throws Exception {
         doTest(":root", "");
     }
@@ -379,7 +376,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "true", "false" },
             CHROME = { "false", "false", "false" })
-    @NotYetImplemented(CHROME)
     public void css3_not() throws Exception {
         doTest(":not(span)", "<span id='elt2'></span>");
     }
@@ -390,7 +386,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
             CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
-    @NotYetImplemented(CHROME)
     public void css3_enabled() throws Exception {
         final String htmlSnippet = "<input id='elt2'>\n"
             + "<input id='elt3' disabled>\n"
@@ -407,7 +402,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
             CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
-    @NotYetImplemented(CHROME)
     public void css3_disabled() throws Exception {
         final String htmlSnippet = "<input id='elt2' disabled>\n"
             + "<input id='elt3'>\n"
@@ -424,7 +418,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "false", "false", "false", "true", "false", "true", "false" },
             CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
-    @NotYetImplemented(CHROME)
     public void css3_checked() throws Exception {
         final String htmlSnippet = "<input id='elt2'>\n"
             + "<input id='elt3' checked>\n"
