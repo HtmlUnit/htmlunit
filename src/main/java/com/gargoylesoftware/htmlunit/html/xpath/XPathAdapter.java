@@ -72,9 +72,7 @@ class XPathAdapter {
             errorListener = new DefaultErrorHandler();
         }
 
-        if (!caseSensitive) {
-            exprString = preProcessXPath(exprString);
-        }
+        exprString = preProcessXPath(exprString, caseSensitive);
 
         final XPathParser parser = new XPathParser(errorListener, locator);
         final Compiler compiler = new Compiler(errorListener, locator, funcTable_);
@@ -95,17 +93,20 @@ class XPathAdapter {
      * The current implementation lower-cases the attribute name, and anything outside the brackets.
      *
      * @param xpath the XPath expression to pre-process
+     * @param caseSensitive whether or not the XPath expression should be case-sensitive
      * @return the processed XPath expression
      */
-    private static String preProcessXPath(String xpath) {
+    private static String preProcessXPath(String xpath, final boolean caseSensitive) {
         final char[] charArray = xpath.toCharArray();
         processOutsideBrackets(charArray);
         xpath = new String(charArray);
 
-        final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
-        while (matcher.find()) {
-            final String attribute = matcher.group(1);
-            xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ROOT));
+        if (!caseSensitive) {
+            final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
+            while (matcher.find()) {
+                final String attribute = matcher.group(1);
+                xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ROOT));
+            }
         }
         return xpath;
     }

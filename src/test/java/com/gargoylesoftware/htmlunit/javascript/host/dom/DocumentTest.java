@@ -1913,17 +1913,15 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLHeadingElement]",
             CHROME = "null",
             IE = "not available")
-    @NotYetImplemented(CHROME)
     public void evaluate_caseInsensitiveAttribute() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    if(document.evaluate) {\n"
-            + "      var expr = './/*[@CLASS]';\n"
-            + "      var result = document.evaluate(expr, "
-                                + "document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
-            + "      alert(result.iterateNext());\n"
-            + "    } else { alert('not available'); }\n"
-            + "  }\n"
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  if(document.evaluate) {\n"
+            + "    var expr = './/*[@CLASS]';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    alert(result.iterateNext());\n"
+            + "  } else { alert('not available'); }\n"
+            + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <h1 class='title'>Some text</h1>\n"
             + "</body></html>";

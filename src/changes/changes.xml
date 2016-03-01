@@ -9,6 +9,9 @@
     <body>
         <release version="2.21" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
+                XPath: fix attribute case sensitivity (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: fix PopStateEvent.state to be clone (Chrome and IE).
             </action>
             <action type="fix" dev="asashour">

@@ -1547,7 +1547,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION,
 
+    /** Indicates that the XPath attribute is case sensitive. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    XPATH_ATTRIBUTE_CASE_SENSITIVE,
+
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     XPATH_SELECTION_NAMESPACES,
+
 }
