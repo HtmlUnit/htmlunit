@@ -542,9 +542,6 @@ public class CSSStyleSheet extends StyleSheet {
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
-                if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
-                    return false;
-                }
                 final String lcLang = ((LangCondition) condition).getLang();
                 final int lcLangLength = lcLang.length();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
@@ -644,21 +641,12 @@ public class CSSStyleSheet extends StyleSheet {
         final String value = condition.getValue();
         switch (value) {
             case "root":
-                if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
-                    return false;
-                }
                 return element == element.getPage().getDocumentElement();
 
             case "enabled":
-                if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
-                    return false;
-                }
                 return element instanceof DisabledElement && !((DisabledElement) element).isDisabled();
 
             case "disabled":
-                if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
-                    return false;
-                }
                 return element instanceof DisabledElement && ((DisabledElement) element).isDisabled();
 
             case "focus":
@@ -670,9 +658,6 @@ public class CSSStyleSheet extends StyleSheet {
                 return false;
 
             case "checked":
-                if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
-                    return false;
-                }
                 return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
                         || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
                                 || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
@@ -792,9 +777,6 @@ public class CSSStyleSheet extends StyleSheet {
                     return getNth(nth, index);
                 }
                 else if (value.startsWith("not(")) {
-                    if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
-                        return false;
-                    }
                     final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
                     final AtomicBoolean errorOccured = new AtomicBoolean(false);
                     final ErrorHandler errorHandler = new ErrorHandler() {

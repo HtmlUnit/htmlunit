@@ -106,6 +106,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_NOSCRIPT_DISPLAY_INLINE,
 
+    /** {@code zIndex} is not considered. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    CSS_NO_Z_INDEX,
+
     /** The default value of the display property for the 'progress' tag is 'inline' instead of the default one. */
     @BrowserFeature(@WebBrowser(IE))
     CSS_PROGRESS_DISPLAY_INLINE,

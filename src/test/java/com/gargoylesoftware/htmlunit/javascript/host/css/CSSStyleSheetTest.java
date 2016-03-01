@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.lang.reflect.Field;
@@ -419,12 +418,12 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "false", "false", "false", "false", "true", "false", "true", "false" },
             CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_checked() throws Exception {
-        final String htmlSnippet = "<input id='elt2'>\n"
-            + "<input id='elt3' checked>\n"
-            + "<input id='elt4' type='checkbox' checked>\n"
-            + "<input id='elt5' type='checkbox'>\n"
-            + "<input id='elt6' type='radio' checked>\n"
-            + "<input id='elt7' type='radio'>\n";
+        final String htmlSnippet = "  <input id='elt2'>\n"
+            + "  <input id='elt3' checked>\n"
+            + "  <input id='elt4' type='checkbox' checked>\n"
+            + "  <input id='elt5' type='checkbox'>\n"
+            + "  <input id='elt6' type='radio' checked>\n"
+            + "  <input id='elt7' type='radio'>\n";
         doTest(":checked", htmlSnippet);
     }
 
@@ -436,7 +435,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
                 + "<script>\n"
                 + "  function test(){\n"
                 + "    var getStyle = function(e) {\n"
-                + "      return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle; };\n"
+                + "      return window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle;\n"
+                + "    };\n"
                 + "    var i = 0;\n"
                 + "    while (true) {\n"
                 + "      var elt = document.getElementById('elt' + i++);\n"
@@ -512,7 +512,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "60",
             CHROME = "auto")
-    @NotYetImplemented(CHROME)
     public void rulePriority_specificity() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
@@ -539,7 +538,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "60",
         CHROME = "auto")
-    @NotYetImplemented(CHROME)
     public void rulePriority_specificity2() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
@@ -570,7 +568,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "10", "10" },
             CHROME = { "auto", "auto" })
-    @NotYetImplemented(CHROME)
     public void rulePriority_position() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
