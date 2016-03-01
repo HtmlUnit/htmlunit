@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgPath;
 
@@ -27,6 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgPath;
  * A JavaScript object for {@code SVGPathElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = SvgPath.class)
 public class SVGPathElement extends SVGGeometryElement {
@@ -36,5 +38,14 @@ public class SVGPathElement extends SVGGeometryElement {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public SVGPathElement() {
+    }
+
+    /**
+     * @return the length of the path
+     */
+    @JsxFunction
+    public float getTotalLength() {
+        // just a fake for the moment
+        return 1.0f;
     }
 }
