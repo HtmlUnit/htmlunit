@@ -69,7 +69,7 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
     @Test
     public void asTextDiv() throws Exception {
         final String html = "<html><head></head><body>\n"
-            + "<div id='foo'>\n \n hello </div>"
+            + "<div id='foo'>\n \n hello </div>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);

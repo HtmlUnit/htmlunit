@@ -718,7 +718,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("the class is x")
     public void getClassName() throws Exception {
         final String html
-            = "<html><head><style>.x {  font: 8pt Arial bold;  }</style>\n"
+            = "<html><head><style>.x { font: 8pt Arial bold; }</style>\n"
             + "<script>\n"
             + "function doTest() {\n"
             + "    var ele = document.getElementById('pid');\n"
@@ -777,7 +777,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("the class is z")
     public void setClassName() throws Exception {
         final String html
-            = "<html><head><style>.x {  font: 8pt Arial bold;  }</style>\n"
+            = "<html><head><style>.x { font: 8pt Arial bold; }</style>\n"
             + "<script>\n"
             + "function doTest() {\n"
             + "    var ele = document.getElementById('pid');\n"

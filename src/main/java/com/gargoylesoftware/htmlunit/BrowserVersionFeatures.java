@@ -1055,6 +1055,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
 
+    /** Children are enumerated. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    JS_NODE_LIST_ENUMERATE_CHILDREN,
+
     /** Functions are enumerated. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,

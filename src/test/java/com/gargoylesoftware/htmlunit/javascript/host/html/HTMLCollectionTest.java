@@ -105,7 +105,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             FF38 = { "string 0", "string item", "string length", "string namedItem" },
             CHROME = { "string 0", "string item", "string length", "string myForm", "string namedItem" },
             IE = { "string item", "string length", "string myForm", "string namedItem" })
-    @NotYetImplemented({  FF31, IE, CHROME })
+    @NotYetImplemented({ FF31, IE })
     public void for_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

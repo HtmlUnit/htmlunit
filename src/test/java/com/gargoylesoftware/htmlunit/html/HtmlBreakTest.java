@@ -61,7 +61,7 @@ public class HtmlBreakTest extends WebDriverTestCase {
     @Test
     public void asText() throws Exception {
         final String html = "<html><head>\n"
-            + "</head><body>"
+            + "</head><body>\n"
             + "Hello<br/>world\n"
             + "</body></html>";
 

@@ -494,9 +494,9 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      */
     @Test
     public void hashAnchor() throws Exception {
-        final String html = "<html><body>"
-                + "<a id='a' href='#a'>a</a>"
-                + "<a id='a_target' href='#target' target='_blank'>target</a>"
+        final String html = "<html><body>\n"
+                + "<a id='a' href='#a'>a</a>\n"
+                + "<a id='a_target' href='#target' target='_blank'>target</a>\n"
                 + "</body></html>";
         HtmlPage page = loadPage(html);
         HtmlPage targetPage = page.getHtmlElementById("a").click();
@@ -552,7 +552,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
+            + "<a href='page2.html'>\n"
             + "<span id='theSpan'>My Link</span></a>\n"
             + "</body></html>";
 

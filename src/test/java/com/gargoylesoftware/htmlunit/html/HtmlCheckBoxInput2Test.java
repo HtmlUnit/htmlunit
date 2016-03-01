@@ -444,7 +444,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <form>"
+            + "  <form>\n"
             + "    <input type='checkbox' id='chkboxChecked' checked>\n"
             + "    <input type='checkbox' id='chkboxNotChecked'>\n"
             + "  </form>\n"

@@ -159,7 +159,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
             CHROME = { "onfocus", "onfocusin", "onblur", "onfocusout" },
             IE = { "onfocusin", "onfocus", "onfocusout", "onblur" })
     public void labelContainsInput_onblur_onfocus() throws Exception {
-        final String body = "<form><label " + COMMON_ID + ">"
+        final String body = "<form><label " + COMMON_ID + ">\n"
                 + "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>\n";
         testWithClick(body);
     }
@@ -225,7 +225,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 + "  }\n"
                 + "</script>\n"
 
-                + "</head><body>"
+                + "</head><body>\n"
                 + "<div id='it'>div</div>\n"
                 + "<textarea id='log'></textarea>\n"
 
@@ -265,7 +265,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 + "  }\n"
                 + "</script>\n"
 
-                + "</head><body>"
+                + "</head><body>\n"
                 + "<textarea id='log'></textarea>\n"
                 + "<div id='div' onblur=\"log('blur')\" onfocus=\"log('focus')\">div</div>\n"
                 + "<input id='input1' onblur=\"log('blur1')\" onfocus=\"log('focus1')\">\n"

@@ -98,7 +98,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             throws ServletException, IOException {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
-            response.getWriter().write("<html>"
+            response.getWriter().write("<html>\n"
                 + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
                 + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"

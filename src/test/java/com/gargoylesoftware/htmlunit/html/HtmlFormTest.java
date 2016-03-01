@@ -249,7 +249,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
     public void submit_onSubmitHandler_preventDefaultOnly() throws Exception {
         final String firstHtml
             = "<html><body>\n"
-            + "<form method='post' action='/foo' >"
+            + "<form method='post' action='/foo' >\n"
             + "<input type='submit' id='button'/>\n"
             + "</form>\n"
             + "<script>\n"

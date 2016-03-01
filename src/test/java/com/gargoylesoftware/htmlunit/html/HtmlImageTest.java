@@ -137,10 +137,10 @@ public class HtmlImageTest extends SimpleWebTestCase {
     public void asXml() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
-            + "<img id='img1' src='foo.png'>"
-            + "<img id='img2' name='testName' src='foo.png' alt='young'>"
-            + "<img id='img3' src='foo.png' width='11' height='17px' >"
-            + "<img id='img4' src='foo.png' width='11em' height='17%' >"
+            + "<img id='img1' src='foo.png'>\n"
+            + "<img id='img2' name='testName' src='foo.png' alt='young'>\n"
+            + "<img id='img3' src='foo.png' width='11' height='17px'>\n"
+            + "<img id='img4' src='foo.png' width='11em' height='17%'>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(content);
 

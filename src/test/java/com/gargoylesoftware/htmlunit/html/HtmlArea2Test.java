@@ -74,7 +74,7 @@ public class HtmlArea2Test extends WebDriverTestCase {
     @Test
     public void isDisplayed() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
-                + "<body>"
+                + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
                         + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
@@ -101,7 +101,7 @@ public class HtmlArea2Test extends WebDriverTestCase {
     @Test
     public void isDisplayedHiddenImage() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
-                + "<body>"
+                + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap' style='display: none'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
                         + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
@@ -128,7 +128,7 @@ public class HtmlArea2Test extends WebDriverTestCase {
     @Test
     public void isDisplayedHiddenMap() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
-                + "<body>"
+                + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
                         + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
@@ -156,7 +156,7 @@ public class HtmlArea2Test extends WebDriverTestCase {
     @Alerts({ "false", "false", "false", "false", "false", "true" })
     public void isDisplayedEmptyArea() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
-                + "<body>"
+                + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
                         + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"

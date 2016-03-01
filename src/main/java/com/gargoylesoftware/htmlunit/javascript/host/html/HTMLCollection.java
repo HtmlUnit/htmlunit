@@ -118,6 +118,14 @@ public class HTMLCollection extends AbstractList {
      * {@inheritDoc}
      */
     @Override
+    protected AbstractList create(final DomNode parentScope, final List<?> initialElements) {
+        return new HTMLCollection(parentScope, initialElements);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected Object getWithPreemptionByName(final String name, final List<Object> elements) {
         final List<Object> matchingElements = new ArrayList<>();
         final boolean searchName = isGetWithPreemptionSearchName();

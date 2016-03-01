@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -25,11 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -46,6 +43,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * The parent class of {@link NodeList} and {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection}.
@@ -334,13 +336,23 @@ public class AbstractList extends SimpleScriptable implements Function {
             return getScriptableForElement(matchingElements.get(0));
         }
         else if (!matchingElements.isEmpty()) {
-            final AbstractList collection = new AbstractList(getDomNodeOrDie(), matchingElements);
+            final AbstractList collection = create(getDomNodeOrDie(), matchingElements);
             collection.setAvoidObjectDetection(true);
             return collection;
         }
 
         // no element found by id, let's search by name
         return getWithPreemptionByName(name, elements);
+    }
+
+    /**
+     * Constructs a new instance with an initial cache value.
+     * @param parentScope the parent scope, on which we listen for changes
+     * @param initialElements the initial content for the cache
+     * @return the newly created instance
+     */
+    protected AbstractList create(final DomNode parentScope, final List<?> initialElements) {
+        return new AbstractList(parentScope, initialElements);
     }
 
     /**
@@ -369,7 +381,7 @@ public class AbstractList extends SimpleScriptable implements Function {
 
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
-        final AbstractList collection = new AbstractList(domNode, matchingElements);
+        final AbstractList collection = create(domNode, matchingElements);
         collection.setAvoidObjectDetection(true);
         return collection;
     }
@@ -461,10 +473,28 @@ public class AbstractList extends SimpleScriptable implements Function {
         if ("length".equals(name)) {
             return true;
         }
-        if (getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
             final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
                     .getJavaScriptEngine().getJavaScriptConfiguration();
-            return jsConfig.getClassConfiguration(getClassName()).getFunctionKeys().contains(name);
+            if (jsConfig.getClassConfiguration(getClassName()).getFunctionKeys().contains(name)) {
+                return true;
+            }
+        }
+
+        if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_CHILDREN)) {
+            for (final Object next : getElements()) {
+                final HtmlElement element = (HtmlElement) next;
+                if (name.equals(element.getAttribute("name"))) {
+                    return true;
+                }
+                else {
+                    final String id = element.getId();
+                    if (name.equals(id)) {
+                        return true;
+                    }
+                }
+            }
         }
         return getWithPreemption(name) != NOT_FOUND;
     }
@@ -482,7 +512,8 @@ public class AbstractList extends SimpleScriptable implements Function {
         final List<String> idList = new ArrayList<>();
         final List<Object> elements = getElements();
 
-        if (getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
             final int length = elements.size();
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
@@ -497,6 +528,8 @@ public class AbstractList extends SimpleScriptable implements Function {
         }
         else {
             idList.add("length");
+        }
+        if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_CHILDREN)) {
             addElementIds(idList, elements);
         }
         return idList.toArray();

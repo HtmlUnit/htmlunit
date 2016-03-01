@@ -37,7 +37,7 @@ public class SimpleRangeTest extends SimpleWebTestCase {
     public void toStringOneNode() throws Exception {
         final String content = "<html><head><title>Test page</title></head>\n"
             + "<body>\n"
-            + "  <input type='text' id='myInput' value='abcd'>"
+            + "  <input type='text' id='myInput' value='abcd'>\n"
             + "</body>\n"
             + "</html>";
 

@@ -135,7 +135,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "      try {\n"
             + "        var r = document.selection.createRange();\n"
             + "        r.select();\n"
-            + "      } catch(e) {  alert('exception'); }\n"
+            + "      } catch(e) { alert('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
