@@ -496,7 +496,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_parseXML() throws Exception {
         runTest("core: jQuery.parseXML");
     }
