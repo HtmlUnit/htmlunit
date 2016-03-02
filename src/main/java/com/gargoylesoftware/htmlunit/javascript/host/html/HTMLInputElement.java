@@ -287,7 +287,7 @@ public class HTMLInputElement extends FormField {
      * Gets the value of {@code selectionStart} attribute.
      * @return the selection start
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getSelectionStart() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionStart();
     }
@@ -296,7 +296,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of {@code selectionStart} attribute.
      * @param start selection start
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setSelectionStart(final int start) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionStart(start);
     }
@@ -305,7 +305,7 @@ public class HTMLInputElement extends FormField {
      * Gets the value of {@code selectionEnd} attribute.
      * @return the selection end
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getSelectionEnd() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionEnd();
     }
@@ -314,7 +314,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of {@code selectionEnd} attribute.
      * @param end selection end
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setSelectionEnd(final int end) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionEnd(end);
     }

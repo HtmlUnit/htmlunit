@@ -58,6 +58,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_BACKGROUND_INITIAL,
 
+    /** Computed {@code zIndex} is not considered. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    CSS_COMPUTED_NO_Z_INDEX,
+
     /** Indicates that the default value for height of elements is 18 instead of 20. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     CSS_DEFAULT_ELEMENT_HEIGHT_18,
@@ -105,10 +109,6 @@ public enum BrowserVersionFeatures {
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_NOSCRIPT_DISPLAY_INLINE,
-
-    /** {@code zIndex} is not considered. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    CSS_NO_Z_INDEX,
 
     /** The default value of the display property for the 'progress' tag is 'inline' instead of the default one. */
     @BrowserFeature(@WebBrowser(IE))

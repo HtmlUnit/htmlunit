@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_NO_Z_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.util.Arrays;
@@ -28,6 +28,7 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.css.sac.Selector;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -216,12 +217,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param selector the selector determining that the style applies to this element
      */
     public void applyStyleFromSelector(final org.w3c.dom.css.CSSStyleDeclaration declaration, final Selector selector) {
+        final BrowserVersion browserVersion = getBrowserVersion();
         final SelectorSpecificity specificity = new SelectorSpecificity(selector);
         for (int k = 0; k < declaration.getLength(); k++) {
             final String name = declaration.item(k);
             final String value = declaration.getPropertyValue(name);
             final String priority = declaration.getPropertyPriority(name);
-            applyLocalStyleAttribute(name, value, priority, specificity);
+            if (!name.equals("z-index") || !browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                applyLocalStyleAttribute(name, value, priority, specificity);
+            }
         }
     }
 
@@ -2760,7 +2764,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public Object getZIndex() {
         final Object response = super.getZIndex();
-        if (response.toString().isEmpty() || getBrowserVersion().hasFeature(CSS_NO_Z_INDEX)) {
+        if (response.toString().isEmpty()) {
             return "auto";
         }
         return response;

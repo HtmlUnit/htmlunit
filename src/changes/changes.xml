@@ -27,7 +27,7 @@
                 JavaScript: fix Selection.rangeCount for Chrome.
             </action>
             <action type="fix" dev="asashour">
-                CSS: Chrome doesn't support 'target' selector or setting 'zIndex' property.
+                CSS: Chrome doesn't support 'target' selector or computed 'zIndex' property.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix location.hash.

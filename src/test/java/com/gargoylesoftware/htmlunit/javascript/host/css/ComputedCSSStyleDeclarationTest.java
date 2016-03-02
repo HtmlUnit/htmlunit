@@ -1450,4 +1450,29 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "10, rgb(0, 128, 0)" },
+            CHROME = "auto, rgb(0, 128, 0)")
+    public void zIndexComputed() throws Exception {
+        final String html = "<html><head>"
+            + "<style>\n"
+            + "  .abc { z-index: 10; color:green }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('myDiv');\n"
+            + "    alert(window.getComputedStyle(div, '').zIndex);\n"
+            + "    alert(window.getComputedStyle(div, '').color);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv' class='abc'></div>"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

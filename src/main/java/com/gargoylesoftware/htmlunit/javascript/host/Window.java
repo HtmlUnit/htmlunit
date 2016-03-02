@@ -625,7 +625,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the console property.
      * @return the console property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter
     public ScriptableObject getConsole() {
         return console_;
     }
@@ -634,7 +634,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Sets the console.
      * @param console the console
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setConsole(final ScriptableObject console) {
         console_ = console;
     }
@@ -1567,7 +1567,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param pseudo a string specifying the pseudo-element to match (may be {@code null})
      * @return the computed style
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxFunction
     public CSS2Properties getComputedStyle(final Element element, final String pseudo) {
         synchronized (computedStyles_) {
             final CSS2Properties style = computedStyles_.get(element);
@@ -1931,7 +1931,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the value of {@code pageXOffset} property.
      * @return the value of {@code pageXOffset} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getPageXOffset() {
         return 0;
     }
@@ -1940,7 +1940,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the value of {@code pageYOffset} property.
      * @return the value of {@code pageYOffset} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getPageYOffset() {
         return 0;
     }

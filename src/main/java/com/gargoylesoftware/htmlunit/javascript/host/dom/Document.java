@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_S
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -298,7 +297,7 @@ public class Document extends EventNode {
      * @param deep Whether to recursively import the subtree under the specified node; or not
      * @return the imported node that belongs to this Document
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxFunction
     public Object importNode(final Node importedNode, final boolean deep) {
         DomNode domNode = importedNode.getDomNodeOrDie();
         domNode = domNode.cloneNode(deep);
@@ -557,7 +556,7 @@ public class Document extends EventNode {
      *                  which matches all elements.
      * @return a live NodeList of found elements in the order they appear in the tree
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxFunction
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Document.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
 

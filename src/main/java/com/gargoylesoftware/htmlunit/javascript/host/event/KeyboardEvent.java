@@ -995,7 +995,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns the char code associated with the event.
      * @return the char code associated with the event
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getCharCode() {
         return charCode_;
     }
@@ -1004,7 +1004,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed.
      * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter
     public Object getWhich() {
         return which_;
     }
@@ -1031,7 +1031,7 @@ public class KeyboardEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter
     public Object getKeyCode() {
         return super.getKeyCode();
     }

@@ -972,7 +972,7 @@ public class CSSStyleSheet extends StyleSheet {
      * For Firefox.
      * @return the owner
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter
     public HTMLElement getOwnerNode() {
         return ownerNode_;
     }
@@ -1062,7 +1062,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param position the position of the rule to be deleted
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxFunction
     public void deleteRule(final int position) {
         try {
             wrapped_.deleteRule(position);
