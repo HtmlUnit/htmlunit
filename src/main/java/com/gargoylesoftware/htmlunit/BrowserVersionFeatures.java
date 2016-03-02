@@ -1068,7 +1068,7 @@ public enum BrowserVersionFeatures {
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
 
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
     /**

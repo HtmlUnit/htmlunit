@@ -2129,7 +2129,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             "f1", "body", "h1", "i1", "td", "exception", "td", "body", "body" },
             FF = { "null", "body", "body", "body", "body", "body",
             "f1", "body", "h1", "i1", "td", "body", "td", "body", "body" })
-    @NotYetImplemented(CHROME)
     public void offsetParent_WithCSS() throws Exception {
         final String html = "<html>\n"
             + "  <body id='body' onload='test()'>\n"
@@ -2163,16 +2162,16 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "                                   // FF   IE   \n"
             + "        alert(document.getElementById('body').offsetParent);  // null null \n"
             + "        alertOffsetParentId('a2'); // body body \n"
-            + "        alertOffsetParentId('b2'); // body body \n"
+            + "        alertOffsetParentId('b2'); // body exception \n"
             + "        alertOffsetParentId('c2'); // body body \n"
             + "        alertOffsetParentId('d2'); // body body \n"
             + "        alertOffsetParentId('e2'); // body body \n"
-            + "        alertOffsetParentId('f2'); // f1   body \n"
+            + "        alertOffsetParentId('f2'); // f1   f1 \n"
             + "        alertOffsetParentId('g2'); // body body \n"
             + "        alertOffsetParentId('h2'); // h1   h1   \n"
             + "        alertOffsetParentId('i2'); // i1   i1   \n"
             + "        alertOffsetParentId('j2'); // td   td   \n"
-            + "        alertOffsetParentId('k2'); // body td   \n"
+            + "        alertOffsetParentId('k2'); // body exception   \n"
             + "        alertOffsetParentId('l2'); // td   td   \n"
             + "        alertOffsetParentId('m2'); // body body \n"
             + "        alertOffsetParentId('n2'); // body body \n"
