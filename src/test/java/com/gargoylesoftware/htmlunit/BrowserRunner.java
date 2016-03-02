@@ -106,6 +106,9 @@ public class BrowserRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.EDGE, false));
             }
         }
+        else {
+            throw new IllegalStateException("No @Test method found");
+        }
     }
 
     @Override

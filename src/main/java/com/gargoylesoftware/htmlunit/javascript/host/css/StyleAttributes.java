@@ -2544,7 +2544,7 @@ final class StyleAttributes {
             browserConfigurations_ = browserConfigurations;
         }
 
-        private boolean isAvailable(final BrowserVersion browserVersion, final boolean onlyIfIteratable) {
+        boolean isAvailable(final BrowserVersion browserVersion, final boolean onlyIfIteratable) {
             return BrowserConfiguration.isDefined(browserVersion, browserConfigurations_, onlyIfIteratable);
         }
 

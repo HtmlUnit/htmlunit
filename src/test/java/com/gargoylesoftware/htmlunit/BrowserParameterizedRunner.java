@@ -174,6 +174,9 @@ public class BrowserParameterizedRunner extends Suite {
                         klass, BrowserVersion.EDGE, false, tests));
             }
         }
+        else {
+            throw new IllegalStateException("No @Test method found");
+        }
     }
 
     /**
