@@ -61,7 +61,7 @@ final class StyleAttributes {
         if (definition == null) {
             return null;
         }
-        if (!definition.isAvailable(browserVersion)) {
+        if (!definition.isAvailable(browserVersion, false)) {
             return null;
         }
         return definition;
@@ -75,7 +75,7 @@ final class StyleAttributes {
     public static List<Definition> getDefinitions(final BrowserVersion browserVersion) {
         final List<Definition> list = new ArrayList<>();
         for (final Definition definition : Definition.values()) {
-            if (definition.isAvailable(browserVersion)) {
+            if (definition.isAvailable(browserVersion, true)) {
                 list.add(definition);
             }
         }
@@ -2527,7 +2527,8 @@ final class StyleAttributes {
         Y("y", "y", chrome("0px")),
 
         /** The style property {@code z-index}. */
-        Z_INDEX_("z-index", "z-index", ff38up("auto")),
+        Z_INDEX_("z-index", "z-index", ff38up("auto"), chrome("auto").setIteratable(false),
+                ie("auto").setIteratable(false)),
 
         /** The style property {@code zoom}. */
         ZOOM("zoom", "zoom", ie("undefined"), chrome("1"));
@@ -2543,8 +2544,8 @@ final class StyleAttributes {
             browserConfigurations_ = browserConfigurations;
         }
 
-        private boolean isAvailable(final BrowserVersion browserVersion) {
-            return BrowserConfiguration.isDefined(browserVersion, browserConfigurations_);
+        private boolean isAvailable(final BrowserVersion browserVersion, final boolean onlyIfIteratable) {
+            return BrowserConfiguration.isDefined(browserVersion, browserConfigurations_, onlyIfIteratable);
         }
 
         /**

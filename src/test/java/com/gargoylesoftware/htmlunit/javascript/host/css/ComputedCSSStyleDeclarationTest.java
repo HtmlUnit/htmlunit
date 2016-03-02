@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1454,8 +1455,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "10, rgb(0, 128, 0)" },
-            CHROME = "auto, rgb(0, 128, 0)")
+    @Alerts(DEFAULT = { "", "", "", "10", "10", "rgb(0, 128, 0)" },
+            CHROME = { "", "", "", "auto", "auto", "rgb(0, 128, 0)" })
+    // expectations not tested with FF31
+    @NotYetImplemented(FF31)
     public void zIndexComputed() throws Exception {
         final String html = "<html><head>"
             + "<style>\n"
@@ -1464,7 +1467,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
+            + "    alert(div.style.zIndex);\n"
+            + "    alert(div.style['z-index']);\n"
+            + "    alert(div.style.color);\n"
             + "    alert(window.getComputedStyle(div, '').zIndex);\n"
+            + "    alert(window.getComputedStyle(div, '')['z-index']);\n"
             + "    alert(window.getComputedStyle(div, '').color);\n"
             + "  }\n"
             + "</script>\n"

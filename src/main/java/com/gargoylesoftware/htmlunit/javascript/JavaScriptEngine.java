@@ -584,7 +584,6 @@ public class JavaScriptEngine {
     }
 
     private static void configureProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
-
         for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getPropertyEntries()) {
             final String propertyName = propertyEntry.getKey();
             final Method readMethod = propertyEntry.getValue().getReadMethod();

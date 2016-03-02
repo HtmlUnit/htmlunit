@@ -30,46 +30,48 @@ class BrowserConfiguration {
     private String defaultValue_;
     private int minVersionNumber_ = -1;
     private int maxVersionNumber_ = Integer.MAX_VALUE;
+    private boolean iteratable_ = true;
 
-    public static BrowserConfiguration ff(final String defaultValue) {
+    static BrowserConfiguration ff(final String defaultValue) {
         final BrowserConfiguration browserConfiguration = new BrowserConfiguration();
         browserConfiguration.browserFamily_ = "FF";
         browserConfiguration.defaultValue_ = defaultValue;
         return browserConfiguration;
     }
 
-    public static BrowserConfiguration ie(final String defaultValue) {
+    static BrowserConfiguration ie(final String defaultValue) {
         final BrowserConfiguration browserConfiguration = new BrowserConfiguration();
         browserConfiguration.browserFamily_ = "IE";
         browserConfiguration.defaultValue_ = defaultValue;
         return browserConfiguration;
     }
 
-    public static BrowserConfiguration chrome(final String defaultValue) {
+    static BrowserConfiguration chrome(final String defaultValue) {
         final BrowserConfiguration browserConfiguration = new BrowserConfiguration();
         browserConfiguration.browserFamily_ = "Chrome";
         browserConfiguration.defaultValue_ = defaultValue;
         return browserConfiguration;
     }
 
-    public static BrowserConfiguration ffBelow38(final String defaultValue) {
+    static BrowserConfiguration ffBelow38(final String defaultValue) {
         return ff(defaultValue).upTo(37);
     }
 
-    public static BrowserConfiguration ff38up(final String defaultValue) {
+    static BrowserConfiguration ff38up(final String defaultValue) {
         return ff(defaultValue).startingWith(38);
     }
 
-    public static boolean isDefined(final BrowserVersion browserVersion,
-            final BrowserConfiguration[] browserConfigurations) {
+    static boolean isDefined(final BrowserVersion browserVersion,
+            final BrowserConfiguration[] browserConfigurations, final boolean onlyIfIteratable) {
         if (browserConfigurations == null) {
             return true; // defined for all browsers
         }
 
-        return getMatchingConfiguration(browserVersion, browserConfigurations) != null;
+        final BrowserConfiguration config = getMatchingConfiguration(browserVersion, browserConfigurations);
+        return config != null && (!onlyIfIteratable || config.isIteratable());
     }
 
-    public static BrowserConfiguration getMatchingConfiguration(
+    static BrowserConfiguration getMatchingConfiguration(
             final BrowserVersion browserVersion,
             final BrowserConfiguration[] browserConfigurations) {
 
@@ -84,11 +86,11 @@ class BrowserConfiguration {
         return null;
     }
 
-    public String getDefaultValue() {
+    String getDefaultValue() {
         return defaultValue_;
     }
 
-    public BrowserConfiguration startingWith(final int minVersionNumber) {
+    BrowserConfiguration startingWith(final int minVersionNumber) {
         if (minVersionNumber_ != -1) {
             throw new IllegalStateException("startingWith has already been set to " + minVersionNumber_);
         }
@@ -96,11 +98,20 @@ class BrowserConfiguration {
         return this;
     }
 
-    public BrowserConfiguration upTo(final int maxVersionNumber) {
+    BrowserConfiguration upTo(final int maxVersionNumber) {
         if (maxVersionNumber_ != Integer.MAX_VALUE) {
             throw new IllegalStateException("below has already been set to " + maxVersionNumber_);
         }
         maxVersionNumber_ = maxVersionNumber;
         return this;
+    }
+
+    BrowserConfiguration setIteratable(final boolean iteratable) {
+        iteratable_ = iteratable;
+        return this;
+    }
+
+    boolean isIteratable() {
+        return iteratable_;
     }
 }
