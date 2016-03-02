@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
@@ -26,20 +25,19 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
-import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 
 /**
- * Tests for {@link StyleAttributes}.
+ * Tests for iterability of CSS style attributes defined in {@link StyleAttributes}.
  *
  * @author Ahmed Ashour
  */
-@Ignore
 @RunWith(BrowserParameterizedRunner.class)
 @ToRunWithRealBrowsers
-public class StyleAttributes2Test extends WebDriverTestCase {
+public class StyleAttributesIterableTest extends WebDriverTestCase {
 
     /**
      * Returns the parameterized data.
@@ -56,7 +54,7 @@ public class StyleAttributes2Test extends WebDriverTestCase {
     }
 
     /**
-     * The {@link Definition} name.
+     * The {@link Definition} to test.
      */
     @Parameter
     public Definition definition_;

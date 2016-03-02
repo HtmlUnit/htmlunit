@@ -184,7 +184,7 @@ final class StyleAttributes {
         BACKFACE_VISIBILITY_("backface-visibility", "backface-visibility", ff38up("visible")),
 
         /** The style property {@code background}. */
-        BACKGROUND("background", "background",
+        BACKGROUND("background", "background", ff(""), ie(""),
                 chrome("rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box")),
 
         /** The style property {@code backgroundAttachment}. */
@@ -265,10 +265,10 @@ final class StyleAttributes {
         BEHAVIOR("behavior", "behavior"),
 
         /** The style property {@code border}. */
-        BORDER("border", "border", chrome("0px none rgb(0, 0, 0)")),
+        BORDER("border", "border", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code borderBottom}. */
-        BORDER_BOTTOM("borderBottom", "border-bottom", chrome("0px none rgb(0, 0, 0)")),
+        BORDER_BOTTOM("borderBottom", "border-bottom", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code border-bottom}. */
         BORDER_BOTTOM_("border-bottom", "border-bottom", ff38up("")),
@@ -313,7 +313,7 @@ final class StyleAttributes {
         BORDER_COLLAPSE_("border-collapse", "border-collapse", ff38up("separate")),
 
         /** The style property {@code borderColor}. */
-        BORDER_COLOR("borderColor", "border-color", chrome("rgb(0, 0, 0)")),
+        BORDER_COLOR("borderColor", "border-color", chrome("rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code border-color}. */
         BORDER_COLOR_("border-color", "border-color", ff38up("")),
@@ -357,7 +357,7 @@ final class StyleAttributes {
         BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ff38up("1 1 1 1")),
 
         /** The style property {@code borderLeft}. */
-        BORDER_LEFT("borderLeft", "border-left", chrome("0px none rgb(0, 0, 0)")),
+        BORDER_LEFT("borderLeft", "border-left", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code border-left}. */
         BORDER_LEFT_("border-left", "border-left", ff38up("")),
@@ -376,7 +376,7 @@ final class StyleAttributes {
         BORDER_LEFT_STYLE_("border-left-style", "border-left-style", ff38up("none")),
 
         /** The style property {@code borderLeftWidth}. */
-        BORDER_LEFT_WIDTH("borderLeftWidth", "border-left-width", chrome("0px")),
+        BORDER_LEFT_WIDTH("borderLeftWidth", "border-left-width", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code border-left-width}. */
         BORDER_LEFT_WIDTH_("border-left-width", "border-left-width", ff38up("0px")),
@@ -388,49 +388,49 @@ final class StyleAttributes {
         BORDER_RADIUS_("border-radius", "border-radius", ff38up("")),
 
         /** The style property {@code borderRight}. */
-        BORDER_RIGHT("borderRight", "border-right", chrome("0px none rgb(0, 0, 0)")),
+        BORDER_RIGHT("borderRight", "border-right", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code border-right}. */
         BORDER_RIGHT_("border-right", "border-right", ff38up("")),
 
         /** The style property {@code borderRightColor}. */
-        BORDER_RIGHT_COLOR("borderRightColor", "border-right-color", chrome("rgb(0, 0, 0)")),
+        BORDER_RIGHT_COLOR("borderRightColor", "border-right-color", chrome("rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code border-right-color}. */
         BORDER_RIGHT_COLOR_("border-right-color", "border-right-color", ff38up("rgb(0, 0, 0)")),
 
         /** The style property {@code borderRightStyle}. */
-        BORDER_RIGHT_STYLE("borderRightStyle", "border-right-style", chrome("none")),
+        BORDER_RIGHT_STYLE("borderRightStyle", "border-right-style", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code border-right-style}. */
         BORDER_RIGHT_STYLE_("border-right-style", "border-right-style", ff38up("none")),
 
         /** The style property {@code borderRightWidth}. */
-        BORDER_RIGHT_WIDTH("borderRightWidth", "border-right-width", chrome("0px")),
+        BORDER_RIGHT_WIDTH("borderRightWidth", "border-right-width", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code border-right-width}. */
         BORDER_RIGHT_WIDTH_("border-right-width", "border-right-width", ff38up("0px")),
 
         /** The style property {@code borderSpacing}. */
-        BORDER_SPACING("borderSpacing", "border-spacing", chrome("0px 0px")),
+        BORDER_SPACING("borderSpacing", "border-spacing", chrome("0px 0px"), ff(""), ie("")),
 
         /** The style property {@code border-spacing}. */
-        BORDER_SPACING_("border-spacing", "border-spacing", ff38up("0px 0px")),
+        BORDER_SPACING_("border-spacing", "border-spacing", ff38up("0px 0px"), ff("")),
 
         /** The style property {@code borderStyle}. */
-        BORDER_STYLE("borderStyle", "border-style", chrome("none")),
+        BORDER_STYLE("borderStyle", "border-style", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code border-style}. */
         BORDER_STYLE_("border-style", "border-style", ff38up("")),
 
         /** The style property {@code borderTop}. */
-        BORDER_TOP("borderTop", "border-top", chrome("0px none rgb(0, 0, 0)")),
+        BORDER_TOP("borderTop", "border-top", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code border-top}. */
         BORDER_TOP_("border-top", "border-top", ff38up("")),
 
         /** The style property {@code borderTopColor}. */
-        BORDER_TOP_COLOR("borderTopColor", "border-top-color", chrome("rgb(0, 0, 0)")),
+        BORDER_TOP_COLOR("borderTopColor", "border-top-color", chrome("rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code border-top-color}. */
         BORDER_TOP_COLOR_("border-top-color", "border-top-color", ff38up("rgb(0, 0, 0)")),
@@ -450,25 +450,25 @@ final class StyleAttributes {
         BORDER_TOP_RIGHT_RADIUS_("border-top-right-radius", "border-top-right-radius", ff38up("0px")),
 
         /** The style property {@code borderTopStyle}. */
-        BORDER_TOP_STYLE("borderTopStyle", "border-top-style", chrome("none")),
+        BORDER_TOP_STYLE("borderTopStyle", "border-top-style", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code border-top-style}. */
         BORDER_TOP_STYLE_("border-top-style", "border-top-style", ff38up("none")),
 
         /** The style property {@code borderTopWidth}. */
-        BORDER_TOP_WIDTH("borderTopWidth", "border-top-width", chrome("0px")),
+        BORDER_TOP_WIDTH("borderTopWidth", "border-top-width", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code border-top-width}. */
         BORDER_TOP_WIDTH_("border-top-width", "border-top-width", ff38up("0px")),
 
         /** The style property {@code borderWidth}. */
-        BORDER_WIDTH("borderWidth", "border-width", chrome("0px")),
+        BORDER_WIDTH("borderWidth", "border-width", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code border-width}. */
         BORDER_WIDTH_("border-width", "border-width", ff38up("")),
 
         /** The style property {@code bottom}. */
-        BOTTOM("bottom", "bottom", chrome("auto")),
+        BOTTOM("bottom", "bottom", chrome("auto"), ff(""), ie("")),
 
         /** The style property {@code boxDecorationBreak}. */
         BOX_DECORATION_BREAK("boxDecorationBreak", "box-decoration-break", ff38up("slice")),
@@ -501,16 +501,16 @@ final class StyleAttributes {
         BUFFERED_RENDERING("bufferedRendering", "buffered-rendering", chrome("auto")),
 
         /** The style property {@code captionSide}. */
-        CAPTION_SIDE("captionSide", "caption-side", chrome("top")),
+        CAPTION_SIDE("captionSide", "caption-side", chrome("top"), ff(""), ie("")),
 
         /** The style property {@code caption-side}. */
         CAPTION_SIDE_("caption-side", "caption-side", ff38up("top")),
 
         /** The style property {@code clear}. */
-        CLEAR("clear", "clear", chrome("none")),
+        CLEAR("clear", "clear", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code clip}. */
-        CLIP("clip", "clip", chrome("auto")),
+        CLIP("clip", "clip", chrome("auto"), ff(""), ie("")),
 
         /** The style property {@code clipPath}. */
         CLIP_PATH("clipPath", "clip-path", ff("none"), ie("none"), chrome("none")),
@@ -525,7 +525,7 @@ final class StyleAttributes {
         CLIP_RULE_("clip-rule", "clip-rule", ff38up("nonzero")),
 
         /** The style property {@code color}. */
-        COLOR("color", "color", chrome("rgb(0, 0, 0)")),
+        COLOR("color", "color", chrome("rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code colorInterpolation}. */
         COLOR_INTERPOLATION("colorInterpolation", "color-interpolation", ff("srgb"), chrome("sRGB")),
@@ -577,13 +577,13 @@ final class StyleAttributes {
         CONTENT("content", "content", ie("normal"), chrome(""), ff("none")),
 
         /** The style property {@code counterIncrement}. */
-        COUNTER_INCREMENT("counterIncrement", "counter-increment", chrome("none")),
+        COUNTER_INCREMENT("counterIncrement", "counter-increment", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code counter-increment}. */
         COUNTER_INCREMENT_("counter-increment", "counter-increment", ff38up("none")),
 
         /** The style property {@code counterReset}. */
-        COUNTER_RESET("counterReset", "counter-reset", chrome("none")),
+        COUNTER_RESET("counterReset", "counter-reset", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code counter-reset}. */
         COUNTER_RESET_("counter-reset", "counter-reset", ff38up("none")),
@@ -593,7 +593,7 @@ final class StyleAttributes {
 
         //TODO: seems to be a combination of all other properties.
         /** The style property {@code cssText}. */
-        CSS_TEXT("cssText", "css-text", chrome("")),
+        CSS_TEXT("cssText", "css-text", chrome(""), ff(""), ie("")),
 
         /** The style property {@code cue}. */
         CUE("cue", "cue"),
@@ -605,7 +605,7 @@ final class StyleAttributes {
         CUE_BEFORE("cueBefore", "cue-before"),
 
         /** The style property {@code cursor}. */
-        CURSOR("cursor", "cursor", chrome("auto")),
+        CURSOR("cursor", "cursor", chrome("auto"), ff(""), ie("")),
 
         /** The style property {@code cx}. */
         CX("cx", "cx", chrome("0px")),
@@ -614,10 +614,10 @@ final class StyleAttributes {
         CY("cy", "cy", chrome("0px")),
 
         /** The style property {@code direction}. */
-        DIRECTION("direction", "direction", chrome("ltr")),
+        DIRECTION("direction", "direction", chrome("ltr"), ff(""), ie("")),
 
         /** The style property {@code display}. */
-        DISPLAY("display", "display", chrome("block")),
+        DISPLAY("display", "display", chrome("block"), ff(""), ie("")),
 
         /** The style property {@code dominantBaseline}. */
         DOMINANT_BASELINE("dominantBaseline", "dominant-baseline", ff("auto"), ie("auto"), chrome("auto")),
@@ -711,7 +711,7 @@ final class StyleAttributes {
         FLOOD_OPACITY_("flood-opacity", "flood-opacity", ff38up("1")),
 
         /** The style property {@code font}. */
-        FONT("font", "font", chrome("normal normal normal normal 16px / normal 'Times New Roman'")),
+        FONT("font", "font", chrome("normal normal normal normal 16px / normal 'Times New Roman'"), ff(""), ie("")),
 
         /** The style property {@code fontFamily}. */
         FONT_FAMILY("fontFamily", "font-family", chrome("'Times New Roman'"), ie("Times New Roman"), ff("serif")),
@@ -739,7 +739,7 @@ final class StyleAttributes {
         FONT_LANGUAGE_OVERRIDE_("font-language-override", "font-language-override", ff38up("normal")),
 
         /** The style property {@code fontSize}. */
-        FONT_SIZE("fontSize", "font-size", chrome("16px")),
+        FONT_SIZE("fontSize", "font-size", chrome("16px"), ff(""), ie("")),
 
         /** The style property {@code font-size}. */
         FONT_SIZE_("font-size", "font-size", ff38up("16px")),
@@ -748,13 +748,13 @@ final class StyleAttributes {
         FONT_SIZE_ADJUST_("font-size-adjust", "font-size-adjust", ff38up("none")),
 
         /** The style property {@code fontStretch}. */
-        FONT_STRETCH("fontStretch", "font-stretch", chrome("normal")),
+        FONT_STRETCH("fontStretch", "font-stretch", chrome("normal"), ff(""), ie("")),
 
         /** The style property {@code font-stretch}. */
         FONT_STRETCH_("font-stretch", "font-stretch", ff38up("normal")),
 
         /** The style property {@code fontStyle}. */
-        FONT_STYLE("fontStyle", "font-style", chrome("normal")),
+        FONT_STYLE("fontStyle", "font-style", chrome("normal"), ff(""), ie("")),
 
         /** The style property {@code font-style}. */
         FONT_STYLE_("font-style", "font-style", ff38up("normal")),
@@ -766,7 +766,7 @@ final class StyleAttributes {
         FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff38up("weight style")),
 
         /** The style property {@code fontVariant}. */
-        FONT_VARIANT("fontVariant", "font-variant", chrome("normal")),
+        FONT_VARIANT("fontVariant", "font-variant", chrome("normal"), ff(""), ie("")),
 
         /** The style property {@code font-variant}. */
         FONT_VARIANT_("font-variant", "font-variant", ff38up("normal")),
@@ -822,7 +822,7 @@ final class StyleAttributes {
                 ie("auto")),
 
         /** The style property {@code height}. */
-        HEIGHT("height", "height", chrome("skipped")),
+        HEIGHT("height", "height", chrome("skipped"), ff(""), ie("")),
 
         /** The style property {@code imageOrientation}. */
         IMAGE_ORIENTATION("imageOrientation", "image-orientation", ff("0deg")),
@@ -874,10 +874,10 @@ final class StyleAttributes {
         LAYOUT_GRID_TYPE("layoutGridType", "layout-grid-type", ie("undefined")),
 
         /** The style property {@code left}. */
-        LEFT("left", "left", chrome("auto")),
+        LEFT("left", "left", chrome("auto"), ff(""), ie("")),
 
         /** The style property {@code letterSpacing}. */
-        LETTER_SPACING("letterSpacing", "letter-spacing", chrome("normal")),
+        LETTER_SPACING("letterSpacing", "letter-spacing", chrome("normal"), ff(""), ie("")),
 
         /** The style property {@code letter-spacing}. */
         LETTER_SPACING_("letter-spacing", "letter-spacing", ff38up("normal")),
@@ -899,52 +899,52 @@ final class StyleAttributes {
         LINE_HEIGHT_("line-height", "line-height", ff38up("20px")),
 
         /** The style property {@code listStyle}. */
-        LIST_STYLE("listStyle", "list-style", chrome("disc outside none")),
+        LIST_STYLE("listStyle", "list-style", chrome("disc outside none"), ff(""), ie("")),
 
         /** The style property {@code list-style}. */
         LIST_STYLE_("list-style", "list-style", ff38up("")),
 
         /** The style property {@code listStyleImage}. */
-        LIST_STYLE_IMAGE("listStyleImage", "list-style-image", chrome("none")),
+        LIST_STYLE_IMAGE("listStyleImage", "list-style-image", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code list-style-image}. */
         LIST_STYLE_IMAGE_("list-style-image", "list-style-image", ff38up("none")),
 
         /** The style property {@code listStylePosition}. */
-        LIST_STYLE_POSITION("listStylePosition", "list-style-position", chrome("outside")),
+        LIST_STYLE_POSITION("listStylePosition", "list-style-position", chrome("outside"), ff(""), ie("")),
 
         /** The style property {@code list-style-position}. */
         LIST_STYLE_POSITION_("list-style-position", "list-style-position", ff38up("outside")),
 
         /** The style property {@code listStyleType}. */
-        LIST_STYLE_TYPE("listStyleType", "list-style-type", chrome("disc")),
+        LIST_STYLE_TYPE("listStyleType", "list-style-type", chrome("disc"), ff(""), ie("")),
 
         /** The style property {@code list-style-type}. */
         LIST_STYLE_TYPE_("list-style-type", "list-style-type", ff38up("disc")),
 
         /** The style property {@code margin}. */
-        MARGIN("margin", "margin", chrome("0px"), ff("")),
+        MARGIN("margin", "margin", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code marginBottom}. */
-        MARGIN_BOTTOM("marginBottom", "margin-bottom", chrome("0px")),
+        MARGIN_BOTTOM("marginBottom", "margin-bottom", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code margin-bottom}. */
         MARGIN_BOTTOM_("margin-bottom", "margin-bottom", ff38up("0px")),
 
         /** The style property {@code marginLeft}. */
-        MARGIN_LEFT("marginLeft", "margin-left", chrome("0px")),
+        MARGIN_LEFT("marginLeft", "margin-left", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code margin-left}. */
         MARGIN_LEFT_("margin-left", "margin-left", ff38up("0px")),
 
         /** The style property {@code marginRight}. */
-        MARGIN_RIGHT("marginRight", "margin-right", chrome("0px")),
+        MARGIN_RIGHT("marginRight", "margin-right", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code margin-right}. */
         MARGIN_RIGHT_("margin-right", "margin-right", ff38up("0px")),
 
         /** The style property {@code marginTop}. */
-        MARGIN_TOP("marginTop", "margin-top", chrome("0px")),
+        MARGIN_TOP("marginTop", "margin-top", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code margin-top}. */
         MARGIN_TOP_("margin-top", "margin-top", ff38up("0px")),
@@ -983,13 +983,13 @@ final class StyleAttributes {
         MASK_TYPE_("mask-type", "mask-type", ff38up("luminance")),
 
         /** The style property {@code maxHeight}. */
-        MAX_HEIGHT("maxHeight", "max-height", chrome("none")),
+        MAX_HEIGHT("maxHeight", "max-height", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code max-height}. */
         MAX_HEIGHT_("max-height", "max-height", ff38up("none")),
 
         /** The style property {@code maxWidth}. */
-        MAX_WIDTH("maxWidth", "max-width", chrome("none")),
+        MAX_WIDTH("maxWidth", "max-width", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code max-width}. */
         MAX_WIDTH_("max-width", "max-width", ff38up("none")),
@@ -998,13 +998,13 @@ final class StyleAttributes {
         MAX_ZOOM("maxZoom", "max-zoom", chrome("")),
 
         /** The style property {@code minHeight}. */
-        MIN_HEIGHT("minHeight", "min-height", chrome("0px")),
+        MIN_HEIGHT("minHeight", "min-height", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code min-height}. */
         MIN_HEIGHT_("min-height", "min-height", ff38up("0px")),
 
         /** The style property {@code minWidth}. */
-        MIN_WIDTH("minWidth", "min-width", chrome("0px")),
+        MIN_WIDTH("minWidth", "min-width", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code min-width}. */
         MIN_WIDTH_("min-width", "min-width", ff38up("0px")),
@@ -1626,7 +1626,7 @@ final class StyleAttributes {
         OBJECT_POSITION_("object-position", "object-position", ff38up("50% 50%")),
 
         /** The style property {@code opacity}. */
-        OPACITY("opacity", "opacity", chrome("1")),
+        OPACITY("opacity", "opacity", chrome("1"), ff(""), ie("")),
 
         /** The style property {@code order}. */
         ORDER("order", "order", ff("0"), ie("0"), chrome("0")),
@@ -1635,10 +1635,10 @@ final class StyleAttributes {
         ORIENTATION("orientation", "orientation", chrome("")),
 
         /** The style property {@code orphans}. */
-        ORPHANS("orphans", "orphans", ie("2"), chrome("auto")),
+        ORPHANS("orphans", "orphans", ie("2"), chrome("auto"), ff("")),
 
         /** The style property {@code outline}. */
-        OUTLINE("outline", "outline", chrome("rgb(0, 0, 0) none 0px")),
+        OUTLINE("outline", "outline", chrome("rgb(0, 0, 0) none 0px"), ff(""), ie("")),
 
         /** The style property {@code outlineColor}. */
         OUTLINE_COLOR("outlineColor", "outline-color", ie("transparent"), chrome("rgb(0, 0, 0)"),
@@ -1648,79 +1648,79 @@ final class StyleAttributes {
         OUTLINE_COLOR_("outline-color", "outline-color", ff38up("rgb(0, 0, 0)")),
 
         /** The style property {@code outlineOffset}. */
-        OUTLINE_OFFSET("outlineOffset", "outline-offset", chrome("0px")),
+        OUTLINE_OFFSET("outlineOffset", "outline-offset", chrome("0px"), ff("")),
 
         /** The style property {@code outline-offset}. */
         OUTLINE_OFFSET_("outline-offset", "outline-offset", ff38up("0px")),
 
         /** The style property {@code outlineStyle}. */
-        OUTLINE_STYLE("outlineStyle", "outline-style", chrome("none")),
+        OUTLINE_STYLE("outlineStyle", "outline-style", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code outline-style}. */
         OUTLINE_STYLE_("outline-style", "outline-style", ff38up("none")),
 
         /** The style property {@code outlineWidth}. */
-        OUTLINE_WIDTH("outlineWidth", "outline-width", chrome("0px")),
+        OUTLINE_WIDTH("outlineWidth", "outline-width", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code outline-width}. */
         OUTLINE_WIDTH_("outline-width", "outline-width", ff38up("0px")),
 
         /** The style property {@code overflow}. */
-        OVERFLOW("overflow", "overflow", chrome("visible")),
+        OVERFLOW("overflow", "overflow", chrome("visible"), ff(""), ie("")),
 
         /** The style property {@code overflowWrap}. */
         OVERFLOW_WRAP("overflowWrap", "overflow-wrap", chrome("normal")),
 
         /** The style property {@code overflowX}. */
-        OVERFLOW_X("overflowX", "overflow-x", chrome("visible")),
+        OVERFLOW_X("overflowX", "overflow-x", chrome("visible"), ff(""), ie("")),
 
         /** The style property {@code overflow-x}. */
         OVERFLOW_X_("overflow-x", "overflow-x", ff38up("visible")),
 
         /** The style property {@code overflowY}. */
-        OVERFLOW_Y("overflowY", "overflow-y", chrome("visible")),
+        OVERFLOW_Y("overflowY", "overflow-y", chrome("visible"), ff(""), ie("")),
 
         /** The style property {@code overflow-y}. */
         OVERFLOW_Y_("overflow-y", "overflow-y", ff38up("visible")),
 
         /** The style property {@code padding}. */
-        PADDING("padding", "padding", chrome("0px")),
+        PADDING("padding", "padding", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code paddingBottom}. */
-        PADDING_BOTTOM("paddingBottom", "padding-bottom", chrome("0px")),
+        PADDING_BOTTOM("paddingBottom", "padding-bottom", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code padding-bottom}. */
         PADDING_BOTTOM_("padding-bottom", "padding-bottom", ff38up("0px")),
 
         /** The style property {@code paddingLeft}. */
-        PADDING_LEFT("paddingLeft", "padding-left", chrome("0px")),
+        PADDING_LEFT("paddingLeft", "padding-left", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code padding-left}. */
         PADDING_LEFT_("padding-left", "padding-left", ff38up("0px")),
 
         /** The style property {@code paddingRight}. */
-        PADDING_RIGHT("paddingRight", "padding-right", chrome("0px")),
+        PADDING_RIGHT("paddingRight", "padding-right", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code padding-right}. */
         PADDING_RIGHT_("padding-right", "padding-right", ff38up("0px")),
 
         /** The style property {@code paddingTop}. */
-        PADDING_TOP("paddingTop", "padding-top", chrome("0px")),
+        PADDING_TOP("paddingTop", "padding-top", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code padding-top}. */
         PADDING_TOP_("padding-top", "padding-top", ff38up("0px")),
 
         /** The style property {@code page}. */
-        PAGE("page", "page", chrome("")),
+        PAGE("page", "page", chrome(""), ff("")),
 
         /** The style property {@code pageBreakAfter}. */
-        PAGE_BREAK_AFTER("pageBreakAfter", "page-break-after", chrome("auto")),
+        PAGE_BREAK_AFTER("pageBreakAfter", "page-break-after", chrome("auto"), ff(""), ie("")),
 
         /** The style property {@code page-break-after}. */
         PAGE_BREAK_AFTER_("page-break-after", "page-break-after", ff38up("auto")),
 
         /** The style property {@code pageBreakBefore}. */
-        PAGE_BREAK_BEFORE("pageBreakBefore", "page-break-before", chrome("auto")),
+        PAGE_BREAK_BEFORE("pageBreakBefore", "page-break-before", chrome("auto"), ff(""), ie("")),
 
         /** The style property {@code page-break-before}. */
         PAGE_BREAK_BEFORE_("page-break-before", "page-break-before", ff38up("auto")),
@@ -1769,7 +1769,7 @@ final class StyleAttributes {
         POINTER_EVENTS_("pointer-events", "pointer-events", ff38up("auto")),
 
         /** The style property {@code position}. */
-        POSITION("position", "position", chrome("static")),
+        POSITION("position", "position", chrome("static"), ff(""), ie("")),
 
         /** The style property {@code quotes}. */
         QUOTES("quotes", "quotes", ff("\"“\" \"”\" \"‘\" \"’\""), ie(""), chrome("")),
@@ -1784,10 +1784,10 @@ final class StyleAttributes {
         RICHNESS("richness", "richness"),
 
         /** The style property {@code right}. */
-        RIGHT("right", "right", chrome("auto")),
+        RIGHT("right", "right", chrome("auto"), ff(""), ie("")),
 
         /** The style property {@code rubyAlign}. */
-        RUBY_ALIGN("rubyAlign", "ruby-align", ff38up("space-around")),
+        RUBY_ALIGN("rubyAlign", "ruby-align", ff38up("space-around"), ie("")),
 
         /** The style property {@code ruby-align}. */
         RUBY_ALIGN_("ruby-align", "ruby-align", ff38up("space-around")),
@@ -1853,7 +1853,7 @@ final class StyleAttributes {
         SHAPE_RENDERING_("shape-rendering", "shape-rendering", ff38up("auto")),
 
         /** The style property {@code size}. */
-        SIZE("size", "size", chrome("")),
+        SIZE("size", "size", chrome(""), ff("")),
 
         /** The style property {@code speak}. */
         SPEAK("speak", "speak", chrome("normal")),
@@ -1940,7 +1940,7 @@ final class StyleAttributes {
         TAB_SIZE("tabSize", "tab-size", chrome("8")),
 
         /** The style property {@code tableLayout}. */
-        TABLE_LAYOUT("tableLayout", "table-layout", chrome("auto")),
+        TABLE_LAYOUT("tableLayout", "table-layout", chrome("auto"), ff(""), ie("")),
 
         /** The style property {@code table-layout}. */
         TABLE_LAYOUT_("table-layout", "table-layout", ff38up("auto")),
@@ -1967,7 +1967,7 @@ final class StyleAttributes {
         TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("none")),
 
         /** The style property {@code textDecoration}. */
-        TEXT_DECORATION("textDecoration", "text-decoration", chrome("none")),
+        TEXT_DECORATION("textDecoration", "text-decoration", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code text-decoration}. */
         TEXT_DECORATION_("text-decoration", "text-decoration", ff38up("none")),
@@ -1991,7 +1991,7 @@ final class StyleAttributes {
         TEXT_DECORATION_STYLE_("text-decoration-style", "text-decoration-style", ff38up("solid")),
 
         /** The style property {@code textIndent}. */
-        TEXT_INDENT("textIndent", "text-indent", chrome("0px")),
+        TEXT_INDENT("textIndent", "text-indent", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code text-indent}. */
         TEXT_INDENT_("text-indent", "text-indent", ff38up("0px")),
@@ -2030,7 +2030,7 @@ final class StyleAttributes {
         TEXT_SHADOW_("text-shadow", "text-shadow", ff38up("none")),
 
         /** The style property {@code textTransform}. */
-        TEXT_TRANSFORM("textTransform", "text-transform", chrome("none")),
+        TEXT_TRANSFORM("textTransform", "text-transform", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code text-transform}. */
         TEXT_TRANSFORM_("text-transform", "text-transform", ff38up("none")),
@@ -2111,13 +2111,13 @@ final class StyleAttributes {
         VECTOR_EFFECT_("vector-effect", "vector-effect", ff38up("none")),
 
         /** The style property {@code verticalAlign}. */
-        VERTICAL_ALIGN("verticalAlign", "vertical-align", chrome("baseline")),
+        VERTICAL_ALIGN("verticalAlign", "vertical-align", chrome("baseline"), ff(""), ie("")),
 
         /** The style property {@code vertical-align}. */
         VERTICAL_ALIGN_("vertical-align", "vertical-align", ff38up("baseline")),
 
         /** The style property {@code visibility}. */
-        VISIBILITY("visibility", "visibility", chrome("visible")),
+        VISIBILITY("visibility", "visibility", chrome("visible"), ff(""), ie("")),
 
         /** The style property {@code voiceFamily}. */
         VOICE_FAMILY("voiceFamily", "voice-family"),
@@ -2482,16 +2482,16 @@ final class StyleAttributes {
         WEBKIT_WRITING_MODE("webkitWritingMode", "webkit-writing-mode", chrome("horizontal-tb")),
 
         /** The style property {@code whiteSpace}. */
-        WHITE_SPACE("whiteSpace", "white-space", chrome("normal")),
+        WHITE_SPACE("whiteSpace", "white-space", chrome("normal"), ff(""), ie("")),
 
         /** The style property {@code white-space}. */
         WHITE_SPACE_("white-space", "white-space", ff38up("normal")),
 
         /** The style property {@code widows}. */
-        WIDOWS("widows", "widows", ie("2"), chrome("1")),
+        WIDOWS("widows", "widows", ie("2"), chrome("1"), ff("")),
 
         /** The style property {@code width}. */
-        WIDTH("width", "width", chrome("skipped")),
+        WIDTH("width", "width", chrome("skipped"), ff(""), ie("")),
 
         /** The style property {@code willChange}. */
         WILL_CHANGE("willChange", "will-change", ff38up("auto"), chrome("auto")),
