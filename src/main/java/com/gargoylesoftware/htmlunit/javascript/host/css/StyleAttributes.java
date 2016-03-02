@@ -415,7 +415,7 @@ final class StyleAttributes {
         BORDER_SPACING("borderSpacing", "border-spacing", chrome("0px 0px"), ff(""), ie("")),
 
         /** The style property {@code border-spacing}. */
-        BORDER_SPACING_("border-spacing", "border-spacing", ff38up("0px 0px"), ff("")),
+        BORDER_SPACING_("border-spacing", "border-spacing", ff38up("0px 0px")),
 
         /** The style property {@code borderStyle}. */
         BORDER_STYLE("borderStyle", "border-style", chrome("none"), ff(""), ie("")),
