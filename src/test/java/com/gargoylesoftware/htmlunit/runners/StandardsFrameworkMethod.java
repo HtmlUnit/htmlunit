@@ -21,7 +21,7 @@ import org.junit.runners.model.FrameworkMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * A method of a class annotated with {@link com.gargoylesoftware.htmlunit.StandardsMode}.
+ * A method of a class annotated with {@link com.gargoylesoftware.htmlunit.annotations.StandardsMode}.
  * @author Ahmed Ashour
  */
 public class StandardsFrameworkMethod extends FrameworkMethod {

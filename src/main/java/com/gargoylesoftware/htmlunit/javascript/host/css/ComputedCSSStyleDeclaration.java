@@ -223,7 +223,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final String name = declaration.item(k);
             final String value = declaration.getPropertyValue(name);
             final String priority = declaration.getPropertyPriority(name);
-            if (!name.equals("z-index") || !browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            if (!"z-index".equals(name) || !browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 applyLocalStyleAttribute(name, value, priority, specificity);
             }
         }

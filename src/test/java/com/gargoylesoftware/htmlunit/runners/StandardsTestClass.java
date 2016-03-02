@@ -27,7 +27,7 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.TestClass;
 
 /**
- * Test class annotated with {@link com.gargoylesoftware.htmlunit.StandardsMode}.
+ * Test class annotated with {@link com.gargoylesoftware.htmlunit.annotations.StandardsMode}.
  * @author Ahmed Ashour
  */
 public class StandardsTestClass extends TestClass {

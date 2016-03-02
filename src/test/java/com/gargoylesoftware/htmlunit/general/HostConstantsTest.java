@@ -29,6 +29,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
+import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
 import com.gargoylesoftware.htmlunit.TestCaseTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
@@ -38,11 +39,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
 /**
  * Test all {@code constant}s defined in host classes.
  *
- * This is meant to run against real browsers.
- *
  * @author Ahmed Ashour
  */
 @RunWith(BrowserParameterizedRunner.class)
+@ToRunWithRealBrowsers
 public class HostConstantsTest extends WebDriverTestCase {
 
     /**

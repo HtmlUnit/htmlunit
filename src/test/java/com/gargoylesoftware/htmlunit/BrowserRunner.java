@@ -36,6 +36,7 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.Suite;
 import org.junit.runners.model.Statement;
 
+import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
 
 /**

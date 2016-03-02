@@ -26,6 +26,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
+import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
@@ -33,12 +34,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 /**
  * Tests for {@link StyleAttributes}.
  *
- * This is meant to be used by real browsers
- *
  * @author Ahmed Ashour
  */
 @Ignore
 @RunWith(BrowserParameterizedRunner.class)
+@ToRunWithRealBrowsers
 public class StyleAttributes2Test extends WebDriverTestCase {
 
     /**
