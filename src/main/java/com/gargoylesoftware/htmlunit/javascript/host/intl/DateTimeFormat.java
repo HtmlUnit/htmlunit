@@ -50,7 +50,7 @@ public class DateTimeFormat extends SimpleScriptable {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
         final String ddDash = "\u200Edd\u200E-\u200EMM\u200E-\u200EYYYY";
         final String mmSlash = "\u200EMM\u200E/\u200Edd\u200E/\u200EYYYY";
-        
+
         FF_FORMATS_.put("", mmSlash);
         FF_FORMATS_.put("en-CA", "YYYY-MM-dd");
         FF_FORMATS_.put("en-NZ", ddSlash);
@@ -65,7 +65,7 @@ public class DateTimeFormat extends SimpleScriptable {
     }
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public DateTimeFormat() {
     }
