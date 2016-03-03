@@ -126,7 +126,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
-        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE11", null);
+        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE", null);
 
     /**
      * Internet Explorer 11.
@@ -182,7 +182,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_38.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_38.setCssAcceptHeader("text/css,*/*;q=0.1");
 
-        // IE11
+        // IE
         INTERNET_EXPLORER.initDefaultFeatures();
         INTERNET_EXPLORER.setBrowserLanguage("en-US");
         INTERNET_EXPLORER.setVendor("");
@@ -750,8 +750,8 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the short name of the browser like "FF3", "IE7", ...
-     * This is used in different tests to reference the browser to which it applies.
+     * Returns the short name of the browser like {@code FF3}, {@code IE}, etc.
+     *
      * @return the short name (if any)
      */
     public String getNickname() {
