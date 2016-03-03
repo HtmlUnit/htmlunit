@@ -55,7 +55,7 @@ public class DateTimeFormat extends SimpleScriptable {
 
     /**
      * Formats a date according to the locale and formatting options of this {@code DateTimeFormat} object.
-     * @param date the date
+     * @param object the JavaScript object to convert
      * @return the dated formated
      */
     @JsxFunction
