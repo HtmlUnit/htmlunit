@@ -6430,4 +6430,35 @@ public class HostParentOfATest extends HostParentOf {
     public void _Event_PresentationConnectionAvailableEvent() throws Exception {
         test("Event", "PresentationConnectionAvailableEvent");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AudioNode_IIRFilterNode() throws Exception {
+        test("AudioNode", "IIRFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_IIRFilterNode() throws Exception {
+        test("EventTarget", "IIRFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_PromiseRejectionEvent() throws Exception {
+        test("Event", "PromiseRejectionEvent");
+    }
+
 }

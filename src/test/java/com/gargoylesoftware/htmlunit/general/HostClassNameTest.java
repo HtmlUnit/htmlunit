@@ -10554,4 +10554,25 @@ public class HostClassNameTest extends WebDriverTestCase {
     public void ext_color_buffer_half_float() throws Exception {
         test("EXT_color_buffer_half_float");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IIRFilterNode() { [native code] }")
+    public void iirFilterNode() throws Exception {
+        test("IIRFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PromiseRejectionEvent() { [native code] }")
+    public void promiseRejectionEvent() throws Exception {
+        test("PromiseRejectionEvent");
+    }
+
 }

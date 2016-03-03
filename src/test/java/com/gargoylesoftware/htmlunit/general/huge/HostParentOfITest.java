@@ -3551,4 +3551,13 @@ public class HostParentOfITest extends HostParentOf {
         test("RTCCertificate", "RTCCertificate");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PromiseRejectionEvent_PromiseRejectionEvent() throws Exception {
+        test("PromiseRejectionEvent", "PromiseRejectionEvent");
+    }
 }

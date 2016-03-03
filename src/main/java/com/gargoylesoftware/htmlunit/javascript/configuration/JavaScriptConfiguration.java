@@ -239,6 +239,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PresentationConnectionAvailableEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PromiseRejectionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.RTCDataChannelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.RTCPeerConnectionIceEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.SVGZoomEvent;
@@ -312,6 +313,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.ConvolverNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.DelayNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.DynamicsCompressorNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.GainNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.IIRFilterNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.InputDeviceCapabilities;
 import com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaDevices;
@@ -468,7 +470,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLVideoElement.class,
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
         IDBKeyRange.class, IDBMutableFile.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class,
-        IDBTransaction.class, IDBVersionChangeEvent.class, IdleDeadline.class,
+        IDBTransaction.class, IDBVersionChangeEvent.class, IdleDeadline.class, IIRFilterNode.class,
         Image.class, ImageBitmap.class, ImageData.class, InputDeviceCapabilities.class, InputEvent.class,
         InstallTrigger.class, Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class, LocalMediaStream.class,
@@ -498,7 +500,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PointerEvent.class, PopStateEvent.class, Position.class, PositionError.class, Presentation.class,
         PresentationAvailability.class, PresentationConnection.class, PresentationConnectionAvailableEvent.class,
         PresentationRequest.class,
-        ProcessingInstruction.class, ProgressEvent.class, Promise.class, Proxy.class, PushManager.class,
+        ProcessingInstruction.class, ProgressEvent.class, Promise.class, PromiseRejectionEvent.class,
+        Proxy.class, PushManager.class,
         PushSubscription.class, RadioNodeList.class, Range.class, ReadableByteStream.class, ReadableStream.class,
         Reflect.class, Request.class, Response.class, RowContainer.class, RTCCertificate.class,
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,

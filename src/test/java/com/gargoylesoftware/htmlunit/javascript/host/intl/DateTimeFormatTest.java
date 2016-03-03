@@ -593,8 +593,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "2012-12-20",
+            IE = "‎20‎/‎12‎/‎2012",
             FF38 = "12/20/2012")
     @NotYetImplemented
     public void format_en_ca() throws Exception {
@@ -616,8 +616,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "12/20/2012",
+    @Alerts(DEFAULT = "12/20/2012",
+            IE = "‎20‎/‎12‎/‎2012",
             FF38 = "20/12/2012")
     @NotYetImplemented
     public void format_en_ie() throws Exception {
@@ -674,8 +674,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "12/20/2012",
+    @Alerts(DEFAULT = "12/20/2012",
+            IE = "‎20‎/‎12‎/‎2012",
             FF38 = "20/12/2012")
     @NotYetImplemented
     public void format_en_sg() throws Exception {
@@ -1053,8 +1053,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "2012-12-20")
+    @Alerts(DEFAULT = "2012-12-20",
+            IE = "‎20‎/‎12‎/‎2012")
     @NotYetImplemented
     public void format_ga() throws Exception {
         test("new Intl.DateTimeFormat('ga').format(date)");
@@ -1064,8 +1064,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "2012-12-20")
+    @Alerts(DEFAULT = "2012-12-20",
+            IE = "‎20‎/‎12‎/‎2012")
     @NotYetImplemented
     public void format_ga_ie() throws Exception {
         test("new Intl.DateTimeFormat('ga-IE').format(date)");
@@ -1211,8 +1211,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "20.12.2012")
+    @Alerts(DEFAULT = "20.12.2012",
+            IE = "‎20‎/‎12‎/‎2012")
     @NotYetImplemented
     public void format_iw() throws Exception {
         test("new Intl.DateTimeFormat('iw').format(date)");
@@ -1222,8 +1222,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "20.12.2012")
+    @Alerts(DEFAULT = "20.12.2012",
+            IE = "‎20‎/‎12‎/‎2012")
     @NotYetImplemented
     public void format_iw_il() throws Exception {
         test("new Intl.DateTimeFormat('iw-IL').format(date)");
@@ -1367,8 +1367,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "2012-12-20")
+    @Alerts(DEFAULT = "2012-12-20",
+            IE = "‎20‎/‎12‎/‎2012")
     @NotYetImplemented
     public void format_mt() throws Exception {
         test("new Intl.DateTimeFormat('mt').format(date)");
@@ -1378,8 +1378,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "2012-12-20")
+    @Alerts(DEFAULT = "2012-12-20",
+            IE = "‎20‎/‎12‎/‎2012")
     @NotYetImplemented
     public void format_mt_mt() throws Exception {
         test("new Intl.DateTimeFormat('mt-MT').format(date)");
@@ -1400,8 +1400,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "‎20‎/‎12‎/‎2012",
-            DEFAULT = "20-12-2012")
+    @Alerts(DEFAULT = "20-12-2012",
+            IE = "‎20‎/‎12‎/‎2012")
     @NotYetImplemented
     public void format_nl_be() throws Exception {
         test("new Intl.DateTimeFormat('nl-BE').format(date)");
