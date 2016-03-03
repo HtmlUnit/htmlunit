@@ -7323,7 +7323,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "[object Object]",
             EDGE = "[object Object]")
-    @NotYetImplemented(CHROME)
     public void reflect() throws Exception {
         test("Reflect");
     }
