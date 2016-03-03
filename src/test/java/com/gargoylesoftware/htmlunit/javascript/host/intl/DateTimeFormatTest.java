@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link DateTimeFormat}.
  *
  * @author Roanld Brill
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class DateTimeFormatTest extends WebDriverTestCase {
@@ -65,8 +66,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "20.12.2012",
-            IE = "\u200e20\u200e\u002e\u200e12\u200e\u002e\u200e2012")
+    @Alerts(DEFAULT = "12/20/2012",
+            IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
     @NotYetImplemented
     public void format_default() throws Exception {
         test("new Intl.DateTimeFormat().format(date)");
@@ -77,7 +78,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-            IE = "\u200e12\u200e\u002f\u200e20\u200e\u002f\u200e2012")
+            IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
     @NotYetImplemented
     public void format_en_us() throws Exception {
         test("new Intl.DateTimeFormat('en-US').format(date)");
@@ -88,7 +89,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "\u200e20\u200e\u002f\u200e12\u200e\u002f\u200e2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_en_gb() throws Exception {
         test("new Intl.DateTimeFormat('en-GB').format(date)");
@@ -99,7 +100,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012. 12. 20.",
-            IE = "\u200e2012\u200e\ub144 \u200e12\u200e\uc6d4 \u200e20\u200e\uc77c")
+            IE = "\u200E2012\u200E\uB144 \u200E12\u200E\uC6D4 \u200E20\u200E\uC77C")
     @NotYetImplemented
     public void format_ko_kr() throws Exception {
         test("new Intl.DateTimeFormat('ko-KR').format(date)");

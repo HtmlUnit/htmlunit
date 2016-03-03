@@ -14,9 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code Intl.DateTimeFormat}.
@@ -27,9 +36,31 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 public class DateTimeFormat extends SimpleScriptable {
 
     /**
-     * The default constructor.
+     * JavaScript constructor.
+     * @param cx the current context
+     * @param args the arguments to the WebSocket constructor
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public DateTimeFormat() {
+    public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
+            final boolean inNewExpr) {
+        final DateTimeFormat format = new DateTimeFormat();
+        final Window window = getWindow(ctorObj);
+        format.setParentScope(window);
+        format.setPrototype(window.getPrototype(format.getClass()));
+        return format;
+    }
+
+    /**
+     * Formats a date according to the locale and formatting options of this {@code DateTimeFormat} object.
+     * @param date the date
+     * @return the dated formated
+     */
+    @JsxFunction
+    public String format(final Object object) {
+        final Date date = (Date) Context.jsToJava(object, Date.class);
+        return new SimpleDateFormat("dd.MM.yyyy").format(date);
     }
 }
