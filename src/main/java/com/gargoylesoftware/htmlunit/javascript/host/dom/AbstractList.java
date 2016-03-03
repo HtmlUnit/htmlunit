@@ -489,11 +489,10 @@ public class AbstractList extends SimpleScriptable implements Function {
                     if (name.equals(element.getAttribute("name"))) {
                         return true;
                     }
-                    else {
-                        final String id = element.getId();
-                        if (name.equals(id)) {
-                            return true;
-                        }
+
+                    final String id = element.getId();
+                    if (name.equals(id)) {
+                        return true;
                     }
                 }
             }
