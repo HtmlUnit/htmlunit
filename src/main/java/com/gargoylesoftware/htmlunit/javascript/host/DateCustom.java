@@ -59,10 +59,10 @@ public final class DateCustom {
 
         if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS)) {
             // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
-            formatString = "\u200Edd\u200E.\u200EMM\u200E.\u200Eyyyy";
+            formatString = "\u200EM\u200E/\u200Ed\u200E/\u200Eyyyy";
         }
         else if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT)) {
-            formatString = "d.M.yyyy";
+            formatString = "M/d/yyyy";
         }
         else {
             formatString = "EEEE, MMMM dd, yyyy";
@@ -86,10 +86,10 @@ public final class DateCustom {
 
         if (browserVersion.hasFeature(JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS)) {
             // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
-            formatString = "\u200EHH\u200E:\u200Emm\u200E:\u200Ess";
+            formatString = "\u200Eh\u200E:\u200Emm\u200E:\u200Ess\u200E \u200Ea";
         }
         else {
-            formatString = "HH:mm:ss";
+            formatString = "h:mm:ss a";
         }
         final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(browserVersion));
         return format.format(getDateValue(thisObj));

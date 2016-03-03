@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                JavaScript: update Date.toLocaleDateString() and .toLocaleTimeString to use en_US locale.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: simple implementation of SVGPathElement.getTotalLength() added.
             </action>
