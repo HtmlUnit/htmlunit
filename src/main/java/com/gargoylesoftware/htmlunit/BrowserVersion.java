@@ -52,18 +52,25 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *     pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
  *     pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
  *     var isMicrosoft = navigator.appVersion.indexOf('Trident/') > 0;
+ *     var isEdge = navigator.appVersion.indexOf('Edge') != -1;
  *     var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
  *     var numeric = 38;
  *     if (isMicrosoft) {
  *         numeric = 11;
  *     }
+ *     else if (isEdge) {
+ *         numeric = 13;
+ *     }
  *     else if (isChrome) {
- *         numeric = 46;
+ *         numeric = 49;
  *     }
  *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
  *     var browser = "FIREFOX_38";
  *     if (isMicrosoft) {
- *         browser = "INTERNET_EXPLORER_11";
+ *         browser = "INTERNET_EXPLORER";
+ *     }
+ *     else if (isEdge) {
+ *         browser = "EDGE";
  *     }
  *     else if (isChrome) {
  *         browser = "CHROME";
@@ -138,10 +145,10 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36",
-        46, "Chrome", null);
+        + " (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36",
+        49, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
     public static final BrowserVersion EDGE = new BrowserVersion(

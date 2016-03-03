@@ -25,6 +25,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.ComparisonFailure;
 import org.junit.runners.model.FrameworkMethod;
@@ -148,6 +149,7 @@ final class TestCaseCorrector {
     private static String getActualString(final ComparisonFailure failure) {
         String actual = failure.getActual();
         actual = actual.substring(1, actual.length() - 1).replace("\r", "\\r").replace("\n", "\\n");
+        actual = StringEscapeUtils.escapeJava(actual);
         if (actual.length() > 96) {
             final StringBuilder builder = new StringBuilder();
             while (!actual.isEmpty()) {

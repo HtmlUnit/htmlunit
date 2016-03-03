@@ -61,6 +61,6 @@ public class DateTimeFormat extends SimpleScriptable {
     @JsxFunction
     public String format(final Object object) {
         final Date date = (Date) Context.jsToJava(object, Date.class);
-        return new SimpleDateFormat("dd.MM.yyyy").format(date);
+        return new SimpleDateFormat("abcd").format(date);
     }
 }
