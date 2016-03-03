@@ -15,8 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCALE_DATE_SHORT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
 import java.util.Date;
 import java.util.Locale;
@@ -57,7 +56,7 @@ public final class DateCustom {
         final String formatString;
         final BrowserVersion browserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
 
-        if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS)) {
+        if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
             // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
             formatString = "\u200EM\u200E/\u200Ed\u200E/\u200Eyyyy";
         }
@@ -84,7 +83,7 @@ public final class DateCustom {
         final String formatString;
         final BrowserVersion browserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
 
-        if (browserVersion.hasFeature(JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS)) {
+        if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
             // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
             formatString = "\u200Eh\u200E:\u200Emm\u200E:\u200Ess\u200E \u200Ea";
         }

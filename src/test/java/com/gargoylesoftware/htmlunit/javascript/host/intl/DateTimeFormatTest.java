@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -68,7 +74,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
     public void format_default() throws Exception {
         test("new Intl.DateTimeFormat().format(date)");
     }
@@ -203,7 +208,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
-            FF38 = "20\u200F/12\u200F/2012",
+            FF = "20\u200F/12\u200F/2012",
             IE = "\u200F20\u200F-\u200F12\u200F-\u200F2012")
     @NotYetImplemented
     public void format_ar_dz() throws Exception {
@@ -270,7 +275,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
-            FF38 = "20\u200F/12\u200F/2012",
+            FF = "20\u200F/12\u200F/2012",
             IE = "\u200F20\u200F/\u200F12\u200F/\u200F2012")
     @NotYetImplemented
     public void format_ar_ly() throws Exception {
@@ -282,7 +287,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
-            FF38 = "20\u200F/12\u200F/2012",
+            FF = "20\u200F/12\u200F/2012",
             IE = "\u200F20\u200F-\u200F12\u200F-\u200F2012")
     @NotYetImplemented
     public void format_ar_ma() throws Exception {
@@ -349,7 +354,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
-            FF38 = "20\u200F/12\u200F/2012",
+            FF = "20\u200F/12\u200F/2012",
             IE = "\u200F20\u200F-\u200F12\u200F-\u200F2012")
     @NotYetImplemented
     public void format_ar_tn() throws Exception {
@@ -372,7 +377,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF38 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     @NotYetImplemented
     public void format_be() throws Exception {
@@ -384,7 +389,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF38 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     @NotYetImplemented
     public void format_be_by() throws Exception {
@@ -418,7 +423,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_ca() throws Exception {
         test("new Intl.DateTimeFormat('ca').format(date)");
@@ -429,7 +434,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_ca_es() throws Exception {
         test("new Intl.DateTimeFormat('ca-ES').format(date)");
@@ -539,7 +544,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_el() throws Exception {
         test("new Intl.DateTimeFormat('el').format(date)");
@@ -550,7 +555,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_el_cy() throws Exception {
         test("new Intl.DateTimeFormat('el-CY').format(date)");
@@ -561,7 +566,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_el_gr() throws Exception {
         test("new Intl.DateTimeFormat('el-GR').format(date)");
@@ -573,7 +578,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
     public void format_en() throws Exception {
         test("new Intl.DateTimeFormat('en').format(date)");
     }
@@ -583,7 +587,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_en_au() throws Exception {
         test("new Intl.DateTimeFormat('en-AU').format(date)");
@@ -594,9 +598,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            IE = "‎20‎/‎12‎/‎2012",
-            FF38 = "12/20/2012")
-    @NotYetImplemented
+            FF = "12/20/2012",
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
+    @NotYetImplemented({ FF31, FF38, IE })
     public void format_en_ca() throws Exception {
         test("new Intl.DateTimeFormat('en-CA').format(date)");
     }
@@ -606,7 +610,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_en_gb() throws Exception {
         test("new Intl.DateTimeFormat('en-GB').format(date)");
@@ -617,9 +621,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-            IE = "‎20‎/‎12‎/‎2012",
-            FF38 = "20/12/2012")
-    @NotYetImplemented
+            FF = "20/12/2012",
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
+    @NotYetImplemented({ FF31, FF38, IE })
     public void format_en_ie() throws Exception {
         test("new Intl.DateTimeFormat('en-IE').format(date)");
     }
@@ -629,9 +633,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-            FF38 = "20/12/2012",
+            FF = "20/12/2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented({ FF31, FF38 })
     public void format_en_in() throws Exception {
         test("new Intl.DateTimeFormat('en-IN').format(date)");
     }
@@ -641,9 +645,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-            FF38 = "20/12/2012",
+            FF = "20/12/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented({ FF31, FF38 })
     public void format_en_mt() throws Exception {
         test("new Intl.DateTimeFormat('en-MT').format(date)");
     }
@@ -653,8 +657,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
-    @NotYetImplemented
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_en_nz() throws Exception {
         test("new Intl.DateTimeFormat('en-NZ').format(date)");
     }
@@ -665,7 +668,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
     public void format_en_ph() throws Exception {
         test("new Intl.DateTimeFormat('en-PH').format(date)");
     }
@@ -675,9 +677,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-            IE = "‎20‎/‎12‎/‎2012",
-            FF38 = "20/12/2012")
-    @NotYetImplemented
+            FF = "20/12/2012",
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
+    @NotYetImplemented({ FF31, FF38, IE })
     public void format_en_sg() throws Exception {
         test("new Intl.DateTimeFormat('en-SG').format(date)");
     }
@@ -688,7 +690,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
     public void format_en_us() throws Exception {
         test("new Intl.DateTimeFormat('en-US').format(date)");
     }
@@ -709,7 +710,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es() throws Exception {
         test("new Intl.DateTimeFormat('es').format(date)");
@@ -720,7 +721,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_ar() throws Exception {
         test("new Intl.DateTimeFormat('es-AR').format(date)");
@@ -731,7 +732,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_bo() throws Exception {
         test("new Intl.DateTimeFormat('es-BO').format(date)");
@@ -742,7 +743,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            FF38 = "20-12-2012",
+            FF = "20-12-2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
     @NotYetImplemented
     public void format_es_cl() throws Exception {
@@ -754,7 +755,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_co() throws Exception {
         test("new Intl.DateTimeFormat('es-CO').format(date)");
@@ -765,7 +766,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_cr() throws Exception {
         test("new Intl.DateTimeFormat('es-CR').format(date)");
@@ -776,7 +777,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_do() throws Exception {
         test("new Intl.DateTimeFormat('es-DO').format(date)");
@@ -787,7 +788,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_ec() throws Exception {
         test("new Intl.DateTimeFormat('es-EC').format(date)");
@@ -798,7 +799,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_es() throws Exception {
         test("new Intl.DateTimeFormat('es-ES').format(date)");
@@ -809,7 +810,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_gt() throws Exception {
         test("new Intl.DateTimeFormat('es-GT').format(date)");
@@ -820,7 +821,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_hn() throws Exception {
         test("new Intl.DateTimeFormat('es-HN').format(date)");
@@ -831,7 +832,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_mx() throws Exception {
         test("new Intl.DateTimeFormat('es-MX').format(date)");
@@ -842,7 +843,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_ni() throws Exception {
         test("new Intl.DateTimeFormat('es-NI').format(date)");
@@ -853,9 +854,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            FF38 = "12/20/2012",
+            FF = "12/20/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented(CHROME)
     public void format_es_pa() throws Exception {
         test("new Intl.DateTimeFormat('es-PA').format(date)");
     }
@@ -865,7 +866,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_pe() throws Exception {
         test("new Intl.DateTimeFormat('es-PE').format(date)");
@@ -876,9 +877,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012",
-            FF38 = "12/20/2012")
-    @NotYetImplemented
+            FF = "12/20/2012",
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
+    @NotYetImplemented({ EDGE, CHROME, IE })
     public void format_es_pr() throws Exception {
         test("new Intl.DateTimeFormat('es-PR').format(date)");
     }
@@ -888,7 +889,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_py() throws Exception {
         test("new Intl.DateTimeFormat('es-PY').format(date)");
@@ -899,7 +900,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_sv() throws Exception {
         test("new Intl.DateTimeFormat('es-SV').format(date)");
@@ -910,9 +911,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            FF38 = "12/20/2012",
+            FF = "12/20/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, EDGE })
     public void format_es_us() throws Exception {
         test("new Intl.DateTimeFormat('es-US').format(date)");
     }
@@ -922,7 +923,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_uy() throws Exception {
         test("new Intl.DateTimeFormat('es-UY').format(date)");
@@ -933,7 +934,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_es_ve() throws Exception {
         test("new Intl.DateTimeFormat('es-VE').format(date)");
@@ -988,7 +989,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_fr() throws Exception {
         test("new Intl.DateTimeFormat('fr').format(date)");
@@ -999,7 +1000,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_fr_be() throws Exception {
         test("new Intl.DateTimeFormat('fr-BE').format(date)");
@@ -1032,7 +1033,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_fr_fr() throws Exception {
         test("new Intl.DateTimeFormat('fr-FR').format(date)");
@@ -1043,7 +1044,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_fr_lu() throws Exception {
         test("new Intl.DateTimeFormat('fr-LU').format(date)");
@@ -1054,7 +1055,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_ga() throws Exception {
         test("new Intl.DateTimeFormat('ga').format(date)");
@@ -1065,7 +1066,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_ga_ie() throws Exception {
         test("new Intl.DateTimeFormat('ga-IE').format(date)");
@@ -1087,7 +1088,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012.",
-            FF38 = "20. 12. 2012.",
+            FF = "20. 12. 2012.",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012\u200E.")
     @NotYetImplemented
     public void format_hr() throws Exception {
@@ -1099,7 +1100,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012.",
-            FF38 = "20. 12. 2012.",
+            FF = "20. 12. 2012.",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012\u200E.")
     @NotYetImplemented
     public void format_hr_hr() throws Exception {
@@ -1133,7 +1134,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_in() throws Exception {
         test("new Intl.DateTimeFormat('in').format(date)");
@@ -1144,7 +1145,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_in_id() throws Exception {
         test("new Intl.DateTimeFormat('in-ID').format(date)");
@@ -1155,7 +1156,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF38 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     @NotYetImplemented
     public void format_is() throws Exception {
@@ -1167,7 +1168,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF38 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     @NotYetImplemented
     public void format_is_is() throws Exception {
@@ -1179,7 +1180,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_it() throws Exception {
         test("new Intl.DateTimeFormat('it').format(date)");
@@ -1201,7 +1202,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_it_it() throws Exception {
         test("new Intl.DateTimeFormat('it-IT').format(date)");
@@ -1212,7 +1213,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_iw() throws Exception {
         test("new Intl.DateTimeFormat('iw').format(date)");
@@ -1223,7 +1224,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_iw_il() throws Exception {
         test("new Intl.DateTimeFormat('iw-IL').format(date)");
@@ -1322,7 +1323,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF38 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     @NotYetImplemented
     public void format_mk() throws Exception {
@@ -1334,7 +1335,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF38 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     @NotYetImplemented
     public void format_mk_mk() throws Exception {
@@ -1346,7 +1347,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_ms() throws Exception {
         test("new Intl.DateTimeFormat('ms').format(date)");
@@ -1357,7 +1358,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_ms_my() throws Exception {
         test("new Intl.DateTimeFormat('ms-MY').format(date)");
@@ -1368,7 +1369,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_mt() throws Exception {
         test("new Intl.DateTimeFormat('mt').format(date)");
@@ -1379,7 +1380,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_mt_mt() throws Exception {
         test("new Intl.DateTimeFormat('mt-MT').format(date)");
@@ -1401,7 +1402,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20-12-2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_nl_be() throws Exception {
         test("new Intl.DateTimeFormat('nl-BE').format(date)");
@@ -1424,7 +1425,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void format_no() throws Exception {
         test("new Intl.DateTimeFormat('no').format(date)");
     }
@@ -1435,7 +1436,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void format_no_no() throws Exception {
         test("new Intl.DateTimeFormat('no-NO').format(date)");
     }
@@ -1478,7 +1479,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_pt() throws Exception {
         test("new Intl.DateTimeFormat('pt').format(date)");
@@ -1489,7 +1490,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_pt_br() throws Exception {
         test("new Intl.DateTimeFormat('pt-BR').format(date)");
@@ -1555,7 +1556,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20. 12. 2012",
-            FF38 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E20\u200E. \u200E12\u200E. \u200E2012")
     @NotYetImplemented
     public void format_sk() throws Exception {
@@ -1567,7 +1568,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20. 12. 2012",
-            FF38 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E20\u200E. \u200E12\u200E. \u200E2012")
     @NotYetImplemented
     public void format_sk_sk() throws Exception {
@@ -1601,7 +1602,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF38 = "20/12/2012",
+            FF = "20/12/2012",
             IE = "\u200E2012\u200E-\u200E12\u200E-\u200E20")
     @NotYetImplemented
     public void format_sq() throws Exception {
@@ -1613,7 +1614,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF38 = "20/12/2012",
+            FF = "20/12/2012",
             IE = "\u200E2012\u200E-\u200E12\u200E-\u200E20")
     @NotYetImplemented
     public void format_sq_al() throws Exception {
@@ -1625,7 +1626,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012.",
-            FF38 = "20. 12. 2012.",
+            FF = "20. 12. 2012.",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     @NotYetImplemented
     public void format_sr() throws Exception {
@@ -1637,9 +1638,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012.",
-            FF38 = "20. 12. 2012.",
+            FF = "20. 12. 2012.",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, FF31, FF38, EDGE })
     public void format_sr_ba() throws Exception {
         test("new Intl.DateTimeFormat('sr-BA').format(date)");
     }
@@ -1649,9 +1650,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012.",
-            FF38 = "20. 12. 2012.",
+            FF = "20. 12. 2012.",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, FF31, FF38, EDGE })
     public void format_sr_cs() throws Exception {
         test("new Intl.DateTimeFormat('sr-CS').format(date)");
     }
@@ -1661,9 +1662,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012.",
-            FF38 = "20. 12. 2012.",
+            FF = "20. 12. 2012.",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, FF31, FF38, EDGE })
     public void format_sr_me() throws Exception {
         test("new Intl.DateTimeFormat('sr-ME').format(date)");
     }
@@ -1673,9 +1674,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012.",
-            FF38 = "20. 12. 2012.",
+            FF = "20. 12. 2012.",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, FF31, FF38, EDGE })
     public void format_sr_rs() throws Exception {
         test("new Intl.DateTimeFormat('sr-RS').format(date)");
     }
@@ -1773,7 +1774,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_vi() throws Exception {
         test("new Intl.DateTimeFormat('vi').format(date)");
@@ -1784,7 +1785,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            IE = "‎20‎/‎12‎/‎2012")
+            IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     @NotYetImplemented
     public void format_vi_vn() throws Exception {
         test("new Intl.DateTimeFormat('vi-VN').format(date)");

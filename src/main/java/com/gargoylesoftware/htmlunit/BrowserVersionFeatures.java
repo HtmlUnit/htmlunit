@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.intl.DateTimeFormat;
 
 /**
  * Constants of various features of each {@link BrowserVersion}.
@@ -594,13 +595,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DATE_LOCALE_DATE_SHORT,
 
-    /** <code>Date.toLocaleDateString()</code> returns a short form (dd.MM.yyyy) with some weird special chars. */
+    /** {@link DateTimeFormat} uses the Unicode Character {@code 'LEFT-TO-RIGHT MARK'}. */
     @BrowserFeature(@WebBrowser(IE))
-    JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS,
-
-    /** <code>Date.toLocaleTimeString()</code> returns a form with some weird special chars. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS,
+    JS_DATE_WITH_LEFT_TO_RIGHT_MARK,
 
     /** */
     @BrowserFeature(@WebBrowser(IE))
