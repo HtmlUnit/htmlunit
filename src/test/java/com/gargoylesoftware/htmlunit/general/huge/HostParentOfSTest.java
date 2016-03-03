@@ -2677,4 +2677,13 @@ public class HostParentOfSTest extends HostParentOf {
         test("ServiceWorkerMessageEvent", "ServiceWorkerMessageEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SyncManager_SyncManager() throws Exception {
+        test("SyncManager", "SyncManager");
+    }
 }

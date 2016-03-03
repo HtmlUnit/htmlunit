@@ -3541,4 +3541,14 @@ public class HostParentOfITest extends HostParentOf {
         test("PresentationConnectionAvailableEvent", "PresentationConnectionAvailableEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _RTCCertificate_RTCCertificate() throws Exception {
+        test("RTCCertificate", "RTCCertificate");
+    }
+
 }

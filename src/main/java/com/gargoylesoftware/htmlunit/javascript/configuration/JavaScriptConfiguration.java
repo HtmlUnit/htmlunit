@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.PushManager;
 import com.gargoylesoftware.htmlunit.javascript.host.PushSubscription;
 import com.gargoylesoftware.htmlunit.javascript.host.ReadableByteStream;
 import com.gargoylesoftware.htmlunit.javascript.host.ReadableStream;
+import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.ScreenOrientation;
 import com.gargoylesoftware.htmlunit.javascript.host.Set;
@@ -352,6 +353,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.presentation.Presenta
 import com.gargoylesoftware.htmlunit.javascript.host.media.presentation.PresentationAvailability;
 import com.gargoylesoftware.htmlunit.javascript.host.media.presentation.PresentationConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.media.presentation.PresentationRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCCertificate;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCIceCandidate;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCIceCandidate;
@@ -382,6 +384,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.*;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorkerContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorkerRegistration;
+import com.gargoylesoftware.htmlunit.javascript.host.worker.SyncManager;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.Worker;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
@@ -495,9 +498,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PointerEvent.class, PopStateEvent.class, Position.class, PositionError.class, Presentation.class,
         PresentationAvailability.class, PresentationConnection.class, PresentationConnectionAvailableEvent.class,
         PresentationRequest.class,
-        ProcessingInstruction.class, ProgressEvent.class,
-        Promise.class, Proxy.class, PushManager.class, PushSubscription.class, RadioNodeList.class, Range.class,
-        ReadableByteStream.class, ReadableStream.class, Request.class, Response.class, RowContainer.class,
+        ProcessingInstruction.class, ProgressEvent.class, Promise.class, Proxy.class, PushManager.class,
+        PushSubscription.class, RadioNodeList.class, Range.class, ReadableByteStream.class, ReadableStream.class,
+        Reflect.class, Request.class, Response.class, RowContainer.class, RTCCertificate.class,
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScreenOrientation.class, ScriptProcessorNode.class, SecurityPolicyViolationEvent.class,
         Selection.class, ServiceWorker.class, ServiceWorkerContainer.class, ServiceWorkerMessageEvent.class,
@@ -542,8 +545,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGSymbolElement.class, SVGTextContentElement.class, SVGTextElement.class,
         SVGTextPathElement.class, SVGTextPositioningElement.class, SVGTitleElement.class, SVGTransform.class,
         SVGTransformList.class, SVGTSpanElement.class, SVGUnitTypes.class, SVGUseElement.class, SVGViewElement.class,
-        SVGViewSpec.class, SVGZoomEvent.class, Symbol.class, Text.class, TextDecoder.class, TextEncoder.class,
-        TextEvent.class, TextMetrics.class, TextRange.class, TextTrack.class, TextTrackCue.class,
+        SVGViewSpec.class, SVGZoomEvent.class, Symbol.class, SyncManager.class, Text.class, TextDecoder.class,
+        TextEncoder.class, TextEvent.class, TextMetrics.class, TextRange.class, TextTrack.class, TextTrackCue.class,
         TextTrackCueList.class, TextTrackList.class, TimeEvent.class, TimeRanges.class,
         Touch.class, TouchEvent.class, TouchList.class, TrackEvent.class, TransitionEvent.class, TreeWalker.class,
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class, URL.class,

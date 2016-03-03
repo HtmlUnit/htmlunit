@@ -12,28 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.event;
+package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code BlobEvent}.
+ * A JavaScript object for {@code SyncManager}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
-public class BlobEvent extends Event {
+@JsxClass(browsers = @WebBrowser(CHROME))
+public class SyncManager extends SimpleScriptable {
 
     /**
      * Creates an instance.
      */
     @JsxConstructor
-    public BlobEvent() {
+    public SyncManager() {
     }
 
 }

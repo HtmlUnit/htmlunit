@@ -3798,8 +3798,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function URLSearchParams() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "function URLSearchParams() { [native code] }",
+            FF = "function URLSearchParams() {\n    [native code]\n}",
+            IE = "exception")
     public void urlSearchParams() throws Exception {
         test("URLSearchParams");
     }
@@ -4391,8 +4392,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function MediaRecorder() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "function MediaRecorder() { [native code] }",
+            FF = "function MediaRecorder() {\n    [native code]\n}",
+            IE = "exception")
     public void mediaRecorder() throws Exception {
         test("MediaRecorder");
     }
@@ -7319,7 +7321,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "[object Object]",
             EDGE = "[object Object]")
+    @NotYetImplemented(CHROME)
     public void reflect() throws Exception {
         test("Reflect");
     }
@@ -7329,8 +7333,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function MediaStreamTrack() { [native code] }",
-            IE = "exception",
-            FF = "function MediaStreamTrack() {\n    [native code]\n}")
+            FF = "function MediaStreamTrack() {\n    [native code]\n}",
+            IE = "exception")
     public void mediaStreamTrack() throws Exception {
         test("MediaStreamTrack");
     }
@@ -7767,8 +7771,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function BlobEvent() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "function BlobEvent() { [native code] }",
+            FF = "function BlobEvent() {\n    [native code]\n}",
+            IE = "exception")
     public void blobEvent() throws Exception {
         test("BlobEvent");
     }
@@ -7997,9 +8002,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "function Proxy() { [native code] }",
             FF = "function Proxy() {\n    [native code]\n}",
-            EDGE = "function Proxy() { [native code] }")
+            IE = "exception")
     public void proxy() throws Exception {
         test("Proxy");
     }
@@ -8444,7 +8449,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SyncManager() { [native code] }")
     public void syncManager() throws Exception {
         test("SyncManager");
     }
@@ -10488,7 +10494,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function RTCCertificate() { [native code] }")
     public void rtcCertificate() throws Exception {
         test("RTCCertificate");
     }
