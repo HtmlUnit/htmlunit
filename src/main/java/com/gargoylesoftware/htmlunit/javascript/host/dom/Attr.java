@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTR_BASE_URI_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -191,9 +190,6 @@ public class Attr extends Node {
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public String getBaseURI() {
-        if (!getBrowserVersion().hasFeature(JS_ATTR_BASE_URI_NULL)) {
-            return getDomNodeOrDie().getPage().getUrl().toExternalForm();
-        }
-        return null;
+        return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }
 }

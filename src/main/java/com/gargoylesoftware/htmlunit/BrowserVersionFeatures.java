@@ -539,10 +539,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
 
-    /** Is {@code baseURI} null. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_ATTR_BASE_URI_NULL,
-
     /** firstChild and lastChild returns null for Attr (like IE does). */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,

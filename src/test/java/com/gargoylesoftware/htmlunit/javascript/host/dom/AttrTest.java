@@ -283,7 +283,6 @@ public class AttrTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Attr]", "§§URL§§" },
-            CHROME = { "[object Attr]", "null" },
             IE = { "[object Attr]", "undefined" })
     public void html_baseURI() throws Exception {
         html("baseURI");
@@ -351,7 +350,6 @@ public class AttrTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Attr]", "§§URL§§foo.xml" },
-            CHROME = { "[object Attr]", "null" },
             IE = { "[object Attr]", "undefined" })
     public void xml_baseURI() throws Exception {
         xml("baseURI");
