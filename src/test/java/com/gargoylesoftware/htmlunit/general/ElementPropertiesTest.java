@@ -577,9 +577,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "cancelIdleCallback(),captureEvents(),chrome,clearInterval(),clearTimeout(),clientInformation,"
                 + "close(),closed,confirm(),"
-                + "console,createXmlDocument(),crypto,defaultstatus,defaultStatus,devicePixelRatio,"
+                + "console,createXmlDocument(),crypto,defaultStatus,defaultstatus,devicePixelRatio,"
                 + "dispatchEvent(),document,external,fetch(),find(),focus(),frameElement,frames,getComputedStyle(),"
-                + "getMatchedCSSRules(),getSelection(),history,ieMethods,indexedDB,innerHeight,innerWidth,length,"
+                + "getMatchedCSSRules(),getSelection(),history,ieMethods,"
+                + "indexedDB,innerHeight,innerWidth,isSecureContext,"
+                + "length,"
                 + "localStorage,location,locationbar,matchMedia(),menubar,moveBy(),moveTo(),name,navigator,onabort,"
                 + "onanimationend,onanimationiteration,onanimationstart,"
                 + "onautocomplete,onautocompleteerror,onbeforeunload,onblur,oncancel,oncanplay,oncanplaythrough,"
@@ -589,12 +591,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onlanguagechange,onload(),onloadeddata,onloadedmetadata,onloadstart,onmessage,onmousedown,"
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onoffline,"
                 + "ononline,onpagehide,onpageshow,onpause,onplay,onplaying,onpopstate,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onsearch,onseeked,onseeking,onselect,onshow,onstalled,onstorage,"
-                + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onunload,onvolumechange,onwaiting,"
+                + "onrejectionhandled,onreset,onresize,onscroll,onsearch,"
+                + "onseeked,onseeking,onselect,onshow,onstalled,onstorage,"
+                + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onunhandledrejection,"
+                + "onunload,onvolumechange,onwaiting,"
                 + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,"
                 + "onwheel,open(),openDatabase(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,"
                 + "performance,PERSISTENT,personalbar,postMessage(),print(),process(),prompt(),releaseEvents(),"
-                + "removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),screen,screenLeft,screenTop,"
+                + "removeEventListener(),requestAnimationFrame(),requestIdleCallback(),"
+                + "resizeBy(),resizeTo(),screen,screenLeft,screenTop,"
                 + "screenX,screenY,scroll(),scrollbars,scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),sortFunction(),speechSynthesis,status,statusbar,stop(),styleMedia,"
                 + "TEMPORARY,test(),toolbar,top,webkitCancelAnimationFrame(),webkitCancelRequestAnimationFrame(),"
@@ -833,11 +838,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
-                + "defaultMuted,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
+                + "defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,"
+                + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,"
                 + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "pause(),paused,play(),playbackRate,played,preload,readyState,"
-                + "seekable,seeking,setMediaKeys(),src,textTracks,volume,webkitAudioDecodedByteCount,"
+                + "seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,textTracks,"
+                + "volume,webkitAudioDecodedByteCount,"
                 + "webkitVideoDecodedByteCount",
             FF31 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
@@ -969,8 +976,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "aLink,background,bgColor,link,onbeforeunload,onhashchange,onlanguagechange,onmessage,onoffline,"
-                + "ononline,onpagehide,onpageshow,onpopstate,onstorage,onunload,text,"
-                + "vLink",
+                + "ononline,onpagehide,onpageshow,onpopstate,"
+                + "onrejectionhandled,onstorage,onunhandledrejection,onunload,"
+                + "text,vLink",
             FF31 = "aLink,background,bgColor,link,onafterprint,onbeforeprint,onbeforeunload,onhashchange,onmessage,"
                 + "onoffline,ononline,onpagehide,onpageshow,onpopstate,onresize,onunload,text,"
                 + "vLink",
@@ -1375,7 +1383,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "cols,onbeforeunload,onhashchange,onlanguagechange,onmessage,onoffline,ononline,onpagehide,"
-                + "onpageshow,onpopstate,onstorage,onunload,"
+                + "onpageshow,onpopstate,onrejectionhandled,onstorage,onunhandledrejection,onunload,"
                 + "rows",
             FF31 = "cols,onafterprint,onbeforeprint,onbeforeunload,onhashchange,onmessage,onoffline,ononline,"
                 + "onpagehide,onpageshow,onpopstate,onresize,onunload,"
@@ -2547,13 +2555,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
-                + "defaultMuted,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
+                + "defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,"
+                + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,muted,NETWORK_EMPTY,"
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "pause(),paused,play(),playbackRate,played,"
-                + "poster,preload,readyState,seekable,seeking,setMediaKeys(),src,textTracks,videoHeight,videoWidth,"
+                + "poster,preload,readyState,seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,"
+                + "textTracks,videoHeight,videoWidth,"
                 + "volume,webkitAudioDecodedByteCount,webkitDecodedFrameCount,"
-                + "webkitDisplayingFullscreen,webkitDroppedFrameCount,webkitEnterFullScreen(),webkitEnterFullscreen(),"
+                + "webkitDisplayingFullscreen,webkitDroppedFrameCount,"
+                + "webkitEnterFullscreen(),webkitEnterFullScreen(),"
                 + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
                 + "width",
             FF31 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
