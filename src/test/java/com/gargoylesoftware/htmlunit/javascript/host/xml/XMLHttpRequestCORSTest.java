@@ -321,7 +321,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
-            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother" },
+            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type", "x-pingother" },
             IE = { "4", "200", "null", "null", "null", "null" })
     @NotYetImplemented(CHROME)
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
