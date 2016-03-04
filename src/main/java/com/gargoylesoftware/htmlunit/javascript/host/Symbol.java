@@ -126,6 +126,20 @@ public class Symbol extends SimpleScriptable {
     }
 
     /**
+     * Returns the {@code toStringTag} static property.
+     * @param thisObj the scriptable
+     * @return the {@code toStringTag} static property
+     */
+    @JsxStaticGetter(@WebBrowser(CHROME))
+    public static Symbol getToStringTag(final Scriptable thisObj) {
+        final Symbol symbol = new Symbol("toStringTag");
+        final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
+        symbol.setParentScope(scope);
+        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
+        return symbol;
+    }
+
+    /**
      * Searches for existing symbols in a runtime-wide symbol registry with the given key and returns it if found.
      * Otherwise a new symbol gets created in the global symbol registry with this key.
      * @param context the context
@@ -139,9 +153,10 @@ public class Symbol extends SimpleScriptable {
             final Function function) {
         final String key = Context.toString(args.length != 0 ? args[0] : Undefined.instance);
 
-        final SimpleScriptable parentScope = (SimpleScriptable) thisObj.getParentScope();
         Symbol symbol = (Symbol) ((ScriptableObject) thisObj).get(key);
         if (symbol == null) {
+            final SimpleScriptable parentScope = (SimpleScriptable) thisObj.getParentScope();
+
             symbol = new Symbol(key);
             symbol.setParentScope(parentScope);
             symbol.setPrototype(parentScope.getPrototype(symbol.getClass()));
