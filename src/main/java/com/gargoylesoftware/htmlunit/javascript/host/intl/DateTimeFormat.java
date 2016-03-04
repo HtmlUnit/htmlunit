@@ -101,7 +101,7 @@ public class DateTimeFormat extends SimpleScriptable {
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
-        String locale;
+        final String locale;
         if (args.length != 0) {
             locale = Context.toString(args[0]);
         }
