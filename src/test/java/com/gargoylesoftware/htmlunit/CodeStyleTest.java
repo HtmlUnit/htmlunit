@@ -584,7 +584,8 @@ public class CodeStyleTest {
         if (relativePath.replace('\\', '/').contains("src/main/java")
                 && !relativePath.contains("JavaScriptConfiguration")
                 && !relativePath.contains("BrowserVersionFeatures")
-                && !relativePath.contains("HTMLDocument")) {
+                && !relativePath.contains("HTMLDocument")
+            && !relativePath.contains("DateTimeFormat")) {
             int index = 1;
             for (final String line : lines) {
                 if (line.contains(".isIE()") || line.contains(".isFirefox()")) {

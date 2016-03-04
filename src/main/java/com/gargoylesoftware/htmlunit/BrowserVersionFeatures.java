@@ -1115,6 +1115,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_PRE_WIDTH_STRING,
 
+    /** Support {@code Reflect}. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    JS_REFLECT,
+
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
     @BrowserFeature(@WebBrowser(IE))
     JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS,

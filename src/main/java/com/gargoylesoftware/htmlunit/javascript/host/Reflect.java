@@ -29,4 +29,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(EDGE) })
 public class Reflect extends SimpleScriptable {
 
+    /**
+     * Define needed properties.
+     */
+    public void defineProperties() {
+        setClassName("Object");
+    }
+
 }

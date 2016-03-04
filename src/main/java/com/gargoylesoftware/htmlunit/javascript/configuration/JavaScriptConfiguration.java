@@ -59,7 +59,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.PushManager;
 import com.gargoylesoftware.htmlunit.javascript.host.PushSubscription;
 import com.gargoylesoftware.htmlunit.javascript.host.ReadableByteStream;
 import com.gargoylesoftware.htmlunit.javascript.host.ReadableStream;
-import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.ScreenOrientation;
 import com.gargoylesoftware.htmlunit.javascript.host.Set;
@@ -503,7 +502,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ProcessingInstruction.class, ProgressEvent.class, Promise.class, PromiseRejectionEvent.class,
         Proxy.class, PushManager.class,
         PushSubscription.class, RadioNodeList.class, Range.class, ReadableByteStream.class, ReadableStream.class,
-        Reflect.class, Request.class, Response.class, RowContainer.class, RTCCertificate.class,
+        Request.class, Response.class, RowContainer.class, RTCCertificate.class,
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScreenOrientation.class, ScriptProcessorNode.class, SecurityPolicyViolationEvent.class,
         Selection.class, ServiceWorker.class, ServiceWorkerContainer.class, ServiceWorkerMessageEvent.class,

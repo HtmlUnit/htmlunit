@@ -2522,8 +2522,8 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _MediaRecorder_MediaRecorder() throws Exception {
         test("MediaRecorder", "MediaRecorder");
     }
