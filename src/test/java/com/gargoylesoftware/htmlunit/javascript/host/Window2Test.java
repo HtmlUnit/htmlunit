@@ -1588,7 +1588,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Window]", "[object Window]", "" },
             CHROME = { "[object Window]", "function Window() { [native code] }",
-            "toString, TEMPORARY, PERSISTENT, " },
+            "TEMPORARY, PERSISTENT, " },
             FF38 = { "[object Window]", "function Window() {\n    [native code]\n}", "" })
     public void enumeratedProperties() throws Exception {
         final String html

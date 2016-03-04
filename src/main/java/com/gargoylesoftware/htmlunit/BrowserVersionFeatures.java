@@ -901,10 +901,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_FUNCTION_TOSOURCE,
 
-    /** Indicates if the method 'toString' is enumerated. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_FUNCTION_TOSTRING_ENUMERATED,
-
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,

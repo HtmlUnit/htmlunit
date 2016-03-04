@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSTRING_ENUMERATED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML_IMAGE_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
@@ -62,9 +61,6 @@ public class RecursiveFunctionObject extends FunctionObject {
         if (super.has(name, start)) {
             return true;
         }
-        if ("toString".equals(name) && getBrowserVersion().hasFeature(JS_FUNCTION_TOSTRING_ENUMERATED)) {
-            return true;
-        }
         for (Class<?> c = getMethodOrConstructor().getDeclaringClass().getSuperclass();
                 c != null; c = c.getSuperclass()) {
             final Object scripatble = getParentScope().get(c.getSimpleName(), this);
@@ -83,9 +79,6 @@ public class RecursiveFunctionObject extends FunctionObject {
     @Override
     public Object[] getIds() {
         final Set<Object> objects = new LinkedHashSet<>();
-        if (getBrowserVersion().hasFeature(JS_FUNCTION_TOSTRING_ENUMERATED)) {
-            objects.add("toString");
-        }
         for (final Object o : super.getIds()) {
             objects.add(o);
         }
