@@ -425,7 +425,7 @@ public enum BrowserVersionFeatures {
     HTMLOPTION_PREVENT_DISABLED,
 
     /** Removing the selected attribute, de selects the option. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
 
     /** Trims the value of the type attribute before to verify it. */

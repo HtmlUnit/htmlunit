@@ -1301,8 +1301,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false-null", "true-true", "false-null",
                         "false-null", "true-true", "false-null" },
-            CHROME  = { "false-null", "true-true", "true-null",
-                        "false-null", "true-true", "true-null" },
             IE = { "false-null", "true-true", "true-",
                     "false-null", "true-true", "false-null" })
     @NotYetImplemented(IE)
