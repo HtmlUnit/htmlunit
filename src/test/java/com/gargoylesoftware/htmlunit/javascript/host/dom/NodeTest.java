@@ -85,6 +85,29 @@ public class NodeTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "4", "function", "3" },
+            IE = { "4", "undefined", "exception" })
+    public void remove() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='div1'></div>\n"
+            + "<script>\n"
+            + "var div1 = document.getElementById('div1');\n"
+            + "try {\n"
+            + "  alert(document.body.childNodes.length);\n"
+            + "  alert(typeof div1.remove);\n"
+            + "  div1.remove();\n"
+            + "  alert(document.body.childNodes.length);\n"
+            + "}\n"
+            + "catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for removeChild.
      * @throws Exception if the test fails
      */

@@ -365,6 +365,15 @@ public class Node extends EventTarget {
     }
 
     /**
+     * Removes the DOM node from its parent.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove">MDN documentation</a>
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    public void remove() {
+        getDomNodeOrDie().remove();
+    }
+
+    /**
      * Removes a DOM node from this node.
      * @param childObject the node to remove from this node
      * @return the removed child node

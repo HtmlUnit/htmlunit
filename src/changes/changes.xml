@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="Bugfixes">
+            <action type="update" dev="mguillem">
+                JavaScript: add support for DOMNode.remove().
+            </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: change BrowserVersion.INTERNET_EXPLORER nickname to "IE".
             </action>
