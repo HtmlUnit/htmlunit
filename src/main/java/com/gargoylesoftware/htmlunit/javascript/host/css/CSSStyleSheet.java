@@ -1156,8 +1156,8 @@ public class CSSStyleSheet extends StyleSheet {
      * Sets whether this sheet is enabled or not.
      * @param enabled enabled or not
      */
-    public void setEnabled(boolean enabled) {
-        this.enabled_ = enabled;
+    public void setEnabled(final boolean enabled) {
+        enabled_ = enabled;
     }
 
     /**
