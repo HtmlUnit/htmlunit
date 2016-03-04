@@ -127,9 +127,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "second" },
-            CHROME = { "§§URL§§", "second" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "", "second" })
     public void formArray() throws Exception {
         final String firstHtml
             = "<html><head><SCRIPT lang='JavaScript'>\n"
