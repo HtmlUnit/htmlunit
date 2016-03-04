@@ -169,7 +169,6 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "body", "h1", "a.foo", ".foo", ".foo .foo2", ".myFoo", "#byId" },
-            CHROME = { "body", "h1", "a.foo", ".foo", ".foo .foo2", ".myfoo", "#byid" },
             FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId" })
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"

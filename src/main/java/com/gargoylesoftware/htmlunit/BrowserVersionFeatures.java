@@ -1124,10 +1124,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW,
 
-    /** Javascript selectorText property returns ID selectors in lower case. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_SELECTOR_ID_LOWERCASE,
-
     /** Javascript selectorText property returns selectors in lower case. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_SELECTOR_TEXT_LOWERCASE,
