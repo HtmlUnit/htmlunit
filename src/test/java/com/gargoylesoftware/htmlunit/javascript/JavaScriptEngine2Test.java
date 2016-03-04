@@ -154,6 +154,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function foo() {}", "function foo() {}" },
+            CHROME = { "undefined", "function foo() {}" },
             FF = { "undefined", "foo error" })
     @NotYetImplemented({ IE, CHROME })
     public void variableNotDefined() throws Exception {
