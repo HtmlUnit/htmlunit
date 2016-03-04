@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,7 +47,7 @@ public class DateTimeFormat extends SimpleScriptable {
     private static Map<String, String> CHROME_FORMATS_ = new HashMap<>();
     private static Map<String, String> IE_FORMATS_ = new HashMap<>();
 
-    private String format_;
+    private DateFormat format_;
 
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
@@ -61,6 +64,8 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_FORMATS_.put("en-IN", ddSlash);
         FF_FORMATS_.put("en-MT", ddSlash);
         FF_FORMATS_.put("en-SG", ddSlash);
+        FF_FORMATS_.put("ar", "dd\u200F/MM\u200F/YYYY");
+        FF_FORMATS_.put("ar-EG", "dd\u200F/MM\u200F/YYYY");
         FF_FORMATS_.put("en-ZA", "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd");
 
         CHROME_FORMATS_.putAll(FF_FORMATS_);
@@ -75,6 +80,7 @@ public class DateTimeFormat extends SimpleScriptable {
         IE_FORMATS_.put("en-IN", ddDash);
         IE_FORMATS_.put("en-MT", mmSlash);
         IE_FORMATS_.put("en-CA", ddSlash);
+        IE_FORMATS_.put("ar-EG", "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY");
     }
 
     /**
@@ -94,13 +100,28 @@ public class DateTimeFormat extends SimpleScriptable {
         else {
             formats = FF_FORMATS_;
         }
-        format_ = formats.get(locale);
-        if (format_ == null) {
-            format_ = formats.get("");
+        String pattern = formats.get(locale);
+        if (pattern == null) {
+            pattern = formats.get("");
         }
-        if (!browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
-            format_ = format_.replace("\u200E", "");
+        if (!browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK) && !locale.startsWith("ar")) {
+            pattern = pattern.replace("\u200E", "");
         }
+        for (char ch : pattern.toCharArray()) {
+            System.out.println("PP " + (int) ch + ' ' + ch);
+        }
+
+        format_ = new SimpleDateFormat(pattern);
+        if (locale.startsWith("ar")) {
+            setZeroDigit('\u0660');
+        }
+    }
+
+    private void setZeroDigit(final char zeroDigit) {
+        final DecimalFormat df = (DecimalFormat) format_.getNumberFormat();
+        final DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
+        dfs.setZeroDigit(zeroDigit);
+        df.setDecimalFormatSymbols(dfs);
     }
 
     /**
@@ -136,7 +157,7 @@ public class DateTimeFormat extends SimpleScriptable {
     @JsxFunction
     public String format(final Object object) {
         final Date date = (Date) Context.jsToJava(object, Date.class);
-        return new SimpleDateFormat(format_).format(date);
+        return format_.format(date);
     }
 
 }

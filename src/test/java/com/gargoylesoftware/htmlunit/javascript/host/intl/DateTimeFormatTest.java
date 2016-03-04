@@ -82,9 +82,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0662\u0660\u200f\u002f\u0661\u0662\u200f\u002f\u0662\u0660\u0661\u0662",
-            IE = "\u200f\u0662\u0660\u200f\u002f\u200f\u0661\u0662\u200f\u002f\u200f\u0662\u0660\u0661\u0662")
-    @NotYetImplemented
+    @Alerts(DEFAULT = "\u0662\u0660\u200F\u002f\u0661\u0662\u200F\u002f\u0662\u0660\u0661\u0662",
+            IE = "\u200F\u0662\u0660\u200F\u002f\u200F\u0661\u0662\u200F\u002f\u200F\u0662\u0660\u0661\u0662")
     public void format_ar_EG() throws Exception {
         test("new Intl.DateTimeFormat('ar-EG').format(date)");
     }
@@ -176,7 +175,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
             IE = "\u200F\u0660\u0667\u200F/\u200F\u0660\u0662\u200F/\u200F\u0661\u0664\u0663\u0664")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void format_ar() throws Exception {
         test("new Intl.DateTimeFormat('ar').format(date)");
     }
@@ -221,7 +220,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
             IE = "\u200F\u0662\u0660\u200F/\u200F\u0661\u0662\u200F/\u200F\u0662\u0660\u0661\u0662")
-    @NotYetImplemented
     public void format_ar_eg() throws Exception {
         test("new Intl.DateTimeFormat('ar-EG').format(date)");
     }
