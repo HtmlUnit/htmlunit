@@ -3560,4 +3560,15 @@ public class HostParentOfITest extends HostParentOf {
     public void _PromiseRejectionEvent_PromiseRejectionEvent() throws Exception {
         test("PromiseRejectionEvent", "PromiseRejectionEvent");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IIRFilterNode_IIRFilterNode() throws Exception {
+        test("IIRFilterNode", "IIRFilterNode");
+    }
+
 }

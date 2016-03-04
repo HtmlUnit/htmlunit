@@ -1839,14 +1839,4 @@ public class HostParentOfHTest extends HostParentOf {
         test("HTMLTemplateElement", "HTMLTemplateElement");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _IIRFilterNode_IIRFilterNode() throws Exception {
-        test("IIRFilterNode", "IIRFilterNode");
-    }
-
 }

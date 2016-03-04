@@ -52,16 +52,29 @@ public class DateTimeFormat extends SimpleScriptable {
         final String mmSlash = "\u200EMM\u200E/\u200Edd\u200E/\u200EYYYY";
 
         FF_FORMATS_.put("", mmSlash);
-        FF_FORMATS_.put("en-CA", "YYYY-MM-dd");
         FF_FORMATS_.put("en-NZ", ddSlash);
         FF_FORMATS_.put("en-PA", ddSlash);
         FF_FORMATS_.put("en-PR", ddSlash);
+        FF_FORMATS_.put("en-AU", ddSlash);
+        FF_FORMATS_.put("en-GB", ddSlash);
+        FF_FORMATS_.put("en-IE", ddSlash);
+        FF_FORMATS_.put("en-IN", ddSlash);
+        FF_FORMATS_.put("en-MT", ddSlash);
+        FF_FORMATS_.put("en-SG", ddSlash);
+        FF_FORMATS_.put("en-ZA", "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd");
 
-        IE_FORMATS_.putAll(FF_FORMATS_);
         CHROME_FORMATS_.putAll(FF_FORMATS_);
+        IE_FORMATS_.putAll(FF_FORMATS_);
+
+        CHROME_FORMATS_.put("en-CA", "YYYY-MM-dd");
+        CHROME_FORMATS_.put("en-IE", mmSlash);
+        CHROME_FORMATS_.put("en-IN", mmSlash);
+        CHROME_FORMATS_.put("en-MT", mmSlash);
+        CHROME_FORMATS_.put("en-SG", mmSlash);
 
         IE_FORMATS_.put("en-IN", ddDash);
         IE_FORMATS_.put("en-MT", mmSlash);
+        IE_FORMATS_.put("en-CA", ddSlash);
     }
 
     /**
