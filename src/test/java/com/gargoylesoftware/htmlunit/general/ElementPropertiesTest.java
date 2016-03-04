@@ -2270,7 +2270,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "disabled,media,scoped,sheet,type",
             IE = "media,sheet,type",
             EDGE = "media,sheet,type")
-    @NotYetImplemented({ FF, EDGE })
+    @NotYetImplemented(EDGE)
     public void style() throws Exception {
         test("style");
     }

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: add initial support for HTMLStyleElement.scoped.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for HTMLStyleElement.disabled.
             </action>

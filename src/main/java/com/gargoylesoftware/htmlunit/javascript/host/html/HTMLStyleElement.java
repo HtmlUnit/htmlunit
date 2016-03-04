@@ -122,6 +122,26 @@ public class HTMLStyleElement extends HTMLElement {
     }
 
     /**
+     * Returns the scoped of this style.
+     * @return the scoped
+     */
+    @JsxGetter(@WebBrowser(FF))
+    public boolean getScoped() {
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        return style.hasAttribute("scoped");
+    }
+
+    /**
+     * Sets the scoped of this style.
+     * @param scoped the new scoped
+     */
+    @JsxSetter(@WebBrowser(FF))
+    public void setScoped(final boolean scoped) {
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        style.setAttribute("scoped", Boolean.toString(scoped));
+    }
+
+    /**
      * Returns the {@code disabled} property.
      * @return the {@code disabled} property
      */

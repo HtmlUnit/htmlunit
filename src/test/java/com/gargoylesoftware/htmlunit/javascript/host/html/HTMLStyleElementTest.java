@@ -207,6 +207,65 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "undefined", "undefined" },
+            FF = { "false", "true" })
+    public void scoped() throws Exception {
+        final String html
+            = "<html><head>\n"
+
+            + "<style id='style_none'>my { }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('style_none');\n"
+            + "  alert(style.scoped);\n"
+            + "  style = document.getElementById('style_scoped');\n"
+            + "  alert(style.scoped);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <style id='style_scoped' scoped>my { }</style>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "true", "false" },
+            FF = { "false", "true", "false" })
+    public void scoped_setter() throws Exception {
+        final String html
+            = "<html><head>\n"
+
+            + "<style id='myStyle' media='all'>my { }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('myStyle');\n"
+
+            + "  alert(style.scoped);\n"
+
+            + "  style.scoped = true;\n"
+            + "  alert(style.scoped);\n"
+
+            + "  style.media = false;\n"
+            + "  alert(style.media);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "", "text/css" })
     public void type_setter() throws Exception {
         final String html
