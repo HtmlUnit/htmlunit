@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_REMOVES_IF_INVALID;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -81,10 +80,6 @@ public class HTMLTableElement extends RowContainer {
     @JsxSetter
     public void setCaption(final Object o) {
         if (!(o instanceof HTMLTableCaptionElement)) {
-            if (getBrowserVersion().hasFeature(JS_TABLE_SET_REMOVES_IF_INVALID)) {
-                deleteCaption();
-            }
-
             throw Context.reportRuntimeError("Not a caption");
         }
 
@@ -117,9 +112,6 @@ public class HTMLTableElement extends RowContainer {
     public void setTFoot(final Object o) {
         if (!(o instanceof HTMLTableSectionElement
             && "TFOOT".equals(((HTMLTableSectionElement) o).getTagName()))) {
-            if (getBrowserVersion().hasFeature(JS_TABLE_SET_REMOVES_IF_INVALID)) {
-                deleteTFoot();
-            }
             throw Context.reportRuntimeError("Not a tFoot");
         }
 
@@ -152,9 +144,6 @@ public class HTMLTableElement extends RowContainer {
     public void setTHead(final Object o) {
         if (!(o instanceof HTMLTableSectionElement
             && "THEAD".equals(((HTMLTableSectionElement) o).getTagName()))) {
-            if (getBrowserVersion().hasFeature(JS_TABLE_SET_REMOVES_IF_INVALID)) {
-                deleteTHead();
-            }
             throw Context.reportRuntimeError("Not a tHead");
         }
 

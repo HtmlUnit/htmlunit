@@ -1225,10 +1225,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,
 
-    /** The caption/thead will be removed also if the new value is invalid. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_TABLE_SET_REMOVES_IF_INVALID,
-
     /** Throws an exception if the value for column span is less than one. */
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID,
