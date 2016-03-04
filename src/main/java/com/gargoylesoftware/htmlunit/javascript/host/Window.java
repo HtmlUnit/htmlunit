@@ -1583,7 +1583,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         final boolean trace = LOG.isTraceEnabled();
         for (int i = 0; i < sheets.getLength(); i++) {
             final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
-            if (sheet.isActive()) {
+            if (sheet.isActive() && sheet.isEnabled()) {
                 if (trace) {
                     LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
                 }
@@ -1762,6 +1762,15 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
+     * Clears the computed styles.
+     */
+    public void clearComputedStyles() {
+        synchronized (computedStyles_) {
+            computedStyles_.clear();
+        }
+    }
+
+    /**
      * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
      * changes. Note that the very lazy way of doing this (completely clearing the cache every time something happens)
      * results in very meager performance gains. In order to get good (but still correct) performance, we need to be
@@ -1839,17 +1848,13 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         private void nodeChanged(final DomNode changed, final String attribName) {
             // If a stylesheet was changed, all of our calculations could be off; clear the cache.
             if (changed instanceof HtmlStyle) {
-                synchronized (computedStyles_) {
-                    computedStyles_.clear();
-                }
+                clearComputedStyles();
                 return;
             }
             if (changed instanceof HtmlLink) {
                 final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase(Locale.ROOT);
                 if ("stylesheet".equals(rel)) {
-                    synchronized (computedStyles_) {
-                        computedStyles_.clear();
-                    }
+                    clearComputedStyles();
                     return;
                 }
             }

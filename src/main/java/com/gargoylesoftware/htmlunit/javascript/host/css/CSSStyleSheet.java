@@ -153,6 +153,8 @@ public class CSSStyleSheet extends StyleSheet {
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
 
+    private boolean enabled_ = true;
+
     private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
             "link", "visited", "hover", "active",
             "focus", "lang", "first-child"));
@@ -969,8 +971,8 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * For Firefox.
-     * @return the owner
+     * Returns the owner node.
+     * @return the owner node
      */
     @JsxGetter
     public HTMLElement getOwnerNode() {
@@ -978,8 +980,8 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * For Internet Explorer.
-     * @return the owner
+     * Returns the owner element, same as {@link #getOwnerNode()}.
+     * @return the owner element
      */
     @JsxGetter(@WebBrowser(IE))
     public HTMLElement getOwningElement() {
@@ -1140,6 +1142,22 @@ public class CSSStyleSheet extends StyleSheet {
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
         final SACMediaList mediaList = parseMedia(webClient.getCssErrorHandler(), media);
         return isActive(this, new MediaListImpl(mediaList));
+    }
+
+    /**
+     * Returns {@code true} if this stylesheet is enabled.
+     * @return {@code true} if this stylesheet is enabled
+     */
+    public boolean isEnabled() {
+        return enabled_;
+    }
+
+    /**
+     * Sets whether this sheet is enabled or not.
+     * @param enabled enabled or not
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled_ = enabled;
     }
 
     /**

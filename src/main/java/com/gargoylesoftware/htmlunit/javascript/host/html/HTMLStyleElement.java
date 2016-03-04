@@ -120,4 +120,28 @@ public class HTMLStyleElement extends HTMLElement {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         style.setAttribute("media", media);
     }
+
+    /**
+     * Returns the {@code disabled} property.
+     * @return the {@code disabled} property
+     */
+    @JsxGetter
+    public boolean isDisabled() {
+        return !getSheet().isEnabled();
+    }
+
+    /**
+     * Sets the {@code disabled} property.
+     * @param disabled the {@code disabled} property
+     */
+    @Override
+    @JsxSetter
+    public void setDisabled(final boolean disabled) {
+        final CSSStyleSheet sheet = getSheet();
+        final boolean modified = disabled == sheet.isEnabled();
+        sheet.setEnabled(!disabled);
+        if (modified) {
+            getWindow().clearComputedStyles();
+        }
+    }
 }

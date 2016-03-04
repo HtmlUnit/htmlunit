@@ -8,8 +8,11 @@
 
     <body>
         <release version="2.21" date="???" description="Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: add support for HTMLStyleElement.disabled.
+            </action>
             <action type="update" dev="mguillem">
-                JavaScript: add support for DOMNode.remove().
+                JavaScript: add support for Node.remove().
             </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: change BrowserVersion.INTERNET_EXPLORER nickname to "IE".

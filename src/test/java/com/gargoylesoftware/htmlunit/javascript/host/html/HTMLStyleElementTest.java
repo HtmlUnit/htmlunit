@@ -38,7 +38,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     @Alerts({ "[object HTMLStyleElement]", "[object CSSStyleSheet]", "undefined" })
     public void stylesheet() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
             + "  alert(f);\n"
@@ -60,7 +60,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void styleChildren() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function doTest() {\n"
             + "  var doc = document;\n"
             + "  var style = doc.createElement('style');\n"
@@ -86,7 +86,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     @Alerts({ ".a > .t { }", ".b > .t { }", ".c > .t { }" })
     public void innerHtml() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<style id='style_none'>.a > .t { }</style>\n"
             + "<style type='text/test' id='style_text'>.b > .t { }</style>\n"
@@ -115,7 +115,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     @Alerts({ "", "text/test", "text/css" })
     public void type() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<style id='style_none'>my { }</style>\n"
             + "<style type='text/test' id='style_text'>my { }</style>\n"
@@ -144,7 +144,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     @Alerts({ "", "all", "screen, print,test" })
     public void media() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<style id='style_none'>my { }</style>\n"
             + "<style media='all' id='style_all'>my { }</style>\n"
@@ -173,7 +173,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     @Alerts({ "all", "", "screen:screen", "priNT", "screen, print" })
     public void media_setter() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<style id='myStyle' media='all'>my { }</style>\n"
 
@@ -210,7 +210,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     @Alerts({ "", "text/css" })
     public void type_setter() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<style id='style_none'></style>\n"
 
             + "<script>\n"
@@ -222,6 +222,33 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "rgb(0, 128, 0)", "false", "rgb(0, 0, 0)" })
+    public void disabled() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<style id='myStyle'> .abc { color: green; }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var style = document.getElementById('myStyle');\n"
+            + "  alert(window.getComputedStyle(div, '').color);\n"
+            + "  alert(style.disabled);\n"
+            + "  style.disabled = true;\n"
+            + "  alert(window.getComputedStyle(div, '').color);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "  <div id='myDiv' class='abc'>abcd</div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
