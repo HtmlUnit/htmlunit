@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -32,7 +30,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -1355,49 +1352,5 @@ public class HtmlFormTest extends SimpleWebTestCase {
         urlAfterSubmit(url, "post", "?hi", url + "?hi");
         urlAfterSubmit(new URL(getDefaultUrl(), "test.html?there"), "post", "?hi",
             getDefaultUrl() + "test.html?hi");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented({ FF, CHROME })
-    public void encoding() throws Exception {
-        final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
-            + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "  <form>\n"
-            + "    <input name='par\u00F6m' value='Hello G\u00FCnter'>\n"
-            + "    <input id='mySubmit' type='submit' value='Submit'>\n"
-            + "  </form>\n"
-            + "   <a href='bug.html?h\u00F6=G\u00FCnter' id='myLink'>Click me</a>\n"
-            + "</body></html>";
-
-        final WebClient client = getWebClientWithMockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final URL url = getDefaultUrl();
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setDefaultResponse(html, "text/html", "UTF-8");
-
-        final HtmlPage page = client.getPage(url);
-        assertEquals(url.toExternalForm(), page.getUrl());
-        final HtmlPage submitPage = page.getHtmlElementById("mySubmit").click();
-        final HtmlPage linkPage = page.getHtmlElementById("myLink").click();
-        final String submitSuffix;
-        final String linkSuffix;
-        if (getBrowserVersion().isIE()) {
-            submitSuffix = "?par%C3%B6m=Hello+G%C3%BCnter";
-            linkSuffix = "bug.html?h\u00F6=G\u00FCnter";
-        }
-        else {
-            submitSuffix = "?par\u00F6m=Hello+G\u00FCnter";
-            linkSuffix = "bug.html?h\u00F6=G\u00FCnter";
-        }
-        assertEquals(url.toExternalForm() + submitSuffix, submitPage.getUrl());
-        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getUrl());
     }
 }

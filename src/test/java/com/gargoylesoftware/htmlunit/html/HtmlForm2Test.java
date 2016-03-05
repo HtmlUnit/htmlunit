@@ -15,10 +15,12 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ById;
 import org.openqa.selenium.By.ByTagName;
 import org.openqa.selenium.WebDriver;
 
@@ -26,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlForm}, with BrowserRunner.
@@ -284,5 +287,35 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "</form></body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "§§URL§§?par%F6m=Hello+G%FCnter", "par\ufffdm", "Hello G\ufffdnter" })
+    public void encodingSubmit() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <input name='par\u00F6m' value='Hello G\u00FCnter'>\n"
+            + "    <input id='mySubmit' type='submit' value='Submit'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        driver.findElement(new ById("mySubmit")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+
+        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        assertEquals(1, requestedParams.size());
+        assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
+        assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());
     }
 }
