@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.MethodUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -71,13 +72,14 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
-        final String version = "1.12.0";
         final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
 
-        final String browser = "FF38";
+        // final String browser = "FF38";
         // final String browser = "FF31";
-        // final String browser = "CHROME";
-        // final String browser = "IE11";
+        final String browser = "CHROME";
+        // final String browser = "IE";
+
+        final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
         extractExpectations(new File(baseDir, browser + ".out"), new File(baseDir, "results." + browser + ".txt"));
@@ -236,9 +238,11 @@ public final class JQueryExtractor {
                         Collections.sort(browserNames);
 
                         // TODO dirty hack
-                        if (browserNames.size() == 3 && browserNames.contains("CHROME")
+                        if (browserNames.size() == 4
+                                && browserNames.contains("CHROME")
                                 && browserNames.contains("FF")
-                                && browserNames.contains("IE")) {
+                                && browserNames.contains("IE")
+                                && browserNames.contains("EDGE")) {
                             System.out.println("    @NotYetImplemented");
                         }
                         else {
@@ -259,7 +263,7 @@ public final class JQueryExtractor {
                 // ignore
             }
 
-            System.out.println("    public void " + test.getName().replaceAll("\\W", "_") + "() throws Exception {");
+            System.out.println("    public void " + methodName + "() throws Exception {");
             System.out.println("        runTest(\"" + test.getName().replace("\"", "\\\"") + "\");");
             System.out.println("    }");
             System.out.println();
