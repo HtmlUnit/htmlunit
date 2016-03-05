@@ -2682,7 +2682,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "value")
-    @NotYetImplemented(FF)
     public void data() throws Exception {
         test("data");
     }
