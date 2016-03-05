@@ -44,7 +44,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * {@inheritDoc}
      */
     @Override
-    protected String getVersion() {
+    public String getVersion() {
         return "1.11.3";
     }
 
@@ -1214,7 +1214,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
+    @Alerts(CHROME = "1, 1, 2",
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
         IE = "0, 2, 2")
@@ -3015,10 +3015,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 54, 54",
-        FF31 = "0, 54, 54",
-        FF38 = "0, 54, 54",
-        IE = "0, 54, 54")
+    @Alerts("0, 54, 54")
     @NotYetImplemented
     public void selector__attributes() throws Exception {
         runTest("selector: attributes");
@@ -3800,10 +3797,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-        FF31 = "0, 2, 2",
-        FF38 = "0, 2, 2",
-        IE = "0, 2, 2")
+    @Alerts("0, 2, 2")
     public void manipulation__append_the_same_fragment_with_events__Bug__6997__5566_() throws Exception {
         runTest("manipulation: append the same fragment with events (Bug #6997, 5566)");
     }
@@ -5113,7 +5107,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     }
 
     /**
-     * Test {505=[FF31, FF38], 506=[IE], 507=[CHROME]]}.
+     * Test {505=[FF31, FF38], 506=[IE], 507=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5396,10 +5390,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 1, 1",
-        FF31 = "0, 1, 1",
-        FF38 = "0, 1, 1",
-        IE = "0, 1, 1")
+    @Alerts("0, 1, 1")
     public void css__Don_t_append_px_to_CSS__order__value___14049_() throws Exception {
         runTest("css: Don't append px to CSS \"order\" value (#14049)");
     }
@@ -7935,7 +7926,10 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(CHROME = "1, 1, 2",
+        FF31 = "0, 2, 2",
+        FF38 = "0, 2, 2",
+        IE = "0, 2, 2")
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");
     }

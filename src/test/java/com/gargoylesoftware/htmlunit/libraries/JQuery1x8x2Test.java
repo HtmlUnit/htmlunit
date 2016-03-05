@@ -69,8 +69,8 @@ public class JQuery1x8x2Test extends JQueryTestBase {
 
         try {
             final WebDriver webdriver = getWebDriver();
-            webdriver.get("http://localhost:" + PORT + "/jquery/test/index.html?testNumber="
-                    + testNumber);
+            final String url = "http://localhost:" + PORT + "/jquery/test/index.html?testNumber=" + testNumber;
+            webdriver.get(url);
 
             final WebElement status = webdriver.findElement(By.id("qunit-testresult"));
             while (!status.getText().startsWith("Tests completed")) {
@@ -1145,10 +1145,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-        FF31 = "0, 2, 2",
-        FF38 = "0, 2, 2",
-        IE = "0, 2, 2")
+    @Alerts("0, 2, 2")
     public void support__body_background_is_not_lost_if_set_prior_to_loading_jQuery___9238_() throws Exception {
         runTest("support: body background is not lost if set prior to loading jQuery (#9238)");
     }
@@ -3261,10 +3258,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-        FF31 = "0, 2, 2",
-        FF38 = "0, 2, 2",
-        IE = "0, 2, 2")
+    @Alerts("0, 2, 2")
     public void manipulation__append_the_same_fragment_with_events__Bug__6997__5566_() throws Exception {
         runTest("manipulation: append the same fragment with events (Bug #6997, 5566)");
     }
@@ -3899,10 +3893,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 7, 7",
-        FF31 = "0, 7, 7",
-        FF38 = "0, 7, 7",
-        IE = "0, 7, 7")
+    @Alerts("0, 7, 7")
     @NotYetImplemented
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
@@ -6359,7 +6350,10 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(CHROME = "1, 1, 2",
+        FF31 = "0, 2, 2",
+        FF38 = "0, 2, 2",
+        IE = "0, 2, 2")
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");
     }
