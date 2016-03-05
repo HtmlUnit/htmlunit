@@ -606,6 +606,15 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
+     * Sets the {@code origin} attribute.
+     * @param origin {@code origin} attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void setOrigin(final String origin) {
+        // ignore
+    }
+
+    /**
      * Returns the {@code username} attribute.
      * @return the {@code username} attribute
      */
