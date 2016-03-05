@@ -6354,6 +6354,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
         FF31 = "0, 2, 2",
         FF38 = "0, 2, 2",
         IE = "0, 2, 2")
+    @NotYetImplemented(CHROME)
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");
     }
