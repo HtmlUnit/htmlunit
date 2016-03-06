@@ -149,6 +149,7 @@ public class HtmlPage extends InteractivePage {
     private HtmlBase base_;
     private URL baseUrl_;
     private List<AutoCloseable> autoCloseableList_;
+    private ElementFromPointHandler elementFromPointHandler_;
 
     private static final List<String> TABBABLE_TAGS = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
             HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME);
@@ -2281,5 +2282,33 @@ public class HtmlPage extends InteractivePage {
             return true;
         }
         return super.handles(event);
+    }
+
+    /**
+     * Sets the {@link ElementFromPointHandler}.
+     * @param elementFromPointHandler the handler
+     */
+    public void setElementFromPointHandler(final ElementFromPointHandler elementFromPointHandler) {
+        elementFromPointHandler_ = elementFromPointHandler;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the element for the specified x coordinate and the specified y coordinate.
+     *
+     * @param x the x offset, in pixels
+     * @param y the y offset, in pixels
+     * @return the element for the specified x coordinate and the specified y coordinate
+     */
+    public HtmlElement getElementFromPoint(final int x, final int y) {
+        if (elementFromPointHandler_ == null) {
+            LOG.warn("ElementFromPointHandler was not specicifed for " + this);
+            if (x <= 0 || y <= 0) {
+                return null;
+            }
+            return getBody();
+        }
+        return elementFromPointHandler_.getElementFromPoint(this, x, y);
     }
 }

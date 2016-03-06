@@ -1650,11 +1650,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public Object elementFromPoint(final int x, final int y) {
-        // minimal implementation to make simple unit test happy for FF and IE
-        if (x <= 0 || y <= 0) {
-            return null;
-        }
-        return getBody();
+        final HtmlElement element = getPage().getElementFromPoint(x, y);
+        return element == null ? null : element.getScriptableObject();
     }
 
     /**
