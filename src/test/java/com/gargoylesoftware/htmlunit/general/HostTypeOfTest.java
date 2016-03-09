@@ -7673,4 +7673,55 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("SyncManager");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "function")
+    public void canvasCaptureMediaStream() throws Exception {
+        test("CanvasCaptureMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "function")
+    public void fontFaceSet() throws Exception {
+        test("FontFaceSet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "function")
+    public void mediaDeviceInfo() throws Exception {
+        test("MediaDeviceInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "function")
+    public void rtcPeerConnection() throws Exception {
+        test("RTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "function",
+            EDGE = "function")
+    public void videoPlaybackQuality() throws Exception {
+        test("VideoPlaybackQuality");
+    }
+
 }
