@@ -14,11 +14,26 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -821,5 +836,79 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            CHROME = "PING")
+    @NotYetImplemented(CHROME)
+    public void ping() throws Exception {
+        final String html
+            = "<html><body>"
+            + "  <a href='" + URL_SECOND + "' ping='test2?h'>clickMe</a>\n"
+            + "</body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PingServlet.class);
+
+        PingServlet.HEADERS_.clear();
+        PingServlet.BODY_ = null;
+
+        getMockWebConnection().setResponse(URL_SECOND, "something");
+        final WebDriver driver = loadPage2(html, servlets);
+        driver.findElement(By.linkText("clickMe")).click();
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final String firstString;
+        final String secondString;
+        final String body;
+        if (expectedAlerts.length != 0) {
+            firstString = URL_FIRST.toString();
+            secondString = URL_SECOND.toString();
+            body = PingServlet.BODY_;
+        }
+        else {
+            firstString = null;
+            secondString = null;
+            body = null;
+        }
+        assertEquals(firstString, PingServlet.HEADERS_.get("Ping-From"));
+        assertEquals(secondString, PingServlet.HEADERS_.get("Ping-To"));
+        assertEquals(body, PingServlet.BODY_);
+    }
+
+    /**
+     * Servlet for {@link #ping()}.
+     */
+    public static class PingServlet extends HttpServlet {
+
+        private static Map<String, String> HEADERS_ = new HashMap<>();
+        private static String BODY_;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+
+            final Writer writer = response.getWriter();
+            writer.close();
+
+            for (final Enumeration<String> en = request.getHeaderNames();en.hasMoreElements(); ) {
+                final String key = en.nextElement();
+                HEADERS_.put(key, request.getHeader(key));
+            }
+
+            final BufferedReader reader = request.getReader();
+            final StringWriter stringSriter = new StringWriter();
+            IOUtils.copy(reader, stringSriter);
+            BODY_ = stringSriter.toString();
+        }
     }
 }
