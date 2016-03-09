@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *     var isMicrosoft = navigator.appVersion.indexOf('Trident/') > 0;
  *     var isEdge = navigator.appVersion.indexOf('Edge') != -1;
  *     var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
- *     var numeric = 38;
+ *     var numeric = 45;
  *     if (isMicrosoft) {
  *         numeric = 11;
  *     }
@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *         numeric = 49;
  *     }
  *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
- *     var browser = "FIREFOX_38";
+ *     var browser = "FIREFOX_45";
  *     if (isMicrosoft) {
  *         browser = "INTERNET_EXPLORER";
  *     }
@@ -130,6 +130,15 @@ public class BrowserVersion implements Serializable, Cloneable {
         "Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0",
         (float) 38.0, "FF38", null);
 
+    /**
+     * Firefox 45 ESR.
+     * @since 2.21
+     */
+    public static final BrowserVersion FIREFOX_45 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows)",
+        "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0",
+        (float) 45.0, "FF45", null);
+
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
@@ -189,6 +198,18 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_38.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_38.setCssAcceptHeader("text/css,*/*;q=0.1");
 
+        // FF45
+        FIREFOX_45.initDefaultFeatures();
+        FIREFOX_45.setBrowserLanguage("en-US");
+        FIREFOX_45.setVendor("");
+        FIREFOX_45.buildId_ = "20160120213330";
+        FIREFOX_45.setHeaderNamesOrdered(new String[] {
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
+        FIREFOX_45.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_45.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_45.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_45.setCssAcceptHeader("text/css,*/*;q=0.1");
+
         // IE
         INTERNET_EXPLORER.initDefaultFeatures();
         INTERNET_EXPLORER.setBrowserLanguage("en-US");
@@ -238,12 +259,17 @@ public class BrowserVersion implements Serializable, Cloneable {
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_38.getPlugins().add(flash);
+        flash = new PluginConfiguration("Shockwave Flash",
+                "Shockwave Flash 20.0 r0", "20.0.0.286", "NPSWF32_20_0_0_286.dll");
+        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+                "Shockwave Flash", "swf"));
+        FIREFOX_45.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 20.0 r0", "20.0.0.270", "Flash32_20_0_0_270.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
-        INTERNET_EXPLORER_11.getPlugins().add(flash);
+        INTERNET_EXPLORER.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx");

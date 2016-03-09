@@ -83,6 +83,9 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ff38")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, true));
                 }
+                if (browsers.contains("ff45")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_45, true));
+                }
                 if (browsers.contains("ie")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, true));
                 }
@@ -99,6 +102,9 @@ public class BrowserRunner extends Suite {
             }
             if (browsers.contains("hu-ff38")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, false));
+            }
+            if (browsers.contains("hu-ff45")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_45, false));
             }
             if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, false));
@@ -175,6 +181,9 @@ public class BrowserRunner extends Suite {
 
         /** Firefox 38. */
         FF38,
+
+        /** Firefox 45. */
+        FF45
     }
 
     /**
@@ -225,6 +234,12 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] FF38() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Firefox 45. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
+        String[] FF45() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.
@@ -283,6 +298,12 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] FF38() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Firefox 45. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
+        String[] FF45() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.
