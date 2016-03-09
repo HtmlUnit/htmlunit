@@ -772,7 +772,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "cite,clear,width")
-    @NotYetImplemented(IE)
     public void address() throws Exception {
         test("address");
     }
@@ -964,7 +963,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "cite",
             IE = "cite,clear,width")
-    @NotYetImplemented(IE)
     public void blockquote() throws Exception {
         test("blockquote");
     }
@@ -1084,7 +1082,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "cite,clear,width")
-    @NotYetImplemented(IE)
     public void center() throws Exception {
         test("center");
     }
@@ -1662,7 +1659,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setCustomValidity(),type,validationMessage,validity,"
                 + "willValidate",
             IE = "cite,clear,width")
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(CHROME)
     public void keygen() throws Exception {
         test("keygen");
     }
@@ -1713,7 +1710,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF31 = "",
             IE = "cite,clear,width",
             EDGE = "width")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented(EDGE)
     public void listing() throws Exception {
         test("listing");
     }
@@ -2056,7 +2053,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "cite,clear,width")
-    @NotYetImplemented(IE)
     public void plaintext() throws Exception {
         test("plaintext");
     }
@@ -2626,7 +2622,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "width",
             FF = "",
             IE = "cite,clear,width")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented(EDGE)
     public void xmp() throws Exception {
         test("xmp");
     }

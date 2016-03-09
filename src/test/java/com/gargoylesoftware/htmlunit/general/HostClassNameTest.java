@@ -1939,6 +1939,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             IE = "[object Location]",
             FF = "function Location() {\n    [native code]\n}")
     @AlertsStandards(DEFAULT = "[object Location]",
+            FF31 = "[object Location]",
             CHROME = "function Location() { [native code] }",
             EDGE = "function Location() { [native code] }",
             FF = "function Location() {\n    [native code]\n}")

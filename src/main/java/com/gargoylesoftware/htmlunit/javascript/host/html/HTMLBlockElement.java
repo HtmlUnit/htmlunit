@@ -28,6 +28,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
@@ -66,8 +68,7 @@ public class HTMLBlockElement extends HTMLElement {
      * @return the value of the {@code cite} property
      */
     public String getCite() {
-        final String cite = getDomNodeOrDie().getAttribute("cite");
-        return cite;
+        return getDomNodeOrDie().getAttribute("cite");
     }
 
     /**
@@ -107,4 +108,41 @@ public class HTMLBlockElement extends HTMLElement {
         }
         return false;
     }
+
+    /**
+     * Returns the value of the {@code clear} property.
+     * @return the value of the {@code clear} property
+     */
+    @JsxGetter
+    public String getClear() {
+        return getDomNodeOrDie().getAttribute("clear");
+    }
+
+    /**
+     * Returns the value of the {@code clear} property.
+     * @param clear the value
+     */
+    @JsxSetter
+    public void setClear(final String clear) {
+        getDomNodeOrDie().setAttribute("clear", clear);
+    }
+
+    /**
+     * Returns the value of the {@code width} property.
+     * @return the value of the {@code width} property
+     */
+    @JsxGetter(propertyName = "width")
+    public String getWidth_js() {
+        return getWidthOrHeight("width", Boolean.TRUE);
+    }
+
+    /**
+     * Sets the value of the {@code width} property.
+     * @param width the value of the {@code width} property
+     */
+    @JsxSetter
+    public void setWidth(final String width) {
+        setWidthOrHeight("width", width, true);
+    }
+
 }
