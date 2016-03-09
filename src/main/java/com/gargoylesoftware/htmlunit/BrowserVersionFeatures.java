@@ -1108,7 +1108,7 @@ public enum BrowserVersionFeatures {
     JS_PRE_WIDTH_STRING,
 
     /** Support {@code Reflect}. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45), @WebBrowser(EDGE) })
     JS_REFLECT,
 
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */

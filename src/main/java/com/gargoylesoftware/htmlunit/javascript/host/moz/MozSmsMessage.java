@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = @WebBrowser(value = FF, maxVersion = 38))
 public class MozSmsMessage extends SimpleScriptable {
 
 }

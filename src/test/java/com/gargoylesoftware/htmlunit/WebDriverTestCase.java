@@ -88,7 +88,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
    browsers=hu,ff38,ie
    edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
-   ff38.bin=/usr/bin/firefox                            [Unix-like]
+   ff45.bin=/usr/bin/firefox                            [Unix-like]
    chrome.bin=/path/to/chromedriver                     [Unix-like]
    autofix=true
  * </pre>
@@ -96,7 +96,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
  *   "hu-ie", "hu-ff31",
- *   "ff31", "ff38", "ie", "chrome", which will be used to driver real browsers,
+ *   "ff31", "ff38", "ff45", "ie", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
  *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
@@ -104,7 +104,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
  *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
  *
- *   <li>ff38.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
+ *   <li>ff45.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
  *   <li>autofix (optional): if {@code true}, try to automatically fix the real browser expectations,
@@ -132,6 +132,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String IE_BIN_;
     private static String FF31_BIN_;
     private static String FF38_BIN_;
+    private static String FF45_BIN_;
 
     /** The driver cache. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<>();
@@ -186,6 +187,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     IE_BIN_ = properties.getProperty("ie.bin");
                     FF31_BIN_ = properties.getProperty("ff31.bin");
                     FF38_BIN_ = properties.getProperty("ff38.bin");
+                    FF45_BIN_ = properties.getProperty("ff45.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
                     System.setProperty(AUTOFIX_, Boolean.toString(autofix));
@@ -376,6 +378,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             if (BrowserVersion.FIREFOX_38 == getBrowserVersion()) {
                 ffBinary = FF38_BIN_;
+            }
+            if (BrowserVersion.FIREFOX_45 == getBrowserVersion()) {
+                ffBinary = FF45_BIN_;
             }
             if (ffBinary != null) {
                 return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());

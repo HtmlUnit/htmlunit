@@ -99,9 +99,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Attr() { [native code] }",
             IE = "[object Attr]",
             FF = "function Attr() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function Attr() { [native code] }",
-            IE = "[object Attr]",
-            FF = "function Attr() {\n    [native code]\n}")
     public void attr() throws Exception {
         test("Attr");
     }
@@ -196,7 +193,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "[object CSSCharsetRule]")
+            FF31 = "[object CSSCharsetRule]",
+            FF38 = "[object CSSCharsetRule]")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
     }
@@ -274,11 +272,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function CSSRuleList() { [native code] }",
             IE = "[object CSSRuleList]",
             FF31 = "[object CSSRuleList]",
-            FF38 = "function CSSRuleList() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function CSSRuleList() { [native code] }",
-            IE = "[object CSSRuleList]",
-            FF31 = "[object CSSRuleList]",
-            FF38 = "function CSSRuleList() {\n    [native code]\n}")
+            FF = "function CSSRuleList() {\n    [native code]\n}")
     public void cssRuleList() throws Exception {
         test("CSSRuleList");
     }
@@ -290,9 +284,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function CSSStyleDeclaration() { [native code] }",
-            IE = "[object CSSStyleDeclaration]",
-            FF = "function CSSStyleDeclaration() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function CSSStyleDeclaration() { [native code] }",
             IE = "[object CSSStyleDeclaration]",
             FF = "function CSSStyleDeclaration() {\n    [native code]\n}")
     public void cssStyleDeclaration() throws Exception {
@@ -334,9 +325,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function CSSStyleSheet() { [native code] }",
-            IE = "[object CSSStyleSheet]",
-            FF = "function CSSStyleSheet() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function CSSStyleSheet() { [native code] }",
             IE = "[object CSSStyleSheet]",
             FF = "function CSSStyleSheet() {\n    [native code]\n}")
     public void cssStyleSheet() throws Exception {
@@ -412,7 +400,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards("exception")
     public void htmlCommentElement() throws Exception {
         test("HTMLCommentElement");
     }
@@ -487,9 +474,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function DOMImplementation() { [native code] }",
-            IE = "[object DOMImplementation]",
-            FF = "function DOMImplementation() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function DOMImplementation() { [native code] }",
             IE = "[object DOMImplementation]",
             FF = "function DOMImplementation() {\n    [native code]\n}")
     public void domImplementation() throws Exception {
@@ -583,9 +567,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Element() { [native code] }",
             IE = "[object Element]",
             FF = "function Element() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function Element() { [native code] }",
-            IE = "[object Element]",
-            FF = "function Element() {\n    [native code]\n}")
     public void element() throws Exception {
         test("Element");
     }
@@ -609,9 +590,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Event() { [native code] }",
-            IE = "[object Event]",
-            FF = "function Event() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function Event() { [native code] }",
             IE = "[object Event]",
             FF = "function Event() {\n    [native code]\n}")
     public void event() throws Exception {
@@ -724,9 +702,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function History() { [native code] }",
             IE = "[object History]",
             FF = "function History() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function History() { [native code] }",
-            IE = "[object History]",
-            FF = "function History() {\n    [native code]\n}")
     public void history() throws Exception {
         test("History");
     }
@@ -738,9 +713,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLAnchorElement() { [native code] }",
-            IE = "[object HTMLAnchorElement]",
-            FF = "function HTMLAnchorElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLAnchorElement() { [native code] }",
             IE = "[object HTMLAnchorElement]",
             FF = "function HTMLAnchorElement() {\n    [native code]\n}")
     public void htmlAnchorElement() throws Exception {
@@ -769,9 +741,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLAreaElement() { [native code] }",
             IE = "[object HTMLAreaElement]",
             FF = "function HTMLAreaElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLAreaElement() { [native code] }",
-            IE = "[object HTMLAreaElement]",
-            FF = "function HTMLAreaElement() {\n    [native code]\n}")
     public void htmlAreaElement() throws Exception {
         test("HTMLAreaElement");
     }
@@ -797,8 +766,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object HTMLBGSoundElement]")
-    @AlertsStandards(DEFAULT = "exception",
-            IE = "[object HTMLBGSoundElement]")
     public void htmlBGSoundElement() throws Exception {
         test("HTMLBGSoundElement");
     }
@@ -810,9 +777,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLBRElement() { [native code] }",
-            IE = "[object HTMLBRElement]",
-            FF = "function HTMLBRElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLBRElement() { [native code] }",
             IE = "[object HTMLBRElement]",
             FF = "function HTMLBRElement() {\n    [native code]\n}")
     public void htmlBRElement() throws Exception {
@@ -828,9 +792,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLBaseElement() { [native code] }",
             IE = "[object HTMLBaseElement]",
             FF = "function HTMLBaseElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLBaseElement() { [native code] }",
-            IE = "[object HTMLBaseElement]",
-            FF = "function HTMLBaseElement() {\n    [native code]\n}")
     public void htmlBaseElement() throws Exception {
         test("HTMLBaseElement");
     }
@@ -844,9 +805,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "[object HTMLBaseFontElement]",
             EDGE = "function HTMLBaseFontElement() { [native code] }")
-    @AlertsStandards(DEFAULT = "exception",
-            IE = "[object HTMLBaseFontElement]",
-            EDGE = "function HTMLBaseFontElement() { [native code] }")
     public void htmlBaseFontElement() throws Exception {
         test("HTMLBaseFontElement");
     }
@@ -858,8 +816,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLBlockElement]")
-    @AlertsStandards(DEFAULT = "exception",
             IE = "[object HTMLBlockElement]")
     public void htmlBlockElement() throws Exception {
         test("HTMLBlockElement");
@@ -898,9 +854,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLBodyElement() { [native code] }",
             IE = "[object HTMLBodyElement]",
             FF = "function HTMLBodyElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLBodyElement() { [native code] }",
-            IE = "[object HTMLBodyElement]",
-            FF = "function HTMLBodyElement() {\n    [native code]\n}")
     public void htmlBodyElement() throws Exception {
         test("HTMLBodyElement");
     }
@@ -912,9 +865,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLButtonElement() { [native code] }",
-            IE = "[object HTMLButtonElement]",
-            FF = "function HTMLButtonElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLButtonElement() { [native code] }",
             IE = "[object HTMLButtonElement]",
             FF = "function HTMLButtonElement() {\n    [native code]\n}")
     public void htmlButtonElement() throws Exception {
@@ -943,9 +893,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLCollection() { [native code] }",
             IE = "[object HTMLCollection]",
             FF = "function HTMLCollection() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLCollection() { [native code] }",
-            IE = "[object HTMLCollection]",
-            FF = "function HTMLCollection() {\n    [native code]\n}")
     public void htmlCollection() throws Exception {
         test("HTMLCollection");
     }
@@ -959,7 +906,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLAllCollection() { [native code] }",
             IE = "[object HTMLAllCollection]",
             FF31 = "exception",
-            FF38 = "function HTMLAllCollection() {\n    [native code]\n}")
+            FF = "function HTMLAllCollection() {\n    [native code]\n}")
     public void htmlAllCollection() throws Exception {
         test("HTMLAllCollection");
     }
@@ -996,8 +943,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object HTMLDDElement]")
-    @AlertsStandards(DEFAULT = "exception",
-            IE = "[object HTMLDDElement]")
     public void htmlDDElement() throws Exception {
         test("HTMLDDElement");
     }
@@ -1021,8 +966,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object HTMLDTElement]")
-    @AlertsStandards(DEFAULT = "exception",
-            IE = "[object HTMLDTElement]")
     public void htmlDTElement() throws Exception {
         test("HTMLDTElement");
     }
@@ -1034,9 +977,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLDListElement() { [native code] }",
-            IE = "[object HTMLDListElement]",
-            FF = "function HTMLDListElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLDListElement() { [native code] }",
             IE = "[object HTMLDListElement]",
             FF = "function HTMLDListElement() {\n    [native code]\n}")
     public void htmlDListElement() throws Exception {
@@ -1065,9 +1005,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLDivElement() { [native code] }",
             IE = "[object HTMLDivElement]",
             FF = "function HTMLDivElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLDivElement() { [native code] }",
-            IE = "[object HTMLDivElement]",
-            FF = "function HTMLDivElement() {\n    [native code]\n}")
     public void htmlDivElement() throws Exception {
         test("HTMLDivElement");
     }
@@ -1079,9 +1016,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLDocument() { [native code] }",
-            IE = "[object HTMLDocument]",
-            FF = "function HTMLDocument() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLDocument() { [native code] }",
             IE = "[object HTMLDocument]",
             FF = "function HTMLDocument() {\n    [native code]\n}")
     public void htmlDocument() throws Exception {
@@ -1110,9 +1044,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLEmbedElement() { [native code] }",
             IE = "[object HTMLEmbedElement]",
             FF = "function HTMLEmbedElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLEmbedElement() { [native code] }",
-            IE = "[object HTMLEmbedElement]",
-            FF = "function HTMLEmbedElement() {\n    [native code]\n}")
     public void htmlEmbedElement() throws Exception {
         test("HTMLEmbedElement");
     }
@@ -1124,9 +1055,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLFieldSetElement() { [native code] }",
-            IE = "[object HTMLFieldSetElement]",
-            FF = "function HTMLFieldSetElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLFieldSetElement() { [native code] }",
             IE = "[object HTMLFieldSetElement]",
             FF = "function HTMLFieldSetElement() {\n    [native code]\n}")
     public void htmlFieldSetElement() throws Exception {
@@ -1142,9 +1070,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLFontElement() { [native code] }",
             IE = "[object HTMLFontElement]",
             FF = "function HTMLFontElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLFontElement() { [native code] }",
-            IE = "[object HTMLFontElement]",
-            FF = "function HTMLFontElement() {\n    [native code]\n}")
     public void htmlFontElement() throws Exception {
         test("HTMLFontElement");
     }
@@ -1156,9 +1081,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLFormElement() { [native code] }",
-            IE = "[object HTMLFormElement]",
-            FF = "function HTMLFormElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLFormElement() { [native code] }",
             IE = "[object HTMLFormElement]",
             FF = "function HTMLFormElement() {\n    [native code]\n}")
     public void htmlFormElement() throws Exception {
@@ -1174,9 +1096,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLFrameElement() { [native code] }",
             IE = "[object HTMLFrameElement]",
             FF = "function HTMLFrameElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLFrameElement() { [native code] }",
-            IE = "[object HTMLFrameElement]",
-            FF = "function HTMLFrameElement() {\n    [native code]\n}")
     public void htmlFrameElement() throws Exception {
         test("HTMLFrameElement");
     }
@@ -1188,9 +1107,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLFrameSetElement() { [native code] }",
-            IE = "[object HTMLFrameSetElement]",
-            FF = "function HTMLFrameSetElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLFrameSetElement() { [native code] }",
             IE = "[object HTMLFrameSetElement]",
             FF = "function HTMLFrameSetElement() {\n    [native code]\n}")
     public void htmlFrameSetElement() throws Exception {
@@ -1206,9 +1122,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLHRElement() { [native code] }",
             IE = "[object HTMLHRElement]",
             FF = "function HTMLHRElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLHRElement() { [native code] }",
-            IE = "[object HTMLHRElement]",
-            FF = "function HTMLHRElement() {\n    [native code]\n}")
     public void htmlHRElement() throws Exception {
         test("HTMLHRElement");
     }
@@ -1220,9 +1133,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLHeadElement() { [native code] }",
-            IE = "[object HTMLHeadElement]",
-            FF = "function HTMLHeadElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLHeadElement() { [native code] }",
             IE = "[object HTMLHeadElement]",
             FF = "function HTMLHeadElement() {\n    [native code]\n}")
     public void htmlHeadElement() throws Exception {
@@ -1238,9 +1148,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLHeadingElement() { [native code] }",
             IE = "[object HTMLHeadingElement]",
             FF = "function HTMLHeadingElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLHeadingElement() { [native code] }",
-            IE = "[object HTMLHeadingElement]",
-            FF = "function HTMLHeadingElement() {\n    [native code]\n}")
     public void htmlHeadingElement() throws Exception {
         test("HTMLHeadingElement");
     }
@@ -1252,9 +1159,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLHtmlElement() { [native code] }",
-            IE = "[object HTMLHtmlElement]",
-            FF = "function HTMLHtmlElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLHtmlElement() { [native code] }",
             IE = "[object HTMLHtmlElement]",
             FF = "function HTMLHtmlElement() {\n    [native code]\n}")
     public void htmlHtmlElement() throws Exception {
@@ -1270,9 +1174,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLIFrameElement() { [native code] }",
             IE = "[object HTMLIFrameElement]",
             FF = "function HTMLIFrameElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLIFrameElement() { [native code] }",
-            IE = "[object HTMLIFrameElement]",
-            FF = "function HTMLIFrameElement() {\n    [native code]\n}")
     public void htmlIFrameElement() throws Exception {
         test("HTMLIFrameElement");
     }
@@ -1284,9 +1185,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLImageElement() { [native code] }",
-            IE = "[object HTMLImageElement]",
-            FF = "function HTMLImageElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLImageElement() { [native code] }",
             IE = "[object HTMLImageElement]",
             FF = "function HTMLImageElement() {\n    [native code]\n}")
     public void htmlImageElement() throws Exception {
@@ -1327,9 +1225,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLInputElement() { [native code] }",
             IE = "[object HTMLInputElement]",
             FF = "function HTMLInputElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLInputElement() { [native code] }",
-            IE = "[object HTMLInputElement]",
-            FF = "function HTMLInputElement() {\n    [native code]\n}")
     public void htmlInputElement() throws Exception {
         test("HTMLInputElement");
     }
@@ -1341,8 +1236,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLIsIndexElement]")
-    @AlertsStandards(DEFAULT = "exception",
             IE = "[object HTMLIsIndexElement]")
     public void htmlIsIndexElement() throws Exception {
         test("HTMLIsIndexElement");
@@ -1369,9 +1262,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLLIElement() { [native code] }",
             IE = "[object HTMLLIElement]",
             FF = "function HTMLLIElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLLIElement() { [native code] }",
-            IE = "[object HTMLLIElement]",
-            FF = "function HTMLLIElement() {\n    [native code]\n}")
     public void htmlLIElement() throws Exception {
         test("HTMLLIElement");
     }
@@ -1383,9 +1273,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLLabelElement() { [native code] }",
-            IE = "[object HTMLLabelElement]",
-            FF = "function HTMLLabelElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLLabelElement() { [native code] }",
             IE = "[object HTMLLabelElement]",
             FF = "function HTMLLabelElement() {\n    [native code]\n}")
     public void htmlLabelElement() throws Exception {
@@ -1401,9 +1288,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLLegendElement() { [native code] }",
             IE = "[object HTMLLegendElement]",
             FF = "function HTMLLegendElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLLegendElement() { [native code] }",
-            IE = "[object HTMLLegendElement]",
-            FF = "function HTMLLegendElement() {\n    [native code]\n}")
     public void htmlLegendElement() throws Exception {
         test("HTMLLegendElement");
     }
@@ -1415,9 +1299,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLLinkElement() { [native code] }",
-            IE = "[object HTMLLinkElement]",
-            FF = "function HTMLLinkElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLLinkElement() { [native code] }",
             IE = "[object HTMLLinkElement]",
             FF = "function HTMLLinkElement() {\n    [native code]\n}")
     public void htmlLinkElement() throws Exception {
@@ -1444,9 +1325,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLMapElement() { [native code] }",
             IE = "[object HTMLMapElement]",
             FF = "function HTMLMapElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLMapElement() { [native code] }",
-            IE = "[object HTMLMapElement]",
-            FF = "function HTMLMapElement() {\n    [native code]\n}")
     public void htmlMapElement() throws Exception {
         test("HTMLMapElement");
     }
@@ -1458,9 +1336,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLMarqueeElement() { [native code] }",
-            IE = "[object HTMLMarqueeElement]",
-            FF = "exception")
-    @AlertsStandards(DEFAULT = "function HTMLMarqueeElement() { [native code] }",
             IE = "[object HTMLMarqueeElement]",
             FF = "exception")
     public void htmlMarqueeElement() throws Exception {
@@ -1502,9 +1377,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLMetaElement() { [native code] }",
             IE = "[object HTMLMetaElement]",
             FF = "function HTMLMetaElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLMetaElement() { [native code] }",
-            IE = "[object HTMLMetaElement]",
-            FF = "function HTMLMetaElement() {\n    [native code]\n}")
     public void htmlMetaElement() throws Exception {
         test("HTMLMetaElement");
     }
@@ -1542,7 +1414,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards("exception")
     public void htmlNoShowElement() throws Exception {
         test("HTMLNoShowElement");
     }
@@ -1554,8 +1425,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLNextIdElement]")
-    @AlertsStandards(DEFAULT = "exception",
             IE = "[object HTMLNextIdElement]")
     public void htmlNextIdElement() throws Exception {
         test("HTMLNextIdElement");
@@ -1570,9 +1439,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLOListElement() { [native code] }",
             IE = "[object HTMLOListElement]",
             FF = "function HTMLOListElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLOListElement() { [native code] }",
-            IE = "[object HTMLOListElement]",
-            FF = "function HTMLOListElement() {\n    [native code]\n}")
     public void htmlOListElement() throws Exception {
         test("HTMLOListElement");
     }
@@ -1584,9 +1450,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLObjectElement() { [native code] }",
-            IE = "[object HTMLObjectElement]",
-            FF = "function HTMLObjectElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLObjectElement() { [native code] }",
             IE = "[object HTMLObjectElement]",
             FF = "function HTMLObjectElement() {\n    [native code]\n}")
     public void htmlObjectElement() throws Exception {
@@ -1613,9 +1476,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLOptionElement() { [native code] }",
-            IE = "[object HTMLOptionElement]",
-            FF = "function HTMLOptionElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLOptionElement() { [native code] }",
             IE = "[object HTMLOptionElement]",
             FF = "function HTMLOptionElement() {\n    [native code]\n}")
     public void htmlOptionElement() throws Exception {
@@ -1671,9 +1531,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLParagraphElement() { [native code] }",
             IE = "[object HTMLParagraphElement]",
             FF = "function HTMLParagraphElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLParagraphElement() { [native code] }",
-            IE = "[object HTMLParagraphElement]",
-            FF = "function HTMLParagraphElement() {\n    [native code]\n}")
     public void htmlParagraphElement() throws Exception {
         test("HTMLParagraphElement");
     }
@@ -1687,9 +1544,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLParamElement() { [native code] }",
             IE = "[object HTMLParamElement]",
             FF = "function HTMLParamElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLParamElement() { [native code] }",
-            IE = "[object HTMLParamElement]",
-            FF = "function HTMLParamElement() {\n    [native code]\n}")
     public void htmlParamElement() throws Exception {
         test("HTMLParamElement");
     }
@@ -1701,8 +1555,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLPhraseElement]")
-    @AlertsStandards(DEFAULT = "exception",
             IE = "[object HTMLPhraseElement]")
     public void htmlPhraseElement() throws Exception {
         test("HTMLPhraseElement");
@@ -1743,9 +1595,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLScriptElement() { [native code] }",
             IE = "[object HTMLScriptElement]",
             FF = "function HTMLScriptElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLScriptElement() { [native code] }",
-            IE = "[object HTMLScriptElement]",
-            FF = "function HTMLScriptElement() {\n    [native code]\n}")
     public void htmlScriptElement() throws Exception {
         test("HTMLScriptElement");
     }
@@ -1757,9 +1606,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLSelectElement() { [native code] }",
-            IE = "[object HTMLSelectElement]",
-            FF = "function HTMLSelectElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLSelectElement() { [native code] }",
             IE = "[object HTMLSelectElement]",
             FF = "function HTMLSelectElement() {\n    [native code]\n}")
     public void htmlSelectElement() throws Exception {
@@ -1788,9 +1634,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLSpanElement() { [native code] }",
             IE = "[object HTMLSpanElement]",
             FF = "function HTMLSpanElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLSpanElement() { [native code] }",
-            IE = "[object HTMLSpanElement]",
-            FF = "function HTMLSpanElement() {\n    [native code]\n}")
     public void htmlSpanElement() throws Exception {
         test("HTMLSpanElement");
     }
@@ -1802,9 +1645,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLStyleElement() { [native code] }",
-            IE = "[object HTMLStyleElement]",
-            FF = "function HTMLStyleElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLStyleElement() { [native code] }",
             IE = "[object HTMLStyleElement]",
             FF = "function HTMLStyleElement() {\n    [native code]\n}")
     public void htmlStyleElement() throws Exception {
@@ -1820,9 +1660,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLTableCaptionElement() { [native code] }",
             IE = "[object HTMLTableCaptionElement]",
             FF = "function HTMLTableCaptionElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLTableCaptionElement() { [native code] }",
-            IE = "[object HTMLTableCaptionElement]",
-            FF = "function HTMLTableCaptionElement() {\n    [native code]\n}")
     public void htmlTableCaptionElement() throws Exception {
         test("HTMLTableCaptionElement");
     }
@@ -1836,9 +1673,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLTableCellElement() { [native code] }",
             IE = "[object HTMLTableCellElement]",
             FF = "function HTMLTableCellElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLTableCellElement() { [native code] }",
-            IE = "[object HTMLTableCellElement]",
-            FF = "function HTMLTableCellElement() {\n    [native code]\n}")
     public void htmlTableCellElement() throws Exception {
         test("HTMLTableCellElement");
     }
@@ -1850,9 +1684,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLTableColElement() { [native code] }",
-            IE = "[object HTMLTableColElement]",
-            FF = "function HTMLTableColElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLTableColElement() { [native code] }",
             IE = "[object HTMLTableColElement]",
             FF = "function HTMLTableColElement() {\n    [native code]\n}")
     public void htmlTableColElement() throws Exception {
@@ -1892,9 +1723,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLTableElement() { [native code] }",
             IE = "[object HTMLTableElement]",
             FF = "function HTMLTableElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLTableElement() { [native code] }",
-            IE = "[object HTMLTableElement]",
-            FF = "function HTMLTableElement() {\n    [native code]\n}")
     public void htmlTableElement() throws Exception {
         test("HTMLTableElement");
     }
@@ -1921,9 +1749,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLTableRowElement() { [native code] }",
             IE = "[object HTMLTableRowElement]",
             FF = "function HTMLTableRowElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLTableRowElement() { [native code] }",
-            IE = "[object HTMLTableRowElement]",
-            FF = "function HTMLTableRowElement() {\n    [native code]\n}")
     public void htmlTableRowElement() throws Exception {
         test("HTMLTableRowElement");
     }
@@ -1937,9 +1762,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLTableSectionElement() { [native code] }",
             IE = "[object HTMLTableSectionElement]",
             FF = "function HTMLTableSectionElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLTableSectionElement() { [native code] }",
-            IE = "[object HTMLTableSectionElement]",
-            FF = "function HTMLTableSectionElement() {\n    [native code]\n}")
     public void htmlTableSectionElement() throws Exception {
         test("HTMLTableSectionElement");
     }
@@ -1951,7 +1773,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards("exception")
     public void htmlTextElement() throws Exception {
         test("HTMLTextElement");
     }
@@ -1963,9 +1784,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLTextAreaElement() { [native code] }",
-            IE = "[object HTMLTextAreaElement]",
-            FF = "function HTMLTextAreaElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLTextAreaElement() { [native code] }",
             IE = "[object HTMLTextAreaElement]",
             FF = "function HTMLTextAreaElement() {\n    [native code]\n}")
     public void htmlTextAreaElement() throws Exception {
@@ -1993,9 +1811,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function HTMLTitleElement() { [native code] }",
             IE = "[object HTMLTitleElement]",
             FF = "function HTMLTitleElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLTitleElement() { [native code] }",
-            IE = "[object HTMLTitleElement]",
-            FF = "function HTMLTitleElement() {\n    [native code]\n}")
     public void htmlTitleElement() throws Exception {
         test("HTMLTitleElement");
     }
@@ -2007,9 +1822,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function HTMLUListElement() { [native code] }",
-            IE = "[object HTMLUListElement]",
-            FF = "function HTMLUListElement() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function HTMLUListElement() { [native code] }",
             IE = "[object HTMLUListElement]",
             FF = "function HTMLUListElement() {\n    [native code]\n}")
     public void htmlUListElement() throws Exception {
@@ -2036,7 +1848,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards("exception")
     public void htmlGenericElement() throws Exception {
         test("HTMLGenericElement");
     }
@@ -2126,11 +1937,11 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Location() { [native code] }",
             FF31 = "[object Location]",
             IE = "[object Location]",
-            FF38 = "function Location() {\n    [native code]\n}")
+            FF = "function Location() {\n    [native code]\n}")
     @AlertsStandards(DEFAULT = "[object Location]",
             CHROME = "function Location() { [native code] }",
             EDGE = "function Location() { [native code] }",
-            FF38 = "function Location() {\n    [native code]\n}")
+            FF = "function Location() {\n    [native code]\n}")
     public void location() throws Exception {
         test("Location");
     }
@@ -2222,11 +2033,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function NamedNodeMap() { [native code] }",
             IE = "[object NamedNodeMap]",
             FF31 = "exception",
-            FF38 = "function NamedNodeMap() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function NamedNodeMap() { [native code] }",
-            IE = "[object NamedNodeMap]",
-            FF31 = "exception",
-            FF38 = "function NamedNodeMap() {\n    [native code]\n}")
+            FF = "function NamedNodeMap() {\n    [native code]\n}")
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
     }
@@ -2260,9 +2067,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Navigator() { [native code] }",
-            IE = "[object Navigator]",
-            FF = "function Navigator() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function Navigator() { [native code] }",
             IE = "[object Navigator]",
             FF = "function Navigator() {\n    [native code]\n}")
     public void navigator() throws Exception {
@@ -2302,9 +2106,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function NodeList() { [native code] }",
-            IE = "[object NodeList]",
-            FF = "function NodeList() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function NodeList() { [native code] }",
             IE = "[object NodeList]",
             FF = "function NodeList() {\n    [native code]\n}")
     public void nodeList() throws Exception {
@@ -3302,9 +3103,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Screen() { [native code] }",
             IE = "[object Screen]",
             FF = "function Screen() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function Screen() { [native code] }",
-            IE = "[object Screen]",
-            FF = "function Screen() {\n    [native code]\n}")
     public void screen() throws Exception {
         test("Screen");
     }
@@ -3316,9 +3114,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Selection() { [native code] }",
-            IE = "[object Selection]",
-            FF = "function Selection() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function Selection() { [native code] }",
             IE = "[object Selection]",
             FF = "function Selection() {\n    [native code]\n}")
     public void selection() throws Exception {
@@ -3343,7 +3138,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @AlertsStandards("exception")
     @NotYetImplemented
     public void staticNodeList() throws Exception {
         test("StaticNodeList");
@@ -3357,12 +3151,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Storage() { [native code] }",
             FF31 = "[object Storage]",
-            FF38 = "function Storage() {\n    [native code]\n}",
+            FF = "function Storage() {\n    [native code]\n}",
             IE  = "[object Storage]")
-    @AlertsStandards(DEFAULT = "function Storage() { [native code] }",
-            FF31 = "[object Storage]",
-            IE = "[object Storage]",
-            FF38 = "function Storage() {\n    [native code]\n}")
     public void storage() throws Exception {
         test("Storage");
     }
@@ -3374,9 +3164,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function StyleSheetList() { [native code] }",
-            IE = "[object StyleSheetList]",
-            FF = "function StyleSheetList() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function StyleSheetList() { [native code] }",
             IE = "[object StyleSheetList]",
             FF = "function StyleSheetList() {\n    [native code]\n}")
     public void styleSheetList() throws Exception {
@@ -3392,9 +3179,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Text() { [native code] }",
             IE = "[object Text]",
             FF = "function Text() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function Text() { [native code] }",
-            IE = "[object Text]",
-            FF = "function Text() {\n    [native code]\n}")
     public void text() throws Exception {
         test("Text");
     }
@@ -3406,8 +3190,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-        IE = "[object TextRange]")
-    @AlertsStandards(DEFAULT = "exception",
         IE = "[object TextRange]")
     public void textRange() throws Exception {
         test("TextRange");
@@ -3513,11 +3295,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Window() { [native code] }",
             IE = "[object Window]",
             FF31 = "[object Window]",
-            FF38 = "function Window() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function Window() { [native code] }",
-            IE = "[object Window]",
-            FF31 = "[object Window]",
-            FF38 = "function Window() {\n    [native code]\n}")
+            FF = "function Window() {\n    [native code]\n}")
     public void window() throws Exception {
         test("Window");
     }
@@ -3595,7 +3373,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function XPathResult() { [native code] }",
             FF31 = "[object XPathResult]",
-            FF38 = "function XPathResult() {\n    [native code]\n}",
+            FF = "function XPathResult() {\n    [native code]\n}",
             IE = "exception")
     public void xPathResult() throws Exception {
         test("XPathResult");
@@ -3609,7 +3387,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function XSLTProcessor() { [native code] }",
             FF31 = "[object XSLTProcessor]",
-            FF38 = "function XSLTProcessor() {\n    [native code]\n}",
+            FF = "function XSLTProcessor() {\n    [native code]\n}",
             IE = "exception")
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
@@ -3837,7 +3615,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function MessageChannel() { [native code] }",
             FF = "exception",
-            IE = "\nfunction MessageChannel() {\n    [native code]\n}\n")
+            IE = "\nfunction MessageChannel() {\n    [native code]\n}\n",
+            FF45 = "function MessageChannel() {\n    [native code]\n}")
     public void messageChannel() throws Exception {
         test("MessageChannel");
     }
@@ -4187,7 +3966,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function Headers() { [native code] }")
+            CHROME = "function Headers() { [native code] }",
+            FF45 = "function Headers() {\n    [native code]\n}")
     public void headers() throws Exception {
         test("Headers");
     }
@@ -4268,7 +4048,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "[object MozMobileMessageThread]")
+            FF31 = "[object MozMobileMessageThread]",
+            FF38 = "[object MozMobileMessageThread]")
     public void mozMobileMessageThread() throws Exception {
         test("MozMobileMessageThread");
     }
@@ -4278,7 +4059,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function RTCSessionDescription() { [native code] }")
+            CHROME = "function RTCSessionDescription() { [native code] }",
+            FF45 = "function RTCSessionDescription() {\n    [native code]\n}")
     public void rtcSessionDescription() throws Exception {
         test("RTCSessionDescription");
     }
@@ -4374,7 +4156,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function MediaKeySession() { [native code] }")
+            CHROME = "function MediaKeySession() { [native code] }",
+            FF45 = "function MediaKeySession() {\n    [native code]\n}")
     public void mediaKeySession() throws Exception {
         test("MediaKeySession");
     }
@@ -4456,7 +4239,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function Response() { [native code] }")
+            CHROME = "function Response() { [native code] }",
+            FF45 = "function Response() {\n    [native code]\n}")
     public void response() throws Exception {
         test("Response");
     }
@@ -4506,6 +4290,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF45 = "function VideoPlaybackQuality() {\n    [native code]\n}",
             EDGE = "function VideoPlaybackQuality() { [native code] }")
     public void videoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality");
@@ -4739,7 +4524,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF38 = "function DOMMatrixReadOnly() {\n    [native code]\n}")
+            FF31 = "exception",
+            FF = "function DOMMatrixReadOnly() {\n    [native code]\n}")
     public void domMatrixReadOnly() throws Exception {
         test("DOMMatrixReadOnly");
     }
@@ -5314,7 +5100,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function MediaKeyStatusMap() { [native code] }")
+            CHROME = "function MediaKeyStatusMap() { [native code] }",
+            FF45 = "function MediaKeyStatusMap() {\n    [native code]\n}")
     public void mediaKeyStatusMap() throws Exception {
         test("MediaKeyStatusMap");
     }
@@ -5407,8 +5194,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF31 = "exception",
             CHROME = "function HTMLPictureElement() { [native code] }",
-            FF38 = "function HTMLPictureElement() {\n    [native code]\n}")
+            FF = "function HTMLPictureElement() {\n    [native code]\n}")
     public void htmlPictureElement() throws Exception {
         test("HTMLPictureElement");
     }
@@ -5436,7 +5224,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function MediaKeyMessageEvent() { [native code] }")
+            CHROME = "function MediaKeyMessageEvent() { [native code] }",
+            FF45 = "function MediaKeyMessageEvent() {\n    [native code]\n}")
     public void mediaKeyMessageEvent() throws Exception {
         test("MediaKeyMessageEvent");
     }
@@ -5499,7 +5288,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function MediaKeys() { [native code] }")
+            CHROME = "function MediaKeys() { [native code] }",
+            FF45 = "function MediaKeys() {\n    [native code]\n}")
     public void mediaKeys() throws Exception {
         test("MediaKeys");
     }
@@ -5632,7 +5422,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF38 = "function BroadcastChannel() {\n    [native code]\n}")
+            FF31 = "exception",
+            FF = "function BroadcastChannel() {\n    [native code]\n}")
     public void broadcastChannel() throws Exception {
         test("BroadcastChannel");
     }
@@ -5899,7 +5690,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function Cache() { [native code] }")
+            CHROME = "function Cache() { [native code] }",
+            FF45 = "function Cache() {\n    [native code]\n}")
     public void cache() throws Exception {
         test("Cache");
     }
@@ -6117,7 +5909,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SubtleCrypto() { [native code] }",
             FF31 = "exception",
-            FF38 = "function SubtleCrypto() {\n    [native code]\n}",
+            FF = "function SubtleCrypto() {\n    [native code]\n}",
             IE = "[object SubtleCrypto]")
     public void subtleCrypto() throws Exception {
         test("SubtleCrypto");
@@ -6137,7 +5929,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF38 = "function DOMMatrix() {\n    [native code]\n}")
+            FF31 = "exception",
+            FF = "function DOMMatrix() {\n    [native code]\n}")
     public void domMatrix() throws Exception {
         test("DOMMatrix");
     }
@@ -6176,7 +5969,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function MediaKeySystemAccess() { [native code] }")
+            CHROME = "function MediaKeySystemAccess() { [native code] }",
+            FF45 = "function MediaKeySystemAccess() {\n    [native code]\n}")
     public void mediaKeySystemAccess() throws Exception {
         test("MediaKeySystemAccess");
     }
@@ -6297,7 +6091,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF45 = "function RTCPeerConnection() {\n    [native code]\n}")
     public void rtcPeerConnection() throws Exception {
         test("RTCPeerConnection");
     }
@@ -6309,7 +6104,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function CryptoKey() { [native code] }",
             IE = "exception",
             FF31 = "exception",
-            FF38 = "function CryptoKey() {\n    [native code]\n}")
+            FF = "function CryptoKey() {\n    [native code]\n}")
     public void cryptoKey() throws Exception {
         test("CryptoKey");
     }
@@ -6414,7 +6209,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function WeakSet() { [native code] }",
             IE = "exception",
             FF31 = "exception",
-            FF38 = "function WeakSet() {\n    [native code]\n}")
+            FF = "function WeakSet() {\n    [native code]\n}")
     public void weakSet() throws Exception {
         test("WeakSet");
     }
@@ -6781,7 +6576,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "[object MozMmsMessage]")
+            FF31 = "[object MozMmsMessage]",
+            FF38 = "[object MozMmsMessage]")
     public void mozMmsMessage() throws Exception {
         test("MozMmsMessage");
     }
@@ -6913,7 +6709,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function SVGNumber() { [native code] }",
             FF31 = "[object SVGNumber]",
             IE = "[object SVGNumber]",
-            FF38 = "function SVGNumber() {\n    [native code]\n}")
+            FF = "function SVGNumber() {\n    [native code]\n}")
     public void svgNumber() throws Exception {
         test("SVGNumber");
     }
@@ -6950,7 +6746,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF38 = "function StereoPannerNode() {\n    [native code]\n}",
+            FF31 = "exception",
+            FF = "function StereoPannerNode() {\n    [native code]\n}",
             EDGE = "function StereoPannerNode() { [native code] }")
     public void stereoPannerNode() throws Exception {
         test("StereoPannerNode");
@@ -6981,8 +6778,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF31 = "exception",
             CHROME = "function XMLHttpRequestEventTarget() { [native code] }",
-            FF38 = "function XMLHttpRequestEventTarget() {\n    [native code]\n}",
+            FF = "function XMLHttpRequestEventTarget() {\n    [native code]\n}",
             IE = "[object XMLHttpRequestEventTarget]")
     public void xmlHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget");
@@ -7036,7 +6834,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function RadioNodeList() { [native code] }",
-            FF38 = "function RadioNodeList() {\n    [native code]\n}")
+            FF31 = "exception",
+            FF = "function RadioNodeList() {\n    [native code]\n}")
     public void radioNodeList() throws Exception {
         test("RadioNodeList");
     }
@@ -7094,7 +6893,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function MediaSource() { [native code] }",
             IE = "exception",
-            FF = "exception")
+            FF = "exception",
+            FF45 = "function MediaSource() {\n    [native code]\n}")
     public void mediaSource() throws Exception {
         test("MediaSource");
     }
@@ -7124,7 +6924,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF38 = "[object CSSCounterStyleRule]")
+            FF31 = "exception",
+            FF = "[object CSSCounterStyleRule]")
     public void cssCounterStyleRule() throws Exception {
         test("CSSCounterStyleRule");
     }
@@ -7250,7 +7051,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function MediaDevices() { [native code] }",
             FF31 = "exception",
             IE = "exception",
-            FF38 = "function MediaDevices() {\n    [native code]\n}")
+            FF = "function MediaDevices() {\n    [native code]\n}")
     public void mediaDevices() throws Exception {
         test("MediaDevices");
     }
@@ -7287,8 +7088,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Blob() { [native code] }",
+            FF = "function Blob() {\n    [native code]\n}",
             FF31 = "[object Blob]",
-            FF38 = "function Blob() {\n    [native code]\n}",
             IE = "\nfunction Blob() {\n    [native code]\n}\n")
     public void blob() throws Exception {
         test("Blob");
@@ -7322,7 +7123,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "[object Object]",
-            EDGE = "[object Object]")
+            EDGE = "[object Object]",
+            FF45 = "[object Object]")
     public void reflect() throws Exception {
         test("Reflect");
     }
@@ -7412,7 +7214,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function Request() { [native code] }")
+            CHROME = "function Request() { [native code] }",
+            FF45 = "function Request() {\n    [native code]\n}")
     public void request() throws Exception {
         test("Request");
     }
@@ -7422,7 +7225,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function CacheStorage() { [native code] }")
+            CHROME = "function CacheStorage() { [native code] }",
+            FF45 = "function CacheStorage() {\n    [native code]\n}")
     public void cacheStorage() throws Exception {
         test("CacheStorage");
     }
@@ -7843,9 +7647,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function DataTransfer() { [native code] }",
             IE = "[object DataTransfer]",
             FF = "function DataTransfer() {\n    [native code]\n}")
-    @AlertsStandards(DEFAULT = "function DataTransfer() { [native code] }",
-            IE = "[object DataTransfer]",
-            FF = "function DataTransfer() {\n    [native code]\n}")
     public void dataTransfer() throws Exception {
         test("DataTransfer");
     }
@@ -7895,7 +7696,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Symbol() { [native code] }",
             IE = "exception",
             FF31 = "exception",
-            FF38 = "function Symbol() {\n    [native code]\n}")
+            FF = "function Symbol() {\n    [native code]\n}")
     public void symbol() throws Exception {
         test("Symbol");
     }
@@ -8085,7 +7886,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function File() { [native code] }",
             FF31 = "[object File]",
-            FF38 = "function File() {\n    [native code]\n}",
+            FF = "function File() {\n    [native code]\n}",
             IE = "[object File]")
     public void file() throws Exception {
         test("File");
@@ -8096,7 +7897,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "[object MozSmsMessage]")
+            FF31 = "[object MozSmsMessage]",
+            FF38 = "[object MozSmsMessage]")
     public void mozSmsMessage() throws Exception {
         test("MozSmsMessage");
     }
@@ -8188,7 +7990,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function RTCIceCandidate() { [native code] }")
+            CHROME = "function RTCIceCandidate() { [native code] }",
+            FF45 = "function RTCIceCandidate() {\n    [native code]\n}")
     public void rtcIceCandidate() throws Exception {
         test("RTCIceCandidate");
     }
@@ -8701,7 +8504,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF45 = "function MediaKeyError() {\n    [native code]\n}")
     public void mediaKeyError() throws Exception {
         test("MediaKeyError");
     }
@@ -8742,7 +8546,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function PerformanceMark() { [native code] }",
             FF31 = "exception",
-            FF38 = "function PerformanceMark() {\n    [native code]\n}",
+            FF = "function PerformanceMark() {\n    [native code]\n}",
             IE = "[object PerformanceMark]")
     public void performanceMark() throws Exception {
         test("PerformanceMark");
@@ -8754,7 +8558,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function PerformanceMeasure() { [native code] }",
             FF31 = "exception",
-            FF38 = "function PerformanceMeasure() {\n    [native code]\n}",
+            FF = "function PerformanceMeasure() {\n    [native code]\n}",
             IE = "[object PerformanceMeasure]")
     public void performanceMeasure() throws Exception {
         test("PerformanceMeasure");
@@ -9167,7 +8971,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function TextTrackCue() { [native code] }",
             FF = "exception",
-            IE = "\nfunction TextTrackCue() {\n    [native code]\n}\n")
+            IE = "\nfunction TextTrackCue() {\n    [native code]\n}\n",
+            FF45 = "function TextTrackCue() {\n    [native code]\n}")
     public void textTrackCue() throws Exception {
         test("TextTrackCue");
     }
@@ -9385,7 +9190,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function XPathExpression() { [native code] }",
             IE = "exception",
             FF31 = "[object XPathExpression]",
-            FF38 = "function XPathExpression() {\n    [native code]\n}")
+            FF = "function XPathExpression() {\n    [native code]\n}")
     public void xPathExpression() throws Exception {
         test("XPathExpression");
     }
@@ -9415,7 +9220,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function FontFace() { [native code] }")
+            CHROME = "function FontFace() { [native code] }",
+            FF45 = "function FontFace() {\n    [native code]\n}")
     public void fontFace() throws Exception {
         test("FontFace");
     }
@@ -9425,7 +9231,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function ImageBitmap() { [native code] }")
+            CHROME = "function ImageBitmap() { [native code] }",
+            FF45 = "function ImageBitmap() {\n    [native code]\n}")
     public void imageBitmap() throws Exception {
         test("ImageBitmap");
     }
@@ -9444,7 +9251,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function MediaEncryptedEvent() { [native code] }")
+            CHROME = "function MediaEncryptedEvent() { [native code] }",
+            FF45 = "function MediaEncryptedEvent() {\n    [native code]\n}")
     public void mediaEncryptedEvent() throws Exception {
         test("MediaEncryptedEvent");
     }
@@ -9484,7 +9292,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function ScreenOrientation() { [native code] }")
+            CHROME = "function ScreenOrientation() { [native code] }",
+            FF45 = "function ScreenOrientation() {\n    [native code]\n}")
     public void screenOrientation() throws Exception {
         test("ScreenOrientation");
     }
@@ -9802,7 +9611,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF45 = "function CanvasCaptureMediaStream() {\n    [native code]\n}")
     public void canvasCaptureMediaStream() throws Exception {
         test("CanvasCaptureMediaStream");
     }
@@ -9829,7 +9639,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF45 = "function FontFaceSet() {\n    [native code]\n}")
     public void fontFaceSet() throws Exception {
         test("FontFaceSet");
     }
@@ -9955,7 +9766,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF45 = "function MediaDeviceInfo() {\n    [native code]\n}")
     public void mediaDeviceInfo() throws Exception {
         test("MediaDeviceInfo");
     }
@@ -10117,7 +9929,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF45 = "function SourceBufferList() {\n    [native code]\n}")
     public void sourceBufferList() throws Exception {
         test("SourceBufferList");
     }
@@ -10411,7 +10224,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF45 = "function SourceBuffer() {\n    [native code]\n}")
     public void sourceBuffer() throws Exception {
         test("SourceBuffer");
     }
@@ -10494,7 +10308,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function RTCCertificate() { [native code] }")
+            CHROME = "function RTCCertificate() { [native code] }",
+            FF45 = "function RTCCertificate() {\n    [native code]\n}")
     public void rtcCertificate() throws Exception {
         test("RTCCertificate");
     }
