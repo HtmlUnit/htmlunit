@@ -6461,4 +6461,84 @@ public class HostParentOfATest extends HostParentOf {
         test("Event", "PromiseRejectionEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _CanvasCaptureMediaStream_CanvasCaptureMediaStream() throws Exception {
+        test("CanvasCaptureMediaStream", "CanvasCaptureMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _EventTarget_CanvasCaptureMediaStream() throws Exception {
+        test("EventTarget", "CanvasCaptureMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _EventTarget_FontFaceSet() throws Exception {
+        test("EventTarget", "FontFaceSet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _EventTarget_RTCPeerConnection() throws Exception {
+        test("EventTarget", "RTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _EventTarget_SourceBuffer() throws Exception {
+        test("EventTarget", "SourceBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _EventTarget_SourceBufferList() throws Exception {
+        test("EventTarget", "SourceBufferList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _Event_MediaKeyError() throws Exception {
+        test("Event", "MediaKeyError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _FontFaceSet_FontFaceSet() throws Exception {
+        test("FontFaceSet", "FontFaceSet");
+    }
+
 }

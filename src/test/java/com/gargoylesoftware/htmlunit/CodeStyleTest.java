@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -94,43 +95,69 @@ public class CodeStyleTest {
         final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
         svnWCClient_ = new SVNWCClient(authManager, options);
-        process(new File("src/main"));
-        process(new File("src/test"));
+        final List<File> files = new ArrayList<>();
+        addAll(new File("src/main"), files);
+        addAll(new File("src/test"), null);
+        final List<String> classNames = getClassNames(files);
+        process(files, classNames);
+        for (final String className : classNames) {
+            addFailure("Not used " + className);
+        }
+
         licenseYear();
         versionYear();
         parentInPom();
     }
 
-    private void process(final File dir) throws IOException {
-        final File[] files = dir.listFiles();
-        if (files != null) {
-            for (final File file : files) {
-                if (file.isDirectory() && !".svn".equals(file.getName())) {
-                    process(file);
+    private List<String> getClassNames(final List<File> files) {
+        final List<String> list = new ArrayList<>();
+        for (final File file : files) {
+            String fileName = file.getName();
+            if (fileName.endsWith(".java")) {
+                fileName = fileName.substring(0, fileName.length() - 5);
+                fileName = fileName.substring(fileName.lastIndexOf('.') + 1);
+                list.add(fileName);
+            }
+        }
+        return list;
+    }
+
+    private void addAll(final File dir, final List<File> files) throws IOException {
+        final File[] children = dir.listFiles();
+        if (children != null) {
+            for (final File child : children) {
+                if (child.isDirectory() && !".svn".equals(child.getName())) {
+                    addAll(child, files);
                 }
-                else {
-                    final String relativePath = file.getAbsolutePath().substring(
-                            new File(".").getAbsolutePath().length() - 1);
-                    svnProperties(file, relativePath);
-                    if (file.getName().endsWith(".java")) {
-                        final List<String> lines = FileUtils.readLines(file);
-                        openingCurlyBracket(lines, relativePath);
-                        year(lines, relativePath);
-                        javaDocFirstLine(lines, relativePath);
-                        methodFirstLine(lines, relativePath);
-                        methodLastLine(lines, relativePath);
-                        lineBetweenMethods(lines, relativePath);
-                        runWith(lines, relativePath);
-                        vs85aspx(lines, relativePath);
-                        deprecated(lines, relativePath);
-                        staticJSMethod(lines, relativePath);
-                        singleAlert(lines, relativePath);
-                        staticLoggers(lines, relativePath);
-                        loggingEnabled(lines, relativePath);
-                        browserVersion_isIE(lines, relativePath);
-                        alerts(lines, relativePath);
-                    }
+                else if (files != null) {
+                    files.add(child);
                 }
+            }
+        }
+    }
+
+    private void process(final List<File> files, final List<String> classNames) throws IOException {
+        for (final File file : files) {
+            final String relativePath = file.getAbsolutePath().substring(new File(".").getAbsolutePath().length() - 1);
+            svnProperties(file, relativePath);
+            if (file.getName().endsWith(".java")) {
+                final List<String> lines = FileUtils.readLines(file);
+                openingCurlyBracket(lines, relativePath);
+                year(lines, relativePath);
+                javaDocFirstLine(lines, relativePath);
+                methodFirstLine(lines, relativePath);
+                methodLastLine(lines, relativePath);
+                lineBetweenMethods(lines, relativePath);
+                runWith(lines, relativePath);
+                vs85aspx(lines, relativePath);
+                deprecated(lines, relativePath);
+                staticJSMethod(lines, relativePath);
+                singleAlert(lines, relativePath);
+                staticLoggers(lines, relativePath);
+                loggingEnabled(lines, relativePath);
+                browserVersion_isIE(lines, relativePath);
+                alerts(lines, relativePath);
+                //classNameUsed(lines, classNames, relativePath);
             }
         }
     }
@@ -613,6 +640,22 @@ public class CodeStyleTest {
             if (lines.get(i).startsWith("    @Alerts(")) {
                 final List<String> alerts = alertsToList(lines, i, true);
                 alertVerify(alerts, relativePath, i);
+            }
+        }
+    }
+
+    /**
+     * Verifies that the class name is used.
+     */
+    private void classNameUsed(final List<String> lines, final List<String> classNames, final String relativePath) {
+        String fileName = relativePath.substring(0, relativePath.length() - 5);
+        fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+        for (final String line : lines) {
+            for (final Iterator<String> it = classNames.iterator(); it.hasNext();) {
+                final String className = it.next();
+                if (line.contains(className) && !className.equals(fileName)) {
+                    it.remove();
+                }
             }
         }
     }

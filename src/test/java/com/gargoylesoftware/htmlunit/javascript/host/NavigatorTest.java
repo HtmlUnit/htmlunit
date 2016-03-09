@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class NavigatorTest extends WebDriverTestCase {
 
     /**
-     * Tests the "appCodeName" property.
+     * Tests the {@code appCodeName} property.
      * @throws Exception on test failure
      */
     @Test
@@ -48,7 +48,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "appMinorVersion" property.
+     * Tests the {@code appMinorVersion} property.
      * @throws Exception on test failure
      */
     @Test
@@ -59,7 +59,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "appName" property.
+     * Tests the {@code appName} property.
      * @throws Exception on test failure
      */
     @Test
@@ -68,7 +68,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "appVersion" property.
+     * Tests the {@code appVersion} property.
      * @throws Exception on test failure
      */
     @Test
@@ -80,18 +80,18 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "browserLanguage" property.
+     * Tests the {@code browserLanguage} property.
      * @throws Exception on test failure
      */
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "en-US")
-    public void browserLanguage_IE() throws Exception {
+    public void browserLanguage() throws Exception {
         attribute("browserLanguage", getExpectedAlerts()[0]);
     }
 
     /**
-     * Tests the "productSub" property.
+     * Tests the {@code productSub} property.
      * @throws Exception on test failure
      */
     @Test
@@ -109,7 +109,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "cpuClass" property.
+     * Tests the {@code cpuClass} property.
      * @throws Exception on test failure
      */
     @Test
@@ -120,7 +120,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "onLine" property.
+     * Tests the {@code onLine} property.
      * @throws Exception on test failure
      */
     @Test
@@ -129,7 +129,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "platform" property.
+     * Tests the {@code platform} property.
      * @throws Exception on test failure
      */
     @Test
@@ -138,7 +138,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "systemLanguage" property.
+     * Tests the {@code systemLanguage} property.
      * @throws Exception on test failure
      */
     @Test
@@ -149,7 +149,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "userAgent" property.
+     * Tests the {@code userAgent} property.
      * @throws Exception on test failure
      */
     @Test
@@ -161,7 +161,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "userLanguage" property.
+     * Tests the {@code userLanguage} property.
      * @throws Exception on test failure
      */
     @Test
@@ -172,7 +172,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "plugins" property.
+     * Tests the {@code plugins} property.
      * @throws Exception on test failure
      */
     @Test
@@ -207,6 +207,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(FF31 = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.209", "NPSWF32_18_0_0_209.dll"},
             FF38 = {"Shockwave Flash", "Shockwave Flash 20.0 r0", "20.0.0.286", "NPSWF32_20_0_0_286.dll"},
+            FF45 = {"Shockwave Flash", "Shockwave Flash 20.0 r0", "20.0.0.306", "NPSWF32_20_0_0_306.dll"},
             CHROME = { "Shockwave Flash", "Shockwave Flash 20.0 r0", "undefined", "pepflashplayer.dll"},
             IE = {"Shockwave Flash, Shockwave Flash 20.0 r0", "20.0.0.270", "Flash32_20_0_0_270.ocx"},
             EDGE = {"Shockwave Flash, Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
@@ -236,7 +237,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "taintEnabled" property.
+     * Tests the {@code taintEnabled} property.
      * @throws Exception on test failure
      */
     @Test
@@ -293,7 +294,7 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Test language property.
+     * Test {@code language} property.
      * @throws Exception if the test fails
      */
     @Test
@@ -308,7 +309,6 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Test some Mozilla properties (minimal tests are support is not completed).
      * @throws Exception if the test fails
      */
     @Test
@@ -372,7 +372,8 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF31 = "20150504194141",
-            FF38 = "20160120213330")
+            FF38 = "20160120213330",
+            FF45 = "20160304113541")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

@@ -1184,4 +1184,13 @@ public class HostParentOfTTest extends HostParentOf {
         test("WEBGL_debug_renderer_info", "WEBGL_debug_renderer_info");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {
+        test("VideoPlaybackQuality", "VideoPlaybackQuality");
+    }
 }

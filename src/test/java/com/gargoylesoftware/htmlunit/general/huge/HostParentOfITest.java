@@ -3571,4 +3571,74 @@ public class HostParentOfITest extends HostParentOf {
         test("IIRFilterNode", "IIRFilterNode");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _MediaDeviceInfo_MediaDeviceInfo() throws Exception {
+        test("MediaDeviceInfo", "MediaDeviceInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _MediaKeyError_MediaKeyError() throws Exception {
+        test("MediaKeyError", "MediaKeyError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _MediaStream_CanvasCaptureMediaStream() throws Exception {
+        test("MediaStream", "CanvasCaptureMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _RTCPeerConnection_RTCPeerConnection() throws Exception {
+        test("RTCPeerConnection", "RTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _RTCPeerConnection_mozRTCPeerConnection() throws Exception {
+        test("RTCPeerConnection", "mozRTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _SourceBufferList_SourceBufferList() throws Exception {
+        test("SourceBufferList", "SourceBufferList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _SourceBuffer_SourceBuffer() throws Exception {
+        test("SourceBuffer", "SourceBuffer");
+    }
+
 }
