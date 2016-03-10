@@ -101,7 +101,7 @@ public class CodeStyleTest {
         final List<String> classNames = getClassNames(files);
         process(files, classNames);
         for (final String className : classNames) {
-            addFailure("Not used " + className);
+            //addFailure("Not used " + className);
         }
 
         licenseYear();
@@ -157,7 +157,7 @@ public class CodeStyleTest {
                 loggingEnabled(lines, relativePath);
                 browserVersion_isIE(lines, relativePath);
                 alerts(lines, relativePath);
-                //classNameUsed(lines, classNames, relativePath);
+                classNameUsed(lines, classNames, relativePath);
             }
         }
     }
