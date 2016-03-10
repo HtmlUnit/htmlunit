@@ -830,9 +830,51 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "true", "null", "false", "", "false", "yes"})
+    public void checkedAttribute() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var checkbox = document.getElementById('c1');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('c2');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('c3');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "  <input type='checkbox' id='c1' name='radar' value='initial'>\n"
+            + "  <input type='checkbox' id='c2' name='radar' value='initial' checked>\n"
+            + "  <input type='checkbox' id='c3' name='radar' value='initial' checked='yes'>\n"
+            + "</form>\n"
+            + "  <button id='clickNe' onClick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("c1")).click();
+        driver.findElement(By.id("c2")).click();
+        driver.findElement(By.id("c3")).click();
+
+        driver.findElement(By.id("clickNe")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "false", "null", "true", "null", "false", "null", "true", "", "false", "", "true", "",
                         "true", "yes", "false", "yes", "true", "yes"})
-    public void checkedAttribute() throws Exception {
+    public void checkedAttributeJS() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"

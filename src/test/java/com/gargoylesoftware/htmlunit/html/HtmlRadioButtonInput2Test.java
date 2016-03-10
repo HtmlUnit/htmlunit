@@ -944,9 +944,58 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "true", "null", "true", "", "true", "yes" })
+    public void checkedAttribute() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var checkbox = document.getElementById('r1');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('r2');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+
+            + "    checkbox = document.getElementById('r3');\n"
+            + "    alert(checkbox.checked);\n"
+            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body'>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='r1' name='myRadio'>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='r2' name='myRadio' checked>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' id='r3' name='myRadio' checked='yes'>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
+            + "  <button id='clickNe' onClick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("r1")).click();
+        driver.findElement(By.id("r2")).click();
+        driver.findElement(By.id("r3")).click();
+
+        driver.findElement(By.id("clickNe")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "false", "null", "true", "null", "false", "null", "true", "", "false", "",
                         "true", "", "true", "yes", "false", "yes", "true", "yes" })
-    public void checkedAttribute() throws Exception {
+    public void checkedAttributeJS() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"
