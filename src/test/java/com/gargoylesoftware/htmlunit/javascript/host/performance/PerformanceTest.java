@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
@@ -40,10 +41,13 @@ public class PerformanceTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  if (!performance) { alert('performance not available'); retrun; };\n"
-                + "  alert(performance.now());\n"
-                + "  alert(performance.now());\n"
-                + "  alert(typeof performance.now());\n"
+                + "  function test() {"
+                + "    if (!performance) { alert('performance not available'); return; };\n"
+                + "    alert(performance.now());\n"
+                + "    alert(performance.now());\n"
+                + "    alert(typeof performance.now());\n"
+                + "  }\n"
+                + "  test();"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body></body>\n"
@@ -57,5 +61,30 @@ public class PerformanceTest extends WebDriverTestCase {
         assertTrue(Double.parseDouble(now2) > Double.parseDouble(now1));
 
         assertEquals("number", getCollectedAlerts(driver).get(2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object PerformanceTiming]")
+    public void timing() throws Exception {
+        final String html =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {"
+                + "    var performanceTiming = performance.timing;"
+                + "    if (!performanceTiming) { alert('performanceTiming not available'); return; };\n"
+                + "    alert(performanceTiming);\n"
+                + "  }\n"
+                + "  test();"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body></body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }

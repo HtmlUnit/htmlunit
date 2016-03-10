@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="add" dev="rbri" issue="1756">
+                JavaScript: support window.performace.timing.
+            </action>
             <action type="add" dev="asashour" issue="1755">
                 JavaScript: support HTMLAnchorElement.ping.
             </action>

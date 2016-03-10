@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  */
 @JsxClass
 public class Performance extends EventTarget {
+    private PerformanceTiming timing_;
 
     /**
      * Creates an instance.
@@ -51,6 +52,23 @@ public class Performance extends EventTarget {
         navigation.setParentScope(getParentScope());
         navigation.setPrototype(getPrototype(navigation.getClass()));
         return navigation;
+    }
+
+    /**
+     * Returns the {@code timing} property.
+     * @return the {@code timing} property
+     */
+    @JsxGetter
+    public PerformanceTiming getTiming() {
+        if (timing_ != null) {
+            return timing_;
+        }
+
+        final PerformanceTiming timing = new PerformanceTiming();
+        timing.setParentScope(getParentScope());
+        timing.setPrototype(getPrototype(timing.getClass()));
+        timing_ = timing;
+        return timing_;
     }
 
     /**
