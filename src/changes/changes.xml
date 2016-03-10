@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="add" dev="asashour" issue="1755">
+                JavaScript: support HTMLAnchorElement.ping.
+            </action>
             <action type="add" dev="asashour">
                 Firefox 45 ESR support added.
             </action>

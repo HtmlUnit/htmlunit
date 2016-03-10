@@ -674,7 +674,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public String getPing() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        return ((HtmlAnchor) getDomNodeOrDie()).getPingAttribute();
     }
 
     /**
@@ -683,7 +683,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public void setPing(final String ping) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        getDomNodeOrDie().setAttribute("ping", ping);
     }
 
     /**

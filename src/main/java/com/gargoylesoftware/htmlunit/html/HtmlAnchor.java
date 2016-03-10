@@ -27,6 +27,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -66,10 +67,11 @@ public class HtmlAnchor extends HtmlElement {
     }
 
     /**
-     * Same as {@link #doClickStateUpdate()}, except that it accepts an href suffix, needed when a click is
+     * Same as {@link #doClickStateUpdate()}, except that it accepts an {@code href} suffix, needed when a click is
      * performed on an image map to pass information on the click position.
      *
-     * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
+     * @param hrefSuffix the suffix to add to the anchor's {@code href} attribute
+     *        (for instance coordinates from an image map)
      * @throws IOException if an IO error occurs
      */
     protected void doClickStateUpdate(final String hrefSuffix) throws IOException {
@@ -81,7 +83,7 @@ public class HtmlAnchor extends HtmlElement {
         if (ATTRIBUTE_NOT_DEFINED == getHrefAttribute()) {
             return;
         }
-        HtmlPage htmlPage = (HtmlPage) getPage();
+        HtmlPage page = (HtmlPage) getPage();
         if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final StringBuilder builder = new StringBuilder(href.length());
             builder.append(JavaScriptURLConnection.JAVASCRIPT_PREFIX);
@@ -101,35 +103,44 @@ public class HtmlAnchor extends HtmlElement {
             }
 
             if (hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF)) {
-                htmlPage.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+                page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
             }
             else {
-                final WebWindow win = htmlPage.getWebClient().openTargetWindow(htmlPage.getEnclosingWindow(),
-                        htmlPage.getResolvedTarget(getTargetAttribute()), "_self");
-                final Page page = win.getEnclosedPage();
-                if (page != null && page.isHtmlPage()) {
-                    htmlPage = (HtmlPage) page;
-                    htmlPage.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+                final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(),
+                        page.getResolvedTarget(getTargetAttribute()), "_self");
+                final Page enclosedPage = win.getEnclosedPage();
+                if (enclosedPage != null && enclosedPage.isHtmlPage()) {
+                    page = (HtmlPage) enclosedPage;
+                    page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
                 }
             }
             return;
         }
 
-        final URL url = getTargetUrl(href, htmlPage);
+        final URL url = getTargetUrl(href, page);
 
-        final BrowserVersion browser = htmlPage.getWebClient().getBrowserVersion();
+        final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+        if (ATTRIBUTE_NOT_DEFINED != getPingAttribute() && browser.hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF)) {
+            final URL pingUrl = getTargetUrl(getPingAttribute(), page);
+            final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
+            pingRequest.setAdditionalHeader("Ping-From", page.getUrl().toExternalForm());
+            pingRequest.setAdditionalHeader("Ping-To", url.toExternalForm());
+            pingRequest.setRequestBody("PING");
+            page.getWebClient().loadWebResponse(pingRequest);
+        }
+
         final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader());
-        webRequest.setCharset(htmlPage.getPageEncoding());
-        webRequest.setAdditionalHeader("Referer", htmlPage.getUrl().toExternalForm());
+        webRequest.setCharset(page.getPageEncoding());
+        webRequest.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
             LOG.debug(
                     "Getting page for " + url.toExternalForm()
                     + ", derived from href '" + href
                     + "', using the originating URL "
-                    + htmlPage.getUrl());
+                    + page.getUrl());
         }
-        htmlPage.getWebClient().download(htmlPage.getEnclosingWindow(),
-                htmlPage.getResolvedTarget(getTargetAttribute()),
+        page.getWebClient().download(page.getEnclosingWindow(),
+                page.getResolvedTarget(getTargetAttribute()),
                 webRequest, true, false, "Link click");
     }
 
@@ -364,4 +375,14 @@ public class HtmlAnchor extends HtmlElement {
         }
         return super.handles(event);
     }
+
+    /**
+     * Returns the value of the attribute {@code ping}.
+     *
+     * @return the value of the attribute {@code ping}
+     */
+    public final String getPingAttribute() {
+        return getAttribute("ping");
+    }
+
 }

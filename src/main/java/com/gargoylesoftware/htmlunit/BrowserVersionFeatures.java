@@ -45,7 +45,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     ANCHOR_EMPTY_HREF_NO_FILENAME,
 
-    /** Ignore target when href is a javascript snippet. */
+    /** Ignore target when {@code href} is a javascript snippet. */
     @BrowserFeature(@WebBrowser(CHROME))
     ANCHOR_IGNORE_TARGET_FOR_JS_HREF,
 

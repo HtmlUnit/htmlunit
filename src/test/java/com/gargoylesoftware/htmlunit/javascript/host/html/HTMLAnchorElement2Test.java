@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.io.BufferedReader;
@@ -844,7 +843,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             CHROME = "PING")
-    @NotYetImplemented(CHROME)
     public void ping() throws Exception {
         final String html
             = "<html><body>"
@@ -900,7 +898,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             final Writer writer = response.getWriter();
             writer.close();
 
-            for (final Enumeration<String> en = request.getHeaderNames();en.hasMoreElements(); ) {
+            for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
                 final String key = en.nextElement();
                 HEADERS_.put(key, request.getHeader(key));
             }
