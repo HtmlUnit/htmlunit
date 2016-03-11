@@ -77,6 +77,14 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
+     */
+    @Override
+    public String getContentAsString(final String encoding, final String defaultEncoding) {
+        return wrappedWebResponse_.getContentAsString(encoding, defaultEncoding);
+    }
+
+    /**
+     * {@inheritDoc}
      * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped webResponse object.
      */
     @Override

@@ -337,7 +337,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
     HTMLCOMMAND_END_TAG_FORBIDDEN,
 
-    /** Is document.charset lower-case (and defaultCharset is 'windows-1252'). */
+    /** Is {@code document.charset} lower-case. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLDOCUMENT_CHARSET_LOWERCASE,
 
@@ -1350,13 +1350,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,
 
-    /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
-    JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
-
     /** XMLDocument: .getElementsByTagName() to search the nodes by their local name. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL,
+
+    /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
+    JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
 
     /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
     @BrowserFeature(@WebBrowser(IE))

@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.XMLHttpRequestProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -350,7 +351,15 @@ public class XMLHttpRequest extends EventTarget {
             return "";
         }
         if (webResponse_ != null) {
-            return webResponse_.getContentAsString();
+            final String encoding = webResponse_.getContentCharset();
+            String defaultEncoding = null;
+            if (getBrowserVersion().hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT)) {
+                defaultEncoding = ((HTMLDocument) containingPage_.getScriptableObject()).getDefaultCharset();
+            }
+            if (getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)) {
+                defaultEncoding = encoding;
+            }
+            return webResponse_.getContentAsString(encoding, defaultEncoding);
         }
         if (LOG.isDebugEnabled()) {
             LOG.debug("XMLHttpRequest.responseText was retrieved before the response was available.");

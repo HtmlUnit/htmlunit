@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.io.BufferedReader;
@@ -745,7 +744,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9ec4", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -774,7 +773,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9ec4", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -803,7 +802,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9ec4", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -812,9 +811,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "40644",
-            CHROME = "233",
-            IE = "NaN")
-    @NotYetImplemented({ IE, CHROME })
+            CHROME = { "233", "187", "8222" },
+            IE = {})
     public void overrideMimeType_charset_wrong() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -822,20 +820,23 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "try {\n"
-            + "  var request = new XMLHttpRequest();\n"
-            + "  if (!request.overrideMimeType) { alert('not supported'); return };\n"
-            + "  request.open('GET', '" + URL_SECOND + "', false);\n"
-            + "  request.overrideMimeType('text/plain; charset=abcdefg');\n"
-            + "  request.send('');\n"
-            + "  alert(request.responseText.charCodeAt(0));\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  try {\n"
+            + "    var request = new XMLHttpRequest();\n"
+            + "    if (!request.overrideMimeType) { alert('not supported'); return };\n"
+            + "    request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "    request.overrideMimeType('text/plain; charset=abcdefg');\n"
+            + "    request.send('');\n"
+            + "    var text = request.responseText;\n"
+            + "    for (var i = 0; i < text.length; i++) {\n"
+            + "      alert(text.charCodeAt(i));\n"
+            + "    }\n"
+            + "  } catch (e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9ec4", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -1343,7 +1344,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "'\u9ec4'", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "'\u9EC4'", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -1356,7 +1357,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         // but Java and other tools (e.g. Notpad++) return only 3 characters, not 4
         // this method is not a test case, but rather to show the behavior of java
 
-        final String string = "'\u9ec4'";
+        final String string = "'\u9EC4'";
         final ByteArrayInputStream bais = new ByteArrayInputStream(string.getBytes("UTF-8"));
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(bais, "GBK"))) {
             final String output = reader.readLine();
