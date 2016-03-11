@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
@@ -23,6 +24,7 @@ import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -2397,6 +2399,49 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" },
+            FF = { "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-" },
+            CHROME = { "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
+    @NotYetImplemented({ CHROME, FF })
+    public void readyState() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <script>\n"
+            + "    var doc;"
+            + "    function test() {\n"
+            + "      var iframe = document.createElement('iframe');\n"
+            + "      var textarea = document.getElementById('myTextarea');\n"
+            + "      textarea.parentNode.appendChild(iframe);\n"
+            + "      doc = iframe.contentWindow.document;\n"
+            + "      check();\n"
+            + "      setTimeout(check, 100);\n"
+            + "    }\n"
+            + "    function check() {\n"
+            + "      var textarea = document.getElementById('myTextarea');\n"
+            + "      textarea.value += doc.readyState + ',' + doc.body + '-';\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div>\n"
+            + "  <textarea id='myTextarea' cols='80'></textarea>\n"
+            + "</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+
+        final List<String> actual = new LinkedList<>();
+        actual.add(driver.findElement(By.id("myTextarea")).getAttribute("value"));
+
+        assertEquals(getExpectedAlerts(), actual);
     }
 
 }

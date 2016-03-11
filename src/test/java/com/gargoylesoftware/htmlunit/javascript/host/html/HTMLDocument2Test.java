@@ -20,7 +20,6 @@ import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
@@ -35,7 +34,6 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
@@ -47,47 +45,6 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDocument2Test extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented({ IE, CHROME })
-    @Alerts(FF = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
-    public void readyState() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "    <script>\n"
-            + "    var doc;"
-            + "    function test() {\n"
-            + "      var iframe = document.createElement('iframe');\n"
-            + "      var textarea = document.getElementById('myTextarea');\n"
-            + "      textarea.parentNode.appendChild(iframe);\n"
-            + "      doc = iframe.contentWindow.document;\n"
-            + "      check();\n"
-            + "      setTimeout(check, 100);\n"
-            + "    }\n"
-            + "    function check() {\n"
-            + "      var textarea = document.getElementById('myTextarea');\n"
-            + "      textarea.value += doc.readyState + ',' + doc.body + '-';\n"
-            + "    }\n"
-            + "    </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<div>\n"
-            + "  <textarea id='myTextarea' cols='80'></textarea>\n"
-            + "</div>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final HtmlPage page = loadPage(html);
-        page.getWebClient().waitForBackgroundJavaScript(500);
-
-        final List<String> actual = new LinkedList<>();
-        actual.add(page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
-
-        assertEquals(getExpectedAlerts(), actual);
-    }
 
     /**
      * @throws Exception if the test fails
