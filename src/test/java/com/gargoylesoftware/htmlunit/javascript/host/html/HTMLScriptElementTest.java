@@ -1075,7 +1075,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "false", "null", "true", "", "true", "", "false", "null" })
-    @NotYetImplemented
     public void asyncProperty() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
@@ -1115,7 +1114,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "false", "null", "true", "true", "true", "", "true", "true", "false", "null" })
-    @NotYetImplemented
     public void asyncAttribute() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
