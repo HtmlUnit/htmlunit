@@ -107,9 +107,6 @@ public class DateTimeFormat extends SimpleScriptable {
         if (!browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK) && !locale.startsWith("ar")) {
             pattern = pattern.replace("\u200E", "");
         }
-        for (char ch : pattern.toCharArray()) {
-            System.out.println("PP " + (int) ch + ' ' + ch);
-        }
 
         format_ = new SimpleDateFormat(pattern);
         if (locale.startsWith("ar")) {
