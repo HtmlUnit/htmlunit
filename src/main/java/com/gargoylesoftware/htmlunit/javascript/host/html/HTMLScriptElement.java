@@ -54,8 +54,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code src} attribute.
-     * @return the {@code src} attribute
+     * Returns the {@code src} property.
+     * @return the {@code src} property
      */
     @JsxGetter
     public String getSrc() {
@@ -75,8 +75,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code src} attribute.
-     * @param src the {@code src} attribute
+     * Sets the {@code src} property.
+     * @param src the {@code src} property
      */
     @JsxSetter
     public void setSrc(final String src) {
@@ -84,8 +84,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code text} attribute.
-     * @return the {@code text} attribute
+     * Returns the {@code text} property.
+     * @return the {@code text} property
      */
     @JsxGetter
     public String getText() {
@@ -100,8 +100,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code text} attribute.
-     * @param text the {@code text} attribute
+     * Sets the {@code text} property.
+     * @param text the {@code text} property
      */
     @JsxSetter
     public void setText(final String text) {
@@ -115,8 +115,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code type} attribute.
-     * @return the {@code type} attribute
+     * Returns the {@code type} property.
+     * @return the {@code type} property
      */
     @JsxGetter
     public String getType() {
@@ -124,8 +124,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code type} attribute.
-     * @param type the {@code type} attribute
+     * Sets the {@code type} property.
+     * @param type the {@code type} property
      */
     @JsxSetter
     public void setType(final String type) {
@@ -201,8 +201,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the <tt>async</tt> attribute.
-     * @return the <tt>async</tt> attribute
+     * Returns the {@code async} property.
+     * @return the {@code async} property
      */
     @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)})
     public boolean getAsync() {
@@ -210,8 +210,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>async</tt> attribute.
-     * @param type the <tt>async</tt> attribute
+     * Sets the {@code async} property.
+     * @param async the {@code async} property
      */
     @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)})
     public void setAsync(final boolean async) {
