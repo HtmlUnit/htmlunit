@@ -799,7 +799,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "1", "0", "1" },
             CHROME = { "1", "0" },
             IE = { "1", "0" })
-    @NotYetImplemented({ CHROME, IE })
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

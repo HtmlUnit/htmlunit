@@ -1354,6 +1354,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
 
+    /** XMLDocument: .getElementsByTagName() to search the nodes by their local name. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL,
+
     /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING,
