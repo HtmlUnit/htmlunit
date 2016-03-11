@@ -211,7 +211,7 @@ public class WebResponse implements Serializable {
      * rather than the charset/encoding specified in the server response. If the specified
      * charset/encoding is not supported then the provided default encoding is used.
      * @param encoding the charset/encoding to use to convert the response content into a string
-     * @param defaultEncoding the default encoding to use if the specified {@code encode} is not supported 
+     * @param defaultEncoding the default encoding to use if the specified {@code encode} is not supported
      * @return the response content as a string
      */
     public String getContentAsString(final String encoding, final String defaultEncoding) {
