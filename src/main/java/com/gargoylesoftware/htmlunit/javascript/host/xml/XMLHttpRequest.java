@@ -1044,6 +1044,11 @@ public class XMLHttpRequest extends EventTarget {
         }
 
         @Override
+        public String getContentAsString(final String encoding, final String defaultEncoding) {
+            return "";
+        }
+
+        @Override
         public InputStream getContentAsStream() {
             return null;
         }
