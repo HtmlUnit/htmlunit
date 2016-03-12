@@ -14,18 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSS_MOZ_CSS_KEYFRAMES_RULE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code CSSKeyframesRule}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
 public class CSSKeyframesRule extends CSSRule {
@@ -35,5 +38,35 @@ public class CSSKeyframesRule extends CSSRule {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
     public CSSKeyframesRule() {
+    }
+
+    /**
+     * Creates a new instance.
+     * @param stylesheet the Stylesheet of this rule.
+     * @param rule the wrapped rule
+     */
+    protected CSSKeyframesRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSUnknownRule rule) {
+        super(stylesheet, rule);
+    }
+
+    /**
+     * Returns the type of the rule.
+     * @return the type of the rule.
+     */
+    @JsxGetter
+    public short getType() {
+        return KEYFRAMES_RULE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if ((String.class.equals(hint) || hint == null)
+                && getBrowserVersion().hasFeature(JS_CSS_MOZ_CSS_KEYFRAMES_RULE)) {
+            return "[object MozCSSKeyframesRule]";
+        }
+        return super.getDefaultValue(hint);
     }
 }

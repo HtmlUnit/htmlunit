@@ -14,14 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_CHARSET_RULE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_ENUM_ITEM_LENGTH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -30,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.steadystate.css.dom.CSSRuleListImpl;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -38,20 +35,19 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * A JavaScript object for {@code CSSRuleList}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class CSSRuleList extends SimpleScriptable {
 
-    private final CSSStyleSheet stylesheet_;
-    private final org.w3c.dom.css.CSSRuleList rules_;
+    private final List<CSSRule> rules_;
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
     public CSSRuleList() {
-        stylesheet_ = null;
-        rules_ = null;
+        rules_ = new ArrayList<CSSRule>();
     }
 
     /**
@@ -59,19 +55,25 @@ public class CSSRuleList extends SimpleScriptable {
      * @param stylesheet the stylesheet
      */
     public CSSRuleList(final CSSStyleSheet stylesheet) {
-        stylesheet_ = stylesheet;
-        rules_ = stylesheet.getWrappedSheet().getCssRules();
+        this();
+
         setParentScope(stylesheet.getParentScope());
         setPrototype(getPrototype(getClass()));
+    }
 
-        if (!getBrowserVersion().hasFeature(JS_CSSRULELIST_CHARSET_RULE) && rules_ instanceof CSSRuleListImpl) {
-            final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) rules_).getRules();
-            for (Iterator<org.w3c.dom.css.CSSRule> it = rules.iterator(); it.hasNext();) {
-                if (it.next() instanceof org.w3c.dom.css.CSSCharsetRule) {
-                    it.remove();
-                }
-            }
-        }
+    /**
+     * Add a rule.
+     * @param rule the rule to add
+     */
+    protected void addRule(final CSSRule rule) {
+        rules_.add(rule);
+    }
+
+    /**
+     * Clear the listOfRules.
+     */
+    protected void clearRules() {
+        rules_.clear();
     }
 
     /**
@@ -81,7 +83,7 @@ public class CSSRuleList extends SimpleScriptable {
     @JsxGetter
     public int getLength() {
         if (rules_ != null) {
-            return rules_.getLength();
+            return rules_.size();
         }
         return 0;
     }
@@ -152,7 +154,7 @@ public class CSSRuleList extends SimpleScriptable {
         if (index < 0 || getLength() <= index) {
             return NOT_FOUND;
         }
-        return CSSRule.create(stylesheet_, rules_.item(index));
+        return rules_.get(index);
     }
 
 }

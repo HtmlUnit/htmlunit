@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: limited support for css @keyframes rules added.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: CSSRuleList ignores unsupported rules.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: Element.baseURI.
             </action>

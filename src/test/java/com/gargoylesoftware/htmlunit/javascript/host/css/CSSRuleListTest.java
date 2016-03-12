@@ -34,7 +34,7 @@ public class CSSRuleListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("[object CSSStyleRule]")
+    @Alerts({"1", "[object CSSStyleRule]"})
     public void ruleList() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -47,8 +47,8 @@ public class CSSRuleListTest extends WebDriverTestCase {
                 + "      rules = document.styleSheets[0].cssRules;\n"
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
-                + "    var r = rules[0];\n"
-                + "    alert(r);\n"
+                + "    alert(rules.length);\n"
+                + "    alert(rules[0]);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -107,4 +107,56 @@ public class CSSRuleListTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"0", "undefined"})
+    public void ruleListUnknownAtRule() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  @UnknownAtRule valo-animate-in-fade {0 {opacity: 0;}}\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test(){\n"
+                + "    var rules;\n"
+                + "    if (document.styleSheets[0].cssRules)\n"
+                + "      rules = document.styleSheets[0].cssRules;\n"
+                + "    else\n"
+                + "      rules = document.styleSheets[0].rules;\n"
+                + "    alert(rules.length);\n"
+                + "    alert(rules[0]);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "[object CSSKeyframesRule]"},
+            FF = {"1", "[object MozCSSKeyframesRule]"})
+    public void ruleListKeyframes() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  @keyframes mymove {from {top: 0px;} to {top: 200px;}}\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test(){\n"
+                + "    var rules;\n"
+                + "    if (document.styleSheets[0].cssRules)\n"
+                + "      rules = document.styleSheets[0].cssRules;\n"
+                + "    else\n"
+                + "      rules = document.styleSheets[0].rules;\n"
+                + "    alert(rules.length);\n"
+                + "    alert(rules[0]);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

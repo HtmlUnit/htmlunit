@@ -19,6 +19,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -32,9 +35,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass
 public class CSSRule extends SimpleScriptable {
+
+    private static final Log LOG = LogFactory.getLog(CSSRule.class);
 
     /**
      * The rule is a {@code CSSUnknownRule}.
@@ -175,10 +181,19 @@ public class CSSRule extends SimpleScriptable {
                 return new CSSMediaRule(stylesheet, (org.w3c.dom.css.CSSMediaRule) rule);
             case FONT_FACE_RULE:
                 return new CSSFontFaceRule(stylesheet, (org.w3c.dom.css.CSSFontFaceRule) rule);
+            case UNKNOWN_RULE:
+                final org.w3c.dom.css.CSSUnknownRule unknownRule = (org.w3c.dom.css.CSSUnknownRule) rule;
+                if (unknownRule.getCssText().startsWith("@keyframes")) {
+                    return new CSSKeyframesRule(stylesheet, (org.w3c.dom.css.CSSUnknownRule) rule);
+                }
+                LOG.warn("Unknown CSSRule " + rule.getClass().getName()
+                        + " is not yet supported; rule content: '" + rule.getCssText() + "'");
             default:
-                throw new UnsupportedOperationException("CSSRule "
-                    + rule.getClass().getName() + " is not yet supported; rule content: '" + rule.getCssText() + "'");
+                LOG.warn("CSSRule " + rule.getClass().getName()
+                        + " is not yet supported; rule content: '" + rule.getCssText() + "'");
         }
+
+        return null;
     }
 
     /**
@@ -251,5 +266,4 @@ public class CSSRule extends SimpleScriptable {
     protected org.w3c.dom.css.CSSRule getRule() {
         return rule_;
     }
-
 }

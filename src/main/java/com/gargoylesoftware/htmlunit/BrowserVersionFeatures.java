@@ -587,6 +587,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
 
+    /** Uses {@code MozCSSKeyframesRule}. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_CSS_MOZ_CSS_KEYFRAMES_RULE,
+
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DATE_LOCALE_DATE_SHORT,

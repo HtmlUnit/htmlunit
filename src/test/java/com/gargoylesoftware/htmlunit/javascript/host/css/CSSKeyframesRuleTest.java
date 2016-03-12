@@ -34,9 +34,8 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object CSSKeyframesRule], 7, identifier, 2" },
-            FF = { "[object MozCSSKeyframesRule]", "7", "identifier", "2" })
-    @NotYetImplemented
+    @Alerts(DEFAULT = { "[object CSSKeyframesRule]", "7" },
+            FF = { "[object MozCSSKeyframesRule]", "7" })
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"
@@ -51,8 +50,66 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
             + "    var rule = styleSheet.cssRules[0];\n"
             + "    alert(rule);\n"
             + "    alert(rule.type);\n"
+            + "  } else {\n"
+            + "    alert('Your browser does not support this example');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object CSSKeyframesRule], identifier" },
+            FF = { "[object MozCSSKeyframesRule]", "identifier" })
+    @NotYetImplemented
+    public void name() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>"
+            + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  if (styleSheet.cssRules) {\n"
+            + "    var rule = styleSheet.cssRules[0];\n"
+            + "    alert(rule);\n"
             + "    alert(rule.name);\n"
-            + "    alert(rule.cssRules.length)\n"
+            + "  } else {\n"
+            + "    alert('Your browser does not support this example');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object CSSRuleList]")
+    @NotYetImplemented
+    public void cssRules() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>"
+            + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  if (styleSheet.cssRules) {\n"
+            + "    var rule = styleSheet.cssRules[0];\n"
+            + "    alert(rule.cssRules)\n"
             + "  } else {\n"
             + "    alert('Your browser does not support this example');\n"
             + "  }\n"

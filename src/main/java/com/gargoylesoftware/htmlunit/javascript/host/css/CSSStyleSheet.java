@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_CHARSET_RULE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NO_TARGET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
@@ -31,9 +32,12 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -101,6 +105,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.steadystate.css.dom.CSSImportRuleImpl;
 import com.steadystate.css.dom.CSSMediaRuleImpl;
+import com.steadystate.css.dom.CSSRuleListImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.dom.CSSValueImpl;
@@ -146,6 +151,7 @@ public class CSSStyleSheet extends StyleSheet {
 
     /** The collection of rules defined in this style sheet. */
     private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
+    private List<Integer> cssRulesIndexFix_;
 
     /** The CSS import rules and their corresponding stylesheets. */
     private final Map<CSSImportRule, CSSStyleSheet> imports_ = new HashMap<>();
@@ -1005,6 +1011,8 @@ public class CSSStyleSheet extends StyleSheet {
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getCssRules() {
         if (cssRules_ == null) {
             cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
+            cssRulesIndexFix_ = new ArrayList<Integer>();
+            refreshCssRules();
         }
         return cssRules_;
     }
@@ -1052,11 +1060,55 @@ public class CSSStyleSheet extends StyleSheet {
     @JsxFunction
     public int insertRule(final String rule, final int position) {
         try {
-            return wrapped_.insertRule(rule, position);
+            final int result = wrapped_.insertRule(rule, fixIndex(position));
+            refreshCssRules();
+            return result;
         }
         catch (final DOMException e) {
             throw Context.throwAsScriptRuntimeEx(e);
         }
+    }
+
+    private void refreshCssRules() {
+        if (cssRules_ == null) {
+            return;
+        }
+
+        cssRules_.clearRules();
+        cssRulesIndexFix_.clear();
+
+        final boolean ignoreCharsetRules = !getBrowserVersion().hasFeature(JS_CSSRULELIST_CHARSET_RULE);
+
+        final org.w3c.dom.css.CSSRuleList ruleList = getWrappedSheet().getCssRules();
+        final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) ruleList).getRules();
+        int pos = 0;
+        for (Iterator<org.w3c.dom.css.CSSRule> it = rules.iterator(); it.hasNext();) {
+            final org.w3c.dom.css.CSSRule rule = it.next();
+            if (ignoreCharsetRules && rule instanceof org.w3c.dom.css.CSSCharsetRule) {
+                cssRulesIndexFix_.add(pos);
+                continue;
+            }
+
+            final com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule cssRule
+                        = com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule.create(this, rule);
+            if (null == cssRule) {
+                cssRulesIndexFix_.add(pos);
+            }
+            else {
+                cssRules_.addRule(cssRule);
+            }
+            pos++;
+        }
+    }
+
+    private int fixIndex(int index) {
+        for (final int fix : cssRulesIndexFix_) {
+            if (fix > index) {
+                return index;
+            }
+            index++;
+        }
+        return index;
     }
 
     /**
@@ -1067,7 +1119,8 @@ public class CSSStyleSheet extends StyleSheet {
     @JsxFunction
     public void deleteRule(final int position) {
         try {
-            wrapped_.deleteRule(position);
+            wrapped_.deleteRule(fixIndex(position));
+            refreshCssRules();
         }
         catch (final DOMException e) {
             throw Context.throwAsScriptRuntimeEx(e);
@@ -1086,6 +1139,7 @@ public class CSSStyleSheet extends StyleSheet {
         final String completeRule = selector + " {" + rule + "}";
         try {
             wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
+            refreshCssRules();
         }
         catch (final DOMException e) {
             throw Context.throwAsScriptRuntimeEx(e);
@@ -1101,7 +1155,8 @@ public class CSSStyleSheet extends StyleSheet {
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public void removeRule(final int position) {
         try {
-            wrapped_.deleteRule(position);
+            wrapped_.deleteRule(fixIndex(position));
+            refreshCssRules();
         }
         catch (final DOMException e) {
             throw Context.throwAsScriptRuntimeEx(e);

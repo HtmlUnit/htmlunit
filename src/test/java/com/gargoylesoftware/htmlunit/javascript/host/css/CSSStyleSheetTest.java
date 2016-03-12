@@ -248,7 +248,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that exception handling in insertRule.
+     * Test exception handling in deletRule / removeRule.
      * @throws Exception if an error occurs
      */
     @Test
@@ -268,6 +268,70 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  } catch(err) { alert('exception'); }\n"
             + "}</script>\n"
             + "<style id='myStyle'></style>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "1", "div"})
+    public void deleteRuleIgnored() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var f = document.getElementById('myStyle');\n"
+            + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+            + "  var rules = s.cssRules || s.rules;\n"
+            + "  alert(rules.length);\n"
+            + "  try {\n"
+            + "    if (s.deleteRule)\n"
+            + "      s.deleteRule(0);\n"
+            + "    else\n"
+            + "      s.removeRule(0);\n"
+            + "    alert(rules.length);\n"
+            + "    alert(rules[0].selectorText);\n"
+            + "  } catch(err) { alert('exception'); }\n"
+            + "}</script>\n"
+            + "<style id='myStyle'>"
+            + "  p { vertical-align:top }\n"
+            + "  @unknown div { color: red; }\n"
+            + "  div { color: red; }\n"
+            + "</style>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "1", "p"})
+    public void deleteRuleIgnoredLast() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var f = document.getElementById('myStyle');\n"
+            + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+            + "  var rules = s.cssRules || s.rules;\n"
+            + "  alert(rules.length);\n"
+            + "  try {\n"
+            + "    if (s.deleteRule)\n"
+            + "      s.deleteRule(1);\n"
+            + "    else\n"
+            + "      s.removeRule(1);\n"
+            + "    alert(rules.length);\n"
+            + "    alert(rules[0].selectorText);\n"
+            + "  } catch(err) { alert('exception'); }\n"
+            + "}</script>\n"
+            + "<style id='myStyle'>"
+            + "  p { vertical-align:top }\n"
+            + "  @unknown div { color: red; }\n"
+            + "  div { color: red; }\n"
+            + "</style>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
@@ -1146,5 +1210,4 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         driver.findElement(By.linkText("second page")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
-
 }
