@@ -183,15 +183,6 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _XPathNSResolver_XPathNSResolver() throws Exception {
-        test("XPathNSResolver", "XPathNSResolver");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _XPathResult_XPathResult() throws Exception {

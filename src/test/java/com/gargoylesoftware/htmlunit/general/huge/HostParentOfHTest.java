@@ -240,15 +240,6 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _HTMLCommentElement_HTMLCommentElement() throws Exception {
-        test("HTMLCommentElement", "HTMLCommentElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _HTMLDataListElement_HTMLDataListElement() throws Exception {
         test("HTMLDataListElement", "HTMLDataListElement");
@@ -591,15 +582,6 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _HTMLNoShowElement_HTMLNoShowElement() throws Exception {
-        test("HTMLNoShowElement", "HTMLNoShowElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
     public void _HTMLNextIdElement_HTMLNextIdElement() throws Exception {
@@ -825,15 +807,6 @@ public class HostParentOfHTest extends HostParentOf {
     @Alerts("true")
     public void _HTMLTableSectionElement_HTMLTableSectionElement() throws Exception {
         test("HTMLTableSectionElement", "HTMLTableSectionElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLTextElement_HTMLTextElement() throws Exception {
-        test("HTMLTextElement", "HTMLTextElement");
     }
 
     /**

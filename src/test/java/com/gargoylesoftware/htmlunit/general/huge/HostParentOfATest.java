@@ -980,15 +980,6 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Element_HTMLNoShowElement() throws Exception {
-        test("Element", "HTMLNoShowElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
     public void _Element_HTMLNextIdElement() throws Exception {
@@ -1204,15 +1195,6 @@ public class HostParentOfATest extends HostParentOf {
     @Alerts("true")
     public void _Element_HTMLTableSectionElement() throws Exception {
         test("Element", "HTMLTableSectionElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Element_HTMLTextElement() throws Exception {
-        test("Element", "HTMLTextElement");
     }
 
     /**
