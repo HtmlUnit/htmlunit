@@ -154,6 +154,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
                 "[object XSLTProcessor]" },
             FF38 = { "function", "function XSLTProcessor() {\n    [native code]\n}",
                 "[object XSLTProcessor]" },
+            FF45 = { "function", "function XSLTProcessor() {\n    [native code]\n}",
+                "[object XSLTProcessor]" },
             IE = { "undefined", "exception" })
     public void type() throws Exception {
         final String html = "<html><head><script>\n"
@@ -177,6 +179,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object XSLTProcessor]", "NaN", "true", "Yes", "Yes" },
             CHROME = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes" },
             FF38 = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes" },
+            FF45 = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes" },
             IE = {"exception str", "exception numb", "exception bool", "exception ?", "exception if" })
     public void browserDetection() throws Exception {
         final String html = "<html>\n"
