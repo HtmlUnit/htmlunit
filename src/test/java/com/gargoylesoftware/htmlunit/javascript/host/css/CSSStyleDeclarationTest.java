@@ -990,7 +990,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "      }\n"
             + "      function alertComputedMargins(id) {\n"
             + "        var e = document.getElementById(id);\n"
-            + "        var s = e.currentStyle ? e.currentStyle : getComputedStyle(e, null);\n"
+            + "        var s = getComputedStyle(e, null);\n"
             + "        alert('L:' + s.marginLeft + ',R:' + s.marginRight +\n"
             + "          ',T:' + s.marginTop + ',B:' + s.marginBottom);\n"
             + "      }\n"
