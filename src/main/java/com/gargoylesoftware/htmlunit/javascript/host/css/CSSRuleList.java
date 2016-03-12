@@ -40,14 +40,13 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass
 public class CSSRuleList extends SimpleScriptable {
 
-    private final List<CSSRule> rules_;
+    private final List<CSSRule> rules_ = new ArrayList<>();
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
     public CSSRuleList() {
-        rules_ = new ArrayList<CSSRule>();
     }
 
     /**
@@ -55,8 +54,6 @@ public class CSSRuleList extends SimpleScriptable {
      * @param stylesheet the stylesheet
      */
     public CSSRuleList(final CSSStyleSheet stylesheet) {
-        this();
-
         setParentScope(stylesheet.getParentScope());
         setPrototype(getPrototype(getClass()));
     }

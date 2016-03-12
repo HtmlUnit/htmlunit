@@ -1011,7 +1011,7 @@ public class CSSStyleSheet extends StyleSheet {
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getCssRules() {
         if (cssRules_ == null) {
             cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
-            cssRulesIndexFix_ = new ArrayList<Integer>();
+            cssRulesIndexFix_ = new ArrayList<>();
             refreshCssRules();
         }
         return cssRules_;
