@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -591,7 +588,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "2", "3" },
             IE = "no list")
-    @NotYetImplemented(FF31)
     public void addSvg() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"

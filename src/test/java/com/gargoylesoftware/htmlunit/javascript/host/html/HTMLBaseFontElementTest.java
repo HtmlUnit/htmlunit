@@ -151,8 +151,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "[object HTMLBaseFontElement]", "[object HTMLBaseFontElement]" },
             CHROME = { "[object HTMLElement]", "exception" },
-            FF31 = { "[object HTMLSpanElement]", "exception" },
-            FF38 = { "[object HTMLElement]", "exception" })
+            FF = { "[object HTMLElement]", "exception" })
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

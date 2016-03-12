@@ -1709,8 +1709,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF31 = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]")
+            FF = "[object HTMLElement]")
     public void event_source() throws Exception {
         test("event-source");
     }

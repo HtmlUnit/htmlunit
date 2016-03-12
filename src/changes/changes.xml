@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="remove" dev="asashour">
+                BrowserVersion: remove deprecated FIREFOX_31.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: limited support for css @keyframes rules added.
             </action>

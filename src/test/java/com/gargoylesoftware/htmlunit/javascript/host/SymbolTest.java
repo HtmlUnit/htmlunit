@@ -36,7 +36,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "symbol", "Symbol(Symbol.iterator)", "true" },
-            FF31 = "not supported",
             IE = "not supported")
     public void iterator() throws Exception {
         name("iterator");
@@ -47,7 +46,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            FF31 = "not supported",
             FF45 = { "symbol", "Symbol(Symbol.match)", "true" },
             IE = "not supported")
     public void match() throws Exception {
@@ -59,7 +57,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            FF31 = "not supported",
             IE = "not supported")
     public void replace() throws Exception {
         name("replace");
@@ -70,7 +67,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            FF31 = "not supported",
             IE = "not supported")
     public void search() throws Exception {
         name("search");
@@ -81,7 +77,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            FF31 = "not supported",
             IE = "not supported")
     public void split() throws Exception {
         name("split");
@@ -92,7 +87,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            FF31 = "not supported",
             IE = "not supported")
     public void hasInstance() throws Exception {
         name("hasInstance");
@@ -104,7 +98,6 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
             CHROME = { "symbol", "Symbol(Symbol.isConcatSpreadable)", "true" },
-            FF31 = "not supported",
             IE = "not supported")
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
@@ -116,7 +109,6 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
             CHROME = { "symbol", "Symbol(Symbol.unscopables)", "true" },
-            FF31 = "not supported",
             IE = "not supported")
     public void unscopables() throws Exception {
         name("unscopables");
@@ -127,7 +119,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            FF31 = "not supported",
             FF45 = { "symbol", "Symbol(Symbol.species)", "true" },
             IE = "not supported")
     public void species() throws Exception {
@@ -141,7 +132,6 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
             CHROME = { "symbol", "Symbol(Symbol.toPrimitive)", "true" },
             FF45 = { "symbol", "Symbol(Symbol.toPrimitive)", "true" },
-            FF31 = "not supported",
             IE = "not supported")
     public void toPrimitive() throws Exception {
         name("toPrimitive");
@@ -153,7 +143,6 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
             CHROME = { "symbol", "Symbol(Symbol.toStringTag)", "true" },
-            FF31 = "not supported",
             IE = "not supported")
     public void toStringTag() throws Exception {
         name("toStringTag");
@@ -183,7 +172,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)" },
-            FF31 = "not supported",
             IE = "not supported")
     public void string() throws Exception {
         final String html =
@@ -209,7 +197,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)" },
-            FF31 = "not supported",
             IE = "not supported")
     public void defaultValue() throws Exception {
         final String html =
@@ -237,7 +224,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function", "symbol", "symbol", "symbol" },
-            FF31 = "not supported",
             IE = "not supported")
     public void typeOf() throws Exception {
         final String html =
@@ -266,7 +252,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "true", "Symbol(mario)" },
-            FF31 = "not supported",
             IE = "not supported")
     public void symbolFor() throws Exception {
         final String html =
@@ -296,7 +281,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "false" },
-            FF31 = "not supported",
             IE = "not supported")
     public void symbolForGlobal() throws Exception {
         final String html =
@@ -326,7 +310,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "exception", "exception" },
-            FF31 = "not supported",
             IE = "not supported")
     public void symbolNew() throws Exception {
         final String html =
@@ -355,7 +338,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "exception", "exception" },
-            FF31 = "not supported",
             IE = "not supported")
     public void globalSymbolRegistry() throws Exception {
         final String html =

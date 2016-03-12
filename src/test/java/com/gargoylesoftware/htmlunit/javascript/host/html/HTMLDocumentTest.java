@@ -772,9 +772,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLAllCollection]",
-            FF31 = "[object HTML document.all class]",
-            FF38 = "[object HTMLAllCollection]")
+    @Alerts("[object HTMLAllCollection]")
     public void all_scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

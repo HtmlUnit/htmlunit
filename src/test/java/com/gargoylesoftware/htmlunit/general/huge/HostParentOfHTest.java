@@ -99,16 +99,6 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF31 = "false")
-    public void _HTMLAllCollection_HTMLAllCollection() throws Exception {
-        test("HTMLAllCollection", "HTMLAllCollection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _HTMLAnchorElement_HTMLAnchorElement() throws Exception {
         test("HTMLAnchorElement", "HTMLAnchorElement");

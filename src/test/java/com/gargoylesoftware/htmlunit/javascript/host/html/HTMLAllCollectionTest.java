@@ -107,8 +107,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_ZeroIndex() throws Exception {
         namedItem("0");
     }
@@ -118,8 +117,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_ValidIndex() throws Exception {
         namedItem("1");
     }
@@ -129,8 +127,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_DoubleIndex() throws Exception {
         namedItem("1.1");
     }
@@ -140,8 +137,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_InvalidIndex() throws Exception {
         namedItem("200");
     }
@@ -151,8 +147,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_IndexAsString() throws Exception {
         namedItem("'1'");
     }
@@ -162,8 +157,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_IndexDoubleAsString() throws Exception {
         namedItem("'1.1'");
     }
@@ -470,8 +464,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "[object HTMLAllCollection]", "[object HTMLAllCollection]" },
             CHROME = { "[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }" },
-            FF31 = { "[object HTML document.all class]", "exception" },
-            FF38 = { "[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}" })
+            FF = { "[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}" })
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

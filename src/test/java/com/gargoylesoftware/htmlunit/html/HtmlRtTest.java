@@ -34,8 +34,7 @@ public class HtmlRtTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = ", inline, block",
-            FF31 = "block, inline, inline",
-            FF38 = "block, ruby-text, ruby-text",
+            FF = "block, ruby-text, ruby-text",
             IE = "ruby-text, ruby-text, ruby-text")
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
@@ -68,8 +67,7 @@ public class HtmlRtTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = ", inline, block",
-            FF31 = "block, inline, inline",
-            FF38 = "block, ruby-text, ruby-text",
+            FF = "block, ruby-text, ruby-text",
             IE = "ruby-text, ruby-text, ruby-text")
     public void defaultStyleStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

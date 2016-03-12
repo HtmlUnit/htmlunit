@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
@@ -833,11 +832,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false", "false", "false" },
-            CHROME = { "false", "false", "true", "false" },
-            FF38 = { "false", "false", "true", "false" },
+    @Alerts(DEFAULT = { "false", "false", "true", "false" },
             IE = { "false", "false", "false", "false" })
-    @NotYetImplemented(FF31)
     // XML ID handling not yet correctly implemented
     public void getElementById_xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

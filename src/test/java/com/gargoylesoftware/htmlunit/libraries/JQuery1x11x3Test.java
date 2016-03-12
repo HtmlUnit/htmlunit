@@ -1214,10 +1214,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1, 1, 2",
-        FF31 = "0, 2, 2",
-        FF38 = "0, 2, 2",
-        IE = "0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2",
+            CHROME = "1, 1, 2")
     @NotYetImplemented({FF, IE})
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
@@ -1860,8 +1858,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(CHROME = "0, 4, 4",
-        FF31 = "0, 4, 4",
-        FF38 = "0, 4, 4")
+            FF = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -7637,8 +7634,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
-        FF31 = "0, 1, 1",
-        FF38 = "0, 1, 1",
+        FF = "0, 1, 1",
         IE = "0, 1, 1")
     @NotYetImplemented({ CHROME, IE })
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
@@ -7927,8 +7923,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(CHROME = "1, 1, 2",
-        FF31 = "0, 2, 2",
-        FF38 = "0, 2, 2",
+        FF = "0, 2, 2",
         IE = "0, 2, 2")
     @NotYetImplemented(CHROME)
     public void offset__fractions__see__7730_and__7885_() throws Exception {

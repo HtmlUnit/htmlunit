@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +28,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -500,8 +498,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "load", "false", "false" },
-            FF31 = { "[object Event]", "load", "false", "true" })
+    @Alerts({ "[object Event]", "load", "false", "false" })
     public void onload() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -645,12 +642,6 @@ public class EventTest extends WebDriverTestCase {
                         "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
                         "e-25", "e-26", "e-27", "e-28", "e-29", "e-30", "e-31", "e-32",
                         "e-33" },
-            FF31 = { "e-0", "1", "e-2", "e-3", "e-4", "e-5",
-                     "2", "e-7", "e-8", "e-9", "e-10", "e-11",
-                     "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
-                     "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
-                     "e-25", "e-26", "e-27", "e-28", "e-29", "4", "e-31", "e-32",
-                     "e-33" },
             FF38 = { "e-0", "1", "e-2", "e-3", "e-4", "e-5",
                      "2", "e-7", "e-8", "e-9", "e-10", "e-11",
                      "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
@@ -743,7 +734,6 @@ public class EventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "activeElement BODY" },
             FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY" },
             IE = { "activeElement BODY", "focus BODY", "handler: activeElement BODY" })
-    @BuggyWebDriver(FF31) // FFDriver doesn't behave like "manually driven" FF
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @NotYetImplemented({ FF, IE })
     public void document_focus() throws Exception {
@@ -886,7 +876,6 @@ public class EventTest extends WebDriverTestCase {
         // IE11 cannot click on hidden fields
         // FF31/FF38 cannot click on hidden fields
         if (getBrowserVersion() != BrowserVersion.INTERNET_EXPLORER
-                && getBrowserVersion() != BrowserVersion.FIREFOX_31
                 && getBrowserVersion() != BrowserVersion.FIREFOX_38
                 && getBrowserVersion() != BrowserVersion.CHROME) {
             eventHandlersParentScopeChain("<input type='hidden'", "");

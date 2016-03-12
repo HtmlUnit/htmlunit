@@ -307,7 +307,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<command></command>",
-            FF31 = "<command>")
+            FF = "<command>")
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }

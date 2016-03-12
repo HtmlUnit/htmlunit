@@ -4796,16 +4796,6 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _DeviceStorageChangeEvent_DeviceStorageChangeEvent() throws Exception {
-        test("DeviceStorageChangeEvent", "DeviceStorageChangeEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _DragEvent_DragEvent() throws Exception {
         test("DragEvent", "DragEvent");
@@ -4828,16 +4818,6 @@ public class HostParentOfATest extends HostParentOf {
             FF = "true")
     public void _Event_DeviceLightEvent() throws Exception {
         test("Event", "DeviceLightEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _Event_DeviceStorageChangeEvent() throws Exception {
-        test("Event", "DeviceStorageChangeEvent");
     }
 
     /**
@@ -5319,26 +5299,6 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _DOMRequest_FileRequest() throws Exception {
-        test("DOMRequest", "FileRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _DeviceStorage_DeviceStorage() throws Exception {
-        test("DeviceStorage", "DeviceStorage");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
             FF = "true")
     public void _EventTarget_DOMCursor() throws Exception {
         test("EventTarget", "DOMCursor");
@@ -5358,80 +5318,10 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _EventTarget_DeviceStorage() throws Exception {
-        test("EventTarget", "DeviceStorage");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _EventTarget_FileHandle() throws Exception {
-        test("EventTarget", "FileHandle");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _EventTarget_FileRequest() throws Exception {
-        test("EventTarget", "FileRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _EventTarget_LockedFile() throws Exception {
-        test("EventTarget", "LockedFile");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _Event_BlobEvent() throws Exception {
         test("Event", "BlobEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _FileHandle_FileHandle() throws Exception {
-        test("FileHandle", "FileHandle");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _FileRequest_FileRequest() throws Exception {
-        test("FileRequest", "FileRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _EventTarget_MozMobileMessageManager() throws Exception {
-        test("EventTarget", "MozMobileMessageManager");
     }
 
     /**
@@ -5449,29 +5339,9 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _Event_MozMmsEvent() throws Exception {
-        test("Event", "MozMmsEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
             FF = "true")
     public void _Event_MozSettingsEvent() throws Exception {
         test("Event", "MozSettingsEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _Event_MozSmsEvent() throws Exception {
-        test("Event", "MozSmsEvent");
     }
 
     /**

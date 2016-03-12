@@ -208,8 +208,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF31 = "false")
+    @Alerts("true")
     public void _NamedNodeMap_NamedNodeMap() throws Exception {
         test("NamedNodeMap", "NamedNodeMap");
     }
@@ -2630,17 +2629,6 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _LockedFile_LockedFile() throws Exception {
-        test("LockedFile", "LockedFile");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _NodeIterator_NodeIterator() throws Exception {
         test("NodeIterator", "NodeIterator");
@@ -2717,31 +2705,9 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _MozMmsEvent_MozMmsEvent() throws Exception {
-        test("MozMmsEvent", "MozMmsEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
             FF = "true")
     public void _MozMmsMessage_MozMmsMessage() throws Exception {
         test("MozMmsMessage", "MozMmsMessage");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _MozMobileMessageManager_MozMobileMessageManager() throws Exception {
-        test("MozMobileMessageManager", "MozMobileMessageManager");
     }
 
     /**
@@ -2772,42 +2738,9 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _MozSmsEvent_MozSmsEvent() throws Exception {
-        test("MozSmsEvent", "MozSmsEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _MozSmsFilter_MozSmsFilter() throws Exception {
-        test("MozSmsFilter", "MozSmsFilter");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
             FF = "true")
     public void _MozSmsMessage_MozSmsMessage() throws Exception {
         test("MozSmsMessage", "MozSmsMessage");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _MozSmsSegmentInfo_MozSmsSegmentInfo() throws Exception {
-        test("MozSmsSegmentInfo", "MozSmsSegmentInfo");
     }
 
     /**
@@ -3010,28 +2943,6 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF31 = "false")
-    public void _PerformanceEntry_PerformanceMark() throws Exception {
-        test("PerformanceEntry", "PerformanceMark");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF31 = "false")
-    public void _PerformanceEntry_PerformanceMeasure() throws Exception {
-        test("PerformanceEntry", "PerformanceMeasure");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _PerformanceEntry_PerformanceResourceTiming() throws Exception {
         test("PerformanceEntry", "PerformanceResourceTiming");
@@ -3042,8 +2953,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF31 = "false")
+    @Alerts("true")
     public void _PerformanceMark_PerformanceMark() throws Exception {
         test("PerformanceMark", "PerformanceMark");
     }
@@ -3053,8 +2963,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF31 = "false")
+    @Alerts("true")
     public void _PerformanceMeasure_PerformanceMeasure() throws Exception {
         test("PerformanceMeasure", "PerformanceMeasure");
     }

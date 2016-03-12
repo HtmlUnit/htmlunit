@@ -193,8 +193,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "[object CSSCharsetRule]",
-            FF38 = "[object CSSCharsetRule]")
+            FF = "[object CSSCharsetRule]")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
     }
@@ -271,7 +270,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function CSSRuleList() { [native code] }",
             IE = "[object CSSRuleList]",
-            FF31 = "[object CSSRuleList]",
             FF = "function CSSRuleList() {\n    [native code]\n}")
     public void cssRuleList() throws Exception {
         test("CSSRuleList");
@@ -905,7 +903,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function HTMLAllCollection() { [native code] }",
             IE = "[object HTMLAllCollection]",
-            FF31 = "exception",
             FF = "function HTMLAllCollection() {\n    [native code]\n}")
     public void htmlAllCollection() throws Exception {
         test("HTMLAllCollection");
@@ -1935,11 +1932,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Location() { [native code] }",
-            FF31 = "[object Location]",
             IE = "[object Location]",
             FF = "function Location() {\n    [native code]\n}")
     @AlertsStandards(DEFAULT = "[object Location]",
-            FF31 = "[object Location]",
             CHROME = "function Location() { [native code] }",
             EDGE = "function Location() { [native code] }",
             FF = "function Location() {\n    [native code]\n}")
@@ -2033,7 +2028,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function NamedNodeMap() { [native code] }",
             IE = "[object NamedNodeMap]",
-            FF31 = "exception",
             FF = "function NamedNodeMap() {\n    [native code]\n}")
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
@@ -3151,7 +3145,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Storage() { [native code] }",
-            FF31 = "[object Storage]",
             FF = "function Storage() {\n    [native code]\n}",
             IE  = "[object Storage]")
     public void storage() throws Exception {
@@ -3295,7 +3288,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Window() { [native code] }",
             IE = "[object Window]",
-            FF31 = "[object Window]",
             FF = "function Window() {\n    [native code]\n}")
     public void window() throws Exception {
         test("Window");
@@ -3360,7 +3352,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "[object XPathNSResolver]",
             EDGE = "function XPathNSResolver() { [native code] }")
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
@@ -3373,7 +3364,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function XPathResult() { [native code] }",
-            FF31 = "[object XPathResult]",
             FF = "function XPathResult() {\n    [native code]\n}",
             IE = "exception")
     public void xPathResult() throws Exception {
@@ -3387,7 +3377,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function XSLTProcessor() { [native code] }",
-            FF31 = "[object XSLTProcessor]",
             FF = "function XSLTProcessor() {\n    [native code]\n}",
             IE = "exception")
     public void xsltProcessor() throws Exception {
@@ -4049,7 +4038,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "[object MozMobileMessageThread]",
             FF38 = "[object MozMobileMessageThread]")
     public void mozMobileMessageThread() throws Exception {
         test("MozMobileMessageThread");
@@ -4070,8 +4058,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "function MozSmsEvent() {\n    [native code]\n}")
+    @Alerts("exception")
     public void mozSmsEvent() throws Exception {
         test("MozSmsEvent");
     }
@@ -4465,8 +4452,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "[object MozSmsFilter]")
+    @Alerts("exception")
     public void mozSmsFilter() throws Exception {
         test("MozSmsFilter");
     }
@@ -4525,7 +4511,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "exception",
             FF = "function DOMMatrixReadOnly() {\n    [native code]\n}")
     public void domMatrixReadOnly() throws Exception {
         test("DOMMatrixReadOnly");
@@ -4720,8 +4705,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "function LockedFile() {\n    [native code]\n}")
+    @Alerts("exception")
     public void lockedFile() throws Exception {
         test("LockedFile");
     }
@@ -5195,7 +5179,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "exception",
             CHROME = "function HTMLPictureElement() { [native code] }",
             FF = "function HTMLPictureElement() {\n    [native code]\n}")
     public void htmlPictureElement() throws Exception {
@@ -5423,7 +5406,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "exception",
             FF = "function BroadcastChannel() {\n    [native code]\n}")
     public void broadcastChannel() throws Exception {
         test("BroadcastChannel");
@@ -5491,8 +5473,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "function MozMmsEvent() {\n    [native code]\n}")
+    @Alerts("exception")
     public void mozMmsEvent() throws Exception {
         test("MozMmsEvent");
     }
@@ -5847,8 +5828,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "[object MozMobileMessageManager]")
+    @Alerts("exception")
     public void mozMobileMessageManager() throws Exception {
         test("MozMobileMessageManager");
     }
@@ -5909,7 +5889,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function SubtleCrypto() { [native code] }",
-            FF31 = "exception",
             FF = "function SubtleCrypto() {\n    [native code]\n}",
             IE = "[object SubtleCrypto]")
     public void subtleCrypto() throws Exception {
@@ -5930,7 +5909,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "exception",
             FF = "function DOMMatrix() {\n    [native code]\n}")
     public void domMatrix() throws Exception {
         test("DOMMatrix");
@@ -6104,7 +6082,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function CryptoKey() { [native code] }",
             IE = "exception",
-            FF31 = "exception",
             FF = "function CryptoKey() {\n    [native code]\n}")
     public void cryptoKey() throws Exception {
         test("CryptoKey");
@@ -6167,8 +6144,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "[object MozSmsSegmentInfo]")
+    @Alerts("exception")
     public void mozSmsSegmentInfo() throws Exception {
         test("MozSmsSegmentInfo");
     }
@@ -6177,8 +6153,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "function FileRequest() {\n    [native code]\n}")
+    @Alerts("exception")
     public void fileRequest() throws Exception {
         test("FileRequest");
     }
@@ -6209,7 +6184,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function WeakSet() { [native code] }",
             IE = "exception",
-            FF31 = "exception",
             FF = "function WeakSet() {\n    [native code]\n}")
     public void weakSet() throws Exception {
         test("WeakSet");
@@ -6311,8 +6285,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "function DeviceStorage() {\n    [native code]\n}")
+    @Alerts("exception")
     public void deviceStorage() throws Exception {
         test("DeviceStorage");
     }
@@ -6441,8 +6414,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "function DeviceStorageChangeEvent() {\n    [native code]\n}")
+    @Alerts("exception")
     public void deviceStorageChangeEvent() throws Exception {
         test("DeviceStorageChangeEvent");
     }
@@ -6451,8 +6423,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "function FileHandle() {\n    [native code]\n}")
+    @Alerts("exception")
     public void fileHandle() throws Exception {
         test("FileHandle");
     }
@@ -6577,7 +6548,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "[object MozMmsMessage]",
             FF38 = "[object MozMmsMessage]")
     public void mozMmsMessage() throws Exception {
         test("MozMmsMessage");
@@ -6708,7 +6678,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function SVGNumber() { [native code] }",
-            FF31 = "[object SVGNumber]",
             IE = "[object SVGNumber]",
             FF = "function SVGNumber() {\n    [native code]\n}")
     public void svgNumber() throws Exception {
@@ -6747,7 +6716,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "exception",
             FF = "function StereoPannerNode() {\n    [native code]\n}",
             EDGE = "function StereoPannerNode() { [native code] }")
     public void stereoPannerNode() throws Exception {
@@ -6779,7 +6747,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "exception",
             CHROME = "function XMLHttpRequestEventTarget() { [native code] }",
             FF = "function XMLHttpRequestEventTarget() {\n    [native code]\n}",
             IE = "[object XMLHttpRequestEventTarget]")
@@ -6835,7 +6802,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function RadioNodeList() { [native code] }",
-            FF31 = "exception",
             FF = "function RadioNodeList() {\n    [native code]\n}")
     public void radioNodeList() throws Exception {
         test("RadioNodeList");
@@ -6925,7 +6891,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "exception",
             FF = "[object CSSCounterStyleRule]")
     public void cssCounterStyleRule() throws Exception {
         test("CSSCounterStyleRule");
@@ -7050,7 +7015,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function MediaDevices() { [native code] }",
-            FF31 = "exception",
             IE = "exception",
             FF = "function MediaDevices() {\n    [native code]\n}")
     public void mediaDevices() throws Exception {
@@ -7090,7 +7054,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Blob() { [native code] }",
             FF = "function Blob() {\n    [native code]\n}",
-            FF31 = "[object Blob]",
             IE = "\nfunction Blob() {\n    [native code]\n}\n")
     public void blob() throws Exception {
         test("Blob");
@@ -7696,7 +7659,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Symbol() { [native code] }",
             IE = "exception",
-            FF31 = "exception",
             FF = "function Symbol() {\n    [native code]\n}")
     public void symbol() throws Exception {
         test("Symbol");
@@ -7886,7 +7848,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function File() { [native code] }",
-            FF31 = "[object File]",
             FF = "function File() {\n    [native code]\n}",
             IE = "[object File]")
     public void file() throws Exception {
@@ -7898,7 +7859,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF31 = "[object MozSmsMessage]",
             FF38 = "[object MozSmsMessage]")
     public void mozSmsMessage() throws Exception {
         test("MozSmsMessage");
@@ -8546,7 +8506,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function PerformanceMark() { [native code] }",
-            FF31 = "exception",
             FF = "function PerformanceMark() {\n    [native code]\n}",
             IE = "[object PerformanceMark]")
     public void performanceMark() throws Exception {
@@ -8558,7 +8517,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function PerformanceMeasure() { [native code] }",
-            FF31 = "exception",
             FF = "function PerformanceMeasure() {\n    [native code]\n}",
             IE = "[object PerformanceMeasure]")
     public void performanceMeasure() throws Exception {
@@ -9190,7 +9148,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function XPathExpression() { [native code] }",
             IE = "exception",
-            FF31 = "[object XPathExpression]",
             FF = "function XPathExpression() {\n    [native code]\n}")
     public void xPathExpression() throws Exception {
         test("XPathExpression");

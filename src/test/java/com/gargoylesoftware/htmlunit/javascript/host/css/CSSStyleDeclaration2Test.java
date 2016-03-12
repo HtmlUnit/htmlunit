@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +22,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -145,11 +142,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "success", "success", "success", "success", "success", "success" },
-            FF31 = { "success", "success", "maxHeight 42.0 - ; 42.7 - ; 42 - ",
-                    "maxWidth 42.0 - ; 42.7 - ; 42 - ", "minHeight 42.0 - ; 42.7 - ; 42 - ",
-                    "minWidth 42.0 - ; 42.7 - ; 42 - " })
-    @NotYetImplemented(FF31)
+    @Alerts({ "success", "success", "success", "success", "success", "success" })
     public void width_like_properties_heightWidth() throws Exception {
         width_like_properties("height", "width", "maxHeight", "maxWidth", "minHeight", "minWidth");
     }
@@ -166,17 +159,11 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                         "success",
                         "success",
                         "wordSpacing 42% - 42em" },
-            FF31 = { "success", "letterSpacing 42% - 42em",
-                        "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
-                        "textIndent 42.0 - ; 42.7 - ; 42 - ",
-                        "verticalAlign 42.0 - ; 42.7 - ; 42 - ",
-                        "wordSpacing 42% - 42em" },
             FF38 = { "success", "letterSpacing 42% - 42em",
                         "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
                         "success",
                         "success",
                         "wordSpacing 42% - 42em" })
-    @NotYetImplemented(FF31)
     public void width_like_properties_font() throws Exception {
         width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                         "verticalAlign", "wordSpacing");

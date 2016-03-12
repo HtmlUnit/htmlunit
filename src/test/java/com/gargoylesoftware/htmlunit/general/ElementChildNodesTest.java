@@ -749,11 +749,8 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
-            CHROME = { "3", "2", "2", "3", "2", "2" },
-            FF31 = { "1", "0", "1", "1", "0", "1" },
-            FF38 = { "1", "0", "1", "1", "0", "1" },
-            IE = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            CHROME = { "3", "2", "2", "3", "2", "2" })
     @NotYetImplemented({ FF, IE })
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));

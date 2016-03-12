@@ -205,8 +205,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF31 = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.209", "NPSWF32_18_0_0_209.dll"},
-            FF38 = {"Shockwave Flash", "Shockwave Flash 20.0 r0", "20.0.0.286", "NPSWF32_20_0_0_286.dll"},
+    @Alerts(FF38 = {"Shockwave Flash", "Shockwave Flash 20.0 r0", "20.0.0.286", "NPSWF32_20_0_0_286.dll"},
             FF45 = {"Shockwave Flash", "Shockwave Flash 20.0 r0", "20.0.0.306", "NPSWF32_20_0_0_306.dll"},
             CHROME = { "Shockwave Flash", "Shockwave Flash 20.0 r0", "undefined", "pepflashplayer.dll"},
             IE = {"Shockwave Flash, Shockwave Flash 20.0 r0", "20.0.0.270", "Flash32_20_0_0_270.ocx"},
@@ -371,7 +370,6 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF31 = "20150504194141",
             FF38 = "20160120213330",
             FF45 = "20160304113541")
     public void buildID() throws Exception {

@@ -42,8 +42,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object CSSImportRule]", "§§URL§§second/",
                 "[object MediaList]", "0", "[object CSSStyleSheet]" },
-            FF31 = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
-            FF38 = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
+            FF = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
             IE = { "[object CSSImportRule]", "§§URL§§second/",
                 "all", "0", "[object CSSStyleSheet]" })
     public void getImportFromCssRulesCollection_absolute() throws Exception {
@@ -57,8 +56,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object CSSImportRule]", "foo.css",
                 "[object MediaList]", "0", "[object CSSStyleSheet]" },
-            FF31 = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
-            FF38 = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
+            FF = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
             IE = { "[object CSSImportRule]", "foo.css", "all", "0", "[object CSSStyleSheet]" })
     public void getImportFromCssRulesCollection_relative() throws Exception {
         final URL urlPage = new URL(URL_FIRST, "/dir1/dir2/foo.html");

@@ -183,8 +183,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
+    @Alerts("false")
     public void _XPathNSResolver_XPathNSResolver() throws Exception {
         test("XPathNSResolver", "XPathNSResolver");
     }
@@ -470,7 +469,6 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF31 = "false",
             IE = "false")
     public void _WeakSet_WeakSet() throws Exception {
         test("WeakSet", "WeakSet");
@@ -517,8 +515,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF31 = "false")
+    @Alerts("true")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");
     }
@@ -738,8 +735,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF31 = "false")
+            IE = "false")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestUpload() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestUpload");
     }

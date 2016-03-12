@@ -903,9 +903,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "", "a b c" },
-            FF31 = { "null", "a b c" },
-            FF38 = { "", "a b c" },
+    @Alerts(DEFAULT = { "", "a b c" },
             IE = { "undefined", "a b c" })
     public void classList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"

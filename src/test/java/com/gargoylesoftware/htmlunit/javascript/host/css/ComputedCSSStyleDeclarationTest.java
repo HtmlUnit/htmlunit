@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1457,8 +1456,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "", "", "10", "10", "rgb(0, 128, 0)" },
             CHROME = { "", "", "", "auto", "auto", "rgb(0, 128, 0)" })
-    // expectations not tested with FF31
-    @NotYetImplemented(FF31)
     public void zIndexComputed() throws Exception {
         final String html = "<html><head>"
             + "<style>\n"

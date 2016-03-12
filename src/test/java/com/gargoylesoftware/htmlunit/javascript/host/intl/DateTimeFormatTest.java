@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -1630,7 +1629,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "20.12.2012.",
             FF = "20. 12. 2012.",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented({ CHROME, FF31, FF38, EDGE })
+    @NotYetImplemented({ CHROME, FF38, EDGE })
     public void format_sr_ba() throws Exception {
         test("new Intl.DateTimeFormat('sr-BA').format(date)");
     }
@@ -1642,7 +1641,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "20.12.2012.",
             FF = "20. 12. 2012.",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented({ CHROME, FF31, FF38, EDGE })
+    @NotYetImplemented({ CHROME, FF38, EDGE })
     public void format_sr_cs() throws Exception {
         test("new Intl.DateTimeFormat('sr-CS').format(date)");
     }
@@ -1654,7 +1653,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "20.12.2012.",
             FF = "20. 12. 2012.",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented({ CHROME, FF31, FF38, EDGE })
+    @NotYetImplemented({ CHROME, FF38, EDGE })
     public void format_sr_me() throws Exception {
         test("new Intl.DateTimeFormat('sr-ME').format(date)");
     }
@@ -1666,7 +1665,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "20.12.2012.",
             FF = "20. 12. 2012.",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
-    @NotYetImplemented({ CHROME, FF31, FF38, EDGE })
+    @NotYetImplemented({ CHROME, FF38, EDGE })
     public void format_sr_rs() throws Exception {
         test("new Intl.DateTimeFormat('sr-RS').format(date)");
     }
