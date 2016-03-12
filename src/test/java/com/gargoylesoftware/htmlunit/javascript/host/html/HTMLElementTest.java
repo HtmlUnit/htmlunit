@@ -977,7 +977,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true" },
-            FF = { "true", "true", "false" })
+            FF31 = { "true", "true", "false" },
+            FF38 = { "true", "true", "false" })
     public void outerHTMLinNewDiv() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -998,7 +999,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "" },
-            FF = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" })
+            FF31 = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" },
+            FF38 = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" })
     public void getSetInnerHtmlEmptyTag_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -1019,7 +1021,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "" },
-            FF = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" })
+            FF31 = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" },
+            FF38 = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" })
     public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -1773,7 +1776,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "Old = Old\ninnerText", "New = New cell value" },
-            FF = { "Old = undefined", "New = New cell value" },
+            FF31 = { "Old = undefined", "New = New cell value" },
+            FF38 = { "Old = undefined", "New = New cell value" },
+            FF45 = { "Old = Old\n\ninnerText", "New = New cell value" },
             IE = { "Old = Old \r\ninnerText", "New = New cell value" })
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
@@ -2402,8 +2407,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object ClientRect]",
-            FF31 = "[object DOMRect]",
-            FF38 = "[object DOMRect]")
+            FF = "[object DOMRect]")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='div1'>hello</div><script>\n"
@@ -2505,8 +2509,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object ClientRectList]", "1" },
-            FF31 = { "[object DOMRect]", "1" },
-            FF38 = { "[object DOMRect]", "1" })
+            FF = { "[object DOMRect]", "1" })
     @NotYetImplemented(FF)
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
