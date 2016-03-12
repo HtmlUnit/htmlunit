@@ -178,7 +178,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLSpanElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]",
+            FF = "[object HTMLElement]",
             IE = "[object HTMLBaseFontElement]")
     public void basefont() throws Exception {
         test("basefont");
@@ -1137,7 +1137,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]",
+            FF = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
     public void rp() throws Exception {
         test("rp");
@@ -1151,7 +1151,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]",
+            FF = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
     public void rt() throws Exception {
         test("rt");
@@ -1165,7 +1165,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]",
+            FF = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
     public void ruby() throws Exception {
         test("ruby");
@@ -1848,7 +1848,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]")
+            FF = "[object HTMLElement]")
     public void rb() throws Exception {
         test("rb");
     }
@@ -1868,7 +1868,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]")
+            FF = "[object HTMLElement]")
     public void rtc() throws Exception {
         test("rtc");
     }
@@ -2040,7 +2040,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLPictureElement]",
-            FF38 = "[object HTMLPictureElement]")
+            FF = "[object HTMLPictureElement]")
     public void picture() throws Exception {
         test("picture");
     }
