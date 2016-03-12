@@ -149,12 +149,9 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "function", "[object XSLTProcessor]", "[object XSLTProcessor]" },
+    @Alerts(FF = { "function", "function XSLTProcessor() {\n    [native code]\n}",
+                "[object XSLTProcessor]" },
             CHROME = { "function", "function XSLTProcessor() { [native code] }",
-                "[object XSLTProcessor]" },
-            FF38 = { "function", "function XSLTProcessor() {\n    [native code]\n}",
-                "[object XSLTProcessor]" },
-            FF45 = { "function", "function XSLTProcessor() {\n    [native code]\n}",
                 "[object XSLTProcessor]" },
             IE = { "undefined", "exception" })
     public void type() throws Exception {
@@ -178,8 +175,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object XSLTProcessor]", "NaN", "true", "Yes", "Yes" },
             CHROME = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes" },
-            FF38 = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes" },
-            FF45 = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes" },
+            FF = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes" },
             IE = {"exception str", "exception numb", "exception bool", "exception ?", "exception if" })
     public void browserDetection() throws Exception {
         final String html = "<html>\n"

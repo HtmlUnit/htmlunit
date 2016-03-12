@@ -982,9 +982,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "myID", "blah", "span", "[object XMLDocument]" },
             CHROME = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" },
-            FF38 = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" },
-            FF45 = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" })
-    public void responseXML_getElementById_FF() throws Exception {
+            FF = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" })
+    public void responseXML_getElementById2() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
 
