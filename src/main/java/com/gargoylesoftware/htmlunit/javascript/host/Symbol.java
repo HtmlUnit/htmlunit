@@ -18,8 +18,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import java.util.HashMap;
 import java.util.Map.Entry;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
@@ -46,6 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class Symbol extends SimpleScriptable {
 
     static final String ITERATOR_STRING = "Symbol(Symbol.iterator)";
+    private static java.util.Map<BrowserVersion, java.util.Map<String, Symbol>> SYMBOL_MAP_ = new HashMap<>();
 
     private Object name_;
 
@@ -76,10 +79,27 @@ public class Symbol extends SimpleScriptable {
      */
     @JsxStaticGetter
     public static Symbol getIterator(final Scriptable thisObj) {
-        final Symbol symbol = new Symbol("iterator");
+        return getSymbol(thisObj, "iterator");
+    }
+
+    private static Symbol getSymbol(final Scriptable thisObj, final String name) {
         final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
-        symbol.setParentScope(scope);
-        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
+        final BrowserVersion browserVersion = scope.getBrowserVersion();
+
+        java.util.Map<String, Symbol> map = SYMBOL_MAP_.get(browserVersion);
+        if (map == null) {
+            map = new HashMap<>();
+            SYMBOL_MAP_.put(browserVersion, map);
+        }
+
+        Symbol symbol = map.get(name);
+        if (symbol == null) {
+            symbol = new Symbol(name);
+            symbol.setParentScope(scope);
+            symbol.setPrototype(scope.getPrototype(symbol.getClass()));
+            map.put(name, symbol);
+        }
+        
         return symbol;
     }
 
@@ -90,11 +110,7 @@ public class Symbol extends SimpleScriptable {
      */
     @JsxStaticGetter(@WebBrowser(CHROME))
     public static Symbol getUnscopables(final Scriptable thisObj) {
-        final Symbol symbol = new Symbol("unscopables");
-        final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
-        symbol.setParentScope(scope);
-        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
-        return symbol;
+        return getSymbol(thisObj, "unscopables");
     }
 
     /**
@@ -104,11 +120,7 @@ public class Symbol extends SimpleScriptable {
      */
     @JsxStaticGetter(@WebBrowser(CHROME))
     public static Symbol getIsConcatSpreadable(final Scriptable thisObj) {
-        final Symbol symbol = new Symbol("isConcatSpreadable");
-        final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
-        symbol.setParentScope(scope);
-        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
-        return symbol;
+        return getSymbol(thisObj, "isConcatSpreadable");
     }
 
     /**
@@ -116,13 +128,9 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code toPrimitive} static property
      */
-    @JsxStaticGetter(@WebBrowser(CHROME))
+    @JsxStaticGetter({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45) })
     public static Symbol getToPrimitive(final Scriptable thisObj) {
-        final Symbol symbol = new Symbol("toPrimitive");
-        final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
-        symbol.setParentScope(scope);
-        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
-        return symbol;
+        return getSymbol(thisObj, "toPrimitive");
     }
 
     /**
@@ -132,11 +140,27 @@ public class Symbol extends SimpleScriptable {
      */
     @JsxStaticGetter(@WebBrowser(CHROME))
     public static Symbol getToStringTag(final Scriptable thisObj) {
-        final Symbol symbol = new Symbol("toStringTag");
-        final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
-        symbol.setParentScope(scope);
-        symbol.setPrototype(scope.getPrototype(symbol.getClass()));
-        return symbol;
+        return getSymbol(thisObj, "toStringTag");
+    }
+
+    /**
+     * Returns the {@code match} static property.
+     * @param thisObj the scriptable
+     * @return the {@code match} static property
+     */
+    @JsxStaticGetter(@WebBrowser(value = FF, minVersion = 45))
+    public static Symbol getMatch(final Scriptable thisObj) {
+        return getSymbol(thisObj, "match");
+    }
+
+    /**
+     * Returns the {@code species} static property.
+     * @param thisObj the scriptable
+     * @return the {@code species} static property
+     */
+    @JsxStaticGetter(@WebBrowser(value = FF, minVersion = 45))
+    public static Symbol getSpecies(final Scriptable thisObj) {
+        return getSymbol(thisObj, "species");
     }
 
     /**

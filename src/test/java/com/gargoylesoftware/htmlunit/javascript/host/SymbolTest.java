@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -42,7 +38,6 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "symbol", "Symbol(Symbol.iterator)", "true" },
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented({FF38, CHROME})
     public void iterator() throws Exception {
         name("iterator");
     }
@@ -53,6 +48,7 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
             FF31 = "not supported",
+            FF45 = { "symbol", "Symbol(Symbol.match)", "true" },
             IE = "not supported")
     public void match() throws Exception {
         name("match");
@@ -110,7 +106,6 @@ public class SymbolTest extends WebDriverTestCase {
             CHROME = { "symbol", "Symbol(Symbol.isConcatSpreadable)", "true" },
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented(CHROME)
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
     }
@@ -123,7 +118,6 @@ public class SymbolTest extends WebDriverTestCase {
             CHROME = { "symbol", "Symbol(Symbol.unscopables)", "true" },
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented(CHROME)
     public void unscopables() throws Exception {
         name("unscopables");
     }
@@ -134,6 +128,7 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
             FF31 = "not supported",
+            FF45 = { "symbol", "Symbol(Symbol.species)", "true" },
             IE = "not supported")
     public void species() throws Exception {
         name("species");
@@ -145,9 +140,9 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "true" },
             CHROME = { "symbol", "Symbol(Symbol.toPrimitive)", "true" },
+            FF45 = { "symbol", "Symbol(Symbol.toPrimitive)", "true" },
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented(CHROME)
     public void toPrimitive() throws Exception {
         name("toPrimitive");
     }
@@ -160,7 +155,6 @@ public class SymbolTest extends WebDriverTestCase {
             CHROME = { "symbol", "Symbol(Symbol.toStringTag)", "true" },
             FF31 = "not supported",
             IE = "not supported")
-    @NotYetImplemented(CHROME)
     public void toStringTag() throws Exception {
         name("toStringTag");
     }
