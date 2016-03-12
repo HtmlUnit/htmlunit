@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONTEXT_EVENT_CONSTANTS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XSLTPROCESSOR_OBJECT;
 
 import java.lang.reflect.Member;
 import java.util.LinkedHashSet;
@@ -104,19 +103,6 @@ public class RecursiveFunctionObject extends FunctionObject {
             parent = parent.getParentScope();
         }
         return ((Window) parent).getBrowserVersion();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> typeHint) {
-        final String functionName = getFunctionName();
-        if ("XSLTProcessor".equals(functionName) && getBrowserVersion().hasFeature(JS_XSLTPROCESSOR_OBJECT)) {
-            return "[object " + functionName + ']';
-        }
-
-        return super.getDefaultValue(typeHint);
     }
 
     /**

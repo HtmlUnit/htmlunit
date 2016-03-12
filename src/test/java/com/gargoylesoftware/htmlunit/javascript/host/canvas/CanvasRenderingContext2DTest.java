@@ -270,7 +270,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     // The output depends on the deflation algorithm
     // check the output of: $pngcheck -v file.png
     // chrome gives: zlib: deflated, 256-byte window, fast compression
-    // ff31 gives:   zlib: deflated, 256-byte window, default compression
     // java gives:   zlib: deflated, 32K window, maximum compression
     // https://bugs.openjdk.java.net/browse/JDK-8056093
     public void drawImage_1x1_32bits() throws Exception {

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_BASE_URL_NULL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_CLASS_LIST_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
@@ -438,9 +437,6 @@ public class Element extends EventNode {
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public DOMTokenList getClassList() {
-        if (getBrowserVersion().hasFeature(JS_ELEMENT_CLASS_LIST_NULL)) {
-            return null;
-        }
         return new DOMTokenList(this, "class");
     }
 

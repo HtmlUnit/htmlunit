@@ -23,7 +23,6 @@ import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlBaseFont;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -40,8 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlSpan.class),
-        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF)),
-        @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(value = FF, maxVersion = 31))
+        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF))
     })
 public class HTMLSpanElement extends HTMLElement {
 

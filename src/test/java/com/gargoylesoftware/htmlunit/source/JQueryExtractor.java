@@ -75,7 +75,6 @@ public final class JQueryExtractor {
         final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
 
         // final String browser = "FF38";
-        // final String browser = "FF31";
         final String browser = "CHROME";
         // final String browser = "IE";
 

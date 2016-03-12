@@ -81,7 +81,7 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "1", "[object MouseEvent]", "2" },
             IE = { "[object Event]", "undefined", "[object PointerEvent]", "0", "[object PointerEvent]", "0" })
-    // FF31/38 has a detail of '1' for the double click but it is '2' when executed manually
+    // FF38 has a detail of '1' for the double click but it is '2' when executed manually
     public void detail() throws Exception {
         final String html =
               "<html><head><script>\n"

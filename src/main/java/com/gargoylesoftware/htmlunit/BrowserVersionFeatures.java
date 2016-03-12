@@ -124,7 +124,7 @@ public enum BrowserVersionFeatures {
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The default value of the display property for the 'ruby' tag is 'inline'. */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 31), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(CHROME))
     CSS_RUBY_DISPLAY_INLINE,
 
     /** Throws exception on setting a CSS style value to null. */
@@ -273,10 +273,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLABBREVIATED,
 
-    /** HtmlAllCollection default value is [object HTML document.all class]. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
-    HTMLALLCOLLECTION_DEFAULT_DESCRIPTION,
-
     /** HtmlAllCollection.item does not check the name, only the id. */
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLALLCOLLECTION_DO_NOT_CHECK_NAME,
@@ -332,10 +328,6 @@ public enum BrowserVersionFeatures {
     /** HtmlCollection returns null instead of undefined if an element was not found. */
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
     HTMLCOLLECTION_NULL_IF_NOT_FOUND,
-
-    /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlCommand} have no end tag. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
-    HTMLCOMMAND_END_TAG_FORBIDDEN,
 
     /** Is {@code document.charset} lower-case. */
     @BrowserFeature(@WebBrowser(IE))
@@ -431,10 +423,6 @@ public enum BrowserVersionFeatures {
     /** Trims the value of the type attribute before to verify it. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLSCRIPT_TRIM_TYPE,
-
-    /** asText returns no newlines. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
-    HTMLTEXTAREA_REMOVE_NEWLINE_FROM_TEXT,
 
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -843,10 +831,6 @@ public enum BrowserVersionFeatures {
     /** Element.baseURI is null for XML element. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_ELEMENT_BASE_URL_NULL,
-
-    /** Element.classList returns null. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
-    JS_ELEMENT_CLASS_LIST_NULL,
 
     /** Indicates that attributeNS returns an empty string instead of null if not found. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1389,10 +1373,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser uses the ActiveXObject for implementing XML support. */
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
-
-    /** If <code>alert(XSLTProcessor)</code> returns an object, not function. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
-    JS_XSLTPROCESSOR_OBJECT,
 
     /** With special keys [in .type(int)], should we trigger onkeypress event or not. */
     @BrowserFeature(@WebBrowser(FF))

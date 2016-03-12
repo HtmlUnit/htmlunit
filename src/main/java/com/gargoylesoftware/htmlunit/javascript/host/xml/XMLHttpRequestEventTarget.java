@@ -16,10 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -29,11 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClasses({
-    @JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
-            @WebBrowser(IE) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(value = FF, maxVersion = 31))
-    })
+@JsxClass
 public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**

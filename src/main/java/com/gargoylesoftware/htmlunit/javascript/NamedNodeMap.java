@@ -17,18 +17,17 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when
@@ -43,12 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE),
-            @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-            browsers = @WebBrowser(value = FF, maxVersion = 31))
-    })
+@JsxClass
 public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
     private final org.w3c.dom.NamedNodeMap attributes_;
