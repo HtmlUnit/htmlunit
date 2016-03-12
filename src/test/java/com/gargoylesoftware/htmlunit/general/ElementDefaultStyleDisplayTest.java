@@ -1154,7 +1154,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "inline",
-            FF38 = "none")
+            FF = "none")
     public void rp() throws Exception {
         loadPageWithAlerts2(test("rp"));
     }
@@ -1166,7 +1166,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "inline",
-            FF38 = "ruby-text",
+            FF = "ruby-text",
             IE = "ruby-text")
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
@@ -1179,7 +1179,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "inline",
-            FF38 = "ruby",
+            FF = "ruby",
             IE = "ruby")
     public void ruby() throws Exception {
         loadPageWithAlerts2(test("ruby"));
