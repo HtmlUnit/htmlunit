@@ -1008,7 +1008,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "HTML", "HEAD", "TITLE", "SCRIPT", "BODY" },
-            FF38 = { "all == null", "all == null", "all == null", "all == null", "all == null" })
+            FF = { "all == null", "all == null", "all == null", "all == null", "all == null" })
     public void all_WithParentheses() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1073,7 +1073,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF38 = "null",
+            FF = "null",
             CHROME = "null")
     public void all_NamedItem_Unknown() throws Exception {
         namedItem("foo");
@@ -1248,7 +1248,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
             CHROME = { "undefined", "undefined", "null" },
-            FF38 = { "null", "null", "null" },
+            FF = { "null", "null", "null" },
             IE = { "undefined", "null", "undefined" })
     public void all_NotExisting() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
