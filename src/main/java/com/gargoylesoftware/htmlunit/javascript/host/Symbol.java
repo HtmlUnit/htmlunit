@@ -99,7 +99,7 @@ public class Symbol extends SimpleScriptable {
             symbol.setPrototype(scope.getPrototype(symbol.getClass()));
             map.put(name, symbol);
         }
-        
+
         return symbol;
     }
 
