@@ -1245,11 +1245,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF31 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
-                "origin: ", "source: [object Window]", "lastEventId: " },
-            FF38 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
-                "origin: ", "source: [object Window]", "lastEventId: " },
-            CHROME = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
+    @Alerts(DEFAULT = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: " },
             IE = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: undefined" })
@@ -1589,7 +1585,8 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object Window]", "[object Window]", "" },
             CHROME = { "[object Window]", "function Window() { [native code] }",
             "TEMPORARY, PERSISTENT, " },
-            FF38 = { "[object Window]", "function Window() {\n    [native code]\n}", "" })
+            FF38 = { "[object Window]", "function Window() {\n    [native code]\n}", "" },
+            FF45 = { "[object Window]", "function Window() {\n    [native code]\n}", "" })
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
