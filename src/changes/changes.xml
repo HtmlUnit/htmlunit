@@ -9,6 +9,9 @@
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: Element.baseURI.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: XMLHttpRequest.overrideMimeType().
             </action>
             <action type="fix" dev="asashour">

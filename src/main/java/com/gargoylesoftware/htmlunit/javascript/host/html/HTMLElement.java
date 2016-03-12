@@ -2703,5 +2703,4 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         return false;
     }
-
 }

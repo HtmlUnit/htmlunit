@@ -836,6 +836,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT,
 
+    /** Element.baseURI is null for XML element. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_ELEMENT_BASE_URL_NULL,
+
     /** Element.classList returns null. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
     JS_ELEMENT_CLASS_LIST_NULL,
