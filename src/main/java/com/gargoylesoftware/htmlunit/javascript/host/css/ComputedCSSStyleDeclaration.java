@@ -1887,6 +1887,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getTop() {
+        final Element elem = getElement();
+        if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()
+                && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            return "";
+        }
         return defaultIfEmpty(super.getTop(), Definition.TOP);
     }
 

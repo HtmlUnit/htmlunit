@@ -1620,7 +1620,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "auto", "auto" },
             CHROME = { "auto", "" })
-    @NotYetImplemented(CHROME)
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
