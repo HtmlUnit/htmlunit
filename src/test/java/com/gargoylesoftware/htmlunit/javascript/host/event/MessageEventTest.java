@@ -55,8 +55,8 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no initMessageEvent",
-            CHROME = { "message", "true", "true", "hello", "http://localhost:", "2", "[object Window]" },
+    @Alerts(DEFAULT = { "message", "true", "true", "hello", "http://localhost:", "2", "[object Window]" },
+            FF38 = "no initMessageEvent",
             IE = { "message", "true", "true", "hello", "http://localhost:", "undefined", "[object Window]" })
     public void initMessageEvent() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
