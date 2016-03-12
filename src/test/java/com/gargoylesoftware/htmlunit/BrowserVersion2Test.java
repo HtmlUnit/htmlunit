@@ -159,7 +159,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "  function doTest() {\n"
             // force access
             + "    var b = document.body;\n"
-            + "    window.getComputedStyle ? window.getComputedStyle(b,null) : b.currentStyle;\n"
+            + "    window.getComputedStyle(b, null);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -222,7 +222,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "  function doTest() {\n"
             // force access
             + "    var b = document.body;\n"
-            + "    window.getComputedStyle ? window.getComputedStyle(b,null) : b.currentStyle;\n"
+            + "    window.getComputedStyle(b, null);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -247,7 +247,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "  function doTest() {\n"
             // force access
             + "    var b = document.body;\n"
-            + "    window.getComputedStyle ? window.getComputedStyle(b,null) : b.currentStyle;\n"
+            + "    window.getComputedStyle(b, null);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"

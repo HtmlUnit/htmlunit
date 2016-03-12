@@ -101,7 +101,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
             + "var d = document.getElementById('d');\n"
-            + "var s = window.getComputedStyle ? window.getComputedStyle(d,null) : d.currentStyle;\n"
+            + "var s = window.getComputedStyle(d, null);\n"
             + "alert(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
@@ -124,7 +124,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
             + "var d = document.getElementById('d');\n"
-            + "var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "var s = window.getComputedStyle(d, null);\n"
             + "alert(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
@@ -152,7 +152,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
             + "  var d = document.getElementById('d');\n"
-            + "  var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "  var s = window.getComputedStyle(d, null);\n"
             + "  alert(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
@@ -187,13 +187,13 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<div id='f'>foo</div>\n"
             + "<script>\n"
             + "var d = document.getElementById('d');\n"
-            + "var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "var s = window.getComputedStyle(d, null);\n"
             + "alert(s.color.indexOf('128') > 0);\n"
             + "var e = document.getElementById('e');\n"
-            + "s = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "s = window.getComputedStyle(e, null);\n"
             + "alert(s.color.indexOf('127') > 0);\n"
             + "var f = document.getElementById('f');\n"
-            + "s = window.getComputedStyle ? window.getComputedStyle(f, null) : f.currentStyle;\n"
+            + "s = window.getComputedStyle(f, null);\n"
             + "alert(s.color.indexOf('126') > 0);\n"
             + "</script>\n"
             + "</body></html>";
@@ -244,7 +244,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "  <div id='d'>foo</div>\n"
             + "  <script>\n"
             + "    var d = document.getElementById('d');\n"
-            + "    var s = window.getComputedStyle ? window.getComputedStyle(d,null) : d.currentStyle;\n"
+            + "    var s = window.getComputedStyle(d, null);\n"
             + "    alert(s.fontSize);\n"
             + "</script>\n"
             + "</body></html>";

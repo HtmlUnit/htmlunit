@@ -1328,7 +1328,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<script>\n"
             + "var i = 0;\n"
             + "while (document.cb_form.Quantity[i]) {\n"
-            + "document.cb_form.Quantity[i].value = document.cb_form.Quantity[i].value.replace(/[^0-9]/g,'');\n"
+            + "document.cb_form.Quantity[i].value = document.cb_form.Quantity[i].value.replace(/[^0-9]/g, '');\n"
             + "if ((document.cb_form.Quantity[i].value.length == 0)) {document.cb_form.Quantity[i].value='1';}\n"
             + "i++;\n"
             + "}\n"

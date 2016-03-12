@@ -306,7 +306,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     public void offsetLeft_PositionLeft_DifferentCombinations() throws Exception {
         final String html = "<html><body onload='test()'><script language='javascript'>\n"
             + "String.prototype.trim = function() {\n"
-            + "  return this.replace(/^\\s+|\\s+$/g,'');\n"
+            + "  return this.replace(/^\\s+|\\s+$/g, '');\n"
             + "}\n"
             + "function test() {\n"
             + "  var output = document.getElementById('output');\n"

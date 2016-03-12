@@ -38,7 +38,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var e = document.createElement('" + tagName + "');\n"
             + "      document.body.appendChild(e);\n"
-            + "      var cs = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
             + "      alert(disp);\n"
             + "    } catch (e) {alert('exception')}\n"

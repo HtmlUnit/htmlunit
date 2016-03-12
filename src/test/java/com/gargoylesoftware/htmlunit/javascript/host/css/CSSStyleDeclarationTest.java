@@ -1626,11 +1626,11 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('test');\n"
-            + "    var style = window.getComputedStyle ? window.getComputedStyle(div, null) : {};\n"
+            + "    var style = window.getComputedStyle(div, null);\n"
             + "    alert(style.top);\n"
 
             + "    div = document.createElement('div');\n"
-            + "    style = window.getComputedStyle ? window.getComputedStyle(div, null) : {};\n"
+            + "    style = window.getComputedStyle(div, null);\n"
             + "    alert(style.top);\n"
             + "  }\n"
             + "</script>\n"

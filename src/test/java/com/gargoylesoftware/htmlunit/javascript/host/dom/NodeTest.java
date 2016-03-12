@@ -863,7 +863,7 @@ public class NodeTest extends WebDriverTestCase {
             + "    var div1 = document.createElement('div');\n"
             + "    var div2 = document.createElement('div');\n"
             + "    alert(div1.parentNode);\n"
-            + "    div1.insertBefore(div2,null);\n"
+            + "    div1.insertBefore(div2, null);\n"
             + "    if(div1.parentNode)\n"
             + "      alert(div1.parentNode.nodeName);\n"
             + "    else\n"

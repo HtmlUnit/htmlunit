@@ -48,7 +48,7 @@ public class HtmlRtTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function check(e) {\n"
-            + "    var cs = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "    var cs = window.getComputedStyle(e, null);\n"
             + "    var disp = cs ? cs.display : null;\n"
             + "    alert(disp);\n"
             + "  }\n"
@@ -82,7 +82,7 @@ public class HtmlRtTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function check(e) {\n"
-            + "    var cs = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "    var cs = window.getComputedStyle(e, null);\n"
             + "    var disp = cs ? cs.display : null;\n"
             + "    alert(disp);\n"
             + "  }\n"
