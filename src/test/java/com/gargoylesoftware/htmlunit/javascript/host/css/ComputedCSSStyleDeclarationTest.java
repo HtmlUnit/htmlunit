@@ -771,7 +771,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "inline", "inline", "inline" },
             CHROME = { "inline", "block", "none" },
-            FF38 = { "ruby", "ruby-text", "none" },
+            FF = { "ruby", "ruby-text", "none" },
             IE = { "ruby", "ruby-text", "inline" })
     public void defaultDisplayValues_R() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
