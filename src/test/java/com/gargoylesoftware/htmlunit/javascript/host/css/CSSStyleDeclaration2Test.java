@@ -163,7 +163,12 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                         "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
                         "success",
                         "success",
-                        "wordSpacing 42% - 42em" })
+                        "wordSpacing 42% - 42em" },
+            FF45 = { "success", "letterSpacing 42% - 42em",
+                        "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
+                        "success",
+                        "success",
+                        "success" })
     public void width_like_properties_font() throws Exception {
         width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                         "verticalAlign", "wordSpacing");

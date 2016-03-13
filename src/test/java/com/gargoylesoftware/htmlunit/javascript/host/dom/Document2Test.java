@@ -366,7 +366,7 @@ public class Document2Test extends WebDriverTestCase {
                         "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                         "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
                         "<p>a & b</p> &amp; \u0162 \" '" },
-            FF = { "<p>a & b</p> &amp; \u0162 \" '",
+            FF38 = { "<p>a & b</p> &amp; \u0162 \" '",
                         "<p>a & b</p> &amp; \u0162 \" '",
                         "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                         "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
@@ -395,7 +395,8 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "true", "true" },
-            FF = { "error", "error", "false", "false", "false" })
+            FF38 = { "error", "error", "false", "false", "false" },
+            FF45 = { "false", "false", "false", "false", "false" })
     @NotYetImplemented(FF)
     public void queryCommandEnabled() throws Exception {
         final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
