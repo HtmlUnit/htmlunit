@@ -115,7 +115,8 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" })
+    @Alerts(DEFAULT = { "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" },
+            FF45 = { "myattr", "myattr2", "myattr", "myattr2", "myattr2" })
     public void getNamedItem_HTML_Case() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

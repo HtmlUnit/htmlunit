@@ -39,7 +39,7 @@ public class MessageChannelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Message back from the IFrame, Hello from the main page!",
-            FF = "My body, iFrame body")
+            FF38 = "My body, iFrame body")
     public void test() throws Exception {
         final String html = "<html><body>\n"
                 + "<p>My body</p>\n"

@@ -144,8 +144,10 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
                     "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" },
-            FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                    "#% ^[]|\"<>{}\\" })
+            FF38 = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+                    "#% ^[]|\"<>{}\\" },
+            FF45 = { "#a%20b", "§§URL§§#a%20b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+                    "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" })
     public void hashEncoding() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
@@ -171,7 +173,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
-            FF = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" })
+            FF38 = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" })
     public void hashEncoding2() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.location.hash = 'myDataTable=foo%3Dojkoj';\n"
@@ -187,7 +189,8 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "#üöä", "§§URL§§#üöä" },
-            FF = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" })
+            FF38 = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" },
+            FF45 = { "#%C3%BC%C3%B6%C3%A4", "§§URL§§#%C3%BC%C3%B6%C3%A4" })
     public void hashEncoding3() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.location.hash = 'üöä';\n"
@@ -202,7 +205,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("#<a>foobar</a>")
+    @Alerts(DEFAULT = "#<a>foobar</a>",
+            FF45 = "#%3Ca%3Efoobar%3C/a%3E")
     public void hash() throws Exception {
         checkHash(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>");
     }
@@ -560,7 +564,8 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "foo3.html", "foo2.html" },
-            CHROME = {"", "foo2.html" })
+            CHROME = {"", "foo2.html" },
+            FF45 = {"", "foo2.html" })
     public void onlick_set_location_WithHref() throws Exception {
         final String html =
             "<html><head></head>\n"
