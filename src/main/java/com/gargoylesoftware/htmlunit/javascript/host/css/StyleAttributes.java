@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff45up;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow45;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 
 import java.util.ArrayList;
@@ -1284,15 +1286,15 @@ final class StyleAttributes {
 
         /** The style property {@code MozTextDecorationColor}. */
         MOZ_TEXT_DECORATION_COLOR("MozTextDecorationColor",
-                "-moz-text-decoration-color", ff("rgb(0, 0, 0)")),
+                "-moz-text-decoration-color", ffBelow45("rgb(0, 0, 0)")),
 
         /** The style property {@code MozTextDecorationLine}. */
         MOZ_TEXT_DECORATION_LINE("MozTextDecorationLine",
-                "-moz-text-decoration-line", ff("none")),
+                "-moz-text-decoration-line", ffBelow45("none")),
 
         /** The style property {@code MozTextDecorationStyle}. */
         MOZ_TEXT_DECORATION_STYLE("MozTextDecorationStyle",
-                "-moz-text-decoration-style", ff("solid")),
+                "-moz-text-decoration-style", ffBelow45("solid")),
 
         /** The style property {@code MozTextSizeAdjust}. */
         MOZ_TEXT_SIZE_ADJUST("MozTextSizeAdjust", "-moz-text-size-adjust",
@@ -1344,7 +1346,7 @@ final class StyleAttributes {
         MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging", ff("no-drag")),
 
         /** The style property {@code MozWindowShadow}. */
-        MOZ_WINDOW_SHADOW("MozWindowShadow", "-moz-window-shadow", ff("default")),
+        MOZ_WINDOW_SHADOW("MozWindowShadow", "-moz-window-shadow", ffBelow45("default")),
 
         /** The style property {@code msAnimation}. */
         MS_ANIMATION("msAnimation", "-ms-animation", ie("")),
@@ -1629,7 +1631,7 @@ final class StyleAttributes {
         ORIENTATION("orientation", "orientation", chrome("")),
 
         /** The style property {@code orphans}. */
-        ORPHANS("orphans", "orphans", ie("2"), chrome("auto"), ff("")),
+        ORPHANS("orphans", "orphans", ie("2"), chrome("auto"), ffBelow45("")),
 
         /** The style property {@code outline}. */
         OUTLINE("outline", "outline", chrome("rgb(0, 0, 0) none 0px"), ff(""), ie("")),
@@ -1705,7 +1707,7 @@ final class StyleAttributes {
         PADDING_TOP_("padding-top", "padding-top", ff("0px")),
 
         /** The style property {@code page}. */
-        PAGE("page", "page", chrome(""), ff("")),
+        PAGE("page", "page", chrome(""), ffBelow45("")),
 
         /** The style property {@code pageBreakAfter}. */
         PAGE_BREAK_AFTER("pageBreakAfter", "page-break-after", chrome("auto"), ff(""), ie("")),
@@ -1847,7 +1849,7 @@ final class StyleAttributes {
         SHAPE_RENDERING_("shape-rendering", "shape-rendering", ff("auto")),
 
         /** The style property {@code size}. */
-        SIZE("size", "size", chrome(""), ff("")),
+        SIZE("size", "size", chrome(""), ffBelow45("")),
 
         /** The style property {@code speak}. */
         SPEAK("speak", "speak", chrome("normal")),
@@ -2003,7 +2005,7 @@ final class StyleAttributes {
         TEXT_KASHIDA_SPACE("textKashidaSpace", "text-kashida-space", ie("undefined")),
 
         /** The style property {@code textOrientation}. */
-        TEXT_ORIENTATION("textOrientation", "text-orientation", chrome("mixed")),
+        TEXT_ORIENTATION("textOrientation", "text-orientation", chrome("mixed"), ff45up("mixed")),
 
         /** The style property {@code textOverflow}. */
         TEXT_OVERFLOW("textOverflow", "text-overflow", ff("clip"), ie("clip"), chrome("clip")),
@@ -2482,7 +2484,7 @@ final class StyleAttributes {
         WHITE_SPACE_("white-space", "white-space", ff("normal")),
 
         /** The style property {@code widows}. */
-        WIDOWS("widows", "widows", ie("2"), chrome("1"), ff("")),
+        WIDOWS("widows", "widows", ie("2"), chrome("1"), ffBelow45("")),
 
         /** The style property {@code width}. */
         WIDTH("width", "width", chrome("skipped"), ff(""), ie("")),
@@ -2512,7 +2514,7 @@ final class StyleAttributes {
         WORD_WRAP_("word-wrap", "word-wrap", ff("normal")),
 
         /** The style property {@code writingMode}. */
-        WRITING_MODE("writingMode", "writing-mode", ie("undefined"), chrome("horizontal-tb")),
+        WRITING_MODE("writingMode", "writing-mode", ie("undefined"), chrome("horizontal-tb"), ff45up("horizontal-tb")),
 
         /** The style property {@code x}. */
         X("x", "x", chrome("0px")),
