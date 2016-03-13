@@ -193,7 +193,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "[object CSSCharsetRule]")
+            FF38 = "[object CSSCharsetRule]")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
     }
