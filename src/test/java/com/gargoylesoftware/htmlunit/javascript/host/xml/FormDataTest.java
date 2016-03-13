@@ -54,7 +54,8 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("function, undefined, undefined, undefined, undefined, undefined")
+    @Alerts(DEFAULT = "function, undefined, undefined, undefined, undefined, undefined",
+            FF45 = "function, function, function, function, function, function")
     public void functions() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

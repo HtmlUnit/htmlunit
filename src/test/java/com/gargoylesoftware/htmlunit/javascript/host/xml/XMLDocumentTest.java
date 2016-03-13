@@ -866,9 +866,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false" },
-            CHROME = { "true", "true" },
-            FF38 = { "true", "true" })
+    @Alerts(DEFAULT = { "true", "true" },
+            IE = { "false", "false" })
     // XML ID handling not yet correctly implemented
     public void getElementById_html() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
