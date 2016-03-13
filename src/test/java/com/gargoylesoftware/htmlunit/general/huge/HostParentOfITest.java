@@ -2944,6 +2944,26 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _PerformanceEntry_PerformanceMeasure() throws Exception {
+        test("PerformanceEntry", "PerformanceMeasure");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _PerformanceEntry_PerformanceMark() throws Exception {
+        test("PerformanceEntry", "PerformanceMark");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _PerformanceEntry_PerformanceResourceTiming() throws Exception {
         test("PerformanceEntry", "PerformanceResourceTiming");
     }

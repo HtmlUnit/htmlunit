@@ -1209,7 +1209,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "auto", "auto" },
             CHROME = { "", "" })
-    @NotYetImplemented(CHROME)
     public void widthAndHeightDisconnected() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -777,7 +777,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
                    "4:200 OPTIONS localhost/bounce?null,0 " })
     @NotYetImplemented(IE)
     // HtmlUnit does not send a body for DELETE and OPTIONS requests
-    public void open_methodNYI() throws Exception {
+    public void open_method2() throws Exception {
         final String test = ""
             // DELETE
             + "try {\n"

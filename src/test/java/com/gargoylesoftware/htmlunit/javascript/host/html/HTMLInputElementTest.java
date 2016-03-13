@@ -95,8 +95,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = { "", "", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "", "50" })
     @Test
     @NotYetImplemented
-    public void setValueStringNYI() throws Exception {
-        testValueNYI("'abc'");
+    public void setValueString2() throws Exception {
+        testValue2("'abc'");
     }
 
     /**
@@ -124,8 +124,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = { "", "", "", "", "", "", "", "", "", "", "50" })
     @Test
     @NotYetImplemented
-    public void setValueEmptyStringNYI() throws Exception {
-        testValueNYI("''");
+    public void setValueEmptyString2() throws Exception {
+        testValue2("''");
     }
 
     /**
@@ -153,8 +153,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = { "", "", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "", "50" })
     @Test
     @NotYetImplemented
-    public void setValueBlankStringNYI() throws Exception {
-        testValueNYI("'  '");
+    public void setValueBlankString2() throws Exception {
+        testValue2("'  '");
     }
 
     /**
@@ -182,8 +182,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = { "", "", "12", "12", "12", "12", "12", "12", "12", "12", "12" })
     @Test
     @NotYetImplemented
-    public void setValueNumberNYI() throws Exception {
-        testValueNYI("12");
+    public void setValueNumber2() throws Exception {
+        testValue2("12");
     }
 
     /**
@@ -211,8 +211,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = { "", "", "", "", "", "", "", "", "", "", "50" })
     @Test
     @NotYetImplemented
-    public void setValueNullNYI() throws Exception {
-        testValueNYI("null");
+    public void setValueNull2() throws Exception {
+        testValue2("null");
     }
 
     private void testValue(final String value) throws Exception {
@@ -319,7 +319,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-    private void testValueNYI(final String value) throws Exception {
+    private void testValue2(final String value) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"

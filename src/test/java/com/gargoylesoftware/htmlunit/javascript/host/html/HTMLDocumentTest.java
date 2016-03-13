@@ -1063,7 +1063,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({ "1", "2" })
     @NotYetImplemented
-    public void getElementsByName_changedAfterGet_nyi() throws Exception {
+    public void getElementsByName_changedAfterGet2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1173,7 +1173,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({ "1", "2" })
     @NotYetImplemented
-    public void getElementsByName_changedAfterGet_nested_nyi() throws Exception {
+    public void getElementsByName_changedAfterGet_nested2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

@@ -775,6 +775,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getHeight() {
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()) {
+            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
             return "auto";
         }
         final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
@@ -1946,6 +1949,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()) {
+            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
             return "auto";
         }
 

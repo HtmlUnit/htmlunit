@@ -4382,10 +4382,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-        FF38 = "0, 2, 2",
-        FF45 = "0, 2, 2",
-        IE = "2, 0, 2")
+    @Alerts("0, 2, 2")
     public void ajax__jQuery_ajax___HEAD_requests() throws Exception {
         runTest("ajax: jQuery.ajax - HEAD requests");
     }
