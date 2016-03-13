@@ -1,0 +1,61 @@
+Passed: 59
+Failed: 6
+ok - initial x position
+ok - initial y position
+ok - x position with offsetParent border
+ok - y position with offsetParent border
+ok - updated x position
+ok - updated y position
+ok - updated x position (using relativeTo parameter)
+ok - updated y position (using relativeTo parameter)
+ok - passthrough x position
+ok - passthrough y position
+ok - passthrough x position (using relativeTo parameter)
+ok - passthrough y position (using relativeTo parameter)
+ok - invalid element should return an undefined position
+ok - updated only x position
+ok - not updated y position
+ok - test getStyle selector case
+ok - test getStyle camel case
+ok - test computed getStyle selector case
+ok - test computed getStyle camel case
+ok - test getStyle opacity
+ok - test getOpacity
+ok - test setOpacity
+ok - test setOpacity
+ok - test setOpacity
+ok - getStyle of float
+ok - getStyle of cssFloat
+ok - getStyle of styleFloat
+ok - getStyle of float when unset
+ok - setStyle of CSS float
+ok - setStyle of CSS cssFloat
+ok - setStyle of CSS styleFloat
+ok - getElementDimensions w ok
+ok - getElementDimensions h ok
+ok - getElementDimensions content w ok
+ok - getElementDimensions content h ok
+ok - setElementDimensions w ok
+ok - setElementDimensions h ok
+ok - setElementDimensions only w ok
+ok - setElementDimensions h not updated ok
+ok - getElementDimensions w ok when display none
+ok - getElementDimensions h ok when display none
+ok - getElementDimensions w ok when CSS display none
+ok - getElementDimensions h ok when CSS display none
+ok - getElementDimensions modified element display
+ok - test getViewportDimensions w
+ok - test getViewportDimensions h
+ok - test getViewportPosition x
+ok - test getViewportPosition y
+ok - default left table cell content w ok
+ok - default middle table cell content w ok
+ok - default right table cell content w ok
+ok - collapsed left table cell content w ok
+ok - collapsed middle table cell content w ok
+ok - collapsed right table cell content w ok
+ok - make clipping on overflow-x
+ok - make clipping on overflow-y
+ok - undo clipping on overflow-x
+ok - undo clipping on overflow-y
+ok - test suite finished!
