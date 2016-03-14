@@ -168,11 +168,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     private boolean directlyAttachedToPage_;
 
-    private Collection<DomChangeListener> domListeners_;
     private final Object listeners_lock_ = new Serializable() { };
 
     /** The listeners which are to be notified of characterData change. */
     private Collection<CharacterDataChangeListener> characterDataListeners_;
+
+    private Collection<DomChangeListener> domListeners_;
 
     /**
      * Creates a new instance.
@@ -1700,16 +1701,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         WebAssert.notNull("listener", listener);
 
         synchronized (listeners_lock_) {
-            final Collection<DomChangeListener> newListeners;
             if (domListeners_ == null) {
-                newListeners = new LinkedHashSet<>();
+                domListeners_ = new LinkedHashSet<>();
             }
-            else {
-                newListeners = new LinkedHashSet<>(domListeners_.size() + 1);
-                newListeners.addAll(domListeners_);
-            }
-            newListeners.add(listener);
-            domListeners_ = newListeners;
+            domListeners_.add(listener);
         }
     }
 
@@ -1725,10 +1720,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         synchronized (listeners_lock_) {
             if (domListeners_ != null) {
-                final Collection<DomChangeListener> newListeners = new LinkedHashSet<>(domListeners_);
-                if (newListeners.remove(listener)) {
-                    domListeners_ = newListeners;
-                }
+                domListeners_.remove(listener);
             }
         }
     }
@@ -1743,9 +1735,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param addedNode the node that was added
      */
     protected void fireNodeAdded(final DomNode parentNode, final DomNode addedNode) {
-        if (domListeners_ != null) {
+        final List<DomChangeListener> listeners = safeGetDomListeners();
+        if (listeners != null) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, addedNode);
-            for (final DomChangeListener listener : domListeners_) {
+            for (final DomChangeListener listener : listeners) {
                 listener.nodeAdded(event);
             }
         }
@@ -1765,16 +1758,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         WebAssert.notNull("listener", listener);
 
         synchronized (listeners_lock_) {
-            final Collection<CharacterDataChangeListener> newListeners;
             if (characterDataListeners_ == null) {
-                newListeners = new LinkedHashSet<>();
+                characterDataListeners_ = new LinkedHashSet<>();
             }
-            else {
-                newListeners = new LinkedHashSet<>(characterDataListeners_.size() + 1);
-                newListeners.addAll(characterDataListeners_);
-            }
-            newListeners.add(listener);
-            characterDataListeners_ = newListeners;
+            characterDataListeners_.add(listener);
         }
     }
 
@@ -1790,11 +1777,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         synchronized (listeners_lock_) {
             if (characterDataListeners_ != null) {
-                final Collection<CharacterDataChangeListener> newListeners
-                        = new LinkedHashSet<>(characterDataListeners_);
-                if (newListeners.remove(listener)) {
-                    characterDataListeners_ = newListeners;
-                }
+                characterDataListeners_.remove(listener);
             }
         }
     }
@@ -1808,9 +1791,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param oldValue the old value
      */
     protected void fireCharacterDataChanged(final DomCharacterData charcterData, final String oldValue) {
-        if (characterDataListeners_ != null) {
+        final List<CharacterDataChangeListener> listeners = safeGetCharacterDataListeners();
+        if (listeners != null) {
             final CharacterDataChangeEvent event = new CharacterDataChangeEvent(charcterData, oldValue);
-            for (final CharacterDataChangeListener listener : characterDataListeners_) {
+            for (final CharacterDataChangeListener listener : listeners) {
                 listener.characterDataChanged(event);
             }
         }
@@ -1829,14 +1813,35 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param deletedNode the node that was deleted
      */
     protected void fireNodeDeleted(final DomNode parentNode, final DomNode deletedNode) {
-        if (domListeners_ != null) {
+        final List<DomChangeListener> listeners = safeGetDomListeners();
+        if (listeners != null) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, deletedNode);
-            for (final DomChangeListener listener : domListeners_) {
+            for (final DomChangeListener listener : listeners) {
                 listener.nodeDeleted(event);
             }
         }
         if (parent_ != null) {
             parent_.fireNodeDeleted(parentNode, deletedNode);
+        }
+    }
+
+    private List<DomChangeListener> safeGetDomListeners() {
+        synchronized (listeners_lock_) {
+            if (domListeners_ == null) {
+                return null;
+            }
+
+            return new ArrayList<>(domListeners_);
+        }
+    }
+
+    private List<CharacterDataChangeListener> safeGetCharacterDataListeners() {
+        synchronized (listeners_lock_) {
+            if (characterDataListeners_ == null) {
+                return null;
+            }
+
+            return new ArrayList<>(characterDataListeners_);
         }
     }
 
