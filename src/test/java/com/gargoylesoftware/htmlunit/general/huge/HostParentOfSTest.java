@@ -2660,8 +2660,9 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _ScreenOrientation_ScreenOrientation() throws Exception {
         test("ScreenOrientation", "ScreenOrientation");
     }
@@ -2685,4 +2686,25 @@ public class HostParentOfSTest extends HostParentOf {
     public void _SyncManager_SyncManager() throws Exception {
         test("SyncManager", "SyncManager");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _SourceBufferList_SourceBufferList() throws Exception {
+        test("SourceBufferList", "SourceBufferList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _SourceBuffer_SourceBuffer() throws Exception {
+        test("SourceBuffer", "SourceBuffer");
+    }
+
 }

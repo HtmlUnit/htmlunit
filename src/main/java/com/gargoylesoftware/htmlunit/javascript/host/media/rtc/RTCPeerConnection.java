@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.media.rtc;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * A JavaScript object for {@code RTCPeerConnection}.
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(value = FF, minVersion = 45))
-public class RTCPeerConnection extends SimpleScriptable {
+public class RTCPeerConnection extends EventTarget {
 
     /**
      * Creates an instance.

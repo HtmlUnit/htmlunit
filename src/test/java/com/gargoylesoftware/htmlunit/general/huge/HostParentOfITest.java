@@ -1973,7 +1973,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF38 = "false")
     public void _MessageChannel_MessageChannel() throws Exception {
         test("MessageChannel", "MessageChannel");
     }
@@ -2510,8 +2510,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _MediaSource_MediaSource() throws Exception {
         test("MediaSource", "MediaSource");
     }
@@ -2565,8 +2566,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _RTCSessionDescription_RTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "RTCSessionDescription");
     }
@@ -2759,8 +2761,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _MediaKeyMessageEvent_MediaKeyMessageEvent() throws Exception {
         test("MediaKeyMessageEvent", "MediaKeyMessageEvent");
     }
@@ -2770,8 +2773,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _MediaKeySession_MediaKeySession() throws Exception {
         test("MediaKeySession", "MediaKeySession");
     }
@@ -2781,8 +2785,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _MediaKeyStatusMap_MediaKeyStatusMap() throws Exception {
         test("MediaKeyStatusMap", "MediaKeyStatusMap");
     }
@@ -2792,8 +2797,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _MediaKeySystemAccess_MediaKeySystemAccess() throws Exception {
         test("MediaKeySystemAccess", "MediaKeySystemAccess");
     }
@@ -2803,8 +2809,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _MediaKeys_MediaKeys() throws Exception {
         test("MediaKeys", "MediaKeys");
     }
@@ -2836,8 +2843,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _Request_Request() throws Exception {
         test("Request", "Request");
     }
@@ -2847,8 +2855,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _Response_Response() throws Exception {
         test("Response", "Response");
     }
@@ -3014,8 +3023,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _ImageBitmap_ImageBitmap() throws Exception {
         test("ImageBitmap", "ImageBitmap");
     }
@@ -3025,8 +3035,9 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _MediaEncryptedEvent_MediaEncryptedEvent() throws Exception {
         test("MediaEncryptedEvent", "MediaEncryptedEvent");
     }
@@ -3474,8 +3485,9 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _RTCCertificate_RTCCertificate() throws Exception {
         test("RTCCertificate", "RTCCertificate");
     }
@@ -3534,8 +3546,9 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _RTCPeerConnection_RTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "RTCPeerConnection");
     }
@@ -3556,18 +3569,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF45 = "true")
-    public void _SourceBufferList_SourceBufferList() throws Exception {
-        test("SourceBufferList", "SourceBufferList");
+    public void _RTCSessionDescription_mozRTCSessionDescription() throws Exception {
+        test("RTCSessionDescription", "mozRTCSessionDescription");
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    public void _SourceBuffer_SourceBuffer() throws Exception {
-        test("SourceBuffer", "SourceBuffer");
-    }
-
 }

@@ -1785,8 +1785,9 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _Headers_Headers() throws Exception {
         test("Headers", "Headers");
     }

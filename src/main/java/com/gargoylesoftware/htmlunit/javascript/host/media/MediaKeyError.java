@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.media;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
  * A JavaScript object for {@code MediaKeyError}.
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(value = FF, minVersion = 45))
-public class MediaKeyError extends SimpleScriptable {
+public class MediaKeyError extends Event {
 
     /**
      * Creates an instance.

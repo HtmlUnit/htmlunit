@@ -5007,8 +5007,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _EventTarget_MediaSource() throws Exception {
         test("EventTarget", "MediaSource");
     }
@@ -5390,8 +5391,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _EventTarget_MediaKeySession() throws Exception {
         test("EventTarget", "MediaKeySession");
     }
@@ -5400,8 +5402,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _Event_MediaKeyMessageEvent() throws Exception {
         test("Event", "MediaKeyMessageEvent");
     }
@@ -5697,8 +5700,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _EventTarget_TextTrackCue() throws Exception {
         test("EventTarget", "TextTrackCue");
     }
@@ -5917,8 +5921,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _Event_MediaEncryptedEvent() throws Exception {
         test("Event", "MediaEncryptedEvent");
     }
@@ -5937,8 +5942,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _FontFace_FontFace() throws Exception {
         test("FontFace", "FontFace");
     }
@@ -5987,8 +5993,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _CacheStorage_CacheStorage() throws Exception {
         test("CacheStorage", "CacheStorage");
     }
@@ -5997,8 +6004,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _Cache_Cache() throws Exception {
         test("Cache", "Cache");
     }
