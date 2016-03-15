@@ -29,7 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * A JavaScript object for {@code CanvasRenderingContext2D}.
+ * The default implementation of {@link RenderingBackend}.
  *
  * @author Ronald Brill
  */

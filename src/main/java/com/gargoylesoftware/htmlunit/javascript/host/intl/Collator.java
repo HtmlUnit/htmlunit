@@ -19,7 +19,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code Intl.Collator}.
+ * A JavaScript object for {@code Collator}.
  *
  * @author Ahmed Ashour
  */

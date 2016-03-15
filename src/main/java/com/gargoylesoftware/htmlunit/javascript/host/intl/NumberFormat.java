@@ -19,7 +19,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code Intl.NumberFormat}.
+ * A JavaScript object for {@code NumberFormat}.
  *
  * @author Ahmed Ashour
  */

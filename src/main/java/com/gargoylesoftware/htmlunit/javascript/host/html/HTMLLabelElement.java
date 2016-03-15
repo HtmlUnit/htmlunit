@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code Label}.
+ * A JavaScript object for {@code HTMLLabelElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

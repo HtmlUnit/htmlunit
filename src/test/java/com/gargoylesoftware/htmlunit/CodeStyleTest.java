@@ -157,6 +157,7 @@ public class CodeStyleTest {
                 loggingEnabled(lines, relativePath);
                 browserVersion_isIE(lines, relativePath);
                 alerts(lines, relativePath);
+                className(lines, relativePath);
                 classNameUsed(lines, classNames, relativePath);
             }
         }
@@ -648,13 +649,36 @@ public class CodeStyleTest {
      * Verifies that the class name is used.
      */
     private void classNameUsed(final List<String> lines, final List<String> classNames, final String relativePath) {
-        String fileName = relativePath.substring(0, relativePath.length() - 5);
-        fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+        String simpleName = relativePath.substring(0, relativePath.length() - 5);
+        simpleName = simpleName.substring(simpleName.lastIndexOf(File.separator) + 1);
         for (final String line : lines) {
             for (final Iterator<String> it = classNames.iterator(); it.hasNext();) {
                 final String className = it.next();
-                if (line.contains(className) && !className.equals(fileName)) {
+                if (line.contains(className) && !className.equals(simpleName)) {
                     it.remove();
+                }
+            }
+        }
+    }
+
+    /**
+     * Verifies that the class name is used.
+     */
+    private void className(final List<String> lines, final String relativePath) {
+        if (relativePath.contains("src") && relativePath.contains("host")) {
+            String fileName = relativePath.substring(0, relativePath.length() - 5);
+            fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+            for (final String line : lines) {
+                if (line.startsWith(" * ")) {
+                    int p0 = line.indexOf("{@code ");
+                    if (p0 != -1) {
+                        p0 = p0 + "{@code ".length();
+                        final int p1 = line.indexOf('}',  p0 + 1);
+                        final String name = line.substring(p0,  p1);
+                        if (!name.equals(fileName)) {
+                            addFailure("Incorrect host class in " + relativePath);
+                        }
+                    }
                 }
             }
         }

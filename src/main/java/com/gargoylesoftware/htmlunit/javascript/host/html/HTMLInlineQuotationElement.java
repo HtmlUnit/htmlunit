@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object {@code HtmlInlineQuotation}.
+ * The JavaScript object {@code HTMLInlineQuotationElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

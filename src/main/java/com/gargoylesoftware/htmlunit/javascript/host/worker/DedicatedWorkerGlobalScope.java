@@ -46,7 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * The scope for the execution of {@code Worker}s.
+ * The scope for the execution of {@link Worker}s.
  *
  * @author Marc Guillemot
  */

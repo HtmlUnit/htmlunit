@@ -19,7 +19,7 @@ import java.io.IOException;
 import javax.imageio.ImageReader;
 
 /**
- * Simple no-op impl of {@code RenderingContext}.
+ * Simple no-op impl of {@link RenderingBackend}.
  *
  * @author Ronald Brill
  */

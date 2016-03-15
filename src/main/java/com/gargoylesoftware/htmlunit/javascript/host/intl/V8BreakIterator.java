@@ -33,7 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * A JavaScript object for {@code Intl.v8BreakIterator}.
+ * A JavaScript object for {@code V8BreakIterator}.
  *
  * @author Ahmed Ashour
  */

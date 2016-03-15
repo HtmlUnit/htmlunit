@@ -19,7 +19,8 @@ import java.io.IOException;
 import javax.imageio.ImageReader;
 
 /**
- * Interface to the rendering context used by {@code CanvasRenderingContext2D}.
+ * Interface to the rendering context used by
+ * {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D}.
  * We have this abstraction to support GAE also.
  *
  * @author Ronald Brill

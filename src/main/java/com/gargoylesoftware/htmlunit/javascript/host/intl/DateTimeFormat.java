@@ -36,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * A JavaScript object for {@code Intl.DateTimeFormat}.
+ * A JavaScript object for {@code DateTimeFormat}.
  *
  * @author Ahmed Ashour
  */
