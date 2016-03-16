@@ -98,7 +98,7 @@ public class RecursiveFunctionObject extends FunctionObject {
      * @return the browser version
      */
     public BrowserVersion getBrowserVersion() {
-        Scriptable parent = this.getParentScope();
+        Scriptable parent = getParentScope();
         while (!(parent instanceof Window)) {
             parent = parent.getParentScope();
         }

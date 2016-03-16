@@ -60,7 +60,7 @@ public class SVGRect extends SimpleScriptable {
      */
     @JsxSetter
     public void setX(final double x) {
-        this.xValue_ = x;
+        xValue_ = x;
     }
 
     /**
@@ -78,7 +78,7 @@ public class SVGRect extends SimpleScriptable {
      */
     @JsxSetter
     public void setY(final double y) {
-        this.yValue_ = y;
+        yValue_ = y;
     }
 
     /**
@@ -96,7 +96,7 @@ public class SVGRect extends SimpleScriptable {
      */
     @JsxSetter
     public void setWidth(final double width) {
-        this.width_ = width;
+        width_ = width;
     }
 
     /**
@@ -114,7 +114,7 @@ public class SVGRect extends SimpleScriptable {
      */
     @JsxSetter
     public void setHeigth(final double height) {
-        this.height_ = height;
+        height_ = height;
     }
 
 }

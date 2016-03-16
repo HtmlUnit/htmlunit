@@ -62,7 +62,7 @@ public class HtmlUnitScriptable extends ScriptableObject {
      * @param className the class name.
      */
     public void setClassName(final String className) {
-        this.className_ = className;
+        className_ = className;
     }
 
     /**

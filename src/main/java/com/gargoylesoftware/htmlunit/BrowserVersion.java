@@ -618,7 +618,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param vendor the vendor to set
      */
     public void setVendor(final String vendor) {
-        this.vendor_ = vendor;
+        vendor_ = vendor;
     }
 
     /**
@@ -784,7 +784,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param headerNames the header names in ordered manner
      */
     public void setHeaderNamesOrdered(final String[] headerNames) {
-        this.headerNamesOrdered_ = headerNames;
+        headerNamesOrdered_ = headerNames;
     }
 
     @Override

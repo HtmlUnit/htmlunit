@@ -458,7 +458,7 @@ public class WebRequest implements Serializable {
      * @param cloneForHistoryAPI the cloneForHistoryAPI flag value to use
      */
     public void setCloneForHistoryAPI(final boolean cloneForHistoryAPI) {
-        this.cloneForHistoryAPI_ = cloneForHistoryAPI;
+        cloneForHistoryAPI_ = cloneForHistoryAPI;
     }
 
     /**

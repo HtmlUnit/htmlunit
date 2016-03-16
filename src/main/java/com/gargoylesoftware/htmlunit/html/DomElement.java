@@ -1153,7 +1153,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             return null;
         }
 
-        if (!this.handles(event)) {
+        if (!handles(event)) {
             return null;
         }
 
