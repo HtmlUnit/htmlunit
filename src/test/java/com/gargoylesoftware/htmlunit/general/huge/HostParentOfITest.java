@@ -3546,9 +3546,8 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF38 = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
     public void _RTCPeerConnection_RTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "RTCPeerConnection");
     }
