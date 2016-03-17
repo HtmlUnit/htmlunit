@@ -22,6 +22,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -31,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Adam Afeltowicz
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class History2Test extends WebDriverTestCase {
@@ -715,5 +717,37 @@ public class History2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test that a new page loads after history.pushState() is called.
+     * @throws Exception if test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void loadPageAfterPushState() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<title>page1</title>\n"
+                + "<script>\n"
+                + "  function pushState() {\n"
+                + "    window.history.pushState({'key':'value'});\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='pushState()'>\n"
+                + "</body></html>";
+        final String html2 = "<html>\n"
+                + "<head>\n"
+                + "<title>page2</title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals("page1", driver.getTitle());
+
+        loadPage2(html2, URL_SECOND);
+        assertEquals("page2", driver.getTitle());
     }
 }
