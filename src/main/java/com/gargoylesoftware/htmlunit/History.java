@@ -75,6 +75,13 @@ public class History implements Serializable {
     private final WebWindow window_;
 
     /**
+     * Whether or not to ignore calls to {@link #addPage(Page)}; this is a bit hackish (we should probably be using
+     * explicit boolean parameters in the various methods that load new pages), but it does the job for now -- without
+     * any new API cruft.
+     */
+    private transient ThreadLocal<Boolean> ignoreNewPages_;
+
+    /**
      * The {@link HistoryEntry}s in this navigation history.
      */
     private final List<HistoryEntry> entries_ = new ArrayList<>();
@@ -88,6 +95,14 @@ public class History implements Serializable {
      */
     public History(final WebWindow window) {
         window_ = window;
+        initTransientFields();
+    }
+
+    /**
+     * Initializes the transient fields.
+     */
+    private void initTransientFields() {
+        ignoreNewPages_ = new ThreadLocal<>();
     }
 
     /**
@@ -185,6 +200,10 @@ public class History implements Serializable {
      * @param page the page to add to the navigation history
      */
     protected void addPage(final Page page) {
+        final Boolean ignoreNewPages = ignoreNewPages_.get();
+        if (ignoreNewPages != null && ignoreNewPages.booleanValue()) {
+            return;
+        }
         index_++;
         while (entries_.size() > index_) {
             entries_.remove(index_);
@@ -202,13 +221,21 @@ public class History implements Serializable {
      * @throws IOException if an IO error occurs
      */
     private void goToUrlAtCurrentIndex() throws IOException {
-        final HistoryEntry entry = entries_.get(index_);
+        final Boolean old = ignoreNewPages_.get();
+        ignoreNewPages_.set(Boolean.TRUE);
+        try {
 
-        window_.getWebClient().getPage(window_, entry.getWebRequest(), false);
-        final Window jsWindow = (Window) window_.getScriptableObject();
-        if (jsWindow.hasEventHandlers("onpopstate")) {
-            final Event event = new PopStateEvent(jsWindow, Event.TYPE_POPSTATE, entry.getState());
-            jsWindow.executeEventLocally(event);
+            final HistoryEntry entry = entries_.get(index_);
+
+            window_.getWebClient().getPage(window_, entry.getWebRequest(), false);
+            final Window jsWindow = (Window) window_.getScriptableObject();
+            if (jsWindow.hasEventHandlers("onpopstate")) {
+                final Event event = new PopStateEvent(jsWindow, Event.TYPE_POPSTATE, entry.getState());
+                jsWindow.executeEventLocally(event);
+            }
+        }
+        finally {
+            ignoreNewPages_.set(old);
         }
     }
 
@@ -247,5 +274,6 @@ public class History implements Serializable {
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+        initTransientFields();
     }
 }
