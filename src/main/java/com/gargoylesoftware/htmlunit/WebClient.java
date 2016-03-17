@@ -296,8 +296,38 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @see WebRequest
      */
-    @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final WebWindow webWindow, final WebRequest webRequest)
+            throws IOException, FailingHttpStatusCodeException {
+        return getPage(webWindow, webRequest, true);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Send a request to a server and return a Page that represents the
+     * response from the server. This page will be used to populate the provided window.
+     * <p>
+     * The returned {@link Page} will be created by the {@link PageCreator}
+     * configured by {@link #setPageCreator(PageCreator)}, if any.
+     * <p>
+     * The {@link DefaultPageCreator} will create a {@link Page} depending on the content type of the HTTP response,
+     * basically {@link HtmlPage} for HTML content, {@link com.gargoylesoftware.htmlunit.xml.XmlPage} for XML content,
+     * {@link TextPage} for other text content and {@link UnexpectedPage} for anything else.
+     *
+     * @param webWindow the WebWindow to load the result of the request into
+     * @param webRequest the web request
+     * @param addToHistory true if the page should be part of the history
+     * @param <P> the page type
+     * @return the page returned by the server when the specified request was made in the specified window
+     * @throws IOException if an IO error occurs
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
+     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     *
+     * @see WebRequest
+     */
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P getPage(final WebWindow webWindow, final WebRequest webRequest,
+            final boolean addToHistory)
         throws IOException, FailingHttpStatusCodeException {
 
         final Page page = webWindow.getEnclosedPage();
@@ -311,7 +341,10 @@ public class WebClient implements Serializable, AutoCloseable {
                             && !StringUtils.equals(current.getRef(), prev.getRef()))) {
                 // We're just navigating to an anchor within the current page.
                 page.getWebResponse().getWebRequest().setUrl(current);
-                webWindow.getHistory().addPage(page);
+                if (addToHistory) {
+                    webWindow.getHistory().addPage(page);
+                }
+
                 final Window window = (Window) webWindow.getScriptableObject();
                 if (window != null) { // js enabled
                     window.getLocation().setHash(current.getRef());
@@ -2093,11 +2126,10 @@ public class WebClient implements Serializable, AutoCloseable {
                 if (downloadedResponse.urlWithOnlyHashChange_ != null) {
                     final HtmlPage page = (HtmlPage) downloadedResponse.requestingWindow_.getEnclosedPage();
                     final String oldURL = page.getUrl().toExternalForm();
-                    page.getWebResponse().getWebRequest().setUrl(downloadedResponse.urlWithOnlyHashChange_);
-                    page.getWebResponse().getWebRequest()
-                            .setCloneForHistoryAPI(downloadedResponse.request_.isCloneForHistoryAPI());
-                    page.getWebResponse().getWebRequest()
-                            .setState(downloadedResponse.request_.getState());
+                    final WebRequest req = page.getWebResponse().getWebRequest();
+                    req.setUrl(downloadedResponse.urlWithOnlyHashChange_);
+                    req.setCloneForHistoryAPI(downloadedResponse.request_.isCloneForHistoryAPI());
+                    req.setState(downloadedResponse.request_.getState());
                     win.getHistory().addPage(page);
 
                     // update location.hash

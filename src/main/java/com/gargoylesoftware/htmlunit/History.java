@@ -32,23 +32,52 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Adam Afeltowicz
+ * @author Ronald Brill
  */
 public class History implements Serializable {
+
+    /**
+     * The single entry in the history.
+     */
+    private static final class HistoryEntry {
+        private final WebRequest webRequest_;
+
+        private HistoryEntry(final WebRequest webRequest) {
+            webRequest_ = webRequest;
+        }
+
+        private WebRequest getWebRequest() {
+            return webRequest_;
+        }
+
+        private URL getUrl() {
+            return webRequest_.getUrl();
+        }
+
+        /**
+         * Returns the state object.
+         * @return the state object
+         */
+        private Object getState() {
+            return webRequest_.getState();
+        }
+
+        /**
+         * Sets the state object.
+         * @param state the state object to use
+         */
+        public void setState(final Object state) {
+            webRequest_.setState(state);
+        }
+    }
 
     /** The window to which this navigation history belongs. */
     private final WebWindow window_;
 
     /**
-     * The {@link WebRequest}s of the pages in this navigation history.
+     * The {@link HistoryEntry}s in this navigation history.
      */
-    private final List<WebRequest> webRequests_ = new ArrayList<>();
-
-    /**
-     * Whether or not to ignore calls to {@link #addPage(Page)}; this is a bit hackish (we should probably be using
-     * explicit boolean parameters in the various methods that load new pages), but it does the job for now -- without
-     * any new API cruft.
-     */
-    private transient ThreadLocal<Boolean> ignoreNewPages_;
+    private final List<HistoryEntry> entries_ = new ArrayList<>();
 
     /** The current index within the list of pages which make up this navigation history. */
     private int index_ = -1;
@@ -59,14 +88,6 @@ public class History implements Serializable {
      */
     public History(final WebWindow window) {
         window_ = window;
-        initTransientFields();
-    }
-
-    /**
-     * Initializes the transient fields.
-     */
-    private void initTransientFields() {
-        ignoreNewPages_ = new ThreadLocal<>();
     }
 
     /**
@@ -74,7 +95,7 @@ public class History implements Serializable {
      * @return the length of the navigation history
      */
     public int getLength() {
-        return webRequests_.size();
+        return entries_.size();
     }
 
     /**
@@ -91,8 +112,8 @@ public class History implements Serializable {
      * @return the URL at the specified index in the navigation history, or {@code null} if the index is not valid
      */
     public URL getUrl(final int index) {
-        if (index >= 0 && index < webRequests_.size()) {
-            return UrlUtils.toUrlSafe(webRequests_.get(index).getUrl().toExternalForm());
+        if (index >= 0 && index < entries_.size()) {
+            return UrlUtils.toUrlSafe(entries_.get(index).getUrl().toExternalForm());
         }
         return null;
     }
@@ -116,7 +137,7 @@ public class History implements Serializable {
      * @throws IOException if an IO error occurs
      */
     public History forward() throws IOException {
-        if (index_ < webRequests_.size() - 1) {
+        if (index_ < entries_.size() - 1) {
             index_++;
             goToUrlAtCurrentIndex();
         }
@@ -132,7 +153,7 @@ public class History implements Serializable {
      */
     public History go(final int relativeIndex) throws IOException {
         final int i = index_ + relativeIndex;
-        if (i < webRequests_.size() && i >= 0) {
+        if (i < entries_.size() && i >= 0) {
             index_ = i;
             goToUrlAtCurrentIndex();
         }
@@ -144,15 +165,15 @@ public class History implements Serializable {
      */
     @Override
     public String toString() {
-        return webRequests_.toString();
+        return entries_.toString();
     }
 
     /**
      * Removes the current URL from the history.
      */
     public void removeCurrent() {
-        if (index_ >= 0 && index_ < webRequests_.size()) {
-            webRequests_.remove(index_);
+        if (index_ >= 0 && index_ < entries_.size()) {
+            entries_.remove(index_);
             if (index_ > 0) {
                 index_--;
             }
@@ -164,20 +185,16 @@ public class History implements Serializable {
      * @param page the page to add to the navigation history
      */
     protected void addPage(final Page page) {
-        final Boolean ignoreNewPages = ignoreNewPages_.get();
-        if (ignoreNewPages != null && ignoreNewPages.booleanValue()) {
-            return;
-        }
         index_++;
-        while (webRequests_.size() > index_) {
-            webRequests_.remove(index_);
+        while (entries_.size() > index_) {
+            entries_.remove(index_);
         }
         final WebRequest request = page.getWebResponse().getWebRequest();
         final WebRequest newRequest = new WebRequest(request.getUrl(), request.getHttpMethod());
         newRequest.setCloneForHistoryAPI(request.isCloneForHistoryAPI());
         newRequest.setState(request.getState());
         newRequest.setRequestParameters(request.getRequestParameters());
-        webRequests_.add(newRequest);
+        entries_.add(new HistoryEntry(newRequest));
     }
 
     /**
@@ -185,20 +202,13 @@ public class History implements Serializable {
      * @throws IOException if an IO error occurs
      */
     private void goToUrlAtCurrentIndex() throws IOException {
-        final WebRequest request = webRequests_.get(index_);
+        final HistoryEntry entry = entries_.get(index_);
 
-        final Boolean old = ignoreNewPages_.get();
-        try {
-            ignoreNewPages_.set(Boolean.TRUE);
-            window_.getWebClient().getPage(window_, request);
-            final Window jsWindow = (Window) window_.getScriptableObject();
-            if (jsWindow.hasEventHandlers("onpopstate")) {
-                final Event event = new PopStateEvent(jsWindow, Event.TYPE_POPSTATE, request.getState());
-                jsWindow.executeEventLocally(event);
-            }
-        }
-        finally {
-            ignoreNewPages_.set(old);
+        window_.getWebClient().getPage(window_, entry.getWebRequest(), false);
+        final Window jsWindow = (Window) window_.getScriptableObject();
+        if (jsWindow.hasEventHandlers("onpopstate")) {
+            final Event event = new PopStateEvent(jsWindow, Event.TYPE_POPSTATE, entry.getState());
+            jsWindow.executeEventLocally(event);
         }
     }
 
@@ -209,10 +219,11 @@ public class History implements Serializable {
      * @param url the new url to use
      */
     public void replaceState(final Object state, final URL url) {
-        final WebRequest webRequest = webRequests_.get(index_);
-        webRequest.setState(state);
+        final HistoryEntry entry = entries_.get(index_);
+        entry.setState(state);
+
         if (url != null) {
-            webRequest.setUrl(url);
+            entry.getWebRequest().setUrl(url);
         }
     }
 
@@ -222,8 +233,8 @@ public class History implements Serializable {
      * @return the current state object
      */
     public Object getCurrentState() {
-        if (index_ >= 0 && index_ < webRequests_.size()) {
-            return webRequests_.get(index_).getState();
+        if (index_ >= 0 && index_ < entries_.size()) {
+            return entries_.get(index_).getState();
         }
         return null;
     }
@@ -236,7 +247,5 @@ public class History implements Serializable {
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        initTransientFields();
     }
-
 }
