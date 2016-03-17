@@ -39,7 +39,7 @@ public class History implements Serializable {
     /**
      * The single entry in the history.
      */
-    private static final class HistoryEntry {
+    private static final class HistoryEntry implements Serializable {
         private final WebRequest webRequest_;
 
         private HistoryEntry(final WebRequest webRequest) {
