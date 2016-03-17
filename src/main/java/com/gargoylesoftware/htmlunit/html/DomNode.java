@@ -172,8 +172,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /** The listeners which are to be notified of characterData change. */
     private Collection<CharacterDataChangeListener> characterDataListeners_;
+    private List<CharacterDataChangeListener> characterDataListenersList_;
 
     private Collection<DomChangeListener> domListeners_;
+    private List<DomChangeListener> domListenersList_;
 
     /**
      * Creates a new instance.
@@ -1705,6 +1707,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 domListeners_ = new LinkedHashSet<>();
             }
             domListeners_.add(listener);
+            domListenersList_ = null;
         }
     }
 
@@ -1721,6 +1724,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         synchronized (listeners_lock_) {
             if (domListeners_ != null) {
                 domListeners_.remove(listener);
+                domListenersList_ = null;
             }
         }
     }
@@ -1762,6 +1766,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 characterDataListeners_ = new LinkedHashSet<>();
             }
             characterDataListeners_.add(listener);
+            characterDataListenersList_ = null;
         }
     }
 
@@ -1778,6 +1783,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         synchronized (listeners_lock_) {
             if (characterDataListeners_ != null) {
                 characterDataListeners_.remove(listener);
+                characterDataListenersList_ = null;
             }
         }
     }
@@ -1830,8 +1836,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (domListeners_ == null) {
                 return null;
             }
-
-            return new ArrayList<>(domListeners_);
+            if (domListenersList_ == null) {
+                domListenersList_ = new ArrayList<>(domListeners_);
+            }
+            return domListenersList_;
         }
     }
 
@@ -1840,8 +1848,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (characterDataListeners_ == null) {
                 return null;
             }
-
-            return new ArrayList<>(characterDataListeners_);
+            if (characterDataListenersList_ == null) {
+                characterDataListenersList_ = new ArrayList<>(characterDataListeners_);
+            }
+            return characterDataListenersList_;
         }
     }
 
