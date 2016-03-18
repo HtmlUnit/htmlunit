@@ -2113,35 +2113,35 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final HashSet<WebWindow> updatedWindows = new HashSet<>();
         for (int i = queue.size() - 1; i >= 0; --i) {
-            final LoadJob downloadedResponse = queue.get(i);
-            if (downloadedResponse.isOutdated()) {
-                LOG.info("No usage of download: " + downloadedResponse);
+            final LoadJob loadJob = queue.get(i);
+            if (loadJob.isOutdated()) {
+                LOG.info("No usage of download: " + loadJob);
                 continue;
             }
-            final WebWindow window = resolveWindow(downloadedResponse.requestingWindow_,
-                    downloadedResponse.target_);
+
+            final WebWindow window = resolveWindow(loadJob.requestingWindow_, loadJob.target_);
             if (!updatedWindows.contains(window)) {
-                final WebWindow win = openTargetWindow(downloadedResponse.requestingWindow_,
-                        downloadedResponse.target_, "_self");
-                if (downloadedResponse.urlWithOnlyHashChange_ != null) {
-                    final HtmlPage page = (HtmlPage) downloadedResponse.requestingWindow_.getEnclosedPage();
+                final WebWindow win = openTargetWindow(loadJob.requestingWindow_, loadJob.target_, "_self");
+                if (loadJob.urlWithOnlyHashChange_ != null) {
+                    final HtmlPage page = (HtmlPage) loadJob.requestingWindow_.getEnclosedPage();
                     final String oldURL = page.getUrl().toExternalForm();
                     final WebRequest req = page.getWebResponse().getWebRequest();
-                    req.setUrl(downloadedResponse.urlWithOnlyHashChange_);
-                    req.setCloneForHistoryAPI(downloadedResponse.request_.isCloneForHistoryAPI());
-                    req.setState(downloadedResponse.request_.getState());
+                    req.setUrl(loadJob.urlWithOnlyHashChange_);
+
+                    req.setCloneForHistoryAPI(loadJob.request_.isCloneForHistoryAPI());
+                    req.setState(loadJob.request_.getState());
                     win.getHistory().addPage(page);
 
                     // update location.hash
                     final Window jsWindow = (Window) win.getScriptableObject();
                     if (null != jsWindow) {
                         final Location location = jsWindow.getLocation();
-                        location.setHash(oldURL, downloadedResponse.urlWithOnlyHashChange_.getRef());
+                        location.setHash(oldURL, loadJob.urlWithOnlyHashChange_.getRef());
                     }
                 }
                 else {
                     final Page pageBeforeLoad = win.getEnclosedPage();
-                    loadWebResponseInto(downloadedResponse.response_, win);
+                    loadWebResponseInto(loadJob.response_, win);
 
                     // start execution here.
                     if (scriptEngine_ != null) {
@@ -2153,11 +2153,11 @@ public class WebClient implements Serializable, AutoCloseable {
                     }
 
                     // check and report problems if needed
-                    throwFailingHttpStatusCodeExceptionIfNecessary(downloadedResponse.response_);
+                    throwFailingHttpStatusCodeExceptionIfNecessary(loadJob.response_);
                 }
             }
             else {
-                LOG.info("No usage of download: " + downloadedResponse);
+                LOG.info("No usage of download: " + loadJob);
             }
         }
     }
