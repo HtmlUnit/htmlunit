@@ -210,7 +210,6 @@ public class History implements Serializable {
         }
         final WebRequest request = page.getWebResponse().getWebRequest();
         final WebRequest newRequest = new WebRequest(request.getUrl(), request.getHttpMethod());
-        newRequest.setCloneForHistoryAPI(request.isCloneForHistoryAPI());
         newRequest.setState(request.getState());
         newRequest.setRequestParameters(request.getRequestParameters());
         entries_.add(new HistoryEntry(newRequest));
@@ -252,6 +251,18 @@ public class History implements Serializable {
         if (url != null) {
             entry.getWebRequest().setUrl(url);
         }
+    }
+
+    /**
+     * Allows to change history state and url if provided.
+     *
+     * @param state the new state to use
+     * @param url the new url to use
+     * @throws IOException in case of error
+     */
+    public void pushState(final Object state, final String url) throws IOException {
+        final Window jsWindow = (Window) window_.getScriptableObject();
+        jsWindow.getLocation().setHref(url, true, state);
     }
 
     /**

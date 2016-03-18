@@ -151,8 +151,9 @@ public class History extends SimpleScriptable {
      */
     @JsxFunction
     public void pushState(final Object object, final String title, final String url) {
+        final WebWindow w = getWindow().getWebWindow();
         try {
-            getWindow().getLocation().setHref(url, true, object);
+            w.getHistory().pushState(object, url);
         }
         catch (final IOException e) {
             Context.throwAsScriptRuntimeEx(e);

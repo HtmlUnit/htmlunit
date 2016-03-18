@@ -211,6 +211,8 @@ public class Location extends SimpleScriptable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Sets the location URL to an entirely new value.
      *
      * @param newLocation the new location URL
@@ -219,7 +221,7 @@ public class Location extends SimpleScriptable {
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
      */
-    void setHref(final String newLocation, final boolean justHistoryAPIPushState, final Object state)
+    public void setHref(final String newLocation, final boolean justHistoryAPIPushState, final Object state)
             throws IOException {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
