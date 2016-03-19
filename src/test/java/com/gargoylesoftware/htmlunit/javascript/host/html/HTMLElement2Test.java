@@ -690,7 +690,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "something", "null" },
             CHROME = { "something", "0" },
             FF38 = { "something", "innerText not supported" })
-    @NotYetImplemented(CHROME)
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

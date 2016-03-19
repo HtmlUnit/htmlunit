@@ -933,8 +933,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new value for the contents of this element
      */
     @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public void setInnerText(final String value) {
-        setInnerTextImpl(Context.toString(value));
+    public void setInnerText(final Object value) {
+        final String valueString;
+        if (value == null && !getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
+            valueString = null;
+        }
+        else {
+            valueString = Context.toString(value);
+        }
+        setInnerTextImpl(valueString);
     }
 
     /**
