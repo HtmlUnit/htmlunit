@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -52,7 +49,6 @@ public class XMLHttpRequestProgressEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(CHROME)
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -74,7 +70,6 @@ public class XMLHttpRequestProgressEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(CHROME)
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

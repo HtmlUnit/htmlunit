@@ -21,6 +21,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 /**
  * A JavaScript object for {@code XMLHttpRequestProgressEvent}.
  *
@@ -32,7 +36,6 @@ public class XMLHttpRequestProgressEvent extends ProgressEvent {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public XMLHttpRequestProgressEvent() {
     }
 
@@ -43,6 +46,23 @@ public class XMLHttpRequestProgressEvent extends ProgressEvent {
      */
     public XMLHttpRequestProgressEvent(final SimpleScriptable scriptable, final String type) {
         super(scriptable, type);
+    }
+
+    /**
+     * For instantiation in JavaScript.
+     * @param cx the current context
+     * @param args the URIs
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
+     * @throws Exception in case of problem
+     */
+    @JsxConstructor
+    public static Scriptable jsConstructor(
+            final Context cx, final Object[] args, final Function ctorObj,
+            final boolean inNewExpr) throws Exception {
+        throw Context.reportRuntimeError(
+                "Worker Error: Illegal constructor.");
     }
 
 }
