@@ -43,7 +43,9 @@ public class History implements Serializable {
         private final WebRequest webRequest_;
 
         private HistoryEntry(final WebRequest webRequest) {
-            webRequest_ = webRequest;
+            webRequest_ = new WebRequest(webRequest.getUrl(), webRequest.getHttpMethod());
+            webRequest_.setState(webRequest.getState());
+            webRequest_.setRequestParameters(webRequest.getRequestParameters());
         }
 
         private WebRequest getWebRequest() {
@@ -208,11 +210,7 @@ public class History implements Serializable {
         while (entries_.size() > index_) {
             entries_.remove(index_);
         }
-        final WebRequest request = page.getWebResponse().getWebRequest();
-        final WebRequest newRequest = new WebRequest(request.getUrl(), request.getHttpMethod());
-        newRequest.setState(request.getState());
-        newRequest.setRequestParameters(request.getRequestParameters());
-        entries_.add(new HistoryEntry(newRequest));
+        entries_.add(new HistoryEntry(page.getWebResponse().getWebRequest()));
     }
 
     /**

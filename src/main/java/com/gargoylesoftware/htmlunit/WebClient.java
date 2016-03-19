@@ -2125,12 +2125,10 @@ public class WebClient implements Serializable, AutoCloseable {
                 if (loadJob.urlWithOnlyHashChange_ != null) {
                     final HtmlPage page = (HtmlPage) loadJob.requestingWindow_.getEnclosedPage();
                     final String oldURL = page.getUrl().toExternalForm();
+
+                    // update request url
                     final WebRequest req = page.getWebResponse().getWebRequest();
                     req.setUrl(loadJob.urlWithOnlyHashChange_);
-
-                    req.setCloneForHistoryAPI(loadJob.request_.isCloneForHistoryAPI());
-                    req.setState(loadJob.request_.getState());
-                    win.getHistory().addPage(page);
 
                     // update location.hash
                     final Window jsWindow = (Window) win.getScriptableObject();
@@ -2138,6 +2136,11 @@ public class WebClient implements Serializable, AutoCloseable {
                         final Location location = jsWindow.getLocation();
                         location.setHash(oldURL, loadJob.urlWithOnlyHashChange_.getRef());
                     }
+
+                    // add to history
+                    req.setCloneForHistoryAPI(loadJob.request_.isCloneForHistoryAPI());
+                    req.setState(loadJob.request_.getState());
+                    win.getHistory().addPage(page);
                 }
                 else {
                     final Page pageBeforeLoad = win.getEnclosedPage();

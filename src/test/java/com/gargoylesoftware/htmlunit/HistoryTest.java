@@ -66,6 +66,7 @@ public class HistoryTest extends WebDriverTestCase {
 
         driver.navigate().back();
         assertEquals(URL_FIRST + "post2", driver.getCurrentUrl());
+        System.out.println(driver.getPageSource());
         assertTrue(driver.getPageSource().contains("POST"));
         assertTrue(driver.getPageSource().contains("para1=value1"));
     }
@@ -111,7 +112,6 @@ public class HistoryTest extends WebDriverTestCase {
                 writer.write(key + "=" + request.getParameter(key) + "<br>\n");
             }
             writer.write("<a href='post3'>Go to GET</a>\n");
-            writer.close();
         }
     }
 
