@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="fix" dev="asashour">
+                Fix handling of empty Cookies.
+            </action>
             <action type="remove" dev="asashour">
                 BrowserVersion: remove deprecated FIREFOX_31.
             </action>

@@ -470,6 +470,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
 
+    /** Ignore empty cookie. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTTP_COOKIE_IGNORE_EMPTY,
+
     /** Indicates that the start date for two digits cookies is 1970
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).

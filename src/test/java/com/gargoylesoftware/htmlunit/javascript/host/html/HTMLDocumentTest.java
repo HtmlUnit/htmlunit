@@ -1603,7 +1603,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "a", "", "b", "" },
             CHROME = { "", "a", "a", "b", "b" })
-    @NotYetImplemented(CHROME)
     public void cookie_write2() throws Exception {
         final String html =
               "<html>\n"

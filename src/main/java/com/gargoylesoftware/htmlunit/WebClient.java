@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_IGNORE_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_308;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PROTOCOL_DATA;
@@ -2238,13 +2239,14 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param origin the requester
      */
     public void addCookie(final String cookieString, final URL pageUrl, final Object origin) {
+        final BrowserVersion browserVersion = getBrowserVersion();
         final CookieManager cookieManager = getCookieManager();
-        if (cookieManager.isCookiesEnabled()) {
+        if(cookieManager.isCookiesEnabled()
+                && (!cookieString.isEmpty() || !browserVersion.hasFeature(HTTP_COOKIE_IGNORE_EMPTY))) {
             final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
             buffer.append("Set-Cookie: ");
             buffer.append(cookieString);
 
-            final BrowserVersion browserVersion = getBrowserVersion();
             final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
 
             try {
