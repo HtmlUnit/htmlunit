@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_IGNORE_EMPTY;
 import static com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
 
 import java.net.URL;
@@ -283,7 +284,9 @@ public class WebClient2Test extends SimpleWebTestCase {
    */
     @Test
     public void buildCookie() throws Exception {
-        checkCookie("", EMPTY_COOKIE_NAME, "", "/", false, null);
+        if (!getBrowserVersion().hasFeature(HTTP_COOKIE_IGNORE_EMPTY)) {
+            checkCookie("", EMPTY_COOKIE_NAME, "", "/", false, null);
+        }
         checkCookie("toto", EMPTY_COOKIE_NAME, "toto", "/", false, null);
         checkCookie("toto=", "toto", "", "/", false, null);
         checkCookie("toto=foo", "toto", "foo", "/", false, null);
