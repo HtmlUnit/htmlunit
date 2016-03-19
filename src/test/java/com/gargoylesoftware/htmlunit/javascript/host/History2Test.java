@@ -148,32 +148,30 @@ public class History2Test extends WebDriverTestCase {
 
         final long start = (Long) ((JavascriptExecutor) driver).executeScript("return window.history.length");
 
-        if (expectedAlerts.length != 0) {
-            driver.findElement(By.id("myId")).click();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
-            assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
-            assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
-            driver.findElement(By.id("myId2")).click();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
-            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
-            assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
-            driver.navigate().back();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
-            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
-            assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
-            driver.navigate().back();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
-            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
-            assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
-            driver.navigate().forward();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
-            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
-            assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
-            driver.navigate().forward();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
-            assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
-            assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
-        }
+        driver.findElement(By.id("myId")).click();
+        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+        assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+        driver.findElement(By.id("myId2")).click();
+        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+        assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
+        driver.navigate().back();
+        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+        assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+        driver.navigate().back();
+        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+        assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
+        driver.navigate().forward();
+        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+        assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+        driver.navigate().forward();
+        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
+        assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
         assertEquals(1, getMockWebConnection().getRequestCount());
         verifyAlerts(driver, expectedAlerts);
