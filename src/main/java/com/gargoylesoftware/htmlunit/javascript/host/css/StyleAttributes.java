@@ -386,26 +386,50 @@ final class StyleAttributes {
         /** The style property {@code border-inline-end-color}. */
         BORDER_INLINE_END_COLOR("border-inline-end-color", "border-inline-end-color", ff45up("")),
 
+        /** The style property {@code borderInlineEndColor}. */
+        BORDER_INLINE_END_COLOR_("borderInlineEndColor", "border-inline-end-color", ff45up("")),
+
+        /** The style property {@code borderInlineEndStyle}. */
+        BORDER_INLINE_END_STYLE("borderInlineEndStyle", "border-inline-end-style", ff45up("")),
+
         /** The style property {@code border-inline-end-style}. */
-        BORDER_INLINE_END_STYLE("border-inline-end-style", "border-inline-end-style", ff45up("")),
+        BORDER_INLINE_END_STYLE_("border-inline-end-style", "border-inline-end-style", ff45up("")),
+
+        /** The style property {@code borderInlineEndWidth}. */
+        BORDER_INLINE_END_WIDTH("borderInlineEndWidth", "border-inline-end-width", ff45up("")),
 
         /** The style property {@code border-inline-end-width}. */
-        BORDER_INLINE_END_WIDTH("border-inline-end-width", "border-inline-end-width", ff45up("")),
+        BORDER_INLINE_END_WIDTH_("border-inline-end-width", "border-inline-end-width", ff45up("")),
+
+        /** The style property {@code borderInlineEnd}. */
+        BORDER_INLINE_END("borderInlineEnd", "border-inline-end", ff45up("")),
 
         /** The style property {@code border-inline-end}. */
-        BORDER_INLINE_END("border-inline-end", "border-inline-end", ff45up("")),
+        BORDER_INLINE_END_("border-inline-end", "border-inline-end", ff45up("")),
+
+        /** The style property {@code borderInlineStartColor}. */
+        BORDER_INLINE_START_COLOR("borderInlineStartColor", "border-inline-start-color", ff45up("")),
 
         /** The style property {@code border-inline-start-color}. */
-        BORDER_INLINE_START_COLOR("border-inline-start-color", "border-inline-start-color", ff45up("")),
+        BORDER_INLINE_START_COLOR_("border-inline-start-color", "border-inline-start-color", ff45up("")),
+
+        /** The style property {@code borderInlineStartStyle}. */
+        BORDER_INLINE_START_STYLE("borderInlineStartStyle", "border-inline-start-style", ff45up("")),
 
         /** The style property {@code border-inline-start-style}. */
-        BORDER_INLINE_START_STYLE("border-inline-start-style", "border-inline-start-style", ff45up("")),
+        BORDER_INLINE_START_STYLE_("border-inline-start-style", "border-inline-start-style", ff45up("")),
+
+        /** The style property {@code borderInlineStartWidth}. */
+        BORDER_INLINE_START_WIDTH("borderInlineStartWidth", "border-inline-start-width", ff45up("")),
 
         /** The style property {@code border-inline-start-width}. */
-        BORDER_INLINE_START_WIDTH("border-inline-start-width", "border-inline-start-width", ff45up("")),
+        BORDER_INLINE_START_WIDTH_("border-inline-start-width", "border-inline-start-width", ff45up("")),
+
+        /** The style property {@code borderInlineStart}. */
+        BORDER_INLINE_START("borderInlineStart", "border-inline-start", ff45up("")),
 
         /** The style property {@code border-inline-start}. */
-        BORDER_INLINE_START("border-inline-start", "border-inline-start", ff45up("")),
+        BORDER_INLINE_START_("border-inline-start", "border-inline-start", ff45up("")),
 
         /** The style property {@code borderImageOutset}. */
         BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ff("0 0 0 0"), ie("0"), chrome("0px")),
