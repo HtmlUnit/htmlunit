@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -1218,7 +1219,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
         FF38 = "0, 2, 2",
         FF45 = "1, 1, 2",
         IE = "0, 2, 2")
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({ FF38, IE })
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
     }
