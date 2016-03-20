@@ -43,11 +43,6 @@ import org.apache.xerces.xni.XNIException;
 import org.apache.xerces.xni.parser.XMLInputSource;
 import org.apache.xerces.xni.parser.XMLParseException;
 import org.apache.xerces.xni.parser.XMLParserConfiguration;
-import org.cyberneko.html.HTMLConfiguration;
-import org.cyberneko.html.HTMLEventInfo;
-import org.cyberneko.html.HTMLScanner;
-import org.cyberneko.html.HTMLTagBalancer;
-import org.cyberneko.html.HTMLTagBalancingListener;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
@@ -66,6 +61,12 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
+
+import net.sourceforge.htmlunit.cyberneko.HTMLConfiguration;
+import net.sourceforge.htmlunit.cyberneko.HTMLEventInfo;
+import net.sourceforge.htmlunit.cyberneko.HTMLScanner;
+import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancer;
+import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancingListener;
 
 /**
  * <p>SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
