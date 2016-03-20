@@ -311,7 +311,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
             CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother" },
             IE = { "4", "200", "null", "null", "null", "null" })
-    @NotYetImplemented(CHROME)
     public void preflight() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain");
     }
@@ -323,7 +322,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
             CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type", "x-pingother" },
             IE = { "4", "200", "null", "null", "null", "null" })
-    @NotYetImplemented(CHROME)
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflight_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain;charset=utf-8");
@@ -475,7 +473,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "4", "200", "options_headers", "x-ping,x-pong" },
             CHROME = { "4", "200", "options_headers", "x-ping, x-pong" },
             IE = { "4", "200", "options_headers", "null" })
-    @NotYetImplemented(CHROME)
     public void preflight_many_header_values() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 

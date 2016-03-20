@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Stack;
+import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -116,7 +117,6 @@ public class XMLHttpRequest extends EventTarget {
     public static final int DONE = 4;
 
     private static final String HEADER_ORIGIN = "Origin";
-    private static final char REQUEST_HEADERS_SEPARATOR = ',';
 
     private static final String HEADER_ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
     private static final String HEADER_ACCESS_CONTROL_REQUEST_HEADERS = "Access-Control-Request-Headers";
@@ -711,11 +711,14 @@ public class XMLHttpRequest extends EventTarget {
 
                 // header request-headers
                 final StringBuilder builder = new StringBuilder();
-                for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
+                final boolean acceptContentType
+                    = getBrowserVersion().hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT);
+                for (final Entry<String, String> header
+                        : new TreeMap<>(webRequest_.getAdditionalHeaders()).entrySet()) {
                     final String name = header.getKey().toLowerCase(Locale.ROOT);
-                    if (isPreflightHeader(name, header.getValue())) {
+                    if (isPreflightHeader(name, header.getValue(), acceptContentType)) {
                         if (builder.length() != 0) {
-                            builder.append(REQUEST_HEADERS_SEPARATOR);
+                            builder.append(acceptContentType ? ", " : ",");
                         }
                         builder.append(name);
                     }
@@ -822,9 +825,10 @@ public class XMLHttpRequest extends EventTarget {
         if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST) {
             return true;
         }
+        final boolean acceptContentType = getBrowserVersion().hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT);
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
             if (isPreflightHeader(header.getKey().toLowerCase(Locale.ROOT),
-                    header.getValue())) {
+                    header.getValue(), acceptContentType)) {
                 return true;
             }
         }
@@ -846,7 +850,7 @@ public class XMLHttpRequest extends EventTarget {
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
             final String key = header.getKey().toLowerCase(Locale.ROOT);
-            if (isPreflightHeader(key, header.getValue())
+            if (isPreflightHeader(key, header.getValue(), false)
                     && !headersHeader.contains(key)) {
                 return false;
             }
@@ -857,14 +861,15 @@ public class XMLHttpRequest extends EventTarget {
     /**
      * @param name header name (MUST be lower-case for performance reasons)
      * @param value header value
+     * @param acceptContentType whether to consider {@code content-type} header as preflight or not
      */
-    private boolean isPreflightHeader(final String name, final String value) {
+    private boolean isPreflightHeader(final String name, final String value, final boolean acceptContentType) {
         if ("content-type".equals(name)) {
             final String lcValue = value.toLowerCase(Locale.ROOT);
             if (FormEncodingType.URL_ENCODED.getName().equals(lcValue)
                 || FormEncodingType.MULTIPART.getName().equals(lcValue)
-                || "text/plain".equals(lcValue)
-                || lcValue.startsWith("text/plain;charset=")) {
+                || (!acceptContentType
+                        && ("text/plain".equals(lcValue) || lcValue.startsWith("text/plain;charset=")))) {
                 return false;
             }
             return true;

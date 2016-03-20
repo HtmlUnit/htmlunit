@@ -9,6 +9,9 @@
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: fix XMLHttpRequest CORS handling (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: fix setting .innerText to null (Chrome).
             </action>
             <action type="fix" dev="asashour">
