@@ -735,7 +735,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code searchParams} attribute.
      * @return the {@code searchParams} attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(@WebBrowser(value = FF, maxVersion = 38))
     public String getSearchParams() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
