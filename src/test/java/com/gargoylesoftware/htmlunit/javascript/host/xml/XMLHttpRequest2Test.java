@@ -56,8 +56,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest2Test extends WebDriverTestCase {
-    static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
-        + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
     /**
      * This produced a deadlock situation with HtmlUnit-2.6 and HttmlUnit-2.7-SNAPSHOT on 17.09.09.
@@ -79,12 +77,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Ignore
     public void deadlock() throws Exception {
         final String jsCallSynchXHR = "function callSynchXHR(url) {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', url, false);\n"
             + "  xhr.send('');\n"
             + "}\n";
         final String jsCallASynchXHR = "function callASynchXHR(url) {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  var handler = function() {\n"
             + "    if (xhr.readyState == 4)\n"
             + "      alert(xhr.responseText);\n"
@@ -135,7 +133,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void setRequestHeader() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var xhr = " + XHRInstantiation_ + ";\n"
+            + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'second.html', false);\n"
             + "    xhr.setRequestHeader('Accept', 'text/javascript, application/javascript, */*');\n"
             + "    xhr.setRequestHeader('Accept-Language', 'ar-eg');\n"
@@ -169,7 +167,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String setHeader = headerValue == null ? ""
                 : "xhr.setRequestHeader('Content-length', 1234);\n";
         final String html = "<html><body><script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "xhr.open('POST', 'second.html', false);\n"
             + "var body = '" + body + "';\n"
             + "xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');\n"
@@ -197,7 +195,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "var values = [null, '', ' ', '  \\t  '];\n"
             + "for (var i = 0; i < values.length; i++) {\n"
             + "  try {\n"
@@ -241,7 +239,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', 'foo.xml', false);\n"
             + "  xhr.send('');\n"
             + "  alert(xhr.responseXML);\n"
@@ -260,7 +258,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', 'foo.xml', false);\n"
             + "  xhr.send('');\n"
             + "  var childNodes = xhr.responseXML.childNodes;\n"
@@ -294,7 +292,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', 'foo.xml', false);\n"
             + "  alert(xhr.responseXML);\n"
             + "}\n"
@@ -333,7 +331,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  try {\n"
             + "    xhr.open('GET', '" + url + "', false);\n"
             + "    alert('ok');\n"
@@ -354,7 +352,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void put() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var xhr = " + XHRInstantiation_ + ";\n"
+            + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('PUT', 'second.html', false);\n"
             + "    xhr.send('Something');\n"
             + "  }\n"
@@ -377,7 +375,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Alerts("[object XMLDocument]")
     public void iframeInResponse() throws Exception {
         final String html = "<html><head><script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "xhr.open('GET', 'foo.xml', false);\n"
             + "xhr.send('');\n"
             + "alert(xhr.responseXML);\n"
@@ -401,7 +399,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xhrDownloadInBackground() throws Exception {
         final String html = "<html><head><script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4)\n"
             + "    alert(xhr.responseText);\n"
@@ -428,14 +426,14 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"
             + "function wait() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', '/delay200/foo.txt', false);\n"
             + "  xhr.send('');\n"
             + "}\n"
             + "function doTest() {\n"
             + "  setTimeout(function(){ alert('in timeout');}, 5);\n"
             + "  wait();\n"
-            + "  var xhr2 = " + XHRInstantiation_ + ";\n"
+            + "  var xhr2 = new XMLHttpRequest();\n"
             + "  var handler = function() {\n"
             + "    if (xhr2.readyState == 4)\n"
             + "      alert(xhr2.responseText);\n"
@@ -460,7 +458,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void post() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('POST', '/test2?a=b', false);\n"
             + "  xhr.send('');\n"
             + "  alert(xhr.responseText);\n"
@@ -501,7 +499,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "    <script>\n"
             + "      var xhr;\n"
             + "      function test() {\n"
-            + "        xhr = " + XHRInstantiation_ + ";\n"
+            + "        xhr = new XMLHttpRequest();\n"
             + "        xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "        xhr.onreadystatechange = onStateChange;\n"
             + "        xhr.send('');\n"
@@ -540,7 +538,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "    <script>\n"
             + "      var xhr;\n"
             + "      function test() {\n"
-            + "        xhr = " + XHRInstantiation_ + ";\n"
+            + "        xhr = new XMLHttpRequest();\n"
             + "        xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "        xhr.onreadystatechange = onStateChange;\n"
             + "        xhr.send('');\n"
@@ -581,7 +579,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "    <script>\n"
             + "      var xhr;\n"
             + "      function test() {\n"
-            + "        xhr = " + XHRInstantiation_ + ";\n"
+            + "        xhr = new XMLHttpRequest();\n"
             + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
             + "        xhr.onreadystatechange = onStateChange;\n"
             + "        xhr.send('');\n"
@@ -618,7 +616,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  try {\n"
             + "    xhr.open('GET', '" + URL_CROSS_ORIGIN + "', false);\n"
             + "    alert('ok');\n"
@@ -660,7 +658,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "    <script>\n"
                         + "      var request;\n"
                         + "      function testBasicAuth() {\n"
-                        + "        var request = " + XHRInstantiation_ + ";\n"
+                        + "        var request = new XMLHttpRequest();\n"
                         + "        request.open('GET', '/protected/token', false, 'foo', 'bar');\n"
                         + "        request.send();\n"
                         + "        alert(request.responseText);\n"
@@ -691,7 +689,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "    <script>\n"
                         + "      var request;\n"
                         + "      function testBasicAuth() {\n"
-                        + "        var request = " + XHRInstantiation_ + ";\n"
+                        + "        var request = new XMLHttpRequest();\n"
                         + "        request.open('GET', '" + URL_SECOND + "', false, null, null);\n"
                         + "        request.send();\n"
                         + "        alert(request.responseText);\n"
@@ -715,7 +713,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void patch() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('PATCH', '/test2', false);\n"
             + "  xhr.send('some body data');\n"
             + "  alert(xhr.responseText);\n"

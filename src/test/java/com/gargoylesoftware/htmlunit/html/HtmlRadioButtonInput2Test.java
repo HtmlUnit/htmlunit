@@ -515,7 +515,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "<html><body>\n"
             + "<script>\n"
             + "  alert('send request');\n"
-            + "  var xhr = (window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'));\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', 'foo.xml', false);\n"
             + "  xhr.send('');\n"
             + "  var x = xhr.responseXML;\n" // this is what caused the exception

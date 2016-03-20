@@ -80,11 +80,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     /** Helper. */
     public static final String LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION = ""
             + "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
-            + "    if (window.XMLHttpRequest) {\n"
-            + "      xhttp = new XMLHttpRequest();\n"
-            + "    } else {\n"
-            + "      xhttp = new ActiveXObject(\"Microsoft.XMLHTTP\");\n"
-            + "    }\n"
+            + "    xhttp = new XMLHttpRequest();\n"
             + "    xhttp.open(\"GET\", file, false);\n"
             + "    xhttp.send();\n"
             + "    return xhttp.responseXML;\n"

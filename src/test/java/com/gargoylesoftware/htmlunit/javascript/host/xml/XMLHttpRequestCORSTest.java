@@ -47,9 +47,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
-    private static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
-        + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
-
     /**
      * @throws Exception if the test fails.
      */
@@ -61,7 +58,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void noCorsHeaderCallsErrorHandler() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = '" + URL_THIRD + "';\n"
@@ -93,7 +90,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
@@ -127,7 +124,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
@@ -161,7 +158,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
@@ -195,7 +192,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
@@ -272,7 +269,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
@@ -347,7 +344,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "function test() {\n"
             + "  try {\n"
             + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
@@ -441,7 +438,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
@@ -478,7 +475,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
@@ -516,7 +513,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/withCredentials2';\n"
@@ -541,7 +538,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void withCredentials_setBeforeOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    alert(xhr.withCredentials);\n"
@@ -581,7 +578,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void withCredentials_setBeforeOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    alert(xhr.withCredentials);\n"
@@ -623,7 +620,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void withCredentials_setAfterOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    alert(xhr.withCredentials);\n"
@@ -658,7 +655,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void withCredentials_setAfterOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    alert(xhr.withCredentials);\n"
@@ -748,7 +745,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/withCredentials2';\n"
@@ -812,7 +809,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "</body></html>";
 
         final String js = ""
-                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "var xhr = new XMLHttpRequest();\n"
                 + "  try {\n"
                 + "    var url = '/data';\n"
                 + "    xhr.open('GET', url, true);\n"

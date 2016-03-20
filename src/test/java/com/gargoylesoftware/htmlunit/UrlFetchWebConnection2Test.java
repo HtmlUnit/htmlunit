@@ -44,11 +44,7 @@ public class UrlFetchWebConnection2Test extends SimpleWebTestCase {
     private WebRequest getHeadRequest() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var request;\n"
-            + "    if (window.XMLHttpRequest)\n"
-            + "      request = new XMLHttpRequest();\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "    var request = new XMLHttpRequest();\n"
             + "    request.open('HEAD', 'second.html', false);\n"
             + "    request.setRequestHeader('X-Foo', '123456');\n"
             + "    request.send('');\n"
