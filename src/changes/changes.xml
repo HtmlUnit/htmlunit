@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="update" dev="rbri">
+                History processing changed; now HtmlUnit remembers pages instead of requests.
+            </action>
+            <action type="fix" dev="rbri" issue="1759">
+                Pages are not loaded after History.pushState call.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix XMLHttpRequest CORS handling (Chrome).
             </action>
