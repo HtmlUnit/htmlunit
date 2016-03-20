@@ -92,22 +92,25 @@ final class StyleAttributes {
         ACCELERATOR("accelerator", "accelerator", ie("undefined")),
 
         /** The style property {@code alignContent}. */
-        ALIGN_CONTENT("alignContent", "align-content", ie("stretch"), ff("stretch"), chrome("stretch")),
+        ALIGN_CONTENT("alignContent", "align-content", ie("stretch"),
+                ffBelow45("stretch"), ff45up("auto"), chrome("stretch")),
 
         /** The style property {@code align-content}. */
-        ALIGN_CONTENT_("align-content", "align-content", ff("stretch")),
+        ALIGN_CONTENT_("align-content", "align-content", ffBelow45("stretch"), ff45up("auto")),
 
         /** The style property {@code alignItems}. */
-        ALIGN_ITEMS("alignItems", "align-items", ff("stretch"), ie("stretch"), chrome("stretch")),
+        ALIGN_ITEMS("alignItems", "align-items", ffBelow45("stretch"), ff45up("start"),
+                ie("stretch"), chrome("stretch")),
 
         /** The style property {@code align-items}. */
-        ALIGN_ITEMS_("align-items", "align-items", ff("stretch")),
+        ALIGN_ITEMS_("align-items", "align-items", ffBelow45("stretch"), ff45up("start")),
 
         /** The style property {@code alignSelf}. */
-        ALIGN_SELF("alignSelf", "align-self", ff("stretch"), ie("auto"), chrome("stretch")),
+        ALIGN_SELF("alignSelf", "align-self", ffBelow45("stretch"), ff45up("start"),
+                ie("auto"), chrome("stretch")),
 
         /** The style property {@code align-self}. */
-        ALIGN_SELF_("align-self", "align-self", ff("stretch")),
+        ALIGN_SELF_("align-self", "align-self", ffBelow45("stretch"), ff45up("start")),
 
         /** The style property {@code alignmentBaseline}. */
         ALIGNMENT_BASELINE("alignmentBaseline", "alignment-baseline", ie("auto"), chrome("auto")),
@@ -166,12 +169,14 @@ final class StyleAttributes {
         /** The style property {@code animationTimingFunction}. */
         ANIMATION_TIMING_FUNCTION("animationTimingFunction",
                 "animation-timing-function",
-                ff("cubic-bezier(0.25, 0.1, 0.25, 1)"),
+                ffBelow45("cubic-bezier(0.25, 0.1, 0.25, 1)"),
+                ff45up("ease"),
                 ie("cubic-bezier(0.25, 0.1, 0.25, 1)"), chrome("ease")),
 
         /** The style property {@code animation-timing-function}. */
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function",
-                ff("cubic-bezier(0.25, 0.1, 0.25, 1)")),
+                ffBelow45("cubic-bezier(0.25, 0.1, 0.25, 1)"),
+                ff45up("ease")),
 
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
@@ -264,6 +269,60 @@ final class StyleAttributes {
         /** The style property {@code behavior}. */
         BEHAVIOR("behavior", "behavior"),
 
+        /** The style property {@code blockSize}. */
+        BLOCK_SIZE("blockSize", "block-size", ff45up("")),
+
+        /** The style property {@code block-size}. */
+        BLOCK_SIZE_("block-size", "block-size", ff45up("")),
+
+        /** The style property {@code borderBlockEndColor}. */
+        BORDER_BLOCK_END_COLOR("borderBlockEndColor", "border-block-end-color", ff45up("")),
+
+        /** The style property {@code border-block-end-color}. */
+        BORDER_BLOCK_END_COLOR_("border-block-end-color", "border-block-end-color", ff45up("")),
+
+        /** The style property {@code borderBlockEndStyle}. */
+        BORDER_BLOCK_END_STYLE("borderBlockEndStyle", "border-block-end-style", ff45up("")),
+
+        /** The style property {@code border-block-end-style}. */
+        BORDER_BLOCK_END_STYLE_("border-block-end-style", "border-block-end-style", ff45up("")),
+
+        /** The style property {@code borderBlockEndWidth}. */
+        BORDER_BLOCK_END_WIDTH("borderBlockEndWidth", "border-block-end-width", ff45up("")),
+
+        /** The style property {@code border-block-end-width}. */
+        BORDER_BLOCK_END_WIDTH_("border-block-end-width", "border-block-end-width", ff45up("")),
+
+        /** The style property {@code borderBlockEnd}. */
+        BORDER_BLOCK_END("borderBlockEnd", "border-block-end", ff45up("")),
+
+        /** The style property {@code border-block-end}. */
+        BORDER_BLOCK_END_("border-block-end", "border-block-end", ff45up("")),
+
+        /** The style property {@code borderBlockStartColor}. */
+        BORDER_BLOCK_START_COLOR("borderBlockStartColor", "border-block-start-color", ff45up("")),
+
+        /** The style property {@code border-block-start-color}. */
+        BORDER_BLOCK_START_COLOR_("border-block-start-color", "border-block-start-color", ff45up("")),
+
+        /** The style property {@code borderBlockStartStyle}. */
+        BORDER_BLOCK_START_STYLE("borderBlockStartStyle", "border-block-start-style", ff45up("")),
+
+        /** The style property {@code border-block-start-style}. */
+        BORDER_BLOCK_START_STYLE_("border-block-start-style", "border-block-start-style", ff45up("")),
+
+        /** The style property {@code borderBlockStartWidth}. */
+        BORDER_BLOCK_START_WIDTH("borderBlockStartWidth", "border-block-start-width", ff45up("")),
+
+        /** The style property {@code border-block-start-width}. */
+        BORDER_BLOCK_START_WIDTH_("border-block-start-width", "border-block-start-width", ff45up("")),
+
+        /** The style property {@code borderBlockStart}. */
+        BORDER_BLOCK_START("borderBlockStart", "border-block-start", ff45up("")),
+
+        /** The style property {@code border-block-start}. */
+        BORDER_BLOCK_START_("border-block-start", "border-block-start", ff45up("")),
+
         /** The style property {@code border}. */
         BORDER("border", "border", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
@@ -323,6 +382,30 @@ final class StyleAttributes {
 
         /** The style property {@code border-image}. */
         BORDER_IMAGE_("border-image", "border-image", ff("")),
+
+        /** The style property {@code border-inline-end-color}. */
+        BORDER_INLINE_END_COLOR("border-inline-end-color", "border-inline-end-color", ff45up("")),
+
+        /** The style property {@code border-inline-end-style}. */
+        BORDER_INLINE_END_STYLE("border-inline-end-style", "border-inline-end-style", ff45up("")),
+
+        /** The style property {@code border-inline-end-width}. */
+        BORDER_INLINE_END_WIDTH("border-inline-end-width", "border-inline-end-width", ff45up("")),
+
+        /** The style property {@code border-inline-end}. */
+        BORDER_INLINE_END("border-inline-end", "border-inline-end", ff45up("")),
+
+        /** The style property {@code border-inline-start-color}. */
+        BORDER_INLINE_START_COLOR("border-inline-start-color", "border-inline-start-color", ff45up("")),
+
+        /** The style property {@code border-inline-start-style}. */
+        BORDER_INLINE_START_STYLE("border-inline-start-style", "border-inline-start-style", ff45up("")),
+
+        /** The style property {@code border-inline-start-width}. */
+        BORDER_INLINE_START_WIDTH("border-inline-start-width", "border-inline-start-width", ff45up("")),
+
+        /** The style property {@code border-inline-start}. */
+        BORDER_INLINE_START("border-inline-start", "border-inline-start", ff45up("")),
 
         /** The style property {@code borderImageOutset}. */
         BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ff("0 0 0 0"), ie("0"), chrome("0px")),
@@ -1063,7 +1146,8 @@ final class StyleAttributes {
         /** The style property {@code MozAnimationTimingFunction}. */
         MOZ_ANIMATION_TIMING_FUNCTION("MozAnimationTimingFunction",
                 "moz-annimation-timing-function",
-                ff("cubic-bezier(0.25, 0.1, 0.25, 1)")),
+                ffBelow45("cubic-bezier(0.25, 0.1, 0.25, 1)"),
+                ff45up("ease")),
 
         /** The style property {@code MozAppearance}. */
         MOZ_APPEARANCE("MozAppearance", "-moz-appearance", ff("none")),
@@ -1224,7 +1308,7 @@ final class StyleAttributes {
         MOZ_OPACITY("MozOpacity", "-moz-opacity"),
 
         /** The style property {@code MozOrient}. */
-        MOZ_ORIENT("MozOrient", "-moz-orient", ff("auto"), ff("horizontal")),
+        MOZ_ORIENT("MozOrient", "-moz-orient", ffBelow45("auto"), ff45up("inline")),
 
         /** The style property {@code MozOutline}. */
         MOZ_OUTLINE("MozOutline", "-moz-outline"),
@@ -1328,7 +1412,8 @@ final class StyleAttributes {
         /** The style property {@code MozTransitionTimingFunction}. */
         MOZ_TRANSITION_TIMING_FUNCTION("MozTransitionTimingFunction",
                 "-moz-transition-timing-function",
-                ff("cubic-bezier(0.25, 0.1, 0.25, 1)")),
+                ffBelow45("cubic-bezier(0.25, 0.1, 0.25, 1)"),
+                ff45up("ease")),
 
         /** The style property {@code MozUserFocus}. */
         MOZ_USER_FOCUS("MozUserFocus", "-moz-user-focus", ff("none")),
