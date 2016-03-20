@@ -90,7 +90,7 @@ public class DocumentType extends Node {
      * Returns the internal subset.
      * @return the internal subset
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter({ @WebBrowser(value = FF, maxVersion = 38), @WebBrowser(IE) })
     public String getInternalSubset() {
         final String subset = ((DomDocumentType) getDomNodeOrDie()).getInternalSubset();
         if (StringUtils.isNotEmpty(subset)) {

@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_CR_NL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED;
@@ -935,7 +936,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45) })
     public void setInnerText(final Object value) {
         final String valueString;
-        if (value == null && !getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
+        if (value == null && getBrowserVersion().hasFeature(JS_INNER_TEXT_VALUE_NULL)) {
             valueString = null;
         }
         else {
