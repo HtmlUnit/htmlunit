@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 
 import java.util.List;
 
@@ -255,7 +254,7 @@ public class StorageTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "function", "null", "string", "value", "1" },
             CHROME = { "function", "null", "string", "null", "0" },
             FF = { "function", "null", "function", "value", "1" })
-    @NotYetImplemented({ FF38 })
+    @NotYetImplemented(FF)
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

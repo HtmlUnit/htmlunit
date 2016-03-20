@@ -132,7 +132,7 @@ public class MessageEvent extends Event {
      * Returns the {@code ports} property.
      * @return the {@code ports} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 45) })
     public Object getPorts() {
         return ports_;
     }
