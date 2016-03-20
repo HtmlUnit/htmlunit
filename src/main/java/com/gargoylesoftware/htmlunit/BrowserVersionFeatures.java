@@ -964,7 +964,7 @@ public enum BrowserVersionFeatures {
     JS_INNER_TEXT_READONLY_FOR_TABLE,
 
     /** Indicates that innerText setter supports null values. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38) })
     JS_INNER_TEXT_VALUE_NULL,
 
     /** Setting the type property of an input converts the type to lowercase. */
