@@ -62,8 +62,6 @@ public class WebRequest implements Serializable {
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List<NameValuePair> requestParameters_ = Collections.emptyList();
     private String requestBody_;
-    private boolean cloneForHistoryAPI_;
-    private Object state_;
 
     /**
      * Instantiates a {@link WebRequest} for the specified URL.
@@ -444,37 +442,4 @@ public class WebRequest implements Serializable {
         buffer.append(">]");
         return buffer.toString();
     }
-
-    /**
-     * Returns the cloneForHistoryAPI flag.
-     * @return the cloneForHistoryAPI flag
-     */
-    public boolean isCloneForHistoryAPI() {
-        return cloneForHistoryAPI_;
-    }
-
-    /**
-     * Sets the cloneForHistoryAPI flag.
-     * @param cloneForHistoryAPI the cloneForHistoryAPI flag value to use
-     */
-    public void setCloneForHistoryAPI(final boolean cloneForHistoryAPI) {
-        cloneForHistoryAPI_ = cloneForHistoryAPI;
-    }
-
-    /**
-     * Returns the state object.
-     * @return the state object
-     */
-    public Object getState() {
-        return state_;
-    }
-
-    /**
-     * Sets the state object.
-     * @param state the state object to use
-     */
-    public void setState(final Object state) {
-        state_ = state;
-    }
-
 }

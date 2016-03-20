@@ -336,10 +336,9 @@ public class WebClient implements Serializable, AutoCloseable {
         if (page != null) {
             final URL prev = page.getUrl();
             final URL current = webRequest.getUrl();
-            if (page.getWebResponse().getWebRequest().isCloneForHistoryAPI()
-                    || (current.sameFile(prev)
-                            && current.getRef() != null
-                            && !StringUtils.equals(current.getRef(), prev.getRef()))) {
+            if (current.sameFile(prev)
+                        && current.getRef() != null
+                        && !StringUtils.equals(current.getRef(), prev.getRef())) {
                 // We're just navigating to an anchor within the current page.
                 page.getWebResponse().getWebRequest().setUrl(current);
                 if (addToHistory) {
@@ -2034,47 +2033,45 @@ public class WebClient implements Serializable, AutoCloseable {
         final URL url = request.getUrl();
         boolean justHashJump = false;
 
-        if (!request.isCloneForHistoryAPI()) {
-            if (win != null && HttpMethod.POST != request.getHttpMethod()) {
-                final Page page = win.getEnclosedPage();
-                if (page != null) {
-                    if (page.isHtmlPage() && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
-                        return;
-                    }
+        if (win != null && HttpMethod.POST != request.getHttpMethod()) {
+            final Page page = win.getEnclosedPage();
+            if (page != null) {
+                if (page.isHtmlPage() && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
+                    return;
+                }
 
-                    if (checkHash) {
-                        final URL current = page.getUrl();
-                        justHashJump =
-                                HttpMethod.GET == request.getHttpMethod()
-                                && url.sameFile(current)
-                                && null != url.getRef();
-                    }
+                if (checkHash) {
+                    final URL current = page.getUrl();
+                    justHashJump =
+                            HttpMethod.GET == request.getHttpMethod()
+                            && url.sameFile(current)
+                            && null != url.getRef();
                 }
             }
+        }
 
-            synchronized (loadQueue_) {
-                // verify if this load job doesn't already exist
-                for (final LoadJob loadJob : loadQueue_) {
-                    if (loadJob.response_ == null) {
-                        continue;
-                    }
-                    final WebRequest otherRequest = loadJob.request_;
-                    final URL otherUrl = otherRequest.getUrl();
+        synchronized (loadQueue_) {
+            // verify if this load job doesn't already exist
+            for (final LoadJob loadJob : loadQueue_) {
+                if (loadJob.response_ == null) {
+                    continue;
+                }
+                final WebRequest otherRequest = loadJob.request_;
+                final URL otherUrl = otherRequest.getUrl();
 
-                    // TODO: investigate but it seems that IE considers query string too but not FF
-                    if (!forceLoad
-                        && url.getPath().equals(otherUrl.getPath()) // fail fast
-                        && url.toString().equals(otherUrl.toString())
-                        && request.getRequestParameters().equals(otherRequest.getRequestParameters())
-                        && StringUtils.equals(request.getRequestBody(), otherRequest.getRequestBody())) {
-                        return; // skip it;
-                    }
+                // TODO: investigate but it seems that IE considers query string too but not FF
+                if (!forceLoad
+                    && url.getPath().equals(otherUrl.getPath()) // fail fast
+                    && url.toString().equals(otherUrl.toString())
+                    && request.getRequestParameters().equals(otherRequest.getRequestParameters())
+                    && StringUtils.equals(request.getRequestBody(), otherRequest.getRequestBody())) {
+                    return; // skip it;
                 }
             }
         }
 
         final LoadJob loadJob;
-        if (justHashJump || request.isCloneForHistoryAPI()) {
+        if (justHashJump) {
             loadJob = new LoadJob(request, requestingWindow, target, url);
         }
         else {
@@ -2139,8 +2136,6 @@ public class WebClient implements Serializable, AutoCloseable {
                     }
 
                     // add to history
-                    req.setCloneForHistoryAPI(loadJob.request_.isCloneForHistoryAPI());
-                    req.setState(loadJob.request_.getState());
                     win.getHistory().addPage(page);
                 }
                 else {
@@ -2241,7 +2236,7 @@ public class WebClient implements Serializable, AutoCloseable {
     public void addCookie(final String cookieString, final URL pageUrl, final Object origin) {
         final BrowserVersion browserVersion = getBrowserVersion();
         final CookieManager cookieManager = getCookieManager();
-        if(cookieManager.isCookiesEnabled()
+        if (cookieManager.isCookiesEnabled()
                 && (!cookieString.isEmpty() || !browserVersion.hasFeature(HTTP_COOKIE_IGNORE_EMPTY))) {
             final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
             buffer.append("Set-Cookie: ");

@@ -26,15 +26,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+
 /**
  * Tests for {@link History}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HistoryTest extends WebDriverTestCase {
@@ -71,9 +75,52 @@ public class HistoryTest extends WebDriverTestCase {
     }
 
     /**
-     * Servlet for '/pos1'.
+     * Tests going in history {@link History#back()} with {@code POST} request.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("49")
+    // limit varies for IE
+    public void historyCache() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        final int testDeep = 70;
+
+        for (int i = 0; i < testDeep; i++) {
+            servlets.put("/post" + i, Post1Servlet.class);
+        }
+        startWebServer("./", new String[0], servlets);
+
+        final WebDriver driver = getWebDriver();
+
+        int count = Post1Servlet.Count_;
+        for (int i = 0; i < testDeep; i++) {
+            driver.get("http://localhost:" + PORT + "/post" + i);
+            assertTrue(driver.getPageSource(), driver.getPageSource().contains("Call: " + (i + count)));
+        }
+
+        count = Post1Servlet.Count_;
+        for (int i = 0; i < testDeep - 1; i++) {
+            driver.navigate().back();
+            if (!driver.getPageSource().contains("Call: " + (count - i - 2))) {
+                assertEquals(Integer.parseInt(getExpectedAlerts()[0]), i);
+                return;
+            }
+
+            if (count != Post1Servlet.Count_) {
+                Assert.fail("Server called for " + i);
+                break;
+            }
+        }
+
+        assertEquals(getExpectedAlerts()[0], "done");
+    }
+
+    /**
+     * Servlet for '/post1'.
      */
     public static class Post1Servlet extends HttpServlet {
+        private static int Count_ = 0;
 
         /**
          * {@inheritDoc}
@@ -81,13 +128,21 @@ public class HistoryTest extends WebDriverTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
+
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
-            response.getWriter().write("<html>"
-                + "<body><form action='post2' method='post'>\n"
-                + "Name: <input type='hidden' name='para1' value='value1'><br>\n"
-                + "<input type='submit' value='Click Me' id='mySubmit'>\n"
-                + "</form></body></html>\n");
+            response.getWriter().write(
+                    "<html>\n"
+                    + "<body>\n"
+                    + "  <h1>Call: " + Count_ + "</h1>\n"
+                    + "  <form action='post2' method='post'>\n"
+                    + "    <input type='hidden' name='para1' value='value1'>\n"
+                    + "    <input type='submit' value='Click Me' id='mySubmit'>\n"
+                    + "  </form>\n"
+                    + "</body>\n"
+                    + "</html>\n");
+
+            Count_++;
         }
     }
 
@@ -102,6 +157,7 @@ public class HistoryTest extends WebDriverTestCase {
         @Override
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
+
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
@@ -131,5 +187,4 @@ public class HistoryTest extends WebDriverTestCase {
             writer.write("GET<br>\n");
         }
     }
-
 }

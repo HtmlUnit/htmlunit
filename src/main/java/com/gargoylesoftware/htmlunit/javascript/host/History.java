@@ -127,16 +127,13 @@ public class History extends SimpleScriptable {
     @JsxFunction
     public void replaceState(final Object object, final String title, final String url) {
         final WebWindow w = getWindow().getWebWindow();
-        final HtmlPage page = (HtmlPage) w.getEnclosedPage();
         try {
             URL newStateUrl = null;
+            final HtmlPage page = (HtmlPage) w.getEnclosedPage();
             if (StringUtils.isNotBlank(url)) {
                 newStateUrl = page.getFullyQualifiedUrl(url);
             }
             w.getHistory().replaceState(object, newStateUrl);
-            if (newStateUrl != null) {
-                page.getWebResponse().getWebRequest().setUrl(newStateUrl);
-            }
         }
         catch (final MalformedURLException e) {
             Context.throwAsScriptRuntimeEx(e);
@@ -153,7 +150,12 @@ public class History extends SimpleScriptable {
     public void pushState(final Object object, final String title, final String url) {
         final WebWindow w = getWindow().getWebWindow();
         try {
-            w.getHistory().pushState(object, url);
+            URL newStateUrl = null;
+            final HtmlPage page = (HtmlPage) w.getEnclosedPage();
+            if (StringUtils.isNotBlank(url)) {
+                newStateUrl = page.getFullyQualifiedUrl(url);
+            }
+            w.getHistory().pushState(object, newStateUrl);
         }
         catch (final IOException e) {
             Context.throwAsScriptRuntimeEx(e);

@@ -35,33 +35,49 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  */
 public class History implements Serializable {
+    private static final int SIZE_LIMIT = 50;
 
     /**
      * The single entry in the history.
      */
     private static final class HistoryEntry implements Serializable {
-        private final WebRequest webRequest_;
+        private final Page page_;
+        private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
+        private Object state_;
 
-        private HistoryEntry(final WebRequest webRequest) {
-            webRequest_ = new WebRequest(webRequest.getUrl(), webRequest.getHttpMethod());
-            webRequest_.setState(webRequest.getState());
-            webRequest_.setRequestParameters(webRequest.getRequestParameters());
-        }
-
-        private WebRequest getWebRequest() {
-            return webRequest_;
-        }
-
-        private URL getUrl() {
-            return webRequest_.getUrl();
+        private HistoryEntry(final Page page) {
+            page_ = page;
+            setUrl(page_.getWebResponse().getWebRequest().getUrl());
         }
 
         /**
-         * Returns the state object.
+         * @return the page
+         */
+        private Page getPage() {
+            return page_;
+        }
+
+        /**
+         * @return the url
+         */
+        private URL getUrl() {
+            return UrlUtils.toUrlSafe(url_);
+        }
+
+        /**
+         * Sets the url.
+         * @param url the url to use
+         */
+        public void setUrl(final URL url) {
+            url_ = url.toExternalForm();
+            page_.getWebResponse().getWebRequest().setUrl(url);
+        }
+
+        /**
          * @return the state object
          */
         private Object getState() {
-            return webRequest_.getState();
+            return state_;
         }
 
         /**
@@ -69,7 +85,7 @@ public class History implements Serializable {
          * @param state the state object to use
          */
         public void setState(final Object state) {
-            webRequest_.setState(state);
+            state_ = state;
         }
     }
 
@@ -200,17 +216,25 @@ public class History implements Serializable {
     /**
      * Adds a new page to the navigation history.
      * @param page the page to add to the navigation history
+     * @return the created history entry
      */
-    protected void addPage(final Page page) {
+    protected HistoryEntry addPage(final Page page) {
         final Boolean ignoreNewPages = ignoreNewPages_.get();
         if (ignoreNewPages != null && ignoreNewPages.booleanValue()) {
-            return;
+            return null;
         }
         index_++;
         while (entries_.size() > index_) {
             entries_.remove(index_);
         }
-        entries_.add(new HistoryEntry(page.getWebResponse().getWebRequest()));
+        while (entries_.size() >= SIZE_LIMIT) {
+            entries_.remove(0);
+            index_--;
+        }
+
+        final HistoryEntry entry = new HistoryEntry(page);
+        entries_.add(entry);
+        return entry;
     }
 
     /**
@@ -224,7 +248,9 @@ public class History implements Serializable {
 
             final HistoryEntry entry = entries_.get(index_);
 
-            window_.getWebClient().getPage(window_, entry.getWebRequest(), false);
+            window_.setEnclosedPage(entry.getPage());
+            entry.getPage().getWebResponse().getWebRequest().setUrl(entry.getUrl());
+
             final Window jsWindow = (Window) window_.getScriptableObject();
             if (jsWindow.hasEventHandlers("onpopstate")) {
                 final Event event = new PopStateEvent(jsWindow, Event.TYPE_POPSTATE, entry.getState());
@@ -247,7 +273,7 @@ public class History implements Serializable {
         entry.setState(state);
 
         if (url != null) {
-            entry.getWebRequest().setUrl(url);
+            entry.setUrl(url);
         }
     }
 
@@ -258,9 +284,13 @@ public class History implements Serializable {
      * @param url the new url to use
      * @throws IOException in case of error
      */
-    public void pushState(final Object state, final String url) throws IOException {
-        final Window jsWindow = (Window) window_.getScriptableObject();
-        jsWindow.getLocation().setHref(url, true, state);
+    public void pushState(final Object state, final URL url) throws IOException {
+        final Page page = window_.getEnclosedPage();
+        final HistoryEntry entry = addPage(page);
+
+        entry.setUrl(url);
+
+        entry.setState(state);
     }
 
     /**

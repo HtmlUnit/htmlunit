@@ -22,7 +22,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -722,7 +721,6 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented
     public void loadPageAfterPushState() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

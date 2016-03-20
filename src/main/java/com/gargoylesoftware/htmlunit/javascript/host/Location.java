@@ -247,10 +247,6 @@ public class Location extends SimpleScriptable {
             }
 
             final WebRequest request = new WebRequest(url);
-            request.setCloneForHistoryAPI(justHistoryAPIPushState);
-            if (justHistoryAPIPushState) {
-                request.setState(state);
-            }
             request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
 
             final WebWindow webWindow = getWindow().getWebWindow();
