@@ -927,7 +927,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Retrieves the character set used to encode the document.
      * @return the character set used to encode the document
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45) })
     public String getCharset() {
         String charset = getPage().getPageEncoding();
         if (charset != null) {
