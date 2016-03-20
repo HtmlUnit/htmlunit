@@ -932,7 +932,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Replaces all child elements of this element with the supplied text value.
      * @param value the new value for the contents of this element
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45) })
     public void setInnerText(final Object value) {
         final String valueString;
         if (value == null && !getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
