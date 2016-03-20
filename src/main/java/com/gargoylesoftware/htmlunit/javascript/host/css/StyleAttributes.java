@@ -275,6 +275,15 @@ final class StyleAttributes {
         /** The style property {@code block-size}. */
         BLOCK_SIZE_("block-size", "block-size", ff45up("")),
 
+        /** The style property {@code border}. */
+        BORDER("border", "border", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
+
+        /** The style property {@code borderBlockEnd}. */
+        BORDER_BLOCK_END("borderBlockEnd", "border-block-end", ff45up("")),
+
+        /** The style property {@code border-block-end}. */
+        BORDER_BLOCK_END_("border-block-end", "border-block-end", ff45up("")),
+
         /** The style property {@code borderBlockEndColor}. */
         BORDER_BLOCK_END_COLOR("borderBlockEndColor", "border-block-end-color", ff45up("")),
 
@@ -293,11 +302,11 @@ final class StyleAttributes {
         /** The style property {@code border-block-end-width}. */
         BORDER_BLOCK_END_WIDTH_("border-block-end-width", "border-block-end-width", ff45up("")),
 
-        /** The style property {@code borderBlockEnd}. */
-        BORDER_BLOCK_END("borderBlockEnd", "border-block-end", ff45up("")),
+        /** The style property {@code borderBlockStart}. */
+        BORDER_BLOCK_START("borderBlockStart", "border-block-start", ff45up("")),
 
-        /** The style property {@code border-block-end}. */
-        BORDER_BLOCK_END_("border-block-end", "border-block-end", ff45up("")),
+        /** The style property {@code border-block-start}. */
+        BORDER_BLOCK_START_("border-block-start", "border-block-start", ff45up("")),
 
         /** The style property {@code borderBlockStartColor}. */
         BORDER_BLOCK_START_COLOR("borderBlockStartColor", "border-block-start-color", ff45up("")),
@@ -316,15 +325,6 @@ final class StyleAttributes {
 
         /** The style property {@code border-block-start-width}. */
         BORDER_BLOCK_START_WIDTH_("border-block-start-width", "border-block-start-width", ff45up("")),
-
-        /** The style property {@code borderBlockStart}. */
-        BORDER_BLOCK_START("borderBlockStart", "border-block-start", ff45up("")),
-
-        /** The style property {@code border-block-start}. */
-        BORDER_BLOCK_START_("border-block-start", "border-block-start", ff45up("")),
-
-        /** The style property {@code border}. */
-        BORDER("border", "border", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code borderBottom}. */
         BORDER_BOTTOM("borderBottom", "border-bottom", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
@@ -383,54 +383,6 @@ final class StyleAttributes {
         /** The style property {@code border-image}. */
         BORDER_IMAGE_("border-image", "border-image", ff("")),
 
-        /** The style property {@code border-inline-end-color}. */
-        BORDER_INLINE_END_COLOR("border-inline-end-color", "border-inline-end-color", ff45up("")),
-
-        /** The style property {@code borderInlineEndColor}. */
-        BORDER_INLINE_END_COLOR_("borderInlineEndColor", "border-inline-end-color", ff45up("")),
-
-        /** The style property {@code borderInlineEndStyle}. */
-        BORDER_INLINE_END_STYLE("borderInlineEndStyle", "border-inline-end-style", ff45up("")),
-
-        /** The style property {@code border-inline-end-style}. */
-        BORDER_INLINE_END_STYLE_("border-inline-end-style", "border-inline-end-style", ff45up("")),
-
-        /** The style property {@code borderInlineEndWidth}. */
-        BORDER_INLINE_END_WIDTH("borderInlineEndWidth", "border-inline-end-width", ff45up("")),
-
-        /** The style property {@code border-inline-end-width}. */
-        BORDER_INLINE_END_WIDTH_("border-inline-end-width", "border-inline-end-width", ff45up("")),
-
-        /** The style property {@code borderInlineEnd}. */
-        BORDER_INLINE_END("borderInlineEnd", "border-inline-end", ff45up("")),
-
-        /** The style property {@code border-inline-end}. */
-        BORDER_INLINE_END_("border-inline-end", "border-inline-end", ff45up("")),
-
-        /** The style property {@code borderInlineStartColor}. */
-        BORDER_INLINE_START_COLOR("borderInlineStartColor", "border-inline-start-color", ff45up("")),
-
-        /** The style property {@code border-inline-start-color}. */
-        BORDER_INLINE_START_COLOR_("border-inline-start-color", "border-inline-start-color", ff45up("")),
-
-        /** The style property {@code borderInlineStartStyle}. */
-        BORDER_INLINE_START_STYLE("borderInlineStartStyle", "border-inline-start-style", ff45up("")),
-
-        /** The style property {@code border-inline-start-style}. */
-        BORDER_INLINE_START_STYLE_("border-inline-start-style", "border-inline-start-style", ff45up("")),
-
-        /** The style property {@code borderInlineStartWidth}. */
-        BORDER_INLINE_START_WIDTH("borderInlineStartWidth", "border-inline-start-width", ff45up("")),
-
-        /** The style property {@code border-inline-start-width}. */
-        BORDER_INLINE_START_WIDTH_("border-inline-start-width", "border-inline-start-width", ff45up("")),
-
-        /** The style property {@code borderInlineStart}. */
-        BORDER_INLINE_START("borderInlineStart", "border-inline-start", ff45up("")),
-
-        /** The style property {@code border-inline-start}. */
-        BORDER_INLINE_START_("border-inline-start", "border-inline-start", ff45up("")),
-
         /** The style property {@code borderImageOutset}. */
         BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ff("0 0 0 0"), ie("0"), chrome("0px")),
 
@@ -462,6 +414,54 @@ final class StyleAttributes {
 
         /** The style property {@code border-image-width}. */
         BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ff("1 1 1 1")),
+
+        /** The style property {@code borderInlineEnd}. */
+        BORDER_INLINE_END("borderInlineEnd", "border-inline-end", ff45up("")),
+
+        /** The style property {@code border-inline-end}. */
+        BORDER_INLINE_END_("border-inline-end", "border-inline-end", ff45up("")),
+
+        /** The style property {@code borderInlineEndColor}. */
+        BORDER_INLINE_END_COLOR("borderInlineEndColor", "border-inline-end-color", ff45up("")),
+
+        /** The style property {@code border-inline-end-color}. */
+        BORDER_INLINE_END_COLOR_("border-inline-end-color", "border-inline-end-color", ff45up("")),
+
+        /** The style property {@code borderInlineEndStyle}. */
+        BORDER_INLINE_END_STYLE("borderInlineEndStyle", "border-inline-end-style", ff45up("")),
+
+        /** The style property {@code border-inline-end-style}. */
+        BORDER_INLINE_END_STYLE_("border-inline-end-style", "border-inline-end-style", ff45up("")),
+
+        /** The style property {@code borderInlineEndWidth}. */
+        BORDER_INLINE_END_WIDTH("borderInlineEndWidth", "border-inline-end-width", ff45up("")),
+
+        /** The style property {@code border-inline-end-width}. */
+        BORDER_INLINE_END_WIDTH_("border-inline-end-width", "border-inline-end-width", ff45up("")),
+
+        /** The style property {@code borderInlineStart}. */
+        BORDER_INLINE_START("borderInlineStart", "border-inline-start", ff45up("")),
+
+        /** The style property {@code border-inline-start}. */
+        BORDER_INLINE_START_("border-inline-start", "border-inline-start", ff45up("")),
+
+        /** The style property {@code borderInlineStartColor}. */
+        BORDER_INLINE_START_COLOR("borderInlineStartColor", "border-inline-start-color", ff45up("")),
+
+        /** The style property {@code border-inline-start-color}. */
+        BORDER_INLINE_START_COLOR_("border-inline-start-color", "border-inline-start-color", ff45up("")),
+
+        /** The style property {@code borderInlineStartStyle}. */
+        BORDER_INLINE_START_STYLE("borderInlineStartStyle", "border-inline-start-style", ff45up("")),
+
+        /** The style property {@code border-inline-start-style}. */
+        BORDER_INLINE_START_STYLE_("border-inline-start-style", "border-inline-start-style", ff45up("")),
+
+        /** The style property {@code borderInlineStartWidth}. */
+        BORDER_INLINE_START_WIDTH("borderInlineStartWidth", "border-inline-start-width", ff45up("")),
+
+        /** The style property {@code border-inline-start-width}. */
+        BORDER_INLINE_START_WIDTH_("border-inline-start-width", "border-inline-start-width", ff45up("")),
 
         /** The style property {@code borderLeft}. */
         BORDER_LEFT("borderLeft", "border-left", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
@@ -931,6 +931,9 @@ final class StyleAttributes {
         /** The style property {@code height}. */
         HEIGHT("height", "height", chrome("skipped"), ff(""), ie("")),
 
+        /** The style property {@code hyphens}. */
+        HYPHENS("hyphens", "hyphens", ff45up("manual")),
+
         /** The style property {@code imageOrientation}. */
         IMAGE_ORIENTATION("imageOrientation", "image-orientation", ff("0deg")),
 
@@ -949,15 +952,35 @@ final class StyleAttributes {
         /** The style property {@code ime-mode}. */
         IME_MODE_("ime-mode", "ime-mode", ff("auto")),
 
+        /** The style property {@code inlineSize}. */
+        INLINE_SIZE("inlineSize", "inline-size", ff45up("")),
+
+        /** The style property {@code inlineSize}. */
+        INLINE_SIZE_("inline-size", "inline-size", ff45up("")),
+
         /** The style property {@code isolation}. */
         ISOLATION("isolation", "isolation", ff("auto"), chrome("auto")),
 
         /** The style property {@code justifyContent}. */
         JUSTIFY_CONTENT("justifyContent", "justify-content",
-                ff("flex-start"), ie("flex-start"), chrome("flex-start")),
+                ffBelow45("flex-start"),
+                ff45up("auto"),
+                ie("flex-start"), chrome("flex-start")),
 
         /** The style property {@code justify-content}. */
-        JUSTIFY_CONTENT_("justify-content", "justify-content", ff("flex-start")),
+        JUSTIFY_CONTENT_("justify-content", "justify-content", ffBelow45("flex-start"), ff45up("auto")),
+
+        /** The style property {@code justifyItems}. */
+        JUSTIFY_ITEMS("justifyItems", "justify-items", ff45up("start")),
+
+        /** The style property {@code justify-items}. */
+        JUSTIFY_ITEMS_("justify-items", "justify-items", ff45up("start")),
+
+        /** The style property {@code justifySelf}. */
+        JUSTIFY_SELF("justifySelf", "justify-self", ff45up("start")),
+
+        /** The style property {@code justify-self}. */
+        JUSTIFY_SELF_("justify-self", "justify-self", ff45up("start")),
 
         /** The style property {@code kerning}. */
         KERNING("kerning", "kerning", ie("auto")),
@@ -1032,11 +1055,35 @@ final class StyleAttributes {
         /** The style property {@code margin}. */
         MARGIN("margin", "margin", chrome("0px"), ff(""), ie("")),
 
+        /** The style property {@code marginBlockEnd}. */
+        MARGIN_BLOCK_END("marginBlockEnd", "margin-block-end", ff45up("")),
+
+        /** The style property {@code margin-block-end}. */
+        MARGIN_BLOCK_END_("margin-block-end", "margin-block-end", ff45up("")),
+
+        /** The style property {@code marginBlockStart}. */
+        MARGIN_BLOCK_START("marginBlockStart", "margin-block-start", ff45up("")),
+
+        /** The style property {@code margin-block-start}. */
+        MARGIN_BLOCK_START_("margin-block-start", "margin-block-start", ff45up("")),
+
         /** The style property {@code marginBottom}. */
         MARGIN_BOTTOM("marginBottom", "margin-bottom", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code margin-bottom}. */
         MARGIN_BOTTOM_("margin-bottom", "margin-bottom", ff("0px")),
+
+        /** The style property {@code marginInlineEnd}. */
+        MARGIN_INLINE_END("marginInlineEnd", "margin-inline-end", ff45up("")),
+
+        /** The style property {@code margin-inline-end}. */
+        MARGIN_INLINE_END_("margin-inline-end", "margin-inline-end", ff45up("")),
+
+        /** The style property {@code marginInlineStart}. */
+        MARGIN_INLINE_START("marginInlineStart", "margin-inline-start", ff45up("")),
+
+        /** The style property {@code margin-inline-start}. */
+        MARGIN_INLINE_START_("margin-inline-start", "margin-inline-start", ff45up("")),
 
         /** The style property {@code marginLeft}. */
         MARGIN_LEFT("marginLeft", "margin-left", chrome("0px"), ff(""), ie("")),

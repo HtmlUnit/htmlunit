@@ -2365,7 +2365,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code marks} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(@WebBrowser(value = FF, maxVersion = 38))
     public String getMarks() {
         return getStyleAttribute(MARKS);
     }
@@ -2374,7 +2374,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code marks} style attribute.
      * @param marks the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(@WebBrowser(value = FF, maxVersion = 38))
     public void setMarks(final String marks) {
         setStyleAttribute(MARKS, marks);
     }
