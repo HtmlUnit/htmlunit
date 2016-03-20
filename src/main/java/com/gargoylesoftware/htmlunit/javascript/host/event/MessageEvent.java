@@ -74,7 +74,7 @@ public class MessageEvent extends Event {
      * @param source the window object that contains the document that caused the event
      * @param ports the message ports
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 45) })
     public void initMessageEvent(
             final String type,
             final boolean canBubble,
