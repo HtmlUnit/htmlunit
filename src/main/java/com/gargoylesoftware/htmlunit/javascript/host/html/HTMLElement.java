@@ -806,7 +806,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Gets the innerText attribute.
      * @return the contents of this node as text
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
     public String getInnerText() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
