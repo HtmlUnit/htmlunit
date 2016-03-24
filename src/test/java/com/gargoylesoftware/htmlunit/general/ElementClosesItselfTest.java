@@ -1300,7 +1300,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void source() throws Exception {
         loadPageWithAlerts2(test("source"));
     }
@@ -1310,7 +1309,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void spacer() throws Exception {
         loadPageWithAlerts2(test("spacer"));
     }

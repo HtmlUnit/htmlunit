@@ -1094,7 +1094,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented
     public void param() throws Exception {
         loadPageWithAlerts2(test("param"));
     }
@@ -1162,7 +1161,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
     }
@@ -1174,7 +1172,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented
     public void rp() throws Exception {
         loadPageWithAlerts2(test("rp"));
     }
@@ -1220,7 +1217,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void section() throws Exception {
         loadPageWithAlerts2(test("section"));
     }
@@ -1254,7 +1250,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented
     public void source() throws Exception {
         loadPageWithAlerts2(test("source"));
     }
@@ -1264,7 +1259,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented
     public void spacer() throws Exception {
         loadPageWithAlerts2(test("spacer"));
     }
@@ -1331,7 +1325,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void summary() throws Exception {
         loadPageWithAlerts2(test("summary"));
     }
