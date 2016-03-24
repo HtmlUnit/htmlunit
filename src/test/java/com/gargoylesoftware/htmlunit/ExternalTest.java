@@ -124,6 +124,7 @@ public class ExternalTest {
             url += "/";
         }
         try (final WebClient webClient = getWebClient()) {
+            webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
             final HtmlPage page = webClient.getPage(url);
             for (final HtmlAnchor anchor : page.getAnchors()) {
                 String itemVersion = anchor.getTextContent();
