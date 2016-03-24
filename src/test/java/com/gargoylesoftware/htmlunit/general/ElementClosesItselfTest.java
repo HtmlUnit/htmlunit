@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -400,10 +399,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            CHROME = "0",
-            IE = "0")
-    @NotYetImplemented({ CHROME, IE })
+    @Alerts(DEFAULT = "0",
+            FF = "1")
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
