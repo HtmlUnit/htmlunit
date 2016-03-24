@@ -2057,7 +2057,9 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @JsxFunction
     public void postMessage(final String message, final String targetOrigin, final Object transfer) {
         final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
-        if (!"*".equals(targetOrigin)) {
+
+        // TODO: do the same origin check for '/' also
+        if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
             URL targetURL = null;
             try {
                 targetURL = new URL(targetOrigin);

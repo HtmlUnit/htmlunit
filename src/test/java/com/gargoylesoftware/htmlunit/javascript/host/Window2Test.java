@@ -1365,16 +1365,18 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "received", "posted" },
-            CHROME = { "posted", "received" },
-            IE = { "posted", "received" })
-    @BuggyWebDriver(FF)
-    @NotYetImplemented(FF)
+    @Alerts({ "posted", "received" })
     public void postMessage_exactURL() throws Exception {
-        // FF: strange: the result is different than postMessageSyncOrAsync()
-        // if alert() is done in URL2 just after postMessage() we will have postMessage_exactURL() expectation
-        // if alert() is removed in URL2 after postMessage(), we will have postMessageSyncOrAsync() expectation
         postMessage(URL_FIRST.toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "posted", "received" })
+    public void postMessage_slash() throws Exception {
+        postMessage("/");
     }
 
     /**
