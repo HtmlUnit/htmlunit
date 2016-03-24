@@ -1474,7 +1474,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void track() throws Exception {
         loadPageWithAlerts2(test("track"));
     }
