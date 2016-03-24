@@ -3864,7 +3864,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code orphans} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38) })
     public String getOrphans() {
         return getStyleAttribute(ORPHANS);
     }
@@ -5113,7 +5113,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code widows} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38) })
     public String getWidows() {
         return getStyleAttribute(WIDOWS);
     }

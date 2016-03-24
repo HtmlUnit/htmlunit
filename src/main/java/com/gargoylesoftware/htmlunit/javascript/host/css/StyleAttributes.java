@@ -1136,11 +1136,23 @@ final class StyleAttributes {
         /** The style property {@code mask-type}. */
         MASK_TYPE_("mask-type", "mask-type", ff("luminance")),
 
+        /** The style property {@code maxBlockSize}. */
+        MAX_BLOCK_SIZE("maxBlockSize", "max-block-size", ff45up("")),
+
+        /** The style property {@code max-block-size}. */
+        MAX_BLOCK_SIZE_("max-block-size", "max-block-size", ff45up("")),
+
         /** The style property {@code maxHeight}. */
         MAX_HEIGHT("maxHeight", "max-height", chrome("none"), ff(""), ie("")),
 
         /** The style property {@code max-height}. */
         MAX_HEIGHT_("max-height", "max-height", ff("none")),
+
+        /** The style property {@code maxInlineSize}. */
+        MAX_INLINE_SIZE("maxInlineSize", "max-inline-size", ff45up("")),
+
+        /** The style property {@code max-inline-size}. */
+        MAX_INLINE_SIZE_("max-inline-size", "max-inline-size", ff45up("")),
 
         /** The style property {@code maxWidth}. */
         MAX_WIDTH("maxWidth", "max-width", chrome("none"), ff(""), ie("")),
@@ -1151,11 +1163,23 @@ final class StyleAttributes {
         /** The style property {@code maxZoom}. */
         MAX_ZOOM("maxZoom", "max-zoom", chrome("")),
 
+        /** The style property {@code min-block-size}. */
+        MIN_BLOCK_SIZE("minBlockSize", "min-block-size", ff45up("")),
+
+        /** The style property {@code min-height}. */
+        MIN_BLOCK_SIZE_("min-block-size", "min-block-size", ff45up("")),
+
         /** The style property {@code minHeight}. */
         MIN_HEIGHT("minHeight", "min-height", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code min-height}. */
         MIN_HEIGHT_("min-height", "min-height", ff("0px")),
+
+        /** The style property {@code minInlineSize}. */
+        MIN_INLINE_SIZE("minInlineSize", "min-inline-size", ff45up("")),
+
+        /** The style property {@code min-inline-size}. */
+        MIN_INLINE_SIZE_("min-inline-size", "min-inline-size", ff45up("")),
 
         /** The style property {@code minWidth}. */
         MIN_WIDTH("minWidth", "min-width", chrome("0px"), ff(""), ie("")),
@@ -1777,6 +1801,30 @@ final class StyleAttributes {
         /** The style property {@code object-position}. */
         OBJECT_POSITION_("object-position", "object-position", ff("50% 50%")),
 
+        /** The style property {@code offsetBlockEnd}. */
+        OFFSET_BLOCK_END("offsetBlockEnd", "offset-block-end", ff45up("")),
+
+        /** The style property {@code offset-block-end}. */
+        OFFSET_BLOCK_END_("offset-block-end", "offset-block-end", ff45up("")),
+
+        /** The style property {@code offsetBlockStart}. */
+        OFFSET_BLOCK_START("offsetBlockStart", "offset-block-start", ff45up("")),
+
+        /** The style property {@code offset-block-start}. */
+        OFFSET_BLOCK_START_("offset-block-start", "offset-block-start", ff45up("")),
+
+        /** The style property {@code offsetInlineEnd}. */
+        OFFSET_INLINE_END("offsetInlineEnd", "offset-inline-end", ff45up("")),
+
+        /** The style property {@code offset-inline-end}. */
+        OFFSET_INLINE_END_("offset-inline-end", "offset-inline-end", ff45up("")),
+
+        /** The style property {@code offsetInlineStart}. */
+        OFFSET_INLINE_START("offsetInlineStart", "offset-inline-start", ff45up("")),
+
+        /** The style property {@code offset-inline-start}. */
+        OFFSET_INLINE_START_("offset-inline-start", "offset-inline-start", ff45up("")),
+
         /** The style property {@code opacity}. */
         OPACITY("opacity", "opacity", chrome("1"), ff(""), ie("")),
 
@@ -1838,11 +1886,35 @@ final class StyleAttributes {
         /** The style property {@code padding}. */
         PADDING("padding", "padding", chrome("0px"), ff(""), ie("")),
 
+        /** The style property {@code paddingBlockEnd}. */
+        PADDING_BLOCK_END("paddingBlockEnd", "padding-block-end", ff45up("")),
+
+        /** The style property {@code padding-block-end}. */
+        PADDING_BLOCK_END_("padding-block-end", "padding-block-end", ff45up("")),
+
+        /** The style property {@code paddingBlockStart}. */
+        PADDING_BLOCK_START("paddingBlockStart", "padding-block-start", ff45up("")),
+
+        /** The style property {@code padding-block-start}. */
+        PADDING_BLOCK_START_("padding-block-start", "padding-block-start", ff45up("")),
+
         /** The style property {@code paddingBottom}. */
         PADDING_BOTTOM("paddingBottom", "padding-bottom", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code padding-bottom}. */
         PADDING_BOTTOM_("padding-bottom", "padding-bottom", ff("0px")),
+
+        /** The style property {@code paddingInlineEnd}. */
+        PADDING_INLINE_END("paddingInlineEnd", "padding-inline-end", ff45up("")),
+
+        /** The style property {@code padding-inline-end}. */
+        PADDING_INLINE_END_("padding-inline-end", "padding-inline-end", ff45up("")),
+
+        /** The style property {@code paddingInlineStart}. */
+        PADDING_INLINE_START("paddingInlineStart", "padding-inline-start", ff45up("")),
+
+        /** The style property {@code padding-inline-start}. */
+        PADDING_INLINE_START_("padding-inline-start", "padding-inline-start", ff45up("")),
 
         /** The style property {@code paddingLeft}. */
         PADDING_LEFT("paddingLeft", "padding-left", chrome("0px"), ff(""), ie("")),
