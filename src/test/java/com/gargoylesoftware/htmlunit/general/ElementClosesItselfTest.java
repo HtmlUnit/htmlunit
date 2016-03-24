@@ -1034,7 +1034,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void nextid() throws Exception {
         loadPageWithAlerts2(test("nextid"));
     }
@@ -1112,7 +1111,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void optgroup() throws Exception {
         loadPageWithAlerts2(test("optgroup"));
     }
@@ -1124,7 +1122,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void option() throws Exception {
         loadPageWithAlerts2(test("option"));
     }

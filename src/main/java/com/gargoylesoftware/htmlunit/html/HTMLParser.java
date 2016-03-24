@@ -476,7 +476,10 @@ public final class HTMLParser {
             else if (browserVersion.isIE()) {
                 configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
                         HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
+                configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.MAIN, "MAIN",
+                        HTMLElements.Element.INLINE, HTMLElements.BODY, null));
             }
+
             return configuration;
         }
 

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -662,7 +661,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void header() throws Exception {
         loadPageWithAlerts2(test("header"));
     }
@@ -809,7 +807,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented
     public void legend() throws Exception {
         loadPageWithAlerts2(test("legend"));
     }
@@ -855,7 +852,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
             IE = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented({FF, CHROME})
     public void main() throws Exception {
         loadPageWithAlerts2(test("main"));
     }
@@ -955,7 +951,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void nav() throws Exception {
         loadPageWithAlerts2(test("nav"));
     }
@@ -967,7 +962,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented
     public void nextid() throws Exception {
         loadPageWithAlerts2(test("nextid"));
     }
@@ -1056,7 +1050,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented
     public void optgroup() throws Exception {
         loadPageWithAlerts2(test("optgroup"));
     }
@@ -1068,7 +1061,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented
     public void option() throws Exception {
         loadPageWithAlerts2(test("option"));
     }
