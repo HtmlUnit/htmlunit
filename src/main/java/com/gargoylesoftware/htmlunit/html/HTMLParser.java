@@ -51,6 +51,7 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -63,6 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
 
 import net.sourceforge.htmlunit.cyberneko.HTMLConfiguration;
+import net.sourceforge.htmlunit.cyberneko.HTMLElements;
 import net.sourceforge.htmlunit.cyberneko.HTMLEventInfo;
 import net.sourceforge.htmlunit.cyberneko.HTMLScanner;
 import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancer;
@@ -463,7 +465,19 @@ public final class HTMLParser {
          * @return the configuration
          */
         private static XMLParserConfiguration createConfiguration(final WebClient webClient) {
-            return new HTMLConfiguration();
+            final HTMLConfiguration configuration = new HTMLConfiguration();
+            configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.AREA, "AREA",
+                        HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
+            final BrowserVersion browserVersion = webClient.getBrowserVersion();
+            if (browserVersion.isChrome()) {
+                configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
+                        HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
+            }
+            else if (browserVersion.isIE()) {
+                configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
+                        HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
+            }
+            return configuration;
         }
 
         /**

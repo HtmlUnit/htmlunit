@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests the result of <code>element.childNodes.length</code>.
+ * Tests the result of {@code element.childNodes.length}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -118,7 +118,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented
     public void area() throws Exception {
         loadPageWithAlerts2(test("area"));
     }
@@ -130,7 +129,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void article() throws Exception {
         loadPageWithAlerts2(test("article"));
     }
@@ -142,7 +140,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void aside() throws Exception {
         loadPageWithAlerts2(test("aside"));
     }
@@ -353,10 +350,8 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
-            CHROME = { "3", "2", "2", "3", "2", "3" },
-            IE = { "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented({ CHROME, IE })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            FF = { "3", "2", "2", "3", "2", "2" })
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -412,7 +407,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void details() throws Exception {
         loadPageWithAlerts2(test("details"));
     }
@@ -512,7 +506,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void figcaption() throws Exception {
         loadPageWithAlerts2(test("figcaption"));
     }
@@ -524,7 +517,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void figure() throws Exception {
         loadPageWithAlerts2(test("figure"));
     }
@@ -558,7 +550,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void footer() throws Exception {
         loadPageWithAlerts2(test("footer"));
     }

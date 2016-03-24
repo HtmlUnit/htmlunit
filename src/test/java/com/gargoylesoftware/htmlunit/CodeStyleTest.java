@@ -613,6 +613,7 @@ public class CodeStyleTest {
                 && !relativePath.contains("JavaScriptConfiguration")
                 && !relativePath.contains("BrowserVersionFeatures")
                 && !relativePath.contains("HTMLDocument")
+                && !relativePath.contains("HTMLParser")
             && !relativePath.contains("DateTimeFormat")) {
             int index = 1;
             for (final String line : lines) {
