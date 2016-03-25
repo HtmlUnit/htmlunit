@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +39,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -410,6 +413,8 @@ public class FormDataTest extends WebDriverTestCase {
             + "    formData.append('myKey', 'myValue');\n"
             + "    formData.append('myKey1', '');\n"
             + "    formData.append('mykey 2', '');\n"
+            + "    formData.append('mykey3', 'myVal3');\n"
+            + "    formData.append('mykey3', 'myVal4');\n"
             + "  } catch (e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "    return;\n"
@@ -418,6 +423,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "  try {\n"
             + "    formData.delete('mykey');\n"
             + "    formData.delete('mykey 2');\n"
+            + "    formData.delete('mykey3');\n"
             + "    formData.delete('');\n"
             + "  } catch (e) {\n"
             + "    alert('delete: ' + e.message);\n"
@@ -436,12 +442,98 @@ public class FormDataTest extends WebDriverTestCase {
 
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test2", PostServlet.class);
-
         final WebDriver driver = loadPage2(html, servlets);
         final String alerts = getCollectedAlerts(driver).get(0);
         for (String expected : getExpectedAlerts()) {
             assertTrue(expected + " not found", alerts.contains(expected));
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "no get",
+            FF45 = {"myValue", "null", "null", "null", "null"})
+    @NotYetImplemented(FF45)
+    public void get() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    if (!formData.get) { alert('no get'); return; }\n"
+
+            + "    formData.append('myKey', 'myValue');\n"
+            + "    formData.append('myKey', 'myValue2');\n"
+            + "    formData.append('mykey3', 'myValue3');\n"
+            + "    formData.append('mykey4', '');\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+
+            + "  try {\n"
+            + "    alert(formData.get('myKey'));\n"
+            + "    alert(formData.get('mykey'));\n"
+            + "    alert(formData.get('myKey3'));\n"
+            + "    alert(formData.get('myKey4'));\n"
+            + "    alert(formData.get(''));\n"
+            + "  } catch (e) {\n"
+            + "    alert('get: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        loadPageWithAlerts2(html, servlets);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "no get",
+            FF45 = {"myValue,myValue2", "", "", "", ""})
+    public void getAll() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    if (!formData.get) { alert('no get'); return; }\n"
+
+            + "    formData.append('myKey', 'myValue');\n"
+            + "    formData.append('myKey', 'myValue2');\n"
+            + "    formData.append('mykey3', 'myValue3');\n"
+            + "    formData.append('mykey4', '');\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+
+            + "  try {\n"
+            + "    alert(formData.getAll('myKey'));\n"
+            + "    alert(formData.getAll('mykey'));\n"
+            + "    alert(formData.getAll('myKey3'));\n"
+            + "    alert(formData.getAll('myKey4'));\n"
+            + "    alert(formData.getAll(''));\n"
+            + "  } catch (e) {\n"
+            + "    alert('getAll: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        loadPageWithAlerts2(html, servlets);
     }
 
     /**
@@ -472,7 +564,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    alert(formData.has('mykey'));\n"
             + "    alert(formData.has(''));\n"
             + "  } catch (e) {\n"
-            + "    alert('delete: ' + e.message);\n"
+            + "    alert('has: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
