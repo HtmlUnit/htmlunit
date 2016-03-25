@@ -39,11 +39,13 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * A JavaScript object for {@code DateTimeFormat}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class DateTimeFormat extends SimpleScriptable {
 
-    private static Map<String, String> FF_FORMATS_ = new HashMap<>();
+    private static Map<String, String> FF_38_FORMATS_ = new HashMap<>();
+    private static Map<String, String> FF_45_FORMATS_ = new HashMap<>();
     private static Map<String, String> CHROME_FORMATS_ = new HashMap<>();
     private static Map<String, String> IE_FORMATS_ = new HashMap<>();
 
@@ -52,30 +54,54 @@ public class DateTimeFormat extends SimpleScriptable {
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
         final String ddDash = "\u200Edd\u200E-\u200EMM\u200E-\u200EYYYY";
+        final String ddDotDot = "\u200Edd\u200E.\u200EMM\u200E.\u200EYYYY.";
+        final String ddDotBlank = "\u200Edd\u200E. \u200EMM\u200E. \u200EYYYY.";
         final String mmSlash = "\u200EMM\u200E/\u200Edd\u200E/\u200EYYYY";
 
-        FF_FORMATS_.put("", mmSlash);
-        FF_FORMATS_.put("en-NZ", ddSlash);
-        FF_FORMATS_.put("en-PA", ddSlash);
-        FF_FORMATS_.put("en-PR", ddSlash);
-        FF_FORMATS_.put("en-AU", ddSlash);
-        FF_FORMATS_.put("en-GB", ddSlash);
-        FF_FORMATS_.put("en-IE", ddSlash);
-        FF_FORMATS_.put("en-IN", ddSlash);
-        FF_FORMATS_.put("en-MT", ddSlash);
-        FF_FORMATS_.put("en-SG", ddSlash);
-        FF_FORMATS_.put("ar", "dd\u200F/MM\u200F/YYYY");
-        FF_FORMATS_.put("ar-EG", "dd\u200F/MM\u200F/YYYY");
-        FF_FORMATS_.put("en-ZA", "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd");
+        FF_38_FORMATS_.put("", mmSlash);
+        FF_38_FORMATS_.put("en-NZ", ddSlash);
+        FF_38_FORMATS_.put("en-PA", ddSlash);
+        FF_38_FORMATS_.put("en-PR", ddSlash);
+        FF_38_FORMATS_.put("en-AU", ddSlash);
+        FF_38_FORMATS_.put("en-GB", ddSlash);
+        FF_38_FORMATS_.put("en-IE", ddSlash);
+        FF_38_FORMATS_.put("en-IN", ddSlash);
+        FF_38_FORMATS_.put("en-MT", ddSlash);
+        FF_38_FORMATS_.put("en-SG", ddSlash);
+        FF_38_FORMATS_.put("ar", "dd\u200F/MM\u200F/YYYY");
+        FF_38_FORMATS_.put("ar-EG", "dd\u200F/MM\u200F/YYYY");
+        FF_38_FORMATS_.put("en-ZA", "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd");
 
-        CHROME_FORMATS_.putAll(FF_FORMATS_);
-        IE_FORMATS_.putAll(FF_FORMATS_);
+        FF_45_FORMATS_.putAll(FF_38_FORMATS_);
+        CHROME_FORMATS_.putAll(FF_38_FORMATS_);
+        IE_FORMATS_.putAll(FF_38_FORMATS_);
+
+        FF_38_FORMATS_.put("sr-BA", ddDotBlank);
+        FF_38_FORMATS_.put("sr-CS", ddDotBlank);
+        FF_38_FORMATS_.put("sr-ME", ddDotBlank);
+        FF_38_FORMATS_.put("sr-RS", ddDotBlank);
+
+        FF_45_FORMATS_.putAll(FF_38_FORMATS_);
+        FF_45_FORMATS_.put("en-CA", "YYYY-MM-dd");
+        FF_45_FORMATS_.put("en-PH", ddSlash);
+        FF_45_FORMATS_.put("es-US", ddSlash);
+        FF_45_FORMATS_.put("sr-BA", ddDotDot);
+        FF_45_FORMATS_.put("sr-CS", ddDotDot);
+        FF_45_FORMATS_.put("sr-ME", ddDotDot);
+        FF_45_FORMATS_.put("sr-RS", ddDotDot);
 
         CHROME_FORMATS_.put("en-CA", "YYYY-MM-dd");
         CHROME_FORMATS_.put("en-IE", mmSlash);
         CHROME_FORMATS_.put("en-IN", mmSlash);
         CHROME_FORMATS_.put("en-MT", mmSlash);
         CHROME_FORMATS_.put("en-SG", mmSlash);
+        CHROME_FORMATS_.put("es-PA", ddSlash);
+        CHROME_FORMATS_.put("es-PR", ddSlash);
+        CHROME_FORMATS_.put("es-US", ddSlash);
+        CHROME_FORMATS_.put("sr-BA", ddDotDot);
+        CHROME_FORMATS_.put("sr-CS", ddDotDot);
+        CHROME_FORMATS_.put("sr-ME", ddDotDot);
+        CHROME_FORMATS_.put("sr-RS", ddDotDot);
 
         IE_FORMATS_.put("en-IN", ddDash);
         IE_FORMATS_.put("en-MT", mmSlash);
@@ -97,8 +123,11 @@ public class DateTimeFormat extends SimpleScriptable {
         else if (browserVersion.isIE()) {
             formats = IE_FORMATS_;
         }
+        else if (browserVersion.isFirefox() && browserVersion.getBrowserVersionNumeric() == 45) {
+            formats = FF_45_FORMATS_;
+        }
         else {
-            formats = FF_FORMATS_;
+            formats = FF_38_FORMATS_;
         }
         String pattern = formats.get(locale);
         if (pattern == null) {
