@@ -3873,7 +3873,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code orphans} style attribute.
      * @param orphans the new attribute
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38) })
     public void setOrphans(final String orphans) {
         setStyleAttribute(ORPHANS, orphans);
     }
@@ -4123,7 +4123,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code page} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(@WebBrowser(value = FF, maxVersion = 38))
     public String getPage() {
         return getStyleAttribute(PAGE);
     }
@@ -4132,7 +4132,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code page} style attribute.
      * @param page the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(@WebBrowser(value = FF, maxVersion = 38))
     public void setPage(final String page) {
         setStyleAttribute(PAGE, page);
     }
@@ -4663,7 +4663,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code size} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(@WebBrowser(value = FF, maxVersion = 38))
     public String getSize() {
         return getStyleAttribute(SIZE);
     }
@@ -4672,7 +4672,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code size} style attribute.
      * @param size the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(@WebBrowser(value = FF, maxVersion = 38))
     public void setSize(final String size) {
         setStyleAttribute(SIZE, size);
     }
@@ -5122,7 +5122,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code widows} style attribute.
      * @param widows the new attribute
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38) })
     public void setWidows(final String widows) {
         setStyleAttribute(WIDOWS, widows);
     }
