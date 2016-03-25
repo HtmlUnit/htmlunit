@@ -2274,11 +2274,11 @@ final class StyleAttributes {
         /** The style property {@code textKashidaSpace}. */
         TEXT_KASHIDA_SPACE("textKashidaSpace", "text-kashida-space", ie("undefined")),
 
-        /** The style property {@code text-orientation}. */
-        TEXT_ORIENTATION("text-orientation", "text-orientation", ff45up("mixed")),
-
         /** The style property {@code textOrientation}. */
-        TEXT_ORIENTATION_("textOrientation", "text-orientation", chrome("mixed"), ff45up("mixed")),
+        TEXT_ORIENTATION("textOrientation", "text-orientation", chrome("mixed"), ff45up("mixed")),
+
+        /** The style property {@code text-orientation}. */
+        TEXT_ORIENTATION_("text-orientation", "text-orientation", ff45up("mixed")),
 
         /** The style property {@code textOverflow}. */
         TEXT_OVERFLOW("textOverflow", "text-overflow", ff("clip"), ie("clip"), chrome("clip")),
@@ -2789,11 +2789,11 @@ final class StyleAttributes {
         /** The style property {@code word-wrap}. */
         WORD_WRAP_("word-wrap", "word-wrap", ff("normal")),
 
-        /** The style property {@code writing-mode}. */
-        WRITING_MODE("writing-mode", "writing-mode", ff45up("horizontal-tb")),
-
         /** The style property {@code writingMode}. */
-        WRITING_MODE_("writingMode", "writing-mode", ie("undefined"), chrome("horizontal-tb"), ff45up("horizontal-tb")),
+        WRITING_MODE("writingMode", "writing-mode", ie("undefined"), chrome("horizontal-tb"), ff45up("horizontal-tb")),
+
+        /** The style property {@code writing-mode}. */
+        WRITING_MODE_("writing-mode", "writing-mode", ff45up("horizontal-tb")),
 
         /** The style property {@code x}. */
         X("x", "x", chrome("0px")),
