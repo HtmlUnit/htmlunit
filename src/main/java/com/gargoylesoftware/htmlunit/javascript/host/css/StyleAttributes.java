@@ -2037,6 +2037,48 @@ final class StyleAttributes {
         /** The style property {@code scroll-behavior}. */
         SCROLL_BEHAVIOR_("scroll-behavior", "scroll-behavior", ff("auto")),
 
+        /** The style property {@code scrollSnapCoordinate}. */
+        SCROLL_SNAP_COORDINATE("scrollSnapCoordinate", "scroll-snap-coordinate", ff45up("none")),
+
+        /** The style property {@code scroll-snap-coordinate}. */
+        SCROLL_SNAP_COORDINATE_("scroll-snap-coordinate", "scroll-snap-coordinate", ff45up("none")),
+
+        /** The style property {@code scrollSnapDestination}. */
+        SCROLL_SNAP_DESTINATION("scrollSnapDestination", "scroll-snap-destination", ff45up("0px 0px")),
+
+        /** The style property {@code scroll-snap-destination}. */
+        SCROLL_SNAP_DESTINATION_("scroll-snap-destination", "scroll-snap-destination", ff45up("0px 0px")),
+
+        /** The style property {@code scrollSnapPointsX}. */
+        SCROLL_SNAP_POINTS_X("scrollSnapPointsX", "scroll-snap-points-x", ff45up("none")),
+
+        /** The style property {@code scroll-snap-points-x}. */
+        SCROLL_SNAP_POINTS_X_("scroll-snap-points-x", "scroll-snap-points-x", ff45up("none")),
+
+        /** The style property {@code scrollSnapPointsY}. */
+        SCROLL_SNAP_POINTS_Y("scrollSnapPointsY", "scroll-snap-points-y", ff45up("none")),
+
+        /** The style property {@code scroll-snap-points-y}. */
+        SCROLL_SNAP_POINTS_Y_("scroll-snap-points-y", "scroll-snap-points-y", ff45up("none")),
+
+        /** The style property {@code scrollSnapType}. */
+        SCROLL_SNAP_TYPE("scrollSnapType", "scroll-snap-type", ff45up("")),
+
+        /** The style property {@code scroll-snap-type}. */
+        SCROLL_SNAP_TYPE_("scroll-snap-type", "scroll-snap-type", ff45up("")),
+
+        /** The style property {@code scrollSnapTypeX}. */
+        SCROLL_SNAP_TYPE_X("scrollSnapTypeX", "scroll-snap-type-x", ff45up("none")),
+
+        /** The style property {@code scroll-snap-type-x}. */
+        SCROLL_SNAP_TYPE_X_("scroll-snap-type-x", "scroll-snap-type-x", ff45up("none")),
+
+        /** The style property {@code scrollSnapTypeY}. */
+        SCROLL_SNAP_TYPE_Y("scrollSnapTypeY", "scroll-snap-type-y", ff45up("none")),
+
+        /** The style property {@code scroll-snap-type-y}. */
+        SCROLL_SNAP_TYPE_Y_("scroll-snap-type-y", "scroll-snap-type-y", ff45up("none")),
+
         /** The style property {@code scrollbar3dLightColor}. */
         SCROLLBAR_3DLIGHT_COLOR("scrollbar3dLightColor", "scrollbar-3dlight-color", ie("undefined")),
 
@@ -2232,8 +2274,11 @@ final class StyleAttributes {
         /** The style property {@code textKashidaSpace}. */
         TEXT_KASHIDA_SPACE("textKashidaSpace", "text-kashida-space", ie("undefined")),
 
+        /** The style property {@code text-orientation}. */
+        TEXT_ORIENTATION("text-orientation", "text-orientation", ff45up("mixed")),
+
         /** The style property {@code textOrientation}. */
-        TEXT_ORIENTATION("textOrientation", "text-orientation", chrome("mixed"), ff45up("mixed")),
+        TEXT_ORIENTATION_("textOrientation", "text-orientation", chrome("mixed"), ff45up("mixed")),
 
         /** The style property {@code textOverflow}. */
         TEXT_OVERFLOW("textOverflow", "text-overflow", ff("clip"), ie("clip"), chrome("clip")),
@@ -2308,12 +2353,15 @@ final class StyleAttributes {
         /** The style property {@code transitionTimingFunction}. */
         TRANSITION_TIMING_FUNCTION("transitionTimingFunction",
                 "transition-timing-function",
-                ff("cubic-bezier(0.25, 0.1, 0.25, 1)"),
-                ie("cubic-bezier(0.25, 0.1, 0.25, 1)"), chrome("ease")),
+                ffBelow45("cubic-bezier(0.25, 0.1, 0.25, 1)"),
+                ff45up("ease"),
+                ie("cubic-bezier(0.25, 0.1, 0.25, 1)"),
+                chrome("ease")),
 
         /** The style property {@code transition-timing-function}. */
         TRANSITION_TIMING_FUNCTION_("transition-timing-function", "transition-timing-function",
-                ff("cubic-bezier(0.25, 0.1, 0.25, 1)")),
+                ffBelow45("cubic-bezier(0.25, 0.1, 0.25, 1)"),
+                ff45up("ease")),
 
         /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",
@@ -2741,8 +2789,11 @@ final class StyleAttributes {
         /** The style property {@code word-wrap}. */
         WORD_WRAP_("word-wrap", "word-wrap", ff("normal")),
 
+        /** The style property {@code writing-mode}. */
+        WRITING_MODE("writing-mode", "writing-mode", ff45up("horizontal-tb")),
+
         /** The style property {@code writingMode}. */
-        WRITING_MODE("writingMode", "writing-mode", ie("undefined"), chrome("horizontal-tb"), ff45up("horizontal-tb")),
+        WRITING_MODE_("writingMode", "writing-mode", ie("undefined"), chrome("horizontal-tb"), ff45up("horizontal-tb")),
 
         /** The style property {@code x}. */
         X("x", "x", chrome("0px")),
