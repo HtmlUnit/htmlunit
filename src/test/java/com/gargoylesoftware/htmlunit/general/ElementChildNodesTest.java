@@ -46,9 +46,9 @@ public class ElementChildNodesTest extends WebDriverTestCase {
                 + "<p id='p1'> <" + tagName + "></" + tagName + "> </p>\n"
                 + "<p id='p2'><" + tagName + "></" + tagName + "> </p>\n"
                 + "<p id='p3'> <" + tagName + "></" + tagName + "></p>\n"
-                + "<p id='p4'> <" + tagName + ">something</" + tagName + "> </p>\n"
-                + "<p id='p5'><" + tagName + ">something</" + tagName + "> </p>\n"
-                + "<p id='p6'> <" + tagName + ">something</" + tagName + "></p>\n"
+                + "<p id='p4'> <" + tagName + ">var x</" + tagName + "> </p>\n"
+                + "<p id='p5'><" + tagName + ">var x</" + tagName + "> </p>\n"
+                + "<p id='p6'> <" + tagName + ">var x</" + tagName + "></p>\n"
                 + "</body></html>";
     }
 
@@ -1201,7 +1201,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented
     public void script() throws Exception {
         loadPageWithAlerts2(test("script"));
     }
