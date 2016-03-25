@@ -393,6 +393,97 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "no delete",
+            FF45 = {"myKey", "myKey1"})
+    public void delete() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    if (!formData.delete) { alert('no delete'); return; }\n"
+
+            + "    formData.append('myKey', 'myValue');\n"
+            + "    formData.append('myKey1', '');\n"
+            + "    formData.append('mykey 2', '');\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+
+            + "  try {\n"
+            + "    formData.delete('mykey');\n"
+            + "    formData.delete('mykey 2');\n"
+            + "    formData.delete('');\n"
+            + "  } catch (e) {\n"
+            + "    alert('delete: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch (e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+        final String alerts = getCollectedAlerts(driver).get(0);
+        for (String expected : getExpectedAlerts()) {
+            assertTrue(expected + " not found", alerts.contains(expected));
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "no has",
+            FF45 = {"true", "false", "false"})
+    public void has() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    if (!formData.has) { alert('no has'); return; }\n"
+
+            + "    formData.append('myKey', 'myValue');\n"
+            + "    formData.append('myKey1', '');\n"
+            + "    formData.append('mykey 2', '');\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+
+            + "  try {\n"
+            + "    alert(formData.has('myKey'));\n"
+            + "    alert(formData.has('mykey'));\n"
+            + "    alert(formData.has(''));\n"
+            + "  } catch (e) {\n"
+            + "    alert('delete: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

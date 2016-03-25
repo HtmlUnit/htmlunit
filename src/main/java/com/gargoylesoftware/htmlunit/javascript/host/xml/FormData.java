@@ -14,8 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -23,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
@@ -79,6 +85,45 @@ public class FormData extends SimpleScriptable {
         else {
             requestParameters_.add(new NameValuePair(name, Context.toString(value)));
         }
+    }
+
+    /**
+     * Removes the entry (if exists).
+     * @param name the name of the field to remove
+     */
+    @JsxFunction(@WebBrowser(value = FF, minVersion = 45))
+    public void delete(final String name) {
+        if (StringUtils.isEmpty(name)) {
+            return;
+        }
+
+        final Iterator<NameValuePair> iter = requestParameters_.iterator();
+        while (iter.hasNext()) {
+            final NameValuePair pair = iter.next();
+            if (name.equals(pair.getName())) {
+                iter.remove();
+            }
+        }
+    }
+
+    /**
+     * @param name the name of the field to check
+     * @return true if the name exists
+     */
+    @JsxFunction(@WebBrowser(value = FF, minVersion = 45))
+    public boolean has(final String name) {
+        if (StringUtils.isEmpty(name)) {
+            return false;
+        }
+
+        final Iterator<NameValuePair> iter = requestParameters_.iterator();
+        while (iter.hasNext()) {
+            final NameValuePair pair = iter.next();
+            if (name.equals(pair.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
