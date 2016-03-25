@@ -226,8 +226,16 @@ public abstract class AbstractJavaScriptConfiguration {
                     }
                 }
                 else if (annotation instanceof JsxFunction) {
-                    if (isSupported(((JsxFunction) annotation).value(), expectedBrowserName, browserVersionNumeric)) {
-                        classConfiguration.addFunction(method);
+                    final JsxFunction jsxFunction = (JsxFunction) annotation;
+                    if (isSupported(jsxFunction.value(), expectedBrowserName, browserVersionNumeric)) {
+                        final String name;
+                        if (jsxFunction.functionName().isEmpty()) {
+                            name = method.getName();
+                        }
+                        else {
+                            name = jsxFunction.functionName();
+                        }
+                        classConfiguration.addFunction(name, method);
                     }
                 }
                 else if (annotation instanceof JsxStaticGetter) {

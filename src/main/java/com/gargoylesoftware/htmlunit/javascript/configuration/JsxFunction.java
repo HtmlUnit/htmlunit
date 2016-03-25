@@ -43,4 +43,10 @@ public @interface JsxFunction {
         @WebBrowser(IE),
         @WebBrowser(EDGE)
     };
+
+    /**
+     * The JavaScript function property name.
+     * @return the function property name
+     */
+    String functionName() default "";
 }

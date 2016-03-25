@@ -91,8 +91,8 @@ public class FormData extends SimpleScriptable {
      * Removes the entry (if exists).
      * @param name the name of the field to remove
      */
-    @JsxFunction(@WebBrowser(value = FF, minVersion = 45))
-    public void delete(final String name) {
+    @JsxFunction(functionName = "delete", value = @WebBrowser(value = FF, minVersion = 45))
+    public void delete_js(final String name) {
         if (StringUtils.isEmpty(name)) {
             return;
         }

@@ -187,10 +187,11 @@ public final class ClassConfiguration {
 
     /**
      * Add the function to the configuration.
+     * @param name the method name
      * @param method the method
      */
-    public void addFunction(final Method method) {
-        functionMap_.put(method.getName(), method);
+    public void addFunction(final String name, final Method method) {
+        functionMap_.put(name, method);
     }
 
     /**
