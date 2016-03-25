@@ -108,6 +108,26 @@ public class FormData extends SimpleScriptable {
 
     /**
      * @param name the name of the field to check
+     * @return the first value found for the give name
+     */
+    @JsxFunction(@WebBrowser(value = FF, minVersion = 45))
+    public String get(final String name) {
+        if (StringUtils.isEmpty(name)) {
+            return null;
+        }
+
+        final Iterator<NameValuePair> iter = requestParameters_.iterator();
+        while (iter.hasNext()) {
+            final NameValuePair pair = iter.next();
+            if (name.equals(pair.getName())) {
+                return pair.getValue();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param name the name of the field to check
      * @return true if the name exists
      */
     @JsxFunction(@WebBrowser(value = FF, minVersion = 45))

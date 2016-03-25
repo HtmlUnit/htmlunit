@@ -9,7 +9,7 @@
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
             <action type="add" dev="rbri">
-                JavaScript: FormData delete and has functions added.
+                JavaScript: FormData delete, get and has functions added.
             </action>
             <action type="update" dev="rbri">
                 History processing changed; now HtmlUnit remembers pages instead of requests.
