@@ -1343,7 +1343,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "3", "2" })
-    @NotYetImplemented
     public void table() throws Exception {
         loadPageWithAlerts2(test("table"));
     }

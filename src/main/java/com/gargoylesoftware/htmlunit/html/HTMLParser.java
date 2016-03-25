@@ -806,6 +806,22 @@ public final class HTMLParser {
                         final HtmlTableRow row = (HtmlTableRow) currentNode_;
                         final HtmlTable enclosingTable = row.getEnclosingTable();
                         if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
+                            if (enclosingTable.getPreviousSibling() instanceof DomText) {
+                                final DomText domText = (DomText) enclosingTable.getPreviousSibling();
+                                domText.setTextContent(domText + textValue);
+                            }
+                            else {
+                                enclosingTable.insertBefore(text);
+                            }
+                        }
+                    }
+                    else if (currentNode_ instanceof HtmlTable && StringUtils.isNotBlank(textValue)) {
+                        final HtmlTable enclosingTable = (HtmlTable) currentNode_;
+                        if (enclosingTable.getPreviousSibling() instanceof DomText) {
+                            final DomText domText = (DomText) enclosingTable.getPreviousSibling();
+                            domText.setTextContent(domText + textValue);
+                        }
+                        else {
                             enclosingTable.insertBefore(text);
                         }
                     }
