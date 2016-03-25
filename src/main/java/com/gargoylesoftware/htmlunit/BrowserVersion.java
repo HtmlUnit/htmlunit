@@ -143,9 +143,9 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/49.0.2623.108 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/49.0.2623.108 Safari/537.36",
         49, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
@@ -167,7 +167,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_38.initDefaultFeatures();
         FIREFOX_38.setBrowserLanguage("en-US");
         FIREFOX_38.setVendor("");
-        FIREFOX_38.buildId_ = "20160120213330";
+        FIREFOX_38.buildId_ = "20160315145633";
         FIREFOX_38.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
         FIREFOX_38.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -179,7 +179,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_45.initDefaultFeatures();
         FIREFOX_45.setBrowserLanguage("en-US");
         FIREFOX_45.setVendor("");
-        FIREFOX_45.buildId_ = "20160304113541";
+        FIREFOX_45.buildId_ = "20160316151906";
         FIREFOX_45.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
         FIREFOX_45.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -221,24 +221,24 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 20.0 r0", "undefined", "pepflashplayer.dll");
+                "Shockwave Flash 21.0 r0", "undefined", "pepflashplayer.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         CHROME.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 20.0 r0", "20.0.0.286", "NPSWF32_20_0_0_286.dll");
+                "Shockwave Flash 21.0 r0", "21.0.0.197", "NPSWF32_21_0_0_197.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_38.getPlugins().add(flash);
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 20.0 r0", "20.0.0.306", "NPSWF32_20_0_0_306.dll");
+                "Shockwave Flash 21.0 r0", "21.0.0.197", "NPSWF32_21_0_0_197.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_45.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 20.0 r0", "20.0.0.270", "Flash32_20_0_0_270.ocx");
+                "Shockwave Flash 21.0 r0", "21.0.0.197", "Flash32_21_0_0_197.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.getPlugins().add(flash);
