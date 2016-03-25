@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +24,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -169,6 +172,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                         "success",
                         "success",
                         "success" })
+    @NotYetImplemented(FF45)
     public void width_like_properties_font() throws Exception {
         width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                         "verticalAlign", "wordSpacing");
