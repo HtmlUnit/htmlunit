@@ -572,7 +572,7 @@ public enum BrowserVersionFeatures {
     JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND,
 
     /** Supports {@code CSSCharsetRule}. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 38))
     JS_CSSRULELIST_CHARSET_RULE,
 
     /** item is enumerated before length property of CSSRuleList. */
