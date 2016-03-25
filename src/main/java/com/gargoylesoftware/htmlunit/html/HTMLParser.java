@@ -472,6 +472,8 @@ public final class HTMLParser {
             if (browserVersion.isChrome()) {
                 configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
                         HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
+                configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.ISINDEX, "ISINDEX",
+                        HTMLElements.Element.INLINE, HTMLElements.BODY, null));
             }
             else if (browserVersion.isIE()) {
                 configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",

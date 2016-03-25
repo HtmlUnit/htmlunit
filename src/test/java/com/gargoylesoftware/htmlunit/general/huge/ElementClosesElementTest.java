@@ -15,8 +15,10 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.ArrayList;
@@ -109,7 +111,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _abbr_area() throws Exception {
         test("abbr", "area");
     }
@@ -154,10 +155,9 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "2",
-            IE = "2",
+    @Alerts(DEFAULT = "2",
             FF = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _abbr_command() throws Exception {
         test("abbr", "command");
     }
@@ -231,7 +231,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _abbr_param() throws Exception {
         test("abbr", "param");
     }
@@ -241,7 +241,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _abbr_source() throws Exception {
         test("abbr", "source");
     }
@@ -251,7 +250,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _abbr_track() throws Exception {
         test("abbr", "track");
     }
@@ -270,7 +268,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _acronym_area() throws Exception {
         test("acronym", "area");
     }
@@ -318,7 +315,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _acronym_command() throws Exception {
         test("acronym", "command");
     }
@@ -392,7 +389,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _acronym_param() throws Exception {
         test("acronym", "param");
     }
@@ -402,7 +399,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _acronym_source() throws Exception {
         test("acronym", "source");
     }
@@ -412,7 +408,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _acronym_track() throws Exception {
         test("acronym", "track");
     }
@@ -440,7 +435,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _a_area() throws Exception {
         test("a", "area");
     }
@@ -488,7 +482,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _a_command() throws Exception {
         test("a", "command");
     }
@@ -562,7 +556,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _a_param() throws Exception {
         test("a", "param");
     }
@@ -572,7 +566,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _a_source() throws Exception {
         test("a", "source");
     }
@@ -582,7 +575,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _a_track() throws Exception {
         test("a", "track");
     }
@@ -601,7 +593,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _address_area() throws Exception {
         test("address", "area");
     }
@@ -649,7 +640,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _address_command() throws Exception {
         test("address", "command");
     }
@@ -723,7 +714,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _address_param() throws Exception {
         test("address", "param");
     }
@@ -733,7 +723,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _address_source() throws Exception {
         test("address", "source");
     }
@@ -743,7 +732,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _address_track() throws Exception {
         test("address", "track");
     }
@@ -762,7 +750,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _applet_area() throws Exception {
         test("applet", "area");
     }
@@ -810,7 +797,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _applet_command() throws Exception {
         test("applet", "command");
     }
@@ -893,7 +880,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _applet_source() throws Exception {
         test("applet", "source");
     }
@@ -903,7 +889,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _applet_track() throws Exception {
         test("applet", "track");
     }
@@ -2138,7 +2123,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _article_area() throws Exception {
         test("article", "area");
     }
@@ -2186,7 +2170,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _article_command() throws Exception {
         test("article", "command");
     }
@@ -2260,7 +2244,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _article_param() throws Exception {
         test("article", "param");
     }
@@ -2270,7 +2253,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _article_source() throws Exception {
         test("article", "source");
     }
@@ -2280,7 +2262,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _article_track() throws Exception {
         test("article", "track");
     }
@@ -2299,7 +2280,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _aside_area() throws Exception {
         test("aside", "area");
     }
@@ -2347,7 +2327,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _aside_command() throws Exception {
         test("aside", "command");
     }
@@ -2421,7 +2401,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _aside_param() throws Exception {
         test("aside", "param");
     }
@@ -2431,7 +2410,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _aside_source() throws Exception {
         test("aside", "source");
     }
@@ -2441,7 +2419,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _aside_track() throws Exception {
         test("aside", "track");
     }
@@ -2460,7 +2437,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _audio_area() throws Exception {
         test("audio", "area");
     }
@@ -2508,7 +2484,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _audio_command() throws Exception {
         test("audio", "command");
     }
@@ -2582,7 +2558,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _audio_param() throws Exception {
         test("audio", "param");
     }
@@ -2592,7 +2567,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _audio_source() throws Exception {
         test("audio", "source");
     }
@@ -2602,7 +2576,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _audio_track() throws Exception {
         test("audio", "track");
     }
@@ -5055,6 +5028,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_abbr() throws Exception {
         test("basefont", "abbr");
     }
@@ -5066,6 +5040,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_acronym() throws Exception {
         test("basefont", "acronym");
     }
@@ -5077,6 +5052,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_a() throws Exception {
         test("basefont", "a");
     }
@@ -5088,6 +5064,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_address() throws Exception {
         test("basefont", "address");
     }
@@ -5099,6 +5076,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_applet() throws Exception {
         test("basefont", "applet");
     }
@@ -5110,6 +5088,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_area() throws Exception {
         test("basefont", "area");
     }
@@ -5121,6 +5100,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_article() throws Exception {
         test("basefont", "article");
     }
@@ -5132,6 +5112,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_aside() throws Exception {
         test("basefont", "aside");
     }
@@ -5143,6 +5124,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_audio() throws Exception {
         test("basefont", "audio");
     }
@@ -5154,6 +5136,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_bgsound() throws Exception {
         test("basefont", "bgsound");
     }
@@ -5165,6 +5148,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_base() throws Exception {
         test("basefont", "base");
     }
@@ -5185,6 +5169,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_bdi() throws Exception {
         test("basefont", "bdi");
     }
@@ -5196,6 +5181,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_bdo() throws Exception {
         test("basefont", "bdo");
     }
@@ -5207,6 +5193,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_big() throws Exception {
         test("basefont", "big");
     }
@@ -5218,6 +5205,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_blink() throws Exception {
         test("basefont", "blink");
     }
@@ -5229,6 +5217,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_blockquote() throws Exception {
         test("basefont", "blockquote");
     }
@@ -5249,6 +5238,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_b() throws Exception {
         test("basefont", "b");
     }
@@ -5260,6 +5250,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_br() throws Exception {
         test("basefont", "br");
     }
@@ -5271,6 +5262,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_button() throws Exception {
         test("basefont", "button");
     }
@@ -5282,6 +5274,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_canvas() throws Exception {
         test("basefont", "canvas");
     }
@@ -5293,6 +5286,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_caption() throws Exception {
         test("basefont", "caption");
     }
@@ -5304,6 +5298,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_center() throws Exception {
         test("basefont", "center");
     }
@@ -5315,6 +5310,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_cite() throws Exception {
         test("basefont", "cite");
     }
@@ -5326,6 +5322,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_code() throws Exception {
         test("basefont", "code");
     }
@@ -5337,6 +5334,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_command() throws Exception {
         test("basefont", "command");
     }
@@ -5348,6 +5346,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_datalist() throws Exception {
         test("basefont", "datalist");
     }
@@ -5359,6 +5358,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_dfn() throws Exception {
         test("basefont", "dfn");
     }
@@ -5370,6 +5370,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_dd() throws Exception {
         test("basefont", "dd");
     }
@@ -5381,6 +5382,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_del() throws Exception {
         test("basefont", "del");
     }
@@ -5392,6 +5394,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_details() throws Exception {
         test("basefont", "details");
     }
@@ -5403,6 +5406,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_dialog() throws Exception {
         test("basefont", "dialog");
     }
@@ -5414,6 +5418,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_dir() throws Exception {
         test("basefont", "dir");
     }
@@ -5425,6 +5430,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_div() throws Exception {
         test("basefont", "div");
     }
@@ -5436,6 +5442,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_dl() throws Exception {
         test("basefont", "dl");
     }
@@ -5447,6 +5454,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_dt() throws Exception {
         test("basefont", "dt");
     }
@@ -5458,6 +5466,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_embed() throws Exception {
         test("basefont", "embed");
     }
@@ -5469,6 +5478,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_em() throws Exception {
         test("basefont", "em");
     }
@@ -5480,6 +5490,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_fieldset() throws Exception {
         test("basefont", "fieldset");
     }
@@ -5491,6 +5502,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_figcaption() throws Exception {
         test("basefont", "figcaption");
     }
@@ -5502,6 +5514,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_figure() throws Exception {
         test("basefont", "figure");
     }
@@ -5513,6 +5526,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_font() throws Exception {
         test("basefont", "font");
     }
@@ -5524,6 +5538,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_form() throws Exception {
         test("basefont", "form");
     }
@@ -5535,6 +5550,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_footer() throws Exception {
         test("basefont", "footer");
     }
@@ -5546,6 +5562,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_frame() throws Exception {
         test("basefont", "frame");
     }
@@ -5557,6 +5574,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_frameset() throws Exception {
         test("basefont", "frameset");
     }
@@ -5577,6 +5595,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_header() throws Exception {
         test("basefont", "header");
     }
@@ -5588,6 +5607,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_h1() throws Exception {
         test("basefont", "h1");
     }
@@ -5599,6 +5619,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_h2() throws Exception {
         test("basefont", "h2");
     }
@@ -5610,6 +5631,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_h3() throws Exception {
         test("basefont", "h3");
     }
@@ -5621,6 +5643,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_h4() throws Exception {
         test("basefont", "h4");
     }
@@ -5632,6 +5655,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_h5() throws Exception {
         test("basefont", "h5");
     }
@@ -5643,6 +5667,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_h6() throws Exception {
         test("basefont", "h6");
     }
@@ -5654,6 +5679,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_hr() throws Exception {
         test("basefont", "hr");
     }
@@ -5674,6 +5700,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_iframe() throws Exception {
         test("basefont", "iframe");
     }
@@ -5685,6 +5712,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_q() throws Exception {
         test("basefont", "q");
     }
@@ -5696,6 +5724,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_img() throws Exception {
         test("basefont", "img");
     }
@@ -5707,6 +5736,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_image() throws Exception {
         test("basefont", "image");
     }
@@ -5718,6 +5748,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_ins() throws Exception {
         test("basefont", "ins");
     }
@@ -5729,6 +5760,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_isindex() throws Exception {
         test("basefont", "isindex");
     }
@@ -5740,6 +5772,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_i() throws Exception {
         test("basefont", "i");
     }
@@ -5751,6 +5784,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_kbd() throws Exception {
         test("basefont", "kbd");
     }
@@ -5762,6 +5796,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_keygen() throws Exception {
         test("basefont", "keygen");
     }
@@ -5773,6 +5808,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_label() throws Exception {
         test("basefont", "label");
     }
@@ -5784,6 +5820,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_layer() throws Exception {
         test("basefont", "layer");
     }
@@ -5795,6 +5832,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_legend() throws Exception {
         test("basefont", "legend");
     }
@@ -5806,6 +5844,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_listing() throws Exception {
         test("basefont", "listing");
     }
@@ -5817,6 +5856,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_li() throws Exception {
         test("basefont", "li");
     }
@@ -5828,6 +5868,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_link() throws Exception {
         test("basefont", "link");
     }
@@ -5839,6 +5880,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_main() throws Exception {
         test("basefont", "main");
     }
@@ -5850,6 +5892,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_map() throws Exception {
         test("basefont", "map");
     }
@@ -5861,6 +5904,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_mark() throws Exception {
         test("basefont", "mark");
     }
@@ -5872,6 +5916,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_marquee() throws Exception {
         test("basefont", "marquee");
     }
@@ -5883,6 +5928,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_menu() throws Exception {
         test("basefont", "menu");
     }
@@ -5894,6 +5940,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_menuitem() throws Exception {
         test("basefont", "menuitem");
     }
@@ -5905,6 +5952,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_meta() throws Exception {
         test("basefont", "meta");
     }
@@ -5916,6 +5964,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_meter() throws Exception {
         test("basefont", "meter");
     }
@@ -5927,6 +5976,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_multicol() throws Exception {
         test("basefont", "multicol");
     }
@@ -5938,6 +5988,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_nav() throws Exception {
         test("basefont", "nav");
     }
@@ -5949,6 +6000,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_nextid() throws Exception {
         test("basefont", "nextid");
     }
@@ -5960,6 +6012,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_nobr() throws Exception {
         test("basefont", "nobr");
     }
@@ -5971,6 +6024,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_noembed() throws Exception {
         test("basefont", "noembed");
     }
@@ -5982,6 +6036,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_noframes() throws Exception {
         test("basefont", "noframes");
     }
@@ -5993,6 +6048,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_nolayer() throws Exception {
         test("basefont", "nolayer");
     }
@@ -6004,6 +6060,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_noscript() throws Exception {
         test("basefont", "noscript");
     }
@@ -6024,6 +6081,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_ol() throws Exception {
         test("basefont", "ol");
     }
@@ -6035,6 +6093,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_optgroup() throws Exception {
         test("basefont", "optgroup");
     }
@@ -6046,6 +6105,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_option() throws Exception {
         test("basefont", "option");
     }
@@ -6057,6 +6117,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_output() throws Exception {
         test("basefont", "output");
     }
@@ -6068,6 +6129,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_p() throws Exception {
         test("basefont", "p");
     }
@@ -6079,6 +6141,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_param() throws Exception {
         test("basefont", "param");
     }
@@ -6090,6 +6153,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_plaintext() throws Exception {
         test("basefont", "plaintext");
     }
@@ -6101,6 +6165,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_pre() throws Exception {
         test("basefont", "pre");
     }
@@ -6112,6 +6177,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_progress() throws Exception {
         test("basefont", "progress");
     }
@@ -6123,6 +6189,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_rp() throws Exception {
         test("basefont", "rp");
     }
@@ -6134,6 +6201,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_rt() throws Exception {
         test("basefont", "rt");
     }
@@ -6145,6 +6213,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_ruby() throws Exception {
         test("basefont", "ruby");
     }
@@ -6156,6 +6225,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_s() throws Exception {
         test("basefont", "s");
     }
@@ -6167,6 +6237,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_samp() throws Exception {
         test("basefont", "samp");
     }
@@ -6190,6 +6261,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_section() throws Exception {
         test("basefont", "section");
     }
@@ -6201,6 +6273,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_select() throws Exception {
         test("basefont", "select");
     }
@@ -6212,6 +6285,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_small() throws Exception {
         test("basefont", "small");
     }
@@ -6223,6 +6297,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_source() throws Exception {
         test("basefont", "source");
     }
@@ -6234,6 +6309,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_span() throws Exception {
         test("basefont", "span");
     }
@@ -6245,6 +6321,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_strike() throws Exception {
         test("basefont", "strike");
     }
@@ -6256,6 +6333,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_strong() throws Exception {
         test("basefont", "strong");
     }
@@ -6267,6 +6345,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_style() throws Exception {
         test("basefont", "style");
     }
@@ -6278,6 +6357,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_sub() throws Exception {
         test("basefont", "sub");
     }
@@ -6289,6 +6369,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_summary() throws Exception {
         test("basefont", "summary");
     }
@@ -6300,6 +6381,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_sup() throws Exception {
         test("basefont", "sup");
     }
@@ -6311,6 +6393,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_table() throws Exception {
         test("basefont", "table");
     }
@@ -6322,6 +6405,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_col() throws Exception {
         test("basefont", "col");
     }
@@ -6333,6 +6417,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_colgroup() throws Exception {
         test("basefont", "colgroup");
     }
@@ -6344,6 +6429,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_tbody() throws Exception {
         test("basefont", "tbody");
     }
@@ -6355,6 +6441,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_td() throws Exception {
         test("basefont", "td");
     }
@@ -6366,6 +6453,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_th() throws Exception {
         test("basefont", "th");
     }
@@ -6377,6 +6465,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_tr() throws Exception {
         test("basefont", "tr");
     }
@@ -6388,6 +6477,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_textarea() throws Exception {
         test("basefont", "textarea");
     }
@@ -6399,6 +6489,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_tfoot() throws Exception {
         test("basefont", "tfoot");
     }
@@ -6410,6 +6501,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_thead() throws Exception {
         test("basefont", "thead");
     }
@@ -6421,6 +6513,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_tt() throws Exception {
         test("basefont", "tt");
     }
@@ -6432,6 +6525,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_time() throws Exception {
         test("basefont", "time");
     }
@@ -6452,6 +6546,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_track() throws Exception {
         test("basefont", "track");
     }
@@ -6463,6 +6558,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_u() throws Exception {
         test("basefont", "u");
     }
@@ -6474,6 +6570,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_ul() throws Exception {
         test("basefont", "ul");
     }
@@ -6485,6 +6582,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_var() throws Exception {
         test("basefont", "var");
     }
@@ -6496,6 +6594,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_video() throws Exception {
         test("basefont", "video");
     }
@@ -6507,6 +6606,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_wbr() throws Exception {
         test("basefont", "wbr");
     }
@@ -6518,6 +6618,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _basefont_xmp() throws Exception {
         test("basefont", "xmp");
     }
@@ -6527,7 +6628,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _bdi_area() throws Exception {
         test("bdi", "area");
     }
@@ -6575,7 +6675,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _bdi_command() throws Exception {
         test("bdi", "command");
     }
@@ -6649,7 +6749,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _bdi_param() throws Exception {
         test("bdi", "param");
     }
@@ -6659,7 +6758,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _bdi_source() throws Exception {
         test("bdi", "source");
     }
@@ -6669,7 +6767,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _bdi_track() throws Exception {
         test("bdi", "track");
     }
@@ -6688,7 +6785,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _bdo_area() throws Exception {
         test("bdo", "area");
     }
@@ -6736,7 +6832,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _bdo_command() throws Exception {
         test("bdo", "command");
     }
@@ -6810,7 +6906,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _bdo_param() throws Exception {
         test("bdo", "param");
     }
@@ -6820,7 +6916,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _bdo_source() throws Exception {
         test("bdo", "source");
     }
@@ -6830,7 +6925,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _bdo_track() throws Exception {
         test("bdo", "track");
     }
@@ -6849,7 +6943,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _big_area() throws Exception {
         test("big", "area");
     }
@@ -6897,7 +6990,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _big_command() throws Exception {
         test("big", "command");
     }
@@ -6971,7 +7064,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _big_param() throws Exception {
         test("big", "param");
     }
@@ -6981,7 +7074,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _big_source() throws Exception {
         test("big", "source");
     }
@@ -6991,7 +7083,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _big_track() throws Exception {
         test("big", "track");
     }
@@ -7010,7 +7101,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _blink_area() throws Exception {
         test("blink", "area");
     }
@@ -7058,7 +7148,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _blink_command() throws Exception {
         test("blink", "command");
     }
@@ -7132,7 +7222,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _blink_param() throws Exception {
         test("blink", "param");
     }
@@ -7142,7 +7232,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _blink_source() throws Exception {
         test("blink", "source");
     }
@@ -7152,7 +7241,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _blink_track() throws Exception {
         test("blink", "track");
     }
@@ -7171,7 +7259,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _blockquote_area() throws Exception {
         test("blockquote", "area");
     }
@@ -7219,7 +7306,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _blockquote_command() throws Exception {
         test("blockquote", "command");
     }
@@ -7293,7 +7380,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _blockquote_param() throws Exception {
         test("blockquote", "param");
     }
@@ -7303,7 +7389,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _blockquote_source() throws Exception {
         test("blockquote", "source");
     }
@@ -7313,7 +7398,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _blockquote_track() throws Exception {
         test("blockquote", "track");
     }
@@ -7379,7 +7463,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_area() throws Exception {
         test("body", "area");
     }
@@ -7418,6 +7502,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_bgsound() throws Exception {
         test("body", "bgsound");
     }
@@ -7429,6 +7514,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_base() throws Exception {
         test("body", "base");
     }
@@ -7440,6 +7526,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_basefont() throws Exception {
         test("body", "basefont");
     }
@@ -7505,6 +7592,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_br() throws Exception {
         test("body", "br");
     }
@@ -7561,7 +7649,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _body_command() throws Exception {
         test("body", "command");
     }
@@ -7663,6 +7751,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_embed() throws Exception {
         test("body", "embed");
     }
@@ -7800,6 +7889,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_hr() throws Exception {
         test("body", "hr");
     }
@@ -7829,6 +7919,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_img() throws Exception {
         test("body", "img");
     }
@@ -7861,7 +7952,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "3",
             FF38 = "3")
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({ FF, IE, EDGE })
     public void _body_isindex() throws Exception {
         test("body", "isindex");
     }
@@ -7891,6 +7982,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_keygen() throws Exception {
         test("body", "keygen");
     }
@@ -7947,6 +8039,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_link() throws Exception {
         test("body", "link");
     }
@@ -8012,6 +8105,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_meta() throws Exception {
         test("body", "meta");
     }
@@ -8048,7 +8142,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _body_nextid() throws Exception {
         test("body", "nextid");
     }
@@ -8121,7 +8214,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _body_optgroup() throws Exception {
         test("body", "optgroup");
     }
@@ -8131,7 +8223,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _body_option() throws Exception {
         test("body", "option");
     }
@@ -8161,7 +8252,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_param() throws Exception {
         test("body", "param");
     }
@@ -8282,7 +8373,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_source() throws Exception {
         test("body", "source");
     }
@@ -8403,7 +8494,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_track() throws Exception {
         test("body", "track");
     }
@@ -8451,6 +8542,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "3",
             IE = "3",
             FF38 = "3")
+    @NotYetImplemented({ FF45, EDGE })
     public void _body_wbr() throws Exception {
         test("body", "wbr");
     }
@@ -8469,7 +8561,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _b_area() throws Exception {
         test("b", "area");
     }
@@ -8517,7 +8608,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _b_command() throws Exception {
         test("b", "command");
     }
@@ -8591,7 +8682,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _b_param() throws Exception {
         test("b", "param");
     }
@@ -8601,7 +8692,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _b_source() throws Exception {
         test("b", "source");
     }
@@ -8611,7 +8701,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _b_track() throws Exception {
         test("b", "track");
     }
@@ -9846,7 +9935,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _button_area() throws Exception {
         test("button", "area");
     }
@@ -9903,7 +9991,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _button_command() throws Exception {
         test("button", "command");
     }
@@ -9977,7 +10065,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _button_param() throws Exception {
         test("button", "param");
     }
@@ -9987,7 +10075,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _button_source() throws Exception {
         test("button", "source");
     }
@@ -9997,7 +10084,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _button_track() throws Exception {
         test("button", "track");
     }
@@ -10016,7 +10102,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _canvas_area() throws Exception {
         test("canvas", "area");
     }
@@ -10064,7 +10149,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _canvas_command() throws Exception {
         test("canvas", "command");
     }
@@ -10138,7 +10223,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _canvas_param() throws Exception {
         test("canvas", "param");
     }
@@ -10148,7 +10232,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _canvas_source() throws Exception {
         test("canvas", "source");
     }
@@ -10158,7 +10241,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _canvas_track() throws Exception {
         test("canvas", "track");
     }
@@ -11393,7 +11475,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _center_area() throws Exception {
         test("center", "area");
     }
@@ -11441,7 +11522,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _center_command() throws Exception {
         test("center", "command");
     }
@@ -11515,7 +11596,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _center_param() throws Exception {
         test("center", "param");
     }
@@ -11525,7 +11605,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _center_source() throws Exception {
         test("center", "source");
     }
@@ -11535,7 +11614,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _center_track() throws Exception {
         test("center", "track");
     }
@@ -11554,7 +11632,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _cite_area() throws Exception {
         test("cite", "area");
     }
@@ -11602,7 +11679,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _cite_command() throws Exception {
         test("cite", "command");
     }
@@ -11676,7 +11753,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _cite_param() throws Exception {
         test("cite", "param");
     }
@@ -11686,7 +11763,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _cite_source() throws Exception {
         test("cite", "source");
     }
@@ -11696,7 +11772,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _cite_track() throws Exception {
         test("cite", "track");
     }
@@ -11715,7 +11790,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _code_area() throws Exception {
         test("code", "area");
     }
@@ -11763,7 +11837,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _code_command() throws Exception {
         test("code", "command");
     }
@@ -11837,7 +11911,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _code_param() throws Exception {
         test("code", "param");
     }
@@ -11847,7 +11921,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _code_source() throws Exception {
         test("code", "source");
     }
@@ -11857,7 +11930,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _code_track() throws Exception {
         test("code", "track");
     }
@@ -11878,7 +11950,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_abbr() throws Exception {
         test("command", "abbr");
     }
@@ -11890,7 +11962,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_acronym() throws Exception {
         test("command", "acronym");
     }
@@ -11902,7 +11974,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_a() throws Exception {
         test("command", "a");
     }
@@ -11914,7 +11986,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_address() throws Exception {
         test("command", "address");
     }
@@ -11926,7 +11998,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_applet() throws Exception {
         test("command", "applet");
     }
@@ -11938,7 +12010,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented
+    @NotYetImplemented(EDGE)
     public void _command_area() throws Exception {
         test("command", "area");
     }
@@ -11950,7 +12022,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_article() throws Exception {
         test("command", "article");
     }
@@ -11962,7 +12034,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_aside() throws Exception {
         test("command", "aside");
     }
@@ -11974,7 +12046,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_audio() throws Exception {
         test("command", "audio");
     }
@@ -11986,7 +12058,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_bgsound() throws Exception {
         test("command", "bgsound");
     }
@@ -11998,7 +12070,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_base() throws Exception {
         test("command", "base");
     }
@@ -12010,7 +12082,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_basefont() throws Exception {
         test("command", "basefont");
     }
@@ -12022,7 +12094,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_bdi() throws Exception {
         test("command", "bdi");
     }
@@ -12034,7 +12106,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_bdo() throws Exception {
         test("command", "bdo");
     }
@@ -12046,7 +12118,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_big() throws Exception {
         test("command", "big");
     }
@@ -12058,7 +12130,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_blink() throws Exception {
         test("command", "blink");
     }
@@ -12070,7 +12142,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_blockquote() throws Exception {
         test("command", "blockquote");
     }
@@ -12082,7 +12154,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_body() throws Exception {
         test("command", "body");
     }
@@ -12094,7 +12166,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_b() throws Exception {
         test("command", "b");
     }
@@ -12106,7 +12178,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_br() throws Exception {
         test("command", "br");
     }
@@ -12118,7 +12190,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_button() throws Exception {
         test("command", "button");
     }
@@ -12130,7 +12202,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_canvas() throws Exception {
         test("command", "canvas");
     }
@@ -12142,7 +12214,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_caption() throws Exception {
         test("command", "caption");
     }
@@ -12154,7 +12226,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_center() throws Exception {
         test("command", "center");
     }
@@ -12166,7 +12238,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_cite() throws Exception {
         test("command", "cite");
     }
@@ -12178,7 +12250,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_code() throws Exception {
         test("command", "code");
     }
@@ -12190,7 +12262,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_command() throws Exception {
         test("command", "command");
     }
@@ -12202,7 +12274,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_datalist() throws Exception {
         test("command", "datalist");
     }
@@ -12214,7 +12286,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_dfn() throws Exception {
         test("command", "dfn");
     }
@@ -12226,7 +12298,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_dd() throws Exception {
         test("command", "dd");
     }
@@ -12238,7 +12310,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_del() throws Exception {
         test("command", "del");
     }
@@ -12250,7 +12322,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_details() throws Exception {
         test("command", "details");
     }
@@ -12262,7 +12334,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_dialog() throws Exception {
         test("command", "dialog");
     }
@@ -12274,7 +12346,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_dir() throws Exception {
         test("command", "dir");
     }
@@ -12286,7 +12358,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_div() throws Exception {
         test("command", "div");
     }
@@ -12298,7 +12370,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_dl() throws Exception {
         test("command", "dl");
     }
@@ -12310,7 +12382,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_dt() throws Exception {
         test("command", "dt");
     }
@@ -12322,7 +12394,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_embed() throws Exception {
         test("command", "embed");
     }
@@ -12334,7 +12406,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_em() throws Exception {
         test("command", "em");
     }
@@ -12346,7 +12418,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_fieldset() throws Exception {
         test("command", "fieldset");
     }
@@ -12358,7 +12430,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_figcaption() throws Exception {
         test("command", "figcaption");
     }
@@ -12370,7 +12442,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_figure() throws Exception {
         test("command", "figure");
     }
@@ -12382,7 +12454,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_font() throws Exception {
         test("command", "font");
     }
@@ -12394,7 +12466,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_form() throws Exception {
         test("command", "form");
     }
@@ -12406,7 +12478,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_footer() throws Exception {
         test("command", "footer");
     }
@@ -12418,7 +12490,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_frame() throws Exception {
         test("command", "frame");
     }
@@ -12430,7 +12502,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_frameset() throws Exception {
         test("command", "frameset");
     }
@@ -12442,7 +12514,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_head() throws Exception {
         test("command", "head");
     }
@@ -12454,7 +12526,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_header() throws Exception {
         test("command", "header");
     }
@@ -12466,7 +12538,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_h1() throws Exception {
         test("command", "h1");
     }
@@ -12478,7 +12550,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_h2() throws Exception {
         test("command", "h2");
     }
@@ -12490,7 +12562,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_h3() throws Exception {
         test("command", "h3");
     }
@@ -12502,7 +12574,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_h4() throws Exception {
         test("command", "h4");
     }
@@ -12514,7 +12586,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_h5() throws Exception {
         test("command", "h5");
     }
@@ -12526,7 +12598,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_h6() throws Exception {
         test("command", "h6");
     }
@@ -12538,7 +12610,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_hr() throws Exception {
         test("command", "hr");
     }
@@ -12550,7 +12622,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_html() throws Exception {
         test("command", "html");
     }
@@ -12562,7 +12634,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_iframe() throws Exception {
         test("command", "iframe");
     }
@@ -12574,7 +12646,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_q() throws Exception {
         test("command", "q");
     }
@@ -12586,7 +12658,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_img() throws Exception {
         test("command", "img");
     }
@@ -12598,7 +12670,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _command_image() throws Exception {
         test("command", "image");
     }
@@ -12610,7 +12682,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_ins() throws Exception {
         test("command", "ins");
     }
@@ -12622,7 +12694,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _command_isindex() throws Exception {
         test("command", "isindex");
     }
@@ -12634,7 +12706,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_i() throws Exception {
         test("command", "i");
     }
@@ -12646,7 +12718,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_kbd() throws Exception {
         test("command", "kbd");
     }
@@ -12658,7 +12730,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_keygen() throws Exception {
         test("command", "keygen");
     }
@@ -12670,7 +12742,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_label() throws Exception {
         test("command", "label");
     }
@@ -12682,7 +12754,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_layer() throws Exception {
         test("command", "layer");
     }
@@ -12694,7 +12766,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_legend() throws Exception {
         test("command", "legend");
     }
@@ -12706,7 +12778,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_listing() throws Exception {
         test("command", "listing");
     }
@@ -12718,7 +12790,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_li() throws Exception {
         test("command", "li");
     }
@@ -12730,7 +12802,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_link() throws Exception {
         test("command", "link");
     }
@@ -12742,7 +12814,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_main() throws Exception {
         test("command", "main");
     }
@@ -12754,7 +12826,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_map() throws Exception {
         test("command", "map");
     }
@@ -12766,7 +12838,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_mark() throws Exception {
         test("command", "mark");
     }
@@ -12778,7 +12850,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_marquee() throws Exception {
         test("command", "marquee");
     }
@@ -12790,7 +12862,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_menu() throws Exception {
         test("command", "menu");
     }
@@ -12802,7 +12874,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_menuitem() throws Exception {
         test("command", "menuitem");
     }
@@ -12814,7 +12886,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_meta() throws Exception {
         test("command", "meta");
     }
@@ -12826,7 +12898,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_meter() throws Exception {
         test("command", "meter");
     }
@@ -12838,7 +12910,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_multicol() throws Exception {
         test("command", "multicol");
     }
@@ -12850,7 +12922,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_nav() throws Exception {
         test("command", "nav");
     }
@@ -12862,7 +12934,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_nextid() throws Exception {
         test("command", "nextid");
     }
@@ -12874,7 +12946,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_nobr() throws Exception {
         test("command", "nobr");
     }
@@ -12886,7 +12958,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_noembed() throws Exception {
         test("command", "noembed");
     }
@@ -12898,7 +12970,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_noframes() throws Exception {
         test("command", "noframes");
     }
@@ -12910,7 +12982,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_nolayer() throws Exception {
         test("command", "nolayer");
     }
@@ -12922,7 +12994,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_noscript() throws Exception {
         test("command", "noscript");
     }
@@ -12934,7 +13006,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_object() throws Exception {
         test("command", "object");
     }
@@ -12946,7 +13018,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_ol() throws Exception {
         test("command", "ol");
     }
@@ -12958,7 +13030,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_optgroup() throws Exception {
         test("command", "optgroup");
     }
@@ -12970,7 +13042,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_option() throws Exception {
         test("command", "option");
     }
@@ -12982,7 +13054,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_output() throws Exception {
         test("command", "output");
     }
@@ -12994,7 +13066,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_p() throws Exception {
         test("command", "p");
     }
@@ -13006,7 +13078,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented
+    @NotYetImplemented(EDGE)
     public void _command_param() throws Exception {
         test("command", "param");
     }
@@ -13018,7 +13090,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_plaintext() throws Exception {
         test("command", "plaintext");
     }
@@ -13030,7 +13102,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_pre() throws Exception {
         test("command", "pre");
     }
@@ -13042,7 +13114,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_progress() throws Exception {
         test("command", "progress");
     }
@@ -13054,7 +13126,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_rp() throws Exception {
         test("command", "rp");
     }
@@ -13066,7 +13138,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_rt() throws Exception {
         test("command", "rt");
     }
@@ -13078,7 +13150,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_ruby() throws Exception {
         test("command", "ruby");
     }
@@ -13090,7 +13162,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_s() throws Exception {
         test("command", "s");
     }
@@ -13102,7 +13174,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_samp() throws Exception {
         test("command", "samp");
     }
@@ -13126,7 +13198,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_section() throws Exception {
         test("command", "section");
     }
@@ -13138,7 +13210,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_select() throws Exception {
         test("command", "select");
     }
@@ -13150,7 +13222,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_small() throws Exception {
         test("command", "small");
     }
@@ -13162,7 +13234,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented
+    @NotYetImplemented(EDGE)
     public void _command_source() throws Exception {
         test("command", "source");
     }
@@ -13174,7 +13246,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_span() throws Exception {
         test("command", "span");
     }
@@ -13186,7 +13258,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_strike() throws Exception {
         test("command", "strike");
     }
@@ -13198,7 +13270,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_strong() throws Exception {
         test("command", "strong");
     }
@@ -13210,7 +13282,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_style() throws Exception {
         test("command", "style");
     }
@@ -13222,7 +13294,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_sub() throws Exception {
         test("command", "sub");
     }
@@ -13234,7 +13306,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_summary() throws Exception {
         test("command", "summary");
     }
@@ -13246,7 +13318,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_sup() throws Exception {
         test("command", "sup");
     }
@@ -13258,7 +13330,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_table() throws Exception {
         test("command", "table");
     }
@@ -13270,7 +13342,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_col() throws Exception {
         test("command", "col");
     }
@@ -13282,7 +13354,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_colgroup() throws Exception {
         test("command", "colgroup");
     }
@@ -13294,7 +13366,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_tbody() throws Exception {
         test("command", "tbody");
     }
@@ -13306,7 +13378,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_td() throws Exception {
         test("command", "td");
     }
@@ -13318,7 +13390,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_th() throws Exception {
         test("command", "th");
     }
@@ -13330,7 +13402,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_tr() throws Exception {
         test("command", "tr");
     }
@@ -13342,7 +13414,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_textarea() throws Exception {
         test("command", "textarea");
     }
@@ -13354,7 +13426,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_tfoot() throws Exception {
         test("command", "tfoot");
     }
@@ -13366,7 +13438,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_thead() throws Exception {
         test("command", "thead");
     }
@@ -13378,7 +13450,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_tt() throws Exception {
         test("command", "tt");
     }
@@ -13390,7 +13462,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_time() throws Exception {
         test("command", "time");
     }
@@ -13402,7 +13474,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _command_title() throws Exception {
         test("command", "title");
     }
@@ -13414,7 +13486,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented
+    @NotYetImplemented(EDGE)
     public void _command_track() throws Exception {
         test("command", "track");
     }
@@ -13426,7 +13498,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_u() throws Exception {
         test("command", "u");
     }
@@ -13438,7 +13510,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_ul() throws Exception {
         test("command", "ul");
     }
@@ -13450,7 +13522,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_var() throws Exception {
         test("command", "var");
     }
@@ -13462,7 +13534,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_video() throws Exception {
         test("command", "video");
     }
@@ -13474,7 +13546,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(EDGE)
     public void _command_wbr() throws Exception {
         test("command", "wbr");
     }
@@ -13486,7 +13558,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_xmp() throws Exception {
         test("command", "xmp");
     }
@@ -13496,7 +13568,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _datalist_area() throws Exception {
         test("datalist", "area");
     }
@@ -13544,7 +13615,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _datalist_command() throws Exception {
         test("datalist", "command");
     }
@@ -13618,7 +13689,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _datalist_param() throws Exception {
         test("datalist", "param");
     }
@@ -13628,7 +13698,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _datalist_source() throws Exception {
         test("datalist", "source");
     }
@@ -13638,7 +13707,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _datalist_track() throws Exception {
         test("datalist", "track");
     }
@@ -13657,7 +13725,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dfn_area() throws Exception {
         test("dfn", "area");
     }
@@ -13705,7 +13772,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _dfn_command() throws Exception {
         test("dfn", "command");
     }
@@ -13779,7 +13846,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _dfn_param() throws Exception {
         test("dfn", "param");
     }
@@ -13789,7 +13856,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dfn_source() throws Exception {
         test("dfn", "source");
     }
@@ -13799,7 +13865,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dfn_track() throws Exception {
         test("dfn", "track");
     }
@@ -13818,7 +13883,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dd_area() throws Exception {
         test("dd", "area");
     }
@@ -13866,7 +13930,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _dd_command() throws Exception {
         test("dd", "command");
     }
@@ -13958,7 +14022,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dd_param() throws Exception {
         test("dd", "param");
     }
@@ -13968,7 +14031,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dd_source() throws Exception {
         test("dd", "source");
     }
@@ -13978,7 +14040,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dd_track() throws Exception {
         test("dd", "track");
     }
@@ -13997,7 +14058,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _del_area() throws Exception {
         test("del", "area");
     }
@@ -14045,7 +14105,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _del_command() throws Exception {
         test("del", "command");
     }
@@ -14119,7 +14179,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _del_param() throws Exception {
         test("del", "param");
     }
@@ -14129,7 +14188,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _del_source() throws Exception {
         test("del", "source");
     }
@@ -14139,7 +14197,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _del_track() throws Exception {
         test("del", "track");
     }
@@ -14158,7 +14215,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _details_area() throws Exception {
         test("details", "area");
     }
@@ -14206,7 +14262,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _details_command() throws Exception {
         test("details", "command");
     }
@@ -14280,7 +14336,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _details_param() throws Exception {
         test("details", "param");
     }
@@ -14290,7 +14345,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _details_source() throws Exception {
         test("details", "source");
     }
@@ -14300,7 +14354,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _details_track() throws Exception {
         test("details", "track");
     }
@@ -14319,7 +14372,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dialog_area() throws Exception {
         test("dialog", "area");
     }
@@ -14367,7 +14419,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _dialog_command() throws Exception {
         test("dialog", "command");
     }
@@ -14441,7 +14493,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dialog_param() throws Exception {
         test("dialog", "param");
     }
@@ -14451,7 +14502,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dialog_source() throws Exception {
         test("dialog", "source");
     }
@@ -14461,7 +14511,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dialog_track() throws Exception {
         test("dialog", "track");
     }
@@ -14480,7 +14529,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dir_area() throws Exception {
         test("dir", "area");
     }
@@ -14528,7 +14576,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _dir_command() throws Exception {
         test("dir", "command");
     }
@@ -14602,7 +14650,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dir_param() throws Exception {
         test("dir", "param");
     }
@@ -14612,7 +14659,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dir_source() throws Exception {
         test("dir", "source");
     }
@@ -14622,7 +14668,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dir_track() throws Exception {
         test("dir", "track");
     }
@@ -14641,7 +14686,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _div_area() throws Exception {
         test("div", "area");
     }
@@ -14689,7 +14733,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _div_command() throws Exception {
         test("div", "command");
     }
@@ -14763,7 +14807,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _div_param() throws Exception {
         test("div", "param");
     }
@@ -14773,7 +14816,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _div_source() throws Exception {
         test("div", "source");
     }
@@ -14783,7 +14825,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _div_track() throws Exception {
         test("div", "track");
     }
@@ -14802,7 +14843,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dl_area() throws Exception {
         test("dl", "area");
     }
@@ -14850,7 +14890,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _dl_command() throws Exception {
         test("dl", "command");
     }
@@ -14924,7 +14964,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dl_param() throws Exception {
         test("dl", "param");
     }
@@ -14934,7 +14973,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dl_source() throws Exception {
         test("dl", "source");
     }
@@ -14944,7 +14982,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dl_track() throws Exception {
         test("dl", "track");
     }
@@ -14963,7 +15000,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dt_area() throws Exception {
         test("dt", "area");
     }
@@ -15011,7 +15047,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _dt_command() throws Exception {
         test("dt", "command");
     }
@@ -15103,7 +15139,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dt_param() throws Exception {
         test("dt", "param");
     }
@@ -15113,7 +15148,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dt_source() throws Exception {
         test("dt", "source");
     }
@@ -15123,7 +15157,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _dt_track() throws Exception {
         test("dt", "track");
     }
@@ -16358,7 +16391,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _em_area() throws Exception {
         test("em", "area");
     }
@@ -16406,7 +16438,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _em_command() throws Exception {
         test("em", "command");
     }
@@ -16480,7 +16512,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _em_param() throws Exception {
         test("em", "param");
     }
@@ -16490,7 +16522,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _em_source() throws Exception {
         test("em", "source");
     }
@@ -16500,7 +16531,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _em_track() throws Exception {
         test("em", "track");
     }
@@ -16519,7 +16549,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _fieldset_area() throws Exception {
         test("fieldset", "area");
     }
@@ -16567,7 +16596,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _fieldset_command() throws Exception {
         test("fieldset", "command");
     }
@@ -16641,7 +16670,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _fieldset_param() throws Exception {
         test("fieldset", "param");
     }
@@ -16651,7 +16679,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _fieldset_source() throws Exception {
         test("fieldset", "source");
     }
@@ -16661,7 +16688,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _fieldset_track() throws Exception {
         test("fieldset", "track");
     }
@@ -16680,7 +16706,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _figcaption_area() throws Exception {
         test("figcaption", "area");
     }
@@ -16728,7 +16753,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _figcaption_command() throws Exception {
         test("figcaption", "command");
     }
@@ -16802,7 +16827,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _figcaption_param() throws Exception {
         test("figcaption", "param");
     }
@@ -16812,7 +16836,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _figcaption_source() throws Exception {
         test("figcaption", "source");
     }
@@ -16822,7 +16845,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _figcaption_track() throws Exception {
         test("figcaption", "track");
     }
@@ -16841,7 +16863,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _figure_area() throws Exception {
         test("figure", "area");
     }
@@ -16889,7 +16910,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _figure_command() throws Exception {
         test("figure", "command");
     }
@@ -16963,7 +16984,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _figure_param() throws Exception {
         test("figure", "param");
     }
@@ -16973,7 +16993,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _figure_source() throws Exception {
         test("figure", "source");
     }
@@ -16983,7 +17002,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _figure_track() throws Exception {
         test("figure", "track");
     }
@@ -17002,7 +17020,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _font_area() throws Exception {
         test("font", "area");
     }
@@ -17050,7 +17067,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _font_command() throws Exception {
         test("font", "command");
     }
@@ -17124,7 +17141,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _font_param() throws Exception {
         test("font", "param");
     }
@@ -17134,7 +17150,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _font_source() throws Exception {
         test("font", "source");
     }
@@ -17144,7 +17159,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _font_track() throws Exception {
         test("font", "track");
     }
@@ -17163,7 +17177,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _form_area() throws Exception {
         test("form", "area");
     }
@@ -17211,7 +17224,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _form_command() throws Exception {
         test("form", "command");
     }
@@ -17285,7 +17298,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _form_param() throws Exception {
         test("form", "param");
     }
@@ -17295,7 +17307,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _form_source() throws Exception {
         test("form", "source");
     }
@@ -17305,7 +17316,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _form_track() throws Exception {
         test("form", "track");
     }
@@ -17324,7 +17334,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _footer_area() throws Exception {
         test("footer", "area");
     }
@@ -17372,7 +17381,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _footer_command() throws Exception {
         test("footer", "command");
     }
@@ -17446,7 +17455,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _footer_param() throws Exception {
         test("footer", "param");
     }
@@ -17456,7 +17464,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _footer_source() throws Exception {
         test("footer", "source");
     }
@@ -17466,7 +17473,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _footer_track() throws Exception {
         test("footer", "track");
     }
@@ -21401,7 +21407,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _header_area() throws Exception {
         test("header", "area");
     }
@@ -21449,7 +21454,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _header_command() throws Exception {
         test("header", "command");
     }
@@ -21523,7 +21528,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _header_param() throws Exception {
         test("header", "param");
     }
@@ -21533,7 +21537,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _header_source() throws Exception {
         test("header", "source");
     }
@@ -21543,7 +21546,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _header_track() throws Exception {
         test("header", "track");
     }
@@ -21562,7 +21564,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h1_area() throws Exception {
         test("h1", "area");
     }
@@ -21610,7 +21611,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _h1_command() throws Exception {
         test("h1", "command");
     }
@@ -21631,6 +21632,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h1_h1() throws Exception {
         test("h1", "h1");
     }
@@ -21642,6 +21644,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h1_h2() throws Exception {
         test("h1", "h2");
     }
@@ -21653,6 +21656,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h1_h3() throws Exception {
         test("h1", "h3");
     }
@@ -21664,6 +21668,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h1_h4() throws Exception {
         test("h1", "h4");
     }
@@ -21675,6 +21680,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h1_h5() throws Exception {
         test("h1", "h5");
     }
@@ -21686,6 +21692,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h1_h6() throws Exception {
         test("h1", "h6");
     }
@@ -21750,7 +21757,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h1_param() throws Exception {
         test("h1", "param");
     }
@@ -21760,7 +21766,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h1_source() throws Exception {
         test("h1", "source");
     }
@@ -21770,7 +21775,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h1_track() throws Exception {
         test("h1", "track");
     }
@@ -21789,7 +21793,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h2_area() throws Exception {
         test("h2", "area");
     }
@@ -21837,7 +21840,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _h2_command() throws Exception {
         test("h2", "command");
     }
@@ -21858,6 +21861,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h2_h1() throws Exception {
         test("h2", "h1");
     }
@@ -21869,6 +21873,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h2_h2() throws Exception {
         test("h2", "h2");
     }
@@ -21880,6 +21885,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h2_h3() throws Exception {
         test("h2", "h3");
     }
@@ -21891,6 +21897,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h2_h4() throws Exception {
         test("h2", "h4");
     }
@@ -21902,6 +21909,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h2_h5() throws Exception {
         test("h2", "h5");
     }
@@ -21913,6 +21921,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h2_h6() throws Exception {
         test("h2", "h6");
     }
@@ -21977,7 +21986,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h2_param() throws Exception {
         test("h2", "param");
     }
@@ -21987,7 +21995,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h2_source() throws Exception {
         test("h2", "source");
     }
@@ -21997,7 +22004,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h2_track() throws Exception {
         test("h2", "track");
     }
@@ -22016,7 +22022,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h3_area() throws Exception {
         test("h3", "area");
     }
@@ -22064,7 +22069,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _h3_command() throws Exception {
         test("h3", "command");
     }
@@ -22085,6 +22090,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h3_h1() throws Exception {
         test("h3", "h1");
     }
@@ -22096,6 +22102,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h3_h2() throws Exception {
         test("h3", "h2");
     }
@@ -22107,6 +22114,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h3_h3() throws Exception {
         test("h3", "h3");
     }
@@ -22118,6 +22126,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h3_h4() throws Exception {
         test("h3", "h4");
     }
@@ -22129,6 +22138,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h3_h5() throws Exception {
         test("h3", "h5");
     }
@@ -22140,6 +22150,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h3_h6() throws Exception {
         test("h3", "h6");
     }
@@ -22204,7 +22215,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h3_param() throws Exception {
         test("h3", "param");
     }
@@ -22214,7 +22224,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h3_source() throws Exception {
         test("h3", "source");
     }
@@ -22224,7 +22233,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h3_track() throws Exception {
         test("h3", "track");
     }
@@ -22243,7 +22251,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h4_area() throws Exception {
         test("h4", "area");
     }
@@ -22291,7 +22298,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _h4_command() throws Exception {
         test("h4", "command");
     }
@@ -22312,6 +22319,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h4_h1() throws Exception {
         test("h4", "h1");
     }
@@ -22323,6 +22331,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h4_h2() throws Exception {
         test("h4", "h2");
     }
@@ -22334,6 +22343,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h4_h3() throws Exception {
         test("h4", "h3");
     }
@@ -22345,6 +22355,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h4_h4() throws Exception {
         test("h4", "h4");
     }
@@ -22356,6 +22367,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h4_h5() throws Exception {
         test("h4", "h5");
     }
@@ -22367,6 +22379,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h4_h6() throws Exception {
         test("h4", "h6");
     }
@@ -22431,7 +22444,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h4_param() throws Exception {
         test("h4", "param");
     }
@@ -22441,7 +22453,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h4_source() throws Exception {
         test("h4", "source");
     }
@@ -22451,7 +22462,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h4_track() throws Exception {
         test("h4", "track");
     }
@@ -22470,7 +22480,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h5_area() throws Exception {
         test("h5", "area");
     }
@@ -22518,7 +22527,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _h5_command() throws Exception {
         test("h5", "command");
     }
@@ -22539,6 +22548,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h5_h1() throws Exception {
         test("h5", "h1");
     }
@@ -22550,6 +22560,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h5_h2() throws Exception {
         test("h5", "h2");
     }
@@ -22561,6 +22572,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h5_h3() throws Exception {
         test("h5", "h3");
     }
@@ -22572,6 +22584,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h5_h4() throws Exception {
         test("h5", "h4");
     }
@@ -22583,6 +22596,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h5_h5() throws Exception {
         test("h5", "h5");
     }
@@ -22594,6 +22608,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h5_h6() throws Exception {
         test("h5", "h6");
     }
@@ -22658,7 +22673,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h5_param() throws Exception {
         test("h5", "param");
     }
@@ -22668,7 +22682,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h5_source() throws Exception {
         test("h5", "source");
     }
@@ -22678,7 +22691,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h5_track() throws Exception {
         test("h5", "track");
     }
@@ -22697,7 +22709,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h6_area() throws Exception {
         test("h6", "area");
     }
@@ -22745,7 +22756,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _h6_command() throws Exception {
         test("h6", "command");
     }
@@ -22766,6 +22777,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h6_h1() throws Exception {
         test("h6", "h1");
     }
@@ -22777,6 +22789,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h6_h2() throws Exception {
         test("h6", "h2");
     }
@@ -22788,6 +22801,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h6_h3() throws Exception {
         test("h6", "h3");
     }
@@ -22799,6 +22813,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h6_h4() throws Exception {
         test("h6", "h4");
     }
@@ -22810,6 +22825,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h6_h5() throws Exception {
         test("h6", "h5");
     }
@@ -22821,6 +22837,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF38 = "0")
+    @NotYetImplemented({ FF45, EDGE })
     public void _h6_h6() throws Exception {
         test("h6", "h6");
     }
@@ -22885,7 +22902,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h6_param() throws Exception {
         test("h6", "param");
     }
@@ -22895,7 +22911,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h6_source() throws Exception {
         test("h6", "source");
     }
@@ -22905,7 +22920,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _h6_track() throws Exception {
         test("h6", "track");
     }
@@ -25490,7 +25504,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _q_area() throws Exception {
         test("q", "area");
     }
@@ -25537,7 +25550,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _q_command() throws Exception {
         test("q", "command");
     }
@@ -25611,7 +25624,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _q_param() throws Exception {
         test("q", "param");
     }
@@ -25621,7 +25634,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _q_source() throws Exception {
         test("q", "source");
     }
@@ -25631,7 +25643,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _q_track() throws Exception {
         test("q", "track");
     }
@@ -28215,7 +28226,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ins_area() throws Exception {
         test("ins", "area");
     }
@@ -28263,7 +28273,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _ins_command() throws Exception {
         test("ins", "command");
     }
@@ -28337,7 +28347,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _ins_param() throws Exception {
         test("ins", "param");
     }
@@ -28347,7 +28357,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ins_source() throws Exception {
         test("ins", "source");
     }
@@ -28357,7 +28366,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ins_track() throws Exception {
         test("ins", "track");
     }
@@ -28378,7 +28386,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_area() throws Exception {
         test("isindex", "area");
     }
@@ -28390,7 +28398,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_bgsound() throws Exception {
         test("isindex", "bgsound");
     }
@@ -28402,7 +28410,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_base() throws Exception {
         test("isindex", "base");
     }
@@ -28414,7 +28422,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF })
+    @NotYetImplemented({ IE, FF, EDGE })
     public void _isindex_basefont() throws Exception {
         test("isindex", "basefont");
     }
@@ -28426,7 +28434,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_br() throws Exception {
         test("isindex", "br");
     }
@@ -28438,7 +28446,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_command() throws Exception {
         test("isindex", "command");
     }
@@ -28450,7 +28458,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_embed() throws Exception {
         test("isindex", "embed");
     }
@@ -28462,7 +28470,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_hr() throws Exception {
         test("isindex", "hr");
     }
@@ -28474,7 +28482,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_img() throws Exception {
         test("isindex", "img");
     }
@@ -28498,7 +28506,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF })
+    @NotYetImplemented({ IE, FF, EDGE })
     public void _isindex_keygen() throws Exception {
         test("isindex", "keygen");
     }
@@ -28510,7 +28518,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_link() throws Exception {
         test("isindex", "link");
     }
@@ -28522,7 +28530,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_meta() throws Exception {
         test("isindex", "meta");
     }
@@ -28534,7 +28542,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_param() throws Exception {
         test("isindex", "param");
     }
@@ -28546,7 +28554,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_source() throws Exception {
         test("isindex", "source");
     }
@@ -28558,7 +28566,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_track() throws Exception {
         test("isindex", "track");
     }
@@ -28570,7 +28578,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_wbr() throws Exception {
         test("isindex", "wbr");
     }
@@ -28580,7 +28588,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _i_area() throws Exception {
         test("i", "area");
     }
@@ -28628,7 +28635,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _i_command() throws Exception {
         test("i", "command");
     }
@@ -28702,7 +28709,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _i_param() throws Exception {
         test("i", "param");
     }
@@ -28712,7 +28719,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _i_source() throws Exception {
         test("i", "source");
     }
@@ -28722,7 +28728,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _i_track() throws Exception {
         test("i", "track");
     }
@@ -28741,7 +28746,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _kbd_area() throws Exception {
         test("kbd", "area");
     }
@@ -28789,7 +28793,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _kbd_command() throws Exception {
         test("kbd", "command");
     }
@@ -28863,7 +28867,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _kbd_param() throws Exception {
         test("kbd", "param");
     }
@@ -28873,7 +28877,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _kbd_source() throws Exception {
         test("kbd", "source");
     }
@@ -28883,7 +28886,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _kbd_track() throws Exception {
         test("kbd", "track");
     }
@@ -28904,7 +28906,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_abbr() throws Exception {
         test("keygen", "abbr");
     }
@@ -28916,7 +28918,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_acronym() throws Exception {
         test("keygen", "acronym");
     }
@@ -28928,7 +28930,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_a() throws Exception {
         test("keygen", "a");
     }
@@ -28940,7 +28942,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_address() throws Exception {
         test("keygen", "address");
     }
@@ -28952,7 +28954,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_applet() throws Exception {
         test("keygen", "applet");
     }
@@ -28964,7 +28966,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_area() throws Exception {
         test("keygen", "area");
     }
@@ -28976,7 +28978,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_article() throws Exception {
         test("keygen", "article");
     }
@@ -28988,7 +28990,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_aside() throws Exception {
         test("keygen", "aside");
     }
@@ -29000,7 +29002,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_audio() throws Exception {
         test("keygen", "audio");
     }
@@ -29012,7 +29014,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_bgsound() throws Exception {
         test("keygen", "bgsound");
     }
@@ -29024,7 +29026,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_base() throws Exception {
         test("keygen", "base");
     }
@@ -29036,7 +29038,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_basefont() throws Exception {
         test("keygen", "basefont");
     }
@@ -29048,7 +29050,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_bdi() throws Exception {
         test("keygen", "bdi");
     }
@@ -29060,7 +29062,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_bdo() throws Exception {
         test("keygen", "bdo");
     }
@@ -29072,7 +29074,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_big() throws Exception {
         test("keygen", "big");
     }
@@ -29084,7 +29086,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_blink() throws Exception {
         test("keygen", "blink");
     }
@@ -29096,7 +29098,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_blockquote() throws Exception {
         test("keygen", "blockquote");
     }
@@ -29108,7 +29110,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_body() throws Exception {
         test("keygen", "body");
     }
@@ -29120,7 +29122,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_b() throws Exception {
         test("keygen", "b");
     }
@@ -29132,7 +29134,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_br() throws Exception {
         test("keygen", "br");
     }
@@ -29144,7 +29146,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_button() throws Exception {
         test("keygen", "button");
     }
@@ -29156,7 +29158,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_canvas() throws Exception {
         test("keygen", "canvas");
     }
@@ -29168,7 +29170,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_caption() throws Exception {
         test("keygen", "caption");
     }
@@ -29180,7 +29182,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_center() throws Exception {
         test("keygen", "center");
     }
@@ -29192,7 +29194,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_cite() throws Exception {
         test("keygen", "cite");
     }
@@ -29204,7 +29206,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_code() throws Exception {
         test("keygen", "code");
     }
@@ -29216,7 +29218,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_command() throws Exception {
         test("keygen", "command");
     }
@@ -29228,7 +29230,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_datalist() throws Exception {
         test("keygen", "datalist");
     }
@@ -29240,7 +29242,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_dfn() throws Exception {
         test("keygen", "dfn");
     }
@@ -29252,7 +29254,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_dd() throws Exception {
         test("keygen", "dd");
     }
@@ -29264,7 +29266,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_del() throws Exception {
         test("keygen", "del");
     }
@@ -29276,7 +29278,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_details() throws Exception {
         test("keygen", "details");
     }
@@ -29288,7 +29290,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_dialog() throws Exception {
         test("keygen", "dialog");
     }
@@ -29300,7 +29302,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_dir() throws Exception {
         test("keygen", "dir");
     }
@@ -29312,7 +29314,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_div() throws Exception {
         test("keygen", "div");
     }
@@ -29324,7 +29326,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_dl() throws Exception {
         test("keygen", "dl");
     }
@@ -29336,7 +29338,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_dt() throws Exception {
         test("keygen", "dt");
     }
@@ -29348,7 +29350,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_embed() throws Exception {
         test("keygen", "embed");
     }
@@ -29360,7 +29362,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_em() throws Exception {
         test("keygen", "em");
     }
@@ -29372,7 +29374,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_fieldset() throws Exception {
         test("keygen", "fieldset");
     }
@@ -29384,7 +29386,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_figcaption() throws Exception {
         test("keygen", "figcaption");
     }
@@ -29396,7 +29398,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_figure() throws Exception {
         test("keygen", "figure");
     }
@@ -29408,7 +29410,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_font() throws Exception {
         test("keygen", "font");
     }
@@ -29420,7 +29422,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_form() throws Exception {
         test("keygen", "form");
     }
@@ -29432,7 +29434,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_footer() throws Exception {
         test("keygen", "footer");
     }
@@ -29444,7 +29446,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_frame() throws Exception {
         test("keygen", "frame");
     }
@@ -29456,7 +29458,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_frameset() throws Exception {
         test("keygen", "frameset");
     }
@@ -29468,7 +29470,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_head() throws Exception {
         test("keygen", "head");
     }
@@ -29480,7 +29482,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_header() throws Exception {
         test("keygen", "header");
     }
@@ -29492,7 +29494,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_h1() throws Exception {
         test("keygen", "h1");
     }
@@ -29504,7 +29506,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_h2() throws Exception {
         test("keygen", "h2");
     }
@@ -29516,7 +29518,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_h3() throws Exception {
         test("keygen", "h3");
     }
@@ -29528,7 +29530,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_h4() throws Exception {
         test("keygen", "h4");
     }
@@ -29540,7 +29542,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_h5() throws Exception {
         test("keygen", "h5");
     }
@@ -29552,7 +29554,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_h6() throws Exception {
         test("keygen", "h6");
     }
@@ -29564,7 +29566,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_hr() throws Exception {
         test("keygen", "hr");
     }
@@ -29576,7 +29578,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_html() throws Exception {
         test("keygen", "html");
     }
@@ -29588,7 +29590,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_iframe() throws Exception {
         test("keygen", "iframe");
     }
@@ -29600,7 +29602,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_q() throws Exception {
         test("keygen", "q");
     }
@@ -29612,7 +29614,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_img() throws Exception {
         test("keygen", "img");
     }
@@ -29624,7 +29626,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_image() throws Exception {
         test("keygen", "image");
     }
@@ -29636,7 +29638,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_ins() throws Exception {
         test("keygen", "ins");
     }
@@ -29648,7 +29650,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_isindex() throws Exception {
         test("keygen", "isindex");
     }
@@ -29660,7 +29662,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_i() throws Exception {
         test("keygen", "i");
     }
@@ -29672,7 +29674,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_kbd() throws Exception {
         test("keygen", "kbd");
     }
@@ -29684,7 +29686,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_keygen() throws Exception {
         test("keygen", "keygen");
     }
@@ -29696,7 +29698,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_label() throws Exception {
         test("keygen", "label");
     }
@@ -29708,7 +29710,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_layer() throws Exception {
         test("keygen", "layer");
     }
@@ -29720,7 +29722,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_legend() throws Exception {
         test("keygen", "legend");
     }
@@ -29732,7 +29734,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_listing() throws Exception {
         test("keygen", "listing");
     }
@@ -29744,7 +29746,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_li() throws Exception {
         test("keygen", "li");
     }
@@ -29756,7 +29758,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_link() throws Exception {
         test("keygen", "link");
     }
@@ -29768,7 +29770,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_main() throws Exception {
         test("keygen", "main");
     }
@@ -29780,7 +29782,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_map() throws Exception {
         test("keygen", "map");
     }
@@ -29792,7 +29794,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_mark() throws Exception {
         test("keygen", "mark");
     }
@@ -29804,7 +29806,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_marquee() throws Exception {
         test("keygen", "marquee");
     }
@@ -29816,7 +29818,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_menu() throws Exception {
         test("keygen", "menu");
     }
@@ -29828,7 +29830,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_menuitem() throws Exception {
         test("keygen", "menuitem");
     }
@@ -29840,7 +29842,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_meta() throws Exception {
         test("keygen", "meta");
     }
@@ -29852,7 +29854,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_meter() throws Exception {
         test("keygen", "meter");
     }
@@ -29864,7 +29866,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_multicol() throws Exception {
         test("keygen", "multicol");
     }
@@ -29876,7 +29878,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_nav() throws Exception {
         test("keygen", "nav");
     }
@@ -29888,7 +29890,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_nextid() throws Exception {
         test("keygen", "nextid");
     }
@@ -29900,7 +29902,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_nobr() throws Exception {
         test("keygen", "nobr");
     }
@@ -29912,7 +29914,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_noembed() throws Exception {
         test("keygen", "noembed");
     }
@@ -29924,7 +29926,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_noframes() throws Exception {
         test("keygen", "noframes");
     }
@@ -29936,7 +29938,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_nolayer() throws Exception {
         test("keygen", "nolayer");
     }
@@ -29948,7 +29950,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_noscript() throws Exception {
         test("keygen", "noscript");
     }
@@ -29960,7 +29962,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_object() throws Exception {
         test("keygen", "object");
     }
@@ -29972,7 +29974,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_ol() throws Exception {
         test("keygen", "ol");
     }
@@ -29984,7 +29986,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_optgroup() throws Exception {
         test("keygen", "optgroup");
     }
@@ -29996,7 +29998,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_option() throws Exception {
         test("keygen", "option");
     }
@@ -30008,7 +30010,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_output() throws Exception {
         test("keygen", "output");
     }
@@ -30020,7 +30022,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_p() throws Exception {
         test("keygen", "p");
     }
@@ -30032,7 +30034,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_param() throws Exception {
         test("keygen", "param");
     }
@@ -30044,7 +30046,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_plaintext() throws Exception {
         test("keygen", "plaintext");
     }
@@ -30056,7 +30058,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_pre() throws Exception {
         test("keygen", "pre");
     }
@@ -30068,7 +30070,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_progress() throws Exception {
         test("keygen", "progress");
     }
@@ -30080,7 +30082,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_rp() throws Exception {
         test("keygen", "rp");
     }
@@ -30092,7 +30094,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_rt() throws Exception {
         test("keygen", "rt");
     }
@@ -30104,7 +30106,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_ruby() throws Exception {
         test("keygen", "ruby");
     }
@@ -30116,7 +30118,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_s() throws Exception {
         test("keygen", "s");
     }
@@ -30128,7 +30130,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_samp() throws Exception {
         test("keygen", "samp");
     }
@@ -30152,7 +30154,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_section() throws Exception {
         test("keygen", "section");
     }
@@ -30164,7 +30166,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_select() throws Exception {
         test("keygen", "select");
     }
@@ -30176,7 +30178,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_small() throws Exception {
         test("keygen", "small");
     }
@@ -30188,7 +30190,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_source() throws Exception {
         test("keygen", "source");
     }
@@ -30200,7 +30202,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_span() throws Exception {
         test("keygen", "span");
     }
@@ -30212,7 +30214,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_strike() throws Exception {
         test("keygen", "strike");
     }
@@ -30224,7 +30226,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_strong() throws Exception {
         test("keygen", "strong");
     }
@@ -30236,7 +30238,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_style() throws Exception {
         test("keygen", "style");
     }
@@ -30248,7 +30250,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_sub() throws Exception {
         test("keygen", "sub");
     }
@@ -30260,7 +30262,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_summary() throws Exception {
         test("keygen", "summary");
     }
@@ -30272,7 +30274,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_sup() throws Exception {
         test("keygen", "sup");
     }
@@ -30284,7 +30286,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_table() throws Exception {
         test("keygen", "table");
     }
@@ -30296,7 +30298,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_col() throws Exception {
         test("keygen", "col");
     }
@@ -30308,7 +30310,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_colgroup() throws Exception {
         test("keygen", "colgroup");
     }
@@ -30320,7 +30322,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_tbody() throws Exception {
         test("keygen", "tbody");
     }
@@ -30332,7 +30334,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_td() throws Exception {
         test("keygen", "td");
     }
@@ -30344,7 +30346,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_th() throws Exception {
         test("keygen", "th");
     }
@@ -30356,7 +30358,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_tr() throws Exception {
         test("keygen", "tr");
     }
@@ -30368,7 +30370,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_textarea() throws Exception {
         test("keygen", "textarea");
     }
@@ -30380,7 +30382,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_tfoot() throws Exception {
         test("keygen", "tfoot");
     }
@@ -30392,7 +30394,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_thead() throws Exception {
         test("keygen", "thead");
     }
@@ -30404,7 +30406,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_tt() throws Exception {
         test("keygen", "tt");
     }
@@ -30416,7 +30418,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_time() throws Exception {
         test("keygen", "time");
     }
@@ -30428,7 +30430,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_title() throws Exception {
         test("keygen", "title");
     }
@@ -30440,7 +30442,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_track() throws Exception {
         test("keygen", "track");
     }
@@ -30452,7 +30454,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_u() throws Exception {
         test("keygen", "u");
     }
@@ -30464,7 +30466,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_ul() throws Exception {
         test("keygen", "ul");
     }
@@ -30476,7 +30478,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_var() throws Exception {
         test("keygen", "var");
     }
@@ -30488,7 +30490,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_video() throws Exception {
         test("keygen", "video");
     }
@@ -30500,7 +30502,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_wbr() throws Exception {
         test("keygen", "wbr");
     }
@@ -30512,7 +30514,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "0",
             IE = "0",
             FF = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_xmp() throws Exception {
         test("keygen", "xmp");
     }
@@ -30522,7 +30524,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _label_area() throws Exception {
         test("label", "area");
     }
@@ -30570,7 +30571,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _label_command() throws Exception {
         test("label", "command");
     }
@@ -30644,7 +30645,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _label_param() throws Exception {
         test("label", "param");
     }
@@ -30654,7 +30655,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _label_source() throws Exception {
         test("label", "source");
     }
@@ -30664,7 +30664,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _label_track() throws Exception {
         test("label", "track");
     }
@@ -30683,7 +30682,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _layer_area() throws Exception {
         test("layer", "area");
     }
@@ -30731,7 +30729,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _layer_command() throws Exception {
         test("layer", "command");
     }
@@ -30805,7 +30803,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _layer_param() throws Exception {
         test("layer", "param");
     }
@@ -30815,7 +30812,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _layer_source() throws Exception {
         test("layer", "source");
     }
@@ -30825,7 +30821,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _layer_track() throws Exception {
         test("layer", "track");
     }
@@ -30844,7 +30839,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _legend_area() throws Exception {
         test("legend", "area");
     }
@@ -30892,7 +30886,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _legend_command() throws Exception {
         test("legend", "command");
     }
@@ -30966,7 +30960,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
     public void _legend_param() throws Exception {
         test("legend", "param");
     }
@@ -30976,7 +30969,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _legend_source() throws Exception {
         test("legend", "source");
     }
@@ -30986,7 +30978,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _legend_track() throws Exception {
         test("legend", "track");
     }
@@ -31005,7 +30996,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _listing_area() throws Exception {
         test("listing", "area");
     }
@@ -31053,7 +31043,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _listing_command() throws Exception {
         test("listing", "command");
     }
@@ -31127,7 +31117,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _listing_param() throws Exception {
         test("listing", "param");
     }
@@ -31137,7 +31126,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _listing_source() throws Exception {
         test("listing", "source");
     }
@@ -31147,7 +31135,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _listing_track() throws Exception {
         test("listing", "track");
     }
@@ -31166,7 +31153,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _li_area() throws Exception {
         test("li", "area");
     }
@@ -31214,7 +31200,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _li_command() throws Exception {
         test("li", "command");
     }
@@ -31297,7 +31283,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _li_param() throws Exception {
         test("li", "param");
     }
@@ -31307,7 +31292,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _li_source() throws Exception {
         test("li", "source");
     }
@@ -31317,7 +31301,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _li_track() throws Exception {
         test("li", "track");
     }
@@ -32552,7 +32535,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _main_area() throws Exception {
         test("main", "area");
     }
@@ -32600,7 +32582,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _main_command() throws Exception {
         test("main", "command");
     }
@@ -32674,7 +32656,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _main_param() throws Exception {
         test("main", "param");
     }
@@ -32684,7 +32665,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _main_source() throws Exception {
         test("main", "source");
     }
@@ -32694,7 +32674,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _main_track() throws Exception {
         test("main", "track");
     }
@@ -32760,7 +32739,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _map_command() throws Exception {
         test("map", "command");
     }
@@ -32834,7 +32813,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _map_param() throws Exception {
         test("map", "param");
     }
@@ -32844,7 +32823,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _map_source() throws Exception {
         test("map", "source");
     }
@@ -32854,7 +32832,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _map_track() throws Exception {
         test("map", "track");
     }
@@ -32873,7 +32850,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _mark_area() throws Exception {
         test("mark", "area");
     }
@@ -32921,7 +32897,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _mark_command() throws Exception {
         test("mark", "command");
     }
@@ -32995,7 +32971,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _mark_param() throws Exception {
         test("mark", "param");
     }
@@ -33005,7 +32980,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _mark_source() throws Exception {
         test("mark", "source");
     }
@@ -33015,7 +32989,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _mark_track() throws Exception {
         test("mark", "track");
     }
@@ -33034,7 +33007,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _marquee_area() throws Exception {
         test("marquee", "area");
     }
@@ -33082,7 +33054,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _marquee_command() throws Exception {
         test("marquee", "command");
     }
@@ -33156,7 +33128,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _marquee_param() throws Exception {
         test("marquee", "param");
     }
@@ -33166,7 +33137,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _marquee_source() throws Exception {
         test("marquee", "source");
     }
@@ -33176,7 +33146,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _marquee_track() throws Exception {
         test("marquee", "track");
     }
@@ -33195,7 +33164,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _menu_area() throws Exception {
         test("menu", "area");
     }
@@ -33243,7 +33211,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _menu_command() throws Exception {
         test("menu", "command");
     }
@@ -33317,7 +33285,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _menu_param() throws Exception {
         test("menu", "param");
     }
@@ -33327,7 +33294,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _menu_source() throws Exception {
         test("menu", "source");
     }
@@ -33337,7 +33303,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _menu_track() throws Exception {
         test("menu", "track");
     }
@@ -33356,7 +33321,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _menuitem_area() throws Exception {
         test("menuitem", "area");
     }
@@ -33404,7 +33368,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _menuitem_command() throws Exception {
         test("menuitem", "command");
     }
@@ -33478,7 +33442,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _menuitem_param() throws Exception {
         test("menuitem", "param");
     }
@@ -33488,7 +33451,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _menuitem_source() throws Exception {
         test("menuitem", "source");
     }
@@ -33498,7 +33460,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _menuitem_track() throws Exception {
         test("menuitem", "track");
     }
@@ -34733,7 +34694,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _meter_area() throws Exception {
         test("meter", "area");
     }
@@ -34781,7 +34741,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _meter_command() throws Exception {
         test("meter", "command");
     }
@@ -34855,7 +34815,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _meter_param() throws Exception {
         test("meter", "param");
     }
@@ -34865,7 +34824,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _meter_source() throws Exception {
         test("meter", "source");
     }
@@ -34875,7 +34833,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _meter_track() throws Exception {
         test("meter", "track");
     }
@@ -34894,7 +34851,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _multicol_area() throws Exception {
         test("multicol", "area");
     }
@@ -34942,7 +34898,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _multicol_command() throws Exception {
         test("multicol", "command");
     }
@@ -35016,7 +34972,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _multicol_param() throws Exception {
         test("multicol", "param");
     }
@@ -35026,7 +34981,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _multicol_source() throws Exception {
         test("multicol", "source");
     }
@@ -35036,7 +34990,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _multicol_track() throws Exception {
         test("multicol", "track");
     }
@@ -35055,7 +35008,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nav_area() throws Exception {
         test("nav", "area");
     }
@@ -35103,7 +35055,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _nav_command() throws Exception {
         test("nav", "command");
     }
@@ -35177,7 +35129,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nav_param() throws Exception {
         test("nav", "param");
     }
@@ -35187,7 +35138,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nav_source() throws Exception {
         test("nav", "source");
     }
@@ -35197,7 +35147,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nav_track() throws Exception {
         test("nav", "track");
     }
@@ -35216,7 +35165,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_area() throws Exception {
         test("nextid", "area");
     }
@@ -35226,7 +35174,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_bgsound() throws Exception {
         test("nextid", "bgsound");
     }
@@ -35236,7 +35183,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_base() throws Exception {
         test("nextid", "base");
     }
@@ -35246,7 +35192,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_basefont() throws Exception {
         test("nextid", "basefont");
     }
@@ -35256,7 +35201,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_br() throws Exception {
         test("nextid", "br");
     }
@@ -35268,7 +35212,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, EDGE })
     public void _nextid_command() throws Exception {
         test("nextid", "command");
     }
@@ -35278,7 +35222,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_embed() throws Exception {
         test("nextid", "embed");
     }
@@ -35288,7 +35231,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_hr() throws Exception {
         test("nextid", "hr");
     }
@@ -35298,7 +35240,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_img() throws Exception {
         test("nextid", "img");
     }
@@ -35318,7 +35259,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_keygen() throws Exception {
         test("nextid", "keygen");
     }
@@ -35328,7 +35268,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_link() throws Exception {
         test("nextid", "link");
     }
@@ -35338,7 +35277,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_meta() throws Exception {
         test("nextid", "meta");
     }
@@ -35348,7 +35286,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_param() throws Exception {
         test("nextid", "param");
     }
@@ -35358,7 +35295,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_source() throws Exception {
         test("nextid", "source");
     }
@@ -35368,7 +35304,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_track() throws Exception {
         test("nextid", "track");
     }
@@ -35378,7 +35313,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nextid_wbr() throws Exception {
         test("nextid", "wbr");
     }
@@ -35388,7 +35322,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nobr_area() throws Exception {
         test("nobr", "area");
     }
@@ -35436,7 +35369,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _nobr_command() throws Exception {
         test("nobr", "command");
     }
@@ -35519,7 +35452,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _nobr_param() throws Exception {
         test("nobr", "param");
     }
@@ -35529,7 +35462,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nobr_source() throws Exception {
         test("nobr", "source");
     }
@@ -35539,7 +35471,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nobr_track() throws Exception {
         test("nobr", "track");
     }
@@ -35558,7 +35489,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nolayer_area() throws Exception {
         test("nolayer", "area");
     }
@@ -35606,7 +35536,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _nolayer_command() throws Exception {
         test("nolayer", "command");
     }
@@ -35680,7 +35610,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nolayer_param() throws Exception {
         test("nolayer", "param");
     }
@@ -35690,7 +35619,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nolayer_source() throws Exception {
         test("nolayer", "source");
     }
@@ -35700,7 +35628,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _nolayer_track() throws Exception {
         test("nolayer", "track");
     }
@@ -35719,7 +35646,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _object_area() throws Exception {
         test("object", "area");
     }
@@ -35767,7 +35693,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _object_command() throws Exception {
         test("object", "command");
     }
@@ -35850,7 +35776,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _object_source() throws Exception {
         test("object", "source");
     }
@@ -35860,7 +35785,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _object_track() throws Exception {
         test("object", "track");
     }
@@ -35879,7 +35803,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ol_area() throws Exception {
         test("ol", "area");
     }
@@ -35927,7 +35850,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _ol_command() throws Exception {
         test("ol", "command");
     }
@@ -36001,7 +35924,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ol_param() throws Exception {
         test("ol", "param");
     }
@@ -36011,7 +35933,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ol_source() throws Exception {
         test("ol", "source");
     }
@@ -36021,7 +35942,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ol_track() throws Exception {
         test("ol", "track");
     }
@@ -36040,7 +35960,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_area() throws Exception {
         test("optgroup", "area");
     }
@@ -36050,7 +35969,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_bgsound() throws Exception {
         test("optgroup", "bgsound");
     }
@@ -36060,7 +35978,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_base() throws Exception {
         test("optgroup", "base");
     }
@@ -36070,7 +35987,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_basefont() throws Exception {
         test("optgroup", "basefont");
     }
@@ -36080,7 +35996,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_br() throws Exception {
         test("optgroup", "br");
     }
@@ -36092,7 +36007,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, EDGE })
     public void _optgroup_command() throws Exception {
         test("optgroup", "command");
     }
@@ -36102,7 +36017,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_embed() throws Exception {
         test("optgroup", "embed");
     }
@@ -36112,7 +36026,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_hr() throws Exception {
         test("optgroup", "hr");
     }
@@ -36122,7 +36035,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_img() throws Exception {
         test("optgroup", "img");
     }
@@ -36142,7 +36054,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_keygen() throws Exception {
         test("optgroup", "keygen");
     }
@@ -36152,7 +36063,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_link() throws Exception {
         test("optgroup", "link");
     }
@@ -36162,7 +36072,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_meta() throws Exception {
         test("optgroup", "meta");
     }
@@ -36172,7 +36081,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_param() throws Exception {
         test("optgroup", "param");
     }
@@ -36182,7 +36090,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_source() throws Exception {
         test("optgroup", "source");
     }
@@ -36192,7 +36099,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_track() throws Exception {
         test("optgroup", "track");
     }
@@ -36202,7 +36108,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_wbr() throws Exception {
         test("optgroup", "wbr");
     }
@@ -36212,7 +36117,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_area() throws Exception {
         test("option", "area");
     }
@@ -36222,7 +36126,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_bgsound() throws Exception {
         test("option", "bgsound");
     }
@@ -36232,7 +36135,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_base() throws Exception {
         test("option", "base");
     }
@@ -36242,7 +36144,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_basefont() throws Exception {
         test("option", "basefont");
     }
@@ -36252,7 +36153,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_br() throws Exception {
         test("option", "br");
     }
@@ -36264,7 +36164,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, EDGE })
     public void _option_command() throws Exception {
         test("option", "command");
     }
@@ -36274,7 +36174,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_embed() throws Exception {
         test("option", "embed");
     }
@@ -36284,7 +36183,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_hr() throws Exception {
         test("option", "hr");
     }
@@ -36294,7 +36192,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_img() throws Exception {
         test("option", "img");
     }
@@ -36314,7 +36211,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_keygen() throws Exception {
         test("option", "keygen");
     }
@@ -36324,7 +36220,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_link() throws Exception {
         test("option", "link");
     }
@@ -36334,7 +36229,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_meta() throws Exception {
         test("option", "meta");
     }
@@ -36344,7 +36238,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _option_optgroup() throws Exception {
         test("option", "optgroup");
     }
@@ -36354,7 +36247,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _option_option() throws Exception {
         test("option", "option");
     }
@@ -36364,7 +36256,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_param() throws Exception {
         test("option", "param");
     }
@@ -36374,7 +36265,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_source() throws Exception {
         test("option", "source");
     }
@@ -36384,7 +36274,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_track() throws Exception {
         test("option", "track");
     }
@@ -36394,7 +36283,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_wbr() throws Exception {
         test("option", "wbr");
     }
@@ -36404,7 +36292,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _output_area() throws Exception {
         test("output", "area");
     }
@@ -36452,7 +36339,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "2",
             IE = "2",
             FF38 = "1")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _output_command() throws Exception {
         test("output", "command");
     }
@@ -36526,7 +36413,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _output_param() throws Exception {
         test("output", "param");
     }
@@ -36536,7 +36422,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _output_source() throws Exception {
         test("output", "source");
     }
@@ -36546,7 +36431,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _output_track() throws Exception {
         test("output", "track");
     }
@@ -36574,7 +36458,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _p_area() throws Exception {
         test("p", "area");
     }
@@ -36585,7 +36468,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_article() throws Exception {
         test("p", "article");
     }
@@ -36596,7 +36479,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_aside() throws Exception {
         test("p", "aside");
     }
@@ -36661,7 +36544,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _p_command() throws Exception {
         test("p", "command");
     }
@@ -36681,7 +36564,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_details() throws Exception {
         test("p", "details");
     }
@@ -36746,7 +36629,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_figcaption() throws Exception {
         test("p", "figcaption");
     }
@@ -36757,7 +36640,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_figure() throws Exception {
         test("p", "figure");
     }
@@ -36768,7 +36651,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _p_form() throws Exception {
         test("p", "form");
     }
@@ -36779,7 +36662,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_footer() throws Exception {
         test("p", "footer");
     }
@@ -36790,7 +36673,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_header() throws Exception {
         test("p", "header");
     }
@@ -36919,7 +36802,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "1")
-    @NotYetImplemented({ CHROME, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _p_main() throws Exception {
         test("p", "main");
     }
@@ -36948,7 +36831,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_nav() throws Exception {
         test("p", "nav");
     }
@@ -36976,7 +36859,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _p_param() throws Exception {
         test("p", "param");
     }
@@ -37006,7 +36888,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_section() throws Exception {
         test("p", "section");
     }
@@ -37016,7 +36898,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _p_source() throws Exception {
         test("p", "source");
     }
@@ -37027,7 +36908,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _p_summary() throws Exception {
         test("p", "summary");
     }
@@ -37037,7 +36918,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _p_track() throws Exception {
         test("p", "track");
     }
@@ -38290,7 +38170,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _pre_area() throws Exception {
         test("pre", "area");
     }
@@ -38337,7 +38216,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _pre_command() throws Exception {
         test("pre", "command");
     }
@@ -38411,7 +38290,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _pre_param() throws Exception {
         test("pre", "param");
     }
@@ -38421,7 +38299,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _pre_source() throws Exception {
         test("pre", "source");
     }
@@ -38431,7 +38308,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _pre_track() throws Exception {
         test("pre", "track");
     }
@@ -38450,7 +38326,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _progress_area() throws Exception {
         test("progress", "area");
     }
@@ -38497,7 +38372,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _progress_command() throws Exception {
         test("progress", "command");
     }
@@ -38571,7 +38446,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _progress_param() throws Exception {
         test("progress", "param");
     }
@@ -38581,7 +38455,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _progress_source() throws Exception {
         test("progress", "source");
     }
@@ -38591,7 +38464,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _progress_track() throws Exception {
         test("progress", "track");
     }
@@ -38610,7 +38482,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _rp_area() throws Exception {
         test("rp", "area");
     }
@@ -38657,7 +38528,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _rp_command() throws Exception {
         test("rp", "command");
     }
@@ -38731,7 +38602,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
     public void _rp_param() throws Exception {
         test("rp", "param");
     }
@@ -38741,7 +38611,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _rp_source() throws Exception {
         test("rp", "source");
     }
@@ -38751,7 +38620,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _rp_track() throws Exception {
         test("rp", "track");
     }
@@ -38770,7 +38638,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _rt_area() throws Exception {
         test("rt", "area");
     }
@@ -38817,7 +38684,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _rt_command() throws Exception {
         test("rt", "command");
     }
@@ -38891,7 +38758,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
     public void _rt_param() throws Exception {
         test("rt", "param");
     }
@@ -38901,7 +38767,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _rt_source() throws Exception {
         test("rt", "source");
     }
@@ -38911,7 +38776,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _rt_track() throws Exception {
         test("rt", "track");
     }
@@ -38930,7 +38794,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ruby_area() throws Exception {
         test("ruby", "area");
     }
@@ -38977,7 +38840,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _ruby_command() throws Exception {
         test("ruby", "command");
     }
@@ -39051,7 +38914,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ruby_param() throws Exception {
         test("ruby", "param");
     }
@@ -39061,7 +38923,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ruby_source() throws Exception {
         test("ruby", "source");
     }
@@ -39071,7 +38932,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ruby_track() throws Exception {
         test("ruby", "track");
     }
@@ -39090,7 +38950,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _s_area() throws Exception {
         test("s", "area");
     }
@@ -39137,7 +38996,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _s_command() throws Exception {
         test("s", "command");
     }
@@ -39211,7 +39070,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _s_param() throws Exception {
         test("s", "param");
     }
@@ -39221,7 +39079,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _s_source() throws Exception {
         test("s", "source");
     }
@@ -39231,7 +39088,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _s_track() throws Exception {
         test("s", "track");
     }
@@ -39250,7 +39106,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _samp_area() throws Exception {
         test("samp", "area");
     }
@@ -39297,7 +39152,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _samp_command() throws Exception {
         test("samp", "command");
     }
@@ -39371,7 +39226,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _samp_param() throws Exception {
         test("samp", "param");
     }
@@ -39381,7 +39236,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _samp_source() throws Exception {
         test("samp", "source");
     }
@@ -39391,7 +39245,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _samp_track() throws Exception {
         test("samp", "track");
     }
@@ -39410,7 +39263,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _section_area() throws Exception {
         test("section", "area");
     }
@@ -39457,7 +39309,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _section_command() throws Exception {
         test("section", "command");
     }
@@ -39531,7 +39383,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _section_param() throws Exception {
         test("section", "param");
     }
@@ -39541,7 +39392,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _section_source() throws Exception {
         test("section", "source");
     }
@@ -39551,7 +39401,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _section_track() throws Exception {
         test("section", "track");
     }
@@ -39600,7 +39449,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _small_area() throws Exception {
         test("small", "area");
     }
@@ -39647,7 +39495,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _small_command() throws Exception {
         test("small", "command");
     }
@@ -39721,7 +39569,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _small_param() throws Exception {
         test("small", "param");
     }
@@ -39731,7 +39579,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _small_source() throws Exception {
         test("small", "source");
     }
@@ -39741,7 +39588,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _small_track() throws Exception {
         test("small", "track");
     }
@@ -39760,7 +39606,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_abbr() throws Exception {
         test("source", "abbr");
     }
@@ -39770,7 +39615,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_acronym() throws Exception {
         test("source", "acronym");
     }
@@ -39780,7 +39624,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_a() throws Exception {
         test("source", "a");
     }
@@ -39790,7 +39633,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_address() throws Exception {
         test("source", "address");
     }
@@ -39800,7 +39642,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_applet() throws Exception {
         test("source", "applet");
     }
@@ -39810,7 +39651,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_area() throws Exception {
         test("source", "area");
     }
@@ -39820,7 +39660,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_article() throws Exception {
         test("source", "article");
     }
@@ -39830,7 +39669,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_aside() throws Exception {
         test("source", "aside");
     }
@@ -39840,7 +39678,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_audio() throws Exception {
         test("source", "audio");
     }
@@ -39850,7 +39687,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_bgsound() throws Exception {
         test("source", "bgsound");
     }
@@ -39860,7 +39696,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_base() throws Exception {
         test("source", "base");
     }
@@ -39870,7 +39705,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_basefont() throws Exception {
         test("source", "basefont");
     }
@@ -39880,7 +39714,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_bdi() throws Exception {
         test("source", "bdi");
     }
@@ -39890,7 +39723,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_bdo() throws Exception {
         test("source", "bdo");
     }
@@ -39900,7 +39732,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_big() throws Exception {
         test("source", "big");
     }
@@ -39910,7 +39741,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_blink() throws Exception {
         test("source", "blink");
     }
@@ -39920,7 +39750,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_blockquote() throws Exception {
         test("source", "blockquote");
     }
@@ -39930,7 +39759,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_body() throws Exception {
         test("source", "body");
     }
@@ -39940,7 +39768,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_b() throws Exception {
         test("source", "b");
     }
@@ -39950,7 +39777,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_br() throws Exception {
         test("source", "br");
     }
@@ -39960,7 +39786,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_button() throws Exception {
         test("source", "button");
     }
@@ -39970,7 +39795,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_canvas() throws Exception {
         test("source", "canvas");
     }
@@ -39980,7 +39804,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_caption() throws Exception {
         test("source", "caption");
     }
@@ -39990,7 +39813,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_center() throws Exception {
         test("source", "center");
     }
@@ -40000,7 +39822,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_cite() throws Exception {
         test("source", "cite");
     }
@@ -40010,7 +39831,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_code() throws Exception {
         test("source", "code");
     }
@@ -40020,7 +39840,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_command() throws Exception {
         test("source", "command");
     }
@@ -40030,7 +39849,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_datalist() throws Exception {
         test("source", "datalist");
     }
@@ -40040,7 +39858,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_dfn() throws Exception {
         test("source", "dfn");
     }
@@ -40050,7 +39867,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_dd() throws Exception {
         test("source", "dd");
     }
@@ -40060,7 +39876,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_del() throws Exception {
         test("source", "del");
     }
@@ -40070,7 +39885,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_details() throws Exception {
         test("source", "details");
     }
@@ -40080,7 +39894,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_dialog() throws Exception {
         test("source", "dialog");
     }
@@ -40090,7 +39903,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_dir() throws Exception {
         test("source", "dir");
     }
@@ -40100,7 +39912,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_div() throws Exception {
         test("source", "div");
     }
@@ -40110,7 +39921,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_dl() throws Exception {
         test("source", "dl");
     }
@@ -40120,7 +39930,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_dt() throws Exception {
         test("source", "dt");
     }
@@ -40130,7 +39939,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_embed() throws Exception {
         test("source", "embed");
     }
@@ -40140,7 +39948,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_em() throws Exception {
         test("source", "em");
     }
@@ -40150,7 +39957,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_fieldset() throws Exception {
         test("source", "fieldset");
     }
@@ -40160,7 +39966,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_figcaption() throws Exception {
         test("source", "figcaption");
     }
@@ -40170,7 +39975,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_figure() throws Exception {
         test("source", "figure");
     }
@@ -40180,7 +39984,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_font() throws Exception {
         test("source", "font");
     }
@@ -40190,7 +39993,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_form() throws Exception {
         test("source", "form");
     }
@@ -40200,7 +40002,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_footer() throws Exception {
         test("source", "footer");
     }
@@ -40210,7 +40011,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_frame() throws Exception {
         test("source", "frame");
     }
@@ -40220,7 +40020,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_frameset() throws Exception {
         test("source", "frameset");
     }
@@ -40230,7 +40029,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_head() throws Exception {
         test("source", "head");
     }
@@ -40240,7 +40038,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_header() throws Exception {
         test("source", "header");
     }
@@ -40250,7 +40047,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_h1() throws Exception {
         test("source", "h1");
     }
@@ -40260,7 +40056,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_h2() throws Exception {
         test("source", "h2");
     }
@@ -40270,7 +40065,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_h3() throws Exception {
         test("source", "h3");
     }
@@ -40280,7 +40074,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_h4() throws Exception {
         test("source", "h4");
     }
@@ -40290,7 +40083,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_h5() throws Exception {
         test("source", "h5");
     }
@@ -40300,7 +40092,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_h6() throws Exception {
         test("source", "h6");
     }
@@ -40310,7 +40101,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_hr() throws Exception {
         test("source", "hr");
     }
@@ -40320,7 +40110,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_html() throws Exception {
         test("source", "html");
     }
@@ -40330,7 +40119,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_iframe() throws Exception {
         test("source", "iframe");
     }
@@ -40340,7 +40128,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_q() throws Exception {
         test("source", "q");
     }
@@ -40350,7 +40137,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_img() throws Exception {
         test("source", "img");
     }
@@ -40360,7 +40146,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_image() throws Exception {
         test("source", "image");
     }
@@ -40370,7 +40155,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_ins() throws Exception {
         test("source", "ins");
     }
@@ -40380,7 +40164,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_isindex() throws Exception {
         test("source", "isindex");
     }
@@ -40390,7 +40173,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_i() throws Exception {
         test("source", "i");
     }
@@ -40400,7 +40182,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_kbd() throws Exception {
         test("source", "kbd");
     }
@@ -40410,7 +40191,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_keygen() throws Exception {
         test("source", "keygen");
     }
@@ -40420,7 +40200,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_label() throws Exception {
         test("source", "label");
     }
@@ -40430,7 +40209,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_layer() throws Exception {
         test("source", "layer");
     }
@@ -40440,7 +40218,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_legend() throws Exception {
         test("source", "legend");
     }
@@ -40450,7 +40227,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_listing() throws Exception {
         test("source", "listing");
     }
@@ -40460,7 +40236,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_li() throws Exception {
         test("source", "li");
     }
@@ -40470,7 +40245,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_link() throws Exception {
         test("source", "link");
     }
@@ -40480,7 +40254,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_main() throws Exception {
         test("source", "main");
     }
@@ -40490,7 +40263,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_map() throws Exception {
         test("source", "map");
     }
@@ -40500,7 +40272,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_mark() throws Exception {
         test("source", "mark");
     }
@@ -40510,7 +40281,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_marquee() throws Exception {
         test("source", "marquee");
     }
@@ -40520,7 +40290,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_menu() throws Exception {
         test("source", "menu");
     }
@@ -40530,7 +40299,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_menuitem() throws Exception {
         test("source", "menuitem");
     }
@@ -40540,7 +40308,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_meta() throws Exception {
         test("source", "meta");
     }
@@ -40550,7 +40317,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_meter() throws Exception {
         test("source", "meter");
     }
@@ -40560,7 +40326,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_multicol() throws Exception {
         test("source", "multicol");
     }
@@ -40570,7 +40335,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_nav() throws Exception {
         test("source", "nav");
     }
@@ -40580,7 +40344,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_nextid() throws Exception {
         test("source", "nextid");
     }
@@ -40590,7 +40353,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_nobr() throws Exception {
         test("source", "nobr");
     }
@@ -40600,7 +40362,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_noembed() throws Exception {
         test("source", "noembed");
     }
@@ -40610,7 +40371,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_noframes() throws Exception {
         test("source", "noframes");
     }
@@ -40620,7 +40380,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_nolayer() throws Exception {
         test("source", "nolayer");
     }
@@ -40630,7 +40389,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_noscript() throws Exception {
         test("source", "noscript");
     }
@@ -40640,7 +40398,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_object() throws Exception {
         test("source", "object");
     }
@@ -40650,7 +40407,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_ol() throws Exception {
         test("source", "ol");
     }
@@ -40660,7 +40416,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_optgroup() throws Exception {
         test("source", "optgroup");
     }
@@ -40670,7 +40425,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_option() throws Exception {
         test("source", "option");
     }
@@ -40680,7 +40434,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_output() throws Exception {
         test("source", "output");
     }
@@ -40690,7 +40443,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_p() throws Exception {
         test("source", "p");
     }
@@ -40700,7 +40452,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_param() throws Exception {
         test("source", "param");
     }
@@ -40710,7 +40461,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_plaintext() throws Exception {
         test("source", "plaintext");
     }
@@ -40720,7 +40470,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_pre() throws Exception {
         test("source", "pre");
     }
@@ -40730,7 +40479,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_progress() throws Exception {
         test("source", "progress");
     }
@@ -40740,7 +40488,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_rp() throws Exception {
         test("source", "rp");
     }
@@ -40750,7 +40497,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_rt() throws Exception {
         test("source", "rt");
     }
@@ -40760,7 +40506,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_ruby() throws Exception {
         test("source", "ruby");
     }
@@ -40770,7 +40515,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_s() throws Exception {
         test("source", "s");
     }
@@ -40780,7 +40524,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_samp() throws Exception {
         test("source", "samp");
     }
@@ -40800,7 +40543,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_section() throws Exception {
         test("source", "section");
     }
@@ -40810,7 +40552,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_select() throws Exception {
         test("source", "select");
     }
@@ -40820,7 +40561,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_small() throws Exception {
         test("source", "small");
     }
@@ -40830,7 +40570,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_source() throws Exception {
         test("source", "source");
     }
@@ -40840,7 +40579,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_span() throws Exception {
         test("source", "span");
     }
@@ -40850,7 +40588,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_strike() throws Exception {
         test("source", "strike");
     }
@@ -40860,7 +40597,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_strong() throws Exception {
         test("source", "strong");
     }
@@ -40870,7 +40606,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_style() throws Exception {
         test("source", "style");
     }
@@ -40880,7 +40615,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_sub() throws Exception {
         test("source", "sub");
     }
@@ -40890,7 +40624,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_summary() throws Exception {
         test("source", "summary");
     }
@@ -40900,7 +40633,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_sup() throws Exception {
         test("source", "sup");
     }
@@ -40910,7 +40642,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_table() throws Exception {
         test("source", "table");
     }
@@ -40920,7 +40651,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_col() throws Exception {
         test("source", "col");
     }
@@ -40930,7 +40660,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_colgroup() throws Exception {
         test("source", "colgroup");
     }
@@ -40940,7 +40669,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_tbody() throws Exception {
         test("source", "tbody");
     }
@@ -40950,7 +40678,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_td() throws Exception {
         test("source", "td");
     }
@@ -40960,7 +40687,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_th() throws Exception {
         test("source", "th");
     }
@@ -40970,7 +40696,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_tr() throws Exception {
         test("source", "tr");
     }
@@ -40980,7 +40705,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_textarea() throws Exception {
         test("source", "textarea");
     }
@@ -40990,7 +40714,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_tfoot() throws Exception {
         test("source", "tfoot");
     }
@@ -41000,7 +40723,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_thead() throws Exception {
         test("source", "thead");
     }
@@ -41010,7 +40732,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_tt() throws Exception {
         test("source", "tt");
     }
@@ -41020,7 +40741,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_time() throws Exception {
         test("source", "time");
     }
@@ -41039,7 +40759,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_track() throws Exception {
         test("source", "track");
     }
@@ -41049,7 +40768,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_u() throws Exception {
         test("source", "u");
     }
@@ -41059,7 +40777,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_ul() throws Exception {
         test("source", "ul");
     }
@@ -41069,7 +40786,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_var() throws Exception {
         test("source", "var");
     }
@@ -41079,7 +40795,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_video() throws Exception {
         test("source", "video");
     }
@@ -41089,7 +40804,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_wbr() throws Exception {
         test("source", "wbr");
     }
@@ -41099,7 +40813,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_xmp() throws Exception {
         test("source", "xmp");
     }
@@ -41109,7 +40822,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _span_area() throws Exception {
         test("span", "area");
     }
@@ -41156,7 +40868,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _span_command() throws Exception {
         test("span", "command");
     }
@@ -41230,7 +40942,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _span_param() throws Exception {
         test("span", "param");
     }
@@ -41240,7 +40951,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _span_source() throws Exception {
         test("span", "source");
     }
@@ -41250,7 +40960,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _span_track() throws Exception {
         test("span", "track");
     }
@@ -41269,7 +40978,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _strike_area() throws Exception {
         test("strike", "area");
     }
@@ -41316,7 +41024,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _strike_command() throws Exception {
         test("strike", "command");
     }
@@ -41390,7 +41098,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _strike_param() throws Exception {
         test("strike", "param");
     }
@@ -41400,7 +41108,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _strike_source() throws Exception {
         test("strike", "source");
     }
@@ -41410,7 +41117,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _strike_track() throws Exception {
         test("strike", "track");
     }
@@ -41429,7 +41135,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _strong_area() throws Exception {
         test("strong", "area");
     }
@@ -41476,7 +41181,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _strong_command() throws Exception {
         test("strong", "command");
     }
@@ -41550,7 +41255,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _strong_param() throws Exception {
         test("strong", "param");
     }
@@ -41560,7 +41265,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _strong_source() throws Exception {
         test("strong", "source");
     }
@@ -41570,7 +41274,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _strong_track() throws Exception {
         test("strong", "track");
     }
@@ -41589,7 +41292,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _sub_area() throws Exception {
         test("sub", "area");
     }
@@ -41636,7 +41338,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _sub_command() throws Exception {
         test("sub", "command");
     }
@@ -41710,7 +41412,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _sub_param() throws Exception {
         test("sub", "param");
     }
@@ -41720,7 +41422,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _sub_source() throws Exception {
         test("sub", "source");
     }
@@ -41730,7 +41431,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _sub_track() throws Exception {
         test("sub", "track");
     }
@@ -41749,7 +41449,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _summary_area() throws Exception {
         test("summary", "area");
     }
@@ -41796,7 +41495,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _summary_command() throws Exception {
         test("summary", "command");
     }
@@ -41870,7 +41569,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _summary_param() throws Exception {
         test("summary", "param");
     }
@@ -41880,7 +41578,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _summary_source() throws Exception {
         test("summary", "source");
     }
@@ -41890,7 +41587,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _summary_track() throws Exception {
         test("summary", "track");
     }
@@ -41909,7 +41605,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _sup_area() throws Exception {
         test("sup", "area");
     }
@@ -41956,7 +41651,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _sup_command() throws Exception {
         test("sup", "command");
     }
@@ -42030,7 +41725,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _sup_param() throws Exception {
         test("sup", "param");
     }
@@ -42040,7 +41735,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _sup_source() throws Exception {
         test("sup", "source");
     }
@@ -42050,7 +41744,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _sup_track() throws Exception {
         test("sup", "track");
     }
@@ -42070,7 +41763,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_abbr() throws Exception {
         test("table", "abbr");
     }
@@ -42081,7 +41774,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_acronym() throws Exception {
         test("table", "acronym");
     }
@@ -42092,7 +41785,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_a() throws Exception {
         test("table", "a");
     }
@@ -42103,7 +41796,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_address() throws Exception {
         test("table", "address");
     }
@@ -42114,7 +41807,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_applet() throws Exception {
         test("table", "applet");
     }
@@ -42125,7 +41818,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_article() throws Exception {
         test("table", "article");
     }
@@ -42136,7 +41829,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_aside() throws Exception {
         test("table", "aside");
     }
@@ -42147,7 +41840,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_audio() throws Exception {
         test("table", "audio");
     }
@@ -42158,7 +41851,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_bdi() throws Exception {
         test("table", "bdi");
     }
@@ -42169,7 +41862,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_bdo() throws Exception {
         test("table", "bdo");
     }
@@ -42180,7 +41873,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_big() throws Exception {
         test("table", "big");
     }
@@ -42191,7 +41884,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_blink() throws Exception {
         test("table", "blink");
     }
@@ -42202,7 +41895,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_blockquote() throws Exception {
         test("table", "blockquote");
     }
@@ -42213,7 +41906,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_b() throws Exception {
         test("table", "b");
     }
@@ -42235,7 +41928,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_canvas() throws Exception {
         test("table", "canvas");
     }
@@ -42246,7 +41939,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_center() throws Exception {
         test("table", "center");
     }
@@ -42257,7 +41950,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_cite() throws Exception {
         test("table", "cite");
     }
@@ -42268,7 +41961,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_code() throws Exception {
         test("table", "code");
     }
@@ -42279,7 +41972,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_datalist() throws Exception {
         test("table", "datalist");
     }
@@ -42290,7 +41983,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_dfn() throws Exception {
         test("table", "dfn");
     }
@@ -42301,7 +41994,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_dd() throws Exception {
         test("table", "dd");
     }
@@ -42312,7 +42005,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_del() throws Exception {
         test("table", "del");
     }
@@ -42323,7 +42016,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_details() throws Exception {
         test("table", "details");
     }
@@ -42334,7 +42027,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_dialog() throws Exception {
         test("table", "dialog");
     }
@@ -42345,7 +42038,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_dir() throws Exception {
         test("table", "dir");
     }
@@ -42356,7 +42049,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_div() throws Exception {
         test("table", "div");
     }
@@ -42367,7 +42060,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_dl() throws Exception {
         test("table", "dl");
     }
@@ -42378,7 +42071,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_dt() throws Exception {
         test("table", "dt");
     }
@@ -42389,7 +42082,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_em() throws Exception {
         test("table", "em");
     }
@@ -42400,7 +42093,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_fieldset() throws Exception {
         test("table", "fieldset");
     }
@@ -42411,7 +42104,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_figcaption() throws Exception {
         test("table", "figcaption");
     }
@@ -42422,7 +42115,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_figure() throws Exception {
         test("table", "figure");
     }
@@ -42433,7 +42126,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_font() throws Exception {
         test("table", "font");
     }
@@ -42454,7 +42147,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_footer() throws Exception {
         test("table", "footer");
     }
@@ -42465,7 +42158,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_header() throws Exception {
         test("table", "header");
     }
@@ -42476,7 +42169,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_h1() throws Exception {
         test("table", "h1");
     }
@@ -42487,7 +42180,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_h2() throws Exception {
         test("table", "h2");
     }
@@ -42498,7 +42191,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_h3() throws Exception {
         test("table", "h3");
     }
@@ -42509,7 +42202,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_h4() throws Exception {
         test("table", "h4");
     }
@@ -42520,7 +42213,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_h5() throws Exception {
         test("table", "h5");
     }
@@ -42531,7 +42224,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_h6() throws Exception {
         test("table", "h6");
     }
@@ -42542,7 +42235,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_iframe() throws Exception {
         test("table", "iframe");
     }
@@ -42553,7 +42246,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_q() throws Exception {
         test("table", "q");
     }
@@ -42564,7 +42257,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_ins() throws Exception {
         test("table", "ins");
     }
@@ -42575,7 +42268,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "1")
-    @NotYetImplemented({ FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_isindex() throws Exception {
         test("table", "isindex");
     }
@@ -42586,7 +42279,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_i() throws Exception {
         test("table", "i");
     }
@@ -42597,7 +42290,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_kbd() throws Exception {
         test("table", "kbd");
     }
@@ -42608,7 +42301,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_label() throws Exception {
         test("table", "label");
     }
@@ -42619,7 +42312,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_layer() throws Exception {
         test("table", "layer");
     }
@@ -42630,7 +42323,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_legend() throws Exception {
         test("table", "legend");
     }
@@ -42641,7 +42334,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_listing() throws Exception {
         test("table", "listing");
     }
@@ -42652,7 +42345,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_li() throws Exception {
         test("table", "li");
     }
@@ -42663,7 +42356,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_main() throws Exception {
         test("table", "main");
     }
@@ -42674,7 +42367,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_map() throws Exception {
         test("table", "map");
     }
@@ -42685,7 +42378,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_mark() throws Exception {
         test("table", "mark");
     }
@@ -42696,7 +42389,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_marquee() throws Exception {
         test("table", "marquee");
     }
@@ -42707,7 +42400,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_menu() throws Exception {
         test("table", "menu");
     }
@@ -42718,7 +42411,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_menuitem() throws Exception {
         test("table", "menuitem");
     }
@@ -42729,7 +42422,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_meter() throws Exception {
         test("table", "meter");
     }
@@ -42740,7 +42433,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_multicol() throws Exception {
         test("table", "multicol");
     }
@@ -42751,7 +42444,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_nav() throws Exception {
         test("table", "nav");
     }
@@ -42762,7 +42455,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _table_nextid() throws Exception {
         test("table", "nextid");
     }
@@ -42773,7 +42466,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_nobr() throws Exception {
         test("table", "nobr");
     }
@@ -42784,7 +42477,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_noembed() throws Exception {
         test("table", "noembed");
     }
@@ -42795,7 +42488,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_noframes() throws Exception {
         test("table", "noframes");
     }
@@ -42806,7 +42499,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_nolayer() throws Exception {
         test("table", "nolayer");
     }
@@ -42817,7 +42510,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_noscript() throws Exception {
         test("table", "noscript");
     }
@@ -42828,7 +42521,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_object() throws Exception {
         test("table", "object");
     }
@@ -42839,7 +42532,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_ol() throws Exception {
         test("table", "ol");
     }
@@ -42850,7 +42543,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _table_optgroup() throws Exception {
         test("table", "optgroup");
     }
@@ -42861,7 +42554,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, EDGE })
     public void _table_option() throws Exception {
         test("table", "option");
     }
@@ -42872,7 +42565,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_output() throws Exception {
         test("table", "output");
     }
@@ -42883,7 +42576,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_p() throws Exception {
         test("table", "p");
     }
@@ -42894,7 +42587,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_plaintext() throws Exception {
         test("table", "plaintext");
     }
@@ -42905,7 +42598,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_pre() throws Exception {
         test("table", "pre");
     }
@@ -42916,7 +42609,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_progress() throws Exception {
         test("table", "progress");
     }
@@ -42927,7 +42620,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_rp() throws Exception {
         test("table", "rp");
     }
@@ -42938,7 +42631,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_rt() throws Exception {
         test("table", "rt");
     }
@@ -42949,7 +42642,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_ruby() throws Exception {
         test("table", "ruby");
     }
@@ -42960,7 +42653,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_s() throws Exception {
         test("table", "s");
     }
@@ -42971,7 +42664,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_samp() throws Exception {
         test("table", "samp");
     }
@@ -42982,7 +42675,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_section() throws Exception {
         test("table", "section");
     }
@@ -43004,7 +42697,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_small() throws Exception {
         test("table", "small");
     }
@@ -43015,7 +42708,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_span() throws Exception {
         test("table", "span");
     }
@@ -43026,7 +42719,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_strike() throws Exception {
         test("table", "strike");
     }
@@ -43037,7 +42730,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_strong() throws Exception {
         test("table", "strong");
     }
@@ -43048,7 +42741,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_sub() throws Exception {
         test("table", "sub");
     }
@@ -43059,7 +42752,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_summary() throws Exception {
         test("table", "summary");
     }
@@ -43070,7 +42763,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_sup() throws Exception {
         test("table", "sup");
     }
@@ -43081,7 +42774,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_table() throws Exception {
         test("table", "table");
     }
@@ -43103,7 +42796,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_tt() throws Exception {
         test("table", "tt");
     }
@@ -43114,7 +42807,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_time() throws Exception {
         test("table", "time");
     }
@@ -43125,7 +42818,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_title() throws Exception {
         test("table", "title");
     }
@@ -43136,7 +42829,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_u() throws Exception {
         test("table", "u");
     }
@@ -43147,7 +42840,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_ul() throws Exception {
         test("table", "ul");
     }
@@ -43158,7 +42851,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_var() throws Exception {
         test("table", "var");
     }
@@ -43169,7 +42862,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_video() throws Exception {
         test("table", "video");
     }
@@ -43180,7 +42873,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "0",
             IE = "0")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_xmp() throws Exception {
         test("table", "xmp");
     }
@@ -52918,7 +52611,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _tt_area() throws Exception {
         test("tt", "area");
     }
@@ -52965,7 +52657,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _tt_command() throws Exception {
         test("tt", "command");
     }
@@ -53039,7 +52731,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _tt_param() throws Exception {
         test("tt", "param");
     }
@@ -53049,7 +52741,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _tt_source() throws Exception {
         test("tt", "source");
     }
@@ -53059,7 +52750,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _tt_track() throws Exception {
         test("tt", "track");
     }
@@ -53078,7 +52768,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _time_area() throws Exception {
         test("time", "area");
     }
@@ -53125,7 +52814,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _time_command() throws Exception {
         test("time", "command");
     }
@@ -53199,7 +52888,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _time_param() throws Exception {
         test("time", "param");
     }
@@ -53209,7 +52897,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _time_source() throws Exception {
         test("time", "source");
     }
@@ -53219,7 +52906,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _time_track() throws Exception {
         test("time", "track");
     }
@@ -53238,7 +52924,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_abbr() throws Exception {
         test("track", "abbr");
     }
@@ -53248,7 +52933,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_acronym() throws Exception {
         test("track", "acronym");
     }
@@ -53258,7 +52942,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_a() throws Exception {
         test("track", "a");
     }
@@ -53268,7 +52951,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_address() throws Exception {
         test("track", "address");
     }
@@ -53278,7 +52960,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_applet() throws Exception {
         test("track", "applet");
     }
@@ -53288,7 +52969,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_area() throws Exception {
         test("track", "area");
     }
@@ -53298,7 +52978,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_article() throws Exception {
         test("track", "article");
     }
@@ -53308,7 +52987,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_aside() throws Exception {
         test("track", "aside");
     }
@@ -53318,7 +52996,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_audio() throws Exception {
         test("track", "audio");
     }
@@ -53328,7 +53005,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_bgsound() throws Exception {
         test("track", "bgsound");
     }
@@ -53338,7 +53014,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_base() throws Exception {
         test("track", "base");
     }
@@ -53348,7 +53023,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_basefont() throws Exception {
         test("track", "basefont");
     }
@@ -53358,7 +53032,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_bdi() throws Exception {
         test("track", "bdi");
     }
@@ -53368,7 +53041,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_bdo() throws Exception {
         test("track", "bdo");
     }
@@ -53378,7 +53050,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_big() throws Exception {
         test("track", "big");
     }
@@ -53388,7 +53059,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_blink() throws Exception {
         test("track", "blink");
     }
@@ -53398,7 +53068,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_blockquote() throws Exception {
         test("track", "blockquote");
     }
@@ -53408,7 +53077,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_body() throws Exception {
         test("track", "body");
     }
@@ -53418,7 +53086,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_b() throws Exception {
         test("track", "b");
     }
@@ -53428,7 +53095,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_br() throws Exception {
         test("track", "br");
     }
@@ -53438,7 +53104,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_button() throws Exception {
         test("track", "button");
     }
@@ -53448,7 +53113,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_canvas() throws Exception {
         test("track", "canvas");
     }
@@ -53458,7 +53122,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_caption() throws Exception {
         test("track", "caption");
     }
@@ -53468,7 +53131,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_center() throws Exception {
         test("track", "center");
     }
@@ -53478,7 +53140,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_cite() throws Exception {
         test("track", "cite");
     }
@@ -53488,7 +53149,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_code() throws Exception {
         test("track", "code");
     }
@@ -53498,7 +53158,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_command() throws Exception {
         test("track", "command");
     }
@@ -53508,7 +53167,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_datalist() throws Exception {
         test("track", "datalist");
     }
@@ -53518,7 +53176,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_dfn() throws Exception {
         test("track", "dfn");
     }
@@ -53528,7 +53185,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_dd() throws Exception {
         test("track", "dd");
     }
@@ -53538,7 +53194,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_del() throws Exception {
         test("track", "del");
     }
@@ -53548,7 +53203,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_details() throws Exception {
         test("track", "details");
     }
@@ -53558,7 +53212,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_dialog() throws Exception {
         test("track", "dialog");
     }
@@ -53568,7 +53221,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_dir() throws Exception {
         test("track", "dir");
     }
@@ -53578,7 +53230,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_div() throws Exception {
         test("track", "div");
     }
@@ -53588,7 +53239,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_dl() throws Exception {
         test("track", "dl");
     }
@@ -53598,7 +53248,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_dt() throws Exception {
         test("track", "dt");
     }
@@ -53608,7 +53257,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_embed() throws Exception {
         test("track", "embed");
     }
@@ -53618,7 +53266,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_em() throws Exception {
         test("track", "em");
     }
@@ -53628,7 +53275,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_fieldset() throws Exception {
         test("track", "fieldset");
     }
@@ -53638,7 +53284,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_figcaption() throws Exception {
         test("track", "figcaption");
     }
@@ -53648,7 +53293,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_figure() throws Exception {
         test("track", "figure");
     }
@@ -53658,7 +53302,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_font() throws Exception {
         test("track", "font");
     }
@@ -53668,7 +53311,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_form() throws Exception {
         test("track", "form");
     }
@@ -53678,7 +53320,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_footer() throws Exception {
         test("track", "footer");
     }
@@ -53688,7 +53329,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_frame() throws Exception {
         test("track", "frame");
     }
@@ -53698,7 +53338,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_frameset() throws Exception {
         test("track", "frameset");
     }
@@ -53708,7 +53347,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_head() throws Exception {
         test("track", "head");
     }
@@ -53718,7 +53356,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_header() throws Exception {
         test("track", "header");
     }
@@ -53728,7 +53365,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_h1() throws Exception {
         test("track", "h1");
     }
@@ -53738,7 +53374,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_h2() throws Exception {
         test("track", "h2");
     }
@@ -53748,7 +53383,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_h3() throws Exception {
         test("track", "h3");
     }
@@ -53758,7 +53392,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_h4() throws Exception {
         test("track", "h4");
     }
@@ -53768,7 +53401,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_h5() throws Exception {
         test("track", "h5");
     }
@@ -53778,7 +53410,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_h6() throws Exception {
         test("track", "h6");
     }
@@ -53788,7 +53419,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_hr() throws Exception {
         test("track", "hr");
     }
@@ -53798,7 +53428,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_html() throws Exception {
         test("track", "html");
     }
@@ -53808,7 +53437,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_iframe() throws Exception {
         test("track", "iframe");
     }
@@ -53818,7 +53446,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_q() throws Exception {
         test("track", "q");
     }
@@ -53828,7 +53455,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_img() throws Exception {
         test("track", "img");
     }
@@ -53838,7 +53464,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_image() throws Exception {
         test("track", "image");
     }
@@ -53848,7 +53473,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_ins() throws Exception {
         test("track", "ins");
     }
@@ -53858,7 +53482,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_isindex() throws Exception {
         test("track", "isindex");
     }
@@ -53868,7 +53491,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_i() throws Exception {
         test("track", "i");
     }
@@ -53878,7 +53500,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_kbd() throws Exception {
         test("track", "kbd");
     }
@@ -53888,7 +53509,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_keygen() throws Exception {
         test("track", "keygen");
     }
@@ -53898,7 +53518,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_label() throws Exception {
         test("track", "label");
     }
@@ -53908,7 +53527,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_layer() throws Exception {
         test("track", "layer");
     }
@@ -53918,7 +53536,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_legend() throws Exception {
         test("track", "legend");
     }
@@ -53928,7 +53545,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_listing() throws Exception {
         test("track", "listing");
     }
@@ -53938,7 +53554,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_li() throws Exception {
         test("track", "li");
     }
@@ -53948,7 +53563,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_link() throws Exception {
         test("track", "link");
     }
@@ -53958,7 +53572,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_main() throws Exception {
         test("track", "main");
     }
@@ -53968,7 +53581,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_map() throws Exception {
         test("track", "map");
     }
@@ -53978,7 +53590,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_mark() throws Exception {
         test("track", "mark");
     }
@@ -53988,7 +53599,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_marquee() throws Exception {
         test("track", "marquee");
     }
@@ -53998,7 +53608,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_menu() throws Exception {
         test("track", "menu");
     }
@@ -54008,7 +53617,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_menuitem() throws Exception {
         test("track", "menuitem");
     }
@@ -54018,7 +53626,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_meta() throws Exception {
         test("track", "meta");
     }
@@ -54028,7 +53635,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_meter() throws Exception {
         test("track", "meter");
     }
@@ -54038,7 +53644,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_multicol() throws Exception {
         test("track", "multicol");
     }
@@ -54048,7 +53653,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_nav() throws Exception {
         test("track", "nav");
     }
@@ -54058,7 +53662,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_nextid() throws Exception {
         test("track", "nextid");
     }
@@ -54068,7 +53671,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_nobr() throws Exception {
         test("track", "nobr");
     }
@@ -54078,7 +53680,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_noembed() throws Exception {
         test("track", "noembed");
     }
@@ -54088,7 +53689,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_noframes() throws Exception {
         test("track", "noframes");
     }
@@ -54098,7 +53698,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_nolayer() throws Exception {
         test("track", "nolayer");
     }
@@ -54108,7 +53707,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_noscript() throws Exception {
         test("track", "noscript");
     }
@@ -54118,7 +53716,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_object() throws Exception {
         test("track", "object");
     }
@@ -54128,7 +53725,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_ol() throws Exception {
         test("track", "ol");
     }
@@ -54138,7 +53734,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_optgroup() throws Exception {
         test("track", "optgroup");
     }
@@ -54148,7 +53743,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_option() throws Exception {
         test("track", "option");
     }
@@ -54158,7 +53752,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_output() throws Exception {
         test("track", "output");
     }
@@ -54168,7 +53761,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_p() throws Exception {
         test("track", "p");
     }
@@ -54178,7 +53770,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_param() throws Exception {
         test("track", "param");
     }
@@ -54188,7 +53779,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_plaintext() throws Exception {
         test("track", "plaintext");
     }
@@ -54198,7 +53788,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_pre() throws Exception {
         test("track", "pre");
     }
@@ -54208,7 +53797,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_progress() throws Exception {
         test("track", "progress");
     }
@@ -54218,7 +53806,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_rp() throws Exception {
         test("track", "rp");
     }
@@ -54228,7 +53815,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_rt() throws Exception {
         test("track", "rt");
     }
@@ -54238,7 +53824,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_ruby() throws Exception {
         test("track", "ruby");
     }
@@ -54248,7 +53833,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_s() throws Exception {
         test("track", "s");
     }
@@ -54258,7 +53842,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_samp() throws Exception {
         test("track", "samp");
     }
@@ -54278,7 +53861,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_section() throws Exception {
         test("track", "section");
     }
@@ -54288,7 +53870,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_select() throws Exception {
         test("track", "select");
     }
@@ -54298,7 +53879,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_small() throws Exception {
         test("track", "small");
     }
@@ -54308,7 +53888,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_source() throws Exception {
         test("track", "source");
     }
@@ -54318,7 +53897,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_span() throws Exception {
         test("track", "span");
     }
@@ -54328,7 +53906,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_strike() throws Exception {
         test("track", "strike");
     }
@@ -54338,7 +53915,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_strong() throws Exception {
         test("track", "strong");
     }
@@ -54348,7 +53924,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_style() throws Exception {
         test("track", "style");
     }
@@ -54358,7 +53933,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_sub() throws Exception {
         test("track", "sub");
     }
@@ -54368,7 +53942,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_summary() throws Exception {
         test("track", "summary");
     }
@@ -54378,7 +53951,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_sup() throws Exception {
         test("track", "sup");
     }
@@ -54388,7 +53960,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_table() throws Exception {
         test("track", "table");
     }
@@ -54398,7 +53969,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_col() throws Exception {
         test("track", "col");
     }
@@ -54408,7 +53978,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_colgroup() throws Exception {
         test("track", "colgroup");
     }
@@ -54418,7 +53987,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_tbody() throws Exception {
         test("track", "tbody");
     }
@@ -54428,7 +53996,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_td() throws Exception {
         test("track", "td");
     }
@@ -54438,7 +54005,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_th() throws Exception {
         test("track", "th");
     }
@@ -54448,7 +54014,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_tr() throws Exception {
         test("track", "tr");
     }
@@ -54458,7 +54023,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_textarea() throws Exception {
         test("track", "textarea");
     }
@@ -54468,7 +54032,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_tfoot() throws Exception {
         test("track", "tfoot");
     }
@@ -54478,7 +54041,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_thead() throws Exception {
         test("track", "thead");
     }
@@ -54488,7 +54050,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_tt() throws Exception {
         test("track", "tt");
     }
@@ -54498,7 +54059,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_time() throws Exception {
         test("track", "time");
     }
@@ -54517,7 +54077,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_track() throws Exception {
         test("track", "track");
     }
@@ -54527,7 +54086,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_u() throws Exception {
         test("track", "u");
     }
@@ -54537,7 +54095,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_ul() throws Exception {
         test("track", "ul");
     }
@@ -54547,7 +54104,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_var() throws Exception {
         test("track", "var");
     }
@@ -54557,7 +54113,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_video() throws Exception {
         test("track", "video");
     }
@@ -54567,7 +54122,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_wbr() throws Exception {
         test("track", "wbr");
     }
@@ -54577,7 +54131,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_xmp() throws Exception {
         test("track", "xmp");
     }
@@ -54587,7 +54140,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _u_area() throws Exception {
         test("u", "area");
     }
@@ -54634,7 +54186,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _u_command() throws Exception {
         test("u", "command");
     }
@@ -54708,7 +54260,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _u_param() throws Exception {
         test("u", "param");
     }
@@ -54718,7 +54270,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _u_source() throws Exception {
         test("u", "source");
     }
@@ -54728,7 +54279,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _u_track() throws Exception {
         test("u", "track");
     }
@@ -54747,7 +54297,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ul_area() throws Exception {
         test("ul", "area");
     }
@@ -54794,7 +54343,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _ul_command() throws Exception {
         test("ul", "command");
     }
@@ -54868,7 +54417,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ul_param() throws Exception {
         test("ul", "param");
     }
@@ -54878,7 +54426,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ul_source() throws Exception {
         test("ul", "source");
     }
@@ -54888,7 +54435,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _ul_track() throws Exception {
         test("ul", "track");
     }
@@ -54907,7 +54453,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _var_area() throws Exception {
         test("var", "area");
     }
@@ -54954,7 +54499,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _var_command() throws Exception {
         test("var", "command");
     }
@@ -55028,7 +54573,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _var_param() throws Exception {
         test("var", "param");
     }
@@ -55038,7 +54583,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _var_source() throws Exception {
         test("var", "source");
     }
@@ -55048,7 +54592,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _var_track() throws Exception {
         test("var", "track");
     }
@@ -55067,7 +54610,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _video_area() throws Exception {
         test("video", "area");
     }
@@ -55114,7 +54656,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _video_command() throws Exception {
         test("video", "command");
     }
@@ -55188,7 +54730,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _video_param() throws Exception {
         test("video", "param");
     }
@@ -55198,7 +54739,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _video_source() throws Exception {
         test("video", "source");
     }
@@ -55208,7 +54748,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _video_track() throws Exception {
         test("video", "track");
     }
@@ -56481,7 +56020,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _address_isindex() throws Exception {
         test("address", "isindex");
     }
@@ -56601,7 +56140,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _blockquote_isindex() throws Exception {
         test("blockquote", "isindex");
     }
@@ -56637,7 +56176,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _center_isindex() throws Exception {
         test("center", "isindex");
     }
@@ -56685,7 +56224,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _dd_isindex() throws Exception {
         test("dd", "isindex");
     }
@@ -56697,7 +56236,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _del_isindex() throws Exception {
         test("del", "isindex");
     }
@@ -56745,7 +56284,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _dir_isindex() throws Exception {
         test("dir", "isindex");
     }
@@ -56757,7 +56296,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _div_isindex() throws Exception {
         test("div", "isindex");
     }
@@ -56769,7 +56308,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _dl_isindex() throws Exception {
         test("dl", "isindex");
     }
@@ -56781,7 +56320,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _dt_isindex() throws Exception {
         test("dt", "isindex");
     }
@@ -56805,7 +56344,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _fieldset_isindex() throws Exception {
         test("fieldset", "isindex");
     }
@@ -56841,7 +56380,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _font_isindex() throws Exception {
         test("font", "isindex");
     }
@@ -56865,7 +56404,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _h1_isindex() throws Exception {
         test("h1", "isindex");
     }
@@ -56877,7 +56416,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _h2_isindex() throws Exception {
         test("h2", "isindex");
     }
@@ -56889,7 +56428,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _h3_isindex() throws Exception {
         test("h3", "isindex");
     }
@@ -56901,7 +56440,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _h4_isindex() throws Exception {
         test("h4", "isindex");
     }
@@ -56913,7 +56452,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _h5_isindex() throws Exception {
         test("h5", "isindex");
     }
@@ -56925,7 +56464,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _h6_isindex() throws Exception {
         test("h6", "isindex");
     }
@@ -57621,7 +57160,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({ FF, EDGE })
     public void _isindex_isindex() throws Exception {
         test("isindex", "isindex");
     }
@@ -57813,7 +57352,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented
+    @NotYetImplemented({ FF38, IE })
     public void _isindex_nextid() throws Exception {
         test("isindex", "nextid");
     }
@@ -58293,7 +57832,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "0",
             FF38 = "0")
-    @NotYetImplemented({ CHROME })
+    @NotYetImplemented({ CHROME, FF45, EDGE })
     public void _isindex_title() throws Exception {
         test("isindex", "title");
     }
@@ -58437,7 +57976,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _li_isindex() throws Exception {
         test("li", "isindex");
     }
@@ -58497,7 +58036,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _marquee_isindex() throws Exception {
         test("marquee", "isindex");
     }
@@ -58509,7 +58048,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _menu_isindex() throws Exception {
         test("menu", "isindex");
     }
@@ -58569,7 +58108,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, IE })
     public void _nextid_isindex() throws Exception {
         test("nextid", "isindex");
     }
@@ -58617,7 +58156,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45 })
     public void _ol_isindex() throws Exception {
         test("ol", "isindex");
     }
@@ -58629,7 +58168,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, IE })
     public void _optgroup_isindex() throws Exception {
         test("optgroup", "isindex");
     }
@@ -58641,7 +58180,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented
+    @NotYetImplemented({ FF45, FF38, IE })
     public void _option_isindex() throws Exception {
         test("option", "isindex");
     }
@@ -58663,7 +58202,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @NotYetImplemented({ IE })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _p_isindex() throws Exception {
         test("p", "isindex");
     }
@@ -59720,7 +59259,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _applet_nextid() throws Exception {
         test("applet", "nextid");
     }
@@ -60776,7 +60314,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _article_nextid() throws Exception {
         test("article", "nextid");
     }
@@ -61832,7 +61369,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _aside_nextid() throws Exception {
         test("aside", "nextid");
     }
@@ -62888,7 +62424,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _audio_nextid() throws Exception {
         test("audio", "nextid");
     }
@@ -63990,7 +63525,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _bdi_nextid() throws Exception {
         test("bdi", "nextid");
     }
@@ -65312,7 +64846,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _canvas_nextid() throws Exception {
         test("canvas", "nextid");
     }
@@ -66506,7 +66039,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _datalist_nextid() throws Exception {
         test("datalist", "nextid");
     }
@@ -67654,7 +67186,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _details_nextid() throws Exception {
         test("details", "nextid");
     }
@@ -68756,7 +68287,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _dialog_nextid() throws Exception {
         test("dialog", "nextid");
     }
@@ -70088,7 +69618,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _figcaption_nextid() throws Exception {
         test("figcaption", "nextid");
     }
@@ -71144,7 +70673,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _figure_nextid() throws Exception {
         test("figure", "nextid");
     }
@@ -72246,7 +71774,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _footer_nextid() throws Exception {
         test("footer", "nextid");
     }
@@ -73624,7 +73151,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _header_nextid() throws Exception {
         test("header", "nextid");
     }
@@ -76079,7 +75605,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _layer_nextid() throws Exception {
         test("layer", "nextid");
     }
@@ -77135,7 +76660,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _legend_nextid() throws Exception {
         test("legend", "nextid");
     }
@@ -77868,7 +77392,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _listing_nextid() throws Exception {
         test("listing", "nextid");
     }
@@ -78671,7 +78194,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _main_nextid() throws Exception {
         test("main", "nextid");
     }
@@ -79773,7 +79295,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _mark_nextid() throws Exception {
         test("mark", "nextid");
     }
@@ -80921,7 +80442,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _menuitem_nextid() throws Exception {
         test("menuitem", "nextid");
     }
@@ -81977,7 +81497,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _meter_nextid() throws Exception {
         test("meter", "nextid");
     }
@@ -83033,7 +82552,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _multicol_nextid() throws Exception {
         test("multicol", "nextid");
     }
@@ -84089,7 +83607,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nav_nextid() throws Exception {
         test("nav", "nextid");
     }
@@ -84524,7 +84041,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_a() throws Exception {
         test("nextid", "a");
     }
@@ -84534,7 +84050,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_abbr() throws Exception {
         test("nextid", "abbr");
     }
@@ -84544,7 +84059,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_acronym() throws Exception {
         test("nextid", "acronym");
     }
@@ -84554,7 +84068,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_address() throws Exception {
         test("nextid", "address");
     }
@@ -84564,7 +84077,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_applet() throws Exception {
         test("nextid", "applet");
     }
@@ -84574,7 +84086,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_article() throws Exception {
         test("nextid", "article");
     }
@@ -84584,7 +84095,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_aside() throws Exception {
         test("nextid", "aside");
     }
@@ -84594,7 +84104,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_audio() throws Exception {
         test("nextid", "audio");
     }
@@ -84604,7 +84113,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_b() throws Exception {
         test("nextid", "b");
     }
@@ -84614,7 +84122,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_bdi() throws Exception {
         test("nextid", "bdi");
     }
@@ -84624,7 +84131,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_bdo() throws Exception {
         test("nextid", "bdo");
     }
@@ -84634,7 +84140,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_big() throws Exception {
         test("nextid", "big");
     }
@@ -84644,7 +84149,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_blink() throws Exception {
         test("nextid", "blink");
     }
@@ -84654,7 +84158,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_blockquote() throws Exception {
         test("nextid", "blockquote");
     }
@@ -84664,7 +84167,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_body() throws Exception {
         test("nextid", "body");
     }
@@ -84674,7 +84176,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_button() throws Exception {
         test("nextid", "button");
     }
@@ -84684,7 +84185,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_canvas() throws Exception {
         test("nextid", "canvas");
     }
@@ -84694,7 +84194,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_caption() throws Exception {
         test("nextid", "caption");
     }
@@ -84704,7 +84203,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_center() throws Exception {
         test("nextid", "center");
     }
@@ -84714,7 +84212,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_cite() throws Exception {
         test("nextid", "cite");
     }
@@ -84724,7 +84221,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_code() throws Exception {
         test("nextid", "code");
     }
@@ -84734,7 +84230,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_col() throws Exception {
         test("nextid", "col");
     }
@@ -84744,7 +84239,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_colgroup() throws Exception {
         test("nextid", "colgroup");
     }
@@ -84754,7 +84248,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_datalist() throws Exception {
         test("nextid", "datalist");
     }
@@ -84764,7 +84257,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_dd() throws Exception {
         test("nextid", "dd");
     }
@@ -84774,7 +84266,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_del() throws Exception {
         test("nextid", "del");
     }
@@ -84784,7 +84275,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_details() throws Exception {
         test("nextid", "details");
     }
@@ -84794,7 +84284,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_dfn() throws Exception {
         test("nextid", "dfn");
     }
@@ -84804,7 +84293,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_dialog() throws Exception {
         test("nextid", "dialog");
     }
@@ -84814,7 +84302,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_dir() throws Exception {
         test("nextid", "dir");
     }
@@ -84824,7 +84311,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_div() throws Exception {
         test("nextid", "div");
     }
@@ -84834,7 +84320,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_dl() throws Exception {
         test("nextid", "dl");
     }
@@ -84844,7 +84329,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_dt() throws Exception {
         test("nextid", "dt");
     }
@@ -84854,7 +84338,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_em() throws Exception {
         test("nextid", "em");
     }
@@ -84864,7 +84347,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_fieldset() throws Exception {
         test("nextid", "fieldset");
     }
@@ -84874,7 +84356,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_figcaption() throws Exception {
         test("nextid", "figcaption");
     }
@@ -84884,7 +84365,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_figure() throws Exception {
         test("nextid", "figure");
     }
@@ -84894,7 +84374,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_font() throws Exception {
         test("nextid", "font");
     }
@@ -84904,7 +84383,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_footer() throws Exception {
         test("nextid", "footer");
     }
@@ -84914,7 +84392,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_form() throws Exception {
         test("nextid", "form");
     }
@@ -84924,7 +84401,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_frame() throws Exception {
         test("nextid", "frame");
     }
@@ -84934,7 +84410,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_frameset() throws Exception {
         test("nextid", "frameset");
     }
@@ -84944,7 +84419,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_h1() throws Exception {
         test("nextid", "h1");
     }
@@ -84954,7 +84428,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_h2() throws Exception {
         test("nextid", "h2");
     }
@@ -84964,7 +84437,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_h3() throws Exception {
         test("nextid", "h3");
     }
@@ -84974,7 +84446,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_h4() throws Exception {
         test("nextid", "h4");
     }
@@ -84984,7 +84455,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_h5() throws Exception {
         test("nextid", "h5");
     }
@@ -84994,7 +84464,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_h6() throws Exception {
         test("nextid", "h6");
     }
@@ -85004,7 +84473,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_head() throws Exception {
         test("nextid", "head");
     }
@@ -85014,7 +84482,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_header() throws Exception {
         test("nextid", "header");
     }
@@ -85024,7 +84491,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_html() throws Exception {
         test("nextid", "html");
     }
@@ -85034,7 +84500,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_i() throws Exception {
         test("nextid", "i");
     }
@@ -85044,7 +84509,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_iframe() throws Exception {
         test("nextid", "iframe");
     }
@@ -85054,7 +84518,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_ins() throws Exception {
         test("nextid", "ins");
     }
@@ -85064,7 +84527,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_kbd() throws Exception {
         test("nextid", "kbd");
     }
@@ -85074,7 +84536,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_label() throws Exception {
         test("nextid", "label");
     }
@@ -85084,7 +84545,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_layer() throws Exception {
         test("nextid", "layer");
     }
@@ -85094,7 +84554,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_legend() throws Exception {
         test("nextid", "legend");
     }
@@ -85104,7 +84563,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_li() throws Exception {
         test("nextid", "li");
     }
@@ -85114,7 +84572,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_listing() throws Exception {
         test("nextid", "listing");
     }
@@ -85124,7 +84581,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_main() throws Exception {
         test("nextid", "main");
     }
@@ -85134,7 +84590,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_map() throws Exception {
         test("nextid", "map");
     }
@@ -85144,7 +84599,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_mark() throws Exception {
         test("nextid", "mark");
     }
@@ -85154,7 +84608,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_marquee() throws Exception {
         test("nextid", "marquee");
     }
@@ -85164,7 +84617,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_menu() throws Exception {
         test("nextid", "menu");
     }
@@ -85174,7 +84626,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_menuitem() throws Exception {
         test("nextid", "menuitem");
     }
@@ -85184,7 +84635,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_meter() throws Exception {
         test("nextid", "meter");
     }
@@ -85194,7 +84644,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_multicol() throws Exception {
         test("nextid", "multicol");
     }
@@ -85204,7 +84653,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_nav() throws Exception {
         test("nextid", "nav");
     }
@@ -85214,7 +84662,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_nextid() throws Exception {
         test("nextid", "nextid");
     }
@@ -85224,7 +84671,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_nobr() throws Exception {
         test("nextid", "nobr");
     }
@@ -85234,7 +84680,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_noembed() throws Exception {
         test("nextid", "noembed");
     }
@@ -85244,7 +84689,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_noframes() throws Exception {
         test("nextid", "noframes");
     }
@@ -85254,7 +84698,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_nolayer() throws Exception {
         test("nextid", "nolayer");
     }
@@ -85264,7 +84707,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_noscript() throws Exception {
         test("nextid", "noscript");
     }
@@ -85274,7 +84716,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_object() throws Exception {
         test("nextid", "object");
     }
@@ -85284,7 +84725,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_ol() throws Exception {
         test("nextid", "ol");
     }
@@ -85294,7 +84734,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_optgroup() throws Exception {
         test("nextid", "optgroup");
     }
@@ -85304,7 +84743,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_option() throws Exception {
         test("nextid", "option");
     }
@@ -85314,7 +84752,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_output() throws Exception {
         test("nextid", "output");
     }
@@ -85324,7 +84761,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_p() throws Exception {
         test("nextid", "p");
     }
@@ -85334,7 +84770,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_plaintext() throws Exception {
         test("nextid", "plaintext");
     }
@@ -85344,7 +84779,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_pre() throws Exception {
         test("nextid", "pre");
     }
@@ -85354,7 +84788,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_progress() throws Exception {
         test("nextid", "progress");
     }
@@ -85364,7 +84797,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_q() throws Exception {
         test("nextid", "q");
     }
@@ -85374,7 +84806,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_rp() throws Exception {
         test("nextid", "rp");
     }
@@ -85384,7 +84815,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_rt() throws Exception {
         test("nextid", "rt");
     }
@@ -85394,7 +84824,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_ruby() throws Exception {
         test("nextid", "ruby");
     }
@@ -85404,7 +84833,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_s() throws Exception {
         test("nextid", "s");
     }
@@ -85414,7 +84842,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_samp() throws Exception {
         test("nextid", "samp");
     }
@@ -85434,7 +84861,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_section() throws Exception {
         test("nextid", "section");
     }
@@ -85444,7 +84870,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_select() throws Exception {
         test("nextid", "select");
     }
@@ -85454,7 +84879,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_small() throws Exception {
         test("nextid", "small");
     }
@@ -85464,7 +84888,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_span() throws Exception {
         test("nextid", "span");
     }
@@ -85474,7 +84897,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_strike() throws Exception {
         test("nextid", "strike");
     }
@@ -85484,7 +84906,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_strong() throws Exception {
         test("nextid", "strong");
     }
@@ -85494,7 +84915,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_style() throws Exception {
         test("nextid", "style");
     }
@@ -85504,7 +84924,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_sub() throws Exception {
         test("nextid", "sub");
     }
@@ -85514,7 +84933,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_summary() throws Exception {
         test("nextid", "summary");
     }
@@ -85524,7 +84942,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_sup() throws Exception {
         test("nextid", "sup");
     }
@@ -85534,7 +84951,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_table() throws Exception {
         test("nextid", "table");
     }
@@ -85544,7 +84960,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_tbody() throws Exception {
         test("nextid", "tbody");
     }
@@ -85554,7 +84969,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_td() throws Exception {
         test("nextid", "td");
     }
@@ -85564,7 +84978,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_textarea() throws Exception {
         test("nextid", "textarea");
     }
@@ -85574,7 +84987,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_tfoot() throws Exception {
         test("nextid", "tfoot");
     }
@@ -85584,7 +84996,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_th() throws Exception {
         test("nextid", "th");
     }
@@ -85594,7 +85005,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_thead() throws Exception {
         test("nextid", "thead");
     }
@@ -85604,7 +85014,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_time() throws Exception {
         test("nextid", "time");
     }
@@ -85624,7 +85033,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_tr() throws Exception {
         test("nextid", "tr");
     }
@@ -85634,7 +85042,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_tt() throws Exception {
         test("nextid", "tt");
     }
@@ -85644,7 +85051,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_u() throws Exception {
         test("nextid", "u");
     }
@@ -85654,7 +85060,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_ul() throws Exception {
         test("nextid", "ul");
     }
@@ -85664,7 +85069,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_var() throws Exception {
         test("nextid", "var");
     }
@@ -85674,7 +85078,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_video() throws Exception {
         test("nextid", "video");
     }
@@ -85684,7 +85087,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_xmp() throws Exception {
         test("nextid", "xmp");
     }
@@ -85785,6 +85187,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _noembed_area() throws Exception {
         test("noembed", "area");
     }
@@ -85996,6 +85399,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, IE })
     public void _noembed_command() throws Exception {
         test("noembed", "command");
     }
@@ -86497,7 +85901,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _noembed_nextid() throws Exception {
         test("noembed", "nextid");
     }
@@ -86606,6 +86009,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _noembed_param() throws Exception {
         test("noembed", "param");
     }
@@ -86733,6 +86137,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _noembed_source() throws Exception {
         test("noembed", "source");
     }
@@ -86896,6 +86301,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _noembed_track() throws Exception {
         test("noembed", "track");
     }
@@ -88805,7 +88211,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nolayer_nextid() throws Exception {
         test("nolayer", "nextid");
     }
@@ -91076,7 +90481,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _object_nextid() throws Exception {
         test("object", "nextid");
     }
@@ -91557,7 +90961,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_a() throws Exception {
         test("optgroup", "a");
     }
@@ -91567,7 +90970,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_abbr() throws Exception {
         test("optgroup", "abbr");
     }
@@ -91577,7 +90979,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_acronym() throws Exception {
         test("optgroup", "acronym");
     }
@@ -91587,7 +90988,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_address() throws Exception {
         test("optgroup", "address");
     }
@@ -91597,7 +90997,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_applet() throws Exception {
         test("optgroup", "applet");
     }
@@ -91607,7 +91006,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_article() throws Exception {
         test("optgroup", "article");
     }
@@ -91617,7 +91015,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_aside() throws Exception {
         test("optgroup", "aside");
     }
@@ -91627,7 +91024,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_audio() throws Exception {
         test("optgroup", "audio");
     }
@@ -91637,7 +91033,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_b() throws Exception {
         test("optgroup", "b");
     }
@@ -91647,7 +91042,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_bdi() throws Exception {
         test("optgroup", "bdi");
     }
@@ -91657,7 +91051,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_bdo() throws Exception {
         test("optgroup", "bdo");
     }
@@ -91667,7 +91060,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_big() throws Exception {
         test("optgroup", "big");
     }
@@ -91677,7 +91069,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_blink() throws Exception {
         test("optgroup", "blink");
     }
@@ -91687,7 +91078,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_blockquote() throws Exception {
         test("optgroup", "blockquote");
     }
@@ -91697,7 +91087,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_body() throws Exception {
         test("optgroup", "body");
     }
@@ -91707,7 +91096,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_button() throws Exception {
         test("optgroup", "button");
     }
@@ -91717,7 +91105,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_canvas() throws Exception {
         test("optgroup", "canvas");
     }
@@ -91727,7 +91114,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_caption() throws Exception {
         test("optgroup", "caption");
     }
@@ -91737,7 +91123,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_center() throws Exception {
         test("optgroup", "center");
     }
@@ -91747,7 +91132,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_cite() throws Exception {
         test("optgroup", "cite");
     }
@@ -91757,7 +91141,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_code() throws Exception {
         test("optgroup", "code");
     }
@@ -91767,7 +91150,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_col() throws Exception {
         test("optgroup", "col");
     }
@@ -91777,7 +91159,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_colgroup() throws Exception {
         test("optgroup", "colgroup");
     }
@@ -91787,7 +91168,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_datalist() throws Exception {
         test("optgroup", "datalist");
     }
@@ -91797,7 +91177,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_dd() throws Exception {
         test("optgroup", "dd");
     }
@@ -91807,7 +91186,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_del() throws Exception {
         test("optgroup", "del");
     }
@@ -91817,7 +91195,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_details() throws Exception {
         test("optgroup", "details");
     }
@@ -91827,7 +91204,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_dfn() throws Exception {
         test("optgroup", "dfn");
     }
@@ -91837,7 +91213,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_dialog() throws Exception {
         test("optgroup", "dialog");
     }
@@ -91847,7 +91222,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_dir() throws Exception {
         test("optgroup", "dir");
     }
@@ -91857,7 +91231,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_div() throws Exception {
         test("optgroup", "div");
     }
@@ -91867,7 +91240,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_dl() throws Exception {
         test("optgroup", "dl");
     }
@@ -91877,7 +91249,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_dt() throws Exception {
         test("optgroup", "dt");
     }
@@ -91887,7 +91258,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_em() throws Exception {
         test("optgroup", "em");
     }
@@ -91897,7 +91267,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_fieldset() throws Exception {
         test("optgroup", "fieldset");
     }
@@ -91907,7 +91276,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_figcaption() throws Exception {
         test("optgroup", "figcaption");
     }
@@ -91917,7 +91285,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_figure() throws Exception {
         test("optgroup", "figure");
     }
@@ -91927,7 +91294,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_font() throws Exception {
         test("optgroup", "font");
     }
@@ -91937,7 +91303,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_footer() throws Exception {
         test("optgroup", "footer");
     }
@@ -91947,7 +91312,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_form() throws Exception {
         test("optgroup", "form");
     }
@@ -91957,7 +91321,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_frame() throws Exception {
         test("optgroup", "frame");
     }
@@ -91967,7 +91330,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_frameset() throws Exception {
         test("optgroup", "frameset");
     }
@@ -91977,7 +91339,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_h1() throws Exception {
         test("optgroup", "h1");
     }
@@ -91987,7 +91348,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_h2() throws Exception {
         test("optgroup", "h2");
     }
@@ -91997,7 +91357,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_h3() throws Exception {
         test("optgroup", "h3");
     }
@@ -92007,7 +91366,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_h4() throws Exception {
         test("optgroup", "h4");
     }
@@ -92017,7 +91375,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_h5() throws Exception {
         test("optgroup", "h5");
     }
@@ -92027,7 +91384,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_h6() throws Exception {
         test("optgroup", "h6");
     }
@@ -92037,7 +91393,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_head() throws Exception {
         test("optgroup", "head");
     }
@@ -92047,7 +91402,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_header() throws Exception {
         test("optgroup", "header");
     }
@@ -92057,7 +91411,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_html() throws Exception {
         test("optgroup", "html");
     }
@@ -92067,7 +91420,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_i() throws Exception {
         test("optgroup", "i");
     }
@@ -92077,7 +91429,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_iframe() throws Exception {
         test("optgroup", "iframe");
     }
@@ -92087,7 +91438,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_ins() throws Exception {
         test("optgroup", "ins");
     }
@@ -92097,7 +91447,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_kbd() throws Exception {
         test("optgroup", "kbd");
     }
@@ -92107,7 +91456,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_label() throws Exception {
         test("optgroup", "label");
     }
@@ -92117,7 +91465,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_layer() throws Exception {
         test("optgroup", "layer");
     }
@@ -92127,7 +91474,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_legend() throws Exception {
         test("optgroup", "legend");
     }
@@ -92137,7 +91483,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_li() throws Exception {
         test("optgroup", "li");
     }
@@ -92147,7 +91492,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_listing() throws Exception {
         test("optgroup", "listing");
     }
@@ -92157,7 +91501,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_main() throws Exception {
         test("optgroup", "main");
     }
@@ -92167,7 +91510,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_map() throws Exception {
         test("optgroup", "map");
     }
@@ -92177,7 +91519,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_mark() throws Exception {
         test("optgroup", "mark");
     }
@@ -92187,7 +91528,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_marquee() throws Exception {
         test("optgroup", "marquee");
     }
@@ -92197,7 +91537,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_menu() throws Exception {
         test("optgroup", "menu");
     }
@@ -92207,7 +91546,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_menuitem() throws Exception {
         test("optgroup", "menuitem");
     }
@@ -92217,7 +91555,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_meter() throws Exception {
         test("optgroup", "meter");
     }
@@ -92227,7 +91564,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_multicol() throws Exception {
         test("optgroup", "multicol");
     }
@@ -92237,7 +91573,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_nav() throws Exception {
         test("optgroup", "nav");
     }
@@ -92247,7 +91582,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_nextid() throws Exception {
         test("optgroup", "nextid");
     }
@@ -92257,7 +91591,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_nobr() throws Exception {
         test("optgroup", "nobr");
     }
@@ -92267,7 +91600,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_noembed() throws Exception {
         test("optgroup", "noembed");
     }
@@ -92277,7 +91609,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_noframes() throws Exception {
         test("optgroup", "noframes");
     }
@@ -92287,7 +91618,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_nolayer() throws Exception {
         test("optgroup", "nolayer");
     }
@@ -92297,7 +91627,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_noscript() throws Exception {
         test("optgroup", "noscript");
     }
@@ -92307,7 +91636,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_object() throws Exception {
         test("optgroup", "object");
     }
@@ -92317,7 +91645,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_ol() throws Exception {
         test("optgroup", "ol");
     }
@@ -92327,7 +91654,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_optgroup() throws Exception {
         test("optgroup", "optgroup");
     }
@@ -92337,7 +91663,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_option() throws Exception {
         test("optgroup", "option");
     }
@@ -92347,7 +91672,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_output() throws Exception {
         test("optgroup", "output");
     }
@@ -92357,7 +91681,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_p() throws Exception {
         test("optgroup", "p");
     }
@@ -92367,7 +91690,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_plaintext() throws Exception {
         test("optgroup", "plaintext");
     }
@@ -92377,7 +91699,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_pre() throws Exception {
         test("optgroup", "pre");
     }
@@ -92387,7 +91708,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_progress() throws Exception {
         test("optgroup", "progress");
     }
@@ -92397,7 +91717,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_q() throws Exception {
         test("optgroup", "q");
     }
@@ -92407,7 +91726,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_rp() throws Exception {
         test("optgroup", "rp");
     }
@@ -92417,7 +91735,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_rt() throws Exception {
         test("optgroup", "rt");
     }
@@ -92427,7 +91744,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_ruby() throws Exception {
         test("optgroup", "ruby");
     }
@@ -92437,7 +91753,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_s() throws Exception {
         test("optgroup", "s");
     }
@@ -92447,7 +91762,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_samp() throws Exception {
         test("optgroup", "samp");
     }
@@ -92467,7 +91781,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_section() throws Exception {
         test("optgroup", "section");
     }
@@ -92477,7 +91790,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_select() throws Exception {
         test("optgroup", "select");
     }
@@ -92487,7 +91799,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_small() throws Exception {
         test("optgroup", "small");
     }
@@ -92497,7 +91808,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_span() throws Exception {
         test("optgroup", "span");
     }
@@ -92507,7 +91817,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_strike() throws Exception {
         test("optgroup", "strike");
     }
@@ -92517,7 +91826,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_strong() throws Exception {
         test("optgroup", "strong");
     }
@@ -92527,7 +91835,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_style() throws Exception {
         test("optgroup", "style");
     }
@@ -92537,7 +91844,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_sub() throws Exception {
         test("optgroup", "sub");
     }
@@ -92547,7 +91853,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_summary() throws Exception {
         test("optgroup", "summary");
     }
@@ -92557,7 +91862,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_sup() throws Exception {
         test("optgroup", "sup");
     }
@@ -92567,7 +91871,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_table() throws Exception {
         test("optgroup", "table");
     }
@@ -92577,7 +91880,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_tbody() throws Exception {
         test("optgroup", "tbody");
     }
@@ -92587,7 +91889,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_td() throws Exception {
         test("optgroup", "td");
     }
@@ -92597,7 +91898,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_textarea() throws Exception {
         test("optgroup", "textarea");
     }
@@ -92607,7 +91907,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_tfoot() throws Exception {
         test("optgroup", "tfoot");
     }
@@ -92617,7 +91916,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_th() throws Exception {
         test("optgroup", "th");
     }
@@ -92627,7 +91925,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_thead() throws Exception {
         test("optgroup", "thead");
     }
@@ -92637,7 +91934,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_time() throws Exception {
         test("optgroup", "time");
     }
@@ -92657,7 +91953,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_tr() throws Exception {
         test("optgroup", "tr");
     }
@@ -92667,7 +91962,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_tt() throws Exception {
         test("optgroup", "tt");
     }
@@ -92677,7 +91971,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_u() throws Exception {
         test("optgroup", "u");
     }
@@ -92687,7 +91980,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_ul() throws Exception {
         test("optgroup", "ul");
     }
@@ -92697,7 +91989,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_var() throws Exception {
         test("optgroup", "var");
     }
@@ -92707,7 +91998,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_video() throws Exception {
         test("optgroup", "video");
     }
@@ -92717,7 +92007,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_xmp() throws Exception {
         test("optgroup", "xmp");
     }
@@ -92727,7 +92016,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_a() throws Exception {
         test("option", "a");
     }
@@ -92737,7 +92025,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_abbr() throws Exception {
         test("option", "abbr");
     }
@@ -92747,7 +92034,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_acronym() throws Exception {
         test("option", "acronym");
     }
@@ -92757,7 +92043,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_address() throws Exception {
         test("option", "address");
     }
@@ -92767,7 +92052,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_applet() throws Exception {
         test("option", "applet");
     }
@@ -92777,7 +92061,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_article() throws Exception {
         test("option", "article");
     }
@@ -92787,7 +92070,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_aside() throws Exception {
         test("option", "aside");
     }
@@ -92797,7 +92079,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_audio() throws Exception {
         test("option", "audio");
     }
@@ -92807,7 +92088,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_b() throws Exception {
         test("option", "b");
     }
@@ -92817,7 +92097,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_bdi() throws Exception {
         test("option", "bdi");
     }
@@ -92827,7 +92106,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_bdo() throws Exception {
         test("option", "bdo");
     }
@@ -92837,7 +92115,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_big() throws Exception {
         test("option", "big");
     }
@@ -92847,7 +92124,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_blink() throws Exception {
         test("option", "blink");
     }
@@ -92857,7 +92133,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_blockquote() throws Exception {
         test("option", "blockquote");
     }
@@ -92867,7 +92142,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_body() throws Exception {
         test("option", "body");
     }
@@ -92877,7 +92151,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_button() throws Exception {
         test("option", "button");
     }
@@ -92887,7 +92160,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_canvas() throws Exception {
         test("option", "canvas");
     }
@@ -92897,7 +92169,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_caption() throws Exception {
         test("option", "caption");
     }
@@ -92907,7 +92178,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_center() throws Exception {
         test("option", "center");
     }
@@ -92917,7 +92187,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_cite() throws Exception {
         test("option", "cite");
     }
@@ -92927,7 +92196,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_code() throws Exception {
         test("option", "code");
     }
@@ -92937,7 +92205,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_col() throws Exception {
         test("option", "col");
     }
@@ -92947,7 +92214,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_colgroup() throws Exception {
         test("option", "colgroup");
     }
@@ -92957,7 +92223,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_datalist() throws Exception {
         test("option", "datalist");
     }
@@ -92967,7 +92232,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_dd() throws Exception {
         test("option", "dd");
     }
@@ -92977,7 +92241,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_del() throws Exception {
         test("option", "del");
     }
@@ -92987,7 +92250,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_details() throws Exception {
         test("option", "details");
     }
@@ -92997,7 +92259,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_dfn() throws Exception {
         test("option", "dfn");
     }
@@ -93007,7 +92268,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_dialog() throws Exception {
         test("option", "dialog");
     }
@@ -93017,7 +92277,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_dir() throws Exception {
         test("option", "dir");
     }
@@ -93027,7 +92286,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_div() throws Exception {
         test("option", "div");
     }
@@ -93037,7 +92295,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_dl() throws Exception {
         test("option", "dl");
     }
@@ -93047,7 +92304,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_dt() throws Exception {
         test("option", "dt");
     }
@@ -93057,7 +92313,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_em() throws Exception {
         test("option", "em");
     }
@@ -93067,7 +92322,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_fieldset() throws Exception {
         test("option", "fieldset");
     }
@@ -93077,7 +92331,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_figcaption() throws Exception {
         test("option", "figcaption");
     }
@@ -93087,7 +92340,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_figure() throws Exception {
         test("option", "figure");
     }
@@ -93097,7 +92349,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_font() throws Exception {
         test("option", "font");
     }
@@ -93107,7 +92358,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_footer() throws Exception {
         test("option", "footer");
     }
@@ -93117,7 +92367,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_form() throws Exception {
         test("option", "form");
     }
@@ -93127,7 +92376,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_frame() throws Exception {
         test("option", "frame");
     }
@@ -93137,7 +92385,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_frameset() throws Exception {
         test("option", "frameset");
     }
@@ -93147,7 +92394,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_h1() throws Exception {
         test("option", "h1");
     }
@@ -93157,7 +92403,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_h2() throws Exception {
         test("option", "h2");
     }
@@ -93167,7 +92412,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_h3() throws Exception {
         test("option", "h3");
     }
@@ -93177,7 +92421,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_h4() throws Exception {
         test("option", "h4");
     }
@@ -93187,7 +92430,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_h5() throws Exception {
         test("option", "h5");
     }
@@ -93197,7 +92439,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_h6() throws Exception {
         test("option", "h6");
     }
@@ -93207,7 +92448,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_head() throws Exception {
         test("option", "head");
     }
@@ -93217,7 +92457,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_header() throws Exception {
         test("option", "header");
     }
@@ -93227,7 +92466,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_html() throws Exception {
         test("option", "html");
     }
@@ -93237,7 +92475,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_i() throws Exception {
         test("option", "i");
     }
@@ -93247,7 +92484,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_iframe() throws Exception {
         test("option", "iframe");
     }
@@ -93257,7 +92493,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_ins() throws Exception {
         test("option", "ins");
     }
@@ -93267,7 +92502,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_kbd() throws Exception {
         test("option", "kbd");
     }
@@ -93277,7 +92511,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_label() throws Exception {
         test("option", "label");
     }
@@ -93287,7 +92520,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_layer() throws Exception {
         test("option", "layer");
     }
@@ -93297,7 +92529,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_legend() throws Exception {
         test("option", "legend");
     }
@@ -93307,7 +92538,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_li() throws Exception {
         test("option", "li");
     }
@@ -93317,7 +92547,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_listing() throws Exception {
         test("option", "listing");
     }
@@ -93327,7 +92556,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_main() throws Exception {
         test("option", "main");
     }
@@ -93337,7 +92565,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_map() throws Exception {
         test("option", "map");
     }
@@ -93347,7 +92574,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_mark() throws Exception {
         test("option", "mark");
     }
@@ -93357,7 +92583,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_marquee() throws Exception {
         test("option", "marquee");
     }
@@ -93367,7 +92592,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_menu() throws Exception {
         test("option", "menu");
     }
@@ -93377,7 +92601,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_menuitem() throws Exception {
         test("option", "menuitem");
     }
@@ -93387,7 +92610,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_meter() throws Exception {
         test("option", "meter");
     }
@@ -93397,7 +92619,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_multicol() throws Exception {
         test("option", "multicol");
     }
@@ -93407,7 +92628,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_nav() throws Exception {
         test("option", "nav");
     }
@@ -93417,7 +92637,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_nextid() throws Exception {
         test("option", "nextid");
     }
@@ -93427,7 +92646,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_nobr() throws Exception {
         test("option", "nobr");
     }
@@ -93437,7 +92655,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_noembed() throws Exception {
         test("option", "noembed");
     }
@@ -93447,7 +92664,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_noframes() throws Exception {
         test("option", "noframes");
     }
@@ -93457,7 +92673,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_nolayer() throws Exception {
         test("option", "nolayer");
     }
@@ -93467,7 +92682,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_noscript() throws Exception {
         test("option", "noscript");
     }
@@ -93477,7 +92691,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_object() throws Exception {
         test("option", "object");
     }
@@ -93487,7 +92700,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_ol() throws Exception {
         test("option", "ol");
     }
@@ -93497,7 +92709,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_output() throws Exception {
         test("option", "output");
     }
@@ -93507,7 +92718,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_p() throws Exception {
         test("option", "p");
     }
@@ -93517,7 +92727,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_plaintext() throws Exception {
         test("option", "plaintext");
     }
@@ -93527,7 +92736,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_pre() throws Exception {
         test("option", "pre");
     }
@@ -93537,7 +92745,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_progress() throws Exception {
         test("option", "progress");
     }
@@ -93547,7 +92754,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_q() throws Exception {
         test("option", "q");
     }
@@ -93557,7 +92763,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_rp() throws Exception {
         test("option", "rp");
     }
@@ -93567,7 +92772,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_rt() throws Exception {
         test("option", "rt");
     }
@@ -93577,7 +92781,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_ruby() throws Exception {
         test("option", "ruby");
     }
@@ -93587,7 +92790,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_s() throws Exception {
         test("option", "s");
     }
@@ -93597,7 +92799,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_samp() throws Exception {
         test("option", "samp");
     }
@@ -93617,7 +92818,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_section() throws Exception {
         test("option", "section");
     }
@@ -93627,7 +92827,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_select() throws Exception {
         test("option", "select");
     }
@@ -93637,7 +92836,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_small() throws Exception {
         test("option", "small");
     }
@@ -93647,7 +92845,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_span() throws Exception {
         test("option", "span");
     }
@@ -93657,7 +92854,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_strike() throws Exception {
         test("option", "strike");
     }
@@ -93667,7 +92863,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_strong() throws Exception {
         test("option", "strong");
     }
@@ -93677,7 +92872,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_style() throws Exception {
         test("option", "style");
     }
@@ -93687,7 +92881,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_sub() throws Exception {
         test("option", "sub");
     }
@@ -93697,7 +92890,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_summary() throws Exception {
         test("option", "summary");
     }
@@ -93707,7 +92899,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_sup() throws Exception {
         test("option", "sup");
     }
@@ -93717,7 +92908,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_table() throws Exception {
         test("option", "table");
     }
@@ -93727,7 +92917,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_tbody() throws Exception {
         test("option", "tbody");
     }
@@ -93737,7 +92926,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_td() throws Exception {
         test("option", "td");
     }
@@ -93747,7 +92935,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_textarea() throws Exception {
         test("option", "textarea");
     }
@@ -93757,7 +92944,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_tfoot() throws Exception {
         test("option", "tfoot");
     }
@@ -93767,7 +92953,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_th() throws Exception {
         test("option", "th");
     }
@@ -93777,7 +92962,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_thead() throws Exception {
         test("option", "thead");
     }
@@ -93787,7 +92971,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_time() throws Exception {
         test("option", "time");
     }
@@ -93807,7 +92990,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_tr() throws Exception {
         test("option", "tr");
     }
@@ -93817,7 +92999,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_tt() throws Exception {
         test("option", "tt");
     }
@@ -93827,7 +93008,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_u() throws Exception {
         test("option", "u");
     }
@@ -93837,7 +93017,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_ul() throws Exception {
         test("option", "ul");
     }
@@ -93847,7 +93026,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_var() throws Exception {
         test("option", "var");
     }
@@ -93857,7 +93035,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_video() throws Exception {
         test("option", "video");
     }
@@ -93867,7 +93044,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_xmp() throws Exception {
         test("option", "xmp");
     }
@@ -94498,7 +93674,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _output_nextid() throws Exception {
         test("output", "nextid");
     }
@@ -95231,7 +94406,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _pre_nextid() throws Exception {
         test("pre", "nextid");
     }
@@ -96034,7 +95208,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _progress_nextid() throws Exception {
         test("progress", "nextid");
     }
@@ -97136,7 +96309,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _rp_nextid() throws Exception {
         test("rp", "nextid");
     }
@@ -97300,7 +96472,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _rp_ruby() throws Exception {
         test("rp", "ruby");
     }
@@ -98194,7 +97365,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _rt_nextid() throws Exception {
         test("rt", "nextid");
     }
@@ -98357,7 +97527,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _rt_ruby() throws Exception {
         test("rt", "ruby");
     }
@@ -100749,7 +99918,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _section_nextid() throws Exception {
         test("section", "nextid");
     }
@@ -101229,6 +100397,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _select_area() throws Exception {
         test("select", "area");
     }
@@ -101742,7 +100911,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _select_nextid() throws Exception {
         test("select", "nextid");
     }
@@ -101815,6 +100983,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _select_param() throws Exception {
         test("select", "param");
     }
@@ -104116,7 +103285,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _summary_nextid() throws Exception {
         test("summary", "nextid");
     }
@@ -104597,7 +103765,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _table_area() throws Exception {
         test("table", "area");
     }
@@ -104679,7 +103846,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_command() throws Exception {
         test("table", "command");
     }
@@ -104791,7 +103958,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _table_param() throws Exception {
         test("table", "param");
     }
@@ -104811,7 +103977,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _table_source() throws Exception {
         test("table", "source");
     }
@@ -104849,7 +104014,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _table_track() throws Exception {
         test("table", "track");
     }
@@ -105489,7 +104653,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _time_nextid() throws Exception {
         test("time", "nextid");
     }
@@ -105969,6 +105132,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _title_area() throws Exception {
         test("title", "area");
     }
@@ -106180,6 +105344,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, IE })
     public void _title_command() throws Exception {
         test("title", "command");
     }
@@ -106681,7 +105846,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _title_nextid() throws Exception {
         test("title", "nextid");
     }
@@ -106790,6 +105954,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _title_param() throws Exception {
         test("title", "param");
     }
@@ -106917,6 +106082,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _title_source() throws Exception {
         test("title", "source");
     }
@@ -107081,6 +106247,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
     public void _title_track() throws Exception {
         test("title", "track");
     }
@@ -107959,7 +107126,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _video_nextid() throws Exception {
         test("video", "nextid");
     }
@@ -108502,7 +107668,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _a_nextid() throws Exception {
         test("a", "nextid");
     }
@@ -108711,7 +107876,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _abbr_nextid() throws Exception {
         test("abbr", "nextid");
     }
@@ -108920,7 +108084,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _acronym_nextid() throws Exception {
         test("acronym", "nextid");
     }
@@ -109021,7 +108184,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _address_nextid() throws Exception {
         test("address", "nextid");
     }
@@ -109149,7 +108311,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _b_nextid() throws Exception {
         test("b", "nextid");
     }
@@ -109358,7 +108519,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _bdo_nextid() throws Exception {
         test("bdo", "nextid");
     }
@@ -109567,7 +108727,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _big_nextid() throws Exception {
         test("big", "nextid");
     }
@@ -109776,7 +108935,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _blink_nextid() throws Exception {
         test("blink", "nextid");
     }
@@ -109877,7 +109035,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _blockquote_nextid() throws Exception {
         test("blockquote", "nextid");
     }
@@ -110035,7 +109192,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _button_nextid() throws Exception {
         test("button", "nextid");
     }
@@ -110136,7 +109292,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _center_nextid() throws Exception {
         test("center", "nextid");
     }
@@ -110264,7 +109419,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _cite_nextid() throws Exception {
         test("cite", "nextid");
     }
@@ -110473,7 +109627,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _code_nextid() throws Exception {
         test("code", "nextid");
     }
@@ -110574,7 +109727,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _dd_nextid() throws Exception {
         test("dd", "nextid");
     }
@@ -110594,7 +109746,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _del_nextid() throws Exception {
         test("del", "nextid");
     }
@@ -110722,7 +109873,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _dfn_nextid() throws Exception {
         test("dfn", "nextid");
     }
@@ -110823,7 +109973,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _dir_nextid() throws Exception {
         test("dir", "nextid");
     }
@@ -110843,7 +109992,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _div_nextid() throws Exception {
         test("div", "nextid");
     }
@@ -110863,7 +110011,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _dl_nextid() throws Exception {
         test("dl", "nextid");
     }
@@ -110883,7 +110030,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _dt_nextid() throws Exception {
         test("dt", "nextid");
     }
@@ -111011,7 +110157,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _em_nextid() throws Exception {
         test("em", "nextid");
     }
@@ -111112,7 +110257,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _fieldset_nextid() throws Exception {
         test("fieldset", "nextid");
     }
@@ -111132,7 +110276,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _font_nextid() throws Exception {
         test("font", "nextid");
     }
@@ -111152,7 +110295,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _form_nextid() throws Exception {
         test("form", "nextid");
     }
@@ -111172,7 +110314,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _h1_nextid() throws Exception {
         test("h1", "nextid");
     }
@@ -111192,7 +110333,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _h2_nextid() throws Exception {
         test("h2", "nextid");
     }
@@ -111212,7 +110352,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _h3_nextid() throws Exception {
         test("h3", "nextid");
     }
@@ -111232,7 +110371,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _h4_nextid() throws Exception {
         test("h4", "nextid");
     }
@@ -111252,7 +110390,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _h5_nextid() throws Exception {
         test("h5", "nextid");
     }
@@ -111272,7 +110409,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _h6_nextid() throws Exception {
         test("h6", "nextid");
     }
@@ -111400,7 +110536,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _i_nextid() throws Exception {
         test("i", "nextid");
     }
@@ -111609,7 +110744,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _ins_nextid() throws Exception {
         test("ins", "nextid");
     }
@@ -111818,7 +110952,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _kbd_nextid() throws Exception {
         test("kbd", "nextid");
     }
@@ -112027,7 +111160,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _label_nextid() throws Exception {
         test("label", "nextid");
     }
@@ -112128,7 +111260,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _li_nextid() throws Exception {
         test("li", "nextid");
     }
@@ -112266,7 +111397,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _map_nextid() throws Exception {
         test("map", "nextid");
     }
@@ -112367,7 +111497,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _marquee_nextid() throws Exception {
         test("marquee", "nextid");
     }
@@ -112387,7 +111516,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _menu_nextid() throws Exception {
         test("menu", "nextid");
     }
@@ -112515,7 +111643,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nobr_nextid() throws Exception {
         test("nobr", "nextid");
     }
@@ -112616,7 +111743,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _ol_nextid() throws Exception {
         test("ol", "nextid");
     }
@@ -112636,7 +111762,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _p_legend() throws Exception {
         test("p", "legend");
     }
@@ -112646,7 +111771,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _p_nextid() throws Exception {
         test("p", "nextid");
     }
@@ -112784,7 +111908,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _q_nextid() throws Exception {
         test("q", "nextid");
     }
@@ -112885,7 +112008,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _ruby_nextid() throws Exception {
         test("ruby", "nextid");
     }
@@ -112905,7 +112027,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _s_nextid() throws Exception {
         test("s", "nextid");
     }
@@ -113033,7 +112154,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _samp_nextid() throws Exception {
         test("samp", "nextid");
     }
@@ -113272,7 +112392,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _small_nextid() throws Exception {
         test("small", "nextid");
     }
@@ -113373,7 +112492,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _span_nextid() throws Exception {
         test("span", "nextid");
     }
@@ -113501,7 +112619,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _strike_nextid() throws Exception {
         test("strike", "nextid");
     }
@@ -113710,7 +112827,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _strong_nextid() throws Exception {
         test("strong", "nextid");
     }
@@ -113919,7 +113035,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _sub_nextid() throws Exception {
         test("sub", "nextid");
     }
@@ -114128,7 +113243,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _sup_nextid() throws Exception {
         test("sup", "nextid");
     }
@@ -114337,7 +113451,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _tt_nextid() throws Exception {
         test("tt", "nextid");
     }
@@ -114546,7 +113659,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _u_nextid() throws Exception {
         test("u", "nextid");
     }
@@ -114647,7 +113759,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _ul_nextid() throws Exception {
         test("ul", "nextid");
     }
@@ -114775,7 +113886,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _var_nextid() throws Exception {
         test("var", "nextid");
     }
@@ -120495,6 +119605,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             IE = "2",
             CHROME = "2",
             FF38 = "2")
+    @NotYetImplemented({ FF45, EDGE })
     public void _button_input() throws Exception {
         test("button", "input");
     }
@@ -120570,7 +119681,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             IE = "0",
             CHROME = "0",
             FF38 = "2")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({ FF45, EDGE })
     public void _command_input() throws Exception {
         test("command", "input");
     }
@@ -120742,7 +119853,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _frame_input() throws Exception {
         test("frame", "input");
     }
@@ -120752,7 +119863,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _frameset_input() throws Exception {
         test("frameset", "input");
     }
@@ -120846,7 +119957,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             IE = "2",
             CHROME = "2",
             FF38 = "2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _html_input() throws Exception {
         test("html", "input");
     }
@@ -122121,7 +121232,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             IE = "0",
             CHROME = "2",
             FF38 = "0")
-    @NotYetImplemented({ IE, FF38 })
+    @NotYetImplemented({ IE, FF38, FF45, EDGE })
     public void _isindex_input() throws Exception {
         test("isindex", "input");
     }
@@ -122143,7 +121254,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             IE = "0",
             CHROME = "0",
             FF38 = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_input() throws Exception {
         test("keygen", "input");
     }
@@ -122237,6 +121348,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             IE = "2",
             CHROME = "2",
             FF38 = "2")
+    @NotYetImplemented({ FF45, EDGE })
     public void _marquee_input() throws Exception {
         test("marquee", "input");
     }
@@ -122300,7 +121412,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _nextid_input() throws Exception {
         test("nextid", "input");
     }
@@ -122331,6 +121443,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             IE = "2",
             CHROME = "2",
             FF38 = "2")
+    @NotYetImplemented({ FF45, EDGE })
     public void _object_input() throws Exception {
         test("object", "input");
     }
@@ -122349,7 +121462,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _optgroup_input() throws Exception {
         test("optgroup", "input");
     }
@@ -122359,7 +121471,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _option_input() throws Exception {
         test("option", "input");
     }
@@ -122496,7 +121607,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_input() throws Exception {
         test("source", "input");
     }
@@ -122623,7 +121733,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_input() throws Exception {
         test("track", "input");
     }
@@ -122707,7 +121816,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _table_input() throws Exception {
         test("table", "input");
     }
@@ -122927,7 +122036,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             IE = "0")
-    @NotYetImplemented({ CHROME, IE })
     public void _command_content() throws Exception {
         test("command", "content");
     }
@@ -122939,7 +122047,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             IE = "0")
-    @NotYetImplemented({ CHROME, IE })
     public void _command_data() throws Exception {
         test("command", "data");
     }
@@ -122949,7 +122056,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _content_area() throws Exception {
         test("content", "area");
     }
@@ -122997,7 +122103,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE })
     public void _content_command() throws Exception {
         test("content", "command");
     }
@@ -123080,7 +122185,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _content_param() throws Exception {
         test("content", "param");
     }
@@ -123090,7 +122194,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _content_source() throws Exception {
         test("content", "source");
     }
@@ -123100,7 +122203,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _content_track() throws Exception {
         test("content", "track");
     }
@@ -123119,7 +122221,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _data_area() throws Exception {
         test("data", "area");
     }
@@ -123167,7 +122268,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE })
     public void _data_command() throws Exception {
         test("data", "command");
     }
@@ -123250,7 +122350,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _data_param() throws Exception {
         test("data", "param");
     }
@@ -123260,7 +122359,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _data_source() throws Exception {
         test("data", "source");
     }
@@ -123270,7 +122368,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _data_track() throws Exception {
         test("data", "track");
     }
@@ -123307,7 +122404,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _frame_content() throws Exception {
         test("frame", "content");
     }
@@ -123317,7 +122414,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _frame_data() throws Exception {
         test("frame", "data");
     }
@@ -123327,7 +122424,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _frameset_content() throws Exception {
         test("frameset", "content");
     }
@@ -123337,7 +122434,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _frameset_data() throws Exception {
         test("frameset", "data");
     }
@@ -123383,7 +122480,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _html_content() throws Exception {
         test("html", "content");
     }
@@ -123393,7 +122490,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _html_data() throws Exception {
         test("html", "data");
     }
@@ -123462,7 +122559,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             IE = "0",
             FF38 = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_content() throws Exception {
         test("keygen", "content");
     }
@@ -123475,7 +122572,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             IE = "0",
             FF38 = "2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_data() throws Exception {
         test("keygen", "data");
     }
@@ -123539,7 +122636,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_content() throws Exception {
         test("source", "content");
     }
@@ -123549,7 +122645,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_data() throws Exception {
         test("source", "data");
     }
@@ -123685,7 +122780,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_content() throws Exception {
         test("track", "content");
     }
@@ -123695,7 +122789,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_data() throws Exception {
         test("track", "data");
     }
@@ -123771,7 +122864,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _content_nextid() throws Exception {
         test("content", "nextid");
     }
@@ -123791,7 +122883,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _content_title() throws Exception {
         test("content", "title");
     }
@@ -123801,7 +122893,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _data_nextid() throws Exception {
         test("data", "nextid");
     }
@@ -123821,7 +122912,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _data_title() throws Exception {
         test("data", "title");
     }
@@ -123831,7 +122922,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _nextid_content() throws Exception {
         test("nextid", "content");
     }
@@ -123841,7 +122932,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented(FF)
     public void _nextid_data() throws Exception {
         test("nextid", "data");
     }
@@ -123851,7 +122942,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_content() throws Exception {
         test("optgroup", "content");
     }
@@ -123861,7 +122951,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_data() throws Exception {
         test("optgroup", "data");
     }
@@ -123871,7 +122960,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_content() throws Exception {
         test("option", "content");
     }
@@ -123881,7 +122969,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_data() throws Exception {
         test("option", "data");
     }
@@ -126784,7 +125871,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             IE = "0")
-    @NotYetImplemented({ CHROME, IE })
     public void _command_picture() throws Exception {
         test("command", "picture");
     }
@@ -126882,7 +125968,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             IE = "0",
             FF38 = "2")
-    @NotYetImplemented({ FF })
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_picture() throws Exception {
         test("keygen", "picture");
     }
@@ -126919,7 +126005,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _picture_area() throws Exception {
         test("picture", "area");
     }
@@ -126967,7 +126052,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "2",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE })
     public void _picture_command() throws Exception {
         test("picture", "command");
     }
@@ -127050,7 +126134,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _picture_param() throws Exception {
         test("picture", "param");
     }
@@ -127060,7 +126143,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _picture_source() throws Exception {
         test("picture", "source");
     }
@@ -127070,7 +126152,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _picture_track() throws Exception {
         test("picture", "track");
     }
@@ -127089,7 +126170,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_picture() throws Exception {
         test("source", "picture");
     }
@@ -127110,7 +126190,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             IE = "null")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _tbody_picture() throws Exception {
         test("tbody", "picture");
     }
@@ -127122,7 +126202,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             IE = "null")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _td_picture() throws Exception {
         test("td", "picture");
     }
@@ -127134,7 +126214,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             IE = "null")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _tfoot_picture() throws Exception {
         test("tfoot", "picture");
     }
@@ -127146,7 +126226,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             IE = "null")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _th_picture() throws Exception {
         test("th", "picture");
     }
@@ -127158,7 +126238,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             IE = "null")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _thead_picture() throws Exception {
         test("thead", "picture");
     }
@@ -127170,7 +126250,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "null",
             IE = "null")
-    @NotYetImplemented(FF38)
+    @NotYetImplemented({ FF38, FF45, EDGE })
     public void _tr_picture() throws Exception {
         test("tr", "picture");
     }
@@ -127180,7 +126260,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_picture() throws Exception {
         test("track", "picture");
     }
@@ -127199,7 +126278,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_picture() throws Exception {
         test("nextid", "picture");
     }
@@ -127209,7 +126287,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_picture() throws Exception {
         test("optgroup", "picture");
     }
@@ -127219,7 +126296,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_picture() throws Exception {
         test("option", "picture");
     }
@@ -127229,7 +126305,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _picture_nextid() throws Exception {
         test("picture", "nextid");
     }
@@ -127510,7 +126585,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             IE = "0")
-    @NotYetImplemented({ CHROME, IE })
     public void _command_template() throws Exception {
         test("command", "template");
     }
@@ -127539,7 +126613,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ CHROME, IE, FF, EDGE })
     public void _frameset_template() throws Exception {
         test("frameset", "template");
     }
@@ -127608,7 +126682,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "2",
             IE = "0")
-    @NotYetImplemented({ FF })
+    @NotYetImplemented({ FF, EDGE })
     public void _keygen_template() throws Exception {
         test("keygen", "template");
     }
@@ -127645,7 +126719,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _source_template() throws Exception {
         test("source", "template");
     }
@@ -127736,7 +126809,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ FF, CHROME, EDGE })
     public void _template_area() throws Exception {
         test("template", "area");
     }
@@ -127797,7 +126870,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_base() throws Exception {
         test("template", "base");
     }
@@ -127810,7 +126883,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_basefont() throws Exception {
         test("template", "basefont");
     }
@@ -127847,7 +126920,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_bgsound() throws Exception {
         test("template", "bgsound");
     }
@@ -127908,7 +126981,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_br() throws Exception {
         test("template", "br");
     }
@@ -128017,7 +127090,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ FF, CHROME })
     public void _template_command() throws Exception {
         test("template", "command");
     }
@@ -128186,7 +127259,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_embed() throws Exception {
         test("template", "embed");
     }
@@ -128391,7 +127464,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_hr() throws Exception {
         test("template", "hr");
     }
@@ -128453,7 +127526,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_img() throws Exception {
         test("template", "img");
     }
@@ -128466,7 +127539,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_input() throws Exception {
         test("template", "input");
     }
@@ -128516,7 +127589,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_keygen() throws Exception {
         test("template", "keygen");
     }
@@ -128577,7 +127650,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_link() throws Exception {
         test("template", "link");
     }
@@ -128674,7 +127747,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_meta() throws Exception {
         test("template", "meta");
     }
@@ -128722,7 +127795,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0")
-    @NotYetImplemented({ CHROME, IE, FF38 })
+    @NotYetImplemented({ FF38, CHROME, FF45 })
     public void _template_nextid() throws Exception {
         test("template", "nextid");
     }
@@ -128867,7 +127940,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ FF, CHROME, EDGE })
     public void _template_param() throws Exception {
         test("template", "param");
     }
@@ -129048,7 +128121,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ FF, CHROME, EDGE })
     public void _template_source() throws Exception {
         test("template", "source");
     }
@@ -129252,7 +128325,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF = "0")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, EDGE })
     public void _template_title() throws Exception {
         test("template", "title");
     }
@@ -129277,7 +128350,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, IE, FF })
+    @NotYetImplemented({ FF, CHROME, EDGE })
     public void _template_track() throws Exception {
         test("template", "track");
     }
@@ -129350,7 +128423,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             CHROME = "0",
             FF = "0",
             IE = "2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _template_wbr() throws Exception {
         test("template", "wbr");
     }
@@ -129408,7 +128481,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void _track_template() throws Exception {
         test("track", "template");
     }
@@ -129440,7 +128512,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, EDGE })
     public void _table_template() throws Exception {
         test("table", "template");
     }
@@ -129450,7 +128522,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _nextid_template() throws Exception {
         test("nextid", "template");
     }
@@ -129460,7 +128531,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _optgroup_template() throws Exception {
         test("optgroup", "template");
     }
@@ -129470,7 +128540,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _option_template() throws Exception {
         test("option", "template");
     }
@@ -129492,5 +128561,35 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("1")
     public void _noscript_template() throws Exception {
         test("noscript", "template");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ CHROME, IE })
+    public void _select_command() throws Exception {
+        test("select", "command");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
+    public void _select_source() throws Exception {
+        test("select", "source");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ CHROME, FF38, IE, FF45, EDGE })
+    public void _select_track() throws Exception {
+        test("select", "track");
     }
 }
