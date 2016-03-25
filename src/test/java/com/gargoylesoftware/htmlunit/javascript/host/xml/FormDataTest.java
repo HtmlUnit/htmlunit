@@ -493,7 +493,7 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no get",
+    @Alerts(DEFAULT = "no getAll",
             FF45 = {"myValue,myValue2", "", "", "", ""})
     public void getAll() throws Exception {
         final String html
