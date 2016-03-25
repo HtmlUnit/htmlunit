@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +37,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -455,7 +452,6 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no get",
             FF45 = {"myValue", "null", "null", "null", "null"})
-    @NotYetImplemented(FF45)
     public void get() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
