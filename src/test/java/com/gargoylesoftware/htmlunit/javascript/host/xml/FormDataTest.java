@@ -572,6 +572,74 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "no set",
+            FF45 = "")
+    public void set() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    if (!formData.set) { alert('no set'); return; }\n"
+            + "    formData.append('myKey1', 'myValue1');\n"
+            + "    formData.append('myKey1', 'myValue2');\n"
+            + "    formData.append('myKey3', 'myValue3');\n"
+            + "    formData.append('myKey4', 'myValue4');\n"
+            + "    formData.set('myKey1', 'new1');\n"
+            + "    formData.set('myKey4', 'new4');\n"
+            + "    formData.set('myKeyX', 'newX');\n"
+            + "  } catch (e) {\n"
+            + "    alert('set: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch (e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+        final List<String> alerts = getCollectedAlerts(driver);
+
+        if (alerts.get(0).equals("no set")) {
+            assertEquals(getExpectedAlerts(), alerts);
+            return;
+        }
+
+        System.out.println(alerts.get(0));
+        final String[] lines = alerts.get(0).split("\\n");
+        assertEquals("Response: " + alerts.get(0) + "; line count", 17, lines.length);
+        assertEquals("Content-Disposition: form-data; name=\"myKey1\"", lines[1]);
+        assertEquals("", lines[2]);
+        assertEquals("new1", lines[3]);
+        assertEquals(lines[0], lines[4]);
+        assertEquals("Content-Disposition: form-data; name=\"myKey3\"", lines[5]);
+        assertEquals("", lines[6]);
+        assertEquals("myValue3", lines[7]);
+        assertEquals(lines[0], lines[8]);
+        assertEquals("Content-Disposition: form-data; name=\"myKey4\"", lines[9]);
+        assertEquals("", lines[10]);
+        assertEquals("new4", lines[11]);
+        assertEquals(lines[0], lines[12]);
+        assertEquals("Content-Disposition: form-data; name=\"myKeyX\"", lines[13]);
+        assertEquals("", lines[14]);
+        assertEquals("newX", lines[15]);
+        assertEquals(lines[0] + "--", lines[16]);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

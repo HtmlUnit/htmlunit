@@ -171,6 +171,51 @@ public class FormData extends SimpleScriptable {
     }
 
     /**
+     * Sets a new value for an existing key inside a {@code FormData} object,
+     * or adds the key if it does not already exist.
+     * @param name the name of the field whose data is contained in {@code value}
+     * @param value the field's value
+     * @param filename the filename reported to the server (optional)
+     */
+    @JsxFunction
+    public void set(final String name, final Object value, final Object filename) {
+        if (StringUtils.isEmpty(name)) {
+            return;
+        }
+
+        int pos = -1;
+
+        final Iterator<NameValuePair> iter = requestParameters_.iterator();
+        int idx = 0;
+        while (iter.hasNext()) {
+            final NameValuePair pair = iter.next();
+            if (name.equals(pair.getName())) {
+                iter.remove();
+                if (pos < 0) {
+                    pos = idx;
+                }
+            }
+            idx++;
+        }
+
+        if (pos < 0) {
+            pos = requestParameters_.size();
+        }
+
+        if (value instanceof File) {
+            final File file = (File) value;
+            String fileName = null;
+            if (filename instanceof String) {
+                fileName = (String) filename;
+            }
+            requestParameters_.add(pos, new KeyDataPair(name, file.getFile(), fileName, file.getType(), null));
+        }
+        else {
+            requestParameters_.add(pos, new NameValuePair(name, Context.toString(value)));
+        }
+    }
+
+    /**
      * Sets the specified request with the parameters in this {@code FormData}.
      * @param webRequest the web request to fill
      */
