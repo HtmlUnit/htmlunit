@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code FormData}.
@@ -124,6 +125,29 @@ public class FormData extends SimpleScriptable {
             }
         }
         return null;
+    }
+
+    /**
+     * @param name the name of the field to check
+     * @return the first value found for the give name
+     */
+    @JsxFunction(@WebBrowser(value = FF, minVersion = 45))
+    public Scriptable getAll(final String name) {
+        if (StringUtils.isEmpty(name)) {
+            return Context.getCurrentContext().newArray(this, 0);
+        }
+
+        final List<Object> values = new ArrayList<Object>();
+        final Iterator<NameValuePair> iter = requestParameters_.iterator();
+        while (iter.hasNext()) {
+            final NameValuePair pair = iter.next();
+            if (name.equals(pair.getName())) {
+                values.add(pair.getValue());
+            }
+        }
+
+        final Object[] stringValues = values.toArray(new Object[values.size()]);
+        return Context.getCurrentContext().newArray(this, stringValues);
     }
 
     /**
