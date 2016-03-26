@@ -1005,6 +1005,13 @@ public enum BrowserVersionFeatures {
     JS_LOCATION_HASH_IS_DECODED,
 
     /**
+     * Property location.hash returns '#' for urls ending with a hash
+     * sign (e.g. http://localhost/something/#).
+     */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED,
+
+    /**
      * Set this property if the browser evaluates<br>
      * window.location.hash to #%C3%BC; (like Firefox)<br>
      * for url 'http://localhost/something/#&uuml;'.<br>
@@ -1012,13 +1019,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(FF))
     JS_LOCATION_HREF_HASH_IS_ENCODED,
-
-    /**
-     * Property location.hash returns '#' for urls ending with a hash
-     * sign (e.g. http://localhost/something/#).
-     */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED,
 
     /** Map supports the argument constructor. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
