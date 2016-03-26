@@ -991,6 +991,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_Iterator,
 
+    /** location.hash returns an encoded hash. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    JS_LOCATION_HASH_HASH_IS_ENCODED,
+
     /**
      * Set this property if the browser evaluates<br>
      * window.location.hash to #&uuml; (like Firefox)<br>
@@ -999,10 +1003,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(FF))
     JS_LOCATION_HASH_IS_DECODED,
-
-    /** location.hash returns an encoded hash. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
-    JS_LOCATION_HASH_HASH_IS_ENCODED,
 
     /**
      * Set this property if the browser evaluates<br>
