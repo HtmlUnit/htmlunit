@@ -1,0 +1,756 @@
+ 345 tests to run in 41 groups
+ ------------------------------------------------------------
+ GROUP "tests._base._loader.bootstrap" has 5 tests to run
+ PASSED test: hasConsole
+ PASSED test: hasDjConfig
+ PASSED test: getObject
+ PASSED test: exists
+ PASSED test: evalWorks
+ ------------------------------------------------------------
+ GROUP "tests._base._loader.loader" has 3 tests to run
+ PASSED test: baseUrl
+ PASSED test: modulePaths
+ PASSED test: moduleUrls
+ ------------------------------------------------------------
+ GROUP "tests._base._loader.hostenv_browser" has 1 test to run
+ PASSED test: getText
+ ------------------------------------------------------------
+ GROUP "tests._base.array" has 13 tests to run
+ PASSED test: testIndexOf
+ PASSED test: testIndexOfFromIndex
+ PASSED test: testLastIndexOf
+ PASSED test: testLastIndexOfFromIndex
+ PASSED test: testForEach
+ PASSED test: testForEach_str
+ PASSED test: testEvery
+ PASSED test: testEvery_str
+ PASSED test: testSome
+ PASSED test: testSome_str
+ PASSED test: testFilter
+ PASSED test: testFilter_str
+ PASSED test: testMap
+ ------------------------------------------------------------
+ GROUP "tests._base.Color" has 12 tests to run
+ PASSED test: testColor1
+ PASSED test: testColor2
+ PASSED test: testColor3
+ PASSED test: testColor4
+ PASSED test: testColor5
+ PASSED test: testColor6
+ PASSED test: testColor7
+ PASSED test: testColor8
+ PASSED test: testColor9
+ PASSED test: testColor10
+ PASSED test: testColor11
+ PASSED test: testColor12
+ ------------------------------------------------------------
+ GROUP "tests._base.lang" has 13 tests to run
+ PASSED test: mixin
+ PASSED test: extend
+ PASSED test: isObject
+ PASSED test: isArray
+ PASSED test: isArrayLike
+ PASSED test: isString
+ PASSED test: partial
+ PASSED test: nestedPartial
+ PASSED test: hitch
+ PASSED test: hitchWithArgs
+ PASSED test: hitchAsPartial
+ PASSED test: _toArray
+ PASSED test: clone
+ ------------------------------------------------------------
+ GROUP "tests._base.declare" has 12 tests to run
+ PASSED test: smokeTest
+ PASSED test: smokeTest2
+ PASSED test: smokeTestWithCtor
+ PASSED test: smokeTestCompactArgs
+ PASSED test: subclass
+ PASSED test: subclassWithCtor
+ PASSED test: mixinSubclass
+ PASSED test: superclassRef
+ PASSED test: inheritedCall
+ PASSED test: inheritedExplicitCall
+ PASSED test: inheritedMixinCalls
+ PASSED test: mixinPreamble
+ ------------------------------------------------------------
+ GROUP "tests._base.connect" has 10 tests to run
+ PASSED test: smokeTest
+ PASSED test: basicTest
+ PASSED test: hubConnectDisconnect1000
+ PASSED test: args4Test
+ PASSED test: args3Test
+ PASSED test: args2Test
+ PASSED test: scopeTest1
+ PASSED test: scopeTest2
+ PASSED test: connectPublisher
+ PASSED test: publishSubscribe1000
+ ------------------------------------------------------------
+ GROUP "tests._base.Deferred" has 4 tests to run
+ debug from dojo.Deferred callback
+ PASSED test: callback
+ PASSED test: errback
+ PASSED test: callbackTwice
+ PASSED test: addBoth
+ ------------------------------------------------------------
+ GROUP "tests._base.json" has 1 test to run
+ PASSED test: toAndFromJson
+ ------------------------------------------------------------
+ GROUP "tests._base.html" has 1 test to run
+ 57 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 57 tests to run
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.marginBox('sq100').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.marginBox('sq100').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100margin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100margin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100margin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100margin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100pad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100pad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(110, dojo.marginBox('sq100ltpad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(110, dojo.marginBox('sq100ltpad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100ltpad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100ltpad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100border10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100border10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(140, dojo.marginBox('sq100border10margin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(140, dojo.marginBox('sq100border10margin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10margin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10margin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.marginBox('sq100nopos').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).l);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).t);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(0, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).l);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(0, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).t);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).l);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).t);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(20, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(20, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(20, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).l);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(20, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).t);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(40, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(40, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsBasic
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsMargin
+ PASSED test: ../../dojo/tests/_base/html.html::t::sq100nopos
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsScrolled
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(1, dojo.style('sq100nopos', 'opacity'));
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(0.1, dojo.style('sq100nopos', 'opacity', 0.1));
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(0.8, dojo.style('sq100nopos', 'opacity', 0.8));
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is('static', dojo.style('sq100nopos', 'position'));
+ PASSED test: ../../dojo/tests/_base/html.html::t::getBgcolor
+ PASSED test: ../../dojo/tests/_base/html.html::t::isDescendant
+ PASSED test: ../../dojo/tests/_base/html.html::t::isDescendantIframe
+ PASSED test: ../../dojo/tests/_base/html.html::t::testClassFunctions
+ PASSED test: ../../dojo/tests/_base/html.html
+ ------------------------------------------------------------
+ GROUP "tests._base.html_rtl" has 1 test to run
+ 3 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 3 tests to run
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::t::coordsWithVertScrollbar
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::t::coordsWithHorzScrollbar
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::t::eventClientXY
+ PASSED test: ../../dojo/tests/_base/html_rtl.html
+ ------------------------------------------------------------
+ GROUP "tests._base.html_quirks" has 1 test to run
+ 32 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 32 tests to run
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.marginBox('sq100').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.marginBox('sq100').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100margin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100margin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100margin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100margin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.marginBox('sq100nopos').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::coordsBasic
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::coordsMargin
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::sq100nopos
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100pad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100pad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(110, dojo.marginBox('sq100ltpad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(110, dojo.marginBox('sq100ltpad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100ltpad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100ltpad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100border10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100border10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100border10margin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100border10margin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html
+ ------------------------------------------------------------
+ GROUP "tests._base.html_box" has 1 test to run
+ 6 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 6 tests to run
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::reciprocalTests
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::fitTests
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::fitTestsOverflow
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::fitTestsFloat
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::reciprocalTestsInline
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::reciprocalTestsButtonChild
+ PASSED test: ../../dojo/tests/_base/html_box.html
+ ------------------------------------------------------------
+ GROUP "tests._base.html_box_quirks" has 1 test to run
+ 6 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 6 tests to run
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::reciprocalTests
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::fitTests
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::fitTestsOverflow
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::fitTestsFloat
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::reciprocalTestsInline
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::reciprocalTestsButtonChild
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html
+ ------------------------------------------------------------
+ GROUP "tests._base.fx" has 1 test to run
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 5 tests to run
+ PASSED test: ../../dojo/tests/_base/fx.html::t::fadeOut
+ PASSED test: ../../dojo/tests/_base/fx.html::t::fadeIn
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateColor
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateColorBack
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateHeight
+ PASSED test: ../../dojo/tests/_base/fx.html
+ ------------------------------------------------------------
+ GROUP "tests._base.query" has 1 test to run
+ 70 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 70 tests to run
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(4, (dojo.query('h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('h1:first-child')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('h3:first-child')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#t')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#bug')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(4, (dojo.query('#t h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('div#t')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(4, (dojo.query('div#t h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, (dojo.query('span#t')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#t div > h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.foo')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('.foo.bar')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('#t > h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(12, (dojo.query('#t > *')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(12, (dojo.query('#t >')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('.foo >')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('.foo > *')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('> *', 'container')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('> h3', 't')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.foo, .bar')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.foo,.bar')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('.foo.bar')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.foo')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('span.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('sPaN.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('SPAN.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('[foo~="bar"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('[ foo ~= "bar" ]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('[foo]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo$="thud"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo$=thud]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo$="thudish"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#t [foo$=thud]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#t [ title $= thud ]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, (dojo.query('#t span[ title $= thud ]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo|="bar"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo|="bar-baz"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, (dojo.query('[foo|="baz"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(dojo.byId('_foo'), dojo.query('.foo:nth-child(2)')[0]);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(dojo.query('style')[0], dojo.query(':nth-child(2)')[0]);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('>', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('> *', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, dojo.query('> [qux]', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is('child1', dojo.query('> [qux]', 'container')[0].id);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is('child3', dojo.query('> [qux]', 'container')[1].id);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('>', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('> *', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is('passed', dojo.query('#bug')[0].value);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t span.foo:not(span:first-child)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t span.foo:not(:first-child)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, dojo.query('#t > h3:nth-child(odd)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('#t h3:nth-child(odd)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('#t h3:nth-child(2n+1)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t h3:nth-child(even)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t h3:nth-child(2n)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, dojo.query('#t h3:nth-child(2n+3)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, dojo.query('#t h3:nth-child(1)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t > h3:nth-child(1)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('#t :nth-child(3)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, dojo.query('#t > div:nth-child(1)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(7, dojo.query('#t span').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(4, dojo.query('#t > span:empty').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(6, dojo.query('#t span:empty').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, dojo.query('h3 span:empty').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('h3 :not(:empty)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::silly_IDs1
+ PASSED test: ../../dojo/tests/_base/query.html::t::NodeList_identity
+ PASSED test: ../../dojo/tests/_base/query.html::t::xml
+ PASSED test: ../../dojo/tests/_base/query.html
+ ------------------------------------------------------------
+ GROUP "tests._base.NodeList" has 1 test to run
+ 25 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 25 tests to run
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::ctor
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::ctorArgs
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::ctorArgs2
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::forEach
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::indexOf
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::lastIndexOf
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::every
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::some
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::map
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::slice
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::splice
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::spliceInsert
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::spliceDel
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::spliceInsertDel
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::query
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::filter
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::coords
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::styleGet
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::styleSet
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::styles
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::concat
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::concat2
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::place
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::orphan
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::connect
+ PASSED test: ../../dojo/tests/_base/NodeList.html
+ ------------------------------------------------------------
+ GROUP "tests._base.xhr" has 1 test to run
+ 27 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 27 tests to run
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formNodeToObject
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formIdToObject
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToObjectWithMultiSelect
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::objectToQuery
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::objectToQueryArr
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToQuery
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToQueryArr
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToJson
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToJsonArr
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::queryToObject
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::textContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::jsonContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::jsonCFContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::jsContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xmlContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGet
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGet404
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGetContent
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGetForm
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGetFormWithContent
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPost
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPostWithContent
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPostForm
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::rawXhrPost
+ Error: false
+ FAILED test: ../../dojo/tests/_base/xhr.html::t::xhrPut
+ Error: false
+ FAILED test: ../../dojo/tests/_base/xhr.html::t::xhrDelete
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrCancel
+ PASSED test: ../../dojo/tests/_base/xhr.html
+ ------------------------------------------------------------
+ GROUP "tests.i18n" has 9 tests to run
+ PASSED test: salutations-de
+ PASSED test: salutations-en
+ PASSED test: salutations-en-au
+ PASSED test: salutations-en-us
+ PASSED test: salutations-en-us-texas
+ PASSED test: salutations-en-us-new_york
+ PASSED test: salutations-en-us-new_york-brooklyn
+ PASSED test: salutations-xx
+ PASSED test: salutations-zh-cn
+ ------------------------------------------------------------
+ GROUP "tests.back.hash" has 1 test to run
+ PASSED test: getAndSet
+ ------------------------------------------------------------
+ GROUP "tests.cldr" has 1 test to run
+ PASSED test: test_date_getWeekend
+ ------------------------------------------------------------
+ GROUP "tests.data.utils" has 18 tests to run
+ PASSED test: testWildcardFilter_1
+ PASSED test: testWildcardFilter_2
+ PASSED test: testWildcardFilter_3
+ PASSED test: testWildcardFilter_4
+ PASSED test: testWildcardFilter_5
+ PASSED test: testWildcardFilter_caseInsensitive
+ PASSED test: testSingleChar_1
+ PASSED test: testSingleChar_2
+ PASSED test: testBracketChar
+ PASSED test: testBraceChar
+ PASSED test: testParenChar
+ PASSED test: testPlusChar
+ PASSED test: testPeriodChar
+ PASSED test: testBarChar
+ PASSED test: testDollarSignChar
+ PASSED test: testCarrotChar
+ PASSED test: testEscapeChar
+ PASSED test: testAbsoluteMatch
+ ------------------------------------------------------------
+ GROUP "tests.data.readOnlyItemFileTestTemplates, with datastore dojo.data.ItemFileReadStore" has 56 tests to run
+ PASSED test: Identity API: fetchItemByIdentity()
+ PASSED test: Identity API: fetchItemByIdentity() notFound
+ PASSED test: Identity API: getIdentityAttributes()
+ PASSED test: Identity API: fetchItemByIdentity() commentFilteredJson
+ PASSED test: Identity API: fetchItemByIdentity() nullValue
+ PASSED test: Identity API: fetchItemByIdentity() booleanValue
+ PASSED test: Identity API: fetchItemByIdentity() withoutSpecifiedIdInData
+ PASSED test: Identity API: getIdentity()
+ PASSED test: Identity API: getIdentity() withoutSpecifiedId
+ PASSED test: Read API: fetch() all
+ PASSED test: Read API: fetch() one
+ PASSED test: Read API: fetch() shallow
+ PASSED test: Read API: fetch() Multiple
+ PASSED test: Read API: fetch() MultipleMixedFetch
+ PASSED test: Read API: fetch() deep
+ PASSED test: Read API: fetch() one_commentFilteredJson
+ PASSED test: Read API: fetch() withNull
+ PASSED test: Read API: fetch() all_streaming
+ PASSED test: Read API: fetch() paging
+ PASSED test: Read API: fetch() with MultiType Match
+ PASSED test: Read API: fetch() with MultiType, MultiValue Match
+ PASSED test: Read API: getLabel()
+ PASSED test: Read API: getLabelAttributes()
+ PASSED test: Read API: getValue()
+ PASSED test: Read API: getValues()
+ PASSED test: Read API: isItem()
+ PASSED test: Read API: isItem() multistore
+ PASSED test: Read API: hasAttribute()
+ PASSED test: Read API: containsValue()
+ PASSED test: Read API: getAttributes()
+ PASSED test: Read API: getFeatures()
+ PASSED test: Read API: fetch() patternMatch0
+ PASSED test: Read API: fetch() patternMatch1
+ PASSED test: Read API: fetch() patternMatch2
+ PASSED test: Read API: fetch() patternMatch_caseSensitive
+ PASSED test: Read API: fetch() patternMatch_caseInsensitive
+ PASSED test: Read API: fetch() sortNumeric
+ PASSED test: Read API: fetch() sortNumericDescending
+ PASSED test: Read API: fetch() sortNumericWithCount
+ PASSED test: Read API: fetch() sortAlphabetic
+ PASSED test: Read API: fetch() sortAlphabeticDescending
+ PASSED test: Read API: fetch() sortDate
+ PASSED test: Read API: fetch() sortDateDescending
+ PASSED test: Read API: fetch() sortMultiple
+ PASSED test: Read API: fetch() sortMultipleSpecialComparator
+ PASSED test: Read API: fetch() sortAlphabeticWithUndefined
+ PASSED test: Read API: errorCondition_idCollision_inMemory
+ PASSED test: Read API: errorCondition_idCollision_xhr
+ PASSED test: Read API: Date_datatype
+ PASSED test: Read API: custom_datatype_Color_SimpleMapping
+ PASSED test: Read API: custom_datatype_Color_GeneralMapping
+ PASSED test: Read API: hierarchical_data
+ PASSED test: Identity API: no_identifier_specified
+ PASSED test: Identity API: hierarchical_data
+ PASSED test: Read API: functionConformance
+ PASSED test: Identity API: functionConformance
+ ------------------------------------------------------------
+ GROUP "tests.data.readOnlyItemFileTestTemplates, with datastore dojo.data.ItemFileWriteStore" has 56 tests to run
+ PASSED test: Identity API: fetchItemByIdentity()
+ PASSED test: Identity API: fetchItemByIdentity() notFound
+ PASSED test: Identity API: getIdentityAttributes()
+ PASSED test: Identity API: fetchItemByIdentity() commentFilteredJson
+ PASSED test: Identity API: fetchItemByIdentity() nullValue
+ PASSED test: Identity API: fetchItemByIdentity() booleanValue
+ PASSED test: Identity API: fetchItemByIdentity() withoutSpecifiedIdInData
+ PASSED test: Identity API: getIdentity()
+ PASSED test: Identity API: getIdentity() withoutSpecifiedId
+ PASSED test: Read API: fetch() all
+ PASSED test: Read API: fetch() one
+ PASSED test: Read API: fetch() shallow
+ PASSED test: Read API: fetch() Multiple
+ PASSED test: Read API: fetch() MultipleMixedFetch
+ PASSED test: Read API: fetch() deep
+ PASSED test: Read API: fetch() one_commentFilteredJson
+ PASSED test: Read API: fetch() withNull
+ PASSED test: Read API: fetch() all_streaming
+ PASSED test: Read API: fetch() paging
+ PASSED test: Read API: fetch() with MultiType Match
+ PASSED test: Read API: fetch() with MultiType, MultiValue Match
+ PASSED test: Read API: getLabel()
+ PASSED test: Read API: getLabelAttributes()
+ PASSED test: Read API: getValue()
+ PASSED test: Read API: getValues()
+ PASSED test: Read API: isItem()
+ PASSED test: Read API: isItem() multistore
+ PASSED test: Read API: hasAttribute()
+ PASSED test: Read API: containsValue()
+ PASSED test: Read API: getAttributes()
+ PASSED test: Read API: getFeatures()
+ PASSED test: Read API: fetch() patternMatch0
+ PASSED test: Read API: fetch() patternMatch1
+ PASSED test: Read API: fetch() patternMatch2
+ PASSED test: Read API: fetch() patternMatch_caseSensitive
+ PASSED test: Read API: fetch() patternMatch_caseInsensitive
+ PASSED test: Read API: fetch() sortNumeric
+ PASSED test: Read API: fetch() sortNumericDescending
+ PASSED test: Read API: fetch() sortNumericWithCount
+ PASSED test: Read API: fetch() sortAlphabetic
+ PASSED test: Read API: fetch() sortAlphabeticDescending
+ PASSED test: Read API: fetch() sortDate
+ PASSED test: Read API: fetch() sortDateDescending
+ PASSED test: Read API: fetch() sortMultiple
+ PASSED test: Read API: fetch() sortMultipleSpecialComparator
+ PASSED test: Read API: fetch() sortAlphabeticWithUndefined
+ PASSED test: Read API: errorCondition_idCollision_inMemory
+ PASSED test: Read API: errorCondition_idCollision_xhr
+ PASSED test: Read API: Date_datatype
+ PASSED test: Read API: custom_datatype_Color_SimpleMapping
+ PASSED test: Read API: custom_datatype_Color_GeneralMapping
+ PASSED test: Read API: hierarchical_data
+ PASSED test: Identity API: no_identifier_specified
+ PASSED test: Identity API: hierarchical_data
+ PASSED test: Read API: functionConformance
+ PASSED test: Identity API: functionConformance
+ ------------------------------------------------------------
+ GROUP "tests.data.ItemFileWriteStore" has 25 tests to run
+ PASSED test: test_getFeatures
+ PASSED test: testWriteAPI_setValue
+ PASSED test: testWriteAPI_setValues
+ PASSED test: testWriteAPI_unsetAttribute
+ PASSED test: testWriteAPI_newItem
+ PASSED test: testWriteAPI_newItem_withParent
+ PASSED test: testWriteAPI_newItem_multiple_withParent
+ PASSED test: testWriteAPI_deleteItem
+ PASSED test: testWriteAPI_isDirty
+ PASSED test: testWriteAPI_revert
+ PASSED test: testWriteAPI_save
+ PASSED test: testWriteAPI_saveVerifyState
+ PASSED test: testWriteAPI_saveEverything
+ PASSED test: testWriteAPI_saveEverything_withDateType
+ PASSED test: testWriteAPI_saveEverything_withCustomColorTypeSimple
+ PASSED test: testWriteAPI_saveEverything_withCustomColorTypeGeneral
+ PASSED test: testWriteAPI_newItem_revert
+ PASSED test: testNotificationAPI_onSet
+ PASSED test: testNotificationAPI_onNew
+ PASSED test: testNotificationAPI_onDelete
+ PASSED test: testReadAPI_functionConformanceToo
+ PASSED test: testWriteAPI_functionConformance
+ PASSED test: testNotificationAPI_functionConformance
+ PASSED test: testIdentityAPI_noIdentifierSpecified
+ PASSED test: testIdentityAPI_noIdentifierSpecified_revert
+ ------------------------------------------------------------
+ GROUP "tests.date.util" has 3 tests to run
+ PASSED test: test_date_getDaysInMonth
+ PASSED test: test_date_isLeapYear
+ PASSED test: test_date_getTimezoneName
+ ------------------------------------------------------------
+ GROUP "tests.date.math" has 12 tests to run
+ PASSED test: test_date_compare
+ PASSED test: test_date_add
+ PASSED test: test_date_diff
+ PASSED test: test_date_add_diff_year
+ PASSED test: test_date_add_diff_quarter
+ PASSED test: test_date_add_diff_month
+ PASSED test: test_date_add_diff_week
+ PASSED test: test_date_add_diff_day
+ PASSED test: test_date_add_diff_weekday
+ PASSED test: test_date_add_diff_hour
+ PASSED test: test_date_add_diff_minute
+ PASSED test: test_date_add_diff_second
+ ------------------------------------------------------------
+ GROUP "tests.date.locale" has 9 tests to run
+ PASSED test: date.locale
+ PASSED test: isWeekend
+ PASSED test: format
+ PASSED test: parse_dates
+ PASSED test: parse_dates_neg
+ PASSED test: parse_datetimes
+ PASSED test: parse_times
+ PASSED test: day_of_year
+ PASSED test: week_of_year
+ ------------------------------------------------------------
+ GROUP "tests.date.stamp" has 2 tests to run
+ PASSED test: test_date_iso
+ PASSED test: test_date_iso_tz
+ ------------------------------------------------------------
+ GROUP "tests.number" has 26 tests to run
+ PASSED test: number
+ doh._AssertFailure: assertEqual() failed: expected |-12,34,567.890| but got |-12.34.567,890|
+ FAILED test: format
+ doh._AssertFailure: assertEqual() failed: expected |0.501| but got |NaN|
+ FAILED test: parse
+ PASSED test: format_icu4j3_6
+ doh._AssertFailure: assertEqual() failed: expected |0.0| but got |0,0|
+ FAILED test: format_patterns
+ PASSED test: exponential
+ PASSED test: format_quotes
+ doh._AssertFailure: assertEqual() failed: expected |0.00018| but got |0,00018|
+ FAILED test: format_rounding
+ PASSED test: format_scientific
+ doh._AssertFailure: assertEqual() failed: expected |485.7‰| but got |485,7‰|
+ FAILED test: format_perMill
+ PASSED test: format_grouping
+ PASSED test: format_pad
+ PASSED test: parse_icu4j3_6
+ PASSED test: parse_whitespace
+ doh._AssertFailure: assertEqual() failed: expected |-0.1| but got |-0,1|
+ FAILED test: number_regression_1
+ PASSED test: number_regression_2
+ doh._AssertFailure: assertEqual() failed: expected |123.55456| but got |NaN|
+ FAILED test: number_regression_3
+ PASSED test: number_regression_4
+ PASSED test: number_regression_5
+ PASSED test: number_regression_6
+ PASSED test: number_regression_7
+ doh._AssertFailure: assertEqual() failed: expected |3,456.78| but got |3.456,78|
+ FAILED test: number_regression_8
+ PASSED test: number_regression_9
+ doh._AssertFailure: assertEqual() failed: expected |012.34| but got |012,34|
+ FAILED test: number_regression_10
+ PASSED test: number_regression_11
+ PASSED test: number_regression_12
+ ------------------------------------------------------------
+ GROUP "tests.currency" has 1 test to run
+ PASSED test: currency
+ ------------------------------------------------------------
+ GROUP "tests.AdapterRegistry" has 5 tests to run
+ PASSED test: ctor
+ PASSED test: register
+ PASSED test: noMatch
+ PASSED test: returnWrappers
+ PASSED test: unregister
+ ------------------------------------------------------------
+ GROUP "tests.io.script" has 1 test to run
+ 3 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 3 tests to run
+ PASSED test: ../../dojo/tests/io/script.html::t::ioScriptSimple
+ PASSED test: ../../dojo/tests/io/script.html::t::ioScriptJsonp
+ PASSED test: ../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout
+ PASSED test: ../../dojo/tests/io/script.html
+ ------------------------------------------------------------
+ GROUP "tests.io.iframe" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 4 tests to run
+ Error: test timeout in ../../dojo/tests/io/iframe.html::t::ioIframeGetText
+ FAILED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetText
+ Error: test timeout in ../../dojo/tests/io/iframe.html::t::ioIframeGetJson
+ FAILED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetJson
+ Error: test timeout in ../../dojo/tests/io/iframe.html::t::ioIframeGetJavascript
+ FAILED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetJavascript
+ Error: test timeout in ../../dojo/tests/io/iframe.html::t::ioIframeGetHtml
+ FAILED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetHtml
+ PASSED test: ../../dojo/tests/io/iframe.html
+ ------------------------------------------------------------
+ GROUP "tests.rpc" has 4 tests to run
+ Error: JsonRpc-EchoTest test failed, resultant content didn't match
+ FAILED test: JsonRPC-EchoTest
+ Error: JsonRpc-EmpytParamTest test failed, resultant content didn't match
+ FAILED test: JsonRPC-EmptyParamTest
+ PASSED test: JsonRPC_SMD_Loading_test
+ TypeError: this.svc.webSearch is not a function
+ FAILED test: JsonP_test
+ ------------------------------------------------------------
+ GROUP "tests.string" has 3 tests to run
+ PASSED test: test_string_pad
+ PASSED test: test_string_substitute
+ PASSED test: test_string_trim
+ ------------------------------------------------------------
+ GROUP "tests.behavior" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 4 tests to run
+ PASSED test: ../../dojo/tests/behavior.html::t::add
+ PASSED test: ../../dojo/tests/behavior.html::t::apply
+ PASSED test: ../../dojo/tests/behavior.html::t::reapply
+ PASSED test: ../../dojo/tests/behavior.html::t::topics
+ PASSED test: ../../dojo/tests/behavior.html
+ ------------------------------------------------------------
+ GROUP "tests.parser" has 1 test to run
+ 18 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 18 tests to run
+ PASSED test: ../../dojo/tests/parser.html::t::testJsId
+ PASSED test: ../../dojo/tests/parser.html::t::testStrProp
+ PASSED test: ../../dojo/tests/parser.html::t::testIntProp
+ PASSED test: ../../dojo/tests/parser.html::t::testArrProp
+ PASSED test: ../../dojo/tests/parser.html::t::testBoolProp
+ PASSED test: ../../dojo/tests/parser.html::t::testDateProp
+ PASSED test: ../../dojo/tests/parser.html::t::testDisabledFlag
+ PASSED test: ../../dojo/tests/parser.html::t::testCheckedFlag
+ PASSED test: ../../dojo/tests/parser.html::t::testFunctionProp
+ PASSED test: ../../dojo/tests/parser.html::t::t.is(4, obj.preambleTestProp);
+ PASSED test: ../../dojo/tests/parser.html::t::t.is(deepTestProp, obj.deepProp);
+ PASSED test: ../../dojo/tests/parser.html::t::testConnect
+ PASSED test: ../../dojo/tests/parser.html::t::testFunctionAssignment
+ PASSED test: ../../dojo/tests/parser.html::t::testSubNodeParse
+ PASSED test: ../../dojo/tests/parser.html::t::testMarkupFactory
+ PASSED test: ../../dojo/tests/parser.html::t::testMarkupFactoryClass
+ PASSED test: ../../dojo/tests/parser.html::t::testDisabledFlag
+ PASSED test: ../../dojo/tests/parser.html::t::testCheckedFlag
+ PASSED test: ../../dojo/tests/parser.html
+ ------------------------------------------------------------
+ GROUP "tests.colors" has 26 tests to run
+ PASSED test: testColorEx01
+ PASSED test: testColorEx02
+ PASSED test: testColorEx03
+ PASSED test: testColorEx04
+ PASSED test: testColorEx05
+ PASSED test: testColorEx06
+ PASSED test: testColorEx07
+ PASSED test: testColorEx08
+ PASSED test: testColorEx09
+ PASSED test: testColorEx10
+ PASSED test: testColorEx11
+ PASSED test: testColorEx12
+ PASSED test: testColorEx13
+ PASSED test: testColorEx14
+ PASSED test: testColorEx15
+ PASSED test: testColorEx16
+ PASSED test: testColorEx17
+ PASSED test: testColorEx18
+ PASSED test: testColorEx19
+ PASSED test: testColorEx20
+ PASSED test: testColorEx21
+ PASSED test: testColorEx22
+ PASSED test: testColorEx23
+ PASSED test: testColorEx24
+ PASSED test: testColorEx25
+ PASSED test: testColorEx26
+ ------------------------------------------------------------
+ GROUP "tests.fx" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 4 tests to run
+ PASSED test: ../../dojo/tests/fx.html::t::slideTo
+ PASSED test: ../../dojo/tests/fx.html::t::wipeOut
+ PASSED test: ../../dojo/tests/fx.html::t::wipeIn
+ PASSED test: ../../dojo/tests/fx.html::t::Toggler
+ PASSED test: ../../dojo/tests/fx.html
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
