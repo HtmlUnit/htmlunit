@@ -177,7 +177,7 @@ public class FormData extends SimpleScriptable {
      * @param value the field's value
      * @param filename the filename reported to the server (optional)
      */
-    @JsxFunction
+    @JsxFunction(@WebBrowser(value = FF, minVersion = 45))
     public void set(final String name, final Object value, final Object filename) {
         if (StringUtils.isEmpty(name)) {
             return;
