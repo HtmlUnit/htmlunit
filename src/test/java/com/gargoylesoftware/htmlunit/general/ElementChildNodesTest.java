@@ -701,7 +701,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented
     public void image() throws Exception {
         loadPageWithAlerts2(test("image"));
     }

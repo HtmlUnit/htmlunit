@@ -801,11 +801,23 @@ public final class HTMLParser {
                     final DomText text = new DomText(page_, textValue);
                     characters_.setLength(0);
 
-                    // malformed HTML: </td>some text</tr> => text comes before the table
-                    if (currentNode_ instanceof HtmlTableRow && StringUtils.isNotBlank(textValue)) {
-                        final HtmlTableRow row = (HtmlTableRow) currentNode_;
-                        final HtmlTable enclosingTable = row.getEnclosingTable();
-                        if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
+                    if (StringUtils.isNotBlank(textValue)) {
+                        // malformed HTML: </td>some text</tr> => text comes before the table
+                        if (currentNode_ instanceof HtmlTableRow) {
+                            final HtmlTableRow row = (HtmlTableRow) currentNode_;
+                            final HtmlTable enclosingTable = row.getEnclosingTable();
+                            if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
+                                if (enclosingTable.getPreviousSibling() instanceof DomText) {
+                                    final DomText domText = (DomText) enclosingTable.getPreviousSibling();
+                                    domText.setTextContent(domText + textValue);
+                                }
+                                else {
+                                    enclosingTable.insertBefore(text);
+                                }
+                            }
+                        }
+                        else if (currentNode_ instanceof HtmlTable) {
+                            final HtmlTable enclosingTable = (HtmlTable) currentNode_;
                             if (enclosingTable.getPreviousSibling() instanceof DomText) {
                                 final DomText domText = (DomText) enclosingTable.getPreviousSibling();
                                 domText.setTextContent(domText + textValue);
@@ -814,15 +826,11 @@ public final class HTMLParser {
                                 enclosingTable.insertBefore(text);
                             }
                         }
-                    }
-                    else if (currentNode_ instanceof HtmlTable && StringUtils.isNotBlank(textValue)) {
-                        final HtmlTable enclosingTable = (HtmlTable) currentNode_;
-                        if (enclosingTable.getPreviousSibling() instanceof DomText) {
-                            final DomText domText = (DomText) enclosingTable.getPreviousSibling();
-                            domText.setTextContent(domText + textValue);
+                        else if (currentNode_ instanceof HtmlImage) {
+                            currentNode_.setNextSibling(text);
                         }
                         else {
-                            enclosingTable.insertBefore(text);
+                            currentNode_.appendChild(text);
                         }
                     }
                     else {
