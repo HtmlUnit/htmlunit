@@ -40,6 +40,7 @@ public final class UrlUtils {
     private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet QUERY_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet ANCHOR_ALLOWED_CHARS = new BitSet(256);
+    private static final BitSet HASH_ALLOWED_CHARS = new BitSet(256);
     private static final URLCreator URL_CREATOR = URLCreator.getCreator();
 
     /**
@@ -144,9 +145,14 @@ public final class UrlUtils {
         final BitSet allowedQuery = new BitSet(256);
         allowedQuery.or(uric);
 
+        final BitSet allowedHash = new BitSet(256);
+        allowedHash.or(uric);
+        allowedHash.clear('%');
+
         PATH_ALLOWED_CHARS.or(allowedAbsPath);
         QUERY_ALLOWED_CHARS.or(allowedQuery);
         ANCHOR_ALLOWED_CHARS.or(allowedFragment);
+        HASH_ALLOWED_CHARS.or(allowedHash);
     }
 
     /**
@@ -248,6 +254,19 @@ public final class UrlUtils {
             anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "UTF-8");
         }
         return anchor;
+    }
+
+    /**
+     * Encodes and escapes the specified URI anchor string.
+     *
+     * @param hash the anchor string to encode and escape
+     * @return the encoded and escaped anchor string
+     */
+    public static String encodeHash(String hash) {
+        if (hash != null) {
+            hash = encode(hash, HASH_ALLOWED_CHARS, "UTF-8");
+        }
+        return hash;
     }
 
     /**

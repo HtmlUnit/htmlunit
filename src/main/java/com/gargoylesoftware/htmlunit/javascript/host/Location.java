@@ -16,9 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_HASH_IS_ENCODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_ENCODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HREF_HASH_IS_ENCODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_BLANK_PATH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_EMPTY_PATH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -180,7 +181,7 @@ public class Location extends SimpleScriptable {
         }
         try {
             URL url = page.getUrl();
-            final boolean encodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HASH_IS_ENCODED);
+            final boolean encodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HREF_HASH_IS_ENCODED);
             final String hash = getHash(encodeHash);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
@@ -305,6 +306,9 @@ public class Location extends SimpleScriptable {
                     && getHref().endsWith("#")) {
                 return "#";
             }
+        }
+        else if (getBrowserVersion().hasFeature(JS_LOCATION_HASH_HASH_IS_ENCODED)) {
+            return "#" + UrlUtils.encodeHash(hash);
         }
         else {
             return "#" + hash;

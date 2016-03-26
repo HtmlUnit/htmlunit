@@ -1000,6 +1000,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_LOCATION_HASH_IS_DECODED,
 
+    /** location.hash returns an encoded hash. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    JS_LOCATION_HASH_HASH_IS_ENCODED,
+
     /**
      * Set this property if the browser evaluates<br>
      * window.location.hash to #%C3%BC; (like Firefox)<br>
@@ -1007,7 +1011,7 @@ public enum BrowserVersionFeatures {
      * IE evaluates to #&uuml;.
      */
     @BrowserFeature(@WebBrowser(FF))
-    JS_LOCATION_HASH_IS_ENCODED,
+    JS_LOCATION_HREF_HASH_IS_ENCODED,
 
     /**
      * Property location.hash returns '#' for urls ending with a hash
