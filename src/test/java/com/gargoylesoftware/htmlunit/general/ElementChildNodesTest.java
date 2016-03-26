@@ -38,7 +38,10 @@ public class ElementChildNodesTest extends WebDriverTestCase {
                 + "<script>\n"
                 + "function test() {\n"
                 + "  for (var i = 1; i <= 6; i++) {\n"
-                + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+                + "    var element = document.getElementById('p' + i);\n"
+                + "    if (element) {\n"
+                + "      alert(element.childNodes.length);\n"
+                + "    }\n"
                 + "  }\n"
                 + "}\n"
                 + "</script>\n"
@@ -1099,7 +1102,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void plaintext() throws Exception {
         loadPageWithAlerts2(test("plaintext"));
     }
