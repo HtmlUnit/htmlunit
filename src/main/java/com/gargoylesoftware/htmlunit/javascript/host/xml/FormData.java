@@ -137,7 +137,7 @@ public class FormData extends SimpleScriptable {
             return Context.getCurrentContext().newArray(this, 0);
         }
 
-        final List<Object> values = new ArrayList<Object>();
+        final List<Object> values = new ArrayList<>();
         final Iterator<NameValuePair> iter = requestParameters_.iterator();
         while (iter.hasNext()) {
             final NameValuePair pair = iter.next();

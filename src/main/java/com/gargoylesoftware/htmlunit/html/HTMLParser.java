@@ -388,7 +388,6 @@ public final class HTMLParser {
         private StringBuilder characters_;
         private HeadParsed headParsed_ = HeadParsed.NO;
         private boolean parsingInnerHead_ = false;
-        private HtmlElement head_;
         private HtmlElement body_;
         private boolean lastTagWasSynthesized_;
         private HtmlForm formWaitingForLostChildren_;
@@ -578,9 +577,6 @@ public final class HTMLParser {
             if ("body".equals(tagLower)) {
                 body_ = (HtmlElement) newElement;
             }
-            else if ("head".equals(tagLower)) {
-                head_ = (HtmlElement) newElement;
-            }
             else if ("meta".equals(tagLower)) {
                 // i like the IE
                 if (page_.hasFeature(META_X_UA_COMPATIBLE)) {
@@ -664,9 +660,6 @@ public final class HTMLParser {
                     parent = findElementOnStack("table");
                     parent.insertBefore(newElement);
                 }
-            }
-            else if (head_ != null && "title".equals(newNodeName) && !parsingInnerHead_) {
-                head_.appendChild(newElement);
             }
             else if (formWaitingForLostChildren_ != null && "form".equals(parentNodeName)) {
                 // Do not append any children to invalid form. Submittable are inserted after the form,
