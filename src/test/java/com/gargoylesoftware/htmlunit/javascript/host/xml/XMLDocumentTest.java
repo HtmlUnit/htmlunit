@@ -1089,4 +1089,35 @@ public class XMLDocumentTest extends WebDriverTestCase {
         verifyAlerts(driver, getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "myAttr", "" })
+    public void createAttributeNameValue() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + callCreateXMLDocument() + ";\n"
+            + "    var node = doc.createAttribute('myAttr');\n"
+            + "    alert(node.name);\n"
+            + "    alert(node.value);\n"
+            + "  }\n"
+            + CREATE_XML_DOCUMENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='tester'></div>\n"
+            + "</body></html>";
+
+        final String xml
+            = "<books>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
 }

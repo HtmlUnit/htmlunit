@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
@@ -1776,6 +1777,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             FF38 = { "Old = undefined", "New = New cell value" },
             FF45 = { "Old = Old\n\ninnerText", "New = New cell value" },
             IE = { "Old = Old \r\ninnerText", "New = New cell value" })
+    @NotYetImplemented(FF45)
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

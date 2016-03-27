@@ -603,6 +603,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCTYPE_NOTATIONS_NULL,
 
+    /** Indicates that document.createAttribute converts the local name to lowercase. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE,
+
     /** Javascript function document.createElement accepts only tag names. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(IE) })

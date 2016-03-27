@@ -1693,6 +1693,28 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "myAttr", "" },
+            FF45 = { "myattr", "" })
+    public void createAttributeNameValue() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var node = document.createAttribute('myAttr');\n"
+            + "    alert(node.name);\n"
+            + "    alert(node.value);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='tester'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("null")
     public void getElementById_strict() throws Exception {
         getElementById_strict(true);
