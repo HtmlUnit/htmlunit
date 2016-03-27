@@ -2508,7 +2508,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object ClientRectList]", "1" },
             FF = { "[object DOMRect]", "1" })
-    @NotYetImplemented(FF)
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
