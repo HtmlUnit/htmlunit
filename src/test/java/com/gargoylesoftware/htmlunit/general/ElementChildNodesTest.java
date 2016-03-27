@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -558,7 +557,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented
     public void frame() throws Exception {
         loadPageWithAlerts2(test("frame"));
     }
@@ -570,7 +568,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented
     public void frameset() throws Exception {
         loadPageWithAlerts2(test("frameset"));
     }
