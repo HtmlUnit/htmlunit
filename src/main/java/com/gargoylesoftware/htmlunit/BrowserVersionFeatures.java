@@ -567,6 +567,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CLEAR_RESTRICT,
 
+    /** ClientRectList toString reports the first item. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST,
+
     /** ClientRectList.item throws instead of returning null if an element was not found. */
     @BrowserFeature(@WebBrowser(IE))
     JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND,

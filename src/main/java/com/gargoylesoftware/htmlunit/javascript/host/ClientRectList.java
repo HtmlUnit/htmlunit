@@ -14,9 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -38,7 +41,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClasses({
+        @JsxClass(isJSObject = false, browsers = @WebBrowser(FF)),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
+    })
 public class ClientRectList extends SimpleScriptable {
 
     private final List<ClientRect> clientRects_;
@@ -94,5 +100,15 @@ public class ClientRectList extends SimpleScriptable {
      */
     public void add(final ClientRect clientRect) {
         clientRects_.add(clientRect);
+    }
+
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class == hint
+                && clientRects_.size() > 0
+                && getBrowserVersion().hasFeature(JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST)) {
+            return clientRects_.get(0).getDefaultValue(hint);
+        }
+        return super.getDefaultValue(hint);
     }
 }

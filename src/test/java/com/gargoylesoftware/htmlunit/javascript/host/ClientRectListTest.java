@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -38,7 +35,6 @@ public class ClientRectListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object ClientRectList]", "1", "[object ClientRect]", "[object ClientRect]" },
             FF = { "[object DOMRect]", "1", "[object DOMRect]", "[object DOMRect]" })
-    @NotYetImplemented(FF)
     public void getClientRects() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
@@ -63,7 +59,6 @@ public class ClientRectListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "null" },
             IE = { "exception", "exception" })
-    @NotYetImplemented(FF)
     public void itemOutside() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
