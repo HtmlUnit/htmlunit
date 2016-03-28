@@ -730,7 +730,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void html() throws Exception {
         loadPageWithAlerts2(test("html"));
     }
@@ -1658,7 +1657,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void template() throws Exception {
         loadPageWithAlerts2(test("template"));
     }

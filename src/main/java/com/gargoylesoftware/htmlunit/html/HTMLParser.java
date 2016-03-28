@@ -934,22 +934,28 @@ public final class HTMLParser {
             // when multiple body elements are encountered, the attributes of the discarded
             // elements are used when not previously defined
             if (body_ != null && "body".equalsIgnoreCase(elem.localpart) && attrs != null) {
-                // add the attributes that don't already exist
-                final int length = attrs.getLength();
-                for (int i = 0; i < length; i++) {
-                    final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
-                    if (body_.getAttributes().getNamedItem(attrName) == null) {
-                        body_.setAttribute(attrName, attrs.getValue(i));
-                        if (attrName.startsWith("on") && body_.getScriptableObject() != null) {
-                            final HTMLBodyElement jsBody = (HTMLBodyElement) body_.getScriptableObject();
-                            jsBody.createEventHandlerFromAttribute(attrName, attrs.getValue(i));
-                        }
-                    }
-                }
+                copyAttributes(body_, attrs);
+            }
+            if (body_ != null && "html".equalsIgnoreCase(elem.localpart) && attrs != null) {
+                copyAttributes((DomElement) body_.getParentNode(), attrs);
             }
 
             if (headParsed_ == HeadParsed.YES && "head".equalsIgnoreCase(elem.localpart)) {
                 parsingInnerHead_ = true;
+            }
+        }
+
+        private void copyAttributes(final DomElement to, final XMLAttributes attrs) {
+            final int length = attrs.getLength();
+            for (int i = 0; i < length; i++) {
+                final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
+                if (to.getAttributes().getNamedItem(attrName) == null) {
+                    to.setAttribute(attrName, attrs.getValue(i));
+                    if (attrName.startsWith("on") && to.getScriptableObject() instanceof HTMLBodyElement) {
+                        final HTMLBodyElement jsBody = (HTMLBodyElement) to.getScriptableObject();
+                        jsBody.createEventHandlerFromAttribute(attrName, attrs.getValue(i));
+                    }
+                }
             }
         }
 
