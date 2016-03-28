@@ -1115,6 +1115,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_POP_STATE_EVENT_CLONE_STATE,
 
+    /** Indicates that the {@link PopStateEvent}.{@code type} has value. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_POP_STATE_EVENT_TYPE,
+
     /** Indicates that the {@code pre.width} is string. */
     @BrowserFeature(@WebBrowser(IE))
     JS_PRE_WIDTH_STRING,

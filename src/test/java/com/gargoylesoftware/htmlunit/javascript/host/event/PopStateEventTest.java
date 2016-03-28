@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -101,7 +100,6 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null", "", "false", "false", "null" },
             CHROME = { "[object PopStateEvent]", "null", "popstate", "false", "true", "null" })
-    @NotYetImplemented(CHROME)
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -149,7 +147,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "exception" },
             FF = { "dispatched" },
             CHROME = { "[object PopStateEvent]", "[object Window]", "popstate", "false", "true", "null", "dispatched" })
-    @NotYetImplemented({ CHROME, IE})
+    @NotYetImplemented(IE)
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
