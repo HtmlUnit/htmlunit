@@ -1683,7 +1683,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "control,form,htmlFor",
             IE = "form,htmlFor",
             EDGE = "form,htmlFor")
-    @NotYetImplemented({ FF, CHROME })
     public void label() throws Exception {
         test("label");
     }
