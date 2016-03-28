@@ -18,6 +18,7 @@
 
         <section name="Code todo's">
             <ol>
+                <li>KeyboardEventTest.which should be fixed in HtmlUnitDriver</li>
                 <li>Fix focused window of focused page for <code>click()</code></li>
                 <li>Allow access to the WebResponse for all components that may request an additional request</li>
                 <li>JavaScript: isolate NodeList from HTMLCollection, e.g. node.childNodes is NodeList. Recheck live and static lists.</li>

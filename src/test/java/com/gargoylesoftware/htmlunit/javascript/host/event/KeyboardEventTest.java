@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.util.Arrays;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -337,7 +336,10 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keyup:65,0,65",
                     "keydown:190,0,190",
                     "keypress:46,46,46",
-                    "keyup:190,0,190" },
+                    "keyup:190,0,190",
+                    "keydown:13,0,13",
+                    "keypress:13,13,13",
+                    "keyup:13,0,13" },
            IE = { "keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:65,65,65",
@@ -352,9 +354,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:13,0,13",
                     "keypress:13,13,13",
                     "keyup:13,0,13" })
-    // WebDriver with real IE11 does not get the '\r' but real IE11 does
-    // TODO [IE11] HtmlUnit (or WebDriver?) does not fire an own event for the shift key (down + up)
-    @NotYetImplemented(CHROME)
+    // An issue with HtmlUnitWebDriver, which mandates a containing form of the <input> to handle pressing RETURN
+    @NotYetImplemented
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -371,7 +372,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "</script>\n"
             + "<textarea id='myTextarea' cols=80 rows=20></textarea>\n"
             + "</body></html>";
-        final String keysToSend = "Aa.\r";
+        final String keysToSend = "Aa." + Keys.RETURN;
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("keyId")).sendKeys(keysToSend);
 
