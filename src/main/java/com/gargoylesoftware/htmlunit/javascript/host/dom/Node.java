@@ -361,7 +361,11 @@ public class Node extends EventTarget {
      * @return {@code false} if it is not allowed here
      */
     private boolean isNodeInsertable(final Node childObject) {
-        return !(childObject instanceof HTMLHtmlElement);
+        if (childObject instanceof HTMLHtmlElement) {
+            final DomNode domNode = childObject.getDomNodeOrDie();
+            return !(domNode.getPage().getDocumentElement() == domNode);
+        }
+        return true;
     }
 
     /**
