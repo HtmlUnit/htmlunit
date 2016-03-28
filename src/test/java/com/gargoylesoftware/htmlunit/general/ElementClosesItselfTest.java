@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -64,6 +63,19 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
                     + "<frameset onload='test()'>\n"
                     + "<frame id='outer'><frame>\n"
                     + "</frameset></html>";
+        }
+        if ("script".equals(tagName)) {
+            return "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(e == null ? e : e.childNodes.length);\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head><body onload='test()'>\n"
+                    + "<script id='outer'>//<script>\n"
+                    + "</script>\n"
+                    + "</body></html>";
         }
         if ("frameset".equals(tagName)) {
             return "<html><head>\n"
@@ -1192,7 +1204,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void ruby() throws Exception {
         loadPageWithAlerts2(test("ruby"));
     }
@@ -1248,7 +1259,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void script() throws Exception {
         loadPageWithAlerts2(test("script"));
     }
