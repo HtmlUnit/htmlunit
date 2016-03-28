@@ -1398,6 +1398,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,
 
+    /** Handle {@code <keygen>} as {@code <select>}. */
+    @BrowserFeature(@WebBrowser(FF))
+    KEYGEN_AS_SELECT,
+
     /**
      * Indicates that the browser considers the meta X-UA-Compatible when determining
      * compatibility/quirks mode.

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -831,7 +829,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2")
-    @NotYetImplemented(FF)
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
