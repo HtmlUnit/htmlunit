@@ -14,12 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.lang.reflect.Method;
 import java.util.LinkedList;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -650,6 +652,19 @@ public class Event extends SimpleScriptable {
         type_ = type;
         bubbles_ = bubbles;
         cancelable_ = cancelable;
+        if (TYPE_BEFORE_UNLOAD.equals(type) && getBrowserVersion().hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
+            try {
+                final Method readMethod = getClass().getMethod("getReturnValue");
+                final Method writeMethod = getClass().getMethod("setReturnValue", Object.class);
+                defineProperty("returnValue", null, readMethod, writeMethod, ScriptableObject.EMPTY);
+                if ("Event".equals(getClass().getSimpleName())) {
+                    setReturnValue(Boolean.TRUE);
+                }
+            }
+            catch (final Exception e) {
+                throw Context.throwAsScriptRuntimeEx(e);
+            }
+        }
     }
 
     /**

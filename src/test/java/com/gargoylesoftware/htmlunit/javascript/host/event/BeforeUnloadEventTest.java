@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -141,7 +138,6 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Event]", "beforeunload", "true", "false", "undefined" },
             CHROME = { "[object Event]", "beforeunload", "true", "false", "true" })
-    @NotYetImplemented(CHROME)
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
