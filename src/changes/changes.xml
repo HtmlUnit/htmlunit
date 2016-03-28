@@ -9,6 +9,9 @@
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
             <action type="add" dev="rbri">
+                JavaScript: HTMLLabelElement.control property added (FF and Chrome).
+            </action>
+            <action type="add" dev="rbri">
                 JavaScript: FormData delete, get, getAll, set and has functions added.
             </action>
             <action type="update" dev="rbri">

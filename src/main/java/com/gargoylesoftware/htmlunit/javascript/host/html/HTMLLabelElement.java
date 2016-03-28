@@ -18,6 +18,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Element;
+
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -58,5 +62,22 @@ public class HTMLLabelElement extends FormChild {
     @JsxSetter
     public void setHtmlFor(final String id) {
         ((HtmlLabel) getDomNodeOrDie()).setAttribute("for", id);
+    }
+
+    /**
+     * @return the HTMLElement to which the given label object is assigned
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLElement getControl() {
+        final String id = getHtmlFor();
+        if (StringUtils.isBlank(id)) {
+            return null;
+        }
+        final HtmlElement htmlElem = getDomNodeOrDie();
+        final Element elem = htmlElem.getPage().getElementById(id);
+        if (null == elem || !(elem instanceof HtmlElement)) {
+            return null;
+        }
+        return (HTMLElement) ((HtmlElement) elem).getScriptableObject();
     }
 }
