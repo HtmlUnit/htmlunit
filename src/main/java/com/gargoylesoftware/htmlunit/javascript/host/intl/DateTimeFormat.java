@@ -198,8 +198,10 @@ public class DateTimeFormat extends SimpleScriptable {
         format_ = new SimpleDateFormat(pattern);
         if (locale.startsWith("ar")
                 && (!browserVersion.hasFeature(JS_DATE_AR_DZ_ASCII_DIGITS)
-                        || (!locale.equals("ar-DZ") && !locale.equals("ar-LY") && !locale.equals("ar-MA")
-                                && !locale.equals("ar-TN") ))) {
+                        || (!"ar-DZ".equals(locale)
+                                && !"ar-LY".equals(locale)
+                                && !"ar-MA".equals(locale)
+                                && !"ar-TN".equals(locale)))) {
             setZeroDigit('\u0660');
         }
     }
