@@ -28,8 +28,8 @@ public class NiceRefreshHandler extends ImmediateRefreshHandler {
 
     /**
      * Creates a new refresh handler that will immediately refresh if the refresh delay is no
-     * longer than <tt>maxDelay</tt>. No refresh will be perform at all for refresh values
-     * larger than <tt>maxDelay</tt>.
+     * longer than {@code maxDelay}. No refresh will be perform at all for refresh values
+     * larger than {@code maxDelay}.
      *
      * @param maxDelay the maximum refreshValue (in seconds) that should cause a refresh
      */
@@ -41,8 +41,8 @@ public class NiceRefreshHandler extends ImmediateRefreshHandler {
     }
 
     /**
-     * Refreshes the specified page using the specified URL immediately if the <tt>requestedWait</tt>
-     * not larget that the <tt>maxDelay</tt>. Does nothing otherwise.
+     * Refreshes the specified page using the specified URL immediately if the {@code requestedWait}
+     * is not larger than the {@code maxDelay}. Does nothing otherwise.
      * @param page the page that is going to be refreshed
      * @param url the URL where the new page will be loaded
      * @param requestedWait the number of seconds to wait before reloading the page
