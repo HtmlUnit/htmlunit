@@ -25,7 +25,6 @@ import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -852,9 +851,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown-2-mouseup-2-",
-            FF = "mousedown-3-mouseup-3-")
-    @NotYetImplemented
+    @Alerts(DEFAULT = "mousedown-0-mouseup-0-",
+            FF = "mousedown-1-mouseup-1-")
     public void mouse_Down_Up() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
