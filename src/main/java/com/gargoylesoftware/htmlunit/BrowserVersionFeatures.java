@@ -116,11 +116,11 @@ public enum BrowserVersionFeatures {
     CSS_PROGRESS_DISPLAY_INLINE,
 
     /** The default value of the display property for the 'rp' tag is 'none'. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
+    @BrowserFeature(@WebBrowser(FF))
     CSS_RP_DISPLAY_NONE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The default value of the display property for the 'ruby' tag is 'inline'. */
@@ -185,7 +185,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONHASHCHANGE_BUBBLES_AND_CANCELABLE_FALSE,
 
     /** <code>Event.cancelable</code> is false in 'onload' event handler. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF),
         @WebBrowser(IE) })
     EVENT_ONLOAD_CANCELABLE_FALSE,
 
@@ -278,11 +278,11 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_DO_NOT_CHECK_NAME,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
 
     /** HtmlAllCollection.item(int) is not supported. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
+    @BrowserFeature(@WebBrowser(FF))
     HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES,
 
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
@@ -290,11 +290,11 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
@@ -306,7 +306,7 @@ public enum BrowserVersionFeatures {
     HTMLBASE_HREF_DEFAULT_EMPTY,
 
     /** HtmlCollection.item() supports also doubles as index. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
 
     /** HtmlCollection.item[] supports also doubles as index. */
@@ -326,7 +326,7 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlCollection returns null instead of undefined if an element was not found. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
+    @BrowserFeature(@WebBrowser(FF))
     HTMLCOLLECTION_NULL_IF_NOT_FOUND,
 
     /** Is {@code document.charset} lower-case. */
@@ -580,7 +580,7 @@ public enum BrowserVersionFeatures {
     JS_CSSRULELIST_CHARSET_RULE,
 
     /** item is enumerated before length property of CSSRuleList. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
+    @BrowserFeature(@WebBrowser(FF))
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
 
     /** Uses {@code MozCSSKeyframesRule}. */
@@ -637,7 +637,7 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
     /** If setting the document.location inside onclick() of anchor element should be triggered. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR,
 
     /** createHTMLDucument requires a title. */
@@ -910,7 +910,7 @@ public enum BrowserVersionFeatures {
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
 
     /** HTMLElement instead of HTMLUnknownElement for ruby elements. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
     /** IE ignores the last line containing uncommented. */
@@ -1305,7 +1305,7 @@ public enum BrowserVersionFeatures {
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
     /** WeakMap supports the argument constructor. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_WEAKMAP_CONSTRUCTOR_ARGUMENT,
 
     /** Allow inheriting parent constants
@@ -1375,7 +1375,7 @@ public enum BrowserVersionFeatures {
     JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL,
 
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 38), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
 
     /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
