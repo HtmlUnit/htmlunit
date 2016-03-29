@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -103,6 +104,16 @@ public class PopStateEvent extends Event {
         if (getBrowserVersion().hasFeature(JS_POP_STATE_EVENT_TYPE)) {
             setType(Event.TYPE_POPSTATE);
             setCancelable(true);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void put(final String name, final Scriptable start, final Object value) {
+        if (!"state".equals(name)) {
+            super.put(name, start, value);
         }
     }
 }

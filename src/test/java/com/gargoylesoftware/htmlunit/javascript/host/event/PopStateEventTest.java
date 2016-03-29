@@ -122,7 +122,6 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null", "", "false", "false", "null" },
             CHROME = { "[object PopStateEvent]", "null", "popstate", "false", "true", "null" })
-    @NotYetImplemented
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
