@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -183,7 +184,8 @@ public class HTMLAllCollection extends HTMLCollection {
      */
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES)) {
+        final BrowserVersion browser = getBrowserVersion();
+        if (browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES)) {
             if (args.length == 0) {
                 throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
             }
@@ -192,6 +194,25 @@ public class HTMLAllCollection extends HTMLCollection {
                 return null;
             }
         }
+
+        if (browser.hasFeature(BrowserVersionFeatures.HTMLALLCOLLECTION_INTEGER_INDEX)) {
+            if (args[0] instanceof Number) {
+                final double val = ((Number) args[0]).doubleValue();
+                if (val != (int) val) {
+                    return Undefined.instance;
+                }
+            }
+            else {
+                final String val = Context.toString(args[0]);
+                try {
+                    args[0] = Integer.parseInt(val);
+                }
+                catch (final NumberFormatException e) {
+                    // ignore
+                }
+            }
+        }
+
         return super.call(cx, scope, thisObj, args);
     }
 }

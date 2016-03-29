@@ -285,6 +285,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES,
 
+    /** HtmlAllCollection.item(int) requires int parameter. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLALLCOLLECTION_INTEGER_INDEX,
+
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
@@ -304,6 +308,10 @@ public enum BrowserVersionFeatures {
     /** Base tag href attribute is empty if not defined. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLBASE_HREF_DEFAULT_EMPTY,
+
+    /** HtmlAllCollection(int) is not supported. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLCOLLECTION_SUPPORTS_PARANTHESES,
 
     /** HtmlCollection.item() supports also doubles as index. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
