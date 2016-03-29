@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="remove" dev="rbri">
+                JavaScript: StaticNodeList removed.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: HTMLCollection and HTMLAllCollection function like access implementation improved (CHROME).
             </action>

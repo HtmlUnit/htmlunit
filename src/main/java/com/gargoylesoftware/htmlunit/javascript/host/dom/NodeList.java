@@ -18,10 +18,15 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -34,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass
 public class NodeList extends AbstractList {
@@ -55,5 +61,29 @@ public class NodeList extends AbstractList {
      */
     public NodeList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
         super(parentScope, attributeChangeSensitive, description);
+    }
+
+    /**
+     * Creates an instance.
+     * @param parentScope the parent scope
+     */
+    private NodeList(final ScriptableObject parentScope) {
+        setParentScope(parentScope);
+        setPrototype(getPrototype(getClass()));
+    }
+
+    /**
+     * Gets a static NodeList.
+     * @param parentScope the parent scope
+     * @param elements the elements
+     * @return an empty collection
+     */
+    public static NodeList staticNodeList(final HtmlUnitScriptable parentScope, final List<Object> elements) {
+        return new NodeList(parentScope) {
+            @Override
+            public List<Object> getElements() {
+                return elements;
+            }
+        };
     }
 }

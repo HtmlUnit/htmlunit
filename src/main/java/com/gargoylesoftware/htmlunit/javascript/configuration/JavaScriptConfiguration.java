@@ -182,7 +182,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.RadioNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Range;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.ShadowRoot;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker;
@@ -509,7 +508,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ServiceWorkerMessageEvent.class, ServiceWorkerRegistration.class, Set.class, ShadowRoot.class,
         SharedWorker.class, SimpleArray.class, SourceBuffer.class, SourceBufferList.class,
         SpeechSynthesis.class, SpeechSynthesisEvent.class,
-        SpeechSynthesisUtterance.class, StaticNodeList.class, StereoPannerNode.class, Storage.class, StorageEvent.class,
+        SpeechSynthesisUtterance.class, StereoPannerNode.class, Storage.class, StorageEvent.class,
         StyleMedia.class, StyleSheet.class, StyleSheetList.class, SubtleCrypto.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,

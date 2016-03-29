@@ -3127,18 +3127,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("exception")
-    @NotYetImplemented
-    public void staticNodeList() throws Exception {
-        test("StaticNodeList");
-    }
-
-    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Storage}.
      *
      * @throws Exception if an error occurs

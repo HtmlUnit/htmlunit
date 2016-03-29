@@ -1351,7 +1351,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object NodeList]")
-    @NotYetImplemented
     public void querySelectorAllType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
             + "<script>\n"

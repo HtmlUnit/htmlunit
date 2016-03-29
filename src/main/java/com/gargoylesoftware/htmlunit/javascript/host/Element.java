@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -581,13 +581,13 @@ public class Element extends EventNode {
      * @return the static node list
      */
     @JsxFunction
-    public StaticNodeList querySelectorAll(final String selectors) {
+    public NodeList querySelectorAll(final String selectors) {
         try {
-            final List<Node> nodes = new ArrayList<>();
+            final List<Object> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add((Node) domNode.getScriptableObject());
+                nodes.add(domNode.getScriptableObject());
             }
-            return new StaticNodeList(nodes, this);
+            return NodeList.staticNodeList(this, nodes);
         }
         catch (final CSSException e) {
             throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"

@@ -103,9 +103,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeIterator;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Range;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
@@ -1870,13 +1870,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the static node list
      */
     @JsxFunction
-    public StaticNodeList querySelectorAll(final String selectors) {
+    public NodeList querySelectorAll(final String selectors) {
         try {
-            final List<Node> nodes = new ArrayList<>();
+            final List<Object> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add((Node) domNode.getScriptableObject());
+                nodes.add(domNode.getScriptableObject());
             }
-            return new StaticNodeList(nodes, this);
+            return  NodeList.staticNodeList(this, nodes);
         }
         catch (final CSSException e) {
             throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
