@@ -54,11 +54,21 @@ public class DateTimeFormat extends SimpleScriptable {
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
         final String ddDash = "\u200Edd\u200E-\u200EMM\u200E-\u200EYYYY";
+        final String ddDot = "\u200Edd\u200E.\u200EMM\u200E.\u200EYYYY";
         final String ddDotDot = "\u200Edd\u200E.\u200EMM\u200E.\u200EYYYY.";
-        final String ddDotBlank = "\u200Edd\u200E. \u200EMM\u200E. \u200EYYYY.";
+        final String ddDotBlank = "\u200Edd\u200E. \u200EMM\u200E. \u200EYYYY";
+        final String ddDotBlankDot = "\u200Edd\u200E. \u200EMM\u200E. \u200EYYYY.";
         final String mmSlash = "\u200EMM\u200E/\u200Edd\u200E/\u200EYYYY";
+        final String yyyyMmDdSlash = "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd";
+        final String yyyyMmDdDash = "\u200EYYYY\u200E-\u200EMM\u200E-\u200Edd";
 
         FF_38_FORMATS_.put("", mmSlash);
+        FF_38_FORMATS_.put("ar", "dd\u200F/MM\u200F/YYYY");
+        FF_38_FORMATS_.put("be", ddDot);
+        FF_38_FORMATS_.put("ca", ddSlash);
+        FF_38_FORMATS_.put("cs", ddDotBlank);
+        FF_38_FORMATS_.put("da", ddSlash);
+        FF_38_FORMATS_.put("de", ddDot);
         FF_38_FORMATS_.put("en-NZ", ddSlash);
         FF_38_FORMATS_.put("en-PA", ddSlash);
         FF_38_FORMATS_.put("en-PR", ddSlash);
@@ -68,21 +78,19 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_38_FORMATS_.put("en-IN", ddSlash);
         FF_38_FORMATS_.put("en-MT", ddSlash);
         FF_38_FORMATS_.put("en-SG", ddSlash);
-        FF_38_FORMATS_.put("ar", "dd\u200F/MM\u200F/YYYY");
-        FF_38_FORMATS_.put("ar-EG", "dd\u200F/MM\u200F/YYYY");
-        FF_38_FORMATS_.put("en-ZA", "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd");
+        FF_38_FORMATS_.put("en-ZA", yyyyMmDdSlash);
 
         FF_45_FORMATS_.putAll(FF_38_FORMATS_);
         CHROME_FORMATS_.putAll(FF_38_FORMATS_);
         IE_FORMATS_.putAll(FF_38_FORMATS_);
 
-        FF_38_FORMATS_.put("sr-BA", ddDotBlank);
-        FF_38_FORMATS_.put("sr-CS", ddDotBlank);
-        FF_38_FORMATS_.put("sr-ME", ddDotBlank);
-        FF_38_FORMATS_.put("sr-RS", ddDotBlank);
+        FF_38_FORMATS_.put("sr-BA", ddDotBlankDot);
+        FF_38_FORMATS_.put("sr-CS", ddDotBlankDot);
+        FF_38_FORMATS_.put("sr-ME", ddDotBlankDot);
+        FF_38_FORMATS_.put("sr-RS", ddDotBlankDot);
 
         FF_45_FORMATS_.putAll(FF_38_FORMATS_);
-        FF_45_FORMATS_.put("en-CA", "YYYY-MM-dd");
+        FF_45_FORMATS_.put("en-CA", yyyyMmDdDash);
         FF_45_FORMATS_.put("en-PH", ddSlash);
         FF_45_FORMATS_.put("es-US", ddSlash);
         FF_45_FORMATS_.put("sr-BA", ddDotDot);
@@ -90,7 +98,8 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_45_FORMATS_.put("sr-ME", ddDotDot);
         FF_45_FORMATS_.put("sr-RS", ddDotDot);
 
-        CHROME_FORMATS_.put("en-CA", "YYYY-MM-dd");
+        CHROME_FORMATS_.put("be", yyyyMmDdDash);
+        CHROME_FORMATS_.put("en-CA", yyyyMmDdDash);
         CHROME_FORMATS_.put("en-IE", mmSlash);
         CHROME_FORMATS_.put("en-IN", mmSlash);
         CHROME_FORMATS_.put("en-MT", mmSlash);
@@ -103,10 +112,12 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("sr-ME", ddDotDot);
         CHROME_FORMATS_.put("sr-RS", ddDotDot);
 
+        IE_FORMATS_.put("ar-EG", "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY");
+        IE_FORMATS_.put("cs", ddDot);
+        IE_FORMATS_.put("da", ddDash);
         IE_FORMATS_.put("en-IN", ddDash);
         IE_FORMATS_.put("en-MT", mmSlash);
         IE_FORMATS_.put("en-CA", ddSlash);
-        IE_FORMATS_.put("ar-EG", "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY");
     }
 
     /**
@@ -130,6 +141,9 @@ public class DateTimeFormat extends SimpleScriptable {
             formats = FF_38_FORMATS_;
         }
         String pattern = formats.get(locale);
+        if (pattern == null && locale.indexOf('-') != -1) {
+            pattern = formats.get(locale.substring(0,  locale.indexOf('-')));
+        }
         if (pattern == null) {
             pattern = formats.get("");
         }
