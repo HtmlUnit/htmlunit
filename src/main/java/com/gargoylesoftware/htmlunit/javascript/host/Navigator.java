@@ -102,8 +102,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the language of the browser.
      * @return the language
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE),
-        @WebBrowser(EDGE) })
+    @JsxGetter
     public String getLanguage() {
         return getBrowserVersion().getBrowserLanguage();
     }
@@ -148,7 +147,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code product} property.
      * @return the {@code product} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxGetter
     public String getProduct() {
         return "Gecko";
     }
@@ -262,8 +261,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code geolocation} property.
      * @return the {@code geolocation} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE),
-        @WebBrowser(EDGE) })
+    @JsxGetter
     public Geolocation getGeolocation() {
         final Geolocation geolocation = new Geolocation();
         geolocation.setPrototype(getPrototype(geolocation.getClass()));
@@ -284,8 +282,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the vendor.
      * @return the vendor
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE),
-        @WebBrowser(EDGE)})
+    @JsxGetter
     public String getVendor() {
         return getBrowserVersion().getVendor();
     }

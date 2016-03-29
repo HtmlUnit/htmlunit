@@ -204,7 +204,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the {@code async} property.
      * @return the {@code async} property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)})
+    @JsxGetter
     public boolean getAsync() {
         return getDomNodeOrDie().hasAttribute("async");
     }
@@ -213,7 +213,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the {@code async} property.
      * @param async the {@code async} property
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)})
+    @JsxSetter
     public void setAsync(final boolean async) {
         if (async) {
             getDomNodeOrDie().setAttribute("async", "");

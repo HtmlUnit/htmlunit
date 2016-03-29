@@ -104,7 +104,7 @@ public class Node extends EventTarget {
     public static final short COMMENT_NODE = org.w3c.dom.Node.COMMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_NODE */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxConstant
     public static final short DOCUMENT_NODE = org.w3c.dom.Node.DOCUMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_TYPE_NODE */

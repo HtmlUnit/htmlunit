@@ -135,15 +135,15 @@ public class Event extends SimpleScriptable {
     public static final short NONE = 0;
 
     /** The first event phase: the capturing phase. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxConstant
     public static final short CAPTURING_PHASE = 1;
 
     /** The second event phase: at the event target. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxConstant
     public static final short AT_TARGET = 2;
 
     /** The third (and final) event phase: the bubbling phase. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxConstant
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
@@ -548,7 +548,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event bubbles
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxGetter
     public boolean getBubbles() {
         return bubbles_;
     }
@@ -563,7 +563,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event can be canceled
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxGetter
     public boolean getCancelable() {
         return cancelable_;
     }
@@ -604,7 +604,7 @@ public class Event extends SimpleScriptable {
     /**
      * Stops the event from propagating.
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxFunction
     public void stopPropagation() {
         stopPropagation_ = true;
     }
