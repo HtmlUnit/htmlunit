@@ -595,6 +595,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DATE_WITH_LEFT_TO_RIGHT_MARK,
 
+    /** {@link DateTimeFormat} uses the Ascii digits for {@code ar-DZ} locale. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    JS_DATE_AR_DZ_ASCII_DIGITS,
+
     /** */
     @BrowserFeature(@WebBrowser(IE))
     JS_DEFERRED,

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_AR_DZ_ASCII_DIGITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
 import java.text.DateFormat;
@@ -61,14 +62,17 @@ public class DateTimeFormat extends SimpleScriptable {
         final String mmSlash = "\u200EMM\u200E/\u200Edd\u200E/\u200EYYYY";
         final String yyyyMmDdSlash = "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd";
         final String yyyyMmDdDash = "\u200EYYYY\u200E-\u200EMM\u200E-\u200Edd";
+        final String rightToLeft = "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY";
 
         FF_38_FORMATS_.put("", mmSlash);
         FF_38_FORMATS_.put("ar", "dd\u200F/MM\u200F/YYYY");
         FF_38_FORMATS_.put("be", ddDot);
+        FF_38_FORMATS_.put("bg", ddDot + "\u200E \u0433.");
         FF_38_FORMATS_.put("ca", ddSlash);
         FF_38_FORMATS_.put("cs", ddDotBlank);
         FF_38_FORMATS_.put("da", ddSlash);
         FF_38_FORMATS_.put("de", ddDot);
+        FF_38_FORMATS_.put("el", ddSlash);
         FF_38_FORMATS_.put("en-NZ", ddSlash);
         FF_38_FORMATS_.put("en-PA", ddSlash);
         FF_38_FORMATS_.put("en-PR", ddSlash);
@@ -79,6 +83,15 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_38_FORMATS_.put("en-MT", ddSlash);
         FF_38_FORMATS_.put("en-SG", ddSlash);
         FF_38_FORMATS_.put("en-ZA", yyyyMmDdSlash);
+        FF_38_FORMATS_.put("es", ddSlash);
+        FF_38_FORMATS_.put("es-CL", ddDash);
+        FF_38_FORMATS_.put("es-PA", mmSlash);
+        FF_38_FORMATS_.put("es-PR", mmSlash);
+        FF_38_FORMATS_.put("es-US", mmSlash);
+        FF_38_FORMATS_.put("et", ddDot);
+        FF_38_FORMATS_.put("fi", ddDot);
+        FF_38_FORMATS_.put("fr", ddSlash);
+        FF_38_FORMATS_.put("fr-CA", yyyyMmDdDash);
 
         FF_45_FORMATS_.putAll(FF_38_FORMATS_);
         CHROME_FORMATS_.putAll(FF_38_FORMATS_);
@@ -104,6 +117,7 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("en-IN", mmSlash);
         CHROME_FORMATS_.put("en-MT", mmSlash);
         CHROME_FORMATS_.put("en-SG", mmSlash);
+        CHROME_FORMATS_.put("es-CL", ddSlash);
         CHROME_FORMATS_.put("es-PA", ddSlash);
         CHROME_FORMATS_.put("es-PR", ddSlash);
         CHROME_FORMATS_.put("es-US", ddSlash);
@@ -112,12 +126,29 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("sr-ME", ddDotDot);
         CHROME_FORMATS_.put("sr-RS", ddDotDot);
 
-        IE_FORMATS_.put("ar-EG", "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY");
+        IE_FORMATS_.put("ar-AE", rightToLeft);
+        IE_FORMATS_.put("ar-BH", rightToLeft);
+        IE_FORMATS_.put("ar-DZ", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
+        IE_FORMATS_.put("ar-LY", "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY");
+        IE_FORMATS_.put("ar-MA", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
+        IE_FORMATS_.put("ar-TN", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
+        IE_FORMATS_.put("ar-EG", rightToLeft);
+        IE_FORMATS_.put("ar-IQ", rightToLeft);
+        IE_FORMATS_.put("ar-JO", rightToLeft);
+        IE_FORMATS_.put("ar-KW", rightToLeft);
+        IE_FORMATS_.put("ar-LB", rightToLeft);
+        IE_FORMATS_.put("ar-OM", rightToLeft);
+        IE_FORMATS_.put("ar-QA", rightToLeft);
+        IE_FORMATS_.put("ar-SY", rightToLeft);
+        IE_FORMATS_.put("ar-YE", rightToLeft);
         IE_FORMATS_.put("cs", ddDot);
         IE_FORMATS_.put("da", ddDash);
         IE_FORMATS_.put("en-IN", ddDash);
         IE_FORMATS_.put("en-MT", mmSlash);
         IE_FORMATS_.put("en-CA", ddSlash);
+        IE_FORMATS_.put("es-PR", ddSlash);
+        IE_FORMATS_.put("es-US", mmSlash);
+        IE_FORMATS_.put("fr-CH", ddDot);
     }
 
     /**
@@ -152,7 +183,10 @@ public class DateTimeFormat extends SimpleScriptable {
         }
 
         format_ = new SimpleDateFormat(pattern);
-        if (locale.startsWith("ar")) {
+        if (locale.startsWith("ar")
+                && (!browserVersion.hasFeature(JS_DATE_AR_DZ_ASCII_DIGITS)
+                        || (!locale.equals("ar-DZ") && !locale.equals("ar-LY") && !locale.equals("ar-MA")
+                                && !locale.equals("ar-TN") ))) {
             setZeroDigit('\u0660');
         }
     }
