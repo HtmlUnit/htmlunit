@@ -591,13 +591,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_CSS_MOZ_CSS_KEYFRAMES_RULE,
 
-    /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    JS_DATE_LOCALE_DATE_SHORT,
-
     /** {@link DateTimeFormat} uses the Ascii digits for {@code ar-DZ} locale. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     JS_DATE_AR_DZ_ASCII_DIGITS,
+
+    /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DATE_LOCALE_DATE_SHORT,
 
     /** {@link DateTimeFormat} uses the Unicode Character {@code 'LEFT-TO-RIGHT MARK'}. */
     @BrowserFeature(@WebBrowser(IE))
