@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -42,7 +41,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -125,21 +123,6 @@ public class AbstractList extends SimpleScriptable implements Function {
     protected AbstractList(final DomNode parentScope, final List<?> initialElements) {
         this(parentScope.getScriptableObject());
         cachedElements_ = new ArrayList<>(initialElements);
-    }
-
-    /**
-     * Gets an empty collection.
-     * @param window the current scope
-     * @return an empty collection
-     */
-    public static AbstractList emptyCollection(final Window window) {
-        final List<Object> list = Collections.emptyList();
-        return new AbstractList(window) {
-            @Override
-            public List<Object> getElements() {
-                return list;
-            }
-        };
     }
 
     /**
