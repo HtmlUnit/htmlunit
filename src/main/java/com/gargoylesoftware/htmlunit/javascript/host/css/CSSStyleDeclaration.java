@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -5160,7 +5161,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setWordSpacing(final String wordSpacing) {
-        if (!wordSpacing.endsWith("%")) {
+        if (!wordSpacing.endsWith("%") || getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT)) {
             setStyleAttributePixel(WORD_SPACING, wordSpacing);
         }
     }

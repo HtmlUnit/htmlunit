@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: wordSpacing property support percent values for FF45.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: HTMLLabelElement.control property added (FF and Chrome).
             </action>

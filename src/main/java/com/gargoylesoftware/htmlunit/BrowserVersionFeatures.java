@@ -1212,6 +1212,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
 
+    /** Indicates wordSpacing support percent values. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT,
+
     /** Indicates that trying to access the style property with a wrong index returns undefined
      * instead of "". */
     @BrowserFeature(@WebBrowser(FF))
