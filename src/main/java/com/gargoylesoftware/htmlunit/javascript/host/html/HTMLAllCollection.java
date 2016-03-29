@@ -215,4 +215,12 @@ public class HTMLAllCollection extends HTMLCollection {
 
         return super.call(cx, scope, thisObj, args);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsParanteses() {
+        return true;
+    }
 }

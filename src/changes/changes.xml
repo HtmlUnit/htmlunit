@@ -9,7 +9,7 @@
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
             <action type="fix" dev="rbri">
-                JavaScript: HTMLAllCollection function access implementation improved (CHROME).
+                JavaScript: HTMLCollection and HTMLAllCollection function like access implementation improved (CHROME).
             </action>
             <action type="fix" dev="rbri">
                 JavaScript: wordSpacing property support percent values for FF45.

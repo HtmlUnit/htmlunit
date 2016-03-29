@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NAMED_ITEM_ID_FIRST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_SUPPORTS_PARANTHESES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -122,6 +124,26 @@ public class HTMLCollection extends AbstractList {
     @Override
     protected AbstractList create(final DomNode parentScope, final List<?> initialElements) {
         return new HTMLCollection(parentScope, initialElements);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        if (supportsParanteses()) {
+            return super.call(cx, scope, thisObj, args);
+        }
+
+        throw Context.reportRuntimeError("TypeError - HTMLCollection does nont support function like access");
+    }
+
+    /**
+     * To be overwritten.
+     * @return true or false
+     */
+    protected boolean supportsParanteses() {
+        return getBrowserVersion().hasFeature(HTMLCOLLECTION_SUPPORTS_PARANTHESES);
     }
 
     /**
@@ -283,7 +305,6 @@ public class HTMLCollection extends AbstractList {
         };
         return collection;
     }
-
 }
 
 class HTMLSubCollection extends HTMLCollection {

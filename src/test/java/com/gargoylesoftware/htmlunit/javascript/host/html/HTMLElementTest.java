@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
@@ -1755,7 +1754,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "2", "exception" },
             IE = { "2", "BR" })
-    @NotYetImplemented({ FF, CHROME })
     public void childrenFunctionAccess() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'><br/><div>\n"

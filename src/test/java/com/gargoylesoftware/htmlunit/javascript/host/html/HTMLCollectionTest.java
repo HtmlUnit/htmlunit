@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -191,7 +189,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ FF, CHROME })
     @Alerts(DEFAULT = { "null", "null", "undefined", "exception" },
             IE = { "null", "null", "undefined", "undefined" })
     public void outOfBoundAccess() throws Exception {
@@ -578,6 +575,130 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var col = document.getElementsByTagName('button');\n"
             + "      report(col[" + name + "]);\n"
+            + "    } catch(e) { alert('exception'); }"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <button id='b1' name='button1'></button>\n"
+            + "  <button id='b2' name='button2'></button>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "undefined")
+    public void functionIndex_Unknown() throws Exception {
+        functionIndex("'foo'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b2-button2")
+    public void functionIndex_ById() throws Exception {
+        functionIndex("'b2'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b2-button2")
+    public void functionIndex_ByName() throws Exception {
+        functionIndex("'button2'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "undefined")
+    public void functionIndex_NegativIndex() throws Exception {
+        functionIndex("-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b1-button1")
+    public void functionIndex_ZeroIndex() throws Exception {
+        functionIndex("0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b2-button2")
+    public void functionIndex_ValidIndex() throws Exception {
+        functionIndex("1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b2-button2")
+    public void functionIndex_DoubleIndex() throws Exception {
+        functionIndex("1.1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "undefined")
+    public void functionIndex_InvalidIndex() throws Exception {
+        functionIndex("2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "undefined")
+    public void functionIndex_IndexAsString() throws Exception {
+        functionIndex("'2'");
+    }
+
+    private void functionIndex(final String name) throws Exception {
+        final String html
+            = "<!doctype html>\n"
+            + "<html><head><title>First</title><script>\n"
+            + "  function report(result) {\n"
+            + "    if (result == null || result == undefined) {\n"
+            + "      alert(result);\n"
+            + "    } else if (('length' in result) && ('item' in result)) {\n"
+            + "      alert('coll ' + result.length);\n"
+            + "      for(var i = 0; i < result.length; i++) {\n"
+            + "        alert(result.item(i).id + '-' + result.item(i).name);\n"
+            + "      }\n"
+            + "    } else if (result.id || result.name) {\n"
+            + "      alert(result.id + '-' + result.name);\n"
+            + "    } else {\n"
+            + "      alert(result);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  function doTest() {\n"
+            + "    try {\n"
+            + "      var col = document.getElementsByTagName('button');\n"
+            + "      report(col(" + name + "));\n"
             + "    } catch(e) { alert('exception'); }"
             + "  }\n"
             + "</script></head>\n"
