@@ -309,10 +309,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLBASE_HREF_DEFAULT_EMPTY,
 
-    /** HtmlAllCollection(int) is not supported. */
-    @BrowserFeature(@WebBrowser(IE))
-    HTMLCOLLECTION_SUPPORTS_PARANTHESES,
-
     /** HtmlCollection.item() supports also doubles as index. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
