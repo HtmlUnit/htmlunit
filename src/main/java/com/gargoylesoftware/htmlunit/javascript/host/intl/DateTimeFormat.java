@@ -56,12 +56,14 @@ public class DateTimeFormat extends SimpleScriptable {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
         final String ddDash = "\u200Edd\u200E-\u200EMM\u200E-\u200EYYYY";
         final String ddDot = "\u200Edd\u200E.\u200EMM\u200E.\u200EYYYY";
-        final String ddDotDot = "\u200Edd\u200E.\u200EMM\u200E.\u200EYYYY.";
+        final String ddDotDot = "\u200Edd\u200E.\u200EMM\u200E.\u200EYYYY\u200E.";
         final String ddDotBlank = "\u200Edd\u200E. \u200EMM\u200E. \u200EYYYY";
         final String ddDotBlankDot = "\u200Edd\u200E. \u200EMM\u200E. \u200EYYYY.";
         final String mmSlash = "\u200EMM\u200E/\u200Edd\u200E/\u200EYYYY";
         final String yyyyMmDdSlash = "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd";
         final String yyyyMmDdDash = "\u200EYYYY\u200E-\u200EMM\u200E-\u200Edd";
+        final String yyyyDotBlankDot = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd.";
+        final String yyyyDotDot = "\u200EYYYY\u200E.\u200EMM\u200E.\u200Edd\u200E.";
         final String rightToLeft = "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY";
 
         FF_38_FORMATS_.put("", mmSlash);
@@ -92,6 +94,11 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_38_FORMATS_.put("fi", ddDot);
         FF_38_FORMATS_.put("fr", ddSlash);
         FF_38_FORMATS_.put("fr-CA", yyyyMmDdDash);
+        FF_38_FORMATS_.put("ga", yyyyMmDdDash);
+        FF_38_FORMATS_.put("hi", ddSlash);
+        FF_38_FORMATS_.put("in", ddSlash);
+        FF_38_FORMATS_.put("hr", ddDotBlankDot);
+        FF_38_FORMATS_.put("hu", yyyyDotBlankDot);
 
         FF_45_FORMATS_.putAll(FF_38_FORMATS_);
         CHROME_FORMATS_.putAll(FF_38_FORMATS_);
@@ -106,6 +113,7 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_45_FORMATS_.put("en-CA", yyyyMmDdDash);
         FF_45_FORMATS_.put("en-PH", ddSlash);
         FF_45_FORMATS_.put("es-US", ddSlash);
+        FF_45_FORMATS_.put("ga", ddSlash);
         FF_45_FORMATS_.put("sr-BA", ddDotDot);
         FF_45_FORMATS_.put("sr-CS", ddDotDot);
         FF_45_FORMATS_.put("sr-ME", ddDotDot);
@@ -121,6 +129,7 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("es-PA", ddSlash);
         CHROME_FORMATS_.put("es-PR", ddSlash);
         CHROME_FORMATS_.put("es-US", ddSlash);
+        CHROME_FORMATS_.put("hr", ddDotDot);
         CHROME_FORMATS_.put("sr-BA", ddDotDot);
         CHROME_FORMATS_.put("sr-CS", ddDotDot);
         CHROME_FORMATS_.put("sr-ME", ddDotDot);
@@ -149,6 +158,10 @@ public class DateTimeFormat extends SimpleScriptable {
         IE_FORMATS_.put("es-PR", ddSlash);
         IE_FORMATS_.put("es-US", mmSlash);
         IE_FORMATS_.put("fr-CH", ddDot);
+        IE_FORMATS_.put("ga", ddSlash);
+        IE_FORMATS_.put("hi", ddDash);
+        IE_FORMATS_.put("hr", ddDotDot);
+        IE_FORMATS_.put("hu", yyyyDotDot);
     }
 
     /**
