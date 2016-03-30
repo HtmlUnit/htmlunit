@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
+
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -136,10 +140,15 @@ public class XmlPage extends SgmlPage {
             }
         }
 
-        Node node = node_;
-        while (node != null) {
-            XmlUtil.appendChild(this, this, node, handleXHTMLAsHTML);
-            node = node.getNextSibling();
+        final Map<Integer, List<String>> attributesOrderMap;
+        if (node_ != null && getWebClient().getBrowserVersion().hasFeature(JS_XML)) {
+            attributesOrderMap = XmlUtil.getAttributesOrderMap(node_.getOwnerDocument());
+        }
+        else {
+            attributesOrderMap = null;
+        }
+        for (Node node = node_; node != null; node = node.getNextSibling()) {
+            XmlUtil.appendChild(this, this, node, handleXHTMLAsHTML, attributesOrderMap);
         }
     }
 

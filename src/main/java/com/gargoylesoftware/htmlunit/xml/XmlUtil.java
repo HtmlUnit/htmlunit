@@ -18,7 +18,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -28,6 +32,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.xerces.dom.DeferredDocumentImpl;
+import org.apache.xerces.dom.DeferredNode;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
@@ -204,18 +210,34 @@ public final class XmlUtil {
      */
     public static void appendChild(final SgmlPage page, final DomNode parent, final Node child,
         final boolean handleXHTMLAsHTML) {
+        appendChild(page, parent, child, handleXHTMLAsHTML, null);
+    }
+
+    /**
+     * Recursively appends a {@link Node} child to {@link DomNode} parent.
+     *
+     * @param page the owner page of {@link DomElement}s to be created
+     * @param parent the parent DomNode
+     * @param child the child Node
+     * @param handleXHTMLAsHTML if true elements from the XHTML namespace are handled as HTML elements instead of
+     *     DOM elements
+     * @param attributesOrderMap (optional) the one returned by {@link #getAttributesOrderMap(Document)}
+     */
+    public static void appendChild(final SgmlPage page, final DomNode parent, final Node child,
+        final boolean handleXHTMLAsHTML, final Map<Integer, List<String>> attributesOrderMap) {
         final DocumentType documentType = child.getOwnerDocument().getDoctype();
         if (documentType != null && page instanceof XmlPage) {
             final DomDocumentType domDoctype = new DomDocumentType(
                     page, documentType.getName(), documentType.getPublicId(), documentType.getSystemId());
             ((XmlPage) page).setDocumentType(domDoctype);
         }
-        final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML);
+        final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML, attributesOrderMap);
         parent.appendChild(childXml);
-        copy(page, child, childXml, handleXHTMLAsHTML);
+        copy(page, child, childXml, handleXHTMLAsHTML, attributesOrderMap);
     }
 
-    private static DomNode createFrom(final SgmlPage page, final Node source, final boolean handleXHTMLAsHTML) {
+    private static DomNode createFrom(final SgmlPage page, final Node source, final boolean handleXHTMLAsHTML,
+            final Map<Integer, List<String>> attributesOrderMap) {
         if (source.getNodeType() == Node.TEXT_NODE) {
             return new DomText(page, source.getNodeValue());
         }
@@ -234,7 +256,8 @@ public final class XmlUtil {
         String localName = source.getLocalName();
         if (handleXHTMLAsHTML && HTMLParser.XHTML_NAMESPACE.equals(ns)) {
             final ElementFactory factory = HTMLParser.getFactory(localName);
-            return factory.createElementNS(page, ns, localName, namedNodeMapToSaxAttributes(source.getAttributes()));
+            return factory.createElementNS(page, ns, localName,
+                    namedNodeMapToSaxAttributes(source.getAttributes(), attributesOrderMap, source));
         }
         final NamedNodeMap nodeAttributes = source.getAttributes();
         if (page != null && page.isHtmlPage()) {
@@ -251,12 +274,13 @@ public final class XmlUtil {
         final String namespaceURI = source.getNamespaceURI();
         if (HTMLParser.SVG_NAMESPACE.equals(namespaceURI)) {
             return HTMLParser.SVG_FACTORY.createElementNS(page, namespaceURI, qualifiedName,
-                    namedNodeMapToSaxAttributes(nodeAttributes));
+                    namedNodeMapToSaxAttributes(nodeAttributes, attributesOrderMap, source));
         }
 
         final Map<String, DomAttr> attributes = new LinkedHashMap<>();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
-            final Attr attribute = (Attr) nodeAttributes.item(i);
+            final int orderedIndex = getIndex(nodeAttributes, attributesOrderMap, source, i);
+            final Attr attribute = (Attr) nodeAttributes.item(orderedIndex);
             final String attributeNamespaceURI = attribute.getNamespaceURI();
             final String attributeQualifiedName;
             if (attribute.getPrefix() != null) {
@@ -274,16 +298,33 @@ public final class XmlUtil {
         return new DomElement(namespaceURI, qualifiedName, page, attributes);
     }
 
-    private static Attributes namedNodeMapToSaxAttributes(final NamedNodeMap attributesMap) {
+    private static Attributes namedNodeMapToSaxAttributes(final NamedNodeMap attributesMap,
+            final Map<Integer, List<String>> attributesOrderMap, final Node element) {
         final AttributesImpl attributes = new AttributesImpl();
         final int length = attributesMap.getLength();
         for (int i = 0; i < length; i++) {
-            final Node attr = attributesMap.item(i);
+            final int orderedIndex = getIndex(attributesMap, attributesOrderMap, element, i);
+            final Node attr = attributesMap.item(orderedIndex);
             attributes.addAttribute(attr.getNamespaceURI(), attr.getLocalName(),
                 attr.getNodeName(), null, attr.getNodeValue());
         }
 
         return attributes;
+    }
+
+    private static int getIndex(final NamedNodeMap namedNodeMap, final Map<Integer, List<String>> attributesOrderMap,
+            final Node element, final int requiredIndex) {
+        if (attributesOrderMap != null && element instanceof DeferredNode) {
+            final int elementIndex = ((DeferredNode) element).getNodeIndex();
+            final List<String> attributesOrderList = attributesOrderMap.get(elementIndex);
+            final String attributeName = attributesOrderList.get(requiredIndex);
+            for (int i = 0; i < namedNodeMap.getLength(); i++) {
+                if (namedNodeMap.item(i).getNodeName().equals(attributeName)) {
+                    return i;
+                }
+            }
+        }
+        return requiredIndex;
     }
 
     /**
@@ -295,15 +336,15 @@ public final class XmlUtil {
      *     DOM elements
      */
     private static void copy(final SgmlPage page, final Node source, final DomNode dest,
-        final boolean handleXHTMLAsHTML) {
+        final boolean handleXHTMLAsHTML, final Map<Integer, List<String>> attributesOrderMap) {
         final NodeList nodeChildren = source.getChildNodes();
         for (int i = 0; i < nodeChildren.getLength(); i++) {
             final Node child = nodeChildren.item(i);
             switch (child.getNodeType()) {
                 case Node.ELEMENT_NODE:
-                    final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML);
+                    final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML, attributesOrderMap);
                     dest.appendChild(childXml);
-                    copy(page, child, childXml, handleXHTMLAsHTML);
+                    copy(page, child, childXml, handleXHTMLAsHTML, attributesOrderMap);
                     break;
 
                 case Node.TEXT_NODE:
@@ -377,5 +418,45 @@ public final class XmlUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns internal Xerces details about all elements in the specified document.
+     * The id of the returned {@link Map} is the {@code nodeIndex} of an element, and the list
+     * is the array of ordered attributes names.
+     * @param document the document
+     * @return the map of an element index with its ordered attribute names
+     */
+    public static Map<Integer, List<String>> getAttributesOrderMap(final Document document) {
+        final Map<Integer, List<String>> map = new HashMap<>();
+        if (document instanceof DeferredDocumentImpl) {
+            final DeferredDocumentImpl deferredDocument = (DeferredDocumentImpl) document;
+            final int fNodeCount = getPrivate(deferredDocument, "fNodeCount");
+            for (int i = 0; i < fNodeCount; i++) {
+                final int type = deferredDocument.getNodeType(i, false);
+                if (type == org.w3c.dom.Node.ELEMENT_NODE) {
+                    int attrIndex = deferredDocument.getNodeExtra(i, false);
+                    final List<String> attributes = new ArrayList<>();
+                    map.put(i, attributes);
+                    while (attrIndex != -1) {
+                        attributes.add(deferredDocument.getNodeName(attrIndex, false));
+                        attrIndex = deferredDocument.getPrevSibling(attrIndex, false);
+                    }
+                }
+            }
+        }
+        return map;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T getPrivate(final Object object, final String fieldName) {
+        try {
+            final Field f = object.getClass().getDeclaredField(fieldName);
+            f.setAccessible(true);
+            return (T) f.get(object);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
