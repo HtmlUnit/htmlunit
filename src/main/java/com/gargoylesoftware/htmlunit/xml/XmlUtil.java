@@ -317,10 +317,12 @@ public final class XmlUtil {
         if (attributesOrderMap != null && element instanceof DeferredNode) {
             final int elementIndex = ((DeferredNode) element).getNodeIndex();
             final List<String> attributesOrderList = attributesOrderMap.get(elementIndex);
-            final String attributeName = attributesOrderList.get(requiredIndex);
-            for (int i = 0; i < namedNodeMap.getLength(); i++) {
-                if (namedNodeMap.item(i).getNodeName().equals(attributeName)) {
-                    return i;
+            if (attributesOrderList != null) {
+                final String attributeName = attributesOrderList.get(requiredIndex);
+                for (int i = 0; i < namedNodeMap.getLength(); i++) {
+                    if (namedNodeMap.item(i).getNodeName().equals(attributeName)) {
+                        return i;
+                    }
                 }
             }
         }

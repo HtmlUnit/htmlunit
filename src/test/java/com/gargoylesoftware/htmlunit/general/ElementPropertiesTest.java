@@ -112,7 +112,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "'updateSettings', 'urns', 'write', 'writeln'];\n"
 
                 + "  function test(event) {\n"
-                + "    var xmlDocument = createXmlDocument();\n"
+                + "    var xmlDocument = document.implementation.createDocument('', '', null);\n"
                 + "    var element = xmlDocument.createElement('wakwak');\n"
                 + "    var unknown = document.createElement('harhar');\n"
                 + "    var div = document.createElement('div');\n"
@@ -164,12 +164,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "  }\n"
                 + "  function sortFunction(s1, s2) {\n"
                 + "    return s1.toLowerCase() > s2.toLowerCase() ? 1 : -1;\n"
-                + "  }\n"
-                + "  function createXmlDocument() {\n"
-                + "    if (document.implementation && document.implementation.createDocument)\n"
-                + "      return document.implementation.createDocument('', '', null);\n"
-                + "    else if (window.ActiveXObject)\n"
-                + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
                 + "  }\n"
                 + "</script></head><body onload='test(event)'>\n"
                 + "</body></html>";
@@ -578,7 +572,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "cancelIdleCallback(),captureEvents(),chrome,clearInterval(),clearTimeout(),clientInformation,"
                 + "close(),closed,confirm(),"
-                + "console,createXmlDocument(),crypto,defaultStatus,defaultstatus,devicePixelRatio,"
+                + "console,crypto,defaultStatus,defaultstatus,devicePixelRatio,"
                 + "dispatchEvent(),document,external,fetch(),find(),focus(),frameElement,frames,getComputedStyle(),"
                 + "getMatchedCSSRules(),getSelection(),history,ieMethods,"
                 + "indexedDB,innerHeight,innerWidth,isSecureContext,"
@@ -609,7 +603,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "window",
             FF38 = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),console,content,"
-                + "createXmlDocument(),crypto,devicePixelRatio,dispatchEvent(),document,dump(),external,find(),"
+                + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),external,find(),"
                 + "focus(),frameElement,frames,fullScreen,getComputedStyle(),getDefaultComputedStyle(),"
                 + "getSelection(),history,ieMethods,indexedDB,innerHeight,innerWidth,"
                 + "InstallTrigger,length,localStorage,location,locationbar,matchMedia(),menubar,moveBy(),moveTo(),"
@@ -637,7 +631,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "window",
             FF45 = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),console,content,"
-                + "createImageBitmap(),createXmlDocument(),crypto,devicePixelRatio,dispatchEvent(),document,dump(),"
+                + "createImageBitmap(),crypto,devicePixelRatio,dispatchEvent(),document,dump(),"
                 + "external,fetch(),find(),"
                 + "focus(),frameElement,frames,fullScreen,getComputedStyle(),getDefaultComputedStyle(),"
                 + "getSelection(),history,ieMethods,indexedDB,innerHeight,innerWidth,"
@@ -666,7 +660,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "window",
             IE = "addEventListener(),alert(),animationStartTime,applicationCache,atob(),blur(),btoa(),"
                 + "cancelAnimationFrame(),captureEvents(),clearImmediate(),clearInterval(),clearTimeout(),"
-                + "clientInformation,clipboardData,close(),closed,confirm(),console,createXmlDocument(),"
+                + "clientInformation,clipboardData,close(),closed,confirm(),console,"
                 + "defaultStatus,devicePixelRatio,dispatchEvent(),document,doNotTrack,event,external,focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,ieMethods,indexedDB,innerHeight,"
                 + "innerWidth,item(),length,localStorage,location,matchMedia(),maxConnectionsPerServer,moveBy(),"
@@ -693,7 +687,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "window",
             EDGE = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),chrome,clearImmediate(),clearInterval(),clearTimeout(),clientInformation,close(),"
-                + "closed,confirm(),console,createXmlDocument(),crypto,defaultStatus,devicePixelRatio,"
+                + "closed,confirm(),console,crypto,defaultStatus,devicePixelRatio,"
                 + "dispatchEvent(),document,doNotTrack,event,external,focus(),frameElement,frames,"
                 + "getComputedStyle(),getMatchedCSSRules(),getSelection(),history,ieMethods,indexedDB,innerHeight,"
                 + "innerWidth,length,localStorage,location,locationbar,matchMedia(),menubar,moveBy(),moveTo(),"

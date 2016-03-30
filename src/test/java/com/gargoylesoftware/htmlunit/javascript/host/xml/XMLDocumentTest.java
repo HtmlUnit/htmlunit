@@ -43,38 +43,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class XMLDocumentTest extends WebDriverTestCase {
 
-    private static final String CREATE_XML_DOCUMENT_FUNCTION_NAME = "createXMLDocument";
-
-    /** Helper. */
-    public static final String CREATE_XML_DOCUMENT_FUNCTION = ""
-            + "  function " + CREATE_XML_DOCUMENT_FUNCTION_NAME + "() {\n"
-            + "    if (document.implementation && document.implementation.createDocument) {\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    } else if (window.ActiveXObject) {\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    }\n"
-            + "  }\n";
-
-    /** Helper. */
-    public static final String CREATE_NATIVE_XML_DOCUMENT_FUNCTION = ""
-            + "  function " + CREATE_XML_DOCUMENT_FUNCTION_NAME + "() {\n"
-            + "    return document.implementation.createDocument('', '', null);\n"
-            + "  }\n";
-
-    /** Helper. */
-    public static final String CREATE_ACTIVEX_XML_DOCUMENT_FUNCTION = ""
-            + "  function " + CREATE_XML_DOCUMENT_FUNCTION_NAME + "() {\n"
-            + "    return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n";
-
-    /**
-     * Helper.
-     * @return xml helper
-     */
-    public static String callCreateXMLDocument() {
-        return CREATE_XML_DOCUMENT_FUNCTION_NAME + "()";
-    }
-
     private static final String LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME = "loadXMLDocumentFromFile";
 
     /** Helper. */
@@ -199,11 +167,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
     public void async() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    alert(document.async);\n"
             + "    alert(doc.async);\n"
             + "  }\n"
-            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -219,7 +186,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     public void load() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    doc.async = false;\n"
             + "    try {\n"
             + "      alert(doc.load('" + URL_SECOND + "'));\n"
@@ -230,7 +197,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "      alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
-            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -257,7 +223,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     public void load_relativeURL() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    doc.async = false;\n"
             + "    try {\n"
             + "      alert(doc.load('" + URL_SECOND + "'));\n"
@@ -268,7 +234,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "      alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
-            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -293,11 +258,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var doc = " + callCreateXMLDocument() + ";\n"
+            + "      var doc = document.implementation.createDocument('', '', null);\n"
             + "      alert(doc.preserveWhiteSpace);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
-            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -311,13 +275,12 @@ public class XMLDocumentTest extends WebDriverTestCase {
     public void setProperty() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    try {\n"
             + "      doc.setProperty('SelectionNamespaces', \"xmlns:xsl='http://www.w3.org/1999/XSL/Transform'\");\n"
             + "      doc.setProperty('SelectionLanguage', 'XPath');\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
-            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -1099,12 +1062,11 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var doc = " + callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var node = doc.createAttribute('myAttr');\n"
             + "    alert(node.name);\n"
             + "    alert(node.value);\n"
             + "  }\n"
-            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "  <div id='tester'></div>\n"
             + "</body></html>";

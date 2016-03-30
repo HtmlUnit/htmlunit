@@ -42,7 +42,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void createProcessingInstruction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var d = doc.createElement('doc');\n"
             + "    d.setAttribute('fluffy', 'true');\n"
             + "    d.setAttribute('numAttributes', '2');\n"
@@ -53,7 +53,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    alert(pi.target + ',' + pi.data);\n"
             + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("pi") + ");\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -69,7 +68,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void createCDATASection() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var d = doc.createElement('doc');\n"
             + "    doc.appendChild(d);\n"
             + "    var cdata = doc.createCDATASection('abcdefghij');\n"
@@ -78,7 +77,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    alert(cdata.data);\n"
             + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -94,7 +92,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void createCDATASection_specialChars() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var d = doc.createElement('doc');\n"
             + "    doc.appendChild(d);\n"
             + "    var cdata = doc.createCDATASection('<>&?');\n"
@@ -103,7 +101,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    alert(cdata.data);\n"
             + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -140,7 +137,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void createNode_element() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(1, 'test:element', 'uri:test');\n"
             + "      alert(node.localName);\n"
@@ -149,7 +146,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "      alert(node.nodeName);\n"
             + "    } else { alert('createNode not available'); }\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -163,7 +159,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void documentElementCaching() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var a = doc.createElement('a');\n"
             + "    var b = doc.createElement('b');\n"
             + "    doc.appendChild(a);\n"
@@ -173,7 +169,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    doc.appendChild(b);\n"
             + "    alert(doc.documentElement.tagName);\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -187,11 +182,10 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void createElement_namespace() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var a = doc.createElement('a:b');\n"
             + "    alert(a.tagName);\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

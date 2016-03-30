@@ -14,10 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION;
-import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callCreateXMLDocument;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callSerializeXMLDocumentToString;
 
@@ -673,13 +671,12 @@ public class NodeTest extends WebDriverTestCase {
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var root = doc.appendChild(doc.createElement('root'));\n"
             + "    var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n"
             + "    cdata.splitText(3);\n"
             + "    alert(" + callSerializeXMLDocumentToString("doc") + ");\n"
             + "  }\n"
-            + CREATE_XML_DOCUMENT_FUNCTION
             + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -928,7 +925,7 @@ public class NodeTest extends WebDriverTestCase {
     public void normalize() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var root = doc.appendChild(doc.createElement('root'));\n"
             + "    var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n"
             + "    cdata.splitText(3);\n"
@@ -952,12 +949,6 @@ public class NodeTest extends WebDriverTestCase {
             + "    body.normalize();\n"
             + "    alert(body.childNodes.length);\n"
             + "    alert(body.childNodes.item(0) == text);\n"
-            + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
             + "  }\n"
             + "</script></head><body onload='test()'></body></html>";
         loadPageWithAlerts2(html);

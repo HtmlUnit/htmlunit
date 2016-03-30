@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
  * Tests for {@link DomDocumentFragment}.
@@ -39,7 +38,7 @@ public class DomDocumentFragmentTest extends WebDriverTestCase {
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    testFragment(doc);\n"
             + "    testFragment(document);\n"
             + "  }\n"
@@ -49,7 +48,6 @@ public class DomDocumentFragmentTest extends WebDriverTestCase {
             + "    fragment.appendChild(div);\n"
             + "    alert(fragment.xml);\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

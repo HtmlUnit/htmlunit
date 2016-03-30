@@ -234,7 +234,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    if (window.XMLSerializer) {\n"
             + "      testFragment(doc);\n"
             + "      testFragment(document);\n"
@@ -248,7 +248,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + "    fragment.appendChild(img);\n"
             + "    alert(new XMLSerializer().serializeToString(fragment));\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -263,7 +262,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     public void namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var root = doc.createElement('root');\n"
             + "    doc.appendChild(root);\n"
             + "    var parent = createNS(doc, 'my:parent', 'myUri');\n"
@@ -276,7 +275,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + "    return typeof doc.createNode == 'function' || typeof doc.createNode == 'unknown' ? "
             + "doc.createNode(1, name, uri) : doc.createElementNS(uri, name);\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
