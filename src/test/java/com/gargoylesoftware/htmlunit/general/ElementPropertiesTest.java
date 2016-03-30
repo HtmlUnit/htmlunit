@@ -2781,8 +2781,22 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "which")
     @NotYetImplemented
     public void keyboardEvent() throws Exception {
-        testString("document.createEvent ? document.createEvent('KeyboardEvent') : '',"
-                + " document.createEvent ? document.createEvent('UIEvent') : ''");
+        testString("document.createEvent('KeyboardEvent'), document.createEvent('UIEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "detail,initUIEvent(),sourceCapabilities,view,which",
+            FF45 = "cancelBubble,detail,initUIEvent(),isChar,layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
+            IE = "detail,initUIEvent(),view")
+    @NotYetImplemented
+    public void uiEvent() throws Exception {
+        testString("document.createEvent('UIEvent'), document.createEvent('Event')");
     }
 
 }
