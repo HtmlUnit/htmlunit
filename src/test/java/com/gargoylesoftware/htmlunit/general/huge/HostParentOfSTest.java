@@ -22,7 +22,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.google.common.base.Predicate;
 
 /**
@@ -688,16 +687,6 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts("true")
     public void _Selection_Selection() throws Exception {
         test("Selection", "Selection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    @NotYetImplemented
-    public void _StaticNodeList_StaticNodeList() throws Exception {
-        test("StaticNodeList", "StaticNodeList");
     }
 
     /**
