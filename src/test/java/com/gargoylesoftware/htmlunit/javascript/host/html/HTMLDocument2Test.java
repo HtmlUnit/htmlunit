@@ -78,9 +78,8 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(getWebClient(), html, collectedAlerts, new URL("http://localhost"));
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts(html, new URL("http://localhost"), -1);
     }
 
   /**
@@ -101,7 +100,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(new URL("http://www.gargoylesoftware.com/"), html);
+        getMockWebConnection().setDefaultResponse(html);
         loadPageWithAlerts(html, urlGargoyleUpperCase, -1);
     }
 
@@ -142,9 +141,8 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(getWebClient(), html, collectedAlerts, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"));
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts(html, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"), -1);
     }
 
     /**
@@ -163,9 +161,8 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(getWebClient(), html, collectedAlerts, new URL("http://localhost"));
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts(html, new URL("http://localhost"), -1);
     }
 
     /**
