@@ -68,6 +68,7 @@ public class CloseEvent extends Event {
      * @param type the event type
      * @param details the event details (optional)
      */
+    @Override
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
