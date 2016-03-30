@@ -195,11 +195,15 @@ public class HTMLAllCollection extends HTMLCollection {
             }
         }
 
+        boolean nullIfNotFound = false;
         if (browser.hasFeature(BrowserVersionFeatures.HTMLALLCOLLECTION_INTEGER_INDEX)) {
             if (args[0] instanceof Number) {
                 final double val = ((Number) args[0]).doubleValue();
                 if (val != (int) val) {
                     return Undefined.instance;
+                }
+                if (val >= 0) {
+                    nullIfNotFound = true;
                 }
             }
             else {
@@ -213,7 +217,11 @@ public class HTMLAllCollection extends HTMLCollection {
             }
         }
 
-        return super.call(cx, scope, thisObj, args);
+        final Object value = super.call(cx, scope, thisObj, args);
+        if (nullIfNotFound && value == Undefined.instance) {
+            return null;
+        }
+        return value;
     }
 
     /**
