@@ -82,30 +82,28 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * Base class for tests using WebDriver.
  * <p>
  * By default, this test runs with HtmlUnit, but this behavior can be changed by having a property file named
- * "test.properties" in the HtmlUnit root directory.
+ * "{@code test.properties}" in the HtmlUnit root directory.
  * Sample:
  * <pre>
-   browsers=hu,ff38,ie
-   edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
-   ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
-   ff45.bin=/usr/bin/firefox                            [Unix-like]
+   browsers=hu,ff45,ie
    chrome.bin=/path/to/chromedriver                     [Unix-like]
+   ff45.bin=/usr/bin/firefox                            [Unix-like]
+   ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
+   edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
    autofix=true
  * </pre>
- * The file should contain four properties: "browsers", "ie.bin", "ff38.bin", and "chrome.bin".
+ * The file could contain some properties:
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie", "hu-ff45", "ff45", "ie", "chrome", which will be used to driver real browsers,
- *   note that you can't define more than one IE as there is no standard way
- *   to have multiple IEs on the same machine</li>
- *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
- *   (see <a href="http://go.microsoft.com/fwlink/?LinkId=619687">MicrosoftWebDriver downloads</a>)</li>
- *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
- *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
+ *   "hu-ie", "hu-ff45", "ff45", "ie", "chrome", which will be used to drive real browsers</li>
  *
- *   <li>ff45.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
+ *   <li>ff45.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
+ *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
+ *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
+ *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
+ *   (see <a href="http://go.microsoft.com/fwlink/?LinkId=619687">MicrosoftWebDriver downloads</a>)</li>
  *   <li>autofix (optional): if {@code true}, try to automatically fix the real browser expectations,
  *   or add/remove {@code @NotYetImplemented} annotations, use with caution!</li>
  * </ul>
