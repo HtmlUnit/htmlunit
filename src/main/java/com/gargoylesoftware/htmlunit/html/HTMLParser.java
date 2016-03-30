@@ -691,9 +691,6 @@ public final class HTMLParser {
                 formWaitingForLostChildren_.addLostChild((HtmlElement) newElement);
                 parent.appendChild(newElement);
             }
-            else if (newElement instanceof HtmlImage && parent instanceof HtmlImage) {
-                parent.setNextSibling(newElement);
-            }
             else {
                 parent.appendChild(newElement);
             }

@@ -336,12 +336,13 @@ class HtmlSerializer {
         }
         final HtmlTableFooter tableFooter = htmlTable.getFooter();
 
-        first = appendHtmlTableRows(htmlTable.getRows(), first, tableHeader, tableFooter);
+        final List<HtmlTableRow> tableRows = htmlTable.getRows();
+        first = appendHtmlTableRows(tableRows, first, tableHeader, tableFooter);
 
         if (tableFooter != null) {
             first = appendHtmlTableRows(tableFooter.getRows(), first, null, null);
         }
-        else {
+        else if (tableRows.isEmpty()) {
             final DomNode firstChild = htmlTable.getFirstChild();
             if (firstChild != null) {
                 appendNode(firstChild);
