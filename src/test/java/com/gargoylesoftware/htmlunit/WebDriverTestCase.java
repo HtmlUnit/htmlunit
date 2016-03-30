@@ -197,6 +197,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (BROWSERS_PROPERTIES_.contains("hu")) {
                 BROWSERS_PROPERTIES_.add("hu-chrome");
                 BROWSERS_PROPERTIES_.add("hu-ff38");
+                BROWSERS_PROPERTIES_.add("hu-ff45");
                 BROWSERS_PROPERTIES_.add("hu-ie");
             }
         }
