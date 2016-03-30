@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.io.IOException;
@@ -331,9 +330,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
-            CHROME = { "4", "200", "§§URL§§", "null", "null", "null" },
+            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother" },
             IE = { "4", "200", "null", "null", "null", "null" })
-    @NotYetImplemented(CHROME)
+    //unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_methods() throws Exception {
         doPreflightTestAllowedMethods(null, "text/plain");
     }
@@ -430,9 +429,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "4", "200" },
-            FF = { "exception", "4", "0" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = { "exception", "4", "0" },
+            IE = { "4", "200" })
+    //unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
