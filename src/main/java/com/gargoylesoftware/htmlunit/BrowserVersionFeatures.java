@@ -644,10 +644,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_DESIGN_MODE_INHERIT,
 
-    /** Javascript property document.domain is lowercase. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    JS_DOCUMENT_DOMAIN_IS_LOWERCASE,
-
     /** Javascript document.forms(...) supported. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,

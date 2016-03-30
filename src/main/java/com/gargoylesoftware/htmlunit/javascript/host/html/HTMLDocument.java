@@ -32,7 +32,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
@@ -1472,10 +1471,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     return null;
                 }
             }
-            domain_ = url.getHost();
-            if (getBrowserVersion().hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
-                domain_ = domain_.toLowerCase(Locale.ROOT);
-            }
+            domain_ = url.getHost().toLowerCase(Locale.ROOT);
         }
 
         return domain_;
@@ -1510,7 +1506,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param newDomain the new domain to set
      */
     @JsxSetter
-    public void setDomain(final String newDomain) {
+    public void setDomain(String newDomain) {
         final BrowserVersion browserVersion = getBrowserVersion();
 
         // IE (at least 6) doesn't allow to set domain of about:blank
@@ -1520,6 +1516,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     + WebClient.URL_ABOUT_BLANK + "\" to: \""
                     + newDomain + "\".");
         }
+
+        newDomain = newDomain.toLowerCase(Locale.ROOT);
 
         final String currentDomain = getDomain();
         if (currentDomain.equalsIgnoreCase(newDomain)) {
@@ -1537,13 +1535,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     + currentDomain + "\" to: \"" + newDomain + "\"");
         }
 
-        // Netscape down shifts the case of the domain
-        if (browserVersion.hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
-            domain_ = newDomain.toLowerCase(Locale.ROOT);
-        }
-        else {
-            domain_ = newDomain;
-        }
+        domain_ = newDomain;
     }
 
     /**

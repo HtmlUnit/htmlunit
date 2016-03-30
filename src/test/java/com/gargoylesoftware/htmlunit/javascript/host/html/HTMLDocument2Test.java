@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -91,7 +88,6 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     */
     @Test
     @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
-    @NotYetImplemented(IE)
     public void domainMixedCaseNetscape() throws Exception {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
 
@@ -113,9 +109,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "www.gargoylesoftware.com", "gargoylesoftware.com" },
-            IE = { "www.gargoylesoftware.com", "GaRgOyLeSoFtWaRe.CoM" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
     public void domainMixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -203,9 +197,8 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "www.gargoylesoftware.com", "www.gargoylesoftware.com" },
+    @Alerts(DEFAULT = { "www.gargoylesoftware.com", "www.gargoylesoftware.com" },
             IE = { "www.gargoylesoftware.com", "www.gargoylesoftware.com", "exception" })
-    @NotYetImplemented(CHROME)
     public void domain_set_for_about_blank() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
