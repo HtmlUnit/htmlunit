@@ -180,6 +180,19 @@ public enum BrowserVersionFeatures {
     /** Triggers 'onclick' and 'ondblclick' event handler using <code>PointerEvent</code>. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_ONCLICK_USES_POINTEREVENT,
+
+    /** <code>CloseEvent</code> has type '' when created from document.createEvent('CloseEvent'). */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    EVENT_ONCLOSE_DEFAULT_TYPE_EMPTY,
+
+    /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
+
+    /** <code>CloseEvent</code> initCloseEvent is available but throws an exception when called. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS,
+
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     EVENT_ONHASHCHANGE_BUBBLES_FALSE,

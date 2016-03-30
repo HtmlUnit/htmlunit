@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="add" dev="rbri" due-to="Madis P&#x00e4;rn">
+                Improved CloseEvent implementation; properties reason, code and wasClean are available now.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix document.all when called with invalid index (Chrome).
             </action>

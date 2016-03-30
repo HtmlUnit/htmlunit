@@ -130,6 +130,12 @@ public class Event extends SimpleScriptable {
     /** The message event type, triggered by postMessage. */
     public static final String TYPE_MESSAGE = "message";
 
+    /** The close event type, triggered by "onclose" event handlers. */
+    public static final String TYPE_CLOSE = "close";
+
+    /** The open event type, triggered by "onopen" event handlers. */
+    public static final String TYPE_OPEN = "open";
+
     /** No event phase. */
     @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public static final short NONE = 0;
