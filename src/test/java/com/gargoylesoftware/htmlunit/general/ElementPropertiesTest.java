@@ -1705,7 +1705,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("align,form")
-    @NotYetImplemented
     public void legend() throws Exception {
         test("legend");
     }

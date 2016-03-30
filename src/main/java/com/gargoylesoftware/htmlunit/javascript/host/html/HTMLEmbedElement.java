@@ -45,7 +45,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * Returns the value of the {@code align} property.
      * @return the value of the {@code align} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public String getAlign() {
         return getAlign(true);
     }
@@ -54,7 +54,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * Sets the value of the {@code align} property.
      * @param align the value of the {@code align} property
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public void setAlign(final String align) {
         setAlign(align, false);
     }
