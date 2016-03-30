@@ -9,6 +9,9 @@
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: fix document.all when called with invalid index (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: fix table.innerText.
             </action>
             <action type="fix" dev="asashour" issue="1576">
@@ -18,7 +21,7 @@
                 JavaScript: StaticNodeList removed.
             </action>
             <action type="fix" dev="rbri">
-                JavaScript: HTMLCollection and HTMLAllCollection function like access implementation improved (CHROME).
+                JavaScript: HTMLCollection and HTMLAllCollection function like access implementation improved (Chrome).
             </action>
             <action type="fix" dev="rbri">
                 JavaScript: wordSpacing property support percent values for FF45.

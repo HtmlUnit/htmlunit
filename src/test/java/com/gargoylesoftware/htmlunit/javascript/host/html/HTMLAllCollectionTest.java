@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -456,9 +453,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            CHROME = "undefined",
-            IE = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF = "null")
     public void functionIndex_Unknown() throws Exception {
         functionIndex("'foo'");
     }
@@ -486,9 +482,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            CHROME = "undefined",
-            IE = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF = "null")
     public void functionIndex_NegativIndex() throws Exception {
         functionIndex("-1");
     }
@@ -530,7 +525,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             IE = "undefined")
-    @NotYetImplemented(CHROME)
     public void functionIndex_InvalidIndex() throws Exception {
         functionIndex("200");
     }
