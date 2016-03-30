@@ -289,7 +289,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
                 final boolean caseSensitive = hasCaseSensitiveTagNames();
                 for (final DomElement elem : getDomElementDescendants()) {
                     final String localName = elem.getLocalName();
-                    if ((!caseSensitive && localName.equalsIgnoreCase(tagName)) || localName.equals(tagName)) {
+                    if (localName.equals(tagName) || (!caseSensitive && localName.equalsIgnoreCase(tagName))) {
                         res.add(elem);
                     }
                 }
