@@ -182,7 +182,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONCLICK_USES_POINTEREVENT,
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
-    EVENT_ONHASHCHANGE_BUBBLES_AND_CANCELABLE_FALSE,
+    EVENT_ONHASHCHANGE_BUBBLES_FALSE,
 
     /** <code>Event.cancelable</code> is false in 'onload' event handler. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF),

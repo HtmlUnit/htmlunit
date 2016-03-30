@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONHASHCHANGE_BUBBLES_AND_CANCELABLE_FALSE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONHASHCHANGE_BUBBLES_FALSE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -65,7 +65,7 @@ public class HashChangeEvent extends Event {
         oldURL_ = oldURL;
         newURL_ = newURL;
 
-        if (getBrowserVersion().hasFeature(EVENT_ONHASHCHANGE_BUBBLES_AND_CANCELABLE_FALSE)) {
+        if (getBrowserVersion().hasFeature(EVENT_ONHASHCHANGE_BUBBLES_FALSE)) {
             setBubbles(false);
         }
         setCancelable(false);
