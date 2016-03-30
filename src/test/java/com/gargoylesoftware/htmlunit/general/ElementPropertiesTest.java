@@ -792,8 +792,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "declare,form,height,hspace,name,object,standby,type,useMap,vspace,width",
             EDGE = "align,alt,altHtml,archive,BaseHref,border,code,codeBase,codeType,contentDocument,data,declare,"
                 + "form,height,hspace,name,object,standby,type,useMap,vspace,"
-                + "width")
-    @NotYetImplemented
+                + "width",
+            CHROME = {})
+    @NotYetImplemented({ FF, IE })
     public void applet() throws Exception {
         test("applet");
     }
