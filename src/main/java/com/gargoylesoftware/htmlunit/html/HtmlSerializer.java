@@ -341,6 +341,12 @@ class HtmlSerializer {
         if (tableFooter != null) {
             first = appendHtmlTableRows(tableFooter.getRows(), first, null, null);
         }
+        else {
+            final DomNode firstChild = htmlTable.getFirstChild();
+            if (firstChild != null) {
+                appendNode(firstChild);
+            }
+        }
 
         doAppendBlockSeparator();
     }
@@ -391,7 +397,7 @@ class HtmlSerializer {
     }
 
     /**
-     * Appends a &lt;ol&gt; taking care to numerate it.
+     * Appends a {@code <ol>} taking care to numerate it.
      * @param htmlOrderedList the OL element
      */
     private void appendHtmlOrderedList(final HtmlOrderedList htmlOrderedList) {

@@ -426,4 +426,13 @@ public class HTMLTableElement extends RowContainer {
         }
         super.setInnerText(value);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getInnerText() {
+        return getDomNodeOrDie().asText();
+    }
 }
+
