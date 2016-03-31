@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -32,8 +36,10 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
@@ -50,7 +56,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Marc Guillemot
  */
-@JsxClass
+@JsxClasses({
+    @JsxClass(browsers = @WebBrowser(IE)),
+    @JsxClass(className = "global", browsers = @WebBrowser(CHROME)),
+    @JsxClass(className = "WorkerGlobalScope", browsers = @WebBrowser(FF))
+})
 public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);
@@ -129,11 +139,6 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
         final HtmlPage page = (HtmlPage) owningWindow_.getDocument().getPage();
         owningWindow_.getWebWindow().getJobManager().addJob(job, page);
-    }
-
-    @Override
-    public String getClassName() {
-        return "DedicatedWorkerGlobalScope";
     }
 
     void messagePosted(final Object message) {

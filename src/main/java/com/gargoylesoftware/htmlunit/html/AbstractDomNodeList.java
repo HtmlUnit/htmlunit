@@ -174,9 +174,11 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
         }
 
         private void clearCache() {
-            final AbstractDomNodeList<?> nodes = nodeList_.get();
-            if (null != nodes) {
-                nodes.cachedElements_ = null;
+            if (nodeList_ != null) {
+                final AbstractDomNodeList<?> nodes = nodeList_.get();
+                if (nodes != null) {
+                    nodes.cachedElements_ = null;
+                }
             }
         }
     }
