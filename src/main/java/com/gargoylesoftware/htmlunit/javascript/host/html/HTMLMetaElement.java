@@ -52,7 +52,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code charset} attribute.
-     * @param charset the charset attribute
+     * @param charset the {@code charset} attribute
      */
     @JsxSetter(@WebBrowser(IE))
     public void setCharset(final String charset) {
@@ -106,7 +106,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code name} attribute.
-     * @param name the name attribute
+     * @param name the {@code name} attribute
      */
     @JsxSetter
     public void setName(final String name) {
@@ -124,7 +124,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code scheme} attribute.
-     * @param scheme the scheme attribute
+     * @param scheme the {@code scheme} attribute
      */
     @JsxSetter
     public void setScheme(final String scheme) {
@@ -142,7 +142,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code url} attribute.
-     * @param url the url attribute
+     * @param url the {@code url} attribute
      */
     @JsxSetter(@WebBrowser(IE))
     public void setUrl(final String url) {

@@ -59,4 +59,22 @@ public class HTMLFieldSetElement extends FormChild {
         setAlign(align, false);
     }
 
+    /**
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public String getName() {
+        return getDomNodeOrDie().getAttribute("name");
+    }
+
+    /**
+     * Sets the {@code name} attribute.
+     * @param name the {@code name} attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void setName(final String name) {
+        getDomNodeOrDie().setAttribute("name", name);
+    }
+
 }

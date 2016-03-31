@@ -1764,7 +1764,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("areas,name")
-    @NotYetImplemented
     public void map() throws Exception {
         test("map");
     }
