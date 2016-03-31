@@ -67,7 +67,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public Object getCaption() {
-        final List<HtmlElement> captions = getDomNodeOrDie().getHtmlElementsByTagName("caption");
+        final List<HtmlElement> captions = getDomNodeOrDie().getElementsByTagName("caption");
         if (captions.isEmpty()) {
             return null;
         }
@@ -98,7 +98,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public Object getTFoot() {
-        final List<HtmlElement> tfoots = getDomNodeOrDie().getHtmlElementsByTagName("tfoot");
+        final List<HtmlElement> tfoots = getDomNodeOrDie().getElementsByTagName("tfoot");
         if (tfoots.isEmpty()) {
             return null;
         }
@@ -130,7 +130,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public Object getTHead() {
-        final List<HtmlElement> theads = getDomNodeOrDie().getHtmlElementsByTagName("thead");
+        final List<HtmlElement> theads = getDomNodeOrDie().getElementsByTagName("thead");
         if (theads.isEmpty()) {
             return null;
         }

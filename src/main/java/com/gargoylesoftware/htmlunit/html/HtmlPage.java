@@ -37,11 +37,6 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -82,6 +77,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -628,7 +628,7 @@ public class HtmlPage extends InteractivePage {
      * @return the list of {@link HtmlAnchor} in this page
      */
     public List<HtmlAnchor> getAnchors() {
-        return getDocumentElement().getHtmlElementsByTagName("a");
+        return getDocumentElement().getElementsByTagNameImpl("a");
     }
 
     /**
@@ -667,7 +667,7 @@ public class HtmlPage extends InteractivePage {
      * @return all the forms in this page
      */
     public List<HtmlForm> getForms() {
-        return getDocumentElement().getHtmlElementsByTagName("form");
+        return getDocumentElement().getElementsByTagNameImpl("form");
     }
 
     /**
@@ -1380,7 +1380,7 @@ public class HtmlPage extends InteractivePage {
         }
         if (hasFeature(JS_DEFERRED)) {
             final HtmlElement doc = getDocumentElement();
-            final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
+            final List<HtmlElement> elements = doc.getElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {
                     final HtmlScript script = (HtmlScript) e;
@@ -1397,7 +1397,7 @@ public class HtmlPage extends InteractivePage {
      */
     private void setReadyStateOnDeferredScriptsIfNeeded() {
         if (getWebClient().getOptions().isJavaScriptEnabled() && hasFeature(JS_DEFERRED)) {
-            final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
+            final List<HtmlElement> elements = getDocumentElement().getElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {
                     final HtmlScript script = (HtmlScript) e;
@@ -1810,18 +1810,18 @@ public class HtmlPage extends InteractivePage {
     }
 
     private void calculateBase() {
-        final List<HtmlBase> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
+        final List<HtmlElement> baseElements = getDocumentElement().getElementsByTagName("base");
         switch (baseElements.size()) {
             case 0:
                 base_ = null;
                 break;
 
             case 1:
-                base_ = baseElements.get(0);
+                base_ = (HtmlBase) baseElements.get(0);
                 break;
 
             default:
-                base_ = baseElements.get(0);
+                base_ = (HtmlBase) baseElements.get(0);
                 notifyIncorrectness("Multiple 'base' detected, only the first is used.");
         }
     }
@@ -1870,7 +1870,7 @@ public class HtmlPage extends InteractivePage {
             return Collections.emptyList(); // weird case, for instance if document.documentElement has been removed
         }
         final String nameLC = httpEquiv.toLowerCase(Locale.ROOT);
-        final List<HtmlMeta> tags = getDocumentElement().getHtmlElementsByTagName("meta");
+        final List<HtmlMeta> tags = getDocumentElement().getElementsByTagNameImpl("meta");
         for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
             final HtmlMeta element = iter.next();
             if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase(Locale.ROOT))) {

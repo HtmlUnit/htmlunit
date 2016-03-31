@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="update" dev="asashour">
+                HtmlElement: deprecate .getHtmlElementsByTagName() and .getHtmlElementsByTagNames().
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add .labels property for HTMLButtonElement, HTMLInputElement, HTMLKeygenElement,
                 HTMLMeterElement, HTMLOutputElement, HTMLProgressElement, HTMLSelectElement and HTMLTextAreaElement.

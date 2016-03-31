@@ -412,11 +412,14 @@ public final class WebAssert {
     public static void assertAllTabIndexAttributesSet(final HtmlPage page) {
         final List<String> tags =
             Arrays.asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
-        for (final HtmlElement element : page.getDocumentElement().getHtmlElementsByTagNames(tags)) {
-            final Short tabIndex = element.getTabIndex();
-            if (tabIndex == null || tabIndex == HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
-                final String s = element.getAttribute("tabindex");
-                throw new AssertionError("Illegal value for tab index: '" + s + "'.");
+
+        for (final String tag : tags) {
+            for (final HtmlElement element : page.getDocumentElement().getElementsByTagName(tag)) {
+                final Short tabIndex = element.getTabIndex();
+                if (tabIndex == null || tabIndex == HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
+                    final String s = element.getAttribute("tabindex");
+                    throw new AssertionError("Illegal value for tab index: '" + s + "'.");
+                }
             }
         }
     }

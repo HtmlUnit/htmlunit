@@ -398,13 +398,23 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      */
     @Override
     public DomNodeList<HtmlElement> getElementsByTagName(final String tagName) {
-        return new AbstractDomNodeList<HtmlElement>(this) {
+        return getElementsByTagNameImpl(tagName);
+    }
+
+    /**
+     * This should be {@link #getElementsByTagName(String)}, but is separate because of the type erasure in Java. 
+     * @param name The name of the tag to match on
+     * @return A list of matching elements.
+     */
+    <E extends HtmlElement> DomNodeList<E> getElementsByTagNameImpl(final String tagName) {
+        return new AbstractDomNodeList<E>(this) {
             @Override
-            protected List<HtmlElement> provideElements() {
-                final List<HtmlElement> res = new LinkedList<>();
-                for (HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
+            @SuppressWarnings("unchecked")
+            protected List<E> provideElements() {
+                final List<E> res = new LinkedList<>();
+                for (final HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
                     if (elem.getLocalName().equalsIgnoreCase(tagName)) {
-                        res.add(elem);
+                        res.add((E) elem);
                     }
                 }
                 return res;

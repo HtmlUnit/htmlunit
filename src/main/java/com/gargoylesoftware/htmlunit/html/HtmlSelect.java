@@ -145,7 +145,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return all of the options in this select element
      */
     public List<HtmlOption> getOptions() {
-        return Collections.unmodifiableList(this.<HtmlOption>getHtmlElementsByTagName("option"));
+        return Collections.unmodifiableList(this.<HtmlOption>getElementsByTagNameImpl("option"));
     }
 
     /**
@@ -155,7 +155,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the option specified by the index
      */
     public HtmlOption getOption(final int index) {
-        return this.<HtmlOption>getHtmlElementsByTagName("option").get(index);
+        return this.<HtmlOption>getElementsByTagNameImpl("option").get(index);
     }
 
     /**
@@ -163,7 +163,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the number of options
      */
     public int getOptionSize() {
-        return getHtmlElementsByTagName("option").size();
+        return getElementsByTagName("option").size();
     }
 
     /**
@@ -172,7 +172,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param newLength the new length property value
      */
     public void setOptionSize(final int newLength) {
-        final List<HtmlElement> elementList = getHtmlElementsByTagName("option");
+        final List<HtmlElement> elementList = getElementsByTagName("option");
 
         for (int i = elementList.size() - 1; i >= newLength; i--) {
             elementList.get(i).remove();

@@ -81,7 +81,7 @@ public class HtmlMap extends HtmlElement {
         String name = getNameAttribute();
         if (null != page && StringUtils.isNotBlank(name)) {
             name = "#" + name.trim();
-            for (HtmlElement elem : page.getDocumentElement().getHtmlElementsByTagName("img")) {
+            for (HtmlElement elem : page.getDocumentElement().getElementsByTagName("img")) {
                 final HtmlImage image = (HtmlImage) elem;
                 if (name.equals(image.getUseMapAttribute())) {
                     return image;
