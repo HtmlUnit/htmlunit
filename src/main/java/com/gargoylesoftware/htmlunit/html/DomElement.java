@@ -403,7 +403,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             protected List<HtmlElement> provideElements() {
                 final List<HtmlElement> res = new LinkedList<>();
                 for (HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
-                    if (elem.getLocalName().equals(tagName)) {
+                    if (elem.getLocalName().equalsIgnoreCase(tagName)) {
                         res.add(elem);
                     }
                 }
