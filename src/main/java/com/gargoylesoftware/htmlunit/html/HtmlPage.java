@@ -29,7 +29,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -1871,13 +1870,13 @@ public class HtmlPage extends InteractivePage {
         }
         final String nameLC = httpEquiv.toLowerCase(Locale.ROOT);
         final List<HtmlMeta> tags = getDocumentElement().getElementsByTagNameImpl("meta");
-        for (final Iterator<HtmlMeta> iter = new ArrayList<>(tags).iterator(); iter.hasNext();) {
-            final HtmlMeta element = iter.next();
-            if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase(Locale.ROOT))) {
-                iter.remove();
+        final List<HtmlMeta> foundTags = new ArrayList<>();
+        for (HtmlMeta htmlMeta : tags) {
+            if (nameLC.equals(htmlMeta.getHttpEquivAttribute().toLowerCase(Locale.ROOT))) {
+                foundTags.add(htmlMeta);
             }
         }
-        return tags;
+        return foundTags;
     }
 
     /**
