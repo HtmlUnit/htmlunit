@@ -163,7 +163,7 @@ public class HTMLTableElement extends RowContainer {
     public Object getTBodies() {
         if (tBodies_ == null) {
             final HtmlTable table = (HtmlTable) getDomNodeOrDie();
-            tBodies_ = new HTMLCollection(table, false, "HTMLTableElement.tBodies") {
+            tBodies_ = new HTMLCollection(table, false) {
                 @Override
                 protected List<Object> computeElements() {
                     return new ArrayList<Object>(table.getBodies());

@@ -131,7 +131,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
 
-            elements_ = new HTMLCollection(htmlForm, false, "HTMLFormElement.elements") {
+            elements_ = new HTMLCollection(htmlForm, false) {
                 private boolean filterChildrenOfNestedForms_;
 
                 @Override

@@ -256,8 +256,7 @@ public class XMLDocument extends Document {
             return HTMLCollection.emptyCollection(getWindow());
         }
 
-        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false,
-                "XMLDocument.getElementsByTagName") {
+        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 final String nodeName;

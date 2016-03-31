@@ -685,7 +685,7 @@ public class HTMLInputElement extends FormField {
     @JsxGetter(@WebBrowser(CHROME))
     public AbstractList getLabels() {
         if (labels_ == null) {
-            labels_ = new LabelsHelper(getDomNodeOrDie(), "Input.labels");
+            labels_ = new LabelsHelper(getDomNodeOrDie());
         }
         return labels_;
     }

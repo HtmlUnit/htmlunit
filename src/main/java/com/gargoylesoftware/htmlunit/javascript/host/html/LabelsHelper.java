@@ -19,11 +19,11 @@ class LabelsHelper extends NodeList {
     /**
      * Creates an instance.
      *
-     * @param parentScope the parent scope
+     * @param domeNode the {@link DomNode}
      * @param description a text useful for debugging
      */
-    public LabelsHelper(final DomElement parentScope, final String description) {
-        super(parentScope, false, description);
+    public LabelsHelper(final DomElement domeNode) {
+        super(domeNode, false);
     }
 
 

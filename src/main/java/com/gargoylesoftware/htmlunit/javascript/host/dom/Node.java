@@ -495,7 +495,7 @@ public class Node extends EventTarget {
     public NodeList getChildNodes() {
         if (childNodes_ == null) {
             final DomNode node = getDomNodeOrDie();
-            childNodes_ = new NodeList(node, false, "Node.childNodes") {
+            childNodes_ = new NodeList(node, false) {
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> response = new ArrayList<>();

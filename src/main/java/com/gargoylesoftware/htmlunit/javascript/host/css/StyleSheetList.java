@@ -126,7 +126,7 @@ public class StyleSheetList extends SimpleScriptable {
         final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
 
         if (cssEnabled) {
-            nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true, "stylesheets") {
+            nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     if (node instanceof HtmlStyle) {

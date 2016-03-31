@@ -1377,7 +1377,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         // Null must be changed to '' for proper collection initialization.
         final String expElementName = "null".equals(name) ? "" : name;
 
-        return new HTMLCollection(page, true, "Window.getElementsByName('" + name + "')") {
+        return new HTMLCollection(page, true) {
             @Override
             protected List<Object> computeElements() {
                 final List<DomElement> elements = page.getElementsByName(expElementName);
@@ -2211,7 +2211,7 @@ class HTMLCollectionFrames extends HTMLCollection {
     private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames.class);
 
     HTMLCollectionFrames(final HtmlPage page) {
-        super(page, false, "Window.frames");
+        super(page, false);
     }
 
     @Override

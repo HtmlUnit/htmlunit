@@ -214,9 +214,8 @@ public class Element extends EventNode {
         }
 
         final DomNode node = getDomNodeOrDie();
-        final String description = "Element.getElementsByTagName('" + tagNameLC + "')";
         if ("*".equals(tagName)) {
-            collection = new HTMLCollection(node, false, description) {
+            collection = new HTMLCollection(node, false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return true;
@@ -224,7 +223,7 @@ public class Element extends EventNode {
             };
         }
         else {
-            collection = new HTMLCollection(node, false, description) {
+            collection = new HTMLCollection(node, false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return tagNameLC.equalsIgnoreCase(node.getNodeName());
@@ -262,9 +261,7 @@ public class Element extends EventNode {
      */
     @JsxFunction
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
-        final String description = "Element.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
-
-        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
+        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return localName.equals(node.getLocalName());
@@ -416,7 +413,7 @@ public class Element extends EventNode {
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public HTMLCollection getChildren() {
         final DomElement node = getDomNodeOrDie();
-        final HTMLCollection collection = new HTMLCollection(node, false, "Element.children") {
+        final HTMLCollection collection = new HTMLCollection(node, false) {
             @Override
             protected List<Object> computeElements() {
                 final List<Object> children = new LinkedList<>();

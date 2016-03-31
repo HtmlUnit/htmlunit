@@ -51,7 +51,7 @@ public class HTMLDataListElement extends HTMLElement {
     @JsxGetter
     public Object getOptions() {
         if (options_ == null) {
-            options_ = new HTMLCollection(getDomNodeOrDie(), false, "options") {
+            options_ = new HTMLCollection(getDomNodeOrDie(), false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlOption;

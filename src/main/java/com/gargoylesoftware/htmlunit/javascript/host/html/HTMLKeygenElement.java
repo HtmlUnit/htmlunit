@@ -69,7 +69,7 @@ public class HTMLKeygenElement extends HTMLElement {
     @JsxGetter
     public AbstractList getLabels() {
         if (labels_ == null) {
-            labels_ = new LabelsHelper(getDomNodeOrDie(), "Keygen.labels");
+            labels_ = new LabelsHelper(getDomNodeOrDie());
         }
         return labels_;
     }

@@ -85,22 +85,21 @@ public class HTMLCollection extends AbstractList {
 
     /**
      * Creates an instance.
-     * @param parentScope parent scope
+     * @param domNode parent scope
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
-     * @param description a text useful for debugging
      */
-    public HTMLCollection(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        super(parentScope, attributeChangeSensitive, description);
+    public HTMLCollection(final DomNode domNode, final boolean attributeChangeSensitive) {
+        super(domNode, attributeChangeSensitive);
     }
 
     /**
      * Constructs an instance with an initial cache value.
-     * @param parentScope the parent scope, on which we listen for changes
+     * @param domNode the parent scope, on which we listen for changes
      * @param initialElements the initial content for the cache
      */
-    HTMLCollection(final DomNode parentScope, final List<?> initialElements) {
-        super(parentScope, initialElements);
+    HTMLCollection(final DomNode domNode, final List<?> initialElements) {
+        super(domNode, initialElements);
     }
 
     /**
@@ -297,7 +296,7 @@ public class HTMLCollection extends AbstractList {
      */
     @JsxFunction(@WebBrowser(IE))
     public Object tags(final String tagName) {
-        final HTMLCollection collection = new HTMLSubCollection(this, ".tags('" + tagName + "')") {
+        final HTMLCollection collection = new HTMLSubCollection(this) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return tagName.equalsIgnoreCase(node.getLocalName());
@@ -310,8 +309,8 @@ public class HTMLCollection extends AbstractList {
 class HTMLSubCollection extends HTMLCollection {
     private final HTMLCollection mainCollection_;
 
-    HTMLSubCollection(final HTMLCollection mainCollection, final String subDescription) {
-        super(mainCollection.getDomNodeOrDie(), false, mainCollection.toString() + subDescription);
+    HTMLSubCollection(final HTMLCollection mainCollection) {
+        super(mainCollection.getDomNodeOrDie(), false);
         mainCollection_ = mainCollection;
     }
 

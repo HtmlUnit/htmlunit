@@ -110,7 +110,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     public Object getCells() {
         if (cells_ == null) {
             final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
-            cells_ = new HTMLCollection(row, false, "cells") {
+            cells_ = new HTMLCollection(row, false) {
                 @Override
                 protected List<Object> computeElements() {
                     return new ArrayList<Object>(row.getCells());

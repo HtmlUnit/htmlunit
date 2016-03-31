@@ -526,11 +526,9 @@ public class Document extends EventNode {
      */
     @JsxFunction
     public HTMLCollection getElementsByTagName(final String tagName) {
-        final String description = "Document.getElementsByTagName('" + tagName + "')";
-
         final HTMLCollection collection;
         if ("*".equals(tagName)) {
-            collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
+            collection = new HTMLCollection(getDomNodeOrDie(), false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return true;
@@ -538,7 +536,7 @@ public class Document extends EventNode {
             };
         }
         else {
-            collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
+            collection = new HTMLCollection(getDomNodeOrDie(), false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return tagName.equalsIgnoreCase(node.getNodeName());
@@ -558,8 +556,6 @@ public class Document extends EventNode {
      */
     @JsxFunction
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
-        final String description = "Document.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
-
         final String prefix;
         if (namespaceURI != null && !"*".equals(namespaceURI)) {
             prefix = XmlUtil.lookupPrefix(getPage().getDocumentElement(), Context.toString(namespaceURI));
@@ -568,7 +564,7 @@ public class Document extends EventNode {
             prefix = null;
         }
 
-        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
+        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 if (!localName.equals(node.getLocalName())) {

@@ -56,7 +56,7 @@ public class HTMLMapElement extends HTMLElement {
     public HTMLCollection getAreas() {
         if (areas_ == null) {
             final HtmlMap map = (HtmlMap) getDomNodeOrDie();
-            areas_ = new HTMLCollection(map, false, "HTMLMapElement.areas") {
+            areas_ = new HTMLCollection(map, false) {
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> list = new ArrayList<>();

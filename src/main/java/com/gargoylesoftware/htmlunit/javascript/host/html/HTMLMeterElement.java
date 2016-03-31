@@ -126,7 +126,7 @@ public class HTMLMeterElement extends HTMLElement {
     @JsxGetter(@WebBrowser(CHROME))
     public AbstractList getLabels() {
         if (labels_ == null) {
-            labels_ = new LabelsHelper(getDomNodeOrDie(), "Meter.labels");
+            labels_ = new LabelsHelper(getDomNodeOrDie());
         }
         return labels_;
     }

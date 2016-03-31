@@ -69,7 +69,7 @@ public class HTMLOutputElement extends HTMLElement {
     @JsxGetter(@WebBrowser(CHROME))
     public AbstractList getLabels() {
         if (labels_ == null) {
-            labels_ = new LabelsHelper(getDomNodeOrDie(), "Output.labels");
+            labels_ = new LabelsHelper(getDomNodeOrDie());
         }
         return labels_;
     }

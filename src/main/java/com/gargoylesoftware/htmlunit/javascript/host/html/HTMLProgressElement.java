@@ -80,7 +80,7 @@ public class HTMLProgressElement extends HTMLElement {
     @JsxGetter(@WebBrowser(CHROME))
     public AbstractList getLabels() {
         if (labels_ == null) {
-            labels_ = new LabelsHelper(getDomNodeOrDie(), "Progress.labels");
+            labels_ = new LabelsHelper(getDomNodeOrDie());
         }
         return labels_;
     }

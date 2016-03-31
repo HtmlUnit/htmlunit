@@ -710,10 +710,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxFunction
     public HTMLCollection getElementsByClassName(final String className) {
         final HtmlElement elt = getDomNodeOrDie();
-        final String description = "HTMLElement.getElementsByClassName('" + className + "')";
         final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
 
-        final HTMLCollection collection = new HTMLCollection(elt, true, description) {
+        final HTMLCollection collection = new HTMLCollection(elt, true) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 if (!(node instanceof HtmlElement)) {

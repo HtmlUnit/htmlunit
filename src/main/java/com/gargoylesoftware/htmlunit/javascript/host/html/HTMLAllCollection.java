@@ -64,10 +64,9 @@ public class HTMLAllCollection extends HTMLCollection {
     /**
      * Creates an instance.
      * @param parentScope parent scope
-     * @param description a text useful for debugging
      */
-    public HTMLAllCollection(final DomNode parentScope, final String description) {
-        super(parentScope, false, description);
+    public HTMLAllCollection(final DomNode parentScope) {
+        super(parentScope, false);
     }
 
     /**

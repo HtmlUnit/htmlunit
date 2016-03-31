@@ -54,13 +54,12 @@ public class NodeList extends AbstractList {
     /**
      * Creates an instance.
      *
-     * @param parentScope the parent scope
+     * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
-     * @param description a text useful for debugging
      */
-    public NodeList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        super(parentScope, attributeChangeSensitive, description);
+    public NodeList(final DomNode domNode, final boolean attributeChangeSensitive) {
+        super(domNode, attributeChangeSensitive);
     }
 
     /**
@@ -74,6 +73,7 @@ public class NodeList extends AbstractList {
 
     /**
      * Gets a static NodeList.
+     *
      * @param parentScope the parent scope
      * @param elements the elements
      * @return an empty collection

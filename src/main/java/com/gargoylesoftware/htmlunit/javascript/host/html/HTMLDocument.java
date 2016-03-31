@@ -340,7 +340,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (forms_ == null) {
             final boolean allowFunctionCall = getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED);
 
-            forms_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.forms") {
+            forms_ = new HTMLCollection(getDomNodeOrDie(), false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlForm && node.getPrefix() == null;
@@ -367,7 +367,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public Object getLinks() {
         if (links_ == null) {
-            links_ = new HTMLCollection(getDomNodeOrDie(), true, "HTMLDocument.links") {
+            links_ = new HTMLCollection(getDomNodeOrDie(), true) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return (node instanceof HtmlAnchor || node instanceof HtmlArea)
@@ -426,7 +426,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (anchors_ == null) {
             final boolean checkId = getBrowserVersion().hasFeature(JS_ANCHORS_REQUIRES_NAME_OR_ID);
 
-            anchors_ = new HTMLCollection(getDomNodeOrDie(), true, "HTMLDocument.anchors") {
+            anchors_ = new HTMLCollection(getDomNodeOrDie(), true) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     if (!(node instanceof HtmlAnchor)) {
@@ -466,7 +466,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public Object getApplets() {
         if (applets_ == null) {
-            applets_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.applets") {
+            applets_ = new HTMLCollection(getDomNodeOrDie(), false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlApplet;
@@ -888,7 +888,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public Object getImages() {
         if (images_ == null) {
-            images_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.images") {
+            images_ = new HTMLCollection(getDomNodeOrDie(), false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlImage;
@@ -983,7 +983,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public HTMLCollection getAll() {
         if (all_ == null) {
-            all_ = new HTMLAllCollection(getDomNodeOrDie(), "HTMLDocument.all") {
+            all_ = new HTMLAllCollection(getDomNodeOrDie()) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return true;
@@ -1153,8 +1153,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final String expElementName = "null".equals(elementName) ? "" : elementName;
 
         final HtmlPage page = getPage();
-        final String description = "HTMLDocument.getElementsByName('" + elementName + "')";
-        final HTMLCollection collection = new HTMLCollection(page, true, description) {
+        final HTMLCollection collection = new HTMLCollection(page, true) {
             @Override
             protected List<Object> computeElements() {
                 return new ArrayList<Object>(page.getElementsByName(expElementName));
@@ -1192,7 +1191,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         final boolean forIDAndOrName = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME);
         final boolean alsoFrames = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_ALSO_FRAMES);
-        final HTMLCollection collection = new HTMLCollection(page, true, "HTMLDocument." + name) {
+        final HTMLCollection collection = new HTMLCollection(page, true) {
             @Override
             protected List<Object> computeElements() {
                 final List<DomElement> elements;
@@ -1539,13 +1538,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute <tt>scripts</tt>.
-     * @return the value of the JavaScript attribute <tt>scripts</tt>
+     * Returns the value of the {@code scripts} attribute.
+     * @return the value of the {@code scripts} attribute
      */
     @JsxGetter
     public Object getScripts() {
         if (scripts_ == null) {
-            scripts_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.scripts") {
+            scripts_ = new HTMLCollection(getDomNodeOrDie(), false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlScript;

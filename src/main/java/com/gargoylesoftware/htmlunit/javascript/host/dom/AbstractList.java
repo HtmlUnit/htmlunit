@@ -69,10 +69,9 @@ public class AbstractList extends SimpleScriptable implements Function {
         RESET
     }
 
-    private boolean avoidObjectDetection_ = false;
-    private String description_;
+    private boolean avoidObjectDetection_;
 
-    private boolean attributeChangeSensitive_ = true;
+    private boolean attributeChangeSensitive_;
 
     /**
      * Cache collection elements when possible, so as to avoid expensive XPath expression evaluations.
@@ -90,39 +89,45 @@ public class AbstractList extends SimpleScriptable implements Function {
 
     /**
      * Creates an instance.
-     * @param parentScope parent scope
+     *
+     * @param domeNode the {@link DomNode}
+     * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
+     * of a descendant node of parentScope changes (attribute added, modified or removed)
      */
-    private AbstractList(final ScriptableObject parentScope) {
-        if (parentScope != null) {
-            setParentScope(parentScope);
-            setPrototype(getPrototype(getClass()));
-        }
+    public AbstractList(final DomNode domeNode, final boolean attributeChangeSensitive) {
+        this(domeNode, attributeChangeSensitive, null);
+    }
+
+    /**
+     * Creates an instance with an initial cache value.
+     *
+     * @param domeNode the {@link DomNode}
+     * @param initialElements the initial content for the cache
+     */
+    protected AbstractList(final DomNode domNode, final List<?> initialElements) {
+        this(domNode, true, new ArrayList<>(initialElements));
     }
 
     /**
      * Creates an instance.
-     * @param parentScope parent scope
+     *
+     * @param domeNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
-     * @param description a text useful for debugging
-     */
-    public AbstractList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        this(parentScope == null ? null : parentScope.getScriptableObject());
-        if (parentScope != null) {
-            setDomNode(parentScope, false);
-        }
-        description_ = description;
-        attributeChangeSensitive_ = attributeChangeSensitive;
-    }
-
-    /**
-     * Constructs an instance with an initial cache value.
-     * @param parentScope the parent scope, on which we listen for changes
      * @param initialElements the initial content for the cache
      */
-    protected AbstractList(final DomNode parentScope, final List<?> initialElements) {
-        this(parentScope.getScriptableObject());
-        cachedElements_ = new ArrayList<>(initialElements);
+    private AbstractList(final DomNode domeNode, final boolean attributeChangeSensitive,
+            final List<Object> initialElements) {
+        if (domeNode != null) {
+            setDomNode(domeNode, false);
+            final ScriptableObject parentScope = domeNode.getScriptableObject();
+            if (parentScope != null) {
+                setParentScope(parentScope);
+                setPrototype(getPrototype(getClass()));
+            }
+        }
+        attributeChangeSensitive_ = attributeChangeSensitive;
+        cachedElements_ = initialElements;
     }
 
     /**
@@ -401,7 +406,7 @@ public class AbstractList extends SimpleScriptable implements Function {
      */
     @Override
     public String toString() {
-        return description_;
+        return getClass().getSimpleName() + " for " + getDomNodeOrNull();
     }
 
     /**
