@@ -57,10 +57,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  */
 @JsxClasses({
-    @JsxClass(browsers = @WebBrowser(IE)),
-    @JsxClass(className = "global", browsers = @WebBrowser(CHROME)),
-    @JsxClass(className = "WorkerGlobalScope", browsers = @WebBrowser(FF))
-})
+        @JsxClass(browsers = @WebBrowser(IE)),
+        @JsxClass(className = "global", browsers = @WebBrowser(CHROME)),
+        @JsxClass(className = "WorkerGlobalScope", browsers = @WebBrowser(FF))
+    })
 public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);

@@ -666,7 +666,7 @@ public class CodeStyleTest {
      * Verifies that the class name is used.
      */
     private void className(final List<String> lines, final String relativePath) {
-        if (relativePath.contains("main") && relativePath.contains("host") 
+        if (relativePath.contains("main") && relativePath.contains("host")
                 && !relativePath.contains("LabelsHelper")) {
             String fileName = relativePath.substring(0, relativePath.length() - 5);
             fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
