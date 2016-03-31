@@ -1871,7 +1871,7 @@ public class HtmlPage extends InteractivePage {
         }
         final String nameLC = httpEquiv.toLowerCase(Locale.ROOT);
         final List<HtmlMeta> tags = getDocumentElement().getElementsByTagNameImpl("meta");
-        for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
+        for (final Iterator<HtmlMeta> iter = new ArrayList<>(tags).iterator(); iter.hasNext();) {
             final HtmlMeta element = iter.next();
             if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase(Locale.ROOT))) {
                 iter.remove();
