@@ -101,7 +101,7 @@ public class AbstractList extends SimpleScriptable implements Function {
     /**
      * Creates an instance with an initial cache value.
      *
-     * @param domeNode the {@link DomNode}
+     * @param domNode the {@link DomNode}
      * @param initialElements the initial content for the cache
      */
     protected AbstractList(final DomNode domNode, final List<?> initialElements) {

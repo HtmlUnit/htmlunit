@@ -402,7 +402,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
-     * This should be {@link #getElementsByTagName(String)}, but is separate because of the type erasure in Java. 
+     * This should be {@link #getElementsByTagName(String)}, but is separate because of the type erasure in Java.
      * @param name The name of the tag to match on
      * @return A list of matching elements.
      */

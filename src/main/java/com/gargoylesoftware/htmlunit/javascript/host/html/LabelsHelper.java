@@ -36,10 +36,9 @@ class LabelsHelper extends NodeList {
      * @param domeNode the {@link DomNode}
      * @param description a text useful for debugging
      */
-    public LabelsHelper(final DomElement domeNode) {
+    LabelsHelper(final DomElement domeNode) {
         super(domeNode, false);
     }
-
 
     /**
      * This is overridden instead of {@link #computeElements()} in order to prevent caching at all.
