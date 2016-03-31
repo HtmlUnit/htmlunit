@@ -138,33 +138,37 @@ public class HTMLAllCollection extends HTMLCollection {
         final List<Object> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
-        final List<DomElement> matchingByName = new ArrayList<>();
-        final List<DomElement> matchingById = new ArrayList<>();
+        final List<DomElement> matching = new ArrayList<>();
 
         final BrowserVersion browser = getBrowserVersion();
-        final boolean byName = !browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);
-        for (final Object next : elements) {
-            if (next instanceof DomElement) {
-                final DomElement elem = (DomElement) next;
-                if ((byName || (elem instanceof HtmlForm)) && name.equals(elem.getAttribute("name"))) {
-                    matchingByName.add(elem);
-                }
-                else {
-                    final String id = elem.getAttribute("id");
-                    if (name.equals(id)) {
-                        matchingById.add(elem);
+        final boolean idFirst = browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);
+        if (idFirst) {
+            for (final Object next : elements) {
+                if (next instanceof DomElement) {
+                    final DomElement elem = (DomElement) next;
+                    if (name.equals(elem.getId())) {
+                        matching.add(elem);
                     }
                 }
             }
         }
-        matchingByName.addAll(matchingById);
-
-        if (matchingByName.size() == 1
-                || (matchingByName.size() > 1
-                        && browser.hasFeature(HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS))) {
-            return getScriptableForElement(matchingByName.get(0));
+        for (final Object next : elements) {
+            if (next instanceof DomElement) {
+                final DomElement elem = (DomElement) next;
+                if ((!idFirst || (elem instanceof HtmlForm)) && name.equals(elem.getAttribute("name"))) {
+                    matching.add(elem);
+                }
+                else if (!idFirst && name.equals(elem.getId())) {
+                    matching.add(elem);
+                }
+            }
         }
-        if (matchingByName.isEmpty()) {
+        if (matching.size() == 1
+                || (matching.size() > 1
+                        && browser.hasFeature(HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS))) {
+            return getScriptableForElement(matching.get(0));
+        }
+        if (matching.isEmpty()) {
             if (browser.hasFeature(HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND)) {
                 return null;
             }
@@ -173,7 +177,7 @@ public class HTMLAllCollection extends HTMLCollection {
 
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
-        final HTMLCollection collection = new HTMLCollection(domNode, matchingByName);
+        final HTMLCollection collection = new HTMLCollection(domNode, matching);
         collection.setAvoidObjectDetection(true);
         return collection;
     }

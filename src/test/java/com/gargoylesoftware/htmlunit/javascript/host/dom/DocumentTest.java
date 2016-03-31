@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromFile;
@@ -1133,7 +1132,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "coll 2", "f6<->form6", "form6<->form6_2" },
             CHROME = { "coll 2", "form6<->form6_2", "f6<->form6" },
             IE = "f6<->form6")
-    @NotYetImplemented(CHROME)
     public void all_NamedItem_DuplicateIdName() throws Exception {
         namedItem("form6");
     }
