@@ -275,54 +275,49 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     private void fireOnOpen() {
-        if (openHandler_ == null) {
+        callFunction(openHandler_, ArrayUtils.EMPTY_OBJECT_ARRAY);
+    }
+
+    private void callFunction(final Function function, final Object[] args) {
+        if (function == null) {
             return;
         }
-        final Scriptable scope = openHandler_.getParentScope();
-        final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-        jsEngine.callFunction(containingPage_, openHandler_, scope, WebSocket.this,
-                ArrayUtils.EMPTY_OBJECT_ARRAY);
+        final Scriptable scope = function.getParentScope();
+        final JavaScriptEngine engine = containingPage_.getWebClient().getJavaScriptEngine();
+        engine.callFunction(containingPage_, function, scope, this, args);
     }
 
     private class WebSocketImpl extends WebSocketAdapter {
+
         @Override
         public void onWebSocketConnect(final Session session) {
+            super.onWebSocketConnect(session);
             outgoingSession_ = session;
         }
 
         @Override
-        public void onWebSocketClose(final int closeCode, final String message) {
-            if (closeHandler_ == null) {
-                return;
-            }
-            final Scriptable scope = closeHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            jsEngine.callFunction(containingPage_, closeHandler_, scope, WebSocket.this,
-                    new Object[] {closeCode, message});
+        public void onWebSocketClose(final int statusCode, final String reason) {
+            super.onWebSocketClose(statusCode, reason);
+            outgoingSession_ = null;
+
+            callFunction(closeHandler_, new Object[] {statusCode, reason});
         }
 
         @Override
-        public void onWebSocketText(final String data) {
-            if (messageHandler_ == null) {
-                return;
-            }
-            final Scriptable scope = messageHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            final MessageEvent event = new MessageEvent(data);
+        public void onWebSocketText(final String message) {
+            super.onWebSocketText(message);
+
+            final MessageEvent event = new MessageEvent(message);
             event.setParentScope(getParentScope());
             event.setPrototype(getPrototype(event.getClass()));
-            jsEngine.callFunction(containingPage_, messageHandler_, scope, WebSocket.this, new Object[] {event});
+            callFunction(messageHandler_, new Object[] {event});
         }
 
         @Override
         public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
-            if (messageHandler_ == null) {
-                return;
-            }
-            final Scriptable scope = messageHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            jsEngine.callFunction(containingPage_, messageHandler_, scope, WebSocket.this,
-                    new Object[] {data, offset, length});
+            super.onWebSocketBinary(data, offset, length);
+
+            callFunction(messageHandler_, new Object[] {data, offset, length});
         }
     }
 }
