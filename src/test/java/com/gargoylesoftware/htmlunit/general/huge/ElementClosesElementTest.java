@@ -105847,8 +105847,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
+    @Alerts("2")
     public void _a_script() throws Exception {
         test("a", "script");
     }
@@ -106055,8 +106054,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
+    @Alerts("2")
     public void _abbr_script() throws Exception {
         test("abbr", "script");
     }
@@ -106263,8 +106261,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
+    @Alerts("2")
     public void _acronym_script() throws Exception {
         test("acronym", "script");
     }
@@ -106282,8 +106279,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
+    @Alerts("2")
     public void _address_script() throws Exception {
         test("address", "script");
     }
