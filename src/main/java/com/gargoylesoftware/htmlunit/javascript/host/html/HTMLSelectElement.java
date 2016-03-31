@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -48,6 +49,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 public class HTMLSelectElement extends FormField {
 
     private HTMLOptionsCollection optionsArray_;
+
+    /** "Live" labels collection; has to be a member to have equality (==) working. */
+    private AbstractList labels_;
 
     /**
      * Creates an instance.
@@ -299,4 +303,17 @@ public class HTMLSelectElement extends FormField {
             getDomNodeOrDie().removeAttribute("multiple");
         }
     }
+
+    /**
+     * Returns the labels associated with the element.
+     * @return the labels associated with the element
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public AbstractList getLabels() {
+        if (labels_ == null) {
+            labels_ = new LabelsHelper(getDomNodeOrDie(), "Select.labels");
+        }
+        return labels_;
+    }
+
 }

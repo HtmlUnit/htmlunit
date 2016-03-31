@@ -1848,7 +1848,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "high,low,max,min,optimum,value",
             IE = "",
             EDGE = "")
-    @NotYetImplemented(CHROME)
     public void meter() throws Exception {
         test("meter");
     }

@@ -1740,4 +1740,41 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
+            CHROME = { "0", "2", "1", "2", "1", "1" })
+    public void labels() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      debug(document.getElementById('e1'));\n"
+            + "      debug(document.getElementById('e2'));\n"
+            + "      debug(document.getElementById('e3'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      var labels = document.getElementById('e4').labels;\n"
+            + "      document.body.removeChild(document.getElementById('l4'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      alert(labels ? labels.length : labels);\n"
+            + "    }\n"
+            + "    function debug(e) {\n"
+            + "      alert(e.labels ? e.labels.length : e.labels);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='e1'><br>\n"
+            + "  <label>something <label> click here <input id='e2'></label></label><br>\n"
+            + "  <label for='e3'> and here</label>\n"
+            + "  <input id='e3'><br>\n"
+            + "  <label id='l4' for='e4'> what about</label>\n"
+            + "  <label> this<input id='e4'></label><br>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

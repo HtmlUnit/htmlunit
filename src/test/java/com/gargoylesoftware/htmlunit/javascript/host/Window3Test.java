@@ -825,7 +825,6 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2-2", "3-3" })
-    @NotYetImplemented
     public void elementsByName_changedAfterGet2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

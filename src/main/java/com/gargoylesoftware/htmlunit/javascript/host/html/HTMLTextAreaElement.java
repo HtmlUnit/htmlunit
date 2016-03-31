@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -49,6 +50,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClass(domClass = HtmlTextArea.class)
 public class HTMLTextAreaElement extends FormField {
+
+    /** "Live" labels collection; has to be a member to have equality (==) working. */
+    private AbstractList labels_;
 
     /**
      * Creates an instance.
@@ -329,4 +333,17 @@ public class HTMLTextAreaElement extends FormField {
     public void setPlaceholder(final String placeholder) {
         ((HtmlTextArea) getDomNodeOrDie()).setPlaceholder(placeholder);
     }
+
+    /**
+     * Returns the labels associated with the element.
+     * @return the labels associated with the element
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public AbstractList getLabels() {
+        if (labels_ == null) {
+            labels_ = new LabelsHelper(getDomNodeOrDie(), "TextArea.labels");
+        }
+        return labels_;
+    }
+
 }

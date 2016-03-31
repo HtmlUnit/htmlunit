@@ -2427,4 +2427,41 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         verifyAlerts(driver, getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
+            CHROME = { "0", "2", "1", "2", "1", "1" })
+    public void labels() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      debug(document.getElementById('e1'));\n"
+            + "      debug(document.getElementById('e2'));\n"
+            + "      debug(document.getElementById('e3'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      var labels = document.getElementById('e4').labels;\n"
+            + "      document.body.removeChild(document.getElementById('l4'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      alert(labels ? labels.length : labels);\n"
+            + "    }\n"
+            + "    function debug(e) {\n"
+            + "      alert(e.labels ? e.labels.length : e.labels);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='e1'>e 1</select><br>\n"
+            + "  <label>something <label> click here <select id='e2'>e 2</select></label></label><br>\n"
+            + "  <label for='e3'> and here</label>\n"
+            + "  <select id='e3'>e 3</select><br>\n"
+            + "  <label id='l4' for='e4'> what about</label>\n"
+            + "  <label> this<select id='e4'>e 4</select></label><br>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

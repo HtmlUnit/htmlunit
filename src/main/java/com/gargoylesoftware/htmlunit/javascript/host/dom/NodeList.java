@@ -54,7 +54,7 @@ public class NodeList extends AbstractList {
     /**
      * Creates an instance.
      *
-     * @param parentScope parent scope
+     * @param parentScope the parent scope
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
      * @param description a text useful for debugging

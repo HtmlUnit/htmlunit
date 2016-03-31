@@ -1062,16 +1062,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "2" })
-    @NotYetImplemented
     public void getElementsByName_changedAfterGet2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            // 1
             + "    var collection = document.getElementsByName('image1');\n"
             + "    alert(collection.length);\n"
-
-            // 2
             + "    document.getElementById('image2').name = 'image1';\n"
             + "    alert(collection.length);\n"
             + "  }\n"
@@ -1172,16 +1168,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "2" })
-    @NotYetImplemented
     public void getElementsByName_changedAfterGet_nested2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            // 1
             + "    var collection = document.getElementsByName('image1');\n"
             + "    alert(collection.length);\n"
-
-            // 2
             + "    document.getElementById('image2').name = 'image1';\n"
             + "    alert(collection.length);\n"
             + "  }\n"

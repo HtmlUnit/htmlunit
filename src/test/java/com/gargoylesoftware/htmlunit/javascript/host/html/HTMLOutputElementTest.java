@@ -22,52 +22,12 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link HTMLMeterElement}.
+ * Tests for {@link HTMLOutputElement}.
  *
- * @author Marc Guillemot
- * @author Frank Danek
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HTMLMeterElementTest extends WebDriverTestCase {
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "[object HTMLMeterElement]",
-            IE = "[object HTMLUnknownElement]")
-    public void tag() throws Exception {
-        final String html = "<html><body>\n"
-            + "<meter id='it' min='200' max='500' value='350'>\n"
-            + "<script>\n"
-            + "alert(document.getElementById('it'));\n"
-            + "</script></body></html>";
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = { "number200", "number500", "number200", "number500", "number350", "number350" },
-            IE = { })
-    public void properties() throws Exception {
-        final String html = "<html><body>\n"
-            + "<meter id='it' min='200' max='500' value='350'>\n"
-            + "<script>\n"
-            + "var elt = document.getElementById('it');\n"
-            + "if (window.HTMLMeterElement) {\n"
-            + "  alert(typeof(elt.min) + elt.min);\n"
-            + "  alert(typeof(elt.max) + elt.max);\n"
-            + "  alert(typeof(elt.low) + elt.low);\n"
-            + "  alert(typeof(elt.high) + elt.high);\n"
-            + "  alert(typeof(elt.value) + elt.value);\n"
-            + "  alert(typeof(elt.optimum) + elt.optimum);\n"
-            + "}\n"
-            + "</script></body></html>";
-        loadPageWithAlerts2(html);
-    }
+public class HTMLOutputElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -95,12 +55,12 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <meter id='e1'>e 1</meter><br>\n"
-            + "  <label>something <label> click here <meter id='e2'>e 2</meter></label></label><br>\n"
+            + "  <output id='e1'>e 1</output><br>\n"
+            + "  <label>something <label> click here <output id='e2'>e 2</output></label></label><br>\n"
             + "  <label for='e3'> and here</label>\n"
-            + "  <meter id='e3'>e 3</meter><br>\n"
+            + "  <output id='e3'>e 3</output><br>\n"
             + "  <label id='l4' for='e4'> what about</label>\n"
-            + "  <label> this<meter id='e4'>e 4</meter></label><br>\n"
+            + "  <label> this<output id='e4'>e 4</output></label><br>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

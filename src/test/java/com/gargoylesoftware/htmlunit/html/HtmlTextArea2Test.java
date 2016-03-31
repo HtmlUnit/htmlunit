@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link HtmlTextInput}.
  *
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTextArea2Test extends WebDriverTestCase {
@@ -480,6 +481,43 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
+            CHROME = { "0", "2", "1", "2", "1", "1" })
+    public void labels() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      debug(document.getElementById('e1'));\n"
+            + "      debug(document.getElementById('e2'));\n"
+            + "      debug(document.getElementById('e3'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      var labels = document.getElementById('e4').labels;\n"
+            + "      document.body.removeChild(document.getElementById('l4'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      alert(labels ? labels.length : labels);\n"
+            + "    }\n"
+            + "    function debug(e) {\n"
+            + "      alert(e.labels ? e.labels.length : e.labels);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='e1'>e 1</textarea><br>\n"
+            + "  <label>something <label> click here <textarea id='e2'>e 2</textarea></label></label><br>\n"
+            + "  <label for='e3'> and here</label>\n"
+            + "  <textarea id='e3'>e 3</textarea><br>\n"
+            + "  <label id='l4' for='e4'> what about</label>\n"
+            + "  <label> this<textarea id='e4'>e 4</textarea></label><br>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }

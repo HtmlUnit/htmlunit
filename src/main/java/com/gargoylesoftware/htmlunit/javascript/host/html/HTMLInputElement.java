@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
@@ -70,6 +71,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass(domClass = HtmlInput.class)
 public class HTMLInputElement extends FormField {
+
+    /** "Live" labels collection; has to be a member to have equality (==) working. */
+    private AbstractList labels_;
 
     /**
      * Creates an instance.
@@ -672,6 +676,18 @@ public class HTMLInputElement extends FormField {
     @JsxSetter
     public void setHeight(final int height) {
         getDomNodeOrDie().setAttribute("height", Integer.toString(height));
+    }
+
+    /**
+     * Returns the labels associated with the element.
+     * @return the labels associated with the element
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public AbstractList getLabels() {
+        if (labels_ == null) {
+            labels_ = new LabelsHelper(getDomNodeOrDie(), "Input.labels");
+        }
+        return labels_;
     }
 
 }

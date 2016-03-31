@@ -68,9 +68,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass
 public class Node extends EventTarget {
 
-    /** "Live" child nodes collection; has to be a member to have equality (==) working. */
-    private NodeList childNodes_;
-
     /** @see org.w3c.dom.Node#ELEMENT_NODE */
     @JsxConstant
     public static final short ELEMENT_NODE = org.w3c.dom.Node.ELEMENT_NODE;
@@ -143,6 +140,9 @@ public class Node extends EventTarget {
     @JsxConstant
     public static final short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
         = org.w3c.dom.Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+
+    /** "Live" child nodes collection; has to be a member to have equality (==) working. */
+    private NodeList childNodes_;
 
     /**
      * Creates an instance.
