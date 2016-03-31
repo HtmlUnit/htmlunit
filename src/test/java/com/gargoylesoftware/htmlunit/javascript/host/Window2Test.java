@@ -1673,4 +1673,20 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Another strange browser detection trick.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void find() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  alert(typeof window.find);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

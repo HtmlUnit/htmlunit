@@ -2171,6 +2171,24 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
+     * Stub only at the moment.
+     * @param search the text string for which to search
+     * @param caseSensitive if true, specifies a case-sensitive search
+     * @param backwards if true, specifies a backward search
+     * @param wrapAround if true, specifies a wrap around search
+     * @param wholeWord if true, specifies a whole word search
+     * @param searchInFrames if true, specifies a search in frames
+     * @param showDialog if true, specifies a show Dialog.
+     * @return false
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public boolean find(final String search, final boolean caseSensitive,
+            final boolean backwards, final boolean wrapAround,
+            final boolean wholeWord, final boolean searchInFrames, final boolean showDialog) {
+        return false;
+    }
+
+    /**
      * Returns the {@code speechSynthesis} property.
      * @return the {@code speechSynthesis} property
      */
