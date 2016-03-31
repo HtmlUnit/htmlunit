@@ -101940,7 +101940,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1")
+    @Alerts("1")
     @NotYetImplemented({ FF38, FF45, EDGE })
     public void _table_command() throws Exception {
         test("table", "command");

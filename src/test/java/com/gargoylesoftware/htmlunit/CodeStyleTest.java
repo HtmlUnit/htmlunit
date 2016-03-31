@@ -97,7 +97,7 @@ public class CodeStyleTest {
         svnWCClient_ = new SVNWCClient(authManager, options);
         final List<File> files = new ArrayList<>();
         addAll(new File("src/main"), files);
-        addAll(new File("src/test"), null);
+        addAll(new File("src/test"), files);
         final List<String> classNames = getClassNames(files);
         process(files, classNames);
         for (final String className : classNames) {
@@ -129,7 +129,7 @@ public class CodeStyleTest {
                 if (child.isDirectory() && !".svn".equals(child.getName())) {
                     addAll(child, files);
                 }
-                else if (files != null) {
+                else {
                     files.add(child);
                 }
             }
@@ -666,7 +666,8 @@ public class CodeStyleTest {
      * Verifies that the class name is used.
      */
     private void className(final List<String> lines, final String relativePath) {
-        if (relativePath.contains("src") && relativePath.contains("host")) {
+        if (relativePath.contains("main") && relativePath.contains("host") 
+                && !relativePath.contains("LabelsHelper")) {
             String fileName = relativePath.substring(0, relativePath.length() - 5);
             fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
             for (final String line : lines) {

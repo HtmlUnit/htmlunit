@@ -359,6 +359,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
         driver.findElement(By.id("clickNe")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
+
     /**
      * @throws Exception if the test fails
      */
