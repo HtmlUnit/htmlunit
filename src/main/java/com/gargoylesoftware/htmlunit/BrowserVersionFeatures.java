@@ -937,10 +937,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
-    /** Is iframe {@code onload} event executed for {@code about:blank}. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
-    JS_IFRAME_ONLOAD_ABOUT_BLANK,
-
     /** Ignore the last line containing uncommented. */
     @BrowserFeature(@WebBrowser(IE))
     JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
