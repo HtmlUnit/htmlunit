@@ -164,7 +164,7 @@ public class MessageEvent extends Event {
     }
 
     /**
-     * sets the URI of the document of origin.
+     * Sets the URI of the document of origin.
      * @param origin the origin
      */
     public void setOrigin(final String origin) {
