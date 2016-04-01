@@ -117,7 +117,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
+        assertEquals("Element should have attribute", "tag", node.getId());
     }
 
     /**
@@ -343,7 +343,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.setAttribute("id", "other");
-        assertEquals("Element should have attribute", "other", node.getAttribute("id"));
+        assertEquals("Element should have attribute", "other", node.getId());
     }
 
     /**
@@ -403,7 +403,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.removeAttribute("id");
-        assertEquals("Element should not have removed attribute", "", node.getAttribute("id"));
+        assertEquals("Element should not have removed attribute", "", node.getId());
     }
 
     /**

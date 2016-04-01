@@ -656,7 +656,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     JS_DOCUMENT_SELECTION_RANGE_COUNT,
 
-    /** Javascript property document.domain doesn't allow to set domain of about:blank. */
+    /** Javascript property document.domain doesn't allow to set domain of {@code about:blank}. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
@@ -937,9 +937,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
-    /** Is iframe {@code onload} can be set. */
+    /** Is iframe {@code onload} event is execute for {@code about:blank}. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
-    JS_IFRAME_ONLOAD_SET,
+    JS_IFRAME_ONLOAD_ABOUT_BLANK,
 
     /** Ignore the last line containing uncommented. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1517,7 +1517,7 @@ public enum BrowserVersionFeatures {
     URL_ABOUT_BLANK_HAS_BLANK_PATH,
 
     /**
-     * Indicates, that the pathname for the url 'about:blank' is empty;
+     * Indicates, that the pathname for the url {@code about:blank} is empty;
      * instead of '/blank'.
      */
     @BrowserFeature(@WebBrowser(FF))
@@ -1555,7 +1555,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     XHR_IGNORE_PORT_FOR_SAME_ORIGIN,
 
-    /** A cross origin request to about:blank is not allowed. */
+    /** A cross origin request to {@code about:blank} is not allowed. */
     @BrowserFeature(@WebBrowser(IE))
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
 

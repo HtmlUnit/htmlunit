@@ -313,7 +313,7 @@ public class AbstractList extends SimpleScriptable implements Function {
 
         for (final Object next : elements) {
             if (next instanceof DomElement) {
-                final String id = ((DomElement) next).getAttribute("id");
+                final String id = ((DomElement) next).getId();
                 if (name.equals(id)) {
                     matchingElements.add(next);
                 }

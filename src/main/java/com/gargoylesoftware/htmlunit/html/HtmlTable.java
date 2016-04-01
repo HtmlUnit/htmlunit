@@ -165,7 +165,7 @@ public class HtmlTable extends HtmlElement {
      */
     public final HtmlTableRow getRowById(final String id) throws ElementNotFoundException {
         for (final HtmlTableRow row : getRowIterator()) {
-            if (row.getAttribute("id").equals(id)) {
+            if (row.getId().equals(id)) {
                 return row;
             }
         }

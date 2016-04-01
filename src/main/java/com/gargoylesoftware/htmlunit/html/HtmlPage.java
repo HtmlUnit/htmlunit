@@ -725,7 +725,7 @@ public class HtmlPage extends InteractivePage {
         final List<String> list = new ArrayList<>();
 
         for (final HtmlElement element : getTabbableElements()) {
-            list.add(element.getAttribute("id"));
+            list.add(element.getId());
         }
 
         return Collections.unmodifiableList(list);

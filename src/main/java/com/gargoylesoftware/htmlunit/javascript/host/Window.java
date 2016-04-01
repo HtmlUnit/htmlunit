@@ -2263,8 +2263,7 @@ class HTMLCollectionFrames extends HTMLCollection {
                 }
                 return getScriptableForElement(window);
             }
-            if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)
-                    && frameElt.getAttribute("id").equals(name)) {
+            if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID) && frameElt.getId().equals(name)) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
                 }

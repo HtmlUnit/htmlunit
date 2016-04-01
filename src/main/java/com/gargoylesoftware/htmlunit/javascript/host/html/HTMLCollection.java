@@ -236,7 +236,7 @@ public class HTMLCollection extends AbstractList {
             for (final Object next : elements) {
                 if (next instanceof DomElement) {
                     final DomElement elem = (DomElement) next;
-                    final String id = elem.getAttribute("id");
+                    final String id = elem.getId();
                     if (name.equals(id)) {
                         return getScriptableForElement(elem);
                     }
@@ -251,7 +251,7 @@ public class HTMLCollection extends AbstractList {
                     return getScriptableForElement(elem);
                 }
 
-                final String id = elem.getAttribute("id");
+                final String id = elem.getId();
                 if (name.equals(id)) {
                     return getScriptableForElement(elem);
                 }

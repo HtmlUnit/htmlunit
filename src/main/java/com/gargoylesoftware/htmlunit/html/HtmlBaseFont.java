@@ -53,7 +53,7 @@ public class HtmlBaseFont extends HtmlElement {
      * @return the value of the attribute {@code id} or an empty string if that attribute isn't defined
      */
     public final String getIdAttribute() {
-        return getAttribute("id");
+        return getId();
     }
 
     /**

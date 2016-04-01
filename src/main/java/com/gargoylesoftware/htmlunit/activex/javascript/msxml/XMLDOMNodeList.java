@@ -318,7 +318,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
 
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
-                final String id = ((DomElement) next).getAttribute("id");
+                final String id = ((DomElement) next).getId();
                 if (name.equals(id)) {
                     matchingElements.add(next);
                 }

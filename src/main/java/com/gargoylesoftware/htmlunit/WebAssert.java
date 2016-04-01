@@ -452,7 +452,7 @@ public final class WebAssert {
     public static void assertAllIdAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<>();
         for (final HtmlElement element : page.getHtmlElementDescendants()) {
-            final String id = element.getAttribute("id");
+            final String id = element.getId();
             if (id != null && !id.isEmpty()) {
                 if (list.contains(id)) {
                     throw new AssertionError("The element ID '" + id + "' is not unique.");

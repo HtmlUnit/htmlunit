@@ -128,7 +128,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     public void redownloadOnSrcAttributeChanged() throws Exception {
         final HtmlImage htmlImage = getHtmlElementToTest("image1");
         final ImageReader imageReader = htmlImage.getImageReader();
-        htmlImage.setAttribute("src", htmlImage.getAttribute("src") + "#changed");
+        htmlImage.setAttribute("src", htmlImage.getSrcAttribute() + "#changed");
         assertFalse("Src attribute changed but ImageReader was not reloaded",
                 imageReader.equals(htmlImage.getImageReader()));
     }
