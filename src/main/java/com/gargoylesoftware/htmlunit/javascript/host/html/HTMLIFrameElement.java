@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -114,7 +115,9 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnload(final Object eventHandler) {
-        setEventHandlerProp("onload", eventHandler);
+        if (getBrowserVersion().hasFeature(JS_IFRAME_ONLOAD_SET)) {
+            setEventHandlerProp("onload", eventHandler);
+        }
     }
 
     /**

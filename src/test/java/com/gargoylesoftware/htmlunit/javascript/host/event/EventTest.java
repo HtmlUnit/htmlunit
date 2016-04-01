@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -48,14 +47,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class EventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
-        + "    if (event) {\n"
-        + "      alert(event);\n"
-        + "      alert(event.type);\n"
-        + "      alert(event.bubbles);\n"
-        + "      alert(event.cancelable);\n"
-        + "    } else {\n"
-        + "      alert('no event');\n"
-        + "    }\n"
+        + "    alert(event);\n"
+        + "    alert(event.type);\n"
+        + "    alert(event.bubbles);\n"
+        + "    alert(event.cancelable);\n"
         + "  }\n";
 
     /**
@@ -254,7 +249,6 @@ public class EventTest extends WebDriverTestCase {
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
             + "  function handler(event) {\n"
-            + "    if(!event) { alert('no event param'); return; };\n"
             + "    alert(event.target == this ? 'pass' : event.target + '!=' + this);\n"
             + "  }\n"
             + "  document.getElementById('clickId').onclick = handler;\n"
@@ -298,7 +292,6 @@ public class EventTest extends WebDriverTestCase {
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
             + "  function handler(event) {\n"
-            + "    if(!event) { alert('no event param'); return; };\n"
             + "    alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this);\n"
             + "  }\n"
             + "  document.getElementById('clickId').onclick = handler;\n"
@@ -319,7 +312,6 @@ public class EventTest extends WebDriverTestCase {
             + "<div id='clickId'>click me</div>\n"
             + "<script>\n"
             + "  function handler(event) {\n"
-            + "    if(!event) { alert('no event param'); return; };\n"
             + "    alert(event.currentTarget);\n"
             + "  }\n"
             + "  document.getElementById('clickId').onmousedown = handler;\n"
@@ -401,13 +393,11 @@ public class EventTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that "this" refers to the element on which the event applies.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "frame1",
             CHROME = "")
-    @NotYetImplemented(CHROME)
     public void thisInEventHandler() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -415,7 +405,54 @@ public class EventTest extends WebDriverTestCase {
             + "<button name='button1' id='button1' onclick='alert(this.name)'>1</button>\n"
             + "<iframe src='about:blank' name='frame1' id='frame1'></iframe>\n"
             + "<script>\n"
-            + "document.getElementById('frame1').onload = document.getElementById('button1').onclick;\n"
+            + "  var e = document.getElementById('frame1');\n"
+            + "  e.onload = document.getElementById('button1').onclick;\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "called",
+            CHROME = "")
+    public void iframeOnload() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>"
+            + "  function test() {\n"
+            + "    alert('called');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<iframe src='about:blank' name='frame1' id='frame1'></iframe>\n"
+            + "<script>\n"
+            + "  var e = document.getElementById('frame1');\n"
+            + "  e.onload = test;\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "inline", "null" })
+    public void iframeOnload2() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<iframe src='about:blank' name='frame1' id='frame1'></iframe>\n"
+            + "<script>\n"
+            + "  var e = document.getElementById('frame1');\n"
+            + "  e.onload = alert('inline');\n"
+            + "  alert(e.onload);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -649,20 +686,17 @@ public class EventTest extends WebDriverTestCase {
         final String html =
               "<html><body>\n"
             + "<script>\n"
-            + "    if(!document.createEvent) { alert('no Event'); }\n"
-            + "    else {\n"
-            + "      var constants = [Event.ABORT, Event.ALT_MASK, Event.BACK, Event.BLUR, Event.CHANGE, Event.CLICK, "
+            + "  var constants = [Event.ABORT, Event.ALT_MASK, Event.BACK, Event.BLUR, Event.CHANGE, Event.CLICK, "
             + "Event.CONTROL_MASK, Event.DBLCLICK, Event.DRAGDROP, Event.ERROR, Event.FOCUS, Event.FORWARD, "
             + "Event.HELP, Event.KEYDOWN, Event.KEYPRESS, Event.KEYUP, Event.LOAD, Event.LOCATE, Event.META_MASK, "
             + "Event.MOUSEDOWN, Event.MOUSEDRAG, Event.MOUSEMOVE, Event.MOUSEOUT, Event.MOUSEOVER, Event.MOUSEUP, "
             + "Event.MOVE, Event.RESET, Event.RESIZE, Event.SCROLL, Event.SELECT, Event.SHIFT_MASK, Event.SUBMIT, "
             + "Event.UNLOAD, Event.XFER_DONE];\n"
-            + "      for (var x in constants) {\n"
-            + "        try {\n"
-            + "          alert(constants[x].toString(16));\n"
-            + "        } catch(e) { alert('e-' + x); }\n"
-            + "      }\n"
-            + "    }\n"
+            + "  for (var x in constants) {\n"
+            + "    try {\n"
+            + "      alert(constants[x].toString(16));\n"
+            + "    } catch(e) { alert('e-' + x); }\n"
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
 

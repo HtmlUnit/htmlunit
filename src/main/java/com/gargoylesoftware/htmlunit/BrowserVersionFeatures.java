@@ -933,7 +933,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
-    /** IE ignores the last line containing uncommented. */
+    /** Is iframe {@code onload} can be set. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    JS_IFRAME_ONLOAD_SET,
+
+    /** Ignore the last line containing uncommented. */
     @BrowserFeature(@WebBrowser(IE))
     JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
 
@@ -1353,7 +1357,7 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME,
 
     /** Support for accessing the frame of a window by id additionally to using the name (FF). */
-    @BrowserFeature({ @WebBrowser(IE) })
+    @BrowserFeature(@WebBrowser(IE))
     JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID,
 
     /** <code>window..frames['id']</code> returns the frame window instead of the frame element. */
