@@ -50,9 +50,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "SELECT;",
-            CHROME = { })
-    @NotYetImplemented(CHROME)
+    @Alerts("SELECT;")
+    @BuggyWebDriver
+    //https://bugs.chromium.org/p/chromedriver/issues/detail?id=1352
     public void clickSelect() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
