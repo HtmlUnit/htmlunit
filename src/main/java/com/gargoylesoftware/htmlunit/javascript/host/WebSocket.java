@@ -264,6 +264,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
+     * @return the sub protocol used
+     */
+    @JsxGetter
+    public long getBufferedAmount() {
+        return 0L;
+    }
+
+    /**
      * @return the used binary type
      */
     @JsxGetter
@@ -399,9 +407,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         public void onWebSocketText(final String message) {
             super.onWebSocketText(message);
 
-            final MessageEvent event = new MessageEvent(message);
-            fire(event);
-            callFunction(messageHandler_, new Object[] {event});
+            final MessageEvent msgEvent = new MessageEvent(message);
+            msgEvent.setOrigin(getUrl());
+            fire(msgEvent);
+            callFunction(messageHandler_, new Object[] {msgEvent});
         }
 
         @Override
@@ -413,9 +422,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             buffer.constructor(copy.length);
             buffer.setBytes(0, copy);
 
-            final MessageEvent event = new MessageEvent(buffer);
-            fire(event);
-            callFunction(messageHandler_, new Object[] {event});
+            final MessageEvent msgEvent = new MessageEvent(buffer);
+            msgEvent.setOrigin(getUrl());
+            fire(msgEvent);
+            callFunction(messageHandler_, new Object[] {msgEvent});
         }
     }
 }

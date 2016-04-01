@@ -26,7 +26,7 @@
 
     var room = {
         init : function() {
-            var location = "ws://localhost:12345/"
+            var location = "ws://localhost:12345"
             this._ws = new WebSocket(location);
             this._ws.binaryType = 'arraybuffer';
 
@@ -53,10 +53,18 @@
 
         _onmessageListener : function(e) {
             if (e.data === 'server_text') {
-                log('onMessageTextListener ' + e.data);
+                log('onMessageTextListener');
+                log(e.data);
+                log(e.origin);
+                log(e.lastEventId);
+                log(e.source);
             }
             else if(ab2str(e.data) === 'server_binary'){
-                log('onMessageBinaryListener ' + e.data);
+                log('onMessageBinaryListener');
+                log(e.data);
+                log(e.origin);
+                log(e.lastEventId);
+                log(e.source);
             }
             else {
                 log("Unknown message: ", e.data);
@@ -65,11 +73,21 @@
 
         _onmessage : function(e) {
             if (e.data === 'server_text') {
-                log('onMessageText ' + e.data);
+                log('onMessageText');
+                log(e.data);
+                log(e.origin);
+                log(e.lastEventId);
+                log(e.source);
+
                 room._send(str2ab('binary'));
             }
             else if(ab2str(e.data) === 'server_binary'){
-                log('onMessageBinary ' + e.data);
+                log('onMessageBinary');
+                log(e.data);
+                log(e.origin);
+                log(e.lastEventId);
+                log(e.source);
+
                 room._send('close');
             }
             else {

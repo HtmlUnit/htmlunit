@@ -286,14 +286,18 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "onOpenListener", "onOpen", "onMessageTextListener server_text",
-                "onMessageText server_text", "onMessageBinaryListener [object ArrayBuffer]",
-                "onMessageBinary [object ArrayBuffer]",
+    @Alerts(DEFAULT = { "onOpenListener", "onOpen",
+                "onMessageTextListener", "server_text", "ws://localhost:12345", "", "null",
+                "onMessageText", "server_text", "ws://localhost:12345", "", "null",
+                "onMessageBinaryListener", "[object ArrayBuffer]", "ws://localhost:12345", "", "null",
+                "onMessageBinary", "[object ArrayBuffer]", "ws://localhost:12345", "", "null",
                 "onCloseListener code: 1000  wasClean: true",
                 "onClose code: 1000  wasClean: true" },
-            IE = { "onOpenListener", "onOpen", "onMessageTextListener server_text",
-                    "onMessageText server_text", "onMessageBinaryListener [object ArrayBuffer]",
-                    "onMessageBinary [object ArrayBuffer]",
+            IE = { "onOpenListener", "onOpen",
+                    "onMessageTextListener", "server_text", "", "undefined", "null",
+                    "onMessageText", "server_text", "", "undefined", "null",
+                    "onMessageBinaryListener", "[object ArrayBuffer]", "", "undefined", "null",
+                    "onMessageBinary", "[object ArrayBuffer]", "", "undefined", "null",
                     "onCloseListener code: 1005  wasClean: true",
                     "onClose code: 1005  wasClean: true" })
     @NotYetImplemented(IE)

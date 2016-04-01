@@ -164,6 +164,14 @@ public class MessageEvent extends Event {
     }
 
     /**
+     * sets the URI of the document of origin.
+     * @param origin the origin
+     */
+    public void setOrigin(final String origin) {
+        origin_ = origin;
+    }
+
+    /**
      * Retrieves the identifier of the last event.
      * @return the identified of the last event
      */
