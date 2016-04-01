@@ -85,10 +85,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * The main starting point in HtmlUnit: this class simulates a web browser.
@@ -935,6 +938,10 @@ public class WebClient implements Serializable, AutoCloseable {
             if (page != null && page.isHtmlPage()) {
                 try {
                     final FrameWindow frame = ((HtmlPage) page).getFrameByName(name);
+                    final ScriptableObject scriptable = frame.getFrameElement().getScriptableObject();
+                    if (scriptable instanceof HTMLIFrameElement) {
+                        ((HTMLIFrameElement) scriptable).onRefresh();
+                    }
                     return frame;
                 }
                 catch (final ElementNotFoundException e) {

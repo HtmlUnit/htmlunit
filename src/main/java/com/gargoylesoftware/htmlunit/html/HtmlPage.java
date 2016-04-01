@@ -234,8 +234,7 @@ public class HtmlPage extends InteractivePage {
                 final TopLevelWindow topWindow = (TopLevelWindow) enclosingWindow;
                 final WebWindow openerWindow = topWindow.getOpener();
                 if (openerWindow != null && openerWindow.getEnclosedPage() != null) {
-                    baseUrl_ = openerWindow.getEnclosedPage().getWebResponse()
-                    .getWebRequest().getUrl();
+                    baseUrl_ = openerWindow.getEnclosedPage().getWebResponse().getWebRequest().getUrl();
                 }
             }
         }

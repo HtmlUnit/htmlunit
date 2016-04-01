@@ -9,6 +9,9 @@
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: do not execute iframe onload handle if set while the element is attached to page (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: CSSStyleDeclaration to return lower-case values (Chrome and IE).
             </action>
             <action type="fix" dev="rbri" due-to="Madis P&#x00e4;rn" issue="1762">

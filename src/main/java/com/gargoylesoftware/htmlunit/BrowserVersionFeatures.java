@@ -937,6 +937,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
+    /** Executes the {@code onload} handler, regardless of the whether the element was already attached to the page. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    JS_IFRAME_ALWAYS_EXECUTE_ONLOAD,
+
     /** Ignore the last line containing uncommented. */
     @BrowserFeature(@WebBrowser(IE))
     JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
