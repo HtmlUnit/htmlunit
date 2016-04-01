@@ -125,7 +125,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var a = document.getElementById('link');\n"
-            + "    if (!a.addEventListener) { alert('addEventListener not available'); return };\n"
             + "    a.addEventListener('click', handler);\n"
             + "  }\n"
             + "  function handler(event) {\n"

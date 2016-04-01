@@ -258,12 +258,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "  }\n"
             + "}\n"
             + "var oForm = document.forms[0];\n"
-            + "if (oForm.addEventListener) {\n"
-            + "  oForm.addEventListener('submit', foo, false);\n"
-            + "}"
-            + "else if (oForm.attachEvent) {\n"
-            + "  oForm.attachEvent('onsubmit', foo);\n"
-            + "}"
+            + "oForm.addEventListener('submit', foo, false);\n"
             + "</script>\n"
             + "</body></html>";
 

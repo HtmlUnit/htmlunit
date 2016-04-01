@@ -230,12 +230,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 + "<textarea id='log'></textarea>\n"
 
                 + "<script>\n"
-                + "  if (document.addEventListener) {\n"
-                + "    document.addEventListener('focus', ff, true);\n"
-                + "  }\n"
-                + "  else {\n"
-                + "    document.attachEvent('onfocus', ff);\n"
-                + "  }\n"
+                + "  document.addEventListener('focus', ff, true);\n"
                 + "  document.getElementById('it').focus();\n"
                 + "  document.getElementById('it').blur();\n"
                 + "  log('done');\n"

@@ -477,11 +477,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    alert('clicked');\n"
             + "  }\n"
 
-            + "  if (document.addEventListener) {\n"
-            + "    document.addEventListener('click', clickListener, true);\n"
-            + "  } else {\n"
-            + "    alert('document.addEventListener not available');\n"
-            + "  }\n"
+            + "  document.addEventListener('click', clickListener, true);\n"
             + "</script>\n"
             + "<body onload='doTest()'>foo</body>\n"
             + "</html>";
