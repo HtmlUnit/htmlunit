@@ -533,7 +533,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return the current event phase for the event
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxGetter
     public int getEventPhase() {
         return eventPhase_;
     }

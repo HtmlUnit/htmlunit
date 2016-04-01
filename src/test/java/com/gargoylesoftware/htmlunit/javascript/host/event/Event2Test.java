@@ -623,7 +623,6 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "capturing", "at target", "bubbling" })
-    @NotYetImplemented(CHROME)
     public void eventPhase() throws Exception {
         final String html =
               "<html>\n"

@@ -9,6 +9,9 @@
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: Event.eventPhase is supported by Chrome.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: IFrame onload is ignored by Chrome.
             </action>
             <action type="update" dev="asashour">
