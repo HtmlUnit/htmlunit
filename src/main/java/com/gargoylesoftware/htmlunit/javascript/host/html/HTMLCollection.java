@@ -121,7 +121,7 @@ public class HTMLCollection extends AbstractList {
      * {@inheritDoc}
      */
     @Override
-    protected HTMLCollection create(final DomNode parentScope, final List<?> initialElements) {
+    protected AbstractList create(final DomNode parentScope, final List<?> initialElements) {
         return new HTMLCollection(parentScope, initialElements);
     }
 

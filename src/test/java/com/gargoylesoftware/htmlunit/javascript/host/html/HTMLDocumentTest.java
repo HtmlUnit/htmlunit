@@ -564,7 +564,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HTMLCollection]", "4", "red" },
             CHROME = { "[object NodeList]", "4", "red" })
-    @NotYetImplemented(CHROME)
     public void identicalIDs() throws Exception {
         final String html =
             "<html>\n"

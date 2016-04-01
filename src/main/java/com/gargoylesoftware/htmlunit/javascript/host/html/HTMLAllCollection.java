@@ -38,6 +38,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -234,4 +236,16 @@ public class HTMLAllCollection extends HTMLCollection {
     protected boolean supportsParanteses() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AbstractList create(final DomNode parentScope, final List<?> initialElements) {
+        if (getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME)) {
+            return new NodeList(parentScope, initialElements);
+        }
+        return super.create(parentScope, initialElements);
+    }
+
 }

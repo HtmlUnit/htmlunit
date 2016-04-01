@@ -63,6 +63,15 @@ public class NodeList extends AbstractList {
     }
 
     /**
+     * Constructs an instance with an initial cache value.
+     * @param domNode the parent scope, on which we listen for changes
+     * @param initialElements the initial content for the cache
+     */
+    public NodeList(final DomNode domNode, final List<?> initialElements) {
+        super(domNode, initialElements);
+    }
+
+    /**
      * Creates an instance.
      * @param parentScope the parent scope
      */
