@@ -117,14 +117,6 @@ public class MessageEvent extends Event {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void eventCreated() {
-        super.eventCreated();
-    }
-
-    /**
      * Initializes an event object.
      * @param type the event type
      * @param canBubble can the event bubble
