@@ -206,6 +206,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     EVENT_ONLOAD_INTERNAL_JAVASCRIPT,
 
+    /** MessageEvent default data value is null. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    EVENT_ONMESSAGE_DEFAULT_DATA_NULL,
+
     /** Does not trigger "onmousedown" event handler for the select options. */
     @BrowserFeature({ @WebBrowser(IE) })
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,

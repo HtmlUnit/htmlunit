@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="fix" dev="rbri" due-to="Madis P&#x00e4;rn" issue="1762">
+                WebSocket event handling fixed, open event now fired, tests added.
+            </action>
+            <action type="add" dev="rbri">
+                Improved MessageEvent implementation.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: Event.eventPhase is supported by Chrome.
             </action>

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMESSAGE_DEFAULT_DATA_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -25,6 +26,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code MessageEvent}.
@@ -50,8 +56,11 @@ public class MessageEvent extends Event {
     /**
      * Default constructor used to build the prototype.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public MessageEvent() {
+        setType(TYPE_MESSAGE);
+        origin_ = "";
+        lastEventId_ = "";
+        data_ = Undefined.instance;
     }
 
     /**
@@ -59,8 +68,60 @@ public class MessageEvent extends Event {
      * @param data the data
      */
     public MessageEvent(final Object data) {
+        this();
         data_ = data;
-        setType(TYPE_MESSAGE);
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @Override
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
+
+        if (getBrowserVersion().hasFeature(EVENT_ONMESSAGE_DEFAULT_DATA_NULL)) {
+            data_ = null;
+        }
+
+        String origin = "";
+        String lastEventId = "";
+        if (details != null && !Context.getUndefinedValue().equals(details)) {
+            data_ = details.get("data");
+
+            final String detailOrigin = (String) details.get("origin");
+            if (detailOrigin != null) {
+                origin = detailOrigin;
+            }
+
+            final Object detailLastEventId = details.get("lastEventId");
+            if (detailLastEventId != null) {
+                lastEventId = Context.toString(detailLastEventId);
+            }
+
+            source_ = null;
+            final Object detailSource = details.get("source");
+            if (detailSource instanceof Window) {
+                source_ = (Window) detailSource;
+            }
+            else if (detailSource instanceof WindowProxy) {
+                source_ = ((WindowProxy) detailSource).getDelegee();
+            }
+            ports_ = details.get("ports");
+        }
+        origin_ = origin;
+        lastEventId_ = lastEventId;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void eventCreated() {
+        super.eventCreated();
     }
 
     /**
