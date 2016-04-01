@@ -1362,7 +1362,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;", "color: pink;" },
             CHROME = { "black", "pink", "color: pink;", "color: pink;" },
             IE = { "black", "pink", "color: pink;", "color: pink;" })
-    @NotYetImplemented({ IE, CHROME })
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1373,7 +1372,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "    style.color = 'pink';\n"
             + "    alert(style.color);\n"
             + "    alert(node.getAttribute('style'));\n"
-            + "}\n</script></head>\n"
+            + "}\n"
+            + "</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='COLOR: BLACK'>foo</div></body></html>";
 
         final String style = getExpectedAlerts()[getExpectedAlerts().length - 1];

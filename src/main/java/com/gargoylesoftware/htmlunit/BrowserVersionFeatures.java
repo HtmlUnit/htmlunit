@@ -937,7 +937,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
-    /** Is iframe {@code onload} event is execute for {@code about:blank}. */
+    /** Is iframe {@code onload} event executed for {@code about:blank}. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     JS_IFRAME_ONLOAD_ABOUT_BLANK,
 
