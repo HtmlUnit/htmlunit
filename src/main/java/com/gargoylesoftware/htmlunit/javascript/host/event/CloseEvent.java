@@ -128,6 +128,13 @@ public class CloseEvent extends Event {
     }
 
     /**
+     * @param code the code
+     */
+    public void setCode(final int code) {
+        code_ = code;
+    }
+
+    /**
      * @return the reason
      */
     @JsxGetter
@@ -136,10 +143,24 @@ public class CloseEvent extends Event {
     }
 
     /**
+     * @param reason the reason
+     */
+    public void setReason(final String reason) {
+        reason_ = reason;
+    }
+
+    /**
      * @return the wasClean
      */
     @JsxGetter
     public boolean getWasClean() {
         return wasClean_;
+    }
+
+    /**
+     * @param wasClean the wasClean
+     */
+    public void setWasClean(final boolean wasClean) {
+        wasClean_ = wasClean;
     }
 }

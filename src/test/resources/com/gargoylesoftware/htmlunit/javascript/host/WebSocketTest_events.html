@@ -20,43 +20,74 @@
         return buf;
     }
 
+    function log(x) {
+        $('log').value += x + '\n';
+    }
+
     var room = {
         init : function() {
             var location = "ws://localhost:12345/"
             this._ws = new WebSocket(location);
             this._ws.binaryType = 'arraybuffer';
-            this._ws.addEventListener('open', this._onopen);
-            this._ws.addEventListener('message', this._onmessage);
-            this._ws.addEventListener('close', this._onclose);
+
+            this._ws.addEventListener('open', this._onopenListener);
+            this._ws.onopen = this._onopen;
+
+            this._ws.addEventListener('message', this._onmessageListener);
+            this._ws.onmessage = this._onmessage;
+
+            this._ws.addEventListener('close', this._oncloseListener);
+            this._ws.onclose =  this._onclose;
+
             this._ws.onerror = this._onerror;
         },
 
+        _onopenListener : function() {
+            log('onOpenListener');
+        },
+
         _onopen : function() {
-            $('onOpen').className = '';
+            log('onOpen');
             room._send('text');
+        },
+
+        _onmessageListener : function(e) {
+            if (e.data === 'server_text') {
+                log('onMessageTextListener ' + e.data);
+            }
+            else if(ab2str(e.data) === 'server_binary'){
+                log('onMessageBinaryListener ' + e.data);
+            }
+            else {
+                log("Unknown message: ", e.data);
+            }
         },
 
         _onmessage : function(e) {
             if (e.data === 'server_text') {
-                $('onMessageText').className = '';
+                log('onMessageText ' + e.data);
                 room._send(str2ab('binary'));
             }
             else if(ab2str(e.data) === 'server_binary'){
-                $('onMessageBinary').className = '';
+                log('onMessageBinary ' + e.data);
                 room._send('close');
             }
             else {
-                console.warn("Unknown message: ", e.data);
+                log("Unknown message: ", e.data);
             }
         },
 
-        _onclose : function(m) {
+        _oncloseListener : function(ce) {
+            log('onCloseListener code: ' + ce.code + '  wasClean: ' + ce.wasClean);
+        },
+
+        _onclose : function(ce) {
             this._ws = null;
-            $('onClose').className = '';
+            log('onClose code: ' + ce.code + '  wasClean: ' + ce.wasClean);
         },
 
         _onerror : function(e) {
-            alert(e);
+            log('onError' + e);
         },
         
         _send: function(data) {
@@ -69,15 +100,9 @@
     };
 </script>
 
-<style type='text/css'>
-    div.hidden { display: none; }
-</style>
 </head>
 
 <body>
-    <div id="onOpen" class="hidden">onOpen</div>
-    <div id="onMessageText" class="hidden">onMessageText</div>
-    <div id="onMessageBinary" class="hidden">onMessageBinary</div>
-    <div id="onClose" class="hidden">onClose</div>
+    <textarea id='log' cols='80' rows='40'></textarea>\n"
 </body>
 </html>

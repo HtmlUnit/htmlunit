@@ -14,7 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.IOException;
 import java.net.URI;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
@@ -25,6 +29,7 @@ import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -33,10 +38,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
+import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -44,6 +53,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * A JavaScript object for {@code WebSocket}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ * @author Madis Pärn
  *
  * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/WebSocket">Mozilla documentation</a>
  */
@@ -69,11 +80,13 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     private Function errorHandler_;
     private Function messageHandler_;
     private Function openHandler_;
-    private int readyState_ = CLOSED;
+    private URI url_;
+    private int readyState_ = CONNECTING;
+    private String binaryType_ = "blob";
 
     private HtmlPage containingPage_;
     private WebSocketClient client_;
-    private Session incomingSession_;
+    private volatile Session incomingSession_;
     private Session outgoingSession_;
 
     /**
@@ -91,6 +104,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     private WebSocket(final String url, final Object protocols, final Window window) {
         try {
             containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
+            setParentScope(window);
+            setDomNode(containingPage_.getBody(), false);
 
             if (containingPage_.getWebClient().getOptions().isUseInsecureSSL()) {
                 client_ = new WebSocketClient(new SslContextFactory(true));
@@ -100,16 +115,28 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             }
             client_.setCookieStore(new WebSocketCookieStore(window.getWebWindow().getWebClient()));
             client_.start();
+            containingPage_.addAutoCloseable(this);
+            url_ = new URI(url);
 
             // there seem to be a bug in jetty, this constructor sets the cookies twice
             // incomingSession_ = client_.connect(new WebSocketImpl(), new URI(url)).get();
-            incomingSession_ = client_.connect(new WebSocketImpl(), new URI(url), new ClientUpgradeRequest()).get();
-
-            readyState_ = OPEN;
-            containingPage_.addAutoCloseable(this);
+            final Future<Session> connectFuture = client_.connect(new WebSocketImpl(),
+                                                                    url_, new ClientUpgradeRequest());
+            client_.getExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        readyState_ = CONNECTING;
+                        incomingSession_ = connectFuture.get();
+                    }
+                    catch (final Exception e) {
+                        LOG.error("WS connect error", e);
+                    }
+                }
+            });
         }
         catch (final Exception e) {
-            LOG.error(e);
+            LOG.error("WS constructor error", e);
         }
     }
 
@@ -208,7 +235,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxSetter
     public void setOnopen(final Function openHandler) {
         openHandler_ = openHandler;
-        fireOnOpen();
     }
 
     /**
@@ -219,6 +245,42 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxGetter
     public int getReadyState() {
         return readyState_;
+    }
+
+    /**
+     * @return the url
+     */
+    @JsxGetter
+    public String getUrl() {
+        return url_.toString();
+    }
+
+    /**
+     * @return the sub protocol used
+     */
+    @JsxGetter
+    public String getProtocol() {
+        return "";
+    }
+
+    /**
+     * @return the used binary type
+     */
+    @JsxGetter
+    public String getBinaryType() {
+        return binaryType_;
+    }
+
+    /**
+     * Sets the used binary type.
+     * @param type the type
+     */
+    @JsxSetter
+    public void setBinaryType(final String type) {
+        if ("arraybuffer".equals(type)
+            || "blob".equals(type)) {
+            binaryType_ = type;
+        }
     }
 
     /**
@@ -244,13 +306,16 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             if (outgoingSession_ != null) {
                 outgoingSession_.close();
             }
-            try {
+        }
+
+        try {
+            if (client_ != null) {
                 client_.stop();
+                client_ = null;
             }
-            catch (final Exception e) {
-                throw new RuntimeException(e);
-            }
-            readyState_ = CLOSED;
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -262,20 +327,35 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     public void send(final Object content) {
         try {
             if (content instanceof String) {
-                outgoingSession_.getRemote().sendString(content.toString());
+                outgoingSession_.getRemote().sendString((String) content);
+            }
+            else if (content instanceof ArrayBuffer) {
+                final byte[] bytes = ((ArrayBuffer) content).getBytes();
+                final ByteBuffer buffer = ByteBuffer.wrap(bytes);
+                outgoingSession_.getRemote().sendBytes(buffer);
             }
             else {
                 throw new IllegalStateException(
                         "Not Yet Implemented: WebSocket.send() was used to send non-string value");
             }
         }
-        catch (final Exception e) {
-            LOG.error(e);
+        catch (final IOException e) {
+            LOG.error("WS send error", e);
         }
     }
 
-    private void fireOnOpen() {
-        callFunction(openHandler_, ArrayUtils.EMPTY_OBJECT_ARRAY);
+    private void fire(final Event evt) {
+        evt.setTarget(this);
+        evt.setParentScope(getParentScope());
+        evt.setPrototype(getPrototype(evt.getClass()));
+
+        final JavaScriptEngine engine = containingPage_.getWebClient().getJavaScriptEngine();
+        engine.getContextFactory().call(new ContextAction() {
+            @Override
+            public ScriptResult run(final Context cx) {
+                return executeEventLocally(evt);
+            }
+        });
     }
 
     private void callFunction(final Function function, final Object[] args) {
@@ -292,15 +372,27 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         @Override
         public void onWebSocketConnect(final Session session) {
             super.onWebSocketConnect(session);
+            readyState_ = OPEN;
             outgoingSession_ = session;
+
+            final Event openEvent = new Event();
+            openEvent.setType(Event.TYPE_OPEN);
+            fire(openEvent);
+            callFunction(openHandler_, ArrayUtils.EMPTY_OBJECT_ARRAY);
         }
 
         @Override
         public void onWebSocketClose(final int statusCode, final String reason) {
             super.onWebSocketClose(statusCode, reason);
+            readyState_ = CLOSED;
             outgoingSession_ = null;
 
-            callFunction(closeHandler_, new Object[] {statusCode, reason});
+            final CloseEvent closeEvent = new CloseEvent();
+            closeEvent.setCode(statusCode);
+            closeEvent.setReason(reason);
+            closeEvent.setWasClean(true);
+            fire(closeEvent);
+            callFunction(closeHandler_, new Object[] {closeEvent});
         }
 
         @Override
@@ -308,8 +400,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             super.onWebSocketText(message);
 
             final MessageEvent event = new MessageEvent(message);
-            event.setParentScope(getParentScope());
-            event.setPrototype(getPrototype(event.getClass()));
+            fire(event);
             callFunction(messageHandler_, new Object[] {event});
         }
 
@@ -317,7 +408,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
             super.onWebSocketBinary(data, offset, length);
 
-            callFunction(messageHandler_, new Object[] {data, offset, length});
+            final byte[] copy = Arrays.copyOfRange(data, offset, length);
+            final ArrayBuffer buffer = new ArrayBuffer();
+            buffer.constructor(copy.length);
+            buffer.setBytes(0, copy);
+
+            final MessageEvent event = new MessageEvent(buffer);
+            fire(event);
+            callFunction(messageHandler_, new Object[] {event});
         }
     }
 }

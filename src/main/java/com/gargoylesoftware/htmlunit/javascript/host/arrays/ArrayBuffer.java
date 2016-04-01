@@ -90,7 +90,10 @@ public class ArrayBuffer extends SimpleScriptable {
         }
     }
 
-    byte[] getBytes() {
+    /**
+     * @return the bytes
+     */
+    public byte[] getBytes() {
         return bytes_;
     }
 }

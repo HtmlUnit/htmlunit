@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
@@ -49,6 +51,65 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class WebSocketTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "ws://localhost:12345/", "", "0", "blob"})
+    public void initial() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var location = 'ws://localhost:" + PORT + "/'\n"
+            + "    var ws = new WebSocket(location);\n"
+            + "    alert(ws.url);\n"
+            + "    alert(ws.protocol);\n"
+            + "    alert(ws.readyState);\n"
+            + "    alert(ws.binaryType);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "blob", "blob", "arraybuffer", "blob", "blob" },
+            IE = { "blob", "exception", "arraybuffer", "blob", "exception" })
+    @NotYetImplemented(IE)
+    public void binaryType() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var location = 'ws://localhost:" + PORT + "/'\n"
+            + "    var ws = new WebSocket(location);\n"
+            + "    alert(ws.binaryType);\n"
+
+            + "    try {\n"
+            + "      ws.binaryType = 'abc';\n"
+            + "      alert(ws.binaryType);\n"
+            + "    } catch(e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "      ws.binaryType = 'arraybuffer';\n"
+            + "      alert(ws.binaryType);\n"
+            + "    } catch(e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "      ws.binaryType = 'blob';\n"
+            + "      alert(ws.binaryType);\n"
+            + "    } catch(e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "      ws.binaryType = '';\n"
+            + "      alert(ws.binaryType);\n"
+            + "    } catch(e) { alert('exception') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 
     /**
      * Test case taken from <a href="http://angelozerr.wordpress.com/2011/07/23/websockets_jetty_step1/">here</a>.
@@ -225,17 +286,33 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @Alerts(DEFAULT = { "onOpenListener", "onOpen", "onMessageTextListener server_text",
+                "onMessageText server_text", "onMessageBinaryListener [object ArrayBuffer]",
+                "onMessageBinary [object ArrayBuffer]",
+                "onCloseListener code: 1000  wasClean: true",
+                "onClose code: 1000  wasClean: true" },
+            IE = { "onOpenListener", "onOpen", "onMessageTextListener server_text",
+                    "onMessageText server_text", "onMessageBinaryListener [object ArrayBuffer]",
+                    "onMessageBinary [object ArrayBuffer]",
+                    "onCloseListener code: 1005  wasClean: true",
+                    "onClose code: 1005  wasClean: true" })
+    @NotYetImplemented(IE)
     public void events() throws Exception {
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
             null, null, new EventsWebSocketHandler());
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + "/WebSocketTest_events.html");
 
-        assertVisible("onOpen", driver);
-        assertVisible("onMessageText", driver);
-        assertVisible("onMessageBinary", driver);
-        assertVisible("onClose", driver);
+        final WebElement logElement = driver.findElement(By.id("log"));
+        int counter = 0;
+        String text;
+        do {
+            Thread.sleep(100);
+
+            text = logElement.getAttribute("value").trim().replaceAll("\r", "");
+        } while (text.length() > 0 && counter++ < 10);
+
+        assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
     }
 
     private void assertVisible(final String domId, final WebDriver driver) throws Exception {
