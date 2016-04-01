@@ -20,9 +20,6 @@
             <action type="fix" dev="asashour">
                 JavaScript: Event.eventPhase is supported by Chrome.
             </action>
-            <action type="fix" dev="asashour">
-                JavaScript: IFrame onload is ignored for about:blank by Chrome.
-            </action>
             <action type="update" dev="asashour">
                 HtmlElement: deprecate .getHtmlElementsByTagName() and .getHtmlElementsByTagNames().
             </action>

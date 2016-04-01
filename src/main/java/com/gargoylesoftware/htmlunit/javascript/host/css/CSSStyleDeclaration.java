@@ -405,7 +405,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         final StyleElement element = getStyleElement(name);
         if (element != null && element.getValue() != null) {
             final String value = element.getValue();
-            if (getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
+            if (!value.contains("url")
+                    && getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
                 return value.toLowerCase(Locale.ROOT);
             }
             return value;

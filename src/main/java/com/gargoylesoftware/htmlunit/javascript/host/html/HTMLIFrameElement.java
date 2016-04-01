@@ -14,16 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IFRAME_ONLOAD_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -32,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
  * A JavaScript object for {@link HtmlInlineFrame}.
@@ -202,18 +197,5 @@ public class HTMLIFrameElement extends HTMLElement {
     @JsxSetter
     public void setHeight(final String height) {
         setWidthOrHeight("height", height, true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ScriptResult executeEventLocally(final Event event) {
-        final String src = getSrc();
-        if ((src != DomElement.ATTRIBUTE_NOT_DEFINED && !WebClient.ABOUT_BLANK.equals(src))
-                || getBrowserVersion().hasFeature(JS_IFRAME_ONLOAD_ABOUT_BLANK)) {
-            return super.executeEventLocally(event);
-        }
-        return null;
     }
 }

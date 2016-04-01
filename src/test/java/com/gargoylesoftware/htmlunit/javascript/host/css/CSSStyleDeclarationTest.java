@@ -889,26 +889,29 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
-     * Browsers are really strange.
-     *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "none",
-            CHROME = "",
-            IE = "inline")
+    @Alerts(DEFAULT = { "none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)" },
+            CHROME = { "", "", "none", "rgb(0, 128, 0)" },
+            IE = { "inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)" })
     @NotYetImplemented({ IE, CHROME })
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>foo</title>\n"
             + "  <style>\n"
-            + "    tt { display: none; }\n"
+            + "    tt { display: none; color: green; }\n"
             + "  </style>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      var elem = document.createElement('TT');\n"
-            + "      alert(window.getComputedStyle(elem, null)['display']);\n"
+            + "      var e = document.createElement('tt');\n"
+            + "      var style = window.getComputedStyle(e, null);\n"
+            + "      alert(style['display']);\n"
+            + "      alert(style['color']);\n"
+            + "      document.body.appendChild(e);\n"
+            + "      alert(style['display']);\n"
+            + "      alert(style['color']);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
