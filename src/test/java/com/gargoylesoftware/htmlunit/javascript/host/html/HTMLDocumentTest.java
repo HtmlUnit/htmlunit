@@ -1289,7 +1289,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "        nbSupported++;\n"
             + "      else\n"
             + "        cmdsNotSupported[cmdsNotSupported.length] = cmd;\n"
-            + "    }"
+            + "    }\n"
             + "  } catch (e) { alert('exception'); }\n"
             + "  alert(nbSupported + ' commands supported');\n"
             + "  if (nbSupported != 0 && cmdsNotSupported.length > 0)\n"

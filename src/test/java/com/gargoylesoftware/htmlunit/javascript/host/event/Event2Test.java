@@ -679,7 +679,6 @@ public class Event2Test extends WebDriverTestCase {
             + "    var oSpan = document.getElementById('theSpan');\n"
             + "    oSpan.addEventListener('click', t('span capturing'), true);\n"
             + "    oSpan.addEventListener('click', t('span bubbling'), false);\n"
-            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

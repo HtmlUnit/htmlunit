@@ -231,7 +231,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function test() {\n"
-            + "    if (!Function.prototype.bind) { alert('bind not supported'); return }"
+            + "    if (!Function.prototype.bind) { alert('bind not supported'); return }\n"
 
             + "    var foo = bindTest.bind(null);\n"
             + "    foo();\n"
@@ -268,7 +268,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function test() {\n"
-            + "    if (!Function.prototype.bind) { alert('bind not supported'); return }"
+            + "    if (!Function.prototype.bind) { alert('bind not supported'); return }\n"
 
             + "    var foo = bindTest.bind('ab', ['x', 'y']);\n"
             + "    foo();\n"

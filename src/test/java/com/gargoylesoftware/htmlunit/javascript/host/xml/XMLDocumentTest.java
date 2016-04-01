@@ -961,7 +961,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "      alert('nodeFromID ' + doc.nodeFromID('target'));\n"
             + "    } catch (e) {\n"
             + "      alert('nodeFromID not available');\n"
-            + "    }"
+            + "    }\n"
             + "  }\n"
             + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"

@@ -306,7 +306,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     }
 
     /**
-     * Produces a String that will produce a JS map like "{'key1': 'value1', 'key 2': 'value2'}"
+     * Produces a String that will produce a JS map like "{'key1': 'value1', 'key 2': 'value2'}".
      * @param headers a list of {@link NameValuePair}
      * @return the JS String
      */

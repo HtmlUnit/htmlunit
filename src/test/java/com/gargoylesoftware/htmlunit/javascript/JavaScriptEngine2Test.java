@@ -424,7 +424,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void onloadJavascriptFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function onload() {alert('foo');}"
+            + "function onload() {alert('foo');}\n"
             + "</script></head><body>\n"
             + "</body></html>";
 

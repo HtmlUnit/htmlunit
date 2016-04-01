@@ -135,11 +135,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({ "32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57" })
     public void keyCodes_keyup() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
             + "  alert(e.keyCode);"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeyup='handleKey(event)'/>\n"
@@ -160,11 +160,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({ "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
         "82", "83", "84", "85", "86", "87", "88", "89", "90" })
     public void keyCodes2_keyup() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);"
-            + "}"
+            + "  alert(e.keyCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeyup='handleKey(event)'/>\n"
@@ -184,11 +184,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({ "32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57" })
     public void keyCodes_keydown() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);"
-            + "}"
+            + "  alert(e.keyCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeydown='handleKey(event)'/>\n"
@@ -209,11 +209,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({ "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
         "82", "83", "84", "85", "86", "87", "88", "89", "90" })
     public void keyCodes2_keydown() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);"
-            + "}"
+            + "  alert(e.keyCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeydown='handleKey(event)'/>\n"
@@ -233,11 +233,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({ "32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57" })
     public void keyCodes_keypress() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.charCode);"
-            + "}"
+            + "  alert(e.charCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeypress='handleKey(event)'/>\n"
@@ -260,11 +260,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
             "110", "111", "112", "113", "114", "115", "116", "117", "118", "119",
             "120", "121", "122" })
     public void keyCodes2_keypress() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.charCode);"
-            + "}"
+            + "  alert(e.charCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeypress='handleKey(event)'/>\n"

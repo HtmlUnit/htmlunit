@@ -113,9 +113,9 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     public void namespacesWithCustomNSResolver() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "  function nsResolver(prefix) {"
-            + "    return {s : 'http://schemas.xmlsoap.org/soap/envelope/'}[prefix] || null;"
-            + "  }"
+            + "  function nsResolver(prefix) {\n"
+            + "    return {s : 'http://schemas.xmlsoap.org/soap/envelope/'}[prefix] || null;\n"
+            + "  }\n"
 
             + "  var xml = "
             + "  '<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
@@ -128,8 +128,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "  </soap:Envelope>';\n"
 
             + "  function test() {\n"
-            + "    if (window.XPathEvaluator) {"
-            + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');"
+            + "    if (window.XPathEvaluator) {\n"
+            + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');\n"
             + "      var xpe = new XPathEvaluator();\n"
             + "      var result = xpe.evaluate('/s:Envelope/s:books/s:book/title/text()', "
                                    + "doc.documentElement, nsResolver, XPathResult.STRING_TYPE, null);\n"

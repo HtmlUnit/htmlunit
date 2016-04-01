@@ -247,7 +247,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "  document.open();\n"
             + "  document.write('<html><body onload=\"alert(document.location)\"></body></html>');\n"
             + "  document.close();\n"
-            + "}"
+            + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
@@ -274,7 +274,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "  alert(document.submitForm.tagName);\n"
             + "  alert(window.document == document);\n"
             + "  alert(document.submitForm == document.getElementsByTagName('form')[0]);\n"
-            + "}"
+            + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 

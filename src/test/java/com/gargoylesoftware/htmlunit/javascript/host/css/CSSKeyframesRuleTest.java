@@ -40,8 +40,8 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
 
-            + "<style>"
-            + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}"
+            + "<style>\n"
+            + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -71,8 +71,8 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
 
-            + "<style>"
-            + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}"
+            + "<style>\n"
+            + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -101,8 +101,8 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
 
-            + "<style>"
-            + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}"
+            + "<style>\n"
+            + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
             + "</style>\n"
 
             + "<script>\n"

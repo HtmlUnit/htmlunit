@@ -77,7 +77,7 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
             + "<script>\n"
             + "function copy(node) {\n"
             + "  e.value = '231';"
-            + "}"
+            + "}\n"
             + "var e = document.getElementById('t');\n"
             + "e.onkeyup = copy;\n"
             + "var c = e.cloneNode();\n"

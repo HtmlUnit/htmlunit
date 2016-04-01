@@ -121,7 +121,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             + "    map['x5'] = 'y5';\n"
             + "    for (var i in map) {\n"
             + "      alert(i);\n"
-            + "    }"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

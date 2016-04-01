@@ -269,7 +269,7 @@ public abstract class HtmlElement extends DomElement {
      * @param tagName the tag name to match (case-insensitive)
      * @param <E> the sub-element type
      * @return the HTML elements that are descendants of this element and that have the specified tag name
-     * @deprecated as of 2.21, please use {@link #getElementsByTagName(String)}, which is read-only list
+     * @deprecated as of 2.21, please use {@link #getElementsByTagName(String)}, which returns read-only list
      */
     @Deprecated
     public final <E extends HtmlElement> List<E> getHtmlElementsByTagName(final String tagName) {

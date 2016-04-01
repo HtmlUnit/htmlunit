@@ -1270,7 +1270,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "    i = i + 1;\n"
             + "    if (i >= 10)\n"
             + "      window.clearInterval(aktiv);\n"
-            + "  }"
+            + "  }\n"
             + "</script>\n"
             + "<form name='f' id='f'></form>\n"
             + "<script>var y = document.getElementById('f').elements;</script>\n"

@@ -247,7 +247,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "    } else {\n"
             + "      alert('evaluate not supported');\n"
             + "    }\n"
-            + "}"
+            + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 

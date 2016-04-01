@@ -179,7 +179,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  try {"
             + "    document.getElementById(\"link1\").click();\n"
             + "  } catch(e) {}\n"
-            + "}"
+            + "}\n"
             + "</script></head><body>\n"
             + "<a id='link1' href='#' onclick='document.form1.submit()'>link 1</a>\n"
             + "<form name='form1' action='" + URL_SECOND + "' method='post'>\n"
