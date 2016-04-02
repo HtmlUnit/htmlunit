@@ -865,16 +865,16 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             final String bg = getStyleAttribute(BACKGROUND);
             if (StringUtils.isNotBlank(bg)) {
                 value = findImageUrl(bg);
-                final boolean backgroundInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)
-                        && getClass() == CSSStyleDeclaration.class;
+                final boolean isComputed = getClass() != CSSStyleDeclaration.class;
+                final boolean backgroundInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL);
                 if (value == null) {
-                    return backgroundInitial ? "initial" : "none";
+                    return backgroundInitial && !isComputed ? "initial" : "none";
                 }
-                if (backgroundInitial) {
+                if (isComputed) {
                     try {
                         value = value.substring(5, value.length() - 2);
-                        return "url(" + ((HtmlElement) jsElement_.getDomNodeOrDie()).getHtmlPageOrNull()
-                            .getFullyQualifiedUrl(value) + ")";
+                        return "url(\"" + ((HtmlElement) jsElement_.getDomNodeOrDie()).getHtmlPageOrNull()
+                            .getFullyQualifiedUrl(value) + "\")";
                     }
                     catch (final Exception e) {
                         // ignore
@@ -917,9 +917,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                 final boolean isInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL);
                 final boolean isComputed = getClass() != CSSStyleDeclaration.class;
                 if (value == null) {
-                    return isInitial ? "" : "0% 0%";
+                    if (isInitial) {
+                        return isComputed ? "" : "initial";
+                    }
+                    return "0% 0%";
                 }
-                if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_INTEGER) && !isComputed) {
+                if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
                     final String[] values = value.split(" ");
                     if ("center".equals(values[0])) {
                         values[0] = "";
@@ -927,9 +930,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                     if ("center".equals(values[1])) {
                         values[1] = "";
                     }
-                    value = (values[0] + ' ' + values[1]).trim();
+                    if (!isComputed || value.contains("top")) {
+                        return (values[0] + ' ' + values[1]).trim();
+                    }
                 }
-                else if (isInitial || isComputed) {
+                if (isInitial || isComputed) {
                     final String[] values = value.split(" ");
                     switch (values[0]) {
                         case "left":

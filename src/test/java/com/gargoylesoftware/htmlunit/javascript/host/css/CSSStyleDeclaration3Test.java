@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -49,7 +45,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "red", "none", "repeat", "0% 0%", "scroll" },
             CHROME = { "red", "initial", "initial", "initial", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundColorRed() throws Exception {
         background("red");
     }
@@ -60,7 +55,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "rgb(20, 40, 60)", "none", "repeat", "0% 0%", "scroll" },
             CHROME = { "rgb(20, 40, 60)", "initial", "initial", "initial", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundColorRgb() throws Exception {
         background("rgb(20, 40, 60)");
     }
@@ -71,7 +65,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
             CHROME = { "initial", "url(\"myImage.png\")", "initial", "initial", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundImage() throws Exception {
         background("url(myImage.png)");
     }
@@ -82,7 +75,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat-x", "0% 0%", "scroll" },
             CHROME = { "initial", "initial", "repeat-x", "initial", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundRepeat() throws Exception {
         background("repeat-x");
     }
@@ -134,7 +126,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "0% 0%", "fixed" },
             CHROME = { "initial", "initial", "initial", "initial", "fixed" })
-    @NotYetImplemented(CHROME)
     public void backgroundAttachment() throws Exception {
         background("fixed");
     }
@@ -145,7 +136,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" },
             CHROME = { "rgb(255, 204, 221)", "initial", "initial", "initial", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundColorHex() throws Exception {
         background("#ffccdd");
     }
@@ -156,7 +146,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "red", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
             CHROME = { "red", "url(\"myImage.png\")", "initial", "initial", "initial" })
-    @NotYetImplemented(CHROME)
     public void backgroundMixed() throws Exception {
         background("red url(\"myImage.png\")");
     }
@@ -223,7 +212,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
             CHROME = { "rgba(0, 0, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" })
-    @NotYetImplemented
     public void backgroundCssImage() throws Exception {
         backgroundCss("url(myImage.png)");
     }
@@ -275,7 +263,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(FF = { "transparent", "none", "repeat", "50% 0%", "scroll" },
             CHROME = { "rgba(0, 0, 0, 0)", "none", "repeat", "50% 0%", "scroll" },
             IE = { "transparent", "none", "repeat", "top", "scroll" })
-    @NotYetImplemented(IE)
     public void backgroundCssPosition4() throws Exception {
         backgroundCss("top center");
     }
@@ -305,7 +292,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
             CHROME = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" })
-    @NotYetImplemented
     public void backgroundCssMixed() throws Exception {
         backgroundCss("red url(\"myImage.png\")");
     }
