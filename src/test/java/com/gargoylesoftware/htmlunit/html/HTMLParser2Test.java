@@ -355,11 +355,11 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("\n<var data=\"f\">\n<a href=\"#\">a</a>\n<div>d</div>\n<li>l</li>\n</var>\n")
-    public void var() throws Exception {
+    @Alerts({"\n<var data=\"f\">\n<a href=\"#\">a</a>\n<div>d</div>\n<li>l</li>\n</var>\n", "3"})
+    public void varInsideUl() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+            + "<html>\n"
             + "<head></head>"
             + "<body>\n"
             + "<ul id='myUl'>\n"
@@ -371,7 +371,37 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "</ul>\n"
             + "<script>"
             + "  var tmp = document.getElementById('myUl');\n"
-            + "  alert(tmp.innerHTML)\n"
+            + "  alert(tmp.innerHTML);\n"
+            + "  alert(tmp.childNodes.length);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @see <a href="http://sf.net/p/htmlunit/bugs/1046/">Bug 1046</a>
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"\n<table>\n<tbody><tr>\n<td>data</td>\n</tr>\n</tbody></table>\n", "3"})
+    public void tableInsideAnchor() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head></head>"
+            + "<body>\n"
+            +  "<a id='myA' href='#'>\n"
+            +   "<table>\n"
+            +     "<tr>\n"
+            +       "<td>data</td>\n"
+            +     "</tr>\n"
+            +   "</table>\n"
+            +  "</a>\n"
+            + "<script>"
+            + "  var tmp = document.getElementById('myA');\n"
+            + "  alert(tmp.innerHTML);\n"
+            + "  alert(tmp.childNodes.length);\n"
             + "</script>\n"
             + "</body></html>";
 
