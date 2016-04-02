@@ -61,7 +61,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
-     * Compares all style and getComputedStle.
+     * Compares all {@code style} and {@code getComputedStyle}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -91,6 +92,42 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final String expected = loadExpectation("ComputedCSSStyleDeclarationTest.properties", ".txt");
+        final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Compares all {@code style} and {@code getComputedStyle}, for not-attached elements.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void stringPropertiesNotAttached() throws Exception {
+        final String html
+            = "<html><head><body>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + "var e = document.createElement('div');\n"
+            + "var array = [];\n"
+            + "try {\n"
+            + "  for (var i in e.style) {\n"
+            + "    var s1 = e.style[i];\n"
+            + "    var s2 = window.getComputedStyle(e, null)[i];\n"
+            + "    if ('height' == i || 'width' == i || 'cssText' == i) {\n"
+            + "      s2 = 'skipped';\n"
+            + "    }\n"
+            + "    if(typeof s1 == 'string')\n"
+            + "      array.push(i + '=' + s1 + ':' + s2);\n"
+            + "  }\n"
+            + "} catch (e) { array[array.length] = 'exception'; }\n"
+            + "array.sort();\n"
+            + "document.getElementById('myTextarea').value = array.join('\\n');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String expected = loadExpectation("ComputedCSSStyleDeclarationTest.properties.notAttached", ".txt");
         final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
         assertEquals(expected, actual);
     }
