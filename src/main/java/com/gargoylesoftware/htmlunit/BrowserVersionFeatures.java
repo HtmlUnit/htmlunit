@@ -59,6 +59,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_BACKGROUND_INITIAL,
 
+    /** Computed {@code display} is {@code block} for non-attached elements. */
+    @BrowserFeature(@WebBrowser(FF))
+    CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED,
+
     /** Computed {@code zIndex} is not considered. */
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_COMPUTED_NO_Z_INDEX,
@@ -352,6 +356,10 @@ public enum BrowserVersionFeatures {
     /** HtmlAllCollection(int) is not supported. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLCOLLECTION_SUPPORTS_PARANTHESES,
+
+    /** Is the default display style {@code inline} for quirks mode. */
+    @BrowserFeature(@WebBrowser(FF))
+    HTMLDEFINITION_INLINE_IN_QUIRKS,
 
     /** Is {@code document.charset} lower-case. */
     @BrowserFeature(@WebBrowser(IE))

@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.util.Arrays;
@@ -670,11 +671,41 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getDisplay() {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
+        final Element elem = getElement();
+        boolean changeValueIfEmpty = false;
+        if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()) {
+            final BrowserVersion browserVersion = getBrowserVersion();
+            if (browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
+            if (browserVersion.hasFeature(CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED)) {
+                changeValueIfEmpty = true;
+            }
+        }
         final String value = super.getDisplay();
         if (StringUtils.isEmpty(value)) {
-            final Element elem = getElement();
             if (elem instanceof HTMLElement) {
-                return ((HTMLElement) elem).getDefaultStyleDisplay();
+                final String defaultValue = ((HTMLElement) elem).getDefaultStyleDisplay();
+                if (changeValueIfEmpty) {
+                    switch (defaultValue) {
+                        case "inline":
+                        case "inline-block":
+                        case "table-caption":
+                        case "table-cell":
+                        case "table-column":
+                        case "table-column-group":
+                        case "table-footer-group":
+                        case "table-header-group":
+                        case "table-row":
+                        case "table-row-group":
+                        case "list-item":
+                        case "ruby":
+                            return "block";
+
+                        default:
+                    }
+                }
+                return defaultValue;
             }
             return "";
         }
