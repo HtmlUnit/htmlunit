@@ -19,6 +19,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.html.HtmlTime;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -35,5 +37,23 @@ public class HTMLTimeElement extends HTMLElement {
      */
     @JsxConstructor
     public HTMLTimeElement() {
+    }
+
+    /**
+     * Returns the dateTime.
+     * @return the dateTime
+     */
+    @JsxGetter
+    public String getDateTime() {
+        return getDomNodeOrDie().getAttribute("dateTime");
+    }
+
+    /**
+     * Sets the dateTime.
+     * @param dateTime the dateTime
+     */
+    @JsxSetter
+    public void setCols(final String dateTime) {
+        getDomNodeOrDie().setAttribute("cols", dateTime);
     }
 }

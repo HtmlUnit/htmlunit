@@ -2485,7 +2485,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "dateTime")
-    @NotYetImplemented(FF)
     public void time() throws Exception {
         test("time");
     }
