@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for compatibility with version 1.0.2 of the <a href="http://dojotoolkit.org/">Dojo
@@ -57,6 +60,7 @@ public class Dojo102Test extends DojoTestBase {
                     "test: number_regression_1", "test: number_regression_3",
                     "test: number_regression_8", "test: number_regression_10",
                     "test: ../../dojo/tests/behavior.html::t::topics"})
+    @NotYetImplemented(CHROME)
     public void dojo() throws Exception {
         test();
     }
