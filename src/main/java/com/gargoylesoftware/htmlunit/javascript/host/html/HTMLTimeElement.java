@@ -53,7 +53,7 @@ public class HTMLTimeElement extends HTMLElement {
      * @param dateTime the dateTime
      */
     @JsxSetter
-    public void setCols(final String dateTime) {
-        getDomNodeOrDie().setAttribute("cols", dateTime);
+    public void getDateTime(final String dateTime) {
+        getDomNodeOrDie().setAttribute("dateTime", dateTime);
     }
 }
