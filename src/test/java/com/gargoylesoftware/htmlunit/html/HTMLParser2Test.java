@@ -349,4 +349,32 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @see <a href="http://sf.net/p/htmlunit/bugs/1423/">Bug 1423</a>
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("\n<var data=\"f\">\n<a href=\"#\">a</a>\n<div>d</div>\n<li>l</li>\n</var>\n")
+    public void var() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+            + "<head></head>"
+            + "<body>\n"
+            + "<ul id='myUl'>\n"
+            +   "<var data='f'>\n"
+            +     "<a href='#'>a</a>\n"
+            +     "<div>d</div>\n"
+            +     "<li>l</li>\n"
+            +   "</var>\n"
+            + "</ul>\n"
+            + "<script>"
+            + "  var tmp = document.getElementById('myUl');\n"
+            + "  alert(tmp.innerHTML)\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
