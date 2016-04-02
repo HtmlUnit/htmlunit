@@ -308,6 +308,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private String defaultIfEmpty(final String str, final String defaultStr) {
+        if (!getElement().getDomNodeOrDie().isDirectlyAttachedToPage()
+                && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            return "";
+        }
         if (str == null || str.isEmpty()) {
             return defaultStr;
         }

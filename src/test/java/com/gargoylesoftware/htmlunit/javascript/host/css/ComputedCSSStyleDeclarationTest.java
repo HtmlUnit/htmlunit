@@ -104,6 +104,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @NotYetImplemented
     public void stringPropertiesNotAttached() throws Exception {
+        // to fix Chrome, look into ComputedCSSStyleDeclaration.defaultIfEmpty first condition
         final String html
             = "<html><head><body>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"

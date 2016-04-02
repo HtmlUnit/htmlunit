@@ -2462,6 +2462,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         setStyleAttributePixel(MIN_WIDTH, minWidth);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object get(final String name, final Scriptable start) {
         if (this != start) {

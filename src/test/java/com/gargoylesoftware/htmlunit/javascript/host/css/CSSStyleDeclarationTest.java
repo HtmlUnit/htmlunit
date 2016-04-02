@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -895,7 +894,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)" },
             CHROME = { "", "", "none", "rgb(0, 128, 0)" },
             IE = { "inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)" })
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented(IE)
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -926,7 +925,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "block", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)" },
             CHROME = { "", "", "inline", "rgb(0, 0, 0)" },
             IE = { "inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)" })
-    @NotYetImplemented(CHROME)
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
