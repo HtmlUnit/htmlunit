@@ -69,6 +69,7 @@ public class HTMLIFrameElement extends HTMLElement {
     @JsxSetter
     public void setSrc(final String src) {
         getFrame().setSrcAttribute(src);
+        isDirectlyAttachedToPageDuringOnload_ = false;
     }
 
     /**
