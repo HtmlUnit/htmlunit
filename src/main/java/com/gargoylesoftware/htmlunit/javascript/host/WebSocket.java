@@ -417,10 +417,12 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
             super.onWebSocketBinary(data, offset, length);
 
-            final byte[] copy = Arrays.copyOfRange(data, offset, length);
             final ArrayBuffer buffer = new ArrayBuffer();
-            buffer.constructor(copy.length);
-            buffer.setBytes(0, copy);
+            buffer.setParentScope(getParentScope());
+            buffer.setPrototype(getPrototype(buffer.getClass()));
+
+            buffer.constructor(length);
+            buffer.setBytes(0, Arrays.copyOfRange(data, offset, length));
 
             final MessageEvent msgEvent = new MessageEvent(buffer);
             msgEvent.setOrigin(getUrl());
