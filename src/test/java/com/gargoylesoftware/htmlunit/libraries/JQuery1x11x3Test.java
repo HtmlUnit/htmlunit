@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -1215,9 +1214,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1, 1, 2",
+    @Alerts(DEFAULT = "1, 1, 2",
         FF38 = "0, 2, 2",
-        FF45 = "1, 1, 2",
         IE = "0, 2, 2")
     @NotYetImplemented({ FF38, IE })
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
@@ -1860,9 +1858,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 4, 4",
-        FF38 = "0, 4, 4",
-        FF45 = "0, 4, 4")
+    @Alerts(DEFAULT = "0, 4, 4",
+            IE = {})
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -2934,8 +2931,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-        IE = "0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2",
+        FF = {})
     public void event__Check_order_of_focusin_focusout_events() throws Exception {
         runTest("event: Check order of focusin/focusout events");
     }
@@ -2945,8 +2942,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 5, 5",
-        IE = "0, 5, 5")
+    @Alerts(DEFAULT = "0, 5, 5",
+            FF = {})
     public void event__focus_blur_order___12868_() throws Exception {
         runTest("event: focus-blur order (#12868)");
     }
@@ -5215,10 +5212,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-        FF38 = "0, 2, 2",
-        FF45 = "0, 1, 1",
-        IE = "0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2",
+        FF45 = "0, 1, 1")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
@@ -5270,7 +5265,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ FF, IE })
     public void css__Do_not_append_px___9548___12990_() throws Exception {
         runTest("css: Do not append px (#9548, #12990)");
     }
@@ -7640,11 +7634,9 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-        FF38 = "0, 1, 1",
-        FF45 = "0, 1, 1",
-        IE = "0, 1, 1")
-    @NotYetImplemented({ CHROME, IE })
+    @Alerts(DEFAULT = "0, 1, 1",
+        CHROME = "0, 2, 2")
+    @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }
@@ -7930,10 +7922,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1, 1, 2",
-        FF38 = "0, 2, 2",
-        FF45 = "0, 2, 2",
-        IE = "0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2",
+        CHROME = "1, 1, 2")
     @NotYetImplemented(CHROME)
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");

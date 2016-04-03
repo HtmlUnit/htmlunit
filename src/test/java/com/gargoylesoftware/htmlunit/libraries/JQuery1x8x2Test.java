@@ -6180,11 +6180,9 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-        FF38 = "0, 1, 1",
-        FF45 = "0, 1, 1",
-        IE = "0, 1, 1")
-    @NotYetImplemented({ CHROME, IE })
+    @Alerts(DEFAULT = "0, 1, 1",
+        CHROME = "0, 2, 2")
+    @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }

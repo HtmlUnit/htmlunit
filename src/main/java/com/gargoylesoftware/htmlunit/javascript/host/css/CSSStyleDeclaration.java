@@ -2532,7 +2532,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
             if (style != null) {
                 final String stringValue = Context.toString(value);
-                setStyleAttribute(style.getPropertyName(), stringValue);
+                setStyleAttribute(style.getAttributeName(), stringValue);
                 return;
             }
         }
