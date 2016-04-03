@@ -47,11 +47,14 @@ public class Dojo102Test extends DojoTestBase {
                     "test: format", "test: parse", "test: format_patterns",
                     "test: format_rounding", "PASSED test: format_perMill",
                     "test: number_regression_1", "test: number_regression_3",
-                    "test: number_regression_8", "test: number_regression_10"},
+                    "test: number_regression_8", "test: number_regression_10",
+                    "../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout"},
             FF38 = {"test: ../../dojo/tests/_base/fx.html::t::animateHeight",
-                    "test: ../../dojo/tests/behavior.html::t::topics"},
+                    "test: ../../dojo/tests/behavior.html::t::topics",
+                    "../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout"},
             FF45 = {"test: ../../dojo/tests/_base/fx.html::t::animateHeight",
-                    "test: ../../dojo/tests/behavior.html::t::topics"},
+                    "test: ../../dojo/tests/behavior.html::t::topics",
+                    "../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout"},
             IE = {"test: ../../dojo/tests/_base/html.html::t::sq100nopos",
                     "../../dojo/tests/_base/html_quirks.html::t::sq100nopos",
                     "test: ../../dojo/tests/_base/fx.html::t::animateHeight",
@@ -59,7 +62,8 @@ public class Dojo102Test extends DojoTestBase {
                     "test: format_rounding", "PASSED test: format_perMill",
                     "test: number_regression_1", "test: number_regression_3",
                     "test: number_regression_8", "test: number_regression_10",
-                    "test: ../../dojo/tests/behavior.html::t::topics"})
+                    "test: ../../dojo/tests/behavior.html::t::topics",
+                    "../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout"})
     @NotYetImplemented(CHROME)
     public void dojo() throws Exception {
         test();

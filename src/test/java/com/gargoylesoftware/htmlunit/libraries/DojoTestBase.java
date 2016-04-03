@@ -134,6 +134,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
             return text;
         }
         if (text.startsWith(" Error: test timeout")
+                || text.startsWith(" Error: false")
                 || text.startsWith(" TypeError:")
                 || text.startsWith(" doh._AssertFailure:")) {
             return null;
