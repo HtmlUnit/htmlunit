@@ -989,7 +989,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code backgroundPositionX} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
     public String getBackgroundPositionX() {
         return getStyleAttribute(BACKGROUND_POSITION_X);
     }
@@ -998,7 +998,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code backgroundPositionX} style attribute.
      * @param backgroundPositionX the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
     public void setBackgroundPositionX(final String backgroundPositionX) {
         setStyleAttribute(BACKGROUND_POSITION_X, backgroundPositionX);
     }
