@@ -375,10 +375,8 @@
  PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPostWithContent
  PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPostForm
  PASSED test: ../../dojo/tests/_base/xhr.html::t::rawXhrPost
- Error: false
- FAILED test: ../../dojo/tests/_base/xhr.html::t::xhrPut
- Error: false
- FAILED test: ../../dojo/tests/_base/xhr.html::t::xhrDelete
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPut
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrDelete
  PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrCancel
  PASSED test: ../../dojo/tests/_base/xhr.html
  ------------------------------------------------------------
@@ -654,10 +652,8 @@
  PASSED test: ../../dojo/tests/io/iframe.html
  ------------------------------------------------------------
  GROUP "tests.rpc" has 4 tests to run
- Error: JsonRpc-EchoTest test failed, resultant content didn't match
- FAILED test: JsonRPC-EchoTest
- Error: JsonRpc-EmpytParamTest test failed, resultant content didn't match
- FAILED test: JsonRPC-EmptyParamTest
+ PASSED test: JsonRPC-EchoTest
+ PASSED test: JsonRPC-EmptyParamTest
  PASSED test: JsonRPC_SMD_Loading_test
  TypeError: this.svc.webSearch is not a function
  FAILED test: JsonP_test
