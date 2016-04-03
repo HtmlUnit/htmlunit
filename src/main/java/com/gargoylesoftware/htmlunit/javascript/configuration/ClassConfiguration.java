@@ -138,11 +138,11 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Returns the set of entries for the defined properties.
-     * @return a set
+     * Returns the Map of entries for the defined properties.
+     * @return the map
      */
-    public Set<Entry<String, PropertyInfo>> getPropertyEntries() {
-        return propertyMap_.entrySet();
+    public Map<String, PropertyInfo> getPropertyMap() {
+        return propertyMap_;
     }
 
     /**

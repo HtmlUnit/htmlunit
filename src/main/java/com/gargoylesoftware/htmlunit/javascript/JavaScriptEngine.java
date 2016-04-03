@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptF
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
@@ -593,10 +594,11 @@ public class JavaScriptEngine {
     }
 
     private static void configureProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
-        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getPropertyEntries()) {
-            final String propertyName = propertyEntry.getKey();
-            final Method readMethod = propertyEntry.getValue().getReadMethod();
-            final Method writeMethod = propertyEntry.getValue().getWriteMethod();
+        final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
+        for (final String propertyName : propertyMap.keySet()) {
+            final PropertyInfo info = propertyMap.get(propertyName);
+            final Method readMethod = info.getReadMethod();
+            final Method writeMethod = info.getWriteMethod();
             scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
     }

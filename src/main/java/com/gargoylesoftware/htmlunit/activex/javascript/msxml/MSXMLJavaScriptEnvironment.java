@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 
 /**
  * JavaScript environment for the MSXML ActiveX library.
@@ -120,10 +121,11 @@ public class MSXMLJavaScriptEnvironment {
         configureConstants(config, scriptable);
 
         // the properties
-        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getPropertyEntries()) {
-            final String propertyName = propertyEntry.getKey();
-            final Method readMethod = propertyEntry.getValue().getReadMethod();
-            final Method writeMethod = propertyEntry.getValue().getWriteMethod();
+        final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
+        for (final String propertyName : propertyMap.keySet()) {
+            final PropertyInfo info = propertyMap.get(propertyName);
+            final Method readMethod = info.getReadMethod();
+            final Method writeMethod = info.getWriteMethod();
             scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
 
