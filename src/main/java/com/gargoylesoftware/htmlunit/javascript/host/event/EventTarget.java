@@ -105,12 +105,13 @@ public class EventTarget extends SimpleScriptable {
             // handlers declared as property on a node don't receive the event as argument for IE
             final Object[] propHandlerArgs = args;
 
+            final Event previousEvent = window.getCurrentEvent();
             window.setCurrentEvent(event);
             try {
                 return eventListenersContainer.executeListeners(event, args, propHandlerArgs);
             }
             finally {
-                window.setCurrentEvent(null); // reset event
+                window.setCurrentEvent(previousEvent); // reset event
             }
         }
         return null;
