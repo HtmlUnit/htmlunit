@@ -124,7 +124,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String COLOR = "color";
     private static final String DISPLAY = "display";
     private static final String FONT_SIZE = "font-size";
-    private static final String FONT_STRETCH = "font-stretch";
     private static final String HEIGHT = "height";
     private static final String LEFT = "left";
     private static final String LETTER_SPACING = "letter-spacing";
@@ -1373,24 +1372,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setFontSize(final String fontSize) {
         setStyleAttributePixel(FONT_SIZE, fontSize);
-    }
-
-    /**
-     * Gets the {@code fontStretch} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter({ @WebBrowser(value = FF, minVersion = 45), @WebBrowser(IE) })
-    public String getFontStretch() {
-        return getStyleAttribute(FONT_STRETCH);
-    }
-
-    /**
-     * Sets the {@code fontStretch} style attribute.
-     * @param fontStretch the new attribute
-     */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
-    public void setFontStretch(final String fontStretch) {
-        setStyleAttribute(FONT_STRETCH, fontStretch);
     }
 
     /**

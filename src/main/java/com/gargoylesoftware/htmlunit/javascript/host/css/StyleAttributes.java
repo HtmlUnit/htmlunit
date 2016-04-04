@@ -858,7 +858,7 @@ public final class StyleAttributes {
         FONT_SIZE_ADJUST_("font-size-adjust", "font-size-adjust", ff("none")),
 
         /** The style property {@code fontStretch}. */
-        FONT_STRETCH("fontStretch", "font-stretch", chrome("normal"), ff("normal"), ie("")),
+        FONT_STRETCH("fontStretch", "font-stretch", chrome("normal"), ff("normal"), ie("normal")),
 
         /** The style property {@code font-stretch}. */
         FONT_STRETCH_("font-stretch", "font-stretch", ff("normal")),

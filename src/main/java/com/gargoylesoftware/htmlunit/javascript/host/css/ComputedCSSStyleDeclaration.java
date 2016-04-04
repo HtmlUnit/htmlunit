@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.util.Arrays;
@@ -570,18 +569,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String getFontStretch() {
-        String defaultStretch = "";
-        if (getBrowserVersion().hasFeature(CSS_FONT_STRECH_DEFAULT_NORMAL)) {
-            defaultStretch = "normal";
-        }
-        return defaultIfEmpty(super.getFontStretch(), defaultStretch);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getHeight() {
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isAttachedToPage()) {
@@ -878,7 +865,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
 
             // Width not explicitly set.
-            final String cssFloat = getStyleAttribute(Definition.CSS_FLOAT);
+            final String cssFloat = defaultIfEmpty(getStyleAttribute(Definition.FLOAT), Definition.CSS_FLOAT);
             if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
                 // We're floating; simplistic approximation: text content * pixels per character.
                 width = node.getTextContent().length() * PIXELS_PER_CHAR;

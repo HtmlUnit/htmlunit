@@ -91,10 +91,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_FONTFACERULE_CSSTEXT_NO_CRLF,
 
-    /** Default is 'normal'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
-    CSS_FONT_STRECH_DEFAULT_NORMAL,
-
     /** The default value of the display property for the 'input' tags is 'inline-block'. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     CSS_INPUT_DISPLAY_INLINE_BLOCK,
