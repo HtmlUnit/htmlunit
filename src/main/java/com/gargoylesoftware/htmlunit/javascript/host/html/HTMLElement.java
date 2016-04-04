@@ -1599,7 +1599,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getOffsetHeight() {
-        if (isDislayNone()) {
+        if (isDislayNone() || !getDomNodeOrDie().isDirectlyAttachedToPage()) {
             return 0;
         }
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
@@ -1635,7 +1635,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getOffsetWidth() {
-        if (isDislayNone()) {
+        if (isDislayNone() || !getDomNodeOrDie().isDirectlyAttachedToPage()) {
             return 0;
         }
 

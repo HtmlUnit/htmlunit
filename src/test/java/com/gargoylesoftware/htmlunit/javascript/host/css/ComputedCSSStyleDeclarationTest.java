@@ -1507,4 +1507,48 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "0", "0", "auto", "100px", "3px", "block", "content-box", "0px", "0px",
+                "104", "104", "auto", "100px", "3px", "block", "content-box", "0px", "0px" },
+            CHROME = { "0", "0", "", "", "", "", "", "", "",
+                    "104", "104", "auto", "100px", "3px", "block", "content-box", "0px", "0px" })
+    public void offsetWidth() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.style.width = '100px';\n"
+            + "    div.style.height = '100px';\n"
+            + "    div.style.padding = '2px';\n"
+            + "    div.style.margin = '3px';\n"
+            + "    var style = window.getComputedStyle(div, null);\n"
+            + "    alert(div.offsetWidth);\n"
+            + "    alert(div.offsetHeight);\n"
+            + "    alert(style.top);\n"
+            + "    alert(style.width);\n"
+            + "    alert(style.marginRight);\n"
+            + "    alert(style.display);\n"
+            + "    alert(style.boxSizing);\n"
+            + "    alert(style.borderRightWidth);\n"
+            + "    alert(style.borderLeftWidth);\n"
+            + "    document.body.appendChild(div);\n"
+            + "    alert(div.offsetWidth);\n"
+            + "    alert(div.offsetHeight);\n"
+            + "    alert(style.top);\n"
+            + "    alert(style.width);\n"
+            + "    alert(style.marginRight);\n"
+            + "    alert(style.display);\n"
+            + "    alert(style.boxSizing);\n"
+            + "    alert(style.borderRightWidth);\n"
+            + "    alert(style.borderLeftWidth);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

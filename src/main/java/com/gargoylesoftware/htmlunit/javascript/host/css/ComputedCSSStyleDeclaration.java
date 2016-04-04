@@ -75,6 +75,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(FF))
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
+    /** Denotes a value which should be returned as is. */
+    private static final String EMPTY_FINAL = new String("");
+
     /** The number of (horizontal) pixels to assume that each character occupies. */
     private static final int PIXELS_PER_CHAR = 10;
 
@@ -298,6 +301,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition,
             final boolean isPixel) {
+        if (!getElement().getDomNodeOrDie().isDirectlyAttachedToPage()
+                && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            return EMPTY_FINAL;
+        }
         if (str == null || str.isEmpty()) {
             return definition.getDefaultComputedValue(getBrowserVersion());
         }
@@ -310,7 +317,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private String defaultIfEmpty(final String str, final String defaultStr) {
         if (!getElement().getDomNodeOrDie().isDirectlyAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
-            return "";
+            return EMPTY_FINAL;
         }
         if (str == null || str.isEmpty()) {
             return defaultStr;
@@ -1987,7 +1994,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
             }
-            return "auto";
         }
 
         final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
@@ -2846,7 +2852,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @see #pixelString(Element, CSSStyleDeclaration.CssValue)
      */
     protected String pixelString(final String value) {
-        if (value.endsWith("px")) {
+        if (value == EMPTY_FINAL || value.endsWith("px")) {
             return value;
         }
         return pixelValue(value) + "px";
