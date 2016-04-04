@@ -197,7 +197,7 @@ public class HtmlScript extends HtmlElement {
         final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        if (isDirectlyAttachedToPage()) {
+        if (isAttachedToPage()) {
             // if FF, only execute if the "src" attribute
             // was undefined and there was no inline code.
             if (oldValue.isEmpty() && getFirstChild() == null) {
@@ -389,7 +389,7 @@ public class HtmlScript extends HtmlElement {
             return false;
         }
 
-        if (!isDirectlyAttachedToPage()) {
+        if (!isAttachedToPage()) {
             return false;
         }
 

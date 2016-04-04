@@ -1461,7 +1461,7 @@ public class CSSStyleSheet extends StyleSheet {
 
                 if (!CSS2_PSEUDO_CLASSES.contains(value)
                         && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE)
-                        && !domNode.isDirectlyAttachedToPage()
+                        && !domNode.isAttachedToPage()
                         && !domNode.hasChildNodes()) {
                     throw new CSSException("Syntax Error");
                 }

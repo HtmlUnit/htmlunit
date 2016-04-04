@@ -181,7 +181,7 @@ public abstract class HtmlElement extends DomElement {
 
         final String oldAttributeValue = getAttribute(qualifiedName);
         final HtmlPage htmlPage = (HtmlPage) getPage();
-        final boolean mappedElement = isDirectlyAttachedToPage()
+        final boolean mappedElement = isAttachedToPage()
                     && HtmlPage.isMappedElement(htmlPage, qualifiedName);
         if (mappedElement) {
             // cast is save here because isMappedElement checks for HtmlPage
@@ -221,7 +221,7 @@ public abstract class HtmlElement extends DomElement {
         final String qualifiedName = attribute.getName();
         final String oldAttributeValue = getAttribute(qualifiedName);
         final HtmlPage htmlPage = (HtmlPage) getPage();
-        final boolean mappedElement = isDirectlyAttachedToPage()
+        final boolean mappedElement = isAttachedToPage()
                     && HtmlPage.isMappedElement(htmlPage, qualifiedName);
         if (mappedElement) {
             // cast is save here because isMappedElement checks for HtmlPage

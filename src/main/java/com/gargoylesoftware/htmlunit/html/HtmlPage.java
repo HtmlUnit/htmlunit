@@ -2189,7 +2189,7 @@ public class HtmlPage extends InteractivePage {
      * {@inheritDoc}
      */
     @Override
-    public boolean isDirectlyAttachedToPage() {
+    public boolean isAttachedToPage() {
         return true;
     }
 

@@ -307,7 +307,7 @@ public class Element extends EventNode {
      */
     @JsxFunction
     public ClientRect getBoundingClientRect() {
-        if (!getDomNodeOrDie().isDirectlyAttachedToPage()
+        if (!getDomNodeOrDie().isAttachedToPage()
                 && getBrowserVersion().hasFeature(JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED)) {
             throw Context.reportRuntimeError("Element is not attache to a page");
         }
@@ -512,7 +512,7 @@ public class Element extends EventNode {
      */
     @JsxGetter(@WebBrowser(IE))
     public ComputedCSSStyleDeclaration getCurrentStyle() {
-        if (!getDomNodeOrDie().isDirectlyAttachedToPage()) {
+        if (!getDomNodeOrDie().isAttachedToPage()) {
             return null;
         }
         return getWindow().getComputedStyle(this, null);

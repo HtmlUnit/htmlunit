@@ -43,8 +43,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 @JsxClass(domClass = HtmlInlineFrame.class)
 public class HTMLIFrameElement extends HTMLElement {
 
-    /** During {@link #setOnload()}, was the element directly attached to the page. */
-    private boolean isDirectlyAttachedToPageDuringOnload_;
+    /** During {@link #setOnload()}, was the element attached to the page. */
+    private boolean isAttachedToPageDuringOnload_;
 
     /**
      * Creates an instance.
@@ -69,7 +69,7 @@ public class HTMLIFrameElement extends HTMLElement {
     @JsxSetter
     public void setSrc(final String src) {
         getFrame().setSrcAttribute(src);
-        isDirectlyAttachedToPageDuringOnload_ = false;
+        isAttachedToPageDuringOnload_ = false;
     }
 
     /**
@@ -122,7 +122,7 @@ public class HTMLIFrameElement extends HTMLElement {
     @JsxSetter
     public void setOnload(final Object eventHandler) {
         setEventHandlerProp("onload", eventHandler);
-        isDirectlyAttachedToPageDuringOnload_ = getDomNodeOrDie().isDirectlyAttachedToPage();
+        isAttachedToPageDuringOnload_ = getDomNodeOrDie().isAttachedToPage();
     }
 
     /**
@@ -212,7 +212,7 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @Override
     public ScriptResult executeEventLocally(final Event event) {
-        if (!isDirectlyAttachedToPageDuringOnload_ || getBrowserVersion().hasFeature(JS_IFRAME_ALWAYS_EXECUTE_ONLOAD)) {
+        if (!isAttachedToPageDuringOnload_ || getBrowserVersion().hasFeature(JS_IFRAME_ALWAYS_EXECUTE_ONLOAD)) {
             return super.executeEventLocally(event);
         }
         return null;
@@ -222,6 +222,6 @@ public class HTMLIFrameElement extends HTMLElement {
      * To be called when the frame is being refreshed.
      */
     public void onRefresh() {
-        isDirectlyAttachedToPageDuringOnload_ = false;
+        isAttachedToPageDuringOnload_ = false;
     }
 }

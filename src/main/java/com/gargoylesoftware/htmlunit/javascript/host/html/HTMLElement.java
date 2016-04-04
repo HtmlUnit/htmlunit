@@ -1599,7 +1599,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getOffsetHeight() {
-        if (isDislayNone() || !getDomNodeOrDie().isDirectlyAttachedToPage()) {
+        if (isDislayNone() || !getDomNodeOrDie().isAttachedToPage()) {
             return 0;
         }
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
@@ -1635,7 +1635,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getOffsetWidth() {
-        if (isDislayNone() || !getDomNodeOrDie().isDirectlyAttachedToPage()) {
+        if (isDislayNone() || !getDomNodeOrDie().isAttachedToPage()) {
             return 0;
         }
 
@@ -1795,7 +1795,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         rectList.setParentScope(getWindow());
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
-        if (getDomNodeOrDie().isDirectlyAttachedToPage()) {
+        if (getDomNodeOrDie().isAttachedToPage()) {
             final ClientRect rect = new ClientRect(0, 0, 1, 1);
             rect.setParentScope(getWindow());
             rect.setPrototype(getPrototype(rect.getClass()));
@@ -2508,7 +2508,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public ClientRect getBoundingClientRect() {
-        if (!getDomNodeOrDie().isDirectlyAttachedToPage()
+        if (!getDomNodeOrDie().isAttachedToPage()
                 && getBrowserVersion().hasFeature(JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED)) {
             throw Context.reportRuntimeError("Element is not attache to a page");
         }

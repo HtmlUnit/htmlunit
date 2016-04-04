@@ -301,7 +301,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition,
             final boolean isPixel) {
-        if (!getElement().getDomNodeOrDie().isDirectlyAttachedToPage()
+        if (!getElement().getDomNodeOrDie().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
             return EMPTY_FINAL;
         }
@@ -315,7 +315,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private String defaultIfEmpty(final String str, final String defaultStr) {
-        if (!getElement().getDomNodeOrDie().isDirectlyAttachedToPage()
+        if (!getElement().getDomNodeOrDie().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
             return EMPTY_FINAL;
         }
@@ -684,7 +684,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         // (no need to calculate the default if not empty)
         final Element elem = getElement();
         boolean changeValueIfEmpty = false;
-        if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()) {
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
             final BrowserVersion browserVersion = getBrowserVersion();
             if (browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
@@ -816,7 +816,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getHeight() {
         final Element elem = getElement();
-        if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()) {
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
             if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
             }
@@ -1933,7 +1933,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getTop() {
         final Element elem = getElement();
-        if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()
+        if (!elem.getDomNodeOrDie().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
             return "";
         }
@@ -1990,7 +1990,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final Element elem = getElement();
-        if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()) {
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
             if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
             }
@@ -2032,7 +2032,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's width in pixels, possibly including its padding and border
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
-        if (!getElement().getDomNodeOrNull().isDirectlyAttachedToPage()) {
+        if (!getElement().getDomNodeOrNull().isAttachedToPage()) {
             return 0;
         }
         int width = getCalculatedWidth();
@@ -2040,7 +2040,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             width += getBorderHorizontal();
         }
         else if (isScrollable(true, true) && !(getElement() instanceof HTMLBodyElement)
-                && getElement().getDomNodeOrDie().isDirectlyAttachedToPage()) {
+                && getElement().getDomNodeOrDie().isAttachedToPage()) {
             width -= 17;
         }
         if (includePadding) {
@@ -2164,7 +2164,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's height, possibly including its padding and border
      */
     public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
-        if (!getElement().getDomNodeOrNull().isDirectlyAttachedToPage()) {
+        if (!getElement().getDomNodeOrNull().isAttachedToPage()) {
             return 0;
         }
         int height = getCalculatedHeight();
@@ -2172,7 +2172,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             height += getBorderVertical();
         }
         else if (isScrollable(false, true) && !(getElement() instanceof HTMLBodyElement)
-                && getElement().getDomNodeOrDie().isDirectlyAttachedToPage()) {
+                && getElement().getDomNodeOrDie().isAttachedToPage()) {
             height -= 17;
         }
         if (includePadding) {

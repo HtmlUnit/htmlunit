@@ -166,7 +166,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     private int endColumnNumber_ = -1;
 
-    private boolean directlyAttachedToPage_;
+    private boolean attachedToPage_;
 
     private final Object listeners_lock_ = new Serializable() { };
 
@@ -887,7 +887,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newnode.previousSibling_ = null;
         newnode.firstChild_ = null;
         newnode.scriptObject_ = null;
-        newnode.directlyAttachedToPage_ = false;
+        newnode.attachedToPage_ = false;
 
         // if deep, clone the children too.
         if (deep) {
@@ -1078,10 +1078,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     private void fireAddition(final DomNode domNode) {
-        final boolean wasAlreadyAttached = domNode.isDirectlyAttachedToPage();
-        domNode.directlyAttachedToPage_ = isDirectlyAttachedToPage();
+        final boolean wasAlreadyAttached = domNode.isAttachedToPage();
+        domNode.attachedToPage_ = isAttachedToPage();
 
-        if (isDirectlyAttachedToPage()) {
+        if (isAttachedToPage()) {
             // trigger events
             final Page page = getPage();
             if (null != page && page.isHtmlPage()) {
@@ -1091,7 +1091,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // a node that is already "complete" (ie not being parsed) and not yet attached
             if (!domNode.isBodyParsed() && !wasAlreadyAttached) {
                 for (final DomNode child : domNode.getDescendants()) {
-                    child.directlyAttachedToPage_ = true;
+                    child.attachedToPage_ = true;
                     child.onAllChildrenAddedToPage(true);
                 }
                 domNode.onAllChildrenAddedToPage(true);
@@ -1921,11 +1921,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Indicates if this node is currently directly attached to the page.
+     * Indicates if this node is currently attached to the page.
      * @return {@code true} if the page is one ancestor of the node.
      */
-    public boolean isDirectlyAttachedToPage() {
-        return directlyAttachedToPage_;
+    public boolean isAttachedToPage() {
+        return attachedToPage_;
     }
 
     /**
