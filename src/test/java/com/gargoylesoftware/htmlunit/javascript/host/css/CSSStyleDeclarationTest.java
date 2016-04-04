@@ -1715,6 +1715,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     /**
      * Ensures no default implementation is being used.
      *
+     * When no JavaScript method is defined, {@link StyleAttributes} values are used, this can be overridden only
+     * when a different implementation is needed.
+     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -1723,20 +1726,20 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         final ClassConfiguration config
             = AbstractJavaScriptConfiguration.getClassConfiguration(CSSStyleDeclaration.class, browserVersion);
         final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
-        final List<String> cssLines = FileUtils.readLines(new File(
-                "src/main/java/com/gargoylesoftware/htmlunit/javascript/host/css/CSSStyleDeclaration.java"));
-        final List<String> computedCssLines = FileUtils.readLines(new File(
-                "src/main/java/com/gargoylesoftware/htmlunit/javascript/host/css/ComputedCSSStyleDeclaration.java"));
+        final File cssFolder = new File("src/main/java/com/gargoylesoftware/htmlunit/javascript/host/css/");
+        final List<String> cssLines = FileUtils.readLines(new File(cssFolder, "CSSStyleDeclaration.java"));
+        final List<String> computedLines = FileUtils.readLines(new File(cssFolder, "ComputedCSSStyleDeclaration.java"));
         for (final String propertyName : propertyMap.keySet()) {
             final PropertyInfo info = propertyMap.get(propertyName);
             if (info.getReadMethod() == null) {
-                System.out.println(browserVersion.getNickname() + " CSSStyleDeclaration: no getter for " + propertyName);
+                fail(browserVersion.getNickname() + " CSSStyleDeclaration: no getter for " + propertyName);
             }
             if (info.getWriteMethod() == null && !"length".equals(propertyName)) {
-                System.out.println(browserVersion.getNickname() + " CSSStyleDeclaration: no setter for " + propertyName);
+                fail(browserVersion.getNickname() + " CSSStyleDeclaration: no setter for " + propertyName);
             }
-            if (isDefaultGetter(cssLines, info) && isDefaultSetter(cssLines, info) && isDefaultGetterComputed(computedCssLines, info)) {
-                System.out.println(browserVersion.getNickname() + " CSSStyleDeclaration: default implementation for " + propertyName);
+            if (isDefaultGetter(cssLines, info) && isDefaultSetter(cssLines, info)
+                    && isDefaultGetterComputed(computedLines, info)) {
+                fail(browserVersion.getNickname() + " CSSStyleDeclaration: default implementation for " + propertyName);
             }
         }
     }
@@ -1767,7 +1770,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.startsWith("    public ") && line.contains(" " + info.getReadMethod().getName() + "(")) {
-                String nextLine = lines.get(i + 1);
+                final String nextLine = lines.get(i + 1);
                 if (nextLine.contains("  return defaultIfEmpty(super." + info.getReadMethod().getName() + "(),")
                         && nextLine.indexOf(',', nextLine.indexOf(',') + 1) == -1
                         && lines.get(i + 2).equals("    }")) {

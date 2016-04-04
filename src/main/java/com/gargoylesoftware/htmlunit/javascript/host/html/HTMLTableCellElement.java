@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -86,7 +87,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         }
 
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        if ("collapse".equals(style.getBorderCollapse())) {
+        if ("collapse".equals(style.getStyleAttribute(StyleAttributes.Definition.BORDER_COLLAPSE))) {
             final HtmlTableRow row = getRow();
             if (row != null) {
                 final HtmlElement thiz = getDomNodeOrDie();

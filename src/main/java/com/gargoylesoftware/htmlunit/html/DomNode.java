@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -755,7 +756,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // the visibility used by parent nodes
             for (int i = styles.size() - 1; i >= 0; i--) {
                 final CSSStyleDeclaration style = styles.get(i);
-                final String visibility = style.getVisibility();
+                final String visibility = style.getStyleAttribute(StyleAttributes.Definition.VISIBILITY);
                 if (visibility.length() > 5) {
                     if ("visible".equals(visibility)) {
                         return true;
