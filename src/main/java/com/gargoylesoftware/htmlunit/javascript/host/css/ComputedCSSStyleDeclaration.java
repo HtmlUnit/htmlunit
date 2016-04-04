@@ -1994,6 +1994,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
             }
+            if (getStyleAttribute("width").isEmpty()) {
+                return "auto";
+            }
         }
 
         final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
@@ -2029,6 +2032,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's width in pixels, possibly including its padding and border
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
+        if (!getElement().getDomNodeOrNull().isDirectlyAttachedToPage()) {
+            return 0;
+        }
         int width = getCalculatedWidth();
         if (includeBorder) {
             width += getBorderHorizontal();
@@ -2158,6 +2164,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's height, possibly including its padding and border
      */
     public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
+        if (!getElement().getDomNodeOrNull().isDirectlyAttachedToPage()) {
+            return 0;
+        }
         int height = getCalculatedHeight();
         if (includeBorder) {
             height += getBorderVertical();

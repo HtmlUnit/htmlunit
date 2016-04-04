@@ -9,7 +9,7 @@
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
             <action type="fix" dev="asashour">
-                JavaScript: fix .offsetWidth and .offsetHeight of unconnected elements.
+                JavaScript: fix .offsetWidth, .offsetHeight, .clientWidth and .clientHeight of unconnected elements.
             </action>
             <action type="add" dev="rbri" due-to="Madis P&#x00e4;rn">
                 WebSocket support for binary data added.
