@@ -18,8 +18,12 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1707,4 +1711,71 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             }
         }
     }
+
+    /**
+     * Ensures no default implementation is being used.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void defaultImplementation() throws Exception {
+        final BrowserVersion browserVersion = getBrowserVersion();
+        final ClassConfiguration config
+            = AbstractJavaScriptConfiguration.getClassConfiguration(CSSStyleDeclaration.class, browserVersion);
+        final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
+        final List<String> cssLines = FileUtils.readLines(new File(
+                "src/main/java/com/gargoylesoftware/htmlunit/javascript/host/css/CSSStyleDeclaration.java"));
+        final List<String> computedCssLines = FileUtils.readLines(new File(
+                "src/main/java/com/gargoylesoftware/htmlunit/javascript/host/css/ComputedCSSStyleDeclaration.java"));
+        for (final String propertyName : propertyMap.keySet()) {
+            final PropertyInfo info = propertyMap.get(propertyName);
+            if (info.getReadMethod() == null) {
+                System.out.println(browserVersion.getNickname() + " CSSStyleDeclaration: no getter for " + propertyName);
+            }
+            if (info.getWriteMethod() == null && !"length".equals(propertyName)) {
+                System.out.println(browserVersion.getNickname() + " CSSStyleDeclaration: no setter for " + propertyName);
+            }
+            if (isDefaultGetter(cssLines, info) && isDefaultSetter(cssLines, info) && isDefaultGetterComputed(computedCssLines, info)) {
+                System.out.println(browserVersion.getNickname() + " CSSStyleDeclaration: default implementation for " + propertyName);
+            }
+        }
+    }
+
+    private boolean isDefaultGetter(final List<String> lines, final PropertyInfo info) {
+        for (int i = 0; i < lines.size(); i++) {
+            final String line = lines.get(i);
+            if (line.startsWith("    public ") && line.contains(" " + info.getReadMethod().getName() + "(") &&
+                    lines.get(i + 1).contains("  return getStyleAttribute(") && lines.get(i + 2).equals("    }")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isDefaultSetter(final List<String> lines, final PropertyInfo info) {
+        for (int i = 0; i < lines.size(); i++) {
+            final String line = lines.get(i);
+            if (line.startsWith("    public void ") && line.contains(" " + info.getWriteMethod().getName() + "(") &&
+                    lines.get(i + 1).contains("  setStyleAttribute(") && lines.get(i + 2).equals("    }")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isDefaultGetterComputed(final List<String> lines, final PropertyInfo info) {
+        for (int i = 0; i < lines.size(); i++) {
+            final String line = lines.get(i);
+            if (line.startsWith("    public ") && line.contains(" " + info.getReadMethod().getName() + "(")) {
+                String nextLine = lines.get(i + 1);
+                if (nextLine.contains("  return defaultIfEmpty(super." + info.getReadMethod().getName() + "(),")
+                        && nextLine.indexOf(',', nextLine.indexOf(',') + 1) == -1
+                        && lines.get(i + 2).equals("    }")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

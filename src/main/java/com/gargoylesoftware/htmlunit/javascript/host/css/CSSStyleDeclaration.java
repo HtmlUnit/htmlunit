@@ -2146,8 +2146,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the "length", not yet implemented.
-     * @return the length
+     * Returns the {@code length} property.
+     * @return the {@code length} property
      */
     @JsxGetter
     public int getLength() {
@@ -2482,7 +2482,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
         final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
         if (style != null) {
-            return getStyleAttributeValue(style);
+            return getStyleAttribute(style);
         }
 
         return super.get(name, start);
@@ -2509,7 +2509,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param style the style
      * @return the value
      */
-    protected String getStyleAttributeValue(final Definition style) {
+    protected String getStyleAttribute(final Definition style) {
         return getStyleAttribute(style.getAttributeName());
     }
 

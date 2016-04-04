@@ -2809,10 +2809,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    protected String getStyleAttributeValue(final Definition style) {
+    protected String getStyleAttribute(final Definition style) {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
-        final String value = super.getStyleAttributeValue(style);
+        final String value = super.getStyleAttribute(style);
         if (StringUtils.isEmpty(value)) {
             return style.getDefaultComputedValue(getBrowserVersion());
         }
