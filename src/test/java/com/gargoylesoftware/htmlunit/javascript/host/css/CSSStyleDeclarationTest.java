@@ -1747,8 +1747,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     private boolean isDefaultGetter(final List<String> lines, final PropertyInfo info) {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
-            if (line.startsWith("    public ") && line.contains(" " + info.getReadMethod().getName() + "(") &&
-                    lines.get(i + 1).contains("  return getStyleAttribute(") && lines.get(i + 2).equals("    }")) {
+            if (line.startsWith("    public ")
+                    && line.contains(" " + info.getReadMethod().getName() + "(")
+                    && lines.get(i + 1).contains("  return getStyleAttribute(")
+                    && lines.get(i + 2).equals("    }")) {
                 return true;
             }
         }
@@ -1758,8 +1760,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     private boolean isDefaultSetter(final List<String> lines, final PropertyInfo info) {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
-            if (line.startsWith("    public void ") && line.contains(" " + info.getWriteMethod().getName() + "(") &&
-                    lines.get(i + 1).contains("  setStyleAttribute(") && lines.get(i + 2).equals("    }")) {
+            if (line.startsWith("    public void ")
+                    && line.contains(" " + info.getWriteMethod().getName() + "(")
+                    && lines.get(i + 1).contains("  setStyleAttribute(")
+                    && lines.get(i + 2).equals("    }")) {
                 return true;
             }
         }

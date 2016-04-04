@@ -49,6 +49,7 @@ public final class StyleAttributes {
 
     /**
      * Gets the style attributes definition with the given name for the specified browser version.
+     * @param propertyName the name of the property
      * @param browserVersion the browser version
      * @return {@code null} if no definition exists for this browser version
      */
@@ -2846,8 +2847,11 @@ public final class StyleAttributes {
             return attributeName_;
         }
 
-        public String getDefaultComputedValue(
-                final BrowserVersion browserVersion) {
+        /**
+         * @param browserVersion the browser version
+         * @return the default value for this attribute
+         */
+        public String getDefaultComputedValue(final BrowserVersion browserVersion) {
             final BrowserConfiguration config
                 = BrowserConfiguration.getMatchingConfiguration(browserVersion, browserConfigurations_);
             if (config == null) {
