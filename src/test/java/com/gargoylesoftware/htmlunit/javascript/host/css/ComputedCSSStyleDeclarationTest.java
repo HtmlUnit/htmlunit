@@ -1692,4 +1692,45 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "15px arial, sans-serif", "normal normal normal normal 15px / normal arial, sans-serif",
+                "normal", "normal",
+                "oblique 15px arial, sans-serif", "oblique normal normal normal 15px / normal arial, sans-serif",
+                "oblique", "oblique" },
+            FF = { "15px arial,sans-serif", "", "normal", "normal",
+                    "oblique 15px arial,sans-serif", "", "oblique", "oblique" },
+            IE = { "15px/normal arial, sans-serif", "", "normal", "normal",
+                    "oblique 15px/normal arial, sans-serif", "", "oblique", "oblique" })
+    @NotYetImplemented
+    public void fontStyle() throws Exception {
+        font("15px arial, sans-serif", "fontStyle", "oblique");
+    }
+
+    private void font(final String fontToSet, final String property, final String value) throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('mydiv');\n"
+            + "    div.style.font = '" + fontToSet + "';\n"
+            + "    debug(div);\n"
+            + "    div.style." + property + " = '" + value + "';\n"
+            + "    debug(div);\n"
+            + "  }\n"
+            + "  function debug(div) {\n"
+            + "    var style = window.getComputedStyle(div, null);\n"
+            + "    alert(div.style.font);\n"
+            + "    alert(style.font);\n"
+            + "    alert(div.style." + property + ");\n"
+            + "    alert(style." + property + ");\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
