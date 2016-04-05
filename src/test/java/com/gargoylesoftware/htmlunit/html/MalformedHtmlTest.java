@@ -222,6 +222,50 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
+    * Regression test for bug #1192.
+    * @throws Exception if an error occurs
+    */
+    @Test
+    @Alerts({"submit", "button"})
+    public void brokenInputSingleQuote() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert(document.getElementById('myBody').firstChild.type);\n"
+                + "    alert(document.getElementById('myBody').firstChild.value);\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body id='myBody' onload='test()'>"
+                +   "<input width:250px' type='submit' value='button'>"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+    * Regression test for bug #1192.
+    * @throws Exception if an error occurs
+    */
+    @Test
+    @Alerts({"submit", "button"})
+    public void brokenInputDoubleQuote() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert(document.getElementById('myBody').firstChild.type);\n"
+                + "    alert(document.getElementById('myBody').firstChild.value);\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body id='myBody' onload='test()'>"
+                +   "<input width:250px\" type=\"submit\" value=\"button\">"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
