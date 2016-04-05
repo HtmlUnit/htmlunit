@@ -6348,11 +6348,12 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1, 1, 2",
-        FF38 = "0, 2, 2",
-        FF45 = "0, 2, 2",
-        IE = "0, 2, 2")
+    @Alerts(DEFAULT  = "0, 2, 2",
+            CHROME = "1, 1, 2")
     @NotYetImplemented(CHROME)
+    // for some reason, real chrome div.getBoundingClientRect().top returns 999.53125
+    // not able to reproduce it with simple case
+    // According to https://github.com/jquery/jquery/issues/2590, this could be fixed in jQuery 1.12
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");
     }
