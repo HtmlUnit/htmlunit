@@ -26,6 +26,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FLOAT;
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.awt.Color;
@@ -1318,6 +1319,24 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setColor(final String color) {
         setStyleAttribute(COLOR, color);
+    }
+
+    /**
+     * Gets the {@code cssFloat} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter
+    public String getCssFloat() {
+        return getStyleAttribute(FLOAT);
+    }
+
+    /**
+     * Sets the {@code cssFloat} style attribute.
+     * @param value the new attribute
+     */
+    @JsxSetter
+    public void setCssFloat(final String value) {
+        setStyleAttribute(FLOAT.getAttributeName(), value);
     }
 
     /**

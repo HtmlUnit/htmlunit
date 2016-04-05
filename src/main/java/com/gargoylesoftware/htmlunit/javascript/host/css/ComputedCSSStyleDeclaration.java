@@ -502,6 +502,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getCssFloat() {
+        return defaultIfEmpty(super.getCssFloat(), Definition.CSS_FLOAT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getDisplay() {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
@@ -865,7 +873,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
 
             // Width not explicitly set.
-            final String cssFloat = defaultIfEmpty(getStyleAttribute(Definition.FLOAT), Definition.CSS_FLOAT);
+            final String cssFloat = getCssFloat();
             if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
                 // We're floating; simplistic approximation: text content * pixels per character.
                 width = node.getTextContent().length() * PIXELS_PER_CHAR;

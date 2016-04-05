@@ -1747,11 +1747,23 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     private boolean isDefaultGetter(final List<String> lines, final PropertyInfo info) {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
+            final String nextLine = i + 1 < lines.size() ? lines.get(i + 1) : null;
             if (line.startsWith("    public ")
                     && line.contains(" " + info.getReadMethod().getName() + "(")
-                    && lines.get(i + 1).contains("  return getStyleAttribute(")
+                    && nextLine.contains("  return getStyleAttribute(")
                     && lines.get(i + 2).equals("    }")) {
-                return true;
+                final String styleName = nextLine.substring(nextLine.indexOf('(' + 1), nextLine.indexOf(')'));
+                try {
+                    final String attributeName = Definition.valueOf(styleName).getAttributeName();
+                    final String methodName = "get" +
+                            Character.toUpperCase(attributeName.charAt(0)) + attributeName.substring(1);
+                    if (info.getReadMethod().getName().equals(methodName)) {
+                        return true;
+                    }
+                }
+                catch(final Exception e) {
+                    // ignore
+                }
             }
         }
         return false;
