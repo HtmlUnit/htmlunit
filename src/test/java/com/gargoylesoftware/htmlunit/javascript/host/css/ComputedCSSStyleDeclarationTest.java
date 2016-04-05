@@ -1512,10 +1512,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0", "0", "0", "auto", "100px", "3px", "block", "content-box", "0px", "0px",
-                "104", "104", "104", "104", "auto", "100px", "3px", "block", "content-box", "0px", "0px" },
-            CHROME = { "0", "0", "0", "0", "", "", "", "", "", "", "",
-                    "104", "104", "104", "104", "auto", "100px", "3px", "block", "content-box", "0px", "0px" })
+    @Alerts(DEFAULT = { "0", "0", "0", "0", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px",
+                "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px" },
+            CHROME = { "0", "0", "0", "0", "", "", "", "", "", "", "", "",
+                    "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px" })
     public void offsetWidth() throws Exception {
         final String html = "<html><head>"
             + "<script>\n"
@@ -1532,6 +1532,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    alert(div.clientHeight);\n"
             + "    alert(style.top);\n"
             + "    alert(style.width);\n"
+            + "    alert(style.height);\n"
             + "    alert(style.marginRight);\n"
             + "    alert(style.display);\n"
             + "    alert(style.boxSizing);\n"
@@ -1544,6 +1545,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    alert(div.clientHeight);\n"
             + "    alert(style.top);\n"
             + "    alert(style.width);\n"
+            + "    alert(style.height);\n"
             + "    alert(style.marginRight);\n"
             + "    alert(style.display);\n"
             + "    alert(style.boxSizing);\n"

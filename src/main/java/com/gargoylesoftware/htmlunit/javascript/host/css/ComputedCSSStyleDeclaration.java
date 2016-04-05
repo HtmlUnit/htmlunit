@@ -583,7 +583,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
             }
-            return "auto";
+            if (getStyleAttribute("height").isEmpty()) {
+                return "auto";
+            }
         }
         final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
         return pixelString(elem, new CssValue(0, windowHeight) {
