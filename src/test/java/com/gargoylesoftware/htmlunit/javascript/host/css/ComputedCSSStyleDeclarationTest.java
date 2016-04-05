@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1552,6 +1553,67 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "", "left", "left", "right", "right" },
+            FF = { "left", "left", "left", "left", "right", "right" },
+            IE = { "undefined", "left", "undefined", "left", "undefined", "right" })
+    @NotYetImplemented(IE)
+    public void cssFloat2() throws Exception {
+        final String html = "<html><head>"
+            + "<style>\n"
+            + "  .abc { float: right }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.style.float = 'left';\n"
+            + "    var style = window.getComputedStyle(div, null);\n"
+            + "    alert(style.float);\n"
+            + "    alert(style.cssFloat);\n"
+            + "    document.body.appendChild(div);\n"
+            + "    alert(style.float);\n"
+            + "    alert(style.cssFloat);\n"
+            + "    div = document.getElementById('mydiv');\n"
+            + "    style = window.getComputedStyle(div, null);\n"
+            + "    alert(style.float);\n"
+            + "    alert(style.cssFloat);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv' class='abc'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "1")
+    public void custom() throws Exception {
+        final String html = "<html><head>"
+            + "<style>\n"
+            + "  .abc { xyz: 1 }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('mydiv');\n"
+            + "    var style = window.getComputedStyle(div, null);\n"
+            + "    alert(style.xyz);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv' class='abc'></div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
