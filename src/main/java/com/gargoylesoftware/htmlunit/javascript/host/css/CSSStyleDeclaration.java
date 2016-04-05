@@ -2881,6 +2881,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         else if (value.endsWith("em")) {
             i = i * 16;
         }
+        else if (value.endsWith("%")) {
+            i = i * 16 / 100;
+        }
         else if (value.endsWith("ex")) {
             i = i * 10;
         }

@@ -1619,4 +1619,32 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "", "16px", "2em", "32px", "150%", "24px" })
+    public void fontSizeEm() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('mydiv');\n"
+            + "    var style = window.getComputedStyle(div, null);\n"
+            + "    alert(div.style.fontSize);\n"
+            + "    alert(style.fontSize);\n"
+            + "    div.style.fontSize = '2em';\n"
+            + "    alert(div.style.fontSize);\n"
+            + "    alert(style.fontSize);\n"
+            + "    div.style.fontSize = '150%';\n"
+            + "    alert(div.style.fontSize);\n"
+            + "    alert(style.fontSize);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

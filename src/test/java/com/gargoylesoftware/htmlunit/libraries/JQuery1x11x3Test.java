@@ -4997,7 +4997,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 43, 43")
-    @NotYetImplemented
     public void css__css_String_Hash_() throws Exception {
         runTest("css: css(String|Hash)");
     }

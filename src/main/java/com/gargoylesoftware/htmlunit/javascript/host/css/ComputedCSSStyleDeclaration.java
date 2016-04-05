@@ -570,6 +570,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (value.isEmpty()) {
             value = "16px";
         }
+        else {
+            value = pixelValue(value) + "px";
+        }
         return value;
     }
 
