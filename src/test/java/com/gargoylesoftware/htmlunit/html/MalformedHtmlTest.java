@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Carsten Steul
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MalformedHtmlTest extends WebDriverTestCase {
@@ -178,28 +179,45 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-    * Regression test for bug 2838901.
+    * Regression test for bug #889.
     * @throws Exception if an error occurs
     */
     @Test
+    @NotYetImplemented
     public void missingSingleQuote() throws Exception {
-        final String html = "<html><body>"
-            + "Go to <a href='http://blah.com>blah</a> now."
-            + "<script>alert(document.links.length)</script>"
-            + "</body></html>";
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert(document.links.length);\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  Go to <a href='http://blah.com>blah</a> now.\n"
+                + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
     /**
-    * Regression test for bug 2838901.
+    * Regression test for bug #889.
     * @throws Exception if an error occurs
     */
     @Test
+    @Alerts("0")
+    @NotYetImplemented
     public void missingDoubleQuote() throws Exception {
-        final String html = "<html><body>"
-                + "Go to <a href='http://blah.com>blah</a> now."
-            + "<script>alert(document.links.length)</script>"
-            + "</body></html>";
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert(document.links.length);\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  Go to <a href=\"http://blah.com>blah</a> now.\n"
+                + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
