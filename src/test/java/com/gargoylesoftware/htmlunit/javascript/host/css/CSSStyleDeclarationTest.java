@@ -1755,13 +1755,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                 final String styleName = nextLine.substring(nextLine.indexOf('(' + 1), nextLine.indexOf(')'));
                 try {
                     final String attributeName = Definition.valueOf(styleName).getAttributeName();
-                    final String methodName = "get" +
-                            Character.toUpperCase(attributeName.charAt(0)) + attributeName.substring(1);
+                    final String methodName = "get"
+                            + Character.toUpperCase(attributeName.charAt(0)) + attributeName.substring(1);
                     if (info.getReadMethod().getName().equals(methodName)) {
                         return true;
                     }
                 }
-                catch(final Exception e) {
+                catch (final Exception e) {
                     // ignore
                 }
             }
