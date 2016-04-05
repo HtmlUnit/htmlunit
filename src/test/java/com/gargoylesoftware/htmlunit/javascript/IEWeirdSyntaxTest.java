@@ -14,32 +14,26 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Test for IE weird JavaScript syntax.
+ * Test for IE weird JavaScript syntax (supported by IE8).
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class IEWeirdSyntaxTest extends SimpleWebTestCase {
+public class IEWeirdSyntaxTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
-    @Alerts(IE = { "1", "2" })
     public void semicolon_before_finally() throws Exception {
         doTestTryCatchFinally("", ";");
         doTestTryCatchFinally("", "\n;\n");
@@ -50,8 +44,6 @@ public class IEWeirdSyntaxTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
-    @Alerts(IE = { "1", "2" })
     public void semicolon_before_catch() throws Exception {
         doTestTryCatchFinally(";", "");
         doTestTryCatchFinally("\n;\n", "");
@@ -61,8 +53,6 @@ public class IEWeirdSyntaxTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
-    @Alerts(IE = { "1", "2" })
     public void semicolonAndComment_before_catchAndFinally() throws Exception {
         doTestTryCatchFinally("// comment\n;\n", "");
         doTestTryCatchFinally("", "// comment\n;\n");
@@ -71,38 +61,26 @@ public class IEWeirdSyntaxTest extends SimpleWebTestCase {
     }
 
     private void doTestTryCatchFinally(final String beforeCatch, final String beforeFinally) throws Exception {
-        final String html = "<html><script>\n"
-            + "try {\n"
-            + "  alert('1');\n"
-            + "}" + beforeCatch
-            + "catch(e) {\n"
-            + "}" + beforeFinally
-            + "finally {\n"
-            + "  alert('2');\n"
-            + "}\n"
-            + "</script></html>";
-        doTestWithEvaluatorExceptionExceptForIE(html);
-    }
-
-    private void doTestWithEvaluatorExceptionExceptForIE(final String html) throws Exception {
-        try {
-            loadPageWithAlerts(html);
-        }
-        catch (final ScriptException e) {
-            if (e.getCause() instanceof EvaluatorException && !getBrowserVersion().isIE()) {
-                // this is normal
-            }
-            else {
-                throw e;
-            }
-        }
+        final String html = "<html>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    alert('1');\n"
+            + "  }" + beforeCatch
+            + "  catch(e) {\n"
+            + "    alert('2');\n"
+            + "  }" + beforeFinally
+            + "  finally {\n"
+            + "    alert('3');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</html>";
+        doTestWithEvaluatorExceptionExcept(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
     public void windowDotHandlerFunction() throws Exception {
         final String html = "<html><head><script>\n"
             + "function window.onload() {\n"
@@ -110,6 +88,17 @@ public class IEWeirdSyntaxTest extends SimpleWebTestCase {
             + "}\n"
             + "</script></head>"
             + "<body></body></html>";
-        doTestWithEvaluatorExceptionExceptForIE(html);
+        doTestWithEvaluatorExceptionExcept(html);
+    }
+
+    private void doTestWithEvaluatorExceptionExcept(final String html) throws Exception {
+        try {
+            loadPageWithAlerts2(html);
+        }
+        catch (final Exception e) {
+            if (!(e.getCause() instanceof ScriptException)) {
+                throw e;
+            }
+        }
     }
 }
