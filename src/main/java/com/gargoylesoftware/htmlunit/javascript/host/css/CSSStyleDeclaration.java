@@ -26,7 +26,37 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BOTTOM;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FLOAT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_SIZE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LEFT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LETTER_SPACING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_BOTTOM;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_LEFT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_RIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MAX_HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MAX_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MIN_HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MIN_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OUTLINE_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_BOTTOM;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_LEFT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_RIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TEXT_INDENT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.VERTICAL_ALIGN;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WORD_SPACING;
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.awt.Color;
@@ -97,7 +127,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     protected static final String PRIORITY_IMPORTANT = "important";
 
     private static final String BACKGROUND = "background";
-    private static final String BACKGROUND_ATTACHMENT = "background-attachment";
     private static final String BACKGROUND_COLOR = "background-color";
     private static final String BACKGROUND_IMAGE = "background-image";
     private static final String BACKGROUND_POSITION = "background-position";
@@ -107,57 +136,27 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String BORDER_BOTTOM = "border-bottom";
     private static final String BORDER_BOTTOM_COLOR = "border-bottom-color";
     private static final String BORDER_BOTTOM_STYLE = "border-bottom-style";
-    private static final String BORDER_BOTTOM_WIDTH = "border-bottom-width";
     private static final String BORDER_LEFT = "border-left";
     private static final String BORDER_LEFT_COLOR = "border-left-color";
     private static final String BORDER_LEFT_STYLE = "border-left-style";
     private static final String BORDER_WIDTH = "border-width";
-    private static final String BORDER_LEFT_WIDTH = "border-left-width";
     private static final String BORDER_RIGHT = "border-right";
     private static final String BORDER_RIGHT_COLOR = "border-right-color";
     private static final String BORDER_RIGHT_STYLE = "border-right-style";
-    private static final String BORDER_RIGHT_WIDTH = "border-right-width";
     private static final String BORDER_TOP = "border-top";
     private static final String BORDER_TOP_COLOR = "border-top-color";
     private static final String BORDER_TOP_STYLE = "border-top-style";
-    private static final String BORDER_TOP_WIDTH = "border-top-width";
-    private static final String BOTTOM = "bottom";
     private static final String COLOR = "color";
     private static final String DISPLAY = "display";
-    private static final String FONT_SIZE = "font-size";
-    private static final String HEIGHT = "height";
-    private static final String LEFT = "left";
-    private static final String LETTER_SPACING = "letter-spacing";
-    private static final String MARGIN_BOTTOM = "margin-bottom";
-    private static final String MARGIN_LEFT = "margin-left";
-    private static final String MARGIN_RIGHT = "margin-right";
     private static final String MARGIN = "margin";
-    private static final String MARGIN_TOP = "margin-top";
     private static final String MARKS = "marks";
-    private static final String MAX_HEIGHT = "max-height";
-    private static final String MAX_WIDTH = "max-width";
-    private static final String MIN_HEIGHT = "min-height";
-    private static final String MIN_WIDTH = "min-width";
     private static final String OPACITY = "opacity";
     private static final String OUTLINE = "outline";
-    private static final String OUTLINE_WIDTH = "outline-width";
-    private static final String PADDING_BOTTOM = "padding-bottom";
-    private static final String PADDING_LEFT = "padding-left";
-    private static final String PADDING_RIGHT = "padding-right";
     private static final String PADDING = "padding";
-    private static final String PADDING_TOP = "padding-top";
     private static final String PAGE = "page";
-    private static final String RIGHT = "right";
     private static final String RUBY_ALIGN = "ruby-align";
     private static final String SIZE = "size";
-    private static final String TEXT_INDENT = "text-indent";
-    private static final String TOP = "top";
-    private static final String VERTICAL_ALIGN = "vertical-align";
-    private static final String WORD_SPACING = "word-spacing";
     private static final String Z_INDEX = "z-index";
-
-    /** The width style attribute. */
-    protected static final String WIDTH = "width";
 
     private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
     private static final Pattern URL_PATTERN =
@@ -682,7 +681,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter(@WebBrowser(IE))
     public void setAccelerator(final String accelerator) {
-        setStyleAttributePixel(Definition.ACCELERATOR.getAttributeName(), accelerator);
+        setStyleAttributePixel(ACCELERATOR, accelerator);
     }
 
     /**
@@ -717,7 +716,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBackgroundAttachment(final String backgroundAttachment) {
-        setStyleAttribute(BACKGROUND_ATTACHMENT, backgroundAttachment);
+        setStyleAttribute(BACKGROUND_ATTACHMENT.getAttributeName(), backgroundAttachment);
     }
 
     /**
@@ -1482,7 +1481,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getMarginBottom() {
-        return getStyleAttribute(MARGIN_BOTTOM, MARGIN, Shorthand.BOTTOM);
+        return getStyleAttribute(MARGIN_BOTTOM.getAttributeName(), MARGIN, Shorthand.BOTTOM);
     }
 
     /**
@@ -1500,7 +1499,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getMarginLeft() {
-        return getStyleAttribute(MARGIN_LEFT, MARGIN, Shorthand.LEFT);
+        return getStyleAttribute(MARGIN_LEFT.getAttributeName(), MARGIN, Shorthand.LEFT);
     }
 
     /**
@@ -1518,7 +1517,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getMarginRight() {
-        return getStyleAttribute(MARGIN_RIGHT, MARGIN, Shorthand.RIGHT);
+        return getStyleAttribute(MARGIN_RIGHT.getAttributeName(), MARGIN, Shorthand.RIGHT);
     }
 
     /**
@@ -1536,7 +1535,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getMarginTop() {
-        return getStyleAttribute(MARGIN_TOP, MARGIN, Shorthand.TOP);
+        return getStyleAttribute(MARGIN_TOP.getAttributeName(), MARGIN, Shorthand.TOP);
     }
 
     /**
@@ -1866,7 +1865,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getPaddingBottom() {
-        return getStyleAttribute(PADDING_BOTTOM, PADDING, Shorthand.BOTTOM);
+        return getStyleAttribute(PADDING_BOTTOM.getAttributeName(), PADDING, Shorthand.BOTTOM);
     }
 
     /**
@@ -1884,7 +1883,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getPaddingLeft() {
-        return getStyleAttribute(PADDING_LEFT, PADDING, Shorthand.LEFT);
+        return getStyleAttribute(PADDING_LEFT.getAttributeName(), PADDING, Shorthand.LEFT);
     }
 
     /**
@@ -1902,7 +1901,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getPaddingRight() {
-        return getStyleAttribute(PADDING_RIGHT, PADDING, Shorthand.RIGHT);
+        return getStyleAttribute(PADDING_RIGHT.getAttributeName(), PADDING, Shorthand.RIGHT);
     }
 
     /**
@@ -1920,7 +1919,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getPaddingTop() {
-        return getStyleAttribute(PADDING_TOP, PADDING, Shorthand.TOP);
+        return getStyleAttribute(PADDING_TOP.getAttributeName(), PADDING, Shorthand.TOP);
     }
 
     /**
@@ -3091,10 +3090,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     /**
      * Sets the style attribute which should be treated as an integer in pixels.
-     * @param name the attribute name
+     * @param definition the definition
      * @param value the attribute value
      */
-    protected void setStyleAttributePixel(final String name, String value) {
+    protected void setStyleAttributePixel(final Definition definition, String value) {
         if (value.endsWith("px")) {
             value = value.substring(0, value.length() - 2);
         }
@@ -3110,6 +3109,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         catch (final Exception e) {
             //ignore
         }
-        setStyleAttribute(name, value);
+        setStyleAttribute(definition.getAttributeName(), value);
     }
 }

@@ -18,6 +18,26 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_POSITION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_REPEAT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CSS_FLOAT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OVERFLOW;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.POSITION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WORD_SPACING;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -329,7 +349,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getAccelerator() {
-        return defaultIfEmpty(getStyleAttribute("accelerator"), Definition.ACCELERATOR);
+        return defaultIfEmpty(getStyleAttribute("accelerator"), ACCELERATOR);
     }
 
     /**
@@ -337,7 +357,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundAttachment() {
-        return defaultIfEmpty(super.getBackgroundAttachment(), Definition.BACKGROUND_ATTACHMENT);
+        return defaultIfEmpty(super.getBackgroundAttachment(), BACKGROUND_ATTACHMENT);
     }
 
     /**
@@ -347,7 +367,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getBackgroundColor() {
         final String value = super.getBackgroundColor();
         if (StringUtils.isEmpty(value)) {
-            return Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
+            return BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
         }
         return toRGBColor(value);
     }
@@ -357,7 +377,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundImage() {
-        return defaultIfEmpty(super.getBackgroundImage(), Definition.BACKGROUND_IMAGE);
+        return defaultIfEmpty(super.getBackgroundImage(), BACKGROUND_IMAGE);
     }
 
     /**
@@ -366,7 +386,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundPosition() {
-        return defaultIfEmpty(super.getBackgroundPosition(), Definition.BACKGROUND_POSITION);
+        return defaultIfEmpty(super.getBackgroundPosition(), BACKGROUND_POSITION);
     }
 
     /**
@@ -374,7 +394,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundRepeat() {
-        return defaultIfEmpty(super.getBackgroundRepeat(), Definition.BACKGROUND_REPEAT);
+        return defaultIfEmpty(super.getBackgroundRepeat(), BACKGROUND_REPEAT);
     }
 
     /**
@@ -382,7 +402,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorder() {
-        return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER);
+        return defaultIfEmpty(super.getBorderBottomColor(), BORDER);
     }
 
     /**
@@ -390,7 +410,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomColor() {
-        return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER_BOTTOM_COLOR);
+        return defaultIfEmpty(super.getBorderBottomColor(), BORDER_BOTTOM_COLOR);
     }
 
     /**
@@ -398,7 +418,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomStyle() {
-        return defaultIfEmpty(super.getBorderBottomStyle(), Definition.BORDER_BOTTOM_STYLE);
+        return defaultIfEmpty(super.getBorderBottomStyle(), BORDER_BOTTOM_STYLE);
     }
 
     /**
@@ -406,7 +426,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), Definition.BORDER_BOTTOM_WIDTH));
+        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), BORDER_BOTTOM_WIDTH));
     }
 
     /**
@@ -414,7 +434,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftColor() {
-        return defaultIfEmpty(super.getBorderLeftColor(), Definition.BORDER_LEFT_COLOR);
+        return defaultIfEmpty(super.getBorderLeftColor(), BORDER_LEFT_COLOR);
     }
 
     /**
@@ -422,7 +442,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftStyle() {
-        return defaultIfEmpty(super.getBorderLeftStyle(), Definition.BORDER_LEFT_STYLE);
+        return defaultIfEmpty(super.getBorderLeftStyle(), BORDER_LEFT_STYLE);
     }
 
     /**
@@ -503,7 +523,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getCssFloat() {
-        return defaultIfEmpty(super.getCssFloat(), Definition.CSS_FLOAT);
+        return defaultIfEmpty(super.getCssFloat(), CSS_FLOAT);
     }
 
     /**
@@ -620,7 +640,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMargin() {
-        return defaultIfEmpty(super.getMargin(), Definition.MARGIN, true);
+        return defaultIfEmpty(super.getMargin(), MARGIN, true);
     }
 
     /**
@@ -708,7 +728,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPadding() {
-        return defaultIfEmpty(super.getPadding(), Definition.PADDING, true);
+        return defaultIfEmpty(super.getPadding(), PADDING, true);
     }
 
     /**
@@ -769,7 +789,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
             return "";
         }
-        return defaultIfEmpty(super.getTop(), Definition.TOP);
+        return defaultIfEmpty(super.getTop(), TOP);
     }
 
     /**
@@ -1155,7 +1175,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private boolean isScrollable(final boolean horizontal, final boolean ignoreSize) {
         final boolean scrollable;
         final Element node = getElement();
-        final String overflow = getStyleAttribute(Definition.OVERFLOW);
+        final String overflow = getStyleAttribute(OVERFLOW);
         if (horizontal) {
             // TODO: inherit, overflow-x
             scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
@@ -1355,7 +1375,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS {@code position} attribute, replacing inherited values with the actual parent values
      */
     public String getPositionWithInheritance() {
-        String p = getStyleAttribute(Definition.POSITION);
+        String p = getStyleAttribute(POSITION);
         if ("inherit".equals(p)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent == null) {
@@ -1578,7 +1598,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWordSpacing() {
-        return defaultIfEmpty(super.getWordSpacing(), Definition.WORD_SPACING);
+        return defaultIfEmpty(super.getWordSpacing(), WORD_SPACING);
     }
 
     /**
