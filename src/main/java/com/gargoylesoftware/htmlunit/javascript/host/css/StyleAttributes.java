@@ -933,7 +933,7 @@ public final class StyleAttributes {
                 ie("auto")),
 
         /** The style property {@code height}. */
-        HEIGHT("height", "height", chrome("skipped"), ff(""), ie("")),
+        HEIGHT("height", "height", chrome(""), ff(""), ie("")),
 
         /** The style property {@code hyphens}. */
         HYPHENS("hyphens", "hyphens", ff45up("manual")),
@@ -2771,7 +2771,7 @@ public final class StyleAttributes {
         WIDOWS("widows", "widows", ie("2"), chrome("1"), ffBelow45("")),
 
         /** The style property {@code width}. */
-        WIDTH("width", "width", chrome("skipped"), ff(""), ie("")),
+        WIDTH("width", "width", chrome(""), ff(""), ie("")),
 
         /** The style property {@code willChange}. */
         WILL_CHANGE("willChange", "will-change", ff("auto"), chrome("auto")),

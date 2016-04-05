@@ -1647,4 +1647,49 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                "", "normal normal normal normal 16px / normal 'Times New Roman'",
+                "", "normal", "", "normal", "", "normal", "", "16px", "", "normal", "", "'Times New Roman'" },
+            FF = { "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif",
+                "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif" },
+            IE = { "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman",
+                "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman" })
+    public void fontInitial() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.createElement('div');\n"
+            + "    debug(div);\n"
+            + "    document.body.appendChild(div);\n"
+            + "    debug(div);\n"
+            + "  }\n"
+            + "  function debug(div) {\n"
+            + "    var style = window.getComputedStyle(div, null);\n"
+            + "    alert(div.style.font);\n"
+            + "    alert(style.font);\n"
+            + "    alert(div.style.fontStyle);\n"
+            + "    alert(style.fontStyle);\n"
+            + "    alert(div.style.fontVariant);\n"
+            + "    alert(style.fontVariant);\n"
+            + "    alert(div.style.fontWeight);\n"
+            + "    alert(style.fontWeight);\n"
+            + "    alert(div.style.fontSize);\n"
+            + "    alert(style.fontSize);\n"
+            + "    alert(div.style.lineHeight);\n"
+            + "    alert(style.lineHeight);\n"
+            + "    alert(div.style.fontFamily);\n"
+            + "    alert(style.fontFamily);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
