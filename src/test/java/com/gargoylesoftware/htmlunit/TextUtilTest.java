@@ -33,7 +33,7 @@ public class TextUtilTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public static void toInputStream_null() throws Exception {
+    public void toInputStream_null() throws Exception {
         try {
             TextUtil.toInputStream(null);
             fail("Expected NullPointerException");
@@ -47,7 +47,7 @@ public class TextUtilTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public static void toInputStream() throws Exception {
+    public void toInputStream() throws Exception {
         final String[][] data = {
             {"", null},
             {"a", "a"},

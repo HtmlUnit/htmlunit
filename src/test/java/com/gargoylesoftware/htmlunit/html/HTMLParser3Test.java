@@ -111,13 +111,14 @@ public class HTMLParser3Test extends WebServerTestCase {
             if (HEADER_ENCODING_ != null) {
                 response.setCharacterEncoding(HEADER_ENCODING_);
             }
-            final Writer writer = new OutputStreamWriter(response.getOutputStream(), "UTF-8");
-            String html = "<html><head>";
-            if (META_TAG_ENCODING_ != null) {
-                html += "<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=" + META_TAG_ENCODING_ + "'>";
+            try (final Writer writer = new OutputStreamWriter(response.getOutputStream(), "UTF-8")) {
+                String html = "<html><head>";
+                if (META_TAG_ENCODING_ != null) {
+                    html += "<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=" + META_TAG_ENCODING_ + "'>";
+                }
+                html += "</head><body>" + utf8String + "</body></html>";
+                writer.write(html);
             }
-            html += "</head><body>" + utf8String + "</body></html>";
-            writer.write(html);
         }
     }
 
