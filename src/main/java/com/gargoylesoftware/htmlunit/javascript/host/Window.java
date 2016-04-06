@@ -1564,11 +1564,11 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * that of <tt>element.style</tt>, but the value returned by this method is read-only.
      *
      * @param element the element
-     * @param pseudo a string specifying the pseudo-element to match (may be {@code null})
+     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
      * @return the computed style
      */
     @JsxFunction
-    public CSS2Properties getComputedStyle(final Element element, final String pseudo) {
+    public CSS2Properties getComputedStyle(final Element element, final String pseudoElement) {
         synchronized (computedStyles_) {
             final CSS2Properties style = computedStyles_.get(element);
             if (style != null) {
@@ -1587,7 +1587,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                 if (trace) {
                     LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
                 }
-                sheet.modifyIfNecessary(style, element);
+                sheet.modifyIfNecessary(style, element, pseudoElement);
             }
         }
 

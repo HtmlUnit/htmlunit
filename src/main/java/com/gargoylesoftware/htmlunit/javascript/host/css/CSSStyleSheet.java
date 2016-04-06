@@ -229,14 +229,30 @@ public class CSSStyleSheet extends StyleSheet {
      * @param style the style to modify
      * @param element the element to which style rules must apply in order for them to be added to
      *        the specified style
+     * @deprecated as of 2.21, please use {@link #modifyIfNecessary(ComputedCSSStyleDeclaration, Element, String)}
      */
+    @Deprecated
     public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element) {
+        modifyIfNecessary(style, element, null);
+    }
+
+    /**
+     * Modifies the specified style object by adding any style rules which apply to the specified
+     * element.
+     *
+     * @param style the style to modify
+     * @param element the element to which style rules must apply in order for them to be added to
+     *        the specified style
+     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
+     */
+    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
+            final String pseudoElement) {
         final CSSRuleList rules = getWrappedSheet().getCssRules();
-        modifyIfNecessary(style, element, rules, new HashSet<String>());
+        modifyIfNecessary(style, element, pseudoElement, rules, new HashSet<String>());
     }
 
     private void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
-        final CSSRuleList rules, final Set<String> alreadyProcessing) {
+            final String pseudoElement, final CSSRuleList rules, final Set<String> alreadyProcessing) {
         if (rules == null) {
             return;
         }
@@ -253,7 +269,7 @@ public class CSSStyleSheet extends StyleSheet {
                 final SelectorList selectors = styleRule.getSelectors();
                 for (int j = 0; j < selectors.getLength(); j++) {
                     final Selector selector = selectors.item(j);
-                    final boolean selected = selects(browser, selector, e);
+                    final boolean selected = selects(browser, selector, e, pseudoElement);
                     if (selected) {
                         final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
                         style.applyStyleFromSelector(dec, selector);
@@ -277,7 +293,7 @@ public class CSSStyleSheet extends StyleSheet {
                     if (!alreadyProcessing.contains(sheet.getUri())) {
                         final CSSRuleList sheetRules = sheet.getWrappedSheet().getCssRules();
                         alreadyProcessing.add(getUri());
-                        sheet.modifyIfNecessary(style, element, sheetRules, alreadyProcessing);
+                        sheet.modifyIfNecessary(style, element, pseudoElement, sheetRules, alreadyProcessing);
                     }
                 }
             }
@@ -286,7 +302,7 @@ public class CSSStyleSheet extends StyleSheet {
                 final MediaList mediaList = mediaRule.getMedia();
                 if (isActive(this, mediaList)) {
                     final CSSRuleList internalRules = mediaRule.getCssRules();
-                    modifyIfNecessary(style, element, internalRules, alreadyProcessing);
+                    modifyIfNecessary(style, element, pseudoElement, internalRules, alreadyProcessing);
                 }
             }
         }
@@ -400,6 +416,20 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element) {
+        return selects(browserVersion, selector, element, null);
+    }
+
+    /**
+     * Returns {@code true} if the specified selector selects the specified element.
+     *
+     * @param browserVersion the browser version
+     * @param selector the selector to test
+     * @param element the element to test
+     * @param pseudoElement the pseudo element to match, (can be {@code null})
+     * @return {@code true} if it does apply, {@code false} if it doesn't apply
+     */
+    public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
+            final DomElement element, final String pseudoElement) {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 if (selector instanceof GeneralAdjacentSelectorImpl) {
@@ -430,11 +460,11 @@ public class CSSStyleSheet extends StyleSheet {
                     && selects(browserVersion, cs.getAncestorSelector(), (HtmlElement) parentNode);
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
-                if (selects(browserVersion, ds.getSimpleSelector(), element)) {
-                    DomNode ancestor = element.getParentNode();
+                if (selects(browserVersion, ds.getSimpleSelector(), element, pseudoElement)) {
+                    DomNode ancestor = element;
                     final Selector dsAncestorSelector = ds.getAncestorSelector();
                     while (ancestor instanceof HtmlElement) {
-                        if (selects(browserVersion, dsAncestorSelector, (HtmlElement) ancestor)) {
+                        if (selects(browserVersion, dsAncestorSelector, (HtmlElement) ancestor, pseudoElement)) {
                             return true;
                         }
                         ancestor = ancestor.getParentNode();
@@ -465,6 +495,8 @@ public class CSSStyleSheet extends StyleSheet {
                 final NegativeSelector ns = (NegativeSelector) selector;
                 return !selects(browserVersion, ns.getSimpleSelector(), element);
             case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
+                final String pseudoName = ((ElementSelector) selector).getLocalName(); 
+                return pseudoElement != null && pseudoElement.equals(":" + pseudoName);
             case Selector.SAC_COMMENT_NODE_SELECTOR:
             case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
             case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:

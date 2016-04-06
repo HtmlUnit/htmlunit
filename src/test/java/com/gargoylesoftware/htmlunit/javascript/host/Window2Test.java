@@ -1678,7 +1678,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("\"0.33\"")
-    @NotYetImplemented
     public void getComputedStylePseudo() throws Exception {
         final String html =
             "<html>\n"
