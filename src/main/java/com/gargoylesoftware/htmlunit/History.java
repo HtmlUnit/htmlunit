@@ -100,7 +100,7 @@ public class History implements Serializable {
     private transient ThreadLocal<Boolean> ignoreNewPages_;
 
     /**
-     * The {@link HistoryEntry}s in this navigation history.
+     * The {@link History.HistoryEntry}s in this navigation history.
      */
     private final List<HistoryEntry> entries_ = new ArrayList<>();
 

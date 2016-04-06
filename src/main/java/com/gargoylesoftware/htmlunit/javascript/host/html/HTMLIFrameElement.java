@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 @JsxClass(domClass = HtmlInlineFrame.class)
 public class HTMLIFrameElement extends HTMLElement {
 
-    /** During {@link #setOnload()}, was the element attached to the page. */
+    /** During {@link #setOnload(Object)}, was the element attached to the page. */
     private boolean isAttachedToPageDuringOnload_;
 
     /**

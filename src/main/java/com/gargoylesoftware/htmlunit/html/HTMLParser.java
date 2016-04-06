@@ -71,7 +71,7 @@ import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancer;
 import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancingListener;
 
 /**
- * <p>SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
+ * <p>SAX parser implementation that uses the NekoHTML {@link net.sourceforge.htmlunit.cyberneko.HTMLConfiguration}
  * to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>
  *
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
