@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.21" date="???" description="FF45, Bugfixes">
+            <action type="fix" dev="asashour" issue="889">
+                Malformed HTML: handle unterminated attribute value.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix .offsetWidth, .offsetHeight, .clientWidth and .clientHeight of unconnected elements.
             </action>
