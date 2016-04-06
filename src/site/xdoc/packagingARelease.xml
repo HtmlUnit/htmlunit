@@ -147,7 +147,7 @@ mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/stagin
                         and upload it to SourceForge files.
                     </li>
                     <li>
-                        Add a new Milestone in SourceForge bugs system.
+                        Add a new Milestone in SourceForge bugs system (for both Bugs and Feature-Requests).
                     </li>
                     <li>
                         Add pom.xml reference to previously removed snapshot repository.

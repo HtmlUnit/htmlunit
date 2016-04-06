@@ -7,6 +7,8 @@
     </properties>
 
     <body>
+        <release version="2.22" date="???" description="Bugfixes">
+        </release>
         <release version="2.21" date="Apr 6, 2016" description="FF45, Bugfixes">
             <action type="update" dev="asashour">
                 Use Neko-HtmlUnit fork.
