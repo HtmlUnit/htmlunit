@@ -183,7 +183,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     * @throws Exception if an error occurs
     */
     @Test
-    @Alerts("")
+    @Alerts("0")
     @NotYetImplemented
     public void missingSingleQuote() throws Exception {
         final String html = "<html>\n"
