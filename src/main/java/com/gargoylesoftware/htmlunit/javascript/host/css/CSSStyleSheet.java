@@ -495,8 +495,11 @@ public class CSSStyleSheet extends StyleSheet {
                 final NegativeSelector ns = (NegativeSelector) selector;
                 return !selects(browserVersion, ns.getSimpleSelector(), element);
             case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
-                final String pseudoName = ((ElementSelector) selector).getLocalName();
-                return pseudoElement != null && (":" + pseudoName).equals(pseudoElement);
+                if (pseudoElement != null && !pseudoElement.isEmpty() && pseudoElement.charAt(0) == ':') {
+                    final String pseudoName = ((ElementSelector) selector).getLocalName();
+                    return pseudoName.equals(pseudoElement.substring(1));
+                }
+                return false;
             case Selector.SAC_COMMENT_NODE_SELECTOR:
             case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
             case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
