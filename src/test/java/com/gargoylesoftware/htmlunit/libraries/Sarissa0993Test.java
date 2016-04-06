@@ -70,7 +70,7 @@ public class Sarissa0993Test extends WebDriverTestCase {
      * @param expectedResult empty for successful test or in the form of "+++F+++"
      * for failing tests (see the results in a real browser)
      */
-    private void verify(final WebDriver driver, final String testName, final String expectedResult) throws Exception {
+    private static void verify(final WebDriver driver, final String testName, final String expectedResult) {
         final WebElement div =
             driver.findElement(By.xpath("//div[@class='placeholder' and a[@name='#" + testName + "']]"));
 

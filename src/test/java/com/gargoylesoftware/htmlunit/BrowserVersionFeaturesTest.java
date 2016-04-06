@@ -105,7 +105,7 @@ public class BrowserVersionFeaturesTest  {
         }
     }
 
-    private String expectedBrowserName(final BrowserVersion browser) {
+    private static String expectedBrowserName(final BrowserVersion browser) {
         if (browser.isIE()) {
             return "IE";
         }

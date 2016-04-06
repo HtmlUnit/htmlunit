@@ -174,11 +174,11 @@ class XmlSerializer {
                 ((HtmlPage) enclosedPage).save(file);
             }
             else {
-                final InputStream is = enclosedPage.getWebResponse().getContentAsStream();
-                final FileOutputStream fos = new FileOutputStream(file);
-                IOUtils.copyLarge(is, fos);
-                IOUtils.closeQuietly(is);
-                IOUtils.closeQuietly(fos);
+                try (final InputStream is = enclosedPage.getWebResponse().getContentAsStream()) {
+                    try (final FileOutputStream fos = new FileOutputStream(file)) {
+                        IOUtils.copyLarge(is, fos);
+                    }
+                }
             }
         }
 
@@ -186,7 +186,7 @@ class XmlSerializer {
         return map;
     }
 
-    private String getFileExtension(final Page enclosedPage) {
+    private static String getFileExtension(final Page enclosedPage) {
         if (enclosedPage != null) {
             if (enclosedPage.isHtmlPage()) {
                 return "html";
@@ -228,7 +228,7 @@ class XmlSerializer {
         return map;
     }
 
-    private String getSuffix(final WebResponse response) {
+    private static String getSuffix(final WebResponse response) {
         // first try to take the one from the requested file
         final String url = response.getWebRequest().getUrl().toString();
         final String fileName = StringUtils.substringAfterLast(StringUtils.substringBefore(url, "?"), "/");
@@ -242,7 +242,8 @@ class XmlSerializer {
         return MimeType.getFileExtension(response.getContentType());
     }
 
-    private Map<String, DomAttr> createAttributesCopyWithClonedAttribute(final HtmlElement elt, final String attrName) {
+    private static Map<String, DomAttr> createAttributesCopyWithClonedAttribute(final HtmlElement elt,
+            final String attrName) {
         final Map<String, DomAttr> newMap = new HashMap<>(elt.getAttributesMap());
 
         // clone the specified element, if possible

@@ -224,8 +224,7 @@ public class BrowserParameterizedRunner extends Suite {
     }
 
     private List<TestWithParameters> createTestsForParameters(
-            final Iterable<Object> allParameters, final String namePattern)
-        throws Exception {
+            final Iterable<Object> allParameters, final String namePattern) {
         int i = 0;
         final List<TestWithParameters> children = new ArrayList<>();
         for (final Object parametersOfSingleTest : allParameters) {

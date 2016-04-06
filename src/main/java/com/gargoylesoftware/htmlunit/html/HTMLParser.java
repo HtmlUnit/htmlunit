@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.parsers.AbstractSAXParser;
@@ -234,20 +233,20 @@ public final class HTMLParser {
             throw new ObjectInstantiationException("Error setting HTML parser feature", e);
         }
 
-        final InputStream content = webResponse.getContentAsStream();
-        final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset);
+        try (final InputStream content = webResponse.getContentAsStream()) {
+            final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset);
 
-        page.registerParsingStart();
-        try {
-            domBuilder.parse(in);
-        }
-        catch (final XNIException e) {
-            // extract enclosed exception
-            final Throwable origin = extractNestedException(e);
-            throw new RuntimeException("Failed parsing content from " + url, origin);
+            page.registerParsingStart();
+            try {
+                domBuilder.parse(in);
+            }
+            catch (final XNIException e) {
+                // extract enclosed exception
+                final Throwable origin = extractNestedException(e);
+                throw new RuntimeException("Failed parsing content from " + url, origin);
+            }
         }
         finally {
-            IOUtils.closeQuietly(content);
             page.registerParsingEnd();
         }
 
@@ -712,13 +711,13 @@ public final class HTMLParser {
             return searchedNode;
         }
 
-        private boolean isTableChild(final String nodeName) {
+        private static boolean isTableChild(final String nodeName) {
             return "thead".equals(nodeName) || "tbody".equals(nodeName)
                     || "tfoot".equals(nodeName) || "caption".equals(nodeName)
                     || "colgroup".equals(nodeName);
         }
 
-        private boolean isTableCell(final String nodeName) {
+        private static boolean isTableCell(final String nodeName) {
             return "td".equals(nodeName) || "th".equals(nodeName);
         }
 
@@ -956,7 +955,7 @@ public final class HTMLParser {
             }
         }
 
-        private void copyAttributes(final DomElement to, final XMLAttributes attrs) {
+        private static void copyAttributes(final DomElement to, final XMLAttributes attrs) {
             final int length = attrs.getLength();
             for (int i = 0; i < length; i++) {
                 final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
@@ -985,7 +984,7 @@ public final class HTMLParser {
             }
         }
 
-        private boolean isSynthesized(final Augmentations augs) {
+        private static boolean isSynthesized(final Augmentations augs) {
             final HTMLEventInfo info = (augs == null) ? null
                     : (HTMLEventInfo) augs.getItem(FEATURE_AUGMENTATIONS);
             return info != null ? info.isSynthesized() : false;

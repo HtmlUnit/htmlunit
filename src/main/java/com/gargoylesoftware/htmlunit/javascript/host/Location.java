@@ -371,7 +371,7 @@ public class Location extends SimpleScriptable {
         }
     }
 
-    private String decodeHash(final String hash) {
+    private static String decodeHash(final String hash) {
         if (hash.indexOf('%') == -1) {
             return hash;
         }

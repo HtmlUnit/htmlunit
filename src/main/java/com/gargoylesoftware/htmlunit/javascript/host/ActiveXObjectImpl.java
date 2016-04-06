@@ -91,8 +91,8 @@ public class ActiveXObjectImpl extends SimpleScriptable {
                         final Object rv = METHOD_callN_.invoke(null, object_, name, arg3);
                         return wrapIfNecessary(rv);
                     }
-                    catch (final Exception e) {
-                        throw Context.throwAsScriptRuntimeEx(e);
+                    catch (final Exception ex) {
+                        throw Context.throwAsScriptRuntimeEx(ex);
                     }
                 }
 
@@ -189,7 +189,7 @@ public class ActiveXObjectImpl extends SimpleScriptable {
      * @param variant the variant to potentially wrap
      * @return either the variant if it is basic type or wrapped {@link ActiveXObjectImpl}
      */
-    private Object wrapIfNecessary(final Object variant) throws Exception {
+    private static Object wrapIfNecessary(final Object variant) throws Exception {
         if (((Short) METHOD_getvt_.invoke(variant)) == 9) { //Variant.VariantDispatch
             return new ActiveXObjectImpl(METHOD_getDispatch_.invoke(variant));
         }

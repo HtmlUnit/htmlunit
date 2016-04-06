@@ -57,10 +57,6 @@ public abstract class DojoTestBase extends WebDriverTestCase {
      */
     abstract String getVersion();
 
-    private String getLibraryDir() {
-        return BASE_FILE_PATH;
-    }
-
     void test() throws Exception {
         try {
             final String[] expectedAlerts = getExpectedAlerts();
@@ -149,11 +145,11 @@ public abstract class DojoTestBase extends WebDriverTestCase {
     }
 
     private String loadExpectation() throws Exception {
-        final String resourcePrefix = "/" + getLibraryDir() + "/" + getVersion() + "/expected";
+        final String resourcePrefix = "/" + BASE_FILE_PATH + "/" + getVersion() + "/expected";
         return loadExpectation(resourcePrefix, ".txt");
     }
 
-    private String getResultElementText(final WebDriver webdriver) throws InterruptedException {
+    private static String getResultElementText(final WebDriver webdriver) {
         // if the elem is not available or stale we return an empty string
         // this will force a second try
         try {
@@ -177,7 +173,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
     public void aaa_startSesrver() throws Exception {
         if (SERVER_ == null) {
             SERVER_ = WebServerTestCase.createWebServer("src/test/resources/"
-                        + getLibraryDir() + "/" + getVersion(), null);
+                        + BASE_FILE_PATH + "/" + getVersion(), null);
         }
     }
 

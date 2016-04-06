@@ -772,7 +772,7 @@ public class HtmlPage extends InteractivePage {
         return Collections.unmodifiableList(tabbableElements);
     }
 
-    private Comparator<HtmlElement> createTabOrderComparator() {
+    private static Comparator<HtmlElement> createTabOrderComparator() {
         return new Comparator<HtmlElement>() {
             @Override
             public int compare(final HtmlElement element1, final HtmlElement element2) {
@@ -1149,7 +1149,7 @@ public class HtmlPage extends InteractivePage {
      * @param clazz the class to search for
      * @return {@code null} if no child found
      */
-    private DomElement getFirstChildElement(final DomElement startElement, final Class<?> clazz) {
+    private static DomElement getFirstChildElement(final DomElement startElement, final Class<?> clazz) {
         if (startElement == null) {
             return null;
         }

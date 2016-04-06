@@ -605,7 +605,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
      */
-    public Page type(final int keyCode) throws IOException {
+    public Page type(final int keyCode) {
         return type(keyCode, false, false, false, true, true, true);
     }
 
@@ -732,14 +732,12 @@ public abstract class HtmlElement extends DomElement {
      * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
      */
     @Deprecated
-    public Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
+    public Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         return type(keyCode, shiftKey, ctrlKey, altKey, true, true, true);
     }
 
     private Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
-        final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp)
-        throws IOException {
+        final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp) {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
@@ -844,12 +842,7 @@ public abstract class HtmlElement extends DomElement {
             ((DomText) domNode).doType(keyCode, shiftKey, ctrlKey, altKey);
         }
         else if (domNode instanceof HtmlElement) {
-            try {
-                ((HtmlElement) domNode).type(keyCode, shiftKey, ctrlKey, altKey);
-            }
-            catch (final IOException e) {
-                throw new RuntimeException(e);
-            }
+            ((HtmlElement) domNode).type(keyCode, shiftKey, ctrlKey, altKey);
         }
     }
 

@@ -1148,7 +1148,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             handleRequest(req, resp);
         }
 
-        private void handleRequest(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+        private static void handleRequest(final HttpServletRequest req, final HttpServletResponse resp)
+                    throws IOException {
             final String authHdr = req.getHeader("Authorization");
             if (null == authHdr) {
                 resp.setStatus(401);

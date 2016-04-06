@@ -316,7 +316,7 @@ public class SvgElementFactory implements ElementFactory {
         return element;
     }
 
-    private Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
+    private static Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
         Map<String, DomAttr> attributeMap = null;
         if (attributes != null) {
             attributeMap = new LinkedHashMap<>(attributes.getLength());

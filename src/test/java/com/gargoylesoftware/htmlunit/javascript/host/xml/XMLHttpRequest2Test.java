@@ -481,7 +481,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             throws ServletException, IOException {
             final Writer writer = resp.getWriter();
             writer.write(req.getQueryString() + ',' + req.getContentLength());
-            writer.close();
         }
     }
 
@@ -738,7 +737,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             writer.write(req.getMethod());
             writer.write('|');
             writer.write(IOUtils.toString(req.getReader()));
-            writer.close();
         }
     }
 

@@ -97,7 +97,7 @@ public class MSXMLJavaScriptEnvironment {
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
      */
-    private ScriptableObject configureClass(final ClassConfiguration config/*, final Scriptable window*/)
+    private static ScriptableObject configureClass(final ClassConfiguration config/*, final Scriptable window*/)
         throws InstantiationException, IllegalAccessException {
 
         final Class<?> jsHostClass = config.getHostClass();
@@ -114,7 +114,7 @@ public class MSXMLJavaScriptEnvironment {
      * @param config the configuration for the object
      * @param scriptable the object to configure
      */
-    private void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
+    private static void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
             final ScriptableObject scriptable) {
 
         // the constants
@@ -139,7 +139,7 @@ public class MSXMLJavaScriptEnvironment {
         }
     }
 
-    private void configureConstants(final ClassConfiguration config,
+    private static void configureConstants(final ClassConfiguration config,
             final ScriptableObject scriptable) {
         for (final ConstantInfo constantInfo : config.getConstants()) {
             scriptable.defineProperty(constantInfo.getName(), constantInfo.getValue(),

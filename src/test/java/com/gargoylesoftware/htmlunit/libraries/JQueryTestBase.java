@@ -106,7 +106,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
         }
     }
 
-    private String getResultElementText(final WebDriver webdriver) throws InterruptedException {
+    private static String getResultElementText(final WebDriver webdriver) {
         // if the elem is not available or stale we return an empty string
         // this will force a second try
         try {

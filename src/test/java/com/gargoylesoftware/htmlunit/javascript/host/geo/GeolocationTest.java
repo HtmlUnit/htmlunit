@@ -145,7 +145,6 @@ public class GeolocationTest extends WebServerTestCase {
                     + "                },\n"
                     + "                \"status\" : \"OK\"\n"
                     + "             }");
-            writer.close();
         }
     }
 }

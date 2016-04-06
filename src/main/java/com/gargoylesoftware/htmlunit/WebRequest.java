@@ -154,7 +154,7 @@ public class WebRequest implements Serializable {
      * unfortunately .replaceAll() doesn't re-process its own output,
      * so if we create a new match with a replacement, it is missed.
      */
-    private String removeDots(final String path) {
+    private static String removeDots(final String path) {
         String newPath = path;
 
         // remove occurrences at the beginning
@@ -177,7 +177,7 @@ public class WebRequest implements Serializable {
         return newPath;
     }
 
-    private URL buildUrlWithNewPath(URL url, final String newPath) {
+    private static URL buildUrlWithNewPath(URL url, final String newPath) {
         try {
             url = UrlUtils.getUrlWithNewPath(url, newPath);
         }

@@ -119,7 +119,7 @@ public class HTMLAllCollection extends HTMLCollection {
         return object;
     }
 
-    private Object itemNotFound(final BrowserVersion browser) {
+    private static Object itemNotFound(final BrowserVersion browser) {
         if (browser.hasFeature(HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
             return null;
         }

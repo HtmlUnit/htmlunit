@@ -231,7 +231,7 @@ public class Node extends EventTarget {
      *
      * @param childDomNode
      */
-    private void initInlineFrameIfNeeded(final DomNode childDomNode) {
+    private static void initInlineFrameIfNeeded(final DomNode childDomNode) {
         if (childDomNode instanceof HtmlInlineFrame) {
             final HtmlInlineFrame frame = (HtmlInlineFrame) childDomNode;
             if (DomElement.ATTRIBUTE_NOT_DEFINED == frame.getSrcAttribute()) {
@@ -360,7 +360,7 @@ public class Node extends EventTarget {
      * @param childObject the node
      * @return {@code false} if it is not allowed here
      */
-    private boolean isNodeInsertable(final Node childObject) {
+    private static boolean isNodeInsertable(final Node childObject) {
         if (childObject instanceof HTMLHtmlElement) {
             final DomNode domNode = childObject.getDomNodeOrDie();
             return !(domNode.getPage().getDocumentElement() == domNode);

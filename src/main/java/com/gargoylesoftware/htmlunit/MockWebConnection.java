@@ -70,7 +70,7 @@ public class MockWebConnection implements WebConnection {
             headers_ = compileHeaders(headers, contentType);
         }
 
-        private List<NameValuePair> compileHeaders(final List<NameValuePair> headers, final String contentType) {
+        private static List<NameValuePair> compileHeaders(final List<NameValuePair> headers, final String contentType) {
             final List<NameValuePair> compiledHeaders = new ArrayList<>();
             if (headers != null) {
                 compiledHeaders.addAll(headers);
@@ -285,12 +285,12 @@ public class MockWebConnection implements WebConnection {
         responseMap_.put(url.toExternalForm(), responseEntry);
     }
 
-    private RawResponseData buildRawResponseData(final byte[] content, final int statusCode, final String statusMessage,
-            final String contentType, final List<NameValuePair> headers) {
+    private static RawResponseData buildRawResponseData(final byte[] content, final int statusCode,
+            final String statusMessage, final String contentType, final List<NameValuePair> headers) {
         return new RawResponseData(content, statusCode, statusMessage, contentType, headers);
     }
 
-    private RawResponseData buildRawResponseData(final String content, String charset, final int statusCode,
+    private static RawResponseData buildRawResponseData(final String content, String charset, final int statusCode,
             final String statusMessage, final String contentType, final List<NameValuePair> headers) {
 
         if (charset == null) {

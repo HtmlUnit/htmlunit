@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 @StandardsMode
 public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
 
-    private String test(final String tagName) throws Exception {
+    private static String test(final String tagName) throws Exception {
         return "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"

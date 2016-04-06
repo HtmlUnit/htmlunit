@@ -74,7 +74,7 @@ class HtmlSerializer {
         return text;
     }
 
-    private String reduceWhitespace(String text) {
+    private static String reduceWhitespace(String text) {
         text = text.trim();
 
         // remove white spaces before or after block separators

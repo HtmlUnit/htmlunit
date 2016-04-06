@@ -1117,7 +1117,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-    private String createPageForGetOuterHTML(final String nodeTag, final String value, final boolean unclosed) {
+    private static String createPageForGetOuterHTML(final String nodeTag, final String value, final boolean unclosed) {
         return "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
@@ -1394,7 +1394,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-    private String createPageForSetOuterHTML(final String nodeTag, final String newValue) {
+    private static String createPageForSetOuterHTML(final String nodeTag, final String newValue) {
         String newVal = "null";
         if ("undefined".equals(newValue)) {
             newVal = "undefined";

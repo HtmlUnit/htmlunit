@@ -547,7 +547,7 @@ public abstract class WebTestCase {
      * @param method the method
      * @return {@code true} if this is a junit test
      */
-    private boolean isPublicTestMethod(final Method method) {
+    private static boolean isPublicTestMethod(final Method method) {
         return method.getParameterTypes().length == 0
             && (method.getName().startsWith("test") || method.getAnnotation(Test.class) != null)
             && method.getReturnType() == Void.TYPE
@@ -667,10 +667,11 @@ public abstract class WebTestCase {
 
             final File expectedLog = new File(outFile.getParentFile(), outFile.getName() + suffix);
 
-            final FileOutputStream fos = new FileOutputStream(expectedLog);
-            final ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(generateTest_expectedAlerts_);
-            oos.close();
+            try (final FileOutputStream fos = new FileOutputStream(expectedLog)) {
+                try (final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                    oos.writeObject(generateTest_expectedAlerts_);
+                }
+            }
         }
     }
 

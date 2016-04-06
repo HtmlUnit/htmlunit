@@ -237,7 +237,7 @@ public class NodeIterator extends SimpleScriptable {
         return getFirstUncleNode(parent);
     }
 
-    private Node getChild(final Node node, final boolean lookLeft) {
+    private static Node getChild(final Node node, final boolean lookLeft) {
         if (node == null) {
             return null;
         }
@@ -253,7 +253,7 @@ public class NodeIterator extends SimpleScriptable {
         return child;
     }
 
-    private Node getSibling(final Node node, final boolean lookLeft) {
+    private static Node getSibling(final Node node, final boolean lookLeft) {
         if (node == null) {
             return null;
         }

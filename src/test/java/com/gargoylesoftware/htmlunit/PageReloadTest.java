@@ -1781,7 +1781,7 @@ public class PageReloadTest extends WebDriverTestCase {
         assertEquals(expectedHash, hash);
     }
 
-    private String testPage() {
+    private static String testPage() {
         return testPageHeader()
                 + testPageBody()
                 + testPageAnchorPart()
@@ -1789,7 +1789,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + testPageFormPostPart();
     }
 
-    private String testPageHeader() {
+    private static String testPageHeader() {
         return "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
                 + "<html>\n"
                 + "  <head>\n"
@@ -1799,9 +1799,8 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "  </head>\n";
     }
 
-    private String testPageBody() {
+    private static String testPageBody() {
         return "<body>\n"
-
                 + "  <div id='locationPathname'></div>\n"
                 + "  <div id='locationHash'></div>\n"
                 + "  <input type='button' id='updateLocationInfo' value='updateLocationInfo' "
@@ -1809,7 +1808,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "document.getElementById(\"locationPathname\").innerHTML=location.pathname;'>\n";
     }
 
-    private String testPageAnchorPart() {
+    private static String testPageAnchorPart() {
         return "  <a id='linkEmpty' href=''>linkEmpty</a>\n"
                 + "  <a id='linkEmptyHash' href='#'>linkEmptyHash</a>\n"
                 + "  <a id='linkHash' href='#anchor'>linkHash</a>\n"
@@ -1826,7 +1825,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "/reload2.html#anchor2" + "'>linkDifferentUrlDifferentHash</a>\n";
     }
 
-    private String testPageFormGetPart() {
+    private static String testPageFormGetPart() {
         return "  <form action='' method='GET'>\n"
                 + "    <input type='button' id='javascriptEmpty' value='javascriptEmpty'"
                 + " onclick='location.href=\"\"'>\n"
@@ -1972,7 +1971,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "  </form>\n";
     }
 
-    private String testPageFormPostPart() {
+    private static String testPageFormPostPart() {
         return "  <form action='' method='POST'>\n"
                 + "    <input type='submit' id='submitPostEmpty' value='submitPostEmpty'>\n"
                 + "    <input type='BUTTON' id='jsSubmitPostEmpty' value='jsSubmitPostEmpty'  onclick='submit();'>\n"
@@ -2094,7 +2093,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "</html>";
     }
 
-    private String testResponse() {
+    private static String testResponse() {
         return "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
                 + "<html>\n"
                 + "  <head>\n"

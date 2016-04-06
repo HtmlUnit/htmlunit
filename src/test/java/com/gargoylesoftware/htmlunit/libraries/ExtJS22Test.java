@@ -147,7 +147,7 @@ public class ExtJS22Test extends WebDriverTestCase {
         assertTrue(core_spotlight_isDisabled(buttons.get(3)));
     }
 
-    private boolean core_spotlight_isDisabled(final WebElement button) {
+    private static boolean core_spotlight_isDisabled(final WebElement button) {
         final WebElement table = button.findElement(By.xpath("ancestor::table[1]"));
         return table.getAttribute("class").contains("disabled");
     }

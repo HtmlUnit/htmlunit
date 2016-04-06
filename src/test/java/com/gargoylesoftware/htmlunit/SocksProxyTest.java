@@ -102,9 +102,11 @@ public class SocksProxyTest extends WebServerTestCase {
         assertEquals("hello", page.getTitleText());
     }
 
-    private void assumeSocksProxyInUse() {
+    private static void assumeSocksProxyInUse() {
         try {
-            new Socket(SOCKS_PROXY_HOST, SOCKS_PROXY_PORT).close();
+            try (final Socket socket = new Socket(SOCKS_PROXY_HOST, SOCKS_PROXY_PORT)) {
+                // nothing
+            }
         }
         catch (final IOException e) {
             assumeTrue("Socks proxy is not available", false);

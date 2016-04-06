@@ -69,7 +69,7 @@ public class GWT250Test extends WebServerTestCase {
      * @param element the element to search in
      * @param expectedValue expected value of the value inside the cell
      */
-    private void assertElementValue(final HtmlElement element, final String expectedValue) {
+    private static void assertElementValue(final HtmlElement element, final String expectedValue) {
         DomNode child = element.getFirstChild();
         while (child != null && !(child instanceof DomElement)
                 && (!(child instanceof DomText) || !((DomText) child).getData().equals(expectedValue))) {
@@ -136,7 +136,7 @@ public class GWT250Test extends WebServerTestCase {
                 "THE GOVERNING AWARD");
     }
 
-    private void verifyStartMailBody(final HtmlPage page, final String... details) {
+    private static void verifyStartMailBody(final HtmlPage page, final String... details) {
         final List<?> detailsCells = page.getByXPath("//div[@class='MGI']/text()");
         for (int i = 0; i < details.length; i++) {
             final DomText text = (DomText) detailsCells.get(i);

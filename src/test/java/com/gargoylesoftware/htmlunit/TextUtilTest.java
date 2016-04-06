@@ -27,13 +27,13 @@ import org.junit.Test;
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public final class TextUtilTest extends SimpleWebTestCase {
+public class TextUtilTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void toInputStream_null() throws Exception {
+    public static void toInputStream_null() throws Exception {
         try {
             TextUtil.toInputStream(null);
             fail("Expected NullPointerException");
@@ -47,7 +47,7 @@ public final class TextUtilTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void toInputStream() throws Exception {
+    public static void toInputStream() throws Exception {
         final String[][] data = {
             {"", null},
             {"a", "a"},
@@ -59,10 +59,11 @@ public final class TextUtilTest extends SimpleWebTestCase {
             final String input = entry[0];
             final String expectedResult = entry[1];
 
-            final InputStream inputStream = TextUtil.toInputStream(input, encoding);
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, encoding));
-            assertEquals(expectedResult, reader.readLine());
-            reader.close();
+            try (final InputStream inputStream = TextUtil.toInputStream(input, encoding)) {
+                try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, encoding))) {
+                    assertEquals(expectedResult, reader.readLine());
+                }
+            }
         }
     }
 

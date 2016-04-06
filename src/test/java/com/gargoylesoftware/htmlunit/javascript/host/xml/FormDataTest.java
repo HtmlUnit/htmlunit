@@ -848,7 +848,6 @@ public class FormDataTest extends WebDriverTestCase {
                 writer.write(line);
                 writer.write('\n');
             }
-            writer.close();
         }
     }
 }

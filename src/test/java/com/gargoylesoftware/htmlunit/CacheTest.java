@@ -50,10 +50,10 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 public class CacheTest extends SimpleWebTestCase {
 
     /**
-     * @throws Exception if the test fails
+     * Test.
      */
     @Test
-    public void isCacheableContent() throws Exception {
+    public void isCacheableContent() {
         final Cache cache = new Cache();
         final Map<String, String> headers = new HashMap<>();
         final WebResponse response = new DummyWebResponse() {
@@ -394,10 +394,9 @@ public class CacheTest extends SimpleWebTestCase {
 
     /**
      * Ensures {@link WebResponse#cleanUp()} is called on calling {@link Cache#clear()}.
-     * @throws Exception if the test fails
      */
     @Test
-    public void cleanUpOnClear() throws Exception {
+    public void cleanUpOnClear() {
         final WebRequest request1 = new WebRequest(URL_FIRST, HttpMethod.GET);
         final WebResponse response1 = createMock(WebResponse.class);
         expect(response1.getWebRequest()).andReturn(request1);

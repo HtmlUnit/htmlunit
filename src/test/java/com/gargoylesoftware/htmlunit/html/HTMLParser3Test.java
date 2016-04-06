@@ -118,7 +118,6 @@ public class HTMLParser3Test extends WebServerTestCase {
             }
             html += "</head><body>" + utf8String + "</body></html>";
             writer.write(html);
-            writer.close();
         }
     }
 

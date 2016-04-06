@@ -190,7 +190,8 @@ public class XMLDocument extends Document {
         }
     }
 
-    private XmlPage createParserErrorXmlPage(final String message, final WebWindow webWindow) throws IOException {
+    private static XmlPage createParserErrorXmlPage(final String message, final WebWindow webWindow)
+            throws IOException {
         final String xml = "<parsererror xmlns=\"http://www.mozilla.org/newlayout/xml/parsererror.xml\">\n"
             + message + "\n"
             + "<sourcetext></sourcetext>\n"

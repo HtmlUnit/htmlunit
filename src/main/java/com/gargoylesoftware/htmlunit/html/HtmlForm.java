@@ -313,7 +313,7 @@ public class HtmlForm extends HtmlElement {
         return submittableElements;
     }
 
-    private boolean isValidForSubmission(final HtmlElement element, final SubmittableElement submitElement) {
+    private static boolean isValidForSubmission(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
         if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName)) {
             return false;
@@ -355,7 +355,7 @@ public class HtmlForm extends HtmlElement {
      *        submitted by JavaScript
      * @return {@code true} if the specified element gets submitted when this form is submitted
      */
-    private boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {
+    private static boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
         if (!isValidForSubmission(element, submitElement)) {
             return false;

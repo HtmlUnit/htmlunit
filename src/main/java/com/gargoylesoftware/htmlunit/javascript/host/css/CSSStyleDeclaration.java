@@ -2624,7 +2624,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param text the string to search in
      * @return the string of the color if found, null otherwise
      */
-    private String findColor(final String text) {
+    private static String findColor(final String text) {
         Color tmpColor = com.gargoylesoftware.htmlunit.util.StringUtils.findColorRGB(text);
         if (tmpColor != null) {
             return com.gargoylesoftware.htmlunit.util.StringUtils.formatColor(tmpColor);
@@ -2649,7 +2649,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param text the string to search in
      * @return the string of the URL if found, null otherwise
      */
-    private String findImageUrl(final String text) {
+    private static String findImageUrl(final String text) {
         final Matcher m = URL_PATTERN.matcher(text);
         if (m.find()) {
             return "url(\"" + m.group(1) + "\")";

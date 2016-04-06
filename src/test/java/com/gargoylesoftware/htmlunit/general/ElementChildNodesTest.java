@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class ElementChildNodesTest extends WebDriverTestCase {
 
-    private String test(final String tagName) {
+    private static String test(final String tagName) {
         return "<html><head><title>test_getChildNodes</title>\n"
                 + "<script>\n"
                 + "function test() {\n"

@@ -421,9 +421,9 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final String jsContent = "function doTest() { alert('gZip'); }";
         final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        final GZIPOutputStream gzipper = new GZIPOutputStream(bytes);
-        gzipper.write(jsContent.getBytes("ASCII"));
-        gzipper.close();
+        try (final GZIPOutputStream gzipper = new GZIPOutputStream(bytes)) {
+            gzipper.write(jsContent.getBytes("ASCII"));
+        }
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
@@ -449,16 +449,15 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void externalScriptEmptyGZipEncoded() throws Exception {
         final MockWebConnection webConnection = getMockWebConnection();
 
-        final String jsContent = "";
-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bytes.write(jsContent.getBytes("ASCII"));
-        bytes.close();
+        try (final ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
+            bytes.write("".getBytes("ASCII"));
 
-        final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Content-Length", "0"));
-        headers.add(new NameValuePair("Content-Encoding", "gzip"));
-        webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
-                bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+            final List<NameValuePair> headers = new ArrayList<>();
+            headers.add(new NameValuePair("Content-Length", "0"));
+            headers.add(new NameValuePair("Content-Encoding", "gzip"));
+            webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+                    bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+        }
 
         final String htmlContent
             = "<html><head>\n"
@@ -478,15 +477,15 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void externalScriptBrokenGZipEncoded() throws Exception {
         final MockWebConnection webConnection = getMockWebConnection();
 
-        final String jsContent = "function doTest() { alert('gZip'); }";
-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bytes.write(jsContent.getBytes("ASCII"));
-        bytes.close();
+        try (final ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
+            final String jsContent = "function doTest() { alert('gZip'); }";
+            bytes.write(jsContent.getBytes("ASCII"));
 
-        final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Content-Encoding", "gzip"));
-        webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
-                bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+            final List<NameValuePair> headers = new ArrayList<>();
+            headers.add(new NameValuePair("Content-Encoding", "gzip"));
+            webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+                    bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+        }
 
         final String htmlContent
             = "<html><head>\n"
@@ -855,7 +854,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 new String[] {new MockActiveXObject().GetMessage()}, collectedAlerts);
     }
 
-    private String getJavaScriptContent(final String javascript) {
+    private static String getJavaScriptContent(final String javascript) {
         return "<html><head><title>foo</title><script>\n"
              + javascript
              + "</script></head><body>\n"

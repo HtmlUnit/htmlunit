@@ -210,7 +210,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    protected ScriptResult doClickFireClickEvent(final Event event) throws IOException {
+    protected ScriptResult doClickFireClickEvent(final Event event) {
         if (!hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
@@ -222,7 +222,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    protected void doClickFireChangeEvent() throws IOException {
+    protected void doClickFireChangeEvent() {
         if (hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
             executeOnChangeHandlerIfAppropriate(this);
         }

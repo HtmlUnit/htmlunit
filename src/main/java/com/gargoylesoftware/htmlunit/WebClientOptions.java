@@ -459,7 +459,7 @@ public class WebClientOptions implements Serializable {
         return sslTrustStore_;
     }
 
-    private KeyStore getKeyStore(final URL keystoreURL, final String keystorePassword,
+    private static KeyStore getKeyStore(final URL keystoreURL, final String keystorePassword,
             final String keystoreType) {
         if (keystoreURL == null) {
             return null;

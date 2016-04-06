@@ -121,7 +121,7 @@ public class WebResponseData implements Serializable {
         return stream;
     }
 
-    private String getHeader(final List<NameValuePair> headers, final String name) {
+    private static String getHeader(final List<NameValuePair> headers, final String name) {
         for (final NameValuePair header : headers) {
             final String headerName = header.getName().trim();
             if (name.equalsIgnoreCase(headerName)) {

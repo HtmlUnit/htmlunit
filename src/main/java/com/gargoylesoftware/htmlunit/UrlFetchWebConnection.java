@@ -183,7 +183,7 @@ public class UrlFetchWebConnection implements WebConnection {
         }
     }
 
-    private WebResponse produceWebResponseForGAEProcolHack(final URL url) {
+    private static WebResponse produceWebResponseForGAEProcolHack(final URL url) {
         final String externalForm = url.toExternalForm();
         for (String pattern : GAE_URL_HACKS) {
             final int index = externalForm.indexOf(pattern);

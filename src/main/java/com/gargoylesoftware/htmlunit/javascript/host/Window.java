@@ -1380,10 +1380,10 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         return new HTMLCollection(page, true) {
             @Override
             protected List<Object> computeElements() {
-                final List<DomElement> elements = page.getElementsByName(expElementName);
-                final List<Object> result = new ArrayList<>(elements.size());
+                final List<DomElement> expElements = page.getElementsByName(expElementName);
+                final List<Object> result = new ArrayList<>(expElements.size());
 
-                for (DomElement domElement : elements) {
+                for (DomElement domElement : expElements) {
                     if (filter.matches(domElement)) {
                         result.add(domElement);
                     }
@@ -2091,7 +2091,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         final PostponedAction action = new PostponedAction(getDomNodeOrDie().getPage()) {
             @Override
             public void execute() throws Exception {
-                final ContextAction action = new ContextAction() {
+                final ContextAction contextAction = new ContextAction() {
                     @Override
                     public Object run(final Context cx) {
                         return dispatchEvent(event);
@@ -2099,7 +2099,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                 };
 
                 final ContextFactory cf = jsEngine.getContextFactory();
-                cf.call(action);
+                cf.call(contextAction);
             }
         };
         jsEngine.addPostponedAction(action);

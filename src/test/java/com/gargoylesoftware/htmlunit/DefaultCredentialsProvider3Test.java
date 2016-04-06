@@ -29,10 +29,10 @@ import org.junit.Test;
 public class DefaultCredentialsProvider3Test {
 
     /**
-     * @throws Exception if an error occurs
+     * Test.
      */
     @Test
-    public void serialization() throws Exception {
+    public void serialization() {
         final String username = "foo";
         final String password = "password";
         final String host = "my.host";

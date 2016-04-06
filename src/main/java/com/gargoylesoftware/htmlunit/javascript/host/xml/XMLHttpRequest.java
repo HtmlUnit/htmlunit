@@ -863,7 +863,7 @@ public class XMLHttpRequest extends EventTarget {
      * @param value header value
      * @param acceptContentType whether to consider {@code content-type} header as preflight or not
      */
-    private boolean isPreflightHeader(final String name, final String value, final boolean acceptContentType) {
+    private static boolean isPreflightHeader(final String name, final String value, final boolean acceptContentType) {
         if ("content-type".equals(name)) {
             final String lcValue = value.toLowerCase(Locale.ROOT);
             if (FormEncodingType.URL_ENCODED.getName().equals(lcValue)

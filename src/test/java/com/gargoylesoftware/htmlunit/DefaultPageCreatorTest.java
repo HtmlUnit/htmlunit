@@ -98,7 +98,6 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
                 writer.write(" xmlns='http://www.w3.org/1999/xhtml'");
             }
             writer.write("><body>foo</body></html>");
-            writer.close();
         }
     }
 
@@ -126,7 +125,6 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
             final Writer writer = response.getWriter();
             writer.write("<html><head><meta http-equiv='Content-Type' content='text/html'></head>"
                 + "<body>Hello World</body></html>");
-            writer.close();
         }
     }
 

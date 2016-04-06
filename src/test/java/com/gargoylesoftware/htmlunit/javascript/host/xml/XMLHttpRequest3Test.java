@@ -445,7 +445,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             res.setContentType("text/html");
             final Writer writer = res.getWriter();
             writer.write(html);
-            writer.close();
         }
     }
 
@@ -479,7 +478,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             response.setContentType("text/plain");
             final Writer writer = response.getWriter();
             writer.write(header);
-            writer.close();
         }
     }
 
@@ -511,7 +509,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write(html);
-            writer.close();
         }
     }
 

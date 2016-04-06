@@ -244,7 +244,7 @@ public class DomTextTest extends SimpleWebTestCase {
      * @param node the node to look at
      * @return the position
      */
-    private int readPositionAmongParentChildren(final DomNode node) {
+    private static int readPositionAmongParentChildren(final DomNode node) {
         int i = 0;
         for (final DomNode child : node.getParentNode().getChildren()) {
             if (child == node) {

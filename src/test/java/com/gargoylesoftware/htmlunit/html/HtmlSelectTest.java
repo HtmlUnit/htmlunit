@@ -426,7 +426,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         option.setSelected(true);
     }
 
-    private void checkOptions(final HtmlSelect select) {
+    private static void checkOptions(final HtmlSelect select) {
         final List<HtmlOption> options = select.getOptions();
         if (options.isEmpty()) {
             assertNull(select.getFirstChild());

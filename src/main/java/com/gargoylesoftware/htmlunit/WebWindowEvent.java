@@ -120,7 +120,7 @@ public final class WebWindowEvent extends EventObject {
         return (WebWindow) getSource();
     }
 
-    private boolean isEqual(final Object object1, final Object object2) {
+    private static boolean isEqual(final Object object1, final Object object2) {
         final boolean result;
 
         if (object1 == null && object2 == null) {

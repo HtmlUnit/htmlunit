@@ -134,7 +134,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         }
     }
 
-    private String[] firstDefined(final String[]... variants) {
+    private static String[] firstDefined(final String[]... variants) {
         for (final String[] var : variants) {
             if (isDefined(var)) {
                 return var;
@@ -401,7 +401,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return buggyWebDriver != null && isDefinedIn(buggyWebDriver.value());
     }
 
-    private int getTries(final FrameworkMethod method) {
+    private static int getTries(final FrameworkMethod method) {
         final Tries tries = method.getAnnotation(Tries.class);
         return tries != null ? tries.value() : 1;
     }

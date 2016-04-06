@@ -171,7 +171,6 @@ public class WebResponseTest extends WebServerTestCase {
             response.setHeader("some_header", "some_value");
             final Writer writer = response.getWriter();
             writer.write("<html/>");
-            writer.close();
         }
     }
 

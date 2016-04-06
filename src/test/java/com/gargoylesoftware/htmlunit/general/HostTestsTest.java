@@ -88,7 +88,7 @@ public class HostTestsTest {
         }
     }
 
-    private void ensure(final File file, final Set<String> set) throws IOException {
+    private static void ensure(final File file, final Set<String> set) throws IOException {
         final Set<String> unusedNames = new HashSet<>(set);
         final List<String> lines = FileUtils.readLines(file);
         for (final String line : lines) {

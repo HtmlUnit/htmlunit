@@ -719,8 +719,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 if (!(node instanceof HtmlElement)) {
                     return false;
                 }
-                final HtmlElement elt = (HtmlElement) node;
-                String classAttribute = elt.getAttribute("class");
+                String classAttribute = ((HtmlElement) node).getAttribute("class");
                 if (classAttribute == DomElement.ATTRIBUTE_NOT_DEFINED) {
                     return false; // probably better performance as most of elements won't have a class attribute
                 }

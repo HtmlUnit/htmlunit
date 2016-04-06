@@ -80,13 +80,7 @@ public class History extends SimpleScriptable {
      */
     @JsxFunction
     public void back() {
-        final WebWindow w = getWindow().getWebWindow();
-        try {
-            w.getHistory().back();
-        }
-        catch (final IOException e) {
-            Context.throwAsScriptRuntimeEx(e);
-        }
+        getWindow().getWebWindow().getHistory().back();
     }
 
     /**
@@ -94,13 +88,7 @@ public class History extends SimpleScriptable {
      */
     @JsxFunction
     public void forward() {
-        final WebWindow w = getWindow().getWebWindow();
-        try {
-            w.getHistory().forward();
-        }
-        catch (final IOException e) {
-            Context.throwAsScriptRuntimeEx(e);
-        }
+        getWindow().getWebWindow().getHistory().forward();
     }
 
     /**
@@ -109,13 +97,7 @@ public class History extends SimpleScriptable {
      */
     @JsxFunction
     public void go(final int relativeIndex) {
-        final WebWindow w = getWindow().getWebWindow();
-        try {
-            w.getHistory().go(relativeIndex);
-        }
-        catch (final IOException e) {
-            Context.throwAsScriptRuntimeEx(e);
-        }
+        getWindow().getWebWindow().getHistory().go(relativeIndex);
     }
 
     /**

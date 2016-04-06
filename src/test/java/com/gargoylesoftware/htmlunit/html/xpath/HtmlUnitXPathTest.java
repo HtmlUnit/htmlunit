@@ -223,7 +223,7 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
         xpath(page, "//td[@id='td11']/following::*", new Object[] {td12, tr2, td21, td22});
     }
 
-    private void xpath(final HtmlPage page, final String xpathExpr, final Object[] expectedNodes) throws Exception {
+    private static void xpath(final HtmlPage page, final String xpathExpr, final Object[] expectedNodes) {
         assertEquals(Arrays.asList(expectedNodes), page.getByXPath(xpathExpr));
     }
 

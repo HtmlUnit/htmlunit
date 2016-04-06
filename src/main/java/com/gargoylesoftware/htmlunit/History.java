@@ -154,9 +154,8 @@ public class History implements Serializable {
     /**
      * Goes back one step in the navigation history, if possible.
      * @return this navigation history, after going back one step
-     * @throws IOException if an IO error occurs
      */
-    public History back() throws IOException {
+    public History back() {
         if (index_ > 0) {
             index_--;
             goToUrlAtCurrentIndex();
@@ -167,9 +166,8 @@ public class History implements Serializable {
     /**
      * Goes forward one step in the navigation history, if possible.
      * @return this navigation history, after going forward one step
-     * @throws IOException if an IO error occurs
      */
-    public History forward() throws IOException {
+    public History forward() {
         if (index_ < entries_.size() - 1) {
             index_++;
             goToUrlAtCurrentIndex();
@@ -182,9 +180,8 @@ public class History implements Serializable {
      * is positive or negative. If the specified index is <tt>0</tt>, this method reloads the current page.
      * @param relativeIndex the index to move to, relative to the current index
      * @return this navigation history, after going forwards or backwards the specified number of steps
-     * @throws IOException if an IO error occurs
      */
-    public History go(final int relativeIndex) throws IOException {
+    public History go(final int relativeIndex) {
         final int i = index_ + relativeIndex;
         if (i < entries_.size() && i >= 0) {
             index_ = i;
@@ -241,7 +238,7 @@ public class History implements Serializable {
      * Loads the URL at the current index into the window to which this navigation history belongs.
      * @throws IOException if an IO error occurs
      */
-    private void goToUrlAtCurrentIndex() throws IOException {
+    private void goToUrlAtCurrentIndex() {
         final Boolean old = ignoreNewPages_.get();
         ignoreNewPages_.set(Boolean.TRUE);
         try {
@@ -282,9 +279,8 @@ public class History implements Serializable {
      *
      * @param state the new state to use
      * @param url the new url to use
-     * @throws IOException in case of error
      */
-    public void pushState(final Object state, final URL url) throws IOException {
+    public void pushState(final Object state, final URL url) {
         final Page page = window_.getEnclosedPage();
         final HistoryEntry entry = addPage(page);
 

@@ -68,7 +68,7 @@ public class StorageHolder implements Serializable {
         }
     }
 
-    private String getKey(final Type type, final Page page) {
+    private static String getKey(final Type type, final Page page) {
         switch (type) {
             case GLOBAL_STORAGE:
                 return page.getUrl().getHost();

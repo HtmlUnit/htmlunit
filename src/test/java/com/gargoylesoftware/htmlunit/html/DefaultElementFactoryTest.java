@@ -65,7 +65,7 @@ public class DefaultElementFactoryTest extends SimpleWebTestCase {
     /**
      * @param anchor the anchor which attributes should be checked
      */
-    private void verifyAttributes(final HtmlAnchor anchor) {
+    private static void verifyAttributes(final HtmlAnchor anchor) {
         // Get the attributes iterator
         final Iterator<DomAttr> attributeEntriesIterator = anchor.getAttributesMap().values().iterator();
 

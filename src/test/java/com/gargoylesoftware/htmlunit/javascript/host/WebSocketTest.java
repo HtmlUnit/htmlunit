@@ -319,7 +319,7 @@ public class WebSocketTest extends WebDriverTestCase {
         assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
     }
 
-    private void assertVisible(final String domId, final WebDriver driver) throws Exception {
+    private static void assertVisible(final String domId, final WebDriver driver) throws Exception {
         final WebElement domE = driver.findElement(By.id(domId));
         int counter = 0;
         do {

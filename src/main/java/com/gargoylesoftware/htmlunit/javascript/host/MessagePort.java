@@ -111,7 +111,7 @@ public class MessagePort extends EventTarget {
             final PostponedAction action = new PostponedAction(getWindow().getWebWindow().getEnclosedPage()) {
                 @Override
                 public void execute() throws Exception {
-                    final ContextAction action = new ContextAction() {
+                    final ContextAction contextAction = new ContextAction() {
                         @Override
                         public Object run(final Context cx) {
                             return port1_.dispatchEvent(event);
@@ -119,7 +119,7 @@ public class MessagePort extends EventTarget {
                     };
 
                     final ContextFactory cf = jsEngine.getContextFactory();
-                    cf.call(action);
+                    cf.call(contextAction);
                 }
             };
             jsEngine.addPostponedAction(action);

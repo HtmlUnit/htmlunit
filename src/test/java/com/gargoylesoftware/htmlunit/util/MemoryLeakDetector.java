@@ -63,7 +63,7 @@ public class MemoryLeakDetector {
     /**
      * Does a best effort at getting unreferenced objects garbage collected.
      */
-    private void gc() {
+    private static void gc() {
         final Runtime rt = Runtime.getRuntime();
         for (int i = 0; i < 3; i++) {
             allocateMemory((int) 2e6);
@@ -87,7 +87,7 @@ public class MemoryLeakDetector {
      * @param bytes the size of the byte array to create
      * @return the total allocated
      */
-    private int allocateMemory(final int bytes) {
+    private static int allocateMemory(final int bytes) {
         final byte[] big = new byte[bytes];
         // Fight against clever compilers/JVMs that may not allocate
         // unless we actually use the elements of the array.

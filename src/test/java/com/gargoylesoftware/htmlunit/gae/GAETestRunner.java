@@ -20,7 +20,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
@@ -108,20 +107,13 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
      * @return the list of classes in the white list
      */
     private static Set<String> loadWhiteList() {
-        final InputStream is = GAETestRunner.class.getResourceAsStream("whitelist.txt");
-        assertNotNull(is);
-        final List<String> lines;
-        try {
-            lines = IOUtils.readLines(is);
+        try (final InputStream is = GAETestRunner.class.getResourceAsStream("whitelist.txt")) {
+            assertNotNull(is);
+            return new HashSet<>(IOUtils.readLines(is));
         }
         catch (final IOException e) {
             throw new Error("Failed to load while list content", e);
         }
-        finally {
-            IOUtils.closeQuietly(is);
-        }
-
-        return new HashSet<>(lines);
     }
 
     @Override

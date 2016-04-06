@@ -28,9 +28,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class DomCDataSection extends DomText implements CDATASection {
 
-    /** The symbolic node name. */
-    public static final String NODE_NAME = "#cdata-section";
-
     /**
      * Creates a new instance.
      *
@@ -50,11 +47,11 @@ public class DomCDataSection extends DomText implements CDATASection {
     }
 
     /**
-     * @return the node name, in this case {@link #NODE_NAME}
+     * {@inheritDoc}
      */
     @Override
     public String getNodeName() {
-        return NODE_NAME;
+        return "#cdata-section";
     }
 
     /**

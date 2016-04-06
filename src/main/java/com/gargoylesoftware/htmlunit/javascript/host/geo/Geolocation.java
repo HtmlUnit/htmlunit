@@ -179,7 +179,7 @@ public class Geolocation extends SimpleScriptable {
         }
     }
 
-    private String getJSONValue(final String content, final String key) {
+    private static String getJSONValue(final String content, final String key) {
         final StringBuilder builder = new StringBuilder();
         int index = content.indexOf("\"" + key + "\"") + key.length() + 2;
         for (index = content.indexOf(':', index) + 1; index < content.length(); index++) {
@@ -243,7 +243,7 @@ public class Geolocation extends SimpleScriptable {
         return builder.toString();
     }
 
-    private List<String> runCommand(final String command) throws IOException {
+    private static List<String> runCommand(final String command) throws IOException {
         final List<String> list = new ArrayList<>();
         final Process p = Runtime.getRuntime().exec(command);
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))) {

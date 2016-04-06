@@ -214,7 +214,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getSearch() throws Exception {
+    public String getSearch() {
         try {
             final String query = getUrl().getQuery();
             if (query == null) {
@@ -253,11 +253,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the hash portion of the link's URL (the portion following the '#', including the '#').
      * @return the hash portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getHash() throws Exception {
+    public String getHash() {
         try {
             final String hash = getUrl().getRef();
             if (hash == null) {
@@ -284,11 +283,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the host portion of the link's URL (the '[hostname]:[port]' portion).
      * @return the host portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getHost() throws Exception {
+    public String getHost() {
         try {
             final URL url = getUrl();
             final int port = url.getPort();
@@ -330,11 +328,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the hostname portion of the link's URL.
      * @return the hostname portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getHostname() throws Exception {
+    public String getHostname() {
         try {
             return getUrl().getHost();
         }
@@ -357,11 +354,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the pathname portion of the link's URL.
      * @return the pathname portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getPathname() throws Exception {
+    public String getPathname() {
         try {
             final URL url = getUrl();
             if (!url.getProtocol().startsWith("http")
@@ -407,11 +403,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the port portion of the link's URL.
      * @return the port portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getPort() throws Exception {
+    public String getPort() {
         try {
             final int port = getUrl().getPort();
             if (port == -1) {
@@ -438,11 +433,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the protocol portion of the link's URL, including the trailing ':'.
      * @return the protocol portion of the link's URL, including the trailing ':'
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getProtocol() throws Exception {
+    public String getProtocol() {
         try {
             if (getBrowserVersion().hasFeature(JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL)) {
                 final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();

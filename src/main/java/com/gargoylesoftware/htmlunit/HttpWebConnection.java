@@ -260,7 +260,7 @@ public class HttpWebConnection implements WebConnection {
      */
     @SuppressWarnings("deprecation")
     private HttpUriRequest makeHttpMethod(final WebRequest webRequest, final HttpClientBuilder httpClientBuilder)
-        throws IOException, URISyntaxException {
+        throws URISyntaxException {
 
         final String charset = webRequest.getCharset();
 
@@ -365,14 +365,14 @@ public class HttpWebConnection implements WebConnection {
         return httpMethod;
     }
 
-    private String escapeQuery(final String query) {
+    private static String escapeQuery(final String query) {
         if (query == null) {
             return null;
         }
         return query.replace("%%", "%25%25");
     }
 
-    private Charset getCharset(final String charset, final List<NameValuePair> pairs) {
+    private static Charset getCharset(final String charset, final List<NameValuePair> pairs) {
         for (final NameValuePair pair : pairs) {
             if (pair instanceof KeyDataPair) {
                 final KeyDataPair pairWithFile = (KeyDataPair) pair;
@@ -389,8 +389,7 @@ public class HttpWebConnection implements WebConnection {
         return null;
     }
 
-    void buildFilePart(final KeyDataPair pairWithFile, final MultipartEntityBuilder builder)
-        throws IOException {
+    void buildFilePart(final KeyDataPair pairWithFile, final MultipartEntityBuilder builder) {
         String mimeType = pairWithFile.getMimeType();
         if (mimeType == null) {
             mimeType = "application/octet-stream";
@@ -555,7 +554,7 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_.setTimeout(timeout);
     }
 
-    private RequestConfig.Builder createRequestConfigBuilder(final int timeout) {
+    private static RequestConfig.Builder createRequestConfigBuilder(final int timeout) {
         final RequestConfig.Builder requestBuilder = RequestConfig.custom()
                 .setCookieSpec(HACKED_COOKIE_POLICY)
                 .setRedirectsEnabled(false)
@@ -567,7 +566,7 @@ public class HttpWebConnection implements WebConnection {
         return requestBuilder;
     }
 
-    private SocketConfig.Builder createSocketConfigBuilder(final int timeout) {
+    private static SocketConfig.Builder createSocketConfigBuilder(final int timeout) {
         final SocketConfig.Builder socketBuilder = SocketConfig.custom()
                 // timeout
                 .setSoTimeout(timeout);
@@ -618,8 +617,7 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_.setProxyConfig(options.getProxyConfig());
     }
 
-    private void configureHttpProcessorBuilder(final HttpClientBuilder builder, final WebRequest webRequest)
-        throws IOException {
+    private void configureHttpProcessorBuilder(final HttpClientBuilder builder, final WebRequest webRequest) {
         final HttpProcessorBuilder b = HttpProcessorBuilder.create();
         for (final HttpRequestInterceptor i : getHttpRequestInterceptors(webRequest)) {
             b.add(i);
@@ -695,7 +693,7 @@ public class HttpWebConnection implements WebConnection {
      * @return a wrapper around the downloaded content
      * @throws IOException in case of read issues
      */
-    public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) throws IOException {
+    public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) {
         if (is == null) {
             return new DownloadedContent.InMemory(new byte[] {});
         }
@@ -749,7 +747,7 @@ public class HttpWebConnection implements WebConnection {
         return new WebResponse(responseData, request, loadTime);
     }
 
-    private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) throws IOException {
+    private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) {
         final List<HttpRequestInterceptor> list = new ArrayList<>();
         final Map<String, String> requestHeaders = webRequest.getAdditionalHeaders();
         final URL url = webRequest.getUrl();
@@ -938,7 +936,7 @@ public class HttpWebConnection implements WebConnection {
      * Has the exact logic in {@link HttpClientBuilder#build()} which sets the {@code connManager} part,
      * but with the ability to configure {@code socketFactory}.
      */
-    private PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
+    private static PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
         final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
 
         try {

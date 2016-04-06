@@ -66,7 +66,7 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
         localServer_.start();
     }
 
-    private KeyManagerFactory createKeyManagerFactory() throws NoSuchAlgorithmException {
+    private static KeyManagerFactory createKeyManagerFactory() throws NoSuchAlgorithmException {
         final String algorithm = KeyManagerFactory.getDefaultAlgorithm();
         try {
             return KeyManagerFactory.getInstance(algorithm);
@@ -76,7 +76,7 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
         }
     }
 
-    private TrustManagerFactory createTrustManagerFactory() throws NoSuchAlgorithmException {
+    private static TrustManagerFactory createTrustManagerFactory() throws NoSuchAlgorithmException {
         final String algorithm = TrustManagerFactory.getDefaultAlgorithm();
         try {
             return TrustManagerFactory.getInstance(algorithm);

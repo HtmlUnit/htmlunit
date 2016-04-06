@@ -136,7 +136,7 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
         useInsecureSSL_ = useInsecureSSL;
     }
 
-    private void configureSocket(final SSLSocket sslSocket, final HttpContext context) {
+    private static void configureSocket(final SSLSocket sslSocket, final HttpContext context) {
         if (isUseSSL3Only(context)) {
             sslSocket.setEnabledProtocols(new String[]{"SSLv3"});
         }
@@ -199,7 +199,7 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
         }
     }
 
-    private void setEmptyHostname(final HttpHost host) {
+    private static void setEmptyHostname(final HttpHost host) {
         try {
             final Field field = HttpHost.class.getDeclaredField("hostname");
             field.setAccessible(true);

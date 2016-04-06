@@ -163,12 +163,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final Properties properties = new Properties();
                 final File file = new File("test.properties");
                 if (file.exists()) {
-                    final FileInputStream in = new FileInputStream(file);
-                    try {
+                    try (final FileInputStream in = new FileInputStream(file)) {
                         properties.load(in);
-                    }
-                    finally {
-                        in.close();
                     }
 
                     String browsersValue = properties.getProperty("browsers");
@@ -264,7 +260,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Closes the real browser drivers.
      * @see #shutDownRealBrowsersAfterTest()
      */
-    private void shutDownRealBrowsers() {
+    private static void shutDownRealBrowsers() {
         for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
             try {
                 driver.quit();
@@ -549,7 +545,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
 
-        private void doService(final HttpServletRequest request, final HttpServletResponse response)
+        private static void doService(final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
             String url = request.getRequestURL().toString();
             if (LOG.isDebugEnabled()) {

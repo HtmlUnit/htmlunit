@@ -108,7 +108,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
         }
     }
 
-    private String stringValue(final Object arg) {
+    private static String stringValue(final Object arg) {
         if (arg instanceof NativeFunction) {
             // Don't return the string value of the function, because it's usually
             // multiple lines of content and messes up the log.
@@ -255,7 +255,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      *
      * @return the name of this frame's source
      */
-    private String getSourceName(final Context cx) {
+    private static String getSourceName(final Context cx) {
         String source = (String) cx.getThreadLocal(KEY_LAST_SOURCE);
         if (source == null) {
             return "unknown";
@@ -274,7 +274,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      * @return the line number of the first line in this frame's function or script, or <tt>???</tt>
      *         if it cannot be determined
      */
-    private String getFirstLine(final Context cx) {
+    private static String getFirstLine(final Context cx) {
         final Object line = cx.getThreadLocal(KEY_LAST_LINE);
         final String result;
         if (line == null) {

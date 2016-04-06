@@ -95,34 +95,35 @@ public final class JQueryExtractor {
      * @throws IOException if an error occurs
      */
     public static void extractExpectations(final File input, final File output) throws IOException {
-        final BufferedReader reader = new BufferedReader(new FileReader(input));
-        final BufferedWriter writer = new BufferedWriter(new FileWriter(output));
-        int testNumber = 1;
-        String line;
-        while ((line = reader.readLine()) != null) {
-            line = line.trim();
-            final int endPos = line.indexOf("Rerun");
-            // the test number is at least for 1.11.3 no longer part of the output
-            // instead a ordered list is used by qunit
-            // if (line.startsWith("" + testNumber + '.') && endPos > -1) {
-            if (endPos > -1) {
-                line = line.substring(0, endPos);
-                writer.write(line + "\n");
-                testNumber++;
-            }
-            else if (line.endsWith("Rerun")) {
-                if (line.indexOf("" + testNumber + '.', 4) != -1) {
-                    System.out.println("Incorrect line for test# " + testNumber + ", please correct it manually");
-                    break;
+        try (final BufferedReader reader = new BufferedReader(new FileReader(input))) {
+            try (final BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
+                int testNumber = 1;
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    line = line.trim();
+                    final int endPos = line.indexOf("Rerun");
+                    // the test number is at least for 1.11.3 no longer part of the output
+                    // instead a ordered list is used by qunit
+                    // if (line.startsWith("" + testNumber + '.') && endPos > -1) {
+                    if (endPos > -1) {
+                        line = line.substring(0, endPos);
+                        writer.write(line + "\n");
+                        testNumber++;
+                    }
+                    else if (line.endsWith("Rerun")) {
+                        if (line.indexOf("" + testNumber + '.', 4) != -1) {
+                            System.out.println("Incorrect line for test# " + testNumber
+                                    + ", please correct it manually");
+                            break;
+                        }
+                        line = "" + testNumber + '.' + ' ' + line.substring(0, line.length() - 5);
+                        writer.write(line + "\n");
+                        testNumber++;
+                    }
                 }
-                line = "" + testNumber + '.' + ' ' + line.substring(0, line.length() - 5);
-                writer.write(line + "\n");
-                testNumber++;
+                System.out.println("Last output #" + (testNumber - 1));
             }
         }
-        System.out.println("Last output #" + (testNumber - 1));
-        reader.close();
-        writer.close();
     }
 
     /**

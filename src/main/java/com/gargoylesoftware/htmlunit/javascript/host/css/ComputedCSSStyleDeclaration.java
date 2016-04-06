@@ -199,7 +199,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return {@code true} if the specified CSS property is inheritable from parent elements
      * @see <a href="http://www.w3.org/TR/CSS21/propidx.html">CSS Property Table</a>
      */
-    private boolean isInheritable(final String name) {
+    private static boolean isInheritable(final String name) {
         return INHERITABLE_ATTRIBUTES.contains(name);
     }
 

@@ -79,12 +79,8 @@ public class LibraryDependencyTest extends WebDriverTestCase {
     }
 
     private String getContent(final String resourceName) throws IOException {
-        final InputStream in = getClass().getClassLoader().getResourceAsStream(resourceName);
-        try {
+        try (final InputStream in = getClass().getClassLoader().getResourceAsStream(resourceName)) {
             return IOUtils.toString(in);
-        }
-        finally {
-            in.close();
         }
     }
 }

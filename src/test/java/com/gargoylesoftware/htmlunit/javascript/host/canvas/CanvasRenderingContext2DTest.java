@@ -162,13 +162,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "UfbPwd18qs91kKRhGuX7d+/9Yr/cNzIyIpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC")
     @NotYetImplemented
     public void drawImage() throws Exception {
-        final InputStream is = getClass().getResourceAsStream("html.png");
-        final byte[] directBytes = IOUtils.toByteArray(is);
-        is.close();
-
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-        getMockWebConnection().setDefaultResponse("Test");
+        try (final InputStream is = getClass().getResourceAsStream("html.png")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
+            getMockWebConnection().setDefaultResponse("Test");
+        }
 
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -217,13 +216,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     }
 
     private void drawImage(final String fileName) throws Exception {
-        final InputStream is = getClass().getResourceAsStream(fileName);
-        final byte[] directBytes = IOUtils.toByteArray(is);
-        is.close();
-
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-        getMockWebConnection().setDefaultResponse("Test");
+        try (final InputStream is = getClass().getResourceAsStream(fileName)) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
+            getMockWebConnection().setDefaultResponse("Test");
+        }
 
         final String html = "<html><head>\n"
             + "<script>\n"

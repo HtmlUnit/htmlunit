@@ -1024,7 +1024,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @return the loaded page
      * @throws Exception if something goes wrong
      */
-    private HtmlPage getPageForKeyboardTest(
+    private static HtmlPage getPageForKeyboardTest(
             final WebClient webClient, final String[] tabIndexValues) throws Exception {
 
         final StringBuilder buffer = new StringBuilder();

@@ -616,7 +616,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         testEvaluate("\"kid's toys\".replace(/'/g, \"\\\\'\")");
     }
 
-    private String buildHtml(final String script) {
+    private static String buildHtml(final String script) {
         return "<html><head><script>function test() {\n"
             + script
             + "\n}</script>"

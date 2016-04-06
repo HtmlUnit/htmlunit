@@ -189,7 +189,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * First the provided text is parsed into a Document. Then the Document is serialized (browser-specific).
      * Finally the result is placed into the text area "myTextArea".
      */
-    private String constructPageContent(final String serializationText) {
+    private static String constructPageContent(final String serializationText) {
         final String escapedText = serializationText.replace("\n", "\\n");
 
         final StringBuilder buffer = new StringBuilder();

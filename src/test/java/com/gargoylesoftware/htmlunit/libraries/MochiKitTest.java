@@ -42,10 +42,6 @@ public class MochiKitTest extends WebDriverTestCase {
 
     private static final String BASE_FILE_PATH = "libraries/MochiKit/1.4.1";
 
-    private String getLibraryDir() {
-        return BASE_FILE_PATH;
-    }
-
     /**
      * @throws Exception if the test fails
      */
@@ -176,7 +172,7 @@ public class MochiKitTest extends WebDriverTestCase {
     }
 
     private String loadExpectation(final String testName) throws Exception {
-        final String resourcePrefix = "/" + getLibraryDir() + "/test-" + testName;
+        final String resourcePrefix = "/" + BASE_FILE_PATH + "/test-" + testName;
         return loadExpectation(resourcePrefix, ".expected.txt");
     }
 

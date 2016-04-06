@@ -122,10 +122,9 @@ public class GAELoadPageTest {
      * Test that a JS job using setInterval is processed on GAE.
      * @throws IOException if fails to get page.
      * @throws FailingHttpStatusCodeException if fails to get page.
-     * @throws InterruptedException if wait fails
      */
     @Test
-    public void setInterval() throws FailingHttpStatusCodeException, IOException, InterruptedException {
+    public void setInterval() throws FailingHttpStatusCodeException, IOException {
         final long timeout = 100L;
         final String html = "<html>\n"
             + "  <body>\n"

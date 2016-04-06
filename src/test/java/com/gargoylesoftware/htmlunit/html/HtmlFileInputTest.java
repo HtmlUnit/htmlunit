@@ -158,11 +158,12 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         final HttpEntity httpEntity = post(client, webConnection);
 
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        httpEntity.writeTo(out);
-        out.close();
+        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            httpEntity.writeTo(out);
 
-        assertTrue(out.toString().contains("Content-Disposition: form-data; name=\"image\"; filename=\"dummy.txt\""));
+            assertTrue(out.toString().contains(
+                    "Content-Disposition: form-data; name=\"image\"; filename=\"dummy.txt\""));
+        }
     }
 
     /**
@@ -201,20 +202,20 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         final HttpEntity httpEntity = post(client, webConnection);
 
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        httpEntity.writeTo(out);
-        out.close();
+        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            httpEntity.writeTo(out);
 
-        if (getBrowserVersion().isIE()) {
-            final Pattern pattern = Pattern
-                .compile("Content-Disposition: form-data; name=\"image\";"
-                        + " filename=\".*testfiles[\\\\/]tiny-png\\.img\"");
-            final Matcher matcher = pattern.matcher(out.toString());
-            assertTrue(matcher.find());
-        }
-        else {
-            assertTrue(out.toString()
-                    .contains("Content-Disposition: form-data; name=\"image\"; filename=\"tiny-png.img\""));
+            if (getBrowserVersion().isIE()) {
+                final Pattern pattern = Pattern
+                        .compile("Content-Disposition: form-data; name=\"image\";"
+                                + " filename=\".*testfiles[\\\\/]tiny-png\\.img\"");
+                final Matcher matcher = pattern.matcher(out.toString());
+                assertTrue(matcher.find());
+            }
+            else {
+                assertTrue(out.toString()
+                        .contains("Content-Disposition: form-data; name=\"image\"; filename=\"tiny-png.img\""));
+            }
         }
     }
 
@@ -251,18 +252,18 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         final HttpEntity httpEntity = post(client, webConnection);
 
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        httpEntity.writeTo(out);
-        out.close();
+        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            httpEntity.writeTo(out);
 
-        assertTrue(out.toString()
-                .contains("Content-Disposition: form-data; name=\"image\"; filename=\"\""));
+            assertTrue(out.toString()
+                    .contains("Content-Disposition: form-data; name=\"image\"; filename=\"\""));
+        }
     }
 
     /**
      * Helper that does some nasty magic.
      */
-    private HttpEntity post(final WebClient client,
+    private static HttpEntity post(final WebClient client,
             final MockWebConnection webConnection)
             throws NoSuchMethodException, IllegalAccessException,
             InvocationTargetException {
@@ -381,15 +382,10 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final HttpClientBuilder clientBuilder = HttpClientBuilder.create();
         final HttpResponse httpResponse = clientBuilder.build().execute(filePost);
 
-        InputStream content = null;
-        try {
-            content = httpResponse.getEntity().getContent();
+        try (final InputStream content = httpResponse.getEntity().getContent()) {
             final String response = new String(IOUtils.toByteArray(content));
             //this is the value with ASCII encoding
             assertFalse("3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 2E 74 78 74 <br>myInput".equals(response));
-        }
-        finally {
-            IOUtils.closeQuietly(content);
         }
     }
 
@@ -487,7 +483,6 @@ public class HtmlFileInputTest extends WebServerTestCase {
                     writer.write("error");
                 }
             }
-            writer.close();
         }
     }
 

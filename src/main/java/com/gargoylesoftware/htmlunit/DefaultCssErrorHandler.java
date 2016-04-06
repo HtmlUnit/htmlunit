@@ -60,7 +60,7 @@ public class DefaultCssErrorHandler implements ErrorHandler, Serializable {
      * @param exception the CSS parsing exception to build a message for
      * @return a message for the specified CSS parsing exception
      */
-    private String buildMessage(final CSSParseException exception) {
+    private static String buildMessage(final CSSParseException exception) {
         final String uri = exception.getURI();
         final int line = exception.getLineNumber();
         final int col = exception.getColumnNumber();

@@ -243,16 +243,15 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final String html = "<html><body><img src='" + URL_SECOND + "'></body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
-        final FileInputStream fis = new FileInputStream(new File(url.toURI()));
-        final byte[] directBytes = IOUtils.toByteArray(fis);
-        fis.close();
-
         final WebClient webClient = getWebClientWithMockWebConnection();
-        final MockWebConnection webConnection = getMockWebConnection();
+        try (final FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
+            final byte[] directBytes = IOUtils.toByteArray(fis);
+            final MockWebConnection webConnection = getMockWebConnection();
 
-        webConnection.setResponse(URL_FIRST, html);
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+            webConnection.setResponse(URL_FIRST, html);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlImage img = page.getFirstByXPath("//img");
@@ -359,23 +358,22 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final String frameRightContent = "<html><head><title>Third</title></head><body>frame right</body></html>";
         final String iframeContent  = "<html><head><title>Iframe</title></head><body>iframe</body></html>";
 
-        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img");
-        final byte[] directBytes = IOUtils.toByteArray(is);
-        is.close();
+        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final MockWebConnection webConnection = getMockWebConnection();
+            webConnection.setResponse(URL_FIRST, mainContent);
+            webConnection.setResponse(URL_SECOND, frameLeftContent);
+            webConnection.setResponse(URL_THIRD, frameRightContent);
+            final URL urlIframe = new URL(URL_SECOND, "iframe.html");
+            webConnection.setResponse(urlIframe, iframeContent);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            final URL urlImage = new URL(URL_SECOND, "img.jpg");
+            webConnection.setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
 
         final WebClient webClient = getWebClientWithMockWebConnection();
-        final MockWebConnection webConnection = getMockWebConnection();
-
-        webConnection.setResponse(URL_FIRST, mainContent);
-        webConnection.setResponse(URL_SECOND, frameLeftContent);
-        webConnection.setResponse(URL_THIRD, frameRightContent);
-        final URL urlIframe = new URL(URL_SECOND, "iframe.html");
-        webConnection.setResponse(urlIframe, iframeContent);
-
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        final URL urlImage = new URL(URL_SECOND, "img.jpg");
-        webConnection.setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
-
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlFrame leftFrame = page.getElementByName("left");
         assertEquals(URL_SECOND.toString(), leftFrame.getSrcAttribute());

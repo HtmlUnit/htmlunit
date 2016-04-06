@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -442,15 +441,6 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             LOG.debug("Finished " + periodicJob + "job " + job);
         }
         return true;
-    }
-
-    /**
-     * Our own serialization (to handle the weak reference)
-     * @param out the stream to write to
-     * @throws IOException in case of error
-     */
-    private void writeObject(final ObjectOutputStream out) throws IOException {
-        out.defaultWriteObject();
     }
 
     /**

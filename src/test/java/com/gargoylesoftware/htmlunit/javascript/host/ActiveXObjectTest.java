@@ -92,7 +92,7 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
         }
     }
 
-    private Object getProperty(final String activeXName, final String property) throws Exception {
+    private static Object getProperty(final String activeXName, final String property) throws Exception {
         final Class<?> clazz = Class.forName("com.jacob.activeX.ActiveXComponent");
         final Method method = clazz.getMethod("getProperty", String.class);
         final Object activXComponenet = clazz.getConstructor(String.class).newInstance(activeXName);

@@ -102,7 +102,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         System.gc();
     }
 
-    private String getMemoryStats() {
+    private static String getMemoryStats() {
         final Runtime rt = Runtime.getRuntime();
         final long free = rt.freeMemory() / 1024;
         final long total = rt.totalMemory() / 1024;
@@ -189,14 +189,14 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win")) {
                     jarPath = jarPath.replace("%20", " ");
                 }
-                final JarFile jarFile = new JarFile(jarPath);
-                for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
-                    final String entryName = entries.nextElement().getName();
-                    if (entryName.endsWith(".class")) {
-                        list.add(entryName.replace('/', '.').replace('\\', '.').replace(".class", ""));
+                try (final JarFile jarFile = new JarFile(jarPath)) {
+                    for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
+                        final String entryName = entries.nextElement().getName();
+                        if (entryName.endsWith(".class")) {
+                            list.add(entryName.replace('/', '.').replace('\\', '.').replace(".class", ""));
+                        }
                     }
                 }
-                jarFile.close();
             }
             catch (final IOException e) {
                 throw new RuntimeException(klass.getPackage().getName() + " does not appear to be a valid package", e);

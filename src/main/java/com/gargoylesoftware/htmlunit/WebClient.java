@@ -48,7 +48,6 @@ import java.util.Set;
 import java.util.Stack;
 
 import org.apache.commons.codec.DecoderException;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1135,7 +1134,7 @@ public class WebClient implements Serializable, AutoCloseable {
         return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
     }
 
-    private WebResponse makeWebResponseForAboutUrl(final URL url) {
+    private static WebResponse makeWebResponseForAboutUrl(final URL url) {
         final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
         if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, "about:"))) {
             throw new IllegalArgumentException(url + " is not supported, only about:blank is supported now.");
@@ -1201,16 +1200,11 @@ public class WebClient implements Serializable, AutoCloseable {
             contentType = "application/xhtml+xml";
         }
         if (contentType == null) {
-            InputStream inputStream = null;
-            try {
-                inputStream = new BufferedInputStream(new FileInputStream(file));
+            try (final InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
                 contentType = URLConnection.guessContentTypeFromStream(inputStream);
             }
             catch (final IOException e) {
                 // Ignore silently.
-            }
-            finally {
-                IOUtils.closeQuietly(inputStream);
             }
         }
         if (contentType == null) {

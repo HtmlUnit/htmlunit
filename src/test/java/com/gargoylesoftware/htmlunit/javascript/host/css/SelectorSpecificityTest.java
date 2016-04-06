@@ -93,7 +93,7 @@ public class SelectorSpecificityTest extends SimpleWebTestCase {
         return specificity;
     }
 
-    private Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
+    private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
         return sheet.parseSelectors(new InputSource(new StringReader(rule))).item(0);
     }
 }

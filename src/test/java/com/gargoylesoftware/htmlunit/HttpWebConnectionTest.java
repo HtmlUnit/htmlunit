@@ -145,38 +145,24 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             }
         }
 
-        InputStream expectedBuf = null;
-        InputStream actualBuf = null;
-        try {
-            expectedBuf = new BufferedInputStream(expected);
-            actualBuf = new BufferedInputStream(actual);
+        try (final InputStream expectedBuf = new BufferedInputStream(expected)) {
+            try (final InputStream actualBuf = new BufferedInputStream(actual)) {
 
-            final byte[] expectedArray = new byte[2048];
-            final byte[] actualArray = new byte[2048];
+                final byte[] expectedArray = new byte[2048];
+                final byte[] actualArray = new byte[2048];
 
-            int expectedLength = expectedBuf.read(expectedArray);
-            while (true) {
+                int expectedLength = expectedBuf.read(expectedArray);
+                while (true) {
 
-                final int actualLength = actualBuf.read(actualArray);
-                assertEquals(message, expectedLength, actualLength);
+                    final int actualLength = actualBuf.read(actualArray);
+                    assertEquals(message, expectedLength, actualLength);
 
-                if (expectedLength == -1) {
-                    break;
-                }
+                    if (expectedLength == -1) {
+                        break;
+                    }
 
-                assertEquals(message, expectedArray, actualArray, expectedLength);
-                expectedLength = expectedBuf.read(expectedArray);
-            }
-        }
-        finally {
-            try {
-                if (expectedBuf != null) {
-                    expectedBuf.close();
-                }
-            }
-            finally {
-                if (actualBuf != null) {
-                    actualBuf.close();
+                    assertEquals(message, expectedArray, actualArray, expectedLength);
+                    expectedLength = expectedBuf.read(expectedArray);
                 }
             }
         }
@@ -446,7 +432,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                     writer.write(c.getName() + '=' + c.getValue());
                 }
             }
-            writer.close();
         }
     }
 

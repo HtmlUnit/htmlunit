@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.io.Writer;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -893,9 +892,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             throws ServletException, IOException {
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
-
-            final Writer writer = response.getWriter();
-            writer.close();
 
             for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
                 final String key = en.nextElement();

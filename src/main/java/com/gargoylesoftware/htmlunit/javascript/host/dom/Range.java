@@ -189,7 +189,7 @@ public class Range extends SimpleScriptable {
         startOffset_ = getPositionInContainer(refNode);
     }
 
-    private int getPositionInContainer(final Node refNode) {
+    private static int getPositionInContainer(final Node refNode) {
         int i = 0;
         Node node = refNode;
         while (node.getPreviousSibling() != null) {

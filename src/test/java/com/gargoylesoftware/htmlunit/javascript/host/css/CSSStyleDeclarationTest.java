@@ -1744,7 +1744,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         }
     }
 
-    private boolean isDefaultGetter(final List<String> lines, final PropertyInfo info) {
+    private static boolean isDefaultGetter(final List<String> lines, final PropertyInfo info) {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             final String nextLine = i + 1 < lines.size() ? lines.get(i + 1) : null;
@@ -1769,7 +1769,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         return false;
     }
 
-    private boolean isDefaultSetter(final List<String> lines, final PropertyInfo info) {
+    private static boolean isDefaultSetter(final List<String> lines, final PropertyInfo info) {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.startsWith("    public void ")
@@ -1782,7 +1782,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         return false;
     }
 
-    private boolean isDefaultGetterComputed(final List<String> lines, final PropertyInfo info) {
+    private static boolean isDefaultGetterComputed(final List<String> lines, final PropertyInfo info) {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.startsWith("    public ") && line.contains(" " + info.getReadMethod().getName() + "(")) {

@@ -186,7 +186,7 @@ public class WebClient4Test extends WebServerTestCase {
             LastRequestTime_ = System.currentTimeMillis() - before;
         }
 
-        private void writeSomeContent(final Writer writer) throws IOException {
+        private static void writeSomeContent(final Writer writer) throws IOException {
             for (int i = 0; i < 1000; i++) {
                 writer.append((char) ('a' + (i % 26)));
             }
@@ -222,7 +222,6 @@ public class WebClient4Test extends WebServerTestCase {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("<html><body>Going anywhere?</body></html>");
-            writer.close();
         }
     }
 
@@ -256,7 +255,6 @@ public class WebClient4Test extends WebServerTestCase {
             writer.write("<html><body><form action='test2'>"
                     + "<input id='submit' type='submit' value='submit'></input>"
                     + "</form></body></html>");
-            writer.close();
         }
     }
 
@@ -306,7 +304,6 @@ public class WebClient4Test extends WebServerTestCase {
                 res.setContentType("text/html");
                 final Writer writer = res.getWriter();
                 writer.write("<html><body>foo</body></html>");
-                writer.close();
             }
             else {
                 res.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
@@ -357,7 +354,6 @@ public class WebClient4Test extends WebServerTestCase {
             res.setContentType("text/html");
             final Writer writer = res.getWriter();
             writer.write("<html><head><title>hello</title></head><body>foo</body></html>");
-            writer.close();
         }
     }
 

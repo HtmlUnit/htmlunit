@@ -540,7 +540,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      * @param w the window
      * @return the URL of the page loaded in the specified window
      */
-    private String getUrl(final WebWindow w) {
+    private static String getUrl(final WebWindow w) {
         return w.getEnclosedPage().getUrl().toString();
     }
 

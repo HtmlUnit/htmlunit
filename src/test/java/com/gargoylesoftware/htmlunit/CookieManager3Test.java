@@ -42,10 +42,9 @@ public class CookieManager3Test {
 
     /**
      * Verifies the basic cookie manager behavior.
-     * @throws Exception if an error occurs
      */
     @Test
-    public void basicBehavior() throws Exception {
+    public void basicBehavior() {
         // Create a new cookie manager.
         final CookieManager mgr = new CookieManager();
         assertTrue(mgr.isCookiesEnabled());

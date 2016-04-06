@@ -476,7 +476,7 @@ public class JavaScriptEngine {
         window.initialize(webWindow);
     }
 
-    private void defineConstructor(final BrowserVersion browserVersion, final Window window,
+    private static void defineConstructor(final BrowserVersion browserVersion, final Window window,
             final Scriptable prototype, final ScriptableObject constructor) {
         constructor.setParentScope(window);
         ScriptableObject.defineProperty(prototype, "constructor", constructor,
@@ -491,7 +491,7 @@ public class JavaScriptEngine {
      * @param scope the scope from which properties have to be removed
      * @param propertiesToDelete the list of property names
      */
-    private void deleteProperties(final Scriptable scope, final String... propertiesToDelete) {
+    private static void deleteProperties(final Scriptable scope, final String... propertiesToDelete) {
         for (final String property : propertiesToDelete) {
             scope.delete(property);
         }
@@ -531,7 +531,7 @@ public class JavaScriptEngine {
      * @param className the class for which properties should be removed
      * @param properties the properties to remove
      */
-    private void removePrototypeProperties(final Scriptable scope, final String className,
+    private static void removePrototypeProperties(final Scriptable scope, final String className,
             final String... properties) {
         final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, className);
         for (final String property : properties) {
@@ -825,7 +825,7 @@ public class JavaScriptEngine {
         return getContextFactory().call(action);
     }
 
-    private Scriptable getScope(final InteractivePage page, final DomNode node) {
+    private static Scriptable getScope(final InteractivePage page, final DomNode node) {
         if (node != null) {
             return node.getScriptableObject();
         }

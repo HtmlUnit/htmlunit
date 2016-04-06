@@ -86,7 +86,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         }
     }
 
-    private String headersToString(final WebRequest request) {
+    private static String headersToString(final WebRequest request) {
         // why doesn't HtmlUnit send these headers whereas Firefox does?
         final List<String> ignoredHeaders = Arrays.asList("accept", "accept-charset", "accept-encoding",
             "accept-language", "keep-alive");

@@ -95,9 +95,9 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
     @Test
     public void gzip() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos);
-        IOUtils.write("alert(1)", gzipOutputStream, "UTF-8");
-        gzipOutputStream.close();
+        try (final GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos)) {
+            IOUtils.write("alert(1)", gzipOutputStream, "UTF-8");
+        }
 
         final MockWebConnection mockConnection = new MockWebConnection();
         final List<NameValuePair> responseHeaders = Arrays.asList(

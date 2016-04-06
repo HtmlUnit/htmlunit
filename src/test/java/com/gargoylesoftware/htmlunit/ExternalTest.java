@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.BEST_SUPPORTED;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeNotNull;
 
@@ -73,7 +74,7 @@ public class ExternalTest {
         }
     }
 
-    private void assertChromeDriver(final String version) throws Exception {
+    private static void assertChromeDriver(final String version) throws Exception {
         try (final WebClient webClient = getWebClient()) {
             final AbstractPage page = webClient.getPage("http://chromedriver.storage.googleapis.com/LATEST_RELEASE");
             final String pageContent = page.getWebResponse().getContentAsString().trim();
@@ -99,6 +100,7 @@ public class ExternalTest {
                     break;
                 }
             }
+            assertNotNull(version);
             if (version.contains("SNAPSHOT")) {
                 try (final WebClient webClient = getWebClient()) {
                     final XmlPage page = webClient.getPage("https://oss.sonatype.org/content/repositories/snapshots/"

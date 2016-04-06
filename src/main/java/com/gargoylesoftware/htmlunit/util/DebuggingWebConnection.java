@@ -181,18 +181,14 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         counter_++;
         final String extension = chooseExtension(response.getContentType());
         final File f = createFile(request.getUrl(), extension);
-        final InputStream input = response.getContentAsStream();
-        final OutputStream output = new FileOutputStream(f);
         int length = 0;
-        try {
-            length = IOUtils.copy(input, output);
-        }
-        catch (final EOFException e) {
-            // ignore
-        }
-        finally {
-            IOUtils.closeQuietly(input);
-            IOUtils.closeQuietly(output);
+        try (final InputStream input = response.getContentAsStream()) {
+            try (final OutputStream output = new FileOutputStream(f)) {
+                length = IOUtils.copy(input, output);
+            }
+            catch (final EOFException e) {
+                // ignore
+            }
         }
 
         final URL url = response.getWebRequest().getUrl();

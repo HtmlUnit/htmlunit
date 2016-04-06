@@ -93,7 +93,6 @@ public class HtmlPage4Test extends WebServerTestCase {
                     + "</body>\n"
                     + "</html>";
             writer.write(response);
-            writer.close();
         }
 
         /**
@@ -195,7 +194,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         }
     }
 
-    private int getTempFiles() {
+    private static int getTempFiles() {
         final File file = new File(System.getProperty("java.io.tmpdir"));
         final String[] list = file.list(new FilenameFilter() {
             @Override

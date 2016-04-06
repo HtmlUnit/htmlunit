@@ -843,10 +843,8 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
 
     /**
      * This method implements the control onchange handler call during the click action.
-     *
-     * @throws IOException if an IO error occurs
      */
-    protected void doClickFireChangeEvent() throws IOException {
+    protected void doClickFireChangeEvent() {
         // nothing to do, in the default case
     }
 
@@ -854,9 +852,8 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * This method implements the control onclick handler call during the click action.
      * @param event the click event used
      * @return the script result
-     * @throws IOException if an IO error occurs
      */
-    protected ScriptResult doClickFireClickEvent(final Event event) throws IOException {
+    protected ScriptResult doClickFireClickEvent(final Event event) {
         return fireEvent(event);
     }
 

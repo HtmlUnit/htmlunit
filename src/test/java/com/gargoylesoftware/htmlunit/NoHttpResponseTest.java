@@ -149,35 +149,36 @@ class MiniServer extends Thread {
             started_.set(true);
             LOG.info("Starting listening on port " + port_);
             while (!shutdown_) {
-                final Socket s = serverSocket_.accept();
-                final BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                try (final Socket s = serverSocket_.accept()) {
+                    try (final BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()))) {
 
-                final CharBuffer cb = CharBuffer.allocate(5000);
-                br.read(cb);
-                cb.flip();
-                final String in = cb.toString();
-                cb.rewind();
+                        final CharBuffer cb = CharBuffer.allocate(5000);
+                        br.read(cb);
+                        cb.flip();
+                        final String in = cb.toString();
+                        cb.rewind();
 
-                final RawResponseData responseData = getResponseData(in);
+                        final RawResponseData responseData = getResponseData(in);
 
-                if (responseData == null || responseData.getStringContent() == DROP_CONNECTION) {
-                    LOG.info("Closing impolitely in & output streams");
-                    s.getOutputStream().close();
-                }
-                else {
-                    final PrintWriter pw = new PrintWriter(s.getOutputStream());
-                    pw.println("HTTP/1.0 " + responseData.getStatusCode() + " " + responseData.getStatusMessage());
-                    for (final NameValuePair header : responseData.getHeaders()) {
-                        pw.println(header.getName() + ": " + header.getValue());
+                        if (responseData == null || responseData.getStringContent() == DROP_CONNECTION) {
+                            LOG.info("Closing impolitely in & output streams");
+                            s.getOutputStream().close();
+                        }
+                        else {
+                            try (final PrintWriter pw = new PrintWriter(s.getOutputStream())) {
+                                pw.println("HTTP/1.0 " + responseData.getStatusCode() + " "
+                                        + responseData.getStatusMessage());
+                                for (final NameValuePair header : responseData.getHeaders()) {
+                                    pw.println(header.getName() + ": " + header.getValue());
+                                }
+                                pw.println();
+                                pw.println(responseData.getStringContent());
+                                pw.println();
+                                pw.flush();
+                            }
+                        }
                     }
-                    pw.println();
-                    pw.println(responseData.getStringContent());
-                    pw.println();
-                    pw.flush();
-                    pw.close();
                 }
-                br.close();
-                s.close();
             }
         }
         catch (final SocketException e) {

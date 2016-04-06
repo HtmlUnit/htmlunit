@@ -96,7 +96,7 @@ public final class TestCaseTest {
         return list;
     }
 
-    private void checkLines(final String relativePath, final String line, final List<String> lines,
+    private static void checkLines(final String relativePath, final String line, final List<String> lines,
             final String elementName, final List<String> allElements) {
         final List<String> allExpectedLines = new ArrayList<>();
         for (final String element : allElements) {

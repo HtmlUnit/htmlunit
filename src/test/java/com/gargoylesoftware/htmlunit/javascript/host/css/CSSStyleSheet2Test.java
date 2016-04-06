@@ -83,7 +83,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         assertFalse(sheet.selects(selector, input2));
     }
 
-    private Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
+    private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
         return sheet.parseSelectors(new InputSource(new StringReader(rule))).item(0);
     }
 

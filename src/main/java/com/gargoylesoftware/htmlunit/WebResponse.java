@@ -145,17 +145,12 @@ public class WebResponse implements Serializable {
      *         or {@code null} if none was specified
      */
     public String getContentCharsetOrNull() {
-        InputStream is = null;
-        try {
-            is = getContentAsStream();
+        try (final InputStream is = getContentAsStream()) {
             return EncodingSniffer.sniffEncoding(getResponseHeaders(), is);
         }
         catch (final IOException e) {
             LOG.warn("Error trying to sniff encoding.", e);
             return null;
-        }
-        finally {
-            IOUtils.closeQuietly(is);
         }
     }
 
@@ -215,9 +210,7 @@ public class WebResponse implements Serializable {
      * @return the response content as a string
      */
     public String getContentAsString(final String encoding, final String defaultEncoding) {
-        InputStream in = null;
-        try {
-            in = responseData_.getInputStream();
+        try (final InputStream in = responseData_.getInputStream()) {
             if (null == in) {
                 return null;
             }
@@ -243,9 +236,6 @@ public class WebResponse implements Serializable {
         catch (final IOException e) {
             LOG.warn(e);
             return null;
-        }
-        finally {
-            IOUtils.closeQuietly(in);
         }
     }
 

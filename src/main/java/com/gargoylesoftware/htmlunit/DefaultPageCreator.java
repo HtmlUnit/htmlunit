@@ -222,7 +222,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * See http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4
      * @param bytes the bytes to check
      */
-    private boolean isBinary(final byte[] bytes) {
+    private static boolean isBinary(final byte[] bytes) {
         for (byte b : bytes) {
             if (b < 0x08
                 || b == 0x0B
@@ -234,7 +234,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         return false;
     }
 
-    private boolean startsWith(final byte[] bytes, final byte[] lookFor) {
+    private static boolean startsWith(final byte[] bytes, final byte[] lookFor) {
         if (bytes.length < lookFor.length) {
             return false;
         }
@@ -248,7 +248,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         return true;
     }
 
-    private byte[] read(final InputStream stream, final int maxNb) throws IOException {
+    private static byte[] read(final InputStream stream, final int maxNb) throws IOException {
         final byte[] buffer = new byte[maxNb];
         final int nbRead = stream.read(buffer);
         if (nbRead == buffer.length) {

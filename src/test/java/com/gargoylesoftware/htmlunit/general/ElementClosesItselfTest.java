@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class ElementClosesItselfTest extends WebDriverTestCase {
 
-    private String test(final String tagName) {
+    private static String test(final String tagName) {
         if ("basefont".equals(tagName) || "isindex".equals(tagName)) {
             return headElementClosesItself(tagName);
         }
@@ -103,7 +103,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
                 + "</body></html>";
     }
 
-    private String headElementClosesItself(final String tagName) {
+    private static String headElementClosesItself(final String tagName) {
         return "<html><head>\n"
                 + "<" + tagName + " id='outer'><" + tagName + ">\n"
                 + "<script>\n"

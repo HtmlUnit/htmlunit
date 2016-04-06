@@ -137,7 +137,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
                     writer.write("error");
                 }
             }
-            writer.close();
         }
     }
 
@@ -160,7 +159,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             while ((line = reader.readLine()) != null) {
                 writer.write(line);
             }
-            writer.close();
         }
     }
 
@@ -202,7 +200,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("CONTENT_TYPE:" + request.getContentType());
-            writer.close();
         }
     }
 
@@ -297,7 +294,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("TRANSFER_ENCODING:" + request.getHeader("TRANSFER-ENCODING"));
-            writer.close();
         }
     }
 

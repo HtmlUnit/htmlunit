@@ -109,7 +109,7 @@ public class CodeStyleTest {
         parentInPom();
     }
 
-    private List<String> getClassNames(final List<File> files) {
+    private static List<String> getClassNames(final List<File> files) {
         final List<String> list = new ArrayList<>();
         for (final File file : files) {
             String fileName = file.getName();
@@ -491,7 +491,7 @@ public class CodeStyleTest {
      * @param lines source code lines
      * @param index the index to start searching from, must be a 'javadoc' line.
      */
-    private List<String> getAnnotations(final List<String> lines, int index) {
+    private static List<String> getAnnotations(final List<String> lines, int index) {
         final List<String> annotations = new ArrayList<>();
         while (!lines.get(index++).trim().endsWith("*/")) {
             //empty;
@@ -597,7 +597,7 @@ public class CodeStyleTest {
         }
     }
 
-    private int getIndentation(final String line) {
+    private static int getIndentation(final String line) {
         final Matcher matcher = leadingWhitespace.matcher(line);
         if (matcher.find()) {
             return matcher.end() - matcher.start();
@@ -649,7 +649,8 @@ public class CodeStyleTest {
     /**
      * Verifies that the class name is used.
      */
-    private void classNameUsed(final List<String> lines, final List<String> classNames, final String relativePath) {
+    private static void classNameUsed(final List<String> lines, final List<String> classNames,
+            final String relativePath) {
         String simpleName = relativePath.substring(0, relativePath.length() - 5);
         simpleName = simpleName.substring(simpleName.lastIndexOf(File.separator) + 1);
         for (final String line : lines) {

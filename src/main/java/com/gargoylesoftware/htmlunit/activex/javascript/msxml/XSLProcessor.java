@@ -118,7 +118,7 @@ public class XSLProcessor extends MSXMLScriptable {
         parameters_.put(getQualifiedName(nsString, baseName), parameter);
     }
 
-    private String getQualifiedName(final String namespaceURI, final String localName) {
+    private static String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
         if (namespaceURI != null && !namespaceURI.isEmpty() && !"null".equals(namespaceURI)) {
             qualifiedName = '{' + namespaceURI + '}' + localName;

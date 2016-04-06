@@ -61,8 +61,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import java.io.IOException;
-
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -332,10 +330,9 @@ public class DOMImplementation extends SimpleScriptable {
      *
      * @param titleObj the document title
      * @return the newly created {@link HTMLDocument}
-     * @throws IOException in case of problems
      */
     @JsxFunction
-    public HTMLDocument createHTMLDocument(final Object titleObj) throws IOException {
+    public HTMLDocument createHTMLDocument(final Object titleObj) {
         if (titleObj == Undefined.instance
                 && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE)) {
             throw Context.reportRuntimeError("Title is required");

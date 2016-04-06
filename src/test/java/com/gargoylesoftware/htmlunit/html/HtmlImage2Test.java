@@ -86,13 +86,12 @@ public class HtmlImage2Test extends WebDriverTestCase {
     }
 
     private void loadImage(final String src) throws Exception {
-        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img");
-        final byte[] directBytes = IOUtils.toByteArray(is);
-        is.close();
-
-        final URL urlImage = new URL(URL_FIRST, "img.jpg");
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
 
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -159,13 +158,12 @@ public class HtmlImage2Test extends WebDriverTestCase {
     }
 
     private void isDisplayed(final String src) throws Exception {
-        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img");
-        final byte[] directBytes = IOUtils.toByteArray(is);
-        is.close();
-
-        final URL urlImage = new URL(URL_FIRST, "img.jpg");
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
 
         final String html = "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
@@ -184,13 +182,12 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "1", "§§URL§§abcd/img.gif" })
     public void lineBreaksInUrl() throws Exception {
-        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img");
-        final byte[] directBytes = IOUtils.toByteArray(is);
-        is.close();
-
-        final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+        }
 
         final String html
             = "<html><head>\n"
