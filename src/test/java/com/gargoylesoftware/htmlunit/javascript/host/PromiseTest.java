@@ -34,7 +34,8 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function, undefined, undefined, function",
+    @Alerts(DEFAULT = { "function", "function", "undefined", "undefined",
+                "undefined", "undefined", "function", "function" },
             IE = "")
     public void staticMethods() throws Exception {
         final String html =
@@ -44,10 +45,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        alert(typeof Promise.resolve);\n"
+            + "        alert(typeof Promise.reject);\n"
             + "        alert(typeof Promise.then);\n"
+            + "        alert(typeof Promise.catch);\n"
             + "        var p = Promise.resolve('something');\n"
             + "        alert(typeof p.resolve);\n"
+            + "        alert(typeof p.reject);\n"
             + "        alert(typeof p.then);\n"
+            + "        alert(typeof p.catch);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -62,7 +67,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Success",
+    @Alerts(DEFAULT = "Resolved",
             IE = "")
     public void resolve() throws Exception {
         final String html =
@@ -71,10 +76,38 @@ public class PromiseTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
-            + "        Promise.resolve('Success').then(function(value) {\n"
+            + "        Promise.resolve('Resolved').then(function(value) {\n"
             + "            alert(value);\n"
             + "        }, function(value) {\n"
             + "            alert('failure');\n"
+            + "        });\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Rejected",
+            IE = "")
+    public void reject() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        Promise.reject('Rejected').then(function(value) {\n"
+            + "            alert('failure');\n"
+            + "        }, function(value) {\n"
+            + "            alert(value);\n"
             + "        });\n"
             + "      }\n"
             + "    }\n"
@@ -278,6 +311,43 @@ public class PromiseTest extends WebDriverTestCase {
             + "  alert('end');\n"
             + "} catch (e) { alert('exception'); }\n"
             + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "Success", "string", "oh, no!", "after catch" },
+            IE = "")
+    public void catchTest() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        var p1 = new Promise(function(resolve, reject) {\n"
+                + "          resolve('Success');\n"
+                + "        });\n"
+                + "\n"
+                + "        p1.then(function(value) {\n"
+                + "          alert(value);\n"
+                + "          throw 'oh, no!';\n"
+                + "        }).catch(function(e) {\n"
+                + "          alert(typeof e);\n"
+                + "          alert(e);\n"
+                + "        }).then(function(e) {\n"
+                + "          alert('after catch');\n"
+                + "        }, function () {\n"
+                + "          alert('failure');\n"
+                + "        });\n"
+                + "      }\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body>\n"
+                + "</html>";
         loadPageWithAlerts2(html);
     }
 }

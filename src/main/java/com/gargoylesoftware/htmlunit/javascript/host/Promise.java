@@ -45,6 +45,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class Promise extends SimpleScriptable {
 
     private Object value_;
+    private boolean resolve_ = true;
+    private String exceptionDetails_;
 
     /**
      * Default constructor.
@@ -93,9 +95,33 @@ public class Promise extends SimpleScriptable {
     public static Promise resolve(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         final Promise promise = new Promise(args.length != 0 ? args[0] : Undefined.instance);
+        promise.setResolve(true);
         promise.setParentScope(thisObj.getParentScope());
         promise.setPrototype(getWindow(thisObj).getPrototype(promise.getClass()));
         return promise;
+    }
+
+    /**
+     * Returns a {@link Promise} object that is rejected with the given value.
+     *
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     * @return a {@link Promise}
+     */
+    @JsxStaticFunction
+    public static Promise reject(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        final Promise promise = new Promise(args.length != 0 ? args[0] : Undefined.instance);
+        promise.setResolve(false);
+        promise.setParentScope(thisObj.getParentScope());
+        promise.setPrototype(getWindow(thisObj).getPrototype(promise.getClass()));
+        return promise;
+    }
+
+    private void setResolve(final boolean resolve) {
+        resolve_ = resolve;
     }
 
     /**
@@ -116,8 +142,9 @@ public class Promise extends SimpleScriptable {
             @Override
             public void execute() throws Exception {
                 Object newValue = null;
+                final Function toExecute = resolve_ ? onFulfilled : onRejected;
                 if (value_ instanceof Function) {
-                    final WasCalledFunctionWrapper wrapper = new WasCalledFunctionWrapper(onFulfilled);
+                    final WasCalledFunctionWrapper wrapper = new WasCalledFunctionWrapper(toExecute);
                     try {
                         ((Function) value_).call(Context.getCurrentContext(), window, thisPromise,
                             new Object[] {wrapper, onRejected});
@@ -126,16 +153,47 @@ public class Promise extends SimpleScriptable {
                         }
                     }
                     catch (final JavaScriptException e) {
-                        if (!wrapper.wasCalled_) {
+                        if (onRejected == null) {
+                            promise.exceptionDetails_ = e.details();
+                        }
+                        else if (!wrapper.wasCalled_) {
                             newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
                                     new Object[] {e.getValue()});
                         }
                     }
                 }
                 else {
-                    newValue = onFulfilled.call(Context.getCurrentContext(), window, thisPromise,
+                    newValue = toExecute.call(Context.getCurrentContext(), window, thisPromise,
                             new Object[] {value_});
                 }
+                promise.value_ = newValue;
+            }
+        };
+
+        final JavaScriptEngine jsEngine = window.getWebWindow().getWebClient().getJavaScriptEngine();
+        jsEngine.addPostponedAction(thenAction);
+
+        return promise;
+    }
+
+    /**
+     * Returns a Promise and deals with rejected cases only.
+     *
+     * @param onRejected failure function
+     * @return {@link Promise}
+     */
+    @JsxFunction(functionName = "catch")
+    public Promise catch_js(final Function onRejected) {
+        final Window window = getWindow();
+        final Promise promise = new Promise(window);
+        final Promise thisPromise = this;
+
+        PostponedAction thenAction = new PostponedAction(window.getDocument().getPage(), "Promise.catch") {
+
+            @Override
+            public void execute() throws Exception {
+                Object newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
+                            new Object[] {exceptionDetails_});
                 promise.value_ = newValue;
             }
         };

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: Promise supports .reject() and .catch().
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: IE supports the data URIs.
             </action>
