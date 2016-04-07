@@ -128,7 +128,7 @@ class HtmlSerializer {
 
     private static String trim(String string) {
         int length = string.length();
-        
+
         int start = 0;
         while (start != length && isSpace(string.charAt(start))) {
             start++;
@@ -147,7 +147,7 @@ class HtmlSerializer {
                 string = string.substring(0, end);
             }
         }
-        
+
         return string;
     }
 
