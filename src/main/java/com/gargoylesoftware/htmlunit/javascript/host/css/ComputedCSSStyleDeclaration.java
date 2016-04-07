@@ -806,7 +806,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return pixelString(elem, new CssValue(0, windowWidth) {
             @Override
             public String get(final ComputedCSSStyleDeclaration style) {
-                final String value = style.getStyleAttribute(WIDTH);
+                final String value = style.getStyleAttribute(Definition.WIDTH);
                 if (StringUtils.isEmpty(value)) {
                     if ("absolute".equals(getStyleAttribute("position"))) {
                         final String content = getDomNodeOrDie().getTextContent();
@@ -922,7 +922,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
             width = pixelValue(getElement(), new CssValue(0, windowWidth) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
-                    return style.getStyleAttribute(WIDTH);
+                    return style.getStyleAttribute(Definition.WIDTH);
                 }
             });
         }
