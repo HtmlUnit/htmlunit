@@ -197,7 +197,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * We use a weak hash map because we don't want this cache to be the only reason
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
-    private transient WeakHashMap<Node, CSS2Properties> computedStyles_ = new WeakHashMap<>();
+    private transient WeakHashMap<Node, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
 
     private final Map<Type, Storage> storages_ = new HashMap<>();
 
@@ -1570,9 +1570,12 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @JsxFunction
     public CSS2Properties getComputedStyle(final Element element, final String pseudoElement) {
         synchronized (computedStyles_) {
-            final CSS2Properties style = computedStyles_.get(element);
-            if (style != null) {
-                return style;
+            final Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
+            if (elementMap != null) {
+                final CSS2Properties style = elementMap.get(pseudoElement);
+                if (style != null) {
+                    return style;
+                }
             }
         }
 
@@ -1592,7 +1595,12 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         }
 
         synchronized (computedStyles_) {
-            computedStyles_.put(element, style);
+            Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
+            if (elementMap == null) {
+                elementMap = new WeakHashMap<>();
+                computedStyles_.put(element, elementMap);
+            }
+            elementMap.put(pseudoElement, style);
         }
 
         return style;
@@ -1861,9 +1869,9 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
             synchronized (computedStyles_) {
                 final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
-                final Iterator<Map.Entry<Node, CSS2Properties>> i = computedStyles_.entrySet().iterator();
+                final Iterator<Map.Entry<Node, Map<String, CSS2Properties>>> i = computedStyles_.entrySet().iterator();
                 while (i.hasNext()) {
-                    final Map.Entry<Node, CSS2Properties> entry = i.next();
+                    final Map.Entry<Node, Map<String, CSS2Properties>> entry = i.next();
                     final DomNode node = entry.getKey().getDomNodeOrDie();
                     if (changed == node
                         || changed.getParentNode() == node.getParentNode()

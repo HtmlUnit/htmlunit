@@ -1701,4 +1701,36 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test for Bug #1768.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("\"0.33\"")
+    public void getComputedStylePseudoCache() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <style>\n"
+            + "    #mydiv:before {\n"
+            + "      content: '0.33';\n"
+            + "    }\n"
+            + "  </style>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var div = document.getElementById('mydiv');\n"
+            + "      div.getBoundingClientRect();\n"
+            + "      alert(window.getComputedStyle(div, ':before').getPropertyValue('content'));\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv'></div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
