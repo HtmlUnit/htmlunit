@@ -130,7 +130,7 @@ class HtmlSerializer {
         int length = string.length();
         
         int start = 0;
-        while (start != length && isSpace(string.charAt(0))) {
+        while (start != length && isSpace(string.charAt(start))) {
             start++;
         }
         if (start != 0) {
