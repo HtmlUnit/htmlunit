@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                Fix CSS selector regression introduced during handling pseudo element in window.getComputedStyle().
+            </action>
         </release>
         <release version="2.21" date="Apr 6, 2016" description="FF45, Bugfixes">
             <action type="update" dev="asashour">

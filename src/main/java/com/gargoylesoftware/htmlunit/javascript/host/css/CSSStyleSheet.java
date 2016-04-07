@@ -460,8 +460,12 @@ public class CSSStyleSheet extends StyleSheet {
                     && selects(browserVersion, cs.getAncestorSelector(), (HtmlElement) parentNode);
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
-                if (selects(browserVersion, ds.getSimpleSelector(), element, pseudoElement)) {
+                final SimpleSelector simpleSelector = ds.getSimpleSelector();
+                if (selects(browserVersion, simpleSelector, element, pseudoElement)) {
                     DomNode ancestor = element;
+                    if (simpleSelector.getSelectorType() != Selector.SAC_PSEUDO_ELEMENT_SELECTOR) {
+                        ancestor = ancestor.getParentNode();
+                    }
                     final Selector dsAncestorSelector = ds.getAncestorSelector();
                     while (ancestor instanceof HtmlElement) {
                         if (selects(browserVersion, dsAncestorSelector, (HtmlElement) ancestor, pseudoElement)) {
