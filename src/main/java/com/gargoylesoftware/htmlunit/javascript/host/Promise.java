@@ -192,7 +192,7 @@ public class Promise extends SimpleScriptable {
 
             @Override
             public void execute() throws Exception {
-                Object newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
+                final Object newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
                             new Object[] {exceptionDetails_});
                 promise.value_ = newValue;
             }
