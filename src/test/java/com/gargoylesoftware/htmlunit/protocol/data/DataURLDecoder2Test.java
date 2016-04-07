@@ -18,9 +18,6 @@ import static com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder.decodeD
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.gargoylesoftware.htmlunit.BrowserRunner;
 
 /**
  * Tests for {@link DataUrlDecoder}.
@@ -28,7 +25,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class DataURLDecoder2Test {
 
     /**
