@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="1764">
+                DomNode: fix .asText() for some special spaces.
+            </action>
             <action type="fix" dev="asashour">
                 Fix CSS selector regression introduced during handling pseudo element in window.getComputedStyle().
             </action>

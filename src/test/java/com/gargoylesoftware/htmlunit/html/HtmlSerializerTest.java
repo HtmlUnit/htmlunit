@@ -119,4 +119,17 @@ public class HtmlSerializerTest {
         final long runTime = System.currentTimeMillis() - time;
         assertTrue("cleanUp() took too much time", runTime < 1_000);
     }
+
+    /**
+     * Test special spaces.
+     */
+    @Test
+    public void specialSpaces() {
+        final HtmlSerializer serializer = new HtmlSerializer();
+        assertEquals("\u3000", serializer.cleanUp("\u3000"));
+
+        // real IE treats this as space, will not consider this for performance reasons
+        assertEquals("\uFEFF", serializer.cleanUp("\uFEFF"));
+        assertEquals("\u200B", serializer.cleanUp("\u200B"));
+    }
 }

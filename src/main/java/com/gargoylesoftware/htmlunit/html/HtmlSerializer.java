@@ -75,7 +75,7 @@ class HtmlSerializer {
     }
 
     private static String reduceWhitespace(String text) {
-        text = text.trim();
+        text = trim(text);
 
         // remove white spaces before or after block separators
         text = reduceWhiteSpaceAroundBlockSeparator(text);
@@ -89,7 +89,7 @@ class HtmlSerializer {
         while (text.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
             text = text.substring(0, text.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH);
         }
-        text = text.trim();
+        text = trim(text);
 
         final StringBuilder buffer = new StringBuilder(text.length());
 
@@ -103,13 +103,13 @@ class HtmlSerializer {
             }
             else {
                 if (whitespace) {
-                    if (!Character.isWhitespace(ch)) {
+                    if (!isSpace(ch)) {
                         buffer.append(ch);
                         whitespace = false;
                     }
                 }
                 else {
-                    if (Character.isWhitespace(ch)) {
+                    if (isSpace(ch)) {
                         whitespace = true;
                         buffer.append(' ');
                     }
@@ -120,6 +120,35 @@ class HtmlSerializer {
             }
         }
         return buffer.toString();
+    }
+
+    private static boolean isSpace(final char ch) {
+        return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\f' || ch == '\r';
+    }
+
+    private static String trim(String string) {
+        int length = string.length();
+        
+        int start = 0;
+        while (start != length && isSpace(string.charAt(0))) {
+            start++;
+        }
+        if (start != 0) {
+            string = string.substring(start);
+            length = string.length();
+        }
+
+        if (length != 0) {
+            int end = length;
+            while (end != 0 && isSpace(string.charAt(end - 1))) {
+                end--;
+            }
+            if (end != length) {
+                string = string.substring(0, end);
+            }
+        }
+        
+        return string;
     }
 
     private static String reduceWhiteSpaceAroundBlockSeparator(final String text) {
@@ -137,7 +166,7 @@ class HtmlSerializer {
         int start = 0;
         while (p0 != -1) {
             int p1 = p0 + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-            while (p0 != start && Character.isWhitespace(text.charAt(p0 - 1))) {
+            while (p0 != start && isSpace(text.charAt(p0 - 1))) {
                 p0--;
             }
             if (p0 >= AS_TEXT_NEW_LINE_LENGTH && text.startsWith(AS_TEXT_NEW_LINE, p0 - AS_TEXT_NEW_LINE_LENGTH)) {
@@ -145,7 +174,7 @@ class HtmlSerializer {
             }
             result.append(text.substring(start, p0)).append(AS_TEXT_BLOCK_SEPARATOR);
 
-            while (p1 < length && Character.isWhitespace(text.charAt(p1))) {
+            while (p1 < length && isSpace(text.charAt(p1))) {
                 p1++;
             }
             start = p1;
