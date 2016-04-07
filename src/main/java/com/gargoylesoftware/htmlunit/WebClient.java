@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_IGNORE_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_308;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PROTOCOL_DATA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
 
@@ -1263,12 +1262,7 @@ public class WebClient implements Serializable, AutoCloseable {
             response = makeWebResponseForFileUrl(webRequest);
         }
         else if ("data".equals(protocol)) {
-            if (browserVersion_.hasFeature(PROTOCOL_DATA)) {
-                response = makeWebResponseForDataUrl(webRequest);
-            }
-            else {
-                throw new MalformedURLException("Unknown protocol: data");
-            }
+            response = makeWebResponseForDataUrl(webRequest);
         }
         else {
             response = loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);

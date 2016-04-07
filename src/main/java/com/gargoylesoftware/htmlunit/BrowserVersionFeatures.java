@@ -1463,10 +1463,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     PAGE_WAIT_LOAD_BEFORE_BODY,
 
-    /** Supports 'data' protocol. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    PROTOCOL_DATA,
-
     /** Indicates <code>.querySelectorAll()</code> and <code>.querySelector()</code> is not supported in quirks mode. */
     @BrowserFeature(@WebBrowser(IE))
     QUERYSELECTORALL_NOT_IN_QUIRKS,
